@@ -1,12 +1,12 @@
 # SLSA: Supply-chain Levels for Software Artifacts, Proposal
 
-# Objective
+## Objective
 
 The objective of this document is to reach industry agreement on the framework
 for software supply chain security through standards, accreditation, and
 technical controls.
 
-# Overview
+## Overview
 
 This is just a proposed starting point using one example for discussion. We are
 looking for wide-ranging feedback via doc comments,
@@ -20,7 +20,7 @@ standards, inspired by what Google does
 [internally](https://cloud.google.com/security/binary-authorization-for-borg).
 It consists of:
 
-1.  **Standards:** (this doc) Industry consensus on the definition of a “secure”
+1.  **Standards:** (this doc) Industry consensus on the definition of a "secure"
     software supply chain. There may be multiple standards to represent multiple
     aspects of security.
 2.  **Accreditation:** Process for organizations to certify compliance with
@@ -30,22 +30,22 @@ It consists of:
 
 Ultimately, the software consumer decides whom to trust and what standards to
 enforce. In this light, accreditation is a means to transfer trust across
-organizational boundaries. For example, a company may internally “accredit” its
+organizational boundaries. For example, a company may internally "accredit" its
 in-house source and build systems while relying on OpenSSF to accredit
 third-party ones. Other organizations may trust other accreditation bodies.
 
-This document <span style="text-decoration:underline;">only discusses the first
-part</span>, Standards. We expect to develop an accreditation process and
-technical controls over time. In the interim, these levels can provide value as
-guidelines for how to secure a software supply chain.
+This document *only discusses the first part*, Standards. We expect to develop
+an accreditation process and technical controls over time. In the interim, these
+levels can provide value as guidelines for how to secure a software supply
+chain.
 
-# Principles
+## Principles
 
 We suggest initially focusing on the following two main principles:
 
 *   **Non-unilateral:** No person can modify the software artifact anywhere in
     the software supply chain without explicit review and approval by at least
-    one other “trusted person.”[^1] The purpose is prevention, deterrence,
+    one other "trusted person."[^1] The purpose is prevention, deterrence,
     and/or early detection of risky/bad changes.
 
 *   **Auditable:** The software artifact can be securely and transparently
@@ -64,15 +64,15 @@ meaningful progress.
 
 What sets SLSA 3 apart from simple best practices is its resilience against
 determined adversaries. That is, SLSA is a **guarantee** that these practices
-have been followed, though still not a guarantee that the software is “safe.”
+have been followed, though still not a guarantee that the software is "safe."
 
-# Background
+## Background
 
-## Why do we need SLSA?
+### Why do we need SLSA?
 
 SLSA addresses three issues:
 
-*   Software producers want to secure their supply chains but don’t know exactly
+*   Software producers want to secure their supply chains but don't know exactly
     how.
 *   Software consumers want to understand and limit their exposure to supply
     chain attacks but have no means of doing so.
@@ -94,7 +94,7 @@ supply chain can implement to the attacks they can prevent. Software producers
 and consumers will be able to look at the SLSA level of a software artifact and
 know what attacks have been defended against in its production.
 
-## Motivating example
+### Motivating example
 
 Consider the example of using [curl](https://curl.se) through its
 [official docker image](https://hub.docker.com/r/curlimages/curl). What threats
@@ -104,7 +104,7 @@ it is a popular open-source package, not to single it out.)
 The first problem is figuring out the actual supply chain. This requires
 significant manual effort, guesswork, and blind trust. Working backwards:
 
-*   The “latest” tag in Docker Hub points to
+*   The "latest" tag in Docker Hub points to
     [7.72.0](https://hub.docker.com/layers/curlimages/curl/7.72.0/images/sha256-3c3ff0c379abb1150bb586c7d55848ed4dcde4a6486b6f37d6815aed569332fe?context=explore).
 *   It claims to have come from a Dockerfile in the
     [curl/curl-docker](https://github.com/curl/curl-docker/blob/d6525c840a62b398424a78d792f457477135d0cf/alpine/latest/Dockerfile)
@@ -118,9 +118,9 @@ significant manual effort, guesswork, and blind trust. Working backwards:
         stunnel perl nghttp2
     *   File at URL:
         [https://curl.haxx.se/ca/cacert.pem](https://curl.haxx.se/ca/cacert.pem)
-*   Each of the dependencies has its own supply chain, but let’s look at
+*   Each of the dependencies has its own supply chain, but let's look at
     [curl-dev](https://pkgs.alpinelinux.org/package/edge/main/x86/curl-dev),
-    which contains the actual “curl” source code.
+    which contains the actual "curl" source code.
 *   The package, like all Alpine packages, has its build script defined in an
     [APKBUILD](https://git.alpinelinux.org/aports/tree/main/curl/APKBUILD?id=166f72b36f3b5635be0d237642a63f39697c848a)
     in the Alpine git repo. There are several build dependencies:
@@ -140,8 +140,8 @@ significant manual effort, guesswork, and blind trust. Working backwards:
     no indication about their software, configuration, or runtime state
     whatsoever.
 
-Suppose some developer’s machine is compromised. What attacks could potentially
-be performed unilaterally with only that developer’s credentials? (None of these
+Suppose some developer's machine is compromised. What attacks could potentially
+be performed unilaterally with only that developer's credentials? (None of these
 are confirmed.)
 
 *   Directly upload a malicious image to Docker Hub.
@@ -151,12 +151,12 @@ are confirmed.)
     git repo.
 *   Upload a malicious
     [https://curl.haxx.se/ca/cacert.pem](https://curl.haxx.se/ca/cacert.pem).
-*   Upload a malicious APKBUILD in Alpine’s git repo.
-*   Upload a malicious “curl-dev” Alpine package to the Alpine repository. (Not
+*   Upload a malicious APKBUILD in Alpine's git repo.
+*   Upload a malicious "curl-dev" Alpine package to the Alpine repository. (Not
     sure if this is possible.)
 *   Upload a malicious
     [https://curl.haxx.se/download/curl-7.72.0.tar.xz](https://curl.haxx.se/download/curl-7.72.0.tar.xz).
-    (Won’t be detected by APKBUILD’s hash if the upload happens before the hash
+    (Won't be detected by APKBUILD's hash if the upload happens before the hash
     is computed.)
 *   Upload a malicious change to the [curl/curl](https://github.com/curl/curl/)
     git repo.
@@ -168,11 +168,11 @@ chain have a sufficient SLSA level, consumers can gain confidence that most of
 these attacks are mitigated, first via self-certification and eventually through
 automated verification.
 
-Finally, note that all of this is just for curl’s own first-party supply chain
+Finally, note that all of this is just for curl's own first-party supply chain
 steps. The dependencies, namely the Alpine base image and packages, have their
 own similar threats. And they too have dependencies, which have other
 dependencies, and so on. Each dependency has its own SLSA level and the
-composition of SLSA levels describes the entire supply chain’s security.
+composition of SLSA levels describes the entire supply chain's security.
 
 For another look at Docker supply chain security, see
 [Who's at the Helm?](https://dlorenc.medium.com/whos-at-the-helm-1101c37bf0f1)
@@ -180,7 +180,7 @@ For a much broader look at open source security, including these issues and many
 more, see
 [Threats, Risks, and Mitigations in the Open Source Ecosystem](https://github.com/Open-Source-Security-Coalition/Open-Source-Security-Coalition/blob/master/publications/threats-risks-mitigations/v1.1/Threats%2C%20Risks%2C%20and%20Mitigations%20in%20the%20Open%20Source%20Ecosystem%20-%20v1.1.pdf).
 
-## What about reproducible builds?
+### What about reproducible builds?
 
 [Reproducible](https://reproducible-builds.org) and hermetic builds
 [provide](https://reproducible-builds.org/docs/buy-in/)
@@ -196,7 +196,7 @@ In terms of security, _verified_ reproducible builds are often
 [suggested](https://www.linuxfoundation.org/en/blog/preventing-supply-chain-attacks-like-solarwinds/)
 as a solution to supply chain integrity. The idea is that a system of
 independent reproducers all run the same build commands on the same inputs and
-report the same output. A consumer can gain confidence in an artifact’s
+report the same output. A consumer can gain confidence in an artifact's
 provenance by querying multiple rebuilders, assuming that not all of the
 rebuilders have been compromised.
 
@@ -229,7 +229,7 @@ implementing some of the SLSA requirements.
 For more on reproducibility, see
 [Hermetic, Reproducible, or Verifiable?](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=357)
 
-# Terminology
+## Terminology
 
 A **resource** is what we are trying to protect: a uniquely identifiable thing
 that can be associated with a software artifact. It is often the way that a
@@ -240,8 +240,8 @@ contents.
 A **software supply chain** is a sequence of steps resulting in the assignment
 of an artifact to a resource. We represent a supply chain as a
 [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
-of sources, builds, dependencies, and deployments. A resource’s supply chain is
-a combination of its dependencies’ supply chains plus its own sources, builds,
+of sources, builds, dependencies, and deployments. A resource's supply chain is
+a combination of its dependencies' supply chains plus its own sources, builds,
 and deployment.
 
 ![supply-chain](images/supply-chain.png)
@@ -249,61 +249,44 @@ and deployment.
 Figure 1: Relationship between concepts.
 
 <table>
+ <thead>
   <tr>
-   <td><strong>Term</strong>
-   </td>
-   <td><strong>Description</strong>
-   </td>
-   <td><strong>Examples</strong>
-   </td>
+   <th>Term
+   <th>Description
+   <th>Examples
   </tr>
+ </thead>
+ <tbody>
   <tr>
-   <td><strong>Source</strong>
-   </td>
+   <th>Source
    <td>Resource containing only artifacts authored or reviewed by persons. It is the beginning of the supply chain; we do not trace the provenance back any further.
-   </td>
    <td>Git repository.
-   </td>
   </tr>
   <tr>
-   <td><strong>Dependency</strong>
-   </td>
-   <td>Resource that either is “imported” software or does not meet the definition of source.
-   </td>
-   <td>Debian package.
-<p>
-Container base image.
-<p>
-Library git repository.
-<p>
-Firmware image.
-   </td>
+   <th>Dependency
+   <td>Resource that either is "imported" software or does not meet the definition of source.
+   <td>Debian package.<br>
+       Container base image.<br>
+       Library git repository.<br>
+       Firmware image.
   </tr>
   <tr>
-   <td><strong>Build</strong>
-   </td>
+   <th>Build
    <td>Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs.
-   </td>
-   <td>Compiling a binary.
-<p>
-Creating a zip archive.
-<p>
-Building a docker image.
-   </td>
+   <td>Compiling a binary.<br>
+       Creating a zip archive.<br>
+       Building a docker image.
   </tr>
   <tr>
-   <td><strong>Deployment</strong>
-   </td>
+   <th>Deployment
    <td>Process that associates an artifact with a resource, granting the artifact special privilege.
-   </td>
-   <td>Uploading an image to a container registry.
-<p>
-Code signing a mobile app.
-   </td>
+   <td>Uploading an image to a container registry.<br>
+       Code signing a mobile app.
   </tr>
+ </tbody>
 </table>
 
-# Proposed SLSA definitions
+## Proposed SLSA definitions
 
 _Reminder: the proposed requirements here are based on what Google currently
 uses and has found useful. We expect these requirements—and perhaps even the
@@ -315,231 +298,62 @@ to meet. In our experience, achieving SLSA 3 can take many years and significant
 effort, so intermediate milestones are important.
 
 <table>
+ <thead>
   <tr>
-   <td><strong>Level</strong>
-   </td>
-   <td><strong>Meaning</strong>
-   </td>
+   <th>Level
+   <th>Meaning
   </tr>
+ </thead>
+ <tbody>
   <tr>
    <td>SLSA 3
-   </td>
-   <td>“Auditable and Non-Unilateral.” High confidence that (1) one can correctly and easily trace back to the original source code, its change history, and all dependencies and (2) no single person has the power to make a meaningful change to the software without review.
-   </td>
+   <td>"Auditable and Non-Unilateral." High confidence that (1) one can correctly and easily trace back to the original source code, its change history, and all dependencies and (2) no single person has the power to make a meaningful change to the software without review.
   </tr>
   <tr>
    <td>SLSA 2
-   </td>
-   <td>“Auditable.” Moderate confidence that one can trace back to the original source code and change history. However, trusted persons still have the ability to make unilateral changes, and the list of dependencies is likely incomplete.
-   </td>
+   <td>"Auditable." Moderate confidence that one can trace back to the original source code and change history. However, trusted persons still have the ability to make unilateral changes, and the list of dependencies is likely incomplete.
   </tr>
   <tr>
    <td>SLSA 1
-   </td>
    <td>Stepping stone to higher levels. Moderate confidence that one can determine either who authorized the artifact or what systems produced the artifact. Protects against tampering after the build.
-   </td>
   </tr>
+ </tbody>
 </table>
-
-<br>
 
 Each SLSA level has a set of requirements.
 
 <table>
-  <tr>
-   <td colspan="2" >
-   </td>
-   <td colspan="3" style="text-align:center"><strong>Required at</strong>
-   </td>
-  </tr>
-  <tr>
-   <td colspan="2" ><strong>Requirement</strong>
-   </td>
-   <td><strong>SLSA 1</strong>
-   </td>
-   <td><strong>SLSA 2</strong>
-   </td>
-   <td><strong>SLSA 3</strong>
-   </td>
-  </tr>
-  <tr>
-   <td rowspan="4" >Source
-   </td>
-   <td>Readability
-   </td>
-   <td>✓
-   </td>
-   <td>✓
-   </td>
-   <td>✓
-   </td>
-  </tr>
-  <tr>
-   <td>Retention
-   </td>
-   <td>
-   </td>
-   <td>18 mo.
-   </td>
-   <td>indef
-   </td>
-  </tr>
-  <tr>
-   <td>Change History
-   </td>
-   <td>
-   </td>
-   <td>✓
-   </td>
-   <td>✓
-   </td>
-  </tr>
-  <tr>
-   <td>Two-Person Review
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td>✓
-   </td>
-  </tr>
-  <tr>
-   <td rowspan="5" >Build
-   </td>
-   <td>Automation
-   </td>
-   <td>✓
-   </td>
-   <td>✓
-   </td>
-   <td>✓
-   </td>
-  </tr>
-  <tr>
-   <td>Isolation
-   </td>
-   <td>
-   </td>
-   <td>✓
-   </td>
-   <td>✓
-   </td>
-  </tr>
-  <tr>
-   <td>Source Integrity
-   </td>
-   <td>
-   </td>
-   <td>✓ *
-   </td>
-   <td>✓
-   </td>
-  </tr>
-  <tr>
-   <td>Hermeticity
-   </td>
-   <td>
-   </td>
-   <td>
-   </td>
-   <td>✓
-   </td>
-  </tr>
-  <tr>
-   <td>Provenance
-   </td>
-   <td>↓
-   </td>
-   <td>✓ *
-   </td>
-   <td>✓
-   </td>
-  </tr>
-  <tr>
-   <td rowspan="4" >Deploy
-   </td>
-   <td>Provenance Chain
-   </td>
-   <td>↓
-   </td>
-   <td>✓
-   </td>
-   <td>✓
-   </td>
-  </tr>
-  <tr>
-   <td>Policy
-   </td>
-   <td>↓
-   </td>
-   <td>✓
-   </td>
-   <td>✓
-   </td>
-  </tr>
-  <tr>
-   <td>Enforcement
-   </td>
-   <td>†
-   </td>
-   <td>†
-   </td>
-   <td>✓
-   </td>
-  </tr>
-  <tr>
-   <td>Logging
-   </td>
-   <td>✓
-   </td>
-   <td>✓
-   </td>
-   <td>✓
-   </td>
-  </tr>
-  <tr>
-   <td rowspan="3" >Common
-   </td>
-   <td>Security
-   </td>
-   <td>↓↓
-   </td>
-   <td>↓
-   </td>
-   <td>✓
-   </td>
-  </tr>
-  <tr>
-   <td>Access
-   </td>
-   <td>↓↓
-   </td>
-   <td>↓
-   </td>
-   <td>✓
-   </td>
-  </tr>
-  <tr>
-   <td>Superusers
-   </td>
-   <td>↓↓
-   </td>
-   <td>↓
-   </td>
-   <td>✓
-   </td>
-  </tr>
+ <thead>
+  <tr><th colspan="2">                       <th colspan="3">Required at   </tr>
+  <tr><th colspan="2">Requirement            <th>SLSA 1<th>SLSA 2<th>SLSA 3</tr>
+ </thead>
+ <tbody>
+  <tr><td rowspan="4">Source<td>Readability      <td>✓ <td>✓     <td>✓     </tr>
+  <tr>                      <td>Retention        <td>  <td>18 mo.<td>indef </tr>
+  <tr>                      <td>Change History   <td>  <td>✓     <td>✓     </tr>
+  <tr>                      <td>Two-Person Review<td>  <td>      <td>✓     </tr>
+  <tr><td rowspan="5">Build <td>Automation       <td>✓ <td>✓     <td>✓     </tr>
+  <tr>                      <td>Isolation        <td>  <td>✓     <td>✓     </tr>
+  <tr>                      <td>Source Integrity <td>  <td>✓ *   <td>✓     </tr>
+  <tr>                      <td>Hermeticity      <td>  <td>      <td>✓     </tr>
+  <tr>                      <td>Provenance       <td>↓ <td>✓ *   <td>✓     </tr>
+  <tr><td rowspan="4">Deploy<td>Provenance Chain <td>↓ <td>✓     <td>✓     </tr>
+  <tr>                      <td>Policy           <td>↓ <td>✓     <td>✓     </tr>
+  <tr>                      <td>Enforcement      <td>† <td>†     <td>✓     </tr>
+  <tr>                      <td>Logging          <td>✓ <td>✓     <td>✓     </tr>
+  <tr><td rowspan="3">Common<td>Security         <td>↓↓<td>↓     <td>✓     </tr>
+  <tr>                      <td>Access           <td>↓↓<td>↓     <td>✓     </tr>
+  <tr>                      <td>Superusers       <td>↓↓<td>↓     <td>✓     </tr>
+ </tbody>
 </table>
 
 Legend:
 
-*   = best effort because it depends on hermeticity, which is not required at
-    this level
-
-† = detection is allowed instead of prevention
-
-↓, ↓↓ = lower requirements (details TBD)
+*   ✓ = required at this level
+*   ✓ \* = required at this level, but best effort because it depends on
+    hermeticity, which is not required at this level
+*   † = detection is allowed instead of prevention
+*   ↓, ↓↓ = lower requirements (details TBD)
 
 Note: The actual requirements will necessarily be much more detailed and
 nuanced. We only provide a brief summary here for clarity.
@@ -574,7 +388,7 @@ nuanced. We only provide a brief summary here for clarity.
 
 *   **[Provenance Chain]** There is an unbroken chain of provenance linking the
     artifact back to its original sources and dependencies.
-*   **[Policy]** The resource’s security policy defines the specific top-level
+*   **[Policy]** The resource's security policy defines the specific top-level
     resources, build processes, and build entry points that are allowed in its
     provenance chain. The policy itself is a SLSA 3 source.
 *   **[Enforcement]** Non-policy-compliant artifacts are prevented at the time
@@ -598,10 +412,10 @@ following requirements:
     guarantees listed here. Doing so MUST require approval of a second platform
     admin.
 
-# Scope of SLSA
+## Scope of SLSA
 
 SLSA applies to a single resource and is not transitive. It describes the
-security strength of the resource’s own sources, build processes, and deploy
+security strength of the resource's own sources, build processes, and deploy
 processes. Dependencies have their own SLSA ratings, and it is possible for a
 SLSA 3 resource to be built from SLSA 0 dependencies.
 
@@ -609,27 +423,27 @@ The reason for non-transitivity is to make the problem tractable. If SLSA 3
 required dependencies to be SLSA 3, then reaching SLSA 3 would require starting
 at the very end of the supply chain and working forward. This is backwards,
 forcing us to work on the least risky component first and blocking any progress
-further downstream. By making each resource’s SLSA rating independent from one
+further downstream. By making each resource's SLSA rating independent from one
 another, it allows parallel progress and prioritization based on risk. (This is
 a lesson we learned when deploying other security controls at scale throughout
 Google.)
 
-We expect SLSA ratings to be composed to describe a supply chain’s overall
+We expect SLSA ratings to be composed to describe a supply chain's overall
 security stance, as described in the vision below.
 
-# Vision: Case Study
+## Vision: Case Study
 
-Let’s consider how we might secure
+Let's consider how we might secure
 [curlimages/curl](https://hub.docker.com/r/curlimages/curl) from the motivating
 example using the SLSA framework. See [pdf](images/vision-diagram.pdf) for a
 larger version of the diagram with links.
 
-## Incrementally reaching SLSA 3
+### Incrementally reaching SLSA 3
 
-Let’s start by incrementally applying the SLSA principles to the final Docker
+Let's start by incrementally applying the SLSA principles to the final Docker
 image.
 
-### SLSA 0: Initial state
+#### SLSA 0: Initial state
 
 ![slsa0](images/slsa-0.png)
 
@@ -640,7 +454,7 @@ dependencies were used.
 The diagram shows that the (mutable) resource `curlimages/curl:7.72.0` points to
 (immutable) artifact `sha256:3c3ff…`.
 
-### SLSA 1: Provenance
+#### SLSA 1: Provenance
 
 ![slsa1](images/slsa-1.png)
 
@@ -660,7 +474,7 @@ and to deter attackers who are not significantly motivated or skilled. The
 provenance can be useful for doing things like vulnerability scans or license
 checks, where tampering is less of a concern.
 
-### SLSA 2: Additional controls
+#### SLSA 2: Additional controls
 
 ![slsa2](images/slsa-2.png)
 
@@ -676,7 +490,7 @@ base image (`alpine:3.11.5`) and apk packages (e.g. `curl-dev`).
 At this level, the provenance is significantly more trustworthy than before.
 Only highly skilled adversaries are likely able to forge it.
 
-### SLSA 3: Hermeticity and two-person review
+#### SLSA 3: Hermeticity and two-person review
 
 ![slsa3](images/slsa-3.png)
 
@@ -691,7 +505,7 @@ At this level, we have high confidence that the provenance is complete and
 trustworthy and that no single person can unilaterally change the top-level
 source.
 
-## Full graph
+### Full graph
 
 ![full-graph](images/slsa-full-graph.png)
 
@@ -711,12 +525,12 @@ idea is to use ecosystem-specific heuristics. For example, Debian packages are
 built and organized in a very uniform way, which may allow Debian-specific
 heuristics.
 
-## Composition of SLSA levels
+### Composition of SLSA levels
 
-A resource’s SLSA level is not transitive, so some aggregate measure of security
+A resource's SLSA level is not transitive, so some aggregate measure of security
 risk across the whole supply chain is necessary. In other words, each node in
-our graph has its own, independent SLSA level. Just because a resource’s level
-is N does not imply anything about its dependencies’ levels.
+our graph has its own, independent SLSA level. Just because a resource's level
+is N does not imply anything about its dependencies' levels.
 
 In our example, suppose that the final
 [curlimages/curl](https://hub.docker.com/r/curlimages/curl) Docker image were
@@ -734,7 +548,7 @@ too early to develop such a measure without real-world data. Once SLSA becomes
 more widely adopted, we expect patterns to emerge and the task to get a bit
 easier.
 
-## Deployment policies
+### Deployment policies
 
 Another major component of SLSA is enforcement of security policies based on
 provenance. Without policy enforcement, there is no guarantee that future
@@ -742,7 +556,7 @@ revisions will not regress.
 
 The following describes how policies might work.
 
-1.  The resource owner writes a **policy** stating the resource’s **expected
+1.  The resource owner writes a **policy** stating the resource's **expected
     SLSA level and provenance**. In many cases the policy can be auto-generated
     based on prior deployments.
 
@@ -770,17 +584,17 @@ allow:
     were associated with provenance from a SLSA-3 compliant GitHub Actions
     workflow building from the `curl/curl-docker` GitHub repo.
 
-## Accreditation and delegation
+### Accreditation and delegation
 
 Finally, accreditation and delegation will play a large role in the SLSA
 framework. It is not practical for every software consumer to fully vet every
 platform and fully walk the entire graph of every artifact. Auditors and/or
 accreditation bodies can verify and assert that a platform or vendor meets the
 SLSA requirements when configured in a certain way. Similarly, there may be some
-way to “trust” an artifact without analyzing its dependencies. This may be
+way to "trust" an artifact without analyzing its dependencies. This may be
 particularly valuable for closed source software.
 
-# Next steps
+## Next steps
 
 We welcome all comments and suggestions for this document via issues, pull
 requests, [email](mailto:slsa-discussion@googlegroups.com), or
@@ -799,7 +613,7 @@ discussion and progress. Issues that we must work out:
 *   Examples showing how to use common platforms to achieve SLSA (or an
     approximation) today.
 
-# Related work
+## Related work
 
 In parallel to the SLSA specification, there is work to develop core formats and
 data models. Currently this is joint work between
@@ -839,11 +653,9 @@ Other takes on provenance and CI/CD:
 *   [The Path to Code Provenance](https://medium.com/uber-security-privacy/code-provenance-application-security-77ebfa4b6bc5)
 *   [How to Build a Compromise-Resilient CI/CD](https://www.youtube.com/watch?v=9hCiHr1f0zM)
 
-<!-- Footnotes themselves at the bottom. -->
+## Footnotes
 
-## Notes
-
-[^1]: “Trusted person” is defined by the organization or developers that
+[^1]: "Trusted person" is defined by the organization or developers that
     own/produce the software. A consumer must ultimately trust them to do the
     right thing. The non-unilateral principle protects against individuals
-    within the organization subverting the organization’s goals.
+    within the organization subverting the organization's goals.
