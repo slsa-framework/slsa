@@ -171,8 +171,10 @@ automated verification.
 Finally, note that all of this is just for curl's own first-party supply chain
 steps. The dependencies, namely the Alpine base image and packages, have their
 own similar threats. And they too have dependencies, which have other
-dependencies, and so on. Each dependency has its own SLSA level and the
-composition of SLSA levels describes the entire supply chain's security.
+dependencies, and so on. Each dependency has its
+[own SLSA level](#scope-of-slsa) and the
+[composition of SLSA levels](#composition-of-slsa-levels) describes the entire
+supply chain's security.
 
 For another look at Docker supply chain security, see
 [Who's at the Helm?](https://dlorenc.medium.com/whos-at-the-helm-1101c37bf0f1)
@@ -429,14 +431,14 @@ a lesson we learned when deploying other security controls at scale throughout
 Google.)
 
 We expect SLSA ratings to be composed to describe a supply chain's overall
-security stance, as described in the vision below.
+security stance, as described in the [vision](#vision-case-study) below.
 
 ## Vision: Case Study
 
 Let's consider how we might secure
-[curlimages/curl](https://hub.docker.com/r/curlimages/curl) from the motivating
-example using the SLSA framework. See [pdf](images/vision-diagram.pdf) for a
-larger version of the diagram with links.
+[curlimages/curl](https://hub.docker.com/r/curlimages/curl) from the
+[motivating example](#motivating-example) using the SLSA framework. See
+[pdf](images/vision-diagram.pdf) for a larger version of the diagram with links.
 
 ### Incrementally reaching SLSA 3
 
@@ -494,9 +496,9 @@ Only highly skilled adversaries are likely able to forge it.
 
 ![slsa3](images/slsa-3.png)
 
-SLSA 3 requires two-party source control and hermetic builds. Hermeticity in
-particular guarantees that the dependencies are complete. Once these controls
-are enabled, the Docker image will be SLSA 3.
+SLSA 3 [requires](#proposed-slsa-definitions) two-party source control and
+hermetic builds. Hermeticity in particular guarantees that the dependencies are
+complete. Once these controls are enabled, the Docker image will be SLSA 3.
 
 In the updated diagram, the provenance now attests to its hermeticity and
 includes the `cacert.pem` dependency, which was absent before.
