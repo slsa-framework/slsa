@@ -9,16 +9,14 @@ technical controls.
 ## Overview
 
 This is just a proposed starting point using one example for discussion. We are
-looking for wide-ranging feedback via doc comments,
-[email](mailto:slsa-discussion@googlegroups.com), or this
-[short feedback form](https://forms.gle/93QRfUqF7YY2mJDi9).
+looking for wide-ranging feedback via GitHub issues, [email][mailing list], or
+[feedback form].
 
 Our draft proposal is called SLSA: Supply-chain Levels for Software Artifacts,
 pronounced _[salsa](https://www.google.com/search?q=how+to+pronounce+salsa)_. It
 ensures that software artifacts meet certain minimum end-to-end integrity
 standards, inspired by what Google does
-[internally](https://cloud.google.com/security/binary-authorization-for-borg).
-It consists of:
+[internally][Binary Authorization for Borg]. It consists of:
 
 1.  **Standards:** (this doc) Industry consensus on the definition of a "secure"
     software supply chain. There may be multiple standards to represent multiple
@@ -97,9 +95,9 @@ know what attacks have been defended against in its production.
 ### Motivating example
 
 Consider the example of using [curl](https://curl.se) through its
-[official docker image](https://hub.docker.com/r/curlimages/curl). What threats
-are we exposed to in the software supply chain? (We choose curl simply because
-it is a popular open-source package, not to single it out.)
+[official docker image][curlimages/curl]. What threats are we exposed to in the
+software supply chain? (We choose curl simply because it is a popular
+open-source package, not to single it out.)
 
 The first problem is figuring out the actual supply chain. This requires
 significant manual effort, guesswork, and blind trust. Working backwards:
@@ -116,16 +114,13 @@ significant manual effort, guesswork, and blind trust. Working backwards:
     *   Alpine packages: libssh2 libssh2-dev libssh2-static autoconf automake
         build-base groff openssl curl-dev python3 python3-dev libtool curl
         stunnel perl nghttp2
-    *   File at URL:
-        [https://curl.haxx.se/ca/cacert.pem](https://curl.haxx.se/ca/cacert.pem)
+    *   File at URL: https://curl.haxx.se/ca/cacert.pem
 *   Each of the dependencies has its own supply chain, but let's look at
-    [curl-dev](https://pkgs.alpinelinux.org/package/edge/main/x86/curl-dev),
-    which contains the actual "curl" source code.
+    [curl-dev], which contains the actual "curl" source code.
 *   The package, like all Alpine packages, has its build script defined in an
     [APKBUILD](https://git.alpinelinux.org/aports/tree/main/curl/APKBUILD?id=166f72b36f3b5635be0d237642a63f39697c848a)
     in the Alpine git repo. There are several build dependencies:
-    *   File at URL:
-        [https://curl.haxx.se/download/curl-7.72.0.tar.xz](https://curl.haxx.se/download/curl-7.72.0.tar.xz).
+    *   File at URL: https://curl.haxx.se/download/curl-7.72.0.tar.xz.
         *   The APKBUILD includes a sha256 hash of this file. It is not clear
             where that hash came from.
     *   Alpine packages: openssl-dev nghttp2-dev zlib-dev brotli-dev autoconf
@@ -149,15 +144,13 @@ are confirmed.)
 *   Upload a malicious Dockerfile (or other file) in the
     [curl/curl-docker](https://github.com/curl/curl-docker/blob/d6525c840a62b398424a78d792f457477135d0cf/alpine/latest/Dockerfile)
     git repo.
-*   Upload a malicious
-    [https://curl.haxx.se/ca/cacert.pem](https://curl.haxx.se/ca/cacert.pem).
+*   Upload a malicious https://curl.haxx.se/ca/cacert.pem.
 *   Upload a malicious APKBUILD in Alpine's git repo.
-*   Upload a malicious "curl-dev" Alpine package to the Alpine repository. (Not
+*   Upload a malicious [curl-dev] Alpine package to the Alpine repository. (Not
     sure if this is possible.)
-*   Upload a malicious
-    [https://curl.haxx.se/download/curl-7.72.0.tar.xz](https://curl.haxx.se/download/curl-7.72.0.tar.xz).
-    (Won't be detected by APKBUILD's hash if the upload happens before the hash
-    is computed.)
+*   Upload a malicious https://curl.haxx.se/download/curl-7.72.0.tar.xz. (Won't
+    be detected by APKBUILD's hash if the upload happens before the hash is
+    computed.)
 *   Upload a malicious change to the [curl/curl](https://github.com/curl/curl/)
     git repo.
 *   Attack any of the systems involved in the supply chain, as in the
@@ -179,8 +172,7 @@ supply chain's security.
 For another look at Docker supply chain security, see
 [Who's at the Helm?](https://dlorenc.medium.com/whos-at-the-helm-1101c37bf0f1)
 For a much broader look at open source security, including these issues and many
-more, see
-[Threats, Risks, and Mitigations in the Open Source Ecosystem](https://github.com/Open-Source-Security-Coalition/Open-Source-Security-Coalition/blob/master/publications/threats-risks-mitigations/v1.1/Threats%2C%20Risks%2C%20and%20Mitigations%20in%20the%20Open%20Source%20Ecosystem%20-%20v1.1.pdf).
+more, see [Threats, Risks, and Mitigations in the Open Source Ecosystem].
 
 ### What about reproducible builds?
 
@@ -435,8 +427,7 @@ security stance, as described in the [vision](#vision-case-study) below.
 
 ## Vision: Case Study
 
-Let's consider how we might secure
-[curlimages/curl](https://hub.docker.com/r/curlimages/curl) from the
+Let's consider how we might secure [curlimages/curl] from the
 [motivating example](#motivating-example) using the SLSA framework. See
 [pdf](images/vision-diagram.pdf) for a larger version of the diagram with links.
 
@@ -534,14 +525,10 @@ risk across the whole supply chain is necessary. In other words, each node in
 our graph has its own, independent SLSA level. Just because a resource's level
 is N does not imply anything about its dependencies' levels.
 
-In our example, suppose that the final
-[curlimages/curl](https://hub.docker.com/r/curlimages/curl) Docker image were
-SLSA 3 but its
-[curl-dev](https://pkgs.alpinelinux.org/package/edge/main/x86/curl-dev)
-dependency were SLSA 0. Then this would imply a significant security risk: an
-adversary could potentially introduce malicious behavior into the final image by
-modifying the source code found in the
-[curl-dev](https://pkgs.alpinelinux.org/package/edge/main/x86/curl-dev) package.
+In our example, suppose that the final [curlimages/curl] Docker image were SLSA
+3 but its [curl-dev] dependency were SLSA 0. Then this would imply a significant
+security risk: an adversary could potentially introduce malicious behavior into
+the final image by modifying the source code found in the [curl-dev] package.
 That said, even being able to _identify_ that it has a SLSA 0 dependency has
 tremendous value because it can help focus efforts.
 
@@ -598,13 +585,12 @@ particularly valuable for closed source software.
 
 ## Next steps
 
-We welcome all comments and suggestions for this document via issues, pull
-requests, [email](mailto:slsa-discussion@googlegroups.com), or
-[feedback form](https://forms.gle/93QRfUqF7YY2mJDi9).
+We welcome all comments and suggestions for this document via GitHub issues,
+pull requests, [email][mailing list], or [feedback form].
 
 The future SLSA working group will formulate this document. Join the
-[mailing list](https://groups.google.com/g/slsa-discussion) to follow the
-discussion and progress. Issues that we must work out:
+[mailing list] to follow the discussion and progress. Issues that we must work
+out:
 
 *   Agree on the principles, terminology, and high-level strategy.
 *   Define a threat model describing specific threats we intend to address.
@@ -634,13 +620,13 @@ For a broader view of the software supply chain problem:
 *   [Know, Prevent, Fix: A framework for shifting the discussion around
     vulnerabilities in open
     source](https://security.googleblog.com/2021/02/know-prevent-fix-framework-for-shifting.html)
-*   [Threats, Risks, and Mitigations in the Open Source Ecosystem](https://github.com/Open-Source-Security-Coalition/Open-Source-Security-Coalition/blob/master/publications/threats-risks-mitigations/v1.1/Threats%2C%20Risks%2C%20and%20Mitigations%20in%20the%20Open%20Source%20Ecosystem%20-%20v1.1.pdf)
+*   [Threats, Risks, and Mitigations in the Open Source Ecosystem]
 
 Prior iterations of the ideas presented here:
 
 *   [Building Secure and Reliable Systems, Chapter 14: Deploying Code](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=339)
-*   [Binary Authorization for Borg](https://cloud.google.com/security/binary-authorization-for-borg) -
-    This is how Google implements the SLSA idea internally.
+*   [Binary Authorization for Borg] - This is how Google implements the SLSA
+    idea internally.
 
 Other related work:
 
@@ -661,3 +647,12 @@ Other takes on provenance and CI/CD:
     own/produce the software. A consumer must ultimately trust them to do the
     right thing. The non-unilateral principle protects against individuals
     within the organization subverting the organization's goals.
+
+<!-- Links -->
+
+[Binary Authorization for Borg]: https://cloud.google.com/security/binary-authorization-for-borg
+[Threats, Risks, and Mitigations in the Open Source Ecosystem]: https://github.com/Open-Source-Security-Coalition/Open-Source-Security-Coalition/blob/master/publications/threats-risks-mitigations/v1.1/Threats%2C%20Risks%2C%20and%20Mitigations%20in%20the%20Open%20Source%20Ecosystem%20-%20v1.1.pdf
+[curl-dev]: https://pkgs.alpinelinux.org/package/edge/main/x86/curl-dev
+[curlimages/curl]: https://hub.docker.com/r/curlimages/curl
+[feedback form]: https://forms.gle/93QRfUqF7YY2mJDi9
+[mailing list]: https://groups.google.com/g/slsa-discussion
