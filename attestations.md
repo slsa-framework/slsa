@@ -76,14 +76,7 @@ policies](policy.md).
 
 <p align="center"><img width="50%" src="images/policy_model.svg"></p>
 
-## Project Scope and Organization
-
-We recommend a cohesive set of formats, conventions, and tools to provide
-end-to-end software supply chain integrity guarantees. Currently, there are
-various projects in this space with overlapping missions and often incompatible
-interfaces. No one project solves all problems and it is confusing to understand
-how the pieces fit together. The well-lit path we define will make it easier for
-users to achieve the guarantees they desire.
+## Recommended Technology Suite
 
 ### Specifications and Interfaces
 
@@ -96,60 +89,31 @@ make integration easier.
 </thead>
 <tbody>
 <tr>
-  <td rowspan="2">Meta
-  <td>Standards
-  <td><a href="https://github.com/SLSA-Framework/levels">SLSA-Framework/levels</a>
+  <td rowspan="4">Attestation Format
+  <td>Envelope Layer
+  <td><a href="https://github.com/secure-systems-lab/signing-spec/">secure-systems-lab/signing-spec</a>
 </tr>
 <tr>
-  <td>Index of Technical Controls</td>
-  <td>(this repo)</td>
+  <td>Statement Layer
+  <td rowspan="3"><a href="https://github.com/in-toto/attestation-spec/">in-toto/attestation-spec</a><br>
+      (<strong>new</strong> - split from
+      <a href="https://github.com/in-toto/ITE/pull/15">ITE-6</a>)
 </tr>
 <tr>
-<td>Attestation Format</td>
-<td>Envelope Layer</td>
-<td><a
-href="https://github.com/secure-systems-lab/signing-spec/">secure-systems-lab/signing-spec</a></td>
+  <td>Predicate Layer
 </tr>
 <tr>
-<td></td>
-<td>Statement Layer</td>
-<td><a
-href="https://github.com/in-toto/attestation-spec/">in-toto/attestation-spec</a><br>
-(<strong>new</strong> - split from <a
-href="https://github.com/in-toto/ITE/pull/15">ITE-6</a>)</td>
+  <td>Recommended Predicate Types
 </tr>
 <tr>
-<td></td>
-<td>Predicate Layer</td>
-<td></td>
+  <td rowspan="2">Attestation Storage
+  <td>Local Filesystem
+  <td><a href="https://github.com/in-toto/attestation-spec/">in-toto/attestation-spec</a>
 </tr>
 <tr>
-<td></td>
-<td>Recommended Predicate Types</td>
-<td></td>
-</tr>
-<tr>
-<td>Attestation Storage</td>
-<td>Local Filesystem</td>
-<td><a
-href="https://github.com/in-toto/attestation-spec/">in-toto/attestation-spec</a></td>
-</tr>
-<tr>
-<td></td>
-<td>Docker/OCI Registry</td>
-<td><a href="https://github.com/sigstore/cosign">sigstore/cosign</a><br>
-(Competing: <a
-href="https://github.com/notaryproject/nv2">notaryproject/nv2</a>)</td>
-</tr>
-<tr>
-<td>Attestation Consumption</td>
-<td>Policy Format</td>
-<td>TBD (not clear if needed)</td>
-</tr>
-<tr>
-<td></td>
-<td>Trust Model</td>
-<td></td>
+  <td>Docker/OCI Registry</td>
+  <td><a href="https://github.com/sigstore/cosign">sigstore/cosign</a><br>
+      (Competing: <a href="https://github.com/notaryproject/nv2">notaryproject/nv2</a>)
 </tr>
 </tbody>
 </table>
@@ -180,14 +144,6 @@ application, particularly:
     attesters save attestations for that blob, and how should verifiers find
     attestations for that blob?
 -   Others on an as-needed basis.
-
-**Attestation Consumption (TBD):** Conventions for how attestations are
-consumed.
-
--   Policy Format: It may be desirable to agree on a standard way to express
-    policies, independent of the tooling used to evaluate those policies.
--   Trust Model: How does a consumer know the expected attestations for a given
-    software package?
 
 ### Compatible Implementations
 
