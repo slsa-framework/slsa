@@ -107,23 +107,23 @@ Statement requirements:
     the Statement. Being in this layer allows uniform processing of references
     independent of the predicate type, which may be desirable in some cases.
 
-## Recommended Formats/Conventions
+## Recommended Suite
 
 We recommend a single suite of formats and conventions that work well together
 and have desirable security properties. Our hope is to align the industry around
 this particular suite because it makes everything easier. That said, we
 recognize that other choices may be necessary in various cases.
 
-Summary: Use [in-toto](https://in-toto.io).
+Summary: Generate [in-toto](https://in-toto.io) attestations.
 
 *   Envelope:
     **[secure-systems-lab/signing-spec](https://github.com/secure-systems-lab/signing-spec/)**
     (TODO: Recommend Crypto/PKI)
 *   Statement:
     **[in-toto/attestation-spec](https://github.com/in-toto/attestation-spec/)**
-*   Predicate: (TODO link to specific specs)
+*   Predicate: Choose as appopriate. (TODO link to specific specs)
     *   Provenance
-    *   SDPX (TODO)
+    *   [SPDX]
     *   If none are a good fit, invent a new one.
 *   Bundle and Storage/Lookup:
     *   Local Filesystem: TODO
@@ -189,194 +189,79 @@ Properties:
 [in-toto v2]: https://github.com/in-toto/attestations
 [Simple Signing]: https://github.com/containers/image/blob/master/docs/containers-signature.5.md
 [Notary v2]: https://github.com/notaryproject/nv2
-
-Property            | [in-toto v2]  | [in-toto v1] | [Simple Signing] | [Notary v2] | Raw Signing
-------------------- | ------------- | ------------ | ---------------- | ----------- | -----------
-Envelope            | signing-spec  | in-toto v1   | OpenPGP          | JWT         | (various)
-Statement           |               |              |                  |             |
-Subject             |               |              |                  |             |
-Predicate           |               |              |                  |             | (none)
-Supported Artifacts |               |              |                  |             |
-Predicate           |               |              |                  |             |
-
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Raw Signing</th>
-<th><a
-href="https://github.com/in-toto/docs/blob/master/in-toto-spec.md">In-toto
-Link 1.0</a></th>
-<th><a
-href="https://github.com/containers/image/blob/master/docs/containers-signature.5.md">"Simple
-Signing"</a></th>
-<th><a href="https://github.com/notaryproject/nv2">Notary v2</a></th>
-<th><a href="https://github.com/spdx/spdx-spec">SPDX</a></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Envelope</td>
-<td>(various)</td>
-<td>Custom</td>
-<td>PGP</td>
-<td>JWT</td>
-<td>(none)</td>
-</tr>
-<tr>
-<td>Statement</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>(none)</td>
-</tr>
-<tr>
-<td>Subject</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>n/a</td>
-</tr>
-<tr>
-<td>Typed Predicate</td>
-<td></td>
-<td>✗</td>
-<td></td>
-<td></td>
-<td>n/a</td>
-</tr>
-<tr>
-<td>Not Specific to One Artifact Type</td>
-<td>(depends)</td>
-<td>✓</td>
-<td>✗ (Docker)</td>
-<td>✗ (Docker)</td>
-<td>n/a</td>
-</tr>
-<tr>
-<td>Predicate</td>
-<td>✗</td>
-<td>✓</td>
-<td></td>
-<td>✗</td>
-<td>✓</td>
-</tr>
-<tr>
-<td></td>
-<td>n/a</td>
-<td></td>
-<td></td>
-<td>n/a</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>n/a</td>
-<td></td>
-<td></td>
-<td>n/a</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>n/a</td>
-<td></td>
-<td></td>
-<td>n/a</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
--   [In-toto Link 1.0](https://github.com/in-toto/docs/blob/master/in-toto-spec.md)
-    -   Mapping to our model:
-        -   Envelope: Custom - JSON encoding, raw signature over Canonical JSON.
-        -   Statement: JSON object with fixed `_type`. Subject is some subset of
-            `materials` and/or `products`. No explicit PredicateType.
-        -   Predicate: fixed schema.
-    -   Problems:
-        -   No clear subject.
-        -   Predicate schema too constrained.
-        -   Nitpicks: Naming is confusing. Does not cleanly separate into the
-            layers above. No explicit PredicateType.
--   [RedHat "Simple Signing"](https://github.com/containers/image/blob/master/docs/containers-signature.5.md)
-    ([blog post](https://www.redhat.com/en/blog/container-image-signing))
-    -   Mapping to our model:
-        -   Envelope: PGP Signed Message (suggested but not required)
-        -   Statement: JSON object with fixed `critical.type`. Subject is
-            `critical.image` + `critical.identity`. No explicit PredicateType.
-        -   Predicate: `optional` field (arbitrary JSON object)
-    -   Problems:
-        -   `critical`+`optional` is simultaneously too brittle and too loose.
-            The critical fields can effectively never change because the
-            producer and consumer must agree in lock step, while the optional
-            fields lack validation, typing, or versioning.
-            -   _Suggested solution:_ Explicit MessageType and PredicateType,
-                each mapping to a versioned schema.
-        -   `critical.image` is too inflexible and ambiguous. Does not specify
-            ALL vs ANY semantics when multiple members are present. Does not
-            support multiple, alternative digests. Does not support multiple
-            artifacts.
-            -   _Suggested solution:_ ANY semantics, ignore
-                unrecognized/unsupported members.
-        -   `critical.identity` is required but does not make sense in all
-            contexts. For example, a "provenance" attestation likely does not
-            yet know the identity.
-            -   _Suggested solution: _Make it optional.
-        -   Nitpicks: Naming is too container-centric. Does not cleanly separate
-            into the layers above.
--   [Notary v2](https://github.com/notaryproject/nv2)
-    -   Mapping to our model:
-        -   Envelope: JWT
-        -   Statement: JWT
-        -   Predicate: None. (Technically you could put predicates in the JWT,
-            but the spec does not say anything about that one way or the other,
-            and it is not designed to do this.)
-    -   Problems:
-        -   Docker/OCI-specific, especially `references`.
-        -   Does not naturally support multiple digest algorithms.
-        -   Does not officially support predicates.
-        -   (matter of opinion) Subject does not naturally support multiple
-            artifacts, though you can sign an index which in turn lists multiple
-            artifacts. But it is awkward and detached.
-        -   Nitpicks: Does not cleanly separate into layers above.
--   [Binary Authorization](https://cloud.google.com/sdk/gcloud/reference/beta/container/binauthz/create-signature-payload)
-    -   Mapping to our model:
-        -   Envelope: (TODO)
-        -   Statement: RedHat "Simple Signing"
-        -   Predicate: not supported
-
-TODO - Table of the above.
-
-### Predicate types
-
 [SPDX]: https://github.com/spdx/spdx-spec
 
--   [SPDX](https://github.com/spdx/spdx-spec)
-    -   Mapping to our model: just Predicate (AFAICT)
-    -   Problems:
-        -   Does not specify envelope or statement layer.
-        -   Too complex. Trying to be all things to all parties with a fixed
-            schema.
-        -   Not extensible. Cannot add custom metadata (AFAICT). In particular,
-            does not easily support the few fields we care about for provenance.
+Property              | [in-toto v2] | [in-toto v1] | [Simple Signing] | [Notary v2] | Raw Signing
+--------------------- | ------------ | ------------ | ---------------- | ----------- | -----------
+Recommended Envelope  | signing-spec | in-toto v1   | OpenPGP          | JWT         | (various)
+Subject: Clear        | ✓            | ✗            | ✓                | ✓           | ✓
+Subject: Any Type     | ✓            | ✓            | ✗                | ✓           | (depends)
+Subject: Multi-Digest | ✓            | ✓            | ✗                | ✗           | (depends)
+Predicate: Supported  | ✓            | ✓            | ✓                | ✗           | ✗
+Predicate: Flexible   | ✓            | ✗ (*)        | ✓                | (n/a)       | (n/a)
+Predicate: Typed      | ✓            | ✗            | ✗                | (n/a)       | (n/a)
+Materials: Supported  | ✓            | ✓            | ✗                | ✗           | ✗
+Layered               | ✓            | ✗            | ✓                | (n/a)       | (n/a)
+Evolvable             | ✓            | ✓            | ✗                | ✓           | ✗
 
-### Raw artifact signing (Statement ≅ Subject)
+Properties:
+
+-   **Recommended Envelope:** Which envelope is recommended (or possibly
+    required)?
+-   **Subject: Clear:** Is the Attestation clearly about a particular
+    attestation?
+    -   ✗ in-toto v1: Subject is ambiguous between `materials` and `products`.
+-   **Subject: Any Type:** Does Subject support arbitrary Artifact types?
+    -   ✗ Simple Signing: `critical.image` only supports Docker/OCI image
+        manifests (and because it's `critical`, that field is required.) Also,
+        `critical.identity` is required but not applicable to all use cases
+        (e.g. build provenance, where the identity is not yet known).
+-   **Subject: Multi-Digest:** Does Subject support specifying multiple digest
+    algorithms for crypto agility?
+    -   ✗ Only one digest supported. (The `multihash` algorithm mentioned in the
+        OCI image-spec is not defined or implemented anywhere.)
+-   **Predicate: Supported:** Can a predicate be supplied?
+    -   ✗ Notary v2: Does not officially support a predicate. Undefined what
+        happens if extra predicate fields are added to the JWT.
+-   **Predicate: Flexible:** Can a user-defined predicate be used?
+    -   ✗ in-toto v1: Several fixed, required predicate fields. Technically
+        arbitrary data can be added to `environment` but that is not well
+        documented or standardized.
+    -   ✓ Simple Signing: Can use `optional` field.
+-   **Predicate: Typed:** Is there a well-established convention of indicating
+    the meaning of the Attestation and/or the schema of the user-defined
+    predicate unambiguous?
+-   **Materials: Supported:** Are Materials standardized in the Statement layer?
+-   **Layered:** Does the schema clearly match the layers of our
+    [model](#model-and-terminology)?
+    -   ✗ in-toto v1: Statement and Predicate fields are mixed together.
+-   **Evolvable:** Can the spec be modified to support required features?
+    -   ✗ Simple Signing: The `critical` field can effectively never change
+        because the producer and consumer must agree in lock step.
+
+### Bundle + Storage/Lookup
+
+-   Local filesystem
+    -   (none yet)
+-   OCI/Docker Registry:
+    -   [sigstore/cosign](https://github.com/sigstore/cosign) **(recommended)**
+    -   [Notary v2]
+
+### Raw artifact signing
+
+For reference, we list examples of raw artifact signing, where the statement
+only contains the subject.
 
 -   [Node.js](https://github.com/nodejs/node#verifying-binaries)
     ([example](https://nodejs.org/dist/v14.16.0/SHASUMS256.txt.asc))
     -   Envelope: PGP Signed Message.
     -   Statement: List of (sha256, filename) pairs.
 
-### Policy Engine + Software Distribution
+## TODO
+
+Show how the following are related:
 
 -   [Binary Authorization](https://cloud.google.com/sdk/gcloud/reference/beta/container/binauthz/create-signature-payload)
-    -   Envelope
-
-TODO:
-
 -   Secure Boot - Also uses the term "attestation", possibly with a different
     meaning. Need to make sure it's compatible. Ask
     [kmoy](https://moma.corp.google.com/person/kmoy) and
