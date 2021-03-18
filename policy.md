@@ -1,7 +1,7 @@
 # Attestation-based Policies
 
 Author: lodato@google.com \
-Date: March 9, 2021 \
+Date: March 2021 \
 Status: EARLY DRAFT
 
 ## Objective
