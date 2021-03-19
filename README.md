@@ -238,9 +238,9 @@ of sources, builds, dependencies, and deployments. A resource's supply chain is
 a combination of its dependencies' supply chains plus its own sources, builds,
 and deployment.
 
-![supply-chain](images/supply-chain.png)
+The following diagram shows the relationship between concepts.
 
-Figure 1: Relationship between concepts.
+![supply-chain](images/supply-chain.svg)
 
 <table>
  <thead>
@@ -428,8 +428,7 @@ security stance, as described in the [vision](#vision-case-study) below.
 ## Vision: Case Study
 
 Let's consider how we might secure [curlimages/curl] from the
-[motivating example](#motivating-example) using the SLSA framework. See
-[pdf](images/vision-diagram.pdf) for a larger version of the diagram with links.
+[motivating example](#motivating-example) using the SLSA framework.
 
 ### Incrementally reaching SLSA 3
 
@@ -438,7 +437,7 @@ image.
 
 #### SLSA 0: Initial state
 
-![slsa0](images/slsa-0.png)
+![slsa0](images/slsa-0.svg)
 
 Initially the Docker image is SLSA 0. There is no provenance and no policy. It
 is difficult to determine who built the artifact and what sources and
@@ -449,7 +448,7 @@ The diagram shows that the (mutable) resource `curlimages/curl:7.72.0` points to
 
 #### SLSA 1: Provenance
 
-![slsa1](images/slsa-1.png)
+![slsa1](images/slsa-1.svg)
 
 We can reach SLSA 1 by using a build system that generates
 [provenance](https://github.com/TomHennen/ITE/blob/ite-6/ITE/6/README.md). The
@@ -469,7 +468,7 @@ checks, where tampering is less of a concern.
 
 #### SLSA 2: Additional controls
 
-![slsa2](images/slsa-2.png)
+![slsa2](images/slsa-2.svg)
 
 To reach SLSA 2, the source repo must guarantee accurate change history while
 the build process must guarantee isolation, among other things. The provenance
@@ -485,7 +484,7 @@ Only highly skilled adversaries are likely able to forge it.
 
 #### SLSA 3: Hermeticity and two-person review
 
-![slsa3](images/slsa-3.png)
+![slsa3](images/slsa-3.svg)
 
 SLSA 3 [requires](#proposed-slsa-definitions) two-party source control and
 hermetic builds. Hermeticity in particular guarantees that the dependencies are
@@ -500,7 +499,7 @@ source.
 
 ### Full graph
 
-![full-graph](images/slsa-full-graph.png)
+![full-graph](images/slsa-full-graph.svg)
 
 We can recursively apply the same steps above to lock down dependencies. Each
 non-source dependency gets its own provenance, which in turns lists more
