@@ -4,7 +4,8 @@
 
 The objective of this document is to reach industry agreement on the framework
 for software supply chain security through standards, accreditation, and
-technical controls.
+technical controls. This is being developed as part of the [OpenSSF Digital
+Identity WG](https://github.com/ossf/wg-digital-identity-attestation).
 
 ## Overview
 
