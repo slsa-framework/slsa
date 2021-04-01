@@ -65,14 +65,16 @@ Summary:
 -   **Attestation:** Authenticated, machine-readable metadata about one or more
     software artifacts. MUST contain at least:
     -   **Envelope:** Authenticates the message. At a minimum, it contains:
-        -   **Message:** Content (statement) of the attestation. The type SHOULD
-            be authenticated and unambiguous.
+        -   **Message:** Content (statement) of the attestation. The message
+            type SHOULD be authenticated and unambiguous to avoid confusion
+            attacks.
         -   **Signature:** Denotes the **attester** who created the attestation.
     -   **Statement:** Binds the attestation to a particular set of artifacts.
         This is a separate layer is to allow for predicate-agnostic processing
         and storage/lookup. MUST contain at least:
         -   **Subject:** Identifies which artifacts the predicate applies to.
-        -   **Predicate:** Metadata about the subject.
+        -   **Predicate:** Metadata about the subject. The predicate type SHOULD
+            be explicit to avoid misinterpretation.
     -   **Predicate:** Arbitrary metadata in a predicate-specific schema. MAY
         contain:
         -   **Link:** *(repeated)* Reference to a related artifact, such as
