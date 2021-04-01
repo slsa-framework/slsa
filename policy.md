@@ -29,3 +29,10 @@ verification, logging, etc.*
 
 *TODO: Note that a policy decision may itself be an attestation that can be fed
 into further policy decisions down the line.*
+
+*TODO: Two modes: (a) only allow if a "good" attestation exists,
+even if there also exists some "bad" attestation; (b) block if some "bad"
+attestation exists, even if there also exists some "good" attestation. Talk
+about threat model and whether the attestation storage is trusted. (a) is better
+for enforcement in the critical path, while (b) is useful for vulnerability
+remediation.*

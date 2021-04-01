@@ -116,7 +116,6 @@ Subject: Multi-Digest | ✓            | ✓            | ✗                | �
 Predicate: Supported  | ✓            | ✓            | ✓                | ✗           | ✗
 Predicate: Flexible   | ✓            | ✗ (*)        | ✓                | (n/a)       | (n/a)
 Predicate: Typed      | ✓            | ✗            | ✗                | (n/a)       | (n/a)
-Materials: Supported  | ✓            | ✓            | ✗                | ✗           | ✗
 Layered               | ✓            | ✗            | ✓                | (n/a)       | (n/a)
 Evolvable             | ✓            | ✓            | ✗                | ✓           | ✗
 
@@ -134,8 +133,9 @@ Properties:
         (e.g. build provenance, where the identity is not yet known).
 -   **Subject: Multi-Digest:** Does Subject support specifying multiple digest
     algorithms for crypto agility?
-    -   ✗ Only one digest supported. (The `multihash` algorithm mentioned in the
-        OCI image-spec is not defined or implemented anywhere.)
+    -   ✗ Simple Signing, Notary v2: Only one digest supported. (The `multihash`
+        algorithm mentioned in the OCI image-spec is not defined or implemented
+        anywhere.)
 -   **Predicate: Supported:** Can a predicate be supplied?
     -   ✗ Notary v2: Does not officially support a predicate. Undefined what
         happens if extra predicate fields are added to the JWT.
@@ -147,7 +147,6 @@ Properties:
 -   **Predicate: Typed:** Is there a well-established convention of indicating
     the meaning of the Attestation and/or the schema of the user-defined
     predicate unambiguous?
--   **Materials: Supported:** Are Materials standardized in the Statement layer?
 -   **Layered:** Does the schema clearly match the layers of our
     [model](#model-and-terminology)?
     -   ✗ in-toto v1: Statement and Predicate fields are mixed together.
