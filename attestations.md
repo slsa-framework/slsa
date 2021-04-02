@@ -9,18 +9,47 @@ Status: IN REVIEW
 Standardize the terminology, data model, layers, and conventions for software
 artifact metadata.
 
-## Model and Terminology
+## Overview
 
-A software **attestation** is a signed statement (metadata) about a software
-**artifact** or collection of software artifacts. (Sometimes called a
+A software attestation is a signed statement (metadata) about a software
+artifact or collection of software artifacts. (Sometimes called a
 "[software bill of materials](https://en.wikipedia.org/wiki/Software_bill_of_materials)"
 or SBoM. Not to be confused with
 [remote attestation](https://en.wikipedia.org/wiki/Trusted_Computing#Remote_attestation)
 in the trusted computing world.)
 
+An attestation is the generalization of raw artifact/code signing, where the
+signature is directly over the artifact or a hash of artifact:
+
+*   With raw signing, a signature *implies* a single bit of metadata about the
+    artifact, based on the public key. The exact meaning must be negotiated
+    between signer and verifier, and a new keyset must be provisioned for each
+    bit of information. For example, a signature might denote who produced an
+    artifact, or it might denote fitness for some purpose, or something else
+    entirely.
+
+*   With an attestation, the metadata is *explicit* and the signature only
+    denotes who created the attestation. A single keyset can express an
+    arbitrary amount of information, including things that are not possible with
+    raw signing. For example, an attestation might state exactly how an artifact
+    was produced, including the build command that was run and all of its
+    dependencies.
+
+## Intended Use Case
+
+The primary intended use case is to feed into an
+[automated policy framework](policy.md). See that doc for more info.
+
+Other use cases are "nice-to-haves", including ad-hoc analysis.
+
+## Model and Terminology
+
 We define the following model to represent any software attestations, regardless
 of format. Not all formats will have all fields or all layers, but to be called
 an "attestation" it must fit this general model.
+
+The key words MUST, SHOULD, and MAY are to be interpreted as described in
+[RFC 2119](https://tools.ietf.org/html/rfc2119).
 
 <p align="center"><img width="100%" src="images/attestation_layers.svg"></p>
 
@@ -30,82 +59,38 @@ Example in English:
 
 Summary:
 
--   **Artifact:** Immutable blob of data. Examples: file content, git commit,
-    Docker image.
--   **Attestation:** Authenticated message containing metadata about one or more
-    software artifacts. It has the following layers:
-    -   **Envelope:** Authenticates the message (**Signature**) and
-        unambiguously identifies how to interpret the next layer
-        (**MessageType**). May also contain unauthenticated data, such as a key
-        hint.
-        -   Note: The envelope layer is not specific to the attestations model
-            and can be used for other types of messages.
-    -   **Statement:** Binds the attestation to a specific set of artifacts
-        (**Subject**) and identifies what the attestation means
-        (**PredicateType**). May also reference other artifacts (**Materials**)
-        that influenced the Statement.
-    -   **Predicate:** Describes arbitrary properties of the subject using a
-        type-specific schema.
+-   **Artifact:** Immutable blob of data, usually identified by cryptographic
+    content hash. Examples: file content, git commit, Docker image. May also
+    include a mutable locator, such as a package name or URI.
+-   **Attestation:** Authenticated, machine-readable metadata about one or more
+    software artifacts. MUST contain at least:
+    -   **Envelope:** Authenticates the message. At a minimum, it contains:
+        -   **Message:** Content (statement) of the attestation. The message
+            type SHOULD be authenticated and unambiguous to avoid confusion
+            attacks.
+        -   **Signature:** Denotes the **attester** who created the attestation.
+    -   **Statement:** Binds the attestation to a particular set of artifacts.
+        This is a separate layer is to allow for predicate-agnostic processing
+        and storage/lookup. MUST contain at least:
+        -   **Subject:** Identifies which artifacts the predicate applies to.
+        -   **Predicate:** Metadata about the subject. The predicate type SHOULD
+            be explicit to avoid misinterpretation.
+    -   **Predicate:** Arbitrary metadata in a predicate-specific schema. MAY
+        contain:
+        -   **Link:** *(repeated)* Reference to a related artifact, such as
+            build dependency. Effectively forms a
+            [hypergraph](https://en.wikipedia.org/wiki/Hypergraph) where the
+            nodes are artifacts and the hyperedges are attestations. It is
+            helpful for the link to be standardized to allow predicate-agnostic
+            graph processing.
 -   **Bundle:** A collection of Attestations, which are usually but not
     necessarily related.
     -   Note: The bundle itself is unauthenticated. Authenticating multiple
-        attestations as a unit is out of scope of this model. For that, consider
-        [TUF](https://theupdateframework.io/).
--   **Storage/Lookup:** Convention for where attestors place Attestations and
-    how verifiers find Attestations for a given Artifact.
+        attestations as a unit is [TBD](#compound-statement).
+-   **Storage/Lookup:** Convention for where attesters place attestations and
+    how verifiers find attestations for a given artifact.
 
-See [Requirements](#requirements) for details and
-[Appendix: Known Attestation Formats](#heading=h.38zmbsgw7uys) for examples.
-
-## Intended Use Case
-
-The primary intended use case is to feed into an
-[automated policy framework](policy.md). See that doc for more info.
-
-<p align="center"><img width="50%" src="images/policy_model.svg"></p>
-
-Other use cases are "nice-to-haves", including ad-hoc analysis.
-
-## Requirements
-
-We define the minimal set of requirements for attestations to fit into this
-framework. The key words MUST, MUST NOT, SHOULD, and MAY are to be interpreted
-as described in [RFC 2119](https://tools.ietf.org/html/rfc2119).
-
-General requirements:
-
-*   All layers MUST be machine parsable and suitable for processing via an
-    [automated policy framework](policy.md).
-*   Each layer SHOULD be independent of the layers above.
-*   Layers and fields MAY be omitted if implicit or unnecessary. For example,
-    traditional "raw artifact signing" uses a fixed, application-specific
-    Statement with no explicit MessageType and no PredicateType/Predicate.
-*   Field names MAY differ from the model.
-
-Envelope requirements:
-
-*   Envelope MUST include a cryptographic Signature.
-*   Envelope MUST include an authenticated Message containing a Statement.
-*   Envelope SHOULD include an authenticated MessageType indicating how to
-    interpret Message.
-*   Envelope MAY contain other authenticated or unauthenticated data.
-
-Statement requirements:
-
-*   Statement MUST include a Subject identifying at least one Artifact.
-    *   Subject MUST refer to immutable Artifacts. Identifier SHOULD be a
-        cryptographic content digest whenever possible, but MAY be some other
-        trusted immutable identifier. Examples: `sha256:dd2f3...`,
-        `svn+https://example.com/svn-repo@341`.
-    *   Subject SHOULD support crypto agility by specifying multiple alternative
-        digests.
-    *   Subject MAY include mutable locators for those Artifacts, such as URIs
-        or package names. Example: `pkg:docker/alpine`.
-*   Statement SHOULD include a PredicateType and/or Predicate indicating what
-    the Statement means.
-*   Statement MAY include Materials identifying other Artifacts that influenced
-    the Statement. Being in this layer allows uniform processing of references
-    independent of the predicate type, which may be desirable in some cases.
+See [Survey](survey.md) for examples.
 
 ## Recommended Suite
 
@@ -121,7 +106,7 @@ Summary: Generate [in-toto](https://in-toto.io) attestations.
     (TODO: Recommend Crypto/PKI)
 *   Statement:
     **[in-toto/attestation-spec](https://github.com/in-toto/attestation-spec/)**
-*   Predicate: Choose as appopriate. (TODO link to specific specs)
+*   Predicate: Choose as appropriate. (TODO link to specific specs)
     *   Provenance
     *   [SPDX]
     *   If none are a good fit, invent a new one.
@@ -131,6 +116,39 @@ Summary: Generate [in-toto](https://in-toto.io) attestations.
         **[sigstore/cosign](https://github.com/sigstore/cosign)**
 
 See [survey](survey.md) for other options.
+
+## Future Extensions
+
+### Expanded artifact definition
+
+TODO: Can a subject of an attestation be something like "GCP project at time T"?
+That is logically immutable since the "at time T" cannot change.
+
+### Compound predicate
+
+TODO: One subject but multiple predicates. Should we offer an opinion on whether
+this is represented at the Statement layer (repeated predicate) or Predicate
+layer (a "compound" type predicate)?
+
+### Compound statement
+
+TODO: One envelope has multiple statements (separate subject+predicate pairs)
+signed as a unit, which are not valid individually. Is this one attestation or
+multiple?
+
+TODO: Should we represent this as multiple messages within the envelope (i.e. a
+shim) or as a new type of Statement that refers to the other Statements (perhaps
+too complicated).
+
+### Attestation as an artifact
+
+TODO: If you have separate signed attestations and want to refer to the
+collection (e.g. a signed bundle), you can create a statement referring to all
+of them as the subject.
+
+TODO: Figure out serialization. Previously I had been thinking envelopes didn't
+have to be serialized deterministically, but now if they are an Artifact it does
+have to be deterministic/immutable.
 
 ## Appendix: Naming
 
