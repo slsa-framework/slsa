@@ -1,4 +1,6 @@
-# Attestation type: Provenance v1
+# Predicate type: Provenance v1
+
+Type URI: https://in-toto.io/Provenance/v1
 
 ## Purpose
 
@@ -10,55 +12,36 @@ The primary focus is on automated builds that followed some "recipe".
 
 ```jsonc
 {
-  "attestation_type": "https://in-toto.io/Provenance/v1",
-  "subject": {
-    "<URI-OR-PATH>": {
-      "<DIGEST_TYPE>": "<DIGEST_VALUE>"
-    }
-  },
-  "materials": {
-    "<URI-OR-PATH>": {
-      "<DIGEST_TYPE>": "<DIGEST_VALUE>"
-    }
-  },
-  "builder": {
-    "id": "<URI>"
-  },
-  "recipe": {
-    "type": "<URI>",
-    "material": "<URI-OR-PATH>",        // optional
-    "entry_point": "<STRING>",          // optional
-    "arguments": { /* object */ }       // optional
-  },
-  "reproducibility": {                  // optional
-    /* object */
-  },
-  "metadata": {                         // optional
-    "build_timestamp": "<TIMESTAMP>",   // optional
-    "materials_complete": true/false    // optional
+  "subject": { ... }
+  "predicateType": "https://in-toto.io/Provenance/v1",
+  "predicate": {                           // required
+    "builder": {                           // required
+      "id": "<URI>"                        // required
+    },
+    "recipe": {                            // optional
+      "type": "<URI>",                     // required
+      "definedInMaterial": /* integer */,  // optional
+      "entryPoint": "<STRING>",            // optional
+      "arguments": { /* object */ },       // optional
+      "reproducibility": { /* object */ }  // optional
+    },
+    "metadata": {                          // optional
+      "buildStartedOn": "<TIMESTAMP>",     // optional
+      "materialsComplete": true/false      // optional
+    },
+    "materials": [
+      {
+        "uri": "<URI>",                    // optional
+        "digest": { /* DigestSet */ },     // optional
+        "mediaType": "<MEDIA_TYPE>",       // optional
+        "tags": [ "<STRING>" ]             // optional
+      }
+    ]
   }
 }
 ```
 
-### Standard attestation fields ([Attestation v1])
-
-<a id="attestation_type"></a>
-`attestation_type` _string ([TypeURI]), required_
-
-> Always `"https://in-toto.io/Provenance/v1"`.
-
-<a id="subject"></a>
-`subject` _object ([ArtifactCollection]), required_
-
-> The products of the build.
-
-<a id="materials"></a>
-`materials` _object ([ArtifactCollection]), optional_
-
-> The collection of artifacts that influenced the build including sources,
-> dependencies, build tools, base images, and so on.
-
-### Type-specific fields
+### Fields
 
 <a id="builder"></a>
 `builder` _object, required_
@@ -72,7 +55,7 @@ The primary focus is on automated builds that followed some "recipe".
 > ```
 >
 > This is distinct from the signer because one signer may generate attestations
-> for more than one builder. For example, a signle GitHubActions signer may
+> for more than one builder. For example, a single GitHubActions signer may
 > produce attestations for both "github-hosted runner" and various "self-hosted
 > runner" builders.
 >
@@ -94,9 +77,8 @@ The primary focus is on automated builds that followed some "recipe".
 > ```json
 > "recipe": {
 >   "type": "https://github.com/Attestations/GitHubActionsWorkflow@v1",
->   "material": "git+https://github.com/curl/curl@curl-7_72_0",
->   "entry_point": "build.yaml:maketgz",
->   "arguments": null
+>   "definedInMaterial": 0,
+>   "entryPoint": "build.yaml:maketgz"
 > }
 > ```
 >
@@ -105,14 +87,14 @@ The primary focus is on automated builds that followed some "recipe".
 <a id="recipe.type"></a>
 `recipe.type` _string ([TypeURI]), required_
 
-> URI indicating what type of recipe was performed. It determines the meaning
-> of `recipe.entry_point`, `recipe.arguments`, `materials`, and
-> `reproducibility`.
+> URI indicating what type of recipe was performed. It determines the meaning of
+> `recipe.entryPoint`, `recipe.arguments`, `recipe.reproducibility`, and
+> `materials`.
 
-<a id="recipe.material"></a>
-`recipe.material` _string, optional_
+<a id="recipe.definedInMaterial"></a>
+`recipe.definedInMaterial` _string, optional_
 
-> Key in `materials` containing the recipe steps that are not implied by
+> Index in `materials` containing the recipe steps that are not implied by
 > `recipe.type`. For example, if the recipe type were "make", then this would
 > point to the source containing the Makefile, not the `make` program itself.
 >
@@ -120,8 +102,8 @@ The primary focus is on automated builds that followed some "recipe".
 >
 > TODO: What if there is more than one material?
 
-<a id="recipe.entry_point"></a>
-`recipe.entry_point` _string, optional_
+<a id="recipe.entryPoint"></a>
+`recipe.entryPoint` _string, optional_
 
 > String identifying the entry point. The meaning is defined by `recipe.type`.
 > For example, if the recipe type were "make", then this would reference the
@@ -138,8 +120,8 @@ The primary focus is on automated builds that followed some "recipe".
 >
 > Omit this field (or use null) to indicate "no arguments."
 
-<a id="reproducibility"></a>
-`reproducibility` _object, optional_
+<a id="recipe.reproducibility"></a>
+`recipe.reproducibility` _object, optional_
 
 > Other information that is needed to reproduce the build but that cannot be
 > controlled by users. The schema is determined by `recipe.type`.
@@ -149,27 +131,61 @@ The primary focus is on automated builds that followed some "recipe".
 
 > Other properties of the build.
 
-<a id="metadata.build_timestamp"></a>
-`metadata.build_timestamp` _string ([Timestamp]), optional_
+<a id="metadata.buildStartedOn"></a>
+`metadata.buildStartedOn` _string ([Timestamp]), optional_
 
-> The timestamp of when the build occurred.
+> The timestamp of when the build started.
 
-<a id="metadata.materials_complete"></a>
-`metadata.materials_complete` _boolean, optional_
+<a id="metadata.materialsComplete"></a>
+`metadata.materialsComplete` _boolean, optional_
 
-> If true, `materials` is claimed to be complete, usually through some
-> controls to prevent network access.
+> If true, `materials` is claimed to be complete, usually through some controls
+> to prevent network access.
 
-## Examples
+<a id="materials"></a>
+`materials` _object ([ArtifactCollection]), optional_
 
-See [provenance_curl_maketgz.yaml](../examples/provenance_curl_maketgz.yaml).
+> The collection of artifacts that influenced the build including sources,
+> dependencies, build tools, base images, and so on.
+
+<a id="materials.uri"></a>
+`materials[*].uri` _string ([ResourceURI]), optional_
+
+> The method by which this artifact was referenced during the build.
+>
+> TODO: Should we differentiate between the "referenced" URI and the "resolved"
+> URI, e.g. "latest" vs "3.4.1"?
+>
+> TODO: Should wrap in a `locator` object to allow for extensibility, in case we
+> add other types of URIs or other non-URI locators?
+
+<a id="materials.digest"></a>
+`materials[*].digest` _string ([DigestSet]), optional_
+
+> Collection of cryptographic digests for the contents of this artifact.
+
+<a id="materials.mediaType"></a>
+`materials[*].mediaType` _string (Media Type), optional_
+
+> The [Media Type](https://www.iana.org/assignments/media-types/) for this
+> artifact, if known.
+
+<a id="materials.tags"></a>
+`materials[*].tags` _array (of strings), optional_
+
+> Unordered set of labels whose meaning is dependent on `recipe.type`. SHOULD be
+> sorted lexicographically.
+>
+> TODO: Recommend specific conventions, e.g. `source` and `dev-dependency`.
 
 ## Appendix: Review of CI/CD systems
 
-See [ci_survey.md](../ci_survey.md) for a list of well-known CI/CD systems, to make
-sure they all map cleanly into this schema.
+See [ci_survey.md](../ci_survey.md) for a list of well-known CI/CD systems, to
+make sure they all map cleanly into this schema.
 
 [ArtifactCollection]: field_types.md#ArtifactCollection
 [Attestation v1]: attestation.md
+[DigestSet]: field_types.md#DigestSet
+[ResourceURI]: field_types.md#ResourceURI
 [Timestamp]: field_types.md#Timestamp
 [TypeURI]: field_types.md#TypeURI
