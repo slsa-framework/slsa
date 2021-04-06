@@ -418,12 +418,12 @@ SLSA 3 resource to be built from SLSA 0 dependencies.
 
 The reason for non-transitivity is to make the problem tractable. If SLSA 3
 required dependencies to be SLSA 3, then reaching SLSA 3 would require starting
-at the very end of the supply chain and working forward. This is backwards,
-forcing us to work on the least risky component first and blocking any progress
-further downstream. By making each resource's SLSA rating independent from one
-another, it allows parallel progress and prioritization based on risk. (This is
-a lesson we learned when deploying other security controls at scale throughout
-Google.)
+at the very beginning of the supply chain and working forward. This is
+backwards, forcing us to work on the least risky component first and blocking
+any progress further downstream. By making each resource's SLSA rating
+independent from one another, it allows parallel progress and prioritization
+based on risk. (This is a lesson we learned when deploying other security
+controls at scale throughout Google.)
 
 We expect SLSA ratings to be composed to describe a supply chain's overall
 security stance, as described in the [vision](#vision-case-study) below.
