@@ -331,8 +331,8 @@ Each SLSA level has a set of requirements.
   <tr>                      <td>Two-Person Review<td>  <td>      <td>✓     </tr>
   <tr><td rowspan="5">Build <td>Automation       <td>✓ <td>✓     <td>✓     </tr>
   <tr>                      <td>Isolation        <td>  <td>✓     <td>✓     </tr>
-  <tr>                      <td>Source Integrity <td>  <td>✓ *   <td>✓     </tr>
   <tr>                      <td>Hermeticity      <td>  <td>      <td>✓     </tr>
+  <tr>                      <td>Source Integrity <td>  <td>✓ *   <td>✓     </tr>
   <tr>                      <td>Provenance       <td>↓ <td>✓ *   <td>✓     </tr>
   <tr><td rowspan="4">Deploy<td>Provenance Chain <td>↓ <td>✓     <td>✓     </tr>
   <tr>                      <td>Policy           <td>↓ <td>✓     <td>✓     </tr>
@@ -373,10 +373,10 @@ nuanced. We only provide a brief summary here for clarity.
     commands.
 *   **[Isolation]** The build steps ran in an isolated environment free of
     influence from other build instances, whether prior or concurrent.
-*   **[Source Integrity]** All input artifacts were fetched in a manner that
-    prevents tampering, such as TLS.
 *   **[Hermeticity]** All build steps, sources, and dependencies were fully
     declared up front and the build steps ran with no network access.
+*   **[Source Integrity]** All input artifacts were fetched in a manner that
+    prevents tampering, such as TLS.
 *   **[Provenance]** Signed provenance recorded the input artifacts, output
     artifacts, build environment, and top-level entry point (e.g. `make`) and
     cannot be falsified.
