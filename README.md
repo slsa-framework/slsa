@@ -365,25 +365,25 @@ effort, so intermediate milestones are important.
 
 _○ = required unless there is a justification_
 
-Note: The actual requirements will necessarily be much more detailed and
-nuanced. We only provide a brief summary here for clarity.
+The following is a summary. For details, see corresponding
+[Source][source-reqs], [Build/Provenance][build-reqs], and [Common][common-reqs]
+documents.
 
-**[Source]** Requirements for the artifact's top-level source (i.e. the one
-containing the build script):
+**[\[Source\]][source-reqs]** Requirements for the artifact's top-level source,
+meaning the one containing the build script:
 
 *   **[Version Controlled]** Every change to the source is tracked in a version
     control system that identifies who made the change, what the change was, and
     when that change occurred.
-*   **[Verified History]** The version control history indicates which actor
-    identities (author, uploader, reviewer, etc.) and timestamps were strongly
-    authenticated. For example, GitHub-generated merge commits for pull requests
-    meet this requirement.
+*   **[Verified History]** Every change in the history has at least one strongly
+    authenticated actor identity (author, uploader, reviewer, etc.) and
+    timestamp.
 *   **[Retained Indefinitely]** The artifact and its change history are retained
     indefinitely and cannot be deleted.
 *   **[Two-Person Review]** At least two trusted persons agreed to every change
     in the history.
 
-**[Build]** Requirements for the artifact's build process:
+**[\[Build\]][build-reqs]** Requirements for the artifact's build process:
 
 *   **[Scripted]** All build steps were fully defined in some sort of "build
     script". The only manual command, if any, was to invoke the build script.
@@ -403,7 +403,7 @@ containing the build script):
     results in bit-for-bit identical output. (Builds that cannot meet this must
     provide a justification.)
 
-**[Provenance]** Requirements for the artifact's provenance:
+**[\[Provenance\]][build-reqs]** Requirements for the artifact's provenance:
 
 *   **[Available]** Provenance is available to the consumer of the artifact, or
     to whomever is verifying the policy, and it identifies at least the
@@ -419,8 +419,8 @@ containing the build script):
     meaning every artifact that was available to the build script. This includes
     the initial state of the machine, VM, or container of the build worker.
 
-**[Common]** Common requirements for every trusted system involved in the supply
-chain (source, build, distribution, etc.):
+**[\[Common\]][common-reqs]** Common requirements for every trusted system
+involved in the supply chain (source, build, distribution, etc.):
 
 *   **[Security]** The system meets some TBD baseline security standard to
     prevent compromise. (Patching, vulnerability scanning, user isolation,
@@ -638,7 +638,10 @@ Other takes on provenance and CI/CD:
 
 [Binary Authorization for Borg]: https://cloud.google.com/security/binary-authorization-for-borg
 [Threats, Risks, and Mitigations in the Open Source Ecosystem]: https://github.com/Open-Source-Security-Coalition/Open-Source-Security-Coalition/blob/master/publications/threats-risks-mitigations/v1.1/Threats%2C%20Risks%2C%20and%20Mitigations%20in%20the%20Open%20Source%20Ecosystem%20-%20v1.1.pdf
+[build-reqs]: build-requirements.md
+[common-reqs]: common-requirements.md
 [curl-dev]: https://pkgs.alpinelinux.org/package/edge/main/x86/curl-dev
 [curlimages/curl]: https://hub.docker.com/r/curlimages/curl
 [feedback form]: https://forms.gle/93QRfUqF7YY2mJDi9
 [mailing list]: https://groups.google.com/g/slsa-discussion
+[source-reqs]: source-requirements.md
