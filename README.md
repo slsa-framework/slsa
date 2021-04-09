@@ -553,22 +553,22 @@ The following describes how policies might work.
 
     In our example, the policy might look as follows:
 
-```bash
-scope: "pkg:docker/curlimages/curl"
-slsa_level: 3
-allow:
-  builder: "github_actions"
-  source: "https://github.com/curl/curl-docker"
-```
+    ```bash
+    scope: "pkg:docker/curlimages/curl"
+    slsa_level: 3
+    allow:
+      builder: "github_actions"
+      source: "https://github.com/curl/curl-docker"
+    ```
 
-1.  At deploy/publish time, the uploader **includes provenance** in the request.
+2.  At deploy/publish time, the uploader **includes provenance** in the request.
 
     For Docker, perhaps `docker push` gains a command-line flag to upload the
     provenance to the registry and associates it with the image. The API and
     data model would be standardized in the
     [OCI distribution spec](https://github.com/opencontainers/distribution-spec).
 
-2.  The platform **rejects deployments** unless the provenance matches the
+3.  The platform **rejects deployments** unless the provenance matches the
     policy.
 
     In our example, pushes to `curlimages/curl` would be rejected unless they
