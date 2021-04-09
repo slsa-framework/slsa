@@ -184,10 +184,8 @@ more, see [Threats, Risks, and Mitigations in the Open Source Ecosystem].
 [many](https://wiki.debian.org/ReproducibleBuilds/About)
 [benefits](https://static.googleusercontent.com/media/sre.google/en//static/pdf/building_secure_and_reliable_systems.pdf#page=357),
 including easier debugging, more confident cherry-pick releases, better build
-caching and storage efficiency, and accurate dependency tracking. Most builds
-ought to be reproducible, but they often are not simply because it is not the
-default mode of operation by build tools. We strongly support any effort to make
-reproducibility the default mode of operation and the norm in the industry.
+caching and storage efficiency, and accurate dependency tracking. For these
+reasons, we recommend reproducibility and require hermeticity at SLSA 3.
 
 In terms of security, _verified_ reproducible builds are often
 [suggested](https://www.linuxfoundation.org/en/blog/preventing-supply-chain-attacks-like-solarwinds/)
@@ -219,7 +217,7 @@ chain integrity, nor are they practical in all cases:
     many cases, or develop multiple, independent in-house rebuilders, which is
     likely prohibitively expensive.
 
-For these reasons, we do not require reproducible builds as part of SLSA.
+For these reasons, we do not _require_ reproducible builds as part of SLSA.
 Instead, it is best to think of verified reproducible builds as one option for
 implementing some of the SLSA requirements.
 
@@ -329,9 +327,10 @@ Each SLSA level has a set of requirements.
   <tr>                      <td>Retention        <td>  <td>18 mo.<td>indef </tr>
   <tr>                      <td>Change History   <td>  <td>✓     <td>✓     </tr>
   <tr>                      <td>Two-Person Review<td>  <td>      <td>✓     </tr>
-  <tr><td rowspan="5">Build <td>Automation       <td>✓ <td>✓     <td>✓     </tr>
+  <tr><td rowspan="6">Build <td>Automation       <td>✓ <td>✓     <td>✓     </tr>
   <tr>                      <td>Isolation        <td>  <td>✓     <td>✓     </tr>
   <tr>                      <td>Hermeticity      <td>  <td>      <td>✓     </tr>
+  <tr>                      <td>Reproducibility  <td>  <td>      <td>○     </tr>
   <tr>                      <td>Source Integrity <td>  <td>✓ *   <td>✓     </tr>
   <tr>                      <td>Provenance       <td>↓ <td>✓ *   <td>✓     </tr>
   <tr><td rowspan="4">Deploy<td>Provenance Chain <td>↓ <td>✓     <td>✓     </tr>
@@ -347,6 +346,7 @@ Each SLSA level has a set of requirements.
 Legend:
 
 *   ✓ = required at this level
+*   ○ = recommended at this level, but not strictly required
 *   ✓ \* = required at this level, but best effort because it depends on
     hermeticity, which is not required at this level
 *   † = detection is allowed instead of prevention
@@ -375,6 +375,9 @@ nuanced. We only provide a brief summary here for clarity.
     influence from other build instances, whether prior or concurrent.
 *   **[Hermeticity]** All build steps, sources, and dependencies were fully
     declared up front and the build steps ran with no network access.
+*   **[Reproducibility]** Re-running the build steps with identical input
+    artifacts results in bit-for-bit identical output. (Strongly recommended but
+    not required.)
 *   **[Source Integrity]** All input artifacts were fetched in a manner that
     prevents tampering, such as TLS.
 *   **[Provenance]** Signed provenance recorded the input artifacts, output
