@@ -185,7 +185,7 @@ more, see [Threats, Risks, and Mitigations in the Open Source Ecosystem].
 [benefits](https://static.googleusercontent.com/media/sre.google/en//static/pdf/building_secure_and_reliable_systems.pdf#page=357),
 including easier debugging, more confident cherry-pick releases, better build
 caching and storage efficiency, and accurate dependency tracking. For these
-reasons, we recommend reproducibility and require hermeticity at SLSA 3.
+reasons, we require reproducibility and hermeticity at SLSA 3 by default.
 
 In terms of security, _verified_ reproducible builds are often
 [suggested](https://www.linuxfoundation.org/en/blog/preventing-supply-chain-attacks-like-solarwinds/)
@@ -217,9 +217,9 @@ chain integrity, nor are they practical in all cases:
     many cases, or develop multiple, independent in-house rebuilders, which is
     likely prohibitively expensive.
 
-For these reasons, we do not _require_ reproducible builds as part of SLSA.
-Instead, it is best to think of verified reproducible builds as one option for
-implementing some of the SLSA requirements.
+For these reasons, we do not strictly require reproducible builds as part of
+SLSA. Instead, we only _recommend_ reproducibility at SLSA 3 and allow verified
+reproducible builds as one option for meeting the build requirements.
 
 For more on reproducibility, see
 [Hermetic, Reproducible, or Verifiable?](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=357)
@@ -346,7 +346,7 @@ Each SLSA level has a set of requirements.
 Legend:
 
 *   ✓ = required at this level
-*   ○ = recommended at this level, but not strictly required
+*   ○ = required at this level unless there is a justification
 *   ✓ \* = required at this level, but best effort because it depends on
     hermeticity, which is not required at this level
 *   † = detection is allowed instead of prevention
@@ -376,8 +376,8 @@ nuanced. We only provide a brief summary here for clarity.
 *   **[Hermeticity]** All build steps, sources, and dependencies were fully
     declared up front and the build steps ran with no network access.
 *   **[Reproducibility]** Re-running the build steps with identical input
-    artifacts results in bit-for-bit identical output. (Strongly recommended but
-    not required.)
+    artifacts results in bit-for-bit identical output. (Builds that cannot meet
+    this must provide a justification.)
 *   **[Source Integrity]** All input artifacts were fetched in a manner that
     prevents tampering, such as TLS.
 *   **[Provenance]** Signed provenance recorded the input artifacts, output
