@@ -4,8 +4,8 @@
 
 The objective of this document is to reach industry agreement on the framework
 for software supply chain security through standards, accreditation, and
-technical controls. This is being developed as part of the [OpenSSF Digital
-Identity WG](https://github.com/ossf/wg-digital-identity-attestation).
+technical controls. This is being developed as part of the
+[OpenSSF Digital Identity WG](https://github.com/ossf/wg-digital-identity-attestation).
 
 ## Overview
 
@@ -331,8 +331,8 @@ Each SLSA level has a set of requirements.
   <tr>                      <td>Two-Person Review<td>  <td>      <td>✓     </tr>
   <tr><td rowspan="5">Build <td>Automation       <td>✓ <td>✓     <td>✓     </tr>
   <tr>                      <td>Isolation        <td>  <td>✓     <td>✓     </tr>
-  <tr>                      <td>Source Integrity <td>  <td>✓ *   <td>✓     </tr>
   <tr>                      <td>Hermeticity      <td>  <td>      <td>✓     </tr>
+  <tr>                      <td>Source Integrity <td>  <td>✓ *   <td>✓     </tr>
   <tr>                      <td>Provenance       <td>↓ <td>✓ *   <td>✓     </tr>
   <tr><td rowspan="4">Deploy<td>Provenance Chain <td>↓ <td>✓     <td>✓     </tr>
   <tr>                      <td>Policy           <td>↓ <td>✓     <td>✓     </tr>
@@ -373,10 +373,10 @@ nuanced. We only provide a brief summary here for clarity.
     commands.
 *   **[Isolation]** The build steps ran in an isolated environment free of
     influence from other build instances, whether prior or concurrent.
-*   **[Source Integrity]** All input artifacts were fetched in a manner that
-    prevents tampering, such as TLS.
 *   **[Hermeticity]** All build steps, sources, and dependencies were fully
     declared up front and the build steps ran with no network access.
+*   **[Source Integrity]** All input artifacts were fetched in a manner that
+    prevents tampering, such as TLS.
 *   **[Provenance]** Signed provenance recorded the input artifacts, output
     artifacts, build environment, and top-level entry point (e.g. `make`) and
     cannot be falsified.
@@ -418,12 +418,12 @@ SLSA 3 resource to be built from SLSA 0 dependencies.
 
 The reason for non-transitivity is to make the problem tractable. If SLSA 3
 required dependencies to be SLSA 3, then reaching SLSA 3 would require starting
-at the very end of the supply chain and working forward. This is backwards,
-forcing us to work on the least risky component first and blocking any progress
-further downstream. By making each resource's SLSA rating independent from one
-another, it allows parallel progress and prioritization based on risk. (This is
-a lesson we learned when deploying other security controls at scale throughout
-Google.)
+at the very beginning of the supply chain and working forward. This is
+backwards, forcing us to work on the least risky component first and blocking
+any progress further downstream. By making each resource's SLSA rating
+independent from one another, it allows parallel progress and prioritization
+based on risk. (This is a lesson we learned when deploying other security
+controls at scale throughout Google.)
 
 We expect SLSA ratings to be composed to describe a supply chain's overall
 security stance, as described in the [vision](#vision-case-study) below.
@@ -553,22 +553,22 @@ The following describes how policies might work.
 
     In our example, the policy might look as follows:
 
-```bash
-scope: "pkg:docker/curlimages/curl"
-slsa_level: 3
-allow:
-  builder: "github_actions"
-  source: "https://github.com/curl/curl-docker"
-```
+    ```bash
+    scope: "pkg:docker/curlimages/curl"
+    slsa_level: 3
+    allow:
+      builder: "github_actions"
+      source: "https://github.com/curl/curl-docker"
+    ```
 
-1.  At deploy/publish time, the uploader **includes provenance** in the request.
+2.  At deploy/publish time, the uploader **includes provenance** in the request.
 
     For Docker, perhaps `docker push` gains a command-line flag to upload the
     provenance to the registry and associates it with the image. The API and
     data model would be standardized in the
     [OCI distribution spec](https://github.com/opencontainers/distribution-spec).
 
-2.  The platform **rejects deployments** unless the provenance matches the
+3.  The platform **rejects deployments** unless the provenance matches the
     policy.
 
     In our example, pushes to `curlimages/curl` would be rejected unless they
