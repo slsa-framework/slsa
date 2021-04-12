@@ -92,7 +92,7 @@ The primary focus is on automated builds that followed some "recipe".
 > `materials`.
 
 <a id="recipe.definedInMaterial"></a>
-`recipe.definedInMaterial` _string, optional_
+`recipe.definedInMaterial` _integer, optional_
 
 > Index in `materials` containing the recipe steps that are not implied by
 > `recipe.type`. For example, if the recipe type were "make", then this would
