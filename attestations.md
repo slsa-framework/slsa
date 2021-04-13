@@ -105,10 +105,10 @@ Summary: Generate [in-toto](https://in-toto.io) attestations.
     **[secure-systems-lab/signing-spec](https://github.com/secure-systems-lab/signing-spec/)**
     (TODO: Recommend Crypto/PKI)
 *   Statement:
-    **[in-toto/attestation-spec](https://github.com/in-toto/attestation-spec/)**
-*   Predicate: Choose as appropriate. (TODO link to specific specs)
-    *   Provenance
-    *   [SPDX]
+    **[in-toto/attestation](https://github.com/in-toto/attestation/)**
+*   Predicate: Choose as appropriate.
+    *   [Provenance](https://github.com/in-toto/attestation/tree/main/spec/provenance.md)
+    *   [SPDX](https://github.com/in-toto/attestation/tree/main/spec/spdx.md)
     *   If none are a good fit, invent a new one.
 *   Bundle and Storage/Lookup:
     *   Local Filesystem: TODO
