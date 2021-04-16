@@ -143,7 +143,7 @@ The primary focus is on automated builds that followed some "recipe".
 > to prevent network access.
 
 <a id="materials"></a>
-`materials` _object ([ArtifactCollection]), optional_
+`materials` _array of objects, optional_
 
 > The collection of artifacts that influenced the build including sources,
 > dependencies, build tools, base images, and so on.
@@ -180,12 +180,10 @@ The primary focus is on automated builds that followed some "recipe".
 
 ## Appendix: Review of CI/CD systems
 
-See [ci_survey.md](../ci_survey.md) for a list of well-known CI/CD systems, to
+See [ci_survey.md](../../ci_survey.md) for a list of well-known CI/CD systems, to
 make sure they all map cleanly into this schema.
 
-[ArtifactCollection]: field_types.md#ArtifactCollection
-[Attestation v1]: attestation.md
-[DigestSet]: field_types.md#DigestSet
-[ResourceURI]: field_types.md#ResourceURI
-[Timestamp]: field_types.md#Timestamp
-[TypeURI]: field_types.md#TypeURI
+[DigestSet]: ../field_types.md#DigestSet
+[ResourceURI]: ../field_types.md#ResourceURI
+[Timestamp]: ../field_types.md#Timestamp
+[TypeURI]: ../field_types.md#TypeURI
