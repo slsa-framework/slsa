@@ -166,7 +166,7 @@ The primary focus is on automated builds that followed some "recipe".
 > add other types of URIs or other non-URI locators?
 
 <a id="materials.digest"></a>
-`materials[*].digest` _string ([DigestSet]), optional_
+`materials[*].digest` _object ([DigestSet]), optional_
 
 > Collection of cryptographic digests for the contents of this artifact.
 
