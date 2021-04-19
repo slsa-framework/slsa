@@ -179,27 +179,34 @@ more, see [Threats, Risks, and Mitigations in the Open Source Ecosystem].
 
 ### What about reproducible builds?
 
-[Reproducible](https://reproducible-builds.org) and hermetic builds
-[provide](https://reproducible-builds.org/docs/buy-in/)
+When talking about [reproducible builds](https://reproducible-builds.org)
+builds, there are two related but distinct concepts: "reproducible" and
+"verified reproducible."
+
+"Reproducible" means that repeating the build with the same inputs results in
+bit-for-bit identical output. This property
+[provides](https://reproducible-builds.org/docs/buy-in/)
 [many](https://wiki.debian.org/ReproducibleBuilds/About)
 [benefits](https://static.googleusercontent.com/media/sre.google/en//static/pdf/building_secure_and_reliable_systems.pdf#page=357),
 including easier debugging, more confident cherry-pick releases, better build
-caching and storage efficiency, and accurate dependency tracking. Most builds
-ought to be reproducible, but they often are not simply because it is not the
-default mode of operation by build tools. We strongly support any effort to make
-reproducibility the default mode of operation and the norm in the industry.
+caching and storage efficiency, and accurate dependency tracking.
 
-In terms of security, _verified_ reproducible builds are often
+For these reasons, SLSA 3 [requires](#proposed-slsa-definitions) reproducible
+builds unless there is a justification why the build cannot be made
+reproducible.
+[Example](https://lists.reproducible-builds.org/pipermail/rb-general/2021-January/002177.html)
+justifications include profile-guided optimizations or code signing that
+invalidates hashes. Note that there is no actual reproduction, just a claim that
+reproduction is possible.
+
+"Verified reproducible" means using two or more independent build systems to
+corroborate the provenance of a build. In this way, one can create an overall
+system that is more trustworthy than any of the individual components. This is
+often
 [suggested](https://www.linuxfoundation.org/en/blog/preventing-supply-chain-attacks-like-solarwinds/)
-as a solution to supply chain integrity. The idea is that a system of
-independent reproducers all run the same build commands on the same inputs and
-report the same output. A consumer can gain confidence in an artifact's
-provenance by querying multiple rebuilders, assuming that not all of the
-rebuilders have been compromised.
-
-Indeed, this is one option to secure build steps of a supply chain. When
-designed correctly, such a system satisfies all of the build requirements listed
-below.
+as a solution to supply chain integrity. Indeed, this is one option to secure
+build steps of a supply chain. When designed correctly, such a system can
+satisfy all of the SLSA build requirements.
 
 That said, verified reproducible builds are not a complete solution to supply
 chain integrity, nor are they practical in all cases:
@@ -211,17 +218,14 @@ chain integrity, nor are they practical in all cases:
     and that software has a vulnerability that can be triggered by sending a
     build request, then an attacker can compromise all rebuilders, violating the
     assumption above.
-*   Some builds cannot easily be made reproducible,
-    [such as](https://lists.reproducible-builds.org/pipermail/rb-general/2021-January/002177.html)
-    profile-guided optimizations or code signing that invalidates hashes.
+*   Some builds cannot easily be made reproducible, as noted above.
 *   Closed-source reproducible builds require the code owner to either grant
     source access to multiple independent rebuilders, which is unacceptable in
     many cases, or develop multiple, independent in-house rebuilders, which is
     likely prohibitively expensive.
 
-For these reasons, we do not require reproducible builds as part of SLSA.
-Instead, it is best to think of verified reproducible builds as one option for
-implementing some of the SLSA requirements.
+Therefore, SLSA does not require verified reproducible builds directly. Instead,
+verified reproducible builds are one option for implementing the requirements.
 
 For more on reproducibility, see
 [Hermetic, Reproducible, or Verifiable?](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=357)
@@ -329,9 +333,10 @@ Each SLSA level has a set of requirements.
   <tr>                      <td>Retention        <td>  <td>18 mo.<td>indef </tr>
   <tr>                      <td>Change History   <td>  <td>✓     <td>✓     </tr>
   <tr>                      <td>Two-Person Review<td>  <td>      <td>✓     </tr>
-  <tr><td rowspan="5">Build <td>Automation       <td>✓ <td>✓     <td>✓     </tr>
+  <tr><td rowspan="6">Build <td>Automation       <td>✓ <td>✓     <td>✓     </tr>
   <tr>                      <td>Isolation        <td>  <td>✓     <td>✓     </tr>
   <tr>                      <td>Hermeticity      <td>  <td>      <td>✓     </tr>
+  <tr>                      <td>Reproducibility  <td>  <td>      <td>○     </tr>
   <tr>                      <td>Source Integrity <td>  <td>✓ *   <td>✓     </tr>
   <tr>                      <td>Provenance       <td>↓ <td>✓ *   <td>✓     </tr>
   <tr><td rowspan="4">Deploy<td>Provenance Chain <td>↓ <td>✓     <td>✓     </tr>
@@ -347,6 +352,7 @@ Each SLSA level has a set of requirements.
 Legend:
 
 *   ✓ = required at this level
+*   ○ = required at this level unless there is a justification
 *   ✓ \* = required at this level, but best effort because it depends on
     hermeticity, which is not required at this level
 *   † = detection is allowed instead of prevention
@@ -375,6 +381,9 @@ nuanced. We only provide a brief summary here for clarity.
     influence from other build instances, whether prior or concurrent.
 *   **[Hermeticity]** All build steps, sources, and dependencies were fully
     declared up front and the build steps ran with no network access.
+*   **[Reproducibility]** Re-running the build steps with identical input
+    artifacts results in bit-for-bit identical output. (Builds that cannot meet
+    this must provide a justification.)
 *   **[Source Integrity]** All input artifacts were fetched in a manner that
     prevents tampering, such as TLS.
 *   **[Provenance]** Signed provenance recorded the input artifacts, output
