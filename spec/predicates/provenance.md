@@ -12,7 +12,7 @@ The primary focus is on automated builds that followed some "recipe".
 
 ```jsonc
 {
-  "subject": { ... }
+  "subject": [{ ... }],
   "predicateType": "https://in-toto.io/Provenance/v1",
   "predicate": {                           // required
     "builder": {                           // required
