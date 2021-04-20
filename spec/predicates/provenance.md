@@ -187,6 +187,139 @@ _(Note: This is a Predicate type that fits within the larger
 >
 > TODO: Recommend specific conventions, e.g. `source` and `dev-dependency`.
 
+## Examples
+
+This section shows how `builder` and `recipe` would be populated for various
+common scenarios. Other fields are omitted because they do not vary
+significantly between systems.
+
+### GitHub Actions
+
+WARNING: This is only for demonstration purposes. The GitHub Actions team has
+not yet reviewed or approved this design, and it is not yet implemented. Details
+are subject to change!
+
+GitHub-Hosted runner:
+
+```json
+"builder": {
+  "id": "https://github.com/Attestations/GitHubHostedActions@v1"
+}
+```
+
+Self-hosted runner: Not yet supported. We need to figure out a URI scheme that
+represents what system hosted the runner, or perhaps add additional properties
+in `builder`.
+
+GitHub Actions Workflow:
+
+```jsonc
+"recipe": {
+  // Build steps were defined in a GitHub Actions Workflow file ...
+  "type": "https://github.com/Attestations/GitHubActionsWorkflow@v1",
+  // ... in the git repo described by `materials[0]` ...
+  "definedInMaterial": 0,
+  // ... at the path .github/workflows/build.yaml, using the job "build".
+  "entryPoint": "build.yaml:build",
+  // The only possible user-defined parameters that can affect the build are the
+  // "inputs" to a workflow_dispatch event. This is unset/null for all other
+  // events.
+  "arguments": {
+    "inputs": { ... }
+  },
+  // TODO: Additional parameters needed to make the workflow reproducible.
+  "reproducibility": null
+}
+```
+
+### Google Cloud Build
+
+WARNING: This is only for demonstration purposes. The Google Cloud Build team
+has not yet reviewed or approved this design, and it is not yet implemented.
+Details are subject to change!
+
+Google-hosted worker:
+
+```json
+"builder": {
+  "id": "https://cloudbuild.googleapis.com/GoogleHostedWorker@v1"
+}
+```
+
+Custom worker: Not yet supported. We need to figure out a URI scheme that
+represents what system hosted the worker, or perhaps add additional properties
+in `builder`.
+
+Cloud Build config-as-code
+([BuildTrigger](https://cloud.google.com/build/docs/api/reference/rest/v1/projects.triggers)
+with `filename`):
+
+```jsonc
+"recipe": {
+  // Build steps were defined in a cloudbuild.yaml file ...
+  "type": "https://cloudbuild.googleapis.com/CloudBuildYaml@v1",
+  // ... in the git repo described by `materials[0]` ...
+  "definedInMaterial": 0,
+  // ... at the path path/to/cloudbuild.yaml.
+  "entryPoint": "path/to/cloudbuild.yaml",
+  // The only possible user-defined parameters that can affect a BuildTrigger
+  // are the subtitutions in the BuildTrigger.
+  "arguments": {
+    "substitutions": {...}
+  },
+  // TODO: Additional parameters needed to make the build reproducible.
+  "reproducibility": null
+}
+```
+
+Cloud Build with steps defined in a trigger or over RPC:
+
+```jsonc
+"recipe": {
+  // Build steps were provided as an argument. No `definedInMaterial` or
+  // `entryPoint`.
+  "type": "https://cloudbuild.googleapis.com/CloudBuildSteps@v1",
+  "arguments": {
+    // The steps that were performed. (Format TBD.)
+    "steps": [...],
+    // The substitutions in the build trigger.
+    "substitutions": {...}
+    // TODO: Any other arguments?
+  },
+  // TODO: Additional parameters needed to make the build reproducible.
+  "reproducibility": null
+}
+```
+
+### Manually run commands
+
+WARNING: This is just a proof-of-concept. It is not yet standardized.
+
+```jsonc
+"builder": {
+  "id": "mailto:person@example.com"
+},
+"recipe": {
+  // There was no entry point, and the commands were run in an ad-hoc fashion.
+  // There is no `definedInMaterial` or `entryPoint`.
+  "type": "https://example.com/ManuallyRunCommands@v1",
+  "arguments": {
+    // The list of commands that were executed.
+    "commands": [
+      "tar xvf foo-1.2.3.tar.gz",
+      "cd foo-1.2.3",
+      "./configure --enable-some-feature",
+      "make foo.zip"
+    ],
+    // Indicates how to parse the strings in `commands`.
+    "shell": "bash"
+  },
+  // If desired, this can be used to describe the state of the system. It would
+  // contain arbitrary key/value pairs intended for human consumption.
+  "reproducibility": null
+}
+```
+
 ## Appendix: Review of CI/CD systems
 
 See [ci_survey.md](../../ci_survey.md) for a list of well-known CI/CD systems, to
