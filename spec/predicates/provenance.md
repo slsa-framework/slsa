@@ -42,6 +42,9 @@ The primary focus is on automated builds that followed some "recipe".
 }
 ```
 
+_(Note: This is a Predicate type that fits within the larger
+[Attestation](../README.md) framework.)_
+
 ### Fields
 
 <a id="builder"></a>
