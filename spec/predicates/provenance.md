@@ -27,6 +27,7 @@ The primary focus is on automated builds that followed some "recipe".
     },
     "metadata": {                          // optional
       "buildStartedOn": "<TIMESTAMP>",     // optional
+      "buildFinishedOn": "<TIMESTAMP>",    // optional
       "materialsComplete": true/false      // optional
     },
     "materials": [
@@ -135,6 +136,11 @@ The primary focus is on automated builds that followed some "recipe".
 `metadata.buildStartedOn` _string ([Timestamp]), optional_
 
 > The timestamp of when the build started.
+
+<a id="metadata.buildFinishedOn"></a>
+`metadata.buildFinishedOn` _string ([Timestamp]), optional_
+
+> The timestamp of when the build completed.
 
 <a id="metadata.materialsComplete"></a>
 `metadata.materialsComplete` _boolean, optional_
