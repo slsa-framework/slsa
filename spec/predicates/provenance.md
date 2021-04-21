@@ -295,10 +295,36 @@ Cloud Build with steps defined in a trigger or over RPC:
 
 WARNING: This is just a proof-of-concept. It is not yet standardized.
 
-```jsonc
+Individual performed the build, identified by email address:
+
+```json
 "builder": {
   "id": "mailto:person@example.com"
-},
+}
+```
+
+Execution of a `bazel build` command:
+
+```jsonc
+"recipe": {
+  // Execution of `bazel build from within the `path/to/workspace`
+  // directory of `materials[0]`, which is downloaded, extracted (if
+  // appropriate), and changed into.
+  "type": "https://example.com/BazelBuidl@v1",
+  "definedInMaterial": 0,
+  "entryPoint": "path/to/workspace://foo:bar",
+  "arguments": {
+    // List of startup options (before the "build" command).
+    "startupOptions": []
+    // List of build flags (after the "build" command).
+    "buildFlags": []
+  }
+}
+```
+
+Execution of arbitrary commands:
+
+```jsonc
 "recipe": {
   // There was no entry point, and the commands were run in an ad-hoc fashion.
   // There is no `definedInMaterial` or `entryPoint`.
@@ -313,10 +339,7 @@ WARNING: This is just a proof-of-concept. It is not yet standardized.
     ],
     // Indicates how to parse the strings in `commands`.
     "shell": "bash"
-  },
-  // If desired, this can be used to describe the state of the system. It would
-  // contain arbitrary key/value pairs intended for human consumption.
-  "reproducibility": null
+  }
 }
 ```
 
