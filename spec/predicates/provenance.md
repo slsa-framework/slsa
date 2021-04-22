@@ -119,7 +119,7 @@ _(Note: This is a Predicate type that fits within the larger
 `recipe.arguments` _object, optional_
 
 > Collection of input arguments that influenced the build on top of
-> `recipe.material` and `recipe.entry_point`. The schema is defined by
+> `recipe.material` and `recipe.entryPoint`. The schema is defined by
 > `recipe.type`.
 >
 > Omit this field (or use null) to indicate "no arguments."
