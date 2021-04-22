@@ -50,23 +50,22 @@ _(Note: This is a Predicate type that fits within the larger
 <a id="builder"></a>
 `builder` _object, required_
 
-> Idenfifies the entity that executed the build steps. Example:
+> Identifies the entity that executed the build steps, which is trusted to have
+> performed the operation correctly and populated this provenance.
 >
-> ```json
-> "builder": {
->   "id": "https://github.com/Attestations/GitHubHostedActions@v1"
-> }
-> ```
->
-> This is distinct from the signer because one signer may generate attestations
-> for more than one builder. For example, a single GitHubActions signer may
-> produce attestations for both "github-hosted runner" and various "self-hosted
-> runner" builders.
->
-> Even though it may be implicit from the signer, it is required to aid
-> readability and debugging.
+> The identity MUST reflect the entire trust base that could influence the
+> build. For example, [GitHub Actions] supports both GitHub-hosted runners,
+> where the entire builder is under GitHub's control, and self-hosted runners,
+> where users provide their own runner. In this case, GitHub-hosted runnner is
+> one identity while each self-hosted runner is its own identity.
 >
 > Verifiers MUST only accept specific builders from specific signers.
+>
+> Design rationale: The builder is distinct from the signer because one signer
+> may generate attestations for more than one builder, as in the GitHub Actions
+> example above. The field is required, even if it is implicit from the signer,
+> is to aid readability and debugging. It is an object to allow additional
+> fields in the future, in case one URI is not sufficient.
 
 <a id="builder.id"></a>
 `builder.id` _string ([TypeURI]), required_
@@ -76,17 +75,20 @@ _(Note: This is a Predicate type that fits within the larger
 <a id="recipe"></a>
 `recipe` _object, optional_
 
-> Describes the actions that the builder performed. Example:
+> Identifies the configuration used for the build. When combined with
+> `materials`, this SHOULD fully describe the build, such that re-running this
+> recipe results in bit-for-bit identical output (if the build is
+> [reproducible]).
 >
-> ```json
-> "recipe": {
->   "type": "https://github.com/Attestations/GitHubActionsWorkflow@v1",
->   "definedInMaterial": 0,
->   "entryPoint": "build.yaml:maketgz"
-> }
-> ```
+> -   The `recipe.type`, `recipe.entryPoint`, and `recipe.definedInMaterial`
+>     describe the location of the recipe.
+> -   The `recipe.arguments` describes all user-controlled arguments to the
+>     recipe, meaning anything that is not fully under the control of the
+>     `builder`.
+> -   The `recipe.reproducibility` describes all builder-controlled arguments to
+>     the recipe.
 >
-> MAY be omitted if unknown or implicit from the builder.
+> MAY be unset/null if unknown, but this is DISCOURAGED.
 
 <a id="recipe.type"></a>
 `recipe.type` _string ([TypeURI]), required_
@@ -118,17 +120,22 @@ _(Note: This is a Predicate type that fits within the larger
 <a id="recipe.arguments"></a>
 `recipe.arguments` _object, optional_
 
-> Collection of input arguments that influenced the build on top of
-> `recipe.material` and `recipe.entryPoint`. The schema is defined by
-> `recipe.type`.
+> Collection of all user-controlled inputs that influenced the build on top of
+> `recipe.definedInMaterial` and `recipe.entryPoint`. The schema is defined by
+> `recipe.type`. A "user" is any entity that is not `builder`. For example, if
+> [GitHub Actions] is the builder, then the "user" is anyone who is not GitHub.
 >
 > Omit this field (or use null) to indicate "no arguments."
 
 <a id="recipe.reproducibility"></a>
 `recipe.reproducibility` _object, optional_
 
-> Other information that is needed to reproduce the build but that cannot be
-> controlled by users. The schema is determined by `recipe.type`.
+> Collection of all builder-controlled inputs that influenced the build on top
+> of `recipe.definedInMaterial` and `recipe.entryPoint`. The schema is defined
+> by `recipe.type`.
+>
+> TODO: Is there a better name for this? "Reproducibility" sounds more like a
+> property (enum or bool) rather than a set of things needed for reproduction.
 
 <a id="metadata"></a>
 `metadata` _object, optional_
@@ -349,6 +356,8 @@ See [ci_survey.md](../../ci_survey.md) for a list of well-known CI/CD systems, t
 make sure they all map cleanly into this schema.
 
 [DigestSet]: ../field_types.md#DigestSet
+[GitHub Actions]: #github-actions
+[Reproducible]: https://reproducible-builds.org
 [ResourceURI]: ../field_types.md#ResourceURI
 [Timestamp]: ../field_types.md#Timestamp
 [TypeURI]: ../field_types.md#TypeURI
