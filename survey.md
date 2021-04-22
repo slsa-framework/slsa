@@ -66,15 +66,15 @@ Columns:
 
 ## Envelope Layer (not specific to Attestations)
 
-Property                | [signing-spec] | [OpenPGP] | [JWS]/[JWT] | [PASETO] | [in-toto v1] | [JSS]
------------------------ | -------------- | --------- | ----------- | -------- | ------------ | -----
-Authenticated Purpose   | ✓              | ✗         | ✓           | ✗        | ✓            | ✗
-Arbitrary Message Type  | ✓              | ✓         | ✗           | ✗        | ✗            | ✗
-Simple                  | ✓              | ✗         | ✗           | ✓        | ✓            | ✓
-Avoids Canonicalization | ✓              | ✓         | ✓           | ✓        | ✗            | ✓
-Pluggable Crypto        | ✓              | ✗         | ✓           | ✗        | ✓            | ✓
-Efficient Encoding      | ✓              | ✗         | ✗           | ✗        | ✓            | ✗
-Widely Adopted          | ✗ (not yet!)   | ✓         | ✓           | ✗        | ✗            | ✗
+Property                | [signing-spec] | [OpenPGP] | [JWS] | [JWT] | [PASETO] | [in-toto v1] | [JSS]
+----------------------- | -------------- | --------- | ----- | ----- | -------- | ------------ | -----
+Authenticated Purpose   | ✓              | ✗         | ✓     | ✓     | ✗        | ✓            | ✗
+Arbitrary Message Type  | ✓              | ✓         | ✓     | ✗     | ✗        | ✗            | ✗
+Simple                  | ✓              | ✗         | ✗     | ✗     | ✓        | ✓            | ✓
+Avoids Canonicalization | ✓              | ✓         | ✓     | ✓     | ✓        | ✗            | ✓
+Pluggable Crypto        | ✓              | ✗         | ✓     | ✓     | ✗        | ✓            | ✓
+Efficient Encoding      | ✓              | ✗         | ✗     | ✗     | ✗        | ✓            | ✗
+Widely Adopted          | ✗ (not yet!)   | ✓         | ✓     | ✓     | ✗        | ✗            | ✗
 
 Properties:
 
@@ -84,11 +84,11 @@ Properties:
         `_type`
 -   **Arbitrary Message Type:** Does the envelope support arbitrary message
     types / encodings?
-    -   ✗ PASETO, JWS/JWT, in-toto v1, JSS: only supports JSON messages
+    -   ✗ PASETO, JWT, in-toto v1, JSS: only supports JSON messages
 -   **Simple:** Is the standard simple, easy to understand, and unlikely to be
     implemented incorrectly?
     -   ✗ PGP: Enformous RFC.
-    -   ✗ JWS/JWT: Enormous RFC, many vulnerabilities in the past.
+    -   ✗ JWS, JWT: Enormous RFC, many vulnerabilities in the past.
 -   **Avoids Canonicalization:** Does the protocol avoid relying on
     canonicalization for security, in order to reduce attack surface?
     -   ✗ in-toto v1: Relies on Canonical JSON
