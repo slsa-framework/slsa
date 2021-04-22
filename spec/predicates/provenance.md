@@ -16,7 +16,7 @@ builder. However, the builder may have performed this operation at the request
 of some external, possibly untrusted entity. These untrusted parameters are
 captured in the recipe's `entryPoint`, `arguments`, and some of the `materials`.
 Finally, the build may have depended on various environmental parameters
-(`reproducibility`) that are needed for [reproducing][reproducible] the build
+(`environment`) that are needed for [reproducing][reproducible] the build
 but that are not under external control.
 
 See [Example](#example) for a concrete example.
@@ -42,7 +42,7 @@ See [Example](#example) for a concrete example.
       "definedInMaterial": /* integer */,  // optional
       "entryPoint": "<STRING>",            // optional
       "arguments": { /* object */ },       // optional
-      "reproducibility": { /* object */ }  // optional
+      "environment": { /* object */ }      // optional
     },
     "metadata": {                          // optional
       "buildStartedOn": "<TIMESTAMP>",     // optional
@@ -115,7 +115,7 @@ _(Note: This is a Predicate type that fits within the larger
 `recipe.type` _string ([TypeURI]), required_
 
 > URI indicating what type of recipe was performed. It determines the meaning of
-> `recipe.entryPoint`, `recipe.arguments`, `recipe.reproducibility`, and
+> `recipe.entryPoint`, `recipe.arguments`, `recipe.environment`, and
 > `materials`.
 
 <a id="recipe.definedInMaterial"></a>
@@ -163,8 +163,8 @@ _(Note: This is a Predicate type that fits within the larger
 >
 > Omit this field (or use null) to indicate "no arguments."
 
-<a id="recipe.reproducibility"></a>
-`recipe.reproducibility` _object, optional_
+<a id="recipe.environment"></a>
+`recipe.environment` _object, optional_
 
 > Collection of all builder-controlled inputs that influenced the build.
 > `definedInMaterial` and `recipe.entryPoint`. Usually this contains the
@@ -299,9 +299,7 @@ GitHub Actions Workflow:
   // events.
   "arguments": {
     "inputs": { ... }
-  },
-  // TODO: Additional parameters needed to make the workflow reproducible.
-  "reproducibility": null
+  }
 }
 ```
 
@@ -339,9 +337,7 @@ with `filename`):
   // are the subtitutions in the BuildTrigger.
   "arguments": {
     "substitutions": {...}
-  },
-  // TODO: Additional parameters needed to make the build reproducible.
-  "reproducibility": null
+  }
 }
 ```
 
@@ -358,9 +354,7 @@ Cloud Build with steps defined in a trigger or over RPC:
     // The substitutions in the build trigger.
     "substitutions": {...}
     // TODO: Any other arguments?
-  },
-  // TODO: Additional parameters needed to make the build reproducible.
-  "reproducibility": null
+  }
 }
 ```
 

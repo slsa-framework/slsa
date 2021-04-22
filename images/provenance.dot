@@ -8,10 +8,10 @@ digraph {
   }
   subgraph cluster_system {
     label="System Inputs";
-    reproducibility;
+    environment;
     type;
   }
   BuildExecution [shape=oval];
   {type, entryPoint, arguments, materials} -> recipe;
-  {recipe, materials, reproducibility} -> BuildExecution -> subject;
+  {recipe, materials, environment} -> BuildExecution -> subject;
 }
