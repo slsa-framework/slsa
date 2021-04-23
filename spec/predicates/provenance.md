@@ -1,6 +1,8 @@
-# Predicate type: Provenance v0.1
+# Predicate type: Provenance
 
 Type URI: https://in-toto.io/Provenance/v0.1
+
+Version: 0.1.0
 
 ## Purpose
 
