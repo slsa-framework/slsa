@@ -59,9 +59,7 @@ See [Example](#example) for a concrete example.
     "materials": [
       {
         "uri": "<URI>",
-        "digest": { /* DigestSet */ },
-        "mediaType": "<MEDIA_TYPE>",
-        "tags": [ "<STRING>" ]
+        "digest": { /* DigestSet */ }
       }
     ]
   }
@@ -252,20 +250,6 @@ _(Note: This is a Predicate type that fits within the larger
 `materials[*].digest` _object ([DigestSet]), optional_
 
 > Collection of cryptographic digests for the contents of this artifact.
-
-<a id="materials.mediaType"></a>
-`materials[*].mediaType` _string (Media Type), optional_
-
-> The [Media Type](https://www.iana.org/assignments/media-types/) for this
-> artifact, if known.
-
-<a id="materials.tags"></a>
-`materials[*].tags` _array (of strings), optional_
-
-> Unordered set of labels whose meaning is dependent on `recipe.type`. SHOULD be
-> sorted lexicographically.
->
-> TODO: Recommend specific conventions, e.g. `source` and `dev-dependency`.
 
 ## Example
 
