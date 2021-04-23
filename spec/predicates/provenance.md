@@ -6,7 +6,22 @@ Type URI: https://in-toto.io/Provenance/v1
 
 Describe how an artifact or set of artifacts was produced.
 
-The primary focus is on automated builds that followed some "recipe".
+## Model
+
+Provenance is a claim that some entity (`builder`) produced one or more software
+artifacts ([Statement]'s `subject`) by executing a series of steps (`recipe`),
+using some other artifacts as input (`materials`). The builder is trusted to
+have faithfully recorded the provenance; there is no option but to trust the
+builder. However, the builder may have performed this operation at the request
+of some external, possibly untrusted entity. These untrusted parameters are
+captured in the recipe's `entryPoint`, `arguments`, and some of the `materials`.
+Finally, the build may have depended on various environmental parameters
+(`reproducibility`) that are needed for [reproducing][reproducible] the build
+but that are not under external control.
+
+See [Example](#example) for a concrete example.
+
+![Model Diagram](../../images/provenance.svg)
 
 ## Schema
 
@@ -60,16 +75,20 @@ _(Note: This is a Predicate type that fits within the larger
 <a id="builder"></a>
 `builder` _object, required_
 
-> Identifies the entity that executed the build steps, which is trusted to have
-> performed the operation correctly and populated this provenance.
+> Identifies the entity that executed the recipe, which is trusted to have
+> correctly performed the operation and populated this provenance.
 >
-> The identity MUST reflect the entire trust base that could influence the
-> build. For example, [GitHub Actions] supports both GitHub-hosted runners,
-> where the entire builder is under GitHub's control, and self-hosted runners,
-> where users provide their own runner. In this case, GitHub-hosted runnner is
-> one identity while each self-hosted runner is its own identity.
+> The identity MUST reflect the trust base that consumers care about. How
+> detailed to be is a judgement call. For example, [GitHub Actions] supports
+> both GitHub-hosted runners and self-hosted runners. The GitHub-hosted runner
+> might be a single identity because, it's all GitHub from the consumer's
+> perspective. Meanwhile, each self-hosted runner might have its own identity
+> because not all runners are trusted by all consumers.
 >
-> Verifiers MUST only accept specific builders from specific signers.
+> Consumers MUST accept only specific (signer, builder) pairs. For example, the
+> "GitHub" can sign provenance for the "GitHub Actions" builder, and "Google"
+> can sign provenance for the "Google Cloud Build" builder, but "GitHub" cannot
+> sign for the "Google Cloud Build" builder.
 >
 > Design rationale: The builder is distinct from the signer because one signer
 > may generate attestations for more than one builder, as in the GitHub Actions
@@ -89,14 +108,6 @@ _(Note: This is a Predicate type that fits within the larger
 > `materials`, this SHOULD fully describe the build, such that re-running this
 > recipe results in bit-for-bit identical output (if the build is
 > [reproducible]).
->
-> -   The `recipe.type`, `recipe.entryPoint`, and `recipe.definedInMaterial`
->     describe the location of the recipe.
-> -   The `recipe.arguments` describes all user-controlled arguments to the
->     recipe, meaning anything that is not fully under the control of the
->     `builder`.
-> -   The `recipe.reproducibility` describes all builder-controlled arguments to
->     the recipe.
 >
 > MAY be unset/null if unknown, but this is DISCOURAGED.
 
@@ -121,28 +132,46 @@ _(Note: This is a Predicate type that fits within the larger
 <a id="recipe.entryPoint"></a>
 `recipe.entryPoint` _string, optional_
 
-> String identifying the entry point. The meaning is defined by `recipe.type`.
-> For example, if the recipe type were "make", then this would reference the
-> directory in which to run `make` as well as which target to use.
+> String identifying the entry point into the build. This is often a path to a
+> configuration file and/or a target label within that file. The syntax and
+> meaning are defined by `recipe.type`. For example, if the recipe type were
+> "make", then this would reference the directory in which to run `make` as well
+> as which target to use.
+>
+> Consumers SHOULD accept only specific `recipe.entryPoint` values. For example,
+> a policy might only allow the "release" entry point but not the "debug" entry
+> point. (This is REQUIRED for [SLSA 2][SLSA] policies.)
 >
 > MAY be omitted if the recipe type specifies a default value.
+>
+> Design rationale: The `entryPoint` is distinct from `arguments` to make it
+> easier to write secure policies without having to parse `arguments`.
 
 <a id="recipe.arguments"></a>
 `recipe.arguments` _object, optional_
 
-> Collection of all user-controlled inputs that influenced the build on top of
-> `recipe.definedInMaterial` and `recipe.entryPoint`. The schema is defined by
-> `recipe.type`. A "user" is any entity that is not `builder`. For example, if
-> [GitHub Actions] is the builder, then the "user" is anyone who is not GitHub.
+> Collection of all external inputs that influenced the build on top of
+> `recipe.definedInMaterial` and `recipe.entryPoint`. For example, if the recipe
+> type were "make", then this might be the flags passed to `make` aside from the
+> target, which is captured in `recipe.entryPoint`.
+>
+> Consumers SHOULD accept only "safe" `recipe.arguments`. The simplest and
+> safest way to achieve this is to disallow any `arguments` altogether. (This is
+> REQUIRED for [SLSA 3][SLSA] policies.)
+>
+> This is an arbitrary JSON object with a schema is defined by `recipe.type`.
 >
 > Omit this field (or use null) to indicate "no arguments."
 
 <a id="recipe.reproducibility"></a>
 `recipe.reproducibility` _object, optional_
 
-> Collection of all builder-controlled inputs that influenced the build on top
-> of `recipe.definedInMaterial` and `recipe.entryPoint`. The schema is defined
-> by `recipe.type`.
+> Collection of all builder-controlled inputs that influenced the build.
+> `definedInMaterial` and `recipe.entryPoint`. Usually this contains the
+> information necessary to [reproduce][reproducible] the build but not
+> meaningful to apply a policy against.
+>
+> This is an arbitrary JSON object with a schema is defined by `recipe.type`.
 >
 > TODO: Is there a better name for this? "Reproducibility" sounds more like a
 > property (enum or bool) rather than a set of things needed for reproduction.
@@ -204,11 +233,38 @@ _(Note: This is a Predicate type that fits within the larger
 >
 > TODO: Recommend specific conventions, e.g. `source` and `dev-dependency`.
 
-## Examples
+## Example
 
-This section shows how `builder` and `recipe` would be populated for various
-common scenarios. Other fields are omitted because they do not vary
-significantly between systems.
+WARNING: This is just for demonstration purposes.
+
+Suppose the builder downloaded `example-1.2.3.tar.gz`, extracted it, and ran
+`make -C src foo CFLAGS=-O3`, resulting in a file with hash `5678...`. Then the
+provenance might look like this:
+
+```jsonc
+{
+  "type": "https://in-toto.io/Statement/v1",
+  // Output file; name is "_" to indicate "not important".
+  "subject": [{"name": "_", "digest": {"sha256": "5678..."}}],
+  "predicateType": "https://in-toto.io/Provenance/v1",
+  "predicate": {
+    "builder": { "id": "mailto:person@example.com" },
+    "recipe": {
+      "type": "https://example.com/Makefile",
+      "definedInMaterial": 0,                 // material containing the Makefile
+      "entryPoint": "src:foo",                // target "foo" in directory "src"
+      "arguments": {"CFLAGS": "-O3"}          // extra args to `make`
+    },
+    "materials": [{
+      "uri": "https://example.com/example-1.2.3.tar.gz",
+      "digest": {"sha256": "1234..."}
+    }]
+  }
+}
+```
+
+
+## More examples
 
 ### GitHub Actions
 
@@ -312,33 +368,6 @@ Cloud Build with steps defined in a trigger or over RPC:
 
 WARNING: This is just a proof-of-concept. It is not yet standardized.
 
-Individual performed the build, identified by email address:
-
-```json
-"builder": {
-  "id": "mailto:person@example.com"
-}
-```
-
-Execution of a `bazel build` command:
-
-```jsonc
-"recipe": {
-  // Execution of `bazel build from within the `path/to/workspace`
-  // directory of `materials[0]`, which is downloaded, extracted (if
-  // appropriate), and changed into.
-  "type": "https://example.com/BazelBuidl@v1",
-  "definedInMaterial": 0,
-  "entryPoint": "path/to/workspace://foo:bar",
-  "arguments": {
-    // List of startup options (before the "build" command).
-    "startupOptions": []
-    // List of build flags (after the "build" command).
-    "buildFlags": []
-  }
-}
-```
-
 Execution of arbitrary commands:
 
 ```jsonc
@@ -362,12 +391,14 @@ Execution of arbitrary commands:
 
 ## Appendix: Review of CI/CD systems
 
-See [ci_survey.md](../../ci_survey.md) for a list of well-known CI/CD systems, to
-make sure they all map cleanly into this schema.
+See [ci_survey.md](../../ci_survey.md) for a list of well-known CI/CD systems,
+to make sure they all map cleanly into this schema.
 
 [DigestSet]: ../field_types.md#DigestSet
 [GitHub Actions]: #github-actions
 [Reproducible]: https://reproducible-builds.org
 [ResourceURI]: ../field_types.md#ResourceURI
+[SLSA]: https://github.com/slsa-framework/slsa
+[Statement]: ../README.md#statement
 [Timestamp]: ../field_types.md#Timestamp
 [TypeURI]: ../field_types.md#TypeURI
