@@ -1,6 +1,6 @@
-# Predicate type: Provenance v1
+# Predicate type: Provenance v0.1
 
-Type URI: https://in-toto.io/Provenance/v1
+Type URI: https://in-toto.io/Provenance/v0.1
 
 ## Purpose
 
@@ -28,11 +28,11 @@ See [Example](#example) for a concrete example.
 ```jsonc
 {
   // Standard attestation fields:
-  "type": "https://in-toto.io/Statement/v1",
+  "type": "https://in-toto.io/Statement/v0.1",
   "subject": [{ ... }],
 
   // Predicate:
-  "predicateType": "https://in-toto.io/Provenance/v1",
+  "predicateType": "https://in-toto.io/Provenance/v0.1",
   "predicate": {                           // required
     "builder": {                           // required
       "id": "<URI>"                        // required
@@ -70,7 +70,7 @@ _(Note: This is a Predicate type that fits within the larger
 `type` _string ([TypeURI]), required_
 
 > Standard [Predicate](../README.md#predicate) field. Always
-> `https://in-toto.io/Provenance/v1`.
+> `https://in-toto.io/Provenance/v0.1` for this version of the spec.
 
 <a id="builder"></a>
 `builder` _object, required_
@@ -243,10 +243,10 @@ provenance might look like this:
 
 ```jsonc
 {
-  "type": "https://in-toto.io/Statement/v1",
+  "type": "https://in-toto.io/Statement/v0.1",
   // Output file; name is "_" to indicate "not important".
   "subject": [{"name": "_", "digest": {"sha256": "5678..."}}],
-  "predicateType": "https://in-toto.io/Provenance/v1",
+  "predicateType": "https://in-toto.io/Provenance/v0.1",
   "predicate": {
     "builder": { "id": "mailto:person@example.com" },
     "recipe": {
