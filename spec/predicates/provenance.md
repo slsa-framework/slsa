@@ -12,7 +12,11 @@ The primary focus is on automated builds that followed some "recipe".
 
 ```jsonc
 {
+  // Standard attestation fields:
+  "type": "https://in-toto.io/Statement/v1",
   "subject": [{ ... }],
+
+  // Predicate:
   "predicateType": "https://in-toto.io/Provenance/v1",
   "predicate": {                           // required
     "builder": {                           // required
@@ -46,6 +50,12 @@ _(Note: This is a Predicate type that fits within the larger
 [Attestation](../README.md) framework.)_
 
 ### Fields
+
+<a id="type"></a>
+`type` _string ([TypeURI]), required_
+
+> Standard [Predicate](../README.md#predicate) field. Always
+> `https://in-toto.io/Provenance/v1`.
 
 <a id="builder"></a>
 `builder` _object, required_
