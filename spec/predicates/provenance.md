@@ -33,28 +33,28 @@ See [Example](#example) for a concrete example.
 
   // Predicate:
   "predicateType": "https://in-toto.io/Provenance/v0.1",
-  "predicate": {                           // required
-    "builder": {                           // required
-      "id": "<URI>"                        // required
+  "predicate": {
+    "builder": {
+      "id": "<URI>"
     },
-    "recipe": {                            // optional
-      "type": "<URI>",                     // required
-      "definedInMaterial": /* integer */,  // optional
-      "entryPoint": "<STRING>",            // optional
-      "arguments": { /* object */ },       // optional
-      "environment": { /* object */ }      // optional
+    "recipe": {
+      "type": "<URI>",
+      "definedInMaterial": /* integer */,
+      "entryPoint": "<STRING>",
+      "arguments": { /* object */ },
+      "environment": { /* object */ }
     },
-    "metadata": {                          // optional
-      "buildStartedOn": "<TIMESTAMP>",     // optional
-      "buildFinishedOn": "<TIMESTAMP>",    // optional
-      "materialsComplete": true/false      // optional
+    "metadata": {
+      "buildStartedOn": "<TIMESTAMP>",
+      "buildFinishedOn": "<TIMESTAMP>",
+      "materialsComplete": true/false
     },
     "materials": [
       {
-        "uri": "<URI>",                    // optional
-        "digest": { /* DigestSet */ },     // optional
-        "mediaType": "<MEDIA_TYPE>",       // optional
-        "tags": [ "<STRING>" ]             // optional
+        "uri": "<URI>",
+        "digest": { /* DigestSet */ },
+        "mediaType": "<MEDIA_TYPE>",
+        "tags": [ "<STRING>" ]
       }
     ]
   }
