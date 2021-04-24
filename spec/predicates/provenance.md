@@ -71,12 +71,6 @@ _(Note: This is a Predicate type that fits within the larger
 
 ### Fields
 
-<a id="type"></a>
-`type` _string ([TypeURI]), required_
-
-> Standard [Predicate](../README.md#predicate) field. Always
-> `https://in-toto.io/Provenance/v0.1` for this version of the spec.
-
 <a id="builder"></a>
 `builder` _object, required_
 
