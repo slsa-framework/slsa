@@ -28,7 +28,7 @@ See [Example](#example) for a concrete example.
 ```jsonc
 {
   // Standard attestation fields:
-  "type": "https://in-toto.io/Statement/v0.1",
+  "_type": "https://in-toto.io/Statement/v0.1",
   "subject": [{ ... }],
 
   // Predicate:
@@ -275,7 +275,7 @@ provenance might look like this:
 
 ```jsonc
 {
-  "type": "https://in-toto.io/Statement/v0.1",
+  "_type": "https://in-toto.io/Statement/v0.1",
   // Output file; name is "_" to indicate "not important".
   "subject": [{"name": "_", "digest": {"sha256": "5678..."}}],
   "predicateType": "https://in-toto.io/Provenance/v0.1",
