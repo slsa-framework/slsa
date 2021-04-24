@@ -172,9 +172,6 @@ _(Note: This is a Predicate type that fits within the larger
 > meaningful to apply a policy against.
 >
 > This is an arbitrary JSON object with a schema is defined by `recipe.type`.
->
-> TODO: Is there a better name for this? "Reproducibility" sounds more like a
-> property (enum or bool) rather than a set of things needed for reproduction.
 
 <a id="metadata"></a>
 `metadata` _object, optional_
