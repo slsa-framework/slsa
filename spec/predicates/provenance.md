@@ -47,7 +47,12 @@ See [Example](#example) for a concrete example.
     "metadata": {
       "buildStartedOn": "<TIMESTAMP>",
       "buildFinishedOn": "<TIMESTAMP>",
-      "materialsComplete": true/false
+      "completeness": {
+        "arguments": true/false,
+        "environment": true/false,
+        "materials": true/false
+      },
+      "reproducible": true/false
     },
     "materials": [
       {
@@ -161,7 +166,8 @@ _(Note: This is a Predicate type that fits within the larger
 >
 > This is an arbitrary JSON object with a schema is defined by `recipe.type`.
 >
-> Omit this field (or use null) to indicate "no arguments."
+> This is considered to be incomplete unless `metadata.completeness.arguments`
+> is true. Unset or null is equivalent to empty.
 
 <a id="recipe.environment"></a>
 `recipe.environment` _object, optional_
@@ -172,6 +178,9 @@ _(Note: This is a Predicate type that fits within the larger
 > meaningful to apply a policy against.
 >
 > This is an arbitrary JSON object with a schema is defined by `recipe.type`.
+>
+> This is considered to be incomplete unless `metadata.completeness.environment`
+> is true. Unset or null is equivalent to empty.
 
 <a id="metadata"></a>
 `metadata` _object, optional_
@@ -188,17 +197,43 @@ _(Note: This is a Predicate type that fits within the larger
 
 > The timestamp of when the build completed.
 
-<a id="metadata.materialsComplete"></a>
-`metadata.materialsComplete` _boolean, optional_
+<a id="metadata.completeness"></a>
+`metadata.completeness` _object, optional_
+
+> Indicates that the `builder` claims certain fields in this message to be
+> complete.
+
+<a id="metadata.completeness.arguments"></a>
+`metadata.completeness.arguments` _boolean, optional_
+
+> If true, `recipe.arguments` is claimed to be complete, meaning that all
+> external inputs are propertly captured in `recipe`.
+
+<a id="metadata.completeness.environment"></a>
+`metadata.completeness.environment` _boolean, optional_
+
+> If true, `recipe.environment` is claimed to be complete.
+
+<a id="metadata.completeness.materials"></a>
+`metadata.completeness.materials` _boolean, optional_
 
 > If true, `materials` is claimed to be complete, usually through some controls
-> to prevent network access.
+> to prevent network access. Sometimes called "hermetic".
+
+<a id="metadata.reproducible"></a>
+`metadata.reproducible` _boolean, optional_
+
+> If true, running `recipe` on `materials` is expected to produce bit-for-bit
+> identical output.
 
 <a id="materials"></a>
 `materials` _array of objects, optional_
 
 > The collection of artifacts that influenced the build including sources,
 > dependencies, build tools, base images, and so on.
+>
+> This is considered to be incomplete unless `metadata.completeness.materials`
+> is true. Unset or null is equivalent to empty.
 
 <a id="materials.uri"></a>
 `materials[*].uri` _string ([ResourceURI]), optional_
