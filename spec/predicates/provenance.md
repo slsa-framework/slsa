@@ -69,6 +69,10 @@ See [Example](#example) for a concrete example.
 _(Note: This is a Predicate type that fits within the larger
 [Attestation](../README.md) framework.)_
 
+### Parsing rules
+
+See [parsing rules](../README.md#parsing-rules).
+
 ### Fields
 
 <a id="type"></a>
