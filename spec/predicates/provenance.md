@@ -170,10 +170,9 @@ See [parsing rules](../README.md#parsing-rules).
 <a id="recipe.environment"></a>
 `recipe.environment` _object, optional_
 
-> Collection of all builder-controlled inputs that influenced the build.
-> `definedInMaterial` and `recipe.entryPoint`. Usually this contains the
-> information necessary to [reproduce][reproducible] the build but not
-> meaningful to apply a policy against.
+> Collection of all builder-controlled inputs that influenced the build. Usually
+> this contains the information necessary to [reproduce][reproducible] the build
+> but not meaningful to apply a policy against.
 >
 > This is an arbitrary JSON object with a schema is defined by `recipe.type`.
 >
