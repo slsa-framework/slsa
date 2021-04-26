@@ -172,7 +172,8 @@ See [parsing rules](../README.md#parsing-rules).
 
 > Collection of all builder-controlled inputs that influenced the build. Usually
 > this contains the information necessary to [reproduce][reproducible] the build
-> but not meaningful to apply a policy against.
+> but not meaningful to apply a policy against. It SHOULD exclude any
+> information that can be recomputed from `materials` or `recipe`.
 >
 > This is an arbitrary JSON object with a schema is defined by `recipe.type`.
 >
@@ -314,6 +315,31 @@ GitHub Actions Workflow:
   // events.
   "arguments": {
     "inputs": { ... }
+  },
+  // Other variables that are required to reproduce the build and that cannot be
+  // recomputed using existing information. (Documentation would explain how to
+  // recompute the rest of the fields.)
+  "environment": {
+    // The architecture of the runner.
+    "arch": "amd64",
+    // Environment variables. These are always set because it is not possible
+    // to know whether they were referenced or not.
+    "env": {
+      "GITHUB_RUN_ID": "1234",
+      "GITHUB_RUN_NUMBER": "5678",
+      "GITHUB_EVENT_NAME": "push"
+    },
+    // The context values that were referenced in the workflow definition.
+    // Secrets are set to the empty string.
+    "context": {
+      "github": {
+        "run_id": "abcd1234"
+      },
+      "runner": {
+        "os": "Linux",
+        "temp": "/tmp/tmp.iizj8l0XhS",
+      }
+    }
   }
 }
 ```
