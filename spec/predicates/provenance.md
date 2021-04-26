@@ -1,6 +1,8 @@
-# Predicate type: Provenance v0.1
+# Predicate type: Provenance
 
 Type URI: https://in-toto.io/Provenance/v0.1
+
+Version: 0.1.0
 
 ## Purpose
 
@@ -57,9 +59,7 @@ See [Example](#example) for a concrete example.
     "materials": [
       {
         "uri": "<URI>",
-        "digest": { /* DigestSet */ },
-        "mediaType": "<MEDIA_TYPE>",
-        "tags": [ "<STRING>" ]
+        "digest": { /* DigestSet */ }
       }
     ]
   }
@@ -68,6 +68,10 @@ See [Example](#example) for a concrete example.
 
 _(Note: This is a Predicate type that fits within the larger
 [Attestation](../README.md) framework.)_
+
+### Parsing rules
+
+See [parsing rules](../README.md#parsing-rules).
 
 ### Fields
 
@@ -244,20 +248,6 @@ _(Note: This is a Predicate type that fits within the larger
 `materials[*].digest` _object ([DigestSet]), optional_
 
 > Collection of cryptographic digests for the contents of this artifact.
-
-<a id="materials.mediaType"></a>
-`materials[*].mediaType` _string (Media Type), optional_
-
-> The [Media Type](https://www.iana.org/assignments/media-types/) for this
-> artifact, if known.
-
-<a id="materials.tags"></a>
-`materials[*].tags` _array (of strings), optional_
-
-> Unordered set of labels whose meaning is dependent on `recipe.type`. SHOULD be
-> sorted lexicographically.
->
-> TODO: Recommend specific conventions, e.g. `source` and `dev-dependency`.
 
 ## Example
 
