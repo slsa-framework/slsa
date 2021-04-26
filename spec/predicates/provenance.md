@@ -204,25 +204,26 @@ See [parsing rules](../README.md#parsing-rules).
 <a id="metadata.completeness.arguments"></a>
 `metadata.completeness.arguments` _boolean, optional_
 
-> If true, `recipe.arguments` is claimed to be complete, meaning that all
-> external inputs are propertly captured in `recipe`.
+> If true, the `builder` claims that `recipe.arguments` is complete, meaning
+> that all external inputs are propertly captured in `recipe`.
 
 <a id="metadata.completeness.environment"></a>
 `metadata.completeness.environment` _boolean, optional_
 
-> If true, `recipe.environment` is claimed to be complete.
+> If true, the `builder` claims that `recipe.environment` is claimed to be
+> complete.
 
 <a id="metadata.completeness.materials"></a>
 `metadata.completeness.materials` _boolean, optional_
 
-> If true, `materials` is claimed to be complete, usually through some controls
-> to prevent network access. Sometimes called "hermetic".
+> If true, the `builder` claims that `materials` is complete, usually through
+> some controls to prevent network access. Sometimes called "hermetic".
 
 <a id="metadata.reproducible"></a>
 `metadata.reproducible` _boolean, optional_
 
-> If true, running `recipe` on `materials` is expected to produce bit-for-bit
-> identical output.
+> If true, the `builder` claims that running `recipe` on `materials` will
+> produce bit-for-bit identical output.
 
 <a id="materials"></a>
 `materials` _array of objects, optional_
