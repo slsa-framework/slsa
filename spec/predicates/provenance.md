@@ -170,10 +170,16 @@ See [parsing rules](../README.md#parsing-rules).
 <a id="recipe.environment"></a>
 `recipe.environment` _object, optional_
 
-> Collection of all builder-controlled inputs that influenced the build. Usually
-> this contains the information necessary to [reproduce][reproducible] the build
-> but not meaningful to apply a policy against. It SHOULD exclude any
-> information that can be recomputed from `materials` or `recipe`.
+> Any other builder-controlled inputs necessary for correctly evaluating the
+> recipe. Usually only needed for [reproducing][reproducible] the build but not
+> evaluated as part of policy.
+>
+> This SHOULD be minimized to only include things that are part of the public
+> API, that cannot be recomputed from other values in the provenance, and that
+> actually affect the evaluation of the recipe. For example, this might include
+> variables that are referenced in the workflow definition, but it SHOULD NOT
+> include a dump of all environment variables or include things like the
+> hostname (assuming hostname is not part of the public API).
 >
 > This is an arbitrary JSON object with a schema is defined by `recipe.type`.
 >
