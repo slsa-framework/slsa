@@ -11,15 +11,15 @@ Describe how an artifact or set of artifacts was produced.
 ## Model
 
 Provenance is a claim that some entity (`builder`) produced one or more software
-artifacts ([Statement]'s `subject`) by executing a series of steps (`recipe`),
-using some other artifacts as input (`materials`). The builder is trusted to
-have faithfully recorded the provenance; there is no option but to trust the
-builder. However, the builder may have performed this operation at the request
-of some external, possibly untrusted entity. These untrusted parameters are
-captured in the recipe's `entryPoint`, `arguments`, and some of the `materials`.
-Finally, the build may have depended on various environmental parameters
-(`environment`) that are needed for [reproducing][reproducible] the build
-but that are not under external control.
+artifacts ([Statement]'s `subject`) by executing some `recipe`, using some other
+artifacts as input (`materials`). The builder is trusted to have faithfully
+recorded the provenance; there is no option but to trust the builder. However,
+the builder may have performed this operation at the request of some external,
+possibly untrusted entity. These untrusted parameters are captured in the
+recipe's `entryPoint`, `arguments`, and some of the `materials`. Finally, the
+build may have depended on various environmental parameters (`environment`) that
+are needed for [reproducing][reproducible] the build but that are not under
+external control.
 
 See [Example](#example) for a concrete example.
 
