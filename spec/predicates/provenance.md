@@ -2,7 +2,8 @@
 
 Type URI: https://in-toto.io/Provenance/v0.1
 
-Version: 0.1.0
+Version:
+[0.1.0](https://github.com/in-toto/attestation/blob/v0.1.0/spec/predicates/provenance.md)
 
 ## Purpose
 
