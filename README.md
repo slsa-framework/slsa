@@ -363,8 +363,9 @@ nuanced. We only provide a brief summary here for clarity.
 
 **[Source]** A source meets SLSA 3 if:
 
-*   **[Readability]** The artifact must be human readable or reviewable.
-    (Example: JPEG images are OK, executable ELF files are not.)
+*   **[Readability]** The artifact must be in the preferred form of work for
+    making modifications to it. (Example: JPEG images are OK, executable ELF
+    files are not.)
 *   **[Retention]** The artifact and its change history are retained
     indefinitely and cannot be deleted.
 *   **[Change History]** The change history is unforgeable and includes, among
