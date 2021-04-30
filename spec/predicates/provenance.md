@@ -97,8 +97,8 @@ See [parsing rules](../README.md#parsing-rules).
 > Design rationale: The builder is distinct from the signer because one signer
 > may generate attestations for more than one builder, as in the GitHub Actions
 > example above. The field is required, even if it is implicit from the signer,
-> is to aid readability and debugging. It is an object to allow additional
-> fields in the future, in case one URI is not sufficient.
+> to aid readability and debugging. It is an object to allow additional fields
+> in the future, in case one URI is not sufficient.
 
 <a id="builder.id"></a>
 `builder.id` _string ([TypeURI]), required_
