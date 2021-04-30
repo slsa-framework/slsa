@@ -184,12 +184,11 @@ builds, there are two related but distinct concepts: "reproducible" and
 "verified reproducible."
 
 "Reproducible" means that repeating the build with the same inputs results in
-bit-for-bit identical output. This property
-[provides](https://reproducible-builds.org/docs/buy-in/)
+bit-for-bit identical output. This property provides
 [many](https://wiki.debian.org/ReproducibleBuilds/About)
-[benefits](https://static.googleusercontent.com/media/sre.google/en//static/pdf/building_secure_and_reliable_systems.pdf#page=357),
-including easier debugging, more confident cherry-pick releases, better build
-caching and storage efficiency, and accurate dependency tracking.
+[benefits](https://reproducible-builds.org/docs/buy-in/), including easier
+debugging, more confident cherry-pick releases, better build caching and storage
+efficiency, and accurate dependency tracking.
 
 For these reasons, SLSA 3 [requires](#proposed-slsa-definitions) reproducible
 builds unless there is a justification why the build cannot be made
@@ -227,8 +226,8 @@ chain integrity, nor are they practical in all cases:
 Therefore, SLSA does not require verified reproducible builds directly. Instead,
 verified reproducible builds are one option for implementing the requirements.
 
-For more on reproducibility, see
-[Hermetic, Reproducible, or Verifiable?](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=357)
+For more on reproducibility, see "Hermetic, Reproducible, or Verifiable?" in
+Chapter 14 of the [Secure and Reliable Systems Book][SRS Book].
 
 ## Terminology
 
@@ -636,7 +635,7 @@ For a broader view of the software supply chain problem:
 
 Prior iterations of the ideas presented here:
 
-*   [Building Secure and Reliable Systems, Chapter 14: Deploying Code](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=339)
+*   [Building Secure and Reliable Systems, Chapter 14: Deploying Code][SRS Book]
 *   [Binary Authorization for Borg] - This is how Google implements the SLSA
     idea internally.
 
@@ -663,6 +662,7 @@ Other takes on provenance and CI/CD:
 <!-- Links -->
 
 [Binary Authorization for Borg]: https://cloud.google.com/security/binary-authorization-for-borg
+[SRS Book]: https://sre.google/books/building-secure-reliable-systems/
 [Threats, Risks, and Mitigations in the Open Source Ecosystem]: https://github.com/Open-Source-Security-Coalition/Open-Source-Security-Coalition/blob/master/publications/threats-risks-mitigations/v1.1/Threats%2C%20Risks%2C%20and%20Mitigations%20in%20the%20Open%20Source%20Ecosystem%20-%20v1.1.pdf
 [curl-dev]: https://pkgs.alpinelinux.org/package/edge/main/x86/curl-dev
 [curlimages/curl]: https://hub.docker.com/r/curlimages/curl
