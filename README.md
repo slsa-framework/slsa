@@ -24,8 +24,8 @@ standards, inspired by what Google does
     aspects of security.
 2.  **Accreditation:** Process for organizations to certify compliance with
     these standards.
-3.  **[Technical controls][slsa-controls]:** To record provenance and detect or
-    prevent non-compliance.
+3.  **[Technical controls](controls/README.md):** To record provenance and
+    detect or prevent non-compliance.
 
 Ultimately, the software consumer decides whom to trust and what standards to
 enforce. In this light, accreditation is a means to transfer trust across
@@ -37,8 +37,6 @@ This document *only discusses the first part*, Standards. We expect to develop
 an accreditation process and technical controls over time. In the interim, these
 levels can provide value as guidelines for how to secure a software supply
 chain.
-
-[slsa-controls]: https://github.com/slsa-framework/slsa-controls
 
 ## Principles
 

@@ -1,7 +1,7 @@
 # SLSA: Technical Controls
 
 This repository contains an index of technical controls that fit into the
-[SLSA Framework](https://github.com/SLSA-Framework/levels).
+[SLSA Framework](../README.md).
 
 NOTE: This is still a work in progress.
 
