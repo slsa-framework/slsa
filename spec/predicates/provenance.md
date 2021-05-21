@@ -2,8 +2,7 @@
 
 Type URI: https://in-toto.io/Provenance/v0.1
 
-Version:
-[0.1.0](https://github.com/in-toto/attestation/blob/v0.1.0/spec/predicates/provenance.md)
+Version: 0.1.1
 
 ## Purpose
 
@@ -48,6 +47,7 @@ See [Example](#example) for a concrete example.
       "environment": { /* object */ }
     },
     "metadata": {
+      "buildInvocationId": "<STRING>",
       "buildStartedOn": "<TIMESTAMP>",
       "buildFinishedOn": "<TIMESTAMP>",
       "completeness": {
@@ -191,6 +191,14 @@ See [parsing rules](../README.md#parsing-rules).
 `metadata` _object, optional_
 
 > Other properties of the build.
+
+<a id="metadata.buildInvocationId"></a>
+`metadata.buildInvocationId` _string, optional_
+
+> Identifies this particular build invocation, which can be useful for finding
+> associated logs or other ad-hoc analysis. The exact meaning and format is
+> defined by `builder.id`; by default it is treated as opaque and
+> case-sensitive. The value SHOULD be globally unique.
 
 <a id="metadata.buildStartedOn"></a>
 `metadata.buildStartedOn` _string ([Timestamp]), optional_
@@ -431,6 +439,11 @@ Execution of arbitrary commands:
   }
 }
 ```
+
+## Change history
+
+* 0.1.1: Added `metadata.buildInvocationId`.
+* 0.1: Initial version
 
 ## Appendix: Review of CI/CD systems
 
