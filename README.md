@@ -617,7 +617,7 @@ data models. Currently this is joint work between
 [Binary Authorization](https://cloud.google.com/binary-authorization) and
 [in-toto](https://in-toto.io/) but we invite wider participation.
 
-*   [Standard attestation format](https://github.com/in-toto/ITE/pull/15) to
+*   [Standard attestation format](https://github.com/in-toto/attestation#in-toto-attestations) to
     express provenance and other attributes. This will allow sources and
     builders to express properties in a standard way that can be consumed by
     anyone. Also includes reference implementations for generating these
