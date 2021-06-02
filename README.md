@@ -78,10 +78,10 @@ SLSA addresses three issues:
 *   Artifact signatures alone only prevent a subset of the attacks we care
     about.
 
-At a minimum, SLSA can be used as a set of guiding principles within an
-organization. More importantly, SLSA allows us to talk about supply chain risks
-and mitigations in a common language. This allows us to communicate and act on
-those risks across organizational boundaries.
+At a minimum, SLSA can be used as a set of guiding principles for software
+producers and consumers. More importantly, SLSA allows us to talk about supply
+chain risks and mitigations in a common language. This allows us to communicate
+and act on those risks across organizational boundaries.
 
 Numeric levels, in particular, are useful because they are simple. A decision
 maker easily understands that SLSA 3 is better than SLSA 2 without understanding
