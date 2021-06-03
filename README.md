@@ -286,11 +286,7 @@ The following diagram shows the relationship between concepts.
 
 ## Proposed SLSA definitions
 
-_Reminder: the proposed requirements here are based on what Google currently
-uses and has found useful. We expect these requirements—and perhaps even the
-concept of levels—to evolve based on community feedback._
-
-**Definition Version: 2021-04-21**
+_Reminder: The definitions below are not yet finalized and subject to change._
 
 There are three SLSA levels. SLSA 3 is the current highest level and represents
 the ideal end state. SLSA 1 and 2 offer lower security guarantees but are easier
@@ -321,8 +317,6 @@ effort, so intermediate milestones are important.
 </table>
 
 Each SLSA level has a set of requirements.
-
-<!-- REMINDER: Update the version date whenever changing requirements. -->
 
 <table>
  <thead>
