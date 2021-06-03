@@ -309,9 +309,12 @@ effort, so intermediate milestones are important.
    <td>SLSA 2
    <td>"Auditable." Moderate confidence that one can trace back to the original source code and change history. However, trusted persons still have the ability to make unilateral changes, and the list of dependencies is likely incomplete.
   </tr>
+  <!--
+    Old wording for SLSA 1, can be used for 1.5: Stepping stone to higher levels. Moderate confidence that one can determine either who authorized the artifact or what systems produced the artifact. Protects against tampering after the build.
+  -->
   <tr>
    <td>SLSA 1
-   <td>Stepping stone to higher levels. Moderate confidence that one can determine either who authorized the artifact or what systems produced the artifact. Protects against tampering after the build.
+   <td>Stepping stone to higher levels. Unauthenticated assertion of how the artifact was produced.
   </tr>
  </tbody>
 </table>
@@ -324,23 +327,26 @@ Each SLSA level has a set of requirements.
   <tr><th colspan="2">Requirement            <th>SLSA 1<th>SLSA 2<th>SLSA 3</tr>
  </thead>
  <tbody>
-  <tr><td rowspan="4">Source<td>Readability      <td>✓ <td>✓     <td>✓     </tr>
+  <tr><td rowspan="4">Source<td>Version Control  <td>  <td>✓     <td>✓     </tr>
+  <tr>                      <td>Verified History <td>  <td>✓     <td>✓     </tr>
   <tr>                      <td>Retention        <td>  <td>18 mo.<td>indef </tr>
-  <tr>                      <td>Change History   <td>  <td>✓     <td>✓     </tr>
   <tr>                      <td>Two-Person Review<td>  <td>      <td>✓     </tr>
-  <tr><td rowspan="6">Build <td>Automation       <td>✓ <td>✓     <td>✓     </tr>
+  <tr><td rowspan="6">Build <td>Scripted         <td>✓ <td>✓     <td>✓     </tr>
+  <tr>                      <td>Build Service    <td>  <td>✓     <td>✓     </tr>
   <tr>                      <td>Isolation        <td>  <td>✓     <td>✓     </tr>
   <tr>                      <td>Hermeticity      <td>  <td>      <td>✓     </tr>
   <tr>                      <td>Reproducibility  <td>  <td>      <td>○     </tr>
   <tr>                      <td>Source Integrity <td>  <td>✓ *   <td>✓     </tr>
-  <tr>                      <td>Provenance       <td>↓ <td>✓ *   <td>✓     </tr>
-  <tr><td rowspan="4">Deploy<td>Provenance Chain <td>↓ <td>✓     <td>✓     </tr>
-  <tr>                      <td>Policy           <td>↓ <td>✓     <td>✓     </tr>
-  <tr>                      <td>Enforcement      <td>† <td>†     <td>✓     </tr>
-  <tr>                      <td>Logging          <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td rowspan="3">Common<td>Security         <td>↓↓<td>↓     <td>✓     </tr>
-  <tr>                      <td>Access           <td>↓↓<td>↓     <td>✓     </tr>
-  <tr>                      <td>Superusers       <td>↓↓<td>↓     <td>✓     </tr>
+  <tr><td rowspan="3">Provenance
+                            <td>Available        <td>✓ <td>✓     <td>✓     </tr>
+  <tr>                      <td>Tamper Resistant <td>  <td>✓     <td>✓     </tr>
+  <tr>                      <td>Dependencies     <td>  <td>      <td>✓     </tr>
+  <tr><td rowspan="3">Deploy<td>Provenance Chain <td>✓ <td>✓     <td>✓     </tr>
+  <tr>                      <td>Policy           <td>  <td>✓     <td>✓     </tr>
+  <tr>                      <td>Logging          <td>  <td>✓     <td>✓     </tr>
+  <tr><td rowspan="3">Common<td>Security         <td>  <td>↓     <td>✓     </tr>
+  <tr>                      <td>Access           <td>  <td>↓     <td>✓     </tr>
+  <tr>                      <td>Superusers       <td>  <td>↓     <td>✓     </tr>
  </tbody>
 </table>
 
@@ -350,29 +356,30 @@ Legend:
 *   ○ = required at this level unless there is a justification
 *   ✓ \* = required at this level, but best effort because it depends on
     hermeticity, which is not required at this level
-*   † = detection is allowed instead of prevention
-*   ↓, ↓↓ = lower requirements (details TBD)
+*   ↓ = lower requirements (details TBD)
 
 Note: The actual requirements will necessarily be much more detailed and
 nuanced. We only provide a brief summary here for clarity.
 
 **[Source]** A source meets SLSA 3 if:
 
-*   **[Readability]** The artifact must be in the preferred form of work for
-    making modifications to it. (Example: JPEG images are OK, executable ELF
-    files are not.)
+*   **[Version Control]** Every change to the source is tracked in a version
+    control system that identifies who made the change, what the change was, and
+    when that change occurred.
+*   **[Verified History]** The version control history indicates which actor
+    identities (author, uploader, reviewer, etc.) and timestamps were strongly
+    authenticated.
 *   **[Retention]** The artifact and its change history are retained
     indefinitely and cannot be deleted.
-*   **[Change History]** The change history is unforgeable and includes, among
-    other things, authenticated uploader and reviewer identities as well as
-    trusted review and submission timestamps.
 *   **[Two-Person Review]** At least two trusted persons agreed to every change
     in the history.
 
 **[Build]** A build process qualifies for SLSA 3 if:
 
-*   **[Automation]** All build steps were fully automated, i.e. no manual
-    commands.
+*   **[Scripted]** All build steps were fully defined in some sort of "build
+    script". The only manual command, if any, was to invoke the build script.
+*   **[Build Service]** All build steps ran using some build service, such as a
+    Continuous Integration (CI) platform, not on a developer's workstation.
 *   **[Isolation]** The build steps ran in an isolated environment free of
     influence from other build instances, whether prior or concurrent.
 *   **[Hermeticity]** All build steps, sources, and dependencies were fully
@@ -382,20 +389,27 @@ nuanced. We only provide a brief summary here for clarity.
     this must provide a justification.)
 *   **[Source Integrity]** All input artifacts were fetched in a manner that
     prevents tampering, such as TLS.
-*   **[Provenance]** Signed provenance recorded the input artifacts, output
-    artifacts, build environment, and top-level entry point (e.g. `make`) and
-    cannot be falsified.
+
+**[Provenance]** An artifact's provenance qualifies for SLSA 3 if:
+
+*   **[Available]** Provenance is available to the consumer of the artifact, or
+    to whomever is verifying the policy, and it contains at least the
+    cryptographic hash of the aritfact, the identity of the system that
+    performed the build, and the top-level source repository (i.e. the one
+    containing the build script).
+*   **[Tamper Resistant]** The build platform generates the provenance and the
+    platform's users cannot falsify it.
+*   **[Dependencies]** The provenance records all build dependencies, meaning
+    every artifact that was available to the build script. This includes the
+    initial state of the machine, VM, or container of the build worker.
 
 **[Deploy]** An artifact deployed to a resource meets SLSA 3 if:
 
 *   **[Provenance Chain]** There is an unbroken chain of provenance linking the
     artifact back to its original sources and dependencies.
-*   **[Policy]** The resource's security policy defines the specific top-level
-    resources, build processes, and build entry points that are allowed in its
-    provenance chain. The policy itself is a SLSA 3 source.
-*   **[Enforcement]** Non-policy-compliant artifacts are prevented at the time
-    of deployment and/or use. (Whether to allow break-glass bypassing in case of
-    emergency is TBD.)
+*   **[Policy]** The resource's security policy only accepts artifacts with
+    provenance by specific builders and specific top-level source repositories.
+    The policy itself is a SLSA 3 source.
 *   **[Logging]** The history of deployed artifacts and their provenances is
     retained for 18 months and is resistant to tampering.
 
