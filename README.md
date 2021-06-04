@@ -395,7 +395,7 @@ nuanced. We only provide a brief summary here for clarity.
 
 *   **[Available]** Provenance is available to the consumer of the artifact, or
     to whomever is verifying the policy, and it contains at least the
-    cryptographic hash of the aritfact, the identity of the system that
+    cryptographic hash of the artifact, the identity of the system that
     performed the build, and the top-level source repository (i.e. the one
     containing the build script).
 *   **[Tamper Resistant]** The build platform generates the provenance and the
