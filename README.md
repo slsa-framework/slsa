@@ -287,10 +287,11 @@ The following diagram shows the relationship between concepts.
 
 ## Proposed SLSA definitions
 
-_Reminder: The definitions below are not yet finalized and subject to change._
+_Reminder: The definitions below are not yet finalized and subject to change. In
+particular, the levels will be renumbered to be all integers._
 
-There are three SLSA levels. SLSA 3 is the current highest level and represents
-the ideal end state. SLSA 1 and 2 offer lower security guarantees but are easier
+There are four SLSA levels. SLSA 3 is the current highest level and represents
+the ideal end state. SLSA 1–2 offer lower security guarantees but are easier
 to meet. In our experience, achieving SLSA 3 can take many years and significant
 effort, so intermediate milestones are important.
 
@@ -310,12 +311,13 @@ effort, so intermediate milestones are important.
    <td>SLSA 2
    <td>"Auditable." Moderate confidence that one can trace back to the original source code and change history. However, trusted persons still have the ability to make unilateral changes, and the list of dependencies is likely incomplete.
   </tr>
-  <!--
-    Old wording for SLSA 1, can be used for 1.5: Stepping stone to higher levels. Moderate confidence that one can determine either who authorized the artifact or what systems produced the artifact. Protects against tampering after the build.
-  -->
+  <tr>
+   <td>SLSA 1.5
+   <td>Stepping stone to higher levels. Moderate confidence that one can determine either who authorized the artifact or what systems produced the artifact. Protects against tampering after the build.
+  </tr>
   <tr>
    <td>SLSA 1
-   <td>Stepping stone to higher levels. Unauthenticated assertion of how the artifact was produced.
+   <td>Entrypoint into SLSA. Unauthenticated provenance.
   </tr>
  </tbody>
 </table>
@@ -324,30 +326,36 @@ Each SLSA level has a set of requirements.
 
 <table>
  <thead>
-  <tr><th colspan="2">                       <th colspan="3">Required at   </tr>
-  <tr><th colspan="2">Requirement            <th>SLSA 1<th>SLSA 2<th>SLSA 3</tr>
+  <tr><th colspan="2">           <th colspan="4">Required at</tr>
+  <tr><th colspan="2">Requirement<th>SLSA 1<th>SLSA 1.5<th>SLSA 2<th>SLSA 3</tr>
  </thead>
  <tbody>
-  <tr><td rowspan="4">Source<td>Version Control  <td>  <td>✓     <td>✓     </tr>
-  <tr>                      <td>Verified History <td>  <td>✓     <td>✓     </tr>
-  <tr>                      <td>Retention        <td>  <td>18 mo.<td>indef </tr>
-  <tr>                      <td>Two-Person Review<td>  <td>      <td>✓     </tr>
-  <tr><td rowspan="6">Build <td>Scripted         <td>✓ <td>✓     <td>✓     </tr>
-  <tr>                      <td>Build Service    <td>  <td>✓     <td>✓     </tr>
-  <tr>                      <td>Isolation        <td>  <td>✓     <td>✓     </tr>
-  <tr>                      <td>Hermeticity      <td>  <td>      <td>✓     </tr>
-  <tr>                      <td>Reproducibility  <td>  <td>      <td>○     </tr>
-  <tr>                      <td>Source Integrity <td>  <td>✓ *   <td>✓     </tr>
-  <tr><td rowspan="3">Provenance
-                            <td>Available        <td>✓ <td>✓     <td>✓     </tr>
-  <tr>                      <td>Tamper Resistant <td>  <td>✓     <td>✓     </tr>
-  <tr>                      <td>Dependencies     <td>  <td>      <td>✓     </tr>
-  <tr><td rowspan="3">Deploy<td>Provenance Chain <td>✓ <td>✓     <td>✓     </tr>
-  <tr>                      <td>Policy           <td>  <td>✓     <td>✓     </tr>
-  <tr>                      <td>Logging          <td>  <td>✓     <td>✓     </tr>
-  <tr><td rowspan="3">Common<td>Security         <td>  <td>↓     <td>✓     </tr>
-  <tr>                      <td>Access           <td>  <td>↓     <td>✓     </tr>
-  <tr>                      <td>Superusers       <td>  <td>↓     <td>✓     </tr>
+  <tr><td rowspan="4">Source
+      <td>Version Control           <td>  <td>✓ <td>✓     <td>✓     </tr>
+  <tr><td>Verified History          <td>  <td>  <td>✓     <td>✓     </tr>
+  <tr><td>Retention                 <td>  <td>  <td>18 mo.<td>indef </tr>
+  <tr><td>Two-Person Review         <td>  <td>  <td>      <td>✓     </tr>
+  <tr><td rowspan="6">Build
+      <td>Scripted                  <td>✓ <td>✓ <td>✓     <td>✓     </tr>
+  <tr><td>Build Service             <td>  <td>✓ <td>✓     <td>✓     </tr>
+  <tr><td>Isolation                 <td>  <td>  <td>✓     <td>✓     </tr>
+  <tr><td>Hermeticity               <td>  <td>  <td>      <td>✓     </tr>
+  <tr><td>Reproducibility           <td>  <td>  <td>      <td>○     </tr>
+  <tr><td>Source Integrity          <td>  <td>  <td>✓ *   <td>✓     </tr>
+  <tr><td rowspan="5">Provenance
+      <td>Available                 <td>✓ <td>✓ <td>✓     <td>✓     </tr>
+  <tr><td>Authenticated             <td>  <td>✓ <td>✓     <td>✓     </tr>
+  <tr><td>Service Generated         <td>  <td>✓ <td>✓     <td>✓     </tr>
+  <tr><td>Non-Falsifiable           <td>  <td>  <td>✓     <td>✓     </tr>
+  <tr><td>Dependencies              <td>  <td>  <td>      <td>✓     </tr>
+  <tr><td rowspan="3">Deploy
+      <td>Provenance Chain          <td>✓ <td>✓ <td>✓     <td>✓     </tr>
+  <tr><td>Policy                    <td>  <td>✓ <td>✓     <td>✓     </tr>
+  <tr><td>Logging                   <td>  <td>  <td>✓     <td>✓     </tr>
+  <tr><td rowspan="3">Common
+      <td>Security                  <td>  <td>  <td>↓     <td>✓     </tr>
+  <tr><td>Access                    <td>  <td>  <td>↓     <td>✓     </tr>
+  <tr><td>Superusers                <td>  <td>  <td>↓     <td>✓     </tr>
  </tbody>
 </table>
 
@@ -398,11 +406,15 @@ nuanced. We only provide a brief summary here for clarity.
     cryptographic hash of the artifact, the identity of the system that
     performed the build, and the top-level source repository (i.e. the one
     containing the build script).
-*   **[Tamper Resistant]** The build platform generates the provenance and the
-    platform's users cannot falsify it.
-*   **[Dependencies]** The provenance records all build dependencies, meaning
-    every artifact that was available to the build script. This includes the
-    initial state of the machine, VM, or container of the build worker.
+*   **[Authenticated]** Provenance's authenticity and integrity can be verified,
+    such as through a digital signature.
+*   **[Service Generated]** Provenance is generated by the build service itself,
+    as opposed to user-provided tooling running on top of the service.
+*   **[Non-Falsifiable]** Provenance cannot be falsified by the build service's
+    users.
+*   **[Dependencies]** Provenance records all build dependencies, meaning every
+    artifact that was available to the build script. This includes the initial
+    state of the machine, VM, or container of the build worker.
 
 **[Deploy]** An artifact deployed to a resource meets SLSA 3 if:
 
