@@ -317,7 +317,7 @@ effort, so intermediate milestones are important.
   </tr>
   <tr>
    <td>SLSA 1
-   <td>Entrypoint into SLSA. Unauthenticated provenance.
+   <td>Entry point into SLSA. Provenance indicates the artifact's origins without any integrity guarantees.
   </tr>
  </tbody>
 </table>
@@ -331,16 +331,16 @@ Each SLSA level has a set of requirements.
  </thead>
  <tbody>
   <tr><td rowspan="4">Source
-      <td>Version Control           <td>  <td>✓ <td>✓     <td>✓     </tr>
+      <td>Version Controlled        <td>  <td>✓ <td>✓     <td>✓     </tr>
   <tr><td>Verified History          <td>  <td>  <td>✓     <td>✓     </tr>
-  <tr><td>Retention                 <td>  <td>  <td>18 mo.<td>indef </tr>
-  <tr><td>Two-Person Review         <td>  <td>  <td>      <td>✓     </tr>
+  <tr><td>Retained                  <td>  <td>  <td>18 mo.<td>indef </tr>
+  <tr><td>Two-Person Reviewed       <td>  <td>  <td>      <td>✓     </tr>
   <tr><td rowspan="6">Build
       <td>Scripted                  <td>✓ <td>✓ <td>✓     <td>✓     </tr>
   <tr><td>Build Service             <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Isolation                 <td>  <td>  <td>✓     <td>✓     </tr>
-  <tr><td>Hermeticity               <td>  <td>  <td>      <td>✓     </tr>
-  <tr><td>Reproducibility           <td>  <td>  <td>      <td>○     </tr>
+  <tr><td>Isolated                  <td>  <td>  <td>✓     <td>✓     </tr>
+  <tr><td>Hermetic                  <td>  <td>  <td>      <td>✓     </tr>
+  <tr><td>Reproducible              <td>  <td>  <td>      <td>○     </tr>
   <tr><td>Source Integrity          <td>  <td>  <td>✓ *   <td>✓     </tr>
   <tr><td rowspan="5">Provenance
       <td>Available                 <td>✓ <td>✓ <td>✓     <td>✓     </tr>
@@ -372,14 +372,14 @@ nuanced. We only provide a brief summary here for clarity.
 
 **[Source]** A source meets SLSA 3 if:
 
-*   **[Version Control]** Every change to the source is tracked in a version
+*   **[Version Controlled]** Every change to the source is tracked in a version
     control system that identifies who made the change, what the change was, and
     when that change occurred.
 *   **[Verified History]** The version control history indicates which actor
     identities (author, uploader, reviewer, etc.) and timestamps were strongly
     authenticated.
-*   **[Retention]** The artifact and its change history are retained
-    indefinitely and cannot be deleted.
+*   **[Retained]** The artifact and its change history are retained indefinitely
+    and cannot be deleted.
 *   **[Two-Person Review]** At least two trusted persons agreed to every change
     in the history.
 
@@ -389,13 +389,13 @@ nuanced. We only provide a brief summary here for clarity.
     script". The only manual command, if any, was to invoke the build script.
 *   **[Build Service]** All build steps ran using some build service, such as a
     Continuous Integration (CI) platform, not on a developer's workstation.
-*   **[Isolation]** The build steps ran in an isolated environment free of
+*   **[Isolated]** The build steps ran in an isolated environment free of
     influence from other build instances, whether prior or concurrent.
-*   **[Hermeticity]** All build steps, sources, and dependencies were fully
+*   **[Hermetic]** All build steps, sources, and dependencies were fully
     declared up front and the build steps ran with no network access.
-*   **[Reproducibility]** Re-running the build steps with identical input
-    artifacts results in bit-for-bit identical output. (Builds that cannot meet
-    this must provide a justification.)
+*   **[Reproducible]** Re-running the build steps with identical input artifacts
+    results in bit-for-bit identical output. (Builds that cannot meet this must
+    provide a justification.)
 *   **[Source Integrity]** All input artifacts were fetched in a manner that
     prevents tampering, such as TLS.
 
