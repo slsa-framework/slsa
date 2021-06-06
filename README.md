@@ -295,6 +295,10 @@ the ideal end state. SLSA 1–2 offer lower security guarantees but are easier
 to meet. In our experience, achieving SLSA 3 can take many years and significant
 effort, so intermediate milestones are important.
 
+Furthermore, we differentiate between
+[source artifacts](#source-artifact-requirements) and
+[built artifacts](#built-artifact-requirements).
+
 <table>
  <thead>
   <tr>
@@ -322,56 +326,24 @@ effort, so intermediate milestones are important.
  </tbody>
 </table>
 
-Each SLSA level has a set of requirements.
+### Source Artifact Requirements
 
-<table>
- <thead>
-  <tr><th colspan="2">           <th colspan="4">Required at</tr>
-  <tr><th colspan="2">Requirement<th>SLSA 1<th>SLSA 1.5<th>SLSA 2<th>SLSA 3</tr>
- </thead>
- <tbody>
-  <tr><td rowspan="4">Source
-      <td>Version Controlled        <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Verified History          <td>  <td>  <td>✓     <td>✓     </tr>
-  <tr><td>Retained                  <td>  <td>  <td>18 mo.<td>indef </tr>
-  <tr><td>Two-Person Reviewed       <td>  <td>  <td>      <td>✓     </tr>
-  <tr><td rowspan="6">Build
-      <td>Scripted                  <td>✓ <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Build Service             <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Isolated                  <td>  <td>  <td>✓     <td>✓     </tr>
-  <tr><td>Hermetic                  <td>  <td>  <td>      <td>✓     </tr>
-  <tr><td>Reproducible              <td>  <td>  <td>      <td>○     </tr>
-  <tr><td>Source Integrity          <td>  <td>  <td>✓ *   <td>✓     </tr>
-  <tr><td rowspan="5">Provenance
-      <td>Available                 <td>✓ <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Authenticated             <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Service Generated         <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Non-Falsifiable           <td>  <td>  <td>✓     <td>✓     </tr>
-  <tr><td>Dependencies              <td>  <td>  <td>      <td>✓     </tr>
-  <tr><td rowspan="3">Deploy
-      <td>Provenance Chain          <td>✓ <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Policy                    <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Logging                   <td>  <td>  <td>✓     <td>✓     </tr>
-  <tr><td rowspan="3">Common
-      <td>Security                  <td>  <td>  <td>↓     <td>✓     </tr>
-  <tr><td>Access                    <td>  <td>  <td>↓     <td>✓     </tr>
-  <tr><td>Superusers                <td>  <td>  <td>↓     <td>✓     </tr>
- </tbody>
-</table>
+Requirement         | SLSA 1 | SLSA 1.5 | SLSA 2 | SLSA 3
+------------------- | ------ | -------- | ------ | ------
+Immutable           | ✓      | ✓        | ✓      | ✓
+Version Controlled  |        | ✓        | ✓      | ✓
+Verified History    |        |          | ✓      | ✓
+Retained            |        |          | 18 mo. | indef
+Two-Person Reviewed |        |          |        | ✓
 
-Legend:
+A **source artifact** is a piece of data in the exact form that its authors and
+maintainers use to make modifications to it. Usually this is a version control
+revision, such as a git commit. _(TODO Move this up to terminology)_
 
-*   ✓ = required at this level
-*   ○ = required at this level unless there is a justification
-*   ✓ \* = required at this level, but best effort because it depends on
-    hermeticity, which is not required at this level
-*   ↓ = lower requirements (details TBD)
+A source artifact meets SLSA 3 if:
 
-Note: The actual requirements will necessarily be much more detailed and
-nuanced. We only provide a brief summary here for clarity.
-
-**[Source]** A source meets SLSA 3 if:
-
+*   **[Immutable]** The artifact is immutable to protect against tampering,
+    usually by means of a cryptographic hash.
 *   **[Version Controlled]** Every change to the source is tracked in a version
     control system that identifies who made the change, what the change was, and
     when that change occurred.
@@ -383,38 +355,67 @@ nuanced. We only provide a brief summary here for clarity.
 *   **[Two-Person Review]** At least two trusted persons agreed to every change
     in the history.
 
-**[Build]** A build process qualifies for SLSA 3 if:
+### Built Artifact Requirements
 
-*   **[Scripted]** All build steps were fully defined in some sort of "build
-    script". The only manual command, if any, was to invoke the build script.
+Requirement                  | SLSA 1 | SLSA 1.5 | SLSA 2 | SLSA 3
+---------------------------- | ------ | -------- | ------ | ------
+Top-Level Source             | SLSA 1 | SLSA 1.5 | SLSA 2 | SLSA 3
+Build Scripted               | ✓      | ✓        | ✓      | ✓
+Build Service                |        | ✓        | ✓      | ✓
+Build Isolated               |        |          | ✓      | ✓
+Build Hermetic               |        |          |        | ✓
+Build Reproducible           |        |          |        | ○
+Provenance Available         | ✓      | ✓        | ✓      | ✓
+Provenance Authenticated     |        | ✓        | ✓      | ✓
+Provenance Service-Generated |        | ✓        | ✓      | ✓
+Provenance Non-Falsifiable   |        |          | ✓      | ✓
+Provenance Complete          |        |          |        | ✓
+Security                     |        |          | ↓      | ✓
+Access                       |        |          | ↓      | ✓
+Superusers                   |        |          | ↓      | ✓
+
+_○ = required unless there is a justification_
+
+A **built artifact** is any data that is not a
+[source artifact](#source-artifact-requirements), meaning that it is generated
+by some software, usually using some other artifact as input. Examples: source
+tarball generated from a git commit, compiled firmware image, docker image, npm
+package, data generated by a service. _(TODO Move this up to terminology)_
+
+A built artifact meets SLSA 3 if:
+
+*   **[Top-Level Source]** The top-level source is a SLSA 3 artifact.
+*   **[Build Scripted]** All build steps were fully defined in some sort of
+    "build script". The only manual command, if any, was to invoke the build
+    script.
 *   **[Build Service]** All build steps ran using some build service, such as a
     Continuous Integration (CI) platform, not on a developer's workstation.
-*   **[Isolated]** The build steps ran in an isolated environment free of
+*   **[Build Isolated]** The build steps ran in an isolated environment free of
     influence from other build instances, whether prior or concurrent.
-*   **[Hermetic]** All build steps, sources, and dependencies were fully
+*   **[Build Hermetic]** All build steps, sources, and dependencies were fully
     declared up front and the build steps ran with no network access.
-*   **[Reproducible]** Re-running the build steps with identical input artifacts
-    results in bit-for-bit identical output. (Builds that cannot meet this must
-    provide a justification.)
-*   **[Source Integrity]** All input artifacts were fetched in a manner that
-    prevents tampering, such as TLS.
-
-**[Provenance]** An artifact's provenance qualifies for SLSA 3 if:
-
-*   **[Available]** Provenance is available to the consumer of the artifact, or
-    to whomever is verifying the policy, and it contains at least the
-    cryptographic hash of the artifact, the identity of the system that
+*   **[Build Reproducible]** Re-running the build steps with identical input
+    artifacts results in bit-for-bit identical output. (Builds that cannot meet
+    this must provide a justification.)
+*   **[Provenance Available]** Provenance is available to the consumer of the
+    artifact, or to whomever is verifying the policy, and it contains at least
+    the cryptographic hash of the artifact, the identity of the system that
     performed the build, and the top-level source repository (i.e. the one
     containing the build script).
-*   **[Authenticated]** Provenance's authenticity and integrity can be verified,
-    such as through a digital signature.
-*   **[Service Generated]** Provenance is generated by the build service itself,
-    as opposed to user-provided tooling running on top of the service.
-*   **[Non-Falsifiable]** Provenance cannot be falsified by the build service's
-    users.
-*   **[Dependencies]** Provenance records all build dependencies, meaning every
-    artifact that was available to the build script. This includes the initial
-    state of the machine, VM, or container of the build worker.
+*   **[Provenance Authenticated]** Provenance's authenticity and integrity can
+    be verified, such as through a digital signature.
+*   **[Provenance Service-Generated]** Provenance is generated by the build
+    service itself, as opposed to user-provided tooling running on top of the
+    service.
+*   **[Provenance Non-Falsifiable]** Provenance cannot be falsified by the build
+    service's users.
+*   **[Provenance Complete]** Provenance records all build dependencies, meaning
+    every artifact that was available to the build script. This includes the
+    initial state of the machine, VM, or container of the build worker.
+
+### TODO: Common & Policy
+
+**TODO: These need to be updated as per the split above.**
 
 **[Deploy]** An artifact deployed to a resource meets SLSA 3 if:
 
