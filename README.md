@@ -331,31 +331,30 @@ Each SLSA level has a set of requirements.
  </thead>
  <tbody>
   <tr><td rowspan="4">Source
-      <td>Version Controlled        <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Verified History          <td>  <td>  <td>✓     <td>✓     </tr>
-  <tr><td>Retained                  <td>  <td>  <td>18 mo.<td>indef </tr>
-  <tr><td>Two-Person Reviewed       <td>  <td>  <td>      <td>✓     </tr>
-  <tr><td rowspan="6">Build
-      <td>Scripted                  <td>✓ <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Build Service             <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Isolated                  <td>  <td>  <td>✓     <td>✓     </tr>
-  <tr><td>Hermetic                  <td>  <td>  <td>      <td>✓     </tr>
-  <tr><td>Reproducible              <td>  <td>  <td>      <td>○     </tr>
-  <tr><td>Source Integrity          <td>  <td>  <td>✓ *   <td>✓     </tr>
+      <td>Version Controlled        <td> <td>✓<td>✓     <td>✓</tr>
+  <tr><td>Verified History          <td> <td> <td>✓     <td>✓</tr>
+  <tr><td>Retained Indefinitely     <td> <td> <td>18 mo.<td>✓</tr>
+  <tr><td>Two-Person Reviewed       <td> <td> <td>      <td>✓</tr>
+  <tr><td rowspan="7">Build
+      <td>Scripted                  <td>✓<td>✓<td>✓     <td>✓</tr>
+  <tr><td>Build Service             <td> <td>✓<td>✓     <td>✓</tr>
+  <tr><td>Ephemeral Environment     <td> <td>✓<td>✓     <td>✓</tr>
+  <tr><td>Isolated                  <td> <td> <td>✓     <td>✓</tr>
+  <tr><td>Hermetic                  <td> <td> <td>      <td>✓</tr>
+  <tr><td>Reproducible              <td> <td> <td>      <td>○</tr>
+  <tr><td>Source Integrity          <td> <td> <td>✓     <td>✓</tr>
   <tr><td rowspan="5">Provenance
-      <td>Available                 <td>✓ <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Authenticated             <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Service Generated         <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Non-Falsifiable           <td>  <td>  <td>✓     <td>✓     </tr>
-  <tr><td>Dependencies              <td>  <td>  <td>      <td>✓     </tr>
-  <tr><td rowspan="3">Deploy
-      <td>Provenance Chain          <td>✓ <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Policy                    <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Logging                   <td>  <td>  <td>✓     <td>✓     </tr>
+      <td>Available                 <td>✓<td>✓<td>✓     <td>✓</tr>
+  <tr><td>Authenticated             <td> <td>✓<td>✓     <td>✓</tr>
+  <tr><td>Service Generated         <td> <td>✓<td>✓     <td>✓</tr>
+  <tr><td>Non-Falsifiable           <td> <td> <td>✓     <td>✓</tr>
+  <tr><td>Dependencies              <td> <td>✓<td>✓     <td>✓</tr>
+  <tr><td rowspan="1">Deploy
+      <td>Provenance Chain          <td>✓<td>✓<td>✓     <td>✓</tr>
   <tr><td rowspan="3">Common
-      <td>Security                  <td>  <td>  <td>↓     <td>✓     </tr>
-  <tr><td>Access                    <td>  <td>  <td>↓     <td>✓     </tr>
-  <tr><td>Superusers                <td>  <td>  <td>↓     <td>✓     </tr>
+      <td>Security                  <td> <td> <td>      <td>✓</tr>
+  <tr><td>Access                    <td> <td> <td>✓     <td>✓</tr>
+  <tr><td>Superusers                <td> <td> <td>✓     <td>✓</tr>
  </tbody>
 </table>
 
@@ -377,7 +376,10 @@ nuanced. We only provide a brief summary here for clarity.
     when that change occurred.
 *   **[Verified History]** The version control history indicates which actor
     identities (author, uploader, reviewer, etc.) and timestamps were strongly
-    authenticated.
+    authenticated. Note: in GitHub, direct commits **are not** strongly
+    authenticated unless they are cryptographically signed and the key is managed
+    by some form of external PKI, however Pull Requests merged by the GitHub
+    system can be if the account is using multi-factor authentication.
 *   **[Retained]** The artifact and its change history are retained indefinitely
     and cannot be deleted.
 *   **[Two-Person Review]** At least two trusted persons agreed to every change
@@ -389,15 +391,25 @@ nuanced. We only provide a brief summary here for clarity.
     script". The only manual command, if any, was to invoke the build script.
 *   **[Build Service]** All build steps ran using some build service, such as a
     Continuous Integration (CI) platform, not on a developer's workstation.
+*   **[Ephemeral Environment]** The build steps ran in an ephemeral environment,
+    such as a container or VM, provisioned solely for this build, and not reused
+    by other builds.
 *   **[Isolated]** The build steps ran in an isolated environment free of
-    influence from other build instances, whether prior or concurrent.
+    influence from other build instances, prior or conccurent. Build caches
+    should not be used for production builds unless they are purely
+    content-addressable.
 *   **[Hermetic]** All build steps, sources, and dependencies were fully
-    declared up front and the build steps ran with no network access.
+    declared up front and the build steps ran with no network access. The
+    control plane may fetch external dependencies and make them available to
+    the build step, as long as the build step declares them via immutable
+    references.
 *   **[Reproducible]** Re-running the build steps with identical input artifacts
     results in bit-for-bit identical output. (Builds that cannot meet this must
     provide a justification.)
 *   **[Source Integrity]** All input artifacts were fetched in a manner that
-    prevents tampering, such as TLS.
+    prevents tampering (such as TLS), and these artifacts were referenced using
+    immutable identifiers (specific commit instead of branch/tag, or a tarball
+    along with a cryptographic hash).
 
 **[Provenance]** An artifact's provenance qualifies for SLSA 3 if:
 
@@ -406,25 +418,22 @@ nuanced. We only provide a brief summary here for clarity.
     cryptographic hash of the artifact, the identity of the system that
     performed the build, and the top-level source repository (i.e. the one
     containing the build script).
-*   **[Authenticated]** Provenance's authenticity and integrity can be verified,
-    such as through a digital signature.
+*   **[Authenticated]** Provenance's authenticity and integrity can be verified
+    against the identity of the build system, such as through a digital
+    signature.
 *   **[Service Generated]** Provenance is generated by the build service itself,
     as opposed to user-provided tooling running on top of the service.
 *   **[Non-Falsifiable]** Provenance cannot be falsified by the build service's
     users.
-*   **[Dependencies]** Provenance records all build dependencies, meaning every
-    artifact that was available to the build script. This includes the initial
-    state of the machine, VM, or container of the build worker.
+*   **[Dependencies]** Provenance records build dependencies via immutable
+    references, meaning every artifact that was available to the build script.
+    This includes the initial state of the machine, VM, or container of the build
+    worker. Note: without `Hermeticity`, this list may still be incomplete. 
 
 **[Deploy]** An artifact deployed to a resource meets SLSA 3 if:
 
 *   **[Provenance Chain]** There is an unbroken chain of provenance linking the
     artifact back to its original sources and dependencies.
-*   **[Policy]** The resource's security policy only accepts artifacts with
-    provenance by specific builders and specific top-level source repositories.
-    The policy itself is a SLSA 3 source.
-*   **[Logging]** The history of deployed artifacts and their provenances is
-    retained for 18 months and is resistant to tampering.
 
 **[Common]** In addition to the requirements above, every trusted system
 involved in the supply chain (source, build, deploy, etc.) must meet the
