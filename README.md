@@ -328,13 +328,13 @@ Furthermore, we differentiate between
 
 ### Source Artifact Requirements
 
-Requirement         | SLSA 1 | SLSA 1.5 | SLSA 2 | SLSA 3
-------------------- | ------ | -------- | ------ | ------
-Immutable           | ✓      | ✓        | ✓      | ✓
-Version Controlled  |        | ✓        | ✓      | ✓
-Verified History    |        |          | ✓      | ✓
-Retained            |        |          | 18 mo. | indef
-Two-Person Reviewed |        |          |        | ✓
+Requirement           | SLSA 1 | SLSA 1.5 | SLSA 2 | SLSA 3
+--------------------- | ------ | -------- | ------ | ------
+Immutable             | ✓      | ✓        | ✓      | ✓
+Version Controlled    |        | ✓        | ✓      | ✓
+Verified History      |        |          | ✓      | ✓
+Retained Indefinitely |        |          | 18 mo. | ✓
+Two-Person Reviewed   |        |          |        | ✓
 
 A **source artifact** is a piece of data in the exact form that its authors and
 maintainers use to make modifications to it. Usually this is a version control
@@ -350,8 +350,8 @@ A source artifact meets SLSA 3 if:
 *   **[Verified History]** The version control history indicates which actor
     identities (author, uploader, reviewer, etc.) and timestamps were strongly
     authenticated.
-*   **[Retained]** The artifact and its change history are retained indefinitely
-    and cannot be deleted.
+*   **[Retained Indefinitely]** The artifact and its change history are retained
+    indefinitely and cannot be deleted.
 *   **[Two-Person Review]** At least two trusted persons agreed to every change
     in the history.
 
