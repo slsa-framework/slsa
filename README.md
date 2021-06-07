@@ -331,31 +331,31 @@ Each SLSA level has a set of requirements.
  </thead>
  <tbody>
   <tr><td rowspan="4">Source
-      <td>Version Controlled        <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Verified History          <td>  <td>  <td>✓     <td>✓     </tr>
-  <tr><td>Retained                  <td>  <td>  <td>18 mo.<td>indef </tr>
-  <tr><td>Two-Person Reviewed       <td>  <td>  <td>      <td>✓     </tr>
+      <td>Version Controlled        <td> <td>✓<td>✓     <td>✓</tr>
+  <tr><td>Verified History          <td> <td> <td>✓     <td>✓</tr>
+  <tr><td>Retained Indefinitely     <td> <td> <td>18 mo.<td>✓</tr>
+  <tr><td>Two-Person Reviewed       <td> <td> <td>      <td>✓</tr>
   <tr><td rowspan="6">Build
-      <td>Scripted                  <td>✓ <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Build Service             <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Isolated                  <td>  <td>  <td>✓     <td>✓     </tr>
-  <tr><td>Hermetic                  <td>  <td>  <td>      <td>✓     </tr>
-  <tr><td>Reproducible              <td>  <td>  <td>      <td>○     </tr>
-  <tr><td>Source Integrity          <td>  <td>  <td>✓ *   <td>✓     </tr>
+      <td>Scripted                  <td>✓<td>✓<td>✓     <td>✓</tr>
+  <tr><td>Build Service             <td> <td>✓<td>✓     <td>✓</tr>
+  <tr><td>Isolated                  <td> <td> <td>✓     <td>✓</tr>
+  <tr><td>Hermetic                  <td> <td> <td>      <td>✓</tr>
+  <tr><td>Reproducible              <td> <td> <td>      <td>○</tr>
+  <tr><td>Source Integrity          <td> <td> <td>✓ *   <td>✓</tr>
   <tr><td rowspan="5">Provenance
-      <td>Available                 <td>✓ <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Authenticated             <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Service Generated         <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Non-Falsifiable           <td>  <td>  <td>✓     <td>✓     </tr>
-  <tr><td>Dependencies              <td>  <td>  <td>      <td>✓     </tr>
+      <td>Available                 <td>✓<td>✓<td>✓     <td>✓</tr>
+  <tr><td>Authenticated             <td> <td>✓<td>✓     <td>✓</tr>
+  <tr><td>Service Generated         <td> <td>✓<td>✓     <td>✓</tr>
+  <tr><td>Non-Falsifiable           <td> <td> <td>✓     <td>✓</tr>
+  <tr><td>Dependencies              <td> <td> <td>      <td>✓</tr>
   <tr><td rowspan="3">Deploy
-      <td>Provenance Chain          <td>✓ <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Policy                    <td>  <td>✓ <td>✓     <td>✓     </tr>
-  <tr><td>Logging                   <td>  <td>  <td>✓     <td>✓     </tr>
+      <td>Provenance Chain          <td>✓<td>✓<td>✓     <td>✓</tr>
+  <tr><td>Policy                    <td> <td>✓<td>✓     <td>✓</tr>
+  <tr><td>Logging                   <td> <td> <td>✓     <td>✓</tr>
   <tr><td rowspan="3">Common
-      <td>Security                  <td>  <td>  <td>↓     <td>✓     </tr>
-  <tr><td>Access                    <td>  <td>  <td>↓     <td>✓     </tr>
-  <tr><td>Superusers                <td>  <td>  <td>↓     <td>✓     </tr>
+      <td>Security                  <td> <td> <td>↓     <td>✓</tr>
+  <tr><td>Access                    <td> <td> <td>↓     <td>✓</tr>
+  <tr><td>Superusers                <td> <td> <td>↓     <td>✓</tr>
  </tbody>
 </table>
 
@@ -378,8 +378,8 @@ nuanced. We only provide a brief summary here for clarity.
 *   **[Verified History]** The version control history indicates which actor
     identities (author, uploader, reviewer, etc.) and timestamps were strongly
     authenticated.
-*   **[Retained]** The artifact and its change history are retained indefinitely
-    and cannot be deleted.
+*   **[Retained Indefinitely]** The artifact and its change history are retained
+    indefinitely and cannot be deleted.
 *   **[Two-Person Review]** At least two trusted persons agreed to every change
     in the history.
 
