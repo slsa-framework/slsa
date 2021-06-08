@@ -108,8 +108,8 @@ significant manual effort, guesswork, and blind trust. Working backwards:
 *   It claims to have come from a Dockerfile in the
     [curl/curl-docker](https://github.com/curl/curl-docker/blob/d6525c840a62b398424a78d792f457477135d0cf/alpine/latest/Dockerfile)
     GitHub repository.
-*   That Dockerfile reads from the following resources, assuming there are no
-    further fetches during build time:
+*   That Dockerfile reads the following artifacts, assuming there are no further
+    fetches during build time:
     *   Docker Hub image:
         [registry.hub.docker.com/library/alpine:3.11.5](https://hub.docker.com/layers/alpine/library/alpine/3.11.5/images/sha256-cb8a924afdf0229ef7515d9e5b3024e23b3eb03ddbba287f4a19c6ac90b8d221?context=explore)
     *   Alpine packages: libssh2 libssh2-dev libssh2-static autoconf automake
@@ -157,7 +157,7 @@ are confirmed.)
 *   Attack any of the systems involved in the supply chain, as in the
     [SolarWinds attack](https://www.crowdstrike.com/blog/sunspot-malware-technical-analysis/).
 
-SLSA intends to cover all of these threats. When all resources in the supply
+SLSA intends to cover all of these threats. When all artifacts in the supply
 chain have a sufficient SLSA level, consumers can gain confidence that most of
 these attacks are mitigated, first via self-certification and eventually through
 automated verification.
@@ -209,7 +209,7 @@ satisfy all of the SLSA build requirements.
 That said, verified reproducible builds are not a complete solution to supply
 chain integrity, nor are they practical in all cases:
 
-*   Reproducible builds do not address source, dependency, or deployment
+*   Reproducible builds do not address source, dependency, or distribution
     threats.
 *   Reproducers must truly be independent, lest they all be susceptible to the
     same attack. For example, if all rebuilders run the same pipeline software,
@@ -230,60 +230,62 @@ For more on reproducibility, see
 
 ## Terminology
 
-A **resource** is what we are trying to protect: a uniquely identifiable thing
-that can be associated with a software artifact. It is often the way that a
-consumer retrieves, uses, or verifies the software. An **artifact** is a raw
-blob of data, such as a file or a configuration value, identified by its
-contents.
+An **artifact** is an immutable blob of data. Example artifacts: a file, a git
+commit, a directory of files (serialized in some way), a container image, a
+firmware image. The primary use case is for _software_ artifacts, but SLSA can
+be used for any type of artifact.
 
-A **software supply chain** is a sequence of steps resulting in the assignment
-of an artifact to a resource. We represent a supply chain as a
+A **software supply chain** is a sequence of steps resulting in the creation of
+an artifact. We represent a supply chain as a
 [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
-of sources, builds, dependencies, and deployments. A resource's supply chain is
-a combination of its dependencies' supply chains plus its own sources, builds,
-and deployment.
+of sources, builds, dependencies, and packages. Furthermore, each source, build,
+and package may be hosted on a platform, such as Source Code Management (SCM) or
+Continuous Integration / Continuous Deployment (CI/CD). Note that one artifact's
+supply chain is a combination of its dependencies' supply chains plus its own
+sources and builds.
 
 The following diagram shows the relationship between concepts.
 
-![supply-chain](images/supply-chain.svg)
+![Software Supply Chain Model](images/supply-chain-model.svg)
 
 <table>
  <thead>
   <tr>
    <th>Term
    <th>Description
-   <th>Examples
+   <th>Example
   </tr>
  </thead>
  <tbody>
   <tr>
    <th>Source
-   <td>Resource containing only artifacts authored or reviewed by persons. It is the beginning of the supply chain; we do not trace the provenance back any further.
-   <td>Git repository.
+   <td>Artifact that was directly authored or directly by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further.
+   <td>Git commit (source) hosted on GitHub (platform).
+  </tr>
+   <th>Build
+   <td>Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs.
+   <td>.travis.yml (process) run by Travis CI (platform).
+  </tr>
+  <tr>
+   <th>Package
+   <td>Artifact that is "published" for use by others. In the model, it is
+   always the output of a build process, though that build process can be a
+   no-op.
+   <td>Docker image (package) distributed on DockerHub (platform).
   </tr>
   <tr>
    <th>Dependency
-   <td>Resource that either is "imported" software or does not meet the definition of source.
-   <td>Debian package.<br>
-       Container base image.<br>
-       Library git repository.<br>
-       Firmware image.
-  </tr>
-  <tr>
-   <th>Build
-   <td>Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs.
-   <td>Compiling a binary.<br>
-       Creating a zip archive.<br>
-       Building a docker image.
-  </tr>
-  <tr>
-   <th>Deployment
-   <td>Process that associates an artifact with a resource, granting the artifact special privilege.
-   <td>Uploading an image to a container registry.<br>
-       Code signing a mobile app.
+   <td>Artifact that is an input to a build process but that is not a source. In
+   the model, it is always a package.
+   <td>Alpine package (package) distributed on Alpine Linux (platform).
   </tr>
  </tbody>
 </table>
+
+Special cases:
+
+*   A ZIP file is containing source code is package, not a source, because it is
+    built from some other source, such as a git commit.
 
 ## Proposed SLSA definitions
 
@@ -348,10 +350,6 @@ Each SLSA level has a set of requirements.
   <tr><td>Service Generated         <td> <td>✓<td>✓     <td>✓</tr>
   <tr><td>Non-Falsifiable           <td> <td> <td>✓     <td>✓</tr>
   <tr><td>Dependencies              <td> <td> <td>      <td>✓</tr>
-  <tr><td rowspan="3">Deploy
-      <td>Provenance Chain          <td>✓<td>✓<td>✓     <td>✓</tr>
-  <tr><td>Policy                    <td> <td>✓<td>✓     <td>✓</tr>
-  <tr><td>Logging                   <td> <td> <td>✓     <td>✓</tr>
   <tr><td rowspan="3">Common
       <td>Security                  <td> <td> <td>↓     <td>✓</tr>
   <tr><td>Access                    <td> <td> <td>↓     <td>✓</tr>
@@ -416,18 +414,8 @@ nuanced. We only provide a brief summary here for clarity.
     artifact that was available to the build script. This includes the initial
     state of the machine, VM, or container of the build worker.
 
-**[Deploy]** An artifact deployed to a resource meets SLSA 3 if:
-
-*   **[Provenance Chain]** There is an unbroken chain of provenance linking the
-    artifact back to its original sources and dependencies.
-*   **[Policy]** The resource's security policy only accepts artifacts with
-    provenance by specific builders and specific top-level source repositories.
-    The policy itself is a SLSA 3 source.
-*   **[Logging]** The history of deployed artifacts and their provenances is
-    retained for 18 months and is resistant to tampering.
-
 **[Common]** In addition to the requirements above, every trusted system
-involved in the supply chain (source, build, deploy, etc.) must meet the
+involved in the supply chain (source, build, distribution, etc.) must meet the
 following requirements:
 
 *   **[Security]** The system meets some TBD baseline security standard to
@@ -443,16 +431,16 @@ following requirements:
 
 ## Scope of SLSA
 
-SLSA applies to a single resource and is not transitive. It describes the
-security strength of the resource's own sources, build processes, and deploy
-processes. Dependencies have their own SLSA ratings, and it is possible for a
-SLSA 3 resource to be built from SLSA 0 dependencies.
+SLSA is not transitive. It describes the integrity protections of an artifact's
+build process and top-level source, but nothing about the artifact's
+dependencies. Dependencies have their own SLSA ratings, and it is possible for a
+SLSA 3 artifact to be built from SLSA 0 dependencies.
 
 The reason for non-transitivity is to make the problem tractable. If SLSA 3
 required dependencies to be SLSA 3, then reaching SLSA 3 would require starting
 at the very beginning of the supply chain and working forward. This is
 backwards, forcing us to work on the least risky component first and blocking
-any progress further downstream. By making each resource's SLSA rating
+any progress further downstream. By making each artifact's SLSA rating
 independent from one another, it allows parallel progress and prioritization
 based on risk. (This is a lesson we learned when deploying other security
 controls at scale throughout Google.)
@@ -478,7 +466,7 @@ Initially the Docker image is SLSA 0. There is no provenance and no policy. It
 is difficult to determine who built the artifact and what sources and
 dependencies were used.
 
-The diagram shows that the (mutable) resource `curlimages/curl:7.72.0` points to
+The diagram shows that the (mutable) locator `curlimages/curl:7.72.0` points to
 (immutable) artifact `sha256:3c3ff…`.
 
 #### SLSA 1: Provenance
@@ -554,9 +542,9 @@ heuristics.
 
 ### Composition of SLSA levels
 
-A resource's SLSA level is not transitive, so some aggregate measure of security
+An artifact's SLSA level is not transitive, so some aggregate measure of security
 risk across the whole supply chain is necessary. In other words, each node in
-our graph has its own, independent SLSA level. Just because a resource's level
+our graph has its own, independent SLSA level. Just because an artifact's level
 is N does not imply anything about its dependencies' levels.
 
 In our example, suppose that the final [curlimages/curl] Docker image were SLSA
@@ -572,6 +560,9 @@ more widely adopted, we expect patterns to emerge and the task to get a bit
 easier.
 
 ### Deployment policies
+
+**TODO: Update this section now that policies/resources have been
+de-emphasized.**
 
 Another major component of SLSA is enforcement of security policies based on
 provenance. Without policy enforcement, there is no guarantee that future
@@ -628,8 +619,8 @@ out:
 
 *   Agree on the principles, terminology, and high-level strategy.
 *   Define a threat model describing specific threats we intend to address.
-*   Specify detailed requirements for Source, Build, Deploy, and Common to meet
-    those principles.
+*   Specify detailed requirements for Source, Build, Provenance, and Common to
+    meet those principles.
 *   Agree on a leveling system.
 *   Document more end-to-end examples to show real threats and mitigations.
 *   Examples showing how to use common platforms to achieve SLSA (or an
