@@ -462,9 +462,8 @@ image.
 
 ![slsa0](images/slsa-0.svg)
 
-Initially the Docker image is SLSA 0. There is no provenance and no policy. It
-is difficult to determine who built the artifact and what sources and
-dependencies were used.
+Initially the Docker image is SLSA 0. There is no provenance. It is difficult to
+determine who built the artifact and what sources and dependencies were used.
 
 The diagram shows that the (mutable) locator `curlimages/curl:7.72.0` points to
 (immutable) artifact `sha256:3c3ff…`.
@@ -473,37 +472,35 @@ The diagram shows that the (mutable) locator `curlimages/curl:7.72.0` points to
 
 ![slsa1](images/slsa-1.svg)
 
-We can reach SLSA 1 by using a build system that generates
-[provenance](https://github.com/TomHennen/ITE/blob/ite-6/ITE/6/README.md). The
-provenance records at the builder, top-level source, and dependencies, though
-not all are required at SLSA 1.
+We can reach SLSA 1 by scripting the build and generating
+[provenance](https://github.com/in-toto/attestation). The build script was
+already automated via `make`, so we use simple tooling to generate the
+provenance on every release. Provenance records the output artifact hash, the
+builder (in this case, our local machine), and the top-level source containing
+the build script.
 
 In the updated diagram, the provenance attestation says that the artifact
-`sha256:3c3ff…` was built by
-[GitHub Actions](https://github.com/features/actions) from
+`sha256:3c3ff…` was built from
 [curl/curl-docker@d6525…](https://github.com/curl/curl-docker/blob/d6525c840a62b398424a78d792f457477135d0cf/alpine/latest/Dockerfile).
 
-At this level, the provenance and security controls are valuable but not
-particularly strong. The controls are likely to prevent many classes of mistakes
-and to deter attackers who are not significantly motivated or skilled. The
-provenance can be useful for doing things like vulnerability scans or license
-checks, where tampering is less of a concern.
+At SLSA 1, the provenance does not protect against tampering or forging but may
+be useful for vulnerability management.
 
-#### SLSA 2: Additional controls
+#### SLSA 1.5 and 2: Build service
 
 ![slsa2](images/slsa-2.svg)
 
-To reach SLSA 2, the source repo must guarantee accurate change history while
-the build process must guarantee isolation, among other things. The provenance
-should also include dependencies on a best-effort basis. These features are
-implemented by the source and build platforms but may need to be explicitly
-enabled.
+To reach SLSA 1.5 (and later SLSA 2), we must switch to a hosted build service
+that generates provenance for us. This updated provenance should also include
+dependencies on a best-effort basis. SLSA 2 additionally requires the source and
+build platforms to implement additional security controls, which might need to
+be enabled.
 
 In the updated diagram, the provenance now lists some dependencies, such as the
 base image (`alpine:3.11.5`) and apk packages (e.g. `curl-dev`).
 
-At this level, the provenance is significantly more trustworthy than before.
-Only highly skilled adversaries are likely able to forge it.
+At SLSA 2, the provenance is significantly more trustworthy than
+before. Only highly skilled adversaries are likely able to forge it.
 
 #### SLSA 3: Hermeticity and two-person review
 
@@ -516,7 +513,7 @@ complete. Once these controls are enabled, the Docker image will be SLSA 3.
 In the updated diagram, the provenance now attests to its hermeticity and
 includes the `cacert.pem` dependency, which was absent before.
 
-At this level, we have high confidence that the provenance is complete and
+At SLSA 3, we have high confidence that the provenance is complete and
 trustworthy and that no single person can unilaterally change the top-level
 source.
 
@@ -559,54 +556,15 @@ too early to develop such a measure without real-world data. Once SLSA becomes
 more widely adopted, we expect patterns to emerge and the task to get a bit
 easier.
 
-### Deployment policies
-
-**TODO: Update this section now that policies/resources have been
-de-emphasized.**
-
-Another major component of SLSA is enforcement of security policies based on
-provenance. Without policy enforcement, there is no guarantee that future
-revisions will not regress.
-
-The following describes how policies might work.
-
-1.  The resource owner writes a **policy** stating the resource's **expected
-    SLSA level and provenance**. In many cases the policy can be auto-generated
-    based on prior deployments.
-
-    In our example, the policy might look as follows:
-
-    ```bash
-    scope: "pkg:docker/curlimages/curl"
-    slsa_level: 3
-    allow:
-      builder: "github_actions"
-      source: "https://github.com/curl/curl-docker"
-    ```
-
-2.  At deploy/publish time, the uploader **includes provenance** in the request.
-
-    For Docker, perhaps `docker push` gains a command-line flag to upload the
-    provenance to the registry and associates it with the image. The API and
-    data model would be standardized in the
-    [OCI distribution spec](https://github.com/opencontainers/distribution-spec).
-
-3.  The platform **rejects deployments** unless the provenance matches the
-    policy.
-
-    In our example, pushes to `curlimages/curl` would be rejected unless they
-    were associated with provenance from a SLSA-3 compliant GitHub Actions
-    workflow building from the `curl/curl-docker` GitHub repo.
-
 ### Accreditation and delegation
 
-Finally, accreditation and delegation will play a large role in the SLSA
-framework. It is not practical for every software consumer to fully vet every
-platform and fully walk the entire graph of every artifact. Auditors and/or
-accreditation bodies can verify and assert that a platform or vendor meets the
-SLSA requirements when configured in a certain way. Similarly, there may be some
-way to "trust" an artifact without analyzing its dependencies. This may be
-particularly valuable for closed source software.
+Accreditation and delegation will play a large role in the SLSA framework. It is
+not practical for every software consumer to fully vet every platform and fully
+walk the entire graph of every artifact. Auditors and/or accreditation bodies
+can verify and assert that a platform or vendor meets the SLSA requirements when
+configured in a certain way. Similarly, there may be some way to "trust" an
+artifact without analyzing its dependencies. This may be particularly valuable
+for closed source software.
 
 ## Next steps
 
