@@ -1,23 +1,20 @@
-# SLSA: Supply-chain Levels for Software Artifacts, Proposal
+# SLSA: Supply-chain Levels for Software Artifacts
 
-## Objective
+Supply-chain Levels for Software Artifacts (SLSA, pronounced
+_[salsa](https://www.google.com/search?q=how+to+pronounce+salsa)_) is an
+end-to-end framework for ensuring the integrity of software artifacts throughout
+the software supply chain. The requirements are inspired by Google’s internal
+"[Binary Authorization for Borg]" that has been in use for the past 8+ years and
+that is mandatory for all of Google's production workloads.
 
-The objective of this document is to reach industry agreement on the framework
-for software supply chain security through standards, accreditation, and
-technical controls. This is being developed as part of the
+**IMPORTANT:** SLSA is an evolving specification and we are looking for
+wide-ranging feedback via GitHub issues, [email][mailing list], or
+[feedback form]. SLSA is being developed as part of the
 [OpenSSF Digital Identity WG](https://github.com/ossf/wg-digital-identity-attestation).
 
 ## Overview
 
-This is just a proposed starting point using one example for discussion. We are
-looking for wide-ranging feedback via GitHub issues, [email][mailing list], or
-[feedback form].
-
-Our draft proposal is called SLSA: Supply-chain Levels for Software Artifacts,
-pronounced _[salsa](https://www.google.com/search?q=how+to+pronounce+salsa)_. It
-ensures that software artifacts meet certain minimum end-to-end integrity
-standards, inspired by what Google does
-[internally][Binary Authorization for Borg]. It consists of:
+SLSA consists of:
 
 1.  **Standards:** (this doc) Industry consensus on the definition of a "secure"
     software supply chain. There may be multiple standards to represent multiple
@@ -40,7 +37,7 @@ chain.
 
 ## Principles
 
-We suggest initially focusing on the following two main principles:
+SLSA focuses on the following two main principles:
 
 *   **Non-unilateral:** No person can modify the software artifact anywhere in
     the software supply chain without explicit review and approval by at least
@@ -189,9 +186,8 @@ bit-for-bit identical output. This property
 including easier debugging, more confident cherry-pick releases, better build
 caching and storage efficiency, and accurate dependency tracking.
 
-For these reasons, SLSA 3 [requires](#proposed-slsa-definitions) reproducible
-builds unless there is a justification why the build cannot be made
-reproducible.
+For these reasons, SLSA 3 [requires](#level-requirements) reproducible builds
+unless there is a justification why the build cannot be made reproducible.
 [Example](https://lists.reproducible-builds.org/pipermail/rb-general/2021-January/002177.html)
 justifications include profile-guided optimizations or code signing that
 invalidates hashes. Note that there is no actual reproduction, just a claim that
@@ -287,10 +283,11 @@ Special cases:
 *   A ZIP file is containing source code is a package, not a source, because it
     is built from some other source, such as a git commit.
 
-## Proposed SLSA definitions
+## SLSA definitions
 
 _Reminder: The definitions below are not yet finalized and subject to change. In
-particular, the levels will be renumbered to be all integers._
+particular, (1) we expect to renumber the levels to be integers; and (2) levels
+2-3 are likely to undergo further changes._
 
 An artifact's **SLSA level** describes the integrity strength of its direct
 supply chain, meaning its direct sources and build steps. To verify that the
@@ -302,8 +299,8 @@ that the level's requirements have been met.
 _This section is non-normative._
 
 There are four SLSA levels. SLSA 3 is the current highest level and represents
-the ideal end state. SLSA 1–2 offer lower security guarantees but are easier
-to meet. In our experience, achieving SLSA 3 can take many years and significant
+the ideal end state. SLSA 1–2 offer lower security guarantees but are easier to
+meet. In our experience, achieving SLSA 3 can take many years and significant
 effort, so intermediate milestones are important.
 
 <table>
@@ -506,16 +503,16 @@ be enabled.
 In the updated diagram, the provenance now lists some dependencies, such as the
 base image (`alpine:3.11.5`) and apk packages (e.g. `curl-dev`).
 
-At SLSA 2, the provenance is significantly more trustworthy than
-before. Only highly skilled adversaries are likely able to forge it.
+At SLSA 2, the provenance is significantly more trustworthy than before. Only
+highly skilled adversaries are likely able to forge it.
 
 #### SLSA 3: Hermeticity and two-person review
 
 ![slsa3](images/slsa-3.svg)
 
-SLSA 3 [requires](#proposed-slsa-definitions) two-party source control and
-hermetic builds. Hermeticity in particular guarantees that the dependencies are
-complete. Once these controls are enabled, the Docker image will be SLSA 3.
+SLSA 3 [requires](#level-requirements) two-party source control and hermetic
+builds. Hermeticity in particular guarantees that the dependencies are complete.
+Once these controls are enabled, the Docker image will be SLSA 3.
 
 In the updated diagram, the provenance now attests to its hermeticity and
 includes the `cacert.pem` dependency, which was absent before.
@@ -546,10 +543,10 @@ heuristics.
 
 ### Composition of SLSA levels
 
-An artifact's SLSA level is not transitive, so some aggregate measure of security
-risk across the whole supply chain is necessary. In other words, each node in
-our graph has its own, independent SLSA level. Just because an artifact's level
-is N does not imply anything about its dependencies' levels.
+An artifact's SLSA level is not transitive, so some aggregate measure of
+security risk across the whole supply chain is necessary. In other words, each
+node in our graph has its own, independent SLSA level. Just because an
+artifact's level is N does not imply anything about its dependencies' levels.
 
 In our example, suppose that the final [curlimages/curl] Docker image were SLSA
 3 but its [curl-dev] dependency were SLSA 0. Then this would imply a significant
@@ -576,11 +573,10 @@ for closed source software.
 ## Next steps
 
 We welcome all comments and suggestions for this document via GitHub issues,
-pull requests, [email][mailing list], or [feedback form].
+pull requests, [email][mailing list], or [feedback form]. Join the
+[mailing list] to follow the discussion and progress.
 
-The future SLSA working group will formulate this document. Join the
-[mailing list] to follow the discussion and progress. Issues that we must work
-out:
+Issues that we must work out:
 
 *   Agree on the principles, terminology, and high-level strategy.
 *   Define a threat model describing specific threats we intend to address.
@@ -598,8 +594,8 @@ data models. Currently this is joint work between
 [Binary Authorization](https://cloud.google.com/binary-authorization) and
 [in-toto](https://in-toto.io/) but we invite wider participation.
 
-*   [Standard attestation format](https://github.com/in-toto/attestation#in-toto-attestations) to
-    express provenance and other attributes. This will allow sources and
+*   [Standard attestation format](https://github.com/in-toto/attestation#in-toto-attestations)
+    to express provenance and other attributes. This will allow sources and
     builders to express properties in a standard way that can be consumed by
     anyone. Also includes reference implementations for generating these
     attestations.
