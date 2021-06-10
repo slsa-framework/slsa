@@ -37,7 +37,7 @@ A revision meets SLSA 1.5 if all of the following are true:
         this particular, immutable revision. In git, this is the {repo URL +
         branch/tag/ref + commit ID}.
 
-Almost any popular version control system meets this requirement, such as git,
+Most popular version control system meet this requirement, such as git,
 Mercurial, Subversion, or Perforce.
 
 NOTE: This does NOT require that the code, uploader/reviewer identities, or
@@ -107,12 +107,11 @@ A revision meets SLSA 3 if all of the following are true:
             Y, the platform understands that this is the same person and does
             not consider the review requirement satisfied.
     -   **[Informed Review]** The reviewer is able and encouraged to make an
-        informed decision about what they're approving. For example, it is not
-        acceptable to only display "path X was updated from hash abcd to hash
-        1234" because the reviewer would not be able to differentiate between a
-        benign change and a malicious one. Instead, the reviewer should be
-        presented with a diff between the proposed revision and the previous
-        SLSA 3 revisions.
+        informed decision about what they're approving. The reviewer should be
+        presented with a full, meaningful content diff between the proposed
+        revision and the previously reviewed revision. For example, it is not
+        sufficient to just indicate that file changed without showing the
+        contents.
     -   **[Context-specific Approvals]** Approvals are for a specific context,
         such as a repo + branch in git. Moving fully reviewed content from one
         context to another still requires review. (Exact definition of "context"
