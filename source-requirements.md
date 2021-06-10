@@ -27,11 +27,14 @@ There are no source requirements at SLSA 1.
 
 A revision meets SLSA 1.5 if all of the following are true:
 
--   **[Version Controlled]** There exists a record of the history of changes
-    that went into the revision. Each change must contain: the identities of the
-    uploader and reviewers (if any), timestamps of the reviews (if any) and
-    submission, the change description / justification, the content of the
-    change, and the parent revisions.
+*   **[Version Controlled]** Every change to the source is tracked in a version
+    control system that meets the following requriements.
+
+    -   **[Change History]** There exists a record of the history of changes
+        that went into the revision. Each change must contain: the identities of
+        the uploader and reviewers (if any), timestamps of the reviews (if any)
+        and submission, the change description / justification, the content of
+        the change, and the parent revisions.
 
     -   **[Immutable Reference]** There exists a way to indefinitely reference
         this particular, immutable revision. In git, this is the {repo URL +
