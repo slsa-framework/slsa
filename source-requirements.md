@@ -8,7 +8,7 @@ This document enumerates all of the detailed requirements for a source to meet
 A source **revision** is an immutable, coherent state of the source. In Git, for
 example, a revision is a commit in the history reachable from a specific branch
 in a specific repository. Different revisions within one repo MAY have different
-levels. Example: the most recent revision on a branch meets SLSA 3 but very old
+levels. Example: the most recent revision on a branch meets SLSA 4 but very old
 historical revisions before the cutoff do not.
 
 A source repository has a set of "trusted persons" who own the project and a
@@ -23,9 +23,9 @@ Mozilla's mercurial hosting.
 
 There are no source requirements at SLSA 1.
 
-## SLSA 1.5
+## SLSA 2
 
-A revision meets SLSA 1.5 if all of the following are true:
+A revision meets SLSA 2 if all of the following are true:
 
 *   **[Version Controlled]** Every change to the source is tracked in a version
     control system that meets the following requriements.
@@ -48,13 +48,13 @@ change history be made public. Rather, some organization must attest to the fact
 that these requirements are met, and it is up to the consumer whether this
 attestation is sufficient.
 
-## SLSA 2
+## SLSA 3
 
-_NOTE: The SLSA 2 requirements are subject to change._
+_NOTE: The SLSA 3 requirements are subject to change._
 
-A revision meets SLSA 2 if all of the following are true:
+A revision meets SLSA 3 if all of the following are true:
 
--   The revision meets [SLSA 1.5](#slsa-15).
+-   The revision meets [SLSA 2](#slsa-2).
 
 -   **[Verified History]** Every change in the revision's history has at least
     one strongly authenticated actor identities (author, uploader, reviewer,
@@ -68,7 +68,7 @@ A revision meets SLSA 2 if all of the following are true:
         parent history" is in scope. In other words, when a feature branch is
         merged back into the main branch, only the merge itself is in scope.
     -   **[Historical Cutoff]** There is some TBD exception to allow existing
-        projects to meet SLSA 2/3 even if historical revisions were present in
+        projects to meet SLSA 3/4 even if historical revisions were present in
         the history. Current thinking is that this could be either last N months
         or a platform attestation guaranteeing that future changes in the next N
         months will meet the requirements.
@@ -88,13 +88,13 @@ A revision meets SLSA 2 if all of the following are true:
             attestation is generated on 2021-01-01, the commit must be retained
             until at least 2022-07-01.
 
-## SLSA 3
+## SLSA 4
 
-_NOTE: The SLSA 3 requirements are subject to change._
+_NOTE: The SLSA 4 requirements are subject to change._
 
-A revision meets SLSA 3 if all of the following are true:
+A revision meets SLSA 4 if all of the following are true:
 
--   The revision meets [SLSA 2](#slsa-2).
+-   The revision meets [SLSA 3](#slsa-3).
 
 -   **[Two-Person Reviewed]** Every change in the revision's history was agreed
     to by two trusted persons prior to submission, and both of these trusted
