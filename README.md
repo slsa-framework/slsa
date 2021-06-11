@@ -54,11 +54,11 @@ wide range of tampering, confusion, and other supply chain attacks.
 
 To measure how well protected a supply chain is according to the two principles
 above, we propose the SLSA levels. A higher level means it is better protected.
-SLSA 3 is the end goal but may take many years and significant investment for
-large organizations. SLSA 1 and SLSA 2 are stepping stones to recognize
+SLSA 4 is the end goal but may take many years and significant investment for
+large organizations. SLSA 1 through SLSA 3 are stepping stones to recognize
 meaningful progress.
 
-What sets SLSA 3 apart from simple best practices is its resilience against
+What sets SLSA 4 apart from simple best practices is its resilience against
 determined adversaries. That is, SLSA is a **guarantee** that these practices
 have been followed, though still not a guarantee that the software is "safe."
 
@@ -81,7 +81,7 @@ chain risks and mitigations in a common language. This allows us to communicate
 and act on those risks across organizational boundaries.
 
 Numeric levels, in particular, are useful because they are simple. A decision
-maker easily understands that SLSA 3 is better than SLSA 2 without understanding
+maker easily understands that SLSA 4 is better than SLSA 3 without understanding
 any of the details. That said, we are not committed to numeric levels and are
 open to other options.
 
@@ -186,7 +186,7 @@ bit-for-bit identical output. This property
 including easier debugging, more confident cherry-pick releases, better build
 caching and storage efficiency, and accurate dependency tracking.
 
-For these reasons, SLSA 3 [requires](#level-requirements) reproducible builds
+For these reasons, SLSA 4 [requires](#level-requirements) reproducible builds
 unless there is a justification why the build cannot be made reproducible.
 [Example](https://lists.reproducible-builds.org/pipermail/rb-general/2021-January/002177.html)
 justifications include profile-guided optimizations or code signing that
@@ -285,9 +285,8 @@ Special cases:
 
 ## SLSA definitions
 
-_Reminder: The definitions below are not yet finalized and subject to change. In
-particular, (1) we expect to renumber the levels to be integers; and (2) levels
-2-3 are likely to undergo further changes._
+_Reminder: The definitions below are not yet finalized and subject to change,
+particularly SLSA 3-4._
 
 An artifact's **SLSA level** describes the integrity strength of its direct
 supply chain, meaning its direct sources and build steps. To verify that the
@@ -298,9 +297,9 @@ that the level's requirements have been met.
 
 _This section is non-normative._
 
-There are four SLSA levels. SLSA 3 is the current highest level and represents
-the ideal end state. SLSA 1–2 offer lower security guarantees but are easier to
-meet. In our experience, achieving SLSA 3 can take many years and significant
+There are four SLSA levels. SLSA 4 is the current highest level and represents
+the ideal end state. SLSA 1–3 offer lower security guarantees but are easier to
+meet. In our experience, achieving SLSA 4 can take many years and significant
 effort, so intermediate milestones are important.
 
 <table>
@@ -312,15 +311,15 @@ effort, so intermediate milestones are important.
  </thead>
  <tbody>
   <tr>
-   <td>SLSA 3
+   <td>SLSA 4
    <td>"Auditable and Non-Unilateral." High confidence that (1) one can correctly and easily trace back to the original source code, its change history, and all dependencies and (2) no single person has the power to make a meaningful change to the software without review.
   </tr>
   <tr>
-   <td>SLSA 2
+   <td>SLSA 3
    <td>"Auditable." Moderate confidence that one can trace back to the original source code and change history. However, trusted persons still have the ability to make unilateral changes, and the list of dependencies is likely incomplete.
   </tr>
   <tr>
-   <td>SLSA 1.5
+   <td>SLSA 2
    <td>Stepping stone to higher levels. Moderate confidence that one can determine either who authorized the artifact or what systems produced the artifact. Protects against tampering after the build.
   </tr>
   <tr>
@@ -335,7 +334,7 @@ effort, so intermediate milestones are important.
 <table>
  <thead>
   <tr><th colspan="2">           <th colspan="4">Required at</tr>
-  <tr><th colspan="2">Requirement<th>SLSA 1<th>SLSA 1.5<th>SLSA 2<th>SLSA 3</tr>
+  <tr><th colspan="2">Requirement<th>SLSA 1<th>SLSA 2<th>SLSA 3<th>SLSA 4</tr>
  </thead>
  <tbody>
   <tr><td rowspan="4">Source
@@ -438,10 +437,10 @@ involved in the supply chain (source, build, distribution, etc.):
 SLSA is not transitive. It describes the integrity protections of an artifact's
 build process and top-level source, but nothing about the artifact's
 dependencies. Dependencies have their own SLSA ratings, and it is possible for a
-SLSA 3 artifact to be built from SLSA 0 dependencies.
+SLSA 4 artifact to be built from SLSA 0 dependencies.
 
-The reason for non-transitivity is to make the problem tractable. If SLSA 3
-required dependencies to be SLSA 3, then reaching SLSA 3 would require starting
+The reason for non-transitivity is to make the problem tractable. If SLSA 4
+required dependencies to be SLSA 4, then reaching SLSA 4 would require starting
 at the very beginning of the supply chain and working forward. This is
 backwards, forcing us to work on the least risky component first and blocking
 any progress further downstream. By making each artifact's SLSA rating
@@ -457,7 +456,7 @@ security stance, as described in the [vision](#vision-case-study) below.
 Let's consider how we might secure [curlimages/curl] from the
 [motivating example](#motivating-example) using the SLSA framework.
 
-### Incrementally reaching SLSA 3
+### Incrementally reaching SLSA 4
 
 Let's start by incrementally applying the SLSA principles to the final Docker
 image.
@@ -490,34 +489,34 @@ In the updated diagram, the provenance attestation says that the artifact
 At SLSA 1, the provenance does not protect against tampering or forging but may
 be useful for vulnerability management.
 
-#### SLSA 1.5 and 2: Build service
+#### SLSA 2 and 3: Build service
 
 ![slsa2](images/slsa-2.svg)
 
-To reach SLSA 1.5 (and later SLSA 2), we must switch to a hosted build service
+To reach SLSA 2 (and later SLSA 3), we must switch to a hosted build service
 that generates provenance for us. This updated provenance should also include
-dependencies on a best-effort basis. SLSA 2 additionally requires the source and
+dependencies on a best-effort basis. SLSA 3 additionally requires the source and
 build platforms to implement additional security controls, which might need to
 be enabled.
 
 In the updated diagram, the provenance now lists some dependencies, such as the
 base image (`alpine:3.11.5`) and apk packages (e.g. `curl-dev`).
 
-At SLSA 2, the provenance is significantly more trustworthy than before. Only
+At SLSA 3, the provenance is significantly more trustworthy than before. Only
 highly skilled adversaries are likely able to forge it.
 
-#### SLSA 3: Hermeticity and two-person review
+#### SLSA 4: Hermeticity and two-person review
 
-![slsa3](images/slsa-3.svg)
+![slsa4](images/slsa-4.svg)
 
-SLSA 3 [requires](#level-requirements) two-party source control and hermetic
+SLSA 4 [requires](#level-requirements) two-party source control and hermetic
 builds. Hermeticity in particular guarantees that the dependencies are complete.
 Once these controls are enabled, the Docker image will be SLSA 3.
 
 In the updated diagram, the provenance now attests to its hermeticity and
 includes the `cacert.pem` dependency, which was absent before.
 
-At SLSA 3, we have high confidence that the provenance is complete and
+At SLSA 4, we have high confidence that the provenance is complete and
 trustworthy and that no single person can unilaterally change the top-level
 source.
 
@@ -549,7 +548,7 @@ node in our graph has its own, independent SLSA level. Just because an
 artifact's level is N does not imply anything about its dependencies' levels.
 
 In our example, suppose that the final [curlimages/curl] Docker image were SLSA
-3 but its [curl-dev] dependency were SLSA 0. Then this would imply a significant
+4 but its [curl-dev] dependency were SLSA 0. Then this would imply a significant
 security risk: an adversary could potentially introduce malicious behavior into
 the final image by modifying the source code found in the [curl-dev] package.
 That said, even being able to _identify_ that it has a SLSA 0 dependency has
