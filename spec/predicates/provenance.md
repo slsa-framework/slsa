@@ -304,7 +304,8 @@ WARNING: This is only for demonstration purposes. The GitHub Actions team has
 not yet reviewed or approved this design, and it is not yet implemented. Details
 are subject to change!
 
-GitHub-Hosted runner:
+If GitHub is the one to generate provenance, and the runner is GitHub-hosted,
+then the builder would be as follows:
 
 ```json
 "builder": {
@@ -366,7 +367,8 @@ WARNING: This is only for demonstration purposes. The Google Cloud Build team
 has not yet reviewed or approved this design, and it is not yet implemented.
 Details are subject to change!
 
-Google-hosted worker:
+If Google is the one to generate provenance, and the worker is Google-hosted,
+then the builder would be as follows:
 
 ```json
 "builder": {
