@@ -342,11 +342,12 @@ effort, so intermediate milestones are important.
   <tr><td>Verified History          <td> <td> <td>✓     <td>✓</tr>
   <tr><td>Retained Indefinitely     <td> <td> <td>18 mo.<td>✓</tr>
   <tr><td>Two-Person Reviewed       <td> <td> <td>      <td>✓</tr>
-  <tr><td rowspan="6">Build
+  <tr><td rowspan="7">Build
       <td>Scripted                  <td>✓<td>✓<td>✓     <td>✓</tr>
   <tr><td>Build Service             <td> <td>✓<td>✓     <td>✓</tr>
   <tr><td>Ephemeral Environment     <td> <td> <td>✓     <td>✓</tr>
   <tr><td>Isolated                  <td> <td> <td>✓     <td>✓</tr>
+  <tr><td>Parameterless             <td> <td> <td>      <td>✓</tr>
   <tr><td>Hermetic                  <td> <td> <td>      <td>✓</tr>
   <tr><td>Reproducible              <td> <td> <td>      <td>○</tr>
   <tr><td rowspan="5">Provenance
@@ -390,10 +391,12 @@ meaning the one containing the build script:
     Continuous Integration (CI) platform, not on a developer's workstation.
 *   **[Ephemeral Environment]** The build steps ran in an ephemeral environment,
     such as a container or VM, provisioned solely for this build, and not reused
-    by other builds.
+    from a prior build.
 *   **[Isolated]** The build steps ran in an isolated environment free of
     influence from other build instances, whether prior or concurrent. Build
     caches, if used, are purely content-addressable to prevent tampering.
+*   **[Parameterless]** The build output cannot be affected by user parameters
+    other than the build entry point and the top-level source location.
 *   **[Hermetic]** All build steps, sources, and dependencies were fully
     declared up front with immutable references, and the build steps ran with no
     network access. All dependencies were fetched by the build service control
