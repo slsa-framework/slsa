@@ -119,8 +119,8 @@ significant manual effort, guesswork, and blind trust. Working backwards:
     [APKBUILD](https://git.alpinelinux.org/aports/tree/main/curl/APKBUILD?id=166f72b36f3b5635be0d237642a63f39697c848a)
     in the Alpine git repo. There are several build dependencies:
     *   File at URL: https://curl.haxx.se/download/curl-7.72.0.tar.xz.
-        *   The APKBUILD includes a sha256 hash of this file. It is not clear
-            where that hash came from.
+        *   The APKBUILD includes a sha256 hash of this file, which is
+            generated during the final step of the [build](https://wiki.alpinelinux.org/wiki/APKBUILD_Reference)
     *   Alpine packages: openssl-dev nghttp2-dev zlib-dev brotli-dev autoconf
         automake groff libtool perl
 *   The source tarball was _presumably_ built from the actual upstream GitHub
