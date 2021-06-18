@@ -514,7 +514,7 @@ highly skilled adversaries are likely able to forge it.
 
 SLSA 4 [requires](#level-requirements) two-party source control and hermetic
 builds. Hermeticity in particular guarantees that the dependencies are complete.
-Once these controls are enabled, the Docker image will be SLSA 3.
+Once these controls are enabled, the Docker image will be SLSA 4.
 
 In the updated diagram, the provenance now attests to its hermeticity and
 includes the `cacert.pem` dependency, which was absent before.
