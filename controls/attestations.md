@@ -101,9 +101,8 @@ recognize that other choices may be necessary in various cases.
 
 Summary: Generate [in-toto](https://in-toto.io) attestations.
 
-*   Envelope:
-    **[secure-systems-lab/signing-spec](https://github.com/secure-systems-lab/signing-spec/)**
-    (TODO: Recommend Crypto/PKI)
+*   Envelope: **[DSSE](https://github.com/secure-systems-lab/dsse/)** (TODO:
+    Recommend Crypto/PKI)
 *   Statement:
     **[in-toto/attestation](https://github.com/in-toto/attestation/)**
 *   Predicate: Choose as appropriate.
