@@ -255,7 +255,7 @@ The following diagram shows the relationship between concepts.
  <tbody>
   <tr>
    <th>Source
-   <td>Artifact that was directly authored or directly by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further.
+   <td>Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further.
    <td>Git commit (source) hosted on GitHub (platform).
   </tr>
    <th>Build
