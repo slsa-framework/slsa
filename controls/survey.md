@@ -18,6 +18,7 @@ The following table provides an overview of how various technologies map to our
 model. Subsequent sections analyze each layer.
 
 [Binary Authorization]: https://cloud.google.com/binary-authorization
+[DSSE]: https://github.com/secure-systems-lab/dsse/
 [JSS]: https://jsonenc.info/jss/1.0/
 [JWS]: https://tools.ietf.org/html/rfc7515
 [JWT]: https://tools.ietf.org/html/rfc7519
@@ -28,7 +29,6 @@ model. Subsequent sections analyze each layer.
 [Simple Signing]: https://github.com/containers/image/blob/master/docs/containers-signature.5.md
 [in-toto v1]: https://github.com/in-toto/docs/blob/master/in-toto-spec.md
 [in-toto v2]: https://github.com/in-toto/attestations
-[signing-spec]: https://github.com/secure-systems-lab/signing-spec/
 
 Project                | Envelope | Statement | Predicate | Storage | Generation | Policy | Status
 ---------------------- | -------- | --------- | --------- | ------- | ---------- | ------ | ------
@@ -38,7 +38,7 @@ Raw signing            | ✓        | ✓         | ✗         |         |     
 [JWT]                  | ✓        |           |           |         |            |        | IETF Standard
 [OpenPGP]              | ✓        |           |           |         |            |        | IETF Standard
 [PASETO]               | ✓        |           |           |         |            |        | Stable
-[signing-spec]         | ✓        |           |           |         |            |        | In development
+[DSSE]                 | ✓        |           |           |         |            |        | In development
 [in-toto v1]           | ✓        | ✓         | ✓         |         | ✓          | ✓      | Stable
 [Notary v2]            | ~        | ✓         | ✗         | ✓       |            | ✓      | In development
 [Simple Signing]       | ~        | ✓         |           |         |            |        | Stable
@@ -66,7 +66,7 @@ Columns:
 
 ## Envelope Layer (not specific to Attestations)
 
-Property                | [signing-spec] | [OpenPGP] | [JWS] | [JWT] | [PASETO] | [in-toto v1] | [JSS]
+Property                | [DSSE]         | [OpenPGP] | [JWS] | [JWT] | [PASETO] | [in-toto v1] | [JSS]
 ----------------------- | -------------- | --------- | ----- | ----- | -------- | ------------ | -----
 Authenticated Purpose   | ✓              | ✗         | ✓     | ✓     | ✗        | ✓            | ✗
 Arbitrary Message Type  | ✓              | ✓         | ✓     | ✗     | ✗        | ✗            | ✗
@@ -80,7 +80,7 @@ Properties:
 
 -   **Authenticated Purpose:** Does the envelope authenticate how the verifier
     should interpret the message in order to prevent confusion attacks?
-    -   ✓ signing-spec: `payloadType`, JWS: `typ`, JWT: `aud`, in-toto v1:
+    -   ✓ DSSE: `payloadType`, JWS: `typ`, JWT: `aud`, in-toto v1:
         `_type`
 -   **Arbitrary Message Type:** Does the envelope support arbitrary message
     types / encodings?
@@ -100,7 +100,7 @@ Properties:
     be re-encoded in a more efficient format, such as protobuf or CBOR, without
     invalidating the signature?
 -   **Widely Adopted:** Is the standard widely adopted?
-    -   ✗ signing-spec: Not yet used, though in-toto and TUF plan to.
+    -   ✗ DSSE: Not yet used, though in-toto and TUF plan to.
     -   ✗ PASETO: Not common.
     -   ✗ in-toto v1: Only by in-toto and TUF.
     -   ✗ JSS: Abandoned, never used.
@@ -109,7 +109,7 @@ Properties:
 
 Property              | [in-toto v2] | [in-toto v1] | [Simple Signing] | [Notary v2] | Raw Signing
 --------------------- | ------------ | ------------ | ---------------- | ----------- | -----------
-Recommended Envelope  | signing-spec | in-toto v1   | OpenPGP          | JWT         | (various)
+Recommended Envelope  | DSSE         | in-toto v1   | OpenPGP          | JWT         | (various)
 Subject: Clear        | ✓            | ✗            | ✓                | ✓           | ✓
 Subject: Any Type     | ✓            | ✓            | ✗                | ✓           | (depends)
 Subject: Multi-Digest | ✓            | ✓            | ✗                | ✗           | (depends)
