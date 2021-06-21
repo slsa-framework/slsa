@@ -300,7 +300,8 @@ _This section is non-normative._
 There are four SLSA levels. SLSA 4 is the current highest level and represents
 the ideal end state. SLSA 1–3 offer lower security guarantees but are easier to
 meet. In our experience, achieving SLSA 4 can take many years and significant
-effort, so intermediate milestones are important.
+effort, so intermediate milestones are important. We also use the term SLSA 0 to
+mean the lack of a SLSA level.
 
 <table>
  <thead>
