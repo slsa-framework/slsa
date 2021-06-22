@@ -27,8 +27,9 @@ There are no source requirements at SLSA 1.
 
 A revision meets SLSA 2 if all of the following are true:
 
-*   **[Version Controlled]** Every change to the source is tracked in a version
-    control system that meets the following requriements.
+*   <a id="version-controlled"></a>**[Version Controlled]** Every change to the
+    source is tracked in a version control system that meets the following
+    requriements.
 
     -   **[Change History]** There exists a record of the history of changes
         that went into the revision. Each change must contain: the identities of
@@ -56,10 +57,10 @@ A revision meets SLSA 3 if all of the following are true:
 
 -   The revision meets [SLSA 2](#slsa-2).
 
--   **[Verified History]** Every change in the revision's history has at least
-    one strongly authenticated actor identities (author, uploader, reviewer,
-    etc.) and timestamp. It must be clear which identities were verified, and
-    those identities must use
+-   <a id="verified-history"></a>**[Verified History]** Every change in the
+    revision's history has at least one strongly authenticated actor identities
+    (author, uploader, reviewer, etc.) and timestamp. It must be clear which
+    identities were verified, and those identities must use
     [two-step verification](https://www.google.com/landing/2step/) or similar.
     (Exceptions noted below.)
 
@@ -73,10 +74,10 @@ A revision meets SLSA 3 if all of the following are true:
         or a platform attestation guaranteeing that future changes in the next N
         months will meet the requirements.
 
--   **[Retained Indefinitely]** The revision and its change history are
-    preserved indefinitely and cannot be deleted, except when subject to an
-    established and transparent policy for obliteration, such as a legal or
-    policy requirement.
+-   <a id="retained-indefinitely"></a>**[Retained Indefinitely]** The revision
+    and its change history are preserved indefinitely and cannot be deleted,
+    except when subject to an established and transparent policy for
+    obliteration, such as a legal or policy requirement.
 
     -   **[Immutable History]** It must not be possible for persons to delete or
         modify the history, even with multi-party approval, except by trusted
@@ -96,10 +97,10 @@ A revision meets SLSA 4 if all of the following are true:
 
 -   The revision meets [SLSA 3](#slsa-3).
 
--   **[Two-Person Reviewed]** Every change in the revision's history was agreed
-    to by two trusted persons prior to submission, and both of these trusted
-    persons were strongly authenticated. (Exceptions from [Verified History]
-    apply here as well.)
+-   <a id="two-person-reviewed"></a>**[Two-Person Reviewed]** Every change in
+    the revision's history was agreed to by two trusted persons prior to
+    submission, and both of these trusted persons were strongly authenticated.
+    (Exceptions from [Verified History] apply here as well.)
 
     -   The following combinations are acceptable:
         -   Uploader and reviewer are two different trusted persons.

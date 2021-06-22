@@ -250,109 +250,55 @@ mean the lack of a SLSA level.
 
 ### Level requirements
 
-<table>
- <thead>
-  <tr><th colspan="2">           <th colspan="4">Required at</tr>
-  <tr><th colspan="2">Requirement<th>SLSA 1<th>SLSA 2<th>SLSA 3<th>SLSA 4</tr>
- </thead>
- <tbody>
-  <tr><td rowspan="4">Source
-      <td>Version Controlled        <td> <td>✓<td>✓     <td>✓</tr>
-  <tr><td>Verified History          <td> <td> <td>✓     <td>✓</tr>
-  <tr><td>Retained Indefinitely     <td> <td> <td>18 mo.<td>✓</tr>
-  <tr><td>Two-Person Reviewed       <td> <td> <td>      <td>✓</tr>
-  <tr><td rowspan="7">Build
-      <td>Scripted                  <td>✓<td>✓<td>✓     <td>✓</tr>
-  <tr><td>Build Service             <td> <td>✓<td>✓     <td>✓</tr>
-  <tr><td>Ephemeral Environment     <td> <td> <td>✓     <td>✓</tr>
-  <tr><td>Isolated                  <td> <td> <td>✓     <td>✓</tr>
-  <tr><td>Parameterless             <td> <td> <td>      <td>✓</tr>
-  <tr><td>Hermetic                  <td> <td> <td>      <td>✓</tr>
-  <tr><td>Reproducible              <td> <td> <td>      <td>○</tr>
-  <tr><td rowspan="5">Provenance
-      <td>Available                 <td>✓<td>✓<td>✓     <td>✓</tr>
-  <tr><td>Authenticated             <td> <td>✓<td>✓     <td>✓</tr>
-  <tr><td>Service Generated         <td> <td>✓<td>✓     <td>✓</tr>
-  <tr><td>Non-Falsifiable           <td> <td> <td>✓     <td>✓</tr>
-  <tr><td>Dependencies Complete     <td> <td> <td>      <td>✓</tr>
-  <tr><td rowspan="3">Common
-      <td>Security                  <td> <td> <td>      <td>✓</tr>
-  <tr><td>Access                    <td> <td> <td>      <td>✓</tr>
-  <tr><td>Superusers                <td> <td> <td>      <td>✓</tr>
- </tbody>
-</table>
+The following is a summary. For details, see corresponding [Source],
+[Build/Provenance], and [Common] documents.
+
+Requirement                          | SLSA 1 | SLSA 2 | SLSA 3 | SLSA 4
+------------------------------------ | ------ | ------ | ------ | ------
+Source - [Version Controlled]        |        | ✓      | ✓      | ✓
+Source - [Verified History]          |        |        | ✓      | ✓
+Source - [Retained Indefinitely]     |        |        | 18 mo. | ✓
+Source - [Two-Person Reviewed]       |        |        |        | ✓
+Build - [Scripted Build]             | ✓      | ✓      | ✓      | ✓
+Build - [Build Service]              |        | ✓      | ✓      | ✓
+Build - [Ephemeral Environment]      |        |        | ✓      | ✓
+Build - [Isolated]                   |        |        | ✓      | ✓
+Build - [Parameterless]              |        |        |        | ✓
+Build - [Hermetic]                   |        |        |        | ✓
+Build - [Reproducible]               |        |        |        | ○
+Provenance - [Available]             | ✓      | ✓      | ✓      | ✓
+Provenance - [Authenticated]         |        | ✓      | ✓      | ✓
+Provenance - [Service Generated]     |        | ✓      | ✓      | ✓
+Provenance - [Non-Falsifiable]       |        |        | ✓      | ✓
+Provenance - [Dependencies Complete] |        |        |        | ✓
+Common - [Security]                  |        |        |        | ✓
+Common - [Access]                    |        |        |        | ✓
+Common - [Superusers]                |        |        |        | ✓
 
 _○ = required unless there is a justification_
 
-The following is a summary. For details, see corresponding
-[Source][source-reqs], [Build/Provenance][build-reqs], and [Common][common-reqs]
-documents.
-
-**[\[Source\]][source-reqs]** Requirements for the artifact's top-level source,
-meaning the one containing the build script:
-
-*   **[Version Controlled]** Every change to the source is tracked in a version
-    control system that identifies who made the change, what the change was, and
-    when that change occurred.
-*   **[Verified History]** Every change in the history has at least one strongly
-    authenticated actor identity (author, uploader, reviewer, etc.) and
-    timestamp.
-*   **[Retained Indefinitely]** The artifact and its change history are retained
-    indefinitely and cannot be deleted.
-*   **[Two-Person Review]** At least two trusted persons agreed to every change
-    in the history.
-
-**[\[Build\]][build-reqs]** Requirements for the artifact's build process:
-
-*   **[Scripted]** All build steps were fully defined in some sort of "build
-    script". The only manual command, if any, was to invoke the build script.
-*   **[Build Service]** All build steps ran using some build service, such as a
-    Continuous Integration (CI) platform, not on a developer's workstation.
-*   **[Ephemeral Environment]** The build steps ran in an ephemeral environment,
-    such as a container or VM, provisioned solely for this build, and not reused
-    from a prior build.
-*   **[Isolated]** The build steps ran in an isolated environment free of
-    influence from other build instances, whether prior or concurrent. Build
-    caches, if used, are purely content-addressable to prevent tampering.
-*   **[Parameterless]** The build output cannot be affected by user parameters
-    other than the build entry point and the top-level source location.
-*   **[Hermetic]** All build steps, sources, and dependencies were fully
-    declared up front with immutable references, and the build steps ran with no
-    network access. All dependencies were fetched by the build service control
-    plane and checked for integrity.
-*   **[Reproducible]** Re-running the build steps with identical input artifacts
-    results in bit-for-bit identical output. (Builds that cannot meet this must
-    provide a justification.)
-
-**[\[Provenance\]][build-reqs]** Requirements for the artifact's provenance:
-
-*   **[Available]** Provenance is available to the consumer of the artifact, or
-    to whomever is verifying the policy, and it identifies at least the
-    artifact, the system that performed the build, and the top-level source. All
-    artifact references are immutable, such as via a cryptographic hash.
-*   **[Authenticated]** Provenance's authenticity and integrity can be verified,
-    such as through a digital signature.
-*   **[Service Generated]** Provenance is generated by the build service itself,
-    as opposed to user-provided tooling running on top of the service.
-*   **[Non-Falsifiable]** Provenance cannot be falsified by the build service's
-    users.
-*   **[Dependencies Complete]** Provenance records all build dependencies,
-    meaning every artifact that was available to the build script. This includes
-    the initial state of the machine, VM, or container of the build worker.
-
-**[\[Common\]][common-reqs]** Common requirements for every trusted system
-involved in the supply chain (source, build, distribution, etc.):
-
-*   **[Security]** The system meets some TBD baseline security standard to
-    prevent compromise. (Patching, vulnerability scanning, user isolation,
-    transport security, secure boot, machine identity, etc. Perhaps
-    [NIST 800-53](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf)
-    or a subset thereof.)
-*   **[Access]** All physical and remote access must be rare, logged, and gated
-    behind multi-party approval.
-*   **[Superusers]** Only a small number of platform admins may override the
-    guarantees listed here. Doing so MUST require approval of a second platform
-    admin.
+[Access]: common-requirements.md#access
+[Authenticated]: build-requirements.md#authenticated
+[Available]: build-requirements.md#available
+[Build Service]: build-requirements.md#build-service
+[Build/Provenance]: build-requirements.md
+[Common]: common-requirements.md
+[Dependencies Complete]: build-requirements.md#dependencies-complete
+[Ephemeral Environment]: build-requirements.md#ephemeral-environment
+[Hermetic]: build-requirements.md#hermetic
+[Isolated]: build-requirements.md#isolated
+[Non-Falsifiable]: build-requirements.md#non-falsifiable
+[Parameterless]: build-requirements.md#parameterless
+[Reproducible]: build-requirements.md#reproducible
+[Retained Indefinitely]: source-requirements.md#retained-indefinitely
+[Scripted Build]: build-requirements.md#scripted-build
+[Security]: common-requirements.md#security
+[Service Generated]: build-requirements.md#service-generated
+[Source]: source-requirements.md
+[Superusers]: common-requirements.md#superusers
+[Two-Person Reviewed]: source-requirements.md#two-person-reviewed
+[Verified History]: source-requirements.md#verified-history
+[Version Controlled]: source-requirements.md#version-controlled
 
 ## Scope of SLSA
 
@@ -428,10 +374,7 @@ Other takes on provenance and CI/CD:
 
 [Binary Authorization for Borg]: https://cloud.google.com/security/binary-authorization-for-borg
 [Threats, Risks, and Mitigations in the Open Source Ecosystem]: https://github.com/Open-Source-Security-Coalition/Open-Source-Security-Coalition/blob/master/publications/threats-risks-mitigations/v1.1/Threats%2C%20Risks%2C%20and%20Mitigations%20in%20the%20Open%20Source%20Ecosystem%20-%20v1.1.pdf
-[build-reqs]: build-requirements.md
-[common-reqs]: common-requirements.md
 [curl-dev]: https://pkgs.alpinelinux.org/package/edge/main/x86/curl-dev
 [curlimages/curl]: https://hub.docker.com/r/curlimages/curl
 [feedback form]: https://forms.gle/93QRfUqF7YY2mJDi9
 [mailing list]: https://groups.google.com/g/slsa-discussion
-[source-reqs]: source-requirements.md
