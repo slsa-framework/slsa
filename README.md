@@ -377,23 +377,6 @@ security stance, as described in the [vision](walkthrough.md#vision-case-study) 
 
 For a motivating example and vision, see [detailed example](walkthrough.md).
 
-## Next steps
-
-We welcome all comments and suggestions for this document via GitHub issues,
-pull requests, [email][mailing list], or [feedback form]. Join the
-[mailing list] to follow the discussion and progress.
-
-Issues that we must work out:
-
-*   Agree on the principles, terminology, and high-level strategy.
-*   Define a threat model describing specific threats we intend to address.
-*   Specify detailed requirements for Source, Build, Provenance, and Common to
-    meet those principles.
-*   Agree on a leveling system.
-*   Document more end-to-end examples to show real threats and mitigations.
-*   Examples showing how to use common platforms to achieve SLSA (or an
-    approximation) today.
-
 ## Related work
 
 In parallel to the SLSA specification, there is work to develop core formats and
