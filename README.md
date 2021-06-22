@@ -174,8 +174,8 @@ more, see [Threats, Risks, and Mitigations in the Open Source Ecosystem].
 
 ### What about reproducible builds?
 
-When talking about [reproducible builds](https://reproducible-builds.org)
-builds, there are two related but distinct concepts: "reproducible" and
+When talking about [reproducible builds](https://reproducible-builds.org), 
+there are two related but distinct concepts: "reproducible" and
 "verified reproducible."
 
 "Reproducible" means that repeating the build with the same inputs results in
