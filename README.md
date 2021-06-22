@@ -1,5 +1,11 @@
 # SLSA: Supply-chain Levels for Software Artifacts
 
+<!--{% if false %}-->
+
+**NOTE: This site is best viewed at https://slsa.dev.**
+
+<!--{% endif %}-->
+
 Supply-chain Levels for Software Artifacts (SLSA, pronounced
 _[salsa](https://www.google.com/search?q=how+to+pronounce+salsa)_) is an
 end-to-end framework for ensuring the integrity of software artifacts throughout
