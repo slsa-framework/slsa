@@ -1,0 +1,27 @@
+title: SLSA
+description: Supply-chain Levels for Software Artifacts
+copyright_html: Copyright 2021 The Linux Foundation<br>under the terms of the <a href="https://github.com/slsa-framework/slsa/blob/main/LICENSE">Apache License 2.0</a>
+repository: slsa-framework/slsa
+header_pages:
+  - walkthrough.md
+
+theme: minima
+permalink: :path/:basename
+markdown: CommonMarkGhPages
+commonmark:
+  options: ["SMART", "FOOTNOTES"]
+  extensions: ["autolink", "strikethrough", "table", "tagfilter"]
+titles_from_headings:
+  strip_title: true
+plugins:
+  - jekyll-commonmark-ghpages
+  # Mandatory GitHub Pages plugins:
+  - jekyll-coffeescript
+  - jekyll-default-layout
+  - jekyll-gist
+  - jekyll-github-metadata
+  - jekyll-optional-front-matter
+  - jekyll-paginate
+  - jekyll-readme-index
+  - jekyll-titles-from-headings
+  - jekyll-relative-links
