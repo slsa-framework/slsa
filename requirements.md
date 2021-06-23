@@ -50,27 +50,24 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ## Source requirements
 
-### SLSA 1
+<table>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
+<tr id="version-controlled">
+<td>Version Controlled
+<td>
 
-There are no source requirements at SLSA 1.
+Every change to the source is tracked in a version control system that meets the
+following requirements:
 
-### SLSA 2
+-   **[Change History]** There exists a record of the history of changes
+    that went into the revision. Each change must contain: the identities of
+    the uploader and reviewers (if any), timestamps of the reviews (if any)
+    and submission, the change description / justification, the content of
+    the change, and the parent revisions.
 
-A revision meets SLSA 2 if all of the following are true:
-
-*   <a id="version-controlled"></a>**[Version Controlled]** Every change to the
-    source is tracked in a version control system that meets the following
-    requriements.
-
-    -   **[Change History]** There exists a record of the history of changes
-        that went into the revision. Each change must contain: the identities of
-        the uploader and reviewers (if any), timestamps of the reviews (if any)
-        and submission, the change description / justification, the content of
-        the change, and the parent revisions.
-
-    -   **[Immutable Reference]** There exists a way to indefinitely reference
-        this particular, immutable revision. In git, this is the {repo URL +
-        branch/tag/ref + commit ID}.
+-   **\[Immutable Reference]** There exists a way to indefinitely reference
+    this particular, immutable revision. In git, this is the {repo URL +
+    branch/tag/ref + commit ID}.
 
 Most popular version control system meet this requirement, such as git,
 Mercurial, Subversion, or Perforce.
@@ -80,81 +77,80 @@ change history be made public. Rather, some organization must attest to the fact
 that these requirements are met, and it is up to the consumer whether this
 attestation is sufficient.
 
-### SLSA 3
+<td> <td>✓<td>✓<td>✓
+<tr id="verified-history">
+<td>Verified History
+<td>
 
-_NOTE: The SLSA 3 requirements are subject to change._
+Every change in the revision's history has at least one strongly authenticated
+actor identities (author, uploader, reviewer, etc.) and timestamp. It must be
+clear which identities were verified, and those identities must use [two-step
+verification](https://www.google.com/landing/2step/) or similar. (Exceptions
+noted below.)
 
-A revision meets SLSA 3 if all of the following are true:
+-   **[First-Parent History]** In the case of a non-linear version control
+    system, where a revision can have more than one parent, only the "first
+    parent history" is in scope. In other words, when a feature branch is merged
+    back into the main branch, only the merge itself is in scope.
+-   **[Historical Cutoff]** There is some TBD exception to allow existing
+    projects to meet SLSA 3/4 even if historical revisions were present in the
+    history. Current thinking is that this could be either last N months or a
+    platform attestation guaranteeing that future changes in the next N months
+    will meet the requirements.
 
--   The revision meets [SLSA 2](#slsa-2).
+<td> <td> <td>✓<td>✓
+<tr id="retained-indefinitely">
+<td>Retained Indefinitely
+<td>
 
--   <a id="verified-history"></a>**[Verified History]** Every change in the
-    revision's history has at least one strongly authenticated actor identities
-    (author, uploader, reviewer, etc.) and timestamp. It must be clear which
-    identities were verified, and those identities must use
-    [two-step verification](https://www.google.com/landing/2step/) or similar.
-    (Exceptions noted below.)
+The revision and its change history are preserved indefinitely and cannot be
+deleted, except when subject to an established and transparent policy for
+obliteration, such as a legal or policy requirement.
 
-    -   **[First-Parent History]** In the case of a non-linear version control
-        system, where a revision can have more than one parent, only the "first
-        parent history" is in scope. In other words, when a feature branch is
-        merged back into the main branch, only the merge itself is in scope.
-    -   **[Historical Cutoff]** There is some TBD exception to allow existing
-        projects to meet SLSA 3/4 even if historical revisions were present in
-        the history. Current thinking is that this could be either last N months
-        or a platform attestation guaranteeing that future changes in the next N
-        months will meet the requirements.
+-   **[Immutable History]** It must not be possible for persons to delete or
+    modify the history, even with multi-party approval, except by trusted
+    platform admins with two-party approval following the obliterate policy.
+-   **[Limited Retention for SLSA 2]** At SLSA 2 (but not 3), it is acceptable
+    for the retention to be limited to 18 months, as attested by the source
+    control platform.
+    -   Example: If a commit is made on 2020-04-05 and then a retention
+        attestation is generated on 2021-01-01, the commit must be retained
+        until at least 2022-07-01.
 
--   <a id="retained-indefinitely"></a>**[Retained Indefinitely]** The revision
-    and its change history are preserved indefinitely and cannot be deleted,
-    except when subject to an established and transparent policy for
-    obliteration, such as a legal or policy requirement.
+<td> <td> <td>18 mo.<td>✓
+<tr id="two-person-reviewed">
+<td>Two-Person Reviewed
+<td>
 
-    -   **[Immutable History]** It must not be possible for persons to delete or
-        modify the history, even with multi-party approval, except by trusted
-        platform admins with two-party approval following the obliterate policy.
-    -   **[Limited Retention for SLSA 2]** At SLSA 2 (but not 3), it is
-        acceptable for the retention to be limited to 18 months, as attested by
-        the source control platform.
-        -   Example: If a commit is made on 2020-04-05 and then a retention
-            attestation is generated on 2021-01-01, the commit must be retained
-            until at least 2022-07-01.
+Every change in the revision's history was agreed to by two trusted persons
+prior to submission, and both of these trusted persons were strongly
+authenticated. (Exceptions from [Verified History](#verified-history) apply here
+as well.)
 
-### SLSA 4
+-   The following combinations are acceptable:
+    -   Uploader and reviewer are two different trusted persons.
+    -   Two different reviewers are trusted persons.
+-   **[Different Persons]** The platform ensures that no person can use
+    alternate identities to bypass the two-person review requirement.
+    -   Example: if a person uploads with identity X then reviews with alias Y,
+        the platform understands that this is the same person and does not
+        consider the review requirement satisfied.
+-   **[Informed Review]** The reviewer is able and encouraged to make an
+    informed decision about what they're approving. The reviewer should be
+    presented with a full, meaningful content diff between the proposed revision
+    and the previously reviewed revision. For example, it is not sufficient to
+    just indicate that file changed without showing the contents.
+-   **[Context-specific Approvals]** Approvals are for a specific context, such
+    as a repo + branch in git. Moving fully reviewed content from one context to
+    another still requires review. (Exact definition of "context" depends on the
+    project, and this does not preclude well-understood automatic or reviewless
+    merges, such as cutting a release branch.)
+    -   Git example: If a fully reviewed commit in one repo is merged into a
+        different repo, or a commit in one branch is merged into a different
+        branch, then the merge still requires review.
 
-_NOTE: The SLSA 4 requirements are subject to change._
-
-A revision meets SLSA 4 if all of the following are true:
-
--   The revision meets [SLSA 3](#slsa-3).
-
--   <a id="two-person-reviewed"></a>**[Two-Person Reviewed]** Every change in
-    the revision's history was agreed to by two trusted persons prior to
-    submission, and both of these trusted persons were strongly authenticated.
-    (Exceptions from [Verified History] apply here as well.)
-
-    -   The following combinations are acceptable:
-        -   Uploader and reviewer are two different trusted persons.
-        -   Two different reviewers are trusted persons.
-    -   **[Different Persons]** The platform ensures that no person can use
-        alternate identities to bypass the two-person review requirement.
-        -   Example: if a person uploads with identity X then reviews with alias
-            Y, the platform understands that this is the same person and does
-            not consider the review requirement satisfied.
-    -   **[Informed Review]** The reviewer is able and encouraged to make an
-        informed decision about what they're approving. The reviewer should be
-        presented with a full, meaningful content diff between the proposed
-        revision and the previously reviewed revision. For example, it is not
-        sufficient to just indicate that file changed without showing the
-        contents.
-    -   **[Context-specific Approvals]** Approvals are for a specific context,
-        such as a repo + branch in git. Moving fully reviewed content from one
-        context to another still requires review. (Exact definition of "context"
-        depends on the project, and this does not preclude well-understood
-        automatic or reviewless merges, such as cutting a release branch.)
-        -   Git example: If a fully reviewed commit in one repo is merged into a
-            different repo, or a commit in one branch is merged into a different
-            branch, then the merge still requires review.
+<td> <td> <td> <td>✓
+</table>
 
 ## Build Requirements
 
@@ -427,21 +423,38 @@ SHOULD at least include start and end timestamps and a permalink to debug logs.
 
 ## Common requirements
 
-TODO: Write this section
-
 Common requirements for every trusted system involved in the supply chain
 (source, build, distribution, etc.)
 
-*   <a id="security"></a>**[Security]** The system meets some TBD baseline
-    security standard to prevent compromise. (Patching, vulnerability scanning,
-    user isolation, transport security, secure boot, machine identity, etc.
-    Perhaps
-    [NIST 800-53](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf)
-    or a subset thereof.)
+**TODO: Expand this section. Currently it is under-specified.**
 
-*   <a id="access"></a>**[Access]** All physical and remote access must be rare,
-    logged, and gated behind multi-party approval.
+<table>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
+<tr id="security">
+<td>Security
+<td>
 
-*   <a id="superusers"></a>**[Superusers]** Only a small number of platform
-    admins may override the guarantees listed here. Doing so MUST require
-    approval of a second platform admin.
+The system meets some TBD baseline security standard to prevent compromise.
+(Patching, vulnerability scanning, user isolation, transport security, secure
+boot, machine identity, etc. Perhaps
+[NIST 800-53](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf)
+or a subset thereof.)
+
+<td> <td> <td> <td>✓
+<tr id="access">
+<td>Access
+<td>
+
+All physical and remote access must be rare, logged, and gated behind
+multi-party approval.
+
+<td> <td> <td> <td>✓
+<tr id="superusers">
+<td>Superusers
+<td>
+
+Only a small number of platform admins may override the guarantees listed here.
+Doing so MUST require approval of a second platform admin.
+
+<td> <td> <td> <td>✓
+</table>
