@@ -50,27 +50,24 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ## Source requirements
 
-### SLSA 1
+<table>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
+<tr id="version-controlled">
+<td>Version Controlled
+<td>
 
-There are no source requirements at SLSA 1.
+Every change to the source is tracked in a version control system that meets the
+following requirements:
 
-### SLSA 2
+-   **[Change History]** There exists a record of the history of changes
+    that went into the revision. Each change must contain: the identities of
+    the uploader and reviewers (if any), timestamps of the reviews (if any)
+    and submission, the change description / justification, the content of
+    the change, and the parent revisions.
 
-A revision meets SLSA 2 if all of the following are true:
-
-*   <a id="version-controlled"></a>**[Version Controlled]** Every change to the
-    source is tracked in a version control system that meets the following
-    requriements.
-
-    -   **[Change History]** There exists a record of the history of changes
-        that went into the revision. Each change must contain: the identities of
-        the uploader and reviewers (if any), timestamps of the reviews (if any)
-        and submission, the change description / justification, the content of
-        the change, and the parent revisions.
-
-    -   **[Immutable Reference]** There exists a way to indefinitely reference
-        this particular, immutable revision. In git, this is the {repo URL +
-        branch/tag/ref + commit ID}.
+-   **\[Immutable Reference]** There exists a way to indefinitely reference
+    this particular, immutable revision. In git, this is the {repo URL +
+    branch/tag/ref + commit ID}.
 
 Most popular version control system meet this requirement, such as git,
 Mercurial, Subversion, or Perforce.
@@ -80,206 +77,198 @@ change history be made public. Rather, some organization must attest to the fact
 that these requirements are met, and it is up to the consumer whether this
 attestation is sufficient.
 
-### SLSA 3
+<td> <td>✓<td>✓<td>✓
+<tr id="verified-history">
+<td>Verified History
+<td>
 
-_NOTE: The SLSA 3 requirements are subject to change._
+Every change in the revision's history has at least one strongly authenticated
+actor identities (author, uploader, reviewer, etc.) and timestamp. It must be
+clear which identities were verified, and those identities must use [two-step
+verification](https://www.google.com/landing/2step/) or similar. (Exceptions
+noted below.)
 
-A revision meets SLSA 3 if all of the following are true:
+-   **[First-Parent History]** In the case of a non-linear version control
+    system, where a revision can have more than one parent, only the "first
+    parent history" is in scope. In other words, when a feature branch is merged
+    back into the main branch, only the merge itself is in scope.
+-   **[Historical Cutoff]** There is some TBD exception to allow existing
+    projects to meet SLSA 3/4 even if historical revisions were present in the
+    history. Current thinking is that this could be either last N months or a
+    platform attestation guaranteeing that future changes in the next N months
+    will meet the requirements.
 
--   The revision meets [SLSA 2](#slsa-2).
+<td> <td> <td>✓<td>✓
+<tr id="retained-indefinitely">
+<td>Retained Indefinitely
+<td>
 
--   <a id="verified-history"></a>**[Verified History]** Every change in the
-    revision's history has at least one strongly authenticated actor identities
-    (author, uploader, reviewer, etc.) and timestamp. It must be clear which
-    identities were verified, and those identities must use
-    [two-step verification](https://www.google.com/landing/2step/) or similar.
-    (Exceptions noted below.)
+The revision and its change history are preserved indefinitely and cannot be
+deleted, except when subject to an established and transparent policy for
+obliteration, such as a legal or policy requirement.
 
-    -   **[First-Parent History]** In the case of a non-linear version control
-        system, where a revision can have more than one parent, only the "first
-        parent history" is in scope. In other words, when a feature branch is
-        merged back into the main branch, only the merge itself is in scope.
-    -   **[Historical Cutoff]** There is some TBD exception to allow existing
-        projects to meet SLSA 3/4 even if historical revisions were present in
-        the history. Current thinking is that this could be either last N months
-        or a platform attestation guaranteeing that future changes in the next N
-        months will meet the requirements.
+-   **[Immutable History]** It must not be possible for persons to delete or
+    modify the history, even with multi-party approval, except by trusted
+    platform admins with two-party approval following the obliterate policy.
+-   **[Limited Retention for SLSA 2]** At SLSA 2 (but not 3), it is acceptable
+    for the retention to be limited to 18 months, as attested by the source
+    control platform.
+    -   Example: If a commit is made on 2020-04-05 and then a retention
+        attestation is generated on 2021-01-01, the commit must be retained
+        until at least 2022-07-01.
 
--   <a id="retained-indefinitely"></a>**[Retained Indefinitely]** The revision
-    and its change history are preserved indefinitely and cannot be deleted,
-    except when subject to an established and transparent policy for
-    obliteration, such as a legal or policy requirement.
+<td> <td> <td>18 mo.<td>✓
+<tr id="two-person-reviewed">
+<td>Two-Person Reviewed
+<td>
 
-    -   **[Immutable History]** It must not be possible for persons to delete or
-        modify the history, even with multi-party approval, except by trusted
-        platform admins with two-party approval following the obliterate policy.
-    -   **[Limited Retention for SLSA 2]** At SLSA 2 (but not 3), it is
-        acceptable for the retention to be limited to 18 months, as attested by
-        the source control platform.
-        -   Example: If a commit is made on 2020-04-05 and then a retention
-            attestation is generated on 2021-01-01, the commit must be retained
-            until at least 2022-07-01.
+Every change in the revision's history was agreed to by two trusted persons
+prior to submission, and both of these trusted persons were strongly
+authenticated. (Exceptions from [Verified History](#verified-history) apply here
+as well.)
 
-### SLSA 4
+-   The following combinations are acceptable:
+    -   Uploader and reviewer are two different trusted persons.
+    -   Two different reviewers are trusted persons.
+-   **[Different Persons]** The platform ensures that no person can use
+    alternate identities to bypass the two-person review requirement.
+    -   Example: if a person uploads with identity X then reviews with alias Y,
+        the platform understands that this is the same person and does not
+        consider the review requirement satisfied.
+-   **[Informed Review]** The reviewer is able and encouraged to make an
+    informed decision about what they're approving. The reviewer should be
+    presented with a full, meaningful content diff between the proposed revision
+    and the previously reviewed revision. For example, it is not sufficient to
+    just indicate that file changed without showing the contents.
+-   **[Context-specific Approvals]** Approvals are for a specific context, such
+    as a repo + branch in git. Moving fully reviewed content from one context to
+    another still requires review. (Exact definition of "context" depends on the
+    project, and this does not preclude well-understood automatic or reviewless
+    merges, such as cutting a release branch.)
+    -   Git example: If a fully reviewed commit in one repo is merged into a
+        different repo, or a commit in one branch is merged into a different
+        branch, then the merge still requires review.
 
-_NOTE: The SLSA 4 requirements are subject to change._
-
-A revision meets SLSA 4 if all of the following are true:
-
--   The revision meets [SLSA 3](#slsa-3).
-
--   <a id="two-person-reviewed"></a>**[Two-Person Reviewed]** Every change in
-    the revision's history was agreed to by two trusted persons prior to
-    submission, and both of these trusted persons were strongly authenticated.
-    (Exceptions from [Verified History] apply here as well.)
-
-    -   The following combinations are acceptable:
-        -   Uploader and reviewer are two different trusted persons.
-        -   Two different reviewers are trusted persons.
-    -   **[Different Persons]** The platform ensures that no person can use
-        alternate identities to bypass the two-person review requirement.
-        -   Example: if a person uploads with identity X then reviews with alias
-            Y, the platform understands that this is the same person and does
-            not consider the review requirement satisfied.
-    -   **[Informed Review]** The reviewer is able and encouraged to make an
-        informed decision about what they're approving. The reviewer should be
-        presented with a full, meaningful content diff between the proposed
-        revision and the previously reviewed revision. For example, it is not
-        sufficient to just indicate that file changed without showing the
-        contents.
-    -   **[Context-specific Approvals]** Approvals are for a specific context,
-        such as a repo + branch in git. Moving fully reviewed content from one
-        context to another still requires review. (Exact definition of "context"
-        depends on the project, and this does not preclude well-understood
-        automatic or reviewless merges, such as cutting a release branch.)
-        -   Git example: If a fully reviewed commit in one repo is merged into a
-            different repo, or a commit in one branch is merged into a different
-            branch, then the merge still requires review.
+<td> <td> <td> <td>✓
+</table>
 
 ## Build Requirements
 
 Requirements on build process:
 
 <table>
- <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4</tr>
- <tr id="scripted-build">
-  <td>Scripted Build
-  <td>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
+<tr id="scripted-build">
+<td>Scripted Build
+<td>
 
-  All build steps were fully defined in some sort of "build script". The
-  only manual command, if any, was to invoke the build script.
+All build steps were fully defined in some sort of "build script". The
+only manual command, if any, was to invoke the build script.
 
-  Examples:
+Examples:
 
-  * Build script is Makefile, invoked via `make all`.
-  * Build script is .github/workflows/build.yaml, invoked by GitHub Actions.
+*   Build script is Makefile, invoked via `make all`.
+*   Build script is .github/workflows/build.yaml, invoked by GitHub Actions.
 
-  <td>✓<td>✓<td>✓<td>✓
- </tr>
- <tr id="build-service">
-  <td>Build Service
-  <td>
+<td>✓<td>✓<td>✓<td>✓
+<tr id="build-service">
+<td>Build Service
+<td>
 
-  All build steps ran using some build service, not on a developer's
-  workstation.
+All build steps ran using some build service, not on a developer's
+workstation.
 
-  Examples: GitHub Actions, Google Cloud Build, Travis CI.
+Examples: GitHub Actions, Google Cloud Build, Travis CI.
 
-  <td> <td>✓<td>✓<td>✓
- </tr>
- <tr id="ephemeral-environment">
-  <td>Ephemeral Environment
-  <td>
+<td> <td>✓<td>✓<td>✓
+<tr id="ephemeral-environment">
+<td>Ephemeral Environment
+<td>
 
-  The build service ensured that the build steps ran in an ephemeral
-  environment, such as a container or VM, provisioned solely for this build, and
-  not reused from a prior build.
+The build service ensured that the build steps ran in an ephemeral environment,
+such as a container or VM, provisioned solely for this build, and not reused
+from a prior build.
 
-  <td> <td> <td>✓<td>✓
- </tr>
- <tr id="isolated">
-  <td>Isolated
-  <td>
+<td> <td> <td>✓<td>✓
+<tr id="isolated">
+<td>Isolated
+<td>
 
-  The build service ensured that the build steps ran in an isolated
-  environment free of influence from other build instances, whether prior or
-  concurrent.
+The build service ensured that the build steps ran in an isolated environment
+free of influence from other build instances, whether prior or concurrent.
 
-  * It MUST NOT be possible for a build to access any secrets of the build
+*   It MUST NOT be possible for a build to access any secrets of the build
     service, such as the provenance signing key.
-  * It MUST NOT be possible for two builds that overlap in time to
+*   It MUST NOT be possible for two builds that overlap in time to
     influence one another.
-  * It MUST NOT be possible for one build to persist or influence the
+*   It MUST NOT be possible for one build to persist or influence the
     build environment of a subsequent build.
-  * Build caches, if used, MUST be purely content-addressable to prevent
+*   Build caches, if used, MUST be purely content-addressable to prevent
     tampering.
 
-  <td> <td> <td>✓<td>✓
- </tr>
- <tr id="parameterless">
-  <td>Parameterless
-  <td>
+<td> <td> <td>✓<td>✓
+<tr id="parameterless">
+<td>Parameterless
+<td>
 
-  The build output cannot be affected by user parameters other than the build
-  entry point and the top-level source location. In other words, the build is
-  fully defined through the build script and nothing else.
+The build output cannot be affected by user parameters other than the build
+entry point and the top-level source location. In other words, the build is
+fully defined through the build script and nothing else.
 
-  Examples:
+Examples:
 
-  * GitHub Actions
+*   GitHub Actions
     [workflow_dispatch](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch) `inputs` MUST be empty.
-  * Google Cloud Build
+*   Google Cloud Build
     [user-defined substitutions](https://cloud.google.com/build/docs/configuring-builds/substitute-variable-values)
     MUST be empty. (Default substitutions, whose values are defined by the
     server, are acceptable.)
 
-  <td> <td> <td> <td>✓
- </tr>
- <tr id="hermetic">
-  <td>Hermetic
-  <td>
+<td> <td> <td> <td>✓
+<tr id="hermetic">
+<td>Hermetic
+<td>
 
-  All transitive build steps, sources, and dependencies were fully declared up
-  front with [immutable references], and the build steps ran with no network
-  access.
+All transitive build steps, sources, and dependencies were fully declared up
+front with [immutable references], and the build steps ran with no network
+access.
 
-  The user-defined build script:
+The user-defined build script:
 
-  * MUST declare all dependencies, including sources and other build steps,
+*   MUST declare all dependencies, including sources and other build steps,
     using [immutable references] in a format that the build service understands.
 
   The build service:
 
-  * MUST fetch all artifacts in a trusted control plane.
-  * MUST disallow mutable references.
-  * MUST verify the integrity of each artifact.
-    * If the [immutable reference] includes a cryptographic hash, the service
-      MUST verify the hash and reject the fetch if the verification fails.
-    * Otherwise, the service MUST fetch the artifact over a channel that ensures
-      transport integrity, such as TLS or code signing.
-  * MUST prevent network access while running the build steps.
-    * This requirement is "best effort." It SHOULD deter a reasonable team from
-      having a non-hermetic build, but it need not stop a determined adversary.
-      For example, using a container to prevent network access is sufficient.
+*   MUST fetch all artifacts in a trusted control plane.
+*   MUST disallow mutable references.
+*   MUST verify the integrity of each artifact.
+    *   If the [immutable reference] includes a cryptographic hash, the service
+        MUST verify the hash and reject the fetch if the verification fails.
+    *   Otherwise, the service MUST fetch the artifact over a channel that
+        ensures transport integrity, such as TLS or code signing.
+*   MUST prevent network access while running the build steps.
+    *   This requirement is "best effort." It SHOULD deter a reasonable team
+        from having a non-hermetic build, but it need not stop a determined
+        adversary. For example, using a container to prevent network access is
+        sufficient.
 
-  <td> <td> <td> <td>✓
- </tr>
- <tr id="reproducible">
-  <td>Reproducible
-  <td>
+<td> <td> <td> <td>✓
+<tr id="reproducible">
+<td>Reproducible
+<td>
 
-  Re-running the build steps with identical input artifacts results in
-  bit-for-bit identical output. Builds that cannot meet this MUST provide a
-  justification why the build cannot be made reproducible.
+Re-running the build steps with identical input artifacts results in bit-for-bit
+identical output. Builds that cannot meet this MUST provide a justification why
+the build cannot be made reproducible.
 
-  "○" means that this requirement is "best effort". The user-provided build
-  script SHOULD declare whether the build is intended to be reproducible or a
-  justification why not. The build service MAY blindly propagate this intent
-  without verifying reproducibility. A consumer MAY reject the build if it does
-  not reproduce.
+"○" means that this requirement is "best effort". The user-provided build script
+SHOULD declare whether the build is intended to be reproducible or a
+justification why not. The build service MAY blindly propagate this intent
+without verifying reproducibility. A consumer MAY reject the build if it does
+not reproduce.
 
-  <td> <td> <td> <td>○
- </tr>
+<td> <td> <td> <td>○
 </table>
 
 ## Provenance Requirements
@@ -287,183 +276,185 @@ Requirements on build process:
 Requirements on the process by which provenance is generated and consumed:
 
 <table>
- <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4</tr>
- <tr id="available">
-  <td>Available
-  <td>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
+<tr id="available">
+<td>Available
+<td>
 
-  The provenance is available to the consumer in a format that the consumer
-  accepts. The format SHOULD be
-  [in-toto provenance](https://github.com/in-toto/attestation/blob/main/spec/predicates/provenance.md),
-  but another format MAY be used if both producer and consumer
-  agree and it meets all the other requirements.
+The provenance is available to the consumer in a format that the consumer
+accepts. The format SHOULD be
+[in-toto provenance](https://github.com/in-toto/attestation/blob/main/spec/predicates/provenance.md),
+but another format MAY be used if both producer and consumer agree and it meets
+all the other requirements.
 
-  <td>✓<td>✓<td>✓<td>✓
- </tr>
- <tr id="authenticated">
-  <td>Authenticated
-  <td>
+<td>✓<td>✓<td>✓<td>✓
+<tr id="authenticated">
+<td>Authenticated
+<td>
 
-  The provenance's authenticity and integrity can be verified by the
-  consumer. This SHOULD be through a digital signature from a private key
-  accessible only to the build service.
+The provenance's authenticity and integrity can be verified by the consumer.
+This SHOULD be through a digital signature from a private key accessible only to
+the build service.
 
-  <td> <td>✓<td>✓<td>✓
- </tr>
- <tr id="service-generated">
-  <td>Service Generated
-  <td>
+<td> <td>✓<td>✓<td>✓
+<tr id="service-generated">
+<td>Service Generated
+<td>
 
-  The provenance was populated by the build service, not by user-provided
-  tooling running on top of the service.
+The provenance was populated by the build service, not by user-provided tooling
+running on top of the service.
 
-  <td> <td>✓<td>✓<td>✓
- </tr>
- <tr id="non-falsifiable">
-  <td>Non-Falsifiable
-  <td>
+<td> <td>✓<td>✓<td>✓
+<tr id="non-falsifiable">
+<td>Non-Falsifiable
+<td>
 
-  Provenance cannot be falsified by the build service's users.
+Provenance cannot be falsified by the build service's users.
 
-  * The provenance signing key MUST be stored in a secure key management system
+*   The provenance signing key MUST be stored in a secure key management system
     accessible only to the build service account.
-  * The provenance signing key MUST NOT be accessible to the environment running
+*   The provenance signing key MUST NOT be accessible to the environment running
     the user-defined build steps.
-  * Every field in the provenance MUST be generated or verified by the build
+*   Every field in the provenance MUST be generated or verified by the build
     service in a trusted control plane. The user-controlled build steps MUST
     NOT be able to inject or alter the contents, except as noted below.
 
-  The following provenance fields MAY be generated by the user-controlled build
-  steps without the build service verifying their correctness:
+The following provenance fields MAY be generated by the user-controlled build
+steps without the build service verifying their correctness:
 
-  * The output artifact hash from [Identifies Artifact](#identifies-artifact).
-    * Reasoning: This only allows a "bad" build to falsely claim that it
-      produced a "good" artifact. This is not a security problem because the
-      consumer MUST accept only "good" builds and reject "bad" builds.
-  * The "reproducible" boolean and justification from
+*   The output artifact hash from [Identifies Artifact](#identifies-artifact).
+    *   Reasoning: This only allows a "bad" build to falsely claim that it
+        produced a "good" artifact. This is not a security problem because the
+        consumer MUST accept only "good" builds and reject "bad" builds.
+*   The "reproducible" boolean and justification from
     [Reproducible](#reproducible).
 
 
-  <td> <td> <td>✓<td>✓
- </tr>
- <tr id="dependencies-complete">
-  <td>Dependencies Complete
-  <td>
+<td> <td> <td>✓<td>✓
+<tr id="dependencies-complete">
+<td>Dependencies Complete
+<td>
 
-  Provenance records all build dependencies that were available while running
-  the build steps. This includes the initial state of the machine, VM, or
-  container of the build worker.
+Provenance records all build dependencies that were available while running the
+build steps. This includes the initial state of the machine, VM, or container of
+the build worker.
 
-  * MUST include all user-specified build steps, sources, dependencies.
-  * SHOULD include all service-provided artifacts.
+*   MUST include all user-specified build steps, sources, dependencies.
+*   SHOULD include all service-provided artifacts.
 
-  <td> <td> <td> <td>✓
- </tr>
+<td> <td> <td> <td>✓
 </table>
 
 Requirements on the contents of the provenance:
 
 <table>
- <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4</tr>
- <tr id="identifies-artifact">
-  <td>Identifies Artifact
-  <td>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
+<tr id="identifies-artifact">
+<td>Identifies Artifact
+<td>
 
-  The provenance identifies the output artifact via a cryptographic hash. The
-  RECOMMENDED algorithm is SHA-256 for cross-system compatibility. If another
-  algorithm is used, it SHOULD be resistant to collisions and second preimages.
+The provenance identifies the output artifact via a cryptographic hash. The
+RECOMMENDED algorithm is SHA-256 for cross-system compatibility. If another
+algorithm is used, it SHOULD be resistant to collisions and second preimages.
 
-  <td>✓<td>✓<td>✓<td>✓
- </tr>
- <tr id="identifies-builder">
-  <td>Identifies Builder
-  <td>
+<td>✓<td>✓<td>✓<td>✓
+<tr id="identifies-builder">
+<td>Identifies Builder
+<td>
 
-  The provenance identifies the entity that performed the build and generated
-  the provenance. This represents the entity that the consumer must trust.
-  Examples: "GitHub Actions with a GitHub-hosted worker", "jdoe@example.com's
-  machine".
+The provenance identifies the entity that performed the build and generated the
+provenance. This represents the entity that the consumer must trust. Examples:
+"GitHub Actions with a GitHub-hosted worker", "jdoe@example.com's machine".
 
-  <td>✓<td>✓<td>✓<td>✓
- </tr>
- <tr id="identifies-source">
-  <td>Identifies Source
-  <td>
+<td>✓<td>✓<td>✓<td>✓
+<tr id="identifies-source">
+<td>Identifies Source
+<td>
 
-  The provenance identifies the source containing the top-level build script,
-  via an [immutable reference]. Example: git URL + branch/tag/ref + commit ID.
+The provenance identifies the source containing the top-level build script, via
+an [immutable reference]. Example: git URL + branch/tag/ref + commit ID.
 
-  <td>✓<td>✓<td>✓<td>✓
- </tr>
- <tr id="identifies-entry-point">
-  <td>Identifies Entry Point
-  <td>
+<td>✓<td>✓<td>✓<td>✓
+<tr id="identifies-entry-point">
+<td>Identifies Entry Point
+<td>
 
-  The provenance identifies the "entry point" or command that was used to
-  invoke the build script. Example: `make all`.
+The provenance identifies the "entry point" or command that was used to invoke
+the build script. Example: `make all`.
 
-  <td>✓<td>✓<td>✓<td>✓
- </tr>
- <tr id="includes-all-params">
-  <td>Includes All Build Parameters
-  <td>
+<td>✓<td>✓<td>✓<td>✓
+<tr id="includes-all-params">
+<td>Includes All Build Parameters
+<td>
 
-  The provenance includes all build parameters under a user's control.
-  See [Parameterless](#parameterless) for details. (At L3, the parameters must
-  be listed; at L4, they must be empty.)
+The provenance includes all build parameters under a user's control. See
+[Parameterless](#parameterless) for details. (At L3, the parameters must be
+listed; at L4, they must be empty.)
 
-  <td> <td> <td>✓<td>✓
- </tr>
- <tr id="includes-all-deps">
-  <td>Includes All Transitive Dependencies
-  <td>
+<td> <td> <td>✓<td>✓
+<tr id="includes-all-deps">
+<td>Includes All Transitive Dependencies
+<td>
 
-  The provenance includes all transitive dependencies listed in
-  [Dependencies Complete](#dependencies-complete).
+The provenance includes all transitive dependencies listed in
+[Dependencies Complete](#dependencies-complete).
 
-  <td> <td> <td> <td>✓
- </tr>
- <tr id="includes-reproducible-info">
-  <td>Includes Reproducible Info
-  <td>
+<td> <td> <td> <td>✓
+<tr id="includes-reproducible-info">
+<td>Includes Reproducible Info
+<td>
 
-  The provenance includes a boolean indicating whether build is intended to be
-  reproducible and, if so, all information necessary to reproduce the build.
-  See [Reproducible](#reproducible) for more details.
+The provenance includes a boolean indicating whether build is intended to be
+reproducible and, if so, all information necessary to reproduce the build. See
+[Reproducible](#reproducible) for more details.
 
-  <td> <td> <td> <td>✓
- </tr>
- <tr id="includes-metadata">
-  <td>Includes Metadata
-  <td>
+<td> <td> <td> <td>✓
+<tr id="includes-metadata">
+<td>Includes Metadata
+<td>
 
-  The provenance includes metadata to aid debugging and investigations. This
-  SHOULD at least include start and end timestamps and a permalink to debug
-  logs.
+The provenance includes metadata to aid debugging and investigations. This
+SHOULD at least include start and end timestamps and a permalink to debug logs.
 
-  "○" = RECOMMENDED.
+"○" = RECOMMENDED.
 
-  <td>○<td>○<td>○<td>○
- </tr>
+<td>○<td>○<td>○<td>○
 </table>
 
 ## Common requirements
 
-TODO: Write this section
-
 Common requirements for every trusted system involved in the supply chain
 (source, build, distribution, etc.)
 
-*   <a id="security"></a>**[Security]** The system meets some TBD baseline
-    security standard to prevent compromise. (Patching, vulnerability scanning,
-    user isolation, transport security, secure boot, machine identity, etc.
-    Perhaps
-    [NIST 800-53](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf)
-    or a subset thereof.)
+**TODO: Expand this section. Currently it is under-specified.**
 
-*   <a id="access"></a>**[Access]** All physical and remote access must be rare,
-    logged, and gated behind multi-party approval.
+<table>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
+<tr id="security">
+<td>Security
+<td>
 
-*   <a id="superusers"></a>**[Superusers]** Only a small number of platform
-    admins may override the guarantees listed here. Doing so MUST require
-    approval of a second platform admin.
+The system meets some TBD baseline security standard to prevent compromise.
+(Patching, vulnerability scanning, user isolation, transport security, secure
+boot, machine identity, etc. Perhaps
+[NIST 800-53](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf)
+or a subset thereof.)
+
+<td> <td> <td> <td>✓
+<tr id="access">
+<td>Access
+<td>
+
+All physical and remote access must be rare, logged, and gated behind
+multi-party approval.
+
+<td> <td> <td> <td>✓
+<tr id="superusers">
+<td>Superusers
+<td>
+
+Only a small number of platform admins may override the guarantees listed here.
+Doing so MUST require approval of a second platform admin.
+
+<td> <td> <td> <td>✓
+</table>
