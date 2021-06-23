@@ -250,8 +250,8 @@ mean the lack of a SLSA level.
 
 ### Level requirements
 
-The following is a summary. For details, see corresponding [Source],
-[Build/Provenance], and [Common] documents.
+The following is a summary. For details, click the links in the table for
+corresponding [requirements](requirements.md).
 
 Requirement                          | SLSA 1 | SLSA 2 | SLSA 3 | SLSA 4
 ------------------------------------ | ------ | ------ | ------ | ------
@@ -277,28 +277,25 @@ Common - [Superusers]                |        |        |        | ✓
 
 _○ = required unless there is a justification_
 
-[Access]: common-requirements.md#access
-[Authenticated]: build-requirements.md#authenticated
-[Available]: build-requirements.md#available
-[Build Service]: build-requirements.md#build-service
-[Build/Provenance]: build-requirements.md
-[Common]: common-requirements.md
-[Dependencies Complete]: build-requirements.md#dependencies-complete
-[Ephemeral Environment]: build-requirements.md#ephemeral-environment
-[Hermetic]: build-requirements.md#hermetic
-[Isolated]: build-requirements.md#isolated
-[Non-Falsifiable]: build-requirements.md#non-falsifiable
-[Parameterless]: build-requirements.md#parameterless
-[Reproducible]: build-requirements.md#reproducible
-[Retained Indefinitely]: source-requirements.md#retained-indefinitely
-[Scripted Build]: build-requirements.md#scripted-build
-[Security]: common-requirements.md#security
-[Service Generated]: build-requirements.md#service-generated
-[Source]: source-requirements.md
-[Superusers]: common-requirements.md#superusers
-[Two-Person Reviewed]: source-requirements.md#two-person-reviewed
-[Verified History]: source-requirements.md#verified-history
-[Version Controlled]: source-requirements.md#version-controlled
+[Access]: requirements.md#access
+[Authenticated]: requirements.md#authenticated
+[Available]: requirements.md#available
+[Build Service]: requirements.md#build-service
+[Dependencies Complete]: requirements.md#dependencies-complete
+[Ephemeral Environment]: requirements.md#ephemeral-environment
+[Hermetic]: requirements.md#hermetic
+[Isolated]: requirements.md#isolated
+[Non-Falsifiable]: requirements.md#non-falsifiable
+[Parameterless]: requirements.md#parameterless
+[Reproducible]: requirements.md#reproducible
+[Retained Indefinitely]: requirements.md#retained-indefinitely
+[Scripted Build]: requirements.md#scripted-build
+[Security]: requirements.md#security
+[Service Generated]: requirements.md#service-generated
+[Superusers]: requirements.md#superusers
+[Two-Person Reviewed]: requirements.md#two-person-reviewed
+[Verified History]: requirements.md#verified-history
+[Version Controlled]: requirements.md#version-controlled
 
 ## Scope of SLSA
 
