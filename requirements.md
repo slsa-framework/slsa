@@ -301,8 +301,8 @@ the service generating the provenance.
 <td>Build Service Reported
 <td>
 
-The provenance was populated by data reported by the build service, not by user-provided tooling
-running on top of the service.
+The provenance was populated with data reported by the build service, not by user-provided tooling
+running within the service.
 
 <td> <td>✓<td>✓<td>✓
 <tr id="non-falsifiable">
