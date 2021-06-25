@@ -294,14 +294,14 @@ all the other requirements.
 
 The provenance's authenticity and integrity can be verified by the consumer.
 This SHOULD be through a digital signature from a private key accessible only to
-the build service.
+the service generating the provenance.
 
 <td> <td>✓<td>✓<td>✓
 <tr id="service-generated">
-<td>Service Generated
+<td>Service Reported
 <td>
 
-The provenance was populated by the build service, not by user-provided tooling
+The provenance was populated by data reported by the build service, not by user-provided tooling
 running on top of the service.
 
 <td> <td>✓<td>✓<td>✓
