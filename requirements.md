@@ -298,7 +298,7 @@ the service generating the provenance.
 
 <td> <td>✓<td>✓<td>✓
 <tr id="service-generated">
-<td>Service Reported
+<td>Build Service Reported
 <td>
 
 The provenance was populated by data reported by the build service, not by user-provided tooling
