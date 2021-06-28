@@ -7,158 +7,179 @@ the software supply chain. The requirements are inspired by Google’s internal
 "[Binary Authorization for Borg]" that has been in use for the past 8+ years and
 that is mandatory for all of Google's production workloads.
 
+The goal of SLSA is to improve the state of the industry, particularly open
+source, to defend against the most pressing integrity threats. With SLSA,
+consumers can make informed choices about the security posture of the software
+they consume.  
+
 **IMPORTANT:** SLSA is an evolving specification and we are looking for
 wide-ranging feedback via [GitHub issues], [email][mailing list], or
 [feedback form]. SLSA is being developed as part of the
 [OpenSSF Digital Identity WG](https://github.com/ossf/wg-digital-identity-attestation).
 
-## Overview
+## Why SLSA?
 
-SLSA consists of:
+Supply chain integrity attacks—unauthorized modifications to software
+packages—have been
+[on the rise](https://www.sonatype.com/hubfs/Corporate/Software%20Supply%20Chain/2020/SON_SSSC-Report-2020_final_aug11.pdf#page=7)
+in the past two years, and are proving to be common and reliable attack vectors
+that affect all consumers of software. The software development and deployment
+supply chain is quite complicated, with numerous threats along the source ➞
+build ➞ publish workflow. While point solutions do exist for some specific
+vulnerabilities, there is no comprehensive end-to-end framework that both
+defines how to mitigate threats across the software supply chain, and provides
+reasonable security guarantees. There is an urgent need for a solution in the
+face of the eye-opening, multi-billion dollar attacks in recent months (e.g.
+[SolarWinds](https://www.solarwinds.com/sa-overview/securityadvisory),
+[Codecov](https://about.codecov.io/security-update/)), some of which could have
+been prevented or made more difficult had such a framework been adopted by
+software developers and consumers.
 
-1.  **Standards:** (this doc) Industry consensus on the definition of a "secure"
-    software supply chain. There may be multiple standards to represent multiple
-    aspects of security.
-2.  **Accreditation:** Process for organizations to certify compliance with
-    these standards.
-3.  **[Technical controls](controls/README.md):** To record provenance and
-    detect or prevent non-compliance.
-
-Ultimately, the software consumer decides whom to trust and what standards to
-enforce. In this light, accreditation is a means to transfer trust across
-organizational boundaries. For example, a company may internally "accredit" its
-in-house source and build systems while relying on OpenSSF to accredit
-third-party ones. Other organizations may trust other accreditation bodies.
-
-This document *only discusses the first part*, Standards. We expect to develop
-an accreditation process and technical controls over time. In the interim, these
-levels can provide value as guidelines for how to secure a software supply
-chain.
-
-## Principles
-
-SLSA focuses on the following two main principles:
-
-*   **Non-unilateral:** No person can modify the software artifact anywhere in
-    the software supply chain without explicit review and approval by at least
-    one other "trusted person."[^1] The purpose is prevention, deterrence,
-    and/or early detection of risky/bad changes.
-
-*   **Auditable:** The software artifact can be securely and transparently
-    traced back to the original, human readable sources and dependencies. The
-    primary purpose is for automated analyses of sources and dependencies, as
-    well as ad-hoc investigations.
-
-Though not perfect, these two principles provide substantial mitigation for a
-wide range of tampering, confusion, and other supply chain attacks.
-
-To measure how well protected a supply chain is according to the two principles
-above, we propose the SLSA levels. A higher level means it is better protected.
-SLSA 4 is the end goal but may take many years and significant investment for
-large organizations. SLSA 1 through SLSA 3 are stepping stones to recognize
-meaningful progress.
-
-What sets SLSA 4 apart from simple best practices is its resilience against
-determined adversaries. That is, SLSA is a **guarantee** that these practices
-have been followed, though still not a guarantee that the software is "safe."
-
-## Background
-
-### Why do we need SLSA?
+Supply-chain Levels for Software Artifacts (SLSA, pronounced "salsa") is an end-to-end framework for ensuring the integrity
+of software artifacts throughout the software supply chain. It is inspired by
+Google's internal "[Binary Authorization for Borg]" which has been in use for the past 8+ years and is mandatory for all of Google's
+production workloads.
 
 SLSA addresses three issues:
 
-*   Software producers want to secure their supply chains but don't know exactly
-    how.
-*   Software consumers want to understand and limit their exposure to supply
-    chain attacks but have no means of doing so.
-*   Artifact signatures alone only prevent a subset of the attacks we care
-    about.
+-  Software producers want to secure their supply chains but don't know
+   exactly how;
+-  Software consumers want to understand and limit their exposure to supply
+   chain attacks but have no means of doing so;
+-  Artifact signatures alone prevent only a subset of the attacks we care about.
 
-At a minimum, SLSA can be used as a set of guiding principles for software
-producers and consumers. More importantly, SLSA allows us to talk about supply
-chain risks and mitigations in a common language. This allows us to communicate
-and act on those risks across organizational boundaries.
+### Supply Chain Threats
 
-Numeric levels, in particular, are useful because they are simple. A decision
-maker easily understands that SLSA 4 is better than SLSA 3 without understanding
-any of the details. That said, we are not committed to numeric levels and are
-open to other options.
+SLSA helps to protect against common supply chain attacks. The following image
+illustrates a typical software supply chain and includes examples of attacks
+that can occur at every link in the chain. Each type of attack has occured over
+the past several years and, unfortunately, is increasing as time goes on.
 
-Once SLSA is complete it will provide a mapping from requirements that the
-supply chain can implement to the attacks they can prevent. Software producers
-and consumers will be able to look at the SLSA level of a software artifact and
-know what attacks have been defended against in its production.
+![Supply Chain Threats](images/supply-chain-threats.svg)
 
-### What about reproducible builds?
+Many recent high-profile attacks were consequences of supply-chain integrity
+vulnerabilities, and could have been prevented by SLSA's framework. For
+example:
 
-When talking about [reproducible builds](https://reproducible-builds.org), 
-there are two related but distinct concepts: "reproducible" and
-"verified reproducible."
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Threat</strong></th>
+<th><strong>Known example</strong></th>
+<th><strong>How SLSA could have helped</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Submit bad code to the source repository</td>
+<td><a
+href="https://lore.kernel.org/lkml/202105051005.49BFABCE@keescook/">Linux
+hypocrite commits</a>: Researcher attempted to intentionally introduce
+vulnerabilities into the Linux kernel via patches on the mailing list.</td>
+<td>Two-person review caught most, but not all, of the vulnerabilities.</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Compromise source control platform</td>
+<td><a href="https://news-web.php.net/php.internals/113838">PHP</a>: Attacker
+compromised PHP's self-hosted git server and injected two malicious
+commits.</td>
+<td>A better-protected source code platform would have been a much harder
+target for the attackers. </td>
+</tr>
+<tr>
+<td>C</td>
+<td>Build with official process but from code not matching source control</td>
+<td><a href="https://www.webmin.com/exploit.html">Webmin</a>: Attacker modified
+the build infrastructure to use source files not matching source
+control.</td>
+<td>A SLSA-compliant build server would have produced provenance identifying
+the actual sources used, allowing consumers to detect such tampering.</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Compromise build platform</td>
+<td><a
+href="https://www.crowdstrike.com/blog/sunspot-malware-technical-analysis/">SolarWinds</a>:
+Attacker compromised the build platform and installed an implant that
+injected malicious behavior during each build.</td>
+<td>Higher SLSA levels require <a
+href="https://github.com/slsa-framework/slsa/blob/main/build-requirements.md">stronger
+security controls for the build platform</a>, making it more difficult to
+compromise and gain persistence.</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Use bad dependency (i.e. A-H, recursively)</td>
+<td><a
+href="https://schneider.dev/blog/event-stream-vulnerability-explained/">event-stream</a>:
+Attacker added an innocuous dependency and then updated the dependency to
+add malicious behavior. The update did not match the code submitted to
+GitHub (i.e. attack F).</td>
+<td>Applying SLSA recursively to all dependencies would have prevented this
+particular vector, because the provenance would have indicated that it
+either wasn't built from a proper builder or that the source did not come
+from GitHub.</td>
+</tr>
+<tr>
+<td>F</td>
+<td>Upload an artifact that was not built by the CI/CD system</td>
+<td><a href="https://about.codecov.io/apr-2021-post-mortem/">CodeCov</a>:
+Attacker used leaked credentials to upload a malicious artifact to a GCS
+bucket, from which users download directly.</td>
+<td>Provenance of the artifact in the GCS bucket would have shown that the
+artifact was not built in the expected manner from the expected source
+repo.</td>
+</tr>
+<tr>
+<td>G</td>
+<td>Compromise package repository</td>
+<td><a
+href="https://theupdateframework.io/papers/attacks-on-package-managers-ccs2008.pdf">Attacks
+on Package Mirrors</a>: Researcher ran mirrors for several popular package
+repositories, which could have been used to serve malicious packages.</td>
+<td>Similar to above (F), provenance of the malicious artifacts would have
+shown that they were not built as expected or from the expected source
+repo.</td>
+</tr>
+<tr>
+<td>H</td>
+<td>Trick consumer into using bad package</td>
+<td><a
+href="https://blog.sonatype.com/damaging-linux-mac-malware-bundled-within-browserify-npm-brandjack-attempt">Browserify
+typosquatting</a>: Attacker uploaded a malicious package with a similar
+name as the original.</td>
+<td>SLSA does not directly address this threat, but provenance linking back to
+source control can enable and enhance other solutions.</td>
+</tr>
+</tbody>
+</table>
 
-"Reproducible" means that repeating the build with the same inputs results in
-bit-for-bit identical output. This property
-[provides](https://reproducible-builds.org/docs/buy-in/)
-[many](https://wiki.debian.org/ReproducibleBuilds/About)
-[benefits](https://static.googleusercontent.com/media/sre.google/en//static/pdf/building_secure_and_reliable_systems.pdf#page=357),
-including easier debugging, more confident cherry-pick releases, better build
-caching and storage efficiency, and accurate dependency tracking.
+A SLSA level gives consumers confidence that software has not been tampered with
+and can be securely traced back to source—something that is difficult, if not
+impossible, to do with most software today.
 
-For these reasons, SLSA 4 [requires](#level-requirements) reproducible builds
-unless there is a justification why the build cannot be made reproducible.
-[Example](https://lists.reproducible-builds.org/pipermail/rb-general/2021-January/002177.html)
-justifications include profile-guided optimizations or code signing that
-invalidates hashes. Note that there is no actual reproduction, just a claim that
-reproduction is possible.
+## What is SLSA?
 
-"Verified reproducible" means using two or more independent build systems to
-corroborate the provenance of a build. In this way, one can create an overall
-system that is more trustworthy than any of the individual components. This is
-often
-[suggested](https://www.linuxfoundation.org/en/blog/preventing-supply-chain-attacks-like-solarwinds/)
-as a solution to supply chain integrity. Indeed, this is one option to secure
-build steps of a supply chain. When designed correctly, such a system can
-satisfy all of the SLSA build requirements.
+SLSA is a set of incrementally adoptable security guidelines, established by
+industry consensus. The standards set by SLSA are guiding principles for both
+software producers and consumers: producers can follow the guidelines to make
+their software more secure, and consumers can make decisions based on a software
+package's security posture. SLSA's [four levels](#slsa-levels) are designed to be
+incremental and actionable, and to protect against specific integrity attacks. SLSA 4 represents the ideal end
+state, and the lower levels represent milestones with corresponding integrity
+guarantees.  
 
-That said, verified reproducible builds are not a complete solution to supply
-chain integrity, nor are they practical in all cases:
+### Terminology
 
-*   Reproducible builds do not address source, dependency, or distribution
-    threats.
-*   Reproducers must truly be independent, lest they all be susceptible to the
-    same attack. For example, if all rebuilders run the same pipeline software,
-    and that software has a vulnerability that can be triggered by sending a
-    build request, then an attacker can compromise all rebuilders, violating the
-    assumption above.
-*   Some builds cannot easily be made reproducible, as noted above.
-*   Closed-source reproducible builds require the code owner to either grant
-    source access to multiple independent rebuilders, which is unacceptable in
-    many cases, or develop multiple, independent in-house rebuilders, which is
-    likely prohibitively expensive.
-
-Therefore, SLSA does not require verified reproducible builds directly. Instead,
-verified reproducible builds are one option for implementing the requirements.
-
-For more on reproducibility, see
-[Hermetic, Reproducible, or Verifiable?](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=357)
-
-## Terminology
-
-An **artifact** is an immutable blob of data. Example artifacts: a file, a git
-commit, a directory of files (serialized in some way), a container image, a
-firmware image. The primary use case is for _software_ artifacts, but SLSA can
-be used for any type of artifact.
-
-A **software supply chain** is a sequence of steps resulting in the creation of
-an artifact. We represent a supply chain as a
-[directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
-of sources, builds, dependencies, and packages. Furthermore, each source, build,
-and package may be hosted on a platform, such as Source Code Management (SCM) or
-Continuous Integration / Continuous Deployment (CI/CD). Note that one artifact's
-supply chain is a combination of its dependencies' supply chains plus its own
-sources and builds.
-
-The following diagram shows the relationship between concepts.
+SLSA's framework addresses every step of the software supply chain—the sequence
+of steps resulting in the creation of an artifact. We represent a supply chain
+as a [directed acyclic
+graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) of sources, builds,
+dependencies, and packages. One artifact's supply chain is a combination of its
+dependencies' supply chains plus its own sources and builds.
 
 ![Software Supply Chain Model](images/supply-chain-model.svg)
 
@@ -172,10 +193,16 @@ The following diagram shows the relationship between concepts.
  </thead>
  <tbody>
   <tr>
+   <th>Artifact
+   <td>An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact
+   <td>A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image.
+  </tr>
+  <tr>
    <th>Source
    <td>Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further.
    <td>Git commit (source) hosted on GitHub (platform).
   </tr>
+  <tr>
    <th>Build
    <td>Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs.
    <td>.travis.yml (process) run by Travis CI (platform).
@@ -201,19 +228,7 @@ Special cases:
 *   A ZIP file is containing source code is a package, not a source, because it
     is built from some other source, such as a git commit.
 
-## SLSA definitions
-
-_Reminder: The definitions below are not yet finalized and subject to change,
-particularly SLSA 3-4._
-
-An artifact's **SLSA level** describes the integrity strength of its direct
-supply chain, meaning its direct sources and build steps. To verify that the
-artifact meets this level, **provenance** is required. This serves as evidence
-that the level's requirements have been met.
-
-### Level descriptions
-
-_This section is non-normative._
+### SLSA Levels
 
 There are four SLSA levels. SLSA 4 is the current highest level and represents
 the ideal end state. SLSA 1–3 offer lower security guarantees but are easier to
@@ -221,32 +236,39 @@ meet. In our experience, achieving SLSA 4 can take many years and significant
 effort, so intermediate milestones are important. We also use the term SLSA 0 to
 mean the lack of a SLSA level.
 
-<table>
- <thead>
-  <tr>
-   <th>Level
-   <th>Meaning
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <td>SLSA 4
-   <td>"Auditable and Non-Unilateral." High confidence that (1) one can correctly and easily trace back to the original source code, its change history, and all dependencies and (2) no single person has the power to make a meaningful change to the software without review.
-  </tr>
-  <tr>
-   <td>SLSA 3
-   <td>"Auditable." Moderate confidence that one can trace back to the original source code and change history. However, trusted persons still have the ability to make unilateral changes, and the list of dependencies is likely incomplete.
-  </tr>
-  <tr>
-   <td>SLSA 2
-   <td>Stepping stone to higher levels. Moderate confidence that one can determine either who authorized the artifact or what systems produced the artifact. Protects against tampering after the build.
-  </tr>
-  <tr>
-   <td>SLSA 1
-   <td>Entry point into SLSA. Provenance indicates the artifact's origins without any integrity guarantees.
-  </tr>
- </tbody>
-</table>
+**SLSA 1** requires that the build process be fully scripted/automated and
+generate provenance. Provenance is metadata about how an artifact was built,
+including the build process, top-level source, and dependencies. Knowing the
+provenance allows software consumers to make risk-based security decisions.
+Though provenance at SLSA 1 does not protect against tampering, it offers a
+basic level of code source identification and may aid in vulnerability
+management.
+
+**SLSA 2** requires using version control and a hosted build service that
+generates authenticated provenance. These additional requirements give the
+consumer greater confidence in the origin of the software. At this level, the
+provenance prevents tampering to the extent that the build service is trusted.
+SLSA 2 also provides an easy upgrade path to SLSA 3.
+
+**SLSA 3** further requires that the source and build platforms meet specific
+standards to guarantee the auditability of the source and the integrity of the
+provenance, respectively. We envision an accreditation process whereby auditors
+certify that platforms meet the requirements, which consumers can then rely on.
+SLSA 3 provides much stronger protections against tampering than earlier levels
+by preventing specific classes of threats, such as cross-build contamination.
+
+**SLSA 4** is currently the highest level, requiring two-person review of all
+changes and a hermetic, reproducible build process. Two-person review is an
+industry best practice for catching mistakes and deterring bad behavior.
+Hermetic builds guarantee that the provenance's list of dependencies is
+complete. Reproducible builds, though not strictly required, provide many
+auditability and reliability benefits. Overall, SLSA 4 gives the consumer a high
+degree of confidence that the software has not been tampered with.
+
+The SLSA level is not transitive [(see explanation)](#q-why-is-slsa-not-transitive). It describes the integrity
+protections of an artifact's build process and top-level source, but nothing
+about the artifact's dependencies. Dependencies have their own SLSA ratings, and
+it is possible for a SLSA 4 artifact to be built from SLSA 0 dependencies.
 
 ### Level requirements
 
@@ -297,24 +319,71 @@ _○ = required unless there is a justification_
 [Verified History]: requirements.md#verified-history
 [Version Controlled]: requirements.md#version-controlled
 
-## Scope of SLSA
+### Frequently Asked Questions
 
-SLSA is not transitive. It describes the integrity protections of an artifact's
-build process and top-level source, but nothing about the artifact's
-dependencies. Dependencies have their own SLSA ratings, and it is possible for a
-SLSA 4 artifact to be built from SLSA 0 dependencies.
+#### Q: Why is SLSA not transitive?
 
-The reason for non-transitivity is to make the problem tractable. If SLSA 4
+SLSA is not transitive in order to make the problem tractable. If SLSA 4
 required dependencies to be SLSA 4, then reaching SLSA 4 would require starting
 at the very beginning of the supply chain and working forward. This is
 backwards, forcing us to work on the least risky component first and blocking
 any progress further downstream. By making each artifact's SLSA rating
 independent from one another, it allows parallel progress and prioritization
 based on risk. (This is a lesson we learned when deploying other security
-controls at scale throughout Google.)
+controls at scale throughout Google.) We expect SLSA ratings to be composed to describe a supply chain's overall
+security stance, as described in the case study [vision](walkthrough.md#vision-case-study).
 
-We expect SLSA ratings to be composed to describe a supply chain's overall
-security stance, as described in the [vision](walkthrough.md#vision-case-study) below.
+#### Q: What about reproducible builds?
+
+When talking about [reproducible builds](https://reproducible-builds.org), 
+there are two related but distinct concepts: "reproducible" and
+"verified reproducible."
+
+"Reproducible" means that repeating the build with the same inputs results in
+bit-for-bit identical output. This property
+[provides](https://reproducible-builds.org/docs/buy-in/)
+[many](https://wiki.debian.org/ReproducibleBuilds/About)
+[benefits](https://static.googleusercontent.com/media/sre.google/en//static/pdf/building_secure_and_reliable_systems.pdf#page=357),
+including easier debugging, more confident cherry-pick releases, better build
+caching and storage efficiency, and accurate dependency tracking.
+
+For these reasons, SLSA 4 [requires](#level-requirements) reproducible builds
+unless there is a justification why the build cannot be made reproducible.
+[Example](https://lists.reproducible-builds.org/pipermail/rb-general/2021-January/002177.html)
+justifications include profile-guided optimizations or code signing that
+invalidates hashes. Note that there is no actual reproduction, just a claim that
+reproduction is possible.
+
+"Verified reproducible" means using two or more independent build systems to
+corroborate the provenance of a build. In this way, one can create an overall
+system that is more trustworthy than any of the individual components. This is
+often
+[suggested](https://www.linuxfoundation.org/en/blog/preventing-supply-chain-attacks-like-solarwinds/)
+as a solution to supply chain integrity. Indeed, this is one option to secure
+build steps of a supply chain. When designed correctly, such a system can
+satisfy all of the SLSA build requirements.
+
+That said, verified reproducible builds are not a complete solution to supply
+chain integrity, nor are they practical in all cases:
+
+*   Reproducible builds do not address source, dependency, or distribution
+    threats.
+*   Reproducers must truly be independent, lest they all be susceptible to the
+    same attack. For example, if all rebuilders run the same pipeline software,
+    and that software has a vulnerability that can be triggered by sending a
+    build request, then an attacker can compromise all rebuilders, violating the
+    assumption above.
+*   Some builds cannot easily be made reproducible, as noted above.
+*   Closed-source reproducible builds require the code owner to either grant
+    source access to multiple independent rebuilders, which is unacceptable in
+    many cases, or develop multiple, independent in-house rebuilders, which is
+    likely prohibitively expensive.
+
+Therefore, SLSA does not require verified reproducible builds directly. Instead,
+verified reproducible builds are one option for implementing the requirements.
+
+For more on reproducibility, see
+[Hermetic, Reproducible, or Verifiable?](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=357)
 
 ## Detailed example
 
