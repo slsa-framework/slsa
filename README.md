@@ -17,25 +17,6 @@ wide-ranging feedback via GitHub issues, [email][mailing list], or
 [feedback form]. SLSA is being developed as part of the
 [OpenSSF Digital Identity WG](https://github.com/ossf/wg-digital-identity-attestation).
 
-### How to get started
-
-Currently, SLSA Level 1 standards are approaching completion, and developers are invited to
-follow the directions linked below to secure their projects at this entry level.
-SLSA Levels 2 through 4 are in development, and we welcome feedback as we try to
-reach industry consensus on the security requirements mandated for each level.
-
-**Developers:** For instructions on how to produce SLSA-compliant software…[TODO
-link]  
-For updates about major SLSA developments and instructions on how to meet the
-upcoming standards for SLSA Levels 2 through 4, please sign up on this [TODO
-list] for release announcements. 
-
-**Consumers**: For instructions on how to verify that software is
-SLSA-compliant…. [TODO link]
-
-**Implementers: **For detailed requirements of how source and build systems can
-meet higher levels of SLSA-compliance… [TODO link]
-
 ## Why SLSA?
 
 Supply chain integrity attacks—unauthorized modifications to software
@@ -54,13 +35,9 @@ face of the eye-opening, multi-billion dollar attacks in recent months (e.g.
 been prevented or made more difficult had such a framework been adopted by
 software developers and consumers.
 
-Our proposed solution is
-[Supply chain Levels for Software Artifacts](https://github.com/slsa-framework/slsa)
-(SLSA, pronounced "salsa"), an end-to-end framework for ensuring the integrity
+Supply-chain Levels for Software Artifacts (SLSA, pronounced "salsa") is an end-to-end framework for ensuring the integrity
 of software artifacts throughout the software supply chain. It is inspired by
-Google's internal
-"[Binary Authorization for Borg](https://cloud.google.com/security/binary-authorization-for-borg)"
-which has been in use for the past 8+ years and is mandatory for all of Google's
+Google's internal "[Binary Authorization for Borg]" which has been in use for the past 8+ years and is mandatory for all of Google's
 production workloads.
 
 SLSA addresses three issues:
@@ -71,7 +48,7 @@ SLSA addresses three issues:
    chain attacks but have no means of doing so;
 -  Artifact signatures alone prevent only a subset of the attacks we care about.
 
-### How SLSA helps
+### Supply Chain Threats
 
 SLSA helps to protect against common supply chain attacks. The following image
 illustrates a typical software supply chain and includes examples of attacks
@@ -190,9 +167,8 @@ SLSA is a set of incrementally adoptable security guidelines, established by
 industry consensus. The standards set by SLSA are guiding principles for both
 software producers and consumers: producers can follow the guidelines to make
 their software more secure, and consumers can make decisions based on a software
-package's security posture. SLSA's four levels [four levels](https://github.com/olivekl/slsa/tree/wording-updates#slsa-levels) are designed to be
-incremental and actionable, and to protect against specific integrity attacks
-[TODO add link to future section on attacks]. SLSA 4 represents the ideal end
+package's security posture. SLSA's [four levels](#slsa-levels) are designed to be
+incremental and actionable, and to protect against specific integrity attacks. SLSA 4 represents the ideal end
 state, and the lower levels represent milestones with corresponding integrity
 guarantees.  
 
@@ -289,7 +265,7 @@ complete. Reproducible builds, though not strictly required, provide many
 auditability and reliability benefits. Overall, SLSA 4 gives the consumer a high
 degree of confidence that the software has not been tampered with.
 
-The SLSA level is not transitive [(see explanation)](https://github.com/olivekl/slsa/tree/wording-updates#q-why-is-slsa-not-transitive). It describes the integrity
+The SLSA level is not transitive [(see explanation)](#q-why-is-slsa-not-transitive). It describes the integrity
 protections of an artifact's build process and top-level source, but nothing
 about the artifact's dependencies. Dependencies have their own SLSA ratings, and
 it is possible for a SLSA 4 artifact to be built from SLSA 0 dependencies.
@@ -354,9 +330,8 @@ backwards, forcing us to work on the least risky component first and blocking
 any progress further downstream. By making each artifact's SLSA rating
 independent from one another, it allows parallel progress and prioritization
 based on risk. (This is a lesson we learned when deploying other security
-controls at scale throughout Google.)  
-We expect SLSA ratings to be composed to describe a supply chain's overall
-security stance, as described in the case study vision.
+controls at scale throughout Google.) We expect SLSA ratings to be composed to describe a supply chain's overall
+security stance, as described in the case study [vision](walkthrough.md#vision-case-study).
 
 #### Q: What about reproducible builds?
 
