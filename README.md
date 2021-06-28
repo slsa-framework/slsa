@@ -19,7 +19,7 @@ wide-ranging feedback via GitHub issues, [email][mailing list], or
 
 ### How to get started
 
-Currently, SLSA Level 1 standards are finalized, and developers are invited to
+Currently, SLSA Level 1 standards are approaching completion, and developers are invited to
 follow the directions linked below to secure their projects at this entry level.
 SLSA Levels 2 through 4 are in development, and we welcome feedback as we try to
 reach industry consensus on the security requirements mandated for each level.
@@ -190,7 +190,7 @@ SLSA is a set of incrementally adoptable security guidelines, established by
 industry consensus. The standards set by SLSA are guiding principles for both
 software producers and consumers: producers can follow the guidelines to make
 their software more secure, and consumers can make decisions based on a software
-package's security posture. SLSA's four levels [TODO link] are designed to be
+package's security posture. SLSA's four levels [four levels](https://github.com/olivekl/slsa/tree/wording-updates#slsa-levels) are designed to be
 incremental and actionable, and to protect against specific integrity attacks
 [TODO add link to future section on attacks]. SLSA 4 represents the ideal end
 state, and the lower levels represent milestones with corresponding integrity
@@ -289,7 +289,7 @@ complete. Reproducible builds, though not strictly required, provide many
 auditability and reliability benefits. Overall, SLSA 4 gives the consumer a high
 degree of confidence that the software has not been tampered with.
 
-The SLSA level is not transitive [TODO: link to FAQ]. It describes the integrity
+The SLSA level is not transitive [(see explanation)](https://github.com/olivekl/slsa/tree/wording-updates#q-why-is-slsa-not-transitive). It describes the integrity
 protections of an artifact's build process and top-level source, but nothing
 about the artifact's dependencies. Dependencies have their own SLSA ratings, and
 it is possible for a SLSA 4 artifact to be built from SLSA 0 dependencies.
