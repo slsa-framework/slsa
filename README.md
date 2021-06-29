@@ -10,7 +10,7 @@ that is mandatory for all of Google's production workloads.
 The goal of SLSA is to improve the state of the industry, particularly open
 source, to defend against the most pressing integrity threats. With SLSA,
 consumers can make informed choices about the security posture of the software
-they consume.  
+they consume.
 
 **IMPORTANT:** SLSA is an evolving specification and we are looking for
 wide-ranging feedback via [GitHub issues], [email][mailing list], or
@@ -170,7 +170,7 @@ their software more secure, and consumers can make decisions based on a software
 package's security posture. SLSA's [four levels](#slsa-levels) are designed to be
 incremental and actionable, and to protect against specific integrity attacks. SLSA 4 represents the ideal end
 state, and the lower levels represent milestones with corresponding integrity
-guarantees.  
+guarantees.
 
 ### Terminology
 
@@ -335,7 +335,7 @@ security stance, as described in the case study [vision](walkthrough.md#vision-c
 
 #### Q: What about reproducible builds?
 
-When talking about [reproducible builds](https://reproducible-builds.org), 
+When talking about [reproducible builds](https://reproducible-builds.org),
 there are two related but distinct concepts: "reproducible" and
 "verified reproducible."
 
