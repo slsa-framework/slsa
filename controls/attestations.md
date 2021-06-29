@@ -21,14 +21,14 @@ in the trusted computing world.)
 An attestation is the generalization of raw artifact/code signing, where the
 signature is directly over the artifact or a hash of artifact:
 
-*   With raw signing, a signature *implies* a single bit of metadata about the
+-   With raw signing, a signature *implies* a single bit of metadata about the
     artifact, based on the public key. The exact meaning must be negotiated
     between signer and verifier, and a new keyset must be provisioned for each
     bit of information. For example, a signature might denote who produced an
     artifact, or it might denote fitness for some purpose, or something else
     entirely.
 
-*   With an attestation, the metadata is *explicit* and the signature only
+-   With an attestation, the metadata is *explicit* and the signature only
     denotes who created the attestation. A single keyset can express an
     arbitrary amount of information, including things that are not possible with
     raw signing. For example, an attestation might state exactly how an artifact
@@ -101,17 +101,17 @@ recognize that other choices may be necessary in various cases.
 
 Summary: Generate [in-toto](https://in-toto.io) attestations.
 
-*   Envelope: **[DSSE](https://github.com/secure-systems-lab/dsse/)** (TODO:
+-   Envelope: **[DSSE](https://github.com/secure-systems-lab/dsse/)** (TODO:
     Recommend Crypto/PKI)
-*   Statement:
+-   Statement:
     **[in-toto/attestation](https://github.com/in-toto/attestation/)**
-*   Predicate: Choose as appropriate.
-    *   [Provenance](https://github.com/in-toto/attestation/tree/main/spec/provenance.md)
-    *   [SPDX](https://github.com/in-toto/attestation/tree/main/spec/spdx.md)
-    *   If none are a good fit, invent a new one.
-*   Bundle and Storage/Lookup:
-    *   Local Filesystem: TODO
-    *   Docker/OCI Registry:
+-   Predicate: Choose as appropriate.
+    -   [Provenance](https://github.com/in-toto/attestation/tree/main/spec/provenance.md)
+    -   [SPDX](https://github.com/in-toto/attestation/tree/main/spec/spdx.md)
+    -   If none are a good fit, invent a new one.
+-   Bundle and Storage/Lookup:
+    -   Local Filesystem: TODO
+    -   Docker/OCI Registry:
         **[sigstore/cosign](https://github.com/sigstore/cosign)**
 
 See [survey](survey.md) for other options.

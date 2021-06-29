@@ -42,11 +42,11 @@ software developers and consumers.
 
 SLSA addresses three issues:
 
--  Software producers want to secure their supply chains but don't know
+-   Software producers want to secure their supply chains but don't know
    exactly how;
--  Software consumers want to understand and limit their exposure to supply
+-   Software consumers want to understand and limit their exposure to supply
    chain attacks but have no means of doing so;
--  Artifact signatures alone prevent only a subset of the attacks we care about.
+-   Artifact signatures alone prevent only a subset of the attacks we care about.
 
 ### Supply Chain Threats
 
@@ -225,7 +225,7 @@ dependencies' supply chains plus its own sources and builds.
 
 Special cases:
 
-*   A ZIP file is containing source code is a package, not a source, because it
+-   A ZIP file is containing source code is a package, not a source, because it
     is built from some other source, such as a git commit.
 
 ### SLSA Levels
@@ -297,6 +297,7 @@ Common - [Security]                  |        |        |        | ✓
 Common - [Access]                    |        |        |        | ✓
 Common - [Superusers]                |        |        |        | ✓
 
+<!-- markdownlint-disable-next-line MD036 -->
 _○ = required unless there is a justification_
 
 [Access]: requirements.md#access
@@ -366,15 +367,15 @@ satisfy all of the SLSA build requirements.
 That said, verified reproducible builds are not a complete solution to supply
 chain integrity, nor are they practical in all cases:
 
-*   Reproducible builds do not address source, dependency, or distribution
+-   Reproducible builds do not address source, dependency, or distribution
     threats.
-*   Reproducers must truly be independent, lest they all be susceptible to the
+-   Reproducers must truly be independent, lest they all be susceptible to the
     same attack. For example, if all rebuilders run the same pipeline software,
     and that software has a vulnerability that can be triggered by sending a
     build request, then an attacker can compromise all rebuilders, violating the
     assumption above.
-*   Some builds cannot easily be made reproducible, as noted above.
-*   Closed-source reproducible builds require the code owner to either grant
+-   Some builds cannot easily be made reproducible, as noted above.
+-   Closed-source reproducible builds require the code owner to either grant
     source access to multiple independent rebuilders, which is unacceptable in
     many cases, or develop multiple, independent in-house rebuilders, which is
     likely prohibitively expensive.
@@ -396,38 +397,38 @@ data models. Currently this is joint work between
 [Binary Authorization](https://cloud.google.com/binary-authorization) and
 [in-toto](https://in-toto.io/) but we invite wider participation.
 
-*   [Standard attestation format](https://github.com/in-toto/attestation#in-toto-attestations)
+-   [Standard attestation format](https://github.com/in-toto/attestation#in-toto-attestations)
     to express provenance and other attributes. This will allow sources and
     builders to express properties in a standard way that can be consumed by
     anyone. Also includes reference implementations for generating these
     attestations.
-*   Policy data model and reference implementation.
+-   Policy data model and reference implementation.
 
 For a broader view of the software supply chain problem:
 
-*   [Know, Prevent, Fix: A framework for shifting the discussion around
+-   [Know, Prevent, Fix: A framework for shifting the discussion around
     vulnerabilities in open
     source](https://security.googleblog.com/2021/02/know-prevent-fix-framework-for-shifting.html)
-*   [Threats, Risks, and Mitigations in the Open Source Ecosystem]
+-   [Threats, Risks, and Mitigations in the Open Source Ecosystem]
 
 Prior iterations of the ideas presented here:
 
-*   [Building Secure and Reliable Systems, Chapter 14: Deploying Code](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=339)
-*   [Binary Authorization for Borg] - This is how Google implements the SLSA
+-   [Building Secure and Reliable Systems, Chapter 14: Deploying Code](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=339)
+-   [Binary Authorization for Borg] - This is how Google implements the SLSA
     idea internally.
 
 Other related work:
 
-*   [CII Best Practices Badge](https://bestpractices.coreinfrastructure.org/en)
-*   [Security Scorecards](https://github.com/ossf/scorecard) - Perhaps SLSA
+-   [CII Best Practices Badge](https://bestpractices.coreinfrastructure.org/en)
+-   [Security Scorecards](https://github.com/ossf/scorecard) - Perhaps SLSA
     could be implemented as an aggregation of scorecard entries, for at least
     the checks that can be automated.
-*   [Trustmarks](https://trustmark.gtri.gatech.edu/)
+-   [Trustmarks](https://trustmark.gtri.gatech.edu/)
 
 Other takes on provenance and CI/CD:
 
-*   [The Path to Code Provenance](https://medium.com/uber-security-privacy/code-provenance-application-security-77ebfa4b6bc5)
-*   [How to Build a Compromise-Resilient CI/CD](https://www.youtube.com/watch?v=9hCiHr1f0zM)
+-   [The Path to Code Provenance](https://medium.com/uber-security-privacy/code-provenance-application-security-77ebfa4b6bc5)
+-   [How to Build a Compromise-Resilient CI/CD](https://www.youtube.com/watch?v=9hCiHr1f0zM)
 
 <!-- Links -->
 

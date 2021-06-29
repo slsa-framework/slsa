@@ -1,0 +1,43 @@
+# MD004/ul-style - Unordered list style
+MD004:
+  style: "dash"
+
+# MD007/ul-indent - Unordered list indentation
+MD007:
+  indent: 4
+
+# MD013/line-length - Line length
+MD013: false
+
+# MD029/ol-prefix - Ordered list item prefix
+MD029:
+  # List style
+  style: "ordered"
+
+# MD030/list-marker-space - Spaces after list markers
+MD030:
+  # Spaces for single-line unordered list items
+  ul_single: 3
+  # Spaces for single-line ordered list items
+  ol_single: 2
+  # Spaces for multi-line unordered list items
+  ul_multi: 3
+  # Spaces for multi-line ordered list items
+  ol_multi: 2
+
+# MD033/no-inline-html - Inline HTML
+MD033: false
+
+# MD034/no-bare-urls - Bare URL used
+MD034: false
+
+# MD046/code-block-style - Code block style
+MD046:
+  style: "fenced"
+
+# MD047/single-trailing-newline - Files should end with a single newline character
+MD047: true
+
+# MD048/code-fence-style - Code fence style
+MD048:
+  style: "backtick"
