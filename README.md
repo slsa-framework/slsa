@@ -429,13 +429,6 @@ Other takes on provenance and CI/CD:
 *   [The Path to Code Provenance](https://medium.com/uber-security-privacy/code-provenance-application-security-77ebfa4b6bc5)
 *   [How to Build a Compromise-Resilient CI/CD](https://www.youtube.com/watch?v=9hCiHr1f0zM)
 
-## Footnotes
-
-[^1]: "Trusted person" is defined by the organization or developers that
-    own/produce the software. A consumer must ultimately trust them to do the
-    right thing. The non-unilateral principle protects against individuals
-    within the organization subverting the organization's goals.
-
 <!-- Links -->
 
 [Binary Authorization for Borg]: https://cloud.google.com/security/binary-authorization-for-borg
