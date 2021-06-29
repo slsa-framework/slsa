@@ -1,7 +1,12 @@
 # SLSA: Supply-chain Levels for Software Artifacts
 
-Supply-chain Levels for Software Artifacts (SLSA, pronounced
-_[salsa](https://www.google.com/search?q=how+to+pronounce+salsa)_) is an
+<!--{% if false %}-->
+
+**NOTE: This site is best viewed at https://slsa.dev.**
+
+<!--{% endif %}-->
+
+Supply-chain Levels for Software Artifacts (SLSA, pronounced _[salsa]_) is an
 end-to-end framework for ensuring the integrity of software artifacts throughout
 the software supply chain. The requirements are inspired by Google’s internal
 "[Binary Authorization for Borg]" that has been in use for the past 8+ years and
@@ -10,7 +15,7 @@ that is mandatory for all of Google's production workloads.
 The goal of SLSA is to improve the state of the industry, particularly open
 source, to defend against the most pressing integrity threats. With SLSA,
 consumers can make informed choices about the security posture of the software
-they consume.  
+they consume.
 
 **IMPORTANT:** SLSA is an evolving specification and we are looking for
 wide-ranging feedback via [GitHub issues], [email][mailing list], or
@@ -34,11 +39,6 @@ face of the eye-opening, multi-billion dollar attacks in recent months (e.g.
 [Codecov](https://about.codecov.io/security-update/)), some of which could have
 been prevented or made more difficult had such a framework been adopted by
 software developers and consumers.
-
-Supply-chain Levels for Software Artifacts (SLSA, pronounced "salsa") is an end-to-end framework for ensuring the integrity
-of software artifacts throughout the software supply chain. It is inspired by
-Google's internal "[Binary Authorization for Borg]" which has been in use for the past 8+ years and is mandatory for all of Google's
-production workloads.
 
 SLSA addresses three issues:
 
@@ -170,7 +170,7 @@ their software more secure, and consumers can make decisions based on a software
 package's security posture. SLSA's [four levels](#slsa-levels) are designed to be
 incremental and actionable, and to protect against specific integrity attacks. SLSA 4 represents the ideal end
 state, and the lower levels represent milestones with corresponding integrity
-guarantees.  
+guarantees.
 
 ### Terminology
 
@@ -335,7 +335,7 @@ security stance, as described in the case study [vision](walkthrough.md#vision-c
 
 #### Q: What about reproducible builds?
 
-When talking about [reproducible builds](https://reproducible-builds.org), 
+When talking about [reproducible builds](https://reproducible-builds.org),
 there are two related but distinct concepts: "reproducible" and
 "verified reproducible."
 
@@ -429,13 +429,6 @@ Other takes on provenance and CI/CD:
 *   [The Path to Code Provenance](https://medium.com/uber-security-privacy/code-provenance-application-security-77ebfa4b6bc5)
 *   [How to Build a Compromise-Resilient CI/CD](https://www.youtube.com/watch?v=9hCiHr1f0zM)
 
-## Footnotes
-
-[^1]: "Trusted person" is defined by the organization or developers that
-    own/produce the software. A consumer must ultimately trust them to do the
-    right thing. The non-unilateral principle protects against individuals
-    within the organization subverting the organization's goals.
-
 <!-- Links -->
 
 [Binary Authorization for Borg]: https://cloud.google.com/security/binary-authorization-for-borg
@@ -445,3 +438,4 @@ Other takes on provenance and CI/CD:
 [curlimages/curl]: https://hub.docker.com/r/curlimages/curl
 [feedback form]: https://forms.gle/93QRfUqF7YY2mJDi9
 [mailing list]: https://groups.google.com/g/slsa-discussion
+[salsa]: https://www.google.com/search?q=how+to+pronounce+salsa
