@@ -6,11 +6,7 @@
 
 <!--{% endif %}-->
 
-Supply-chain Levels for Software Artifacts (SLSA, pronounced _[salsa]_) is an
-end-to-end framework for ensuring the integrity of software artifacts throughout
-the software supply chain. The requirements are inspired by Google’s internal
-"[Binary Authorization for Borg]" that has been in use for the past 8+ years and
-that is mandatory for all of Google's production workloads.
+Supply-chain Levels for Software Artifacts (SLSA, pronounced _[salsa]_) is an end-to-end framework for ensuring the integrity of software artifacts throughout the software supply chain. The requirements are inspired by Google’s internal "[Binary Authorization for Borg]" that has been in use for the past 8+ years and that is mandatory for all of Google's production workloads.
 
 The goal of SLSA is to improve the state of the industry, particularly open
 source, to defend against the most pressing integrity threats. With SLSA,
