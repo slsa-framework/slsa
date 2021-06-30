@@ -48,21 +48,21 @@ Raw signing            | ✓        | ✓         | ✗         |         |     
 
 Legend:
 
-*   ✓ Defines this layer
-*   ✗ Does not support this layer
-*   ~ Imposes requirements on this layer
-*   (blank) No opinion on this layer
+-   ✓ Defines this layer
+-   ✗ Does not support this layer
+-   ~ Imposes requirements on this layer
+-   (blank) No opinion on this layer
 
 Columns:
 
-*   Envelope: Defines the envelope layer of the attestation.
-*   Statement: Defines the statement layer of the attestation.
-*   Predicate: Defines the predicate layer of the attestation.
-*   Storage: Provides a mechanism for attestation storage and retrieval.
-*   Generation: Provides a mechanism for generating attestations.
-*   Policy: Provides a mechanism for consuming attestations and rendering policy
+-   Envelope: Defines the envelope layer of the attestation.
+-   Statement: Defines the statement layer of the attestation.
+-   Predicate: Defines the predicate layer of the attestation.
+-   Storage: Provides a mechanism for attestation storage and retrieval.
+-   Generation: Provides a mechanism for generating attestations.
+-   Policy: Provides a mechanism for consuming attestations and rendering policy
     decisions.
-*   Status: Is it available now?
+-   Status: Is it available now?
 
 ## Envelope Layer (not specific to Attestations)
 
