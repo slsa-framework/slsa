@@ -1,12 +1,11 @@
 name: Lint
-on: [pull_request]
+on: [workflow_dispatch, pull_request]
 permissions: read-all
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-    - name: Markdown Lint
-      uses: nosborn/github-action-markdown-cli@6e34c67b8bd3406dd8ee6eeba353ca4c66793501 # v2.0.0
-      with:
-        files: .
-        config_file: ".markdownlint.yaml"
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+    - run: npm ci --ignore-scripts
+    - run: npm run lint --silent

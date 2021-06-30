@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "lint": "markdownlint *.md controls/*.md",
+    "fix": "markdownlint *.md controls/*.md --fix"
+  },
+  "dependencies": {
+    "markdownlint-cli": "^0.27.1"
+  }
+}
