@@ -36,7 +36,7 @@ defines how to mitigate threats across the software supply chain, and provides
 reasonable security guarantees. There is an urgent need for a solution in the
 face of the eye-opening, multi-billion dollar attacks in recent months (e.g.
 [SolarWinds](https://www.solarwinds.com/sa-overview/securityadvisory),
-[Codecov](https://about.codecov.io/security-update/)), some of which could have
+[CodeCov](https://about.codecov.io/security-update/)), some of which could have
 been prevented or made more difficult had such a framework been adopted by
 software developers and consumers.
 
@@ -61,76 +61,25 @@ Many recent high-profile attacks were consequences of supply-chain integrity
 vulnerabilities, and could have been prevented by SLSA's framework. For
 example:
 
-<table>
-<thead>
-<tr><th><th>Threat<th>Known example<th>How SLSA could have helped
-</thead>
-<tbody>
+|   | Threat | Known example | How SLSA could have helped
+|---|--------|---------------|---------------------------
+| A | Submit bad code to the source repository | [Linux hypocrite commits]: Researcher attempted to intentionally introduce vulnerabilities into the Linux kernel via patches on the mailing list. | Two-person review caught most, but not all, of the vulnerabilities.
+| B | Compromise source control platform | [PHP]: Attacker compromised PHP's self-hosted git server and injected two malicious commits. | A better-protected source code platform would have been a much harder target for the attackers.
+| C | Build with official process but from code not matching source control | [Webmin]: Attacker modified the build infrastructure to use source files not matching source control. | A SLSA-compliant build server would have produced provenance identifying the actual sources used, allowing consumers to detect such tampering.
+| D | Compromise build platform | [SolarWinds]: Attacker compromised the build platform and installed an implant that injected malicious behavior during each build. | Higher SLSA levels require [stronger security controls for the build platform](requirements.md), making it more difficult to compromise and gain persistence.
+| E | Use bad dependency (i.e. A-H, recursively) | [event-stream]: Attacker added an innocuous dependency and then updated the dependency to add malicious behavior. The update did not match the code submitted to GitHub (i.e. attack F). | Applying SLSA recursively to all dependencies would have prevented this particular vector, because the provenance would have indicated that it either wasn't built from a proper builder or that the source did not come from GitHub.
+| F | Upload an artifact that was not built by the CI/CD system | [CodeCov]: Attacker used leaked credentials to upload a malicious artifact to a GCS bucket, from which users download directly. | Provenance of the artifact in the GCS bucket would have shown that the artifact was not built in the expected manner from the expected source repo.
+| G | Compromise package repository | [Attacks on Package Mirrors]: Researcher ran mirrors for several popular package repositories, which could have been used to serve malicious packages. | Similar to above (F), provenance of the malicious artifacts would have shown that they were not built as expected or from the expected source repo.
+| H | Trick consumer into using bad package | [Browserify typosquatting]: Attacker uploaded a malicious package with a similar name as the original. | SLSA does not directly address this threat, but provenance linking back to source control can enable and enhance other solutions.
 
-<tr><td>A<td>Submit bad code to the source repository
-<td><a href="https://lore.kernel.org/lkml/202105051005.49BFABCE@keescook/">Linux hypocrite commits</a>:
-Researcher attempted to intentionally introduce vulnerabilities into the Linux
-kernel via patches on the mailing list.
-<td>Two-person review caught most, but not all, of the vulnerabilities.
-
-<tr><td>B<td>Compromise source control platform
-<td><a href="https://news-web.php.net/php.internals/113838">PHP</a>:
-Attacker compromised PHP's self-hosted git server and injected two malicious
-commits.
-<td>A better-protected source code platform would have been a much harder target
-for the attackers.
-
-<tr><td>C<td>Build with official process but from code not matching source control
-<td><a href="https://www.webmin.com/exploit.html">Webmin</a>:
-Attacker modified the build infrastructure to use source files not matching
-source control.
-<td>A SLSA-compliant build server would have produced provenance identifying the
-actual sources used, allowing consumers to detect such tampering.
-
-<tr><td>D<td>Compromise build platform
-<td><a href="https://www.crowdstrike.com/blog/sunspot-malware-technical-analysis/">SolarWinds</a>:
-Attacker compromised the build platform and installed an implant that
-injected malicious behavior during each build.
-<td><!-- Use Markdown so that jekyll-relative-links rewrites the link. -->
-
-Higher SLSA levels require
-[stronger security controls for the build platform](requirements.md),
-making it more difficult to compromise and gain persistence.
-
-<tr><td>E<td>Use bad dependency (i.e. A-H, recursively)
-<td><a href="https://schneider.dev/blog/event-stream-vulnerability-explained/">event-stream</a>:
-Attacker added an innocuous dependency and then updated the dependency to
-add malicious behavior. The update did not match the code submitted to
-GitHub (i.e. attack F).
-<td>Applying SLSA recursively to all dependencies would have prevented this
-particular vector, because the provenance would have indicated that it
-either wasn't built from a proper builder or that the source did not come
-from GitHub.
-
-<tr><td>F<td>Upload an artifact that was not built by the CI/CD system
-<td><a href="https://about.codecov.io/apr-2021-post-mortem/">CodeCov</a>:
-Attacker used leaked credentials to upload a malicious artifact to a GCS
-bucket, from which users download directly.
-<td>Provenance of the artifact in the GCS bucket would have shown that the
-artifact was not built in the expected manner from the expected source
-repo.
-
-<tr><td>G<td>Compromise package repository
-<td><a href="https://theupdateframework.io/papers/attacks-on-package-managers-ccs2008.pdf">Attacks on Package Mirrors</a>:
-Researcher ran mirrors for several popular package repositories, which could
-have been used to serve malicious packages.
-<td>Similar to above (F), provenance of the malicious artifacts would have
-shown that they were not built as expected or from the expected source
-repo.
-
-<tr><td>H<td>Trick consumer into using bad package
-<td><a href="https://blog.sonatype.com/damaging-linux-mac-malware-bundled-within-browserify-npm-brandjack-attempt">Browserify typosquatting</a>:
-Attacker uploaded a malicious package with a similar name as the original.
-<td>SLSA does not directly address this threat, but provenance linking back to
-source control can enable and enhance other solutions.
-
-</tbody>
-</table>
+[Linux hypocrite commits]: https://lore.kernel.org/lkml/202105051005.49BFABCE@keescook/
+[PHP]: https://news-web.php.net/php.internals/113838
+[Webmin]: https://www.webmin.com/exploit.html
+[SolarWinds]: https://www.crowdstrike.com/blog/sunspot-malware-technical-analysis/
+[event-stream]: https://schneider.dev/blog/event-stream-vulnerability-explained/
+[CodeCov]: https://about.codecov.io/apr-2021-post-mortem/
+[Attacks on Package Mirrors]: https://theupdateframework.io/papers/attacks-on-package-managers-ccs2008.pdf
+[Browserify typosquatting]: https://blog.sonatype.com/damaging-linux-mac-malware-bundled-within-browserify-npm-brandjack-attempt
 
 A SLSA level gives consumers confidence that software has not been tampered with
 and can be securely traced back to source—something that is difficult, if not
