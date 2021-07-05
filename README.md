@@ -107,45 +107,13 @@ dependencies' supply chains plus its own sources and builds.
 
 ![Software Supply Chain Model](images/supply-chain-model.svg)
 
-<table>
- <thead>
-  <tr>
-   <th>Term
-   <th>Description
-   <th>Example
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <th>Artifact
-   <td>An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact
-   <td>A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image.
-  </tr>
-  <tr>
-   <th>Source
-   <td>Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further.
-   <td>Git commit (source) hosted on GitHub (platform).
-  </tr>
-  <tr>
-   <th>Build
-   <td>Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs.
-   <td>.travis.yml (process) run by Travis CI (platform).
-  </tr>
-  <tr>
-   <th>Package
-   <td>Artifact that is "published" for use by others. In the model, it is
-   always the output of a build process, though that build process can be a
-   no-op.
-   <td>Docker image (package) distributed on DockerHub (platform).
-  </tr>
-  <tr>
-   <th>Dependency
-   <td>Artifact that is an input to a build process but that is not a source. In
-   the model, it is always a package.
-   <td>Alpine package (package) distributed on Alpine Linux (platform).
-  </tr>
- </tbody>
-</table>
+| Term | Description | Example |
+|------|-------------|---------|
+| Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image. |
+| Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform). |
+| Build | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform). |
+| Package | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). |
+| Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform). |
 
 Special cases:
 
