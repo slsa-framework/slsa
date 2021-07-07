@@ -66,8 +66,8 @@ example:
 | A | Submit bad code to the source repository | [Linux hypocrite commits]: Researcher attempted to intentionally introduce vulnerabilities into the Linux kernel via patches on the mailing list. | Two-person review caught most, but not all, of the vulnerabilities.
 | B | Compromise source control platform | [PHP]: Attacker compromised PHP's self-hosted git server and injected two malicious commits. | A better-protected source code platform would have been a much harder target for the attackers.
 | C | Build with official process but from code not matching source control | [Webmin]: Attacker modified the build infrastructure to use source files not matching source control. | A SLSA-compliant build server would have produced provenance identifying the actual sources used, allowing consumers to detect such tampering.
-| D | Compromise build platform | [SolarWinds]: Attacker compromised the build platform and installed an implant that injected malicious behavior during each build. | Higher SLSA levels require [stronger security controls for the build platform](requirements.md), making it more difficult to compromise and gain persistence.
-| E | Use bad dependency (i.e. A-H, recursively) | [event-stream]: Attacker added an innocuous dependency and then updated the dependency to add malicious behavior. The update did not match the code submitted to GitHub (i.e. attack F). | Applying SLSA recursively to all dependencies would have prevented this particular vector, because the provenance would have indicated that it either wasn't built from a proper builder or that the source did not come from GitHub.
+| D | Compromise build platform | [SolarWinds]: Attacker compromised the build platform and installed an implant that injected malicious behavior during each build. | Higher SLSA levels require [stronger security controls for the build platform](requirements.md#build-requirements), making it more difficult to compromise and gain persistence.
+| E | Use bad dependency (i.e. A-H, recursively) | [event-stream]: Attacker added an innocuous dependency and then later updated the dependency to add malicious behavior. The update did not match the code submitted to GitHub (i.e. attack F). | Applying SLSA recursively to all dependencies would have prevented this particular vector, because the provenance would have indicated that it either wasn't built from a proper builder or that the source did not come from GitHub.
 | F | Upload an artifact that was not built by the CI/CD system | [CodeCov]: Attacker used leaked credentials to upload a malicious artifact to a GCS bucket, from which users download directly. | Provenance of the artifact in the GCS bucket would have shown that the artifact was not built in the expected manner from the expected source repo.
 | G | Compromise package repository | [Attacks on Package Mirrors]: Researcher ran mirrors for several popular package repositories, which could have been used to serve malicious packages. | Similar to above (F), provenance of the malicious artifacts would have shown that they were not built as expected or from the expected source repo.
 | H | Trick consumer into using bad package | [Browserify typosquatting]: Attacker uploaded a malicious package with a similar name as the original. | SLSA does not directly address this threat, but provenance linking back to source control can enable and enhance other solutions.
@@ -107,45 +107,13 @@ dependencies' supply chains plus its own sources and builds.
 
 ![Software Supply Chain Model](images/supply-chain-model.svg)
 
-<table>
- <thead>
-  <tr>
-   <th>Term
-   <th>Description
-   <th>Example
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <th>Artifact
-   <td>An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact
-   <td>A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image.
-  </tr>
-  <tr>
-   <th>Source
-   <td>Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further.
-   <td>Git commit (source) hosted on GitHub (platform).
-  </tr>
-  <tr>
-   <th>Build
-   <td>Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs.
-   <td>.travis.yml (process) run by Travis CI (platform).
-  </tr>
-  <tr>
-   <th>Package
-   <td>Artifact that is "published" for use by others. In the model, it is
-   always the output of a build process, though that build process can be a
-   no-op.
-   <td>Docker image (package) distributed on DockerHub (platform).
-  </tr>
-  <tr>
-   <th>Dependency
-   <td>Artifact that is an input to a build process but that is not a source. In
-   the model, it is always a package.
-   <td>Alpine package (package) distributed on Alpine Linux (platform).
-  </tr>
- </tbody>
-</table>
+| Term | Description | Example |
+|------|-------------|---------|
+| Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image. |
+| Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform). |
+| Build | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform). |
+| Package | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). |
+| Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform). |
 
 Special cases:
 
