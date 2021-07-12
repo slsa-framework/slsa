@@ -368,9 +368,12 @@ Requirements on the contents of the provenance:
 <td>Identifies Artifact
 <td>
 
-The provenance identifies the output artifact via a cryptographic hash. The
-RECOMMENDED algorithm is SHA-256 for cross-system compatibility. If another
-algorithm is used, it SHOULD be resistant to collisions and second preimages.
+The provenance MUST identify the output artifact via at least one
+cryptographic hash. The provenance MAY provide multiple identifying
+cryptographic hashes using different algorithms. When only one hash is
+provided, the RECOMMENDED algorithm is SHA-256 for cross-system
+compatibility. If another algorithm is used, it SHOULD be resistant to
+collisions and second preimages.
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="identifies-builder">
