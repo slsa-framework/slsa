@@ -241,7 +241,7 @@ The user-defined build script:
   The build service:
 
 -   MUST fetch all artifacts in a trusted control plane.
--   MUST disallow mutable references.
+-   MUST NOT allow mutable references.
 -   MUST verify the integrity of each artifact.
     -   If the [immutable reference] includes a cryptographic hash, the service
         MUST verify the hash and reject the fetch if the verification fails.
