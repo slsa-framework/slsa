@@ -392,7 +392,7 @@ provenance. This represents the entity that the consumer must trust. Examples:
 The provenance identifies the source containing the top-level build script, via
 an [immutable reference]. Example: git URL + branch/tag/ref + commit ID.
 
-<td>✓<td>✓<td>✓<td>✓
+<td><td><td>✓<td>✓
 <tr id="identifies-entry-point">
 <td>Identifies Entry Point
 <td>
@@ -400,7 +400,7 @@ an [immutable reference]. Example: git URL + branch/tag/ref + commit ID.
 The provenance identifies the "entry point" or command that was used to invoke
 the build script. Example: `make all`.
 
-<td>✓<td>✓<td>✓<td>✓
+<td><td><td>✓<td>✓
 <tr id="includes-all-params">
 <td>Includes All Build Parameters
 <td>
