@@ -4,21 +4,21 @@
 
 A vendor, Fooly, has the following goals in applying SLSA:
 
-1. Protect their users from malicious changes to the Fooly app
-2. Protect their reputation, which would be harmed, if the Fooly app were compromised
+1.  Protect their users from malicious changes to the Fooly app
+2.  Protect their reputation, which would be harmed, if the Fooly app were compromised
 
 Fooly can acheive these goals when publishing their app by:
 
-1. Upgrading their source control systems to meet higher SLSA levels.
-2. Upgrading their build system to meet higher SLSA levels.
-3. Ensuring the Fooly app **MUST** go through a secure choke-point in order to be published/signed.
-4. Have the choke-point check the candiate Fooly app against it's provenance, checking:
-    1. That the expected builder created it.
-    2. That the builder meets some minimum SLSA level
-    3. That the source repos listed in the provenance meet some minimum SLSA level
-    4. That the build entry point listed in the provenance is what they expect
-    5. (TBD) That the binary dependencies listed in the provenance meet some minimum SLSA level
-5. Only publishing the app if all the checks in #4 pass.
+1.  Upgrading their source control systems to meet higher SLSA levels.
+2.  Upgrading their build system to meet higher SLSA levels.
+3.  Ensuring the Fooly app **MUST** go through a secure choke-point in order to be published/signed.
+4.  Have the choke-point check the candiate Fooly app against it's provenance, checking:
+    1.  That the expected builder created it.
+    2.  That the builder meets some minimum SLSA level
+    3.  That the source repos listed in the provenance meet some minimum SLSA level
+    4.  That the build entry point listed in the provenance is what they expect
+    5.  (TBD) That the binary dependencies listed in the provenance meet some minimum SLSA level
+5.  Only publishing the app if all the checks in #4 pass.
 
 This approach allows Fooly to acheive their goals without requiring any changes from their users
 or from their distribution channels.  It doesn't, however, protect their users from published
