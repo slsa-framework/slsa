@@ -1,5 +1,10 @@
 # Use Cases
 
+These are some of the use cases for SLSA.  Of these the first use case (a vendor checking their
+own packages prior to publishing) is the most ready for adoption as it does not require
+interactions with any other party.
+
+
 ## Vendor publishing a software package
 
 A vendor, BarInc, has the following goals in applying SLSA:
