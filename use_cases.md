@@ -40,7 +40,7 @@ They could do this by:
     and any additional attestations (such as
     [source control attestations](https://github.com/in-toto/attestation/issues/47)) for BarImage
     each time it is released.
-2.  Requesting BarInc to publish the public keys it's builder uses to sign the attestation.
+2.  Requesting BarInc to publish the public keys it's builder uses to sign the attestations.
     -   (TBD) [Determine how to convey these keys](https://github.com/slsa-framework/slsa/issues/101).
 3.  Requesting BarInc to confirm what SLSA level their builder and source control system meet.
     -   In the future there may be an accredidation body that confirm this _for_ BarInc.
@@ -54,7 +54,36 @@ They could do this by:
     policy from #4.
 7.  Only import the container image if all the checks in #6 pass.
 
+This approach protects the developer without having to rely on any trust in intermediate package
+repositories.
+
 ## Package Repository accepting a software package
 
-A Package Repository (e.g. Maven, NPM) wants to protect their users from malicious changes to the
-software packages uploaded to the repo.
+A Package Repository (e.g. Docker Hub) wants to protect their users from malicious changes to the
+container images uploaded to the repo.
+
+They could do this by:
+
+1.  Requesting publishers of containers to publish the
+    [in-toto Provenance](https://github.com/in-toto/attestation/blob/main/spec/predicates/provenance.md)
+    and any additional attestations (such as
+    [source control attestations](https://github.com/in-toto/attestation/issues/47)) for BarImage
+    each time a new image is pushed to the repository.
+    -   (TBD) Where to store this provenance?
+2.  Requesting publishers to publish the public keys it's builder uses to sign the attestations.
+    -   (TBD) [Determine how to convey these keys](https://github.com/slsa-framework/slsa/issues/101).
+3.  Requesting publishers to confirm what SLSA level their builder and source control system meet.
+    -   In the future there may be an accredidation body that confirm this _for_ the publishers.
+4.  Determining what policy to apply to published images
+    -   They could create this policy on first use based on the data provided in the in-toto Provenance.
+        Any significant deviations (e.g. builder changed, source repo changed) would cause a push
+        failure. OR
+    -   The Package Repository could have publishers configure their specific policy as a part of their
+        repo.
+        -   The Package Repository could make these policies publicly readable by users of the repo.
+        -   (TBD) How to securely update these policies.
+5.  When a new container image is being published check it against the policy from #4.
+6.  Do not allow container images that fail the check in #5 to be made public.
+
+This approach could protect users of protected repos from malicious tampering without requring all
+users to do their own policy checks of each image they consume.
