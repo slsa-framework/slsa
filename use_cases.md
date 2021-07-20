@@ -27,10 +27,28 @@ those concerns, such as code-signing after verification, and time-of-use verific
 
 ## Developer using third party software packages
 
-A developer using third party software packages wants to ensure the third party dependencies
-used by their product have not been tampered with.
+A developer using BarImage wants to ensure it hasn't been tampered with before using it.
 
-TODO: Add some options for how developers might do this.
+They could do this by:
+
+1.  Requesting BarInc to publish the 
+    [in-toto Provenance](https://github.com/in-toto/attestation/blob/main/spec/predicates/provenance.md)
+    and any additional attestations (such as
+    [source control attestations](https://github.com/in-toto/attestation/issues/47)) for BarImage
+    each time it is released.
+2.  Requesting BarInc to publish the public keys it's builder uses to sign the attestation.
+    * (TBD) [Determine how to convey these keys](https://github.com/slsa-framework/slsa/issues/101).
+4.  Requesting BarInc to confirm what SLSA level their builder and source control system meet.
+    * In the future there may be an accredidation body that confirm this _for_ BarInc.
+5.  Determining what policy to apply to BarImages
+    * They could create this policy on first use based on the data provided in the in-toto Provenance.
+      Any significant deviations (e.g. builder changed, source repo changed) would cause failure. OR
+    * BarInc could _publish_ a suggested policy for users of BarImage on their website.
+5.  Establish a secure choke-point that any uses of BarImage must pass through in order to be used.
+    *  E.g. On import to a local Docker registry
+6.  Have the choke-point check the candiate BarImage against it's provenance, checking it against the
+    policy from #4.
+7.  Only import the container image if all the checks in #6 pass.
 
 ## Package Repository accepting a software package
 
