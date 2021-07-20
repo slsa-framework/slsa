@@ -15,8 +15,8 @@ BarInc can acheive these goals when publishing the container image by:
 
 1.  Upgrading their source control systems to meet higher SLSA levels.
 2.  Upgrading their build system to meet higher SLSA levels.
-3.  Ensuring BarImage **MUST** go through a secure choke-point in order to be published.
-4.  Have the choke-point check the candiate BarImage against it's provenance, checking:
+3.  Ensuring BarImage **MUST** go through a secure control-point in order to be published.
+4.  Have the control-point check the candiate BarImage against it's provenance, checking:
     1.  That the expected builder created it.
     2.  That the builder meets some minimum SLSA level
     3.  That the source repos listed in the provenance meet some minimum SLSA level
@@ -48,9 +48,9 @@ They could do this by:
     -   They could create this policy on first use based on the data provided in the in-toto Provenance.
         Any significant deviations (e.g. builder changed, source repo changed) would cause failure. OR
     -   BarInc could _publish_ a suggested policy for users of BarImage on their website.
-5.  Establish a secure choke-point that any uses of BarImage must pass through in order to be used.
+5.  Establish a secure control-point that any uses of BarImage must pass through in order to be used.
     -   E.g. On import to a local Docker registry
-6.  Have the choke-point check the candiate BarImage against it's provenance, checking it against the
+6.  Have the control-point check the candiate BarImage against it's provenance, checking it against the
     policy from #4.
 7.  Only import the container image if all the checks in #6 pass.
 
