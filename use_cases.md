@@ -1,15 +1,16 @@
 # Use Cases
 
-These are some of the use cases for SLSA.  Of these the first use case (a vendor checking their
-own packages prior to publishing) is the most ready for adoption as it does not require
+These are some of the use cases for SLSA.  Of these the first use case (a developer checking
+their own packages prior to publishing) is the most ready for adoption as it does not require
 interactions with any other party.
 
-## Vendor publishing a software package
+## Developer publishing a software package
 
-A vendor, BarInc, has the following goals in applying SLSA:
+A developer, BarInc, has the following goals in applying SLSA:
 
 1.  Protect their users from malicious changes to the BarImage container image.
 2.  Protect their reputation, which would be harmed, if BarImage were compromised.
+3.  Access to metadata for auditing and ad-hoc analysis.
 
 BarInc can acheive these goals when publishing the container image by:
 
@@ -23,6 +24,7 @@ BarInc can acheive these goals when publishing the container image by:
     4.  That the build entry point listed in the provenance is what they expect.
     5.  (TBD) That the binary dependencies listed in the provenance meet some minimum SLSA level.
 5.  Only publishing the container image if all the checks in #4 pass.
+6.  Storing the provenance and all other attestations for future reference.
 
 This approach allows BarInc to acheive their goals without requiring any changes from their users
 or from their distribution channels.  It doesn't, however, protect their users from a published
