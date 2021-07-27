@@ -5,6 +5,8 @@ repository: slsa-framework/slsa
 header_pages:
   - requirements.md
   - walkthrough.md
+exclude:
+  - README.md
 
 theme: minima
 permalink: :path/:basename
