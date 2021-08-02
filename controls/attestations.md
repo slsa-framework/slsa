@@ -106,7 +106,7 @@ Summary: Generate [in-toto](https://in-toto.io) attestations.
 -   Statement:
     **[in-toto/attestation](https://github.com/in-toto/attestation/)**
 -   Predicate: Choose as appropriate.
-    -   [Provenance](https://github.com/in-toto/attestation/tree/main/spec/provenance.md)
+    -   [Provenance](https://slsa.dev/provenance)
     -   [SPDX](https://github.com/in-toto/attestation/tree/main/spec/spdx.md)
     -   If none are a good fit, invent a new one.
 -   Bundle and Storage/Lookup:

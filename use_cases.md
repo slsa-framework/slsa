@@ -37,14 +37,14 @@ A developer using BarImage wants to ensure it hasn't been tampered with before u
 
 They could do this by:
 
-1.  Requesting BarInc to publish the [in-toto Provenance] and any additional attestations (such
+1.  Requesting BarInc to publish the [in-toto SLSA Provenance] and any additional attestations (such
     as [source control attestations]) for BarImage each time it is released.
 2.  Requesting BarInc to publish the public keys its builder uses to sign the attestations.
     -   (TBD) [Determine how to convey these keys].
 3.  Requesting BarInc to confirm what SLSA level their builder and source control system meet.
     -   In the future there may be an accredidation body that confirm this _for_ BarInc.
 4.  Determining what policy to apply to BarImages.
-    -   They could create this policy on first use based on the data provided in the in-toto Provenance.
+    -   They could create this policy on first use based on the data provided in the in-toto SLSA Provenance.
         Any significant deviations (e.g. builder changed, source repo changed) would cause failure. OR
     -   BarInc could _publish_ a suggested policy for users of BarImage on their website.
 5.  Establishing a secure control-point that any uses of BarImage must pass through in order to be used.
@@ -63,7 +63,7 @@ container images uploaded to the repo.
 
 They could do this by:
 
-1.  Requesting publishers of containers to publish the [in-toto Provenance] and any additional
+1.  Requesting publishers of containers to publish the [in-toto SLSA Provenance] and any additional
     attestations (such as [source control attestations]) each time a new image is pushed to the
     repository.
     -   (TBD) Where to store this provenance?
@@ -72,7 +72,7 @@ They could do this by:
 3.  Requesting publishers to confirm what SLSA level their builder and source control system meet.
     -   In the future there may be an accredidation body that confirm this _for_ the publishers.
 4.  Determining what policy to apply to published images.
-    -   They could create this policy on first use based on the data provided in the in-toto Provenance.
+    -   They could create this policy on first use based on the data provided in the in-toto SLSA Provenance.
         Any significant deviations (e.g. builder changed, source repo changed) would cause a push
         failure. OR
     -   The Package Repository could have publishers configure their specific policy as a part of their
@@ -86,5 +86,5 @@ This approach could protect users of protected repos from malicious tampering wi
 users to do their own policy checks of each image they consume.
 
 [Determine how to convey these keys]: https://github.com/slsa-framework/slsa/issues/101
-[in-toto Provenance]: https://github.com/in-toto/attestation/blob/main/spec/predicates/provenance.md
+[in-toto SLSA Provenance]: https://slsa.dev/provenance
 [source control attestations]: https://github.com/in-toto/attestation/issues/47

@@ -1,6 +1,15 @@
-# Predicate type: Provenance
+# SLSA Provenance
 
-Type URI: https://in-toto.io/Provenance/v0.1
+This page describes the "SLSA Provenance" predicate that fits within the larger
+[in-toto attestation] framework. For more information about attestations, see
+that repo.
+
+This predicate is the recommended way to satisfy the SLSA [provenance
+requirements].
+
+## Metadata
+
+Type URI: https://slsa.dev/provenance/v0.1
 
 Version: 0.1.1
 
@@ -23,7 +32,7 @@ external control.
 
 See [Example](#example) for a concrete example.
 
-![Model Diagram](../../images/provenance.svg)
+![Model Diagram](../images/provenance.svg)
 
 ## Schema
 
@@ -34,7 +43,7 @@ See [Example](#example) for a concrete example.
   "subject": [{ ... }],
 
   // Predicate:
-  "predicateType": "https://in-toto.io/Provenance/v0.1",
+  "predicateType": "https://slsa.dev/provenance/v0.1",
   "predicate": {
     "builder": {
       "id": "<URI>"
@@ -67,14 +76,21 @@ See [Example](#example) for a concrete example.
 }
 ```
 
-_(Note: This is a Predicate type that fits within the larger
-[Attestation](../README.md) framework.)_
-
 ### Parsing rules
 
-See [parsing rules](../README.md#parsing-rules).
+This predicate follows the in-toto attestation [parsing rules]. Summary:
+
+-   Consumers MUST ignore unrecognized fields.
+-   The `predicateType` URI includes the major version number and will always
+    change whenever there is a backwards incompatible change.
+-   Minor version changes are always backwards compatible and "monotonic." Such
+    changes do not update the `predicateType`.
+-   Producers MAY add extension fields using field names that are URIs.
 
 ### Fields
+
+_NOTE: This section describes the fields within `predicate`. For a description
+of the other top-level fields, such as `subject`, see [Statement]._
 
 <a id="builder"></a>
 `builder` _object, required_
@@ -144,7 +160,7 @@ See [parsing rules](../README.md#parsing-rules).
 >
 > Consumers SHOULD accept only specific `recipe.entryPoint` values. For example,
 > a policy might only allow the "release" entry point but not the "debug" entry
-> point. (This is REQUIRED for [SLSA 2][SLSA] policies.)
+> point.
 >
 > MAY be omitted if the recipe type specifies a default value.
 >
@@ -160,8 +176,7 @@ See [parsing rules](../README.md#parsing-rules).
 > target, which is captured in `recipe.entryPoint`.
 >
 > Consumers SHOULD accept only "safe" `recipe.arguments`. The simplest and
-> safest way to achieve this is to disallow any `arguments` altogether. (This is
-> REQUIRED for [SLSA 3][SLSA] policies.)
+> safest way to achieve this is to disallow any `arguments` altogether.
 >
 > This is an arbitrary JSON object with a schema is defined by `recipe.type`.
 >
@@ -278,7 +293,7 @@ provenance might look like this:
   "_type": "https://in-toto.io/Statement/v0.1",
   // Output file; name is "_" to indicate "not important".
   "subject": [{"name": "_", "digest": {"sha256": "5678..."}}],
-  "predicateType": "https://in-toto.io/Provenance/v0.1",
+  "predicateType": "https://slsa.dev/provenance/v0.1",
   "predicate": {
     "builder": { "id": "mailto:person@example.com" },
     "recipe": {
@@ -294,7 +309,6 @@ provenance might look like this:
   }
 }
 ```
-
 
 ## More examples
 
@@ -444,19 +458,18 @@ Execution of arbitrary commands:
 
 ## Change history
 
-* 0.1.1: Added `metadata.buildInvocationId`.
-* 0.1: Initial version
+-   Renamed to "slsa.dev/provenance".
+-   0.1.1: Added `metadata.buildInvocationId`.
+-   0.1: Initial version, named "in-toto.io/Provenance"
 
-## Appendix: Review of CI/CD systems
-
-See [ci_survey.md](../../ci_survey.md) for a list of well-known CI/CD systems,
-to make sure they all map cleanly into this schema.
-
-[DigestSet]: ../field_types.md#DigestSet
+[DigestSet]: https://github.com/in-toto/attestation/blob/main/spec/field_types.md#DigestSet
 [GitHub Actions]: #github-actions
 [Reproducible]: https://reproducible-builds.org
-[ResourceURI]: ../field_types.md#ResourceURI
-[SLSA]: https://github.com/slsa-framework/slsa
-[Statement]: ../README.md#statement
-[Timestamp]: ../field_types.md#Timestamp
-[TypeURI]: ../field_types.md#TypeURI
+[ResourceURI]: https://github.com/in-toto/attestation/blob/main/spec/field_types.md#ResourceURI
+[SLSA]: https://slsa.dev
+[Statement]: https://github.com/in-toto/attestation/blob/main/spec/README.md#statement
+[Timestamp]: https://github.com/in-toto/attestation/blob/main/spec/field_types.md#Timestamp
+[TypeURI]: https://github.com/in-toto/attestation/blob/main/spec/field_types.md#TypeURI
+[in-toto attestation]: https://github.com/in-toto/attestation
+[parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/README.md#parsing-rules
+[provenance requirements]: ../requirements.md#provenance-requirements
