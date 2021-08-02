@@ -3,8 +3,11 @@ description: Supply-chain Levels for Software Artifacts
 copyright_html: Copyright 2021 The Linux Foundation<br>under the terms of the <a href="https://github.com/slsa-framework/slsa/blob/main/LICENSE">Apache License 2.0</a>
 repository: slsa-framework/slsa
 header_pages:
+  - levels.md
   - requirements.md
-  - walkthrough.md
+  - example.md
+  - roadmap.md
+  - getinvolved.md
 exclude:
   - README.md
 

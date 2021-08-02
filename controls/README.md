@@ -7,24 +7,24 @@ NOTE: This is still a work in progress.
 
 ## Contents
 
--   [Software Attestations](attestations.md): How to represent software artifact
-    metadata.
--   [Policies](policy.md): Conventions for how to express security policies
-    based on attestations.
--   [Survey](survey.md): Survey of existing and in-development controls that
-    relate to the framework.
+- [Software Attestations](attestations.md): How to represent software artifact
+  metadata.
+- [Policies](policy.md): Conventions for how to express security policies
+  based on attestations.
+- [Survey](survey.md): Survey of existing and in-development controls that
+  relate to the framework.
 
 ## Project Goals
 
 (1) Build an ecosystem around software attestations and policies, applicable to
 use cases beyond SLSA and supply chain integrity:
 
--   Establish clear and consistent terminology and data models.
--   Define simple interfaces between layers/components, to allow
-    compatibility between implementations and to encourage discrete,
-    composable technologies.
--   Recommend a cohesive suite of formats, conventions, and tools that are
-    known to work well together.
+- Establish clear and consistent terminology and data models.
+- Define simple interfaces between layers/components, to allow
+  compatibility between implementations and to encourage discrete,
+  composable technologies.
+- Recommend a cohesive suite of formats, conventions, and tools that are
+  known to work well together.
 
 Currently, there are various projects in this space with overlapping missions
 and incompatible interfaces. No one project solves all problems and it is
@@ -34,8 +34,8 @@ desire.
 
 (2) Provide recipes for achieving SLSA, built on the ecosystem above:
 
--   Identify base technologies that meet the SLSA requirements, which serves as
-    guidance to system implementers on how to build SLSA-compl8iant services.
-    Example: "CI/CD systems should produce provenance attestations in format X."
--   Recommend simple end-to-end solutions for end users (software developers) to
-    achieve SLSA. Example: "Configure GitHub this way to reach SLSA 3."
+- Identify base technologies that meet the SLSA requirements, which serves as
+  guidance to system implementers on how to build SLSA-compl8iant services.
+  Example: "CI/CD systems should produce provenance attestations in format X."
+- Recommend simple end-to-end solutions for end users (software developers) to
+  achieve SLSA. Example: "Configure GitHub this way to reach SLSA 3."

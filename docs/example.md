@@ -10,59 +10,58 @@ open-source package, not to single it out.)
 The first problem is figuring out the actual supply chain. This requires
 significant manual effort, guesswork, and blind trust. Working backwards:
 
--   The "latest" tag in Docker Hub points to
-    [7.72.0](https://hub.docker.com/layers/curlimages/curl/7.72.0/images/sha256-3c3ff0c379abb1150bb586c7d55848ed4dcde4a6486b6f37d6815aed569332fe?context=explore).
--   It claims to have come from a Dockerfile in the
-    [curl/curl-docker](https://github.com/curl/curl-docker/blob/d6525c840a62b398424a78d792f457477135d0cf/alpine/latest/Dockerfile)
-    GitHub repository.
--   That Dockerfile reads the following artifacts, assuming there are no further
-    fetches during build time:
-    -   Docker Hub image:
-        [registry.hub.docker.com/library/alpine:3.11.5](https://hub.docker.com/layers/alpine/library/alpine/3.11.5/images/sha256-cb8a924afdf0229ef7515d9e5b3024e23b3eb03ddbba287f4a19c6ac90b8d221?context=explore)
-    -   Alpine packages: libssh2 libssh2-dev libssh2-static autoconf automake
-        build-base groff openssl curl-dev python3 python3-dev libtool curl
-        stunnel perl nghttp2
-    -   File at URL: https://curl.haxx.se/ca/cacert.pem
--   Each of the dependencies has its own supply chain, but let's look at
-    [curl-dev], which contains the actual "curl" source code.
--   The package, like all Alpine packages, has its build script defined in an
-    [APKBUILD](https://git.alpinelinux.org/aports/tree/main/curl/APKBUILD?id=166f72b36f3b5635be0d237642a63f39697c848a)
-    in the Alpine git repo. There are several build dependencies:
-    -   File at URL: https://curl.haxx.se/download/curl-7.72.0.tar.xz.
-        -   The APKBUILD includes a sha256 hash of this file. It is not clear
-            where that hash came from.
-    -   Alpine packages: openssl-dev nghttp2-dev zlib-dev brotli-dev autoconf
-        automake groff libtool perl
--   The source tarball was _presumably_ built from the actual upstream GitHub
-    repository
-    [curl/curl@curl-7_72_0](https://github.com/curl/curl/tree/curl-7_72_0), by
-    running the commands `./buildconf && ./configure && make && ./maketgz
-    7.72.0`. That command has a set of dependencies, but those are not well
-    documented.
--   Finally, there are the systems that actually ran the builds above. We have
-    no indication about their software, configuration, or runtime state
-    whatsoever.
+- The "latest" tag in Docker Hub points to
+  [7.72.0](https://hub.docker.com/layers/curlimages/curl/7.72.0/images/sha256-3c3ff0c379abb1150bb586c7d55848ed4dcde4a6486b6f37d6815aed569332fe?context=explore).
+- It claims to have come from a Dockerfile in the
+  [curl/curl-docker](https://github.com/curl/curl-docker/blob/d6525c840a62b398424a78d792f457477135d0cf/alpine/latest/Dockerfile)
+  GitHub repository.
+- That Dockerfile reads the following artifacts, assuming there are no further
+  fetches during build time:
+  - Docker Hub image:
+    [registry.hub.docker.com/library/alpine:3.11.5](https://hub.docker.com/layers/alpine/library/alpine/3.11.5/images/sha256-cb8a924afdf0229ef7515d9e5b3024e23b3eb03ddbba287f4a19c6ac90b8d221?context=explore)
+  - Alpine packages: libssh2 libssh2-dev libssh2-static autoconf automake
+    build-base groff openssl curl-dev python3 python3-dev libtool curl
+    stunnel perl nghttp2
+  - File at URL: https://curl.haxx.se/ca/cacert.pem
+- Each of the dependencies has its own supply chain, but let's look at
+  [curl-dev], which contains the actual "curl" source code.
+- The package, like all Alpine packages, has its build script defined in an
+  [APKBUILD](https://git.alpinelinux.org/aports/tree/main/curl/APKBUILD?id=166f72b36f3b5635be0d237642a63f39697c848a)
+  in the Alpine git repo. There are several build dependencies:
+  - File at URL: https://curl.haxx.se/download/curl-7.72.0.tar.xz.
+    - The APKBUILD includes a sha256 hash of this file. It is not clear
+      where that hash came from.
+  - Alpine packages: openssl-dev nghttp2-dev zlib-dev brotli-dev autoconf
+    automake groff libtool perl
+- The source tarball was _presumably_ built from the actual upstream GitHub
+  repository
+  [curl/curl@curl-7_72_0](https://github.com/curl/curl/tree/curl-7_72_0), by
+  running the commands `./buildconf && ./configure && make && ./maketgz 7.72.0`. That command has a set of dependencies, but those are not well
+  documented.
+- Finally, there are the systems that actually ran the builds above. We have
+  no indication about their software, configuration, or runtime state
+  whatsoever.
 
 Suppose some developer's machine is compromised. What attacks could potentially
 be performed unilaterally with only that developer's credentials? (None of these
 are confirmed.)
 
--   Directly upload a malicious image to Docker Hub.
--   Point the CI/CD system to build from an unofficial Dockerfile.
--   Upload a malicious Dockerfile (or other file) in the
-    [curl/curl-docker](https://github.com/curl/curl-docker/blob/d6525c840a62b398424a78d792f457477135d0cf/alpine/latest/Dockerfile)
-    git repo.
--   Upload a malicious https://curl.haxx.se/ca/cacert.pem.
--   Upload a malicious APKBUILD in Alpine's git repo.
--   Upload a malicious [curl-dev] Alpine package to the Alpine repository. (Not
-    sure if this is possible.)
--   Upload a malicious https://curl.haxx.se/download/curl-7.72.0.tar.xz. (Won't
-    be detected by APKBUILD's hash if the upload happens before the hash is
-    computed.)
--   Upload a malicious change to the [curl/curl](https://github.com/curl/curl/)
-    git repo.
--   Attack any of the systems involved in the supply chain, as in the
-    [SolarWinds attack](https://www.crowdstrike.com/blog/sunspot-malware-technical-analysis/).
+- Directly upload a malicious image to Docker Hub.
+- Point the CI/CD system to build from an unofficial Dockerfile.
+- Upload a malicious Dockerfile (or other file) in the
+  [curl/curl-docker](https://github.com/curl/curl-docker/blob/d6525c840a62b398424a78d792f457477135d0cf/alpine/latest/Dockerfile)
+  git repo.
+- Upload a malicious https://curl.haxx.se/ca/cacert.pem.
+- Upload a malicious APKBUILD in Alpine's git repo.
+- Upload a malicious [curl-dev] Alpine package to the Alpine repository. (Not
+  sure if this is possible.)
+- Upload a malicious https://curl.haxx.se/download/curl-7.72.0.tar.xz. (Won't
+  be detected by APKBUILD's hash if the upload happens before the hash is
+  computed.)
+- Upload a malicious change to the [curl/curl](https://github.com/curl/curl/)
+  git repo.
+- Attack any of the systems involved in the supply chain, as in the
+  [SolarWinds attack](https://www.crowdstrike.com/blog/sunspot-malware-technical-analysis/).
 
 SLSA intends to cover all of these threats. When all artifacts in the supply
 chain have a sufficient SLSA level, consumers can gain confidence that most of
@@ -202,6 +201,6 @@ for closed source software.
 
 <!-- Links -->
 
-[Threats, Risks, and Mitigations in the Open Source Ecosystem]: https://github.com/Open-Source-Security-Coalition/Open-Source-Security-Coalition/blob/master/publications/threats-risks-mitigations/v1.1/Threats%2C%20Risks%2C%20and%20Mitigations%20in%20the%20Open%20Source%20Ecosystem%20-%20v1.1.pdf
+[threats, risks, and mitigations in the open source ecosystem]: https://github.com/Open-Source-Security-Coalition/Open-Source-Security-Coalition/blob/master/publications/threats-risks-mitigations/v1.1/Threats%2C%20Risks%2C%20and%20Mitigations%20in%20the%20Open%20Source%20Ecosystem%20-%20v1.1.pdf
 [curl-dev]: https://pkgs.alpinelinux.org/package/edge/main/x86/curl-dev
 [curlimages/curl]: https://hub.docker.com/r/curlimages/curl
