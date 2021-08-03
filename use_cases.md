@@ -77,8 +77,8 @@ They could do this by:
       failure. OR
     -   The Package Repository could have publishers configure their specific policy as a part of their
       repo.
-      -   The Package Repository could make these policies publicly readable by users of the repo.
-      -   (TBD) How to securely update these policies.
+        -   The Package Repository could make these policies publicly readable by users of the repo.
+        -   (TBD) How to securely update these policies.
 5.  Checking new containers against the policy from #4.
 6.  Preventing container images that fail the check in #5 from being made public.
 

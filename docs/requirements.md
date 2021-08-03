@@ -1,6 +1,6 @@
 # Requirements
 
-#### This document enumerates all of the detailed requirements for an artifact to meet SLSA. For a broader overview, including basic terminology and threat model, see [overview](index.md)
+## This document covers all of the detailed requirements for an artifact to meet SLSA. For a broader overview, including basic terminology and threat model, see [overview](index.md)
 
 _Reminder: SLSA is in [alpha](roadmap.md). The definitions below are not yet finalized and subject to change, particularly SLSA 3-4._
 

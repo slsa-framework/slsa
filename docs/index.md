@@ -8,13 +8,13 @@
 
 SLSA ("[salsa](https://www.google.com/search?q=how+to+pronounce+salsa)") is **Supply-chain Levels for Software Artifacts.**
 
-A security framework to describe and verify supply chain integrity, giving anyone working with software a common language and a way to work at scale.
+A security framework from source to service, giving anyone working with software a common language for increasing levels of software security and supply chain integrity.
 
 ## Four steps to advanced protection
 
 | Level | Description                                   |
 | :---- | :-------------------------------------------- |
-| 1     | Documentation of build process                |
+| 1     | Documentation of the build process                |
 | 2     | Tamper resistance of the build service        |
 | 3     | Prevents extra resistance to specific threats |
 | 4     | Highest levels of confidence and trust        |

@@ -1,6 +1,6 @@
 # SLSA ("salsa") is Supply-chain Levels for Software Artifacts
 
-SLSA (pronounced ["salsa"](https://www.google.com/search?q=how+to+pronounce+salsa)) is an open source security framework to describe and verify what integrity looks like, giving anyone working with software a common language and a way to work at scale.
+SLSA (pronounced ["salsa"](https://www.google.com/search?q=how+to+pronounce+salsa)) is security framework from source to service, giving anyone working with software a common language for increasing levels of software security and supply chain integrity.
 
 **The best way to read about SLSA is to visit [slsa.dev].**
 

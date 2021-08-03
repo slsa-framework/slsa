@@ -1,10 +1,10 @@
 # Get involved
 
-#### We rely on feedback from other organisations to evolve SLSA and be more useful to more people. We’d love to hear your experiences using it
+**We rely on feedback from other organisations to evolve SLSA and be more useful to more people. We’d love to hear your experiences using it!**
 
 ## Feedback
 
-#### Are the levels achievable in your project? Would you add or remove anything from the framework? What’s preventing you from adopting it today?
+**Are the levels achievable in your project? Would you add or remove anything from the framework? What’s preventing you from adopting it today?**
 
 -   If you want to discuss the framework, [github issues](https://github.com/slsa-framework/slsa/issues) are [the way](https://i.redd.it/yj67b76hxwd61.jpg).
 -   If you want to contribute to the framework take a look at our [contribution guidelines](https://github.com/slsa-framework/slsa/blob/main/CONTRIBUTING.md).
