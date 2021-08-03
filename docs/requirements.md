@@ -1,15 +1,15 @@
 # Requirements
 
-#### This document enumerates all of the detailed requirements for an artifact to meet SLSA. For a broader overview, including basic terminology and threat model, see [overview](index.md).
+#### This document enumerates all of the detailed requirements for an artifact to meet SLSA. For a broader overview, including basic terminology and threat model, see [overview](index.md)
 
 _Reminder: SLSA is in [alpha](roadmap.md). The definitions below are not yet finalized and subject to change, particularly SLSA 3-4._
 
-- [What is SLSA?](#what-is-slsa)
-- [Definitions](#definitions)
-- [Source requirements](#source-requirements)
-- [Build requirements](#build-requirements)
-- [Provenance requirements](#provenance-requirements)
-- [Common requirements](#common-requirements)
+-   [What is SLSA?](#what-is-slsa)
+-   [Definitions](#definitions)
+-   [Source requirements](#source-requirements)
+-   [Build requirements](#build-requirements)
+-   [Provenance requirements](#provenance-requirements)
+-   [Common requirements](#common-requirements)
 
 ## What is SLSA?
 
@@ -73,13 +73,13 @@ repository.
 Every change to the source is tracked in a version control system that meets the
 following requirements:
 
-- **[Change history]** There exists a record of the history of changes
+-   **[Change history]** There exists a record of the history of changes
   that went into the revision. Each change must contain: the identities of
   the uploader and reviewers (if any), timestamps of the reviews (if any)
   and submission, the change description/justification, the content of
   the change, and the parent revisions.
 
-- **\[Immutable reference]** There exists a way to indefinitely reference
+-   **\[Immutable reference]** There exists a way to indefinitely reference
   this particular, immutable revision. In git, this is the {repo URL +
   branch/tag/ref + commit ID}.
 
@@ -102,11 +102,11 @@ clear which identities were verified, and those identities must use [two-step
 verification](https://www.google.com/landing/2step/) or similar. (Exceptions
 noted below.)
 
-- **[First-parent history]** In the case of a non-linear version control
+-   **[First-parent history]** In the case of a non-linear version control
   system, where a revision can have more than one parent, only the "first
   parent history" is in scope. In other words, when a feature branch is merged
   back into the main branch, only the merge itself is in scope.
-- **[Historical cutoff]** There is some TBD exception to allow existing
+-   **[Historical cutoff]** There is some TBD exception to allow existing
   projects to meet SLSA 3/4 even if historical revisions were present in the
   history. Current thinking is that this could be either last N months or a
   platform attestation guaranteeing that future changes in the next N months
@@ -121,13 +121,13 @@ The revision and its change history are preserved indefinitely and cannot be
 deleted, except when subject to an established and transparent policy for
 obliteration, such as a legal or policy requirement.
 
-- **[Immutable history]** It must not be possible for persons to delete or
+-   **[Immutable history]** It must not be possible for persons to delete or
   modify the history, even with multi-party approval, except by trusted
   platform admins with two-party approval following the obliterate policy.
-- **[Limited retention for SLSA 2]** At SLSA 2 (but not 3), it is acceptable
+-   **[Limited retention for SLSA 2]** At SLSA 2 (but not 3), it is acceptable
   for the retention to be limited to 18 months, as attested by the source
   control platform.
-  - Example: If a commit is made on 2020-04-05 and then a retention
+    -   Example: If a commit is made on 2020-04-05 and then a retention
     attestation is generated on 2021-01-01, the commit must be retained
     until at least 2022-07-01.
 
@@ -141,25 +141,25 @@ prior to submission, and both of these trusted persons were strongly
 authenticated. (Exceptions from [Verified History](#verified-history) apply here
 as well.)
 
-- The following combinations are acceptable:
-  - Uploader and reviewer are two different trusted persons.
-  - Two different reviewers are trusted persons.
-- **[Different persons]** The platform ensures that no person can use
+-   The following combinations are acceptable:
+    -   Uploader and reviewer are two different trusted persons.
+    -   Two different reviewers are trusted persons.
+-   **[Different persons]** The platform ensures that no person can use
   alternate identities to bypass the two-person review requirement.
-  - Example: if a person uploads with identity X then reviews with alias Y,
+    -   Example: if a person uploads with identity X then reviews with alias Y,
     the platform understands that this is the same person and does not
     consider the review requirement satisfied.
-- **[Informed review]** The reviewer is able and encouraged to make an
+-   **[Informed review]** The reviewer is able and encouraged to make an
   informed decision about what they're approving. The reviewer should be
   presented with a full, meaningful content diff between the proposed revision
   and the previously reviewed revision. For example, it is not sufficient to
   just indicate that file changed without showing the contents.
-- **[Context-specific approvals]** Approvals are for a specific context, such
+-   **[Context-specific approvals]** Approvals are for a specific context, such
   as a repo + branch in git. Moving fully reviewed content from one context to
   another still requires review. (Exact definition of "context" depends on the
   project, and this does not preclude well-understood automatic or reviewless
   merges, such as cutting a release branch.)
-  - Git example: If a fully reviewed commit in one repo is merged into a
+    -   Git example: If a fully reviewed commit in one repo is merged into a
     different repo, or a commit in one branch is merged into a different
     branch, then the merge still requires review.
 
@@ -181,8 +181,8 @@ only manual command, if any, was to invoke the build script.
 
 Examples:
 
-- Build script is Makefile, invoked via `make all`.
-- Build script is .github/workflows/build.yaml, invoked by GitHub Actions.
+-   Build script is Makefile, invoked via `make all`.
+-   Build script is .github/workflows/build.yaml, invoked by GitHub Actions.
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="build-service">
@@ -211,13 +211,13 @@ from a prior build.
 The build service ensured that the build steps ran in an isolated environment
 free of influence from other build instances, whether prior or concurrent.
 
-- It MUST NOT be possible for a build to access any secrets of the build
+-   It MUST NOT be possible for a build to access any secrets of the build
   service, such as the provenance signing key.
-- It MUST NOT be possible for two builds that overlap in time to
+-   It MUST NOT be possible for two builds that overlap in time to
   influence one another.
-- It MUST NOT be possible for one build to persist or influence the
+-   It MUST NOT be possible for one build to persist or influence the
   build environment of a subsequent build.
-- Build caches, if used, MUST be purely content-addressable to prevent
+-   Build caches, if used, MUST be purely content-addressable to prevent
   tampering.
 
 <td> <td> <td>✓<td>✓
@@ -231,9 +231,9 @@ fully defined through the build script and nothing else.
 
 Examples:
 
-- GitHub Actions
+-   GitHub Actions
   [workflow_dispatch](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch) `inputs` MUST be empty.
-- Google Cloud Build
+-   Google Cloud Build
   [user-defined substitutions](https://cloud.google.com/build/docs/configuring-builds/substitute-variable-values)
   MUST be empty. (Default substitutions, whose values are defined by the
   server, are acceptable.)
@@ -249,20 +249,20 @@ access.
 
 The user-defined build script:
 
-- MUST declare all dependencies, including sources and other build steps,
+-   MUST declare all dependencies, including sources and other build steps,
   using [immutable references] in a format that the build service understands.
 
 The build service:
 
-- MUST fetch all artifacts in a trusted control plane.
-- MUST NOT allow mutable references.
-- MUST verify the integrity of each artifact.
-  - If the [immutable reference] includes a cryptographic hash, the service
+-   MUST fetch all artifacts in a trusted control plane.
+-   MUST NOT allow mutable references.
+-   MUST verify the integrity of each artifact.
+    -   If the [immutable reference] includes a cryptographic hash, the service
     MUST verify the hash and reject the fetch if the verification fails.
-  - Otherwise, the service MUST fetch the artifact over a channel that
+    -   Otherwise, the service MUST fetch the artifact over a channel that
     ensures transport integrity, such as TLS or code signing.
-- MUST prevent network access while running the build steps.
-  - This requirement is "best effort." It SHOULD deter a reasonable team
+-   MUST prevent network access while running the build steps.
+    -   This requirement is "best effort." It SHOULD deter a reasonable team
     from having a non-hermetic build, but it need not stop a determined
     adversary. For example, using a container to prevent network access is
     sufficient.
@@ -325,11 +325,11 @@ able to inject or alter the contents, except as noted below.
 The following provenance fields MAY be generated by the user-controlled build
 steps:
 
-- The output artifact hash from [Identifies Artifact](#identifies-artifact).
-  - Reasoning: This only allows a "bad" build to falsely claim that it
+-   The output artifact hash from [Identifies Artifact](#identifies-artifact).
+    -   Reasoning: This only allows a "bad" build to falsely claim that it
     produced a "good" artifact. This is not a security problem because the
     consumer MUST accept only "good" builds and reject "bad" builds.
-- The "reproducible" boolean and justification from
+-   The "reproducible" boolean and justification from
   [Reproducible](#reproducible).
 
 <td> <td>✓<td>✓<td>✓
@@ -341,22 +341,22 @@ Provenance cannot be falsified by the build service's users.
 
 NOTE: This requirement is a stricter version of [Service Generated](#service-generated).
 
-- The provenance signing key MUST be stored in a secure key management system
+-   The provenance signing key MUST be stored in a secure key management system
   accessible only to the build service account.
-- The provenance signing key MUST NOT be accessible to the environment running
+-   The provenance signing key MUST NOT be accessible to the environment running
   the user-defined build steps.
-- Every field in the provenance MUST be generated or verified by the build
+-   Every field in the provenance MUST be generated or verified by the build
   service in a trusted control plane. The user-controlled build steps MUST
   NOT be able to inject or alter the contents, except as noted below.
 
 The following provenance fields MAY be generated by the user-controlled build
 steps without the build service verifying their correctness:
 
-- The output artifact hash from [Identifies Artifact](#identifies-artifact).
-  - Reasoning: This only allows a "bad" build to falsely claim that it
+-   The output artifact hash from [Identifies Artifact](#identifies-artifact).
+    -   Reasoning: This only allows a "bad" build to falsely claim that it
     produced a "good" artifact. This is not a security problem because the
     consumer MUST accept only "good" builds and reject "bad" builds.
-- The "reproducible" boolean and justification from
+-   The "reproducible" boolean and justification from
   [Reproducible](#reproducible).
 
 <td> <td> <td>✓<td>✓
@@ -368,8 +368,8 @@ Provenance records all build dependencies that were available while running the
 build steps. This includes the initial state of the machine, VM, or container of
 the build worker.
 
-- MUST include all user-specified build steps, sources, dependencies.
-- SHOULD include all service-provided artifacts.
+-   MUST include all user-specified build steps, sources, dependencies.
+-   SHOULD include all service-provided artifacts.
 
 <td> <td> <td> <td>✓
 </table>

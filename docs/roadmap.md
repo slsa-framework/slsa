@@ -1,6 +1,6 @@
 # Roadmap
 
-## SLSA is currently in **alpha**.
+## SLSA is currently in **alpha**
 
 **Google has been using an internal version of SLSA since 2013 and requires it for all of Google's production workloads.**
 

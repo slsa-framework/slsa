@@ -17,9 +17,9 @@ _TODO: Define what an attestation-based admission control policy is._
 
 To make the decision, a policy engine combines the following:
 
-- The artifact identifier, usually a cryptographic content hash.
-- One or more attestations about the artifact or related artifacts.
-- A policy describing the requirements as a function of the attestations.
+-   The artifact identifier, usually a cryptographic content hash.
+-   One or more attestations about the artifact or related artifacts.
+-   A policy describing the requirements as a function of the attestations.
 
 The decision is usually "allow" or "deny". It may be preventative
 ("enforcement") or detective ("auditing").

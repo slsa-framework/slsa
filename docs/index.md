@@ -6,9 +6,9 @@
 
 <!--{% endif %}-->
 
-SLSA [sal•sa] is **Supply-chain Levels for Software Artifacts.**
+SLSA ("[salsa](https://www.google.com/search?q=how+to+pronounce+salsa)") is **Supply-chain Levels for Software Artifacts.**
 
-A security framework to describe and verify supply chain, giving anyone working with software a common language and a way to work at scale.
+A security framework to describe and verify supply chain integrity, giving anyone working with software a common language and a way to work at scale.
 
 ## Four steps to advanced protection
 

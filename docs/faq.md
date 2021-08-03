@@ -47,15 +47,15 @@ satisfy all of the SLSA build requirements.
 That said, verified reproducible builds are not a complete solution to supply
 chain integrity, nor are they practical in all cases:
 
-- Reproducible builds do not address source, dependency, or distribution
+-   Reproducible builds do not address source, dependency, or distribution
   threats.
-- Reproducers must truly be independent, lest they all be susceptible to the
+-   Reproducers must truly be independent, lest they all be susceptible to the
   same attack. For example, if all rebuilders run the same pipeline software,
   and that software has a vulnerability that can be triggered by sending a
   build request, then an attacker can compromise all rebuilders, violating the
   assumption above.
-- Some builds cannot easily be made reproducible, as noted above.
-- Closed-source reproducible builds require the code owner to either grant
+-   Some builds cannot easily be made reproducible, as noted above.
+-   Closed-source reproducible builds require the code owner to either grant
   source access to multiple independent rebuilders, which is unacceptable in
   many cases, or develop multiple, independent in-house rebuilders, which is
   likely prohibitively expensive.
