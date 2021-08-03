@@ -4,7 +4,7 @@
 
 | Level | Description                                   | Example                                               |
 | :---- | :-------------------------------------------- | :---------------------------------------------------- |
-| 1     | Documentation of the build process                | Unsigned provenance                                   |
+| 1     | Documentation of the build process            | Unsigned provenance                                   |
 | 2     | Tamper resistance of the build service        | Hosted source/build, signed provenance                |
 | 3     | Prevents extra resistance to specific threats | Security controls on host, non-falsifiable provenance |
 | 4     | Highest levels of confidence and trust        | Two-party review + hermetic builds                    |

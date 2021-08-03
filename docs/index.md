@@ -14,7 +14,7 @@ A security framework from source to service, giving anyone working with software
 
 | Level | Description                                   |
 | :---- | :-------------------------------------------- |
-| 1     | Documentation of the build process                |
+| 1     | Documentation of the build process            |
 | 2     | Tamper resistance of the build service        |
 | 3     | Prevents extra resistance to specific threats |
 | 4     | Highest levels of confidence and trust        |

@@ -11,14 +11,15 @@ backwards, forcing us to work on the least risky component first and blocking
 any progress further downstream. By making each artifact's SLSA rating
 independent from one another, it allows parallel progress and prioritization
 based on risk. (This is a lesson we learned when deploying other security
-controls at scale throughout Google.) We expect SLSA ratings to be composed to describe a supply chain's overall
-security stance, as described in the case study [vision](walkthrough.md#vision-case-study).
+controls at scale throughout Google.) We expect SLSA ratings to be composed to
+describe a supply chain's overall security stance, as described in the case
+study [vision](walkthrough.md#vision-case-study).
 
 ## Q: What about reproducible builds?
 
-When talking about [reproducible builds](https://reproducible-builds.org),
-there are two related but distinct concepts: "reproducible" and
-"verified reproducible."
+When talking about [reproducible builds](https://reproducible-builds.org), there
+are two related but distinct concepts: "reproducible" and "verified
+reproducible."
 
 "Reproducible" means that repeating the build with the same inputs results in
 bit-for-bit identical output. This property
@@ -48,17 +49,17 @@ That said, verified reproducible builds are not a complete solution to supply
 chain integrity, nor are they practical in all cases:
 
 -   Reproducible builds do not address source, dependency, or distribution
-  threats.
+    threats.
 -   Reproducers must truly be independent, lest they all be susceptible to the
-  same attack. For example, if all rebuilders run the same pipeline software,
-  and that software has a vulnerability that can be triggered by sending a
-  build request, then an attacker can compromise all rebuilders, violating the
-  assumption above.
+    same attack. For example, if all rebuilders run the same pipeline software,
+    and that software has a vulnerability that can be triggered by sending a
+    build request, then an attacker can compromise all rebuilders, violating the
+    assumption above.
 -   Some builds cannot easily be made reproducible, as noted above.
 -   Closed-source reproducible builds require the code owner to either grant
-  source access to multiple independent rebuilders, which is unacceptable in
-  many cases, or develop multiple, independent in-house rebuilders, which is
-  likely prohibitively expensive.
+    source access to multiple independent rebuilders, which is unacceptable in
+    many cases, or develop multiple, independent in-house rebuilders, which is
+    likely prohibitively expensive.
 
 Therefore, SLSA does not require verified reproducible builds directly. Instead,
 verified reproducible builds are one option for implementing the requirements.

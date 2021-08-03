@@ -6,31 +6,31 @@ data models. Currently this is joint work between
 [in-toto](https://in-toto.io/) but we invite wider participation.
 
 -   [Standard attestation format](https://github.com/in-toto/attestation#in-toto-attestations)
-  to express provenance and other attributes. This will allow sources and
-  builders to express properties in a standard way that can be consumed by
-  anyone. Also includes reference implementations for generating these
-  attestations.
+    to express provenance and other attributes. This will allow sources and
+    builders to express properties in a standard way that can be consumed by
+    anyone. Also includes reference implementations for generating these
+    attestations.
 -   Policy data model and reference implementation.
 
 For a broader view of the software supply chain problem:
 
 -   [Know, Prevent, Fix: A framework for shifting the discussion around
-  vulnerabilities in open
-  source](https://security.googleblog.com/2021/02/know-prevent-fix-framework-for-shifting.html)
+    vulnerabilities in open
+    source](https://security.googleblog.com/2021/02/know-prevent-fix-framework-for-shifting.html)
 -   [Threats, Risks, and Mitigations in the Open Source Ecosystem]
 
 Prior iterations of the ideas presented here:
 
 -   [Building Secure and Reliable Systems, Chapter 14: Deploying Code](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=339)
 -   [Binary Authorization for Borg] - This is how Google implements the SLSA
-  idea internally.
+    idea internally.
 
 Other related work:
 
 -   [CII Best Practices Badge](https://bestpractices.coreinfrastructure.org/en)
 -   [Security Scorecards](https://github.com/ossf/scorecard) - Perhaps SLSA
-  could be implemented as an aggregation of scorecard entries, for at least
-  the checks that can be automated.
+    could be implemented as an aggregation of scorecard entries, for at least
+    the checks that can be automated.
 -   [Trustmarks](https://trustmark.gtri.gatech.edu/)
 
 Other takes on provenance and CI/CD:
