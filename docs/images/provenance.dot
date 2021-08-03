@@ -1,0 +1,17 @@
+digraph {
+  node [shape=rect];
+  subgraph cluster_external {
+    label="External Inputs";
+    materials;
+    entryPoint;
+    arguments;
+  }
+  subgraph cluster_system {
+    label="System Inputs";
+    environment;
+    type;
+  }
+  BuildExecution [shape=oval];
+  {type, entryPoint, arguments, materials} -> recipe;
+  {recipe, materials, environment} -> BuildExecution -> subject;
+}
