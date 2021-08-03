@@ -11,7 +11,7 @@ policy based on [software attestations](attestations.md).
 
 ## Model and Terminology
 
-_TODO: Define what an attestation-based admission control policy is._
+*TODO: Define what an attestation-based admission control policy is.*
 
 <p align="center"><img width="50%" src="images/policy_model.svg"></p>
 
@@ -24,15 +24,15 @@ To make the decision, a policy engine combines the following:
 The decision is usually "allow" or "deny". It may be preventative
 ("enforcement") or detective ("auditing").
 
-_TODO: Better define the policy model, including the notion of attester, subject
-verification, logging, etc._
+*TODO: Better define the policy model, including the notion of attester, subject
+verification, logging, etc.*
 
-_TODO: Note that a policy decision may itself be an attestation that can be fed
-into further policy decisions down the line._
+*TODO: Note that a policy decision may itself be an attestation that can be fed
+into further policy decisions down the line.*
 
-_TODO: Two modes: (a) only allow if a "good" attestation exists,
+*TODO: Two modes: (a) only allow if a "good" attestation exists,
 even if there also exists some "bad" attestation; (b) block if some "bad"
 attestation exists, even if there also exists some "good" attestation. Talk
 about threat model and whether the attestation storage is trusted. (a) is better
 for enforcement in the critical path, while (b) is useful for vulnerability
-remediation._
+remediation.*

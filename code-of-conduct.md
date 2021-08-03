@@ -21,20 +21,20 @@ community include:
 -   Being respectful of differing opinions, viewpoints, and experiences
 -   Giving and gracefully accepting constructive feedback
 -   Accepting responsibility and apologizing to those affected by our mistakes,
-  and learning from the experience
+    and learning from the experience
 -   Focusing on what is best not just for us as individuals, but for the
-  overall community
+    overall community
 
 Examples of unacceptable behavior include:
 
 -   The use of sexualized language or imagery, and sexual attention or
-  advances of any kind
+    advances of any kind
 -   Trolling, insulting or derogatory comments, and personal or political attacks
 -   Public or private harassment
 -   Publishing others' private information, such as a physical or email
-  address, without their explicit permission
+    address, without their explicit permission
 -   Other conduct which could reasonably be considered inappropriate in a
-  professional setting
+    professional setting
 
 ## Enforcement Responsibilities
 
@@ -106,7 +106,7 @@ Violating these terms may lead to a permanent ban.
 ### 4. Permanent Ban
 
 **Community Impact**: Demonstrating a pattern of violation of community
-standards, including sustained inappropriate behavior, harassment of an
+standards, including sustained inappropriate behavior,  harassment of an
 individual, or aggression toward or disparagement of classes of individuals.
 
 **Consequence**: A permanent ban from any sort of public interaction within

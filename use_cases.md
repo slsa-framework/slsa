@@ -1,6 +1,6 @@
 # Use Cases
 
-These are some of the use cases for SLSA. Of these the first use case (a developer checking
+These are some of the use cases for SLSA.  Of these the first use case (a developer checking
 their own packages prior to publishing) is the most ready for adoption as it does not require
 interactions with any other party.
 
@@ -27,7 +27,7 @@ BarInc can acheive these goals when publishing the container image by:
 6.  Storing the provenance and all other attestations for future reference.
 
 This approach allows BarInc to acheive their goals without requiring any changes from their users
-or from their distribution channels. It doesn't, however, protect their users from a published
+or from their distribution channels.  It doesn't, however, protect their users from a published
 BarImage from being tampered with after publication (though there may be other ways to address
 those concerns, such as code-signing after verification, and time-of-use verification).
 
@@ -76,7 +76,7 @@ They could do this by:
         Any significant deviations (e.g. builder changed, source repo changed) would cause a push
         failure. OR
     -   The Package Repository could have publishers configure their specific policy as a part of their
-      repo.
+        repo.
         -   The Package Repository could make these policies publicly readable by users of the repo.
         -   (TBD) How to securely update these policies.
 5.  Checking new containers against the policy from #4.
