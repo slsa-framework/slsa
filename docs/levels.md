@@ -1,6 +1,8 @@
 # Security levels
 
-## Each level provides an increasing degree of confidence, a way to say that software hasn’t been tampered with and can be securely traced back to its source
+<span class="subtitle">
+Each level provides an increasing degree of confidence, a way to say that software hasn’t been tampered with and can be securely traced back to its source.
+</span>
 
 | Level | Description                                   | Example                                               |
 | :---- | :-------------------------------------------- | :---------------------------------------------------- |

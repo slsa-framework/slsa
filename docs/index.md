@@ -6,24 +6,75 @@
 
 <!--{% endif %}-->
 
+<span class="subtitle">
+
 SLSA ("[salsa](https://www.google.com/search?q=how+to+pronounce+salsa)") is **Supply-chain Levels for Software Artifacts.**
 
 A security framework from source to service, giving anyone working with software a common language for increasing levels of software security and supply chain integrity.
 
+</span>
+
+<section class="buttons-horizontal">
+<div class="pseudo-button">
+
+[SLSA levels](/levels.md)
+
+</div>
+
+<div class="pseudo-button">
+
+[Requirements](/requirements.md)
+
+</div>
+
+</section>
+
+<!-- Levels overview -->
+<section class="content-block">
+
+<div class="m-b-l">
+
 ## Four steps to advanced protection
 
-| Level | Description                                   |
-| :---- | :-------------------------------------------- |
-| 1     | Documentation of the build process            |
-| 2     | Tamper resistance of the build service        |
-| 3     | Prevents extra resistance to specific threats |
-| 4     | Highest levels of confidence and trust        |
-
-It can take years to achieve the ideal security state - intermediate milestones are important. SLSA guides you through gradually improving the security of your software. Artifacts used in critical infrastructure or vital business operations may want to attain a higher level of security, whereas software that poses a low risk can stop when they're comfortable.
+**It can take years to achieve the ideal security state - intermediate milestones are important.** SLSA guides you through gradually improving the security of your software. Artifacts used in critical infrastructure or vital business operations may want to attain a higher level of security, whereas software that poses a low risk can stop when they're comfortable.
 
 That’s where SLSA can help, building intermediary levels to assess where software’s come from, and how its being used in a software supply chain.
 
+</div>
+
+<div>
+
+| Level | Description                                   |
+| :---- | :-------------------------------------------- |
+| **1**     | Documentation of the build process            |
+| **2**     | Tamper resistance of the build service        |
+| **3**     | Prevents extra resistance to specific threats |
+| **4**     | Highest levels of confidence and trust        |
+
+</div>
+</section>
+
+<section class="breakout">
+
+## Building towards an industry consensus
+
+We’re developing SLSA collectively to tackle common threats across the supply chain.
+
+<div class="pseudo-button m-t-l">
+
+[Get involved](/getinvolved.md)
+
+</div>
+
+</section>
+
+<!-- Supply chain diagram -->
+<section class="content-block">
+
 ![Supply Chain Threats](images/supply-chain-threats.svg)
+
+<section class="col-2">
+<span>
 
 ## How do you mitigate risks and threats to your supply chain?
 
@@ -31,15 +82,35 @@ Recent high profile supply chain attacks prove how costly an attack can be. It�
 
 See SLSA compared to [known supply chain attacks](levels.md#threats).
 
+</span>
+<span>
+
 ## Standard security guidelines that scale for your future
 
 Software consumers can choose software that provides the needed level of security. SLSA levels are a way to better understand your current security posture, and plan for the future. You can check that the security information for any software in your supply chain is accurate manually, and help develop and share tools that automate the process.
 
+<div class="pseudo-button">
+
 [Read the requirements](requirements.md)
 
-## Ready to see SLSA in action?
+</div>
+
+</span>
+
+</section>
+
+<!-- Github actions breakout -->
+<section class="breakout">
+
+## See a GitHub Actions demo
 
 Check our demonstration for SLSA level 1 with [a provenance generator for GitHub Actions](https://github.com/slsa-framework/github-actions-demo).
+
+</section>
+
+<!-- Two column wrap-up -->
+<section class="col-2 content-block">
+<span>
 
 ## SLSA is currently in alpha
 
@@ -47,7 +118,14 @@ The framework is constantly being improved. We encourage the community to try ad
 
 Google has been using an internal version of SLSA since 2013 and requires it for all of Google's production workloads.
 
+<div class="pseudo-button m-t-l">
+
 [See our roadmap](roadmap.md)
+
+</div>
+</span>
+
+<span>
 
 ## Get involved
 
@@ -57,4 +135,10 @@ We rely on feedback from other organisations to make it more useful for more peo
 
 **Are the levels achievable in your project? Would you add or remove anything from the framework? What’s preventing you from adopting it today?**
 
+<div class="pseudo-button m-t-l">
+
 [Join the conversation](getinvolved.md)
+
+</div>
+
+</span>

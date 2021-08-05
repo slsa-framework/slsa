@@ -10,7 +10,6 @@ header_pages:
   - getinvolved.md
 exclude:
   - README.md
-
 theme: minima
 permalink: :path/:basename
 markdown: CommonMarkGhPages
@@ -21,6 +20,8 @@ titles_from_headings:
   strip_title: true
 plugins:
   - jekyll-commonmark-ghpages
+  - jekyll-sitemap
+  - jekyll-seo-tag
   # Mandatory GitHub Pages plugins:
   - jekyll-coffeescript
   - jekyll-default-layout
@@ -31,3 +32,4 @@ plugins:
   - jekyll-readme-index
   - jekyll-titles-from-headings
   - jekyll-relative-links
+

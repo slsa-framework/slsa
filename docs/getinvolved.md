@@ -1,6 +1,8 @@
 # Get involved
 
-**We rely on feedback from other organisations to evolve SLSA and be more useful to more people. We’d love to hear your experiences using it!**
+<span class="subtitle">
+We rely on feedback from other organisations to evolve SLSA and be more useful to more people. We’d love to hear your experiences using it!
+</span>
 
 ## Feedback
 
