@@ -17,13 +17,13 @@ A security framework from source to service, giving anyone working with software
 <section class="buttons-horizontal">
 <div class="pseudo-button">
 
-[SLSA levels](/levels.md)
+[SLSA levels](levels.md)
 
 </div>
 
 <div class="pseudo-button">
 
-[Requirements](/requirements.md)
+[Requirements](requirements.md)
 
 </div>
 
@@ -46,10 +46,10 @@ That’s where SLSA can help, building intermediary levels to assess where softw
 
 | Level | Description                                   |
 | :---- | :-------------------------------------------- |
-| **1**     | Documentation of the build process            |
-| **2**     | Tamper resistance of the build service        |
-| **3**     | Prevents extra resistance to specific threats |
-| **4**     | Highest levels of confidence and trust        |
+| **1** | Documentation of the build process            |
+| **2** | Tamper resistance of the build service        |
+| **3** | Prevents extra resistance to specific threats |
+| **4** | Highest levels of confidence and trust        |
 
 </div>
 </section>
@@ -62,7 +62,7 @@ We’re developing SLSA collectively to tackle common threats across the supply 
 
 <div class="pseudo-button m-t-l">
 
-[Get involved](/getinvolved.md)
+[Get involved](getinvolved.md)
 
 </div>
 

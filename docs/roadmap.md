@@ -3,7 +3,9 @@
 ## SLSA is currently in alpha
 
 <span class="subtitle">
+
 Google has been using an internal version of SLSA since 2013 and requires it for all of Google's production workloads.
+
 </span>
 
 We encourage the community to try adopting SLSA levels incrementally and to share your experiences back to us. We rely on feedback from other organisations to evolve SLSA and be more useful to more people. [Please get involved!](getinvolved.md)
