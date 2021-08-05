@@ -299,7 +299,7 @@ Requirements on the process by which provenance is generated and consumed:
 <td>
 
 The provenance is available to the consumer in a format that the consumer
-accepts. The format SHOULD be in-toto [SLSA Provenance](provenance/index.md),
+accepts. The format SHOULD be in-toto [SLSA Provenance](provenance/index.html),
 but another format MAY be used if both producer and consumer agree and it meets
 all the other requirements.
 
