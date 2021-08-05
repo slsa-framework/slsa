@@ -1,0 +1,170 @@
+//
+// GLOBALS
+//
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+//
+// LAYOUT
+//
+
+// Blocks of content
+.content-block {
+    padding: 20px 0;
+}
+
+// Reponsive 2 column layout block
+.col-2 {
+    margin: 10px 0;
+    display: grid;
+    gap: $spacer-xxl;
+    grid-template-columns: 1fr 1fr;
+
+    @include media-query($on-palm) {
+        grid-template-columns: 1fr;
+        gap: $spacer-xxl;
+    }
+}
+
+.nogap {
+    @include media-query($on-palm) {
+        gap: 0;
+    }
+}
+
+// Section with wide background + color
+.breakout {
+    margin: $spacer-xl 0;
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    text-align: center;
+    padding: 100px 125px;
+    margin-left: -50vw;
+    background: $breakout-bg-color;
+
+    color: $text-color-light;
+
+    @include media-query($on-tablet) {
+        padding: 100px 40px;
+    }
+
+    @include media-query($on-mobile-old) {
+        min-width: $on-mobile-old;
+        margin-left: -$on-mobile-old * 0.5;
+    }
+
+    a {
+        color: $link-color-light;
+    }
+}
+
+.wrapper {
+    max-width: $content-width;
+    padding: 0 40px;
+    margin: 0 auto;
+}
+
+.max-width {
+    align-items: center;
+}
+
+//
+// STYLING
+//
+
+// Type size ramp
+h1 {
+    font-weight: $title-font-weight;
+    padding-top: $title-padding-top;
+    padding-bottom: $title-padding-bottom;
+
+    font-size: $title-font-size;
+    letter-spacing: $title-letter-spacing;
+    line-height: 1.2;
+
+    @include media-query($on-mobile) {
+        font-size: $title-font-size-mobile;
+    }
+
+    @include media-query($on-mobile-old) {
+        font-size: $title-font-size-mobile-old;
+    }
+}
+
+h2 {
+    font-size: $header2-font-size;
+    line-height: 1.15;
+    padding: 20px 0 10px 0;
+}
+
+h3 {
+    font-size: $header3-font-size;
+    line-height: 1.3;
+    padding: 10px 0 5px 0;
+}
+
+h4 {
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.subtitle {
+    display: block;
+    width: 90%;
+    padding-bottom: 10px;
+    font-size: $subtitle-font-size;
+
+    @include media-query($on-palm) {
+        width: 100%;
+    }
+}
+
+
+// Spacing elements
+.m-b-0 {
+    margin: 0px;
+}
+
+.m-b-l {
+    margin-bottom: $spacer-xl;
+}
+
+.m-b-xl {
+    margin-bottom: 100px;
+}
+
+.m-t-l {
+    margin-top: $spacer-xl;
+}
+
+// Link styles for the 'button' look
+
+.pseudo-button {
+    box-sizing: border-box;
+    text-decoration: none;
+
+    > p > a {
+        display: inline-block;
+        color: $text-color-light;
+        background: $brand-color;
+        border-radius: $button-radius;
+        padding: 12px 18px;
+
+        &:hover {
+            text-decoration: none;
+            background: darken($brand-color, 5%);
+        }
+    }
+}
+
+.buttons-horizontal {
+    display: flex;
+    gap: $spacer-l;
+}

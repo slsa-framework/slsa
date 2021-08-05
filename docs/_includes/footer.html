@@ -1,16 +1,23 @@
-<footer class="site-footer h-card">
-  <data class="u-url" href="{{ "/" | relative_url }}"></data>
-  <div class="wrapper">
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <a href="{{ site.github.repository_url }}">View on GitHub </a>
-      </div>
-      <div class="footer-col footer-col-2">
-        {%- include social.html -%}
-      </div>
-      <div class="footer-col footer-col-3">
-        {{- site.copyright_html -}}
-      </div>
+<footer class="site-footer">
+    <data class="u-url"
+          href="{{ "
+          /"
+          |
+          relative_url
+          }}"></data>
+    <div class="wrapper">
+        <div>
+            <p>SLSA (pronounced "<a href="https://www.google.com/search?q=how+to+pronounce+salsa">salsa</a>") is <strong>Supply-chain Levels
+                    for Software Artifacts</strong>.</p>
+        </div>
+        <div>
+            {{- site.copyright_html -}}
+        </div>
+        <div>
+            {%- include social.html -%}
+        </div>
+        <div>
+            <a href="{{ site.github.repository_url }}">View SLSA on GitHub </a>
+        </div>
     </div>
-  </div>
 </footer>
