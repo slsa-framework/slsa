@@ -9,6 +9,11 @@ MD007:
 # MD013/line-length - Line length
 MD013: false
 
+# MD025/single-title/single-h1 - Multiple top-level headings
+MD025:
+  # Disable checking of YAML frontmatter.
+  front_matter_title: ""
+
 # MD029/ol-prefix - Ordered list item prefix
 MD029:
   # List style
