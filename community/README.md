@@ -3,7 +3,7 @@
 SLSA community repo
 
 Thank you for your interest in contributing to SLSA. Please ensure you abide by
-our [Code of Conduct](code-of-conduct.md) when engaging with the SLSA community.
+our [Code of Conduct](../code-of-conduct.md) when engaging with the SLSA community.
 
 ## Mailing List
 
