@@ -32,26 +32,31 @@ A security framework from source to service, giving anyone working with software
 <!-- Levels overview -->
 <section class="content-block">
 
-<div class="m-b-l">
-
 ## Four steps to advanced protection
 
-**It can take years to achieve the ideal security state - intermediate milestones are important.** SLSA guides you through gradually improving the security of your software. Artifacts used in critical infrastructure or vital business operations may want to attain a higher level of security, whereas software that poses a low risk can stop when they're comfortable.
+<section class="col-2">
 
-That’s where SLSA can help, building intermediary levels to assess where software’s come from, and how its being used in a software supply chain.
+<div class="m-b-l">
+<span class="subtitle">It can take years to achieve the ideal security state, and intermediate milestones are important.</span>
+
+SLSA guides you through gradually improving the security of your software. Artifacts used in critical infrastructure or vital business operations may need a higher level of security than software that poses a lower risk.
+
+The SLSA framework helps guide you through gradual improvements to the security of your software, building intermediary levels to check where software’s come from, and how it's being used in a software supply chain.
 
 </div>
 
 <div>
 
-| Level | Description                                   |
-| :---- | :-------------------------------------------- |
-| **1** | Documentation of the build process            |
-| **2** | Tamper resistance of the build service        |
-| **3** | Prevents extra resistance to specific threats |
-| **4** | Highest levels of confidence and trust        |
+| Level | Description                               |
+| :---- | :---------------------------------------- |
+| 1 | Documentation of the build process            |
+| 2 | Tamper resistance of the build service        |
+| 3 | Prevents extra resistance to specific threats |
+| 4 | Highest levels of confidence and trust        |
 
 </div>
+
+</section>
 </section>
 
 <section class="breakout">
