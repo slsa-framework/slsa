@@ -117,8 +117,7 @@ h4 {
 
 .subtitle {
     display: block;
-    width: 90%;
-    padding-bottom: 10px;
+    padding-bottom: $spacer-l;
     font-size: $subtitle-font-size;
 
     @include media-query($on-palm) {
