@@ -17,62 +17,78 @@ A security framework from source to service, giving anyone working with software
 
 </span>
 
-<section class="buttons-horizontal">
-<div class="pseudo-button">
-
-[SLSA levels](levels.md)
-
-</div>
-
-<div class="pseudo-button">
-
-[Requirements](requirements.md)
-
-</div>
-
-</section>
-
 <!-- Levels overview -->
-<section class="content-block">
-
-## Four steps to advanced protection
-
-<section class="col-2">
-
-<div class="m-b-l">
-<span class="subtitle">It can take years to achieve the ideal security state, and intermediate milestones are important.</span>
-
-Artifacts used in critical infrastructure or vital business operations may need a higher level of security than software that poses a lower risk.
-
-SLSA guides you through gradually improving the security of your software, building intermediary levels to check where software’s come from, and how it's being used in a software supply chain.
-
-</div>
-
-<div>
-
-| Level | Description                               |
-| :---- | :---------------------------------------- |
-| 1 | Documentation of the build process            |
-| 2 | Tamper resistance of the build service        |
-| 3 | Prevents extra resistance to specific threats |
-| 4 | Highest levels of confidence and trust        |
-
-</div>
-
-</section>
-</section>
-
 <section class="breakout">
 
-## Building towards an industry consensus
+<div class="wrapper">
+<span class="subtitle flushed">Overview</span>
 
-We’re developing SLSA collectively to tackle common threats across the supply chain.
+## Security levels
 
-<div class="pseudo-button m-t-l">
+Each level provides a number of requirements that will increase trust in software. These look at the integrity of the source and build services, the available information about the code, reproducibility and resilience against both tampering or human error.
 
-[Get involved](getinvolved.md)
+<div class="level-icons m-b-l">
+
+<div class="dot">
+
+## 1
+
+### Basic protection
+
+Provenance checks to help evaluate risks and security
 
 </div>
+
+<div class="dot">
+
+## 2
+
+### Medium protection
+
+Further checks against the origin of the software
+
+</div>
+
+<div class="dot">
+
+## 3
+
+### Advanced protection
+
+Extra resistance to specific classes of threats
+
+</div>
+<div class="dot">
+
+## 4
+
+### Maximum protection
+
+Strict auditability and reliability checks
+
+</div>
+
+</div>
+
+<div class="buttons-horizontal">
+
+<div class="pseudo-button">
+
+[Learn more](levels.md)
+
+</div>
+
+<div class="pseudo-button">
+
+[Read the requirements](requirements.md)
+
+</div>
+
+</div>
+
+</div>
+
+</section>
 
 </section>
 
@@ -106,13 +122,32 @@ Software consumers can choose software that provides the needed level of securit
 </span>
 
 </section>
-
-<!-- Github actions breakout -->
+<!-- Future -->
 <section class="breakout">
+
+<div class="wrapper">
+<span class="subtitle flushed">In collaboration</span>
+
+## Building towards an industry consensus
+
+We’re developing SLSA collectively to tackle common threats across the supply chain.
+
+<div class="pseudo-button m-t-l">
+
+[Get involved](getinvolved.md)
+
+</div>
+
+</div>
+
+<div class="wrapper">
+<span class="subtitle flushed">Get started</span>
 
 ## See a GitHub Actions demo
 
 Check our demonstration for SLSA level 1 with [a provenance generator for GitHub Actions](https://github.com/slsa-framework/github-actions-demo).
+
+</div>
 
 </section>
 

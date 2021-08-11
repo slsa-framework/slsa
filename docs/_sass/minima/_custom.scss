@@ -40,16 +40,12 @@
 
 // Section with wide background + color
 .breakout {
-    margin: $spacer-xl 0;
     position: relative;
-    width: 100vw;
-    left: 50%;
-    text-align: center;
-    padding: 100px 125px;
-    margin-left: -50vw;
     background: $breakout-bg-color;
-
-    color: $text-color-light;
+    margin: $spacer-xl 0;
+    padding: 100px 0;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
 
     @include media-query($on-tablet) {
         padding: 100px 40px;
@@ -58,10 +54,6 @@
     @include media-query($on-mobile-old) {
         min-width: $on-mobile-old;
         margin-left: -$on-mobile-old * 0.5;
-    }
-
-    a {
-        color: $link-color-light;
     }
 }
 
@@ -73,6 +65,22 @@
 
 .max-width {
     align-items: center;
+}
+
+// 4 column levels
+.level-icons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacer-l;
+
+
+
+    .dot {
+        background: white;
+        border-radius: $radius;
+        border: 4px solid $grey-color-light;
+        padding: 0 $spacer-l $spacer-l $spacer-l;
+    }
 }
 
 //
@@ -123,8 +131,12 @@ h4 {
     @include media-query($on-palm) {
         width: 100%;
     }
-}
 
+    &.flushed {
+        padding-bottom: 0;
+        margin-bottom: -$spacer-l;
+    }
+}
 
 // Spacing elements
 .m-b-0 {
@@ -153,7 +165,7 @@ h4 {
         display: inline-block;
         color: $text-color-light;
         background: $brand-color;
-        border-radius: $button-radius;
+        border-radius: $radius;
         padding: 12px 18px;
 
         &:hover {
