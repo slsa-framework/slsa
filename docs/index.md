@@ -27,9 +27,9 @@ A security framework from source to service, giving anyone working with software
 
 Each level provides a number of requirements that will increase trust in software. These look at the integrity of the source and build services, the available information about the code, reproducibility and resilience against both tampering or human error.
 
-<div class="level-icons m-b-l">
+<div class="level-icons m-b-l m-t-xl">
 
-<div class="dot">
+<div class="level">
 
 ## 1
 
@@ -39,7 +39,7 @@ Provenance checks to help evaluate risks and security
 
 </div>
 
-<div class="dot">
+<div class="level">
 
 ## 2
 
@@ -49,7 +49,7 @@ Further checks against the origin of the software
 
 </div>
 
-<div class="dot">
+<div class="level">
 
 ## 3
 
@@ -58,7 +58,7 @@ Further checks against the origin of the software
 Extra resistance to specific classes of threats
 
 </div>
-<div class="dot">
+<div class="level">
 
 ## 4
 
@@ -140,7 +140,7 @@ We’re developing SLSA collectively to tackle common threats across the supply 
 
 </div>
 
-<div class="wrapper">
+<div class="wrapper m-t-xl">
 <span class="subtitle flushed">Get started</span>
 
 ## See a GitHub Actions demo
