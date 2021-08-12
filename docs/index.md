@@ -31,7 +31,11 @@ Each level provides a number of requirements that will increase trust in softwar
 
 <div class="level">
 
-## 1
+<div class="level-badge">
+
+![Level 1](images/levelBadge1.svg)
+
+</div>
 
 ### Basic protection
 
@@ -41,7 +45,11 @@ Provenance checks to help evaluate risks and security
 
 <div class="level">
 
-## 2
+<div class="level-badge">
+
+![Level 2](images/levelBadge2.svg)
+
+</div>
 
 ### Medium protection
 
@@ -51,7 +59,11 @@ Further checks against the origin of the software
 
 <div class="level">
 
-## 3
+<div class="level-badge">
+
+![Level 3](images/levelBadge3.svg)
+
+</div>
 
 ### Advanced protection
 
@@ -60,7 +72,11 @@ Extra resistance to specific classes of threats
 </div>
 <div class="level">
 
-## 4
+<div class="level-badge">
+
+![Level 4](images/levelBadge4.svg)
+
+</div>
 
 ### Maximum protection
 

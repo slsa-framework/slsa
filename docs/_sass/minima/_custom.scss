@@ -77,7 +77,11 @@
         background: white;
         border-radius: $radius;
         border: 4px solid $grey-color-light;
-        padding: 0 $spacer-l $spacer-l $spacer-l;
+        padding: $spacer-l;
+
+        .level-badge {
+            max-width: 50px;
+        }
     }
 }
 
