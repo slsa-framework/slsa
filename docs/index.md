@@ -25,7 +25,7 @@ A security framework from source to service, giving anyone working with software
 
 ## Security levels
 
-Each level provides a number of requirements that will increase trust in software. These look at the integrity of the source and build services, the available information about the code, reproducibility and resilience against both tampering or human error.
+Each level provides requirements, processes and best practices to increase trust in software. These look at the integrity of the source and build services, available information about the code, reproducibility and resilience against tampering or human error.
 
 <div class="level-icons m-b-l m-t-xl">
 
