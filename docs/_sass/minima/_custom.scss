@@ -130,6 +130,7 @@ h4 {
     padding-bottom: $spacer-l;
     font-size: $subtitle-font-size;
 
+    // For making subtitles hug closely above headers
     &.flushed {
         padding-bottom: 0;
         margin-bottom: -$spacer-l;
@@ -166,6 +167,7 @@ h4 {
     > p > a {
         display: inline-block;
         color: $text-color-light;
+        font-size: $base-font-size;
         background: $brand-color;
         border-radius: $radius;
         padding: 12px 18px;

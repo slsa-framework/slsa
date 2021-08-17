@@ -50,6 +50,7 @@ Provenance checks to help evaluate risks and security
 ![Level 2](images/levelBadge2.svg)
 
 </div>
+<<<<<<< Updated upstream
 
 ### Medium protection
 
@@ -59,6 +60,17 @@ Further checks against the origin of the software
 
 <div class="level">
 
+=======
+
+### Medium protection
+
+Further checks against the origin of the software
+
+</div>
+
+<div class="level">
+
+>>>>>>> Stashed changes
 <div class="level-badge">
 
 ![Level 3](images/levelBadge3.svg)
@@ -116,18 +128,16 @@ Strict auditability and reliability checks
 <section class="col-2">
 <span>
 
-## How do you mitigate risks and threats to your supply chain?
+## How do you mitigate risks to your supply chain?
 
-Recent high profile supply chain attacks prove how costly an attack can be. It’s difficult to check the integrity of software artifacts today, but SLSA wants to fix that with a set of integrity requirements developers can follow to improve the security of the software they produce.
-
-See SLSA compared to [known supply chain attacks](levels.md#threats).
+Any software can introduce vulnerabilities into a supply chain, with recent high profile supply chain attacks proving how costly an attack can be. The requirements and checks that make up the SLSA framework aim to empower developers and software consumers to easily check the integrity of software artifacts, developed in direct response to [known supply chain attacks](levels.md#threats).
 
 </span>
 <span>
 
 ## Standard security guidelines that scale for your future
 
-Software consumers can choose software that provides the needed level of security. SLSA levels are a way to better understand your current security posture, and plan for the future. You can check that the security information for any software in your supply chain is accurate manually, and help develop and share tools that automate the process.
+SLSA levels are a way to better understand your current security posture, and plan for the future. If you’re a software consumer, you can check that the security information for any software in your supply chain is accurate, whether it provides the exact level of security you need, and help develop, share and promote tools that automate the process.
 
 <div class="pseudo-button">
 
@@ -144,9 +154,11 @@ Software consumers can choose software that provides the needed level of securit
 <div class="wrapper">
 <span class="subtitle flushed">In collaboration</span>
 
-## Building towards an industry consensus
+## Building towards the future
 
-We’re developing SLSA collectively to tackle common threats across the supply chain.
+<span class="subtitle">
+Today’s projects, products and services are increasingly complex and open to attack. As that trend continues, we need to scale up our effort to provide more secure, accessible ways to protect the development, distribution and consumption of the software we use, and all the impacted communities behind it.
+</span>
 
 <div class="pseudo-button m-t-l">
 
