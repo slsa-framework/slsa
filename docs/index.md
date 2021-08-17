@@ -118,7 +118,7 @@ Strict auditability and reliability checks
 
 ## How do you mitigate risks to your supply chain?
 
-Any software can introduce vulnerabilities into a supply chain, with recent high profile supply chain attacks proving how costly an attack can be. The requirements and checks that make up the SLSA framework aim to empower developers and software consumers to easily check the integrity of software artifacts, developed in direct response to [known supply chain attacks](levels.md#threats).
+Any software can introduce vulnerabilities into a supply chain, with recent high profile supply chain attacks proving how costly an attack can be. The requirements and checks that make up the SLSA framework were developed in direct response to [known supply chain attacks](levels.md#threats) with the aim to empower developers and software consumers to easily check the integrity of software artifacts in an automatically verifiable way.
 
 </span>
 <span>
