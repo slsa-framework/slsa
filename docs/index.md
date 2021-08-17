@@ -50,7 +50,6 @@ Provenance checks to help evaluate risks and security
 ![Level 2](images/levelBadge2.svg)
 
 </div>
-<<<<<<< Updated upstream
 
 ### Medium protection
 
@@ -60,17 +59,6 @@ Further checks against the origin of the software
 
 <div class="level">
 
-=======
-
-### Medium protection
-
-Further checks against the origin of the software
-
-</div>
-
-<div class="level">
-
->>>>>>> Stashed changes
 <div class="level-badge">
 
 ![Level 3](images/levelBadge3.svg)
