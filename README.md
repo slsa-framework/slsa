@@ -20,6 +20,18 @@ You can read SLSA's documentation here:
 
 SLSA is currently in alpha. The framework is constantly being improved. We encourage the community to try adopting SLSA levels incrementally and to share your experiences back to us.
 
+## Steering committee
+
+SLSA is currently led by an initial cross-organization, vendor-neutral steering committee. This committee is:
+
+-   [Joshua Lock](https://github.com/joshuagl) - VMWare
+-   [Bruno Domingues](https://github.com/brunodom) - Intel
+-   [David A. Wheeler](https://github.com/david-a-wheeler) - Linux Foundation
+-   [Trishank Kuppusamy](https://github.com/trishankatdatadog) - DataDog
+-   [Mike Lieberman](https://github.com/mlieberman85) - Citi/CNCF
+-   [Zak Greant](https://github.com/zakgreant) - ActiveState
+-   [Mark Lodato](https://github.com/MarkLodato) - Google
+
 ## Contributors
 
 -   [Kim Lewandowski](https://github.com/kimsterv)
