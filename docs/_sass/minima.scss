@@ -9,26 +9,25 @@ $text-color-light: #ffffff !default;
 $background-color: #ffffff !default;
 $brand-color: #0079c4 !default;
 $link-color-light: lighten($brand-color, 35%) !default;
-$breakout-bg-color: #F5F5F1 !default;
+$breakout-bg-color: #f5f5f1 !default;
 
 $grey-color: #828282 !default;
 $grey-color-light: lighten($grey-color, 40%) !default;
 $grey-color-dark: darken($grey-color, 25%) !default;
+$grey-color-border: #dedede;
 
 // font variables
 
-$base-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-'Segoe UI Symbol' !default;
+$base-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
 $base-font-size: 16px !default;
 $base-font-weight: 400 !default;
 $small-font-size: $base-font-size * 0.9 !default;
 
 $base-line-height: 1.7 !default;
 
-$header-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol' !default;
+$header-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
 $header2-font-size: 28px !default;
 $header3-font-size: 20px !default;
 $header-font-weight: 700 !default;
@@ -47,9 +46,8 @@ $title-font-size-mobile-old: 32px !default;
 
 $subtitle-font-size: 18px !default;
 
-$logo-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol' !default;
+$logo-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
 $logo-font-size: 17px !default;
 $logo-font-weight: 700 !default;
 $radius: 8px;
@@ -77,7 +75,6 @@ $on-palm: 600px !default;
 $on-tablet: 775px !default;
 $on-laptop: 900px !default;
 
-
 @mixin media-query($device) {
     @media screen and (max-width: $device) {
         @content;
@@ -89,5 +86,4 @@ $on-laptop: 900px !default;
 }
 
 // Import partials.
-@import 'minima/base', 'minima/layout', 'minima/syntax-highlighting',
-    'minima/custom';
+@import "minima/base", "minima/layout", "minima/syntax-highlighting", "minima/custom";

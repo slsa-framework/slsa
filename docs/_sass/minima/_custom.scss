@@ -52,6 +52,10 @@
     max-width: $content-width;
     padding: 0 40px;
     margin: 0 auto;
+
+    @include media-query($on-mobile) {
+        padding: 0 20px;
+    }
 }
 
 .max-width {
@@ -137,6 +141,27 @@ h4 {
     }
 }
 
+.diagram-wrapper {
+    .diagram {
+        border: 1px solid $grey-color-border;
+        padding: $spacer-xl;
+        border-radius: $radius;
+
+        // strange bottom margin hack
+        p {
+            margin: 0;
+        }
+
+        @include media-query($on-mobile) {
+            padding: $spacer-m;
+        }
+    }
+
+    .annotation {
+        color: $grey-color;
+    }
+}
+
 // Spacing elements
 .m-b-0 {
     margin: 0px;
@@ -148,6 +173,14 @@ h4 {
 
 .m-b-xl {
     margin-bottom: 100px;
+}
+
+.m-t-s {
+    margin-top: $spacer-m;
+}
+
+.m-t-m {
+    margin-top: $spacer-l;
 }
 
 .m-t-l {
@@ -168,13 +201,13 @@ h4 {
         display: inline-block;
         color: $text-color-light;
         font-size: $base-font-size;
-        background: $brand-color;
+        background: #000;
         border-radius: $radius;
         padding: 12px 18px;
 
         &:hover {
             text-decoration: none;
-            background: darken($brand-color, 5%);
+            background: $brand-color;
         }
     }
 }

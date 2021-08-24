@@ -6,10 +6,10 @@
     // border-bottom: 1px solid $grey-color-light;
     min-height: $spacer-xl * 4;
     @include media-query($on-tablet) {
-      min-height: $spacer-xl*2;
+        min-height: $spacer-xl * 2;
     }
     @include media-query($on-palm) {
-      min-height: $spacer-xl;
+        min-height: $spacer-xl;
     }
 
     // Positioning context for the mobile navigation icon
@@ -34,7 +34,7 @@
     }
 
     &:hover {
-      text-decoration: none;
+        text-decoration: none;
     }
 }
 
@@ -71,7 +71,7 @@
         border-radius: 5px;
         text-align: right;
 
-        label[for='nav-trigger'] {
+        label[for="nav-trigger"] {
             display: block;
             float: right;
             width: 36px;
@@ -120,7 +120,6 @@
  * Site footer
  */
 .site-footer {
-    border-top: 1px solid $grey-color-light;
     padding: $spacer-xl 0;
     margin-top: 80px;
     color: $text-color;

@@ -94,12 +94,6 @@ Strict auditability and reliability checks
 
 </div>
 
-<div class="pseudo-button">
-
-[Read the requirements](requirements.md)
-
-</div>
-
 </div>
 
 </div>
@@ -110,37 +104,53 @@ Strict auditability and reliability checks
 
 <!-- Supply chain diagram -->
 <section class="content-block">
+<span class="subtitle flushed">The supply chain</span>
+
+## Protecting each stage of development
+
+<div class="m-b-l">
+
+### How do you mitigate threats and risks?
+
+Any software can introduce vulnerabilities into a supply chain, with recent high profile cases proving how costly an attack can be. The steps that make up the SLSA framework aim to empower developers and software consumers to easily and automatically check the integrity of software artifacts, developed in direct response to [known supply chain attacks](levels.md#threats).
+
+</div>
+
+<!-- System threats diagram -->
+<div class="diagram-wrapper">
+
+<div class="diagram">
 
 ![Supply Chain Threats](images/supply-chain-threats.svg)
 
-<section class="col-2">
-<span>
+</div>
 
-## How do you mitigate risks to your supply chain?
+<div class="annotation m-t-s">
+Where threats and risks occur in a supply chain
+</div>
 
-Any software can introduce vulnerabilities into a supply chain, with recent high profile supply chain attacks proving how costly an attack can be. The requirements and checks that make up the SLSA framework were developed in direct response to [known supply chain attacks](levels.md#threats) with the aim to empower developers and software consumers to easily check the integrity of software artifacts in an automatically verifiable way.
+</div>
 
-</span>
-<span>
+<div class="m-t-xl">
 
-## Standard security guidelines that scale for your future
+### Standard security guidelines that scale
 
-SLSA levels are a way to better understand your current security posture, and plan for the future. If you’re a software consumer, you can check that the security information for any software in your supply chain is accurate, whether it provides the exact level of security you need, and help develop, share and promote tools that automate the process.
+SLSA levels are a way to better understand your current security posture, protect yourself from potential threats and plan for the future. If you’re a software consumer, you can check that the security information for any software in your supply chain is accurate, whether it provides the exact level of security you need, and help develop, share and promote tools that automate the process.
 
-<div class="pseudo-button">
+<div class="pseudo-button m-t-l">
 
 [Read the requirements](requirements.md)
 
 </div>
 
-</span>
+</div>
 
 </section>
 <!-- Future -->
 <section class="breakout">
 
 <div class="wrapper">
-<span class="subtitle flushed">In collaboration</span>
+<span class="subtitle flushed">Ethos</span>
 
 ## Building towards the future
 
@@ -156,26 +166,15 @@ Today’s projects, products and services are increasingly complex and open to a
 
 </div>
 
-<div class="wrapper m-t-xl">
-<span class="subtitle flushed">Get started</span>
-
-## See a GitHub Actions demo
-
-Check our demonstration for SLSA level 1 with [a provenance generator for GitHub Actions](https://github.com/slsa-framework/github-actions-demo).
-
-</div>
-
 </section>
 
 <!-- Two column wrap-up -->
 <section class="col-2 content-block">
 <span>
 
-## SLSA is currently in alpha
+## Currently in alpha
 
-The framework is constantly being improved. We encourage the community to try adopting SLSA levels incrementally and to share your experiences back to us.
-
-Google has been using an internal version of SLSA since 2013 and requires it for all of Google's production workloads.
+The framework is constantly being improved, and is now ready to be tried out and tested. Google has been using an internal version of SLSA since 2013 and requires it for all of their production workloads.
 
 <div class="pseudo-button m-t-l">
 
@@ -188,11 +187,7 @@ Google has been using an internal version of SLSA since 2013 and requires it for
 
 ## Get involved
 
-SLSA is building towards an industry consensus. We’re developing SLSA collectively to tackle common threats across the supply chain.
-
-We rely on feedback from other organisations to make it more useful for more people. We’d love to hear from you about your experiences using SLSA.
-
-**Are the levels achievable in your project? Would you add or remove anything from the framework? What’s preventing you from adopting it today?**
+We rely on feedback from other organisations to improve, and we’d love to hear from you. Are the levels achievable in your project? Would you add or remove anything from the framework?
 
 <div class="pseudo-button m-t-l">
 
@@ -201,3 +196,18 @@ We rely on feedback from other organisations to make it more useful for more peo
 </div>
 
 </span>
+</section>
+
+<!-- Future -->
+<section class="breakout">
+
+<div class="wrapper">
+<span class="subtitle flushed">Get started</span>
+
+## See a GitHub Actions demo
+
+Check our demonstration for SLSA level 1 with [a provenance generator for GitHub Actions](https://github.com/slsa-framework/github-actions-demo).
+
+</div>
+
+</section>
