@@ -2,7 +2,7 @@
 
 <span class="subtitle">
 
-The following are some typical cases to explore how SLSA compliance can provide protection. In each, we’ve detailed goals that users need to meet, how organisations can use the SLSA framework to help meet them, and limitations that might be faced.
+The following are some typical cases to explore how SLSA compliance can provide protection. In each, we’ve detailed goals that users need to meet, how organizations can use the SLSA framework to help meet them, and limitations that might be faced.
 
 </span>
 

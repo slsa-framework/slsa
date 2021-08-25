@@ -6,7 +6,7 @@ layout: use-case
 
 ## Consuming third party software
 
-A developer (e.g. FooCo) using third party software (e.g. HowDo developed by HowInc) wants to ensure it hasn’t been tampered with before using it. They could take these steps to protect the organisation from the software they consume without having to rely on any trust in intermediate package repositories.
+A developer (e.g. FooCo) using third party software (e.g. HowDo developed by HowInc) wants to ensure it hasn’t been tampered with before using it. They could take these steps to protect the organization from the software they consume without having to rely on any trust in intermediate package repositories.
 
 | Subject   | Description                   |
 |:----------|:------------------------------|
