@@ -8,12 +8,64 @@ This document covers all of the detailed requirements for an artifact to meet SL
 
 _Reminder: SLSA is in [alpha](roadmap.md). The definitions below are not yet finalized and subject to change, particularly SLSA 3-4._
 
--   [What is SLSA?](#what-is-slsa)
--   [Definitions](#definitions)
--   [Source requirements](#source-requirements)
--   [Build requirements](#build-requirements)
--   [Provenance requirements](#provenance-requirements)
--   [Common requirements](#common-requirements)
+<table class="link-tree">
+<th>On this page</th>
+<tr>
+<td>
+
+[What is SLSA?](#what-is-slsa)
+
+</td>
+</tr>
+<tr>
+<td>
+
+[Definitions](#definitions)
+
+</td>
+</tr>
+<tr>
+<td>
+
+[Source requirements](#source-requirements)
+
+</td>
+</tr>
+<tr>
+<td>
+
+[Build requirements](#build-requirements)
+
+</td>
+</tr>
+<tr>
+<td>
+
+[Provenance requirements](#provenance-requirements)
+
+</td>
+</tr>
+<tr>
+<td>
+
+[Common requirements](#common-requirements)
+
+</td>
+</tr>
+
+</table>
+
+<table class="link-tree">
+<th>Further reading</th>
+<tr>
+<td>
+
+[FAQs](/faq.md)
+
+</td>
+</tr>
+
+</table>
 
 ## What is SLSA?
 
