@@ -33,4 +33,4 @@ BarInc can achieve these goals when publishing the container image by:
 
 ### Limitations
 
-This approach doesn’t protect their users from a published BarImage being tampered with after publication. There may be other ways to address these concerns such as code signing after verification, [time-of-use verification](/consuming-third-party-software.md), or encouraging use of the SLSA framework by their software consumers.
+This approach doesn’t protect their users from a published BarImage being tampered with after publication. There may be other ways to address these concerns such as code signing after verification, or encouraging [use of the SLSA framework by their software consumers](/consuming-third-party-software.md).
