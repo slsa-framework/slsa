@@ -128,7 +128,7 @@ obliteration, such as a legal or policy requirement.
 -   **[Immutable history]** It must not be possible for persons to delete or
     modify the history, even with multi-party approval, except by trusted
     platform admins with two-party approval following the obliterate policy.
--   **[Limited retention for SLSA 2]** At SLSA 2 (but not 3), it is acceptable
+-   **[Limited retention for SLSA 3]** At SLSA 3 (but not 4), it is acceptable
     for the retention to be limited to 18 months, as attested by the source
     control platform.
     -   Example: If a commit is made on 2020-04-05 and then a retention
