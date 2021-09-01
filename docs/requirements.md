@@ -415,10 +415,10 @@ provenance. This represents the entity that the consumer must trust. Examples:
 <td>Identifies build instructions
 <td>
 
-Identifies the top-level instructions used to execute the build.
+The provenance identifies the top-level instructions used to execute the build.
 
 The identified instructions SHOULD be at the highest level available to the build
-(e.g. if the build it told to run build.sh it should list build.sh and NOT the
+(e.g. if the build is told to run build.sh it should list build.sh and NOT the
 individual instructions in build.sh).
 
 If the build uses <a href="#config-as-code">config-as-code<a>, this SHOULD be the
