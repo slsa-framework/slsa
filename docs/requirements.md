@@ -447,28 +447,27 @@ Build steps example:
 "recipe": {
   // Build steps were provided as an argument. No `definedInMaterial` or
   // `entryPoint`.
-  "type": "https://tekton.dev/chains/recipe/buildSteps@v1",
+  "type": "https://foobuilder.dev/recipe/buildSteps@v1",
   "arguments": {
-      "steps": [
-          {
-            "entryPoint": "",
-            "arguments": null,
-            "environment": {
-              "container": "git-source-repo-jwqcl",
-              "image": "gcr.io/tekton-releases/..."
-            },
-            "annotations": null
-          },
-          {
-            "entryPoint": "#!/usr/bin/env bash\nset -x\n\ncd ...",
-            "arguments": null,
-            "environment": {
-              "container": "build",
-              "image": "gcr.io/cloud-marketplace-containers/..."
-            },
-            "annotations": null
-          }
+    "steps": [
+      {
+        "entryPoint": "",
+        "arguments": null,
+        "image":
+            "gcr.io/foo-releases/github.com/foobuilder/pipeline/cmd/git-init@sha256:b963...",
+      },
+      {
+        "entryPoint":
+            "#!/usr/bin/env bash\nset -x\n\ncd src\n\nbuild.sh",
+        "arguments": [
+          "-c",
+          "set -x; cd /workspace/repo && crane digest --tarball=static_root_amd64_debian10.tar > $(results.IMAGE_DIGEST.path) && cat $(results.IMAGE_DIGEST.path)"
+        ],
+        "image":
+            "gcr.io/cloud-marketplace-containers/google/bazel@sha256:010a1e..."",
+      }
     ]
+  }
 }
 ```
 
