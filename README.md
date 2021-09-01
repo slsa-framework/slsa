@@ -32,6 +32,12 @@ SLSA is currently led by an initial cross-organization, vendor-neutral steering 
 -   [Zak Greant](https://github.com/zakgreant) - ActiveState
 -   [Mark Lodato](https://github.com/MarkLodato) - Google
 
+Shortcut to notify the steering committee on any issues/PRs:
+
+```
+@trishankatdatadog @joshuagl @brunodom @david-a-wheeler @mlieberman85 @zakgreant @marklodato
+```
+
 ## Contributors
 
 -   [Kim Lewandowski](https://github.com/kimsterv)
