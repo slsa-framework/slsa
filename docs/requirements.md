@@ -417,7 +417,10 @@ provenance. This represents the entity that the consumer must trust. Examples:
 
 Identifies the top-level instructions used to execute the build.
 
-The identified instructions SHOULD be at the highest level available to the build.
+The identified instructions SHOULD be at the highest level available to the build
+(e.g. if the build it told to run build.sh it should list build.sh and NOT the
+individual instructions in build.sh).
+
 If the build uses <a href="#config-as-code">config-as-code<a>, this SHOULD be the
 source repo and entry point of the build config and NOT the build steps within the
 build config.  If the build does not use config-as-code it MAY list details of the
