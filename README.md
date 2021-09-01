@@ -34,7 +34,7 @@ SLSA is currently led by an initial cross-organization, vendor-neutral steering 
 
 Shortcut to notify the steering committee on any issues/PRs:
 
-> @trishankatdatadog @joshuagl @brunodom @david-a-wheeler @mlieberman85 @zakgreant @marklodato
+> @brunodom @david-a-wheeler @joshuagl @marklodato @mlieberman85 @trishankatdatadog @zakgreant
 
 ## Contributors
 
