@@ -203,7 +203,7 @@ Examples: GitHub Actions, Google Cloud Build, Travis CI.
 <td>Config as code
 <td>
 
-The build service configuration is defined in source control and drives the build automatically.
+The build service configuration is defined in source control and is executed by the build service.
 
 Examples: cloudbuild.yaml, ./github/workflows/build.yaml, zuul.yaml.
 <td> <td> <td>✓<td>✓
