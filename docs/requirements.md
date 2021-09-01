@@ -422,57 +422,14 @@ The identified instructions SHOULD be at the highest level available to the buil
 individual instructions in build.sh).
 
 If the build uses <a href="#config-as-code">config-as-code<a>, this SHOULD be the
-source repo and entry point of the build config and NOT the build steps within the
-build config.  If the build does not use config-as-code it MAY list details of the
-build steps.
+source repo and entry point of the build config (as in
+[the GitHub Actions example](https://slsa.dev/provenance/v0.1#github-actions)).
 
-Config-as-code example:
-
-```json5
-"recipe": {
-  "type": "https://github.com/Attestations/GitHubActionsWorkflow@v1",
-  // Identifies the source repo of the build config.
-  "definedInMaterial": 0,
-  // Identifies the entrypoint within the source repo at the path
-  // .github/workflows/build.yaml, using the job "build".
-  "entryPoint": ".github/workflows/build.yaml:build",
-},
-…
-"materials": [{
-   "uri": "git+https://the.repo/foo",
-   "digest": {"sha1": "abc123..."}
-}]
-```
-
-Build steps example:
-
-```json5
-"recipe": {
-  // Build steps were provided as an argument. No `definedInMaterial` or
-  // `entryPoint`.
-  "type": "https://foobuilder.dev/recipe/buildSteps@v1",
-  "arguments": {
-    "steps": [
-      {
-        "entryPoint": "",
-        "arguments": null,
-        "image":
-            "gcr.io/foo-releases/github.com/foobuilder/pipeline/cmd/git-init@sha256:b963...",
-      },
-      {
-        "entryPoint":
-            "#!/usr/bin/env bash\nset -x\n\ncd src\n\nbuild.sh",
-        "arguments": [
-          "-c",
-          "set -x; cd /workspace/repo && crane digest --tarball=static_root_amd64_debian10.tar > $(results.IMAGE_DIGEST.path) && cat $(results.IMAGE_DIGEST.path)"
-        ],
-        "image":
-            "gcr.io/cloud-marketplace-containers/google/bazel@sha256:010a1e..."",
-      }
-    ]
-  }
-}
-```
+If the build doesn't use config-as-code it MAY list the details of what it did
+as in
+[the Google Cloud Build RPC example](https://slsa.dev/provenance/v0.1#cloud-build-rpc)
+or
+[the Explicitly Run Commands example](https://slsa.dev/provenance/v0.1#explicitly-run-commands).
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="identifies-entry-point">
