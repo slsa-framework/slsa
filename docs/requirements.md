@@ -429,8 +429,7 @@ If the build doesn't use config-as-code it MAY list the details of what it was
 asked to do (as in
 [the Google Cloud Build RPC example](https://slsa.dev/provenance/v0.1#cloud-build-rpc)
 or
-[the Explicitly Run Commands example](https://slsa.dev/provenance/v0.1#explicitly-run-commands)
-).
+[the Explicitly Run Commands example](https://slsa.dev/provenance/v0.1#explicitly-run-commands)).
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="identifies-entry-point">
