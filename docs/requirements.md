@@ -461,7 +461,8 @@ authenticated by the builder.
 At level 3+ this information MUST be authenticated by the builder (i.e. the
 builder either needs to have fetched the source itself or _observed_ the fetch).
 
-NOTE: At levels 3 and below the listed source repositories may not be complete.
+At level 4 this information MUST be complete (i.e. all source repositories used
+in the build are listed).
 
 <td><td>✓<td>✓<td>✓
 <tr id="identifies-entry-point">
