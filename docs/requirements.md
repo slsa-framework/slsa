@@ -450,7 +450,8 @@ or
 <td>Identifies source code
 <td>
 
-The provenance identifies repositories the source code used came from.
+The provenance identifies the repository origin(s) for the source code used in
+the build.
 
 The identified repositories SHOULD only include source used directly in the build.
 The source of dependencies SHOULD NOT be included.
