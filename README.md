@@ -24,7 +24,7 @@ SLSA is currently in alpha. The framework is constantly being improved. We encou
 
 SLSA is currently led by an initial cross-organization, vendor-neutral steering committee. This committee is:
 
--   [Joshua Lock](https://github.com/joshuagl) - VMWare
+-   [Joshua Lock](https://github.com/joshuagl) - VMware
 -   [Bruno Domingues](https://github.com/brunodom) - Intel
 -   [David A. Wheeler](https://github.com/david-a-wheeler) - Linux Foundation
 -   [Trishank Kuppusamy](https://github.com/trishankatdatadog) - DataDog
