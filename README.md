@@ -1,5 +1,7 @@
 # SLSA ("salsa") is Supply-chain Levels for Software Artifacts
 
+<img align="right" src="https://github.com/slsa-framework/slsa/blob/main/docs/images/slsa-dancing-goose-logo.svg">
+
 SLSA (pronounced ["salsa"](https://www.google.com/search?q=how+to+pronounce+salsa)) is security framework from source to service, giving anyone working with software a common language for increasing levels of software security and supply chain integrity.
 
 **The best way to read about SLSA is to visit [slsa.dev].**
@@ -13,7 +15,7 @@ You can read SLSA's documentation here:
 
 -   [Levels](docs/levels.md) (Defining the framework)
 -   [Requirements](docs/requirements.md) (How to attain compliance)
--   [Example of use](docs/example.md)
+-   [Use cases](docs/use-cases/index.md)
 -   Our [roadmap](docs/roadmap.md)
 
 ## Project status
