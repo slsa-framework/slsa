@@ -39,6 +39,7 @@ The following table provides a summary of the [requirements](requirements.md) fo
 | Source - [Two-person reviewed]       |        |        |        | ✓      |
 | Build - [Scripted build]             | ✓      | ✓      | ✓      | ✓      |
 | Build - [Build service]              |        | ✓      | ✓      | ✓      |
+| Build - [Build as code]              |        |        | ✓      | ✓      |
 | Build - [Ephemeral environment]      |        |        | ✓      | ✓      |
 | Build - [Isolated]                   |        |        | ✓      | ✓      |
 | Build - [Parameterless]              |        |        |        | ✓      |
@@ -59,6 +60,7 @@ _○ = required unless there is a justification_
 [access]: requirements.md#access
 [authenticated]: requirements.md#authenticated
 [available]: requirements.md#available
+[build as code]: requirements.md#build-as-code
 [build service]: requirements.md#build-service
 [dependencies complete]: requirements.md#dependencies-complete
 [ephemeral environment]: requirements.md#ephemeral-environment
