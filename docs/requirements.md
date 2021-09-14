@@ -446,6 +446,26 @@ or
 [the Explicitly Run Commands example](https://slsa.dev/provenance/v0.1#explicitly-run-commands)).
 
 <td>✓<td>✓<td>✓<td>✓
+<tr id="identifies-source-code">
+<td>Identifies source code
+<td>
+
+The provenance identifies the repository origin(s) for the source code used in
+the build.
+
+The identified repositories SHOULD only include source used directly in the build.
+The source of dependencies SHOULD NOT be included.
+
+At level 2 this information MAY come from users and DOES NOT need to be
+authenticated by the builder.
+
+At level 3+ this information MUST be authenticated by the builder (i.e. the
+builder either needs to have fetched the source itself or _observed_ the fetch).
+
+At level 4 this information MUST be complete (i.e. all source repositories used
+in the build are listed).
+
+<td><td>✓<td>✓ (Authenticated)<td>✓ (Complete)
 <tr id="identifies-entry-point">
 <td>Identifies entry point
 <td>
