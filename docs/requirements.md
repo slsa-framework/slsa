@@ -465,7 +465,7 @@ builder either needs to have fetched the source itself or _observed_ the fetch).
 At level 4 this information MUST be complete (i.e. all source repositories used
 in the build are listed).
 
-<td><td>✓<td>✓<td>✓
+<td><td>✓<td>✓ (Authenticated)<td>✓ (Complete)
 <tr id="identifies-entry-point">
 <td>Identifies entry point
 <td>
