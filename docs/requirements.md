@@ -109,7 +109,9 @@ change history be made public. Rather, some organization must attest to the fact
 that these requirements are met, and it is up to the consumer whether this
 attestation is sufficient.
 
-<td> <td>✓<td>✓<td>✓
+"○" = RECOMMENDED.
+
+<td>○<td>✓<td>✓<td>✓
 <tr id="verified-history">
 <td>Verified history
 <td>
