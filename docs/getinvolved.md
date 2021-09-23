@@ -16,7 +16,7 @@ We rely on feedback from other organizations to evolve SLSA and be more useful t
 
 ## Community
 
--   We meet bi-monthly on Wednesdays at 9am PT. Anyone is welcome to join, whether to listen or to contribute. [Here's the invite](https://calendar.google.com/calendar/u/0/r/week/2021/8/11?eid=NjIycXNoOHBtbDhuNTJiNjlmaWk5ZjU5ZWVfMjAyMTA4MTFUMTYwMDAwWiBzNjN2b2VmaHA1aTlwZmx0YjVxNjduZ3Blc0Bn&sf=true).
+-   We meet bi-weekly on Wednesdays at 9am PT. Anyone is welcome to join, whether to listen or to contribute. [Here's the invite](https://calendar.google.com/calendar/u/0/r/week/2021/8/11?eid=NjIycXNoOHBtbDhuNTJiNjlmaWk5ZjU5ZWVfMjAyMTA4MTFUMTYwMDAwWiBzNjN2b2VmaHA1aTlwZmx0YjVxNjduZ3Blc0Bn&sf=true).
 -   We're part of the OpenSSF [Digital Identity Attestation Working Group](https://github.com/ossf/wg-digital-identity-attestation). The OpenSSF community calendar is [here](https://calendar.google.com/calendar/u/0?cid=czYzdm9lZmhwNWk5cGZsdGI1cTY3bmdwZXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ).
 -   Our [Google Group is here](https://groups.google.com/g/ossf-wg-developer-identity), where you can participate in discussion or join the mailing list.
 
