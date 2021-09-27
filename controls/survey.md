@@ -28,7 +28,7 @@ model. Subsequent sections analyze each layer.
 [SPDX]: https://github.com/spdx/spdx-spec
 [Simple Signing]: https://github.com/containers/image/blob/master/docs/containers-signature.5.md
 [in-toto v1]: https://github.com/in-toto/docs/blob/master/in-toto-spec.md
-[in-toto v2]: https://github.com/in-toto/attestations
+[in-toto v2]: https://github.com/in-toto/attestation
 
 Project                | Envelope | Statement | Predicate | Storage | Generation | Policy | Status
 ---------------------- | -------- | --------- | --------- | ------- | ---------- | ------ | ------
