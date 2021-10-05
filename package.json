@@ -4,6 +4,6 @@
     "format": "markdownlint . --fix"
   },
   "dependencies": {
-    "markdownlint-cli": "^0.28.1"
+    "markdownlint-cli": "^0.29.0"
   }
 }
