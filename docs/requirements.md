@@ -74,16 +74,16 @@ specific repository. Different revisions within one repo MAY have different
 levels. Example: the most recent revision on a branch meets SLSA 4 but very old
 historical revisions before the cutoff do not.
 
+**Strong authentication:** Authentication that maps back to a specific person
+using an authentication mechanism which is resistant to account and credential
+compromise. For example, 2-factor authentication (2FA) where one factor is a
+hardware security key (i.e. YubiKey).
+
 **Trusted persons:** Set of persons who are granted the authority to maintain a
 software project. For example, https://github.com/MarkLodato/dotfiles has just
 one trusted person (MarkLodato), while https://hg.mozilla.org/mozilla-central
 has a set of trusted persons with write access to the mozilla-central
 repository.
-
-**Strong authentication:** Authentication that maps back to a specific person
-using an authentication mechanism which is resistant to account and credential
-compromise. For example, 2-factor authentication (2FA) where one factor is a
-hardware security key (i.e. YubiKey).
 
 ## Source requirements
 
