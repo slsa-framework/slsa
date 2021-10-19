@@ -221,7 +221,7 @@ Examples: GitHub Actions, Google Cloud Build, Travis CI.
 
 The build definition and configuration is defined in source control and is executed by the build service.
 
-Examples: cloudbuild.yaml, ./github/workflows/build.yaml, zuul.yaml.
+Examples: cloudbuild.yaml, .github/workflows/build.yaml, zuul.yaml.
 <td> <td> <td>✓<td>✓
 <tr id="ephemeral-environment">
 <td>Ephemeral environment
