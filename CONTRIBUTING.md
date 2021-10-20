@@ -20,6 +20,18 @@ style, as encoded in our [markdownlint configuration](.markdownlint.yaml). In
 addition we prefer to keep our Markdown documents wrapped at 80 columns (though
 this is not currently enforced).
 
+### Review and approval
+
+All changes require peer review through GitHub's pull request feature.
+
+-   Changes generally require two approvals before being merged.
+-   Minor changes that only affect clarity or syntax without changing the
+    meaning MAY be merged with a single approval.
+-   Significant changes to the SLSA requirements or provenance schema SHOULD be
+    reviewed and approved from multiple steering committee members. Furthermore,
+    such changes SHOULD wait at least a few days after proposal before
+    submitting, to give the community time to review.
+
 ### Signing your work
 
 When contributing patches to the project via pull request, please indicate that
