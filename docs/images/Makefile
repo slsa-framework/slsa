@@ -1,4 +1,4 @@
-all : provenance.svg
+all : v0.1 v0.2
 
-%.svg : %.dot
-	dot -Tsvg $< > $@
+% : provenance/%/provenance.dot
+	dot -Tsvg $< > provenance/$@/provenance.svg
