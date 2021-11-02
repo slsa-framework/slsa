@@ -39,13 +39,13 @@ SLSA's framework addresses every step of the software supply chain - the sequenc
 
 ![Software Supply Chain Model](images/supply-chain-model.svg)
 
-| Term       | Description                                                                                                                                                                 | Example                                                                                                                                                                                     |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Artifact   | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact.                                                                             | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image.                                                                                   |
-| Source     | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform).                                                                                                                                            |
-| Build      | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs.                       | .travis.yml (process) run by Travis CI (platform).                                                                                                                                          |
-| Package    | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op.                         | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit. |
-| Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package.                                                                | Alpine package (package) distributed on Alpine Linux (platform).                                                                                                                            |
+| Term | Description | Example |
+| --- | --- | --- |
+| Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image. |
+| Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform). |
+| Build | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform). |
+| Package | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit. |
+| Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform). |
 
 ## Definitions
 
@@ -73,6 +73,11 @@ revision is a commit in the history reachable from a specific branch in a
 specific repository. Different revisions within one repo MAY have different
 levels. Example: the most recent revision on a branch meets SLSA 4 but very old
 historical revisions before the cutoff do not.
+
+**Strong authentication:** Authentication that maps back to a specific person
+using an authentication mechanism which is resistant to account and credential
+compromise. For example, 2-factor authentication (2FA) where one factor is a
+hardware security key (i.e. YubiKey).
 
 **Trusted persons:** Set of persons who are granted the authority to maintain a
 software project. For example, https://github.com/MarkLodato/dotfiles has just
