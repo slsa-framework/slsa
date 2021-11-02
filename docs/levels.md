@@ -80,7 +80,7 @@ _○ = required unless there is a justification_
 
 ## <a name="threats"></a>Supply chain threats
 
-Attacks can occur at every link in a typical software supply chain, and these kinds of attacks are increasingly public, disruptive and costly in today’s environment. In developing SLSA, the requirements for each level are there to specifically mitigate the risk of such known examples.
+Attacks can occur at every link in a typical software supply chain, and these kinds of attacks are increasingly public, disruptive and costly in today’s environment. In developing SLSA, the requirements for each level are designed to specifically mitigate the risk of such known examples. For a much deeper technical analysis of the risks and how SLSA mitigates them, see [Threats and mitigations](threats.md).
 
 ![Supply Chain Threats](images/supply-chain-threats.svg)
 
