@@ -6,6 +6,8 @@ SLSA (pronounced ["salsa"](https://www.google.com/search?q=how+to+pronounce+sals
 
 **The best way to read about SLSA is to visit [slsa.dev].**
 
+**The fun way to get a taste of SLSA is to check out the Operation SLSA videos[https://www.youtube.com/playlist?list=PLVl2hFL_zAh_SLZbHMtkPJf8eJxpmM-ww].**
+
 ## What's in this repo?
 
 The primary content of this repo is the [docs/](docs/) directory, which contains the core SLSA
