@@ -15,9 +15,6 @@ The goals of this document are to:
 -   Help implementers better understand what they are protecting against so that
     they can better design and implement controls.
 
-> Note: The current format is not particularly easy to browse. Ideas on how
-> better to represent this information is welcome!
-
 ## Definition of integrity
 
 ![Supply Chain Threats](images/supply-chain-threats.svg)
@@ -38,9 +35,11 @@ stages.
 
 ## Source integrity and availability
 
+<article class="threats">
+
 ### (A1) Submit bad code without review
 
-#### Directly submit without review
+<details><summary>Directly submit without review <span>(SLSA 4)</span></summary>
 
 *Threat:* Submit bad code to the source repository without another person
 reviewing.
@@ -52,7 +51,8 @@ reviewing.
 Solution: Configure GitHub's "branch protection" feature to require pull request
 reviews on the `main` branch.
 
-#### Review own change through a sock puppet account
+</details>
+<details><summary>Review own change through a sock puppet account <span>(SLSA 4)</span></summary>
 
 *Threat:* Propose a change using one account and then approve it using another
 account.
@@ -67,7 +67,8 @@ approves and merges the pull request using their primary account. Solution:
 Configure branch protection to require two approvals and ensure that all
 repository contributors and owners map to unique persons.
 
-#### Use a robot account to submit change
+</details>
+<details><summary>Use a robot account to submit change <span>(SLSA 4)</span></summary>
 
 *Threat:* Exploit a robot account that has the ability to submit changes without
 two-person review.
@@ -84,7 +85,8 @@ review for these changes.
 > may not be practical. Should there be an exception for locked down robot
 > accounts?
 
-#### Abuse review exceptions
+</details>
+<details><summary>Abuse review exceptions<span>(SLSA 4)</span></summary>
 
 *Threat:* Exploit a review exception to submit a bad change without review.
 
@@ -102,9 +104,11 @@ such exceptions.
 > TODO This solution may not be practical in all circumstances. Are there any
 > valid exceptions? If so, how do we ensure they cannot be exploited?
 
+</details>
+
 ### (A2) Evade code review requirements
 
-#### Modify code after review
+<details><summary>Modify code after review <span>(not required)</span></summary>
 
 *Threat:* Modify the code after it has been reviewed but before submission.
 
@@ -123,7 +127,8 @@ protection to dismiss stale approvals when new changes are pushed.
 > should be considered for future SLSA revisions once the state-of-the-art for
 > code review has improved and the cost can be minimized.
 
-#### Submit a change that is unreviewable
+</details>
+<details><summary>Submit a change that is unreviewable <span>(SLSA 4)</span></summary>
 
 *Threat:* Send a change that is meaningless for a human to review that looks
 benign but is actually malicious.
@@ -137,7 +142,8 @@ reviewer does not have enough context to provide a meaningful review. Solution:
 the code review system should present the reviewer with a content diff or some
 other information to make an informed decision.
 
-#### Copy a reviewed change to another context
+</details>
+<details><summary>Copy a reviewed change to another context <span>(SLSA 4)</span></summary>
 
 *Threat:* Get a change reviewed in one context and then transfer it to a
 different context.
@@ -151,7 +157,8 @@ colleague (who is not trusted by MyPackage), then merges the change back into
 the upstream repo. Solution: The merge should still require review, even though
 the fork was reviewed.
 
-#### Compromise another account
+</details>
+<details><summary>Compromise another account <span>(SLSA 3)</span></summary>
 
 *Threat:* Compromise one or more trusted accounts and use those to submit and
 review own changes.
@@ -165,7 +172,8 @@ weak password, logs in, and pushes changes to a GitHub repo. Solution: Configure
 GitHub organization to requires 2FA for all trusted persons. This would increase
 the difficulty of using the compromised password to log in to GitHub.
 
-#### Hide bad change behind good one
+</details>
+<details><summary>Hide bad change behind good one <span>(SLSA 4)</span></summary>
 
 *Threat:* Request review for a series of two commits, X and Y, where X is bad
 and Y is good. Reviewer thinks they are approving only the final Y state whereas
@@ -184,9 +192,11 @@ does not accept this because the version X is not considered reviewed.
 > TODO This is implicit but not clearly spelled out in the requirements. We
 > should consider clarifying if there is confusion or incorrect implementations.
 
+</details>
+
 ### (A3) Code review bypasses that are out of scope of SLSA
 
-#### Software producer intentionally submits bad code
+<details><summary>Software producer intentionally submits bad code <span>(out of scope)</span></summary>
 
 *Threat:* Software producer intentionally submits "bad" code, following all
 proper processes.
@@ -199,30 +209,35 @@ modifies the code to secretly mine bitcoin at the users' expense. SLSA does not
 protect against this, though if the extension were open source, regular auditing
 may discourage this from happening.
 
-#### Collude with another trusted person
+</details>
+<details><summary>Collude with another trusted person <span>(out of scope)</span></summary>
 
 *Threat:* Two trusted persons collude to author and approve a bad change.
 
 *Mitigation:* **Outside the scope of SLSA.** We use "two trusted persons" as a
 proxy for "intent of the software producer".
 
-#### Trick reviewer into approving bad code
+</details>
+<details><summary>Trick reviewer into approving bad code <span>(out of scope)</span></summary>
 
 *Threat:* Construct a change that looks benign but is actually malicious, a.k.a.
 "bugdoor."
 
 *Mitigation:* **Outside the scope of SLSA.**
 
-#### Reviewer blindly approves changes
+</details>
+<details><summary>Reviewer blindly approves changes <span>(out of scope)</span></summary>
 
 *Threat:* Reviewer approves changes without actually reviewing, a.k.a. "rubber
 stamping."
 
 *Mitigation:* **Outside the scope of SLSA.**
 
+</details>
+
 ### (B) Compromise source control system
 
-#### Project owner bypasses or disables controls
+<details><summary>Project owner bypasses or disables controls <span>(SLSA 4)</span></summary>
 
 *Threat:* Trusted person with "admin" privileges in a repository submits "bad"
 code bypassing existing controls.
@@ -244,7 +259,8 @@ has no solution on GitHub.
 > should consider clarifying since most if not all existing platforms do not
 > properly address this threat.
 
-#### Platform admin abuses privileges
+</details>
+<details><summary>Platform admin abuses privileges <span>(SLSA 4)</span></summary>
 
 *Threat:* Platform administrator abuses their privileges to bypass controls or
 to push a malicious version of the software.
@@ -264,18 +280,21 @@ malicious version of the server that includes a backdoor allowing specific users
 to bypass branch protections. Adversary then uses this backdoor to submit a
 change to MyPackage without review.
 
-#### Exploit vulnerability in SCM
+</details>
+<details><summary>Exploit vulnerability in SCM <span>(out of scope)</span></summary>
 
 *Threat:* Exploit a vulnerability in the implementation of the source code
 management system to bypass controls.
 
 *Mitigation:* **Outside the scope of SLSA.**
 
+</details>
+
 ## Build integrity
 
 ### (C) Modify code after source control
 
-#### Build from unofficial fork of code
+<details><summary>Build from unofficial fork of code <span>(TBD)</span></summary>
 
 *Threat:* Build using the expected CI/CD process but from an unofficial fork of
 the code that may contain unauthorized changes.
@@ -287,7 +306,8 @@ expected value.
 Instead, it is built from `evilfork/my-package`. Solution: Policy rejects
 because the source location does not match.
 
-#### Build from unofficial branch or tag
+</details>
+<details><summary>Build from unofficial branch or tag <span>(TBD)</span></summary>
 
 *Threat:* Build using the expected CI/CD process and source location, but
 checking out an "experimental" branch or similar that may contain code not
@@ -302,7 +322,8 @@ branch protections. Adversary builds from the unprotected `experimental` branch
 containing unofficial changes. Solution: Policy rejects because the source
 revision is not reachable from `main`.
 
-#### Build from unofficial build steps
+</details>
+<details><summary>Build from unofficial build steps <span>(TBD)</span></summary>
 
 *Threat:* Build the package using the proper CI/CD platform but with unofficial
 build steps.
@@ -316,7 +337,8 @@ with Google Cloud Build, but using custom build steps provided over RPC.
 Solution: Policy rejects because the build steps did not come from the expected
 source.
 
-#### Build from unofficial entry point
+</details>
+<details><summary>Build from unofficial entry point <span>(TBD)</span></summary>
 
 *Threat:* Build using the expected CI/CD process, source location, and
 branch/tag, but using a target or entry point that is not intended for release.
@@ -328,7 +350,8 @@ expected value.
 Adversary builds from the `debug` workflow. Solution: Policy rejects because the
 entry point does not match.
 
-#### Use build parameter to inject behavior
+</details>
+<details><summary>Use build parameter to inject behavior <span>(SLSA 4)</span></summary>
 
 *Threat:* Build using the expected CI/CD process, source location, branch/tag,
 and entry point, but adding a build parameter that injects bad behavior into the
@@ -342,7 +365,8 @@ allow users to specify custom compiler flags per invocation. Adversary sets a
 compiler flag that overrides a macro to inject malicious behavior into the
 output binary. Solution: Policy rejects because it does not allow any `inputs`.
 
-#### Build from modified version of code modified after checkout
+</details>
+<details><summary>Build from modified version of code modified after checkout <span>(SLSA 3)</span></summary>
 
 *Threat:* Build from a version of the code that includes modifications after
 checkout.
@@ -356,9 +380,11 @@ then requests a build from that local commit. Builder records the fact that it
 did not pull from the official source repo. Solution: Policy rejects because the
 source repo is not as expected.
 
+</details>
+
 ### (D) Compromise build platform
 
-#### Compromise build environment of subsequent build
+<details><summary>Compromise build environment of subsequent build <span>(SLSA 3)</span></summary>
 
 *Threat:* Perform a "bad" build that persists a change in the build environment,
 then run a subsequent "good" build using that environment.
@@ -372,7 +398,8 @@ first runs a build that replaces the `make` binary with a malicious version,
 then runs a subsequent build that otherwise would pass the policy. Solution:
 Builder changes architecture to start each build with a clean machine image.
 
-#### Compromise parallel build
+</details>
+<details><summary>Compromise parallel build <span>(SLSA 3)</span></summary>
 
 *Threat:* Perform a "bad" build that alters the behavior of another "good" build
 running in parallel.
@@ -386,7 +413,8 @@ the "good" build and swaps out source files, then starts a "good" build that
 would otherwise pass the policy. Solution: Builder changes architecture to
 isolate each build in a separate VM or similar.
 
-#### Steal cryptographic secrets
+</details>
+<details><summary>Steal cryptographic secrets <span>(SLSA 3)</span></summary>
 
 *Threat:* Use or exfiltrate the provenance signing key or some other
 cryptographic secret that should only be available to the build service.
@@ -401,7 +429,8 @@ and signs it using the provenance signing key. Solution: Builder generates and
 signs provenance in the trusted control plane; the worker has no access to the
 key.
 
-#### Set values of the provenance
+</details>
+<details><summary>Set values of the provenance <span>(SLSA 2)</span></summary>
 
 *Threat:* Generate false provenance and get the trusted control plane to sign
 it.
@@ -417,7 +446,8 @@ built from `evil/my-package`. Solution: Builder generates and signs the
 provenance in the trusted control plane; the worker reports the output artifacts
 but otherwise has no influence over the provenance.
 
-#### Poison the build cache
+</details>
+<details><summary>Poison the build cache <span>(TBD)</span></summary>
 
 *Threat:* Add a "bad" artifact to a build cache that is later picked up by a
 "good" build process.
@@ -429,13 +459,17 @@ the source file. Adversary runs a malicious build that creates a "poisoned"
 cache entry with a falsified key, meaning that the value wasn't really produced
 from that source. A subsequent build then picks up that poisoned cache entry.
 
-#### Project owner
+</details>
+<details><summary>Project owner <span>(TBD)</span></summary>
 
 **TODO:** similar to Source (do the same threats apply here?)
 
-#### Platform admin
+</details>
+<details><summary>Platform admin <span>(TBD)</span></summary>
 
 **TODO:** similar to Source
+
+</details>
 
 ### (E) Use a bad dependency
 
@@ -443,7 +477,7 @@ from that source. A subsequent build then picks up that poisoned cache entry.
 
 ### (F) Bypass CI/CD
 
-#### Build with untrusted CI/CD
+<details><summary>Build with untrusted CI/CD <span>(TBD)</span></summary>
 
 *Threat:* Build using an unofficial CI/CD pipeline that does not build in the
 correct way.
@@ -456,7 +490,8 @@ trusted up to SLSA 4. Adversary builds on SomeOtherBuildService, which is only
 trusted up to SLSA 2, and then exploits SomeOtherBuildService to inject bad
 behavior. Solution: Policy rejects because builder is not as expected.
 
-#### Upload package without provenance
+</details>
+<details><summary>Upload package without provenance <span>(SLSA 1)</span></summary>
 
 *Threat:* Upload a package without provenance.
 
@@ -467,7 +502,8 @@ expected CI/CD pipeline.
 repository without provenance. Solution: Policy rejects because provenance is
 missing.
 
-#### Tamper with artifact after CI/CD
+</details>
+<details><summary>Tamper with artifact after CI/CD <span>(SLSA 1)</span></summary>
 
 *Threat:* Take a good version of the package, modify it in some way, then
 re-upload it using the original provenance.
@@ -480,7 +516,8 @@ uploads the modified version of the package to the repository along with the
 provenance. Solution: Policy rejects because the hash of the artifact does not
 match the `subject` found within the provenance.
 
-#### Tamper with provenance
+</details>
+<details><summary>Tamper with provenance <span>(SLSA 2)</span></summary>
 
 *Threat:* Perform a build that would not otherwise pass the policy, then modify
 the provenance to make the policy checks pass.
@@ -494,22 +531,26 @@ by the public key corresponding to an acceptable builder.
 like it came from `good/my-package`. Solution: Policy rejects because the
 cryptographic signature is no longer valid.
 
+</details>
+
 ### (G) Compromise package repository
 
 **TODO:** fill this out
 
 ### (H) Use a bad package
 
-#### Typosquatting
+<details><summary>Typosquatting <span>(out of scope)</span></summary>
 
 *Threat:* Register a package name that is similar looking to a popular package
 and get users to use your malicious package instead of the benign one.
 
 *Mitigation:* **Outside the scope of SLSA.**
 
+</details>
+
 ### Things that don't fit well in current picture
 
-#### Tamper with policy
+<details><summary>Tamper with policy <span>(TBD)</span></summary>
 
 *Threat:* Modify the policy to accept something that would not otherwise be
 accepted.
@@ -521,7 +562,8 @@ Adversary modifies the policy to also accept `evil/my-package`, then builds from
 that repo and uploads a bad version of the package. Solution: Policy changes
 require two-party review.
 
-#### Delete the code
+</details>
+<details><summary>Delete the code <span>(SLSA 3)</span></summary>
 
 *Threat:* Perform a build from a particular source revision and then delete that
 revision or cause it to get garbage collected, preventing anyone from inspecting
@@ -539,7 +581,8 @@ for inspection. Solution: Policy prevents this by requiring a positive
 attestation showing that some system, such as GitHub, ensures retention and
 availability.
 
-#### Forge change metadata
+</details>
+<details><summary>Forge change metadata <span>(SLSA 3)</span></summary>
 
 *Threat:* Forge the change metadata to alter attribution, timestamp, or
 discoverability of a change.
@@ -552,7 +595,8 @@ and then rewrites history with a non-fast-forward update to make it appear to
 have been made long ago. Solution: Consumer detects this by seeing that such
 changes are not strongly authenticated and thus not trustworthy.
 
-#### Exploit cryptographic hash collisions
+</details>
+<details><summary>Exploit cryptographic hash collisions <span>(TBD)</span></summary>
 
 *Threat:* Exploit a cryptographic hash collision weakness to bypass one of the
 other controls.
@@ -564,6 +608,10 @@ and provenance, such as SHA-256.
 Get the "good" file reviewed and then submit the "bad" file, or get the "good"
 file reviewed and submitted and then build from the "bad" file. Solution: Only
 accept cryptographic hashes with strong collision resistance.
+
+</details>
+
+</article>
 
 <!-- Links -->
 
