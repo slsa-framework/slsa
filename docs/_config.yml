@@ -7,6 +7,7 @@ header_pages:
   - levels.md
   - requirements.md
   - use-cases/index.md
+  - provenance/v0.2.md
   - roadmap.md
   - getinvolved.md
 exclude:
