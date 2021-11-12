@@ -12,6 +12,7 @@ header_pages:
   - getinvolved.md
 exclude:
   - README.md
+google_analytics: G-VNK063J3QF
 theme: minima
 permalink: :path/:basename
 markdown: CommonMarkGhPages
