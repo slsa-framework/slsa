@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+{%- assign language = page.language | default: site.language | default: "en" -%}
+<html lang="{{ language }}">
 
   {%- include head.html -%}
 
   <body>
     <div class="max-width">
-      {%- include header.html -%}
+      {%- include header.html language=language -%}
       <main aria-label="Content">
         <div class="wrapper">
           {{ content }}
