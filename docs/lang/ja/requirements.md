@@ -83,6 +83,10 @@ SLSA のフレームワークは、ソフトウェアサプライチェーンの
 
 例：ブランチの最新のリビジョンは SLSA 4 に適合していますが、カットオフ前の非常に古い履歴リビジョンは適合していません。
 
+**強固な認証:**
+アカウントとクレデンシャルの漏洩に強い認証メカニズムを使用して、特定の人物にマッピングする認証。
+例えば、2要素認証（2FA）では、1要素がハードウェアセキュリティキー（YubiKeyなど）となります。
+
 **信用できる人:**
 ソフトウェアプロジェクトを維持する権限を与えられた人物のセット。
 
@@ -362,9 +366,9 @@ git、Mercurial、Subversion、Perforce など、最も一般的なバージョ�
 識別された命令は、ビルドが利用できる最高レベルのものであるべきです(SHOULD)。
 (例えば、ビルドが build.sh を実行するように指示された場合、build.sh をリストアップすべきで、build.sh 内の個々の命令をリストアップすべきではありません)
 
-<a href="#build-as-code">ビルドのコード管理<a> が使用される場合、これはソースリポジトリとビルド設定のエントリーポイントであるべきです(SHOULD)（[GitHub Actions の例](https://slsa.dev/provenance/v0.1#github-actions)のように）。
+<a href="#build-as-code">ビルドのコード管理<a> が使用される場合、これはソースリポジトリとビルド設定のエントリーポイントであるべきです(SHOULD)（[GitHub Actions の例](https://slsa.dev/provenance/v0.2#github-actions)のように）。
 
-ビルドがコードで定義されていない場合は、何をするように要求されたかの詳細を記載してもよい(MAY)（[Google Cloud Build RPC の例](https://slsa.dev/provenance/v0.1#cloud-build-rpc)や[Explicitly Run Commands の例](https://slsa.dev/provenance/v0.1#explicitly-run-commands)のように）。
+ビルドがコードで定義されていない場合は、何をするように要求されたかの詳細を記載してもよい(MAY)（[Google Cloud Build RPC の例](https://slsa.dev/provenance/v0.2#cloud-build-rpc)や[Explicitly Run Commands の例](https://slsa.dev/provenance/v0.2#explicitly-run-commands)のように）。
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="identifies-source-code">
