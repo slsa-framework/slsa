@@ -3,6 +3,8 @@ language: ja
 ---
 # 例
 
+<a id="motivating-example"></a>
+
 ## 動機となる例
 
 [curl](https://curl.se)を[公式dockerイメージ][curlimages/curl]を通じてを使用する例を考えてみましょう。
@@ -54,14 +56,14 @@ SLSA はこれらの脅威をすべてカバーすることを意図していま
 最後に、これらはすべてcurl自身のファーストパーティのサプライチェーンのステップに限った話であることに注意してください。
 依存関係にあるAlpineベースイメージやパッケージにも、同様の脅威があります。
 また、依存関係には依存関係があり、その依存関係にはまた別の依存関係がある、といった具合です。
-それぞれの依存関係には、[独自のSLSAレベル](#scope-of-slsa)があり、[SLSAレベルの構成](#SLSAレベルの構成)がサプライチェーン全体のセキュリティを表します。
+それぞれの依存関係には、[独自のSLSAレベル](#scope-of-slsa)があり、[SLSAレベルの構成](#composition-of-slsa-levels)がサプライチェーン全体のセキュリティを表します。
 
 Dockerのサプライチェーンのセキュリティについては、[Who's at the Helm?](https://dlorenc.medium.com/whos-at-the-helm-1101c37bf0f1)を参照してください。
 これらの問題やその他多くの問題を含む、オープンソースのセキュリティについてのより広範な考察については、[Threats, Risks, and Mitigations in the Open Source Ecosystem]を参照してください。
 
 ## ビジョン: ケーススタディ
 
-SLSAフレームワークを使用して、[動機となる例](#動機となる例)の[curlimages/curl]をどのように保護するかを考えてみましょう。
+SLSAフレームワークを使用して、[動機となる例](#motivating-example)の[curlimages/curl]をどのように保護するかを考えてみましょう。
 
 ### SLSA 4への漸進的な到達
 
@@ -128,6 +130,8 @@ SLSA 4では、来歴が完全で信頼できる(complete and trustworthy)もの
 これは手作業でもできますが、スケーラブルで汎用的、かつ自動化された方法でこれを行う最善の方法については、まだ確固たるビジョンがありません。
 1つのアイデアは、エコシステム特有のヒューリスティックを使用することです。
 例えば、Debian のパッケージは非常に統一された方法で構築・整理されているので、Debian 固有のヒューリスティクスが使えるかもしれません。
+
+<a id="composition-of-slsa-levels"></a>
 
 ### SLSAレベルの構成
 

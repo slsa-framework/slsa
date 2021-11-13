@@ -14,14 +14,14 @@ _注：SLSAは[アルファ版](roadmap.md)です。以下の定義はまだ最�
 
 <div class="link-tree">
 
-| このページについて        |
-| :------------------------ |
-| [SLSAとは](#SLSAとは)     |
-| [定義](#定義)             |
-| [ソース要件](#ソース要件) |
-| [ビルド要件](#ビルド要件) |
-| [来歴要件](#来歴要件)     |
-| [共通要件](#共通要件)     |
+| このページについて                   |
+| :----------------------------------- |
+| [SLSAとは](#what-is-slsa)            |
+| [定義](#definitions)                 |
+| [ソース要件](#source-requirements)   |
+| [ビルド要件](#build-requirements)    |
+| [来歴要件](#provenance-requirements) |
+| [共通要件](#common-requirements)     |
 
 </div>
 
@@ -32,6 +32,8 @@ _注：SLSAは[アルファ版](roadmap.md)です。以下の定義はまだ最�
 | [FAQ](/faq.md) |
 
 </div>
+
+<a id="what-is-slsa"></a>
 
 ## SLSAとは
 
@@ -56,6 +58,8 @@ SLSA のフレームワークは、ソフトウェアサプライチェーンの
 | ビルド           | 入力アーティファクトのセットを出力アーティファクトのセットに変換するプロセス。入力は、ソース、依存関係、または一時的なビルド出力の場合があります。     | Travis CI（プラットフォーム）によって実行される。travis.yml（プロセス）。                                                                                                                      |
 | パッケージ       | 他の人が使用するために「公開」されたアーティファクト。モデルでは、それは常にビルドプロセスの出力ですが、そのビルドプロセスは何もしない場合があります。 | DockerHub（プラットフォーム）で配布される Docker イメージ（パッケージ）。ソースコードを含む ZIP ファイルは、git コミットなどの他のソースから構築されているため、ソースではなくパッケージです。 |
 | 依存関係         | ビルドプロセスへの入力であるが、ソースではないアーティファクト。モデルでは、それは常にパッケージです。                                                 | Alpine Linux（プラットフォーム）で配布される Alpine パッケージ（パッケージ）。                                                                                                                 |
+
+<a id="definitions"></a>
 
 ## 定義
 
@@ -91,6 +95,8 @@ SLSA のフレームワークは、ソフトウェアサプライチェーンの
 ソフトウェアプロジェクトを維持する権限を与えられた人物のセット。
 
 例えば、https://github.com/MarkLodato/dotfiles には信頼された人が一人（MarkLodato）しかいませんが、https://hg.mozilla.org/mozilla-central には mozilla-central リポジトリへの書き込み権限を持つ信頼された人のセットがあります。
+
+<a id="source-requirements"></a>
 
 ## ソース要件
 
@@ -163,6 +169,8 @@ git、Mercurial、Subversion、Perforce など、最も一般的なバージョ�
 
 <td> <td> <td> <td>✓
 </table>
+
+<a id="build-requirements"></a>
 
 ## ビルド要件
 
@@ -259,6 +267,8 @@ git、Mercurial、Subversion、Perforce など、最も一般的なバージョ�
 
 <td> <td> <td> <td>○
 </table>
+
+<a id="provenance-requirements"></a>
 
 ## 来歴要件
 
@@ -438,6 +448,8 @@ git、Mercurial、Subversion、Perforce など、最も一般的なバージョ�
 
 <td>○<td>○<td>○<td>○
 </table>
+
+<a id="common-requirements"></a>
 
 ## 共通要件
 
