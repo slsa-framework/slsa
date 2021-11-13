@@ -34,3 +34,6 @@ plugins:
   - jekyll-readme-index
   - jekyll-titles-from-headings
   - jekyll-relative-links
+languages:
+  en: English
+  ja: 日本語
