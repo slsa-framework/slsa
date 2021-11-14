@@ -3,7 +3,7 @@ language: ja
 ---
 # slsa.devソースコード
 
-このディレクトリには、https：//slsa.dev のソースが含まれており、GitHub ページを介して提供され、Jekyll でレンダリングされます。
+このディレクトリには、https://slsa.dev のソースが含まれており、GitHub ページを介して提供され、Jekyll でレンダリングされます。
 
 ## ローカルでのテスト
 
