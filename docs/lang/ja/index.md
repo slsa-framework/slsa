@@ -12,7 +12,7 @@ language: ja
 
 <span class="subtitle">
 
-SLSA( "[salsa](https://www.google.com/search?q=how+to+pronounce+salsa)")は、**ソフトウェア成果物のサプライチェーンレベル**です。
+SLSA("[salsa](https://www.google.com/search?q=how+to+pronounce+salsa)")は、**ソフトウェア成果物のサプライチェーンレベル**です。
 
 ソースからサービスまでのセキュリティフレームワーク。ソフトウェアを使用するすべての人に、ソフトウェアのセキュリティとサプライチェーンの整合性のレベルを高めるための共通言語を提供します。
 
