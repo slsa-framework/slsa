@@ -25,7 +25,7 @@ language: ja
 -   それぞれの依存関係には独自のサプライチェーンがありますが、実際の"curl"のソースコードを含む[curl-dev]を見てみましょう。
 -   このパッケージは、他のAlpineのパッケージと同様に、ビルドスクリプトがAlpineのgit repo内の[APKBUILD](https://git.alpinelinux.org/aports/tree/main/curl/APKBUILD?id=166f72b36f3b5635be0d237642a63f39697c848a)に定義されています。
     ビルドにはいくつかの依存関係があります。
-    -   参考ファイル： https://curl.haxx.se/download/curl-7.72.0.tar.xz。
+    -   参考ファイル： <https://curl.haxx.se/download/curl-7.72.0.tar.xz>。
         -   APKBUILDには、このファイルのsha256ハッシュが含まれています。
             このハッシュがどこから来たのかは不明です。
     -   Alpineのパッケージ: openssl-dev nghttp2-dev zlib-dev brotli-dev autoconf automake groff libtool perl
