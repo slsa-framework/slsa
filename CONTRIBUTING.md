@@ -8,8 +8,7 @@ The SLSA project is authored on GitHub using
 work and [Pull Requests](https://github.com/slsa-framework/slsa/pulls) to submit
 changes.
 
-For other ways to engage with the SLSA community, see our
-[community documentation](community/README.md).
+For other ways to engage with the SLSA community, see our [README](README.md).
 
 ## Contributing changes
 
