@@ -43,4 +43,4 @@ SLSA は現在、最初の組織横断的なベンダー中立の運営委員会
 -   [Tom Hennen](https://github.com/TomHennen)
 -   [Joshua Lock](https://github.com/joshuagl)
 -   [Jacques Chester](https://github.com/jchestershopify)
--   And [many others](https://github.com/slsa-framework/slsa/graphs/contributors)
+-   [その他の寄稿者の方々](https://github.com/slsa-framework/slsa/graphs/contributors)
