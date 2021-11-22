@@ -24,19 +24,17 @@ We rely on feedback from other organizations to evolve SLSA and be more useful t
 
 SLSA is currently led by an initial cross-organization, vendor-neutral steering committee. This committee is:
 
--   [Joshua Lock](https://github.com/joshuagl) - VMware
 -   [Bruno Domingues](https://github.com/brunodom) - Intel
 -   [David A. Wheeler](https://github.com/david-a-wheeler) - Linux Foundation
--   [Trishank Karthik Kuppusamy](https://github.com/trishankatdatadog) - Datadog
--   [Mike Lieberman](https://github.com/mlieberman85) - Citi/CNCF
--   [Zak Greant](https://github.com/zakgreant) - ActiveState
+-   [Joshua Lock](https://github.com/joshuagl) - VMware
 -   [Mark Lodato](https://github.com/MarkLodato) - Google
+-   [Mike Lieberman](https://github.com/mlieberman85) - Citi/CNCF
+-   [Trishank Karthik Kuppusamy](https://github.com/trishankatdatadog) - Datadog
+-   [Zak Greant](https://github.com/zakgreant) - ActiveState
 
 ## Contributors
 
 -   [Kim Lewandowski](https://github.com/kimsterv)
--   [Mark Lodato](https://github.com/MarkLodato)
 -   [Tom Hennen](https://github.com/TomHennen)
--   [Joshua Lock](https://github.com/joshuagl)
 -   [Jacques Chester](https://github.com/jchestershopify)
 -   And [many others](https://github.com/slsa-framework/slsa/graphs/contributors)
