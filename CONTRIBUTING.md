@@ -23,13 +23,22 @@ this is not currently enforced).
 
 All changes require peer review through GitHub's pull request feature.
 
--   Changes generally require two approvals before being merged.
--   Minor changes that only affect clarity or syntax without changing the
-    meaning MAY be merged with a single approval.
--   Significant changes to the SLSA requirements or provenance schema SHOULD be
-    reviewed and approved from multiple steering committee members. Furthermore,
-    such changes SHOULD wait at least a few days after proposal before
-    submitting, to give the community time to review.
+Significant changes to the SLSA requirements or provenance schema require
+approval from **two steering committee members**. (Excludes changes that only
+affect syntax or clarity without altering meaning.)
+
+-   Do an initial round of review with a single reviewer.
+-   Add @slsa-framework/slsa-steering-committee as a reviewer and make it
+    clear you are looking for at least two approvers.
+-   Wait at least a few days before submitting to give the community time to
+    comment.
+
+Otherwise, only a single approval is needed.
+
+-   No requirement to include a steering committee member. In practice, several
+    members review all changes at least passively anyway.
+-   No requirement for the author and reviewer to come from different
+    organizations.
 
 ### Signing your work
 
