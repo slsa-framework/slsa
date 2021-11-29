@@ -10,7 +10,7 @@ Each level provides an increasing degree of confidence, a way to say that softwa
 | :---- | :-------------------------------------------- | :---------------------------------------------------- |
 | 1     | Documentation of the build process            | Unsigned provenance                                   |
 | 2     | Tamper resistance of the build service        | Hosted source/build, signed provenance                |
-| 3     | Prevents extra resistance to specific threats | Security controls on host, non-falsifiable provenance |
+| 3     | Extra resistance to specific threats.         | Security controls on host, non-falsifiable provenance |
 | 4     | Highest levels of confidence and trust        | Two-party review + hermetic builds                    |
 
 It can take years to achieve the ideal security state - intermediate milestones are important. SLSA guides you through gradually improving the security of your software. Artifacts used in critical infrastructure or vital business operations may want to attain a higher level of security, whereas software that poses a low risk can stop when they're comfortable.
