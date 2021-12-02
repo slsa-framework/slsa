@@ -26,8 +26,8 @@ html {
 }
 
 /**
- * Basic styling
- */
+* Basic styling
+*/
 body {
     font: $base-font-weight #{$base-font-size}/#{$base-line-height}
         $base-font-family;
@@ -42,11 +42,7 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-
-    // @include media-query($on-mobile-old) {
-    //   width: $on-mobile-old;
-    //   min-width: $on-mobile-old;
-    // }
+    overflow-x: hidden;
 }
 
 /**

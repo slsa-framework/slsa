@@ -1,0 +1,142 @@
+<style>
+  #cookie-notice {
+    padding: 1rem;
+    display: none;
+    z-index: 100;
+    text-align: left;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 1);
+    background: #000;
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+
+  #cookie-notice a {
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 8px 10px;
+    background: white;
+    text-decoration: none;
+    text-align: center;
+    color: #000;
+    min-width: 80px;
+    margin-left: 0.2rem;
+  }
+  #cookie-notice a:hover {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  #cookie-notice-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 767px) {
+    #cookie-notice {
+      flex-direction: column;
+    }
+
+    #cookie-notice-button-wrapper {
+      justify-content: flex-start;
+    }
+
+    #cookie-notice a {
+      position: relative;
+      bottom: 4px;
+      margin-left: 0;
+      margin-right: 0.2rem;
+    }
+  }
+</style>
+<div id="cookie-notice">
+  <span tabindex="2">
+    We'd like to use Google Analytics cookies to help us improve our website by
+    collecting and reporting information on how you use it. <br />
+    The cookies collect information in a way that does not directly identify
+    anyone. These will be set only if you accept.
+  </span>
+  <span id="cookie-notice-button-wrapper">
+    <a href="#" tabindex="2" id="cookie-notice-accept">Accept</a>
+    <a href="#" tabindex="2" id="cookie-notice-deny">Deny</a>
+  </span>
+</div>
+<script>
+  function createCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+  }
+  function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == " ") c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+  function eraseCookie(name) {
+    createCookie(name, "", -1);
+  }
+
+  if (readCookie("cookie-notice-option") === "true") {
+    function loadScriptAsync(scriptSrc, callback) {
+      if (typeof callback !== "function") {
+        throw new Error("Not a valid callback for async script load");
+      }
+      var script = document.createElement("script");
+      script.onload = callback;
+      script.src = scriptSrc;
+      document.head.appendChild(script);
+    }
+
+    /* This is the part where you call the above defined function and "calls back" your code which gets executed after the script has loaded */
+
+    loadScriptAsync(
+      "https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}",
+      function () {
+        window["ga-disable-{{ site.google_analytics }}"] =
+          window.doNotTrack === "1" ||
+          navigator.doNotTrack === "1" ||
+          navigator.doNotTrack === "yes" ||
+          navigator.msDoNotTrack === "1";
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", "{{ site.google_analytics }}", { anonymize_ip: true });
+      }
+    );
+  } else if (readCookie("cookie-notice-option") != "false") {
+    document.getElementById("cookie-notice").style.display = "flex";
+  }
+
+  document
+    .getElementById("cookie-notice-accept")
+    .addEventListener("click", function () {
+      createCookie("cookie-notice-option", "true", 31);
+      document.getElementById("cookie-notice").style.display = "none";
+      location.reload();
+    });
+
+  document
+    .getElementById("cookie-notice-deny")
+    .addEventListener("click", function () {
+      createCookie("cookie-notice-option", "false", 31);
+      document.getElementById("cookie-notice").style.display = "none";
+      location.reload();
+    });
+</script>

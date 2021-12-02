@@ -270,18 +270,16 @@ h4 {
 // that would be more markup and would not allow us to collapse rows.
 .threats > details {
     // Simulate a 1px border with same behavior as "border-collapse: collapse".
-    box-shadow: 1px 0 0 0 $grey-color-light,
-                0 1px 0 0 $grey-color-light,
-                1px 1px 0 0 $grey-color-light,
-                1px 0 0 0 $grey-color-light inset,
-                0 1px 0 0 $grey-color-light inset;
+    box-shadow: 1px 0 0 0 $grey-color-light, 0 1px 0 0 $grey-color-light,
+        1px 1px 0 0 $grey-color-light, 1px 0 0 0 $grey-color-light inset,
+        0 1px 0 0 $grey-color-light inset;
     display: block;
     padding: ($spacer-xl / 3) ($spacer-xl / 2);
     &[open] > summary {
-      margin-bottom: $spacer-l;
+        margin-bottom: $spacer-l;
     }
     > summary > span {
-      display: block;
-      float: right;
+        display: block;
+        float: right;
     }
 }
