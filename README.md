@@ -38,7 +38,9 @@ SLSA is currently led by an initial cross-organization, vendor-neutral steering 
 
 Shortcut to notify the steering committee on any issues/PRs:
 
-> @slsa-framework/teams/slsa-steering-committee
+> @slsa-framework/slsa-steering-committee
+
+To email the steering committee, use slsa-steering-committee@googlegroups.com.
 
 ## Contributors
 
