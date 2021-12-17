@@ -1,6 +1,6 @@
 ---
 title: Frequently Asked Questions
-order: 5
+order: 6
 layout: specifications
 description: Questions and more information
 ---
