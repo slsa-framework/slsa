@@ -306,13 +306,15 @@ Requirements on the process by which provenance is generated and consumed:
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
 <tr id="available">
-<td>Available
+<td>Available/]
 <td>
 
 The provenance is available to the consumer in a format that the consumer
-accepts. The format SHOULD be in-toto [SLSA Provenance](provenance/index.html),
+accepts. The format SHOULD be in-toto [SLSA Provenance],
 but another format MAY be used if both producer and consumer agree and it meets
 all the other requirements.
+
+[SLSA Provenance]: {{site.baseurl}}/provenance
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="authenticated">
