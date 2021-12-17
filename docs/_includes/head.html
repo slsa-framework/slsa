@@ -1,0 +1,37 @@
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {%- seo title=false -%}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ "images/icons/apple-touch-icon.png" | relative_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ "images/icons/favicon-32x32.png" | relative_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ "images/icons/favicon-16x16.png" | relative_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ "images/icons/favicon-16x16.png" | relative_url }}">
+    <link rel="icon" type="image/x-icon" href="{{ "images/icons/favicon.ico" | relative_url }}">
+    <link rel="mask-icon" href="{{ "images/icons/safari-pinned-tab.svg" | relative_url }}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="msapplication-square150x150logo" content="images/icons/mstile-150x150.png" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>SLSA • {% if page.title %}{{page.title}}{% endif %}</title>
+    <meta name="twitter:title" content="A common language for different levels of software security. SLSA (salsa) is Supply-chain Levels for Software Artifacts." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" />
+    {% if jekyll.environment == 'production' %}
+    <link rel="stylesheet" href="{{"/fonts/fonts-prod.css" | relative_url }}">
+    {% else %}
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    {% endif %}
+
+    <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css"/>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    {%- feed_meta -%}
+    {%- if jekyll.environment == 'production' and site.google_analytics -%}
+    {%- include google-analytics.html -%}
+    {%- endif -%}
+</head>

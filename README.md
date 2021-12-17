@@ -2,7 +2,7 @@
 
 <img align="right" src="https://github.com/slsa-framework/slsa/blob/main/docs/images/slsa-dancing-goose-logo.svg">
 
-SLSA (pronounced ["salsa"](https://www.google.com/search?q=how+to+pronounce+salsa)) is security framework from source to service, giving anyone working with software a common language for increasing levels of software security and supply chain integrity.
+SLSA (pronounced ["salsa"](https://www.google.com/search?q=how+to+pronounce+salsa)) is a security framework from source to service, giving anyone working with software a common language for increasing levels of software security and supply chain integrity. It’s how you get from safe enough to being as resilient as possible, at any link in the chain.
 
 **The best way to read about SLSA is to visit [slsa.dev].**
 
@@ -10,19 +10,15 @@ SLSA (pronounced ["salsa"](https://www.google.com/search?q=how+to+pronounce+sals
 
 ## What's in this repo?
 
-The primary content of this repo is the [docs/](docs/) directory, which contains the core SLSA
-specification and sources to the [slsa.dev] website.
+The primary content of this repo is the [docs/](docs/) directory, which contains the core SLSA specification and sources to the [slsa.dev] website.
 
-You can read SLSA's documentation here:
-
--   [Levels](docs/levels.md) (Defining the framework)
--   [Requirements](docs/requirements.md) (How to attain compliance)
--   [Use cases](docs/use-cases/index.md)
--   Our [roadmap](docs/roadmap.md)
+You can read [SLSA's documentation here](docs/_spec/). The key documents are `levels` - which defines the framework - and `requirements`, which explains how to attain compliance.
 
 ## Project status
 
-SLSA is currently in alpha. The framework is constantly being improved. We encourage the community to try adopting SLSA levels incrementally and to share your experiences back to us.
+The initial v0.1 specification is out and is now ready to be tried out and tested. We encourage the community to try adopting SLSA levels incrementally and to share your experiences back to us. We’ve released a set of tools and services to generate SLSA 1-2 provenance, which we’re looking to develop further soon.
+
+Google has been using an internal version of SLSA since 2013 and requires it for all of their production workloads.
 
 ## Steering committee
 

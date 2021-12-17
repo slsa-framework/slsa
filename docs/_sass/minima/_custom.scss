@@ -2,6 +2,10 @@
 // GLOBALS
 //
 
+// Alpine js
+
+[x-cloak] { display: none; }
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -14,9 +18,107 @@
 // LAYOUT
 //
 
+
+// Colour
+
+.text{
+    &-green{
+        color: $light-green;
+    }
+    &-green-darkest{
+        color: $green-darkest;
+    }
+    &-green-button {
+        color: $button-green;
+    }
+    &-green-dark {
+        color: $dark-green;
+    }
+    &-green-darker {
+        color: $button-green;
+    }
+}
+.bg{
+    &-light-green{
+        background-color: $light-green;
+    }
+    &-light-pastel-green {
+        background-color: #B4F3C9;
+    }
+    &-pastel-green{
+        background-color: $pastel-green;
+    }
+    &-green-dark{
+        background-color: $dark-green;
+    }
+    &-green-darkest{
+        background-color: $green-darkest;
+    }
+    &-button-green {
+        background-color: $button-green;
+    }
+    &-green-transparent {
+        &::before{
+            content:'';
+            position: absolute;
+            left:0;
+            right:0;
+            height: 100%;
+            width: 100%;
+            background-color: $dark-green;
+        }
+    }
+}
+
+.co-logo {
+    object-fit: cover;
+    width: 100%;
+    height: 250px;
+}
+
+.border {
+    &-green {
+        border-color: $button-green;
+    }
+}
 // Blocks of content
 .content-block {
     padding: 20px 0;
+}
+
+.table-of-contents {
+    min-height: 300px;
+    ul{
+        margin-top: 5px;
+        // Opacity on hover effect
+        &:hover > li {
+            transition: 150ms all ease;
+            opacity: 0.3;
+        }
+    }
+
+    ul li {
+        margin-bottom: 5px;
+        font-family: 'Prodigy';
+    }
+    // Focus on hover effect
+    ul li:hover {
+        opacity: 1;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+        font-weight: 400;
+    }
+
+    ul {
+        li {
+            ul {
+                padding-left: 20px;
+            }
+        }
+    }
 }
 
 // Reponsive 2 column layout block
@@ -50,58 +152,61 @@
 
 .wrapper {
     max-width: $content-width;
-    padding: 0 40px;
+    padding: 0 20px;
     margin: 0 auto;
+    width: 100%;
 
-    @include media-query($on-mobile) {
-        padding: 0 20px;
+    &.inner, .inner{
+        padding-left: 70px;
+        padding-right: 70px;
+
+        @include media-query($on-mobile) {
+            padding: 0 40px;
+        }
+    }
+
+}
+
+.main-content {
+    ul:not(.custom-list) {
+        list-style: disc;
+        padding-left: 25px;
+
+        & > li {
+            margin-top: 10px;
+        }
+    }
+
+    blockquote {
+        margin: 30px 0;
+
+        & > p {
+            margin:12px 0;
+        }
     }
 }
 
 .max-width {
     align-items: center;
-}
-
-// 4 column levels
-.level-icons {
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(4, 1fr);
-    gap: $spacer-l;
-
-    @include media-query($on-tablet) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    @include media-query($on-mobile) {
-        grid-template-columns: 1fr;
-    }
-
-    .level {
-        background: white;
-        border-radius: $radius;
-        border: 4px solid $grey-color-light;
-        padding: $spacer-l;
-
-        .level-badge {
-            max-width: 50px;
-        }
-    }
+    flex-grow: 1;
 }
 
 //
 // STYLING
 //
 
-// Type size ramp
-h1 {
-    font-weight: $title-font-weight;
-    padding-top: $title-padding-top;
-    padding-bottom: $title-padding-bottom;
+h1,.h1, h2,.h2, h5,.h5 {
+    font-family: $header-font-family;
+    font-weight: normal;
+}
 
+// Type size ramp
+h1, .h1 {
+    font-weight: $title-font-weight;
     font-size: $title-font-size;
     letter-spacing: $title-letter-spacing;
-    line-height: 1.2;
+    line-height: 1;
+    font-family: $header-font-family;
 
     @include media-query($on-mobile) {
         font-size: $title-font-size-mobile;
@@ -112,21 +217,36 @@ h1 {
     }
 }
 
-h2 {
+h2, .h2 {
     font-size: $header2-font-size;
-    line-height: 1.15;
-    padding: 20px 0 10px 0;
+    line-height: 1;
+    letter-spacing: -0.01em;
 }
 
-h3 {
+h3, .h3 {
     font-size: $header3-font-size;
     line-height: 1.3;
-    padding: 10px 0 5px 0;
+    letter-spacing: 0;
+    font-family: $header-font-family-medium;
+    font-weight: 500;
 }
 
-h4 {
+h4, .h4 {
     line-height: 1.3;
-    font-weight: 700;
+    font-size: $header4-font-size;
+    letter-spacing: 0;
+    font-family: $header-font-family-semibold;
+    font-weight: 600;
+}
+
+h5, .h5 {
+    line-height: 1;
+    font-size: $header5-font-size;
+}
+
+.header-small {
+    font-size: $base-small-size;
+    font-family: $header-font-family;
 }
 
 .subtitle {
@@ -141,26 +261,109 @@ h4 {
     }
 }
 
-.diagram-wrapper {
-    .diagram {
-        border: 1px solid $grey-color-border;
-        padding: $spacer-xl;
-        border-radius: $radius;
+.markdown {
+    h2 {
+        color: $green-darkest;
+        margin-bottom: 32px;
+        margin-top: 60px;
+    }
+    h3, h4 {
+        margin-bottom: 30px;
+        color: $green-darkest;
+    }
+    p{
+        margin-bottom: 30px;
+        color: $green-darkest;
+    }
+    ul {
+        list-style: disc;
+        padding-left: 25px;
+        margin-bottom: 30px;
 
-        // strange bottom margin hack
-        p {
-            margin: 0;
-        }
-
-        @include media-query($on-mobile) {
-            padding: $spacer-m;
+        & > li {
+            margin-bottom: 10px;
         }
     }
+    table {
+        margin-bottom: 28px;
+        width: 100%;
+        text-align: left;
+        color: $green-darkest;
+        border-collapse: collapse;
+        border: 1px solid #CECECE;
+        border-radius: 20px;
+        th {
+            background-color: #F7FAF9;
+        }
+    }
+    blockquote {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 12px;
 
-    .annotation {
-        color: $grey-color;
+        /* Green - Lightest */
+        border: none;
+        background: #F7FAF9;
+        border-radius: $radius;
+        margin-bottom: 30px;
+        letter-spacing: normal;
+        font-style: normal;
+        & > p{
+            margin:0;
+            color: #155757;
+        }
+    }
+    a {
+        color: $green-darkest;
+        text-decoration:underline;
+        font-weight: normal;
     }
 }
+
+details {
+    // Simulate a 1px border with same behavior as "border-collapse: collapse".
+    border: 1px solid $grey-color-light;
+    border-radius: $radius;
+    display: block;
+    padding: ($spacer-xl / 3) ($spacer-xl / 2);
+    margin-bottom: 1rem;
+    &[open] > summary {
+      margin-bottom: $spacer-l;
+    }
+    summary {
+        list-style: none;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 30px;
+        cursor: pointer;
+        font-weight: 600;
+        color: $green-darkest;
+    }
+    summary::-webkit-details-marker {
+        display: none;
+    }
+
+    summary::after {
+        content: ' ►';
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: $green-darkest;
+    }
+    &[open] > summary:after {
+        content: " ▼";
+    }
+    > summary > span {
+      margin-left: 30px;
+    }
+
+    &:last-child {
+        margin-bottom: 40px;
+    }
+}
+
 
 // Spacing elements
 .m-b-0 {
@@ -193,95 +396,78 @@ h4 {
 
 // Link styles for the 'button' look
 
-.pseudo-button {
-    box-sizing: border-box;
-    text-decoration: none;
-
-    > p > a {
-        display: inline-block;
-        color: $text-color-light;
-        font-size: $base-font-size;
-        background: #000;
-        border-radius: $radius;
-        padding: 12px 18px;
-
-        &:hover {
-            text-decoration: none;
-            background: $brand-color;
-        }
-    }
+.button-mono {
+    font-family: $base-button-font;
+    font-size: 16px;
+    line-height: 1;
 }
 
-.buttons-horizontal {
+.cta-link {
+    position: relative;
     display: flex;
-    gap: $spacer-l;
+    align-items: center;
+    line-height: 1;
+    padding-left: 25px;
+    color: #155757;
+    font-family: $header-font-family-semibold;
+    font-weight: 600;
 
-    @include media-query($on-mobile) {
-        display: block;
+    &::before {
+        content:'';
+        transition: all .25s ease-in-out;
+        will-change: transform;
+        position: absolute;
+        left:0;
+        top:auto;
+        height: 14px;
+        width: 14px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 13px;
+        background-image: url("data:image/svg+xml,%3Csvg width='14' height='15' viewBox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.697085 14.1509C-0.232361 9.52348 -0.232362 4.77828 0.697083 0.150878C5.54439 1.72628 10.0667 4.10277 14 7.15088C10.0667 10.199 5.54439 12.5755 0.697085 14.1509Z' fill='%2340DB88'/%3E%3C/svg%3E%0A");
+    }
+
+    &:hover {
+        text-decoration: none;
+        &::before {
+            transform: translateX(3px);
+        }
+    }
+
+    &.white {
+        color: white;
+    }
+
+    &.center {
+        justify-content: center;
+        display: inline-block;
+        &::before {
+            content:'';
+            position: absolute;
+            left: 0;
+            right: auto;
+        }
+
     }
 }
 
-.link-tree {
-    table {
-        max-width: 500px;
-        border: none;
+.select-dropdown {
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='7' viewBox='0 0 12 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 7L11.1962 0.25H0.803847L6 7Z' fill='%23000000'/%3E%3C/svg%3E%0A");
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: auto 15%;
+  background-color: transparent;
+  // disable default appearance
+  outline: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  &::-ms-expand { display: none };
+  cursor: pointer;
 
-        tr {
-            background-color: transparent;
-        }
-        td {
-            background-color: transparent;
-            border: 1px solid #c9c9c9;
-            padding: 4px 8px;
-        }
-        th {
-            background-color: transparent;
-            border: none;
-            padding: 0;
-            color: $grey-color;
-            font-weight: normal;
-        }
-        a {
-            display: block;
-        }
-        p {
-            margin: 0;
-            padding: 0;
-        }
-    }
-
-    // Style variations for use-cases page
-    &.use-cases {
-        table {
-            border-collapse: separate;
-            border-spacing: 0 $spacer-l;
-            max-width: 80%;
-
-            td {
-                padding: $spacer-m;
-            }
-        }
-    }
-}
-
-// threats.md
-
-// Render the threats list as table rows. We don't use a real <table> because
-// that would be more markup and would not allow us to collapse rows.
-.threats > details {
-    // Simulate a 1px border with same behavior as "border-collapse: collapse".
-    box-shadow: 1px 0 0 0 $grey-color-light,
-                0 1px 0 0 $grey-color-light,
-                1px 1px 0 0 $grey-color-light,
-                1px 0 0 0 $grey-color-light inset,
-                0 1px 0 0 $grey-color-light inset;
-    display: block;
-    padding: ($spacer-xl / 3) ($spacer-xl / 2);
-    &[open] > summary {
-      margin-bottom: $spacer-l;
-    }
-    > summary > span {
-      display: block;
-      float: right;
-    }
+  position: relative;
+  min-width: 100%;
+  outline: none;
+  font-family: "Prodigy";
+  line-height: 1;
 }

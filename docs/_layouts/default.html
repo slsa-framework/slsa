@@ -7,6 +7,9 @@
     <div class="max-width">
       {%- include header.html -%}
       <main aria-label="Content">
+        <div id="table-of-contents">
+          {% include toc.html html=content %}
+        </div>
         <div class="wrapper">
           {{ content }}
         </div>
