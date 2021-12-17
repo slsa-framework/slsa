@@ -204,7 +204,7 @@ It’s adaptable, and it’s been designed with the wider security ecosystem in 
         </div>
         <div class="flex flex-wrap justify-center items-center w-6/7 mx-auto md:-ml-4 md:-mr-4">
             <div class="w-full md:w-1/2 getting_started_card md:pl-4 md:h-80 mb-8 md:mb-0">
-                <a href="/get-started#reaching-slsa-level-1" class="hover:no-underline">
+              <a href="get-started#reaching-slsa-level-1" class="hover:no-underline">
                   <div class="bg-white h-full rounded-lg p-10 flex flex-col">
                       <p class="h3 font-semibold mb-8 md:mb-6">Start using SLSA</p>
                       <p>Ready to put your project through its paces? The first on-ramp to SLSA Level 1 is generating provenance. We’ve put together a quick walkthrough with the steps you’ll need to take and available tools you can use.</p>
@@ -213,7 +213,7 @@ It’s adaptable, and it’s been designed with the wider security ecosystem in 
                 </a>
             </div>
             <div class="w-full md:w-1/2 getting_started_card md:pl-4 md:h-80">
-              <a href="/spec/{{ site.current_spec_version }}/#specifications" class="hover:no-underline">
+              <a href="spec/{{ site.current_spec_version }}/#specifications" class="hover:no-underline">
                   <div class="bg-white h-full rounded-lg p-10 flex flex-col">
                       <p class="h3 font-semibold mb-8 md:mb-6">Review the specifications</p>
                       <p>Want to learn about how it fits your organization’s security? Here’s the documentation behind the framework, with use cases, specific threats (and their prevention), provenance and fully detailed requirements.</p>

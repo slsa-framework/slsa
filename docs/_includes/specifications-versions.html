@@ -1,4 +1,4 @@
 {% assign versions = site.spec_versions %}
 {% for item in versions %}
-<a href="/spec/{{item}}/" class="inline-block {% if page.url contains item %}bg-button-green button-mono{% else %}button-mono text-green-button{% endif %} text-white rounded-lg px-4 py-3 text-20 font-normal">Version {{item | replace: "v", ""}}</a>
+<a href="{{site.baseurl}}/spec/{{item}}/" class="inline-block {% if page.url contains item %}bg-button-green button-mono{% else %}button-mono text-green-button{% endif %} text-white rounded-lg px-4 py-3 text-20 font-normal">Version {{item | replace: "v", ""}}</a>
 {% endfor %}
