@@ -23,6 +23,7 @@ figure {
 
 html {
     min-width: $on-mobile-old;
+    scroll-behavior: smooth;
 }
 
 /**
@@ -42,31 +43,9 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-
-    // @include media-query($on-mobile-old) {
-    //   width: $on-mobile-old;
-    //   min-width: $on-mobile-old;
-    // }
-}
-
-/**
- * Set `margin-bottom` to maintain vertical rhythm
- */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-ul,
-ol,
-dl,
-figure,
-%vertical-rhythm {
-    margin-bottom: $spacer-xl / 2;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /**
@@ -98,10 +77,6 @@ figcaption {
 /**
  * Lists
  */
-ul,
-ol {
-    margin-left: $spacer-xl;
-}
 
 li {
     > ul,
@@ -118,7 +93,6 @@ h2,
 h3,
 h4 {
     font-family: $header-font-family;
-    font-weight: $header-font-weight;
 }
 
 h5,
@@ -129,29 +103,18 @@ h6 {
 
 h1 {
     font-weight: $title-font-weight;
-    padding-top: $title-padding-top;
-    padding-bottom: $title-padding-bottom;
-}
-
-h2 {
-    padding: 20px 0 10px 0;
 }
 
 /**
  * Links
  */
-a {
-    color: $brand-color;
+a:not(.table-of-contents a, .getting_started_card a, footer a, .button-mono, .cta-link, .border-b) {
+    color: #23907E;
     text-decoration: none;
-    font-weight: 500;
-
-    &:visited {
-        color: darken($brand-color, 10%);
-    }
+    font-weight: 600;
 
     &:hover {
         text-decoration: underline;
-        // text-decoration: underline;
     }
 
     .social-media-list &:hover {
@@ -184,33 +147,35 @@ blockquote {
  */
 pre,
 code {
-    @include relative-font-size(0.9375);
-    border: 1px solid $grey-color-light;
-    border-radius: 3px;
-    background-color: #eef;
+    font-family: "IBM Plex Mono";
+    margin: $spacer-xl 0;
+
 }
 
 code {
-    padding: 1px 5px;
+    padding: 4px 6px;
+    background: $pastel-green;
+    color: $green-darkest;
+    border: 1px solid #B4F3C9;
+    border-radius: 4px;
 }
 
 pre {
-    padding: 8px 12px;
+    padding: 20px;
     overflow-x: auto;
+    border-radius: $radius;
 
     > code {
         border: 0;
         padding-right: 0;
         padding-left: 0;
+        background: none;
     }
 }
 
 /**
  * Wrapper
  */
-.wrapper {
-    @extend %clearfix;
-}
 
 /**
  * Clearfix
@@ -253,7 +218,7 @@ table {
     border: 1px solid $grey-color-light;
     tr {
         &:nth-child(even) {
-            background-color: lighten($grey-color-light, 6%);
+            background-color: #F7FAF9;
         }
     }
     th,
@@ -267,6 +232,7 @@ table {
     }
     td {
         border: 1px solid $grey-color-light;
+        vertical-align: top;
     }
 }
 

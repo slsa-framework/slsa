@@ -1,0 +1,23 @@
+
+/* // Fonts */
+
+@font-face {
+    font-family: 'Prodigy';
+    src:  url('/slsa/fonts/ProdigySans-Regular.ttf') format('truetype'),
+          url('/slsa/fonts/ProdigySans-Regular.woff2') format('woff2'),
+          url('/slsa/fonts/ProdigySans-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Prodigy medium';
+    src:  url('/slsa/fonts/ProdigySans-Medium.ttf') format('truetype'),
+          url('/slsa/fonts/ProdigySans-Medium.woff2') format('woff2'),
+          url('/slsa/fonts/ProdigySans-Medium.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Prodigy semibold';
+    src:  url('/slsa/fonts/ProdigySans-SemiBold.ttf') format('truetype'),
+          url('/slsa/fonts/ProdigySans-SemiBold.woff2') format('woff2'),
+          url('/slsa/fonts/ProdigySans-SemiBold.woff') format('woff');
+}
