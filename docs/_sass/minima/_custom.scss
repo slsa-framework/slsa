@@ -4,7 +4,9 @@
 
 // Alpine js
 
-[x-cloak] { display: none; }
+[x-cloak] {
+    display: none;
+}
 
 * {
     -webkit-box-sizing: border-box;
@@ -18,14 +20,13 @@
 // LAYOUT
 //
 
-
 // Colour
 
-.text{
-    &-green{
+.text {
+    &-green {
         color: $light-green;
     }
-    &-green-darkest{
+    &-green-darkest {
         color: $green-darkest;
     }
     &-green-button {
@@ -38,31 +39,31 @@
         color: $button-green;
     }
 }
-.bg{
-    &-light-green{
+.bg {
+    &-light-green {
         background-color: $light-green;
     }
     &-light-pastel-green {
-        background-color: #B4F3C9;
+        background-color: #b4f3c9;
     }
-    &-pastel-green{
+    &-pastel-green {
         background-color: $pastel-green;
     }
-    &-green-dark{
+    &-green-dark {
         background-color: $dark-green;
     }
-    &-green-darkest{
+    &-green-darkest {
         background-color: $green-darkest;
     }
     &-button-green {
         background-color: $button-green;
     }
     &-green-transparent {
-        &::before{
-            content:'';
+        &::before {
+            content: '';
             position: absolute;
-            left:0;
-            right:0;
+            left: 0;
+            right: 0;
             height: 100%;
             width: 100%;
             background-color: $dark-green;
@@ -88,7 +89,7 @@
 
 .table-of-contents {
     min-height: 300px;
-    ul{
+    ul {
         margin-top: 5px;
         // Opacity on hover effect
         &:hover > li {
@@ -156,7 +157,8 @@
     margin: 0 auto;
     width: 100%;
 
-    &.inner, .inner{
+    &.inner,
+    .inner {
         padding-left: 70px;
         padding-right: 70px;
 
@@ -164,7 +166,6 @@
             padding: 0 40px;
         }
     }
-
 }
 
 .main-content {
@@ -181,7 +182,7 @@
         margin: 30px 0;
 
         & > p {
-            margin:12px 0;
+            margin: 12px 0;
         }
     }
 }
@@ -195,13 +196,19 @@
 // STYLING
 //
 
-h1,.h1, h2,.h2, h5,.h5 {
+h1,
+.h1,
+h2,
+.h2,
+h5,
+.h5 {
     font-family: $header-font-family;
     font-weight: normal;
 }
 
 // Type size ramp
-h1, .h1 {
+h1,
+.h1 {
     font-weight: $title-font-weight;
     font-size: $title-font-size;
     letter-spacing: $title-letter-spacing;
@@ -217,13 +224,15 @@ h1, .h1 {
     }
 }
 
-h2, .h2 {
+h2,
+.h2 {
     font-size: $header2-font-size;
     line-height: 1;
     letter-spacing: -0.01em;
 }
 
-h3, .h3 {
+h3,
+.h3 {
     font-size: $header3-font-size;
     line-height: 1.3;
     letter-spacing: 0;
@@ -231,7 +240,8 @@ h3, .h3 {
     font-weight: 500;
 }
 
-h4, .h4 {
+h4,
+.h4 {
     line-height: 1.3;
     font-size: $header4-font-size;
     letter-spacing: 0;
@@ -239,7 +249,8 @@ h4, .h4 {
     font-weight: 600;
 }
 
-h5, .h5 {
+h5,
+.h5 {
     line-height: 1;
     font-size: $header5-font-size;
 }
@@ -267,11 +278,12 @@ h5, .h5 {
         margin-bottom: 32px;
         margin-top: 60px;
     }
-    h3, h4 {
+    h3,
+    h4 {
         margin-bottom: 30px;
         color: $green-darkest;
     }
-    p{
+    p {
         margin-bottom: 30px;
         color: $green-darkest;
     }
@@ -292,10 +304,16 @@ h5, .h5 {
         text-align: left;
         color: $green-darkest;
         border-collapse: collapse;
-        border: 1px solid #CECECE;
+        border: 1px solid #cecece;
         border-radius: 20px;
         th {
-            background-color: #F7FAF9;
+            background-color: #f7faf9;
+        }
+        ul {
+            margin-bottom: 0px;
+        }
+        & li {
+            margin-bottom: 6px;
         }
     }
     blockquote {
@@ -303,22 +321,20 @@ h5, .h5 {
         flex-direction: row;
         align-items: flex-start;
         padding: 12px;
-
-        /* Green - Lightest */
         border: none;
-        background: #F7FAF9;
+        background: #f7faf9;
         border-radius: $radius;
         margin-bottom: 30px;
         letter-spacing: normal;
         font-style: normal;
-        & > p{
-            margin:0;
+        p {
+            margin: 0;
             color: #155757;
         }
     }
     a {
         color: $green-darkest;
-        text-decoration:underline;
+        text-decoration: underline;
         font-weight: normal;
     }
 }
@@ -331,7 +347,7 @@ details {
     padding: ($spacer-xl / 3) ($spacer-xl / 2);
     margin-bottom: 1rem;
     &[open] > summary {
-      margin-bottom: $spacer-l;
+        margin-bottom: $spacer-l;
     }
     summary {
         list-style: none;
@@ -355,17 +371,16 @@ details {
         color: $green-darkest;
     }
     &[open] > summary:after {
-        content: " ▼";
+        content: ' ▼';
     }
     > summary > span {
-      margin-left: 30px;
+        margin-left: 30px;
     }
 
     &:last-child {
         margin-bottom: 40px;
     }
 }
-
 
 // Spacing elements
 .m-b-0 {
@@ -415,12 +430,12 @@ details {
     font-weight: 600;
 
     &::before {
-        content:'';
-        transition: all .25s ease-in-out;
+        content: '';
+        transition: all 0.25s ease-in-out;
         will-change: transform;
         position: absolute;
-        left:0;
-        top:auto;
+        left: 0;
+        top: auto;
         height: 14px;
         width: 14px;
         background-repeat: no-repeat;
@@ -444,32 +459,33 @@ details {
         justify-content: center;
         display: inline-block;
         &::before {
-            content:'';
+            content: '';
             position: absolute;
             left: 0;
             right: auto;
         }
-
     }
 }
 
 .select-dropdown {
-  background-image: url("data:image/svg+xml,%3Csvg width='12' height='7' viewBox='0 0 12 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 7L11.1962 0.25H0.803847L6 7Z' fill='%23000000'/%3E%3C/svg%3E%0A");
-  background-position: right 10px center;
-  background-repeat: no-repeat;
-  background-size: auto 15%;
-  background-color: transparent;
-  // disable default appearance
-  outline: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-  &::-ms-expand { display: none };
-  cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='7' viewBox='0 0 12 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 7L11.1962 0.25H0.803847L6 7Z' fill='%23000000'/%3E%3C/svg%3E%0A");
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: auto 15%;
+    background-color: transparent;
+    // disable default appearance
+    outline: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    &::-ms-expand {
+        display: none;
+    }
+    cursor: pointer;
 
-  position: relative;
-  min-width: 100%;
-  outline: none;
-  font-family: "Prodigy";
-  line-height: 1;
+    position: relative;
+    min-width: 100%;
+    outline: none;
+    font-family: 'Prodigy';
+    line-height: 1;
 }

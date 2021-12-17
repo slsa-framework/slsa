@@ -9,13 +9,9 @@ This document covers all of the detailed requirements for an artifact to meet SL
 
 ## Definitions
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-> Reminder: SLSA is in `alpha`. The definitions below are not yet finalized and subject to change, particularly SLSA 3-4.
-
-[Terminology](/spec/terminology)
+> See our [Terminology](../spec/terminology) page for a full glossary of definitions
 
 ## Source requirements
 
