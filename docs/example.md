@@ -1,6 +1,7 @@
-# Example
-
-## Motivating example
+---
+layout: specifications
+---
+# Motivating example
 
 Consider the example of using [curl](https://curl.se) through its
 [official docker image][curlimages/curl]. What threats are we exposed to in the

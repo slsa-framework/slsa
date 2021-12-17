@@ -1,10 +1,7 @@
 ---
-layout: use-case
+layout: specifications
 ---
-
-# Use cases
-
-## Publishing a software package
+# Publishing a software package
 
 A developer (e.g. BarInc) wants to protect consumers of their software from malicious changes to the BarImage container image they publish. They want to prevent any negative consequences and damage to their reputation which would occur if that happened. They want to have access to metadata for auditing and ad hoc analysis.
 
@@ -15,7 +12,7 @@ A developer (e.g. BarInc) wants to protect consumers of their software from mali
 |           | Protecting their company’s reputation    |
 |           | Access to metadata for auditing/analysis |
 
-### How to do it
+## How to do it
 
 BarInc can achieve these goals when publishing the container image by:
 
@@ -31,6 +28,6 @@ BarInc can achieve these goals when publishing the container image by:
 -   Only publishing the container image if all the above checks pass
 -   Storing the provenance and all other attestations for future reference
 
-### Limitations
+## Limitations
 
 This approach doesn’t protect their users from a published BarImage being tampered with after publication. There may be other ways to address these concerns such as code signing after verification, or encouraging [use of the SLSA framework by their software consumers](/consuming-third-party-software.md).

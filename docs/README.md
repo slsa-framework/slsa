@@ -1,28 +1,16 @@
 # slsa.dev sources
 
-This directory contains sources for https://slsa.dev, served via GitHub pages
+This directory contains sources for [https://slsa.dev](https://slsa.dev), served via GitHub pages
 and rendered with Jekyll.
 
-## Testing locally
+## Developing and testing locally
 
-Use [github/pages-gem](https://github.com/github/pages-gem) to spawn a local web
-server. We recommend the "Docker" method as follows:
+1.  [Install Jekyll](https://jekyllrb.com/docs/installation/#guides). This link provides an installation guide for your chosen platform.
+2.  Clone this repo and change directory to `/docs`.
+3.  `bundle install` (to install Jekyll's dependencies).
+4.  Run the project locally with `jekyll serve` (if you'd like live reload use `jekyll serve --livereload`).
+5.  Browse to [http://localhost:4000](http://localhost:4000) to view the site locally.
 
-1.  Install Docker.
+## Deployment
 
-2.  Clone and build the Docker image.
-
-    ```bash
-    git clone https://github.com/github/pages-gem
-    cd pages-gem
-    make image
-    ```
-
-3.  Run the server from the pages-gem directory, where `PATH_TO_SLSA_REPO` is
-    the path to this repo.
-
-    ```bash
-    SITE=PATH_TO_SLSA_REPO/docs make server
-    ```
-
-4.  Browse to http://localhost:4000.
+Pushing to `main` will trigger a deployment of Github Pages.

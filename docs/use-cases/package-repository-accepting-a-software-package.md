@@ -1,10 +1,7 @@
 ---
-layout: use-case
+layout: specifications
 ---
-
-# Use cases
-
-## Package Repository accepting a software package
+# Package Repository accepting a software package
 
 A package repository (e.g. Docker Hub) wants to protect their users from malicious changes to the container images uploaded to the repository. They could do this by the following steps, which could protect users of protected repositories from malicious tampering without requiring all users to perform their own policy checks on each image they consume.
 
@@ -14,7 +11,7 @@ A package repository (e.g. Docker Hub) wants to protect their users from malicio
 | **Goals** | Protecting users from malicious changes                     |
 |           | Not requiring users to perform policy checks on every image |
 
-### How to do it
+## How to do it
 
 -   Requesting publishers of artifacts publish the [in-toto SLSA provenance](https://slsa.dev/provenance) and any additional attestations (e.g. [source control attestations](https://github.com/in-toto/attestation/issues/47)) each time a new image is pushed to the repository
 -   Requesting publishers publish the public keys a builder uses to sign the attestations
@@ -25,7 +22,7 @@ A package repository (e.g. Docker Hub) wants to protect their users from malicio
 -   Checking new artifacts and their provenance (as well as any other attestations) against the policy above, ensuring any attestations evaluated by the policy are signed by the publisher's public key
 -   Preventing artifacts that fail the above check from being made public
 
-### Limitations
+## Limitations
 
 This use case relies on the package repository trusting the SLSA information that publishers provide. In the future, there may be accreditation bodies that confirm this information.
 

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+    <div class="max-width">
+      {%- include header.html -%}
+      <main aria-label="Content" class="overflow-x-auto md:overflow-visible">
+            <div class="wrapper">
+                <!-- Hero -->
+                <section class="hero markdown-page">
+                    <div class="wrapper text-green-darkest text-left">
+                        <h1 class="pr-32 pb-16 pt-32">{{ page.title }}</h1>
+                        <div class="md:flex justify-between items-start text-black">
+                            <div class="w-full md:w-3/5">
+                                <p>{{ page.hero_text }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <section class="wrapper">
+                <div class="flex flex-wrap justify-between items-start">
+                    <div class="w-full md:w-2/3 markdown pb-36">
+                        {{ content }}
+                    </div>
+                    <div class="table-of-contents w-full md:w-1/3 md:sticky md:top-32 pb-12">
+                        {% unless page.url contains '/use-cases/' or page.title == 'Frequently Asked Questions' %}
+                            {% include specifications-versions-dropdown.html %}
+                        {%- endunless -%}
+                        <div class="rounded-lg p-4 border border-gray-400 md:ml-12">
+                            <p class="header-small">ON THIS PAGE</p>
+                            {% include toc.html html=content h_min=1 h_max=3 %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+      </main>
+    </div>
+    {%- include footer.html -%}
+  </body>
+
+</html>
