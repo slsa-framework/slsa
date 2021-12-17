@@ -278,8 +278,10 @@ h5, .h5 {
     ul {
         list-style: disc;
         padding-left: 25px;
-        margin-bottom: 30px;
 
+        &:not(:last-child) {
+            margin-bottom: 30px;
+        }
         & > li {
             margin-bottom: 10px;
         }

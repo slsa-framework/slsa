@@ -5,31 +5,7 @@ version: 0.1
 layout: specifications
 description: The checks and measures for each level
 ---
-<span class="subtitle">
-
 This document covers all of the detailed requirements for an artifact to meet SLSA. For a broader overview, including basic terminology and threat model, see the [overview](index.md).
-
-</span>
-
-> Reminder: SLSA is in `alpha`. The definitions below are not yet finalized and subject to change, particularly SLSA 3-4.
-
-## What is SLSA?
-
-SLSA is a set of incrementally adoptable security guidelines, established by industry consensus. The standards set by SLSA are guiding principles for both software producers and consumers: producers can follow the guidelines to make their software more secure, and consumers can make decisions based on a software package's security posture. SLSA's [four levels](levels.md) are designed to be incremental and actionable, and to protect against specific integrity attacks. SLSA 4 represents the ideal end state, and the lower levels represent milestones with corresponding integrity guarantees.
-
-### Terminology
-
-SLSA's framework addresses every step of the software supply chain - the sequence of steps resulting in the creation of an artifact. We represent a supply chain as a [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) of sources, builds, dependencies, and packages. One artifact's supply chain is a combination of its dependencies' supply chains plus its own sources and builds.
-
-![Software Supply Chain Model]({{ site.baseurl }}/images/supply-chain-model.svg)
-
-| Term | Description | Example |
-| --- | --- | --- |
-| Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image. |
-| Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform). |
-| Build | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform). |
-| Package | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit. |
-| Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform). |
 
 ## Definitions
 
@@ -37,37 +13,9 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-<a id="immutable-reference"></a>**Immutable reference:** An identifier that is
-guaranteed to always point to the same, immutable artifact. This MUST allow the
-consumer to locate the artifact and SHOULD include a cryptographic hash of the
-artifact's contents to ensure integrity. Examples: git URL + branch/tag/ref \+
-commit ID; cloud storage bucket ID + SHA-256 hash; Subversion URL (no hash).
+> Reminder: SLSA is in `alpha`. The definitions below are not yet finalized and subject to change, particularly SLSA 3-4.
 
-[immutable reference]: #immutable-reference
-[immutable references]: #immutable-reference
-
-**Platform:** Infrastructure or service that hosts the source, build, or
-distribution of software. Examples: GitHub, Google Cloud Build, Travis CI,
-[Mozilla's self-hosted Mercurial server](https://hg.mozilla.org).
-
-**Provenance**: Metadata about how an artifact was produced.
-
-**Revision:** An immutable, coherent state of a source. In Git, for example, a
-revision is a commit in the history reachable from a specific branch in a
-specific repository. Different revisions within one repo MAY have different
-levels. Example: the most recent revision on a branch meets SLSA 4 but very old
-historical revisions before the cutoff do not.
-
-**Strong authentication:** Authentication that maps back to a specific person
-using an authentication mechanism which is resistant to account and credential
-compromise. For example, 2-factor authentication (2FA) where one factor is a
-hardware security key (i.e. YubiKey).
-
-**Trusted persons:** Set of persons who are granted the authority to maintain a
-software project. For example, https://github.com/MarkLodato/dotfiles has just
-one trusted person (MarkLodato), while https://hg.mozilla.org/mozilla-central
-has a set of trusted persons with write access to the mozilla-central
-repository.
+[Terminology](/spec/terminology)
 
 ## Source requirements
 
