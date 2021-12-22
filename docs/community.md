@@ -81,6 +81,10 @@ Google has been using an internal version of SLSA since 2013 and requires it for
                 <img class="mx-auto w-full" src="https://img.youtube.com/vi/S_MXbt0p_pg/0.jpg" alt="operation slsa episode 1 image">
                 <p class="text-green-darker font-bold h5 mt-4">Operation SLSA: Episode 1</p>
             </a>
+            <a href="https://youtu.be/DNCrK22uE4U" class="w-full lg:w-1/2 md:pl-5 pb-16">
+                <img class="mx-auto w-full" src="https://img.youtube.com/vi/DNCrK22uE4U/0.jpg" alt="operation slsa episode 2 image">
+                <p class="text-green-darker font-bold h5 mt-4">Operation SLSA: Episode 2</p>
+            </a>
             <a href="https://youtube.com/playlist?list=PLVl2hFL_zAh9sw-wib4W6A14i6DnBTod7" class="w-full lg:w-1/2 md:pl-5">
                 <img class="mx-auto w-full" src="https://img.youtube.com/vi/DxAyP1QVYXc/0.jpg" alt="slsa code image">
                 <p class="text-green-darker font-bold h5 mt-4">SLSA Biweekly Meetings (Playlist)</p>
