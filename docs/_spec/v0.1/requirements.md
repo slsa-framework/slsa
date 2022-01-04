@@ -306,7 +306,7 @@ Requirements on the process by which provenance is generated and consumed:
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
 <tr id="available">
-<td>Available/]
+<td>Available
 <td>
 
 The provenance is available to the consumer in a format that the consumer
