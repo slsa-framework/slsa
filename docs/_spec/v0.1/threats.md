@@ -552,7 +552,10 @@ cryptographic signature is no longer valid.
 *Threat:* Register a package name that is similar looking to a popular package
 and get users to use your malicious package instead of the benign one.
 
-*Mitigation:* **Outside the scope of SLSA.**
+*Mitigation:* **Mostly outside the scope of SLSA.** That said, the requirement
+to make the source available can be a mild deterrent, can aid investigation or
+ad-hoc analysis, and can complement source-based typosquatting solutions.
+<sup>[[Verified history] and [Retained indefinitely] @ SLSA 3]</sup>
 
 </details>
 
