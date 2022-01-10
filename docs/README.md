@@ -28,14 +28,24 @@ via GitHub pages and rendered with Jekyll.
     bundle install
     ```
 
-4.  Run the project locally with `jekyll serve` (optionally appending
+4.  (optional) Create a GitHub
+    [personal access token](https://github.com/settings/tokens/new) and add it
+    to your `~/.netrc`, like so:
+
+    ```none
+    machine api.github.com
+        login github-username
+        password 123abc-your-token
+    ```
+
+5.  Run the project locally with `jekyll serve` (optionally appending
     `--livereload`):
 
     ```bash
     bundle exec jekyll serve
     ```
 
-5.  Browse to http://localhost:4000 to view the site locally.
+6.  Browse to http://localhost:4000 to view the site locally.
 
 ## Deployment
 
