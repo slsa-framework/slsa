@@ -233,6 +233,7 @@ GEM
       jekyll-seo-tag (~> 2.1)
     minitest (5.15.0)
     multipart-post (2.1.1)
+    netrc (0.11.0)
     nokogiri (1.13.0)
       mini_portile2 (~> 2.7.0)
       racc (~> 1.4)
@@ -281,6 +282,7 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  netrc
 
 BUNDLED WITH
    2.1.4
