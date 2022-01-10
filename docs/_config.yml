@@ -15,7 +15,12 @@ collections:
     sort_by: order
     output: true
 exclude:
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - Makefile
   - README.md
+  - vendor/
 google_analytics: G-VNK063J3QF
 theme: minima
 permalink: :path/:basename
