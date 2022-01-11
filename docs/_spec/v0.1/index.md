@@ -61,7 +61,7 @@ levels:
             </div>
         </div>
         <div class="my-16 w-full">
-            <img class="mx-auto w-full md:w-3/4" src="{{ site.baseurl }}/images/supply-chain-threats.svg" alt="supply chain full threats image" />
+            <img class="mx-auto w-full md:w-3/4" src="../../images/supply-chain-threats.svg" alt="supply chain full threats image" />
         </div>
     </div>
     <div class="wrapper inner w-full">
@@ -99,7 +99,7 @@ levels:
                 <p>There’s more to security than just protection against tampering. From vulnerability management and fuzzing to testing and developer trust, many of these require solutions where effort’s focused on the source. That’s where SLSA complements your wider security efforts, giving you confidence that the code you run is the code you analyzed.</p>
             </div>
             <div class="w-full md:w-1/2">
-                <img class="mx-auto" src="{{ site.baseurl }}/images/SLSA-SBOM.svg" alt="How it fits into the security ecosystem image" />
+                <img class="mx-auto" src="../../images/SLSA-SBOM.svg" alt="How it fits into the security ecosystem image" />
             </div>
         </div>
     </div>
@@ -121,7 +121,7 @@ levels:
                 <p>SLSA’s requirements look at the three general main areas involved in a software artifact’s creation, and where vulnerabilities target - the build, the source, and the dependencies. As the levels scale up, they show that work’s been done to assure there’s more integrity in each area, which can be helpful in scenario planning.</p>
             </div>
             <div class="w-full md:w-1/3 mx-auto">
-                <img src="{{ site.baseurl }}/images/badge-exploded.svg" alt="SLSA levels badge">
+                <img src="../../images/badge-exploded.svg" alt="SLSA levels badge">
             </div>
         </div>
         <div class="flex flex-wrap md:flex-row justify-between items-start mt-16 md:-ml-4 md:-mr-4">

@@ -55,7 +55,7 @@ testimonials:
 <!-- Hero -->
 <section class="hero home flex justify-center items-center relative">
     <video class="absolute object-cover h-full w-full z-0" autoplay muted loop>
-      <source src="{{ site.baseurl }}/images/v1.mp4" type="video/mp4">
+      <source src="images/v1.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
     <div class="wrapper inner text-green z-20">
@@ -72,7 +72,7 @@ testimonials:
                 <p>It’s a security framework, a check-list of standards and controls to prevent tampering, improve integrity, and secure packages and infrastructure in your projects, businesses or enterprises. It’s how you get from safe enough to being as resilient as possible, at any link in the chain.</p>
             </div>
             <div class="w-full md:w-1/3 md:mt-0 mt-8">
-                <img src="{{ site.baseurl }}/images/logo-mono.svg" alt="SLSA logo mark mono version">
+                <img src="images/logo-mono.svg" alt="SLSA logo mark mono version">
             </div>
         </div>
     </div>
@@ -85,10 +85,10 @@ testimonials:
             </div>
             <div class="w-full md:w-1/2 md:mt-0 mt-8">
                 <p>Any software can introduce vulnerabilities into a supply chain. As a system gets more complex, it’s critical to already have checks and best practices in place to guarantee artifact integrity, that the source code you’re relying on is the code you’re actually using. Without solid foundations and a plan for the system as it grows, it’s difficult to focus your efforts against tomorrow’s next hack, breach or compromise.</p>
-                <a href="{{ site.baseurl }}/spec/{{ site.current_spec_version }}/#supply-chain-threats" class="cta-link h5 font-semibold mt-8">More about supply chain attacks</a>
+                <a href="spec/{{ site.current_spec_version }}/#supply-chain-threats" class="cta-link h5 font-semibold mt-8">More about supply chain attacks</a>
             </div>
         </div>
-        <img class="mt-16 mx-auto w-full md:w-3/4" src="{{ site.baseurl }}/images/SupplyChainDiagram.svg" alt="the supply chain problem image">
+        <img class="mt-16 mx-auto w-full md:w-3/4" src="images/SupplyChainDiagram.svg" alt="the supply chain problem image">
     </div>
 </section>
 <section class="section bg-pastel-green flex flex-col justify-center items-center">
@@ -98,10 +98,10 @@ testimonials:
                 <h4 class="h2 mb-8">Levels of assurance</h4>
                 <p>SLSA levels are like a common language to talk about how secure software, supply chains and their component parts really are. From source to system, the levels blend together industry-recognized best practices to create four compliance levels of increasing assurance.
                 These look at the builds, sources and dependencies in open source or commercial software. Starting with easy, basic steps at the lower levels to build up and protect against advanced threats later, bringing SLSA into your work means prioritized, practical measures to prevent unauthorized modifications to software, and a plan to harden that security over time.</p>
-                <a href="{{ site.baseurl }}/spec/{{ site.current_spec_version }}/levels" class="cta-link h5 font-semibold mt-8">Read the level specifications</a>
+                <a href="spec/{{ site.current_spec_version }}/levels" class="cta-link h5 font-semibold mt-8">Read the level specifications</a>
             </div>
             <div class="w-full md:w-2/4 md:mt-0 mt-8 pl-12">
-                <img class="w-3/4 mx-auto" src="{{ site.baseurl }}/images/badge-exploded.svg" alt="SLSA levels badge">
+                <img class="w-3/4 mx-auto" src="images/badge-exploded.svg" alt="SLSA levels badge">
             </div>
         </div>
         <div class="flex flex-wrap justify-between items-center mt-16 md:-ml-4 md:-mr-4">
