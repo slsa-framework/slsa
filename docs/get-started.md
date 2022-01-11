@@ -31,9 +31,9 @@ order: 0
                     <p class="h4 font-bold mb-6">Steps</p>
                     <ul class="list-decimal mt-6 mb-10 pl-6">
                         <li>If you don't already use a build service or CI/CD, we recommend you set one up. This is not strictly required but it makes the following steps easier and is needed for higher levels. Consider using a service that is supported in the next step.</li>
-                        <li>Generate <a href="{{ site.baseurl }}/provenance">provenance</a> during your build. The <a href="#tools">tools</a> below might be useful. If your build service is not listed there, consider creating a plugin to generate provenance.
+                        <li>Generate <a href="provenance">provenance</a> during your build. The <a href="#tools">tools</a> below might be useful. If your build service is not listed there, consider creating a plugin to generate provenance.
                         <li>Make the provenance available to your consumers. We don't yet have a standard convention for this. Best practises will develop as SLSA becomes more popular and we get more experience.</li>
-                        <li>You’re Level 1! Add the <a href="{{ site.baseurl }}/images/SLSA-Badge-full-level1.svg">SLSA Level 1 badge</a> to your project's readme.</li>
+                        <li>You’re Level 1! Add the <a href="images/SLSA-Badge-full-level1.svg">SLSA Level 1 badge</a> to your project's readme.</li>
                     </ul>
                     <p class="h4 font-bold mb-6" id="tools">Tools</p>
                     <ul class="list-disc mt-6 pl-6">

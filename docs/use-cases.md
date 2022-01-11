@@ -86,7 +86,7 @@ order: 0
         <p class="h4">Example case studies</p>
         <ul class="mt-6 mb-16 custom-list">
             <li class="border-t border-b border-black-900">
-                <a class="p-0 m-0 text-green-dark w-full hover:no-underline" href="{{ site.baseurl }}/use-cases/publishing-a-software-package">
+                <a class="p-0 m-0 text-green-dark w-full hover:no-underline" href="use-cases/publishing-a-software-package">
                     <p class="h3 font-semibold flex items-center pt-8 pb-8">
                         <span class="mr-4">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.896251 18C-0.298751 12.0505 -0.298752 5.94951 0.896249 -7.47629e-07C7.1285 2.02552 12.9429 5.081 18 9C12.9429 12.919 7.1285 15.9745 0.896251 18Z" fill="#40DB88"/></svg></span>
@@ -95,7 +95,7 @@ order: 0
                 </a>
             </li>
             <li class="border-b border-black-900">
-                <a class="p-0 m-0 text-green-dark w-full hover:no-underline" href="{{ site.baseurl }}/use-cases/consuming-third-party-software">
+                <a class="p-0 m-0 text-green-dark w-full hover:no-underline" href="use-cases/consuming-third-party-software">
                     <p class="h3 font-semibold flex items-center pt-8 pb-8">
                         <span class="mr-4">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.896251 18C-0.298751 12.0505 -0.298752 5.94951 0.896249 -7.47629e-07C7.1285 2.02552 12.9429 5.081 18 9C12.9429 12.919 7.1285 15.9745 0.896251 18Z" fill="#40DB88"/></svg></span>
@@ -104,7 +104,7 @@ order: 0
                 </a>
             </li>
             <li class="border-b border-black-900">
-                <a class="p-0 m-0 text-green-dark w-full hover:no-underline" href="{{ site.baseurl }}/use-cases/package-repository-accepting-a-software-package">
+                <a class="p-0 m-0 text-green-dark w-full hover:no-underline" href="use-cases/package-repository-accepting-a-software-package">
                     <p class="h3 font-semibold flex items-center pt-8 pb-8">
                         <span class="mr-4">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.896251 18C-0.298751 12.0505 -0.298752 5.94951 0.896249 -7.47629e-07C7.1285 2.02552 12.9429 5.081 18 9C12.9429 12.919 7.1285 15.9745 0.896251 18Z" fill="#40DB88"/></svg></span>
@@ -113,7 +113,7 @@ order: 0
                 </a>
             </li>
             <li class="border-b border-black-900">
-                <a class="p-0 m-0 text-green-dark w-full hover:no-underline" href="{{ site.baseurl }}/example">
+                <a class="p-0 m-0 text-green-dark w-full hover:no-underline" href="example">
                     <p class="h3 font-semibold flex items-center pt-8 pb-8">
                         <span class="mr-4">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.896251 18C-0.298751 12.0505 -0.298752 5.94951 0.896249 -7.47629e-07C7.1285 2.02552 12.9429 5.081 18 9C12.9429 12.919 7.1285 15.9745 0.896251 18Z" fill="#40DB88"/></svg></span>
