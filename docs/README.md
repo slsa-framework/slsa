@@ -8,7 +8,7 @@ via GitHub pages and rendered with Jekyll.
 1.  Install ruby, bundler, and the dev headers:
 
     ```bash
-    apt install ruby bundler ruby-dev bundler
+    apt install ruby ruby-dev bundler
     ```
 
     Alternatively, you can use `rbenv` to use the exact version of Ruby used by
@@ -28,7 +28,8 @@ via GitHub pages and rendered with Jekyll.
     bundle install
     ```
 
-4.  (optional) Create a GitHub
+4.  (optional) To enable `jekyll-github-metadata` to read metadata about the
+    slsa repository from the GitHub API, create a GitHub
     [personal access token](https://github.com/settings/tokens/new) and add it
     to your `~/.netrc`, like so:
 
