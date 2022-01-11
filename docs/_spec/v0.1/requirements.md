@@ -21,7 +21,7 @@ SLSA is a set of incrementally adoptable security guidelines, established by ind
 
 SLSA's framework addresses every step of the software supply chain - the sequence of steps resulting in the creation of an artifact. We represent a supply chain as a [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) of sources, builds, dependencies, and packages. One artifact's supply chain is a combination of its dependencies' supply chains plus its own sources and builds.
 
-![Software Supply Chain Model]({{ site.baseurl }}/images/supply-chain-model.svg)
+![Software Supply Chain Model](../../images/supply-chain-model.svg)
 
 | Term | Description | Example |
 | --- | --- | --- |
@@ -314,7 +314,7 @@ accepts. The format SHOULD be in-toto [SLSA Provenance],
 but another format MAY be used if both producer and consumer agree and it meets
 all the other requirements.
 
-[SLSA Provenance]: {{site.baseurl}}/provenance
+[SLSA Provenance]: ../../provenance
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="authenticated">

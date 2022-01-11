@@ -16,7 +16,7 @@ order: 0
                 <p>We rely on feedback from other organizations to evolve SLSA and be more useful to more people. We’d love to hear your experiences using it, and welcome all contributions, challenges and collaboration.</p>
             </div>
             <div class="md:w-5/12 w-full flex justify-center md:justify-end">
-                <img class="w-3/4 pl-6 mt-12" src="{{ site.baseurl }}/images/slsa-dancing-goose-logo.svg" alt="SLSA dancing goose image">
+                <img class="w-3/4 pl-6 mt-12" src="images/slsa-dancing-goose-logo.svg" alt="SLSA dancing goose image">
             </div>
         </div>
         <div class="flex flex-wrap justify-center items-center w-6/7 mt-8 mx-auto md:-mr-5 md:-ml-5">
@@ -41,7 +41,7 @@ order: 0
     </div>
 </section>
 <section class="section relative bg-green-transparent flex justify-center items-center overflow-hidden">
-    <img class="object-cover absolute w-full h-full z-0" src="{{ site.baseurl }}/images/community-bg.png" alt="Community background image">
+    <img class="object-cover absolute w-full h-full z-0" src="images/community-bg.png" alt="Community background image">
     <div class="bg-light-green h-full rounded-lg p-10 z-10 w-4/5 md:w-2/3 mx-auto">
         <p class="font-bold h3 mb-6">“SLSA’s really the first of its kind, a framework for supply chain and build integrity. What sets it apart is the thriving community behind it, and it’s resonating with different organizations.”</p>
         <p class="font-semibold h4 mb-0.5">Kim Lewandowski</p>

@@ -25,7 +25,7 @@ The goals of this document are to:
 
 ## Definition of integrity
 
-![Supply Chain Threats]({{ site.baseurl }}/images/supply-chain-threats.svg)
+![Supply Chain Threats](../../images/supply-chain-threats.svg)
 
 Our goal is to provide software supply chain integrity, but we first need to
 define "integrity." Within SLSA, we divide integrity into two main areas:
