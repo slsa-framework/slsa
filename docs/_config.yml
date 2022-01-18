@@ -2,17 +2,9 @@ title: SLSA
 description: Supply-chain Levels for Software Artifacts
 copyright_html: Copyright 2021 The Linux Foundation<br>under the terms of the <a href="https://github.com/slsa-framework/slsa/blob/main/LICENSE">Apache License 2.0</a>
 repository: slsa-framework/slsa
-header_pages:
-  - index.md
-  - specifications.md
-  - provenance/v0.2.md # WARNING: This is brittle and will not update as per {{ site.current_provenance_version }}
-  - use-cases.md
-  - get-started.md
-  - community.md
 collections:
   spec:
     layout: specifications
-    sort_by: order
     output: true
 exclude:
   - CNAME
@@ -44,6 +36,7 @@ plugins:
   - jekyll-readme-index
   - jekyll-titles-from-headings
   - jekyll-relative-links
+# WARNING: Remember to update _data/nav.yml as well.
 spec_versions: ['v0.1']
 current_spec_version: "v0.1"
 provenance_versions: ['v0.1', "v0.2"]

@@ -1,6 +1,5 @@
 ---
 title: Security levels
-order: 2
 version: 0.1
 layout: specifications
 description: Start here for the level breakdowns
