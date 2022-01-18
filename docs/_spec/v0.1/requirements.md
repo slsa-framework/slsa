@@ -11,6 +11,55 @@ This document covers all of the detailed requirements for an artifact to meet SL
 
 > Reminder: SLSA is in `alpha`. The definitions below are not yet finalized and subject to change, particularly SLSA 3-4.
 
+## Summary table
+
+| Requirement                          | SLSA 1 | SLSA 2 | SLSA 3 | SLSA 4 |
+| ------------------------------------ | ------ | ------ | ------ | ------ |
+| Source - [Version controlled]        |        | ✓      | ✓      | ✓      |
+| Source - [Verified history]          |        |        | ✓      | ✓      |
+| Source - [Retained indefinitely]     |        |        | 18 mo. | ✓      |
+| Source - [Two-person reviewed]       |        |        |        | ✓      |
+| Build - [Scripted build]             | ✓      | ✓      | ✓      | ✓      |
+| Build - [Build service]              |        | ✓      | ✓      | ✓      |
+| Build - [Build as code]              |        |        | ✓      | ✓      |
+| Build - [Ephemeral environment]      |        |        | ✓      | ✓      |
+| Build - [Isolated]                   |        |        | ✓      | ✓      |
+| Build - [Parameterless]              |        |        |        | ✓      |
+| Build - [Hermetic]                   |        |        |        | ✓      |
+| Build - [Reproducible]               |        |        |        | ○      |
+| Provenance - [Available]             | ✓      | ✓      | ✓      | ✓      |
+| Provenance - [Authenticated]         |        | ✓      | ✓      | ✓      |
+| Provenance - [Service generated]     |        | ✓      | ✓      | ✓      |
+| Provenance - [Non-falsifiable]       |        |        | ✓      | ✓      |
+| Provenance - [Dependencies complete] |        |        |        | ✓      |
+| Common - [Security]                  |        |        |        | ✓      |
+| Common - [Access]                    |        |        |        | ✓      |
+| Common - [Superusers]                |        |        |        | ✓      |
+
+<!-- markdownlint-disable MD036 -->
+_○ = required unless there is a justification_
+
+[access]: #access
+[authenticated]: #authenticated
+[available]: #available
+[build as code]: #build-as-code
+[build service]: #build-service
+[dependencies complete]: #dependencies-complete
+[ephemeral environment]: #ephemeral-environment
+[hermetic]: #hermetic
+[isolated]: #isolated
+[non-falsifiable]: #non-falsifiable
+[parameterless]: #parameterless
+[reproducible]: #reproducible
+[retained indefinitely]: #retained-indefinitely
+[scripted build]: #scripted-build
+[security]: #security
+[service generated]: #service-generated
+[superusers]: #superusers
+[two-person reviewed]: #two-person-reviewed
+[verified history]: #verified-history
+[version controlled]: #version-controlled
+
 ## What is SLSA?
 
 SLSA is a set of incrementally adoptable security guidelines, established by industry consensus. The standards set by SLSA are guiding principles for both software producers and consumers: producers can follow the guidelines to make their software more secure, and consumers can make decisions based on a software package's security posture. SLSA's [four levels](levels.md) are designed to be incremental and actionable, and to protect against specific integrity attacks. SLSA 4 represents the ideal end state, and the lower levels represent milestones with corresponding integrity guarantees.
