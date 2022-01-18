@@ -30,57 +30,6 @@ It can take years to achieve the ideal security state - intermediate milestones 
 
 The SLSA level is not transitive ([see our FAQs](../faq.md)). This makes each artifact’s SLSA rating independent from one another, allowing parallel progress and prioritization based on risk. The level describes the integrity protections of an artifact’s build process and top-level source, but nothing about the artifact’s dependencies. Dependencies have their own SLSA ratings, and it is possible for a SLSA 4 artifact to be built from SLSA 0 dependencies.
 
-## Level requirements
-
-The following table provides a summary of the [requirements](requirements.md) for each level.
-
-| Requirement                          | SLSA 1 | SLSA 2 | SLSA 3 | SLSA 4 |
-| ------------------------------------ | ------ | ------ | ------ | ------ |
-| Source - [Version controlled]        |        | ✓      | ✓      | ✓      |
-| Source - [Verified history]          |        |        | ✓      | ✓      |
-| Source - [Retained indefinitely]     |        |        | 18 mo. | ✓      |
-| Source - [Two-person reviewed]       |        |        |        | ✓      |
-| Build - [Scripted build]             | ✓      | ✓      | ✓      | ✓      |
-| Build - [Build service]              |        | ✓      | ✓      | ✓      |
-| Build - [Build as code]              |        |        | ✓      | ✓      |
-| Build - [Ephemeral environment]      |        |        | ✓      | ✓      |
-| Build - [Isolated]                   |        |        | ✓      | ✓      |
-| Build - [Parameterless]              |        |        |        | ✓      |
-| Build - [Hermetic]                   |        |        |        | ✓      |
-| Build - [Reproducible]               |        |        |        | ○      |
-| Provenance - [Available]             | ✓      | ✓      | ✓      | ✓      |
-| Provenance - [Authenticated]         |        | ✓      | ✓      | ✓      |
-| Provenance - [Service generated]     |        | ✓      | ✓      | ✓      |
-| Provenance - [Non-falsifiable]       |        |        | ✓      | ✓      |
-| Provenance - [Dependencies complete] |        |        |        | ✓      |
-| Common - [Security]                  |        |        |        | ✓      |
-| Common - [Access]                    |        |        |        | ✓      |
-| Common - [Superusers]                |        |        |        | ✓      |
-
-<!-- markdownlint-disable MD036 -->
-_○ = required unless there is a justification_
-
-[access]: requirements.md#access
-[authenticated]: requirements.md#authenticated
-[available]: requirements.md#available
-[build as code]: requirements.md#build-as-code
-[build service]: requirements.md#build-service
-[dependencies complete]: requirements.md#dependencies-complete
-[ephemeral environment]: requirements.md#ephemeral-environment
-[hermetic]: requirements.md#hermetic
-[isolated]: requirements.md#isolated
-[non-falsifiable]: requirements.md#non-falsifiable
-[parameterless]: requirements.md#parameterless
-[reproducible]: requirements.md#reproducible
-[retained indefinitely]: requirements.md#retained-indefinitely
-[scripted build]: requirements.md#scripted-build
-[security]: requirements.md#security
-[service generated]: requirements.md#service-generated
-[superusers]: requirements.md#superusers
-[two-person reviewed]: requirements.md#two-person-reviewed
-[verified history]: requirements.md#verified-history
-[version controlled]: requirements.md#version-controlled
-
 ## <a name="threats"></a>Supply chain threats
 
 Attacks can occur at every link in a typical software supply chain, and these kinds of attacks are increasingly public, disruptive and costly in today’s environment. In developing SLSA, the requirements for each level are designed to specifically mitigate the risk of such known examples. For a much deeper technical analysis of the risks and how SLSA mitigates them, see [Threats and mitigations](threats.md).
