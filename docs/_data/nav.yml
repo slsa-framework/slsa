@@ -1,0 +1,33 @@
+# Pages that show in the navbar at the top.
+- title: Overview
+  url: /
+
+- title: Specifications
+  children:
+
+    - title: Introduction
+      url: /spec/v0.1/index
+
+    - title: Security levels
+      url: /spec/v0.1/levels
+
+    - title: Requirements
+      url: /spec/v0.1/requirements
+
+    - title: Threats
+      url: /spec/v0.1/threats
+
+    - title: FAQ
+      url: /spec/faq
+
+- title: Provenance
+  url: /provenance/v0.2
+
+- title: Use cases
+  url: /use-cases
+
+- title: Get started
+  url: /get-started
+
+- title: Community
+  url: /community

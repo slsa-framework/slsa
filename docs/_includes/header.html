@@ -15,9 +15,6 @@
   class="site-header {% if page.url != '/spec/{{ site.current_spec_version }}/' and page.url != {{ site.baseurl }} and page.url != '/' or page.url == '/spec/{{ site.current_spec_version }}/' %} is-specification-markdown{% endif %}">
   <div class="wrapper">
   <div class="py-4 md:py-0 flex items-center justify-between">
-      {%- assign default_paths = site.pages | map: "path" -%}
-      {%- assign page_paths = site.header_pages | default: default_paths -%}
-      {%- assign titles_size = site.pages | map: 'title' | join: '' | size -%}
       <a rel="author" href="{{ "/" | relative_url }}" class="relative logo">
         {% if page.url == '/' %}
           <img src="{{ site.baseurl }}/images/logo.svg" alt="{{site.title}} logo" />
@@ -26,42 +23,8 @@
           <img x-cloak x-show="sticky" src="{{ site.baseurl }}/images/logo.svg" alt="{{site.title}} logo" />
         {% endif%}
       </a>
-      {%- if titles_size > 0 -%}
-        {% include mobile-nav.html paths=page_paths %}
-        <nav class="site-nav">
-          <ul class="list flex justify-center">
-            {%- for path in page_paths -%}
-              {%- assign my_page = site.pages | where: "path", path | first -%}
-              {%- if my_page.title -%}
-              <li class="relative">
-                {%- if my_page.url == '/spec' -%}
-                  {%- assign my_page_url = '' -%}
-                {%- else -%}
-                  {%- assign my_page_url =  my_page.url | relative_url -%}
-                {%- endif -%}
-                  {% if my_page.title == 'Specifications' %}
-                    <a {% if my_page.title == page.title %}class="active page-link text-white flex items-center cursor"{% else %}class="page-link text-white flex items-center cursor"{% endif %}>
-                      <button x-on:click="open = ! open" class="flex items-center">{{ my_page.title | escape }} <div class=" ml-2"><svg width="9" height="9" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3.05881 5.064L0.972811 0.906H5.13081L3.05881 5.064Z" fill="white"/>
-                        </svg></div></button>
-                    </a>
-                    {% else %}
-                    <a {% if my_page.title == page.title %}class="active page-link text-white flex items-center"{% else %}class="page-link text-white flex items-center"{% endif %}
-                    href="{{my_page_url}}">
-                      {{ my_page.title | escape }}
-                    </a>
-                  {% endif %}
-                  {% if my_page.title == 'Specifications' %}
-                    <div @click.outside="open = false" x-cloak x-show="open" x-transition class="absolute m-0 p-4 -ml-2 mt-4 bg-white rounded-lg shadow-md dropdown">
-                      {% include specifications-nav.html %}
-                    </div>
-                  {% endif %}
-                  {%- endif -%}
-                </li>
-                {%- endfor -%}
-          </ul>
-        </nav>
-      {%- endif -%}
+      {% include nav.html mobile=true %}
+      {% include nav.html %}
       <div class="ml-4 flex justify-end">
         <button  x-on:click="navOpen = ! navOpen" :class="{ 'active': navOpen === true }" class="mobile-menu-button inline-block md:hidden">
           <span></span>

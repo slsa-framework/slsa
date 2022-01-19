@@ -1,0 +1,48 @@
+{%- if include.mobile -%}
+  {% assign ul_class = "list flex flex-col md:flex-row flex-wrap justify-center pt-16 pb-8 px-5" %}
+  {% assign li_class = "relative w-2/4" %}
+  {% assign button_fill = "#ffffff" %}
+  {% assign div_cloak = "" %}
+  {% assign div_class = "relative md:absolute m-0 md:py-4 md:bg-white rounded-lg md:shadow-md dropdown" %}
+{%- else -%}
+  {% assign ul_class = "list flex justify-center" %}
+  {% assign li_class = "relative" %}
+  {% assign button_fill = "none" %}
+  {% assign div_cloak = "x-cloak" %}
+  {% assign div_class = "absolute m-0 p-4 -ml-2 mt-4 bg-white rounded-lg shadow-md dropdown" %}
+{%- endif -%}
+<nav {% if include.mobile -%}
+    :class="{ 'active': navOpen === true }" class="site-nav-mobile"
+    {%- else -%}
+    class="site-nav"
+    {%- endif -%}>
+  <ul class="{{ul_class}}">
+    {%- for item in site.data.nav -%}
+      <li class="{{li_class}}">
+        {%- if item.url -%}
+          <a class="{% if item.url == page.url %}active{% endif %} page-link text-white flex items-center" href="{{ item.url | relative_url }}">
+            {{ item.title | escape }}
+          </a>
+        {%- else -%}
+          {% comment %}TODO: add "active" class if on a child page{% endcomment %}
+          <a class="page-link text-white flex items-center cursor">
+            <button x-on:click="open = ! open" class="flex items-center">{{ item.title | escape }} <div class=" ml-2"><svg width="9" height="9" viewBox="0 0 6 6" fill="{{button_fill}}" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.05881 5.064L0.972811 0.906H5.13081L3.05881 5.064Z" fill="white"/>
+              </svg></div></button>
+          </a>
+          <div @click.outside="open = false" {{div_cloak}} x-show="open" x-transition class="{{div_class}}">
+            <ul>
+              {%- for subitem in item.children -%}
+                <li>
+                  <a class="text-white md:text-black" href="{{ subitem.url | relative_url }}">
+                    {{ subitem.title | escape }}
+                  </a>
+                </li>
+              {%- endfor %}
+            </ul>
+          </div>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>

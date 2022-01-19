@@ -2,7 +2,6 @@
 title: Use cases
 layout: standard
 hero_text: Here’s what SLSA looks like in practice, typical cases to explore and break down how compliance can provide protection. Whether you’re a developer working on a project or part of an enterprise, SLSA can be helpful both for securing your supply chain and clarifying existing tools and processes. The case studies expand even further, and are a work in progress as SLSA gets adopted in the industry.
-order: 0
 ---
 <section class="section bg-pastel-green flex justify-center items-center">
     <div class="wrapper inner w-full">

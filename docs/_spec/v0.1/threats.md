@@ -1,6 +1,5 @@
 ---
 title: Threats
-order: 4
 version: 0.1
 layout: specifications
 description: Specific supply chain attacks and how SLSA helps

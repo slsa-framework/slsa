@@ -1,6 +1,5 @@
 ---
 title: Requirements
-order: 3
 version: 0.1
 layout: specifications
 description: The checks and measures for each level
