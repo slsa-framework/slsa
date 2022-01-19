@@ -1,7 +1,6 @@
 ---
 title: Frequently Asked Questions
 layout: specifications
-description: Questions and more information
 ---
 
 ## Q: Why is SLSA not transitive?

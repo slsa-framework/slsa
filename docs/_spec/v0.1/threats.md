@@ -2,7 +2,6 @@
 title: Threats
 version: 0.1
 layout: specifications
-description: Specific supply chain attacks and how SLSA helps
 ---
 <!-- markdownlint disable required to avoid list sub-items appearing in table of contents -->
 <!-- markdownlint-disable MD001 -->
