@@ -30,6 +30,23 @@ levels:
         title: Across the chain
         text: Level 4 means the build environment is fully accounted for, dependencies are tracked in provenance and insider threats are ruled out.
         badge: /images/SLSA-Badge-full-level4.svg
+
+subpages:
+  - title: Security levels
+    description: Start here for the level breakdowns
+    relative_url: levels
+
+  - title: Requirements
+    description: The checks and measures for each level
+    relative_url: requirements
+
+  - title: Threats
+    description: Specific supply chain attacks and how SLSA helps
+    relative_url: threats
+
+  - title: FAQs
+    description: Questions and more information
+    relative_url: ../faqs
 ---
 <section class="section bg-white">
 <!-- no indentation here to get markdown working with jekyll commonmark for styling the headings better -->
@@ -173,8 +190,9 @@ levels:
 <!-- Alpine js state for version buttons here -->
 {% include specifications-versions.html %}
 </div>
+            <!-- TODO: Allow other versions to be selected and displayed. -->
             <div class="w-full md:w-2/4 text-green mt-16 md:mt-0">
-                {% include specifications-list.html  %}
+                {%- include specifications-list.html subpages=page.subpages  -%}
             </div>
         </div>
     </div>

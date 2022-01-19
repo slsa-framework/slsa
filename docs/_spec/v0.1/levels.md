@@ -2,7 +2,6 @@
 title: Security levels
 version: 0.1
 layout: specifications
-description: Start here for the level breakdowns
 ---
 <span class="subtitle">
 
