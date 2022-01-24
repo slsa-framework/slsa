@@ -228,7 +228,7 @@ free of influence from other build instances, whether prior or concurrent.
 
 -   It MUST NOT be possible for a build to access any secrets of the build service, such as the provenance signing key.
 -   It MUST NOT be possible for two builds that overlap in time to influence one another.
--   It MUST NOT be possible for one build to persist or influence thebuild environment of a subsequent build.
+-   It MUST NOT be possible for one build to persist or influence the build environment of a subsequent build.
 -   Build caches, if used, MUST be purely content-addressable to prevent tampering.
 
 <td> <td> <td>✓<td>✓
