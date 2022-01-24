@@ -101,7 +101,7 @@ subpages:
     </div>
 </section>
 <section class="section cta_banner bg-pastel-green">
-<a href="{{ site.baseurl }}/spec/{{ site.current_spec_version }}/threats" class="hover:no-underline h-full w-full">
+<a href="threats" class="hover:no-underline h-full w-full">
     <div class="wrapper inner w-full flex items-center justify-center">
         <p class="cta-link font-semibold h4">Read about threats in detail</p>
     </div>
@@ -174,7 +174,7 @@ subpages:
     </div>
 </section>
 <section class="section cta_banner bg-pastel-green">
-<a href="{{ site.baseurl }}/spec/{{ site.current_spec_version}}/levels" class="h-full w-full">
+<a href="levels" class="h-full w-full">
     <div class="wrapper inner w-full flex items-center justify-center">
         <p class="cta-link font-semibold h4">Read the level specifications</p>
     </div>
