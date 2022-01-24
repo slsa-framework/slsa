@@ -8,7 +8,10 @@
     - title: Introduction
       url: /spec/v0.1/index
 
-    - title: Security levels
+    - title: Terminology
+      url: /spec/v0.1/terminology
+
+    - title: Levels
       url: /spec/v0.1/levels
 
     - title: Requirements
