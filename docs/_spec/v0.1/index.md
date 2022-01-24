@@ -32,15 +32,19 @@ levels:
         badge: /images/SLSA-Badge-full-level4.svg
 
 subpages:
+  - title: Terminology
+    description: Start here to understand how we model supply chains
+    relative_url: terminology
+
   - title: Security levels
-    description: Start here for the level breakdowns
+    description: Ladder of increasing security guarantees
     relative_url: levels
 
   - title: Requirements
-    description: The checks and measures for each level
+    description: Technical requirements to reach each level
     relative_url: requirements
 
-  - title: Threats
+  - title: Threats & mitigations
     description: Specific supply chain attacks and how SLSA helps
     relative_url: threats
 
