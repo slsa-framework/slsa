@@ -5,9 +5,29 @@ layout: specifications
 ---
 <span class="subtitle">
 
-Each level provides an increasing degree of confidence, a way to say that software hasn’t been tampered with and can be securely traced back to its source.
+SLSA is organized into a series of levels that provide increasing
+[integrity](terminology.md) guarantees. This gives you confidence that that
+software hasn’t been tampered with and can be securely traced back to its
+source.
 
 </span>
+
+This page is an informative overview of the SLSA levels, describing their
+purpose and guarantees. For the normative requirements at each level, see
+[Requirements](requirements.md).
+
+## What is SLSA?
+
+SLSA is a set of incrementally adoptable security guidelines, established by
+industry consensus. The standards set by SLSA are guiding principles for both
+software producers and consumers: producers can follow the guidelines to make
+their software more secure, and consumers can make decisions based on a software
+package's security posture. SLSA's four levels are designed to be incremental
+and actionable, and to protect against specific integrity attacks. SLSA 4
+represents the ideal end state, and the lower levels represent milestones with
+corresponding integrity guarantees.
+
+## Summary of levels
 
 | Level | Description                                   | Example                                               |
 | :---- | :-------------------------------------------- | :---------------------------------------------------- |
@@ -29,89 +49,6 @@ It can take years to achieve the ideal security state - intermediate milestones 
 | 4     | **Requires two-person review of all changes and a hermetic, reproducible build process.** Two-person review is an industry best practice for catching mistakes and deterring bad behavior. Hermetic builds guarantee that the provenance’s list of dependencies is complete. Reproducible builds, though not strictly required, provide many auditability and reliability benefits. Overall, SLSA 4 gives the consumer a high degree of confidence that the software has not been tampered with. |
 
 The SLSA level is not transitive ([see our FAQs](../faq.md)). This makes each artifact’s SLSA rating independent from one another, allowing parallel progress and prioritization based on risk. The level describes the integrity protections of an artifact’s build process and top-level source, but nothing about the artifact’s dependencies. Dependencies have their own SLSA ratings, and it is possible for a SLSA 4 artifact to be built from SLSA 0 dependencies.
-
-## Level requirements
-
-The following table provides a summary of the [requirements](requirements.md) for each level.
-
-| Requirement                          | SLSA 1 | SLSA 2 | SLSA 3 | SLSA 4 |
-| ------------------------------------ | ------ | ------ | ------ | ------ |
-| Source - [Version controlled]        |        | ✓      | ✓      | ✓      |
-| Source - [Verified history]          |        |        | ✓      | ✓      |
-| Source - [Retained indefinitely]     |        |        | 18 mo. | ✓      |
-| Source - [Two-person reviewed]       |        |        |        | ✓      |
-| Build - [Scripted build]             | ✓      | ✓      | ✓      | ✓      |
-| Build - [Build service]              |        | ✓      | ✓      | ✓      |
-| Build - [Build as code]              |        |        | ✓      | ✓      |
-| Build - [Ephemeral environment]      |        |        | ✓      | ✓      |
-| Build - [Isolated]                   |        |        | ✓      | ✓      |
-| Build - [Parameterless]              |        |        |        | ✓      |
-| Build - [Hermetic]                   |        |        |        | ✓      |
-| Build - [Reproducible]               |        |        |        | ○      |
-| Provenance - [Available]             | ✓      | ✓      | ✓      | ✓      |
-| Provenance - [Authenticated]         |        | ✓      | ✓      | ✓      |
-| Provenance - [Service generated]     |        | ✓      | ✓      | ✓      |
-| Provenance - [Non-falsifiable]       |        |        | ✓      | ✓      |
-| Provenance - [Dependencies complete] |        |        |        | ✓      |
-| Common - [Security]                  |        |        |        | ✓      |
-| Common - [Access]                    |        |        |        | ✓      |
-| Common - [Superusers]                |        |        |        | ✓      |
-
-<!-- markdownlint-disable MD036 -->
-_○ = required unless there is a justification_
-
-[access]: requirements.md#access
-[authenticated]: requirements.md#authenticated
-[available]: requirements.md#available
-[build as code]: requirements.md#build-as-code
-[build service]: requirements.md#build-service
-[dependencies complete]: requirements.md#dependencies-complete
-[ephemeral environment]: requirements.md#ephemeral-environment
-[hermetic]: requirements.md#hermetic
-[isolated]: requirements.md#isolated
-[non-falsifiable]: requirements.md#non-falsifiable
-[parameterless]: requirements.md#parameterless
-[reproducible]: requirements.md#reproducible
-[retained indefinitely]: requirements.md#retained-indefinitely
-[scripted build]: requirements.md#scripted-build
-[security]: requirements.md#security
-[service generated]: requirements.md#service-generated
-[superusers]: requirements.md#superusers
-[two-person reviewed]: requirements.md#two-person-reviewed
-[verified history]: requirements.md#verified-history
-[version controlled]: requirements.md#version-controlled
-
-## <a name="threats"></a>Supply chain threats
-
-Attacks can occur at every link in a typical software supply chain, and these kinds of attacks are increasingly public, disruptive and costly in today’s environment. In developing SLSA, the requirements for each level are designed to specifically mitigate the risk of such known examples. For a much deeper technical analysis of the risks and how SLSA mitigates them, see [Threats and mitigations](threats.md).
-
-![Supply Chain Threats](../../images/supply-chain-threats.svg)
-
-Many recent high-profile attacks were consequences of supply-chain integrity vulnerabilities, and could have been prevented by SLSA's framework. For example:
-
-|     | Threat                                                                | Known example                                                                                                                                                                                  | How SLSA can help                                                                                                                                                                                                                     |
-| --- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A   | Submit bad code to the source repository                              | [Linux hypocrite commits]: Researcher attempted to intentionally introduce vulnerabilities into the Linux kernel via patches on the mailing list.                                              | Two-person review caught most, but not all, of the vulnerabilities.                                                                                                                                                                   |
-| B   | Compromise source control platform                                    | [PHP]: Attacker compromised PHP's self-hosted git server and injected two malicious commits.                                                                                                   | A better-protected source code platform would have been a much harder target for the attackers.                                                                                                                                       |
-| C   | Build with official process but from code not matching source control | [Webmin]: Attacker modified the build infrastructure to use source files not matching source control.                                                                                          | A SLSA-compliant build server would have produced provenance identifying the actual sources used, allowing consumers to detect such tampering.                                                                                        |
-| D   | Compromise build platform                                             | [SolarWinds]: Attacker compromised the build platform and installed an implant that injected malicious behavior during each build.                                                             | Higher SLSA levels require [stronger security controls for the build platform](requirements.md#build-requirements), making it more difficult to compromise and gain persistence.                                                      |
-| E   | Use bad dependency (i.e. A-H, recursively)                            | [event-stream]: Attacker added an innocuous dependency and then later updated the dependency to add malicious behavior. The update did not match the code submitted to GitHub (i.e. attack F). | Applying SLSA recursively to all dependencies would have prevented this particular vector, because the provenance would have indicated that it either wasn't built from a proper builder or that the source did not come from GitHub. |
-| F   | Upload an artifact that was not built by the CI/CD system             | [CodeCov]: Attacker used leaked credentials to upload a malicious artifact to a GCS bucket, from which users download directly.                                                                | Provenance of the artifact in the GCS bucket would have shown that the artifact was not built in the expected manner from the expected source repo.                                                                                   |
-| G   | Compromise package repository                                         | [Attacks on Package Mirrors]: Researcher ran mirrors for several popular package repositories, which could have been used to serve malicious packages.                                         | Similar to above (F), provenance of the malicious artifacts would have shown that they were not built as expected or from the expected source repo.                                                                                   |
-| H   | Trick consumer into using bad package                                 | [Browserify typosquatting]: Attacker uploaded a malicious package with a similar name as the original.                                                                                         | SLSA does not directly address this threat, but provenance linking back to source control can enable and enhance other solutions.                                                                                                     |
-
-[linux hypocrite commits]: https://lore.kernel.org/lkml/202105051005.49BFABCE@keescook/
-[php]: https://news-web.php.net/php.internals/113838
-[webmin]: https://www.webmin.com/exploit.html
-[solarwinds]: https://www.crowdstrike.com/blog/sunspot-malware-technical-analysis/
-[event-stream]: https://schneider.dev/blog/event-stream-vulnerability-explained/
-[codecov]: https://about.codecov.io/apr-2021-post-mortem/
-[attacks on package mirrors]: https://theupdateframework.io/papers/attacks-on-package-managers-ccs2008.pdf
-[browserify typosquatting]: https://blog.sonatype.com/damaging-linux-mac-malware-bundled-within-browserify-npm-brandjack-attempt
-
-A SLSA level helps give consumers confidence that software has not been tampered with
-and can be securely traced back to source—something that is difficult, if not
-impossible, to do with most software today.
 
 ## Limitations
 
