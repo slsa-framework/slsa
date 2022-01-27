@@ -24,9 +24,9 @@ In the YAML frontmatter, include a snippet like this:
     <path d="M0.896251 18C-0.298751 12.0505 -0.298752 5.94951 0.896249 -7.47629e-07C7.1285 2.02552 12.9429 5.081 18 9C12.9429 12.919 7.1285 15.9745 0.896251 18Z" fill="#40DB88"/>
     </svg>
     </span>
-    {{ item.title }}
+    {{ item.title | escape }}
 </p>
-<p class="mb-4 font-normal text-black pl-9">{{ item.description }}</p>
+<p class="mb-4 font-normal text-black pl-9">{{ item.description | escape }}</p>
 </a>
 </li>
 {% endfor -%}

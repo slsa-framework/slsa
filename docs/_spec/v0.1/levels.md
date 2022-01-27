@@ -3,14 +3,14 @@ title: Security levels
 version: 0.1
 layout: specifications
 ---
-<span class="subtitle">
+<div class="subtitle">
 
 SLSA is organized into a series of levels that provide increasing
 [integrity](terminology.md) guarantees. This gives you confidence that that
 software hasn’t been tampered with and can be securely traced back to its
 source.
 
-</span>
+</div>
 
 This page is an informative overview of the SLSA levels, describing their
 purpose and guarantees. For the normative requirements at each level, see
