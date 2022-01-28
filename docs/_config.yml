@@ -13,7 +13,8 @@ exclude:
   - Makefile
   - README.md
   - vendor/
-google_analytics: G-VNK063J3QF
+goatcounter:
+  endpoint: https://slsa.goatcounter.com/count
 theme: minima
 permalink: :path/:basename
 markdown: CommonMarkGhPages
