@@ -461,7 +461,7 @@ The identified instructions SHOULD be at the highest level available to the buil
 (e.g. if the build is told to run build.sh it should list build.sh and NOT the
 individual instructions in build.sh).
 
-If <a href="#build-as-code">build-as-code<a> is used, this SHOULD be the
+If <a href="#build-as-code">build-as-code</a> is used, this SHOULD be the
 source repo and entry point of the build config (as in
 [the GitHub Actions example](https://slsa.dev/provenance/v0.2#github-actions)).
 
