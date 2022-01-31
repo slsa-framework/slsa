@@ -27,10 +27,10 @@ SLSA is currently led by an initial cross-organization, vendor-neutral steering 
 -   [Bruno Domingues](https://github.com/brunodom) - Intel
 -   [David A. Wheeler](https://github.com/david-a-wheeler) - Linux Foundation
 -   [Joshua Lock](https://github.com/joshuagl) - VMware
+-   [Kim Lewandowksi](https://github.com/kimsterv) - Chainguard
 -   [Mark Lodato](https://github.com/MarkLodato) - Google
 -   [Mike Lieberman](https://github.com/mlieberman85) - Citi/CNCF
 -   [Trishank Karthik Kuppusamy](https://github.com/trishankatdatadog) - Datadog
--   [Zak Greant](https://github.com/zakgreant) - ActiveState
 
 Shortcut to notify the steering committee on any issues/PRs:
 
