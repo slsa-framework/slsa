@@ -26,9 +26,72 @@ supply chains plus its own sources and builds.
 | --- | --- | --- |
 | Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image. |
 | Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform). |
-| Build | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform). |
+| [Build] | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform). |
 | Package | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit. |
 | Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform). |
+
+[build]: #build-model
+
+### Build model
+
+We model a build process as a multi-tenant platform that executes independent
+build workflows. A tenant defines the workload, including the input source
+artifact and the steps to execute. In response to an external trigger, the
+platform runs the workload by initializing the environment, fetching the source
+and possibly some dependencies, and then starting execution inside the
+environment. The workload then performs arbitrary build steps, possibly fetching
+additional dependencies, and outputs one or more artifacts.
+
+![Model Build](../../images/build-model.svg)
+
+| Term | Description
+| --- | ---
+| Platform | System that allows tenants to run build workloads. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the workload.
+| Service | A build platform that is hosted, not a developer's machine.
+| Workload | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within the environment.
+| Steps | The set of actions that comprise a workload, defined by the tenant.
+| Environment | Machine, container, VM, or similar in which the workload runs, initialized by the platform.
+| Trigger | External event or request causing the platform to run the workload.
+| Source | Top-level input artifact requried by the workload.
+| Dependencies | Additional input artifacts required by the workload.
+| Admin | Person with administrative access to the platform, potentially allowing them to tamper with the build process or access secret material.
+
+<details><summary>Example: GitHub Actions</summary>
+
+| Term         | Example
+| ------------ | -------
+| Platform     | [GitHub Actions] + runner + runner's dependent services
+| Workload     | Workflow or job (either would be OK)
+| Steps        | `steps`
+| Environment  | `runs-on`
+| Trigger      | [events that trigger workflows]
+| Source       | git commit defining the workflow
+| Dependencies | any other artifacts fetched during execution
+| Admin        | GitHub personnel
+
+[GitHub Actions]: https://docs.github.com/en/actions
+[events that trigger workflows]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+
+</details>
+
+<details><summary>Example: Local Builds</summary>
+
+The model can still work for the case of a developer building on their local
+workstation, though this does not meet SLSA 2+.
+
+| Term         | Example
+| ------------ | -------
+| Platform     | developer's workstation
+| Workload     | whatever they ran
+| Steps        | whatever they ran
+| Environment  | developer's workstation
+| Trigger      | commands that the developer ran
+| Admin        | developer
+
+</details>
+
+[runs-on]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+[actions trigger]: https://docs.github.com/en/actions/using-workflows/triggering-a-workflow
 
 ## Supply chain integrity
 
