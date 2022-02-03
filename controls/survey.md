@@ -10,7 +10,7 @@ Document all known technologies that relate to SLSA, how they map to our model,
 and a (hopefully not too biased) assessment of various properties of each.
 
 See [Attestations](attestations.md) and [Policy](policy.md) for the
-corresponding models and terminology.
+corresponding [models and terminology](attestations.md#model-and-terminology).
 
 ## Overview
 
@@ -148,7 +148,7 @@ Properties:
     the meaning of the Attestation and/or the schema of the user-defined
     predicate unambiguous?
 -   **Layered:** Does the schema clearly match the layers of our
-    [model](#model-and-terminology)?
+    [model](attestations.md#model-and-terminology)?
     -   ✗ in-toto v1: Statement and Predicate fields are mixed together.
 -   **Evolvable:** Can the spec be modified to support required features?
     -   ✗ Simple Signing: The `critical` field can effectively never change
