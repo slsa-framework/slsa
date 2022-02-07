@@ -50,7 +50,7 @@ subpages:
 
   - title: FAQs
     description: Questions and more information
-    relative_url: ../faqs
+    relative_url: ../faq
 ---
 <section class="section bg-white">
 <!-- no indentation here to get markdown working with jekyll commonmark for styling the headings better -->
