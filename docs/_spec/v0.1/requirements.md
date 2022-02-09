@@ -537,7 +537,8 @@ reproducible and, if so, all information necessary to reproduce the build. See
 <td>
 
 The provenance includes metadata to aid debugging and investigations. This
-SHOULD at least include start and end timestamps and a permalink to debug logs.
+SHOULD at least include start and end timestamps and a unique identifier to
+allow finding detailed debug logs.
 
 "○" = RECOMMENDED.
 
