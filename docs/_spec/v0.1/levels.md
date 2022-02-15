@@ -6,7 +6,7 @@ layout: specifications
 <div class="subtitle">
 
 SLSA is organized into a series of levels that provide increasing
-[integrity](terminology.md) guarantees. This gives you confidence that that
+[integrity](terminology.md) guarantees. This gives you confidence that
 software hasn’t been tampered with and can be securely traced back to its
 source.
 
