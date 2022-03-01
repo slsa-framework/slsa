@@ -62,15 +62,17 @@ additional dependencies, and outputs one or more artifacts.
 | ------------ | -------
 | Platform     | [GitHub Actions] + runner + runner's dependent services
 | Workload     | Workflow or job (either would be OK)
-| Steps        | `steps`
-| Environment  | `runs-on`
-| Trigger      | [events that trigger workflows]
+| Steps        | [`steps`]
+| Environment  | [`runs-on`]
+| Trigger      | [workflow trigger]
 | Source       | git commit defining the workflow
 | Dependencies | any other artifacts fetched during execution
 | Admin        | GitHub personnel
 
 [GitHub Actions]: https://docs.github.com/en/actions
-[events that trigger workflows]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+[`runs-on`]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+[`steps`]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idsteps
+[workflow trigger]: https://docs.github.com/en/actions/using-workflows/triggering-a-workflow
 
 </details>
 
@@ -89,9 +91,6 @@ workstation, though this does not meet SLSA 2+.
 | Admin        | developer
 
 </details>
-
-[runs-on]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
-[actions trigger]: https://docs.github.com/en/actions/using-workflows/triggering-a-workflow
 
 ## Supply chain integrity
 
