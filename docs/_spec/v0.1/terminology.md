@@ -47,10 +47,10 @@ additional dependencies, and outputs one or more artifacts.
 | Term | Description
 | --- | ---
 | Platform | System that allows tenants to run build workloads. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the workload.
-| Service | A build platform that is hosted, not a developer's machine.
-| Workload | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within the environment.
+| Service | A build platform that is hosted, not a developer's machine. (Term used in [requirements](requirements.md).)
+| Workload | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single environment.
 | Steps | The set of actions that comprise a workload, defined by the tenant.
-| Environment | Machine, container, VM, or similar in which the workload runs, initialized by the platform.
+| Environment | Machine, container, VM, or similar in which the workload runs, initialized by the platform. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
 | Trigger | External event or request causing the platform to run the workload.
 | Source | Top-level input artifact requried by the workload.
 | Dependencies | Additional input artifacts required by the workload.
@@ -73,6 +73,20 @@ additional dependencies, and outputs one or more artifacts.
 [`runs-on`]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
 [`steps`]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idsteps
 [workflow trigger]: https://docs.github.com/en/actions/using-workflows/triggering-a-workflow
+
+</details>
+
+<details><summary>Example: Distributed Bazel Builds</summary>
+
+Suppose a [Bazel] build runs on GitHub Actions using Bazel's [remote execution]
+feature. Some steps (namely `bazel` itself) run on a GitHub Actions runner while
+other steps (Bazel actions) run on a remote execution service.
+
+In this case, the workload's **environment** is the union of the GitHub Actions
+runner environment plus the remote execution environment.
+
+[Bazel]: https://bazel.build
+[remote execution]: https://bazel.build/docs/remote-execution
 
 </details>
 
