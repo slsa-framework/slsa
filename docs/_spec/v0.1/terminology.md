@@ -54,6 +54,7 @@ one or more artifacts.
 | Instruction | External event or request causing the platform to run the build.
 | Source | Top-level input artifact requried by the build.
 | Dependencies | Additional input artifacts required by the build.
+| Outputs | Collection of artifacts produced by the build.
 | Admin | Person with administrative access to the platform, potentially allowing them to tamper with the build process or access secret material.
 
 <details><summary>Example: GitHub Actions</summary>
