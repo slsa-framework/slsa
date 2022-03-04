@@ -19,7 +19,8 @@ theme: minima
 permalink: :path/:basename
 markdown: CommonMarkGhPages
 commonmark:
-  options: ["SMART", "FOOTNOTES"]
+  # UNSAFE needed to support raw HTML
+  options: ["SMART", "FOOTNOTES", "UNSAFE"]
   extensions: ["autolink", "strikethrough", "table", "tagfilter"]
 titles_from_headings:
   strip_title: true
