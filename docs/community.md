@@ -22,7 +22,7 @@ hero_text: There’s an active community of members, contributors and collaborat
             <div class="w-full md:w-1/2 getting_started_card md:pl-5 lg:h-96 h-auto lg:mb-0 mb-8">
                 <div class="bg-pastel-green h-full rounded-lg p-10">
                     <p class="h4 font-semibold mb-6">Join the working group</p>
-                    <p>We’re part of the OpenSSF Digital Identity Attestation Working Group. The community meets bi-weekly on Wednesdays at 9am PT. Anyone is welcome to join, whether to listen or to contribute.</p>
+                    <p>We’re part of the OpenSSF Digital Identity Attestation Working Group. The community meets bi-weekly on Thursdays at 9am PT. Anyone is welcome to join, whether to listen or to contribute.</p>
                     <a target="_blank" href="https://calendar.google.com/calendar/u/0/r/week/2021/8/11?eid=NjIycXNoOHBtbDhuNTJiNjlmaWk5ZjU5ZWVfMjAyMTA4MTFUMTYwMDAwWiBzNjN2b2VmaHA1aTlwZmx0YjVxNjduZ3Blc0Bn&sf=true" class="cta-link mt-6 font-semibold h5">Our bi-weekly meet invite</a>
                     <a target="_blank" href="https://github.com/ossf/wg-digital-identity-attestation" class="cta-link mt-6 font-semibold h5">Our discussion group</a>
                     <a target="_blank" href="https://calendar.google.com/calendar/u/2/r?cid=czYzdm9lZmhwNWk5cGZsdGI1cTY3bmdwZXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ" class="cta-link mt-6 font-semibold h5">The OpenSSF community calendar</a>
