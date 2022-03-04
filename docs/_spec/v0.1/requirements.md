@@ -83,10 +83,6 @@ commit ID; cloud storage bucket ID + SHA-256 hash; Subversion URL (no hash).
 [immutable reference]: #immutable-reference
 [immutable references]: #immutable-reference
 
-**Platform:** Infrastructure or service that hosts the source, build, or
-distribution of software. Examples: GitHub, Google Cloud Build, Travis CI,
-[Mozilla's self-hosted Mercurial server](https://hg.mozilla.org).
-
 **Provenance**: Metadata about how an artifact was produced.
 
 **Revision:** An immutable, coherent state of a source. In Git, for example, a
