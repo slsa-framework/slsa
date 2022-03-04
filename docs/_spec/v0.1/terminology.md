@@ -36,8 +36,8 @@ supply chains plus its own sources and builds.
 
 We model a build as running on a multi-tenant platform, where each execution is
 independent. A tenant defines the build, including the input source artifact and
-the steps to execute. In response to an external instruction, the platform runs
-the build by initializing the environment, fetching the source and possibly some
+the steps to execute. In response to an external trigger, the platform runs the
+build by initializing the environment, fetching the source and possibly some
 dependencies, and then starting execution inside the environment. The build then
 performs arbitrary steps, possibly fetching additional dependencies, and outputs
 one or more artifacts.
@@ -51,7 +51,7 @@ one or more artifacts.
 | Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single environment.
 | Steps | The set of actions that comprise a build, defined by the tenant.
 | Environment | Machine, container, VM, or similar in which the build runs, initialized by the platform. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
-| Instruction | External event or request causing the platform to run the build.
+| Trigger | External event or request causing the platform to run the build.
 | Source | Top-level input artifact requried by the build.
 | Dependencies | Additional input artifacts required by the build.
 | Outputs | Collection of artifacts produced by the build.
@@ -65,7 +65,7 @@ one or more artifacts.
 | Build        | Workflow or job (either would be OK)
 | Steps        | [`steps`]
 | Environment  | [`runs-on`]
-| Instruction  | [workflow trigger]
+| Trigger      | [workflow trigger]
 | Source       | git commit defining the workflow
 | Dependencies | any other artifacts fetched during execution
 | Admin        | GitHub personnel
@@ -102,7 +102,7 @@ workstation, though this does not meet SLSA 2+.
 | Build        | whatever they ran
 | Steps        | whatever they ran
 | Environment  | developer's workstation
-| Instruction  | commands that the developer ran
+| Trigger      | commands that the developer ran
 | Admin        | developer
 
 </details>
