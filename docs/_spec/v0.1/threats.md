@@ -36,7 +36,7 @@ Many recent high-profile attacks were consequences of supply-chain integrity vul
 [php]: https://news-web.php.net/php.internals/113838
 [webmin]: https://www.webmin.com/exploit.html
 [solarwinds]: https://www.crowdstrike.com/blog/sunspot-malware-technical-analysis/
-[event-stream]: https://schneider.dev/blog/event-stream-vulnerability-explained/
+[event-stream]: https://web.archive.org/web/20210909051737/https://schneider.dev/blog/event-stream-vulnerability-explained/
 [codecov]: https://about.codecov.io/apr-2021-post-mortem/
 [attacks on package mirrors]: https://theupdateframework.io/papers/attacks-on-package-managers-ccs2008.pdf
 [browserify typosquatting]: https://blog.sonatype.com/damaging-linux-mac-malware-bundled-within-browserify-npm-brandjack-attempt
