@@ -56,7 +56,7 @@ We rely on feedback from other organizations to evolve SLSA and be more useful t
 
 ### Joining the working group
 
--   We meet bi-weekly on Thursdays at 9am PT. Anyone is welcome to join, whether to listen or to contribute. The OpenSSF community calender is [here](https://calendar.google.com/calendar/u/0?cid=czYzdm9lZmhwNWk5cGZsdGI1cTY3bmdwZXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ).
+-   We meet bi-weekly on Thursdays at 9am PT. Anyone is welcome to join, whether to listen or to contribute. The OpenSSF community calendar is [here](https://calendar.google.com/calendar/u/0?cid=czYzdm9lZmhwNWk5cGZsdGI1cTY3bmdwZXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ).
 -   We're part of the OpenSSF [Supply Chain Integrity Working Group](https://github.com/ossf/wg-supply-chain-integrity).
 -   Our mailing list is [slsa-discussion@googlegroups.com](https://groups.google.com/g/slsa-discussion).
 -   You can join our chat on the OpenSSF Slack [here](https://openssf.slack.com/archives/C029E4N3DPF)
