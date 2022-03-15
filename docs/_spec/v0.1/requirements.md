@@ -241,7 +241,8 @@ Examples: GitHub Actions, Google Cloud Build, Travis CI.
 <td>Build as code
 <td>
 
-The build definition and configuration is defined in source control and is executed by the build service.
+The build definition and configuration is defined in text files, stored in a
+version control system, and is executed by the build service.
 
 Examples: cloudbuild.yaml, .github/workflows/build.yaml, zuul.yaml.
 <td> <td> <td>✓<td>✓
