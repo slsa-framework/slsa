@@ -1,5 +1,6 @@
 title: SLSA
-description: Supply-chain Levels for Software Artifacts
+description: Security framework to ensure software supply chain integrity
+logo: /images/icons/android-chrome-512x512.png
 copyright_html: Copyright 2021 The Linux Foundation<br>under the terms of the <a href="https://github.com/slsa-framework/slsa/blob/main/LICENSE">Apache License 2.0</a>
 repository: slsa-framework/slsa
 collections:
@@ -54,3 +55,8 @@ defaults:
       path: "_spec"
     values:
       folder: true
+  - scope:
+      path: ""
+    values:
+      # Set the Social image icon
+      image: /images/icons/android-chrome-512x512.png
