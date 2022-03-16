@@ -12,10 +12,9 @@
     <link rel="icon" type="image/x-icon" href="{{ "images/icons/favicon.ico" | relative_url }}">
     <link rel="mask-icon" href="{{ "images/icons/safari-pinned-tab.svg" | relative_url }}" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="msapplication-square150x150logo" content="images/icons/mstile-150x150.png" />
+    <meta name="msapplication-square150x150logo" content="{{ "images/icons/mstile-150x150.png" | relative_url }}" />
     <meta name="theme-color" content="#ffffff" />
-    <title>SLSA • {% if page.title %}{{page.title}}{% endif %}</title>
-    <meta name="twitter:title" content="A common language for different levels of software security. SLSA (salsa) is Supply-chain Levels for Software Artifacts." />
+    <title>{{ site.title }} • {{page.title}}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

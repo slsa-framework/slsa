@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Supply-chain Levels for Software Artifacts
 subheading: Safeguarding artifact integrity across any software supply chain
 levels:
     - 1:
