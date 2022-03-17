@@ -46,7 +46,7 @@ Other use cases are "nice-to-haves", including ad-hoc analysis.
 
 We define the following model to represent any software attestations, regardless
 of format. Not all formats will have all fields or all layers, but to be called
-an "attestation" it must fit this general model.
+an "attestation" it MUST fit this general model.
 
 The key words MUST, SHOULD, and MAY are to be interpreted as described in
 [RFC 2119](https://tools.ietf.org/html/rfc2119).
