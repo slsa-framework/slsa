@@ -33,6 +33,8 @@ hero_text: There’s an active community of members, contributors and collaborat
                     <p>The project is authored on GitHub using issues to describe proposed work and pull requests to submit changes. See our contribution guidelines for more details and to add your contribution.</p>
                     <a target="_blank" href="https://github.com/slsa-framework/slsa/blob/main/CONTRIBUTING.md" class="cta-link mt-6 font-semibold h5">Contribution guidelines</a>
                     <a target="_blank" href="https://github.com/slsa-framework/slsa/issues" class="cta-link mt-6 font-semibold h5">Leave us an issue on GitHub</a>
+                    <a target="_blank" href="https://groups.google.com/g/slsa-discussion" class="cta-link mt-6 font-semibold h5">Join our mailing list</a>
+                    <a target="_blank" href="https://openssf.slack.com/archives/C029E4N3DPF" class="cta-link mt-6 font-semibold h5">Chat with us on Slack</a>
                 </div>
             </div>
         </div>
