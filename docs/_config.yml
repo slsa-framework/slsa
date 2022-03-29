@@ -7,6 +7,10 @@ collections:
   spec:
     layout: specifications
     output: true
+  posts:
+    layout: post
+    output: true
+    permalink: /blog/:title
 exclude:
   - CNAME
   - Gemfile
@@ -55,6 +59,10 @@ defaults:
       path: "_spec"
     values:
       folder: true
+  - scope:
+      path: "_posts"
+    values:
+      type: posts
   - scope:
       path: ""
     values:

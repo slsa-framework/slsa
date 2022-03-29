@@ -1,0 +1,14 @@
+---
+title: Blog
+layout: post-list
+---
+<ul style="list-style: none;">
+  {% for post in site.posts %}
+    <li class="mb-8">
+      <h2 class="h2 mb-6"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      <h3>{{ post.subtitle }}</h3>
+      <p><b>posted by {{ post.author }} on {{ post.date | date_to_string }}</b></p>
+      <p>{{ post.excerpt }}</p>
+    </li>
+  {% endfor %}
+</ul>
