@@ -3,14 +3,37 @@
 Thank you for your interest in contributing to SLSA. Please ensure you abide by
 our [Code of Conduct](code-of-conduct.md) when engaging with the SLSA community.
 
-The SLSA project is authored on GitHub using
-[Issues](https://github.com/slsa-framework/slsa/issues) to describe proposed
-work and [Pull Requests](https://github.com/slsa-framework/slsa/pulls) to submit
-changes.
+The SLSA project is authored on GitHub using [Issues] to describe proposed work
+and [Pull Requests] to submit changes.
 
 For other ways to engage with the SLSA community, see our [README](README.md).
 
-## Contributing changes
+[Issues]: https://github.com/slsa-framework/slsa/issues
+[Pull Requests]: https://github.com/slsa-framework/slsa/pulls
+
+## Proposing changes
+
+Unless a change is small enough to be fully discussed in a pull request, we
+recommend the following process to propose and reach agreement on changes:
+
+1.  The proposer finds or creates a [GitHub Issue][Issues] describing the
+    problem and proposes an idea to address that problem.
+
+2.  The community discusses and refines the idea, guided by the steering
+    committee.
+
+3.  If supplemental documents are needed, the proposer creates a
+    [proposal document] to describe the proposal and references the document
+    from the Issue. This can be valuable in cases where the topic is too complex
+    to fully describe in an Issue comment.
+
+4.  Once there is general agreement that the proposal is sound, the proposer
+    [submits](#submitting-changes) a pull request implementing the idea. Final
+    agreement happens on the pull request.
+
+[proposal document]: https://github.com/slsa-framework/slsa-proposals
+
+## Submitting changes
 
 ### Markdown style
 
