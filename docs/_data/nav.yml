@@ -23,8 +23,13 @@
     - title: FAQ
       url: /spec/faq
 
-- title: Provenance
-  url: /provenance/v0.2
+    - spacer: true
+
+    - title: Provenance
+      url: /provenance/v0.2
+
+    - title: VSA
+      url: /verification_summary/v0.1
 
 - title: Use cases
   url: /use-cases
