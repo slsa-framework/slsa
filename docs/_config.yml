@@ -10,7 +10,7 @@ collections:
   posts:
     layout: post
     output: true
-    permalink: /blog/:title
+    permalink: /blog/:year/:month/:title
 exclude:
   - CNAME
   - Gemfile
