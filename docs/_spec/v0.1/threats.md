@@ -43,7 +43,6 @@ Many recent high-profile attacks were consequences of supply-chain integrity vul
 [browserify typosquatting]: https://blog.sonatype.com/damaging-linux-mac-malware-bundled-within-browserify-npm-brandjack-attempt
 [mimemagic]: https://www.techradar.com/news/this-popular-code-library-is-causing-problems-for-hundreds-of-thousands-of-devs
 
-
 A SLSA level helps give consumers confidence that software has not been tampered
 with and can be securely traced back to source—something that is difficult, if
 not impossible, to do with most software today.
