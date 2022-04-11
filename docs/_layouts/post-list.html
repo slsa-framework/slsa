@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+    <div class="max-width">
+      {%- include header.html -%}
+      <main aria-label="Content">
+            <div class="wrapper">
+                <!-- Hero -->
+                <section class="hero specifications flex justify-center items-center">
+                    <div class="wrapper inner text-green-darkest text-left flex flex-col justify-start">
+                        <h1 class="pr-32 mb-16 mt-32">{{page.title}}</h1>
+                        <h2>{{ page.subtitle }}</h2>
+                        <div class="md:flex justify-between items-start">
+                            <div class="w-full md:w-3/5">
+                                <p>{{ page.hero_text }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <section class="wrapper inner main-content">
+                <div class="pb-16">{{ content }}</div>
+            </section>
+      </main>
+    </div>
+    {%- include footer.html -%}
+  </body>
+
+</html>
