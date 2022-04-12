@@ -3,7 +3,11 @@ title: SLSA Is No Free Lunch
 author: "Mike Lieberman"
 layout: post
 ---
-“What is SLSA?” followed closely by “What does SLSA do for me?” are the two most common questions I get when people learn about SLSA. This has led to a lot of confusion as to how folks apply SLSA, and the benefits they get. You can’t just apply SLSA practices to a pipeline that runs a build, generate a SLSA attestation and magically be protected from supply chain compromise. Contrary to a lot of the hype being thrown around, SLSA is no free lunch.
+“What is SLSA?” followed closely by “What does SLSA do for me?” are the two most common questions I get when people learn about SLSA. This has led to a lot of confusion as to how folks apply SLSA, and the benefits they get. You can’t just apply SLSA practices to a pipeline that runs a build, generate a SLSA attestation and magically be protected from supply chain compromise. Contrary to a lot of the hype being thrown around, SLSA is no free lunch, and we must help protect our lunch!
+
+![FQJ3jfvVcAIW-79](https://user-images.githubusercontent.com/228135/163072219-f8dd159a-ec8b-40ab-925f-c9d0954d2ae2.jpeg)
+Source: [twitter](https://twitter.com/lcamtuf/status/1513904032116457480?s=20&t=eH498VtizqszHBj-DkZ9xg)
+
 
 Pummeling that analogy into the ground, SLSA isn’t even a meal, it’s a condiment. SLSA isn’t something that replaces your existing security standards and procedures. You don’t replace your static application security testing (SAST) scans or software composition analysis (SCA) with SLSA, nor do you replace your existing security controls, e.g. NIST 800-53 or CSA Cloud Controls Matrix, with SLSA based ones. If your build pipeline is the meal, SLSA is what gets poured over, to complete it.
 
