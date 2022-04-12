@@ -34,9 +34,13 @@
             <ul>
               {%- for subitem in item.children -%}
                 <li>
+                  {%- if subitem.spacer %}
+                  <hr>
+                  {%- else %}
                   <a class="text-white md:text-black" href="{{ subitem.url | relative_url }}">
                     {{ subitem.title | escape }}
                   </a>
+                  {%- endif %}
                 </li>
               {%- endfor %}
             </ul>
