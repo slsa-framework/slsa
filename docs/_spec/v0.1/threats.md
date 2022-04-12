@@ -503,7 +503,16 @@ from that source. A subsequent build then picks up that poisoned cache entry.
 
 #### (E) Use a risky dependency
 
-**TODO:** fill this out
+**TODO:** fill this out to give more examples of threats from risky dependencies
+
+<details><summary>A dependency becomes temporarily or permenantly unavailable to the build process <span>(out of scope)</span></summary>
+
+*Threat:* Unable to perform a build with the intended dependencies.
+
+*Mitigation:* **Outside the scope of SLSA.** That said, some solutions to support Hermetic and Reproducable builds may also reduce the impact of this threat.
+<sup>[[Hermetic] [Reproducible] @ SLSA 4]</sup>
+
+</details>
 
 #### (F) Bypass CI/CD
 
@@ -578,17 +587,6 @@ and get users to use your malicious package instead of the benign one.
 to make the source available can be a mild deterrent, can aid investigation or
 ad-hoc analysis, and can complement source-based typosquatting solutions.
 <sup>[[Verified history] and [Retained indefinitely] @ SLSA 3]</sup>
-
-</details>
-
-#### (I) Dependency becomes unavailable
-
-<details><summary>A dependency becomes temporarily or permenantly unavailable to the build process <span>(out of scope)</span></summary>
-
-*Threat:* Unable to perform a build with the intended dependencies.
-
-*Mitigation:* **Outside the scope of SLSA.** That said, some solutions to support Hermetic and Reproducable builds may also reduce the impact of this threat.
-<sup>[[Hermetic] [Reproducible] @ SLSA 4]</sup>
 
 </details>
 
