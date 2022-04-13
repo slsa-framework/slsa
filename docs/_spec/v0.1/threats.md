@@ -27,7 +27,8 @@ Many recent high-profile attacks were consequences of supply-chain integrity vul
 | B   | Compromise source control platform                                    | [PHP]: Attacker compromised PHP's self-hosted git server and injected two malicious commits.                                                                                                   | A better-protected source code platform would have been a much harder target for the attackers.                                                                                                                                       |
 | C   | Build with official process but from code not matching source control | [Webmin]: Attacker modified the build infrastructure to use source files not matching source control.                                                                                          | A SLSA-compliant build server would have produced provenance identifying the actual sources used, allowing consumers to detect such tampering.                                                                                        |
 | D   | Compromise build platform                                             | [SolarWinds]: Attacker compromised the build platform and installed an implant that injected malicious behavior during each build.                                                             | Higher SLSA levels require [stronger security controls for the build platform](requirements.md#build-requirements), making it more difficult to compromise and gain persistence.                                                      |
-| E   | Use bad dependency (i.e. A-H, recursively)                            | [event-stream]: Attacker added an innocuous dependency and then later updated the dependency to add malicious behavior. The update did not match the code submitted to GitHub (i.e. attack F). | Applying SLSA recursively to all dependencies would have prevented this particular vector, because the provenance would have indicated that it either wasn't built from a proper builder or that the source did not come from GitHub. |
+| E   | Use risky dependency (i.e. A-H, recursively)                          | [event-stream]: Attacker added an innocuous dependency and then later updated the dependency to add malicious behavior. The update did not match the code submitted to GitHub (i.e. attack F). | Applying SLSA recursively to all dependencies would have prevented this particular vector, because the provenance would have indicated that it either wasn't built from a proper builder or that the source did not come from GitHub. |
+|     | Dependency becomes unavailable                                        | [Mimemagic]: Maintainer intentionally removes package or version of package from repository with no warning. Network errors or service outages may also make packages unavailable temporarily. | SLSA does not directly address this threat.
 | F   | Upload an artifact that was not built by the CI/CD system             | [CodeCov]: Attacker used leaked credentials to upload a malicious artifact to a GCS bucket, from which users download directly.                                                                | Provenance of the artifact in the GCS bucket would have shown that the artifact was not built in the expected manner from the expected source repo.                                                                                   |
 | G   | Compromise package repository                                         | [Attacks on Package Mirrors]: Researcher ran mirrors for several popular package repositories, which could have been used to serve malicious packages.                                         | Similar to above (F), provenance of the malicious artifacts would have shown that they were not built as expected or from the expected source repo.                                                                                   |
 | H   | Trick consumer into using bad package                                 | [Browserify typosquatting]: Attacker uploaded a malicious package with a similar name as the original.                                                                                         | SLSA does not directly address this threat, but provenance linking back to source control can enable and enhance other solutions.                                                                                                     |
@@ -40,6 +41,7 @@ Many recent high-profile attacks were consequences of supply-chain integrity vul
 [codecov]: https://about.codecov.io/apr-2021-post-mortem/
 [attacks on package mirrors]: https://theupdateframework.io/papers/attacks-on-package-managers-ccs2008.pdf
 [browserify typosquatting]: https://blog.sonatype.com/damaging-linux-mac-malware-bundled-within-browserify-npm-brandjack-attempt
+[mimemagic]: https://www.techradar.com/news/this-popular-code-library-is-causing-problems-for-hundreds-of-thousands-of-devs
 
 A SLSA level helps give consumers confidence that software has not been tampered
 with and can be securely traced back to source—something that is difficult, if
@@ -499,9 +501,20 @@ from that source. A subsequent build then picks up that poisoned cache entry.
 
 </details>
 
-#### (E) Use a bad dependency
+#### (E) Use a risky dependency
 
-**TODO:** fill this out
+**TODO:** fill this out to give more examples of threats from risky dependencies
+
+#### (E) Dependency becomes unavailable
+
+<details><summary>A dependency becomes temporarily or permenantly unavailable to the build process <span>(out of scope)</span></summary>
+
+*Threat:* Unable to perform a build with the intended dependencies.
+
+*Mitigation:* **Outside the scope of SLSA.** That said, some solutions to support Hermetic and Reproducable builds may also reduce the impact of this threat.
+<sup>[[Hermetic] [Reproducible] @ SLSA 4]</sup>
+
+</details>
 
 #### (F) Bypass CI/CD
 
