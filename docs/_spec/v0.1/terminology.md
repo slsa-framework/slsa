@@ -125,5 +125,3 @@ producer, and that artifacts are not modified as they pass between development
 stages.
 
 > For a detailed look at integrity, see [Threats and mitigations](threats.md).
-
-![Supply Chain Threats](../../images/supply-chain-threats-no-labels.svg)
