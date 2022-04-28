@@ -42,7 +42,7 @@ dependencies, and then starting execution inside the environment. The build then
 performs arbitrary steps, possibly fetching additional dependencies, and outputs
 one or more artifacts.
 
-![Model Build](../../images/build-model.svg)
+<p align="center"><img src="../../images/build-model.svg" alt="Model Build"></p>
 
 | Term | Description
 | --- | ---
