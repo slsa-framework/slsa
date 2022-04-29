@@ -1,7 +1,7 @@
 ---
 title: SLSA Is No Free Lunch
 author: "Mike Lieberman"
-layout: post
+is_guest_post: true
 ---
 “What is SLSA?” followed closely by “What does SLSA do for me?” are the two most common questions I get when people learn about SLSA. This has led to a lot of confusion as to how folks apply SLSA, and the benefits they get. You can’t just apply SLSA practices to a pipeline that runs a build, generate a SLSA attestation and magically be protected from supply chain compromise. Contrary to a lot of the hype being thrown around, SLSA is no free lunch, and we must help protect our lunch!
 

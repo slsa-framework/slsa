@@ -1,3 +1,6 @@
+---
+is_post: false
+---
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
@@ -9,9 +12,13 @@
       <main aria-label="Content">
             <div class="wrapper">
                 <!-- Hero -->
-                <section class="hero specifications flex justify-center items-center">
+                <section class="hero {% if layout.is_post %}post{% else %}post-list{% endif %} flex justify-center items-center">
                     <div class="wrapper inner text-green-darkest text-left flex flex-col justify-start">
-                        <h1 class="pr-32 mb-16 mt-32">{{page.title}}</h1>
+                      {%- if layout.is_post %}
+                        <h1 class="pr-32 mb-4 mt-8">{{ page.title }}</h1>
+                      {%- else %}
+                        <h1 class="pr-32 mb-16 mt-32">{{ page.title }}</h1>
+                      {%- endif %}
                         <h2>{{ page.subtitle }}</h2>
                         <div class="md:flex justify-between items-start">
                             <div class="w-full md:w-3/5">
