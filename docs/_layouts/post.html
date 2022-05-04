@@ -1,7 +1,17 @@
 ---
 layout: post-list
+is_post: true
 ---
-<h3 class="mt-8 mb-8"> by {{ page.author }}</h3>
-<p><b>{{ page.date | date_to_string }}</b></p>
+<p class="h3 post-author">by {{ page.author }}</p>
+<p class="post-date"><time datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date_to_string }}</time></p>
 
 {{ content }}
+
+{% if page.is_guest_post -%}
+<div class="guest-post-banner">
+  This is a guest post. The views expressed are not official positions of the
+  SLSA community or any parent organization. The author has requested and
+  incorporated reviewer feedback whenever possible, but the opinions presented
+  are the author’s alone.
+</div>
+{%- endif %}
