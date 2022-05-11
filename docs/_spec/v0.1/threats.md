@@ -464,21 +464,6 @@ Adversary builds from the `debug` workflow. Solution: Policy rejects because the
 entry point does not match.
 
 </details>
-<details><summary>Use build parameter to inject behavior <span>(SLSA 4)</span></summary>
-
-*Threat:* Build using the expected CI/CD process, source location, branch/tag,
-and entry point, but adding a build parameter that injects bad behavior into the
-output.
-
-*Mitigation:* Policy only allows known-safe parameters. At SLSA 4, no parameters
-are allowed. <sup>[[Parameterless] @ SLSA 4]</sup>
-
-*Example:* MyPackage's GitHub Actions Workflow uses `github.event.inputs` to
-allow users to specify custom compiler flags per invocation. Adversary sets a
-compiler flag that overrides a macro to inject malicious behavior into the
-output binary. Solution: Policy rejects because it does not allow any `inputs`.
-
-</details>
 <details><summary>Build from modified version of code modified after checkout <span>(SLSA 3)</span></summary>
 
 *Threat:* Build from a version of the code that includes modifications after
@@ -501,6 +486,21 @@ An adversary introduces an unauthorized change to a build output through
 tampering of the build process; or introduces false information into the
 provenance.
 
+<details><summary>Use build parameter to inject behavior <span>(SLSA 4)</span></summary>
+
+*Threat:* Build using the expected CI/CD process, source location, branch/tag,
+and entry point, but adding a build parameter that injects bad behavior into the
+output.
+
+*Mitigation:* Policy only allows known-safe parameters. At SLSA 4, no parameters
+are allowed. <sup>[[Parameterless] @ SLSA 4]</sup>
+
+*Example:* MyPackage's GitHub Actions Workflow uses `github.event.inputs` to
+allow users to specify custom compiler flags per invocation. Adversary sets a
+compiler flag that overrides a macro to inject malicious behavior into the
+output binary. Solution: Policy rejects because it does not allow any `inputs`.
+
+</details>
 <details><summary>Compromise build environment of subsequent build <span>(SLSA 3)</span></summary>
 
 *Threat:* Perform a "bad" build that persists a change in the build environment,
