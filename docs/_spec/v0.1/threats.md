@@ -13,7 +13,7 @@ environment.
 
 SLSA's [levels](levels.md) are designed to mitigate the risk of these attacks.
 This page enumerates possible attacks throughout the supply chain and shows how
-SLSA can help.
+SLSA can help. For a background, see [Terminology](terminology.md).
 
 ## Supply chain threats
 
@@ -100,11 +100,8 @@ not impossible, to do with most software today.
 
 > **IMPORTANT:** This is a work in progress.
 
-What follows is a comprehensive technical analysis of supply chain integrity
-threats and their corresponding mitigations in SLSA. For definitions, see
-[Terminology](terminology.md).
-
-The goals of this section are to:
+What follows is a comprehensive technical analysis of supply chain threats and
+their corresponding mitigations in SLSA. The goals are to:
 
 -   Explain the reasons for each of the SLSA [requirements](requirements.md).
 -   Increase confidence that the SLSA requirements are sufficient to achieve the
