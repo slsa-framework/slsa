@@ -15,7 +15,7 @@ SLSA's [levels](levels.md) are designed to mitigate the risk of these attacks.
 This page enumerates possible attacks throughout the supply chain and shows how
 SLSA can help. For a background, see [Terminology](terminology.md).
 
-## Supply chain threats
+## Summary
 
 ![Supply Chain Threats](../../images/supply-chain-threats.svg)
 
@@ -109,9 +109,11 @@ their corresponding mitigations in SLSA. The goals are to:
 -   Help implementers better understand what they are protecting against so that
     they can better design and implement controls.
 
-### Source integrity and availability
-
 <article class="threats">
+
+## Source integrity and availability
+
+### (A) Submit bad code
 
 #### (A1) Submit bad code without review
 
@@ -311,7 +313,7 @@ stamping."
 
 </details>
 
-#### (B) Compromise source control system
+### (B) Compromise source control system
 
 <details><summary>Project owner bypasses or disables controls <span>(SLSA 4)</span></summary>
 
@@ -366,9 +368,9 @@ management system to bypass controls.
 
 </details>
 
-### Build integrity
+## Build integrity
 
-#### (C) Modify code after source control
+### (C) Modify code after source control
 
 <details><summary>Build from unofficial fork of code <span>(TBD)</span></summary>
 
@@ -458,7 +460,7 @@ source repo is not as expected.
 
 </details>
 
-#### (D) Compromise build platform
+### (D) Compromise build platform
 
 <details><summary>Compromise build environment of subsequent build <span>(SLSA 3)</span></summary>
 
@@ -547,11 +549,11 @@ from that source. A subsequent build then picks up that poisoned cache entry.
 
 </details>
 
-#### (E) Use a risky dependency
+### (E) Use a risky dependency
 
 **TODO:** fill this out to give more examples of threats from risky dependencies
 
-#### (E) Dependency becomes unavailable
+### (E) Dependency becomes unavailable
 
 <details><summary>A dependency becomes temporarily or permenantly unavailable to the build process <span>(out of scope)</span></summary>
 
@@ -562,7 +564,7 @@ from that source. A subsequent build then picks up that poisoned cache entry.
 
 </details>
 
-#### (F) Bypass CI/CD
+### (F) Bypass CI/CD
 
 <details><summary>Build with untrusted CI/CD <span>(TBD)</span></summary>
 
@@ -620,11 +622,11 @@ cryptographic signature is no longer valid.
 
 </details>
 
-#### (G) Compromise package repository
+### (G) Compromise package repository
 
 **TODO:** fill this out
 
-#### (H) Use a bad package
+### (H) Use a bad package
 
 <details><summary>Typosquatting <span>(out of scope)</span></summary>
 
@@ -638,7 +640,7 @@ ad-hoc analysis, and can complement source-based typosquatting solutions.
 
 </details>
 
-### Things that don't fit well in current picture
+## Things that don't fit well in current picture
 
 <details><summary>Tamper with policy <span>(TBD)</span></summary>
 
