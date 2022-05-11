@@ -19,6 +19,23 @@ SLSA can help.
 
 ![Supply Chain Threats](../../images/supply-chain-threats.svg)
 
+SLSA is focused on supply chain integrity. This means protection against
+tampering or unauthorized modification at any stage of the software lifecycle.
+Within SLSA, we divide integrity into two main areas:
+
+**Source Integrity and Availability:** Ensure that all changes to the source
+code reflect the intent of the software producer, and that the code and change
+history remain available for investigations and incident response. Intent of an
+organization is difficult to define, so we approximate this as approval from two
+authorized representatives.
+
+**Build Integrity:** Ensure that packages are built from the correct, unmodified
+sources and dependencies according to the build recipe defined by the software
+producer, and that artifacts are not modified as they pass between development
+stages.
+
+### Real-world examples
+
 Many recent high-profile attacks were consequences of supply-chain integrity vulnerabilities, and could have been prevented by SLSA's framework. For example:
 
 |     | Threat                                                                | Known example                                                                                                                                                                                  | How SLSA can help                                                                                                                                                                                                                     |

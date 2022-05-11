@@ -106,24 +106,3 @@ workstation, though this does not meet SLSA 2+.
 | Admin        | developer
 
 </details>
-
-## Supply chain integrity
-
-SLSA is focused on supply chain integrity. This means protection against
-tampering or unauthorized modification at any stage of the software lifecycle.
-Within SLSA, we divide integrity into two main areas:
-
-**Source Integrity and Availability:** Ensure that all changes to the source
-code reflect the intent of the software producer, and that the code and change
-history remain available for investigations and incident response. Intent of an
-organization is difficult to define, so we approximate this as approval from two
-authorized representatives.
-
-**Build Integrity:** Ensure that packages are built from the correct, unmodified
-sources and dependencies according to the build recipe defined by the software
-producer, and that artifacts are not modified as they pass between development
-stages.
-
-> For a detailed look at integrity, see [Threats and mitigations](threats.md).
-
-![Supply Chain Threats](../../images/supply-chain-threats-no-labels.svg)
