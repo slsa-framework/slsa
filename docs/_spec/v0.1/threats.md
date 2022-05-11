@@ -596,6 +596,8 @@ from that source. A subsequent build then picks up that poisoned cache entry.
 > dependency, or is it just about this particular use of the package (e.g.
 > tampering on input, or choosing a bad dependency)?
 
+<!-- separate TODO -->
+
 > **TODO:** Fill this out to give more examples of threats from compromised
 > dependencies.
 
