@@ -241,10 +241,20 @@ Examples: GitHub Actions, Google Cloud Build, Travis CI.
 <td>Build as code
 <td>
 
-The build definition and configuration is defined in text files, stored in a
-version control system, and is executed by the build service.
+The build definition and configuration which are executed by the build service
+is verifiably derived from text file definitions stored in a version control
+system.
 
-Examples: cloudbuild.yaml, .github/workflows/build.yaml, zuul.yaml.
+Verifiably derived can mean either fetched directly through a trusted channel,
+or that the derived definition has some trustworthy provenance chain linking
+back to version control.
+
+Examples:
+
+-   .github/workflows/build.yaml stored in git
+-   Tekton bundles generated from text files by a SLSA compliant build process
+    and stored in an OCI registry with SLSA provenance metadata available.
+
 <td> <td> <td>✓<td>✓
 <tr id="ephemeral-environment">
 <td>Ephemeral environment
