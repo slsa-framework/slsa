@@ -241,8 +241,8 @@ Examples: GitHub Actions, Google Cloud Build, Travis CI.
 <td>Build as code
 <td>
 
-The build definition and configuration which are executed by the build service
-is verifiably derived from text file definitions stored in a version control
+The build definition and configuration executed by the build service is
+verifiably derived from text file definitions stored in a version control
 system.
 
 Verifiably derived can mean either fetched directly through a trusted channel,
