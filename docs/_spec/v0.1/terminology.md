@@ -52,7 +52,7 @@ one or more artifacts.
 | Steps | The set of actions that comprise a build, defined by the tenant.
 | Environment | Machine, container, VM, or similar in which the build runs, initialized by the platform. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
 | Trigger | External event or request causing the platform to run the build.
-| Source | Top-level input artifact requried by the build.
+| Source | Top-level input artifact required by the build.
 | Dependencies | Additional input artifacts required by the build.
 | Outputs | Collection of artifacts produced by the build.
 | Admin | Person with administrative access to the platform, potentially allowing them to tamper with the build process or access secret material.
