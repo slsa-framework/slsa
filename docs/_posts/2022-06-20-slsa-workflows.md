@@ -24,7 +24,7 @@ The workflow will look like the following:
 uses: slsa-framework/slsa-github-generator/.github/workflows/builder_go_slsa3.yml 
 ```
 
-You can find an end-to-end example as used by [Scorecard](https://github.com/ossf/scorecard): [workflow](https://github.com/ossf/scorecard/blob/main/.github/workflows/slsa-goreleaser.yml) and [configuration file](https://github.com/ossf/scorecard/blob/main/.slsa-goreleaser.yml).
+You can find an end-to-end example as used by [Scorecard](https://github.com/ossf/scorecard): [workflow](https://github.com/ossf/scorecard/blob/main/.github/workflows/slsa-goreleaser.yml) and [configuration file](https://github.com/ossf/scorecard/blob/main/.slsa-goreleaser.yml). The workflows produced provenance for the v4.4.0 [linux/amd64](https://github.com/ossf/scorecard/releases/tag/v4.4.0) build. 
 
 
 ### Step 2: Verification for your users
@@ -37,26 +37,26 @@ To install the verification CLI tool, run:
 go install github.com/slsa-framework/slsa-verifier@v1.0.0
 ```
 
-As an example, you can use the CLI tool to verify the latest Scorecard release. Download the Scorecard binary and its SLSA provenance here[TODO:link]
+As an example, you can use the CLI tool to verify the latest Scorecard release. Download the Scorecard binary and its SLSA provenance [here](https://github.com/ossf/scorecard/releases/tag/v4.4.0).
 
 ```
 $ slsa-verifier \
-     --artifact-path ./binary-linux-amd64 \
-     --provenance ./binary-linux-amd64.intoto.jsonl \
+     --artifact-path ./scorecard-linux-amd64 \
+     --provenance ./scorecard-linux-amd64.intoto.jsonl \
      # The expected source repository.
      --source github.com/ossf/scorecard \
      # The expected branch used to generate the artifact.
      --branch "main" \
      # The expected release tag of the artifact
-     --tag v15.0.20 
+     --tag v4.4.0
 ...
-Verified signature against tlog entry index 2604927 at URL: https://rekor.sigstore.dev/api/v1/log/entries/e5591c5f4c5f24918a226a542ffcee3ebd3011b105dc0e078937fd4abcf0bbc6
+Verified signature against tlog entry index 2649415 at URL: https://rekor.sigstore.dev/api/v1/log/entries/93f8c1f0bc4cc2aa260fe48355337ef6515a1d6c6a3bcc3ff2e7c5f5246ed704
 Signing certificate information:
  {
-	"caller": "asraa/slsa-on-github-test",
-	"commit": "2d475d74a93e375bff3420f30930334a8c88b7e2",
+	"caller": "ossf/scorecard",
+	"commit": "e42af756609b2cde6d757fd45ea05ddf0016ff62",
 	"job_workflow_ref": "/slsa-framework/slsa-github-generator/.github/workflows/builder_go_slsa3.yml@refs/tags/v1.0.0",
-	"trigger": "workflow_dispatch",
+	"trigger": "push",
 	"issuer": "https://token.actions.githubusercontent.com"
 }
 PASSED: Verified SLSA provenance
@@ -98,9 +98,9 @@ Another attack described in [[2](https://sockpuppets.medium.com/how-i-hacked-ctx
 
 ```
 $ cat provenance.intoto | jq -r '.predicate.invocation.environment.github_repository_owner_id'
-80431187
+67707773
 $ cat provenance.intoto | jq -r '.predicate.invocation.environment.github_repository_id'
-486325809
+302670797
 ```
 
 Validating fields of the SLSA provenance would have mitigated this risk for existing consumers of a package, as they would have detected a change in `github_repository_id` or `github_repository_owner_id`.
@@ -113,7 +113,7 @@ Some organizations may only want to authorize a predefined set of workflows to c
 
 ```
 $ cat provenance.intoto | jq -r '.predicate.invocation.configSource.entryPoint'
-.github/workflows/e2e.go.tag.branch1.config-ldflags-assets.slsa3.yml
+.github/workflows/slsa-goreleaser.yml
 ```
 
 ### Check how an artifact was built 
@@ -124,34 +124,34 @@ As a user, you may want to validate certain options of the binary you are consum
 ```
 $ cat provenance.intoto | jq -r '.predicate.buildConfig.steps'
 [
-  {
-    "command": [
-      "/opt/hostedtoolcache/go/1.18.2/x64/bin/go",
-      "mod",
-      "vendor"
-    ],
-    "env": null,
-    "workingDir": "/home/runner/work/example-package/example-package"
-  },
-  {
-    "command": [
-      "/opt/hostedtoolcache/go/1.18.2/x64/bin/go",
-      "build",
-      "-mod=vendor",
-      "-trimpath",
-      "-tags=netgo",
-      "-ldflags=-X main.gitVersion=v1.2.3 -X main.gitCommit=abcdef -X main.gitBranch=branch1",
-      "-o",
-      "binary-linux-amd64"
-    ],
-    "env": [
-      "GOOS=linux",
-      "GOARCH=amd64",
-      "GO111MODULE=on",
-      "CGO_ENABLED=0"
-    ],
-    "workingDir": "/home/runner/work/example-package/example-package"
-  }
+    {
+      "command": [
+        "/opt/hostedtoolcache/go/1.17.11/x64/bin/go",
+        "mod",
+        "vendor"
+      ],
+      "env": null,
+      "workingDir": "/home/runner/work/scorecard/scorecard"
+    },
+    {
+      "command": [
+        "/opt/hostedtoolcache/go/1.17.11/x64/bin/go",
+        "build",
+        "-mod=vendor",
+        "-trimpath",
+        "-tags=netgo",
+        "-ldflags=-s -X sigs.k8s.io/release-utils/version.gitVersion=v4.4.0 -X sigs.k8s.io/release-utils/version.gitCommit=e42af756609b2cde6d757fd45ea05ddf0016ff62 -X sigs.k8s.io/release-utils/version.gitTreeState=clean -X sigs.k8s.io/release-utils/version.buildDate=1654888418 -w -extldflags \"-static\"",
+        "-o",
+        "scorecard-linux-amd64"
+      ],
+      "env": [
+        "GOOS=linux",
+        "GOARCH=amd64",
+        "GO111MODULE=on",
+        "CGO_ENABLED=0"
+      ],
+      "workingDir": "/home/runner/work/scorecard/scorecard"
+    }
 ]
 ```
 
