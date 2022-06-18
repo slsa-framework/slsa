@@ -101,7 +101,7 @@ Validating fields of the SLSA provenance would have mitigated this risk for exis
 
 ### Validate the process used to build the binary
 
-Some organizations may only want to authorize a predefined set of workflows to create production-ready release artifacts, for example `github.com/source/repo/github/workflows/release.yml`. They may also host other workflows on their repository intended for CI or developer usage. Users may want to validate and create a policy that the artifacts they are consuming were generated from the authorized workflows. The SLSA provenance in our builders exposes metadata that determines the workflow, or entrypoint, of the build:
+Some organizations may only want to authorize a predefined set of workflows to create production-ready release artifacts, for example `github.com/source/repo/github/workflows/release.yml`. They may also host other workflows on their repository intended for CI or developer usage. Users may want to validate and create a policy that the artifacts they are consuming were generated from the authorized workflows. The SLSA provenance in our builders exposes metadata that determines the calling workflow, or entrypoint, of the build:
 
 ```shell
 $ cat provenance.intoto | jq -r '.predicate.invocation.configSource.entryPoint'
