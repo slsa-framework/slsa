@@ -148,7 +148,7 @@ $ cat provenance.intoto | jq -r '.predicate.buildConfig.steps'
 
 ## Conclusion
 
-We believe all the necessary building blocks are ready to make SLSA a reality *today*. This v1 release of the builder meets SLSA level 3 build and provenance requirements for Golang projects. We are currently working on meeting SLSA level 4 requirements and additionally supporting SBOM generation. We welcome all contributions on our [generators](https://github.com/slsa-framework/slsa-github-generator) and [verifier](https://github.com/slsa-framework/slsa-verifier).
+We believe all the necessary building blocks are ready to make SLSA a reality *today*. This v1 release of the builder meets SLSA level 3 build and provenance requirements for Go projects. We are currently working on meeting SLSA level 4 requirements and additionally supporting SBOM generation. We welcome all contributions on our [generators](https://github.com/slsa-framework/slsa-github-generator) and [verifier](https://github.com/slsa-framework/slsa-verifier).
 
 If you’re a Go package developer, try our [builder](https://github.com/slsa-framework/slsa-github-generator/blob/main/internal/builders/go/README.md) and provide [feedback](https://github.com/slsa-framework/slsa-github-generator/issues) on how we can improve it. Be one of the first adopters of this exciting technology, and encourage your users to verify your artifacts. This is really important to provide transparency and security for the software supply-chain.
 
