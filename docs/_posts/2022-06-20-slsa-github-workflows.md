@@ -21,7 +21,7 @@ All it takes is to install it via the GitHub dashboard:
 The workflow will look like the following:
 
 ```yaml
-uses: slsa-framework/slsa-github-generator/.github/workflows/builder_go_slsa3.yml 
+uses: slsa-framework/slsa-github-generator/.github/workflows/builder_go_slsa3.yml@v1.0.0
 ```
 
 You can find an end-to-end example as used by [Scorecard](https://github.com/ossf/scorecard): [workflow](https://github.com/ossf/scorecard/blob/main/.github/workflows/slsa-goreleaser.yml) and [configuration file](https://github.com/ossf/scorecard/blob/main/.slsa-goreleaser.yml). The workflows produced provenance for the v4.4.0 [linux/amd64](https://github.com/ossf/scorecard/releases/tag/v4.4.0) build.
