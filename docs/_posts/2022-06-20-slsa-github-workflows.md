@@ -14,9 +14,9 @@ The following is a walk through of how to use this builder for Go applications a
 
 ### Step 1: Use our builder to build your releases
 
-All it takes is to install it via the GitHub dashboard:
+All it takes is to install it via the GitHub dashboard. The starter workflow will be available this week.
 
-<!-- TODO: Add images -->
+<!-- TODO: Add images of starter-workflow and link to GitHub post -->
 
 The workflow will look like the following:
 
