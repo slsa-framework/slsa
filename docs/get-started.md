@@ -71,8 +71,8 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
                     <p class="h4 font-bold mb-6">Steps</p>
                     <ul class="list-decimal mt-6 mb-10 pl-6">
                         <li>Follow the steps in <a href="https://github.com/slsa-framework/slsa-github-generator">slsa-framework/slsa-github-generator</a> to use the vetted builder for your release</li>
-                        <li>Follow the steps in <a href="https://github.com/slsa-framework/slsa-github-generator">slsa-framework/slsa-github-generator</a> to use the vetted builder for your release
-                        </li>
+                        <li>Follow the steps in <a href="https://github.com/slsa-framework/slsa-framework">slsa-framework/slsa-verifier</a> to learn how to verify provenance for your release</li>
+                        <li>Update your documentation to tell users how to verify your provenance when downloading your binaries</li>
                         <li>You’re now generating non-forgeable [SLSA provenance](https://slsa.dev/) on GitHub that meets the [build](https://slsa.dev/spec/v0.1/requirements#build-requirements) and [provenance](https://slsa.dev/spec/v0.1/requirements#provenance-requirements) requirements for [SLSA level 3 and above](https://slsa.dev/spec/v0.1/levels)! Add the <a href="images/SLSA-Badge-full-level3.svg">SLSA Level 3 badge</a> to your project's readme.</li>
                     </ul>
                 </div>
