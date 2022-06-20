@@ -46,6 +46,42 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
         </div>
     </div>
 </section>
+
+<section class="section bg-pastel-green flex justify-center items-center">
+    <div class="wrapper inner w-full">
+        <div class="md:flex justify-between items-start mb-16">
+            <div class="text w-full md:w-1/3">
+<div class="h2 p-0">
+
+## Reaching SLSA Level 3
+
+</div>
+<p class="h4 font-semibold my-6 text-green-dark">Effort: Low</p>
+            </div>
+            <div class="w-full md:w-2/3">
+                <div class="bg-white h-full rounded-lg p-10">
+                    <p class="h4 font-bold mb-6">Overview<p>
+                    <p>
+                        This guide will help you achieve Level 3 on GitHub, and it should take less than a couple of hours for an individual project. The goals is to:
+                    <ul class="list-disc my-6 pl-6">
+                        <li>Use a GitHub trusted builder</li>
+                        <li>Verify the generate provenance</li>
+                    </ul>
+                    </p>
+                    <p class="h4 font-bold mb-6">Steps</p>
+                    <ul class="list-decimal mt-6 mb-10 pl-6">
+                        <li>Follow the steps in <a href="https://github.com/slsa-framework/slsa-github-generator">slsa-framework/slsa-github-generator</a> to use the vetted builder for your release</li>
+                        <li>Follow the steps in <a href="https://github.com/slsa-framework/slsa-github-generator">slsa-framework/slsa-github-generator</a> to use the vetted builder for your release
+                        </li>
+                        <li>You’re Level 3 for provenance integrity! Add the <a href="images/SLSA-Badge-full-level3.svg">SLSA Level 3 badge</a> to your project's readme.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 <section class="section bg-white flex justify-center items-center">
     <div class="wrapper inner w-full">
         <div class="justify-between items-start md:-mr-10 md:-ml-10">
