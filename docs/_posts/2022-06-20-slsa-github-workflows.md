@@ -14,9 +14,9 @@ The following is a walk through of how to use this builder for Go applications a
 
 ### Step 1: Use our builder to build your releases
 
-All it takes is to install it via the GitHub dashboard. The starter workflow will be available this week.
+All it takes is to install it via the GitHub dashboard as a [starter workflow](https://docs.github.com/en/actions/using-workflows/using-starter-workflows#using-starter-workflows).
 
-<!-- TODO: Add images of starter-workflow and link to GitHub post -->
+![SLSA GitHub Workflow](https://user-images.githubusercontent.com/5194569/174831436-b8a5cef0-0915-4910-b873-5cf342d4f552.png)
 
 The workflow will look like the following:
 
