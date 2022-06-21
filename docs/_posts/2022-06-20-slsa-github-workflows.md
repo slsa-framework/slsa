@@ -1,7 +1,7 @@
 ---
 title: "General Availability of SLSA 3 Go native builder for GitHub Actions"
 author: "Laurent Simon, Asra Ali, Ian Lewis, Mark Lodato, Jose Palafox, Joshua Lock"
-is_guest_post: true
+is_guest_post: false
 ---
 
 A couple of months ago, Google and GitHub demonstrated how to generate non-forgeable SLSA 3 provenance for packages/binaries created via GitHub Actions ([1](https://security.googleblog.com/2022/04/improving-software-supply-chain.html), [2](https://github.blog/2022-04-07-slsa-3-compliance-with-github-actions/)). Since then, we've been working hard to turn the reference example into a production-ready system for everyone to use. Today, we're announcing the v1 release of the [trusted builders](https://github.com/slsa-framework/slsa-github-generator) that can be used in GitHub Actions and [verification tools](https://github.com/slsa-framework/slsa-verifier).
