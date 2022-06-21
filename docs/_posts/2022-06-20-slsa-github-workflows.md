@@ -21,7 +21,7 @@ All it takes is to install it via the GitHub dashboard. The starter workflow wil
 The workflow will look like the following:
 
 ```yaml
-uses: slsa-framework/slsa-github-generator/.github/workflows/builder_go_slsa3.yml@v1.0.0
+uses: slsa-framework/slsa-github-generator/.github/workflows/builder_go_slsa3.yml@v1.1.1
 ```
 
 You can find an end-to-end example as used by [Scorecard](https://github.com/ossf/scorecard): [workflow](https://github.com/ossf/scorecard/blob/main/.github/workflows/slsa-goreleaser.yml) and [configuration file](https://github.com/ossf/scorecard/blob/main/.slsa-goreleaser.yml). The workflows produced provenance for the v4.4.0 [linux/amd64](https://github.com/ossf/scorecard/releases/tag/v4.4.0) build.
@@ -33,7 +33,7 @@ The verification tool validates the signed provenance and exposes arguments to v
 To install the verification CLI tool, run:
 
 ```shell
-  go install github.com/slsa-framework/slsa-verifier@v1.0.0
+  go install github.com/slsa-framework/slsa-verifier@v1.1.0
 ```
 
 As an example, you can use the CLI tool to verify the latest Scorecard release. Download the Scorecard binary and its SLSA provenance [here](https://github.com/ossf/scorecard/releases/tag/v4.4.0).
