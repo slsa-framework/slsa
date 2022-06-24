@@ -72,7 +72,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
                     </ul>
                     </p>
                     <p class="mb-10">
-                        The list of tools is not exhaustive. If there are tools missing from this list, please <a href="https://github.com/slsa-framework/slsa/issues">create a GitHub issue</a>
+                        The list of tools is not exhaustive. If there are tools missing from this list, please <a href="https://github.com/slsa-framework/slsa/issues">create a GitHub issue</a>.
                     </p>
                     <p class="h4 font-bold mb-6" id="tools">Tools</p>
                     <ul class="list-disc mt-6 mb-10 pl-6">
