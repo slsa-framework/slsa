@@ -72,15 +72,15 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
                     </ul>
                     </p>
                     <p class="mb-10">
-                        The list of tools is not exhaustive. If you believe there are tools that shoudl be added to the list, please <a href="https://github.com/slsa-framework/slsa/issues" class="cta-link font-semibold h5 center mt-8">create a GitHub issue</a>
+                        The list of tools is not exhaustive. If there are tools missing from this list, please <a href="https://github.com/slsa-framework/slsa/issues">create a GitHub issue</a>
                     </p>
                     <p class="h4 font-bold mb-6" id="tools">Tools</p>
-                    <ul class="list-disc mt-6 pl-6">
+                    <ul class="list-disc mt-6 mb-10 pl-6">
                         <li><a href="https://github.com/slsa-framework/slsa-github-generator">GitHub actions builders and generators</a> (SLSA level 3)</li>
                     </ul>
                     <p class="h4 font-bold mb-6">Celebrate</p>
                     <ul class="list-decimal mt-6 mb-10 pl-6">
-                        <li>Update your documentation to let users know you generate provenance and encourage them to verify when downloading your binaries</li>
+                        <li>Update your documentation to let users know you generate provenance and encourage them to verify it when downloading your binaries</li>
                         <li>You’re now generating non-forgeable <a href="https://slsa.dev/">SLSA provenance</a> that meets the <a href="https://slsa.dev/spec/v0.1/requirements#build-requirements">build</a> and <a href="https://slsa.dev/spec/v0.1/requirements#provenance-requirements">provenance</a> requirements for <a href="https://slsa.dev/spec/v0.1/levels">SLSA level 3 and above</a>! Add the <a href="images/SLSA-Badge-full-level3.svg">SLSA Level 3 badge</a> to your project's readme.</li>
                     </ul>
                 </div>
