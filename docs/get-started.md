@@ -62,7 +62,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
                 <div class="bg-white h-full rounded-lg p-10">
                     <p class="h4 font-bold mb-6">Overview<p>
                     <p>
-                        This guide will help you achieve the "Build & Provenance requirements" of Level 3, and it should take less than a couple of hours for an individual project. The goals is to achieve the following requirements:
+                        This guide will help you achieve the <a href="https://slsa.dev/spec/v0.1/requirements#build-requirements">build</a> and <a href="https://slsa.dev/spec/v0.1/requirements#provenance-requirements">provenance</a> requirements of Level 3, and it should take less than a couple of hours for an individual project. The goals is to achieve the following requirements:
                     <ul class="list-disc my-6 pl-6">
                         <li><a href="https://slsa.dev/spec/v0.1/requirements#build-as-code">Build as code</a></li>
                         <li><a href="https://slsa.dev/spec/v0.1/requirements#ephemeral-environment">Ephemeral environment</a></li>
