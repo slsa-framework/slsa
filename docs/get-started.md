@@ -80,7 +80,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
                     </ul>
                     <p class="h4 font-bold mb-6">Celebrate</p>
                     <ul class="list-decimal mt-6 mb-10 pl-6">
-                        <li>Update your documentation to let users know you generate provenance and encourage them to verify it when downloading your binaries. Also, consider contributing to the [SLSA blog](https://slsa.dev/blog) and let others know about your journey, or submit a [case study](https://github.com/slsa-framework/slsa/tree/main/case-studies)!</li>
+                        <li>Update your documentation to let users know you generate provenance and encourage them to verify it when downloading your binaries. Also, consider contributing to the <a href="https://slsa.dev/blog">SLSA blog</a> and let others know about your journey, or submit a <a href="https://github.com/slsa-framework/slsa/tree/main/case-studies">case study</a>!</li>
                         <li>You’re now generating non-forgeable <a href="https://slsa.dev/">SLSA provenance</a> that meets the <a href="https://slsa.dev/spec/v0.1/requirements#build-requirements">build</a> and <a href="https://slsa.dev/spec/v0.1/requirements#provenance-requirements">provenance</a> requirements for <a href="https://slsa.dev/spec/v0.1/levels">SLSA level 3 and above</a>! Add the <a href="images/SLSA-Badge-full-level3.svg">SLSA Level 3 badge</a> to your project's readme.</li>
                     </ul>
                 </div>
