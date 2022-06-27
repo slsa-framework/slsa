@@ -46,6 +46,49 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
         </div>
     </div>
 </section>
+
+<section class="section bg-pastel-green flex justify-center items-center">
+    <div class="wrapper inner w-full">
+        <div class="md:flex justify-between items-start mb-16">
+            <div class="text w-full md:w-1/3">
+<div class="h2 p-0">
+
+## Reaching SLSA Level 3
+
+</div>
+<p class="h4 font-semibold my-6 text-green-dark">Effort: Low</p>
+            </div>
+            <div class="w-full md:w-2/3">
+                <div class="bg-white h-full rounded-lg p-10">
+                    <p class="h4 font-bold mb-6">Overview<p>
+                    <p>
+                        This guide will help you achieve the <a href="https://slsa.dev/spec/v0.1/requirements#build-requirements">build</a> and <a href="https://slsa.dev/spec/v0.1/requirements#provenance-requirements">provenance</a> requirements of Level 3, and it should take less than a couple of hours for an individual project. The goals is to achieve the following requirements:
+                    <ul class="list-disc my-6 pl-6">
+                        <li><a href="https://slsa.dev/spec/v0.1/requirements#build-as-code">Build as code</a></li>
+                        <li><a href="https://slsa.dev/spec/v0.1/requirements#ephemeral-environment">Ephemeral environment</a></li>
+                        <li><a href="https://slsa.dev/spec/v0.1/requirements#isolated">Isolated</a></li>
+                        <li><a href="https://slsa.dev/spec/v0.1/requirements#parameterless">Parameterless</a></li>
+                        <li><a href="https://slsa.dev/spec/v0.1/requirements#non-falsifiable">Non-falsifiable</a></li>
+                    </ul>
+                    </p>
+                    <p class="mb-10">
+                        The list of tools is not exhaustive. If there are tools missing from this list, please <a href="https://github.com/slsa-framework/slsa/issues">create a GitHub issue</a>.
+                    </p>
+                    <p class="h4 font-bold mb-6" id="tools">Tools</p>
+                    <ul class="list-disc mt-6 mb-10 pl-6">
+                        <li><a href="https://github.com/slsa-framework/slsa-github-generator">GitHub actions builders and generators</a> (SLSA level 3)</li>
+                    </ul>
+                    <p class="h4 font-bold mb-6">Celebrate</p>
+                    <ul class="list-decimal mt-6 mb-10 pl-6">
+                        <li>Update your documentation to let users know you generate provenance and encourage them to verify it when downloading your binaries. Also, consider contributing to the <a href="https://slsa.dev/blog">SLSA blog</a> and let others know about your journey, or submit a <a href="https://github.com/slsa-framework/slsa/tree/main/case-studies">case study</a>!</li>
+                        <li>You’re now generating non-forgeable <a href="https://slsa.dev/">SLSA provenance</a> that meets the <a href="https://slsa.dev/spec/v0.1/requirements#build-requirements">build</a> and <a href="https://slsa.dev/spec/v0.1/requirements#provenance-requirements">provenance</a> requirements for <a href="https://slsa.dev/spec/v0.1/levels">SLSA level 3 and above</a>! Add the <a href="images/SLSA-Badge-full-level3.svg">SLSA Level 3 badge</a> to your project's readme.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="section bg-white flex justify-center items-center">
     <div class="wrapper inner w-full">
         <div class="justify-between items-start md:-mr-10 md:-ml-10">
