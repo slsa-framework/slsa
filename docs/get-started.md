@@ -40,6 +40,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
                         <li><a href="https://github.com/slsa-framework/azure-devops-demo">Azure DevOps provenance generator</a> (SLSA level 1)</li>
                         <li><a href="https://cloud.google.com/build/docs/securing-builds/use-provenance-and-binary-authorization">Google Cloud Build</a> (SLSA level 2)</li>
                         <li><a href="https://github.com/sigstore/cosign">Sigstore Cosign for storing signed provenance</a></li>
+                        <li><a href="https://github.com/buildsec/frsca">OpenSSF - Factory for Repeatable Secure Creation of Artifacts (FRSCA)</a> (Currently SLSA level 2)</li>
                     </ul>
                 </div>
             </div>
