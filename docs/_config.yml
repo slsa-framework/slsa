@@ -17,7 +17,7 @@ exclude:
   - Gemfile.lock
   - Makefile
   - README.md
-  - vendor/
+  - vendor/bundle
 goatcounter:
   endpoint: https://slsa.goatcounter.com/count
 theme: minima

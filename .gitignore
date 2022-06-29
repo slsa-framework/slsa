@@ -4,4 +4,4 @@
 .sass-cache
 _site
 node_modules
-/docs/vendor
+/docs/vendor/bundle

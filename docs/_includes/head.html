@@ -3,7 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {%- seo title=false -%}
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ "vendor/tailwindcss-2.2.19/tailwind.min.css" | relative_url }}">
     <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ "images/icons/apple-touch-icon.png" | relative_url }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ "images/icons/favicon-32x32.png" | relative_url }}">
@@ -16,15 +16,13 @@
     <meta name="theme-color" content="#ffffff" />
     <title>{{ site.title }} • {{page.title}}</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="{{site.baseurl}}/fonts/fonts.css" />
+    <link rel="stylesheet" href="{{ "fonts/inter/inter.css" | relative_url }}">
+    <link rel="stylesheet" href="{{ "fonts/ibm_plex/IBMPlexMono-Regular.css" | relative_url }}">
+    <link rel="stylesheet" href="{{ "fonts/prodigy/ProdigySans.css" | relative_url }}">
 
-    <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css"/>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="{{ "vendor/swiper-6.8.4/swiper-bundle.min.js" | relative_url }}"></script>
+    <link rel="stylesheet" href="{{ "vendor/swiper-6.8.4/swiper-bundle.min.css" | relative_url }}">
+    <script defer src="{{ "vendor/alpinejs-3.10.2/cdn.min.js" | relative_url }}"></script>
     {%- feed_meta -%}
     {%- if jekyll.environment == 'production' -%}
     {%- include analytics.html -%}
