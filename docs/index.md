@@ -22,7 +22,7 @@ testimonials:
     - 1:
         quote: This is our chance to work with the industry, set a standard which we can all agree to, and work together to raise the collective bar.
         name: Trishank Karthik Kuppusamy
-        role: Engineering Manager at Datadog
+        role: Staff Engineer at Datadog
         logo: /images/datadog.png
     - 2:
         quote: Software supply chain visibility will become a cross-industry need to establish best practices and trusted evidence in each link.
@@ -32,7 +32,7 @@ testimonials:
     - 3:
         quote: Having a common language and standard for objectively measuring our supply chain security is a must in order to even begin meeting EO 14028.
         name: Trishank Karthik Kuppusamy
-        role: Engineering Manager at Datadog
+        role: Staff Engineer at Datadog
         logo: /images/datadog.png
     - 4:
         quote: The threat to the software supply chain is real and growing, 650% from the last year. However, changing development process without slowing down is a major barrier.
