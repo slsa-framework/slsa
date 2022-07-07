@@ -400,9 +400,11 @@ Provenance cannot be falsified by the build service's users.
 
 NOTE: This requirement is a stricter version of [Service Generated](#service-generated).
 
--   The provenance signing key MUST be stored in a secure key management system
-    accessible only to the build service account.
--   The provenance signing key MUST NOT be accessible to the environment running
+-   Any secret material used to demonstrate the non-falsifiable nature of
+    the provenance, for example the signing key used to generate a digital
+    signature, MUST be stored in a secure management system appropriate for
+    such material and accessible only to the build service account.
+-   Such secret material MUST NOT be accessible to the environment running
     the user-defined build steps.
 -   Every field in the provenance MUST be generated or verified by the build
     service in a trusted control plane. The user-controlled build steps MUST
