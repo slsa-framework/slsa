@@ -27,7 +27,6 @@ model. Subsequent sections analyze each layer.
 [PASETO]: https://paseto.io
 [SPDX]: https://github.com/spdx/spdx-spec
 [Simple Signing]: https://github.com/containers/image/blob/master/docs/containers-signature.5.md
-[sigstore]: https://www.sigstore.dev/
 [in-toto v1]: https://github.com/in-toto/docs/blob/master/in-toto-spec.md
 [in-toto v2]: https://github.com/in-toto/attestation
 
@@ -40,13 +39,12 @@ Raw signing            | ✓        | ✓         | ✗         |         |     
 [OpenPGP]              | ✓        |           |           |         |            |        | IETF Standard
 [PASETO]               | ✓        |           |           |         |            |        | Stable
 [DSSE]                 | ✓        |           |           |         |            |        | In development
-[in-toto v1]           | ✓        | ✓         | ✓         |         | ✓         | ✓      | Stable
+[in-toto v1]           | ✓        | ✓         | ✓         |         | ✓          | ✓      | Stable
 [Notary v2]            | ~        | ✓         | ✗         | ✓       |            | ✓      | In development
 [Simple Signing]       | ~        | ✓         |           |         |            |        | Stable
 [in-toto v2]           | ~        | ✓         |           |         |            |        | In development
 [SPDX]                 |          |           | ✓         |         |            |        | Stable
 [Binary Authorization] | ~        | ~         | ✗         | ~       |            | ✓      | Stable
-[sigstore]             |          |           |           | ✓       | ✓          | ✓      | Stable
 
 Legend:
 
