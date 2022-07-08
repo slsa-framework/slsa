@@ -29,6 +29,7 @@ model. Subsequent sections analyze each layer.
 [Simple Signing]: https://github.com/containers/image/blob/master/docs/containers-signature.5.md
 [in-toto v1]: https://github.com/in-toto/docs/blob/master/in-toto-spec.md
 [in-toto v2]: https://github.com/in-toto/attestation
+[sigstore]: https://www.sigstore.dev/
 
 Project                | Envelope | Statement | Predicate | Storage | Generation | Policy | Status
 ---------------------- | -------- | --------- | --------- | ------- | ---------- | ------ | ------
@@ -45,6 +46,7 @@ Raw signing            | ✓        | ✓         | ✗         |         |     
 [in-toto v2]           | ~        | ✓         |           |         |            |        | In development
 [SPDX]                 |          |           | ✓         |         |            |        | Stable
 [Binary Authorization] | ~        | ~         | ✗         | ~       |            | ✓      | Stable
+[sigstore]             |          |           |           | ✓       | ✓          | ✓      | Stable
 
 Legend:
 
