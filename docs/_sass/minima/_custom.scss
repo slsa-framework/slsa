@@ -477,5 +477,8 @@ details {
 .fix-paragraph-spacing {
   p, ul, ol {
     margin-bottom: 12px;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
