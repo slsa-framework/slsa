@@ -36,10 +36,12 @@
                 <li>
                   {%- if subitem.spacer %}
                   <hr>
-                  {%- else %}
+                  {%- elsif subitem.url %}
                   <a class="text-white md:text-black" href="{{ subitem.url | relative_url }}">
                     {{ subitem.title | escape }}
                   </a>
+                  {%- else %}
+                  <em>{{ subitem.title }}:</em>
                   {%- endif %}
                 </li>
               {%- endfor %}
