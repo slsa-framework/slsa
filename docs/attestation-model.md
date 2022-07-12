@@ -6,8 +6,11 @@ hero_text: A software attestation is a signed statement (metadata) about a softw
 
 ## Purpose
 
-Provided standardized terminology, data model, layers, and conventions for software
-artifact metadata.
+The software attestations model provides standardized terminology, data model, layers,
+and conventions for authenticated software artifact metadata.
+
+The primary intended use case is to feed into automated policy engines, such as
+[in-toto] and [Binary Authorization].
 
 ## Overview
 
@@ -31,13 +34,6 @@ signature is directly over the artifact or a hash of artifact:
     raw signing. For example, an attestation might state exactly how an artifact
     was produced, including the build command that was run and all of its
     dependencies.
-
-## Intended Use Case
-
-The primary intended use case is to feed into automated policy engines, such as
-[in-toto] and [Binary Authorization].
-
-Other use cases are "nice-to-haves", including ad-hoc analysis.
 
 ## Model and Terminology
 
