@@ -52,12 +52,13 @@ Example in English:
 
 Summary:
 
--   **Artifact:** Immutable blob of data, usually identified by cryptographic
-    content hash. Examples: file content, git commit, Docker image. May also
-    include a mutable locator, such as a package name or URI.
+-   **Artifact:** Immutable blob of data described by an attestation, usually
+    identified by cryptographic content hash. Examples: file content, git
+    commit, Docker image. May also include a mutable locator, such as a package
+    name or URI.
 
 -   **Attestation:** Authenticated, machine-readable metadata about one or more
-    software artifacts. MUST contain at least:
+    software artifacts. An attestation MUST contain at least:
 
     -   **Envelope:** Authenticates the message. At a minimum, it contains:
 
