@@ -29,12 +29,6 @@ Reducing risk within an organization from insiders and compromised accounts
 </div>
 <div class="md:w-2/3">
 
-<!--
-SLSA can be used entirely within an organization to reduce the risk of tampering
-by insiders or compromised insider credentials. In other words, SLSA protects
-an organization's first party software.
--->
-
 In its simplest form, SLSA can be used entirely within an organization to reduce
 risk from internal sources. This is the easiest case in which to apply SLSA
 because there is no need to transfer trust across organizational boundaries.
