@@ -1,0 +1,11 @@
+[build]
+base = "docs/"
+publish = "_site/"  # relative to `base` directory
+command = "bundle exec jekyll build"
+
+[context.environment]
+JEKYLL_ENV = "development"
+[context.production.environment]
+JEKYLL_ENV = "production"
+[context.draft.environment]
+JEKYLL_ENV = "draft"
