@@ -24,3 +24,13 @@
     <a rel="author" href="{{ "/" | relative_url }}"><img src="{{ site.baseurl }}/images/logo.svg" alt="{{site.title}} logo" /></a>
   </div>
 </footer>
+{% if jekyll.environment == "draft" -%}
+<section class="important-messages">
+  <div>
+    <p>
+      This is an unreviewed draft.
+      <a href="https://slsa.dev">View latest official version</a>
+    </p>
+  </div>
+</section>
+{%- endif %}
