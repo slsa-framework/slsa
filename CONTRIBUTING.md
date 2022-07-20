@@ -6,6 +6,8 @@ our [Code of Conduct](code-of-conduct.md) when engaging with the SLSA community.
 The SLSA project is authored on GitHub using [Issues] to describe proposed work
 and [Pull Requests] to submit changes.
 
+If you would like to contribute to the SLSA Blog, please see: https://github.com/slsa-framework/governance/blob/main/6._Contributing.md
+
 For other ways to engage with the SLSA community, see our [README](README.md).
 
 [Issues]: https://github.com/slsa-framework/slsa/issues
