@@ -63,13 +63,13 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
                 <div class="bg-white h-full rounded-lg p-10">
                     <p class="h4 font-bold mb-6">Overview<p>
                     <p>
-                        This guide will help you achieve the <a href="https://slsa.dev/spec/v0.1/requirements#build-requirements">build</a> and <a href="https://slsa.dev/spec/v0.1/requirements#provenance-requirements">provenance</a> requirements of Level 3, and it should take less than a couple of hours for an individual project. The goals is to achieve the following requirements:
+                        This guide will help you achieve the <a href="/spec/v0.1/requirements#build-requirements">build</a> and <a href="/spec/v0.1/requirements#provenance-requirements">provenance</a> requirements of Level 3, and it should take less than a couple of hours for an individual project. The goals is to achieve the following requirements:
                     <ul class="list-disc my-6 pl-6">
-                        <li><a href="https://slsa.dev/spec/v0.1/requirements#build-as-code">Build as code</a></li>
-                        <li><a href="https://slsa.dev/spec/v0.1/requirements#ephemeral-environment">Ephemeral environment</a></li>
-                        <li><a href="https://slsa.dev/spec/v0.1/requirements#isolated">Isolated</a></li>
-                        <li><a href="https://slsa.dev/spec/v0.1/requirements#parameterless">Parameterless</a></li>
-                        <li><a href="https://slsa.dev/spec/v0.1/requirements#non-falsifiable">Non-falsifiable</a></li>
+                        <li><a href="/spec/v0.1/requirements#build-as-code">Build as code</a></li>
+                        <li><a href="/spec/v0.1/requirements#ephemeral-environment">Ephemeral environment</a></li>
+                        <li><a href="/spec/v0.1/requirements#isolated">Isolated</a></li>
+                        <li><a href="/spec/v0.1/requirements#parameterless">Parameterless</a></li>
+                        <li><a href="/spec/v0.1/requirements#non-falsifiable">Non-falsifiable</a></li>
                     </ul>
                     </p>
                     <p class="mb-10">
@@ -81,8 +81,8 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
                     </ul>
                     <p class="h4 font-bold mb-6">Celebrate</p>
                     <ul class="list-decimal mt-6 mb-10 pl-6">
-                        <li>Update your documentation to let users know you generate provenance and encourage them to verify it when downloading your binaries. Also, consider contributing to the <a href="https://slsa.dev/blog">SLSA blog</a> and let others know about your journey, or submit a <a href="https://github.com/slsa-framework/slsa/tree/main/case-studies">case study</a>!</li>
-                        <li>You’re now generating non-forgeable <a href="https://slsa.dev/">SLSA provenance</a> that meets the <a href="https://slsa.dev/spec/v0.1/requirements#build-requirements">build</a> and <a href="https://slsa.dev/spec/v0.1/requirements#provenance-requirements">provenance</a> requirements for <a href="https://slsa.dev/spec/v0.1/levels">SLSA level 3 and above</a>! Add the <a href="images/SLSA-Badge-full-level3.svg">SLSA Level 3 badge</a> to your project's readme.</li>
+                        <li>Update your documentation to let users know you generate provenance and encourage them to verify it when downloading your binaries. Also, consider contributing to the <a href="/blog">SLSA blog</a> and let others know about your journey, or submit a <a href="https://github.com/slsa-framework/slsa/tree/main/case-studies">case study</a>!</li>
+                        <li>You’re now generating non-forgeable <a href="/provenance/">SLSA provenance</a> that meets the <a href="/spec/v0.1/requirements#build-requirements">build</a> and <a href="/spec/v0.1/requirements#provenance-requirements">provenance</a> requirements for <a href="/spec/v0.1/levels">SLSA level 3 and above</a>! Add the <a href="images/SLSA-Badge-full-level3.svg">SLSA Level 3 badge</a> to your project's readme.</li>
                     </ul>
                 </div>
             </div>
