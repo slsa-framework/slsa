@@ -74,7 +74,7 @@ Finally, note that all of this is just for curl's own first-party supply chain
 steps. The dependencies, namely the Alpine base image and packages, have their
 own similar threats. And they too have dependencies, which have other
 dependencies, and so on. Each dependency has its
-[own SLSA level](#scope-of-slsa) and the
+own SLSA level and the
 [composition of SLSA levels](#composition-of-slsa-levels) describes the entire
 supply chain's security.
 
