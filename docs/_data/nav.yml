@@ -25,6 +25,11 @@
 
     - spacer: true
 
+    - title: Attestations
+
+    - title: General Model
+      url: /attestation-model
+
     - title: Provenance
       url: /provenance/v0.2
 
