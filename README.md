@@ -29,7 +29,7 @@ SLSA is currently led by an initial cross-organization, vendor-neutral steering 
 -   [Joshua Lock](https://github.com/joshuagl) - VMware
 -   [Kim Lewandowksi](https://github.com/kimsterv) - Chainguard
 -   [Mark Lodato](https://github.com/MarkLodato) - Google
--   [Mike Lieberman](https://github.com/mlieberman85) - Citi/CNCF
+-   [Mike Lieberman](https://github.com/mlieberman85) - Kusari/CNCF
 -   [Trishank Karthik Kuppusamy](https://github.com/trishankatdatadog) - Datadog
 
 Shortcut to notify the steering committee on any issues/PRs:
