@@ -46,3 +46,7 @@ MD047: true
 # MD048/code-fence-style - Code fence style
 MD048:
   style: "backtick"
+
+# Disable checks that currently have bugs:
+MD051: false  # https://github.com/DavidAnson/markdownlint/issues/538
+MD053: false  # https://github.com/DavidAnson/markdownlint/issues/537

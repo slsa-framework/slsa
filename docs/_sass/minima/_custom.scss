@@ -471,3 +471,14 @@ details {
   font-family: "Prodigy";
   line-height: 1;
 }
+
+// This is a hack to fix paragraph spacing. Really the theme should be fixed.
+// See https://github.com/slsa-framework/slsa/issues/335.
+.fix-paragraph-spacing {
+  p, ul, ol {
+    margin-bottom: 12px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

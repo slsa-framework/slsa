@@ -241,10 +241,20 @@ Examples: GitHub Actions, Google Cloud Build, Travis CI.
 <td>Build as code
 <td>
 
-The build definition and configuration is defined in text files, stored in a
-version control system, and is executed by the build service.
+The build definition and configuration executed by the build service is
+verifiably derived from text file definitions stored in a version control
+system.
 
-Examples: cloudbuild.yaml, .github/workflows/build.yaml, zuul.yaml.
+Verifiably derived can mean either fetched directly through a trusted channel,
+or that the derived definition has some trustworthy provenance chain linking
+back to version control.
+
+Examples:
+
+-   .github/workflows/build.yaml stored in git
+-   Tekton bundles generated from text files by a SLSA compliant build process
+    and stored in an OCI registry with SLSA provenance metadata available.
+
 <td> <td> <td>✓<td>✓
 <tr id="ephemeral-environment">
 <td>Ephemeral environment
@@ -390,9 +400,11 @@ Provenance cannot be falsified by the build service's users.
 
 NOTE: This requirement is a stricter version of [Service Generated](#service-generated).
 
--   The provenance signing key MUST be stored in a secure key management system
-    accessible only to the build service account.
--   The provenance signing key MUST NOT be accessible to the environment running
+-   Any secret material used to demonstrate the non-falsifiable nature of
+    the provenance, for example the signing key used to generate a digital
+    signature, MUST be stored in a secure management system appropriate for
+    such material and accessible only to the build service account.
+-   Such secret material MUST NOT be accessible to the environment running
     the user-defined build steps.
 -   Every field in the provenance MUST be generated or verified by the build
     service in a trusted control plane. The user-controlled build steps MUST
@@ -460,13 +472,13 @@ individual instructions in build.sh).
 
 If <a href="#build-as-code">build-as-code</a> is used, this SHOULD be the
 source repo and entry point of the build config (as in
-[the GitHub Actions example](https://slsa.dev/provenance/v0.2#github-actions)).
+[the GitHub Actions example](/provenance/v0.2#github-actions)).
 
 If the build isn't defined in code it MAY list the details of what it was
 asked to do (as in
-[the Google Cloud Build RPC example](https://slsa.dev/provenance/v0.2#cloud-build-rpc)
+[the Google Cloud Build RPC example](/provenance/v0.2#cloud-build-rpc)
 or
-[the Explicitly Run Commands example](https://slsa.dev/provenance/v0.2#explicitly-run-commands)).
+[the Explicitly Run Commands example](/provenance/v0.2#explicitly-run-commands)).
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="identifies-source-code">

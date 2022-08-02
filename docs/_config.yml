@@ -4,9 +4,6 @@ logo: /images/icons/android-chrome-512x512.png
 copyright_html: Copyright 2021 The Linux Foundation<br>under the terms of the <a href="https://github.com/slsa-framework/slsa/blob/main/LICENSE">Apache License 2.0</a>
 repository: slsa-framework/slsa
 collections:
-  spec:
-    layout: specifications
-    output: true
   posts:
     layout: post
     output: true
@@ -17,7 +14,7 @@ exclude:
   - Gemfile.lock
   - Makefile
   - README.md
-  - vendor/
+  - vendor/bundle
 goatcounter:
   endpoint: https://slsa.goatcounter.com/count
 theme: minima
@@ -56,9 +53,9 @@ defaults:
     values:
       image: true
   - scope:
-      path: "_spec"
+      path: "spec"
     values:
-      folder: true
+      layout: "specifications"
   - scope:
       path: "_posts"
     values:
