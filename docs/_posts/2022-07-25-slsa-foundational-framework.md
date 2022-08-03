@@ -4,6 +4,7 @@ author: "Jennifer Privette"
 is_guest_post: true
 ---
 
+<!-- markdownlint-disable MD036 -->
 *In coordination with Aaron Bacchi, Emmy Eide, Melba Lopez, Brandon Lum, and Moshe Zioni*
 
 SUMMARY: Software security frameworks are beginning to give organizations foundational guidance they can build on so that they can start small with easily achievable tasks, and then increase to the highest assurances of integrity. SLSA does this in four levels of maturity. NIST also recently updated one of its main cybersecurity frameworks with foundational guidance. This blog shows examples of foundational guidance from both SLSA and NIST and introduces a mapping document that illustrates the correlation among SLSA and other existing frameworks.
