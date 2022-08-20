@@ -43,7 +43,7 @@ hero_text: There’s an active community of members, contributors and collaborat
 <section class="section relative bg-green-transparent flex justify-center items-center overflow-hidden">
     <img class="object-cover absolute w-full h-full z-0" src="images/community-bg.png" alt="Community background image">
     <div class="bg-light-green h-full rounded-lg p-10 z-10 w-4/5 md:w-2/3 mx-auto">
-        <p class="font-bold h3 mb-6">“SLSA’s really the first of its kind, a framework for supply chain and build integrity. What sets it apart is the thriving community behind it, and it’s resonating with different organizations.”</p>
+        <p class="font-bold h3 mb-6">“SLSA’s really the first of its kind, a framework for supply chain and build integrity. What sets it apart is the thriving community behind it, and its resonating with different organizations.”</p>
         <p class="font-semibold h4 mb-0.5">Kim Lewandowski</p>
         <p class="font-regular">Founder, Chainguard</p>
     </div>
