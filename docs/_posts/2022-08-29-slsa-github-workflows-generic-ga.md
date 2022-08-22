@@ -48,7 +48,7 @@ provenance:
     base64-subjects: "${{ needs.build.outputs.hashes }}"
 ```
 
-Provenance is then created, signed by the workflow, and attached to your build. The generic generator workflow will also optionally upload the provenance to a GitHub release. You can read more about the available options in the [documentation](https://github.com/slsa-framework/slsa-github-generator/tree/main/internal/builders/generic).
+Provenance is then created, signed by the workflow, and attached to your build. The generic generator workflow will also optionally upload the provenance to a GitHub release as a `.intoto.jsonl` file named `provenance.intoto.jsonl` by default. This file will used to verify the release in the next step. You can read more about the available options in the [documentation](https://github.com/slsa-framework/slsa-github-generator/tree/main/internal/builders/generic).
 
 ### Step 3: Verification
 
@@ -60,7 +60,7 @@ To install the verification CLI tool, run:
 go install github.com/slsa-framework/slsa-verifier@v1.2.0
 ```
 
-Once you have installed the tool you can verify provenance as follows:
+Once you have installed the tool and downloaded the provenance from the release you can verify it as follows:
 
 ```shell
 $ slsa-verifier \
