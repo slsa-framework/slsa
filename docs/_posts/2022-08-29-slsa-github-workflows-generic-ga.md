@@ -68,7 +68,7 @@ $ slsa-verifier \
      --provenance ./provenance.intoto.jsonl \
      # The expected source repository.
      --source github.com/ianlewis/actions-test \
-         # The expected release tag of the artifact
+     # The expected release tag of the artifact
      --tag v0.0.39
 ...
 PASSED: Verified SLSA provenance
