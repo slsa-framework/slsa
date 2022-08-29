@@ -57,7 +57,7 @@ Users of a project can verify the provenance using [slsa-verifier](https://githu
 To install the verification CLI tool, run:
 
 ```shell
-go install github.com/slsa-framework/slsa-verifier@v1.2.0
+go install github.com/slsa-framework/slsa-verifier/cli/slsa-verifier@v1.3.0
 ```
 
 Once you have installed the tool and downloaded the provenance from the release you can verify it as follows:
