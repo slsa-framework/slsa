@@ -45,7 +45,7 @@ provenance:
     contents: write # Needed for release uploads.
   uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.2.0
   with:
-    base64-subjects: "${{ needs.build.outputs.hashes }}"
+    base64-subjects: "{% raw %}${{ needs.build.outputs.hashes }}{% endraw %}"
 ```
 
 Provenance is then created, signed by the workflow, and attached to your build. The generic generator workflow will also optionally upload the provenance to a GitHub release as a `.intoto.jsonl` file named `provenance.intoto.jsonl` by default. This file will used to verify the release in the next step. You can read more about the available options in the [documentation](https://github.com/slsa-framework/slsa-github-generator/tree/main/internal/builders/generic).
