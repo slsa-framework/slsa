@@ -61,6 +61,17 @@ We rely on feedback from other organizations to evolve SLSA and be more useful t
 -   Our mailing list is [slsa-discussion@googlegroups.com](https://groups.google.com/g/slsa-discussion).
 -   You can join our chat on the OpenSSF Slack [here](https://openssf.slack.com/archives/C029E4N3DPF)
 
+## License
+
+All SLSA specification content contributed following adoption of the Community
+Specification governance model is provided under the
+[Community Specification License 1.0](LICENSE.md).
+
+Pre-existing portions of the SLSA specification from contributors who have not
+subsequently contributed under the Community Specification License 1.0 following
+its adoption are provided under the
+[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt).
+
 <!-- Links -->
 
 [slsa.dev]: https://slsa.dev
