@@ -39,3 +39,12 @@
     </div>
   </div>
   </header>
+
+{%- if site.data.versions[page.spec_name].versions[page.version].draft %}
+<section class="important-messages">
+  <div>
+    <p>This is an unpublished draft that is subject to change.</p>
+    <p><a href="{{ page.url | replace: page.version, site.data.versions[page.spec_name].current }}">View latest published version</a></p>
+  </div>
+</section>
+{%- endif %}

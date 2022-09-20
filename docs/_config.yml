@@ -70,6 +70,10 @@ defaults:
   # the template by parsing the URL, but that's not possible with liquid
   # templates.
   - scope:
+      path: "spec"
+    values:
+      spec_name: spec
+  - scope:
       path: "spec/v1.0"
     values:
       version: v1.0

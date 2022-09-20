@@ -3,11 +3,13 @@ spec:
     # The key matches `page.version`, set in _config.yml.
     # Available fields:
     #    name (string, required): Display name of the version
+    #    draft (bool, optional): If true, display a "draft" warning banner.
     #    hidden (bool, optional): If true, do not show in dropdown.
     v0.1:
       name: Version 0.1
     v1.0:
       name: Version 1.0 (DRAFT)
+      draft: true
       # We will hide 1.0 until it is ready for review. Viewers can still type
       # the URL manually, but we will not link to it from the main page.
       hidden: true
