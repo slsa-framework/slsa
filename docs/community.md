@@ -14,7 +14,7 @@ hero_text: There’s an active community of members, contributors and collaborat
 
 </div>
 
-The SLSA project is an open-source project that strives to make useful and
+The SLSA project is an open source project that strives to make useful and
 practical standards, tools, and documentation to reduce software supply chain
 risk in the real world. To succeed, we rely on contributors from a variety
 organizations to help us improve. Whether that's reporting successes or
@@ -42,9 +42,9 @@ developing tooling and services, we welcome your contributions.
                 <div class="bg-pastel-green h-full rounded-lg p-10">
                     <p class="h4 font-semibold mb-6">Special Interest Groups (SIGs)</p>
                     <p>To get more deeply involved in SLSA, we welcome your participation in the following special interest groups (SIGs). See linked meeting notes for more info, including meeting times and Slack channel.</p>
-                    <a href="" class="cta-link mt-6 font-semibold h5">Specification SIG</a>
-                    <a href="" class="cta-link mt-6 font-semibold h5">Tooling SIG</a>
-                    <a href="" class="cta-link mt-6 font-semibold h5">Positioning SIG</a>
+                    <a href="notes/specification" class="cta-link mt-6 font-semibold h5">Specification SIG</a>
+                    <a href="notes/tooling" class="cta-link mt-6 font-semibold h5">Tooling SIG</a>
+                    <a href="notes/positioning" class="cta-link mt-6 font-semibold h5">Positioning SIG</a>
                 </div>
             </div>
         </div>
