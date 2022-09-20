@@ -1,7 +1,5 @@
 ---
 title: Security levels
-version: 0.1
-layout: specifications
 ---
 <div class="subtitle">
 
