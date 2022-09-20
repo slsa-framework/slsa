@@ -1,7 +1,5 @@
 ---
 title: Threats and mitigations
-version: 0.1
-layout: specifications
 ---
 <div class="subtitle">
 
