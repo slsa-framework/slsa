@@ -5,36 +5,46 @@ hero_text: There’s an active community of members, contributors and collaborat
 ---
 <section class="section bg-white flex flex-col justify-center items-center">
     <div class="wrapper inner w-full">
-        <div class="flex flex-wrap justify-between items-start">
-            <div class="text w-full md:w-1/2">
+
+<div class="flex flex-wrap md:flex-nowrap gap-4">
+<div>
 <div class="h2 mb-8">
 
 ## Get involved
 
 </div>
-                <p>We rely on feedback from other organizations to evolve SLSA and be more useful to more people. We’d love to hear your experiences using it, and welcome all contributions, challenges and collaboration.</p>
-            </div>
-            <div class="md:w-5/12 w-full flex justify-center md:justify-end">
-                <img class="w-3/4 pl-6 mt-12" src="images/slsa-dancing-goose-logo.svg" alt="SLSA dancing goose image">
-            </div>
-        </div>
-        <div class="flex flex-wrap justify-center items-center w-6/7 mt-8 mx-auto md:-mr-5 md:-ml-5">
+
+The SLSA project is an open source project that strives to make useful and
+practical standards, tools, and documentation to reduce software supply chain
+risk in the real world. To succeed, we rely on contributors from a variety
+organizations to help us improve. Whether that's reporting successes or
+challenges, contributing changes to the specification or documentation, or
+developing tooling and services, we welcome your contributions.
+
+</div>
+
+<img src="images/slsa-dancing-goose-logo.svg" alt="SLSA dancing goose image">
+
+</div>
+        <div class="flex flex-wrap justify-center items-center w-6/7 mt-8 mx-auto md:-mr-5 md:-ml-5 clear-both">
             <div class="w-full md:w-1/2 getting_started_card md:pl-5 lg:h-96 h-auto lg:mb-0 mb-8">
                 <div class="bg-pastel-green h-full rounded-lg p-10">
-                    <p class="h4 font-semibold mb-6">Join the working group</p>
-                    <p>We’re part of the OpenSSF Supply Chain Integrity Working Group. The community meets bi-weekly on Thursdays at 9am PT. Anyone is welcome to join, whether to listen or to contribute.</p>
-                    <a target="_blank" href="https://calendar.google.com/calendar/embed?src=s63voefhp5i9pfltb5q67ngpes%40group.calendar.google.com&ctz=America%2FLos_Angeles" class="cta-link mt-6 font-semibold h5">The OpenSSF Community Calendar</a>
-                    <a target="_blank" href="https://github.com/ossf/wg-digital-identity-attestation" class="cta-link mt-6 font-semibold h5">Our discussion group</a>
+                    <p class="h4 font-semibold mb-6">General contributions</p>
+                    <p>For general questions, suggestions, or status updates, please use one of the following channels.</p>
+                    <a target="_blank" href="https://github.com/slsa-framework/slsa/blob/main/CONTRIBUTING.md" class="cta-link mt-6 font-semibold h5">Contribution guidelines</a>
+                    <a target="_blank" href="notes/community" class="cta-link mt-6 font-semibold h5">Community meeting (bi-weekly)</a>
+                    <a target="_blank" href="https://github.com/slsa-framework/slsa/issues" class="cta-link mt-6 font-semibold h5">GitHub issues (tracks all work)</a>
+                    <a target="_blank" href="https://openssf.slack.com/archives/C029E4N3DPF" class="cta-link mt-6 font-semibold h5" title="#slsa">Slack</a>
+                    <a target="_blank" href="https://groups.google.com/g/slsa-discussion" class="cta-link mt-6 font-semibold h5">Mailing list</a>
                 </div>
             </div>
             <div class="w-full md:w-1/2 getting_started_card md:pl-5 lg:h-96 h-auto lg:mb-0 mb-8">
                 <div class="bg-pastel-green h-full rounded-lg p-10">
-                    <p class="h4 font-semibold mb-6">Contribute and discuss</p>
-                    <p>The project is authored on GitHub using issues to describe proposed work and pull requests to submit changes. See our contribution guidelines for more details and to add your contribution.</p>
-                    <a target="_blank" href="https://github.com/slsa-framework/slsa/blob/main/CONTRIBUTING.md" class="cta-link mt-6 font-semibold h5">Contribution guidelines</a>
-                    <a target="_blank" href="https://github.com/slsa-framework/slsa/issues" class="cta-link mt-6 font-semibold h5">Leave us an issue on GitHub</a>
-                    <a target="_blank" href="https://groups.google.com/g/slsa-discussion" class="cta-link mt-6 font-semibold h5">Join our mailing list</a>
-                    <a target="_blank" href="https://openssf.slack.com/archives/C029E4N3DPF" class="cta-link mt-6 font-semibold h5">Chat with us on Slack</a>
+                    <p class="h4 font-semibold mb-6">Special Interest Groups (SIGs)</p>
+                    <p>To get more deeply involved in SLSA, we welcome your participation in the following special interest groups (SIGs). See linked meeting notes for more info, including meeting times and Slack channel.</p>
+                    <a href="notes/specification" class="cta-link mt-6 font-semibold h5">Specification SIG</a>
+                    <a href="notes/tooling" class="cta-link mt-6 font-semibold h5">Tooling SIG</a>
+                    <a href="notes/positioning" class="cta-link mt-6 font-semibold h5">Positioning SIG</a>
                 </div>
             </div>
         </div>
@@ -124,21 +134,22 @@ Google has been using an internal version of SLSA since 2013 and requires it for
             <div class="text w-full md:w-1/2">
 <div class="h2 p-0 mb-8 md:mb-0">
 
-## Contributors
+## Governance
 
 </div>
             </div>
             <div class="w-full md:w-1/2">
                 <div class="bg-pastel-green h-full rounded-lg p-10">
-                    <ul>
-                        <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/kimsterv">Kim Lewandowski</a></li>
-                        <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/MarkLodato">Mark Lodato</a></li>
-                        <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/TomHennen">Tom Hennen</a></li>
-                        <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/joshuagl">Joshua Lock</a> </li>
-                        <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/jchestershopify">Jacques Chester</a></li>
-                        <li>And <a target="_blank" class="font-bold text-green-darker" href="https://github.com/slsa-framework/slsa/graphs/contributors">many others</a></li>
-                    </ul>
-                </div>
+
+SLSA is a community effort organized within the
+[Open Source Security Foundation (OpenSSF)](https://openssf.org) and released
+under the
+[Community Specification License 1.0](https://github.com/slsa-framework/governance/blob/main/1._Community_Specification_License-v1.md).
+
+For more information about governance, see
+[slsa-framework/governance](https://github.com/slsa-framework/governance).
+
+</div>
             </div>
         </div>
     </div>
