@@ -1,8 +1,13 @@
+{%- assign url_parts = page.url | split: '/' %}
+{%- assign spec_name = url_parts[1] %}
+{%- assign spec_version = url_parts[2] %}
+{%- if spec_version and site.data.versions[spec_name].versions %}
+{%- assign versions = site.data.versions[spec_name].versions | sort %}
 <div class="flex flex-col">
-{%- assign versions = site.data.versions.spec.versions | sort %}
 {%- for item in versions reversed %}
-{%- unless item[1].hidden and page.version != item[0] %}
-<p><a href="{{site.baseurl}}/spec/{{item[0]}}/" class="inline-block {% if page.version == item[0] %}bg-button-green button-mono{% else %}button-mono text-green-button{% endif %} text-white rounded-lg px-4 py-3 text-20 font-normal">{{item[1].name}}</a></p>
+{%- unless item[1].hidden and spec_version != item[0] %}
+<p><a href="{{ page.url | replace: spec_version, item[0] | relative_url }}" class="inline-block button-mono {% if spec_version == item[0] %}bg-button-green{% else %}text-green-button{% endif %} text-white rounded-lg px-4 py-3 text-20 font-normal">{{item[1].name}}</a></p>
 {%- endunless %}
 {%- endfor %}
 </div>
+{%- endif %}
