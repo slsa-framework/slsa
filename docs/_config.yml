@@ -41,8 +41,6 @@ plugins:
   - jekyll-relative-links
 # WARNING: Remember to update _data/nav.yml as well.
 current_spec_version: "v0.1"
-provenance_versions: ['v0.1', "v0.2"]
-current_provenance_version: "v0.2"
 relative_links:
   collections: true
 defaults:
