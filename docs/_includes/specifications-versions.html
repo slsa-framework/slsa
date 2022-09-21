@@ -1,4 +1,8 @@
-{% assign versions = site.spec_versions %}
-{% for item in versions %}
-<a href="{{site.baseurl}}/spec/{{item}}/" class="inline-block {% if page.url contains item %}bg-button-green button-mono{% else %}button-mono text-green-button{% endif %} text-white rounded-lg px-4 py-3 text-20 font-normal">Version {{item | replace: "v", ""}}</a>
-{% endfor %}
+<div class="flex flex-col">
+{%- assign versions = site.data.versions.spec.versions | sort %}
+{%- for item in versions reversed %}
+{%- unless item[1].hidden and page.version != item[0] %}
+<p><a href="{{site.baseurl}}/spec/{{item[0]}}/" class="inline-block {% if page.version == item[0] %}bg-button-green button-mono{% else %}button-mono text-green-button{% endif %} text-white rounded-lg px-4 py-3 text-20 font-normal">{{item[1].name}}</a></p>
+{%- endunless %}
+{%- endfor %}
+</div>

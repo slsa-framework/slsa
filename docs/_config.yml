@@ -40,7 +40,6 @@ plugins:
   - jekyll-titles-from-headings
   - jekyll-relative-links
 # WARNING: Remember to update _data/nav.yml as well.
-spec_versions: ['v0.1']
 current_spec_version: "v0.1"
 provenance_versions: ['v0.1', "v0.2"]
 current_provenance_version: "v0.2"
@@ -67,8 +66,7 @@ defaults:
 
   # Avoid including the version number in the page itself to make it easier to
   # see differences across versions. Ideally this would be done automatically in
-  # the template by parsing the URL, but that's not possible with liquid
-  # templates.
+  # the template by parsing the URL, but that's difficult in liquid templates.
   - scope:
       path: "spec"
     values:
