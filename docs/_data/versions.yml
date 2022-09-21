@@ -22,3 +22,19 @@ spec:
       # the URL manually, but we will not link to it from the main page.
       hidden: true
   current: v0.1
+
+provenance:
+  versions:
+    v0.1:
+      name: Version 0.1
+    v0.2:
+      name: Version 0.2
+  current: v0.2
+
+verification_summary:
+  versions:
+    v0.1:
+      name: Version 0.1
+    v0.2:
+      name: Version 0.2
+  current: v0.2
