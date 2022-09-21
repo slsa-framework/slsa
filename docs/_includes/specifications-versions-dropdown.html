@@ -1,10 +1,13 @@
-{%- assign pagename = page.url | split: '/' | last %}
-{%- assign versions = site.data.versions.spec.versions | sort %}
+{%- assign url_parts = page.url | split: '/' %}
+{%- assign spec_name = url_parts[1] %}
+{%- assign spec_version = url_parts[2] %}
+{%- if spec_version and site.data.versions[spec_name].versions %}
+{%- assign versions = site.data.versions[spec_name].versions | sort %}
 <div class="md:ml-12">
 <select id="redirectSelect" class="rounded-lg p-4 border border-gray-400 mb-4 select-dropdown">
 {%- for item in versions reversed %}
-{%- unless item[1].hidden and page.version != item[0] %}
-  <option value="{{ site.baseurl }}/spec/{{item[0]}}/{{pagename}}" {% if page.version == item[0] %}selected{% endif %} class="inline-block">{{item[1].name}}</option>
+{%- unless item[1].hidden and spec_version != item[0] %}
+  <option value="{{ page.url | replace: spec_version, item[0] | relative_url }}" {% if spec_version == item[0] %}selected{% endif %} class="inline-block">{{item[1].name}}</option>
 {%- endunless %}
 {%- endfor %}
 </select>
@@ -18,3 +21,4 @@
 
     };
 </script>
+{%- endif %}

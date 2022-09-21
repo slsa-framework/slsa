@@ -63,19 +63,3 @@ defaults:
     values:
       # Set the Social image icon
       image: /images/icons/android-chrome-512x512.png
-
-  # Avoid including the version number in the page itself to make it easier to
-  # see differences across versions. Ideally this would be done automatically in
-  # the template by parsing the URL, but that's difficult in liquid templates.
-  - scope:
-      path: "spec"
-    values:
-      spec_name: spec
-  - scope:
-      path: "spec/v1.0"
-    values:
-      version: v1.0
-  - scope:
-      path: "spec/v0.1"
-    values:
-      version: v0.1
