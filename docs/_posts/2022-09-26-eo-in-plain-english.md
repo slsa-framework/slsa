@@ -33,12 +33,12 @@ In **September 2023**, compliance with the NIST Guidance will be required for al
 
 If your software is sold to, or used by, the US Federal government then your ears should be pricking up about now. Starting next year you will be expected, for each major version of each software product you supply, to provide:
 
--   A self-attestation that the product was built in conformance with NIST’s Secure Software Development Framework (SSDF). NIST has published online a handy [matrix of SSDF requirements](https://csrc.nist.gov/csrc/media/Publications/sp/800-218/final/documents/NIST.SP.800-218.SSDF-table.xlsx). 
+-   A self-attestation that the product was built in conformance with NIST’s Secure Software Development Framework (SSDF). NIST has published online a handy [matrix of SSDF requirements](https://csrc.nist.gov/csrc/media/Publications/sp/800-218/final/documents/NIST.SP.800-218.SSDF-table.xlsx).
 -   On request, a Software Bill of Materials (SBOM) for the product. The NTIA report [Minimum Elements of an SBOM](https://www.ntia.doc.gov/files/ntia/publications/sbom_minimum_elements_report.pdf) is a useful starting point for understanding what’s required.
 -   On request, other artifacts substantiating SSDF conformance, e.g., output of vulnerability scanners, software provenance metadata, etc.
 -   On request, evidence of participation in a Vulnerability Disclosure Program.
 
-Even if your software is not in scope today, you might nonetheless find your customers asking for the same things before long, as the new US Federal Government standards raise the bar across the industry. 
+Even if your software is not in scope today, you might nonetheless find your customers asking for the same things before long, as the new US Federal Government standards raise the bar across the industry.
 
 ## What’s in scope
 
@@ -51,6 +51,7 @@ The OMB dictates that agencies will themselves by **December 2022** generate a s
 First, don’t panic!
 
 Instead, you can get started right away with some immediate concrete steps:
+
 -   Review the [OMB memorandum](https://www.whitehouse.gov/wp-content/uploads/2022/09/M-22-18.pdf) itself. This blog post provides a plain English summary but omits some details such as how exceptions are handled, how remediation plans work, how self-attestations are made in practice, and so on. It’s worthwhile reading the original text to get the full skinny.
 -   Familiarize yourself with the [practices and tasks](https://csrc.nist.gov/csrc/media/Publications/sp/800-218/final/documents/NIST.SP.800-218.SSDF-table.xlsx) of the [Secure Software Development Framework](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218.pdf) (SSDF), and begin to develop a sense of how your own software development processes map onto NIST’s set. Take note of any glaring gaps you see.
 -   Read up on SBOMs. A 2019-era NTIA whitepaper “[Roles and Benefits for SBOM Across the Supply Chain](https://www.ntia.gov/files/ntia/publications/ntia_sbom_use_cases_roles_benefits-nov2019.pdf)” includes a comprehensive catalog of potential benefits offered by SBOMs, and the companion document [Minimum Elements of an SBOM](https://www.ntia.doc.gov/files/ntia/publications/sbom_minimum_elements_report.pdf) lays out a pragmatic starting point.
