@@ -485,11 +485,11 @@ details {
 
 .important-messages {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
   pointer-events: none;
-  margin: 10px;
+  margin: 80px 10px 10px;
   z-index: 800;
 
   > div {
