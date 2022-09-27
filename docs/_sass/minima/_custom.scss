@@ -492,9 +492,13 @@ details {
   margin: 80px 10px 10px;
   z-index: 800;
 
+  > input[type=checkbox]:checked + div {
+    display: none;
+  }
+
   > div {
     border-radius: 5px;
-    padding: 0.5rem;
+    padding: 0.5rem 2.5rem;
     text-align: center;
     font-size: larger;
     color: white;
@@ -504,5 +508,15 @@ details {
     width: 100%;
     max-width: 1000px;
     pointer-events: auto;
+    position: relative;
+
+    > label {
+      display: block;
+      width: 1rem;
+      position: absolute;
+      top: 0.5rem;
+      right: 1rem;
+      cursor: pointer;
+    }
   }
 }
