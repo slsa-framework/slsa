@@ -177,6 +177,15 @@
         }
     }
 
+    ol:not(.custom-list) {
+        list-style: auto;
+        padding-left: 25px;
+
+        & > li {
+            margin-top: 10px;
+        }
+    }
+
     blockquote {
         margin: 30px 0;
 
