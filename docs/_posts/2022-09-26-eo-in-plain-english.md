@@ -6,7 +6,7 @@ is_guest_post: true
 
 You probably heard about [EO 14028](https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/), the “Executive Order on Improving the Nation’s Cybersecurity”.
 
-Last week the White House Office of Management and Budget (OMB) issued a memorandum setting firm and aggressive timelines for implementation of guidelines stemming from the EO, and you might reasonably be wondering what it all means. If so, this post is for you. We’re going to try to lay it out in plain English and share steps to help you get ready to meet the timelines
+On September 14th the White House Office of Management and Budget (OMB) issued [a memorandum](https://www.whitehouse.gov/wp-content/uploads/2022/09/M-22-18.pdf) setting firm and aggressive timelines for implementation of guidelines stemming from the EO, and you might reasonably be wondering what it all means. If so, this post is for you. We’re going to try to lay it out in plain English and share steps to help you get ready to meet the timelines
 
 
 ## Background
@@ -27,7 +27,7 @@ We covered the SSDF briefly in a [previous slsa.dev blog post](https://slsa.dev/
 
 ## What’s new
 
-Last week the White House Office of Management and Budget (OMB) issued [a memorandum](https://www.whitehouse.gov/wp-content/uploads/2022/09/M-22-18.pdf) requiring every Federal agency to comply with the NIST Guidance “when using third-party software on the agency’s information systems or otherwise affecting the agency’s information”.
+In **September 2022** the White House Office of Management and Budget (OMB) issued [a memorandum](https://www.whitehouse.gov/wp-content/uploads/2022/09/M-22-18.pdf) requiring every Federal agency to comply with the NIST Guidance “when using third-party software on the agency’s information systems or otherwise affecting the agency’s information”.
 
 In **June 2023**, compliance with the NIST Guidance will be required for all “critical software” used by Federal agencies.
 
@@ -57,7 +57,7 @@ First, don’t panic!
 
 Instead, you can get started right away with some immediate concrete steps:
 
-1. Review the OMB memorandum itself. This blog post provides a plain English summary but omits some details such as how exceptions are handled, how remediation plans work, how self-attestations are made in practice, and so on. It’s worthwhile reading the original text to get the full skinny.
+1. Review the [OMB memorandum](https://www.whitehouse.gov/wp-content/uploads/2022/09/M-22-18.pdf) itself. This blog post provides a plain English summary but omits some details such as how exceptions are handled, how remediation plans work, how self-attestations are made in practice, and so on. It’s worthwhile reading the original text to get the full skinny.
 2. Familiarize yourself with the [practices and tasks](https://csrc.nist.gov/csrc/media/Publications/sp/800-218/final/documents/NIST.SP.800-218.SSDF-table.xlsx) of the [Secure Software Development Framework](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218.pdf) (SSDF), and begin to develop a sense of how your own software development processes map onto NIST’s set. Take note of any glaring gaps you see.
 3. Read up on SBOMs. A 2019-era NTIA whitepaper “[Roles and Benefits for SBOM Across the Supply Chain](https://www.ntia.gov/files/ntia/publications/ntia_sbom_use_cases_roles_benefits-nov2019.pdf)” includes a comprehensive catalog of potential benefits offered by SBOMs, and the companion document [Minimum Elements of an SBOM](https://www.ntia.doc.gov/files/ntia/publications/sbom_minimum_elements_report.pdf) lays out a pragmatic starting point.
 4. Review [NIST’s definition](https://www.nist.gov/itl/executive-order-improving-nations-cybersecurity/critical-software-definition-explanatory) of “critical software” to understand if your products fall into this category. If so, your conformance with the new standards is expected by June next year, rather than September.
