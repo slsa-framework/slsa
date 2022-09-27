@@ -36,10 +36,10 @@ In **September 2023**, compliance with the NIST Guidance will be required for al
 ## What it means
 
 If your software is sold to, or used by, the US Federal government then your ears should be pricking up about now. Starting next year you will be expected, for each major version of each software product you supply, to provide:
-1. A self-attestation that the product was built in conformance with NIST’s Secure Software Development Framework (SSDF). NIST has published online a handy [matrix of SSDF requirements](https://csrc.nist.gov/csrc/media/Publications/sp/800-218/final/documents/NIST.SP.800-218.SSDF-table.xlsx). 
-1. On request, a Software Bill of Materials (SBOM) for the product. The NTIA report [Minimum Elements of an SBOM](https://www.ntia.doc.gov/files/ntia/publications/sbom_minimum_elements_report.pdf) is a useful starting point for understanding what’s required.
-1. On request, other artifacts substantiating SSDF conformance, e.g., output of vulnerability scanners, software provenance metadata, etc.
-1. On request, evidence of participation in a Vulnerability Disclosure Program.
+*   A self-attestation that the product was built in conformance with NIST’s Secure Software Development Framework (SSDF). NIST has published online a handy [matrix of SSDF requirements](https://csrc.nist.gov/csrc/media/Publications/sp/800-218/final/documents/NIST.SP.800-218.SSDF-table.xlsx). 
+*   On request, a Software Bill of Materials (SBOM) for the product. The NTIA report [Minimum Elements of an SBOM](https://www.ntia.doc.gov/files/ntia/publications/sbom_minimum_elements_report.pdf) is a useful starting point for understanding what’s required.
+*   On request, other artifacts substantiating SSDF conformance, e.g., output of vulnerability scanners, software provenance metadata, etc.
+*   On request, evidence of participation in a Vulnerability Disclosure Program.
 
 
 ## What’s in scope
@@ -54,8 +54,8 @@ The OMB dictates that agencies will themselves by **December 2022** generate a s
 First, don’t panic!
 
 Instead, you can get started right away with some immediate concrete steps:
-1. Review the [OMB memorandum](https://www.whitehouse.gov/wp-content/uploads/2022/09/M-22-18.pdf) itself. This blog post provides a plain English summary but omits some details such as how exceptions are handled, how remediation plans work, how self-attestations are made in practice, and so on. It’s worthwhile reading the original text to get the full skinny.
-1. Familiarize yourself with the [practices and tasks](https://csrc.nist.gov/csrc/media/Publications/sp/800-218/final/documents/NIST.SP.800-218.SSDF-table.xlsx) of the [Secure Software Development Framework](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218.pdf) (SSDF), and begin to develop a sense of how your own software development processes map onto NIST’s set. Take note of any glaring gaps you see.
-1. Read up on SBOMs. A 2019-era NTIA whitepaper “[Roles and Benefits for SBOM Across the Supply Chain](https://www.ntia.gov/files/ntia/publications/ntia_sbom_use_cases_roles_benefits-nov2019.pdf)” includes a comprehensive catalog of potential benefits offered by SBOMs, and the companion document [Minimum Elements of an SBOM](https://www.ntia.doc.gov/files/ntia/publications/sbom_minimum_elements_report.pdf) lays out a pragmatic starting point.
-1. Review [NIST’s definition](https://www.nist.gov/itl/executive-order-improving-nations-cybersecurity/critical-software-definition-explanatory) of “critical software” to understand if your products fall into this category. If so, your conformance with the new standards is expected by June next year, rather than September.
-1. See how SLSA can help! Read the previous posts [SBOM + SLSA: Accelerating SBOM success with the help of SLSA](https://slsa.dev/blog/2022/05/slsa-sbom) and [SLSA for Success: Using SLSA to help achieve NIST’s SSDF](https://slsa.dev/blog/2022/06/slsa-ssdf).
+*   Review the [OMB memorandum](https://www.whitehouse.gov/wp-content/uploads/2022/09/M-22-18.pdf) itself. This blog post provides a plain English summary but omits some details such as how exceptions are handled, how remediation plans work, how self-attestations are made in practice, and so on. It’s worthwhile reading the original text to get the full skinny.
+*   Familiarize yourself with the [practices and tasks](https://csrc.nist.gov/csrc/media/Publications/sp/800-218/final/documents/NIST.SP.800-218.SSDF-table.xlsx) of the [Secure Software Development Framework](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218.pdf) (SSDF), and begin to develop a sense of how your own software development processes map onto NIST’s set. Take note of any glaring gaps you see.
+*   Read up on SBOMs. A 2019-era NTIA whitepaper “[Roles and Benefits for SBOM Across the Supply Chain](https://www.ntia.gov/files/ntia/publications/ntia_sbom_use_cases_roles_benefits-nov2019.pdf)” includes a comprehensive catalog of potential benefits offered by SBOMs, and the companion document [Minimum Elements of an SBOM](https://www.ntia.doc.gov/files/ntia/publications/sbom_minimum_elements_report.pdf) lays out a pragmatic starting point.
+*   Review [NIST’s definition](https://www.nist.gov/itl/executive-order-improving-nations-cybersecurity/critical-software-definition-explanatory) of “critical software” to understand if your products fall into this category. If so, your conformance with the new standards is expected by June next year, rather than September.
+*   See how SLSA can help! Read the previous posts [SBOM + SLSA: Accelerating SBOM success with the help of SLSA](https://slsa.dev/blog/2022/05/slsa-sbom) and [SLSA for Success: Using SLSA to help achieve NIST’s SSDF](https://slsa.dev/blog/2022/06/slsa-ssdf).
