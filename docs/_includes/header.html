@@ -38,4 +38,19 @@
         </div>
     </div>
   </div>
-  </header>
+
+{%- assign url_parts = page.url | split: '/' %}
+{%- assign spec_name = url_parts[1] %}
+{%- assign spec_version = url_parts[2] %}
+{%- if site.data.versions[spec_name].versions[spec_version].draft %}
+<section class="important-messages">
+  <input id="important-messages-checkbox" type="checkbox" hidden>
+  <div>
+    <label for="important-messages-checkbox" title="dismiss">✕</label>
+    <p>This is an unpublished draft that is subject to change.</p>
+    <p><a href="{{ page.url | replace: spec_version, site.data.versions[spec_name].current | relative_url}}">View latest published version</a></p>
+  </div>
+</section>
+{%- endif %}
+
+</header>

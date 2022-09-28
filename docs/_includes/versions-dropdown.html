@@ -1,0 +1,25 @@
+{%- assign url_parts = page.url | split: '/' %}
+{%- assign spec_name = url_parts[1] %}
+{%- assign spec_version = url_parts[2] %}
+{%- if site.data.versions[spec_name].versions[spec_version] %}
+{%- assign versions = site.data.versions[spec_name].versions | sort %}
+<select id="redirectSelect" class="select-dropdown rounded-lg p-4 border
+  {%- if include.green %} border-green-900 bg-transparent mt-8 md:mb-4 md:mt-0
+  {%- else %} border-gray-400 mb-4
+  {%- endif %}">
+{%- for item in versions reversed %}
+{%- unless item[1].hidden and spec_version != item[0] %}
+  <option value="{{ page.url | replace: spec_version, item[0] | relative_url }}" {% if spec_version == item[0] %}selected{% endif %} class="inline-block">{{item[1].name}}</option>
+{%- endunless %}
+{%- endfor %}
+</select>
+<script>
+    var selectEl = document.getElementById('redirectSelect');
+
+    selectEl.onchange = function(){
+        var goto = this.value;
+        window.location = goto;
+
+    };
+</script>
+{%- endif %}
