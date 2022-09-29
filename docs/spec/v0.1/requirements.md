@@ -366,8 +366,15 @@ all the other requirements.
 <td>
 
 The provenance's authenticity and integrity can be verified by the consumer.
-This SHOULD be through a digital signature from a private key accessible only to
-the service generating the provenance.
+This SHOULD be through a digital signature from a private key that may only
+be accessed and used by the build service.  
+
+Regardless of mechanism, there MUST be controls in place to prevent exfiltration of
+private authentication-related material and illegitimate use of said material through
+intended channels.  It must not be possible to read or alter the private authentication materials
+(Other than for maintenance operations, such as key rotation)
+nor should it be possible to use the mechanism to authenticate artifacts outside of the build process.
+
 
 <td> <td>✓<td>✓<td>✓
 <tr id="service-generated">
