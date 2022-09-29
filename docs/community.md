@@ -32,7 +32,7 @@ developing tooling and services, we welcome your contributions.
                     <p class="h4 font-semibold mb-6">General contributions</p>
                     <p>For general questions, suggestions, or status updates, please use one of the following channels.</p>
                     <a target="_blank" href="https://github.com/slsa-framework/slsa/blob/main/CONTRIBUTING.md" class="cta-link mt-6 font-semibold h5">Contribution guidelines</a>
-                    <a target="_blank" href="notes/community" class="cta-link mt-6 font-semibold h5">Community meeting (bi-weekly)</a>
+                    <a target="_blank" href="notes/community" class="cta-link mt-6 font-semibold h5">Community meeting (monthly)</a>
                     <a target="_blank" href="https://github.com/slsa-framework/slsa/issues" class="cta-link mt-6 font-semibold h5">GitHub issues (tracks all work)</a>
                     <a target="_blank" href="https://openssf.slack.com/archives/C029E4N3DPF" class="cta-link mt-6 font-semibold h5" title="#slsa">Slack</a>
                     <a target="_blank" href="https://groups.google.com/g/slsa-discussion" class="cta-link mt-6 font-semibold h5">Mailing list</a>
