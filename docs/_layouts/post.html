@@ -3,7 +3,7 @@ layout: post-list
 is_post: true
 ---
 
-<p class="h3 post-author">{% if page.is_guest_post -%}A Guest Post{%- endif %} by {{ page.author }}</p>
+<p class="h3 post-author">{% if page.is_guest_post -%}Guest post{%- endif %} by {{ page.author }}</p>
 
 <p class="post-date"><time datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date_to_string }}</time></p>
 
