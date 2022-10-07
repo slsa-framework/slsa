@@ -34,7 +34,7 @@ developing tooling and services, we welcome your contributions.
                     <a target="_blank" href="https://github.com/slsa-framework/slsa/blob/main/CONTRIBUTING.md" class="cta-link mt-6 font-semibold h5">Contribution guidelines</a>
                     <a target="_blank" href="notes/community" class="cta-link mt-6 font-semibold h5">Community meeting (monthly)</a>
                     <a target="_blank" href="https://github.com/slsa-framework/slsa/issues" class="cta-link mt-6 font-semibold h5">GitHub issues (tracks all work)</a>
-                    <a target="_blank" href="https://openssf.slack.com/archives/C029E4N3DPF" class="cta-link mt-6 font-semibold h5" title="#slsa">Slack</a>
+                    <a target="_blank" href="https://slack.openssf.org/" class="cta-link mt-6 font-semibold h5" title="#slsa">Slack (#slsa)</a>
                     <a target="_blank" href="https://groups.google.com/g/slsa-discussion" class="cta-link mt-6 font-semibold h5">Mailing list</a>
                 </div>
             </div>
