@@ -12,7 +12,8 @@ source.
 
 This page is an informative overview of the SLSA levels, describing their
 purpose and guarantees. For the normative requirements at each level, see
-[Requirements](requirements.md).
+[Requirements](requirements.md). For a background, see
+[Terminology](terminology.md).
 
 ## What is SLSA?
 
@@ -24,6 +25,16 @@ package's security posture. SLSA's four levels are designed to be incremental
 and actionable, and to protect against specific integrity attacks. SLSA 4
 represents the ideal end state, and the lower levels represent milestones with
 corresponding integrity guarantees.
+
+Importantly, SLSA is intended to be a primitive in a broader determination of a
+software's risk. SLSA measures specific aspects of supply chain security,
+particularly those that can be fully automated; other aspects, such as developer
+trust and code quality, are out of scope. Furthermore, each link in the software
+supply chain has its own, independent SLSA level ([FAQ](../faq.md)). The benefit
+of this approach is to break up the large supply chain security problem into
+tractable subproblems that can be prioritized based on risk and tackled in
+parallel. But this does mean that SLSA alone is not sufficient to determine if
+an artifact is "safe".
 
 ## Summary of levels
 
@@ -47,14 +58,3 @@ It can take years to achieve the ideal security state - intermediate milestones 
 | 4     | **Requires two-person review of all changes and a hermetic, reproducible build process.** Two-person review is an industry best practice for catching mistakes and deterring bad behavior. Hermetic builds guarantee that the provenance’s list of dependencies is complete. Reproducible builds, though not strictly required, provide many auditability and reliability benefits. Overall, SLSA 4 gives the consumer a high degree of confidence that the software has not been tampered with. |
 
 The SLSA level is not transitive ([see our FAQs](../faq.md)). This makes each artifact’s SLSA rating independent from one another, allowing parallel progress and prioritization based on risk. The level describes the integrity protections of an artifact’s build process and top-level source, but nothing about the artifact’s dependencies. Dependencies have their own SLSA ratings, and it is possible for a SLSA 4 artifact to be built from SLSA 0 dependencies.
-
-## Limitations
-
-SLSA can help reduce supply chain threats in a software artifact, but there are limitations.
-
--   There are a significant number of dependencies in the supply chain for many artifacts. The full graph of dependencies could be intractably large.
--   In practice, a team working on security will need to identify and focus on the important components in a supply chain. This can be performed manually, but the effort could be significant.
--   An artifact’s SLSA level is not transitive ([see our FAQs](../faq.md)) and dependencies have their own SLSA ratings. This means that it is possible for a SLSA 4 artifact to be built from SLSA 0 dependencies. So, while the main artifact has strong security, risks may still exist elsewhere. The aggregate of these risks will help software consumers understand how and where to use the SLSA 4 artifact.
--   While automation of these tasks will help, it isn’t practical for every software consumer to fully vet the entire graph of every artifact. To close this gap, auditors and accreditation bodies could verify and assert that something meets the SLSA requirements. This could be particularly valuable for closed source software.
-
-As part of our roadmap, we’ll explore how to identify important components, how to determine aggregate risk throughout a supply chain, and the role of accreditation.
