@@ -38,6 +38,24 @@ an artifact is "safe".
 > own SLSA determinations, though in practice they may delegate to some
 > authority.
 
+## Who is SLSA for?
+
+There are three main audiences for SLSA:
+
+-   **Project maintainers,** who are often small teams that know their build
+    process and trust their teammates. Their primary goal is protection against
+    compromise with as low overhead as possible. They may also benefit from
+    easier maintenance and increased consumer confidence.
+
+-   **Consumers,** who use a variety of software and do not know the maintainers
+    or their build processes. Their primary goal is confidence that the software
+    is authentic and has not been tampered with. They are concerned about rogue
+    maintainers, compromised credentials, and compromised infrastructure.
+
+-   **Organizations,** who are both producers and consumers of software. In
+    addition to the goals above, organizations also want to broadly understand
+    and reduce risk across the organization.
+
 ## Levels and tracks
 
 SLSA levels are split into *tracks*. Each track has own set of levels that
@@ -90,12 +108,8 @@ No requirements---L0 represents the lack of SLSA.
 
 <dt>Intended for<dd>
 
-Software that does not need SLSA, such as:
-
--   Binaries built and executed on the same machine, including continuous
-    integration tests.
--   Software that is never distributed to customers or used in environments with
-    sensitive access.
+Development or test builds of software that are built and run on the same
+machine, such as unit tests.
 
 <dt>Requirements<dd>
 
@@ -134,18 +148,12 @@ SLSA other than tamper protection, while waiting to achieve higher levels.
 
 <dt>Benefits<dd>
 
-For consumers:
+-   Makes it easier for both maintainers and consumers to debug, patch, rebuild,
+    and/or analyze the software by knowing its precise source version and build
+    process.
 
--   Allows the consumer to known what the exact source code was for a given
-    artifact so that they can audit it or make decisions based on it.
--   Makes it easier for consumers to build the software themselves, by knowing
-    what the official process and sources were.
-
-For large organizations and enterprises:
-
--   Aids in creating an inventory of first-party software and build systems
-    across many teams.
--   Provides audit trail to narrow the scope of incident investigations.
+-   Aids organizations in creating an inventory of software and build systems
+    used across a variety of teams.
 
 <dt>Notes<dd>
 
@@ -178,16 +186,15 @@ All of [Build L1], plus:
 
 <dt>Benefits<dd>
 
-For package maintainers:
+All of [Build L1], plus:
 
--   Prevents tampering of the artifact after the build.
--   In some cases, reduces impact of compromised package upload credentials.
+-   Prevents tampering after the build through digital signatures.
 
-For consumers:
+-   Moderately reduces the impact of compromised package upload credentials by
+    requiring attacker to also exploit the build process.
 
--   Strongly identifies what build service was used.
-
-For large organizations and enterprises:
+-   Reduces attack surface by limiting builds to specific build services that
+    can be audited and hardened.
 
 -   Allows large-scale migration of teams to supported build services early
     while further hardening work ([Build L3]) is done in parallel.
@@ -218,20 +225,16 @@ All of [Build L2], plus:
 
 <dt>Benefits<dd>
 
-For package maintainers:
+All of [Build L2], plus:
 
--   Prevents tampering of the artifact during or after the build.
--   Reduces impact of compromised upload credentials.
+-   Prevents tampering during the build---by maintainers, compromised
+    credentials, or other tenants.
 
-For consumers:
+-   Greatly reduces the impact of compromised package upload credentials by
+    requiring attacker to perform a difficult exploit of the build process.
 
--   Greatly increases confidence that the package was built from the declared
-    source.
-
-For large organizations and enterprises:
-
--   Reduces risk that a compromised credential or rogue maintainer bypassed the
-    official change management system.
+-   Provides strong confidence that the package was built from the official
+    source and build process.
 
 </dl>
 </section>
