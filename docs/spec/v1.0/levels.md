@@ -128,13 +128,13 @@ n/a
 <dl class="as-table">
 <dt>Summary<dd>
 
-Package has a provenance attestation showing how it was built, though without
-tamper protection.
+Package has a provenance attestation showing how it was built, but the
+provenance is trivial to forge.
 
 <dt>Intended for<dd>
 
 Projects and organizations wanting to easily and quickly gain some benefits of
-SLSA other than tamper protection, while waiting to achieve higher levels.
+SLSA---other than tamper protection---without changing their build workflows.
 
 <dt>Requirements<dd>
 
@@ -171,11 +171,13 @@ SLSA other than tamper protection, while waiting to achieve higher levels.
 <dt>Summary<dd>
 
 Builds run on a hosted service that generates and signs the provenance, reducing
-attack surface and offering some tamper protection.
+attack surface and increasing the difficulty to forge the provenance.
 
 <dt>Intended for<dd>
 
-Projects and organizations waiting for their build service to implement Build L3.
+Projects and organizations wanting to gain moderate security benefits of SLSA by
+switching to a hosted build service, while waiting changes to the build service
+itself required by [Build L3].
 
 <dt>Requirements<dd>
 
@@ -208,11 +210,13 @@ All of [Build L1], plus:
 <dl class="as-table">
 <dt>Summary<dd>
 
-Builds run on a hardened build service that offers strong tamper protection.
+Builds run on a hardened build service that offers strong tamper protection. The
+provenance is very difficult to exploit even for a determined adversary.
 
 <dt>Intended for<dd>
 
-Most software releases.
+Most software releases. Build L3 usually requires significant changes to
+existing build services.
 
 <dt>Requirements<dd>
 
