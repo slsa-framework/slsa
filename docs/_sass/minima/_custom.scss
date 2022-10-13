@@ -23,39 +23,39 @@
 
 .text{
     &-green{
-        color: $light-green;
+        color: $green-light;
     }
     &-green-darkest{
         color: $green-darkest;
     }
     &-green-button {
-        color: $button-green;
+        color: $green-button;
     }
     &-green-dark {
-        color: $dark-green;
+        color: $green-dark;
     }
     &-green-darker {
-        color: $button-green;
+        color: $green-button;
     }
 }
 .bg{
     &-light-green{
-        background-color: $light-green;
+        background-color: $green-light;
     }
     &-light-pastel-green {
         background-color: #B4F3C9;
     }
     &-pastel-green{
-        background-color: $pastel-green;
+        background-color: $green-pastel;
     }
     &-green-dark{
-        background-color: $dark-green;
+        background-color: $green-dark;
     }
     &-green-darkest{
         background-color: $green-darkest;
     }
     &-button-green {
-        background-color: $button-green;
+        background-color: $green-button;
     }
     &-green-transparent {
         &::before{
@@ -65,7 +65,7 @@
             right:0;
             height: 100%;
             width: 100%;
-            background-color: $dark-green;
+            background-color: $green-dark;
         }
     }
 }
@@ -78,7 +78,7 @@
 
 .border {
     &-green {
-        border-color: $button-green;
+        border-color: $green-button;
     }
 }
 // Blocks of content
@@ -302,7 +302,7 @@ h5, .h5 {
         border: 1px solid #CECECE;
         border-radius: 20px;
         th {
-            background-color: $lightest-green;
+            background-color: $green-lightest;
         }
     }
     blockquote {
@@ -313,7 +313,7 @@ h5, .h5 {
 
         /* Green - Lightest */
         border: none;
-        background: $lightest-green;
+        background: $green-lightest;
         border-radius: $radius;
         margin-bottom: 30px;
         letter-spacing: normal;
@@ -511,7 +511,7 @@ dl.as-table {
     text-align: center;
     font-size: larger;
     color: white;
-    background-color: $dark-green;
+    background-color: $green-dark;
     margin: 0.2em auto;
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
     width: 100%;

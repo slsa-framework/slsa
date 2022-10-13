@@ -217,7 +217,7 @@ table {
     border: 1px solid $grey-color-light;
     tr {
         &:nth-child(even) {
-            background-color: $lightest-green;
+            background-color: $green-lightest;
         }
     }
     th,
