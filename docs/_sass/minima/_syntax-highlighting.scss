@@ -4,17 +4,17 @@
 
 .highlight pre { background-color: $green-darkest; }
 .highlight .hll { background-color: $green-darkest; }
-.highlight .c { color: $grey-color } /* Comment */
+.highlight .c { color: $grey-medium } /* Comment */
 .highlight .err { color: #960050; background-color: #1e0010 } /* Error */
 .highlight .k { color: #66d9ef } /* Keyword */
 .highlight .l { color: #ae81ff } /* Literal */
 .highlight .n { color: #f8f8f2 } /* Name */
 .highlight .o { color: #f92672 } /* Operator */
 .highlight .p { color: #f8f8f2 } /* Punctuation */
-.highlight .cm { color: $grey-color } /* Comment.Multiline */
-.highlight .cp { color: $grey-color } /* Comment.Preproc */
-.highlight .c1 { color: $grey-color } /* Comment.Single */
-.highlight .cs { color: $grey-color } /* Comment.Special */
+.highlight .cm { color: $grey-medium } /* Comment.Multiline */
+.highlight .cp { color: $grey-medium } /* Comment.Preproc */
+.highlight .c1 { color: $grey-medium } /* Comment.Single */
+.highlight .cs { color: $grey-medium } /* Comment.Special */
 .highlight .ge { font-style: italic } /* Generic.Emph */
 .highlight .gs { font-weight: bold } /* Generic.Strong */
 .highlight .kc { color: #66d9ef } /* Keyword.Constant */
@@ -63,6 +63,6 @@
 .highlight .vi { color: #f8f8f2 } /* Name.Variable.Instance */
 .highlight .il { color: #ae81ff } /* Literal.Number.Integer.Long */
 
-.highlight .gu { color: $grey-color; } /* Generic.Subheading & Diff Unified/Comment? */
+.highlight .gu { color: $grey-medium; } /* Generic.Subheading & Diff Unified/Comment? */
 .highlight .gd { color: #f92672; } /* Generic.Deleted & Diff Deleted */
 .highlight .gi { color: #a6e22e; } /* Generic.Inserted & Diff Inserted */

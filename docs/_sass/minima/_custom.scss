@@ -332,7 +332,7 @@ h5, .h5 {
 
 details {
     // Simulate a 1px border with same behavior as "border-collapse: collapse".
-    border: 1px solid $grey-color-light;
+    border: 1px solid $grey-light;
     border-radius: $radius;
     display: block;
     padding: ($spacer-xl / 3) ($spacer-xl / 2);

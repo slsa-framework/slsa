@@ -31,15 +31,15 @@ dl.as-table {
 
   // Format similar to the table from minima/_base.scss.
   & {
-    border-top: 1px solid $grey-color-light;
-    border-left: 1px solid $grey-color-light;
+    border-top: 1px solid $grey-light;
+    border-left: 1px solid $grey-light;
     border-collapse: collapse;
     margin: 1rem 0 2.5rem 0;
     line-height: 1.4;
   }
   > dd, > dt {
-    border-right: 1px solid $grey-color-light;
-    border-bottom: 1px solid $grey-color-light;
+    border-right: 1px solid $grey-light;
+    border-bottom: 1px solid $grey-light;
     padding: $spacer-l ($spacer-xl / 2);
   }
   > dt {
