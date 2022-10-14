@@ -237,6 +237,7 @@
 
 .site-nav {
     padding: $spacer-l 0 $spacer-l 0;
+    z-index: 1;
 
     .nav-trigger {
         display: none;
