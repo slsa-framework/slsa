@@ -4,17 +4,17 @@
 
 .highlight pre { background-color: $green-darkest; }
 .highlight .hll { background-color: $green-darkest; }
-.highlight .c { color: $grey-color } /* Comment */
+.highlight .c { color: $grey-medium } /* Comment */
 .highlight .err { color: #960050; background-color: #1e0010 } /* Error */
 .highlight .k { color: #66d9ef } /* Keyword */
 .highlight .l { color: #ae81ff } /* Literal */
 .highlight .n { color: #f8f8f2 } /* Name */
 .highlight .o { color: #f92672 } /* Operator */
 .highlight .p { color: #f8f8f2 } /* Punctuation */
-.highlight .cm { color: $grey-color } /* Comment.Multiline */
-.highlight .cp { color: $grey-color } /* Comment.Preproc */
-.highlight .c1 { color: $grey-color } /* Comment.Single */
-.highlight .cs { color: $grey-color } /* Comment.Special */
+.highlight .cm { color: $grey-medium } /* Comment.Multiline */
+.highlight .cp { color: $grey-medium } /* Comment.Preproc */
+.highlight .c1 { color: $grey-medium } /* Comment.Single */
+.highlight .cs { color: $grey-medium } /* Comment.Special */
 .highlight .ge { font-style: italic } /* Generic.Emph */
 .highlight .gs { font-weight: bold } /* Generic.Strong */
 .highlight .kc { color: #66d9ef } /* Keyword.Constant */
@@ -23,9 +23,9 @@
 .highlight .kp { color: #66d9ef } /* Keyword.Pseudo */
 .highlight .kr { color: #66d9ef } /* Keyword.Reserved */
 .highlight .kt { color: #66d9ef } /* Keyword.Type */
-.highlight .ld { color: $light-green } /* Literal.Date */
+.highlight .ld { color: $green-light } /* Literal.Date */
 .highlight .m { color: #ae81ff } /* Literal.Number */
-.highlight .s { color: $light-green } /* Literal.String */
+.highlight .s { color: $green-light } /* Literal.String */
 .highlight .na { color: #a6e22e } /* Name.Attribute */
 .highlight .nb { color: #f8f8f2 } /* Name.Builtin */
 .highlight .nc { color: #a6e22e } /* Name.Class */
@@ -46,23 +46,23 @@
 .highlight .mh { color: #ae81ff } /* Literal.Number.Hex */
 .highlight .mi { color: #ae81ff } /* Literal.Number.Integer */
 .highlight .mo { color: #ae81ff } /* Literal.Number.Oct */
-.highlight .sb { color: $light-green } /* Literal.String.Backtick */
-.highlight .sc { color: $light-green } /* Literal.String.Char */
-.highlight .sd { color: $light-green } /* Literal.String.Doc */
-.highlight .s2 { color: $light-green } /* Literal.String.Double */
+.highlight .sb { color: $green-light } /* Literal.String.Backtick */
+.highlight .sc { color: $green-light } /* Literal.String.Char */
+.highlight .sd { color: $green-light } /* Literal.String.Doc */
+.highlight .s2 { color: $green-light } /* Literal.String.Double */
 .highlight .se { color: #ae81ff } /* Literal.String.Escape */
-.highlight .sh { color: $light-green } /* Literal.String.Heredoc */
-.highlight .si { color: $light-green } /* Literal.String.Interpol */
-.highlight .sx { color: $light-green } /* Literal.String.Other */
-.highlight .sr { color: $light-green } /* Literal.String.Regex */
-.highlight .s1 { color: $light-green } /* Literal.String.Single */
-.highlight .ss { color: $light-green } /* Literal.String.Symbol */
+.highlight .sh { color: $green-light } /* Literal.String.Heredoc */
+.highlight .si { color: $green-light } /* Literal.String.Interpol */
+.highlight .sx { color: $green-light } /* Literal.String.Other */
+.highlight .sr { color: $green-light } /* Literal.String.Regex */
+.highlight .s1 { color: $green-light } /* Literal.String.Single */
+.highlight .ss { color: $green-light } /* Literal.String.Symbol */
 .highlight .bp { color: #f8f8f2 } /* Name.Builtin.Pseudo */
 .highlight .vc { color: #f8f8f2 } /* Name.Variable.Class */
 .highlight .vg { color: #f8f8f2 } /* Name.Variable.Global */
 .highlight .vi { color: #f8f8f2 } /* Name.Variable.Instance */
 .highlight .il { color: #ae81ff } /* Literal.Number.Integer.Long */
 
-.highlight .gu { color: $grey-color; } /* Generic.Subheading & Diff Unified/Comment? */
+.highlight .gu { color: $grey-medium; } /* Generic.Subheading & Diff Unified/Comment? */
 .highlight .gd { color: #f92672; } /* Generic.Deleted & Diff Deleted */
 .highlight .gi { color: #a6e22e; } /* Generic.Inserted & Diff Inserted */

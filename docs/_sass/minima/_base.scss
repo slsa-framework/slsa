@@ -129,8 +129,8 @@ a:not(.table-of-contents a, .getting_started_card a, footer a, .button-mono, .ct
  * Blockquotes
  */
 blockquote {
-    color: $grey-color;
-    border-left: 4px solid $grey-color-light;
+    color: $grey-medium;
+    border-left: 4px solid $grey-light;
     padding-left: $spacer-xl / 2;
     @include relative-font-size(1.125);
     letter-spacing: -1px;
@@ -154,7 +154,7 @@ code {
 code {
     padding: 4px 6px;
     background: $green-darkest;
-    color: $grey-color-light;
+    color: $grey-light;
     border: 1px solid #B4F3C9;
     border-radius: 4px;
 }
@@ -193,7 +193,7 @@ pre {
     width: 16px;
     height: 16px;
     display: inline-block;
-    fill: #{$grey-color};
+    fill: #{$grey-medium};
     padding-right: 5px;
     vertical-align: text-top;
 }
@@ -214,10 +214,10 @@ table {
     color: $text-color;
     // color: lighten($text-color, 18%);
     border-collapse: collapse;
-    border: 1px solid $grey-color-light;
+    border: 1px solid $grey-light;
     tr {
         &:nth-child(even) {
-            background-color: $lightest-green;
+            background-color: $green-lightest;
         }
     }
     th,
@@ -225,12 +225,12 @@ table {
         padding: ($spacer-xl / 3) ($spacer-xl / 2);
     }
     th {
-        background-color: lighten($grey-color-light, 3%);
-        border: 1px solid darken($grey-color-light, 4%);
-        border-bottom-color: darken($grey-color-light, 12%);
+        background-color: lighten($grey-light, 3%);
+        border: 1px solid darken($grey-light, 4%);
+        border-bottom-color: darken($grey-light, 12%);
     }
     td {
-        border: 1px solid $grey-color-light;
+        border: 1px solid $grey-light;
         vertical-align: top;
     }
 }

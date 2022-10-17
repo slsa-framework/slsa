@@ -227,7 +227,7 @@
     &,
     &:visited {
         color: $text-color;
-        // color: $grey-color-dark;
+        // color: $grey-dark;
     }
 
     &:hover {
@@ -444,7 +444,7 @@
 
 .post-meta {
     font-size: $small-font-size;
-    color: $grey-color;
+    color: $grey-medium;
 }
 
 .post-link {
@@ -481,7 +481,7 @@
 }
 
 .markdown .post-date {
-    color: $grey-color;
+    color: $grey-medium;
 }
 
 .markdown .guest-post-banner {
@@ -489,7 +489,7 @@
     margin-right: $spacer-xxl;
     font-style: italic;
     font-size: $small-font-size;
-    color: $grey-color;
+    color: $grey-medium;
 }
 
 
@@ -500,7 +500,7 @@
     padding: 80px 0;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    background-color: $dark-green;
+    background-color: $green-dark;
     height: 85vh;
     z-index: 10;
 
@@ -511,7 +511,7 @@
     }
 
     &.specifications, &.post-list {
-        background-color: $light-green;
+        background-color: $green-light;
         height: auto;
     }
 
