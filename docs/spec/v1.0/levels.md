@@ -64,7 +64,7 @@ SLSA is intended to serve multiple populations:
 
 ## Levels and tracks
 
-SLSA levels are split into *tracks*. Each track has own set of levels that
+SLSA levels are split into *tracks*. Each track has it's own set of levels that
 measure a particular aspect of supply chain security. The purpose of tracks is
 to recognize progress made in one aspect of security without blocking on an
 unrelated aspect. Tracks also allow the SLSA spec to evolve: we can add more
@@ -190,7 +190,7 @@ service itself required by [Build L3].
 All of [Build L1], plus:
 
 -   Builds run on a hosted build service that generates and signs the
-    provenance itself, outside the control of the users of the build service.
+    provenance itself.
 
 <dt>Benefits<dd>
 
@@ -232,6 +232,8 @@ All of [Build L2], plus:
 
 -   Build service implements strong controls to prevent runs from influencing
     one another, even within the same project.
+
+-   Secret material used to sign the provenance must not be accessable to the user-defined build steps.    
 
 > **TODO:** Add requirement about survey and audit as per the v1.0 proposal.
 
