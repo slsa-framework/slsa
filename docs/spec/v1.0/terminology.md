@@ -8,6 +8,15 @@ of terminology and models to describe what we're protecting.
 
 </div>
 
+## TODO: Terms we still need to define
+
+> **TODO:** Define these terms before the v1.0 release.
+
+-   Ecosystem
+-   Project
+-   Attestation
+-   Provenance
+
 ## Software supply chain
 
 SLSA's framework addresses every step of the software supply chain - the

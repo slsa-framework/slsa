@@ -21,6 +21,7 @@ $light-green: #58DA95;
 $green-darkest: #102B2D;
 $pastel-green: #ECF8F2;
 $button-green: #23907E;
+$lightest-green: #F7FAF9;
 
 // font variables
 
@@ -104,3 +105,4 @@ $on-laptop: 1180px !default;
 
 // Import partials.
 @import "minima/base", "minima/layout", "minima/syntax-highlighting", "minima/custom";
+@import "dl-as-table";

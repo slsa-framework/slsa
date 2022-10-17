@@ -1,18 +1,17 @@
----
-title: Security levels
----
+# Security levels
+
 <div class="subtitle">
 
-SLSA is organized into a series of levels that provide increasing
-[integrity](terminology.md) guarantees. This gives you confidence that
-software hasn’t been tampered with and can be securely traced back to its
-source.
+SLSA is organized into a series of levels that provide increasing supply chain
+security guarantees. This gives you confidence that software hasn’t been
+tampered with and can be securely traced back to its source.
 
 </div>
 
 This page is an informative overview of the SLSA levels, describing their
 purpose and guarantees. For the normative requirements at each level, see
-[Requirements](requirements.md).
+[Requirements](requirements.md). For a background, see
+[Terminology](terminology.md).
 
 ## What is SLSA?
 
@@ -20,41 +19,283 @@ SLSA is a set of incrementally adoptable security guidelines, established by
 industry consensus. The standards set by SLSA are guiding principles for both
 software producers and consumers: producers can follow the guidelines to make
 their software more secure, and consumers can make decisions based on a software
-package's security posture. SLSA's four levels are designed to be incremental
-and actionable, and to protect against specific integrity attacks. SLSA 4
-represents the ideal end state, and the lower levels represent milestones with
-corresponding integrity guarantees.
+package's security posture. SLSA's levels are designed to be incremental
+and actionable, and to protect against specific classes of supply chain attacks.
+The highest level in each track represents an ideal end state, and the lower
+levels represent intermediate milestones with commensurate security guarantees.
 
-## Summary of levels
+Importantly, SLSA is intended to be a primitive in a broader determination of a
+software's risk. SLSA measures specific aspects of supply chain security,
+particularly those that can be fully automated; other aspects, such as developer
+trust and code quality, are out of scope. Furthermore, each link in the software
+supply chain has its own, independent SLSA level---in other words, it is not
+transitive ([FAQ](../faq.md#q-why-is-slsa-not-transitive)). The benefit of this
+approach is to break up the large supply chain security problem into tractable
+subproblems that can be prioritized based on risk and tackled in parallel. But
+this does mean that SLSA alone is not sufficient to determine if an artifact is
+"safe".
 
-| Level | Description                                   | Example                                               |
-| :---- | :-------------------------------------------- | :---------------------------------------------------- |
-| 1     | Documentation of the build process            | Unsigned provenance                                   |
-| 2     | Tamper resistance of the build service        | Hosted source/build, signed provenance                |
-| 3     | Extra resistance to specific threats          | Security controls on host, non-falsifiable provenance |
-| 4     | Highest levels of confidence and trust        | Two-party review + hermetic builds                    |
+> **TODO:** SLSA is in the eye of the beholder: software consumers make their
+> own SLSA determinations, though in practice they may delegate to some
+> authority.
 
-It can take years to achieve the ideal security state - intermediate milestones are important. SLSA guides you through gradually improving the security of your software. Artifacts used in critical infrastructure or vital business operations may want to attain a higher level of security, whereas software that poses a low risk can stop when they're comfortable.
+## Who is SLSA for?
 
-## Detailed explanation
+SLSA is intended to serve multiple populations:
 
-| Level | Requirements |
-| ----- | ------------ |
-| 0     | **No guarantees.** SLSA 0 represents the lack of any SLSA level. |
-| 1     | **The build process must be fully scripted/automated and generate provenance.** Provenance is metadata about how an artifact was built, including the build process, top-level source, and dependencies. Knowing the provenance allows software consumers to make risk-based security decisions. Provenance at SLSA 1 does not protect against tampering, but it offers a basic level of code source identification and can aid in vulnerability management. |
-| 2     | **Requires using version control and a hosted build service that generates authenticated provenance.** These additional requirements give the software consumer greater confidence in the origin of the software. At this level, the provenance prevents tampering to the extent that the build service is trusted. SLSA 2 also provides an easy upgrade path to SLSA 3. |
-| 3     | **The source and build platforms meet specific standards to guarantee the auditability of the source and the integrity of the provenance respectively.** We envision an accreditation process whereby auditors certify that platforms meet the requirements, which consumers can then rely on. SLSA 3 provides much stronger protections against tampering than earlier levels by preventing specific classes of threats, such as cross-build contamination. |
-| 4     | **Requires two-person review of all changes and a hermetic, reproducible build process.** Two-person review is an industry best practice for catching mistakes and deterring bad behavior. Hermetic builds guarantee that the provenance’s list of dependencies is complete. Reproducible builds, though not strictly required, provide many auditability and reliability benefits. Overall, SLSA 4 gives the consumer a high degree of confidence that the software has not been tampered with. |
+-   **Project maintainers,** who are often small teams that know their build
+    process and trust their teammates. Their primary goal is protection against
+    compromise with as low overhead as possible. They may also benefit from
+    easier maintenance and increased consumer confidence.
 
-The SLSA level is not transitive ([see our FAQs](../faq.md)). This makes each artifact’s SLSA rating independent from one another, allowing parallel progress and prioritization based on risk. The level describes the integrity protections of an artifact’s build process and top-level source, but nothing about the artifact’s dependencies. Dependencies have their own SLSA ratings, and it is possible for a SLSA 4 artifact to be built from SLSA 0 dependencies.
+-   **Consumers,** who use a variety of software and do not know the maintainers
+    or their build processes. Their primary goal is confidence that the software
+    is authentic and has not been tampered with. They are concerned about rogue
+    maintainers, compromised credentials, and compromised infrastructure.
 
-## Limitations
+-   **Organizations,** who are both producers and consumers of software. In
+    addition to the goals above, organizations also want to broadly understand
+    and reduce risk across the organization.
 
-SLSA can help reduce supply chain threats in a software artifact, but there are limitations.
+-   **Infrastructure providers,** such as build services and packaging
+    ecosystems, who are critical to achieving SLSA. While not the primary
+    beneficiary of SLSA, they may benefit from increased security and user
+    trust.
 
--   There are a significant number of dependencies in the supply chain for many artifacts. The full graph of dependencies could be intractably large.
--   In practice, a team working on security will need to identify and focus on the important components in a supply chain. This can be performed manually, but the effort could be significant.
--   An artifact’s SLSA level is not transitive ([see our FAQs](../faq.md)) and dependencies have their own SLSA ratings. This means that it is possible for a SLSA 4 artifact to be built from SLSA 0 dependencies. So, while the main artifact has strong security, risks may still exist elsewhere. The aggregate of these risks will help software consumers understand how and where to use the SLSA 4 artifact.
--   While automation of these tasks will help, it isn’t practical for every software consumer to fully vet the entire graph of every artifact. To close this gap, auditors and accreditation bodies could verify and assert that something meets the SLSA requirements. This could be particularly valuable for closed source software.
+## Levels and tracks
 
-As part of our roadmap, we’ll explore how to identify important components, how to determine aggregate risk throughout a supply chain, and the role of accreditation.
+SLSA levels are split into *tracks*. Each track has own set of levels that
+measure a particular aspect of supply chain security. The purpose of tracks is
+to recognize progress made in one aspect of security without blocking on an
+unrelated aspect. Tracks also allow the SLSA spec to evolve: we can add more
+tracks without invalidating previous levels.
+
+| Track/Level | Requirements | Benefits |
+| ----------- | ------------ | -------- |
+| [Build L0]  | (none)       | (n/a)    |
+| [Build L1]  | Attestation showing how the package was built | Documentation, inventorying |
+| [Build L2]  | Signed attestation, generated by a hosted build service | Reduced attack surface, weak tamper protection |
+| [Build L3]  | Hardened build service | Strong tamper protection |
+| [Build L4]  | (not yet defined) | |
+| [Source L…] | (not yet defined) | |
+
+> Note: The [previous version] of the specification used a single unnamed track,
+> SLSA 1–4, roughly corresponding to the equivalently numbered Build + Source
+> levels.
+
+## Build track
+
+The SLSA build track describes the level of protection against tampering
+during or after the build, and the trustworthiness of provenance metadata.
+Higher SLSA build levels provide increased confidence that a package truly came
+from the correct sources, without unauthorized modification or influence.
+
+> **TODO:** Add a diagram visualizing the following.
+
+Summary of the build track:
+
+-   Generate a **provenance attestation** automatically during each build.
+-   Build on **hardened services** that have been manually audited.
+
+Exactly how this is implemented is up to the packaging ecosystem (for open
+source) or organization (for closed source), including: what provenance format
+is accepted, whether reproducible builds are used, and how provenance is
+distributed. Guidelines for implementers can be found in the
+[requirements](requirements.md).
+
+<section id="build-l0">
+
+### Build L0: No guarantees
+
+<dl class="as-table">
+<dt>Summary<dd>
+
+No requirements---L0 represents the lack of SLSA.
+
+<dt>Intended for<dd>
+
+Development or test builds of software that are built and run on the same
+machine, such as unit tests.
+
+<dt>Requirements<dd>
+
+n/a
+
+<dt>Benefits<dd>
+
+n/a
+
+</dl>
+</section>
+<section id="build-l1">
+
+### Build L1: Provenance
+
+<dl class="as-table">
+<dt>Summary<dd>
+
+Package has a provenance attestation showing how it was built, but the
+provenance is trivial to forge.
+
+<dt>Intended for<dd>
+
+Projects and organizations wanting to easily and quickly gain some benefits of
+SLSA---other than tamper protection---without changing their build workflows.
+
+<dt>Requirements<dd>
+
+-   Up front, the package maintainer defines some sort of "build script" that
+    automates how the package is supposed to be built.
+
+-   On each build, the release process automatically generates and distributes a
+    [provenance attestation] describing how the artifact was *actually* built,
+    including: who built the package (person or system), what process/command
+    was used, and what the input artifacts were.
+
+<dt>Benefits<dd>
+
+-   Makes it easier for both maintainers and consumers to debug, patch, rebuild,
+    and/or analyze the software by knowing its precise source version and build
+    process.
+
+-   Aids organizations in creating an inventory of software and build systems
+    used across a variety of teams.
+
+<dt>Notes<dd>
+
+-   Provenance may be incomplete and/or unsigned at L1. Higher levels require
+    more complete and trustworthy provenance.
+
+</dl>
+
+</section>
+<section id="build-l2">
+
+### Build L2: Build service
+
+<dl class="as-table">
+<dt>Summary<dd>
+
+Builds run on a hosted service that generates and signs the provenance, reducing
+attack surface and increasing the difficulty to forge the provenance.
+
+<dt>Intended for<dd>
+
+Projects and organizations wanting to gain moderate security benefits of SLSA by
+switching to a hosted build service, while waiting for changes to the build
+service itself required by [Build L3].
+
+<dt>Requirements<dd>
+
+All of [Build L1], plus:
+
+-   Builds run on a hosted build service that generates and signs the
+    provenance itself, outside the control of the users of the build service.
+
+<dt>Benefits<dd>
+
+All of [Build L1], plus:
+
+-   Prevents tampering after the build through digital signatures.
+
+-   Moderately reduces the impact of compromised package upload credentials by
+    requiring attacker to also exploit the build process.
+
+-   Reduces attack surface by limiting builds to specific build services that
+    can be audited and hardened.
+
+-   Allows large-scale migration of teams to supported build services early
+    while further hardening work ([Build L3]) is done in parallel.
+
+</dl>
+</section>
+<section id="build-l3">
+
+> **TODO:** If possible, avoid being overly specific about "signing".
+
+### Build L3: Hardened builds
+
+<dl class="as-table">
+<dt>Summary<dd>
+
+Builds run on a hardened build service that offers strong tamper protection. The
+provenance is very difficult to exploit even for a determined adversary.
+
+<dt>Intended for<dd>
+
+Most software releases. Build L3 usually requires significant changes to
+existing build services.
+
+<dt>Requirements<dd>
+
+All of [Build L2], plus:
+
+-   Build service implements strong controls to prevent runs from influencing
+    one another, even within the same project.
+
+> **TODO:** Add requirement about survey and audit as per the v1.0 proposal.
+
+<dt>Benefits<dd>
+
+All of [Build L2], plus:
+
+-   Prevents tampering during the build---by maintainers, compromised
+    credentials, or other tenants.
+
+-   Greatly reduces the impact of compromised package upload credentials by
+    requiring attacker to perform a difficult exploit of the build process.
+
+-   Provides strong confidence that the package was built from the official
+    source and build process.
+
+</dl>
+</section>
+<section id="build-l4">
+
+### Build L4: (not yet defined)
+
+Build L4 is not yet defined. For reference, [previous version] of SLSA defined a
+"SLSA 4" that included the following requirements, which **may or may not** be
+part of a future Build L4:
+
+-   Pinned dependencies, which guarantee that each build runs on exactly the
+    same set of inputs.
+-   Hermetic builds, which guarantee that no extraneous dependencies are used.
+-   All dependencies listed in the provenance, which enables downstream systems
+    to recursively apply SLSA to dependencies.
+-   Reproducible builds, which enable other systems to corroborate the
+    provenance.
+
+</section>
+<section id="source-track">
+
+## Source track (not yet defined)
+
+The Source track is not yet defined but is expected to measure protection
+against tampering of the source code. It will be defined in a future version of
+the specification.
+
+For reference, the [previous version] of SLSA included the following
+requirements, which **may or may not** be part of a future Source track:
+
+-   Strong authentication of author and reviewer identities, such as 2-factor
+    authentication using a hardware security key, to resist account and
+    credential compromise.
+-   Retention of the source code to allow for after-the-fact inspection and
+    future rebuilds.
+-   Mandatory two-person review of all changes to the source to prevent a single
+    compromised actor or account from introducing malicious changes.
+
+</section>
+
+<!-- Link definitions -->
+
+[build l0]: #build-l0
+[build l1]: #build-l1
+[build l2]: #build-l2
+[build l3]: #build-l3
+[build l4]: #build-l4
+[build]: #build-track
+[previous version]: ../v0.1/levels.md
+[provenance attestation]: terminology.md
+[source l…]: #source-track

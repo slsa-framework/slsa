@@ -302,7 +302,7 @@ h5, .h5 {
         border: 1px solid #CECECE;
         border-radius: 20px;
         th {
-            background-color: #F7FAF9;
+            background-color: $lightest-green;
         }
     }
     blockquote {
@@ -313,7 +313,7 @@ h5, .h5 {
 
         /* Green - Lightest */
         border: none;
-        background: #F7FAF9;
+        background: $lightest-green;
         border-radius: $radius;
         margin-bottom: 30px;
         letter-spacing: normal;
@@ -483,7 +483,8 @@ details {
 
 // This is a hack to fix paragraph spacing. Really the theme should be fixed.
 // See https://github.com/slsa-framework/slsa/issues/335.
-.fix-paragraph-spacing {
+.fix-paragraph-spacing,
+dl.as-table {
   p, ul, ol {
     margin-bottom: 12px;
     &:last-child {

@@ -14,6 +14,20 @@ To better understand the reasoning behind the requirements, see
 
 > Reminder: SLSA is in `alpha`. The definitions below are not yet finalized and subject to change, particularly SLSA 3-4.
 
+## TODO
+
+**TODO:** Update the requirements to provide guidelines for how to implement,
+showing what the options are:
+
+-   How to define expectations: explicit vs implicit
+-   What provenance format to use: recommend [SLSA Provenance](../../provenance)
+-   Whether provenance is generated during the initial build and/or
+    after-the-fact using reproducible builds
+-   How provenance is distributed
+-   When verification happens: during upload, during download, and/or continuous
+    monitoring
+-   What happens on failure: blocking, warning, and/or asynchronous notification
+
 ## Summary table
 
 | Requirement                          | SLSA 1 | SLSA 2 | SLSA 3 | SLSA 4 |
