@@ -3,16 +3,15 @@ title: Requirements
 ---
 <div class="subtitle">
 
-This page covers all of the technical requirements for an artifact to meet the
-[SLSA Levels](levels.md).
+This page covers the detailed technical requirements for each SLSA level. The
+intended audience is system implementers and security engineers.
 
 </div>
 
-For background, see [Introduction](index.md) and [Terminology](terminology.md).
-To better understand the reasoning behind the requirements, see
-[Threats and mitigations](threats.md).
-
-> Reminder: SLSA is in `alpha`. The definitions below are not yet finalized and subject to change, particularly SLSA 3-4.
+For an informative description of the levels intended for all audiences, see
+[Levels](levels.md). For background, see [Terminology](terminology.md). To
+better understand the reasoning behind the requirements, see [Threats and
+mitigations](threats.md).
 
 ## TODO
 
