@@ -1,8 +1,188 @@
 syntax = "proto3";
 
-package slsa.v1_0;
+package slsa.v1;
+
+import "google/protobuf/struct.proto";
+
+// NOTE: We use lowerCamelCase for field names because that is how the JSON
+// fields are named. The proto style guide advises use of snake_case in the
+// .proto file but lowerCamelCase in JSON, but we believe that is confusing for
+// readers (since we always serialize to JSON). It also makes it harder to
+// reference other fields in comments since there are two ways to reference a
+// field.
 
 message Provenance {
-  What what = 1;
-  
+  // The set of top-level inputs to the build. This SHOULD contain all the
+  // information necessary and sufficient to:
+  //
+  // 1.  Run the build, provided understanding of the build type and access to
+  //     all referenced sources and dependencies.
+  // 2.  Verify that the build was as expected.
+  //
+  // The build system should be designed to minimize the amount of information
+  // necessary here, in order to reduce fragility and ease verification.
+  // Consumers MUST have an expectation of what "good" looks like; the more
+  // information that they must check, the harder that task becomes.
+  //
+  // Guidelines:
+  //
+  // -   Maximize the amount of information that is implicit from the meaning of
+  //     `type`. In particular, any value that is boilerplate and the same for
+  //     every build SHOULD be implicit.
+  //
+  // -   Avoid parameters by moving configuration to source artifacts whenever
+  //     possible. For example, instead of passing in compiler flags via a
+  //     parameter, require them to live next to the code or build
+  //     configuration.
+  //
+  // -   If possible, architect the build system to use this definition as its
+  //     sole top-level input, in order to guarantee that the information is
+  //     sufficient to run the build.
+  //
+  // -   Environment variables and artifacts that are not user controlled SHOULD
+  //     be part of the `runDetails`, not here. For example, in GitHub Actions,
+  //     a user can select which VM image but only from a set of pre-defined
+  //     options; that enumeration may go here (though in practice it is part of
+  //     the input artifact so it would not be recorded in the provenance) while
+  //     the resolved VM version would go in `runDetails`.
+  BuildDefinition buildDefinition = 1;
+
+  // Details about a specific execution of the build definition. Values here
+  // MUST NOT be user controlled.
+  RunDetails runDetails = 2;
+}
+
+message BuildDefinition {
+  // URI indicating how to interpret and act upon this message.
+  string type = 1 [(subclass) = TypeURI];
+
+  // The primary top-level input artifact containing the configuration for this
+  // build. In many cases, this artifact also contains the top-level "code"
+  // (else it is listed in `resolvedDependencies` or `additionalSources`).
+  //
+  // TODO: The term "config source" isn't quite right for the Docker-based
+  // thing. What should we call it? Maybe also ask ActiveState.
+  // TODO: Explain how to handle the case when the configuration blob is not
+  // read directly from source. (Answer: hash it.)
+  Artifact configSource = 2;
+
+  // Additional top-level input artifacts that were not referenced by
+  // `configSource`. Most builds do not need this.
+  //
+  // This is only used when the build takes multiple independent input
+  // artifacts, such as when a build has a separate configuration and source.
+  //
+  // TODO: Use Tekton/GCB as an example.
+  repeated Artifact additionalSources = 3;
+
+  // Resolved dependencies needed at build time and referenced by
+  // `configSource`, `additionalSources`, or (transitively) `dependencies`.
+  // For example, if the build script fetches and executes "example.com/foo.sh",
+  // which in turn fetches "example.com/bar.tar.gz", then both "foo.sh" and
+  // "bar.tar.gz" should be listed here.
+  //
+  // SHOULD NOT contain `configSource` or any `additionalSources`.
+  //
+  // TODO: Explain how to determine what goes here.
+  // TODO: Explain that it's OK for it to be incomplete.
+  // TODO: If the dep is already pinned, does it need to be listed here?
+  repeated Artifact resolvedDependencies = 4;
+
+  // The identifier relative to `configSource` for the build definition. This is
+  // often a path to a configuration file and optional target label within that
+  // file. The syntax and interpretation are defined by `type`.
+  //
+  // This field SHOULD be omitted if it is implicit from `type`. This makes it
+  // the provenance to verify, thus it is preferred when possible.
+  //
+  // Verifiers SHOULD compare this to an expected value.
+  //
+  // Design rationale: The `entryPoint` is distinct from `parameters` to make it
+  // easier to verify. Most builds need an entry point but not extra parameters.
+  string entryPoint = 5;
+
+  // TODO: Enumeration to select between profiles, e.g. debug vs optimized. Is
+  // this is a good idea?
+  string profile = 6;
+
+  // TODO: os and architecture. Seems like we need that. How to record it?
+
+  // Additional per-invocation parameters that were not covered by another
+  // field.
+  //
+  // TODO: finish explanation, particularly that it SHOULD be empty
+  google.protobuf.Struct additionalParameters = 7;
+}
+
+message Artifact {
+  // TODO: Should we split out "locator" (ephemeral) from "identity" (static)?
+  string uri = 1 [(subclass) = URI];
+  DigestSet digest = 2;
+  // TODO: add a "local name"?
+  // TODO: add mediaType?
+}
+
+message DigestSet {
+  string sha256 = 1;
+  string sha512 = 2;
+  // ...
+}
+
+message ParameterSet {
+
+}
+
+message RunDetails {
+  // TODO: The following fields are the same as v0.2:
+  Builder builder = 1;
+
+  // TODO: description
+  BuildMetadata metadata = 2;
+
+  // Properties of the build environment that were provided by the `builder` and
+  // not under user control. The primary intention of this field is for
+  // debugging, incident response, and vulnerability management.
+  //
+  // The values here MAY be required for reproducing the build, but ideally this
+  // would not be the case. For reproducibility, users should be instructed not
+  // to rely on these values during the build.
+  Environment environment = 5;
+
+  // Additional artifacts generated during the build that should not be
+  // considered the "output" of the build but that may be needed during
+  // debugging or incident response.
+  //
+  // Possible use cases:
+  //
+  // -   Logs generated during the build.
+  // -   Fully evaluated build configuration.
+  //
+  // In most cases, this SHOULD NOT contain all intermediate files generated
+  // during the build. Instead, this should only contain files that are likely
+  // to be useful later and that cannot be easily reproduced.
+  repeated Artifact byproducts = 6;
+}
+
+message Builder {
+  // TODO: In most cases this is implicit from the envelope layer (e.g. the
+  // public key or x.509 certificate), which is just one more thing to mess up.
+  // Can we rescope this to avoid the duplication and thus the security concern?
+  // For example, if the envelope identifies the build system, this might
+  // identify the tenant project?
+  string id = 1 [(subclass) = URI];
+
+  // TODO: Do we want to add this field? (#319)
+  string version = 2;
+}
+
+message BuildMetadata {
+  // TODO: same as v0.2:
+  string invocationId = 1;
+  google.protobuf.Timestamp startedOn = 2;
+  google.protobuf.Timestamp finishedOn = 3;
+}
+
+message Environment {
+  repeated Artifact systemArtifacts = 1;
+  google.protobuf.Struct system
 }
