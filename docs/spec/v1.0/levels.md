@@ -183,10 +183,6 @@ SLSA---other than tamper protection---without changing their build workflows.
 
 </dl>
 
-> **TODO:** Add "Scripted Build" if decided in
-> [#498](https://github.com/slsa-framework/slsa/issues/498): "Build process is
-> fully scripted/automated, with no manual steps."
-
 </section>
 <section id="build-l2">
 

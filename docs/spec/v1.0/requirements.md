@@ -19,97 +19,280 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ## TODO
 
-**TODO:** Update the requirements to provide guidelines for how to implement,
-showing what the options are:
+**TODO:** Use consistent terminology throughout the site: "publish" vs
+"release", "publisher" vs "maintainer" vs "developer", "consumer" vs
+"ecosystem" vs "downstream system", "build" vs "produce.
 
--   How to define expectations: explicit vs implicit
--   What provenance format to use: recommend [SLSA Provenance](../../provenance)
--   Whether provenance is generated during the initial build and/or
-    after-the-fact using reproducible builds
--   How provenance is distributed
--   When verification happens: during upload, during download, and/or continuous
-    monitoring
--   What happens on failure: blocking, warning, and/or asynchronous notification
+**TODO:** Generate permalinks to sections.
 
-## Summary table
+## Overview
 
-| Requirement ([Build track])      | Build L1 | Build L2 | Build L3 |
-| -------------------------------- | -------- | -------- | -------- |
-| Build - [Scripted build]         | ✓        | ✓        | ✓        |
-| Build - [Build service]          |          | ✓        | ✓        |
-| Build - [Build as code]          |          |          | ✓        |
-| Build - [Ephemeral and isolated] |          |          | ✓        |
-| Provenance - [Available]         | ✓        | ✓        | ✓        |
-| Provenance - [Authenticated]     |          | ✓        | ✓        |
-| Provenance - [Service generated] |          | ✓        | ✓        |
-| Provenance - [Non-falsifiable]   |          |          | ✓        |
+### Build levels
 
-[authenticated]: #authenticated
-[available]: #available
-[build as code]: #build-as-code
-[build service]: #build-service
-[Ephemeral and isolated]: #ephemeral-isolated
-[non-falsifiable]: #non-falsifiable
-[scripted build]: #scripted-build
-[service generated]: #service-generated
+Responsibility to implement SLSA is spread across the following parties.
 
-## Build track
+<table class="no-alternate">
+<tr>
+  <th>Implementer
+  <th>Requirement
+  <th>Degree
+  <th>L1<th>L2<th>L3
+<tr>
+  <td rowspan=2><a href="#producer">Producer</a>
+  <td colspan=2>Define expectations
+  <td>✓<td>✓<td>✓
+<tr>
+  <td colspan=2>Use acceptable build and release process
+  <td>✓<td>✓<td>✓
+<tr>
+  <td rowspan=5><a href="#build-system">Build system</a>
+  <td rowspan=3><a href="#provenance-generation">Provenance generation</a>
+  <td><a href="#provenance-exists">Exists</a>
+  <td>✓<td>✓<td>✓
+<tr>
+  <td><a href="#provenance-authenticated">Authenticated</a>
+  <td> <td>✓<td>✓
+<tr>
+  <td><a href="#provenance-non-forgeable">Non-forgeable</a>
+  <td> <td> <td>✓
+<tr>
+  <td rowspan=2><a href="#isolation-strength">Isolation strength</a>
+  <td><a href="#build-service">Build service</a>
+  <td> <td>✓<td>✓
+<tr>
+  <td><a href="#ephemeral-isolated">Ephemeral and isolated</a>
+  <td> <td> <td>✓
+<tr>
+  <td rowspan=2><a href="#packaging-ecosystem">Packaging ecosystem</a>
+  <td colspan=2>Provenance distribution
+  <td>✓<td>✓<td>✓
+<tr>
+  <td colspan=2>Expectations and verification
+  <td>✓<td>✓<td>✓
+<tr>
+  <td rowspan=1><a href="#consumer">Consumer</a>
+  <td colspan=2>Opt-in to verification
+  <td>✓<td>✓<td>✓
+</table>
 
-[build track]: #build-track
+## Producer
 
-### Build process requirements
+[Producer]: #producer
+
+A package's <dfn>producer</dfn> is the organization that owns and releases the
+software. It may be an open-source project, a company, a team within a company,
+or even an individual.
+
+The producer is responsible for setting expectations on how the package should
+be built and then using that process on every release. How to set expectations
+and what build systems are acceptable is determined by the [packaging ecosystem]
+and/or [consumer]. Higher SLSA Build levels may be reached by choosing a build
+system that supports that level.
+
+The process differs whether or not the path to SLSA is
+through reproducible builds.
+
+> **TODO:** Reorganize to match the [Overview](#overview) table, i.e. "define
+> expectations" and "Use an acceptable builds and release process". There may
+> also need to be a first "decide on a build system" step?
+
+### Without reproducible builds
+
+Up front:
+
+-   Decide on a build system, which affects the maximum level that can be
+    reached. Ideally this would be a system that already supports Build L3 or
+    plans to do so in an acceptable time frame.
+-   Define how the package is expected to be built, if required by the packaging
+    ecosystem. For example, this might require setting the upstream source
+    repository in the package metadata.
+-   Configure the build to reach the desired level, if required by the build
+    system. For example, a project built on GitHub Actions might use the
+    [GitHub Actions Provenance Generator](https://github.com/slsa-framework/slsa-github-generator).
+-   Configure the release process to upload provenance generated by the build
+    system, if required by the packaging ecosystem. For example, a packaging
+    tool might require an additional command-line flag to during upload.
+
+Every release:
+
+-   Use the expected build and release process. For example, this might mean
+    releasing on a CI/CD platform instead of a maintainer's workstation.
+
+### With reproducible builds
+
+If the packaging ecosystem supports verified [reproducible
+builds](https://reproducible-builds.org), the producer may continue building
+mostly as they have always done, with no specific requirements other than
+generating sufficient provenance. Independent "rebuilders" will reproduce the
+build after-the-fact to corroborate the trustworthiness of the provenance.
+
+Every release:
+
+-   Use the build and release process provided by the packaging ecosystem, which
+    should generate provenance in an acceptable format.
+-   Ensure that the build is deterministic and that all dependencies are
+    properly declared. Otherwise rebuilders will not be able to reproduce the
+    package.
+
+## Build system
+
+[Build system]: #build-system
+
+A package's <dfn>build system</dfn> is the infrastructure used to transform the
+software from source to package. This includes the transitive closure of all
+hardware, software, persons, and organizations that can influence the build. A
+build system is often a hosted, multi-tenant build service, but it could be a
+system of multiple independent rebuilders, a special-purpose build system used
+by a single software project, or even a developer's workstation. Ideally, one
+build system is used by many different software packages so that consumers can
+[minimize the number of trusted systems](principles.md). For more background,
+see [Build Model](terminology.md#build-model).
+
+The build system is responsible for providing two things: [provenance
+generation] and [isolation between builds]. The [Build level](levels.md#build-track) describes
+the degree to which each of these properties is met.
+
+> **TODO:** Pick better degree names. "Hosted", "Fully isolated", etc are not
+> obvious.
+
+### Provenance generation
+
+[Provenance generation]: #provenance-generation
+
+The build system is responsible for generating provenance describing how the
+package was produced.
+
+The SLSA Build level describes the minimum bound for:
+
+-   *Completeness:* What information is required in the provenance?
+-   *Authenticity:* How strongly can the provenance be tied back to the builder?
+-   *Accuracy:* How resistant is the provenance generation to tampering within
+    the build process?
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
-<tr id="scripted-build">
-<td>Scripted build
-<td>
 
-All build steps were fully defined in some sort of "build script". The
-only manual command, if any, was to invoke the build script.
+<tr id="provenance-exists"><td>Provenance Exists<td>
 
-Examples:
+The build process MUST generate provenance describing how the package was
+produced.
 
--   Build script is Makefile, invoked via `make all`.
--   Build script is .github/workflows/build.yaml, invoked by GitHub Actions.
+The format MUST be acceptable to the [packaging ecosystem] and/or [consumer]. It
+is RECOMMENDED to use the [SLSA Provenance] format because it is designed to be
+interoperable, universal, and unambiguous when used for SLSA. See that format's
+documentation for requirements and implementation guidelines. If using an
+alternate format, it MUST contain the equivalent information required at each
+level by SLSA Provenance and SHOULD be bi-directionally translatable to SLSA
+Provenance.
+
+-   *Completeness:* Best effort. The provenance at L1 SHOULD contain sufficient
+    information to catch mistakes and simulate the user experience at higher
+    levels in the absence of tampering. In other words, the contents of the
+    provenance SHOULD be the same at all Build levels, but a few fields MAY be
+    absent at L1 if they are prohibitively expensive to implement.
+-   *Authenticity:* No requirements.
+-   *Accuracy:* No requirements.
+
+**TODO:** Link to local copy of provenance (../../provenance/v1.0.md)
+once [#525](https://github.com/slsa-framework/slsa/pull/525) is merged.
+
+[SLSA Provenance]: https://deploy-preview-525--slsa.netlify.app/provenance/v1.0
 
 <td>✓<td>✓<td>✓
+<tr id="provenance-authenticated"><td>Provenance Authenticated<td>
+
+*Authenticity:* Consumers MUST be able to authenticate the provenance such that
+they can:
+
+-   Identify the transitive closure of the build system, i.e. which entities
+    they must trust.
+-   Verify the integrity of the provenance, i.e. that it was not tampered with
+    after the build.
+
+This SHOULD be through a digital signature from a private key accessible only to
+the service generating the provenance.
+
+*Accuracy:* The provenance MUST be generated by the build system (i.e. within
+the trust boundary identified in the provenance) and not by a tenant of the
+build system (i.e. outside the trust boundary).
+
+-   The data in the provenance MUST be obtained from the build service, either
+    because the generator *is* the build service or because the provenance
+    generator reads the data directly from the build service.
+-   The build system MUST have some security control to prevent tenants from
+    tampering with the provenance. However, there is no minimum bound on the
+    strength. The purpose is to deter adversaries who may face legal or
+    financial risk from evading controls.
+
+*Completeness:* SHOULD be complete, but there MAY be external parameters that
+are not sufficiently captured in the provenance.
+
+**TODO:** The term "Authenticated" is not quite right, more "authenticatable"
+but that's not a word. Also that term is missing the service-generated bit.
+
+**TODO:** Provide guidance on PKI, e.g. make the public key available to
+verifiers.
+
+<td> <td>✓<td>✓
+<tr id="provenance-non-forgeable"><td>Provenance Non-forgeable<td>
+
+*Accuracy:* Provenance MUST be strongly resistant to influence by tenants.
+
+-   Any secret material used to demonstrate the non-forgeable nature of
+    the provenance, for example the signing key used to generate a digital
+    signature, MUST be stored in a secure management system appropriate for
+    such material and accessible only to the build service account.
+-   Such secret material MUST NOT be accessible to the environment running
+    the user-defined build steps.
+-   Every field in the provenance MUST be generated or verified by the build
+    service in a trusted control plane. The user-controlled build steps MUST
+    NOT be able to inject or alter the contents.
+
+*Completeness:* MUST be complete. In particular, the external parameters must be
+fully enumerated in the provenance.
+
+*Authenticity:* Same as [Authenticated](#provenance-authenticated).
+
+Note: This requirement was called "non-falsifiable" in the initial
+[draft version (v0.1)](../v0.1/requirements.md#non-falsifiable).
+
+<td> <td> <td>✓
+</table>
+
+### Isolation strength
+
+[Isolation strength]: #isolation-strength
+[Isolation between builds]: #isolation-strength
+
+The build system is responsible for isolating between builds, even within the
+same tenant project. In other words, how strong of a guarantee do we have that
+the build really executed correctly, without external influence?
+
+The SLSA Build level describes the minimum bar for isolation strength.
+
+<table>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+
 <tr id="build-service">
 <td>Build service
 <td>
 
-All build steps ran using some build service, not on a developer's
+All build steps ran using some build service, not on a maintainer's
 workstation.
 
 Examples: GitHub Actions, Google Cloud Build, Travis CI.
 
 <td> <td>✓<td>✓
-<tr id="build-as-code">
-<td>Build as code
-<td>
-
-The build definition and configuration executed by the build service is
-verifiably derived from text file definitions stored in a version control
-system.
-
-Verifiably derived can mean either fetched directly through a trusted channel,
-or that the derived definition has some trustworthy provenance chain linking
-back to version control.
-
-Examples:
-
--   .github/workflows/build.yaml stored in git
--   Tekton bundles generated from text files by a SLSA compliant build process
-    and stored in an OCI registry with SLSA provenance metadata available.
-
-<td> <td> <td>✓
 <tr id="ephemeral-isolated">
-<td>Ephemeral and Isolated
+<td>Ephemeral and isolated
 <td>
+
+**TODO:** Use updated wording from
+[#532](https://github.com/slsa-framework/slsa/pull/532).
 
 The build service ensured that the build steps ran in an ephemeral and isolated
-environment provisioned solely for this build, free of influence from other build
-instances, whether prior or concurrent.
+environment provisioned solely for this build, free of influence from other
+build instances, whether prior or concurrent.
 
 -   It MUST NOT be possible for a build to access any secrets of the build service, such as the provenance signing key.
 -   It MUST NOT be possible for two builds that overlap in time to influence one another.
@@ -118,178 +301,10 @@ instances, whether prior or concurrent.
 -   The build SHOULD NOT call out to remote execution unless it's considered part of the "builder" within the trust boundary.
 -   The build SHOULD NOT open services that allow for remote influence.
 
-<td> <td> <td>✓
-</table>
-
-### Provenance generation requirements
-
-<table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
-<tr id="available">
-<td>Available
-<td>
-
-The provenance is available to the consumer in a format that the consumer
-accepts. The format SHOULD be in-toto [SLSA Provenance],
-but another format MAY be used if both producer and consumer agree and it meets
-all the other requirements.
-
-[SLSA Provenance]: ../../provenance
-
-<td>✓<td>✓<td>✓
-<tr id="authenticated">
-<td>Authenticated
-<td>
-
-The provenance's authenticity and integrity can be verified by the consumer.
-This SHOULD be through a digital signature from a private key accessible only to
-the service generating the provenance.
-
-<td> <td>✓<td>✓
-<tr id="service-generated">
-<td>Service generated
-<td>
-
-The data in the provenance MUST be obtained from the build service (either because
-the generator _is_ the build service or because the provenance generator reads the
-data directly from the build service).
-
-Regular users of the service MUST NOT be
-able to inject or alter the contents, except as noted below.
-
-The following provenance fields MAY be generated by the user-controlled build
-steps:
-
--   The output artifact hash from [Identifies Artifact](#identifies-artifact).
-    -   Reasoning: This only allows a "bad" build to falsely claim that it
-        produced a "good" artifact. This is not a security problem because the
-        consumer MUST accept only "good" builds and reject "bad" builds.
-
-<td> <td>✓<td>✓
-<tr id="non-falsifiable">
-<td>Non-falsifiable
-<td>
-
-Provenance cannot be falsified by the build service's users.
-
-NOTE: This requirement is a stricter version of [Service Generated](#service-generated).
-
--   Any secret material used to demonstrate the non-falsifiable nature of
-    the provenance, for example the signing key used to generate a digital
-    signature, MUST be stored in a secure management system appropriate for
-    such material and accessible only to the build service account.
--   Such secret material MUST NOT be accessible to the environment running
-    the user-defined build steps.
--   Every field in the provenance MUST be generated or verified by the build
-    service in a trusted control plane. The user-controlled build steps MUST
-    NOT be able to inject or alter the contents, except as noted below.
-
-The following provenance fields MAY be generated by the user-controlled build
-steps without the build service verifying their correctness:
-
--   The output artifact hash from [Identifies Artifact](#identifies-artifact).
-    -   Reasoning: This only allows a "bad" build to falsely claim that it
-        produced a "good" artifact. This is not a security problem because the
-        consumer MUST accept only "good" builds and reject "bad" builds.
+Note: This requirement was split into "Isolated" and "Ephemeral Environment" the
+initial [draft version (v0.1)](../v0.1/requirements.md).
 
 <td> <td> <td>✓
-</table>
-
-### Provenance contents requirements
-
-<table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
-<tr id="identifies-artifact">
-<td>Identifies artifact
-<td>
-
-The provenance MUST identify the output artifact via at least one
-cryptographic hash. The provenance MAY provide multiple identifying
-cryptographic hashes using different algorithms. When only one hash is
-provided, the RECOMMENDED algorithm is SHA-256 for cross-system
-compatibility. If another algorithm is used, it SHOULD be resistant to
-collisions and second preimages.
-
-<td>✓<td>✓<td>✓
-<tr id="identifies-builder">
-<td>Identifies builder
-<td>
-
-The provenance identifies the entity that performed the build and generated the
-provenance. This represents the entity that the consumer must trust. Examples:
-"GitHub Actions with a GitHub-hosted worker", "jdoe@example.com's machine".
-
-<td>✓<td>✓<td>✓
-<tr id="identifies-build-instructions">
-<td>Identifies build instructions
-<td>
-
-The provenance identifies the top-level instructions used to execute the build.
-
-The identified instructions SHOULD be at the highest level available to the build
-(e.g. if the build is told to run build.sh it should list build.sh and NOT the
-individual instructions in build.sh).
-
-If <a href="#build-as-code">build-as-code</a> is used, this SHOULD be the
-source repo and entry point of the build config (as in
-[the GitHub Actions example](/provenance/v0.2#github-actions)).
-
-If the build isn't defined in code it MAY list the details of what it was
-asked to do (as in
-[the Google Cloud Build RPC example](/provenance/v0.2#cloud-build-rpc)
-or
-[the Explicitly Run Commands example](/provenance/v0.2#explicitly-run-commands)).
-
-<td>✓<td>✓<td>✓
-<tr id="identifies-source-code">
-<td>Identifies source code
-<td>
-
-The provenance identifies the repository origin(s) for the source code used in
-the build.
-
-The identified repositories SHOULD only include source used directly in the build.
-The source of dependencies SHOULD NOT be included.
-
-At level 2 this information MAY come from users and DOES NOT need to be
-authenticated by the builder.
-
-At level 3+ this information MUST be authenticated by the builder (i.e. the
-builder either needs to have fetched the source itself or _observed_ the fetch).
-
-<td><td>✓<td>✓✓
-<tr id="identifies-entry-point">
-<td>Identifies entry point
-<td>
-
-The provenance identifies the "entry point" of the build definition
-(see <a href="#build-as-code">build-as-code</a>) used to drive the build
-including what source repo the configuration was read from.
-
-Example:
-
--   source repo: git URL + branch/tag/ref + commit ID
--   entrypoint: path to config file(s) (e.g. ./.zuul.yaml) + job name within config (e.g. envoy-build-arm64)
-
-<td><td><td>✓
-<tr id="includes-all-params">
-<td>Includes all build parameters
-<td>
-
-The provenance includes all build parameters under a user's control.
-
-<td> <td> <td>✓
-<tr id="includes-metadata">
-<td>Includes metadata
-<td>
-
-The provenance includes metadata to aid debugging and investigations. This
-SHOULD at least include start and end timestamps and a unique identifier to
-allow finding detailed debug logs.
-
-"○" = RECOMMENDED.
-
-<td>○<td>○<td>○
 </table>
 
 ### Possible future requirements
@@ -323,7 +338,7 @@ Examples:
 <summary>Hermetic (draft)</summary>
 
 All transitive build steps, sources, and dependencies were fully declared up
-front with _immutable references_, and the build steps ran with no network
+front with *immutable references*, and the build steps ran with no network
 access.
 
 An **immutable reference** is an identifier that is
@@ -335,14 +350,14 @@ commit ID; cloud storage bucket ID + SHA-256 hash; Subversion URL (no hash).
 The user-defined build script:
 
 -   MUST declare all dependencies, including sources and other build steps,
-    using _immutable references_ in a format that the build service understands.
+    using *immutable references* in a format that the build service understands.
 
 The build service:
 
 -   MUST fetch all artifacts in a trusted control plane.
 -   MUST NOT allow mutable references.
 -   MUST verify the integrity of each artifact.
-    -   If the _immutable reference_ includes a cryptographic hash, the service
+    -   If the *immutable reference* includes a cryptographic hash, the service
         MUST verify the hash and reject the fetch if the verification fails.
     -   Otherwise, the service MUST fetch the artifact over a channel that
         ensures transport integrity, such as TLS or code signing.
@@ -379,9 +394,63 @@ the build worker.
 
 </details>
 
-## Source track
+## Packaging ecosystem
 
-The Source track is not yet defined. The initial
+[Packaging ecosystem]: #packaging-ecosystem
+
+> **TODO:** Is there a better term that is more obvious to most readers?
+
+A <dfn>packaging ecosystem</dfn> is a set of conventions and tooling for package
+distribution. Every package has an ecosystem, whether it is formal or ad-hoc.
+Some ecosystems are formal, such as language distribution (e.g.
+[Python/PyPA](https://www.pypa.io)), operating system distribution (e.g.
+[Debian/Apt](https://wiki.debian.org/DebianRepository/Format)), or artifact
+distribution (e.g. [OCI](https://github.com/opencontainers/distribution-spec)).
+Other ecosystems are informal, such as a convention used within a company. Even
+ad-hoc distribution of software, such as through a link on a website, is
+considered an "ecosystem".
+
+The packaging ecosystem is responsible for ensuring that consumers only use
+artifacts ...**TODO**
+
+**TODO:** Provenance MUST be available to the packaging ecosystem and/or
+consumers. For the build system, this usually means outputting the provenance as
+part of the build to allow the release process to upload it in a manner
+prescribed by the packaging ecosystem.
+
+**TODO:** Update the requirements to provide guidelines for how to implement,
+showing what the options are:
+
+-   How to define expectations: explicit vs implicit
+-   Whether provenance is generated during the initial build and/or
+    after-the-fact using reproducible builds
+-   How provenance is distributed
+-   When verification happens: during upload, during download, and/or continuous
+    monitoring
+-   What happens on failure: blocking, warning, and/or asynchronous notification
+
+## Consumer
+
+[Consumer]: #consumer
+
+A package's <dfn>consumer</dfn> is the organization or individual that uses the
+package.
+
+The only requirement on the consumer is that they MAY have to opt-in to enable
+SLSA verification, depending on the packaging ecosystem.
+
+> **TODO:** Anything else? Do they need to make risk-based decisions? Respond to
+> errors/warnings?
+
+## Source control
+
+[Source control]: #source-control
+
+A package's <dfn>source control system</dfn> is the infrastructure for managing
+versions of the package's source code.
+
+There are currently no requirements for the source control system because the
+SLSA [Source track](levels.md#source-track) is not yet defined. The initial
 [draft version (v0.1)](../v0.1/requirements.md#source-requirements) of SLSA
 included the following source requirements, which may form the basis for a
 future Source track. Each entry may or may not be included in the future, in
