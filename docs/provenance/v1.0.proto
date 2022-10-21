@@ -16,7 +16,7 @@ message Provenance {
   // information necessary and sufficient to:
   //
   // 1.  Run the build, provided understanding of the build type and access to
-  //     all referenced sources and dependencies.
+  //     all referenced input artifacts and dependencies.
   // 2.  Verify that the build was as expected.
   //
   // The build system should be designed to minimize the amount of information
@@ -30,9 +30,9 @@ message Provenance {
   //     `type`. In particular, any value that is boilerplate and the same for
   //     every build SHOULD be implicit.
   //
-  // -   Avoid parameters by moving configuration to source artifacts whenever
+  // -   Avoid parameters by moving configuration to input artifacts whenever
   //     possible. For example, instead of passing in compiler flags via a
-  //     parameter, require them to live next to the code or build
+  //     parameter, require them to live next to the source code or build
   //     configuration.
   //
   // -   If possible, architect the build system to use this definition as its
@@ -45,6 +45,9 @@ message Provenance {
   //     options; that enumeration may go here (though in practice it is part of
   //     the input artifact so it would not be recorded in the provenance) while
   //     the resolved VM version would go in `runDetails`.
+  //
+  // The accuracy and completeness of this information is implied by
+  // `runDetails.builder.id`.
   BuildDefinition buildDefinition = 1;
 
   // Details about a specific execution of the build definition. Values here
@@ -56,62 +59,45 @@ message BuildDefinition {
   // URI indicating how to interpret and act upon this message.
   string type = 1 [(subclass) = TypeURI];
 
-  // The primary top-level input artifact containing the configuration for this
-  // build. In many cases, this artifact also contains the top-level "code"
-  // (else it is listed in `resolvedDependencies` or `additionalSources`).
+  // The top-level, independent input artifacts to the build. In most cases,
+  // this is a singular "source" to be built. The key is the name and the value
+  // is an Artifact. The interpretation of the key depends on `type`.
   //
-  // TODO: The term "config source" isn't quite right for the Docker-based
-  // thing. What should we call it? Maybe also ask ActiveState.
-  // TODO: Explain how to handle the case when the configuration blob is not
-  // read directly from source. (Answer: hash it.)
-  Artifact configSource = 2;
-
-  // Additional top-level input artifacts that were not referenced by
-  // `configSource`. Most builds do not need this.
+  // Conventional names:
   //
-  // This is only used when the build takes multiple independent input
-  // artifacts, such as when a build has a separate configuration and source.
+  // -   `source`: The primary input to the build. This name SHOULD be used if
+  //     there is only one possible input.
+  // -   `config`: The build configuration, if independent from `source`.
+  // -   `buildImage`: The container or VM image on which the build occurred, if
+  //     not specified in `config`.
   //
-  // TODO: Use Tekton/GCB as an example.
-  repeated Artifact additionalSources = 3;
+  // In some cases, the build configuration is evaluated client-side and sent
+  // over the wire, such that the build system cannot determine its origin. In
+  // those cases, the build system SHOULD serialize the configuration in a
+  // deterministic way and record the `digest` without a `uri`. This allows one
+  // to consider the client-side evaluation as a separate "build" with its own
+  // provenance, such that the verifier can chain the two provenance
+  // attestations together to determine the origin of the configuration.
+  //
+  // TODO: Some requirement that the builder verifies the URI and that the
+  // verifier checks it against expectations?
+  map<string, Artifact> inputArtifacts = 2;
 
   // Resolved dependencies needed at build time and referenced by
-  // `configSource`, `additionalSources`, or (transitively) `dependencies`.
-  // For example, if the build script fetches and executes "example.com/foo.sh",
-  // which in turn fetches "example.com/bar.tar.gz", then both "foo.sh" and
-  // "bar.tar.gz" should be listed here.
+  // `inputArtifacts`, whether directly or transitively. For example, if the
+  // build script fetches and executes "example.com/foo.sh", which in turn
+  // fetches "example.com/bar.tar.gz", then both "foo.sh" and "bar.tar.gz"
+  // should be listed here.
   //
-  // SHOULD NOT contain `configSource` or any `additionalSources`.
+  // The `inputArtifacts` SHOULD NOT be repeated here.
   //
   // TODO: Explain how to determine what goes here.
   // TODO: Explain that it's OK for it to be incomplete.
   // TODO: If the dep is already pinned, does it need to be listed here?
-  repeated Artifact resolvedDependencies = 4;
+  repeated Artifact resolvedDependencies = 3;
 
-  // The identifier relative to `configSource` for the build definition. This is
-  // often a path to a configuration file and optional target label within that
-  // file. The syntax and interpretation are defined by `type`.
-  //
-  // This field SHOULD be omitted if it is implicit from `type`. This makes it
-  // the provenance to verify, thus it is preferred when possible.
-  //
-  // Verifiers SHOULD compare this to an expected value.
-  //
-  // Design rationale: The `entryPoint` is distinct from `parameters` to make it
-  // easier to verify. Most builds need an entry point but not extra parameters.
-  string entryPoint = 5;
-
-  // TODO: Enumeration to select between profiles, e.g. debug vs optimized. Is
-  // this is a good idea?
-  string profile = 6;
-
-  // TODO: os and architecture. Seems like we need that. How to record it?
-
-  // Additional per-invocation parameters that were not covered by another
-  // field.
-  //
-  // TODO: finish explanation, particularly that it SHOULD be empty
-  google.protobuf.Struct additionalParameters = 7;
+  // The inputs to the build that are not artifacts.
+  ParameterSet parameters = 4;
 }
 
 message Artifact {
@@ -129,7 +115,35 @@ message DigestSet {
 }
 
 message ParameterSet {
+  // The identifier that determines the specific build definition within
+  // `inputArtifacts`. This is often a path to a configuration file and optional
+  // target label within that file. The syntax and interpretation are defined by
+  // `type`.
+  //
+  // This field SHOULD be omitted if it is implicit from `type`. Being empty
+  // simplifies verification of the provenance, thus is preferred when possible.
+  //
+  // Verifiers MUST compare this to an expected value.
+  //
+  // Design rationale: The `entryPoint` is distinct from `additionalParameters`
+  // to make it easier to verify. Most builds need an entry point but not extra
+  // parameters.
+  string entryPoint = 1;
 
+  // TODO: Enumeration to select between profiles, e.g. debug vs optimized. Is
+  // this is a good idea?
+  // TODO: Should this be a map<string,string> or just a repeated string?
+  map<string, string> enums = 2;
+
+  // TODO: We probably need os and architecture. How to record it? Anything else
+  // in that category?
+
+  // Additional per-invocation parameters that were not covered by another
+  // field. The schema and interpretation are defined by `type`.
+  //
+  // TODO: finish explanation, particularly that consumers SHOULD have a way to
+  // know what is expected, and thus it is simplest if it is empty
+  google.protobuf.Struct additionalParameters = 3;
 }
 
 message RunDetails {
@@ -183,6 +197,7 @@ message BuildMetadata {
 }
 
 message Environment {
-  repeated Artifact systemArtifacts = 1;
-  google.protobuf.Struct system
+  // Artifacts provided by the builder. The key is a name.
+  map<string, Artifact> systemArtifacts = 1;
+  // TODO: environment variables?
 }
