@@ -300,12 +300,87 @@ allow finding detailed debug logs.
 
 The [prior version](../v0.1/requirements.md) of SLSA defined a "SLSA 4" that
 included the following requirements. A future Build L4 may incorporate some or
-all of the following, in whole or in part:
+all of the following, in whole or in part.
 
--   [Parameterless](../v0.1/requirements.md#parameterless)
--   [Hermetic](../v0.1/requirements.md#hermetic)
--   [Dependencies complete](../v0.1/requirements.md#dependencies-complete)
--   [Reproducible](../v0.1/requirements.md#reproducible)
+> NOTE: The draft requirements here are unversioned and subject to change.
+
+<details id="parameterless">
+<summary>Parameterless (draft)</summary>
+
+The build output cannot be affected by user parameters other than the build
+entry point and the top-level source location. In other words, the build is
+fully defined through the build script and nothing else.
+
+Examples:
+
+-   GitHub Actions
+    [workflow_dispatch](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch)
+    `inputs` MUST be empty.
+-   Google Cloud Build
+    [user-defined substitutions](https://cloud.google.com/build/docs/configuring-builds/substitute-variable-values)
+    MUST be empty. (Default substitutions, whose values are defined by the
+    server, are acceptable.)
+
+</details>
+<details id="hermetic">
+<summary>Hermetic (draft)</summary>
+
+All transitive build steps, sources, and dependencies were fully declared up
+front with _immutable references_, and the build steps ran with no network
+access.
+
+An **immutable reference** is an identifier that is
+guaranteed to always point to the same, immutable artifact. This MUST allow the
+consumer to locate the artifact and SHOULD include a cryptographic hash of the
+artifact's contents to ensure integrity. Examples: git URL + branch/tag/ref \+
+commit ID; cloud storage bucket ID + SHA-256 hash; Subversion URL (no hash).
+
+The user-defined build script:
+
+-   MUST declare all dependencies, including sources and other build steps,
+    using _immutable references_ in a format that the build service understands.
+
+The build service:
+
+-   MUST fetch all artifacts in a trusted control plane.
+-   MUST NOT allow mutable references.
+-   MUST verify the integrity of each artifact.
+    -   If the _immutable reference_ includes a cryptographic hash, the service
+        MUST verify the hash and reject the fetch if the verification fails.
+    -   Otherwise, the service MUST fetch the artifact over a channel that
+        ensures transport integrity, such as TLS or code signing.
+-   MUST prevent network access while running the build steps.
+    -   This requirement is "best effort." It SHOULD deter a reasonable team
+        from having a non-hermetic build, but it need not stop a determined
+        adversary. For example, using a container to prevent network access is
+        sufficient.
+
+</details>
+<details id="reproducible">
+<summary>Reproducible (draft)</summary>
+
+Re-running the build steps with identical input artifacts results in bit-for-bit
+identical output. Builds that cannot meet this MUST provide a justification why
+the build cannot be made reproducible.
+
+"○" means that this requirement is "best effort". The user-provided build script
+SHOULD declare whether the build is intended to be reproducible or a
+justification why not. The build service MAY blindly propagate this intent
+without verifying reproducibility. A consumer MAY reject the build if it does
+not reproduce.
+
+</details>
+<details id="dependencies-complete">
+<summary>Dependencies complete (draft)</summary>
+
+Provenance records all build dependencies that were available while running the
+build steps. This includes the initial state of the machine, VM, or container of
+the build worker.
+
+-   MUST include all user-specified build steps, sources, dependencies.
+-   SHOULD include all service-provided artifacts.
+
+</details>
 
 ## Source track
 
