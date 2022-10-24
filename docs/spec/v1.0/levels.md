@@ -312,7 +312,7 @@ requirements, which **may or may not** be part of a future Source track:
 [build l1]: #build-l1
 [build l2]: #build-l2
 [build l3]: #build-l3
-[build l4]: #build-l4
+[build l4]: #build-l4-not-yet-defined
 [build]: #build-track
 [previous version]: ../v0.1/levels.md
 [provenance attestation]: terminology.md
