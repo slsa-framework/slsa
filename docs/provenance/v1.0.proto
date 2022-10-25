@@ -60,16 +60,10 @@ message BuildDefinition {
   string type = 1 [(subclass) = TypeURI];
 
   // The top-level, independent input artifacts to the build. In most cases,
-  // this is a singular "source" to be built. The key is the name and the value
-  // is an Artifact. The interpretation of the key depends on `type`.
+  // this is a singular "source" to be built.
   //
-  // Conventional names:
-  //
-  // -   `source`: The primary input to the build. This name SHOULD be used if
-  //     there is only one possible input.
-  // -   `config`: The build configuration, if independent from `source`.
-  // -   `buildImage`: The container or VM image on which the build occurred, if
-  //     not specified in `config`.
+  // Each value MUST have a `category`. If there is only one entry, its
+  // `category` SHOULD be "source".
   //
   // In some cases, the build configuration is evaluated client-side and sent
   // over the wire, such that the build system cannot determine its origin. In
@@ -81,13 +75,15 @@ message BuildDefinition {
   //
   // TODO: Some requirement that the builder verifies the URI and that the
   // verifier checks it against expectations?
-  map<string, Artifact> inputArtifacts = 2;
+  repeated Artifact inputArtifacts = 2;
 
   // Resolved dependencies needed at build time and referenced by
   // `inputArtifacts`, whether directly or transitively. For example, if the
   // build script fetches and executes "example.com/foo.sh", which in turn
   // fetches "example.com/bar.tar.gz", then both "foo.sh" and "bar.tar.gz"
   // should be listed here.
+  //
+  // The `category` field is best effort and may be empty if unknown.
   //
   // The `inputArtifacts` SHOULD NOT be repeated here.
   //
@@ -101,11 +97,42 @@ message BuildDefinition {
 }
 
 message Artifact {
-  // TODO: Should we split out "locator" (ephemeral) from "identity" (static)?
-  string uri = 1 [(subclass) = URI];
+  // How this artifact affects the build.
+  //
+  // category     | description
+  // ------------ | -----------
+  // `source`     | The primary input to the build.
+  // `config`     | The build configuration, if different from `source`.
+  // `buildImage` | The container or VM image on which the build occurred.
+  // `include`    | A dependency included in the output, such as a library.
+  // `tool`       | A build dependency not included in the output, such as a compiler.
+  //
+  // TODO: What about dynamic linking / late binding?
+  string category = 1 [(subclass) = Enum];
+
+  // Collection of cryptographic digests for the contents of this artifact.
   DigestSet digest = 2;
-  // TODO: add a "local name"?
-  // TODO: add mediaType?
+
+  // The name for this artifact local to the build.
+  //
+  // Example: `PyYAML-6.0.tar.gz`
+  string localName = 3;
+
+  // The canonical identifier for this artifact, such as a Package URL or
+  // version control URL. This value SHOULD be universal and stable, irrelevant
+  // of the download or mirror location.
+  //
+  // Example: `pkg:pypi/pyyaml@6.0`
+  string canonicalId = 4 [(subclass) = URI];
+
+  // The location that this artifact was downloaded from, if not derivable from
+  // `canonicalId`.
+  //
+  // Example: `https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz`
+  string downloadLocation = 5 [(subclass) = URI];
+
+  // The Media Type (aka MIME type) of this artifact.
+  string mediaType = 6;
 }
 
 message DigestSet {
