@@ -29,7 +29,7 @@ software's risk. SLSA measures specific aspects of supply chain security,
 particularly those that can be fully automated; other aspects, such as developer
 trust and code quality, are out of scope. Furthermore, each link in the software
 supply chain has its own, independent SLSA level---in other words, it is not
-transitive ([FAQ](../faq.md#q-why-is-slsa-not-transitive)). The benefit of this
+transitive ([FAQ](faq.md#q-why-is-slsa-not-transitive)). The benefit of this
 approach is to break up the large supply chain security problem into tractable
 subproblems that can be prioritized based on risk and tackled in parallel. But
 this does mean that SLSA alone is not sufficient to determine if an artifact is
