@@ -13,6 +13,10 @@ For an informative description of the levels intended for all audiences, see
 better understand the reasoning behind the requirements, see [Threats and
 mitigations](threats.md).
 
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
 ## TODO
 
 **TODO:** Update the requirements to provide guidelines for how to implement,
