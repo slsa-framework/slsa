@@ -302,9 +302,10 @@ allow finding detailed debug logs.
 
 ### Possible future requirements
 
-The [prior version](../v0.1/requirements.md) of SLSA defined a "SLSA 4" that
-included the following requirements. A future Build L4 may incorporate some or
-all of the following, in whole or in part. This list is not exhaustive.
+The initial [draft version (v0.1)](../v0.1/requirements.md) of SLSA defined a
+"SLSA 4" that included the following requirements. A future Build L4 may
+incorporate some or all of the following, in whole or in part. This list is not
+exhaustive.
 
 > WARNING: The draft requirements here are unversioned and subject to change.
 
@@ -388,11 +389,11 @@ the build worker.
 
 ## Source track
 
-The Source track is not yet defined. The
-[prior version](../v0.1/requirements.md#source-requirements) of SLSA included
-the following source requirements, which may form the basis for a future Source
-track. Each entry may or may not be included in the future, in whole or in part.
-The list is not exhaustive.
+The Source track is not yet defined. The initial
+[draft version (v0.1)](../v0.1/requirements.md#source-requirements) of SLSA
+included the following source requirements, which may form the basis for a
+future Source track. Each entry may or may not be included in the future, in
+whole or in part. The list is not exhaustive.
 
 > WARNING: The draft requirements here are unversioned and subject to change.
 
