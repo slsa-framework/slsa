@@ -306,7 +306,7 @@ The [prior version](../v0.1/requirements.md) of SLSA defined a "SLSA 4" that
 included the following requirements. A future Build L4 may incorporate some or
 all of the following, in whole or in part. This list is not exhaustive.
 
-> NOTE: The draft requirements here are unversioned and subject to change.
+> WARNING: The draft requirements here are unversioned and subject to change.
 
 <details id="parameterless">
 <summary>Parameterless (draft)</summary>
@@ -394,7 +394,7 @@ the following source requirements, which may form the basis for a future Source
 track. Each entry may or may not be included in the future, in whole or in part.
 The list is not exhaustive.
 
-> NOTE: The draft requirements here are unversioned and subject to change.
+> WARNING: The draft requirements here are unversioned and subject to change.
 
 <details id="version-controlled">
 <summary>Version controlled (draft)</summary>
