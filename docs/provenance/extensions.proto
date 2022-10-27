@@ -1,9 +1,0 @@
-syntax = "proto2";
-
-package slsa.v1;
-
-import "google/protobuf/descriptor.proto";
-
-extend google.protobuf.FieldOptions {
-  optional string subclass = 50000;
-}

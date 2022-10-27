@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package slsa.v1;
 
-import "extensions.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -58,8 +57,8 @@ message Provenance {
 }
 
 message BuildDefinition {
-  // URI indicating how to interpret and act upon this message.
-  string type = 1 [(subclass) = "TypeURI"];
+  // [TypeURI] indicating how to interpret and act upon this message.
+  string type = 1;
 
   // The top-level, independent input artifacts to the build. In many cases,
   // this is a singular "source" to be built.
@@ -106,7 +105,7 @@ message BuildDefinition {
 }
 
 message Artifact {
-  // How this artifact affects the build.
+  // Enum describing how this artifact affects the build.
   //
   // category     | description
   // ------------ | -----------
@@ -122,7 +121,8 @@ message Artifact {
   // builder to differentiate?
   // TODO: Offer more guidance on what these look like. For example, is
   // `builder` always expected?
-  string category = 1 [(subclass) = "Enum"];
+  // TODO: Are other values allowed, beyond those listed above?
+  string category = 1;
 
   // Collection of cryptographic digests for the contents of this artifact.
   DigestSet digest = 2;
@@ -132,20 +132,20 @@ message Artifact {
   // Example: `PyYAML-6.0.tar.gz`
   string localName = 3;
 
-  // The canonical identifier for this artifact, such as a Package URL or
-  // version control URL. This value SHOULD be universal and stable, irrelevant
-  // of the download or mirror location.
+  // [URI] that is the canonical identifier for this artifact, such as a Package
+  // URL or version control URL. This value SHOULD be universal and stable,
+  // irrelevant of the download or mirror location.
   //
   // Example: `pkg:pypi/pyyaml@6.0`
-  string canonicalId = 4 [(subclass) = "URI"];
+  string canonicalId = 4;
 
-  // The location that this artifact was downloaded from, if not derivable from
-  // `canonicalId`.
+  // [URI] identifying the location that this artifact was downloaded from, if
+  // not derivable from `canonicalId`.
   //
   // Example: `https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz`
-  string downloadLocation = 5 [(subclass) = "URI"];
+  string downloadLocation = 5;
 
-  // The Media Type (aka MIME type) of this artifact.
+  // [Media Type] (aka MIME type) of this artifact.
   string mediaType = 6;
 }
 
@@ -226,12 +226,13 @@ message RunDetails {
 }
 
 message Builder {
+  // [URI] ... (same as v0.2)
   // TODO: In most cases this is implicit from the envelope layer (e.g. the
   // public key or x.509 certificate), which is just one more thing to mess up.
   // Can we rescope this to avoid the duplication and thus the security concern?
   // For example, if the envelope identifies the build system, this might
   // identify the tenant project?
-  string id = 1 [(subclass) = "URI"];
+  string id = 1;
 
   // TODO: Do we want to add this field? (#319)
   string version = 2;
