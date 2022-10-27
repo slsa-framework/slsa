@@ -2,7 +2,9 @@ syntax = "proto3";
 
 package slsa.v1;
 
+import "extensions.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 
 // NOTE: We use lowerCamelCase for field names because that is how the JSON
 // fields are named. The proto style guide advises use of snake_case in the
@@ -57,9 +59,9 @@ message Provenance {
 
 message BuildDefinition {
   // URI indicating how to interpret and act upon this message.
-  string type = 1 [(subclass) = TypeURI];
+  string type = 1 [(subclass) = "TypeURI"];
 
-  // The top-level, independent input artifacts to the build. In most cases,
+  // The top-level, independent input artifacts to the build. In many cases,
   // this is a singular "source" to be built.
   //
   // Each value MUST have a `category`. If there is only one entry, its
@@ -75,6 +77,13 @@ message BuildDefinition {
   //
   // TODO: Some requirement that the builder verifies the URI and that the
   // verifier checks it against expectations?
+  //
+  // TODO: Idea from Shaun: should we have a tree heirarchy like lock files
+  // rather than a flat list? Then perhaps we'd only need one field. The
+  // "inputArtifacts" would be the top level of the hierarchy, and
+  // `resolvedDependencies` would be all the lower levels. This would also allow
+  // us to distinguish, if desired, between deps required by the build tool and
+  // deps required by the source.
   repeated Artifact inputArtifacts = 2;
 
   // Resolved dependencies needed at build time and referenced by
@@ -103,12 +112,17 @@ message Artifact {
   // ------------ | -----------
   // `source`     | The primary input to the build.
   // `config`     | The build configuration, if different from `source`.
+  // `builder`    | The top-level binary that runs the build.
   // `buildImage` | The container or VM image on which the build occurred.
   // `include`    | A dependency included in the output, such as a library.
   // `tool`       | A build dependency not included in the output, such as a compiler.
   //
   // TODO: What about dynamic linking / late binding?
-  string category = 1 [(subclass) = Enum];
+  // TODO: Should we get rid of include vs tool since there's no way for the
+  // builder to differentiate?
+  // TODO: Offer more guidance on what these look like. For example, is
+  // `builder` always expected?
+  string category = 1 [(subclass) = "Enum"];
 
   // Collection of cryptographic digests for the contents of this artifact.
   DigestSet digest = 2;
@@ -123,13 +137,13 @@ message Artifact {
   // of the download or mirror location.
   //
   // Example: `pkg:pypi/pyyaml@6.0`
-  string canonicalId = 4 [(subclass) = URI];
+  string canonicalId = 4 [(subclass) = "URI"];
 
   // The location that this artifact was downloaded from, if not derivable from
   // `canonicalId`.
   //
   // Example: `https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz`
-  string downloadLocation = 5 [(subclass) = URI];
+  string downloadLocation = 5 [(subclass) = "URI"];
 
   // The Media Type (aka MIME type) of this artifact.
   string mediaType = 6;
@@ -157,6 +171,9 @@ message ParameterSet {
   // parameters.
   string entryPoint = 1;
 
+  // Note: the purpose of this is to make it easier to meet the "parameterless"
+  // requirement by marking which parameters are "safe". But maybe it's not a
+  // good idea...
   // TODO: Enumeration to select between profiles, e.g. debug vs optimized. Is
   // this is a good idea?
   // TODO: Should this be a map<string,string> or just a repeated string?
@@ -187,6 +204,10 @@ message RunDetails {
   // The values here MAY be required for reproducing the build, but ideally this
   // would not be the case. For reproducibility, users should be instructed not
   // to rely on these values during the build.
+  //
+  // TODO: Move to buildDefinition based on feedback from Shaun. It's weird that
+  // it's here since it really is an input to the build. Need to figure out some
+  // way to talk about "security boundaries".
   Environment environment = 5;
 
   // Additional artifacts generated during the build that should not be
@@ -210,7 +231,7 @@ message Builder {
   // Can we rescope this to avoid the duplication and thus the security concern?
   // For example, if the envelope identifies the build system, this might
   // identify the tenant project?
-  string id = 1 [(subclass) = URI];
+  string id = 1 [(subclass) = "URI"];
 
   // TODO: Do we want to add this field? (#319)
   string version = 2;
@@ -225,6 +246,6 @@ message BuildMetadata {
 
 message Environment {
   // Artifacts provided by the builder. The key is a name.
-  map<string, Artifact> systemArtifacts = 1;
+  repeated Artifact systemArtifacts = 1;
   // TODO: environment variables?
 }
