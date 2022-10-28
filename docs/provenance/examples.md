@@ -4,16 +4,19 @@
 "predicate": {
     "buildDefinition": {
         "type": "https://slsa.dev/docker-build/v0.1",
-        "inputArtifacts": {
-            "source": {
+        "inputArtifacts": [
+            {
+                "category": "source",
                 "uri": "git+https://github.com/bcoe/slsa-on-github-test@refs/heads/main",
                 "digest": { "sha1": "deadbeef" }
             },
-            "buildImage": {
+            {
+                "category": "buildImage",
                 "uri": "pkg:oci/builder-image?repository_url=gcr.io",
                 "digest": { "sha256": "53ca44..." }
             }
-        },
+        ]
+        ,
         "resolvedDependencies": null,  // not recorded for this builder
         "parameters": {
             "entryPoint": "path/to/config.file"
@@ -36,8 +39,9 @@
             "finishedOn": "...",
         },
         "environment": {
-            "systemArtifacts": {
-                "builder-binary": {
+            "systemArtifacts": [
+                {
+                    "category": "builderBinary": {
                     "uri": "git+https://github.com/slsa-framework/slsa-github-generator@refs/tags/v1.2.0",
                     "digest": { "sha1": "bdd89e60dc5387d8f819bebc702987956bcd4913" }
                 }
