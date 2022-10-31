@@ -3,6 +3,7 @@ title: Get started
 layout: standard
 hero_text: If you’re looking to jump straight in and try SLSA, here’s a quick start guide for the steps to take to reach the first SLSA level. Level 1 ensures that you’re setting up the foundation of trust in a system and that all your applications are generating appropriate provenance data. It also sets a baseline to achieve higher SLSA compliance later, which we explain in detail below.
 ---
+
 <section class="section bg-pastel-green flex justify-center items-center">
     <div class="wrapper inner w-full">
         <div class="md:flex justify-between items-start mb-16">
@@ -36,7 +37,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
                     </ul>
                     <p class="h4 font-bold mb-6" id="tools">Tools</p>
                     <ul class="list-disc mt-6 pl-6">
-                        <li><a href="https://github.com/slsa-framework/github-actions-demo">GitHub actions provenance generator</a> (SLSA level 1)</li>
+                        <li><a href="https://github.com/slsa-framework/slsa-github-generator">SLSA provenance generator for GitHub Actions</a> (SLSA level 3)</li>
                         <li><a href="https://github.com/slsa-framework/azure-devops-demo">Azure DevOps provenance generator</a> (SLSA level 1)</li>
                         <li><a href="https://cloud.google.com/build/docs/securing-builds/use-provenance-and-binary-authorization">Google Cloud Build</a> (SLSA level 2)</li>
                         <li><a href="https://github.com/sigstore/cosign">Sigstore Cosign for storing signed provenance</a></li>
