@@ -5,14 +5,31 @@ package slsa.v1;
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
-// NOTE: We use lowerCamelCase for field names because that is how the JSON
-// fields are named. The proto style guide advises use of snake_case in the
-// .proto file but lowerCamelCase in JSON, but we believe that is confusing for
-// readers (since we always serialize to JSON). It also makes it harder to
-// reference other fields in comments since there are two ways to reference a
-// field.
+// Design guidelines:
+//
+// -   Use lowerCamelCase for field names because that is how the JSON fields
+//     are named. The proto style guide advises use of snake_case in the .proto
+//     file but lowerCamelCase in JSON, but we believe that is confusing for
+//     readers (since we always serialize to JSON). It also makes it harder to
+//     reference other fields in comments since there are two ways to reference
+//     a field.
+//
+// -   Prefer field names that are unique throughout the file, even if somewhat
+//     redundant with the parent field. This makes it easier to reference in
+//     documentation and reduces confusion.
 
 message Provenance {
+  // The input to the build.
+  //
+  // The accuracy and completeness of this information is implied by
+  // `runDetails.builder.id`.
+  BuildDefinition buildDefinition = 1;
+
+  // Details specific to this particular execution of the build.
+  RunDetails runDetails = 2;
+}
+
+message BuildDefinition {
   // The set of top-level inputs to the build. This SHOULD contain all the
   // information necessary and sufficient to:
   //
@@ -28,8 +45,8 @@ message Provenance {
   // Guidelines:
   //
   // -   Maximize the amount of information that is implicit from the meaning of
-  //     `type`. In particular, any value that is boilerplate and the same for
-  //     every build SHOULD be implicit.
+  //     `buildType`. In particular, any value that is boilerplate and the same
+  //     for every build SHOULD be implicit.
   //
   // -   Avoid parameters by moving configuration to input artifacts whenever
   //     possible. For example, instead of passing in compiler flags via a
@@ -39,40 +56,38 @@ message Provenance {
   // -   If possible, architect the build system to use this definition as its
   //     sole top-level input, in order to guarantee that the information is
   //     sufficient to run the build.
-  //
-  // -   Environment variables and artifacts that are not user controlled SHOULD
-  //     be part of the `runDetails`, not here. For example, in GitHub Actions,
-  //     a user can select which VM image but only from a set of pre-defined
-  //     options; that enumeration may go here (though in practice it is part of
-  //     the input artifact so it would not be recorded in the provenance) while
-  //     the resolved VM version would go in `runDetails`.
-  //
-  // The accuracy and completeness of this information is implied by
-  // `runDetails.builder.id`.
-  BuildDefinition buildDefinition = 1;
+  BuildInputs topLevelInputs = 1;
 
-  // Details about a specific execution of the build definition. Values here
-  // MUST NOT be user controlled.
-  RunDetails runDetails = 2;
+  // Other information necessary to perform the build but either derived from
+  // `topLevelInputs` or provided by the build system.
+  //
+  // The values here SHOULD NOT be under external control unless they are
+  // constrained and unlikely to significantly affect the build. For example,
+  // the username who triggered the build might be listed here, rather than
+  // `topLevelInputs`, because it is a small input and unlikely to be affect the
+  // behavior of the output, aside from simple inclusion.
+  BuildDependencies buildDependencies = 2;
 }
 
-message BuildDefinition {
+message BuildInputs {
   // [TypeURI] indicating how to interpret and act upon this message.
-  string type = 1;
+  //
+  // TODO: Provide more guidance on how to define this.
+  string buildType = 1;
 
   // The top-level, independent input artifacts to the build. In many cases,
   // this is a singular "source" to be built.
   //
-  // The key is a name whose interpretations depends on `type`. If there is only
-  // one input, it SHOULD be named "source". The following conventional names
-  // are RECOMMENDED when appropriate:
+  // The key is a name whose interpretation depends on `buildType`. If there is
+  // only one input, it SHOULD be named "source". The following conventional
+  // names are RECOMMENDED when appropriate:
   //
-  // name         | description
-  // ------------ | -----------
-  // `source`     | The primary input to the build.
-  // `config`     | The build configuration, if different from `source`.
-  // `builder`    | The top-level binary that runs the build.
-  // `buildImage` | The container or VM image in which the build occurred.
+  // name            | description
+  // --------------- | -----------
+  // `source`        | The primary input to the build.
+  // `config`        | The build configuration, if different from `source`.
+  // `builderBinary` | The top-level binary that runs the build.
+  // `buildImage`    | The container or VM image in which the build occurred.
   //
   // In some cases, the build configuration is evaluated client-side and sent
   // over the wire, such that the build system cannot determine its origin. In
@@ -84,32 +99,53 @@ message BuildDefinition {
   //
   // TODO: Some requirement that the builder verifies the URI and that the
   // verifier checks it against expectations?
-  //
-  // TODO: Idea from Shaun: should we have a tree heirarchy like lock files
-  // rather than a flat list? Then perhaps we'd only need one field. The
-  // "inputArtifacts" would be the top level of the hierarchy, and
-  // `resolvedDependencies` would be all the lower levels. This would also allow
-  // us to distinguish, if desired, between deps required by the build tool and
-  // deps required by the source.
   map<string, Artifact> inputArtifacts = 2;
 
+  // The identifier that determines the specific build definition within
+  // `inputArtifacts`. This is often a path to a configuration file and optional
+  // target label within that file. The syntax and interpretation are defined by
+  // `buildType`.
+  //
+  // This field SHOULD be omitted if it is implicit from `buildType`. Being
+  // empty simplifies verification of the provenance, thus is preferred when
+  // possible.
+  //
+  // Design rationale: The `entryPoint` is distinct from `parameters` to make it
+  // easier to verify. Most builds need an entry point but not extra parameters.
+  string entryPoint = 3;
+
+  // TODO: We probably need os and architecture. How to record it? Anything else
+  // in that category?
+
+  // Additional per-invocation parameters that were not covered by another
+  // field. The schema and interpretation are defined by `buildType`.
+  //
+  // TODO: finish explanation, particularly that consumers SHOULD have a way to
+  // know what is expected, and thus it is simplest if it is empty
+  google.protobuf.Struct parameters = 4;
+}
+
+message BuildDependencies {
   // Resolved dependencies needed at build time and referenced by
-  // `inputArtifacts`, whether directly or transitively. For example, if the
+  // `buildDefinition`, whether directly or transitively. For example, if the
   // build script fetches and executes "example.com/foo.sh", which in turn
   // fetches "example.com/bar.tar.gz", then both "foo.sh" and "bar.tar.gz"
   // should be listed here.
   //
-  // The `category` field is best effort and may be empty if unknown.
-  //
   // The `inputArtifacts` SHOULD NOT be repeated here.
   //
+  // TODO: Explain what the purpose of this field is. Why do we need it?
   // TODO: Explain how to determine what goes here.
   // TODO: Explain that it's OK for it to be incomplete.
   // TODO: If the dep is already pinned, does it need to be listed here?
-  repeated Artifact resolvedDependencies = 3;
+  repeated Artifact resolvedDependencies = 1;
 
-  // The inputs to the build that are not artifacts.
-  ParameterSet parameters = 4;
+  // Parameters of the build environment that were provided by the `builder` and
+  // not under external control. The primary intention of this field is for
+  // debugging, incident response, and vulnerability management. The values here
+  // MAY be necessary for reproducing the build, but ideally this would not be
+  // the case.
+  google.protobuf.Struct environment = 2;
 }
 
 message Artifact {
@@ -144,60 +180,12 @@ message DigestSet {
   // ...
 }
 
-message ParameterSet {
-  // The identifier that determines the specific build definition within
-  // `inputArtifacts`. This is often a path to a configuration file and optional
-  // target label within that file. The syntax and interpretation are defined by
-  // `type`.
-  //
-  // This field SHOULD be omitted if it is implicit from `type`. Being empty
-  // simplifies verification of the provenance, thus is preferred when possible.
-  //
-  // Verifiers MUST compare this to an expected value.
-  //
-  // Design rationale: The `entryPoint` is distinct from `additionalParameters`
-  // to make it easier to verify. Most builds need an entry point but not extra
-  // parameters.
-  string entryPoint = 1;
-
-  // Note: the purpose of this is to make it easier to meet the "parameterless"
-  // requirement by marking which parameters are "safe". But maybe it's not a
-  // good idea...
-  // TODO: Enumeration to select between profiles, e.g. debug vs optimized. Is
-  // this is a good idea?
-  // TODO: Should this be a map<string,string> or just a repeated string?
-  map<string, string> enums = 2;
-
-  // TODO: We probably need os and architecture. How to record it? Anything else
-  // in that category?
-
-  // Additional per-invocation parameters that were not covered by another
-  // field. The schema and interpretation are defined by `type`.
-  //
-  // TODO: finish explanation, particularly that consumers SHOULD have a way to
-  // know what is expected, and thus it is simplest if it is empty
-  google.protobuf.Struct additionalParameters = 3;
-}
-
 message RunDetails {
   // TODO: The following fields are the same as v0.2:
   Builder builder = 1;
 
   // TODO: description
   BuildMetadata metadata = 2;
-
-  // Properties of the build environment that were provided by the `builder` and
-  // not under user control. The primary intention of this field is for
-  // debugging, incident response, and vulnerability management.
-  //
-  // The values here MAY be required for reproducing the build, but ideally this
-  // would not be the case. For reproducibility, users should be instructed not
-  // to rely on these values during the build.
-  //
-  // TODO: Move to buildDefinition based on feedback from Shaun. It's weird that
-  // it's here since it really is an input to the build. Need to figure out some
-  // way to talk about "security boundaries".
-  Environment environment = 5;
 
   // Additional artifacts generated during the build that should not be
   // considered the "output" of the build but that may be needed during
@@ -211,7 +199,10 @@ message RunDetails {
   // In most cases, this SHOULD NOT contain all intermediate files generated
   // during the build. Instead, this should only contain files that are likely
   // to be useful later and that cannot be easily reproduced.
-  repeated Artifact byproducts = 6;
+  //
+  // TODO: Do we need some recommendation for how to distinguish between
+  // byproducts? For example, should we recommend using `localName`?
+  repeated Artifact byproducts = 3;
 }
 
 message Builder {
@@ -232,12 +223,4 @@ message BuildMetadata {
   string invocationId = 1;
   google.protobuf.Timestamp startedOn = 2;
   google.protobuf.Timestamp finishedOn = 3;
-}
-
-message Environment {
-  // Artifacts provided by the builder. The key is a name, similar to
-  // `BuildDefinition.inputArtifacts`.
-  map<string, Artifact> systemArtifacts = 1;
-
-  // TODO: environment variables?
 }
