@@ -138,6 +138,8 @@ message BuildDependencies {
   // TODO: Explain how to determine what goes here.
   // TODO: Explain that it's OK for it to be incomplete.
   // TODO: If the dep is already pinned, does it need to be listed here?
+  // TODO: Should this be a map instead of an array? Then each MUST be named
+  // explicitly, which would be less ambiguous but more difficult.
   repeated Artifact resolvedDependencies = 1;
 
   // Parameters of the build environment that were provided by the `builder` and

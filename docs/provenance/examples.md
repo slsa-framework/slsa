@@ -43,6 +43,48 @@
 
 ## Tekton
 
+```json
+"predicate": {
+   "buildDefinition": {
+        "topLevelInputs": {
+            "type": "https://tekton.dev/tekton-task/v0.1",
+            "inputArtifacts": {
+                "source": {
+                    "uri": "git+https://github.com/tektoncd/catalog.git",
+                    "digest": { "sha1": "962f9005350b1acb359558b6c5aafc420e0beb46" }
+                }
+            },
+            "entryPoint": "path/to/sample_taskrun.yaml",
+            "parameters": null
+        },
+        "buildDependencies": {
+            "resolvedDependencies": [
+                {
+                    "localName": "systemConfiguration",
+                    "digest": { "sha256": "..." },
+                    "mediaType": "... some tekton config thing? ..."
+                }
+            ],
+            "environment": {
+                "additionalParams": {
+                }
+            }
+        }
+    },
+    "runDetails": {
+        "builder": {
+            "id": "...whoever is running Tekton..."
+        },
+        "metadata": {
+            "invocationId": "...",
+            "startedOn": "...",
+            "finishedOn": "..."
+        },
+        "byproducts": null
+    }
+}
+```
+
 ## GitHub Actions Builder
 
 ```json
