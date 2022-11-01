@@ -10,13 +10,13 @@
             "topLevelInputs": { 
                 "buildType": string,
                 "inputArtifacts": {
-                    [string]: #Artifact
+                    [string]: #ArtifactReference
                 },
                 "entryPoint": string,
                 "parameters": {...}
             },
             "buildDependencies": {
-                "resolvedDependencies": [...#Artifact],
+                "resolvedDependencies": [...#ArtifactReference],
                 "environment": {...}
             }
         },
@@ -30,12 +30,12 @@
                 "startedOn": string,  // timestamp
                 "finishedOn": string  // timestamp
             },
-            "byproducts": [...#Artifact]
+            "byproducts": [...#ArtifactReference]
         }
     }
 }
 
-#Artifact: {
+#ArtifactReference: {
     "uri": string,
     "digest": {
         "sha256": string,
