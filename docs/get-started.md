@@ -8,7 +8,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
     <div class="wrapper inner w-full">
         <div class="md:flex justify-between items-start mb-16">
             <div class="text w-full md:w-1/3">
-<div class="h2 p-0">
+<div class="h2 -mt-16 p-0">
 
 ## Reaching SLSA Level 1
 
@@ -52,7 +52,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
     <div class="wrapper inner w-full">
         <div class="md:flex justify-between items-start mb-16">
             <div class="text w-full md:w-1/3">
-<div class="h2 p-0">
+<div class="h2 -mt-16 p-0">
 
 ## Reaching SLSA Level 3
 
@@ -94,7 +94,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
     <div class="wrapper inner w-full">
         <div class="justify-between items-start md:-mr-10 md:-ml-10">
             <div class="text w-full md:pl-10">
-<div class="h2 mb-8">
+<div class="h2 -mt-16 mb-8">
 
 ## Building to higher levels
 
@@ -123,7 +123,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
 <section class="section">
     <div class="wrapper inner w-full">
         <div class="md:flex flex-col justify-center items-center mb-8 md:w-2/3 mx-auto md:pl-5">
-            <h4 class="h2 font-normal mb-8">Help us improve SLSA</h4>
+            <div class="-mt-8 mb-8 md:mb-4"><h4 class="h2 font-normal">Help us improve SLSA</h4></div>
             <div class="w-full lg:w-full mx-auto text-center">
                 <p>Already at SLSA Level 1? Let us know what went well, what didn’t, and what could be improved. We’re developing new tools and onboarding resources to make the process even easier, so your contribution really goes a long way.</p>
                 <a href="https://github.com/slsa-framework/slsa/issues" class="cta-link font-semibold h5 center mt-8">Leave a GitHub issue</a><br>

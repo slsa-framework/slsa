@@ -8,7 +8,7 @@ hero_text: There’s an active community of members, contributors and collaborat
 
 <div class="flex flex-wrap md:flex-nowrap gap-4">
 <div>
-<div class="h2 mb-8">
+<div class="h2 -mt-16 mb-8">
 
 ## Get involved
 
@@ -62,7 +62,7 @@ developing tooling and services, we welcome your contributions.
     <div class="wrapper inner w-full">
         <div class="md:flex justify-between items-start text-white">
             <div class="text w-full md:w-1/3">
-<div class="h2 p-0 mb-8 md:mb-0">
+<div class="h2 p-0 -mt-16 mb-8 md:mb-0">
 
 ## Project status
 
@@ -80,7 +80,7 @@ Google has been using an internal version of SLSA since 2013 and requires it for
 <section class="section bg-pastel-green">
     <div class="wrapper inner w-full">
         <div class="flex flex-col justify-center items-center mb-8 w-2/3 mx-auto md:pl-5">
-<div class="h2">
+<div class="h2 -mt-16 -mb-4">
 
 ## Media
 
@@ -110,7 +110,7 @@ Google has been using an internal version of SLSA since 2013 and requires it for
     <div class="wrapper inner w-full">
         <div class="md:flex justify-between items-start mb-16">
             <div class="text w-full md:w-1/2">
-<div class="h2 p-0 mb-8 md:mb-0">
+<div class="h2 p-0 -mt-16 mb-8">
 
 ## Steering committee
 
@@ -132,7 +132,7 @@ Google has been using an internal version of SLSA since 2013 and requires it for
         </div>
         <div class="md:flex justify-between items-start mb-16">
             <div class="text w-full md:w-1/2">
-<div class="h2 p-0 mb-8 md:mb-0">
+<div class="h2 p-0 mb-8 md:-mt-16">
 
 ## Governance
 
