@@ -9,14 +9,14 @@ hero_text: >
 <section class="section bg-pastel-green flex justify-center items-center fix-paragraph-spacing">
 <div class="wrapper w-full">
 
-<div class="mb-16">
+<div class="-mt-16 mb-16">
 
 ## Applications of SLSA
 
 </div>
 
 <div class="md:flex gap-5 mb-12 rounded-xl p-10 bg-white">
-<div class="md:w-1/3">
+<div class="md:w-1/3 -mt-8">
 
 ### First party
 
@@ -49,7 +49,7 @@ Example ways an organization might use SLSA internally:
 </div>
 
 <div class="md:flex gap-5 mb-12 rounded-xl p-10 bg-white">
-<div class="md:w-1/3">
+<div class="md:w-1/3 -mt-8">
 
 ### Open source
 
@@ -81,7 +81,7 @@ Example ways an open source ecosystem might use SLSA to protect users:
 </div>
 
 <div class="md:flex gap-5 mb-12 rounded-xl p-10 bg-white">
-<div class="md:w-1/3">
+<div class="md:w-1/3 -mt-8">
 
 ### Vendors
 
@@ -114,7 +114,7 @@ Example ways a consumer might use SLSA for vendor provided software:
 <section class="section bg-white flex justify-center items-center fix-paragraph-spacing">
 <div class="wrapper w-full">
 
-<div class="mb-16">
+<div class="-mt-16 mb-16">
 
 ## Motivating example
 
