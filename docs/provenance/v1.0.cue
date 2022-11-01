@@ -4,10 +4,10 @@
     "subject": [...],
 
     // Predicate:
-    "predicateType": "https://slsa.dev/provenance/v1.0-draft",
+    "predicateType": "https://slsa.dev/provenance/v1.0?draft",
     "predicate": {
         "buildDefinition": {
-            "topLevelInputs": { 
+            "topLevelInputs": {
                 "buildType": string,
                 "inputArtifacts": {
                     [string]: #ArtifactReference
