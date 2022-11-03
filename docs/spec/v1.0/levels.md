@@ -165,8 +165,8 @@ SLSA---other than tamper protection---without changing their build workflows.
     and/or analyze the software by knowing its precise source version and build
     process.
 
--   Prevents mistakes during the release process, such as building from a client
-    with local modifications.
+-   Prevents mistakes during the release process, such as building from a commit
+    that is not present in the upstream repo.
 
 -   Aids organizations in creating an inventory of software and build systems
     used across a variety of teams.
