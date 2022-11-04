@@ -153,7 +153,7 @@ message BuildDependencies {
 message ArtifactReference {
   // [URI] describing where this artifact came from. When possible, this SHOULD
   // be a universal and stable identifier, such as a source location or Package
-  // URL.
+  // URL ([PURL]).
   //
   // Example: `pkg:pypi/pyyaml@6.0`
   string uri = 1;
@@ -167,7 +167,7 @@ message ArtifactReference {
   string localName = 3;
 
   // [URI] identifying the location that this artifact was downloaded from, if
-  // different and not derivable from `canonicalId`.
+  // different and not derivable from `uri`.
   //
   // Example: `https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz`
   string downloadLocation = 4;
