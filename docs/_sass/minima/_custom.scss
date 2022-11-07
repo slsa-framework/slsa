@@ -88,8 +88,10 @@
 
 .table-of-contents {
     min-height: 300px;
-    ul{
-        margin-top: 5px;
+    font-family: 'Prodigy';
+
+    ul {
+        margin-top: 10px;
         // Opacity on hover effect
         &:hover > li {
             transition: 150ms all ease;
@@ -97,19 +99,18 @@
         }
     }
 
-    ul li {
-        margin-bottom: 5px;
-        font-family: 'Prodigy';
-    }
     // Focus on hover effect
     ul li:hover {
         opacity: 1;
     }
 
     a {
+        display: block;
         color: inherit;
         text-decoration: none;
         font-weight: 400;
+        margin-bottom: 10px;
+        line-height: 1.4;
     }
 
     ul {
