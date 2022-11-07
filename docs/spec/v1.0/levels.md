@@ -264,7 +264,8 @@ All of [Build L2], plus:
 -   Build service implements strong controls to:
 
     -   prevent runs from influencing one another, even within the same project.
-    -   prevent secret material used to sign the provenance from being accessible to the user-defined build steps.
+    -   prevent secret material used to sign the provenance from being
+        accessible to the user-defined build steps.
 
 > **TODO:** Add requirement about survey and audit as per the v1.0 proposal.
 
