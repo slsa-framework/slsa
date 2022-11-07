@@ -218,6 +218,12 @@ message Builder {
 
   // TODO: Do we want to add this field? (#319)
   string version = 2;
+
+  // Dependencies used by the orchestrator that are not run within the workload
+  // and that should not affect the build, but may affect the provenance
+  // generation or security guarantees.
+  // TODO: Flesh out this model more.
+  repeated ArtifactReference builderDependencies = 3;
 }
 
 message BuildMetadata {

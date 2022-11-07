@@ -23,7 +23,8 @@
         "runDetails": {
             "builder": {
                 "id": string,
-                "version": string
+                "version": string,
+                "builderDependencies": [...#ArtifactReference]
             },
             "metadata": {
                 "invocationId": string,
