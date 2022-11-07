@@ -96,15 +96,19 @@ Summary of the build track:
 
 -   Set **project-specific expectations** for how the package should be built.
 -   Generate a **provenance attestation** automatically during each build.
--   Build on **hardened services** that have been manually audited.
 -   **Automatically verify** that each package's provenance meets expectations
     before allowing its publication and/or consumption.
 
-Exactly how this is implemented is up to the packaging ecosystem (for open
-source) or organization (for closed source), including: means of defining
-expectations, what provenance format is accepted, whether reproducible builds
-are used, how provenance is distributed, when verification happens, and what
-happens on failure. Guidelines for implementers can be found in the
+What sets the levels apart is how much trust there is in the accuracy of the
+provenance and the degree to which adversaries are detected or prevented from
+tampering with the package. Higher levels require hardened builds and protection
+against more sophisticated adversaries.
+
+Each ecosystem (for open source) or organization (for closed source) defines
+exactly how this is implemented, including: means of defining expectations, what
+provenance format is accepted, whether reproducible builds are used, how
+provenance is distributed, when verification happens, and what happens on
+failure. Guidelines for implementers can be found in the
 [requirements](requirements.md).
 
 <section id="build-l0">
@@ -138,8 +142,9 @@ n/a
 <dl class="as-table">
 <dt>Summary<dd>
 
-Package has a provenance attestation showing that it was built as expected, but
-the provenance is trivial to forge.
+Package has a provenance attestation showing how it was built, and a downstream
+system automatically verifies that packages were built as expected. Prevents
+mistakes but is trivial to bypass or forge.
 
 <dt>Intended for<dd>
 
@@ -190,8 +195,12 @@ SLSA---other than tamper protection---without changing their build workflows.
 <dl class="as-table">
 <dt>Summary<dd>
 
-Builds run on a hosted service that generates and signs the provenance, reducing
-attack surface and increasing the difficulty to forge the provenance.
+Forging the provenance or evading verification requires an explicit "attack",
+though this may be easy to perform. Deters unsophisticated adversaries or those
+who face legal or financial risk.
+
+In practice, this means that builds run on a hosted service that generates and
+signs the provenance.
 
 <dt>Intended for<dd>
 
@@ -203,8 +212,10 @@ service itself required by [Build L3].
 
 All of [Build L1], plus:
 
--   Builds run on a hosted build service that generates and signs the
-    provenance itself.
+-   The build runs on a hosted build service that generates and signs the
+    provenance itself. This may be the original build, an after-the-fact
+    reproducible build, or some equivalent system that ensures the accuracy of
+    the provenance.
 
 -   Downstream verification of provenance includes authenticating the
     provenance.
@@ -215,8 +226,8 @@ All of [Build L1], plus:
 
 -   Prevents tampering after the build through digital signatures.
 
--   Moderately reduces the impact of compromised package upload credentials by
-    requiring attacker to also exploit the build process.
+-   Deters adversaries who face legal or financial risk by evading security
+    controls, such as employees who face risk of getting fired.
 
 -   Reduces attack surface by limiting builds to specific build services that
     can be audited and hardened.
@@ -235,8 +246,11 @@ All of [Build L1], plus:
 <dl class="as-table">
 <dt>Summary<dd>
 
-Builds run on a hardened build service that offers strong tamper protection. The
-provenance is very difficult to exploit even for a determined adversary.
+Forging the provenance or evading verification requires exploiting a
+vulnerability that is beyond the capabilities of most adversaries.
+
+In practice, this means that builds run on a hardened build service that offers
+strong tamper protection.
 
 <dt>Intended for<dd>
 
@@ -248,6 +262,7 @@ existing build services.
 All of [Build L2], plus:
 
 -   Build service implements strong controls to:
+
     -   prevent runs from influencing one another, even within the same project.
     -   prevent secret material used to sign the provenance from being accessible to the user-defined build steps.
 
