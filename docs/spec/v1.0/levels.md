@@ -214,8 +214,8 @@ All of [Build L1], plus:
 
 -   The build runs on a hosted build service that generates and signs the
     provenance itself. This may be the original build, an after-the-fact
-    reproducible build, or some equivalent system that ensures the accuracy of
-    the provenance.
+    reproducible build, or some equivalent system that ensures the
+    trustworthiness of the provenance.
 
 -   Downstream verification of provenance includes authenticating the
     provenance.
