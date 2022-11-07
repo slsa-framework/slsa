@@ -214,8 +214,8 @@ All of [Build L1], plus:
 
 -   The build runs on a hosted build service that generates and signs the
     provenance itself. This may be the original build, an after-the-fact
-    reproducible build, or some equivalent system that ensures the accuracy of
-    the provenance.
+    reproducible build, or some equivalent system that ensures the
+    trustworthiness of the provenance.
 
 -   Downstream verification of provenance includes authenticating the
     provenance.
@@ -264,7 +264,8 @@ All of [Build L2], plus:
 -   Build service implements strong controls to:
 
     -   prevent runs from influencing one another, even within the same project.
-    -   prevent secret material used to sign the provenance from being accessible to the user-defined build steps.
+    -   prevent secret material used to sign the provenance from being
+        accessible to the user-defined build steps.
 
 > **TODO:** Add requirement about survey and audit as per the v1.0 proposal.
 
