@@ -114,15 +114,15 @@ message BuildInputs {
   // easier to verify. Most builds need an entry point but not extra parameters.
   string entryPoint = 3;
 
-  // TODO: We probably need os and architecture. How to record it? Anything else
-  // in that category?
-
   // Additional per-invocation parameters that were not covered by another
   // field. The schema and interpretation are defined by `buildType`.
   //
   // TODO: finish explanation, particularly that consumers SHOULD have a way to
   // know what is expected, and thus it is simplest if it is empty
   google.protobuf.Struct parameters = 4;
+
+  // TODO: We probably need os and architecture. How to record it? Anything else
+  // in that category?
 }
 
 message BuildDependencies {
@@ -153,7 +153,7 @@ message BuildDependencies {
 message ArtifactReference {
   // [URI] describing where this artifact came from. When possible, this SHOULD
   // be a universal and stable identifier, such as a source location or Package
-  // URL ([PURL]).
+  // URL ([purl]).
   //
   // Example: `pkg:pypi/pyyaml@6.0`
   string uri = 1;
