@@ -38,8 +38,7 @@ showing what the options are:
 | Build - [Scripted build]         | ✓        | ✓        | ✓        |
 | Build - [Build service]          |          | ✓        | ✓        |
 | Build - [Build as code]          |          |          | ✓        |
-| Build - [Ephemeral environment]  |          |          | ✓        |
-| Build - [Isolated]               |          |          | ✓        |
+| Build - [Ephemeral and isolated]               |          |          | ✓        |
 | Provenance - [Available]         | ✓        | ✓        | ✓        |
 | Provenance - [Authenticated]     |          | ✓        | ✓        |
 | Provenance - [Service generated] |          | ✓        | ✓        |
@@ -49,7 +48,7 @@ showing what the options are:
 [available]: #available
 [build as code]: #build-as-code
 [build service]: #build-service
-[ephemeral environment]: #ephemeral-environment
+[Ephemeral and isolated]: #ephemeral-isolated
 [isolated]: #isolated
 [non-falsifiable]: #non-falsifiable
 [scripted build]: #scripted-build
@@ -105,26 +104,20 @@ Examples:
     and stored in an OCI registry with SLSA provenance metadata available.
 
 <td> <td> <td>✓
-<tr id="ephemeral-environment">
-<td>Ephemeral environment
+<tr id="ephemeral-isolated">
+<td>Ephemeral and Isolated
 <td>
 
-The build service ensured that the build steps ran in an ephemeral environment,
-such as a container or VM, provisioned solely for this build, and not reused
-from a prior build.
-
-<td> <td> <td>✓
-<tr id="isolated">
-<td>Isolated
-<td>
-
-The build service ensured that the build steps ran in an isolated environment
-free of influence from other build instances, whether prior or concurrent.
+The build service ensured that the build steps ran in an ephemeral and isolated
+environment provisioned solely for this build, free of influence from other build
+instances, whether prior or concurrent.
 
 -   It MUST NOT be possible for a build to access any secrets of the build service, such as the provenance signing key.
 -   It MUST NOT be possible for two builds that overlap in time to influence one another.
 -   It MUST NOT be possible for one build to persist or influence the build environment of a subsequent build.
 -   Build caches, if used, MUST be purely content-addressable to prevent tampering.
+-   The build SHOULD NOT call out to remote execution.
+-   The build SHOULD NOT open services that allow for remote influence.
 
 <td> <td> <td>✓
 </table>
