@@ -38,7 +38,7 @@ showing what the options are:
 | Build - [Scripted build]         | ✓        | ✓        | ✓        |
 | Build - [Build service]          |          | ✓        | ✓        |
 | Build - [Build as code]          |          |          | ✓        |
-| Build - [Ephemeral and isolated]               |          |          | ✓        |
+| Build - [Ephemeral and isolated] |          |          | ✓        |
 | Provenance - [Available]         | ✓        | ✓        | ✓        |
 | Provenance - [Authenticated]     |          | ✓        | ✓        |
 | Provenance - [Service generated] |          | ✓        | ✓        |
@@ -49,7 +49,6 @@ showing what the options are:
 [build as code]: #build-as-code
 [build service]: #build-service
 [Ephemeral and isolated]: #ephemeral-isolated
-[isolated]: #isolated
 [non-falsifiable]: #non-falsifiable
 [scripted build]: #scripted-build
 [service generated]: #service-generated
