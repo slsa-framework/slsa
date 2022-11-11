@@ -37,9 +37,9 @@ message BuildDefinition {
   //     all referenced input artifacts and dependencies.
   // 2.  Verify that the build was as expected.
   //
-  // The build system should be designed to minimize the amount of information
+  // The build system SHOULD be designed to minimize the amount of information
   // necessary here, in order to reduce fragility and ease verification.
-  // Consumers MUST have an expectation of what "good" looks like; the more
+  // Consumers SHOULD have an expectation of what "good" looks like; the more
   // information that they must check, the harder that task becomes.
   //
   // Guidelines:
@@ -56,7 +56,7 @@ message BuildDefinition {
   // -   If possible, architect the build system to use this definition as its
   //     sole top-level input, in order to guarantee that the information is
   //     sufficient to run the build.
-  BuildInputs topLevelInputs = 1;
+  TopLevelInputs topLevelInputs = 1;
 
   // Other information necessary to perform the build but either derived from
   // `topLevelInputs` or provided by the build system.
@@ -69,14 +69,51 @@ message BuildDefinition {
   BuildDependencies buildDependencies = 2;
 }
 
-message BuildInputs {
-  // [TypeURI] indicating how to interpret and act upon this message.
+message TopLevelInputs {
+  // [TypeURI] indicating how to unambiguously interpret this message and
+  // initiate the build. This SHOULD resolve to a human-readable specification
+  // that lists:
+  //
+  // -   Overall description of what this type means.
+  // -   Schema for `inputArtifacts` and `parameters`. For each field, this
+  //     SHOULD include:
+  //     -   name
+  //     -   description
+  //     -   type
+  //     -   required vs optional
+  //     -   any other restrictions
+  // -   Explicit, unambiguous instructions for how to initiate the build given
+  //     this message.
+  //
+  // Examples:
+  // -   A "GitHub Actions Workflow" URI might mean to check out the git repo
+  //     `inputArtifacts["source"]` and check out 
+  //     definition file pointed to by `parameters['
+  // For example, an "NPM build" URI might mean: check out the source repo named
+  // inputArtifacts["source"], cd to that directory, install the version of
+  // Node listed in some config file, and then execute `npm run
+  // <parameters["script"]>`. By designing the type this way, all of
+  // these implicit steps can be checked against a simple expectation of URI
+  // without the fragility of a long list of commands.
+  //
+  // The type is necessary to make sure that two different parties interpret the
+  // provenance in the same way. For example, 
+  //
+  // 1.  Beause 
+  // This is necessary because different build systems use different
+  // conventions. A human might easily figure out what is supposed to happen by 
+  // machine 
+  //
+  // TODO: Add examples to full-fledged definitions each with their own
+  // page.
   //
   // TODO: Provide more guidance on how to define this.
+  //
+  // REQUIRED for SLSA Build L1.
   string buildType = 1;
 
-  // The top-level, independent input artifacts to the build. In many cases,
-  // this is a singular "source" to be built.
+  // References to the top-level, independent input artifacts to the build. In
+  // many cases, this is a singular "source" artifact to be built.
   //
   // The key is a name whose interpretation depends on `buildType`. If there is
   // only one input, it SHOULD be named "source". The following conventional
@@ -99,26 +136,17 @@ message BuildInputs {
   //
   // TODO: Some requirement that the builder verifies the URI and that the
   // verifier checks it against expectations?
+  //
+  // REQUIRED for SLSA Build L1.
   map<string, ArtifactReference> inputArtifacts = 2;
 
-  // The identifier that determines the specific build definition within
-  // `inputArtifacts`. This is often a path to a configuration file and optional
-  // target label within that file. The syntax and interpretation are defined by
-  // `buildType`.
-  //
-  // This field SHOULD be omitted if it is implicit from `buildType`. Being
-  // empty simplifies verification of the provenance, thus is preferred when
-  // possible.
-  //
-  // Design rationale: The `entryPoint` is distinct from `parameters` to make it
-  // easier to verify. Most builds need an entry point but not extra parameters.
-  string entryPoint = 3;
-
-  // Additional per-invocation parameters that were not covered by another
-  // field. The schema and interpretation are defined by `buildType`.
+  // All other input parameters necessary to invoke the build. The schema and
+  // interpretation are defined by `buildType`.
   //
   // TODO: finish explanation, particularly that consumers SHOULD have a way to
   // know what is expected, and thus it is simplest if it is empty
+  //
+  // REQUIRED for SLSA Build L1, though it may be empty.
   google.protobuf.Struct parameters = 4;
 
   // TODO: We probably need os and architecture. How to record it? Anything else

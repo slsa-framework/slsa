@@ -12,26 +12,35 @@
                 "inputArtifacts": {
                     [string]: #ArtifactReference
                 },
-                "entryPoint": string,
-                "parameters": {...}
+                "parameters": {
+                    [string]: object
+                }
             },
             "buildDependencies": {
-                "resolvedDependencies": [...#ArtifactReference],
-                "environment": {...}
+                "resolvedDependencies": [
+                    ...#ArtifactReference
+                ],
+                "environment": {
+                    [string]: object
+                }
             }
         },
         "runDetails": {
             "builder": {
                 "id": string,
                 "version": string,
-                "builderDependencies": [...#ArtifactReference]
+                "builderDependencies": [
+                    ...#ArtifactReference
+                ]
             },
             "metadata": {
                 "invocationId": string,
-                "startedOn": string,  // timestamp
-                "finishedOn": string  // timestamp
+                "startedOn": #Timestamp,
+                "finishedOn": #Timestamp
             },
-            "byproducts": [...#ArtifactReference]
+            "byproducts": [
+                ...#ArtifactReference
+            ]
         }
     }
 }
@@ -49,3 +58,5 @@
     "downloadLocation": string,
     "mediaType": string
 }
+
+#Timestamp: string  // <YYYY>-<MM>-<DD>T<hh>:<mm>:<ss>Z
