@@ -23,19 +23,39 @@ message Provenance {
   //
   // The accuracy and completeness of this information is implied by
   // `runDetails.builder.id`.
+  //
+  // REQUIRED for SLSA Build L1.
   BuildDefinition buildDefinition = 1;
 
   // Details specific to this particular execution of the build.
+  //
+  // REQUIRED for SLSA Build L1.
   RunDetails runDetails = 2;
 }
 
 message BuildDefinition {
-  // The set of top-level inputs to the build. This SHOULD contain all the
-  // information necessary and sufficient to:
+  // [TypeURI] indicating how to unambiguously interpret this message and
+  // initiate the build.
   //
-  // 1.  Run the build, provided understanding of the build type and access to
-  //     all referenced input artifacts and dependencies.
-  // 2.  Verify that the build was as expected.
+  // This SHOULD resolve to a human-readable specification that includes:
+  //
+  // -   Overall description.
+  // -   List of all parameters, including:
+  //     -   name
+  //     -   description
+  //     -   external vs system
+  //     -   artifact vs value
+  //     -   required vs optional
+  //     -   any other restrictions
+  // -   Explicit, unambiguous instructions for how to initiate the build given
+  //     this message.
+  //
+  // REQUIRED.
+  string buildType = 1;
+
+  // The set of top-level external inputs to the build. This SHOULD contain all
+  // the information necessary and sufficient to initialize the build and begin
+  // execution. "Top-level" means that it is not derived from another input.
   //
   // The build system SHOULD be designed to minimize the amount of information
   // necessary here, in order to reduce fragility and ease verification.
@@ -48,7 +68,7 @@ message BuildDefinition {
   //     `buildType`. In particular, any value that is boilerplate and the same
   //     for every build SHOULD be implicit.
   //
-  // -   Avoid parameters by moving configuration to input artifacts whenever
+  // -   Reduce parameters by moving configuration to input artifacts whenever
   //     possible. For example, instead of passing in compiler flags via a
   //     parameter, require them to live next to the source code or build
   //     configuration.
@@ -56,62 +76,41 @@ message BuildDefinition {
   // -   If possible, architect the build system to use this definition as its
   //     sole top-level input, in order to guarantee that the information is
   //     sufficient to run the build.
-  TopLevelInputs topLevelInputs = 1;
-
-  // Other information necessary to perform the build but either derived from
-  // `topLevelInputs` or provided by the build system.
   //
-  // The values here SHOULD NOT be under external control unless they are
-  // constrained and unlikely to significantly affect the build. For example,
-  // the username who triggered the build might be listed here, rather than
-  // `topLevelInputs`, because it is a small input and unlikely to be affect the
-  // behavior of the output, aside from simple inclusion.
-  BuildDependencies buildDependencies = 2;
-}
-
-message TopLevelInputs {
-  // [TypeURI] indicating how to unambiguously interpret this message and
-  // initiate the build. This SHOULD resolve to a human-readable specification
-  // that lists:
-  //
-  // -   Overall description of what this type means.
-  // -   Schema for `inputArtifacts` and `parameters`. For each field, this
-  //     SHOULD include:
-  //     -   name
-  //     -   description
-  //     -   type
-  //     -   required vs optional
-  //     -   any other restrictions
-  // -   Explicit, unambiguous instructions for how to initiate the build given
-  //     this message.
-  //
-  // Examples:
-  // -   A "GitHub Actions Workflow" URI might mean to check out the git repo
-  //     `inputArtifacts["source"]` and check out 
-  //     definition file pointed to by `parameters['
-  // For example, an "NPM build" URI might mean: check out the source repo named
-  // inputArtifacts["source"], cd to that directory, install the version of
-  // Node listed in some config file, and then execute `npm run
-  // <parameters["script"]>`. By designing the type this way, all of
-  // these implicit steps can be checked against a simple expectation of URI
-  // without the fragility of a long list of commands.
-  //
-  // The type is necessary to make sure that two different parties interpret the
-  // provenance in the same way. For example, 
-  //
-  // 1.  Beause 
-  // This is necessary because different build systems use different
-  // conventions. A human might easily figure out what is supposed to happen by 
-  // machine 
-  //
-  // TODO: Add examples to full-fledged definitions each with their own
-  // page.
-  //
-  // TODO: Provide more guidance on how to define this.
+  // TODO: Describe how complete this must be at each SLSA level.
   //
   // REQUIRED for SLSA Build L1.
-  string buildType = 1;
+  ParameterCollection externalParameters = 2;
 
+  // Parameters of the build environment that were provided by the `builder` and
+  // not under external control. The primary intention of this field is for
+  // debugging, incident response, and vulnerability management. The values here
+  // MAY be necessary for reproducing the build.
+  //
+  // OPTIONAL.
+  ParameterCollection systemParameters = 3;
+
+  // Resolved dependencies needed at build time. For example, if the build
+  // script fetches and executes "example.com/foo.sh", which in turn fetches
+  // "example.com/bar.tar.gz", then both "foo.sh" and "bar.tar.gz" should be
+  // listed here.
+  //
+  // Any artifacts listed under `externalParameters` or `systemParameters`
+  // SHOULD NOT be repeated here.
+  //
+  // TODO: Explain what the purpose of this field is. Why do we need it?
+  // TODO: Explain how to determine what goes here.
+  // TODO: Explain that it's OK for it to be incomplete.
+  // TODO: If the dep is already pinned, does it need to be listed here?
+  // TODO: Should this be a map instead of an array? Then each MUST be named
+  // explicitly, which would be less ambiguous but more difficult.
+  //
+  // OPTIONAL.
+  repeated ArtifactReference resolvedDependencies = 1;
+}
+
+
+message ParameterCollection {
   // References to the top-level, independent input artifacts to the build. In
   // many cases, this is a singular "source" artifact to be built.
   //
@@ -126,6 +125,9 @@ message TopLevelInputs {
   // `builderBinary` | The top-level binary that runs the build.
   // `buildImage`    | The container or VM image in which the build occurred.
   //
+  // IMPORTANT: Each name MUST be unique across `externalParameters`,
+  // `systemParameters`, `artifacts`, and `values`.
+  //
   // In some cases, the build configuration is evaluated client-side and sent
   // over the wire, such that the build system cannot determine its origin. In
   // those cases, the build system SHOULD serialize the configuration in a
@@ -136,46 +138,19 @@ message TopLevelInputs {
   //
   // TODO: Some requirement that the builder verifies the URI and that the
   // verifier checks it against expectations?
-  //
-  // REQUIRED for SLSA Build L1.
-  map<string, ArtifactReference> inputArtifacts = 2;
+  // TODO: How can we best document this across externalParameters and
+  // systemParameters?
+  map<string, ArtifactReference> artifacts = 1;
 
-  // All other input parameters necessary to invoke the build. The schema and
-  // interpretation are defined by `buildType`.
+  // Other parameters that are not artifact references. Like `artifacts`, the
+  // key is a name whose interpretation depends on `buildType`.
   //
-  // TODO: finish explanation, particularly that consumers SHOULD have a way to
-  // know what is expected, and thus it is simplest if it is empty
+  // IMPORTANT: Each name MUST be unique across `externalParameters`,
+  // `systemParameters`, `artifacts`, and `values`.
   //
-  // REQUIRED for SLSA Build L1, though it may be empty.
-  google.protobuf.Struct parameters = 4;
-
-  // TODO: We probably need os and architecture. How to record it? Anything else
-  // in that category?
-}
-
-message BuildDependencies {
-  // Resolved dependencies needed at build time and referenced by
-  // `buildDefinition`, whether directly or transitively. For example, if the
-  // build script fetches and executes "example.com/foo.sh", which in turn
-  // fetches "example.com/bar.tar.gz", then both "foo.sh" and "bar.tar.gz"
-  // should be listed here.
-  //
-  // The `inputArtifacts` SHOULD NOT be repeated here.
-  //
-  // TODO: Explain what the purpose of this field is. Why do we need it?
-  // TODO: Explain how to determine what goes here.
-  // TODO: Explain that it's OK for it to be incomplete.
-  // TODO: If the dep is already pinned, does it need to be listed here?
-  // TODO: Should this be a map instead of an array? Then each MUST be named
-  // explicitly, which would be less ambiguous but more difficult.
-  repeated ArtifactReference resolvedDependencies = 1;
-
-  // Parameters of the build environment that were provided by the `builder` and
-  // not under external control. The primary intention of this field is for
-  // debugging, incident response, and vulnerability management. The values here
-  // MAY be necessary for reproducing the build, but ideally this would not be
-  // the case.
-  google.protobuf.Struct environment = 2;
+  // For simplicity, only string values are supported. If a non-string value is
+  // used, serialize it in a deterministic way to a string.
+  map<string, string> values = 2;
 }
 
 message ArtifactReference {
@@ -186,8 +161,8 @@ message ArtifactReference {
   // Example: `pkg:pypi/pyyaml@6.0`
   string uri = 1;
 
-  // Collection of cryptographic digests for the contents of this artifact.
-  DigestSet digest = 2;
+  // [DigestSet] of cryptographic digests for the contents of this artifact.
+  map<string, string> digest = 2;
 
   // The name for this artifact local to the build.
   //
@@ -204,17 +179,15 @@ message ArtifactReference {
   string mediaType = 5;
 }
 
-message DigestSet {
-  string sha256 = 1;
-  string sha512 = 2;
-  // ...
-}
-
 message RunDetails {
   // TODO: The following fields are the same as v0.2:
+  //
+  // REQUIRED for SLSA Build L1 unless the id is implicit from the attestation
+  // envelope (e.g. public key).
   Builder builder = 1;
 
   // TODO: description
+  // OPTIONAL
   BuildMetadata metadata = 2;
 
   // Additional artifacts generated during the build that should not be
@@ -232,6 +205,8 @@ message RunDetails {
   //
   // TODO: Do we need some recommendation for how to distinguish between
   // byproducts? For example, should we recommend using `localName`?
+  //
+  // OPTIONAL
   repeated ArtifactReference byproducts = 3;
 }
 
@@ -242,21 +217,33 @@ message Builder {
   // Can we rescope this to avoid the duplication and thus the security concern?
   // For example, if the envelope identifies the build system, this might
   // identify the tenant project?
+  //
+  // REQUIRED for SLSA Build L1 unless the id is implicit from the attestation
+  // envelope (e.g. public key).
   string id = 1;
 
   // TODO: Do we want to add this field? (#319)
+  //
+  // OPTIONAL
   string version = 2;
 
   // Dependencies used by the orchestrator that are not run within the workload
   // and that should not affect the build, but may affect the provenance
   // generation or security guarantees.
   // TODO: Flesh out this model more.
+  //
+  // OPTIONAL
   repeated ArtifactReference builderDependencies = 3;
 }
 
 message BuildMetadata {
   // TODO: same as v0.2:
+  // OPTIONAL
   string invocationId = 1;
+
+  // OPTIONAL
   google.protobuf.Timestamp startedOn = 2;
+
+  // OPTIONAL
   google.protobuf.Timestamp finishedOn = 3;
 }

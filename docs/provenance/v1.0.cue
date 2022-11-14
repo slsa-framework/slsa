@@ -7,40 +7,29 @@
     "predicateType": "https://slsa.dev/provenance/v1.0?draft",
     "predicate": {
         "buildDefinition": {
-            "topLevelInputs": {
-                "buildType": string,
-                "inputArtifacts": {
-                    [string]: #ArtifactReference
-                },
-                "parameters": {
-                    [string]: object
-                }
-            },
-            "buildDependencies": {
-                "resolvedDependencies": [
-                    ...#ArtifactReference
-                ],
-                "environment": {
-                    [string]: object
-                }
+            "buildType": string,
+            "externalParameters": {
+                "artifacts": { [string]: #ArtifactReference },
+                "values": { [string]: string },
             }
+            "systemParameters": {
+                "artifacts": { [string]: #ArtifactReference },
+                "values": { [string]: string },
+            }
+            "resolvedDependencies": [ ...#ArtifactReference ],
         },
         "runDetails": {
             "builder": {
                 "id": string,
                 "version": string,
-                "builderDependencies": [
-                    ...#ArtifactReference
-                ]
+                "builderDependencies": [ ...#ArtifactReference ],
             },
             "metadata": {
                 "invocationId": string,
                 "startedOn": #Timestamp,
-                "finishedOn": #Timestamp
+                "finishedOn": #Timestamp,
             },
-            "byproducts": [
-                ...#ArtifactReference
-            ]
+            "byproducts": [ ...#ArtifactReference ],
         }
     }
 }
@@ -52,11 +41,11 @@
         "sha512": string,
         "sha1": string,
         // TODO: list the other standard algorithms
-        [string]: string
+        [string]: string,
     },
     "localName": string,
     "downloadLocation": string,
-    "mediaType": string
+    "mediaType": string,
 }
 
 #Timestamp: string  // <YYYY>-<MM>-<DD>T<hh>:<mm>:<ss>Z
