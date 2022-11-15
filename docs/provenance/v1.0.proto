@@ -162,6 +162,7 @@ message ArtifactReference {
   string uri = 1;
 
   // [DigestSet] of cryptographic digests for the contents of this artifact.
+  // TODO: Decide on hex vs base64 in #533 then document it here.
   map<string, string> digest = 2;
 
   // The name for this artifact local to the build.
