@@ -115,7 +115,7 @@ instances, whether prior or concurrent.
 -   It MUST NOT be possible for two builds that overlap in time to influence one another.
 -   It MUST NOT be possible for one build to persist or influence the build environment of a subsequent build.
 -   Build caches, if used, MUST be purely content-addressable to prevent tampering.
--   The build SHOULD NOT call out to remote execution.
+-   The build SHOULD NOT call out to remote execution unless it's considered part of the "builder" within the trust boundary.
 -   The build SHOULD NOT open services that allow for remote influence.
 
 <td> <td> <td>✓
