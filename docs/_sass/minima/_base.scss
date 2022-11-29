@@ -215,7 +215,7 @@ table {
     // color: lighten($text-color, 18%);
     border-collapse: collapse;
     border: 1px solid $grey-light;
-    tr {
+    &:not(.no-alternate) tr {
         &:nth-child(even) {
             background-color: $green-lightest;
         }
