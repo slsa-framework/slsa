@@ -57,6 +57,15 @@ message BuildDefinition {
   // the information necessary and sufficient to initialize the build and begin
   // execution. "Top-level" means that it is not derived from another input.
   //
+  // The key is a name whose interpretation depends on `buildType`. It MUST be
+  // unique across `externalParameters` and `systemParameters`. The following
+  // conventional names are RECOMMENDED when appropriate:
+  //
+  // name     | description
+  // -------- | -----------
+  // `source` | The primary input to the build.
+  // `config` | The build configuration, if different from `source`.
+  //
   // The build system SHOULD be designed to minimize the amount of information
   // necessary here, in order to reduce fragility and ease verification.
   // Consumers SHOULD have an expectation of what "good" looks like; the more
@@ -77,10 +86,22 @@ message BuildDefinition {
   //     sole top-level input, in order to guarantee that the information is
   //     sufficient to run the build.
   //
+  // -   In some cases, the build configuration is evaluated client-side and
+  //     sent over the wire, such that the build system cannot determine its
+  //     origin. In those cases, the build system SHOULD serialize the
+  //     configuration in a deterministic way and record the `digest` without a
+  //     `uri`. This allows one to consider the client-side evaluation as a
+  //     separate "build" with its own provenance, such that the verifier can
+  //     chain the two provenance attestations together to determine the origin
+  //     of the configuration.
+  //
   // TODO: Describe how complete this must be at each SLSA level.
   //
+  // TODO: Some requirement that the builder verifies the URI and that the
+  // verifier checks it against expectations?
+  //
   // REQUIRED for SLSA Build L1.
-  ParameterCollection externalParameters = 2;
+  map<string, ParameterValue> externalParameters = 2;
 
   // Parameters of the build environment that were provided by the `builder` and
   // not under external control. The primary intention of this field is for
@@ -88,7 +109,7 @@ message BuildDefinition {
   // MAY be necessary for reproducing the build.
   //
   // OPTIONAL.
-  ParameterCollection systemParameters = 3;
+  map<string, ParameterValue> systemParameters = 3;
 
   // Resolved dependencies needed at build time. For example, if the build
   // script fetches and executes "example.com/foo.sh", which in turn fetches
@@ -109,48 +130,14 @@ message BuildDefinition {
   repeated ArtifactReference resolvedDependencies = 1;
 }
 
-
-message ParameterCollection {
-  // References to the top-level, independent input artifacts to the build. In
-  // many cases, this is a singular "source" artifact to be built.
-  //
-  // The key is a name whose interpretation depends on `buildType`. If there is
-  // only one input, it SHOULD be named "source". The following conventional
-  // names are RECOMMENDED when appropriate:
-  //
-  // name            | description
-  // --------------- | -----------
-  // `source`        | The primary input to the build.
-  // `config`        | The build configuration, if different from `source`.
-  // `builderBinary` | The top-level binary that runs the build.
-  // `buildImage`    | The container or VM image in which the build occurred.
-  //
-  // IMPORTANT: Each name MUST be unique across `externalParameters`,
-  // `systemParameters`, `artifacts`, and `values`.
-  //
-  // In some cases, the build configuration is evaluated client-side and sent
-  // over the wire, such that the build system cannot determine its origin. In
-  // those cases, the build system SHOULD serialize the configuration in a
-  // deterministic way and record the `digest` without a `uri`. This allows one
-  // to consider the client-side evaluation as a separate "build" with its own
-  // provenance, such that the verifier can chain the two provenance
-  // attestations together to determine the origin of the configuration.
-  //
-  // TODO: Some requirement that the builder verifies the URI and that the
-  // verifier checks it against expectations?
-  // TODO: How can we best document this across externalParameters and
-  // systemParameters?
-  map<string, ArtifactReference> artifacts = 1;
-
-  // Other parameters that are not artifact references. Like `artifacts`, the
-  // key is a name whose interpretation depends on `buildType`.
-  //
-  // IMPORTANT: Each name MUST be unique across `externalParameters`,
-  // `systemParameters`, `artifacts`, and `values`.
-  //
-  // For simplicity, only string values are supported. If a non-string value is
-  // used, serialize it in a deterministic way to a string.
-  map<string, string> values = 2;
+message ParameterValue {
+  oneof value {
+    // A parameter that is a reference to an artifact.
+    ArtifactReference artifact = 1;
+    // A parameter that is a scalar value. For simplicity, only string values
+    // are supported.
+    string value = 2;
+  }
 }
 
 message ArtifactReference {
