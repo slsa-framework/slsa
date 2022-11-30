@@ -8,8 +8,8 @@
     "predicate": {
         "buildDefinition": {
             "buildType": string,
-            "externalParameters": { [string]: #ParameterValue },
-            "systemParameters": { [string]: #ParameterValue },
+            "externalParameters": [ ...#Parameter ],
+            "systemParameters": [ ...#Parameter ],
             "resolvedDependencies": [ ...#ArtifactReference ],
         },
         "runDetails": {
@@ -28,10 +28,12 @@
     }
 }
 
-#ParameterValue: {
-    "artifact": #ArtifactReference
+#Parameter: {
+    "name": string,
+    "artifact": #ArtifactReference,
 } | {
-    "value": string
+    "name": string,
+    "value": string,
 }
 
 #ArtifactReference: {
