@@ -224,9 +224,11 @@ message Builder {
   string id = 1;
 
   // TODO: Do we want to add this field? (#319)
+  // TODO: Should we merge this with builderDependencies into a combined
+  // "builderParameters"? Then arbitrary information can be stored.
   //
   // OPTIONAL
-  string version = 2;
+  map<string, string> version = 2;
 
   // Dependencies used by the orchestrator that are not run within the workload
   // and that should not affect the build, but may affect the provenance
