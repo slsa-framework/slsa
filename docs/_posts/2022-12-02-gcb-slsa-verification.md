@@ -86,7 +86,7 @@ slsa-verifier verify-image "${IMMUTABLE_IMAGE}" \
   --provenance-path unverified-provenance.json \
   --source-uri github.com/laurentsimon/gcb-tests \
   --builder-id=https://cloudbuild.googleapis.com/GoogleHostedWorker \
-  --print-provenance > verified-provenance.json # prints PASSED: Verified SLSA provenance
+  --print-provenance > verified-provenance.json # PASSED: Verified SLSA provenance
 ```
 
 Using the `--print-provenance` flag will print the validated provenance JSON to allow piping into a policy engine. If verification succeeds, `$IMMUTABLE_IMAGE` is verified.
