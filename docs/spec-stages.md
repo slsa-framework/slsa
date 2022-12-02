@@ -4,8 +4,9 @@ layout: specifications
 ---
 
 Specifications go through various stages of development from which you
-should have different expectations. This document defines these
-different stages and their meaning.
+should have different expectations. This document defines the different
+stages the SLSA project uses and their meaning for readers and
+contributors.
 
 Every specification should prominently display a *Status of this
 document* section stating which stage the specification you are
