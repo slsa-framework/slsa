@@ -8,9 +8,9 @@ should have different expectations. This document defines the different
 stages the SLSA project uses and their meaning for readers and
 contributors.
 
-Every specification should prominently display a *Status of this
-document* section stating which stage the specification you are
-looking at is in.
+Every specification page should prominently display a *Status* section
+stating which stage the specification is in with a link to its
+definition.
 
 ## Working Draft
 
@@ -25,7 +25,7 @@ work progresses. The status section of the document may provide
 additional information as to its development status and whether
 reviews and feedback are welcome.
 
-## Proposed Specification
+## In Review
 
 At this stage the document is considered to be feature complete and is
 published as a way to invite final reviews. Editorial changes may
@@ -33,12 +33,12 @@ still be made but no addition of new features is expected and short of
 problems being found no significant changes are expected to happen
 anymore.
 
-## Specification
+## Stable
 
-At this stage the document is considered final and stable. It is
-suitable for reference and implementation in production. Changes may
-only happen if deemed necessary and will be avoided as much as
-possible if they might adversely impact implementations.
+At this stage the document is considered stable. It is suitable for
+reference and implementation in production. Changes may only happen if
+deemed necessary and will be avoided as much as possible if they might
+adversely impact implementations.
 
 ## Retired
 
