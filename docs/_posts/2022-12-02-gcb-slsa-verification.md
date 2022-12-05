@@ -1,7 +1,7 @@
 ---
 title: "Safeguarding builds on Google Cloud Build with SLSA"
 author: "Asra Ali, Ian Lewis, Laurent Simon, Stephen Anastos"
-is_guest_post: false
+is_guest_post: true
 ---
 
 
@@ -13,13 +13,13 @@ As we’ll see below, this new provenance information can be used to validate th
 
 ### GCB Provenance at SLSA Level 3
 
-At SLSA Level 3, users have assurance that the metadata content is authentic, tamper-proof, and not altered by the project maintainers. The build definition and configuration is verifiably derived from definitions stored in versioned source control systems (known as “[build-as-code](https://slsa.dev/spec/v0.1/requirements#build-as-code)”). So in order to describe the full top-level build instructions, GCB now identifies the build configuration stored in git, the `entrypoint`, often named [cloudbuild.yaml](https://cloud.google.com/build/docs/configuring-builds/create-basic-configuration).  A record of all user-controlled parameters ([substitutions](https://cloud.google.com/build/docs/configuring-builds/substitute-variable-values)) to the build is also provided in the provenance’s recipe.
+At SLSA Level 3, users have assurance that the metadata content is authentic, tamper-proof, and not altered by the project maintainers. The build definition and configuration is verifiably derived from definitions stored in versioned source control systems (known as “[build-as-code](https://slsa.dev/spec/v0.1/requirements#build-as-code)”). So in order to describe the full top-level build instructions, GCB now identifies the build configuration stored in git, the `entrypoint`, often named [cloudbuild.yaml](https://cloud.google.com/build/docs/configuring-builds/create-basic-configuration).  A record of all user-controlled parameters ([substitutions](https://cloud.google.com/build/docs/configuring-builds/substitute-variable-values)) to the build is also provided in the provenance’s `recipe`.
 
 ```json
 {
   "_type": "https://in-toto.io/Statement/v0.1",
   "predicateType": "https://slsa.dev/provenance/v0.1",
-  "slsaProvenance": {
+  "predicate": {
     "builder": {
       "id": "https://cloudbuild.googleapis.com/GoogleHostedWorker@v0.3"
     },
@@ -33,7 +33,7 @@ At SLSA Level 3, users have assurance that the metadata content is authentic, ta
     ],
     "metadata": {...},
     "recipe": {
-      "arguments": {...},
+      "arguments": {
         "sourceProvenance": {...},
         "steps": [...],
         "substitutions": {
@@ -101,11 +101,10 @@ docker run "${IMMUTABLE_IMAGE}"
 
 In previous posts ([1](https://slsa.dev/blog/2022/06/slsa-github-workflows), [2](https://slsa.dev/blog/2022/08/slsa-github-workflows-generic-ga)), we described how consumers can use information found in non-forgeable SLSA Level 3 build provenance to evaluate policies that may prevent certain classes of supply chain attacks.
 
-In particular, with the new information provided in GCB’s provenance, users may validate that a predefined set of workflows created the artifacts. For example, an organization may use a certain build configuration to generate a base image for building a final artifact. Before executing the image to create their releases, they can verify the SLSA provenance like above and then validate that the base image was generated from the authorized workflow. The GCB provenance exposes the metadata in the build recipe:
+In particular, with the new information provided in GCB’s provenance, users may validate that a predefined set of workflows created the artifacts. For example, an organization may use a certain build configuration to generate a base image for building a final artifact. Before executing the image to create their releases, they can verify the SLSA provenance like above and then validate that the base image was generated from the authorized configuration. The GCB provenance exposes the metadata in the build recipe:
 
 ```shell
-jq -r '.predicate.recipe.entryPoint' verified-provenance.json
-cloudbuild.yaml
+jq -r '.predicate.recipe.entryPoint' verified-provenance.json # cloudbuild.yaml
 ```
 
 ### Conclusion
