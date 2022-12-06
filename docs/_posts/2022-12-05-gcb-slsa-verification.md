@@ -68,7 +68,7 @@ To start verifying provenance, you must provide a container image name that is _
 
 ```bash
 UNVERIFIED_IMAGE="us-LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE_NAME:TAG"
-IMMUTABLE_IMAGE="${UNVERIFIED_IMAGE%:*}@"$(crane digest "${UNVERIFIED_IMAGE}")"
+IMMUTABLE_IMAGE="${UNVERIFIED_IMAGE%:*}@$(crane digest ${UNVERIFIED_IMAGE})"
 ```
 
 Then, retrieve the provenance using the [gcloud](https://cloud.google.com/sdk/gcloud) CLI utility. (Note: You _must_ be authenticated to GCP to retrieve information about the image and [configure docker authentication](https://cloud.google.com/sdk/gcloud/reference/auth/configure-docker).)
