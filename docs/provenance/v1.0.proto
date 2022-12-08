@@ -57,7 +57,14 @@ message BuildDefinition {
   // the information necessary and sufficient to initialize the build and begin
   // execution. "Top-level" means that it is not derived from another input.
   //
-  // The interpretation of each parameter is determined by `buildType`.
+  // The key is a name whose interpretation depends on `buildType`. It MUST be
+  // unique across `externalParameters` and `systemParameters`. The following
+  // conventional names are RECOMMENDED when appropriate:
+  //
+  // name     | description
+  // -------- | -----------
+  // `source` | The primary input to the build.
+  // `config` | The build configuration, if different from `source`.
   //
   // The build system SHOULD be designed to minimize the amount of information
   // necessary here, in order to reduce fragility and ease verification.
@@ -88,27 +95,21 @@ message BuildDefinition {
   //     chain the two provenance attestations together to determine the origin
   //     of the configuration.
   //
-  // SHOULD be sorted by `name` to make the provenance deterministic.
-  //
   // TODO: Describe how complete this must be at each SLSA level.
   //
   // TODO: Some requirement that the builder verifies the URI and that the
   // verifier checks it against expectations?
   //
   // REQUIRED for SLSA Build L1.
-  repeated Parameter externalParameters = 2;
+  map<string, ParameterValue> externalParameters = 2;
 
   // Parameters of the build environment that were provided by the `builder` and
   // not under external control. The primary intention of this field is for
   // debugging, incident response, and vulnerability management. The values here
   // MAY be necessary for reproducing the build.
   //
-  // The interpretation of each parameter is determined by `buildType`.
-  //
-  // SHOULD be sorted by `name` to make the provenance deterministic.
-  //
   // OPTIONAL.
-  repeated Parameter systemParameters = 3;
+  map<string, ParameterValue> systemParameters = 3;
 
   // Resolved dependencies needed at build time. For example, if the build
   // script fetches and executes "example.com/foo.sh", which in turn fetches
@@ -122,32 +123,20 @@ message BuildDefinition {
   // TODO: Explain how to determine what goes here.
   // TODO: Explain that it's OK for it to be incomplete.
   // TODO: If the dep is already pinned, does it need to be listed here?
-  // TODO: Should this be a Parameter instead of ArtifactReference? On the one
-  //       hand, that would allow specification on scalar values. On the other,
-  //       it would require each to be explicitly named (could be good or bad).
+  // TODO: Should this be a map instead of an array? Then each MUST be named
+  // explicitly, which would be less ambiguous but more difficult.
   //
   // OPTIONAL.
   repeated ArtifactReference resolvedDependencies = 1;
 }
 
-message Parameter {
-  // The name of this parameter. Must be unique across `externalParameters` and
-  // `systemParameters`.
-  //
-  // The following conventional names are RECOMMENDED when appropriate:
-  //
-  // name     | description
-  // -------- | -----------
-  // `source` | The primary input to the build.
-  // `config` | The build configuration, if different from `source`.
-  //
-  string name = 1;
-
-  oneof value_type {
-    // A parameter value that is a reference to an artifact.
-    ArtifactReference artifact = 2;
-    // A scalar parameter value. For simplicity, only string type is supported.
-    string value = 3;
+message ParameterValue {
+  oneof value {
+    // A parameter that is a reference to an artifact.
+    ArtifactReference artifact = 1;
+    // A parameter that is a scalar value. For simplicity, only string values
+    // are supported.
+    string value = 2;
   }
 }
 
