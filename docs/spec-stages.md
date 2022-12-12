@@ -42,8 +42,8 @@ adversely impact implementations.
 
 ## Retired
 
-This stage indicates that the specification should no longer be
-used. It has been either rendered obsolete by a newer version or
+This stage indicates that the specification is no longer maintained.
+It has been either rendered obsolete by a newer version or
 abandoned for some reason. The status of the document may provide
 additional information and point to the new document to use intead if
 there is one.
