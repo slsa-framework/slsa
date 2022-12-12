@@ -84,11 +84,12 @@ $content-width: 1180px !default;
 $on-mobile-old: 320px !default;
 $on-mobile: 440px !default;
 $on-palm: 600px !default;
-$on-tablet: 775px !default;
+$on-tablet: 768px !default;
 $on-laptop: 1180px !default;
+$media-menu: 870px !default;
 
 @mixin media-query($device) {
-    @media screen and (max-width: $device) {
+    @media screen and (max-width: ($device - .1)) {
         @content;
     }
 }
