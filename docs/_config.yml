@@ -1,5 +1,5 @@
 title: SLSA
-description: Security framework to ensure software supply chain integrity
+description: "SLSA: Security framework to ensure software supply chain integrity"
 logo: /images/icons/android-chrome-512x512.png
 repository: slsa-framework/slsa
 collections:

@@ -67,3 +67,24 @@ verified reproducible builds are one option for implementing the requirements.
 
 For more on reproducibility, see
 [Hermetic, Reproducible, or Verifiable?](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=357)
+
+## Q: How does SLSA relate to in-toto?
+
+[in-toto](https://in-toto.io/) is a framework to secure software supply chains
+hosted at the [Cloud Native Computing Foundation](https://cncf.io/). The in-toto
+specification provides a generalized workflow to secure different steps in a
+software supply chain. The SLSA specification recommends
+[in-toto attestations](https://github.com/in-toto/attestation) as the vehicle to
+express Provenance and other attributes of software supply chains. Thus, in-toto
+can be thought of as the unopinionated layer to express information pertaining
+to a software supply chain, and SLSA as the opinionated layer specifying exactly
+what information must be captured in in-toto metadata to achieve the guarantees
+of a particular level.
+
+in-toto's official implementations written in
+[Go](https://github.com/in-toto/in-toto-golang),
+[Java](https://github.com/in-toto/in-toto-java), and
+[Rust](https://github.com/in-toto/in-toto-rs) include support for generating
+SLSA Provenance metadata. These APIs are used in other tools generating SLSA
+Provenance such as Sigstore's cosign, the SLSA GitHub Generator, and the in-toto
+Jenkins plugin.

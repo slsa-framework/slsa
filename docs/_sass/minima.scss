@@ -23,6 +23,8 @@ $green-pastel: #ECF8F2;
 $green-button: #23907E;
 $green-lightest: #F7FAF9;
 
+$code-default: #e8e8e8;
+
 // font variables
 
 $base-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
@@ -84,11 +86,12 @@ $content-width: 1180px !default;
 $on-mobile-old: 320px !default;
 $on-mobile: 440px !default;
 $on-palm: 600px !default;
-$on-tablet: 775px !default;
+$on-tablet: 768px !default;
 $on-laptop: 1180px !default;
+$media-menu: 870px !default;
 
 @mixin media-query($device) {
-    @media screen and (max-width: $device) {
+    @media screen and (max-width: ($device - .1)) {
         @content;
     }
 }

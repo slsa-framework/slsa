@@ -23,18 +23,17 @@
     - title: FAQ
       url: /spec/v0.1/faq
 
-    - spacer: true
-
     - title: Attestations
+      children:
 
-    - title: General Model
-      url: /attestation-model
+      - title: General Model
+        url: /attestation-model
 
-    - title: Provenance
-      url: /provenance
+      - title: Provenance
+        url: /provenance
 
-    - title: VSA
-      url: /verification_summary
+      - title: VSA
+        url: /verification_summary
 
 - title: Use cases
   url: /use-cases
