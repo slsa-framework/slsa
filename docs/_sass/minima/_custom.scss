@@ -92,9 +92,8 @@
 
     ul {
         list-style: none;
-        margin-top: 10px;
+        margin: 10px 0 0 0;
         padding: 0;
-        margin: 0;
         // Opacity on hover effect
         &:hover > li {
             transition: 150ms all ease;
@@ -236,13 +235,13 @@ h5, .h5 {
 
 .subtitle {
     display: block;
-    padding-bottom: $spacer-l;
+    padding-bottom: 3rem;
     font-size: $subtitle-font-size;
 
     // For making subtitles hug closely above headers
     &.flushed {
         padding-bottom: 0;
-        margin-bottom: -$spacer-l;
+        margin-bottom: -3rem;
     }
 }
 
@@ -450,45 +449,47 @@ details {
 .main-content,
 .markdown,
 dl.as-table {
-  p, ul, ol, dl {
-    margin: .75rem 0;
-  }
-
-  p {
-    &:first-child {
-      margin-top: 0;
-    }
+  p, ul, ol {
+    margin: 0 0 2rem 0;
 
     &:last-child {
       margin-bottom: 0;
     }
   }
 
+  li > p:last-child {
+    margin-bottom: 2rem;
+  }
+
   h2 {
     margin-top: 4rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 
   h3, h4 {
     margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 }
 
 .main-content,
 .markdown {
-  ul:not(.custom-list),
-  ol:not(.custom-list) {
-      padding-left: 25px;
+    ul:not(.custom-list),
+    ol:not(.custom-list) {
+        padding-left: 1.5rem;
 
-      & > li {
-          margin-bottom: 5px;
-      }
-  }
+        & > li {
+            margin-bottom: 0.75rem;
 
-  ul:not(.custom-list) {
-      list-style: disc;
-  }
+            &:first-child {
+                margin-top: 0.75rem;
+            }
+        }
+    }
+
+    ul:not(.custom-list) {
+        list-style: disc;
+    }
 
     ol:not(.custom-list) {
         list-style: decimal;
@@ -505,10 +506,10 @@ dl.as-table {
 
 .main-content {
     blockquote {
-        margin: 30px 0;
+        margin: 0 0 2rem 0;
 
         & > p {
-            margin:12px 0;
+            margin: .75rem 0;
         }
     }
 }
