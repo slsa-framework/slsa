@@ -91,7 +91,9 @@
     font-family: 'Prodigy';
 
     ul {
-        margin-top: 10px;
+        list-style: none;
+        margin: 10px 0 0 0;
+        padding: 0;
         // Opacity on hover effect
         &:hover > li {
             transition: 150ms all ease;
@@ -168,34 +170,6 @@
 
 }
 
-.main-content {
-    ul:not(.custom-list) {
-        list-style: disc;
-        padding-left: 25px;
-
-        & > li {
-            margin-top: 10px;
-        }
-    }
-
-    ol:not(.custom-list) {
-        list-style: auto;
-        padding-left: 25px;
-
-        & > li {
-            margin-top: 10px;
-        }
-    }
-
-    blockquote {
-        margin: 30px 0;
-
-        & > p {
-            margin:12px 0;
-        }
-    }
-}
-
 .max-width {
     align-items: center;
     flex-grow: 1;
@@ -261,13 +235,13 @@ h5, .h5 {
 
 .subtitle {
     display: block;
-    padding-bottom: $spacer-l;
+    padding-bottom: 3rem;
     font-size: $subtitle-font-size;
 
     // For making subtitles hug closely above headers
     &.flushed {
         padding-bottom: 0;
-        margin-bottom: -$spacer-l;
+        margin-bottom: -3rem;
     }
 }
 
@@ -281,18 +255,8 @@ h5, .h5 {
         margin-bottom: 30px;
         color: $green-darkest;
     }
-    p{
-        margin-bottom: 30px;
+    p {
         color: $green-darkest;
-    }
-    ul {
-        list-style: disc;
-        padding-left: 25px;
-        margin-bottom: 30px;
-
-        & > li {
-            margin-bottom: 10px;
-        }
     }
     table {
         margin-bottom: 28px;
@@ -482,24 +446,72 @@ details {
   line-height: 1;
 }
 
-// This is a hack to fix paragraph spacing. Really the theme should be fixed.
-// See https://github.com/slsa-framework/slsa/issues/335.
-.fix-paragraph-spacing,
+.main-content,
+.markdown,
 dl.as-table {
   p, ul, ol {
-    margin-bottom: 12px;
+    margin: 0 0 2rem 0;
+
     &:last-child {
       margin-bottom: 0;
     }
   }
+
+  li > p:last-child {
+    margin-bottom: 2rem;
+  }
+
   h2 {
     margin-top: 4rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
+
   h3, h4 {
     margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
+}
+
+.main-content,
+.markdown {
+    ul:not(.custom-list),
+    ol:not(.custom-list) {
+        padding-left: 1.5rem;
+
+        & > li {
+            margin-bottom: 0.75rem;
+
+            &:first-child {
+                margin-top: 0.75rem;
+            }
+        }
+    }
+
+    ul:not(.custom-list) {
+        list-style: disc;
+    }
+
+    ol:not(.custom-list) {
+        list-style: decimal;
+
+        ol {
+          list-style-type: lower-alpha;
+
+          ol {
+            list-style-type: lower-roman;
+          }
+        }
+    }
+}
+
+.main-content {
+    blockquote {
+        margin: 0 0 2rem 0;
+
+        & > p {
+            margin: .75rem 0;
+        }
+    }
 }
 
 .important-messages {
