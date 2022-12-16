@@ -1,10 +1,3 @@
-
-{%- if false %}
-
-# IGNORED header to fool markdownlint
-
-{%- endif %}
-
 {%- assign url_parts = page.url | split: '/' %}
 {%- assign spec_name = url_parts[1] %}
 {%- assign spec_version = url_parts[2] %}
