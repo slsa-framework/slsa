@@ -3,6 +3,7 @@
 #       versions:
 #         <version>:
 #           name: <string> # display name
+#           status: <string> # one of: Working Draft, In Review, Stable, Retired
 #           draft: <bool, optional> # if true, display a "draft" warning banner
 #           hidden: <bool, optional> # if true, do not show in dropdown
 #       current: <version>
@@ -17,6 +18,7 @@ spec:
       name: Version 0.1
     v1.0:
       name: Version 1.0 (DRAFT)
+      status: Working Draft
       draft: true
       # We will hide 1.0 until it is ready for review. Viewers can still type
       # the URL manually, but we will not link to it from the main page.
@@ -27,14 +29,18 @@ provenance:
   versions:
     v0.1:
       name: Version 0.1
+      status: Working Draft
     v0.2:
       name: Version 0.2
+      status: Working Draft
   current: v0.2
 
 verification_summary:
   versions:
     v0.1:
       name: Version 0.1
+      status: Working Draft
     v0.2:
       name: Version 0.2
+      status: Working Draft
   current: v0.2

@@ -8,6 +8,8 @@ levels that describe increasing security guarantees.
 
 </div>
 
+{% include status.md %}
+
 This is **version 1.0** of the SLSA specification, which defines the SLSA
 levels. For other versions, use the chooser <span class="hidden md:inline">to
 the right</span><span class="md:hidden">at the bottom of this page</span>. For

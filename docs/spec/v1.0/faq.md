@@ -3,6 +3,8 @@ title: Frequently Asked Questions
 layout: specifications
 ---
 
+{% include status.md %}
+
 ## Q: Why is SLSA not transitive?
 
 SLSA is not transitive in order to make the problem tractable. If SLSA 4

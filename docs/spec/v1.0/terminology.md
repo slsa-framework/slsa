@@ -8,6 +8,8 @@ of terminology and models to describe what we're protecting.
 
 </div>
 
+{% include status.md %}
+
 ## TODO: Terms we still need to define
 
 > **TODO:** Define these terms before the v1.0 release.
