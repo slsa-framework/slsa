@@ -23,6 +23,11 @@
     - title: FAQ
       url: /spec/v0.1/faq
 
+    - title: Stages
+      url: /spec-stages
+
+    - spacer: true
+
     - title: Attestations
       children:
 
