@@ -39,7 +39,7 @@ verification_summary:
   versions:
     v0.1:
       name: Version 0.1
-      status: Working Draft
+      status: Retired
     v0.2:
       name: Version 0.2
       status: Working Draft
