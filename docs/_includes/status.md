@@ -13,6 +13,6 @@
 This draft has been superseded. [View the latest version]({{ page.url | replace: spec_version, site.data.versions[spec_name].current | relative_url}}).
 {%- endif %}
 
-For more information regarding the meaning of this status, see the [Specification Stages definition](../../spec-stages).
+For more information regarding the meaning of this status, see the [Specification Stages definition]({{ "/spec-stages" | relative_url }}).
 
 {%- endif %}
