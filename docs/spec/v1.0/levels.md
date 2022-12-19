@@ -13,8 +13,6 @@ purpose and guarantees. For the normative requirements at each level, see
 [Requirements](requirements.md). For a background, see
 [Terminology](terminology.md).
 
-{% include status.md %}
-
 ## What is SLSA?
 
 SLSA is a set of incrementally adoptable security guidelines, established by

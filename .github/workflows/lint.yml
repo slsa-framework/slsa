@@ -10,4 +10,4 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # tag=v3.5.1
     - run: npm ci --ignore-scripts
-    - run: npm run lint --silent -- --ignore docs/_includes/status.md
+    - run: npm run lint --silent

@@ -6,8 +6,6 @@ This page lays out the key guiding principles behind SLSA.
 
 </div>
 
-{% include status.md %}
-
 ## Trust systems, verify artifacts
 
 One of the main ideas behind SLSA is to establish trust in a small number of

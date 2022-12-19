@@ -13,8 +13,6 @@ SLSA's [levels](levels.md) are designed to mitigate the risk of these attacks.
 This page enumerates possible attacks throughout the supply chain and shows how
 SLSA can help. For a background, see [Terminology](terminology.md).
 
-{% include status.md %}
-
 ## Summary
 
 ![Supply Chain Threats](../../images/supply-chain-threats.svg)
