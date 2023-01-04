@@ -24,12 +24,12 @@ message Provenance {
   // The accuracy and completeness of this information is implied by
   // `runDetails.builder.id`.
   //
-  // REQUIRED for SLSA Build L1.
+  // REQUIRED at SLSA Build L1.
   BuildDefinition buildDefinition = 1;
 
   // Details specific to this particular execution of the build.
   //
-  // REQUIRED for SLSA Build L1.
+  // REQUIRED at SLSA Build L1.
   RunDetails runDetails = 2;
 }
 
@@ -100,7 +100,7 @@ message BuildDefinition {
   // TODO: Some requirement that the builder verifies the URI and that the
   // verifier checks it against expectations?
   //
-  // REQUIRED for SLSA Build L1.
+  // REQUIRED at SLSA Build L1.
   map<string, ParameterValue> externalParameters = 2;
 
   // Parameters of the build environment that were provided by the `builder` and
@@ -170,12 +170,12 @@ message ArtifactReference {
 message RunDetails {
   // TODO: The following fields are the same as v0.2:
   //
-  // REQUIRED for SLSA Build L1 unless the id is implicit from the attestation
+  // REQUIRED at SLSA Build L1 unless the id is implicit from the attestation
   // envelope (e.g. public key).
   Builder builder = 1;
 
   // TODO: description
-  // OPTIONAL
+  // OPTIONAL.
   BuildMetadata metadata = 2;
 
   // Additional artifacts generated during the build that should not be
@@ -194,7 +194,7 @@ message RunDetails {
   // TODO: Do we need some recommendation for how to distinguish between
   // byproducts? For example, should we recommend using `localName`?
   //
-  // OPTIONAL
+  // OPTIONAL.
   repeated ArtifactReference byproducts = 3;
 }
 
@@ -206,7 +206,7 @@ message Builder {
   // For example, if the envelope identifies the build system, this might
   // identify the tenant project?
   //
-  // REQUIRED for SLSA Build L1 unless the id is implicit from the attestation
+  // REQUIRED at SLSA Build L1 unless the id is implicit from the attestation
   // envelope (e.g. public key).
   string id = 1;
 
@@ -214,7 +214,7 @@ message Builder {
   // TODO: Should we merge this with builderDependencies into a combined
   // "builderParameters"? Then arbitrary information can be stored.
   //
-  // OPTIONAL
+  // OPTIONAL.
   map<string, string> version = 2;
 
   // Dependencies used by the orchestrator that are not run within the workload
@@ -222,18 +222,18 @@ message Builder {
   // generation or security guarantees.
   // TODO: Flesh out this model more.
   //
-  // OPTIONAL
+  // OPTIONAL.
   repeated ArtifactReference builderDependencies = 3;
 }
 
 message BuildMetadata {
   // TODO: same as v0.2:
-  // OPTIONAL
+  // OPTIONAL.
   string invocationId = 1;
 
-  // OPTIONAL
+  // OPTIONAL.
   google.protobuf.Timestamp startedOn = 2;
 
-  // OPTIONAL
+  // OPTIONAL.
   google.protobuf.Timestamp finishedOn = 3;
 }
