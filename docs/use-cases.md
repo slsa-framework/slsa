@@ -6,7 +6,7 @@ hero_text: >
     The answer depends on the use case in which SLSA is applied. Below
     describe the three main use cases for SLSA.
 ---
-<section class="section bg-pastel-green flex justify-center items-center fix-paragraph-spacing">
+<section class="section bg-pastel-green flex justify-center items-center main-content">
 <div class="wrapper w-full">
 
 <div class="-mt-16 mb-16">
@@ -111,7 +111,7 @@ Example ways a consumer might use SLSA for vendor provided software:
 </div>
 </section>
 
-<section class="section bg-white flex justify-center items-center fix-paragraph-spacing">
+<section class="section bg-white flex justify-center items-center main-content">
 <div class="wrapper w-full">
 
 <div class="-mt-16 mb-16">

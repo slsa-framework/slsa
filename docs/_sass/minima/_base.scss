@@ -153,8 +153,8 @@ code {
 
 code {
     padding: 4px 6px;
-    background: $green-darkest;
-    color: $grey-light;
+    background: $green-pastel;
+    color: $green-darkest;
     border: 1px solid #B4F3C9;
     border-radius: 4px;
 }
@@ -169,6 +169,7 @@ pre {
         padding-right: 0;
         padding-left: 0;
         background: none;
+        color: $code-default;
     }
 }
 
@@ -215,7 +216,7 @@ table {
     // color: lighten($text-color, 18%);
     border-collapse: collapse;
     border: 1px solid $grey-light;
-    tr {
+    &:not(.no-alternate) tr {
         &:nth-child(even) {
             background-color: $green-lightest;
         }
