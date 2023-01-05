@@ -20,13 +20,13 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
                     <p>
                         Evaluate your current build situation:
                     <ul class="list-disc my-6 pl-6">
-                        <li>If you are using GitHub Actions or Google Cloud Build, jump directly to <a href="#SLSA3">SLSA 3.</a></li>
+                        <li>If you are using GitHub Actions or Google Cloud Build, jump directly to            <a href="#SLSA3">SLSA 3</a>.</li>
                         <li>If you are using FRSCA, jump to SLSA 2.</li>
-                        <li>If you’re using any other build system or are not using a build system, start with SLSA 1. </li>
+                        <li>If you’re using any other build system or are not using a build system, start with <a href="#SLSA1">SLSA 1</a>.</li>
                     </ul>
                     </p>
                     <p class="mb-10">
-                        <b>Note:</B> SLSA 4 is not yet supported by any widely available build system.
+                        <b>Note:</B> SLSA 4 is not yet supported by any widely available build system. For more information, see LINK.
                     </p>
                 </div>
             </div>
@@ -39,7 +39,8 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
         <div class="md:flex justify-between items-start mb-16">
             <div class="text w-full md:w-1/3">
 <div class="h2 -mt-16 p-0">
-
+<a/ id="SLSA1">
+    
 ## Reaching SLSA Level 1
 
 </div>
