@@ -10,6 +10,36 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
             <div class="text w-full md:w-1/3">
 <div class="h2 -mt-16 p-0">
 
+## Before Starting
+
+</div>
+<p class="h4 font-semibold my-6 text-green-dark">Effort: Low</p>
+            </div>
+            <div class="w-full md:w-2/3">
+                <div class="bg-white h-full rounded-lg p-10">
+                    <p>
+                        Evaluate your current build situation:
+                    <ul class="list-disc my-6 pl-6">
+                        <li>If you are using GitHub Actions or Google Cloud Build, jump directly to <a href="#SLSA3">SLSA 3.</a></li>
+                        <li>If you are using FRSCA, jump to SLSA 2.</li>
+                        <li>If you’re using any other build system or are not using a build system, start with SLSA 1. </li>
+                    </ul>
+                    </p>
+                    <p class="mb-10">
+                        <b>Note:</B> SLSA 4 is not yet supported by any widely available build system.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>            
+
+<section class="section bg-pastel-green flex justify-center items-center">
+    <div class="wrapper inner w-full">
+        <div class="md:flex justify-between items-start mb-16">
+            <div class="text w-full md:w-1/3">
+<div class="h2 -mt-16 p-0">
+
 ## Reaching SLSA Level 1
 
 </div>
@@ -19,10 +49,10 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
                 <div class="bg-white h-full rounded-lg p-10">
                     <p class="h4 font-bold mb-6">Overview<p>
                     <p>
-                        This guide will help you achieve Level 1, and it should take less than two hours for an individual project. The goals is to:
+                        This guide will help you achieve Level 1, and it should take less than two hours for an individual project. The goals are to:
                     <ul class="list-disc my-6 pl-6">
-                        <li>Automate your builds</li>
-                        <li>Produce provenance data</li>
+                        <li>Document your build process (generate unsigned provenance)</li>
+                        <li>Allow downstream users to verify that the provenance exists</li>
                     </ul>
                     </p>
                     <p class="mb-10">
@@ -30,7 +60,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
                     </p>
                     <p class="h4 font-bold mb-6">Steps</p>
                     <ul class="list-decimal mt-6 mb-10 pl-6">
-                        <li>If you don't already use a build service or CI/CD, we recommend you adopt one of the systems listed under SLSA 2 or SLSA 3. This is not strictly required for SLSA 1, but it makes the following steps easier and will be needed for higher SLSA levels. This is not strictly required but it makes the following steps easier and is needed for higher levels.</li>
+                        <li>If you don't already use a build service or CI/CD, we recommend you adopt one of the systems listed under SLSA 2 or SLSA 3. This is not strictly required for SLSA 1, but it makes the following steps easier and will be needed for higher SLSA levels.</li>
                         <li>Generate <a href="provenance">provenance</a> during your build. The <a href="#tools">tools</a> below might be useful. If your build service is not listed there, consider creating a plugin to generate provenance.
                         <li>Make the provenance available to your consumers. We don't yet have a standard convention for this. Best practises will develop as SLSA becomes more popular and we get more experience.</li>
                         <li>You’re Level 1! Add the <a href="images/SLSA-Badge-full-level1.svg">SLSA Level 1 badge</a> to your project's readme.</li>
@@ -55,9 +85,10 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
         <div class="md:flex justify-between items-start mb-16">
             <div class="text w-full md:w-1/3">
 <div class="h2 -mt-16 p-0">
+<a/ id="SLSA3">
 
 ## Reaching SLSA Level 3
-
+    
 </div>
 <p class="h4 font-semibold my-6 text-green-dark">Effort: Low</p>
             </div>
