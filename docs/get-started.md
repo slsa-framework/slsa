@@ -31,7 +31,7 @@ This page recommends specific tooling for developers to imrpove their SLSA build
                         <div class="w-full md:w-2/3">
                 <div class="bg-white h-full rounded-lg p-10">
                     <p>
-The suggested build methods require different methods to verify provenance. The SLSA community is working on ecosystem-level solutions for provenance verification. Even if there is currently no simple verification method for a particular build system, adopting these builders now means you will be “SLSA ready” when more ecosystem tooling is released.
+The suggested build methods require different methods to verify provenance. The SLSA community is working on ecosystem-level solutions for provenance verification. Even if there is currently no simple verification method for a particular build system, adopting these builders now means you are “SLSA ready” when more ecosystem tooling is released.
                     </p>
                 </div>
             </div>
@@ -96,14 +96,16 @@ There is currently no standard for where to store your provenance. With time, th
                 <div class="bg-white h-full rounded-lg p-10">
                     <p class="h4 font-bold mb-6">Overview<p>
                     <p>
-                        This guide will help you achieve Level 1, and it should take less than two hours for an individual project. The goals are to:
+                        This guide will help you achieve Level 1, and it should take less than two hours for an individual project. If you don't already use a build service or CI/CD, we recommend you adopt one of the systems listed under SLSA 2 or SLSA 3. This is not strictly required for SLSA 1, but it makes the following steps easier and will be needed for higher SLSA levels.  The goals for SLSA 1 are to:
                     <ul class="list-disc my-6 pl-6">
                         <li>Document your build process (generate unsigned provenance)</li>
                         <li>Allow downstream users to verify that the provenance exists</li>
                     </ul>
                     </p>
                     <p class="mb-10">
-                        The tools listed are optional resources only, there for demonstration and context-specific guidance.
+                        Some tools suggested below also support signed provenance. Though not required, signing your provenance increases trust in the document by showing that it has not been tampered with.
+
+Ideally, your documentation of the build process will use <a href="https://slsa.dev/provenance/v0.2">provenance format</a>, but this is not required for SLSA 1.
                     </p>
                     <p class="h4 font-bold mb-6">Steps</p>
                     <ul class="list-decimal mt-6 mb-10 pl-6">
