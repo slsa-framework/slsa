@@ -1,7 +1,7 @@
 ---
 title: Get started
 layout: standard
-hero_text: If you’re looking to jump straight in and try SLSA, here’s a quick start guide for the steps to take to reach the first SLSA level. This page recommends specific tooling for developers to imrpove their SLSA build levels.  At a high level, you must adopt a SLSA-compliant build system and generate provenance so that the build process can be verified by your users. Level 1 ensures that you’re setting up the foundation of trust in a system and that all your applications are generating appropriate provenance data. It also sets a baseline to achieve higher SLSA compliance later, which  is the first step in achieving SLSA builds that harden your system against common supply-chain attacks.
+hero_text: If you’re looking to jump straight in and try SLSA, here’s a quick start guide for the steps to take to reach the first SLSA level. Level 1 ensures that you’re setting up the foundation of trust in a system and that all your applications are generating appropriate provenance data. It also sets a baseline to achieve higher SLSA compliance later, which  is the first step in achieving SLSA builds that harden your system against common supply-chain attacks.
 ---
 
 <section class="section bg-pastel-green flex justify-center items-center">
@@ -10,11 +10,57 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
             <div class="text w-full md:w-1/3">
 <div class="h2 -mt-16 p-0">
 
+## SLSA Build Tooling By Level
+
+</div>
+            </div>
+            <div class="w-full md:w-2/3">
+                <div class="bg-white h-full rounded-lg p-10">
+                    <p>
+This page recommends specific tooling for developers to imrpove their SLSA build levels.  At a high level, you must adopt a SLSA-compliant build system and generate provenance so that the build process can be verified by your users. </p>
+    
+<p>The builders suggested in this guide meet SLSA expectations. If you believe a build option is missing or misclassified, please <a href="https://github.com/slsa-framework/slsa/issues">open an issue</a>.
+                    </p>
+                </div>
+            </div>
+<div class="h3 -mt-16 p-0">
+
+### Provenance Verification
+
+</div>
+                        <div class="w-full md:w-2/3">
+                <div class="bg-white h-full rounded-lg p-10">
+                    <p>
+The suggested build methods require different methods to verify provenance. The SLSA community is working on ecosystem-level solutions for provenance verification. Even if there is currently no simple verification method for a particular build system, adopting these builders now means you will be “SLSA ready” when more ecosystem tooling is released.
+                    </p>
+                </div>
+            </div>
+            <div class="h3 -mt-16 p-0">
+
+### Provenance Storage
+
+</div>
+                        <div class="w-full md:w-2/3">
+                <div class="bg-white h-full rounded-lg p-10">
+                    <p>
+There is currently no standard for where to store your provenance. With time, the SLSA community hopes to create standard ecosystem-based repositories for provenance. For now, the convention is to keep the provenance attestation with your artifact.  
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>            
+
+<section class="section bg-pastel-green flex justify-center items-center">
+    <div class="wrapper inner w-full">
+        <div class="md:flex justify-between items-start mb-16">
+            <div class="text w-full md:w-1/3">
+<div class="h2 -mt-16 p-0">
+ 
 ## Before Starting
 
 </div>
-<p class="h4 font-semibold my-6 text-green-dark">Effort: Low</p>
-            </div>
+           </div>
             <div class="w-full md:w-2/3">
                 <div class="bg-white h-full rounded-lg p-10">
                     <p>
