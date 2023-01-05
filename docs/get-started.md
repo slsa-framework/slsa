@@ -1,7 +1,7 @@
 ---
 title: Get started
 layout: standard
-hero_text: If you’re looking to jump straight in and try SLSA, here’s a quick start guide for the steps to take to reach the first SLSA level. Level 1 ensures that you’re setting up the foundation of trust in a system and that all your applications are generating appropriate provenance data. It also sets a baseline to achieve higher SLSA compliance later, which we explain in detail below.
+hero_text: If you’re looking to jump straight in and try SLSA, here’s a quick start guide for the steps to take to reach the first SLSA level. This page recommends specific tooling for developers to imrpove their SLSA build levels.  At a high level, you must adopt a SLSA-compliant build system and generate provenance so that the build process can be verified by your users. Level 1 ensures that you’re setting up the foundation of trust in a system and that all your applications are generating appropriate provenance data. It also sets a baseline to achieve higher SLSA compliance later, which  is the first step in achieving SLSA builds that harden your system against common supply-chain attacks.
 ---
 
 <section class="section bg-pastel-green flex justify-center items-center">
@@ -19,7 +19,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
                 <div class="bg-white h-full rounded-lg p-10">
                     <p class="h4 font-bold mb-6">Overview<p>
                     <p>
-                        This guide will help you achieve Level 1, and it should take less than a couple of hours for an individual project. The goals is to:
+                        This guide will help you achieve Level 1, and it should take less than two hours for an individual project. The goals is to:
                     <ul class="list-disc my-6 pl-6">
                         <li>Automate your builds</li>
                         <li>Produce provenance data</li>
@@ -30,7 +30,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
                     </p>
                     <p class="h4 font-bold mb-6">Steps</p>
                     <ul class="list-decimal mt-6 mb-10 pl-6">
-                        <li>If you don't already use a build service or CI/CD, we recommend you set one up. This is not strictly required but it makes the following steps easier and is needed for higher levels. Consider using a service that is supported in the next step.</li>
+                        <li>If you don't already use a build service or CI/CD, we recommend you adopt one of the systems listed under SLSA 2 or SLSA 3. This is not strictly required for SLSA 1, but it makes the following steps easier and will be needed for higher SLSA levels. This is not strictly required but it makes the following steps easier and is needed for higher levels.</li>
                         <li>Generate <a href="provenance">provenance</a> during your build. The <a href="#tools">tools</a> below might be useful. If your build service is not listed there, consider creating a plugin to generate provenance.
                         <li>Make the provenance available to your consumers. We don't yet have a standard convention for this. Best practises will develop as SLSA becomes more popular and we get more experience.</li>
                         <li>You’re Level 1! Add the <a href="images/SLSA-Badge-full-level1.svg">SLSA Level 1 badge</a> to your project's readme.</li>
