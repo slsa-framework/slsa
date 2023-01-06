@@ -3,6 +3,10 @@ title: Provenance
 layout: standard
 hero_text: To trace software back to the source and define the moving parts in a complex supply chain, provenance needs to be there from the very beginning. It’s the verifiable information about software artifacts describing where, when and how something was produced. For higher SLSA levels and more resilient integrity guarantees, provenance requirements are stricter and need a deeper, more technical understanding of the predicate.
 ---
+<!-- Note: We only include the major version in the URL, e.g. "v1" instead of
+"v1.0", because minor versions are guaranteed to be backwards compatible. We
+still include the minor version number in the selector (_data/versions.yml) so
+that readers can easily find the current minor version number. -->
 
 ## Purpose
 
@@ -25,7 +29,7 @@ and the larger [in-toto attestation] framework.
 Provenance is an attestation that the `builder` produced the `subject` software
 artifacts through execution of the `buildDefinition`.
 
-![Build Model](v1_model.svg)
+![Build Model](model.svg)
 
 The model is as follows:
 
@@ -93,7 +97,7 @@ This predicate follows the in-toto attestation [parsing rules]. Summary:
 > cue schema.
 
 ```javascript
-{% include_relative v1.0.cue %}
+{% include_relative provenance.cue %}
 ```
 
 ### Fields
@@ -105,7 +109,7 @@ of the other top-level fields, such as `subject`, see [Statement]._
 > than a simple inclusion of the raw schema file.
 
 ```proto
-{% include_relative v1.0.proto %}
+{% include_relative provenance.proto %}
 ```
 
 ## Index of build types

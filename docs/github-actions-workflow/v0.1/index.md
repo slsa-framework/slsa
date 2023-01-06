@@ -2,7 +2,7 @@
 title: "Build Type: GitHub Actions Workflow"
 layout: standard
 hero_text: |
-    A [SLSA Provenance](../../provenance/v1.0) `buildType` that describes the
+    A [SLSA Provenance](../../provenance/v1) `buildType` that describes the
     execution of a GitHub Actions workflow.
 ---
 

@@ -29,7 +29,7 @@ provenance:
       name: Version 0.1
     v0.2:
       name: Version 0.2
-    v1.0:
+    v1:
       name: Version 1.0 (DRAFT)
       draft: true
   current: v0.2
