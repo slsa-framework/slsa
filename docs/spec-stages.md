@@ -35,10 +35,9 @@ anymore.
 
 ## Stable
 
-At this stage the document is considered stable. It is suitable for
-reference and implementation in production. Changes may only happen if
-deemed necessary and will be avoided as much as possible if they might
-adversely impact implementations.
+At this stage the document is considered stable. Changes may only
+happen if deemed necessary and will be avoided as much as possible if
+they might adversely impact implementations.
 
 ## Retired
 
