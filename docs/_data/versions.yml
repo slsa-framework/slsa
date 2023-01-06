@@ -33,7 +33,7 @@ provenance:
       status: Retired
     v0.2:
       name: Version 0.2
-      status: Working Draft
+      status: Stable
   current: v0.2
 
 verification_summary:
@@ -43,5 +43,5 @@ verification_summary:
       status: Retired
     v0.2:
       name: Version 0.2
-      status: Working Draft
+      status: Stable
   current: v0.2
