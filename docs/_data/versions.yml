@@ -41,3 +41,10 @@ verification_summary:
     v0.2:
       name: Version 0.2
   current: v0.2
+
+github-actions-workflow:
+  versions:
+    v0.1:
+      name: Version 0.1 (DRAFT)
+      draft: true
+  current: v0.1

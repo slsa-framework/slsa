@@ -5,6 +5,12 @@ package slsa.v1;
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
+// Note on REQUIRED vs OPTIONAL: an unqualified "REQUIRED" means that the field
+// is mandatory to be semantically valid, while "REQUIRED at SLSA Build L1"
+// means that the field is only required to be considered SLSA Build L1. In
+// other words, a provenance file that omits a field marked "REQUIRED at SLSA
+// Build L1" is valid but SLSA Build L0.
+//
 // Design guidelines:
 //
 // -   Use lowerCamelCase for field names because that is how the JSON fields
@@ -49,6 +55,7 @@ message BuildDefinition {
   //     -   any other restrictions
   // -   Explicit, unambiguous instructions for how to initiate the build given
   //     this message.
+  // -   Complete example provenance file.
   //
   // REQUIRED.
   string buildType = 1;
@@ -125,12 +132,15 @@ message BuildDefinition {
   // TODO: If the dep is already pinned, does it need to be listed here?
   // TODO: Should this be a map instead of an array? Then each MUST be named
   // explicitly, which would be less ambiguous but more difficult.
+  // TODO: Clarify when something should go here vs builderDependencies. The
+  // choice is not obvious. More examples might help.
   //
   // OPTIONAL.
   repeated ArtifactReference resolvedDependencies = 1;
 }
 
 message ParameterValue {
+  // REQUIRED.
   oneof value {
     // A parameter that is a reference to an artifact.
     ArtifactReference artifact = 1;
@@ -146,31 +156,41 @@ message ArtifactReference {
   // URL ([purl]).
   //
   // Example: `pkg:pypi/pyyaml@6.0`
+  //
+  // REQUIRED unless `digest` is set.
   string uri = 1;
 
   // [DigestSet] of cryptographic digests for the contents of this artifact.
   // TODO: Decide on hex vs base64 in #533 then document it here.
+  //
+  // REQUIRED unless `uri` is set.
   map<string, string> digest = 2;
 
   // The name for this artifact local to the build.
   //
   // Example: `PyYAML-6.0.tar.gz`
+  //
+  // OPTIONAL.
   string localName = 3;
 
   // [URI] identifying the location that this artifact was downloaded from, if
   // different and not derivable from `uri`.
   //
   // Example: `https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz`
+  //
+  // OPTIONAL.
   string downloadLocation = 4;
 
   // [Media Type] (aka MIME type) of this artifact.
+  //
+  // OPTIONAL.
   string mediaType = 5;
 }
 
 message RunDetails {
   // TODO: The following fields are the same as v0.2:
   //
-  // REQUIRED at SLSA Build L1 unless the id is implicit from the attestation
+  // REQUIRED at SLSA Build L1 unless the `id` is implicit from the attestation
   // envelope (e.g. public key).
   Builder builder = 1;
 
@@ -206,7 +226,7 @@ message Builder {
   // For example, if the envelope identifies the build system, this might
   // identify the tenant project?
   //
-  // REQUIRED at SLSA Build L1 unless the id is implicit from the attestation
+  // REQUIRED at SLSA Build L1 unless it is implicit from the attestation
   // envelope (e.g. public key).
   string id = 1;
 
