@@ -287,9 +287,6 @@ Examples: GitHub Actions, Google Cloud Build, Travis CI.
 <td>Ephemeral and isolated
 <td>
 
-**TODO:** Use updated wording from
-[#532](https://github.com/slsa-framework/slsa/pull/532).
-
 The build service ensured that the build steps ran in an ephemeral and isolated
 environment provisioned solely for this build, free of influence from other
 build instances, whether prior or concurrent.
