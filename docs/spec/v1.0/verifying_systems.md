@@ -10,7 +10,7 @@ More formally, if a build with external parameters P would produce an artifact w
 
 This diagram represents a successful attack:
 
-![image](insert_image_url_here)
+![image](slsa_attack.png)
 
 Note: Platform abuse and attacks against builder availability are out of scope of this document.
 
@@ -58,7 +58,7 @@ We consider three attacker profiles differentiated by the attacker's capabilitie
 
 The build model consists of five components: parameters, the build platform, one or more build executors, a build cache, and output storage. The data flow between these components is shown in the diagram below.
 
-![image](insert_image_url_here)
+![image](slsa_build_model.png)
 
 The following sections detail each element of the build model and prompts for assessing its ability to produce SLSA Build L3 provenance.
 
