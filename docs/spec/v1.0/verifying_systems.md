@@ -82,7 +82,7 @@ The build platform is the control plane that orchestrates each independent build
 
 -  Administration
     -  What are they ways an employee can use privileged access to influence a build or provenance generation? Examples: physical access, terminal access, access to cryptographic secrets
-    -  What controls are in place to detect or prevent the employee from abusing such access? Examples: two-person approvals, audit logging
+    -  What controls are in place to detect or prevent the employee from abusing such access? Examples: two-person approvals, audit logging, workload identities
     -  Roughly how many employees have such access?
     -  How are privileged accounts protected? Examples: two-factor authentication, client device security policies
     -  What plans do you have for recovering from security incidents and system outages? Are they tested? How frequently?
