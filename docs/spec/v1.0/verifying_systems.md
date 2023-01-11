@@ -6,7 +6,7 @@ The provenance consumer is responsible for deciding whether they trust a builder
 
 ### Attacker Goal
 
-The attacker's primary goal is to tamper with a build to create unexpected, vulnerable, or malicious behavior in the output artifact while avoiding detection. Their means of doing so is generating build provenance that does not faithfully represent the built artifact's origins or build process. 
+The attacker's primary goal is to tamper with a build to create unexpected, vulnerable, or malicious behavior in the output artifact while avoiding detection. Their means of doing so is generating build provenance that does not faithfully represent the built artifact's origins or build process.
 
 More formally, if a build with external parameters P would produce an artifact with binary hash X and a build with external parameters P' would produce an artifact with binary hash Y, they wish to produce provenance indicating a build with external parameters P produced an artifact with binary hash Y.
 
@@ -24,37 +24,37 @@ We consider three attacker profiles differentiated by the attacker's capabilitie
 
 #### Low privilege
 
--  Examples
-    -  Anyone on the internet
-    -  Build platform insiders without administrative access
+-   Examples
+    -   Anyone on the internet
+    -   Build platform insiders without administrative access
 
--  Capabilities
-    -  Create builds on the build platform.
-    -  Modify their builds' external parameters.
-    -  Modify their builds' environments and run arbitrary code inside those environments.
-    -  Read the source repo.
-    -  Fork the source repo. Modify their fork and build from it.
-    -  Access builder maintainers' intranet or other internal communications (e.g. email, design documents)
+-   Capabilities
+    -   Create builds on the build platform.
+    -   Modify their builds' external parameters.
+    -   Modify their builds' environments and run arbitrary code inside those environments.
+    -   Read the source repo.
+    -   Fork the source repo. Modify their fork and build from it.
+    -   Access builder maintainers' intranet or other internal communications (e.g. email, design documents)
 
-#### Medium privilege 
+#### Medium privilege
 
--  Examples
-    -  Project maintainer
+-   Examples
+    -   Project maintainer
 
--  Capabilities 
-    -  All listed under "low privilege"
-    -  Create new builds in the package's build project
-    -  Modify the source repo and build from it.
+-   Capabilities
+    -   All listed under "low privilege"
+    -   Create new builds in the package's build project
+    -   Modify the source repo and build from it.
 
 #### High privilege
 
--  Examples
-    -  Build platform admin
+-   Examples
+    -   Build platform admin
 
--  Capabilities
-    -  All listed under "low privilege"
-    -  Run arbitrary code on the build platform
-    -  Read and modify network traffic
+-   Capabilities
+    -   All listed under "low privilege"
+    -   Run arbitrary code on the build platform
+    -   Read and modify network traffic
 
 ## Build Model
 
@@ -70,9 +70,9 @@ Parameters are the external interface to the builder. They must include referenc
 
 #### Prompts for Assessing Parameters
 
--  How does the platform process user-provided parameters? Examples: sanitizing, parsing, not at all
--  Which parameters are processed by the control plane and which are processed by the executor? 
--  What sort of parameters does the control plane accept for executor configuration? 
+-   How does the platform process user-provided parameters? Examples: sanitizing, parsing, not at all
+-   Which parameters are processed by the control plane and which are processed by the executor?
+-   What sort of parameters does the control plane accept for executor configuration?
 
 ### Control Plane
 
@@ -80,34 +80,34 @@ The build platform is the control plane that orchestrates each independent build
 
 #### Prompts for Assessing Control Planes
 
--  Administration
-    -  What are they ways an employee can use privileged access to influence a build or provenance generation? Examples: physical access, terminal access, access to cryptographic secrets
-    -  What controls are in place to detect or prevent the employee from abusing such access? Examples: two-person approvals, audit logging, workload identities
-    -  Roughly how many employees have such access?
-    -  How are privileged accounts protected? Examples: two-factor authentication, client device security policies
-    -  What plans do you have for recovering from security incidents and system outages? Are they tested? How frequently?
+-   Administration
+    -   What are they ways an employee can use privileged access to influence a build or provenance generation? Examples: physical access, terminal access, access to cryptographic secrets
+    -   What controls are in place to detect or prevent the employee from abusing such access? Examples: two-person approvals, audit logging, workload identities
+    -   Roughly how many employees have such access?
+    -   How are privileged accounts protected? Examples: two-factor authentication, client device security policies
+    -   What plans do you have for recovering from security incidents and system outages? Are they tested? How frequently?
 
--  Provenance generation
-    -  How does the control plane observe the build to ensure the provenance's accuracy?
-    -  Are there situations in which the control plane will not generate provenance for a completed build? What are they? 
+-   Provenance generation
+    -   How does the control plane observe the build to ensure the provenance's accuracy?
+    -   Are there situations in which the control plane will not generate provenance for a completed build? What are they?
 
--  Development practices
-    -  How do you track the control plane's software and configuration? Example: version control
-    -  How do you build confidence in the control plane's software supply chain? Example: SLSA L3+ provenance, build from source
-    -  How do you secure communications between builder components? Example: TLS with certificate transparency.
-    -  Are you able to perform forensic analysis on compromised executors? How? Example: retain base images indefinitely
+-   Development practices
+    -   How do you track the control plane's software and configuration? Example: version control
+    -   How do you build confidence in the control plane's software supply chain? Example: SLSA L3+ provenance, build from source
+    -   How do you secure communications between builder components? Example: TLS with certificate transparency.
+    -   Are you able to perform forensic analysis on compromised executors? How? Example: retain base images indefinitely
 
--  Creating executors
-    -  How does the control plane share data with executors? Example: mounting a shared file system partition
-    -  How does the control plane protect its integrity from executors? Example: not mount its own file system partitions on executors
-    -  How does the control plane prevent executors from accessing its cryptographic secrets? Examples: dedicated secret storage, not mounting its own file system partitions on executors
+-   Creating executors
+    -   How does the control plane share data with executors? Example: mounting a shared file system partition
+    -   How does the control plane protect its integrity from executors? Example: not mount its own file system partitions on executors
+    -   How does the control plane prevent executors from accessing its cryptographic secrets? Examples: dedicated secret storage, not mounting its own file system partitions on executors
 
--  Managing cryptographic secrets
-    -  How do you store the  control plane's cryptographic secrets?
-    -  Which parts of the organization have access to the control plane's cryptographic secrets?
-    -  What controls are in place to detect or prevent employees abusing such access? Examples: two-person approvals, audit logging
-    -  How frequently are cryptographic secrets rotated? Describe the rotation process.
-    -  What is your plan for remediating cryptographic secret compromise? How frequently is this plan tested?
+-   Managing cryptographic secrets
+    -   How do you store the  control plane's cryptographic secrets?
+    -   Which parts of the organization have access to the control plane's cryptographic secrets?
+    -   What controls are in place to detect or prevent employees abusing such access? Examples: two-person approvals, audit logging
+    -   How frequently are cryptographic secrets rotated? Describe the rotation process.
+    -   What is your plan for remediating cryptographic secret compromise? How frequently is this plan tested?
 
 ### Executor
 
@@ -115,19 +115,19 @@ The build executor is the independent execution environment where the build take
 
 #### Prompts for Assessing Executors
 
--  Isolation technologies 
-    -  How are executors isolated from the control plane and each other? Examples: VMs, containers, sandboxed processes
-    -  How have you hardened your executors against malicious tenants? Examples: configuration hardening, limiting attack surface
-    -  How frequently do you update your isolation software?
-    -  What is your process for responding to platform vulnerability disclosures? What about vulnerabilities in your dependencies?
+-   Isolation technologies
+    -   How are executors isolated from the control plane and each other? Examples: VMs, containers, sandboxed processes
+    -   How have you hardened your executors against malicious tenants? Examples: configuration hardening, limiting attack surface
+    -   How frequently do you update your isolation software?
+    -   What is your process for responding to platform vulnerability disclosures? What about vulnerabilities in your dependencies?
 
--  Creation and destruction
-    -  What environment is available in executors on creation? How were the elements of this environment chosen?
-    -  How long could a compromised executor remain active in the build system?
+-   Creation and destruction
+    -   What environment is available in executors on creation? How were the elements of this environment chosen?
+    -   How long could a compromised executor remain active in the build system?
 
--  Network access
-    -  Are executors able to call out to remote execution? If so, how do you prevent them from tampering with the control plane or other executors over the network?
-    -  Are executors able to open services on the network? If so, how do you prevent remote interference through these services?
+-   Network access
+    -   Are executors able to call out to remote execution? If so, how do you prevent them from tampering with the control plane or other executors over the network?
+    -   Are executors able to open services on the network? If so, how do you prevent remote interference through these services?
 
 ### Cache
 
@@ -135,9 +135,9 @@ Builders may have zero or more caches to store frequently used dependencies. Bui
 
 #### Prompts for Assessing Caches
 
--  What sorts of caches are available to build executors?
--  How are those caches populated?
--  How do you defend against cache poisoning attacks? Example: content-addressable storage
+-   What sorts of caches are available to build executors?
+-   How are those caches populated?
+-   How do you defend against cache poisoning attacks? Example: content-addressable storage
 
 ### Output Storage
 
@@ -145,8 +145,8 @@ Output Storage holds built artifacts and their provenance. Storage may either be
 
 #### Prompts for Assessing Output Storage
 
--  How do you prevent builds from reading or overwriting files that belong to another build? Example: authorization on storage
--  What processing, if any, does the control plane do on output artifacts?
+-   How do you prevent builds from reading or overwriting files that belong to another build? Example: authorization on storage
+-   What processing, if any, does the control plane do on output artifacts?
 
 ## Builder Evaluation
 
