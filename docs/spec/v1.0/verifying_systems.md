@@ -14,27 +14,29 @@ This diagram represents a successful attack:
 
 ![image](slsa_attack.png)
 
-Note: Platform abuse and attacks against builder availability are out of scope of this document.
+Note: Platform abuse (e.g. running non-build workloads) and attacks against builder availability are out of scope of this document.
 
 TODO: Align/cross-reference with SLSA Provenance Model.
+TODO: Redraw diagrams in the style used by the rest of the site.
 
 ### Types of attackers
 
-We consider three attacker profiles differentiated by the attacker's capabilities and privileges.
+We consider three attacker profiles differentiated by the attacker's capabilities and privileges as related to the build they wish to subvert (the "target build").
 
 #### Low privilege
 
 -   Examples
     -   Anyone on the internet
-    -   Build platform insiders without administrative access
+    -   Build servec insiders without administrative access
 
 -   Capabilities
-    -   Create builds on the build platform.
-    -   Modify their builds' external parameters.
-    -   Modify their builds' environments and run arbitrary code inside those environments.
-    -   Read the source repo.
-    -   Fork the source repo. Modify their fork and build from it.
-    -   Access builder maintainers' intranet or other internal communications (e.g. email, design documents)
+    -   Create builds on the build service. These are the attacker's controlled builds.
+    -   Modify one or more controlled builds' external parameters.
+    -   Modify one or more controlled builds' environments and run arbitrary code inside those environments.
+    -   Read the target build's source repo.
+    -   Fork the target build's source repo.
+    -   Modify a fork of the target build's source repo and build from it.
+    -   Access builder maintainers' intranet or other internal communications (e.g. email, design documents).
 
 #### Medium privilege
 
@@ -42,46 +44,54 @@ We consider three attacker profiles differentiated by the attacker's capabilitie
     -   Project maintainer
 
 -   Capabilities
-    -   All listed under "low privilege"
-    -   Create new builds in the package's build project
-    -   Modify the source repo and build from it.
+    -   All listed under "low privilege".
+    -   Create new builds under the target build's project or identity.
+    -   Modify the target build's source repo and build from it.
+    -   Modify the target build's configuration.
 
 #### High privilege
 
 -   Examples
-    -   Build platform admin
+    -   Build service admin
 
 -   Capabilities
-    -   All listed under "low privilege"
-    -   Run arbitrary code on the build platform
-    -   Read and modify network traffic
+    -   All listed under "low privilege" and "medium privilege".
+    -   Run arbitrary code on the build service.
+    -   Read and modify network traffic.
+    -   Access the control plane's cryptographic secrets.
+    -   Remotely access build executors (e.g. via SSH).
+
+TODO: List other high-privilege capabilities.
+TODO: Maybe differentiate between unilateral and non-unilateral privileges.
 
 ## Build Model
 
-The build model consists of five components: parameters, the build platform, one or more build executors, a build cache, and output storage. The data flow between these components is shown in the diagram below.
+The build model consists of five components: parameters, the control plane, one or more build executors, a build cache, and output storage. The data flow between these components is shown in the diagram below.
 
 ![image](slsa_build_model.png)
 
+TODO: Align with provenance and build models.
+
 The following sections detail each element of the build model and prompts for assessing its ability to produce SLSA Build L3 provenance.
 
-### Parameters
+### External Parameters
 
-Parameters are the external interface to the builder. They must include references to the source to be built and the build definition/script to be executed. They may include instructions to the build platform for how to create the build executor (e.g. which operating system to use). They may include additional strings to pass to the build executor.
+External parameters are the external interface to the builder and include all inputs to the build process. Examples include the source to be built, the build definition/script to be executed, user-provided instructions to the control plane for how to create the build executor (e.g. which operating system to use), and any additional user-provided strings.
 
-#### Prompts for Assessing Parameters
+#### Prompts for Assessing External Parameters
 
--   How does the platform process user-provided parameters? Examples: sanitizing, parsing, not at all
--   Which parameters are processed by the control plane and which are processed by the executor?
--   What sort of parameters does the control plane accept for executor configuration?
+-   How does the control plane process user-provided external parameters? Examples: sanitizing, parsing, not at all
+-   Which external parameters are processed by the control plane and which are processed by the executor?
+-   What sort of external parameters does the control plane accept for executor configuration?
 
 ### Control Plane
 
-The build platform is the control plane that orchestrates each independent build execution. It is responsible for setting up each build and cleaning up afterwards. The platform must generate and sign provenance for each SLSA Build L3+ build performed on the system. The platform is operated by one or more administrators, who have privileges to modify the platform.
+The control plane is the build system component that orchestrates each independent build execution. It is responsible for setting up each build and cleaning up afterwards. The control plane generates and signs provenance for each SLSA Build L3+ build performed on the system. The control plane is operated by one or more administrators, who have privileges to modify the control plane.
 
 #### Prompts for Assessing Control Planes
 
 -   Administration
-    -   What are they ways an employee can use privileged access to influence a build or provenance generation? Examples: physical access, terminal access, access to cryptographic secrets
+    -   What are the ways an employee can use privileged access to influence a build or provenance generation? Examples: physical access, terminal access, access to cryptographic secrets
     -   What controls are in place to detect or prevent the employee from abusing such access? Examples: two-person approvals, audit logging, workload identities
     -   Roughly how many employees have such access?
     -   How are privileged accounts protected? Examples: two-factor authentication, client device security policies
@@ -100,18 +110,19 @@ The build platform is the control plane that orchestrates each independent build
 -   Creating executors
     -   How does the control plane share data with executors? Example: mounting a shared file system partition
     -   How does the control plane protect its integrity from executors? Example: not mount its own file system partitions on executors
-    -   How does the control plane prevent executors from accessing its cryptographic secrets? Examples: dedicated secret storage, not mounting its own file system partitions on executors
+    -   How does the control plane prevent executors from accessing its cryptographic secrets? Examples: dedicated secret storage, not mounting its own file system partitions on executors, hardware security modules
 
 -   Managing cryptographic secrets
-    -   How do you store the  control plane's cryptographic secrets?
+    -   How do you store the control plane's cryptographic secrets?
     -   Which parts of the organization have access to the control plane's cryptographic secrets?
     -   What controls are in place to detect or prevent employees abusing such access? Examples: two-person approvals, audit logging
-    -   How frequently are cryptographic secrets rotated? Describe the rotation process.
+-   How are secrets protected in memory? Examples: secrets are stored in hardware security modules and backed up in secure cold storage
+-   How frequently are cryptographic secrets rotated? Describe the rotation process.
     -   What is your plan for remediating cryptographic secret compromise? How frequently is this plan tested?
 
 ### Executor
 
-The build executor is the independent execution environment where the build takes place. Each executor must be isolated from the build platform and from all other executors. Build users are free to modify the environment inside the executor arbitrarily. Build executors must have a means to fetch input artifacts (source, dependencies, etc).
+The build executor is the independent execution environment where the build takes place. Each executor must be isolated from the control plane and from all other executors. Build users are free to modify the environment inside the executor arbitrarily. Build executors must have a means to fetch input artifacts (source, dependencies, etc).
 
 #### Prompts for Assessing Executors
 
@@ -119,7 +130,7 @@ The build executor is the independent execution environment where the build take
     -   How are executors isolated from the control plane and each other? Examples: VMs, containers, sandboxed processes
     -   How have you hardened your executors against malicious tenants? Examples: configuration hardening, limiting attack surface
     -   How frequently do you update your isolation software?
-    -   What is your process for responding to platform vulnerability disclosures? What about vulnerabilities in your dependencies?
+    -   What is your process for responding to vulnerability disclosures? What about vulnerabilities in your dependencies?
 
 -   Creation and destruction
     -   What environment is available in executors on creation? How were the elements of this environment chosen?
@@ -137,7 +148,7 @@ Builders may have zero or more caches to store frequently used dependencies. Bui
 
 -   What sorts of caches are available to build executors?
 -   How are those caches populated?
--   How do you defend against cache poisoning attacks? Example: content-addressable storage
+-   How do you defend against cache poisoning attacks?
 
 ### Output Storage
 
