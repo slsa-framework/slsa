@@ -22,6 +22,6 @@ in the menu at the top of the page.
 | [Guiding principles](principles.md) | Background on the guiding principles behind SLSA. |
 | [Terminology](terminology.md) | Terminology and model used by SLSA. |
 | [Requirements](requirements.md) | Detailed technical requirements, intended for system implementers. |
-| [Verifying build systems](verifying_systems.md) | Guidelines for securing SLSA Build L3+ builders, intended for system implementers. |
+| [Verifying build systems](verifying-systems.md) | Guidelines for securing SLSA Build L3+ builders, intended for system implementers. |
 | [Threats & mitigations](threats.md) | Specific supply chain attacks and how SLSA helps. |
 | [FAQ](faq.md) | Questions and more information. |
