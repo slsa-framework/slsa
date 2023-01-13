@@ -24,6 +24,8 @@ TODO: Redraw diagrams in the style used by the rest of the site.
 
 We consider three attacker profiles differentiated by the attacker's capabilities and privileges as related to the build they wish to subvert (the "target build").
 
+TODO: Tie attack profiles into the rest of this page.
+
 #### Project contributors
 
 -   Capabilities
@@ -73,6 +75,8 @@ External parameters are the external interface to the builder and include all in
 -   How does the control plane process user-provided external parameters? Examples: sanitizing, parsing, not at all
 -   Which external parameters are processed by the control plane and which are processed by the executor?
 -   What sort of external parameters does the control plane accept for executor configuration?
+-   How do you ensure that all external parameters are represented in the provenance?
+-   How will you ensure that future design changes will not add additional external parameters without representing them in the provenance?
 
 ### Control Plane
 
