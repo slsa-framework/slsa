@@ -26,30 +26,33 @@ We consider three attacker profiles differentiated by the attacker's capabilitie
 
 #### Project contributors
 
--   Capabilities
-    -   Create builds on the build service. These are the attacker's controlled builds.
-    -   Modify one or more controlled builds' external parameters.
-    -   Modify one or more controlled builds' environments and run arbitrary code inside those environments.
-    -   Read the target build's source repo.
-    -   Fork the target build's source repo.
-    -   Modify a fork of the target build's source repo and build from it.
+Capabilities:
+
+-   Create builds on the build service. These are the attacker's controlled builds.
+-   Modify one or more controlled builds' external parameters.
+-   Modify one or more controlled builds' environments and run arbitrary code inside those environments.
+-   Read the target build's source repo.
+-   Fork the target build's source repo.
+-   Modify a fork of the target build's source repo and build from it.
 
 #### Project maintainer
 
--   Capabilities
-    -   All listed under "low privilege".
-    -   Create new builds under the target build's project or identity.
-    -   Modify the target build's source repo and build from it.
-    -   Modify the target build's configuration.
+Capabilities:
+
+-   All listed under "low privilege".
+-   Create new builds under the target build's project or identity.
+-   Modify the target build's source repo and build from it.
+-   Modify the target build's configuration.
 
 #### Build service admin
 
--   Capabilities
-    -   All listed under "low privilege" and "medium privilege".
-    -   Run arbitrary code on the build service.
-    -   Read and modify network traffic.
-    -   Access the control plane's cryptographic secrets.
-    -   Remotely access build executors (e.g. via SSH).
+Capabilities:
+
+-   All listed under "low privilege" and "medium privilege".
+-   Run arbitrary code on the build service.
+-   Read and modify network traffic.
+-   Access the control plane's cryptographic secrets.
+-   Remotely access build executors (e.g. via SSH).
 
 TODO: List other high-privilege capabilities.
 TODO: Maybe differentiate between unilateral and non-unilateral privileges.
