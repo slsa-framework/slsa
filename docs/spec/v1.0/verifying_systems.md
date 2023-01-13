@@ -17,17 +17,14 @@ This diagram represents a successful attack:
 Note: Platform abuse (e.g. running non-build workloads) and attacks against builder availability are out of scope of this document.
 
 TODO: Align/cross-reference with SLSA Provenance Model.
+
 TODO: Redraw diagrams in the style used by the rest of the site.
 
 ### Types of attackers
 
 We consider three attacker profiles differentiated by the attacker's capabilities and privileges as related to the build they wish to subvert (the "target build").
 
-#### Low privilege
-
--   Examples
-    -   Anyone on the internet
-    -   Build servec insiders without administrative access
+#### Project contributors
 
 -   Capabilities
     -   Create builds on the build service. These are the attacker's controlled builds.
@@ -36,12 +33,8 @@ We consider three attacker profiles differentiated by the attacker's capabilitie
     -   Read the target build's source repo.
     -   Fork the target build's source repo.
     -   Modify a fork of the target build's source repo and build from it.
-    -   Access builder maintainers' intranet or other internal communications (e.g. email, design documents).
 
-#### Medium privilege
-
--   Examples
-    -   Project maintainer
+#### Project maintainer
 
 -   Capabilities
     -   All listed under "low privilege".
@@ -49,10 +42,7 @@ We consider three attacker profiles differentiated by the attacker's capabilitie
     -   Modify the target build's source repo and build from it.
     -   Modify the target build's configuration.
 
-#### High privilege
-
--   Examples
-    -   Build service admin
+#### Build service admin
 
 -   Capabilities
     -   All listed under "low privilege" and "medium privilege".
@@ -86,7 +76,7 @@ External parameters are the external interface to the builder and include all in
 
 ### Control Plane
 
-The control plane is the build system component that orchestrates each independent build execution. It is responsible for setting up each build and cleaning up afterwards. The control plane generates and signs provenance for each SLSA Build L3+ build performed on the system. The control plane is operated by one or more administrators, who have privileges to modify the control plane.
+The control plane is the build system component that orchestrates each independent build execution. It is responsible for setting up each build and cleaning up afterwards. At SLSA Build L2+ the control plane generates and signs provenance for each build performed on the build service. The control plane is operated by one or more administrators, who have privileges to modify the control plane.
 
 #### Prompts for Assessing Control Planes
 
@@ -116,13 +106,13 @@ The control plane is the build system component that orchestrates each independe
     -   How do you store the control plane's cryptographic secrets?
     -   Which parts of the organization have access to the control plane's cryptographic secrets?
     -   What controls are in place to detect or prevent employees abusing such access? Examples: two-person approvals, audit logging
--   How are secrets protected in memory? Examples: secrets are stored in hardware security modules and backed up in secure cold storage
--   How frequently are cryptographic secrets rotated? Describe the rotation process.
+    -   How are secrets protected in memory? Examples: secrets are stored in hardware security modules and backed up in secure cold storage
+    -   How frequently are cryptographic secrets rotated? Describe the rotation process.
     -   What is your plan for remediating cryptographic secret compromise? How frequently is this plan tested?
 
 ### Executor
 
-The build executor is the independent execution environment where the build takes place. Each executor must be isolated from the control plane and from all other executors. Build users are free to modify the environment inside the executor arbitrarily. Build executors must have a means to fetch input artifacts (source, dependencies, etc).
+The build executor is the independent execution environment where the build takes place. Each executor must be isolated from the control plane and from all other executors, including executors running builds from the same build user or project. Build users are free to modify the environment inside the executor arbitrarily. Build executors must have a means to fetch input artifacts (source, dependencies, etc).
 
 #### Prompts for Assessing Executors
 
@@ -131,9 +121,10 @@ The build executor is the independent execution environment where the build take
     -   How have you hardened your executors against malicious tenants? Examples: configuration hardening, limiting attack surface
     -   How frequently do you update your isolation software?
     -   What is your process for responding to vulnerability disclosures? What about vulnerabilities in your dependencies?
+    -   What prevents a malicious build from gaining persistence and influencing subsequent builds?
 
 -   Creation and destruction
-    -   What environment is available in executors on creation? How were the elements of this environment chosen?
+    -   What tools and environment are available in executors on creation? How were the elements of this environment chosen? Examples: A minimal Linux distribution with its package manager, OSX with HomeBrew
     -   How long could a compromised executor remain active in the build system?
 
 -   Network access
@@ -148,7 +139,7 @@ Builders may have zero or more caches to store frequently used dependencies. Bui
 
 -   What sorts of caches are available to build executors?
 -   How are those caches populated?
--   How do you defend against cache poisoning attacks?
+-   How are cache contents validated before use?
 
 ### Output Storage
 
@@ -162,3 +153,5 @@ Output Storage holds built artifacts and their provenance. Storage may either be
 ## Builder Evaluation
 
 Organizations can either self-attest to their answers or seek an audit/certification from a third party. Questionnaires for self-attestation should be published on the internet. Questionnaires for third-party certification need not be published. All provenance generated by L3+ builders must contain a non-forgeable attestation of the builder's L3+ capabilities with a limited validity period. Any secret materials used to prove the non-forgeability of the attestation must belong to the attesting party.
+
+TODO: Add build system attestation spec
