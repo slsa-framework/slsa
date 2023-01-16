@@ -67,7 +67,7 @@ Responsibility to implement SLSA is spread across the following parties.
   <td colspan=2>Provenance distribution
   <td>✓<td>✓<td>✓
 <tr>
-  <td colspan=2>Expectations and verification
+  <td colspan=2><a href="#expectations-and-verification">Expectations and verification</a>
   <td>✓<td>✓<td>✓
 <tr>
   <td rowspan=1><a href="#consumer">Consumer</a>
@@ -414,6 +414,57 @@ artifacts ...**TODO**
 consumers. For the build system, this usually means outputting the provenance as
 part of the build to allow the release process to upload it in a manner
 prescribed by the package ecosystem.
+
+### Expectations and verification
+
+The package ecosystem is responsible for ensuring expectations are defined, verified before package use, and are only modified by the package's authenticated producer.
+
+<table>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+
+<tr id="expectations-set">
+<td>Expectations set
+<td>
+
+The package ecosystem MUST ensure that expectations are defined for the package before it is made available to package ecosystem users.
+
+Expectations MAY be set explicitly when registering a new package in the package ecosystem, or implicitly based on the provenance of the package during its initial publication.
+
+<td>✓<td>✓<td>✓
+<tr id="expectations-build-definition">
+<td>Expected build definition
+<td>
+
+The package ecosystem MUST ensure the package was built from the maintainer defined build definition.
+
+This may be through ensuring that is that the provenance's source and configuration matches the value defined in the expectations.
+
+> **TODO:** link to relevant threat [(C) Build from modified source](https://slsa.dev/spec/v0.1/threats#c-build-from-modified-source)
+
+<td>✓<td>✓<td>✓
+<tr id="expectations-builder-id">
+<td>Expected builder
+<td>
+
+The package ecosystem MUST ensure packages were built on the expected builder. 
+
+This may be through checking the builder values in the provenance or through verifying that the provenance is correctly authenticated.
+
+> **TODO:** link to relevant threat [(F) Upload modified package](https://slsa.dev/spec/v0.1/threats#f-upload-modified-package)
+
+<td>✓<td>✓<td>✓
+<tr id="expectations-not-tampered">
+<td>Authenticated changes
+<td>
+
+The package ecosystem MUST ensure expectations are only changed by the package's authenticated producer.
+
+This may be through up-front declaration of expectations which can only be changed by an appropriate authenticated producer. Another approach would be a mechanism which detects changes to the build definition and builder values in the provenance after the initial package is published.
+
+> **TODO**: link to relevant threats [(G) Compromise package repo](https://slsa.dev/spec/v0.1/threats#g-compromise-package-repo) ? and [(H) Use compromised package](https://slsa.dev/spec/v0.1/threats#h-use-compromised-package)
+
+<td><td>✓<td>✓
+</table>
 
 **TODO:** Update the requirements to provide guidelines for how to implement,
 showing what the options are:
