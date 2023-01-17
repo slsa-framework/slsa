@@ -443,6 +443,7 @@ There are several approaches a package ecosystem could take to setting expectati
 The package ecosystem MUST ensure that expectations are non-falsifiable, that is secure against attacks which would enable use of a package which was:
 
 > **TODO**: check this list for completeness against threats
+
 -   Built from an unofficial fork of code
 -   Built from unofficial branch of tag
 -   Built from unofficial build definition
@@ -456,6 +457,7 @@ The package ecosystem MUST ensure that expectations are non-falsifiable, that is
 A critical responsibility of the package ecosystem is to verify that the provenance for a package matches the expectations defined for the package.
 
 Verifying expectations COULD happen in multiple places within a package ecosystem:
+
 -   during package upload the registry SHOULD verify that the package's provenance matches any known expectations for the package before accepting the package into the registry.
 -   during client-side installation/deployment of a package the package ecosystem client SHOULD verify that the package's provenance matches the ecosystem known expectations for the package before use.
 -   package ecosystem participants and/or the ecosystem operators MAY perform continuous monitor of packages to detect changes to packages which do not meet the known expectations.
