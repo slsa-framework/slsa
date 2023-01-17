@@ -103,7 +103,8 @@ A build configuration file (i.e., cloudbuild.yml, GitHub workflow) qualifies for
 
 These options work with your build system to produce unsigned, formatted provenance. They do not qualify for SLSA 2 because they are unsigned and not run by the hosted server.                    
 </div><ul>
-    <li>Azure DevOps extension</li>
+    <a href="https://github.com/slsa-framework/slsa/issues">open an issue</a>
+    <li><a  href="https://github.com/slsa-framework/azure-devops-demo">Azure DevOps extension</a></li>
     <li>Jenkins SLSA generator </li>
     <li>Jenkins plugin</li>
     </ul>
