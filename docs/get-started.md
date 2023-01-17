@@ -75,9 +75,6 @@ Containers have a standard place to put the provenance in the OCI container regi
         </div>
     </div>
 </section>            
-
-
-
 <section class="section bg-pastel-green flex justify-center items-center">
     <div class="wrapper inner w-full">
         <div class="md:flex justify-between items-start mb-16">
@@ -97,7 +94,6 @@ SLSA 1 requires that the build process is documented. Some tools suggested below
 A build configuration file (i.e., cloudbuild.yml, GitHub workflow) qualifies for SLSA 1. It would be considered unsigned, unformatted provenance. 
                      
 </div>
-                     <p class="h4 font-bold mb-6" id="tools">Tools</p>
 
 #### Build Service Plugins or Extensions
 
@@ -109,18 +105,20 @@ These options work with your build system to produce unsigned, formatted provena
     <li><a href="https://plugins.jenkins.io/in-toto/Jenkins plugin">Jenkins plugin</a></li>
     </ul><p>
     Downstream users verify the provenance with <a href="https://cuelang.org/docs/">Cue Policies</a>.  </p>
-    <ul class="list-disc mt-6 pl-6">
-                        <li><a href="https://github.com/slsa-framework/slsa-github-generator#provenance-only-generators">GitHub actions provenance generators</a> (SLSA level 3)</li>
-                        <li><a href="https://github.com/slsa-framework/azure-devops-demo">Azure DevOps provenance generator</a> (SLSA level 1)</li>
-                        <li><a href="https://cloud.google.com/build/docs/securing-builds/use-provenance-and-binary-authorization">Google Cloud Build</a> (SLSA level 2)</li>
-                        <li><a href="https://github.com/sigstore/cosign">Sigstore Cosign for storing signed provenance</a></li>
-                        <li><a href="https://github.com/buildsec/frsca">OpenSSF - Factory for Repeatable Secure Creation of Artifacts (FRSCA)</a> (Currently SLSA level 2)</li>
-                        <li><a href="https://github.com/in-toto">in-toto</a>: Several in-toto implementations (Go, Java, Rust) and integrations (Jenkins Plugin) support the generation of SLSA provenance attestations</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+
+#### Build Observers with hosted Services
+
+These options are user-configured inside a hosted service. They observe the build process and produce signed, formatted provenance. These options do not qualify for SLSA 2 because they are configured by users, not the hosted service.
+    
+    <p>Downstream users verify the provenance with Cue policies and the signature with Cosign. </p>
+
+   <p> <b>Note:</b> If you are using one of these options with Google Cloud Build or GitHub Actions, jump to SLSA 3 and use the builder itself to generate provenance. </p>
+<ul>
+<li><a href="https://github.com/kubernetes-sigs/tejolote">Tejolote</a> – currently supports Google Cloud Build and GitHub Actions. Prow coming soon. 
+If you’re using Tejolote with Google Cloud Build or GitHub Actions, jump to SLSA 3  and generate provenance directly from the builder. </li>
+ <li><a href="https://tekton.dev/docs/chains/signed-provenance-tutorial/">Tekton Chains</a> – custom resource definition controller that can generate provenance for Kubernetes OCI containers</li></ul>
+
+
 </section>
 
 <section class="section bg-pastel-green flex justify-center items-center">
@@ -128,9 +126,9 @@ These options work with your build system to produce unsigned, formatted provena
         <div class="md:flex justify-between items-start mb-16">
             <div class="text w-full md:w-1/3">
 <div class="h2 -mt-16 p-0">
-<a/ id="SLSA3">
+<a/ id="SLSA2">
 
-## Reaching SLSA Level 3
+## SLSA 2
     
 </div>
 <p class="h4 font-semibold my-6 text-green-dark">Effort: Low</p>
@@ -139,19 +137,25 @@ These options work with your build system to produce unsigned, formatted provena
                 <div class="bg-white h-full rounded-lg p-10">
                     <p class="h4 font-bold mb-6">Overview<p>
                     <p>
-                        This guide will help you achieve the <a href="/spec/v0.1/requirements#build-requirements">build</a> and <a href="/spec/v0.1/requirements#provenance-requirements">provenance</a> requirements of Level 3, and it should take less than a couple of hours for an individual project. The goals is to achieve the following requirements:
-                    <ul class="list-disc my-6 pl-6">
-                        <li><a href="/spec/v0.1/requirements#build-as-code">Build as code</a></li>
-                        <li><a href="/spec/v0.1/requirements#ephemeral-environment">Ephemeral environment</a></li>
-                        <li><a href="/spec/v0.1/requirements#isolated">Isolated</a></li>
-                        <li><a href="/spec/v0.1/requirements#parameterless">Parameterless</a></li>
+                     To achieve SLSA 2, the goals are to:
+                        <ul>
+                            <li>Run your build on a hosted service that generates and signs provenance</li>
+                            <li>Let downstream users verify both the provenance and its signature</li>
+                    </ul></p><p>
+There is currently only one SLSA 2 builder: 
+
+<ul><li><a href="https://github.com/buildsec/frscahttps://github.com/buildsec/frsca">Factory for Repeatable Secure Creation of Artifacts (FRSCA)</a></li></ul>
+                </p>
+FRSCA is an OpenSSF project that offers a full build pipeline. It is not yet generally available. It qualifies as a SLSA 2 builder because regular users of the service are not able to inject or alter the contents of the provenance it generates. 
+
+FRSCA produces signed, formatted provenance that can be verified by the generic SLSA verifier. 
+
                         <li><a href="/spec/v0.1/requirements#non-falsifiable">Non-falsifiable</a></li>
                     </ul>
                     </p>
                     <p class="mb-10">
                         The list of tools is not exhaustive. If there are tools missing from this list, please <a href="https://github.com/slsa-framework/slsa/issues">create a GitHub issue</a>.
                     </p>
-                    <p class="h4 font-bold mb-6" id="tools">Tools</p>
                     <ul class="list-disc mt-6 mb-10 pl-6">
                         <li><a href="https://github.com/slsa-framework/slsa-github-generator">GitHub actions builders and generators</a> (SLSA level 3)</li>
                     </ul>
