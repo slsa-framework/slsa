@@ -102,14 +102,14 @@ A build configuration file (i.e., cloudbuild.yml, GitHub workflow) qualifies for
 #### Build Service Plugins or Extensions
 
 These options work with your build system to produce unsigned, formatted provenance. They do not qualify for SLSA 2 because they are unsigned and not run by the hosted server.                    
-</div><ul>
-    <a href="https://github.com/slsa-framework/slsa/issues">open an issue</a>
-    <li><a  href="https://github.com/slsa-framework/azure-devops-demo">Azure DevOps extension</a></li>
-    <li>Jenkins SLSA generator </li>
-    <li>Jenkins plugin</li>
-    </ul>
- 
-Downstream users verify the provenance with Cue Policies.                    <ul class="list-disc mt-6 pl-6">
+</div>
+    <ul>
+    <li><a href="https://github.com/slsa-framework/azure-devops-demo">Azure DevOps extension</a></li>
+    <li><a href="https://github.com/slsa-framework/slsa-jenkins-generator">Jenkins SLSA generator</a> </li>
+    <li><a href="https://plugins.jenkins.io/in-toto/Jenkins plugin">Jenkins plugin</a></li>
+    </ul><p>
+    Downstream users verify the provenance with <a href="https://cuelang.org/docs/">Cue Policies</a>.  </p>
+    <ul class="list-disc mt-6 pl-6">
                         <li><a href="https://github.com/slsa-framework/slsa-github-generator#provenance-only-generators">GitHub actions provenance generators</a> (SLSA level 3)</li>
                         <li><a href="https://github.com/slsa-framework/azure-devops-demo">Azure DevOps provenance generator</a> (SLSA level 1)</li>
                         <li><a href="https://cloud.google.com/build/docs/securing-builds/use-provenance-and-binary-authorization">Google Cloud Build</a> (SLSA level 2)</li>
