@@ -100,8 +100,10 @@ This predicate follows the in-toto attestation [parsing rules]. Summary:
 _NOTE: This section describes the fields within `predicate`. For a description
 of the other top-level fields, such as `subject`, see [Statement]._
 
-<!-- TODO: Get proper syntax highlighting for cue, and explain that this is a
-cue schema. -->
+<!-- Note: While this happens to be a valid cue file, we're really just using it
+as a human-readable summary of the schema. We don't want readers to have to
+understand cue. For that reason, we are not using any special cue syntax or
+features. -->
 
 ```javascript
 {% include_relative provenance.cue %}
@@ -293,9 +295,10 @@ URL ([purl]). Example: `pkg:pypi/pyyaml@6.0`
 <tr id="digest"><td><code>digest</code>
 <td><a href="https://github.com/in-toto/attestation/blob/main/spec/field_types.md#DigestSet">DigestSet</a><td>
 
-One or more cryptographic digests of the contents of this artifact.
+One or more cryptographic digests of the contents of this artifact. Example:
+`{"sha256": "5f0689d54944564971f2811f9788218bfafb21aa20f532e6490004377dfa648f"}`
 
-TODO: Decide on hex vs base64 in #533 then document it here.
+**TODO:** Decide on hex vs base64 in #533 then document it here.
 
 <tr id="localName"><td><code>localName</code>
 <td>string<td>
@@ -312,7 +315,8 @@ different and not derivable from `uri`. Example:
 <tr id="MediaType"><td><code>MediaType</code>
 <td>string (<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types">MediaType</a>)<td>
 
-Media type (aka MIME type) of this artifact was interpreted.
+Media type (aka MIME type) of this artifact was interpreted. Example:
+`application/json`
 
 </table>
 
@@ -417,9 +421,18 @@ example above. The field is required, even if it is implicit from the signer,
 to aid readability and debugging. It is an object to allow additional fields
 in the future, in case one URI is not sufficient.
 
-> ⚠ **RFC:** Should we just allow builders to set arbitrary properties? We don't
-> expect verifiers to use any of them, so maybe that's the simpler approach? Or
-> have a `properties` that is an arbitrary object? (#319)
+> ⚠ **RFC:** Should we just allow builders to set arbitrary properties, rather
+> than calling out `version` and `builderDependencies`? We don't expect
+> verifiers to use any of them, so maybe that's the simpler approach? Or have a
+> `properties` that is an arbitrary object? (#319)
+
+> ⚠ **RFC:** Do we want/need to identify the tenant of the build system,
+> separately from the build system itself? If so, should it be a single `id`
+> that combines both (e.g.
+> `https://builder.example/tenants/company1.example/project1`), or two separate
+> fields (e.g. `{"id": "https://builder.example", "tenant":
+> "https://company1.example/project1"}`)? What would the use case be for this?
+> How should [verification] work?
 
 ### BuildMetadata
 
