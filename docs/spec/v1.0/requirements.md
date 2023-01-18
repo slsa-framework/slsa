@@ -444,6 +444,7 @@ consumer MAY delegate their trust to an auditor.
 > errors/warnings?
   
 ## Auditor
+
 An <dfn>auditor</dfn> is an organization or individual that assesses build
 systems for conformance with the SLSA requirements.
   
@@ -468,10 +469,11 @@ TODO: Where does this requirement go? Consumer, package ecosystem?
   
 <Party> MUST verify the auditor's attestation for validity. An attestation
 is valid if and only if all of the following are true:
-  - the build system identity is equal to the builder identity in the enclosing
+
+-   the build system identity is equal to the builder identity in the enclosing
   provenance
-  - the expiration date is strictly later than the time of validation
-  - the verifier knows any secret material used to prove the attestation's
+-   the expiration date is strictly later than the time of validation
+-   the verifier knows any secret material used to prove the attestation's
   non-forgability to belong to the auditor named in the attestation
   
 ## Source control
