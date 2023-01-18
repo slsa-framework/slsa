@@ -93,24 +93,265 @@ This predicate follows the in-toto attestation [parsing rules]. Summary:
 
 ## Schema
 
-> **TODO:** Get proper syntax highlighting for cue, and explain that this is a
-> cue schema.
+_NOTE: This section describes the fields within `predicate`. For a description
+of the other top-level fields, such as `subject`, see [Statement]._
+
+<!-- TODO: Get proper syntax highlighting for cue, and explain that this is a
+cue schema. -->
 
 ```javascript
 {% include_relative provenance.cue %}
 ```
 
-### Fields
+<details>
+<summary>Protocol buffer schema</summary>
 
-_NOTE: This section describes the fields within `predicate`. For a description
-of the other top-level fields, such as `subject`, see [Statement]._
-
-> **TODO:** Automatically parse the proto and render it directly here, rather
-> than a simple inclusion of the raw schema file.
+Link: [provenance.proto](provenance.proto)
 
 ```proto
 {% include_relative provenance.proto %}
 ```
+
+</details>
+
+### Provenance
+
+[Provenance]: #provenance
+
+REQUIRED FIELDS: `buildDefinition`, `runDetails`
+
+<a id="buildDefinition"></a>
+`buildDefinition` _object ([BuildDefinition])_
+
+> The input to the build.
+>
+> The accuracy and completeness of this information is implied by
+> `runDetails.builder.id`.
+
+<a id="runDetails"></a>
+`runDetails` _object ([RunDetails])_
+
+> Details specific to this particular execution of the build.
+
+### BuildDefinition
+
+[BuildDefinition]: #builddefinition
+
+REQUIRED FIELDS: `buildType`, `externalParameters`
+
+<a id="buildType"></a>
+`buildDefinition.buildType` _string ([TypeURI])_
+
+> [TypeURI] indicating how to unambiguously interpret this message and
+> initiate the build.
+>
+> This SHOULD resolve to a human-readable specification that includes:
+>
+> -   Overall description.
+> -   List of all parameters, including: name, description, external vs system,
+>     type (artifact vs scalar vs...), required vs optional.
+> -   Explicit, unambiguous instructions for how to initiate the build given
+>     this message.
+> -   Complete example provenance file.
+
+<a id="externalParameters"></a>
+`buildDefinition.externalParameters` _map (string→[ParameterValue])_
+
+> The set of top-level external inputs to the build. This SHOULD contain all
+> the information necessary and sufficient to initialize the build and begin
+> execution. "Top-level" means that it is not derived from another input.
+>
+> The key is a name whose interpretation depends on `buildType`. The key MUST be
+> unique across `externalParameters` and `systemParameters`. The following
+> conventional names are RECOMMENDED when appropriate:
+>
+> name     | description
+> -------- | -----------
+> `source` | The primary input to the build.
+> `config` | The build configuration, if different from `source`.
+>
+> The build system SHOULD be designed to minimize the amount of information
+> necessary here, in order to reduce fragility and ease verification.
+> Consumers SHOULD have an expectation of what "good" looks like; the more
+> information that they must check, the harder that task becomes.
+>
+> Guidelines:
+>
+> -   Maximize the amount of information that is implicit from the meaning of
+>     `buildType`. In particular, any value that is boilerplate and the same
+>     for every build SHOULD be implicit.
+>
+> -   Reduce parameters by moving configuration to input artifacts whenever
+>     possible. For example, instead of passing in compiler flags via a
+>     parameter, require them to live next to the source code or build
+>     configuration.
+>
+> -   If possible, architect the build system to use this definition as its
+>     sole top-level input, in order to guarantee that the information is
+>     sufficient to run the build.
+>
+> -   In some cases, the build configuration is evaluated client-side and
+>     sent over the wire, such that the build system cannot determine its
+>     origin. In those cases, the build system SHOULD serialize the
+>     configuration in a deterministic way and record the `digest` without a
+>     `uri`. This allows one to consider the client-side evaluation as a
+>     separate "build" with its own provenance, such that the verifier can
+>     chain the two provenance attestations together to determine the origin
+>     of the configuration.
+>
+> TODO: Describe how complete this must be at each SLSA level.
+>
+> TODO: Some requirement that the builder verifies the URI and that the
+> verifier checks it against expectations?
+
+<a id="systemParameters"></a>
+`buildDefinition.systemParameters` _map (string→[ParameterValue])_
+
+> Parameters of the build environment that were provided by the `builder` and
+> not under external control. The primary intention of this field is for
+> debugging, incident response, and vulnerability management. The values here
+> MAY be necessary for reproducing the build.
+
+<a id="resolvedDependencies"></a>
+`buildDefinition.resolvedDependencies` _array ([ArtifactReference])_
+
+> Resolved dependencies needed at build time. For example, if the build
+> script fetches and executes "example.com/foo.sh", which in turn fetches
+> "example.com/bar.tar.gz", then both "foo.sh" and "bar.tar.gz" should be
+> listed here.
+>
+> Any artifacts listed under `externalParameters` or `systemParameters`
+> SHOULD NOT be repeated here.
+>
+> TODO: Explain what the purpose of this field is. Why do we need it? \
+> TODO: Explain how to determine what goes here. \
+> TODO: Explain that it's OK for it to be incomplete. \
+> TODO: If the dep is already pinned, does it need to be listed here? \
+> TODO: Should this be a map instead of an array? Then each MUST be named
+> explicitly, which would be less ambiguous but more difficult. \
+> TODO: Clarify when something should go here vs builderDependencies. The
+> choice is not obvious. More examples might help.
+
+### ParameterValue
+
+[ParameterValue]: #parametervalue
+
+**Exactly one** of the fields MUST be set.
+
+<a id="artifact"></a>
+`artifact` _object ([ArtifactReference])_
+
+> A reference to an artifact.
+
+<a id="value"></a>
+`value` _string_
+
+> A scalar value. For simplicity, only string values are supported.
+
+### ArtifactReference
+
+[ArtifactReference]: #artifactreference
+
+Either `uri` or `digest` is REQUIRED.
+
+<a id="uri"></a>
+`uri` _string (URI)_
+
+> [URI] describing where this artifact came from. When possible, this SHOULD
+> be a universal and stable identifier, such as a source location or Package
+> URL ([purl]).
+>
+> Example: `pkg:pypi/pyyaml@6.0`
+
+<a id="digest"></a>
+`digest` _string ([DigestSet])_
+
+> [DigestSet] of cryptographic digests for the contents of this artifact.
+>
+> TODO: Decide on hex vs base64 in #533 then document it here.
+
+<a id="localName"></a>
+`localName` _string (URI), OPTIONAL_
+
+> The name for this artifact local to the build.
+>
+> Example: `PyYAML-6.0.tar.gz`
+
+<a id="downloadLocation"></a>
+`downloadLocation` _string (URI), OPTIONAL_
+
+> [URI] identifying the location that this artifact was downloaded from, if
+> different and not derivable from `uri`.
+>
+> Example: `https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz`
+
+<a id="mediaType"></a>
+`mediaType` _string ([MediaType]), OPTIONAL_
+
+> Media Type (aka MIME type) of this artifact.
+
+### RunDetails
+
+[RunDetails]: #rundetails
+
+> TODO: The following fields are the same as v0.2:
+>
+> REQUIRED at SLSA Build L1 unless the `id` is implicit from the attestation
+> envelope (e.g. public key).
+  Builder builder = 1;
+
+> TODO: description
+> OPTIONAL.
+  BuildMetadata metadata = 2;
+
+> Additional artifacts generated during the build that should not be
+> considered the "output" of the build but that may be needed during
+> debugging or incident response.
+>
+> Possible use cases:
+>
+> -   Logs generated during the build.
+> -   Fully evaluated build configuration.
+>
+> In most cases, this SHOULD NOT contain all intermediate files generated
+> during the build. Instead, this should only contain files that are likely
+> to be useful later and that cannot be easily reproduced.
+>
+> TODO: Do we need some recommendation for how to distinguish between
+> byproducts? For example, should we recommend using `localName`?
+>
+> OPTIONAL.
+  repeated ArtifactReference byproducts = 3;
+
+### Builder
+
+[Builder]: #builder
+
+> [URI] ... (same as v0.2)
+> TODO: In most cases this is implicit from the envelope layer (e.g. the
+> public key or x.509 certificate), which is just one more thing to mess up.
+> Can we rescope this to avoid the duplication and thus the security concern?
+> For example, if the envelope identifies the build system, this might
+> identify the tenant project?
+>
+> REQUIRED at SLSA Build L1 unless it is implicit from the attestation
+> envelope (e.g. public key).
+  string id = 1;
+
+> TODO: Do we want to add this field? (#319)
+> TODO: Should we merge this with builderDependencies into a combined
+> "builderParameters"? Then arbitrary information can be stored.
+>
+> OPTIONAL.
+  map<string, string> version = 2;
+
+> Dependencies used by the orchestrator that are not run within the workload
+> and that should not affect the build, but may affect the provenance
+> generation or security guarantees.
+> TODO: Flesh out this model more.
+>
+> OPTIONAL.
+  repeated ArtifactReference builder_dependencies = 3;
 
 ## Index of build types
 

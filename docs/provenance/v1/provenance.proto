@@ -5,255 +5,51 @@ package slsa.v1;
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
-// Note on REQUIRED vs OPTIONAL: an unqualified "REQUIRED" means that the field
-// is mandatory to be semantically valid, while "REQUIRED at SLSA Build L1"
-// means that the field is only required to be considered SLSA Build L1. In
-// other words, a provenance file that omits a field marked "REQUIRED at SLSA
-// Build L1" is valid but SLSA Build L0.
-//
-// Design guidelines:
-//
-// -   Use lowerCamelCase for field names because that is how the JSON fields
-//     are named. The proto style guide advises use of snake_case in the .proto
-//     file but lowerCamelCase in JSON, but we believe that is confusing for
-//     readers (since we always serialize to JSON). It also makes it harder to
-//     reference other fields in comments since there are two ways to reference
-//     a field.
-//
-// -   Prefer field names that are unique throughout the file, even if somewhat
-//     redundant with the parent field. This makes it easier to reference in
-//     documentation and reduces confusion.
+// NOTE: While file uses snake_case as per the Protocol Buffers Style Guide, the
+// provenance is always serialized using JSON with lowerCamelCase. Protobuf
+// tooling performs this case conversion automatically.
 
 message Provenance {
-  // The input to the build.
-  //
-  // The accuracy and completeness of this information is implied by
-  // `runDetails.builder.id`.
-  //
-  // REQUIRED at SLSA Build L1.
-  BuildDefinition buildDefinition = 1;
-
-  // Details specific to this particular execution of the build.
-  //
-  // REQUIRED at SLSA Build L1.
-  RunDetails runDetails = 2;
+  BuildDefinition build_definition = 1;
+  RunDetails run_details = 2;
 }
 
 message BuildDefinition {
-  // [TypeURI] indicating how to unambiguously interpret this message and
-  // initiate the build.
-  //
-  // This SHOULD resolve to a human-readable specification that includes:
-  //
-  // -   Overall description.
-  // -   List of all parameters, including:
-  //     -   name
-  //     -   description
-  //     -   external vs system
-  //     -   artifact vs value
-  //     -   required vs optional
-  //     -   any other restrictions
-  // -   Explicit, unambiguous instructions for how to initiate the build given
-  //     this message.
-  // -   Complete example provenance file.
-  //
-  // REQUIRED.
-  string buildType = 1;
-
-  // The set of top-level external inputs to the build. This SHOULD contain all
-  // the information necessary and sufficient to initialize the build and begin
-  // execution. "Top-level" means that it is not derived from another input.
-  //
-  // The key is a name whose interpretation depends on `buildType`. It MUST be
-  // unique across `externalParameters` and `systemParameters`. The following
-  // conventional names are RECOMMENDED when appropriate:
-  //
-  // name     | description
-  // -------- | -----------
-  // `source` | The primary input to the build.
-  // `config` | The build configuration, if different from `source`.
-  //
-  // The build system SHOULD be designed to minimize the amount of information
-  // necessary here, in order to reduce fragility and ease verification.
-  // Consumers SHOULD have an expectation of what "good" looks like; the more
-  // information that they must check, the harder that task becomes.
-  //
-  // Guidelines:
-  //
-  // -   Maximize the amount of information that is implicit from the meaning of
-  //     `buildType`. In particular, any value that is boilerplate and the same
-  //     for every build SHOULD be implicit.
-  //
-  // -   Reduce parameters by moving configuration to input artifacts whenever
-  //     possible. For example, instead of passing in compiler flags via a
-  //     parameter, require them to live next to the source code or build
-  //     configuration.
-  //
-  // -   If possible, architect the build system to use this definition as its
-  //     sole top-level input, in order to guarantee that the information is
-  //     sufficient to run the build.
-  //
-  // -   In some cases, the build configuration is evaluated client-side and
-  //     sent over the wire, such that the build system cannot determine its
-  //     origin. In those cases, the build system SHOULD serialize the
-  //     configuration in a deterministic way and record the `digest` without a
-  //     `uri`. This allows one to consider the client-side evaluation as a
-  //     separate "build" with its own provenance, such that the verifier can
-  //     chain the two provenance attestations together to determine the origin
-  //     of the configuration.
-  //
-  // TODO: Describe how complete this must be at each SLSA level.
-  //
-  // TODO: Some requirement that the builder verifies the URI and that the
-  // verifier checks it against expectations?
-  //
-  // REQUIRED at SLSA Build L1.
-  map<string, ParameterValue> externalParameters = 2;
-
-  // Parameters of the build environment that were provided by the `builder` and
-  // not under external control. The primary intention of this field is for
-  // debugging, incident response, and vulnerability management. The values here
-  // MAY be necessary for reproducing the build.
-  //
-  // OPTIONAL.
-  map<string, ParameterValue> systemParameters = 3;
-
-  // Resolved dependencies needed at build time. For example, if the build
-  // script fetches and executes "example.com/foo.sh", which in turn fetches
-  // "example.com/bar.tar.gz", then both "foo.sh" and "bar.tar.gz" should be
-  // listed here.
-  //
-  // Any artifacts listed under `externalParameters` or `systemParameters`
-  // SHOULD NOT be repeated here.
-  //
-  // TODO: Explain what the purpose of this field is. Why do we need it?
-  // TODO: Explain how to determine what goes here.
-  // TODO: Explain that it's OK for it to be incomplete.
-  // TODO: If the dep is already pinned, does it need to be listed here?
-  // TODO: Should this be a map instead of an array? Then each MUST be named
-  // explicitly, which would be less ambiguous but more difficult.
-  // TODO: Clarify when something should go here vs builderDependencies. The
-  // choice is not obvious. More examples might help.
-  //
-  // OPTIONAL.
-  repeated ArtifactReference resolvedDependencies = 1;
+  string build_type = 1;
+  map<string, ParameterValue> external_parameters = 2;
+  map<string, ParameterValue> system_parameters = 3;
+  repeated ArtifactReference resolved_dependencies = 4;
 }
 
 message ParameterValue {
-  // REQUIRED.
   oneof value {
-    // A parameter that is a reference to an artifact.
     ArtifactReference artifact = 1;
-    // A parameter that is a scalar value. For simplicity, only string values
-    // are supported.
     string value = 2;
   }
 }
 
 message ArtifactReference {
-  // [URI] describing where this artifact came from. When possible, this SHOULD
-  // be a universal and stable identifier, such as a source location or Package
-  // URL ([purl]).
-  //
-  // Example: `pkg:pypi/pyyaml@6.0`
-  //
-  // REQUIRED unless `digest` is set.
   string uri = 1;
-
-  // [DigestSet] of cryptographic digests for the contents of this artifact.
-  // TODO: Decide on hex vs base64 in #533 then document it here.
-  //
-  // REQUIRED unless `uri` is set.
   map<string, string> digest = 2;
-
-  // The name for this artifact local to the build.
-  //
-  // Example: `PyYAML-6.0.tar.gz`
-  //
-  // OPTIONAL.
-  string localName = 3;
-
-  // [URI] identifying the location that this artifact was downloaded from, if
-  // different and not derivable from `uri`.
-  //
-  // Example: `https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz`
-  //
-  // OPTIONAL.
-  string downloadLocation = 4;
-
-  // [Media Type] (aka MIME type) of this artifact.
-  //
-  // OPTIONAL.
-  string mediaType = 5;
+  string local_name = 3;
+  string download_location = 4;
+  string media_type = 5;
 }
 
 message RunDetails {
-  // TODO: The following fields are the same as v0.2:
-  //
-  // REQUIRED at SLSA Build L1 unless the `id` is implicit from the attestation
-  // envelope (e.g. public key).
   Builder builder = 1;
-
-  // TODO: description
-  // OPTIONAL.
   BuildMetadata metadata = 2;
-
-  // Additional artifacts generated during the build that should not be
-  // considered the "output" of the build but that may be needed during
-  // debugging or incident response.
-  //
-  // Possible use cases:
-  //
-  // -   Logs generated during the build.
-  // -   Fully evaluated build configuration.
-  //
-  // In most cases, this SHOULD NOT contain all intermediate files generated
-  // during the build. Instead, this should only contain files that are likely
-  // to be useful later and that cannot be easily reproduced.
-  //
-  // TODO: Do we need some recommendation for how to distinguish between
-  // byproducts? For example, should we recommend using `localName`?
-  //
-  // OPTIONAL.
   repeated ArtifactReference byproducts = 3;
 }
 
 message Builder {
-  // [URI] ... (same as v0.2)
-  // TODO: In most cases this is implicit from the envelope layer (e.g. the
-  // public key or x.509 certificate), which is just one more thing to mess up.
-  // Can we rescope this to avoid the duplication and thus the security concern?
-  // For example, if the envelope identifies the build system, this might
-  // identify the tenant project?
-  //
-  // REQUIRED at SLSA Build L1 unless it is implicit from the attestation
-  // envelope (e.g. public key).
   string id = 1;
-
-  // TODO: Do we want to add this field? (#319)
-  // TODO: Should we merge this with builderDependencies into a combined
-  // "builderParameters"? Then arbitrary information can be stored.
-  //
-  // OPTIONAL.
   map<string, string> version = 2;
-
-  // Dependencies used by the orchestrator that are not run within the workload
-  // and that should not affect the build, but may affect the provenance
-  // generation or security guarantees.
-  // TODO: Flesh out this model more.
-  //
-  // OPTIONAL.
-  repeated ArtifactReference builderDependencies = 3;
+  repeated ArtifactReference builder_dependencies = 3;
 }
 
 message BuildMetadata {
-  // TODO: same as v0.2:
-  // OPTIONAL.
-  string invocationId = 1;
-
-  // OPTIONAL.
-  google.protobuf.Timestamp startedOn = 2;
-
-  // OPTIONAL.
-  google.protobuf.Timestamp finishedOn = 3;
+  string invocation_id = 1;
+  google.protobuf.Timestamp started_on = 2;
+  google.protobuf.Timestamp finished_on = 3;
 }
