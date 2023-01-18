@@ -20,15 +20,15 @@ workflow, such as an action, a job, or a reusable workflow.
 
 ### External parameters
 
-All external parameters are REQUIRED.
+All external parameters are REQUIRED unless empty.
 
 <table>
 <tr><th>Parameter<th>Type<th>Description
 
-<tr id="inputs"><td><code>inputs_*</code><td>string<td>
+<tr id="inputs"><td><code>inputs</code><td>mapValue<td>
 
-The [inputs context], with each `inputs.<name>` renamed to `inputs_<name>`.
-Every non-empty input value MUST be recorded. Empty values SHOULD be omitted.
+The [inputs context], with each value converted to string. Every non-empty input
+value MUST be recorded. Empty values SHOULD be omitted.
 
 Note: Only `workflow_dispatch` events and reusable workflows have inputs.
 
@@ -39,7 +39,12 @@ The git repository containing the top-level workflow YAML file.
 This can be computed from the [github context] using
 `"git+" + github.server_url + "/" + github.repository + "@" + github.ref`.
 
-<tr id="workflow_path"><td><code>workflow_path</code><td>string<td>
+<tr id="vars"><td><code>vars</code><td>vars<td>
+
+The [vars context], with each value converted to string. Every non-empty input
+value MUST be recorded. Empty values SHOULD be omitted.
+
+<tr id="workflowPath"><td><code>workflowPath</code><td>string<td>
 
 The path to the workflow YAML file within `source`.
 
@@ -53,22 +58,22 @@ the path. See [getEntryPoint] for one possible implementation.
 
 [github context]: https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
 [inputs context]: https://docs.github.com/en/actions/learn-github-actions/contexts#inputs-context
+[vars context]: https://docs.github.com/en/actions/learn-github-actions/contexts#vars-context
 
 ### System parameters
 
-> TODO: None of these are really "parameters", per se, but rather metadata
-> about the build. Perhaps they should go in `runDetails` instead? The problem
-> is that we don't have an appropriate field for it currently.
-
-All system parameters are OPTIONAL. Each corresponds to the [github context]
-value of the same name, with `github.<name>` renamed to `github_<name>`. The
-list only includes parameters that are likely to have an effect on the build and
-that are not already captured elsewhere.
+All system parameters are OPTIONAL.
 
 | Parameter            | Type     | Description |
 | -------------------- | -------- | ----------- |
-| `github_actor`       | string   | The username of the user that triggered the initial workflow run. |
-| `github_event_name`  | string   | The name of the event that triggered the workflow run. |
+| `github`       | mapValue   | A subset of the [github context] as described below. Only includes parameters that are likely to have an effect on the build and that are not already captured elsewhere. |
+
+The `github` map SHOULD contains the following elements:
+
+| GitHub Context Parameter        | Description |
+| ------------------------------- | ----------- |
+| `github.mapValue["actor"]`      | The username of the user that triggered the initial workflow run. |
+| `github.mapValue["event_name"]` | The name of the event that triggered the workflow run. |
 
 > TODO: What about `actor_id`, `repository_id`, and `repository_owner_id`? Those
 > are not part of the context so they're harder to describe, and the repository
@@ -76,6 +81,10 @@ that are not already captured elsewhere.
 >
 > Also `base_ref` and `head_ref` are similar in that they are annotations about
 > `source` rather than a proper parameter.
+
+> TODO: None of these are really "parameters", per se, but rather metadata
+> about the build. Perhaps they should go in `runDetails` instead? The problem
+> is that we don't have an appropriate field for it currently.
 
 ### Resolved dependencies
 

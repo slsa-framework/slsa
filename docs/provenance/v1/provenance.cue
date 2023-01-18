@@ -29,9 +29,13 @@
 }
 
 #ParameterValue: {
-    "artifact": #ArtifactReference
+    "artifactRef": #ArtifactReference
 } | {
-    "value": string
+    "scalarValue": string
+} | {
+    "mapValue": { [string]: string }
+} | {
+    "arrayValue": [ ...string ]
 }
 
 #ArtifactReference: {

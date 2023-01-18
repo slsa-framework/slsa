@@ -24,6 +24,10 @@ requirements].
 Understanding of SLSA [Software Attestations](/attestation-model)
 and the larger [in-toto attestation] framework.
 
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
 ## Model
 
 Provenance is an attestation that the `builder` produced the `subject` software
@@ -35,7 +39,7 @@ The model is as follows:
 
 -   Each build runs as an independent process on a multi-tenant platform. The
     `builder` is the identity of this platform, representing the transitive
-    closure of all entities that must be
+    closure of all entities that are
     [trusted](../spec/v1.0/principles.md#trust-systems-verify-artifacts) to
     faithfully run the build and record the provenance. (Note: The same model
     can be used for platform-less or single-tenant build systems.)
@@ -118,240 +122,339 @@ Link: [provenance.proto](provenance.proto)
 
 [Provenance]: #provenance
 
-REQUIRED FIELDS: `buildDefinition`, `runDetails`
+REQUIRED for SLSA Build L1: `buildDefinition`, `runDetails`
 
-<a id="buildDefinition"></a>
-`buildDefinition` _object ([BuildDefinition])_
+<table>
+<tr><th>Field<th>Type<th>Description
 
-> The input to the build.
->
-> The accuracy and completeness of this information is implied by
-> `runDetails.builder.id`.
+<tr id="buildDefinition"><td><code>buildDefinition</code>
+<td><a href="builddefinition">BuildDefinition</a><td>
 
-<a id="runDetails"></a>
-`runDetails` _object ([RunDetails])_
+The input to the build. The accuracy and completeness are implied by `runDetails.builder.id`.
 
-> Details specific to this particular execution of the build.
+<tr id="runDetails"><td><code>runDetails</code>
+<td><a href="rundetails">RunDetails</a><td>
+
+Details specific to this particular execution of the build.
+
+</table>
 
 ### BuildDefinition
 
 [BuildDefinition]: #builddefinition
 
-REQUIRED FIELDS: `buildType`, `externalParameters`
+REQUIRED for SLSA Build L1: `buildType`, `externalParameters`
 
-<a id="buildType"></a>
-`buildDefinition.buildType` _string ([TypeURI])_
+<table>
+<tr><th>Field<th>Type<th>Description
 
-> [TypeURI] indicating how to unambiguously interpret this message and
-> initiate the build.
->
-> This SHOULD resolve to a human-readable specification that includes:
->
-> -   Overall description.
-> -   List of all parameters, including: name, description, external vs system,
->     type (artifact vs scalar vs...), required vs optional.
-> -   Explicit, unambiguous instructions for how to initiate the build given
->     this message.
-> -   Complete example provenance file.
+<tr id="buildType"><td><code>buildType</code>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/field_types.md#TypeURI">TypeURI</a>)<td>
 
-<a id="externalParameters"></a>
-`buildDefinition.externalParameters` _map (string→[ParameterValue])_
+Identifies the template for how to perform the build and interpret the
+parameters and dependencies.
 
-> The set of top-level external inputs to the build. This SHOULD contain all
-> the information necessary and sufficient to initialize the build and begin
-> execution. "Top-level" means that it is not derived from another input.
->
-> The key is a name whose interpretation depends on `buildType`. The key MUST be
-> unique across `externalParameters` and `systemParameters`. The following
-> conventional names are RECOMMENDED when appropriate:
->
-> name     | description
-> -------- | -----------
-> `source` | The primary input to the build.
-> `config` | The build configuration, if different from `source`.
->
-> The build system SHOULD be designed to minimize the amount of information
-> necessary here, in order to reduce fragility and ease verification.
-> Consumers SHOULD have an expectation of what "good" looks like; the more
-> information that they must check, the harder that task becomes.
->
-> Guidelines:
->
-> -   Maximize the amount of information that is implicit from the meaning of
->     `buildType`. In particular, any value that is boilerplate and the same
->     for every build SHOULD be implicit.
->
-> -   Reduce parameters by moving configuration to input artifacts whenever
->     possible. For example, instead of passing in compiler flags via a
->     parameter, require them to live next to the source code or build
->     configuration.
->
-> -   If possible, architect the build system to use this definition as its
->     sole top-level input, in order to guarantee that the information is
->     sufficient to run the build.
->
-> -   In some cases, the build configuration is evaluated client-side and
->     sent over the wire, such that the build system cannot determine its
->     origin. In those cases, the build system SHOULD serialize the
->     configuration in a deterministic way and record the `digest` without a
->     `uri`. This allows one to consider the client-side evaluation as a
->     separate "build" with its own provenance, such that the verifier can
->     chain the two provenance attestations together to determine the origin
->     of the configuration.
->
-> TODO: Describe how complete this must be at each SLSA level.
->
-> TODO: Some requirement that the builder verifies the URI and that the
-> verifier checks it against expectations?
+The URI SHOULD resolve to a human-readable specification that includes: overall
+description of the build type; a list of all parameters (name, description,
+external vs system, artifact vs scalar vs..., required vs optional, etc.);
+unambiguous instructions for how to initiate the build given this
+BuildDefinition, and a complete example. Example:
+https://slsa.dev/github-actions-workflow/v0.1
 
-<a id="systemParameters"></a>
-`buildDefinition.systemParameters` _map (string→[ParameterValue])_
+<tr id="externalParameters"><td><code>externalParameters</code>
+<td>map (string→<a href="parametervalue">ParameterValue</a>)<td>
 
-> Parameters of the build environment that were provided by the `builder` and
-> not under external control. The primary intention of this field is for
-> debugging, incident response, and vulnerability management. The values here
-> MAY be necessary for reproducing the build.
+The parameters that are under external control, such as those set by a user or
+tenant of the build system. They MUST be complete at SLSA Build L3, meaning that
+that there is no additional mechanism for an external party to influence the
+build. (At lower SLSA Build levels, the completeness MAY be best effort.)
 
-<a id="resolvedDependencies"></a>
-`buildDefinition.resolvedDependencies` _array ([ArtifactReference])_
+The build system SHOULD be designed to minimize the size and complexity of
+`externalParameters`, in order to reduce fragility and ease [verification].
+Consumers SHOULD have an expectation of what "good" looks like; the more
+information that they need to check, the harder that task becomes.
 
-> Resolved dependencies needed at build time. For example, if the build
-> script fetches and executes "example.com/foo.sh", which in turn fetches
-> "example.com/bar.tar.gz", then both "foo.sh" and "bar.tar.gz" should be
-> listed here.
->
-> Any artifacts listed under `externalParameters` or `systemParameters`
-> SHOULD NOT be repeated here.
->
-> TODO: Explain what the purpose of this field is. Why do we need it? \
-> TODO: Explain how to determine what goes here. \
-> TODO: Explain that it's OK for it to be incomplete. \
-> TODO: If the dep is already pinned, does it need to be listed here? \
-> TODO: Should this be a map instead of an array? Then each MUST be named
-> explicitly, which would be less ambiguous but more difficult. \
-> TODO: Clarify when something should go here vs builderDependencies. The
-> choice is not obvious. More examples might help.
+<tr id="systemParameters"><td><code>systemParameters</code>
+<td>map (string→<a href="parametervalue">ParameterValue</a>)<td>
+
+The parameters that are under the control of the `builder`. The primary
+intention of this field is for debugging, incident response, and vulnerability
+management. The values here MAY be necessary for reproducing the build. There is
+no need to [verify][Verification] these parameters because the build system is
+already trusted, and in many cases it is not practical to do so.
+
+<tr id="resolvedDependencies"><td><code>resolvedDependencies</code>
+<td>array (<a href="artifactreference">ArtifactReference</a>)<td>
+
+Collection of artifacts needed at build time, aside from those listed in
+`externalParameters` or `systemParameters`. For example, if the build script
+fetches and executes "example.com/foo.sh", which in turn fetches
+"example.com/bar.tar.gz", then both "foo.sh" and "bar.tar.gz" should be listed
+here.
+
+</table>
+
+The BuildDefinition describes all of the inputs to the build. It SHOULD contain
+all the information necessary and sufficient to initialize the build and begin
+execution.
+
+The `externalParameters` and `systemParameters` are the top-level inputs to the
+template, meaning inputs not derived from another input. Each field is a map
+from parameter name to [parameter value][ParameterValue]. The each parameter
+name MUST be unique across `externalParameters` and `systemParameters`. The
+following conventional names are RECOMMENDED when appropriate:
+
+-   `source`: The primary input to the build.
+-   `config`: The build configuration, if different from `source`.
+
+
+Guidelines:
+
+-   Maximize the amount of information that is implicit from the meaning of
+    `buildType`. In particular, any value that is boilerplate and the same
+    for every build SHOULD be implicit.
+
+-   Reduce parameters by moving configuration to input artifacts whenever
+    possible. For example, instead of passing in compiler flags via an external
+    parameter that has to be [verified][Verification] separately, require the
+    flags to live next to the source code or build configuration so that
+    verifying the latter automatically verifies the compiler flags.
+
+-   If possible, architect the build system to use this definition as its
+    sole top-level input, in order to guarantee that the information is
+    sufficient to run the build.
+
+-   In some cases, the build configuration is evaluated client-side and
+    sent over the wire, such that the build system cannot determine its
+    origin. In those cases, the build system SHOULD serialize the
+    configuration in a deterministic way and record the `digest` without a
+    `uri`. This allows one to consider the client-side evaluation as a
+    separate "build" with its own provenance, such that the verifier can
+    chain the two provenance attestations together to determine the origin
+    of the configuration.
+
+**TODO:** Explain the purpose of `resolvedDependencies`. Why do we need it? What
+goes in it? Is it OK for it to be incomplete? If a dependency is already pinned,
+does it need to be listed? How does one choose between `resolvedDependencies`
+and `builderDependencies`?
 
 ### ParameterValue
 
 [ParameterValue]: #parametervalue
 
-**Exactly one** of the fields MUST be set.
+REQUIRED: exactly one of the fields MUST be set.
 
-<a id="artifact"></a>
-`artifact` _object ([ArtifactReference])_
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `artifactRef` | [ArtifactReference] | Reference to an artifact. |
+| `scalarValue` | string | Scalar value. |
+| `mapValue` | map (string→string) | Unordered collection of name/value pairs. |
+| `arrayValue` | array (string) | Ordered collection of values. |
 
-> A reference to an artifact.
+For simplicity, only string values or collections of string values are
+supported.
 
-<a id="value"></a>
-`value` _string_
-
-> A scalar value. For simplicity, only string values are supported.
+> ⚠ **RFC:** The design of parameters is still not settled. We welcome feedback
+> on this particular design and suggestions for alternatives. In particular:
+>
+> -   How restrictive should we be? This is somewhat of a balance between making
+>     it easier for the builder vs [verifier][Verification]. A very restrictive
+>     type, such as only strings, makes it easier to set expectations but harder
+>     for a builder to describe reality. A very open type, such as an arbitrary
+>     JSON object, provides a lot of freedom to builders but possibly at the
+>     cost of complexity in terms of expectations.
+> -   Is there a better way to express types than using field names?
+> -   Do we need [ArtifactReference]? Would it instead make sense to just have
+>     the raw parameter here and then represent the digest in
+>     `resolvedDependencies`? What is the specific use case?
+>
+> Alternatives considered so far:
+>
+> -   Only allow strings (difficult for many builders)
+> -   Allow strings, maps of strings, or arrays of strings (current design)
+> -   Allow arbitrary JSON (challenge: how do we do [ArtifactReference]?)
 
 ### ArtifactReference
 
 [ArtifactReference]: #artifactreference
 
-Either `uri` or `digest` is REQUIRED.
+REQUIRED: at least one of `uri` or `digest`
 
-<a id="uri"></a>
-`uri` _string (URI)_
+<table>
+<tr><th>Field<th>Type<th>Description
 
-> [URI] describing where this artifact came from. When possible, this SHOULD
-> be a universal and stable identifier, such as a source location or Package
-> URL ([purl]).
->
-> Example: `pkg:pypi/pyyaml@6.0`
+<tr id="uri"><td><code>uri</code>
+<td>string (URI)<td>
 
-<a id="digest"></a>
-`digest` _string ([DigestSet])_
+URI describing where this artifact came from. When possible, this SHOULD
+be a universal and stable identifier, such as a source location or Package
+URL ([purl]). Example: `pkg:pypi/pyyaml@6.0`
 
-> [DigestSet] of cryptographic digests for the contents of this artifact.
->
-> TODO: Decide on hex vs base64 in #533 then document it here.
+<tr id="digest"><td><code>digest</code>
+<td><a href="https://github.com/in-toto/attestation/blob/main/spec/field_types.md#DigestSet">DigestSet</a><td>
 
-<a id="localName"></a>
-`localName` _string (URI), OPTIONAL_
+One or more cryptographic digests of the contents of this artifact.
 
-> The name for this artifact local to the build.
->
-> Example: `PyYAML-6.0.tar.gz`
+TODO: Decide on hex vs base64 in #533 then document it here.
 
-<a id="downloadLocation"></a>
-`downloadLocation` _string (URI), OPTIONAL_
+<tr id="localName"><td><code>localName</code>
+<td>string<td>
 
-> [URI] identifying the location that this artifact was downloaded from, if
-> different and not derivable from `uri`.
->
-> Example: `https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz`
+The name for this artifact local to the build. Example: `PyYAML-6.0.tar.gz`
 
-<a id="mediaType"></a>
-`mediaType` _string ([MediaType]), OPTIONAL_
+<tr id="downloadLocation"><td><code>downloadLocation</code>
+<td>string (URI)<td>
 
-> Media Type (aka MIME type) of this artifact.
+URI identifying the location that this artifact was downloaded from, if
+different and not derivable from `uri`. Example:
+`https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz`
+
+<tr id="MediaType"><td><code>MediaType</code>
+<td>string (<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types">MediaType</a>)<td>
+
+Media type (aka MIME type) of this artifact was interpreted.
+
+</table>
+
+> ⚠ **RFC:** Do we need all these fields? Is this adding too much complexity?
 
 ### RunDetails
 
 [RunDetails]: #rundetails
 
-> TODO: The following fields are the same as v0.2:
->
-> REQUIRED at SLSA Build L1 unless the `id` is implicit from the attestation
-> envelope (e.g. public key).
-  Builder builder = 1;
+REQUIRED for SLSA Build L1: `builder` (unless `id` is implicit from the
+attestation envelope)
 
-> TODO: description
-> OPTIONAL.
-  BuildMetadata metadata = 2;
+<table>
+<tr><th>Field<th>Type<th>Description
 
-> Additional artifacts generated during the build that should not be
-> considered the "output" of the build but that may be needed during
-> debugging or incident response.
->
-> Possible use cases:
->
-> -   Logs generated during the build.
-> -   Fully evaluated build configuration.
->
-> In most cases, this SHOULD NOT contain all intermediate files generated
-> during the build. Instead, this should only contain files that are likely
-> to be useful later and that cannot be easily reproduced.
->
-> TODO: Do we need some recommendation for how to distinguish between
-> byproducts? For example, should we recommend using `localName`?
->
-> OPTIONAL.
-  repeated ArtifactReference byproducts = 3;
+<tr id="builder"><td><code>builder</code>
+<td><a href="builder">Builder</a><td>
+
+Identifies the entity that executed the invocation, which is trusted to have
+correctly performed the operation and populated this provenance.
+
+<tr id="metadata"><td><code>metadata</code>
+<td><a href="buildmetadata">BuildMetadata</a><td>
+
+Metadata about this particular execution of the build.
+
+<tr id="byproducts"><td><code>byproducts</code>
+<td>array (<a href="artifactreference">ArtifactReference</a>)<td>
+
+Additional artifacts generated during the build that should not be considered
+the "output" of the build but that may be needed during debugging or incident
+response. For example, this might reference logs generated during the build
+and/or a digest of the fully evaluated build configuration.
+
+In most cases, this SHOULD NOT contain all intermediate files generated during
+the build. Instead, this should only contain files that are likely to be useful
+later and that cannot be easily reproduced.
+
+**TODO:** Do we need some recommendation for how to distinguish between
+byproducts? For example, should we recommend using `localName`?
+
+</table>
 
 ### Builder
 
 [Builder]: #builder
 
-> [URI] ... (same as v0.2)
-> TODO: In most cases this is implicit from the envelope layer (e.g. the
-> public key or x.509 certificate), which is just one more thing to mess up.
-> Can we rescope this to avoid the duplication and thus the security concern?
-> For example, if the envelope identifies the build system, this might
-> identify the tenant project?
->
-> REQUIRED at SLSA Build L1 unless it is implicit from the attestation
-> envelope (e.g. public key).
-  string id = 1;
+REQUIRED for SLSA Build L1: `id` (unless implicit from the attestation envelope)
 
-> TODO: Do we want to add this field? (#319)
-> TODO: Should we merge this with builderDependencies into a combined
-> "builderParameters"? Then arbitrary information can be stored.
->
-> OPTIONAL.
-  map<string, string> version = 2;
+<table>
+<tr><th>Field<th>Type<th>Description
 
-> Dependencies used by the orchestrator that are not run within the workload
-> and that should not affect the build, but may affect the provenance
-> generation or security guarantees.
-> TODO: Flesh out this model more.
->
-> OPTIONAL.
-  repeated ArtifactReference builder_dependencies = 3;
+<tr id="builder.id"><td><code>id</code>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/field_types.md#TypeURI">TypeURI</a>)<td>
+
+URI indicating the transitive closure of the trusted builder.
+
+**TODO:** In most cases this is implicit from the envelope layer (e.g. the
+public key or x.509 certificate), which is just one more thing to mess up. Can
+we rescope this to avoid the duplication and thus the security concern? For
+example, if the envelope identifies the build system, this might identify the
+tenant project?
+
+**TODO:** Provide guidance on how to choose a URI, what scope it should have,
+stability, how [verification] works, etc.
+
+<tr id="builder.version"><td><code>version</code>
+<td>map (string→string)<td>
+
+Version numbers of components of the builder.
+
+<tr id="builderDependencies"><td><code>builderDependencies</code>
+<td>array (<a href="artifactreference">ArtifactReference</a>)<td>
+
+Dependencies used by the orchestrator that are not run within the workload and
+that should not affect the build, but may affect the provenance generation or
+security guarantees.
+
+**TODO:** Flesh out this model more.
+
+</table>
+
+The builder represents the transitive closure of all the entities that are, by
+necessity, [trusted](../spec/v1.0/principles.md#trust-systems-verify-artifacts)
+to faithfully run the build and record the provenance.
+
+The `id` MUST reflect the trust base that consumers care about. How detailed to
+be is a judgement call. For example, GitHub Actions supports both GitHub-hosted
+runners and self-hosted runners. The GitHub-hosted runner might be a single
+identity because it's all GitHub from the consumer's perspective. Meanwhile,
+each self-hosted runner might have its own identity because not all runners are
+trusted by all consumers.
+
+Consumers MUST accept only specific signer-builder pairs. For example, "GitHub"
+can sign provenance for the "GitHub Actions" builder, and "Google" can sign
+provenance for the "Google Cloud Build" builder, but "GitHub" cannot sign for
+the "Google Cloud Build" builder.
+
+Design rationale: The builder is distinct from the signer because one signer
+may generate attestations for more than one builder, as in the GitHub Actions
+example above. The field is required, even if it is implicit from the signer,
+to aid readability and debugging. It is an object to allow additional fields
+in the future, in case one URI is not sufficient.
+
+> ⚠ **RFC:** Should we just allow builders to set arbitrary properties? We don't
+> expect verifiers to use any of them, so maybe that's the simpler approach? Or
+> have a `properties` that is an arbitrary object? (#319)
+
+### BuildMetadata
+
+[BuildMetadata]: #buildmetadata
+
+REQUIRED: (none)
+
+<table>
+<tr><th>Field<th>Type<th>Description
+
+<tr id="invocationId"><td><code>invocationId</code>
+<td>string<td>
+
+Identifies this particular build invocation, which can be useful for finding
+associated logs or other ad-hoc analysis. The exact meaning and format is
+defined by `builder.id`; by default it is treated as opaque and case-sensitive.
+The value SHOULD be globally unique.
+
+<tr id="startedOn"><td><code>startedOn</code>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/field_types.md#Timestamp">Timestamp</a>)<td>
+
+The timestamp of when the build started.
+
+<tr id="finishedOn"><td><code>finishedOn</code>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/field_types.md#Timestamp">Timestamp</a>)<td>
+
+The timestamp of when the build completed.
+
+</table>
+
+## Verification
+
+[Verification]: #verification
+
+> **TODO:** Describe how clients are expected to verify the provenance.
 
 ## Index of build types
 
@@ -379,7 +482,7 @@ meaning of each field is unchanged unless otherwise noted.
             // If the old `configSource` was the sole top-level input,
             // (i.e. containing the source or a pointer to the source):
             "source": {
-                "artifact": {
+                "artifactRef": {
                     "uri": old.invocation.configSource.uri,
                     "digest": old.invocation.configSource.digest,
                 },
@@ -388,10 +491,10 @@ meaning of each field is unchanged unless otherwise noted.
             // If the old `configSource` contained just build configuration
             // and a separate top-level input contained the source:
             "source": {
-                "artifact": old.materials[indexOfSource],
+                "artifactRef": old.materials[indexOfSource],
             },
             "config": {
-                "artifact": {
+                "artifactRef": {
                     "uri": old.invocation.configSource.uri,
                     "digest": old.invocation.configSource.digest,
                 },

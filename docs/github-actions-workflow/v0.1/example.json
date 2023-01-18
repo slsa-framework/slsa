@@ -4,20 +4,35 @@
         "buildDefinition": {
             "buildType": "https://slsa.dev/github-actions-workflow/v0.1?draft",
             "externalParameters": {
-                "inputs_build_id": { "value": "123456768" },
-                "inputs_deploy_target": { "value": "deployment_sys_1a" },
-                "inputs_perform_deploy": { "value": "true" },
+                "inputs": {
+                    "mapValue": {
+                        "build_id": "123456768",
+                        "deploy_target": "deployment_sys_1a",
+                        "perform_deploy": "true"
+                    }
+                },
                 "source": {
-                    "artifact": {
+                    "artifactRef": {
                         "uri": "git+https://github.com/octocat/hello-world@refs/heads/main",
                         "digest": { "sha1": "c27d339ee6075c1f744c5d4b200f7901aad2c369" }
                     }
                 },
-                "workflow_path": { "value": ".github/workflow/release.yml" }
+                "inputs": {
+                    "mapValue": {
+                        "mascot": "Mona"
+                    }
+                },
+                "workflowPath": {
+                    "scalarValue": ".github/workflow/release.yml"
+                }
             },
             "systemParameters": {
-                "github_actor": { "value": "MarkLodato" },
-                "github_event_name": { "value": "workflow_dispatch" }
+                "github": {
+                    "mapValue": {
+                        "actor": "MarkLodato",
+                        "event_name": "workflow_dispatch"
+                    }
+                }
             },
             "resolvedDependencies": [
                 {

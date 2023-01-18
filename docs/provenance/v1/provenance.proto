@@ -22,10 +22,11 @@ message BuildDefinition {
 }
 
 message ParameterValue {
-  oneof value {
-    ArtifactReference artifact = 1;
-    string value = 2;
-  }
+  // Logically a oneof, but oneof doesn't support repeated or map.
+  ArtifactReference artifact_ref = 1;
+  string scalar_value = 2;
+  map<string, string> map_value = 3;
+  repeated string array_value = 4;
 }
 
 message ArtifactReference {
