@@ -209,7 +209,6 @@ following conventional names are RECOMMENDED when appropriate:
 -   `source`: The primary input to the build.
 -   `config`: The build configuration, if different from `source`.
 
-
 Guidelines:
 
 -   Maximize the amount of information that is implicit from the meaning of
