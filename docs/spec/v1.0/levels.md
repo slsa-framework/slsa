@@ -57,7 +57,7 @@ SLSA is intended to serve multiple populations:
     addition to the goals above, organizations also want to broadly understand
     and reduce risk across the organization.
 
--   **Infrastructure providers,** such as build services and packaging
+-   **Infrastructure providers,** such as build services and package
     ecosystems, who are critical to achieving SLSA. While not the primary
     beneficiary of SLSA, they may benefit from increased security and user
     trust.

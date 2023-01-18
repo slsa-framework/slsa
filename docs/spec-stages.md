@@ -35,10 +35,10 @@ anymore.
 
 ## Stable
 
-At this stage the document is considered stable. It is suitable for
-reference and implementation in production. Changes may only happen if
-deemed necessary and will be avoided as much as possible if they might
-adversely impact implementations.
+At this stage the document is considered stable. No changes that would
+constitute a significant departure from the existing specification are
+expected although changes to address ambiguities and edge cases may
+still occur.
 
 ## Retired
 
