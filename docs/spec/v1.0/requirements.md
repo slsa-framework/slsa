@@ -433,12 +433,47 @@ showing what the options are:
 A package's <dfn>consumer</dfn> is the organization or individual that uses the
 package.
 
-The only requirement on the consumer is that they MAY have to opt-in to enable
-SLSA verification, depending on the package ecosystem.
+The consumer MAY have to opt-in to enable SLSA verification, depending on the
+package ecosystem.
+  
+The consumer MUST explicitly trust that the build system meets the SLSA requirements.
+That trust SHOULD be derived from evidence provided by the build system. The
+consumer MAY delegate their trust to an auditor.
 
 > **TODO:** Anything else? Do they need to make risk-based decisions? Respond to
 > errors/warnings?
+  
+## Auditor
+An <dfn>auditor</dfn> is an organization or individual that assesses build
+systems for conformance with the SLSA requirements.
+  
+A consumer MAY act as their own auditor.
+  
+An auditor SHOULD use the prompts in [verifying systems](verifying-systems.md)
+when assessing build systems. Auditors MAY go beyond these prompts.
+  
+An auditor SHOULD periodically reassess build systes for conformance.
+  
+### SLSA conformance attestations
 
+If an auditor is willing to attest to a build system's SLSA conformance,
+then it MUST provide the build system with a non-forgeable attestation for
+the build system to embed provenance it generates.
+  
+The attestation MUST include the build system's identity, the auditor's
+identity, and an expiration date. The attestation MAY also include one or
+more URIs that resolve to evidence of the build system's conformance.
+  
+TODO: Where does this requirement go? Consumer, package ecosystem?
+  
+<Party> MUST verify the auditor's attestation for validity. An attestation
+is valid if and only if all of the following are true:
+  - the build system identity is equal to the builder identity in the enclosing
+  provenance
+  - the expiration date is strictly later than the time of validation
+  - the verifier knows any secret material used to prove the attestation's
+  non-forgability to belong to the auditor named in the attestation
+  
 ## Source control
 
 [Source control]: #source-control
