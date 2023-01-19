@@ -475,6 +475,9 @@ complete example predicate.
 
 -   [GitHub Actions Workflow](../../github-actions-workflow/v0.1/)
 
+**TODO:** Before marking the spec stable, add at least 1-2 other build types to
+validate that the design is general enough to apply to other builders.
+
 ## Migrating from 0.2
 
 To migrate from [version 0.2][0.2] (`old`), use the following pseudocode. The
