@@ -461,8 +461,13 @@ If an auditor is willing to attest to a build system's SLSA conformance,
 then it MUST provide the build system with a non-forgeable attestation for
 the build system to embed in the provenance it generates.
   
-The attestation MUST include the build system's identity, the auditor's
-identity, and an expiration date. The attestation MAY also include one or
+The attestation MUST include:
+
+-   the build system's identity
+-   the auditor's identity
+-   an expiration date
+-   the SLSA level(s) that the build system satisifies
+The attestation MAY also include one or
 more URIs that resolve to evidence of the build system's conformance.
   
 TODO: Where does this requirement go? Consumer, package ecosystem?
@@ -472,9 +477,10 @@ is valid if and only if all of the following are true:
 
 -   the build system identity is equal to the builder identity in the enclosing
   provenance
--   the expiration date is strictly later than the time of validation
--   the verifier knows any secret material used to prove the attestation's
-  non-forgability to belong to the auditor named in the attestation
+-   the expiration date is strictly later than the time of verification
+-   the verifier knows that any secret material used to demonstrate the attestation's
+  non-forgability belongs to the auditor specified in the attestation
+-   any secret material used to demonstrate the attestation's non-forgeability has not expired or been revoked at the time of verification
   
 ## Source control
 
