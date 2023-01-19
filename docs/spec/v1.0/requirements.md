@@ -453,7 +453,7 @@ A consumer MAY act as their own auditor.
 An auditor SHOULD use the prompts in [verifying systems](verifying-systems.md)
 when assessing build systems. Auditors MAY go beyond these prompts.
   
-An auditor SHOULD periodically reassess build systes for conformance.
+An auditor SHOULD periodically reassess build systems for conformance.
   
 ### SLSA conformance attestations
 
