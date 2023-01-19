@@ -459,7 +459,7 @@ An auditor SHOULD periodically reassess build systems for conformance.
 
 If an auditor is willing to attest to a build system's SLSA conformance,
 then it MUST provide the build system with a non-forgeable attestation for
-the build system to embed provenance it generates.
+the build system to embed in the provenance it generates.
   
 The attestation MUST include the build system's identity, the auditor's
 identity, and an expiration date. The attestation MAY also include one or
