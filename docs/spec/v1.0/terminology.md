@@ -122,14 +122,14 @@ workstation, though this does not meet SLSA 2+.
 ### Verification model
 
 Verification in SLSA is performed in two ways. Firstly, the build system is
-manually verified to confirm that the the SLSA requirements are met for the
-level claimed by the platform. This manual verification should happen on a
-recurring cadence and the outcomes should be published by the platform operator
-for users to review and make informed decisions about which builders to trust.
+verified to ensure conformance with the requirements at the level claimed by
+the build system. This verification should happen on a recurring cadence with
+the outcomes published by the platform operator for their users to review and
+make informed decisions about which builders to trust.
 
-Secondly, artifacts published into a package ecosystem should be automatically
-verified prior to use to ensure they meet the producer defined expectations.
-Automated package verification should, at a minimum, ensure that the provenance
+Secondly, the provenance for packages published into a package ecosystem must
+be verified prior to use to ensure they meet the producer defined expectations.
+Provenance verification should, at a minimum, ensure that the provenance
 metadata for a package matches the expectations of where the package source
 code was retrieved from and on what build system the package was built.
 
@@ -140,16 +140,16 @@ code was retrieved from and on what build system the package was built.
 | Term         | Description |
 |--------------|---- |
 | Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package. |
-| Automatic Verification | Artifacts are automatically verified by the package ecosystem to ensure that the package's expectations are met before the package is used. |
-| Manual Verification | [Build systems are manually verified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level. |
+| Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used. |
+| Build system verification | [Build systems are verified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level. |
 
 <details><summary>Small software team</summary>
 
 | Term | Example |
 | ---- | ------- |
-| Expectations | Defined by the team's security personnel and stored in a database. |
-| Automatic verification | Performed on nodes before execution by querying the expectations database. |
-| Manual verification | The team follows secure design and development best practices and does annual penetration testing exercises. |
+| Expectations | Defined by the producer's security personnel and stored in a database. |
+| Provenance verification | Performed automatically on cluster nodes before execution by querying the expectations database. |
+| Build system verification | The build system implementer follows secure design and development best practices and does annual penetration testing exercises. |
 
 </details>
 
@@ -157,8 +157,8 @@ code was retrieved from and on what build system the package was built.
 
 | Term | Example |
 | ---- | ------- |
-| Expectations | Defined separately for each package based on package repository and builder. Stored in the package registry. |
-| Automatic verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client may also verify expectations prior to installing packages. |
-| Manual verification | Performed by language ecosystem packaging authority. |
+| Expectations | Defined separately for each package and stored in the package registry. |
+| Provenance verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client also verifies expectations prior to installing packages. |
+| Build system verification | Performed by the language ecosystem packaging authority. |
 
 </details>
