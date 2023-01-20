@@ -432,8 +432,10 @@ The package ecosystem MUST ensure that expectations are defined for the package 
 
 There are several approaches a package ecosystem could take to setting expectations, for example:
 
--   requiring the producer to set expectations when registering a new package in the package ecosystem
--   using the values from the package's provenance during its initial publication
+-   Requiring the producer to set expectations when registering a new package
+    in the package ecosystem.
+-   Using the values from the package's provenance during its initial
+    publication (trust on first use).
 
 <td>✓<td>✓<td>✓
 <tr id="expectations-non-falsifiable">
@@ -454,17 +456,33 @@ The package ecosystem MUST ensure that expectations are non-falsifiable, that is
 
 #### Verifying expectations
 
-A critical responsibility of the package ecosystem is to verify that the provenance for a package matches the expectations defined for the package.
+A critical responsibility of the package ecosystem is to verify that the
+provenance for a package matches the expectations defined for that package.
 
-Expectations SHOULD be set for all packages in a package ecosystem. Where expectations are set, the package ecosystem MUST verify the package's provenance meets the expectations before the package is used. Verifying expectations could happen in multiple places within a package ecosystem, for example by using one or more of the approaches:
+Expectations SHOULD be set for all packages in a package ecosystem. Where
+expectations are set, the package ecosystem MUST verify the package's
+provenance meets the expectations before the package is used. Verifying
+expectations could happen in multiple places within a package ecosystem, for
+example by using one or more of the following approaches:
 
--   during package upload the registry ensures that the package's provenance matches any known expectations for the package before accepting the package into the registry.
--   during client-side installation/deployment of a package the package ecosystem client ensures that the package's provenance matches the ecosystem known expectations for the package before use.
--   package ecosystem participants and/or the ecosystem operators may perform continuous monitoring of packages to detect changes to packages which do not meet the known expectations.
+-   During package upload the registry ensures that the package's provenance
+    matches any known expectations for that package before accepting it into
+    the registry.
+-   During client-side installation/deployment of a package the package
+    ecosystem client ensures that the package's provenance matches the
+    ecosystem known expectations for that package before use.
+-   Package ecosystem participants and/or the ecosystem operators may perform
+    continuous monitoring of packages to detect changes to packages which do
+    not meet the known expectations.
 
-The package ecosystem SHOULD default to denying use of packages, only allowing packages if there exists provenance for the package which matches the known expectations.
+The package ecosystem SHOULD default to denying use of packages, only allowing
+packages for which there exists provenance for the package matching the known
+expectations.
 
-Verification MUST ensure that the `BuildType` and `ExternalParameters` in the provenance match the known expectations. The package ecosystem MAY allow an approved list of `ExternalParameters` to be ignored during verification. Any unrecognised `ExternalParameters` SHOULD cause verification to fail.
+Verification MUST ensure that the `BuildType` and `ExternalParameters` in the
+provenance match the known expectations. The package ecosystem MAY allow an
+approved list of `ExternalParameters` to be ignored during verification. Any
+unrecognized `ExternalParameters` SHOULD cause verification to fail.
 
 **TODO:** Update the requirements to provide guidelines for how to implement,
 showing what the options are:
