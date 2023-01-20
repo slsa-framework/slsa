@@ -487,7 +487,7 @@ validate that the design is general enough to apply to other builders.
 
 ## Migrating from 0.2
 
-To migrate from [version 0.2](../v0.2.md) (`old`), use the following pseudocode.
+To migrate from [version 0.2](../v0.2) (`old`), use the following pseudocode.
 The meaning of each field is unchanged unless otherwise noted.
 
 ```javascript
