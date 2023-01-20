@@ -432,8 +432,8 @@ The package ecosystem MUST ensure that expectations are defined for the package 
 
 There are several approaches a package ecosystem could take to setting expectations, for example:
 
--   explicitly, i.e. when registering a new package in the package ecosystem.
--   implicitly, i.e. by using values from the package's provenance during its initial publication.
+-   requiring the producer to set expectations when registering a new package in the package ecosystem
+-   using the values from the package's provenance during its initial publication
 
 <td>✓<td>✓<td>✓
 <tr id="expectations-non-falsifiable">
@@ -456,11 +456,11 @@ The package ecosystem MUST ensure that expectations are non-falsifiable, that is
 
 A critical responsibility of the package ecosystem is to verify that the provenance for a package matches the expectations defined for the package.
 
-Verifying expectations COULD happen in multiple places within a package ecosystem:
+Expectations SHOULD be set for all packages in a package ecosystem. Where expectations are set, the package ecosystem MUST verify the package's provenance meets the expectations before the package is used. Verifying expectations could happen in multiple places within a package ecosystem, for example:
 
--   during package upload the registry SHOULD verify that the package's provenance matches any known expectations for the package before accepting the package into the registry.
--   during client-side installation/deployment of a package the package ecosystem client SHOULD verify that the package's provenance matches the ecosystem known expectations for the package before use.
--   package ecosystem participants and/or the ecosystem operators MAY perform continuous monitor of packages to detect changes to packages which do not meet the known expectations.
+-   during package upload the registry ensures that the package's provenance matches any known expectations for the package before accepting the package into the registry.
+-   during client-side installation/deployment of a package the package ecosystem client ensures that the package's provenance matches the ecosystem known expectations for the package before use.
+-   package ecosystem participants and/or the ecosystem operators may perform continuous monitoring of packages to detect changes to packages which do not meet the known expectations.
 
 The package ecosystem SHOULD default to denying use of packages, only allowing packages if there exists provenance for the package which matches the known expectations.
 
