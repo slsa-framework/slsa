@@ -34,6 +34,10 @@ provenance:
     v0.2:
       name: Version 0.2
       status: Stable
+    v1:
+      name: Version 1.0 (DRAFT)
+      draft: true
+      status: Working Draft
   current: v0.2
 
 verification_summary:
@@ -45,3 +49,11 @@ verification_summary:
       name: Version 0.2
       status: Stable
   current: v0.2
+
+github-actions-workflow:
+  versions:
+    v0.1:
+      name: Version 0.1 (DRAFT)
+      draft: true
+      status: Working Draft
+  current: v0.1

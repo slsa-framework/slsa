@@ -193,10 +193,7 @@ Provenance.
 -   *Authenticity:* No requirements.
 -   *Accuracy:* No requirements.
 
-**TODO:** Link to local copy of provenance (../../provenance/v1.0.md)
-once [#525](https://github.com/slsa-framework/slsa/pull/525) is merged.
-
-[SLSA Provenance]: https://deploy-preview-525--slsa.netlify.app/provenance/v1.0
+[SLSA Provenance]: ../../provenance/v1/index.md
 
 <td>✓<td>✓<td>✓
 <tr id="provenance-authenticated"><td>Provenance Authenticated<td>
