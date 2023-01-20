@@ -133,17 +133,18 @@ Provenance verification should, at a minimum, ensure that the provenance
 metadata for a package matches the expectations of where the package source
 code was retrieved from and on what build system the package was built.
 
-> **TODO:** move into spec versioned folder?
-
-![Verification Model](../../images/verification-model.svg)
+![Verification Model](verification-model.svg)
 
 | Term         | Description |
 |--------------|---- |
-| Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package. |
+| Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly. |
 | Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used. |
 | Build system verification | [Build systems are verified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level. |
 
-<details><summary>Small software team</summary>
+The examples below suggest some ways that expectations and verification may be
+implemented for different, broadly defined, package ecosystems.
+
+<details><summary>Example: Small software team</summary>
 
 | Term | Example |
 | ---- | ------- |
@@ -153,7 +154,7 @@ code was retrieved from and on what build system the package was built.
 
 </details>
 
-<details><summary>Open source language distribution</summary>
+<details><summary>Example: Open source language distribution</summary>
 
 | Term | Example |
 | ---- | ------- |
