@@ -17,7 +17,7 @@ Describe how an artifact or set of artifacts was produced so that:
 -   Others can rebuild the artifact, if desired.
 
 This predicate is the recommended way to satisfy the SLSA [provenance
-requirements].
+requirements](/spec/v1.0/requirements#provenance-generation).
 
 ## Prerequisite
 
@@ -39,10 +39,9 @@ The model is as follows:
 
 -   Each build runs as an independent process on a multi-tenant platform. The
     `builder` is the identity of this platform, representing the transitive
-    closure of all entities that are
-    [trusted](../spec/v1.0/principles.md#trust-systems-verify-artifacts) to
-    faithfully run the build and record the provenance. (Note: The same model
-    can be used for platform-less or single-tenant build systems.)
+    closure of all entities that are [trusted] to faithfully run the build and
+    record the provenance. (Note: The same model can be used for platform-less
+    or single-tenant build systems.)
 
 -   The build process is defined by a parameterized template, identified by
     `buildType`. Often a build platform only supports a single build type. For
@@ -73,14 +72,14 @@ The model is as follows:
 -   During execution, the build process MAY communicate with the build
     platform's control plane and/or build caches. This communication is not
     captured in the provenance but is subject to [SLSA
-    Requirements](../spec/v1.0/requirements.md).
+    Requirements](/spec/v1.0/requirements).
 
 -   Finally, the build process outputs one or more artifacts, identified by
     `subject`.
 
 For concrete examples, see [index of build types](#index-of-build-types).
 
-> **TODO:** Align with the [Build model](../spec/v1.0/terminology.md).
+> **TODO:** Align with the [Build model](/spec/v1.0/terminology#build-model).
 
 ## Parsing rules
 
@@ -130,12 +129,12 @@ REQUIRED for SLSA Build L1: `buildDefinition`, `runDetails`
 <tr><th>Field<th>Type<th>Description
 
 <tr id="buildDefinition"><td><code>buildDefinition</code>
-<td><a href="builddefinition">BuildDefinition</a><td>
+<td><a href="#builddefinition">BuildDefinition</a><td>
 
 The input to the build. The accuracy and completeness are implied by `runDetails.builder.id`.
 
 <tr id="runDetails"><td><code>runDetails</code>
-<td><a href="rundetails">RunDetails</a><td>
+<td><a href="#rundetails">RunDetails</a><td>
 
 Details specific to this particular execution of the build.
 
@@ -164,7 +163,7 @@ BuildDefinition, and a complete example. Example:
 https://slsa.dev/github-actions-workflow/v0.1
 
 <tr id="externalParameters"><td><code>externalParameters</code>
-<td>map (string→<a href="parametervalue">ParameterValue</a>)<td>
+<td>map (string→<a href="#parametervalue">ParameterValue</a>)<td>
 
 The parameters that are under external control, such as those set by a user or
 tenant of the build system. They MUST be complete at SLSA Build L3, meaning that
@@ -177,7 +176,7 @@ Consumers SHOULD have an expectation of what "good" looks like; the more
 information that they need to check, the harder that task becomes.
 
 <tr id="systemParameters"><td><code>systemParameters</code>
-<td>map (string→<a href="parametervalue">ParameterValue</a>)<td>
+<td>map (string→<a href="#parametervalue">ParameterValue</a>)<td>
 
 The parameters that are under the control of the `builder`. The primary
 intention of this field is for debugging, incident response, and vulnerability
@@ -186,7 +185,7 @@ no need to [verify][Verification] these parameters because the build system is
 already trusted, and in many cases it is not practical to do so.
 
 <tr id="resolvedDependencies"><td><code>resolvedDependencies</code>
-<td>array (<a href="artifactreference">ArtifactReference</a>)<td>
+<td>array (<a href="#artifactreference">ArtifactReference</a>)<td>
 
 Collection of artifacts needed at build time, aside from those listed in
 `externalParameters` or `systemParameters`. For example, if the build script
@@ -289,35 +288,44 @@ REQUIRED: at least one of `uri` or `digest`
 
 URI describing where this artifact came from. When possible, this SHOULD
 be a universal and stable identifier, such as a source location or Package
-URL ([purl]). Example: `pkg:pypi/pyyaml@6.0`
+URL ([purl]).
 
 <tr id="digest"><td><code>digest</code>
 <td><a href="https://github.com/in-toto/attestation/blob/main/spec/field_types.md#DigestSet">DigestSet</a><td>
 
-One or more cryptographic digests of the contents of this artifact. Example:
-`{"sha256": "5f0689d54944564971f2811f9788218bfafb21aa20f532e6490004377dfa648f"}`
+One or more cryptographic digests of the contents of this artifact.
 
 **TODO:** Decide on hex vs base64 in #533 then document it here.
 
 <tr id="localName"><td><code>localName</code>
 <td>string<td>
 
-The name for this artifact local to the build. Example: `PyYAML-6.0.tar.gz`
+The name for this artifact local to the build.
 
 <tr id="downloadLocation"><td><code>downloadLocation</code>
 <td>string (URI)<td>
 
 URI identifying the location that this artifact was downloaded from, if
-different and not derivable from `uri`. Example:
-`https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz`
+different and not derivable from `uri`.
 
-<tr id="MediaType"><td><code>MediaType</code>
+<tr id="mediaType"><td><code>mediaType</code>
 <td>string (<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types">MediaType</a>)<td>
 
-Media type (aka MIME type) of this artifact was interpreted. Example:
-`application/json`
+Media type (aka MIME type) of this artifact was interpreted.
 
 </table>
+
+Example:
+
+```json
+{
+    "uri": "pkg:pypi/pyyaml@6.0",
+    "digest": {"sha256": "5f0689d54944564971f2811f9788218bfafb21aa20f532e6490004377dfa648f"},
+    "localName": "PyYAML-6.0.tar.gz",
+    "downloadLocation": "https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz",
+    "mediaType": "application/gzip"
+}
+```
 
 > ⚠ **RFC:** Do we need all these fields? Is this adding too much complexity?
 
@@ -332,18 +340,18 @@ attestation envelope)
 <tr><th>Field<th>Type<th>Description
 
 <tr id="builder"><td><code>builder</code>
-<td><a href="builder">Builder</a><td>
+<td><a href="#builder">Builder</a><td>
 
 Identifies the entity that executed the invocation, which is trusted to have
 correctly performed the operation and populated this provenance.
 
 <tr id="metadata"><td><code>metadata</code>
-<td><a href="buildmetadata">BuildMetadata</a><td>
+<td><a href="#buildmetadata">BuildMetadata</a><td>
 
 Metadata about this particular execution of the build.
 
 <tr id="byproducts"><td><code>byproducts</code>
-<td>array (<a href="artifactreference">ArtifactReference</a>)<td>
+<td>array (<a href="#artifactreference">ArtifactReference</a>)<td>
 
 Additional artifacts generated during the build that should not be considered
 the "output" of the build but that may be needed during debugging or incident
@@ -388,7 +396,7 @@ stability, how [verification] works, etc.
 Version numbers of components of the builder.
 
 <tr id="builderDependencies"><td><code>builderDependencies</code>
-<td>array (<a href="artifactreference">ArtifactReference</a>)<td>
+<td>array (<a href="#artifactreference">ArtifactReference</a>)<td>
 
 Dependencies used by the orchestrator that are not run within the workload and
 that should not affect the build, but may affect the provenance generation or
@@ -399,8 +407,7 @@ security guarantees.
 </table>
 
 The builder represents the transitive closure of all the entities that are, by
-necessity, [trusted](../spec/v1.0/principles.md#trust-systems-verify-artifacts)
-to faithfully run the build and record the provenance.
+necessity, [trusted] to faithfully run the build and record the provenance.
 
 The `id` MUST reflect the trust base that consumers care about. How detailed to
 be is a judgement call. For example, GitHub Actions supports both GitHub-hosted
@@ -480,8 +487,8 @@ validate that the design is general enough to apply to other builders.
 
 ## Migrating from 0.2
 
-To migrate from [version 0.2][0.2] (`old`), use the following pseudocode. The
-meaning of each field is unchanged unless otherwise noted.
+To migrate from [version 0.2](../v0.2.md) (`old`), use the following pseudocode.
+The meaning of each field is unchanged unless otherwise noted.
 
 ```javascript
 {
@@ -598,12 +605,8 @@ Renamed to "slsa.dev/provenance".
 
 Initial version, named "in-toto.io/Provenance"
 
-[0.1]: v0.1.md
-[0.2]: v0.2.md
-[DigestSet]: https://github.com/in-toto/attestation/blob/main/spec/field_types.md#DigestSet
-[ResourceURI]: https://github.com/in-toto/attestation/blob/main/spec/field_types.md#ResourceURI
 [Statement]: https://github.com/in-toto/attestation/blob/main/spec/README.md#statement
-[Timestamp]: https://github.com/in-toto/attestation/blob/main/spec/field_types.md#Timestamp
-[TypeURI]: https://github.com/in-toto/attestation/blob/main/spec/field_types.md#TypeURI
 [in-toto attestation]: https://github.com/in-toto/attestation
 [parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/README.md#parsing-rules
+[purl]: https://github.com/package-url/purl-spec
+[trusted]: /spec/v1.0/principles#trust-systems-verify-artifacts
