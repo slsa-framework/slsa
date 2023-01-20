@@ -456,7 +456,7 @@ The package ecosystem MUST ensure that expectations are non-falsifiable, that is
 
 A critical responsibility of the package ecosystem is to verify that the provenance for a package matches the expectations defined for the package.
 
-Expectations SHOULD be set for all packages in a package ecosystem. Where expectations are set, the package ecosystem MUST verify the package's provenance meets the expectations before the package is used. Verifying expectations could happen in multiple places within a package ecosystem, for example:
+Expectations SHOULD be set for all packages in a package ecosystem. Where expectations are set, the package ecosystem MUST verify the package's provenance meets the expectations before the package is used. Verifying expectations could happen in multiple places within a package ecosystem, for example by using one or more of the approaches:
 
 -   during package upload the registry ensures that the package's provenance matches any known expectations for the package before accepting the package into the registry.
 -   during client-side installation/deployment of a package the package ecosystem client ensures that the package's provenance matches the ecosystem known expectations for the package before use.
