@@ -1,0 +1,5 @@
+- name: "[Example] Foo Build System"
+  slsa_level: 2
+  website: https://example.com/foo-build-system
+  self_attestation: https://example.com/foo-build-system/attestation
+  public_key: https://example.com/foo-build-system/public-key
