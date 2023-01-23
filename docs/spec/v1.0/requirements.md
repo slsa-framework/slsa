@@ -419,6 +419,13 @@ prescribed by the package ecosystem.
 
 The package ecosystem is responsible for ensuring expectations are defined, verified before package use, and are only modified by the package's authenticated producer.
 
+It is important to note that  expectations are tied to a <dfn>package</dfn>
+name, whereas provenance is tied to an <dfn>artifact</dfn>. Package ecosystem's
+using the recommended suite of attestation formats SHOULD list the package name
+in the provenance attestation statement's subject field, but the precise
+semantics for binding a package name to an artifact are defined by the package
+ecosystem.
+
 #### Expectations
 
 <table>
