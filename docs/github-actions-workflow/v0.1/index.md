@@ -11,8 +11,8 @@ hero_text: |
 This `buildType` describes the execution of a top-level [GitHub Actions]
 workflow (as a whole).
 
-Note: This type is not meant to describe execution of subsets of the top-level
-workflow, such as an action, a job, or a reusable workflow.
+Note: This type is **not** meant to describe execution of subsets of the
+top-level workflow, such as an action, a job, or a reusable workflow.
 
 [GitHub Actions]: https://docs.github.com/en/actions
 
@@ -25,24 +25,22 @@ All external parameters are REQUIRED unless empty.
 <table>
 <tr><th>Parameter<th>Type<th>Description
 
-<tr id="inputs"><td><code>inputs</code><td>mapValue<td>
+<tr id="inputs"><td><code>inputs</code><td>object<td>
 
-The [inputs context], with each value converted to string. Every non-empty input
-value MUST be recorded. Empty values SHOULD be omitted.
+The [inputs][inputs context] to the top-level workflow. Every non-empty input
+value MUST be recorded. Empty values SHOULD be omitted. Only relevant for
+`workflow_dispatch` events. MAY be omitted if empty.
 
-Note: Only `workflow_dispatch` events and reusable workflows have inputs.
-
-<tr id="source"><td><code>source</code><td>artifact<td>
+<tr id="source"><td><code>source</code><td>string<td>
 
 The git repository containing the top-level workflow YAML file.
 
 This can be computed from the [github context] using
 `"git+" + github.server_url + "/" + github.repository + "@" + github.ref`.
 
-<tr id="vars"><td><code>vars</code><td>vars<td>
+<tr id="vars"><td><code>vars</code><td>object<td>
 
-The [vars context], with each value converted to string. Every non-empty input
-value MUST be recorded. Empty values SHOULD be omitted.
+The [vars context]. MAY be omitted if empty.
 
 <tr id="workflowPath"><td><code>workflowPath</code><td>string<td>
 
@@ -64,16 +62,16 @@ the path. See [getEntryPoint] for one possible implementation.
 
 All system parameters are OPTIONAL.
 
-| Parameter            | Type     | Description |
-| -------------------- | -------- | ----------- |
-| `github`       | mapValue   | A subset of the [github context] as described below. Only includes parameters that are likely to have an effect on the build and that are not already captured elsewhere. |
+| Parameter | Type     | Description |
+| --------- | -------- | ----------- |
+| `github`  | object   | A subset of the [github context] as described below. Only includes parameters that are likely to have an effect on the build and that are not already captured elsewhere. |
 
-The `github` map SHOULD contains the following elements:
+The `github` object SHOULD contains the following elements:
 
-| GitHub Context Parameter        | Description |
-| ------------------------------- | ----------- |
-| `github.mapValue["actor"]`      | The username of the user that triggered the initial workflow run. |
-| `github.mapValue["event_name"]` | The name of the event that triggered the workflow run. |
+| GitHub Context Parameter | Type   | Description |
+| ------------------------ | ------ | ----------- |
+| `github.actor`           | string |The username of the user that triggered the initial workflow run. |
+| `github.event_name`      | string |The name of the event that triggered the workflow run. |
 
 > TODO: What about `actor_id`, `repository_id`, and `repository_owner_id`? Those
 > are not part of the context so they're harder to describe, and the repository
@@ -88,6 +86,9 @@ The `github` map SHOULD contains the following elements:
 
 ### Resolved dependencies
 
+The `resolvedDependencies` SHOULD contain an entry providing the git commit ID
+of `source`, with the `uri` matching `externalParameters.source`. See [Example].
+
 The resolved dependencies MAY contain any artifacts known to be input to the
 workflow, such as the specific versions of the virtual environments used.
 
@@ -99,6 +100,8 @@ The `invocationId` SHOULD be set to `github.server_url + "/actions/runs/" +
 github.run_id + "/attempts/" + github.run_attempt`.
 
 ## Example
+
+[Example]: #example
 
 ```json
 {% include_relative example.json %}
