@@ -268,7 +268,7 @@ The build system is responsible for isolating between builds, even within the
 same tenant project. In other words, how strong of a guarantee do we have that
 the build really executed correctly, without external influence?
 
-The SLSA Build level describes the minimum bar for isolation strength.
+The SLSA Build level describes the minimum bar for isolation strength. For more information on assessing a build system's isolation strength, see [Verifying build systems](verifying-systems.md).
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
@@ -436,12 +436,8 @@ package.
 The consumer MAY have to opt-in to enable SLSA verification, depending on the
 package ecosystem.
   
-The consumer MUST explicitly trust that the build system meets the SLSA requirements.
-That trust SHOULD be derived from evidence provided by the build system. The
-consumer MAY delegate their trust to an auditor.
-
 > **TODO:** Anything else? Do they need to make risk-based decisions? Respond to
-> errors/warnings?
+> errors/warnings? Do consumers trust builders, or is that up to the package ecosystem?
   
 ## Auditor
 
@@ -454,33 +450,6 @@ An auditor SHOULD use the prompts in [verifying systems](verifying-systems.md)
 when assessing build systems. Auditors MAY go beyond these prompts.
   
 An auditor SHOULD periodically reassess build systems for conformance.
-  
-### SLSA conformance attestations
-
-If an auditor is willing to attest to a build system's SLSA conformance,
-then it MUST provide the build system with a non-forgeable attestation for
-the build system to embed in the provenance it generates.
-  
-The attestation MUST include:
-
--   the build system's identity
--   the auditor's identity
--   an expiration date
--   the SLSA level(s) that the build system satisifies
-The attestation MAY also include one or
-more URIs that resolve to evidence of the build system's conformance.
-  
-TODO: Where does this requirement go? Consumer, package ecosystem?
-  
-<Party> MUST verify the auditor's attestation for validity. An attestation
-is valid if and only if all of the following are true:
-
--   the build system identity is equal to the builder identity in the enclosing
-  provenance
--   the expiration date is strictly later than the time of verification
--   the verifier knows that any secret material used to demonstrate the attestation's
-  non-forgability belongs to the auditor specified in the attestation
--   any secret material used to demonstrate the attestation's non-forgeability has not expired or been revoked at the time of verification
   
 ## Source control
 
