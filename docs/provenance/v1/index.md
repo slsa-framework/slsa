@@ -16,7 +16,7 @@ Describe how an artifact or set of artifacts was produced so that:
     to expectations.
 -   Others can rebuild the artifact, if desired.
 
-This predicate is the recommended way to satisfy the SLSA [provenance
+This predicate is the RECOMMENDED way to satisfy the SLSA [provenance
 requirements](/spec/v1.0/requirements#provenance-generation).
 
 ## Prerequisite
@@ -91,7 +91,7 @@ This predicate follows the in-toto attestation [parsing rules]. Summary:
 -   Minor version changes are always backwards compatible and "monotonic." Such
     changes do not update the `predicateType`.
 -   Producers MAY add extension fields using field names that are URIs.
--   Optional fields MAY be unset or null, and should be treated equivalently.
+-   Optional fields MAY be unset or null, and SHOULD be treated equivalently.
     Both are equivalent to empty for _object_ or _array_ values.
 
 ## Schema
@@ -157,7 +157,7 @@ parameters and dependencies.
 
 The URI SHOULD resolve to a human-readable specification that includes: overall
 description of the build type; a list of all parameters (name, description,
-external vs system, artifact vs scalar vs..., required vs optional, etc.);
+external vs system, artifact vs scalar vs..., REQUIRED vs OPTIONAL, etc.);
 unambiguous instructions for how to initiate the build given this
 BuildDefinition, and a complete example. Example:
 https://slsa.dev/github-actions-workflow/v0.1
@@ -190,7 +190,7 @@ already trusted, and in many cases it is not practical to do so.
 Collection of artifacts needed at build time, aside from those listed in
 `externalParameters` or `systemParameters`. For example, if the build script
 fetches and executes "example.com/foo.sh", which in turn fetches
-"example.com/bar.tar.gz", then both "foo.sh" and "bar.tar.gz" should be listed
+"example.com/bar.tar.gz", then both "foo.sh" and "bar.tar.gz" SHOULD be listed
 here.
 
 </table>
@@ -257,7 +257,7 @@ supported.
 > ⚠ **RFC:** The design of parameters is still not settled. We welcome feedback
 > on this particular design and suggestions for alternatives. In particular:
 >
-> -   How restrictive should we be? This is somewhat of a balance between making
+> -   How restrictive ought we be? This is somewhat of a balance between making
 >     it easier for the builder vs [verifier][Verification]. A very restrictive
 >     type, such as only strings, makes it easier to set expectations but harder
 >     for a builder to describe reality. A very open type, such as an arbitrary
@@ -353,17 +353,17 @@ Metadata about this particular execution of the build.
 <tr id="byproducts"><td><code>byproducts</code>
 <td>array (<a href="#artifactreference">ArtifactReference</a>)<td>
 
-Additional artifacts generated during the build that should not be considered
-the "output" of the build but that may be needed during debugging or incident
+Additional artifacts generated during the build that are not considered
+the "output" of the build but that might be needed during debugging or incident
 response. For example, this might reference logs generated during the build
 and/or a digest of the fully evaluated build configuration.
 
 In most cases, this SHOULD NOT contain all intermediate files generated during
-the build. Instead, this should only contain files that are likely to be useful
+the build. Instead, this SHOULD only contain files that are likely to be useful
 later and that cannot be easily reproduced.
 
 **TODO:** Do we need some recommendation for how to distinguish between
-byproducts? For example, should we recommend using `localName`?
+byproducts, such as using `localName`?
 
 </table>
 
@@ -387,7 +387,7 @@ we rescope this to avoid the duplication and thus the security concern? For
 example, if the envelope identifies the build system, this might identify the
 tenant project?
 
-**TODO:** Provide guidance on how to choose a URI, what scope it should have,
+**TODO:** Provide guidance on how to choose a URI, what scope it SHOULD have,
 stability, how [verification] works, etc.
 
 <tr id="builder.version"><td><code>version</code>
@@ -399,7 +399,7 @@ Version numbers of components of the builder.
 <td>array (<a href="#artifactreference">ArtifactReference</a>)<td>
 
 Dependencies used by the orchestrator that are not run within the workload and
-that should not affect the build, but may affect the provenance generation or
+that do not affect the build, but might affect the provenance generation or
 security guarantees.
 
 **TODO:** Flesh out this model more.
@@ -421,11 +421,11 @@ can sign provenance for the "GitHub Actions" builder, and "Google" can sign
 provenance for the "Google Cloud Build" builder, but "GitHub" cannot sign for
 the "Google Cloud Build" builder.
 
-Design rationale: The builder is distinct from the signer because one signer
-may generate attestations for more than one builder, as in the GitHub Actions
-example above. The field is required, even if it is implicit from the signer,
-to aid readability and debugging. It is an object to allow additional fields
-in the future, in case one URI is not sufficient.
+Design rationale: The builder is distinct from the signer in order to support
+the case where one signer generates attestations for more than one builder, as
+in the GitHub Actions example above. The field is REQUIRED, even if it is
+implicit from the signer, to aid readability and debugging. It is an object to
+allow additional fields in the future, in case one URI is not sufficient.
 
 > ⚠ **RFC:** Should we just allow builders to set arbitrary properties, rather
 > than calling out `version` and `builderDependencies`? We don't expect
@@ -433,12 +433,12 @@ in the future, in case one URI is not sufficient.
 > `properties` that is an arbitrary object? (#319)
 
 > ⚠ **RFC:** Do we want/need to identify the tenant of the build system,
-> separately from the build system itself? If so, should it be a single `id`
+> separately from the build system itself? If so, a single `id`
 > that combines both (e.g.
-> `https://builder.example/tenants/company1.example/project1`), or two separate
+> `https://builder.example/tenants/company1.example/project1`) or two separate
 > fields (e.g. `{"id": "https://builder.example", "tenant":
 > "https://company1.example/project1"}`)? What would the use case be for this?
-> How should [verification] work?
+> How does [verification] work?
 
 ### BuildMetadata
 
