@@ -24,49 +24,21 @@ The following is an example of how to generate provenance using the Container Ge
 
 ### Step 1: Build and push your container image
 
-You can first build and push your image as you would normally using Docker's suite of GitHub Actions.
+You can first build and push your image as you would normally using Docker's `build-push-action`. You can find a full example in the [documentation](https://github.com/slsa-framework/slsa-github-generator/blob/main/internal/builders/container/README.md#getting-started).
 
 ```yaml
 build:
   # ...
-  outputs:
-    image: ${{ steps.image.outputs.image }}
-    digest: ${{ steps.build.outputs.digest }}
   steps:
-    - name: Checkout the repository
-      uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v2.3.4
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@dc7b9719a96d48369863986a06765841d7ea23f6 # v2.0.0
-
-    - name: Authenticate Docker
-      uses: docker/login-action@49ed152c8eca782a232dede0303416e8f356c37b # v2.0.0
-      with:
-        registry: ${{ env.IMAGE_REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Extract metadata (tags, labels) for Docker
-      id: meta
-      uses: docker/metadata-action@69f6fc9d46f2f8bf0d5491e4aabe0bb8c6a4678a # v4.0.1
-      with:
-        images: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}
-
+    # ...
     - name: Build and push Docker image
       uses: docker/build-push-action@e551b19e49efd4e98792db7592c17c09b89db8d8 # v3.0.0
       id: build
       with:
         push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
-
-    - name: Output image
-      id: image
-      run: |
-        # NOTE: Set the image as an output because the `env` context is not
-        # available to the inputs of a reusable workflow call.
-        image_name="${IMAGE_REGISTRY}/${IMAGE_NAME}"
-        echo "image=$image_name" >> "$GITHUB_OUTPUT"
+        tags: {% raw %}${{ steps.meta.outputs.tags }}{% endraw %}
+        labels: {% raw %}${{ steps.meta.outputs.labels }{% endraw %}}
+    # ...
 ```
 
 ### Step 2: Call the Container Generator to generate and upload SLSA provenance
@@ -82,14 +54,14 @@ provenance:
     packages: write # for uploading attestations.
   uses: slsa-framework/slsa-github-generator/.github/workflows/generator_container_slsa3.yml@v1.4.0
   with:
-    image: ${{ needs.build.outputs.image }}
+    image: {% raw %}${{ needs.build.outputs.image }}{% endraw %}
     # The image digest is used to prevent TOCTOU issues.
     # This is an output of the docker/build-push-action
     # See: https://github.com/slsa-framework/slsa-verifier#toctou-attacks
-    digest: ${{ needs.build.outputs.digest }}
-    registry-username: ${{ github.actor }}
+    digest: {% raw %}${{ needs.build.outputs.digest }}{% endraw %}
+    registry-username: {% raw %}${{ github.actor }}{% endraw %}
   secrets:
-    registry-password: ${{ secrets.GITHUB_TOKEN }}
+    registry-password: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
 ```
 
 ### Step 3: Inspection
