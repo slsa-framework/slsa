@@ -421,16 +421,19 @@ prescribed by the package ecosystem.
 
 ### Setting Expectations
 
-<dfn>Expectations</dfn> MUST cover all listed
-[build integrity threats](threats#build-integrity-threats) up to the desired
-SLSA level.
+<dfn>Expectations</dfn> define the allowed values for
+[`buildType`](/provenance/v1/#buildType) and
+[`externalParameters`](/provenance/v1/#externalParameters)
+for a given package (assuming the SLSA provenance format) in order to address
+the [build integrity threats](threats#build-integrity-threats).
+> **TODO:** link to more concrete guidance once it's available.
 
-It is important to note that  expectations are tied to a <dfn>package</dfn>
-name, whereas provenance is tied to an <dfn>artifact</dfn>. Package ecosystem's
-using the [recommended suite](/attestation-model#recommended-suite) of
-attestation formats SHOULD list the package name in the provenance attestation
-statement's `subject` field, though the precise semantics for binding a package
-name to an artifact should be defined by the package ecosystem.
+It is important to note that expectations are tied to a *package name*, whereas
+provenance is tied to an *artifact*. Package ecosystem's using the
+[recommended suite](/attestation-model#recommended-suite) of attestation
+formats SHOULD list the package name in the provenance attestation statement's
+`subject` field, though the precise semantics for binding a package name to an
+artifact should be defined by the package ecosystem.
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
@@ -476,52 +479,53 @@ provenance for a package matches the expectations defined for that package.
 A package version is considered to meet a given SLSA level if and only if the
 package ecosystem has verified its provenance against the package's
 expectations. If expectations are defined for a package but no provenance
-exists for the artifact, this should result in verification failure.
+exists for the artifact, this MUST result in verification failure.
 Conversely, if multiple provenance attestations exist, the system SHOULD accept
 any combination that satisifes expectations.
 
 Verifying expectations could happen in multiple places within a package
 ecosystem, for example by using one or more of the following approaches:
 
--   During package upload the registry ensures that the package's provenance
+-   During package upload, the registry ensures that the package's provenance
     matches any known expectations for that package before accepting it into
     the registry.
--   During client-side installation/deployment of a package the package
+-   During client-side installation/deployment of a package, the package
     ecosystem client ensures that the package's provenance matches the
     any known expectations for that package before use.
 -   Package ecosystem participants and/or the ecosystem operators perform
     continuous monitoring of packages to detect any changes to packages which
-    do not match the known expectations. **TODO:** should we expand to
+    do not match the known expectations. **TODO:** do we need to
     emphasize that the value of monitoring without enforcement is lower?
 
-All package ecosystem verifiers will require a mapping from `builder` `id` to
+All package ecosystem verifiers will require a mapping from builder identity to
 the SLSA level the builder is trusted to meet. How this map is defined,
 distributed, and updated is package ecosystem specific.
 > **TODO:** expand on this map model. Provide examples for ecosystems to follow,
 perhaps in the use-cases, and link to certification.
 
-Verification MUST ensure that the `builder` `id` is one of those in the map of
-trusted builder id's to SLSA level, and that the `BuildType` and
-`ExternalParameters` values in the provenance match the known expectations. The
-package ecosystem MAY allow an approved list of `ExternalParameters` to be
-ignored during verification. Any unrecognized `ExternalParameters` SHOULD cause
-verification to fail.
+Verification MUST include the following steps:
 
-NOTE: The term <dfn>package ecosystem</dfn> may be interpreted loosely. For
-example, one could implement a system which is external to the canonical
-package ecosystem and perform SLSA verification for that package ecosystem's
-contents. This combination can be considered a package ecosystem for the
-purposes of setting and verifying expectations.
+-   Ensuring that the builder identity is one of those in the map of trusted
+    builder id's to SLSA level.
+-   [Verification of the provenance](/provenance/v1/#verification) metadata.
+-   Ensuring that the values for `BuildType` and `ExternalParameters` in the
+    provenance match the known expectations. The package ecosystem MAY allow
+    an approved list of `ExternalParameters` to be ignored during verification.
+    Any unrecognized `ExternalParameters` SHOULD cause verification to fail.
+
+NOTE: The term *package ecosystem* MAY be interpreted loosely. For example, one
+could implement a system which is external to the canonical package ecosystem
+and perform SLSA verification for that package ecosystem's contents. This
+combination can be considered a package ecosystem for the purposes of setting
+and verifying expectations.
 
 **TODO:** Update the requirements to provide guidelines for how to implement,
 showing what the options are:
 
--   How to define expectations: explicit vs implicit
+-   Create a more concrete guide on how to do expectations
 -   Whether provenance is generated during the initial build and/or
     after-the-fact using reproducible builds
 -   How provenance is distributed
--   When verification happens: during upload, during download, and/or continuous
-    monitoring
 -   What happens on failure: blocking, warning, and/or asynchronous notification
 
 ## Consumer
