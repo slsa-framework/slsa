@@ -5,28 +5,26 @@
 - title: Specifications
   children:
 
-    - title: Introduction
-      url: /spec/v0.1/index
+    - title: SLSA
+      children:
 
-    - title: Terminology
-      url: /spec/v0.1/terminology
+      - title: Introduction
+        url: /spec/v0.1/index
 
-    - title: Levels
-      url: /spec/v0.1/levels
+      - title: Terminology
+        url: /spec/v0.1/terminology
 
-    - title: Requirements
-      url: /spec/v0.1/requirements
+      - title: Levels
+        url: /spec/v0.1/levels
 
-    - title: Threats
-      url: /spec/v0.1/threats
+      - title: Requirements
+        url: /spec/v0.1/requirements
 
-    - title: FAQ
-      url: /spec/v0.1/faq
+      - title: Threats
+        url: /spec/v0.1/threats
 
-    - title: Stages
-      url: /spec-stages
-
-    - spacer: true
+      - title: FAQ
+        url: /spec/v0.1/faq
 
     - title: Attestations
       children:
@@ -39,6 +37,11 @@
 
       - title: VSA
         url: /verification_summary
+
+    - spacer: true
+
+    - title: Stages
+      url: /spec-stages
 
 - title: Use cases
   url: /use-cases
