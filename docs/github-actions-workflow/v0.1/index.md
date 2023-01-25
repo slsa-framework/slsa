@@ -70,10 +70,10 @@ The `github` object SHOULD contains the following elements:
 
 | GitHub Context Parameter | Type   | Description |
 | ------------------------ | ------ | ----------- |
-| `github.actor`           | string |The username of the user that triggered the initial workflow run. |
-| `github.event_name`      | string |The name of the event that triggered the workflow run. |
+| `github.actor_id`        | string | The numeric ID of the user that triggered the initial workflow run. |
+| `github.event_name`      | string | The name of the event that triggered the workflow run. |
 
-> TODO: What about `actor_id`, `repository_id`, and `repository_owner_id`? Those
+> TODO: What about `repository_id`, and `repository_owner_id`? Those
 > are not part of the context so they're harder to describe, and the repository
 > ones should arguably go on the `source` paramater rather than be here.
 >
