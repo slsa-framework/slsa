@@ -430,10 +430,10 @@ the [build integrity threats](threats#build-integrity-threats).
 
 It is important to note that expectations are tied to a *package name*, whereas
 provenance is tied to an *artifact*. Package ecosystem's using the
-[recommended suite](/attestation-model#recommended-suite) of attestation
+[RECOMMENDED suite](/attestation-model#recommended-suite) of attestation
 formats SHOULD list the package name in the provenance attestation statement's
 `subject` field, though the precise semantics for binding a package name to an
-artifact should be defined by the package ecosystem.
+artifact are defined by the package ecosystem.
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
@@ -464,7 +464,7 @@ under the actor's control. Some ways this could be achieved include:
 -   Requiring two authorized individuals from the package producer to approve
     the change.
 -   Requiring consumers to approve changes, in a similar fashion to how SSH
-    host fingerprint changes must be approved by users.
+    host fingerprint changes have to be approved by users.
 -   Disallowing changes altogether, for example by binding the package name to
     the source repository.
 
