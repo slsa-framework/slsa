@@ -491,12 +491,12 @@ ecosystem, for example by using one or more of the following approaches:
     any known expectations for that package before use.
 -   Package ecosystem participants and/or the ecosystem operators perform
     continuous monitoring of packages to detect any changes to packages which
-    do not match the known expectations. **TODO:** shoul we expand to emphase
-    that the value of monitoring without enforcement is lower?
+    do not match the known expectations. **TODO:** should we expand to
+    emphasize that the value of monitoring without enforcement is lower?
 
-All package ecosystem verifiers will require a pre-configured map from
-`builder` `id` to the SLSA level the builder is trusted to meet. How this map
-is defined, distributed, and updated is package ecosystem specific.
+All package ecosystem verifiers will require a mapping from `builder` `id` to
+the SLSA level the builder is trusted to meet. How this map is defined,
+distributed, and updated is package ecosystem specific.
 > **TODO:** expand on this map model. Provide examples for ecosystems to follow,
 perhaps in the use-cases, and link to certification.
 
