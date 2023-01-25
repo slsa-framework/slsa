@@ -9,7 +9,9 @@
   {%- endif %}">
 {%- for item in versions reversed %}
 {%- unless item[1].hidden and spec_version != item[0] %}
-  <option value="{{ page.url | replace: spec_version, item[0] | relative_url }}" {% if spec_version == item[0] %}selected{% endif %} class="inline-block">{{item[1].name}}</option>
+  {% assign page_url_parts = page.url | split: '/' %}
+  {% assign page_url = page_url_parts | join: '/' %}
+  <option value="{{ page_url | replace: spec_version, item[0] | relative_url }}" {% if spec_version == item[0] %}selected{% endif %} class="inline-block">{{item[1].name}}</option>
 {%- endunless %}
 {%- endfor %}
 </select>
