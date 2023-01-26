@@ -75,6 +75,19 @@ Responsibility to implement SLSA is spread across the following parties.
   <td>✓<td>✓<td>✓
 </table>
 
+### Security Best Practices
+
+While the exact definition of what constitutes a secure system is beyond the
+scope of this specification, to be conformant all implementations MUST use
+industry security best practices. This includes, but is not limited to, using
+proper access controls, securing communications, implementing proper management
+of cryptographic secrets, doing frequent updates, and promptly fixing known
+vulnerabilities.
+
+Various relevant standards and guides can be consulted for that matter such as
+the [CIS Critical Security
+Controls](https://www.cisecurity.org/controls/cis-controls-list).
+
 ## Producer
 
 [Producer]: #producer
