@@ -27,6 +27,8 @@ supply chains plus its own sources and builds.
 
 [directed acyclic graph]: https://en.wikipedia.org/wiki/Directed_acyclic_graph
 
+**TODO:** update supply chain model to include verification.
+
 ![Software Supply Chain Model](../../images/supply-chain-model.svg)
 
 | Term | Description | Example |
@@ -47,8 +49,9 @@ the steps to execute. In response to an external trigger, the platform runs the
 build by initializing the environment, fetching the source and possibly some
 dependencies, and then starting execution inside the environment. The build then
 performs arbitrary steps, possibly fetching additional dependencies, and outputs
-one or more artifacts.
+one or more artifacts along with provenance metadata for those artifacts.
 
+> **TODO:** move build model into spec versioned folder?
 <p align="center"><img src="../../images/build-model.svg" alt="Model Build"></p>
 
 | Term | Description
@@ -111,5 +114,50 @@ workstation, though this does not meet SLSA 2+.
 | Environment  | developer's workstation
 | Trigger      | commands that the developer ran
 | Admin        | developer
+
+</details>
+
+[verification]: #verification-model
+
+### Verification model
+
+Verification in SLSA is performed in two ways. Firstly, the build system is
+certified to ensure conformance with the requirements at the level claimed by
+the build system. This certification should happen on a recurring cadence with
+the outcomes published by the platform operator for their users to review and
+make informed decisions about which builders to trust.
+
+Secondly, artifacts are verified to ensure they meet the producer defined
+expectations of where the package source code was retrieved from and on what
+build system the package was built.
+
+![Verification Model](verification-model.svg)
+
+| Term         | Description |
+|--------------|---- |
+| Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly. |
+| Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used. |
+| Build system certification | [Build systems are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level. |
+
+The examples below suggest some ways that expectations and verification may be
+implemented for different, broadly defined, package ecosystems.
+
+<details><summary>Example: Small software team</summary>
+
+| Term | Example |
+| ---- | ------- |
+| Expectations | Defined by the producer's security personnel and stored in a database. |
+| Provenance verification | Performed automatically on cluster nodes before execution by querying the expectations database. |
+| Build system certification | The build system implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their conformance to SLSA requirements. |
+
+</details>
+
+<details><summary>Example: Open source language distribution</summary>
+
+| Term | Example |
+| ---- | ------- |
+| Expectations | Defined separately for each package and stored in the package registry. |
+| Provenance verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client also verifies expectations prior to installing packages. |
+| Build system certification | Performed by the language ecosystem packaging authority. |
 
 </details>
