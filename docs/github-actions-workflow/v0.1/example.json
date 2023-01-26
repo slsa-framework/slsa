@@ -13,7 +13,7 @@
                 "vars": {
                     "MASCOT": "Mona"
                 },
-                "workflow": ".github/workflow/release.yml"
+                "workflowPath": ".github/workflow/release.yml"
             },
             "systemParameters": {
                 "github": {
