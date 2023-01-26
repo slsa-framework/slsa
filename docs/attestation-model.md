@@ -26,8 +26,8 @@ are a generalization of raw artifact/code signing.
 
 With raw signing, a signature is directly over the artifact (or a hash of the
 artifact) and *implies* a single bit of metadata about the artifact, based on
-the public key. The exact meaning must be negotiated between signer and
-verifier, and a new keyset must be provisioned for each bit of information. For
+the public key. The exact meaning MUST be negotiated between signer and
+verifier, and a new keyset MUST be provisioned for each bit of information. For
 example, a signature might denote who produced an artifact, or it might denote
 fitness for some purpose, or something else entirely.
 
@@ -58,7 +58,7 @@ Components:
 
 -   **Artifact:** Immutable blob of data described by an attestation, usually
     identified by cryptographic content hash. Examples: file content, git
-    commit, container digest. May also include a mutable locator, such as
+    commit, container digest. MAY also include a mutable locator, such as
     a package name or URI.
 -   **Attestation:** Authenticated, machine-readable metadata about one or more
     software artifacts. An attestation MUST contain at least:
@@ -90,7 +90,7 @@ Components:
 We recommend a single suite of formats and conventions that work well together
 and have desirable security properties. Our hope is to align the industry around
 this particular suite because it makes everything easier. That said, we
-recognize that other choices may be necessary in various cases.
+recognize that other choices MAY be necessary in various cases.
 
 | Component | Recommendation |
 | --- | --- |
