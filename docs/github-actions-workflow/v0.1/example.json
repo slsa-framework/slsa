@@ -17,7 +17,7 @@
             },
             "systemParameters": {
                 "github": {
-                    "actor": "MarkLodato",
+                    "actor_id": "1234567",
                     "event_name": "workflow_dispatch"
                 }
             },

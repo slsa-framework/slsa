@@ -202,7 +202,7 @@ JSON object, though it is RECOMMENDED to keep the structure simple with string
 values to aid verification. The same field name SHOULD NOT be used for both
 `externalParameters` and `systemParameters`.
 
-When a parameter is a references to an artifact, such as a git commit, the
+When a parameter is a reference to an artifact, such as a git commit, the
 parameter SHOULD be a URI and the `resolvedDependencies` SHOULD record the same
 `uri` and its resolved `digest`. For example:
 
