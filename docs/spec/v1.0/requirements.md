@@ -443,8 +443,8 @@ showing what the options are:
 A package's <dfn>consumer</dfn> is the organization or individual that uses the
 package.
 
-The only requirement on the consumer is that they MAY have to opt-in to enable
-SLSA verification, depending on the package ecosystem.
+The consumer MUST enable SLSA verification when the package ecosystem requires
+to opt-in for the verification to be enabled.
 
 > **TODO:** Anything else? Do they need to make risk-based decisions? Respond to
 > errors/warnings?
