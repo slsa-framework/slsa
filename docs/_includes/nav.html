@@ -23,7 +23,7 @@
             </div>
           </button>
           <div @click.outside="{{rootName}} = false" x-on:resize.window="{{ rootName }} ? {{ rootName }} = false : true" x-show="{{rootName}}" x-transition class="dropdown">
-            {% include nav-level.html collection=item.children name=rootName mobile=include.mobile level=menu %}
+            {% include nav-level.html collection=item.children name=rootName mobile=include.mobile level=menu menuNum=0 %}
           </div>
         {%- endif -%}
       </li>
