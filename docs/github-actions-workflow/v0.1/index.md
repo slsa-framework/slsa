@@ -16,12 +16,14 @@ Only the following [event types] are supported:
 | Supported event type  | Event description |
 | --------------------- | ----------------- |
 | [`create`]            | Creation of a git tag or branch. |
-| [`deployment`]        | Creation of a deployment. NOTE: This contains |
+| [`deployment`]        | Creation of a deployment. |
+| [`release`]           | Creation or update of a GitHub release. |
 | [`push`]              | Creation or update of a git tag or branch. |
 | [`workflow_dispatch`] | Manual trigger of a workflow. |
 
 [`create`]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#create
 [`deployment`]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#deployment
+[`release`]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#release
 [`push`]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#push
 [`workflow_dispatch`]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
 
@@ -66,8 +68,8 @@ other event types. SHOULD omit parameters that have a default value to make
 verification easier. SHOULD be unset if there are no non-default values.
 
 Only includes the following parameters (as of API version 2022-11-28) because
-these are the only ones that have an effect on the build: `payload`,
-`environment`, `description`, `transient_environment`, `production_environment`.
+these are the only ones that have an effect on the build: `description`,
+`environment`, `payload`, `production_environment`, `transient_environment`.
 
 Can be computed from the [github context] using the corresponding fields from
 `github.event.deployment`, filtering out default values (see API docs) and using
@@ -80,6 +82,19 @@ SHOULD omit empty inputs to make verification easier. SHOULD be unset if there
 are no non-empty inputs.
 
 Can be computed from the [github context] using `github.event.inputs`.
+
+<tr id="release"><td><code>release</code><td>object<td>
+
+The non-default [release body parameters] for `release` events; unset for
+other event types. SHOULD omit parameters that have a default value to make
+verification easier. SHOULD be unset if there are no non-default values.
+
+Only includes the following parameters (as of API version 2022-11-28) because
+these are the only ones that have an effect on the build: `body`, `draft`,
+`name`, `prerelease`, `target_commitish`.
+
+Can be computed from the [github context] using the corresponding fields from
+`github.event.release`, filtering out default values (see API docs).
 
 <tr id="source"><td><code>source</code><td>string<td>
 
@@ -110,6 +125,7 @@ contain `@` symbols.
 [SPDX Download Location]: https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field
 [deployment body parameters]: https://docs.github.com/en/rest/deployments/deployments?apiVersion=2022-11-28#create-a-deployment--parameters
 [github context]: https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
+[relese body parameters]: https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#create-a-release--parameters
 [variables]: https://docs.github.com/en/actions/learn-github-actions/variables
 [vars context]: https://docs.github.com/en/actions/learn-github-actions/contexts#vars-context
 
