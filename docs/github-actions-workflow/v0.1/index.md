@@ -163,6 +163,9 @@ The `github` object SHOULD contains the following elements:
 > Also `base_ref` and `head_ref` are similar in that they are annotations about
 > `source` rather than a proper parameter.
 
+> TODO: Add `triggering_actor_id` once it's available via the context. The
+> `triggering_actor` is a username (not ID), which we prefer to avoid.
+
 ### Resolved dependencies
 
 The `resolvedDependencies` SHOULD contain an entry identifying the resolved the
