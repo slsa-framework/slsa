@@ -56,7 +56,8 @@ top-level and reusable would make the schema too error-prone.
 
 [External parameters]: #external-parameters
 
-All external parameters are REQUIRED unless empty.
+All external parameters are REQUIRED unless empty. At most one of `deployment`,
+`inputs`, or `release` can be set.
 
 <table>
 <tr><th>Parameter<th>Type<th>Description
@@ -67,9 +68,9 @@ The non-default [deployment body parameters] for `deployment` events; unset for
 other event types. SHOULD omit parameters that have a default value to make
 verification easier. SHOULD be unset if there are no non-default values.
 
-Only includes the following parameters (as of API version 2022-11-28) because
-these are the only ones that have an effect on the build: `description`,
-`environment`, `payload`, `production_environment`, `transient_environment`.
+Only includes the parameters that are passed to the workflow. As of API version
+2022-11-28, this is: `description`, `environment`, `payload`,
+`production_environment`, `transient_environment`.
 
 Can be computed from the [github context] using the corresponding fields from
 `github.event.deployment`, filtering out default values (see API docs) and using
@@ -89,21 +90,11 @@ The non-default [release body parameters] for `release` events; unset for
 other event types. SHOULD omit parameters that have a default value to make
 verification easier. SHOULD be unset if there are no non-default values.
 
-Only includes the following parameters (as of API version 2022-11-28) because
-these are the only ones that have an effect on the build: `body`, `draft`,
-`name`, `prerelease`, `target_commitish`.
+Only includes the parameters are passed to the workflow. As of API version
+2022-11-28, this is: `body`, `draft`, `name`, `prerelease`, `target_commitish`.
 
 Can be computed from the [github context] using the corresponding fields from
 `github.event.release`, filtering out default values (see API docs).
-
-<tr id="source"><td><code>source</code><td>string<td>
-
-URI of the git commit containing the top-level workflow file, in [SPDX Download
-Location] format (`git+<repo>@<ref>`), without ".git" on the repo name. For most
-workflows, this represents the source code to be built.
-
-Can be computed from the [github context] using
-`"git+" + github.server_url + "/" + github.repository + "@" + github.ref`.
 
 <tr id="vars"><td><code>vars</code><td>object<td>
 
@@ -112,20 +103,41 @@ vars.
 
 Can be computed from the [vars context] using `vars`.
 
-<tr id="workflowPath"><td><code>workflowPath</code><td>string<td>
+<tr id="workflow"><td><code>workflow</code><td>object<td>
 
-The path to the workflow YAML file within `source`.
+The workflow that was run. For most workflows, this commit is the source code to
+be built.
 
+<tr id="workflow.ref"><td><code>workflow.ref</code><td>string<td>
+
+A git reference to the commit containing the workflow, as either a git ref
+(starting with `refs/`) or commit ID (lowercase hex). This is the value passed
+in via the event. Only `deployment` events support commit IDs.
+
+Can be computed from the [github context] using `github.ref || github.sha`.
+
+<tr id="workflow.repository"><td><code>workflow.repository</code><td>string<td>
+
+HTTPS URI of the git repository, with `https://` protocol and without `.git`
+suffix.
+
+Can be computed from the [github context] using
+`github.server_url + "/" + github.repository`.
+
+<tr id="workflow.path"><td><code>workflow.path</code><td>string<td>
+
+The path to the workflow YAML file within the commit.
+
+Can be computed from the [github context] using
 `github.workflow_ref`, removing the prefix `github.repository + "/"` and the
 suffix `"@" + github.ref`. Take care to consider that the path and/or ref MAY
 contain `@` symbols.
 
 </table>
 
-[SPDX Download Location]: https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field
 [deployment body parameters]: https://docs.github.com/en/rest/deployments/deployments?apiVersion=2022-11-28#create-a-deployment--parameters
 [github context]: https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
-[relese body parameters]: https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#create-a-release--parameters
+[release body parameters]: https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#create-a-release--parameters
 [variables]: https://docs.github.com/en/actions/learn-github-actions/variables
 [vars context]: https://docs.github.com/en/actions/learn-github-actions/contexts#vars-context
 
@@ -153,11 +165,15 @@ The `github` object SHOULD contains the following elements:
 
 ### Resolved dependencies
 
-The `resolvedDependencies` SHOULD contain an entry providing the git commit ID
-of `source`, with the `uri` matching `externalParameters.source`. See [Example].
+The `resolvedDependencies` SHOULD contain an entry identifying the resolved the
+git commit ID corresponding to `externalParameters.workflow`. The dependency's
+`uri` MUST be in [SPDX Download Location] format, i.e.
+`"git+" + workflow.uri + "@" + workflow.ref`. See [Example].
 
-The resolved dependencies MAY contain any artifacts known to be input to the
-workflow, such as the specific versions of the virtual environments used.
+The `resolvedDependencies` MAY contain additional artifacts known to be input to
+the workflow, such as the specific versions of the virtual environments used.
+
+[SPDX Download Location]: https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field
 
 ## Run details
 

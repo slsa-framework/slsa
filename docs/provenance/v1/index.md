@@ -202,14 +202,17 @@ JSON object, though it is RECOMMENDED to keep the structure simple with string
 values to aid verification. The same field name SHOULD NOT be used for both
 `externalParameters` and `systemParameters`.
 
-When a parameter is a reference to an artifact, such as a git commit, the
-parameter SHOULD be a URI and the `resolvedDependencies` SHOULD record the same
-`uri` and its resolved `digest`. For example:
+The parameters SHOULD only contain the actual values passed in through the
+interface to the build system. Metadata about those parameter values,
+particularly digests of artifacts referenced by those parameters, SHOULD instead
+go in `resolvedDependencies`. The documentation for `buildType` SHOULD explain
+how to convert from a parameter to the dependency `uri`. For example:
 
 ```json
 "externalParameters": {
-    "source": "git+https://github.com/octocat/hello-world@refs/heads/main"
-}
+    "repository": "https://github.com/octocat/hello-world",
+    "ref": "refs/heads/main"
+},
 "resolvedDependencies": [{
     "uri": "git+https://github.com/octocat/hello-world@refs/heads/main",
     "digest": {"sha1": "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d"}

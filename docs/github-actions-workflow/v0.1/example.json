@@ -9,11 +9,14 @@
                     "deploy_target": "deployment_sys_1a",
                     "perform_deploy": "true"
                 },
-                "source": "git+https://github.com/octocat/hello-world@refs/heads/main",
                 "vars": {
                     "MASCOT": "Mona"
                 },
-                "workflowPath": ".github/workflow/release.yml"
+                "workflow": {
+                    "ref": "refs/heads/main",
+                    "repository": "https://github.com/octocat/hello-world",
+                    "path": ".github/workflow/release.yml"
+                }
             },
             "systemParameters": {
                 "github": {
