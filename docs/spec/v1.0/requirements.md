@@ -441,7 +441,7 @@ package ecosystem.
   
 ## Auditor
 
-An <dfn>auditor</dfn> is an organization or individual that assesses build
+An <dfn>auditor</dfn> is an organization or individual that certifies build
 systems for conformance with the SLSA requirements.
   
 A consumer MAY act as their own auditor.
