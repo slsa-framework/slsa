@@ -268,7 +268,9 @@ The build system is responsible for isolating between builds, even within the
 same tenant project. In other words, how strong of a guarantee do we have that
 the build really executed correctly, without external influence?
 
-The SLSA Build level describes the minimum bar for isolation strength. For more information on assessing a build system's isolation strength, see [Verifying build systems](verifying-systems.md).
+The SLSA Build level describes the minimum bar for isolation strength. For more
+information on assessing a build system's isolation strength, see
+[Verifying build systems](verifying-systems.md).
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
