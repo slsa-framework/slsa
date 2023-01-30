@@ -282,7 +282,9 @@ The build system is responsible for isolating between builds, even within the
 same tenant project. In other words, how strong of a guarantee do we have that
 the build really executed correctly, without external influence?
 
-The SLSA Build level describes the minimum bar for isolation strength.
+The SLSA Build level describes the minimum bar for isolation strength. For more
+information on assessing a build system's isolation strength, see
+[Verifying build systems](verifying-systems.md).
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
@@ -545,12 +547,24 @@ showing what the options are:
 A package's <dfn>consumer</dfn> is the organization or individual that uses the
 package.
 
-The only requirement on the consumer is that they MAY have to opt-in to enable
-SLSA verification, depending on the package ecosystem.
-
+The consumer MAY have to opt-in to enable SLSA verification, depending on the
+package ecosystem.
+  
 > **TODO:** Anything else? Do they need to make risk-based decisions? Respond to
-> errors/warnings?
+> errors/warnings? Do consumers trust builders, or is that up to the package ecosystem?
+  
+## Auditor
 
+An <dfn>auditor</dfn> is an organization or individual that certifies build
+systems for conformance with the SLSA requirements.
+  
+A consumer MAY act as their own auditor.
+  
+An auditor SHOULD use the prompts in [verifying systems](verifying-systems.md)
+when assessing build systems. Auditors MAY go beyond these prompts.
+  
+An auditor SHOULD periodically reassess build systems for conformance.
+  
 ## Source control
 
 [Source control]: #source-control
