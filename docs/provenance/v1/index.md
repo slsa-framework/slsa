@@ -91,8 +91,7 @@ This predicate follows the in-toto attestation [parsing rules]. Summary:
 -   Minor version changes are always backwards compatible and "monotonic." Such
     changes do not update the `predicateType`.
 -   Producers MAY add extension fields using field names that are URIs.
--   Optional fields MAY be unset or null, and SHOULD be treated equivalently.
-    Both are equivalent to empty for _object_ or _array_ values.
+-   Unset, null, and empty field values MUST be interpreted equivalently.
 
 ## Schema
 
@@ -427,10 +426,10 @@ in the GitHub Actions example above. The field is REQUIRED, even if it is
 implicit from the signer, to aid readability and debugging. It is an object to
 allow additional fields in the future, in case one URI is not sufficient.
 
-> ⚠ **RFC:** Should we just allow builders to set arbitrary properties, rather
-> than calling out `version` and `builderDependencies`? We don't expect
-> verifiers to use any of them, so maybe that's the simpler approach? Or have a
-> `properties` that is an arbitrary object? (#319)
+> ⚠ **RFC:** Would it be preferable to allow builders to set arbitrary
+> properties, rather than calling out `version` and `builderDependencies`? We
+> don't expect verifiers to use any of them, so maybe that's the simpler
+> approach? Or have a `properties` that is an arbitrary object? (#319)
 
 > ⚠ **RFC:** Do we want/need to identify the tenant of the build system,
 > separately from the build system itself? If so, a single `id`
