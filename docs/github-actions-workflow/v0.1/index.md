@@ -151,20 +151,16 @@ All system parameters are OPTIONAL.
 
 The `github` object SHOULD contains the following elements:
 
-| GitHub Context Parameter | Type   | Description |
-| ------------------------ | ------ | ----------- |
-| `github.actor_id`        | string | The numeric ID of the user that triggered the initial workflow run. |
-| `github.event_name`      | string | The name of the event that triggered the workflow run. |
+| GitHub Context Parameter     | Type   | Description |
+| ---------------------------- | ------ | ----------- |
+| `github.actor_id`            | string | The numeric ID of the user that triggered the initial workflow run. |
+| `github.event_name`          | string | The name of the event that triggered the workflow run. |
+| `github.repository_id`       | string | The numeric ID corresponding to `systemParameters.workflow.repository`. |
+| `github.repository_owner_id` | string | The numeric ID of the user or organization that owns `systemParameters.workflow.repository`. |
+| `github.triggering_actor_id` | string | The numeric ID of the user that triggered the rerun, if different than `actor_id`. |
 
-> TODO: What about `repository_id`, and `repository_owner_id`? Those
-> are not part of the context so they're harder to describe, and the repository
-> ones should arguably go on the `source` paramater rather than be here.
->
-> Also `base_ref` and `head_ref` are similar in that they are annotations about
-> `source` rather than a proper parameter.
-
-> TODO: Add `triggering_actor_id` once it's available via the context. The
-> `triggering_actor` is a username (not ID), which we prefer to avoid.
+Numeric IDs are used here to provide stable identifiers across account and
+repository renames and to detect when an old name is reused for a new entity.
 
 ### Resolved dependencies
 
