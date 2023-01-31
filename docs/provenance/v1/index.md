@@ -92,6 +92,11 @@ This predicate follows the in-toto attestation [parsing rules]. Summary:
 -   Optional fields MAY be unset or null, and SHOULD be treated equivalently.
     Both are equivalent to empty for _object_ or _array_ values.
 
+> **TODO:** The [GitHub Actions] spec says that consumers MUST **reject**
+> unrecognized external parameters, whereas here we say that they MUST
+> **ignore** unrecognized fields (including parameters). We need to figure out
+> which is correct and then resolve the conflict.
+
 ## Schema
 
 _NOTE: This section describes the fields within `predicate`. For a description
@@ -477,7 +482,9 @@ The timestamp of when the build completed.
 
 [Verification]: #verification
 
-> **TODO:** Describe how clients are expected to verify the provenance.
+> **TODO:** Describe how clients are expected to verify the provenance. This
+> includes the idea that a verification tool can check external parameters
+> without knowing the specific buildType.
 
 ## Index of build types
 
@@ -603,7 +610,6 @@ Renamed to "slsa.dev/provenance".
 Initial version, named "in-toto.io/Provenance"
 
 [Statement]: https://github.com/in-toto/attestation/blob/main/spec/README.md#statement
-[DigestSet]: https://github.com/in-toto/attestation/blob/main/spec/field_types.md#DigestSet
 [in-toto attestation]: https://github.com/in-toto/attestation
 [parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/README.md#parsing-rules
 [purl]: https://github.com/package-url/purl-spec

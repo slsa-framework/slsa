@@ -164,7 +164,7 @@ repository renames and to detect when an old name is reused for a new entity.
 
 ### Resolved dependencies
 
-The `resolvedDependencies` SHOULD contain an entry identifying the resolved the
+The `resolvedDependencies` SHOULD contain an entry identifying the resolved
 git commit ID corresponding to `externalParameters.workflow`. The dependency's
 `uri` MUST be in [SPDX Download Location] format, i.e.
 `"git+" + workflow.uri + "@" + workflow.ref`. See [Example].
