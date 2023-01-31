@@ -499,11 +499,11 @@ Verifying expectations could happen in multiple places within a package
 ecosystem, for example by using one or more of the following approaches:
 
 -   During package upload, the registry ensures that the package's provenance
-    matches any known expectations for that package before accepting it into
+    matches the known expectations for that package before accepting it into
     the registry.
 -   During client-side installation/deployment of a package, the package
     ecosystem client ensures that the package's provenance matches the
-    any known expectations for that package before use.
+    known expectations for that package before use.
 -   Package ecosystem participants and/or the ecosystem operators perform
     continuous monitoring of packages to detect any changes to packages which
     do not match the known expectations. **TODO:** do we need to
