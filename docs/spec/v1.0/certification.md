@@ -2,13 +2,14 @@
 
 ## **TODO**
 
+- [ ] Create a certification registry repo and add links in this doc.
 - [ ] Create a self-certification questionnaire.
 - [ ] Add a link to the SLSA Self-Certification Questionnaire.
 
 ## Overview
 
 > User's looking for certifications for a particular build system can find them
-> on the [Certification Registry](certification-registry.md).
+> on the Certification Registry (**TODO:** create repo for certification registry and link here).
 
 The SLSA Framework defines a series of levels that describe increasing security
 guarantees. The certification process is intended to verify that a build system
@@ -24,7 +25,7 @@ trust they can place in a build system. The following tiers are defined:
 ### Tier 0 - No evidence of conformance
 
 > **Note:** If a build system is not listed in the
-> [Certification Registry](certification-registry.md), you should assume that it
+> Certification Registry (**TODO:** create repo for certification registry and link here), you should assume that it
 > is in Tier 0.
 
 The Tier 0 trust tier is the lowest level of trust. Build systems in this tier
@@ -36,7 +37,7 @@ build system before using it.
 ### Tier 1 - Self-certified conformance
 
 > Build systems in this trust tier are listed in the
-> [Certification Registry](certification-registry.md).
+> Certification Registry (**TODO:** create repo for certification registry and link here).
 
 Tier 1 signifies that a build system owner has self-certified their build system
 to a particular SLSA level. This certification is intended to be a reasonable
@@ -55,8 +56,7 @@ The self-certification process includes the following steps:
    and publishes it on their website.
 3. The build system owner publishes their public key to a public key server.
 4. The build system owner submits a pull request to add their build system to
-   the [Certification Registry](certification-registry.md). **[TODO] provide PR
-   template link**
+   the Certification Registry (**TODO:** create repo for certification registry and link here).
 
 ### Tier 2 - Third-party verified conformance [TODO]
 

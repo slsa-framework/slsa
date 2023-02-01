@@ -23,7 +23,7 @@ in the menu at the top of the page.
 | [Terminology](terminology.md) | Terminology and model used by SLSA. |
 | [Requirements](requirements.md) | Detailed technical requirements, intended for system implementers. |
 | [Certification](certification.md) | Guidelines for certifying SLSA builders, intended for build system owners. |
-| [Certification Registry](certification-registry.md) | Registry of certified SLSA builders |
+| Certification Registry (**TODO:** create repo for certification registry and link here) | Registry of certified SLSA builders |
 | [Verifying build systems](verifying-systems.md) | Guidelines for securing SLSA Build L3+ builders, intended for build system implementers. |
 | [Threats & mitigations](threats.md) | Specific supply chain attacks and how SLSA helps. |
 | [FAQ](faq.md) | Questions and more information. |
