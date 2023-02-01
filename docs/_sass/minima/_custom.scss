@@ -489,6 +489,12 @@ dl.as-table {
 
     ul:not(.custom-list) {
         list-style: disc;
+        ul {
+          list-style-type: circle;
+          ul {
+            list-style-type: square;
+          }
+        }
     }
 
     ol:not(.custom-list) {

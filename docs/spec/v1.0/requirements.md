@@ -63,17 +63,34 @@ Responsibility to implement SLSA is spread across the following parties.
   <td><a href="#ephemeral-isolated">Ephemeral and isolated</a>
   <td> <td> <td>✓
 <tr>
-  <td rowspan=2><a href="#package-ecosystem">Package ecosystem</a>
+  <td rowspan=3><a href="#package-ecosystem">Package ecosystem</a>
   <td colspan=2>Provenance distribution
   <td>✓<td>✓<td>✓
 <tr>
-  <td colspan=2>Expectations and verification
+  <td colspan=2><a href="#setting-expectations">Setting expectations</a>
+  <td>✓<td>✓<td>✓
+<tr>
+  <td colspan=2><a href="#verifying-expectations-for-artifacts">
+    Verifying expectations for artifacts</a>
   <td>✓<td>✓<td>✓
 <tr>
   <td rowspan=1><a href="#consumer">Consumer</a>
   <td colspan=2>Opt-in to verification
   <td>✓<td>✓<td>✓
 </table>
+
+### Security Best Practices
+
+While the exact definition of what constitutes a secure system is beyond the
+scope of this specification, to be conformant all implementations MUST use
+industry security best practices. This includes, but is not limited to, using
+proper access controls, securing communications, implementing proper management
+of cryptographic secrets, doing frequent updates, and promptly fixing known
+vulnerabilities.
+
+Various relevant standards and guides can be consulted for that matter such as
+the [CIS Critical Security
+Controls](https://www.cisecurity.org/controls/cis-controls-list).
 
 ## Producer
 
@@ -265,7 +282,9 @@ The build system is responsible for isolating between builds, even within the
 same tenant project. In other words, how strong of a guarantee do we have that
 the build really executed correctly, without external influence?
 
-The SLSA Build level describes the minimum bar for isolation strength.
+The SLSA Build level describes the minimum bar for isolation strength. For more
+information on assessing a build system's isolation strength, see
+[Verifying build systems](verifying-systems.md).
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
@@ -412,15 +431,113 @@ consumers. For the build system, this usually means outputting the provenance as
 part of the build to allow the release process to upload it in a manner
 prescribed by the package ecosystem.
 
+### Setting Expectations
+
+<dfn>Expectations</dfn> define the allowed values for
+[`buildType`](/provenance/v1/#buildType) and
+[`externalParameters`](/provenance/v1/#externalParameters)
+for a given package (assuming the SLSA provenance format) in order to address
+the [build integrity threats](threats#build-integrity-threats).
+> **TODO:** link to more concrete guidance once it's available.
+
+It is important to note that expectations are tied to a *package name*, whereas
+provenance is tied to an *artifact*. Package ecosystem's using the
+[RECOMMENDED suite](/attestation-model#recommended-suite) of attestation
+formats SHOULD list the package name in the provenance attestation statement's
+`subject` field, though the precise semantics for binding a package name to an
+artifact are defined by the package ecosystem.
+
+<table>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+
+<tr id="expectations-known">
+<td>Expectations known
+<td>
+
+The package ecosystem MUST ensure that expectations are defined for the package before it is made available to package ecosystem users.
+
+There are several approaches a package ecosystem could take to setting expectations, for example:
+
+-   Requiring the producer to set expectations when registering a new package
+    in the package ecosystem.
+-   Using the values from the package's provenance during its initial
+    publication (trust on first use).
+
+<td>✓<td>✓<td>✓
+<tr id="expectations-changes-auth">
+<td>Changes authorized
+<td>
+
+The package ecosystem MUST ensure that any changes to expectations are
+authorized by the package's producer. This is to prevent a malicious actor
+from updating the expectations to allow building and publishing from a fork
+under the actor's control. Some ways this could be achieved include:
+
+-   Requiring two authorized individuals from the package producer to approve
+    the change.
+-   Requiring consumers to approve changes, in a similar fashion to how SSH
+    host fingerprint changes have to be approved by users.
+-   Disallowing changes altogether, for example by binding the package name to
+    the source repository.
+
+<td><td>✓<td>✓
+</table>
+
+### Verifying expectations for artifacts
+
+It is a critical responsibility of the package ecosystem to verify that the
+provenance for a package matches the expectations defined for that package.
+
+A package version is considered to meet a given SLSA level if and only if the
+package ecosystem has verified its provenance against the package's
+expectations. If expectations are defined for a package but no provenance
+exists for the artifact, this MUST result in verification failure.
+Conversely, if multiple provenance attestations exist, the system SHOULD accept
+any combination that satisifes expectations.
+
+Verifying expectations could happen in multiple places within a package
+ecosystem, for example by using one or more of the following approaches:
+
+-   During package upload, the registry ensures that the package's provenance
+    matches the known expectations for that package before accepting it into
+    the registry.
+-   During client-side installation/deployment of a package, the package
+    ecosystem client ensures that the package's provenance matches the
+    known expectations for that package before use.
+-   Package ecosystem participants and/or the ecosystem operators perform
+    continuous monitoring of packages to detect any changes to packages which
+    do not match the known expectations. **TODO:** do we need to
+    emphasize that the value of monitoring without enforcement is lower?
+
+All package ecosystem verifiers will require a mapping from builder identity to
+the SLSA level the builder is trusted to meet. How this map is defined,
+distributed, and updated is package ecosystem specific.
+> **TODO:** expand on this map model. Provide examples for ecosystems to follow,
+perhaps in the use-cases, and link to certification.
+
+Verification MUST include the following steps:
+
+-   Ensuring that the builder identity is one of those in the map of trusted
+    builder id's to SLSA level.
+-   [Verification of the provenance](/provenance/v1/#verification) metadata.
+-   Ensuring that the values for `BuildType` and `ExternalParameters` in the
+    provenance match the known expectations. The package ecosystem MAY allow
+    an approved list of `ExternalParameters` to be ignored during verification.
+    Any unrecognized `ExternalParameters` SHOULD cause verification to fail.
+
+NOTE: The term *package ecosystem* MAY be interpreted loosely. For example, one
+could implement a system which is external to the canonical package ecosystem
+and perform SLSA verification for that package ecosystem's contents. This
+combination can be considered a package ecosystem for the purposes of setting
+and verifying expectations.
+
 **TODO:** Update the requirements to provide guidelines for how to implement,
 showing what the options are:
 
--   How to define expectations: explicit vs implicit
+-   Create a more concrete guide on how to do expectations
 -   Whether provenance is generated during the initial build and/or
     after-the-fact using reproducible builds
 -   How provenance is distributed
--   When verification happens: during upload, during download, and/or continuous
-    monitoring
 -   What happens on failure: blocking, warning, and/or asynchronous notification
 
 ## Consumer
@@ -430,12 +547,17 @@ showing what the options are:
 A package's <dfn>consumer</dfn> is the organization or individual that uses the
 package.
 
-The only requirement on the consumer is that they MAY have to opt-in to enable
-SLSA verification, depending on the package ecosystem.
+The consumer MAY have to opt-in to enable SLSA verification, depending on the
+package ecosystem.
 
+The consumer MUST ensure that artifacts they consume are built on
+SLSA-conformant build systems. Consumers MUST either audit the build systems
+themselves using the prompts in [verifying systems](verifying-systems.md) or
+rely on the [SLSA certification program](certification.md).
+  
 > **TODO:** Anything else? Do they need to make risk-based decisions? Respond to
-> errors/warnings?
-
+> errors/warnings? Do consumers trust builders, or is that up to the package ecosystem?
+  
 ## Source control
 
 [Source control]: #source-control

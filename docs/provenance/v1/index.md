@@ -16,7 +16,7 @@ Describe how an artifact or set of artifacts was produced so that:
     to expectations.
 -   Others can rebuild the artifact, if desired.
 
-This predicate is the recommended way to satisfy the SLSA [provenance
+This predicate is the RECOMMENDED way to satisfy the SLSA [provenance
 requirements](/spec/v1.0/requirements#provenance-generation).
 
 ## Prerequisite
@@ -60,14 +60,12 @@ The model is as follows:
         and need not be verified downstream. They MAY be included to enable
         reproducible builds, debugging, or incident response.
 
-    Some (but not all) parameters are references to artifacts. For example, the
-    external parameters for a GitHub Actions workflow includes the source
-    repository (artifact reference) and the path to the workflow file (string
-    value).
-
--   All other artifacts fetched during initialization or execution of the build
-    process are considered dependencies. The `resolvedDependencies` captures
-    these dependencies, if known.
+-   All artifacts fetched during initialization or execution of the build
+    process are considered dependencies, including those referenced directly by
+    parameters. The `resolvedDependencies` captures these dependencies, if
+    known. For example, a build that takes a git repository URI as a parameter
+    might record the specific git commit that the URI resolved to as a
+    dependency.
 
 -   During execution, the build process MAY communicate with the build
     platform's control plane and/or build caches. This communication is not
@@ -91,8 +89,12 @@ This predicate follows the in-toto attestation [parsing rules]. Summary:
 -   Minor version changes are always backwards compatible and "monotonic." Such
     changes do not update the `predicateType`.
 -   Producers MAY add extension fields using field names that are URIs.
--   Optional fields MAY be unset or null, and should be treated equivalently.
-    Both are equivalent to empty for _object_ or _array_ values.
+-   Unset, null, and empty field values MUST be interpreted equivalently.
+
+> **TODO:** The [GitHub Actions] spec says that consumers MUST **reject**
+> unrecognized external parameters, whereas here we say that they MUST
+> **ignore** unrecognized fields (including parameters). We need to figure out
+> which is correct and then resolve the conflict.
 
 ## Schema
 
@@ -156,14 +158,13 @@ Identifies the template for how to perform the build and interpret the
 parameters and dependencies.
 
 The URI SHOULD resolve to a human-readable specification that includes: overall
-description of the build type; a list of all parameters (name, description,
-external vs system, artifact vs scalar vs..., required vs optional, etc.);
-unambiguous instructions for how to initiate the build given this
-BuildDefinition, and a complete example. Example:
+description of the build type; schema for `externalParameters` and
+`systemParameters`; unambiguous instructions for how to initiate the build given
+this BuildDefinition, and a complete example. Example:
 https://slsa.dev/github-actions-workflow/v0.1
 
 <tr id="externalParameters"><td><code>externalParameters</code>
-<td>map (string→<a href="#parametervalue">ParameterValue</a>)<td>
+<td>object<td>
 
 The parameters that are under external control, such as those set by a user or
 tenant of the build system. They MUST be complete at SLSA Build L3, meaning that
@@ -176,7 +177,7 @@ Consumers SHOULD have an expectation of what "good" looks like; the more
 information that they need to check, the harder that task becomes.
 
 <tr id="systemParameters"><td><code>systemParameters</code>
-<td>map (string→<a href="#parametervalue">ParameterValue</a>)<td>
+<td>object<td>
 
 The parameters that are under the control of the `builder`. The primary
 intention of this field is for debugging, incident response, and vulnerability
@@ -187,10 +188,10 @@ already trusted, and in many cases it is not practical to do so.
 <tr id="resolvedDependencies"><td><code>resolvedDependencies</code>
 <td>array (<a href="#artifactreference">ArtifactReference</a>)<td>
 
-Collection of artifacts needed at build time, aside from those listed in
-`externalParameters` or `systemParameters`. For example, if the build script
-fetches and executes "example.com/foo.sh", which in turn fetches
-"example.com/bar.tar.gz", then both "foo.sh" and "bar.tar.gz" should be listed
+Unordered collection of artifacts needed at build time. Completeness is best
+effort, at least through SLSA Build L3. For example, if the build script fetches
+and executes "example.com/foo.sh", which in turn fetches
+"example.com/bar.tar.gz", then both "foo.sh" and "bar.tar.gz" SHOULD be listed
 here.
 
 </table>
@@ -200,13 +201,27 @@ all the information necessary and sufficient to initialize the build and begin
 execution.
 
 The `externalParameters` and `systemParameters` are the top-level inputs to the
-template, meaning inputs not derived from another input. Each field is a map
-from parameter name to [parameter value][ParameterValue]. The each parameter
-name MUST be unique across `externalParameters` and `systemParameters`. The
-following conventional names are RECOMMENDED when appropriate:
+template, meaning inputs not derived from another input. Each is an arbitrary
+JSON object, though it is RECOMMENDED to keep the structure simple with string
+values to aid verification. The same field name SHOULD NOT be used for both
+`externalParameters` and `systemParameters`.
 
--   `source`: The primary input to the build.
--   `config`: The build configuration, if different from `source`.
+The parameters SHOULD only contain the actual values passed in through the
+interface to the build system. Metadata about those parameter values,
+particularly digests of artifacts referenced by those parameters, SHOULD instead
+go in `resolvedDependencies`. The documentation for `buildType` SHOULD explain
+how to convert from a parameter to the dependency `uri`. For example:
+
+```json
+"externalParameters": {
+    "repository": "https://github.com/octocat/hello-world",
+    "ref": "refs/heads/main"
+},
+"resolvedDependencies": [{
+    "uri": "git+https://github.com/octocat/hello-world@refs/heads/main",
+    "digest": {"sha1": "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d"}
+}]
+```
 
 Guidelines:
 
@@ -220,59 +235,52 @@ Guidelines:
     flags to live next to the source code or build configuration so that
     verifying the latter automatically verifies the compiler flags.
 
+-   In some cases, additional external parameters might exist that do not impact
+    the behavior of the build, such as a deadline or priority. These extra
+    parameters SHOULD be excluded from the provenance after careful analysis
+    that they indeed pose no security impact.
+
 -   If possible, architect the build system to use this definition as its
     sole top-level input, in order to guarantee that the information is
     sufficient to run the build.
 
--   In some cases, the build configuration is evaluated client-side and
-    sent over the wire, such that the build system cannot determine its
-    origin. In those cases, the build system SHOULD serialize the
-    configuration in a deterministic way and record the `digest` without a
-    `uri`. This allows one to consider the client-side evaluation as a
-    separate "build" with its own provenance, such that the verifier can
-    chain the two provenance attestations together to determine the origin
-    of the configuration.
+-   When build configuration is evaluated client-side before being sent to the
+    server, such as transforming version-controlled YAML into ephemeral JSON,
+    some solution is needed to make [verification] practical. Consumers need a
+    way to know what configuration is expected and the usual way to do that is
+    to map it back to version control, but that is not possible if the server
+    cannot verify the configuration's origins. Possible solutions:
 
-**TODO:** Explain the purpose of `resolvedDependencies`. Why do we need it? What
-goes in it? Is it OK for it to be incomplete? If a dependency is already pinned,
-does it need to be listed? How does one choose between `resolvedDependencies`
-and `builderDependencies`?
+    -   (RECOMMENDED) Rearchitect the build service to read configuration
+        directly from version control,  recording the server-verified URI in
+        `externalParameters` and the digest in `resolvedDependencies`.
 
-### ParameterValue
+    -   Record the digest in the provenance[^digest-param] and use a separate
+        provenance attestation to link that digest back to version control. In
+        this solution, the client-side evaluation is considered a separate
+        "build" that SHOULD be independently secured using SLSA, though securing
+        it can be difficult since it usually runs on an untrusted workstation.
 
-[ParameterValue]: #parametervalue
+-   The purpose of `resolvedDependencies` is to facilitate recursive analysis of
+    the software supply chain. Where practical, it is valuable to record the
+    URI and digest of artifacts that, if compromised, could impact the build. At
+    SLSA Build L3, completeness is considered "best effort".
 
-REQUIRED: exactly one of the fields MUST be set.
+-   It is acceptable for a single build service to have multiple modes of
+    operation, only some of which are SLSA-compatible. In this case, each mode
+    SHOULD have a separate `builder.id`.
 
-| Field | Type | Description |
-| ----- | ---- | ----------- |
-| `artifactRef` | [ArtifactReference] | Reference to an artifact. |
-| `scalarValue` | string | Scalar value. |
-| `mapValue` | map (string→string) | Unordered collection of name/value pairs. |
-| `arrayValue` | array (string) | Ordered collection of values. |
+[^digest-param]: The `externalParameters` SHOULD reflect reality. If clients
+    send the evaluated configuration object directly to the build server, record
+    the digest directly in `externalParameters`. If clients upload the
+    configuration object to a temporary storage location and send that location
+    to the build server, record the location in `externalParameters` as a URI
+    and record the `uri` and `digest` in `resolvedDependencies`.
 
-For simplicity, only string values or collections of string values are
-supported.
-
-> ⚠ **RFC:** The design of parameters is still not settled. We welcome feedback
-> on this particular design and suggestions for alternatives. In particular:
->
-> -   How restrictive should we be? This is somewhat of a balance between making
->     it easier for the builder vs [verifier][Verification]. A very restrictive
->     type, such as only strings, makes it easier to set expectations but harder
->     for a builder to describe reality. A very open type, such as an arbitrary
->     JSON object, provides a lot of freedom to builders but possibly at the
->     cost of complexity in terms of expectations.
-> -   Is there a better way to express types than using field names?
-> -   Do we need [ArtifactReference]? Would it instead make sense to just have
->     the raw parameter here and then represent the digest in
->     `resolvedDependencies`? What is the specific use case?
->
-> Alternatives considered so far:
->
-> -   Only allow strings (difficult for many builders)
-> -   Allow strings, maps of strings, or arrays of strings (current design)
-> -   Allow arbitrary JSON (challenge: how do we do [ArtifactReference]?)
+> ⚠ **RFC:** We are particularly looking for feedback on this schema from
+> potential implementers. Does this model map cleanly to existing build systems?
+> Is it natural to identify and express the external parameters? Is anything
+> confusing or ambiguous?
 
 ### ArtifactReference
 
@@ -353,17 +361,17 @@ Metadata about this particular execution of the build.
 <tr id="byproducts"><td><code>byproducts</code>
 <td>array (<a href="#artifactreference">ArtifactReference</a>)<td>
 
-Additional artifacts generated during the build that should not be considered
-the "output" of the build but that may be needed during debugging or incident
+Additional artifacts generated during the build that are not considered
+the "output" of the build but that might be needed during debugging or incident
 response. For example, this might reference logs generated during the build
 and/or a digest of the fully evaluated build configuration.
 
 In most cases, this SHOULD NOT contain all intermediate files generated during
-the build. Instead, this should only contain files that are likely to be useful
+the build. Instead, this SHOULD only contain files that are likely to be useful
 later and that cannot be easily reproduced.
 
 **TODO:** Do we need some recommendation for how to distinguish between
-byproducts? For example, should we recommend using `localName`?
+byproducts, such as using `localName`?
 
 </table>
 
@@ -387,7 +395,7 @@ we rescope this to avoid the duplication and thus the security concern? For
 example, if the envelope identifies the build system, this might identify the
 tenant project?
 
-**TODO:** Provide guidance on how to choose a URI, what scope it should have,
+**TODO:** Provide guidance on how to choose a URI, what scope it SHOULD have,
 stability, how [verification] works, etc.
 
 <tr id="builder.version"><td><code>version</code>
@@ -399,7 +407,7 @@ Version numbers of components of the builder.
 <td>array (<a href="#artifactreference">ArtifactReference</a>)<td>
 
 Dependencies used by the orchestrator that are not run within the workload and
-that should not affect the build, but may affect the provenance generation or
+that do not affect the build, but might affect the provenance generation or
 security guarantees.
 
 **TODO:** Flesh out this model more.
@@ -421,24 +429,24 @@ can sign provenance for the "GitHub Actions" builder, and "Google" can sign
 provenance for the "Google Cloud Build" builder, but "GitHub" cannot sign for
 the "Google Cloud Build" builder.
 
-Design rationale: The builder is distinct from the signer because one signer
-may generate attestations for more than one builder, as in the GitHub Actions
-example above. The field is required, even if it is implicit from the signer,
-to aid readability and debugging. It is an object to allow additional fields
-in the future, in case one URI is not sufficient.
+Design rationale: The builder is distinct from the signer in order to support
+the case where one signer generates attestations for more than one builder, as
+in the GitHub Actions example above. The field is REQUIRED, even if it is
+implicit from the signer, to aid readability and debugging. It is an object to
+allow additional fields in the future, in case one URI is not sufficient.
 
-> ⚠ **RFC:** Should we just allow builders to set arbitrary properties, rather
-> than calling out `version` and `builderDependencies`? We don't expect
-> verifiers to use any of them, so maybe that's the simpler approach? Or have a
-> `properties` that is an arbitrary object? (#319)
+> ⚠ **RFC:** Would it be preferable to allow builders to set arbitrary
+> properties, rather than calling out `version` and `builderDependencies`? We
+> don't expect verifiers to use any of them, so maybe that's the simpler
+> approach? Or have a `properties` that is an arbitrary object? (#319)
 
 > ⚠ **RFC:** Do we want/need to identify the tenant of the build system,
-> separately from the build system itself? If so, should it be a single `id`
+> separately from the build system itself? If so, a single `id`
 > that combines both (e.g.
-> `https://builder.example/tenants/company1.example/project1`), or two separate
+> `https://builder.example/tenants/company1.example/project1`) or two separate
 > fields (e.g. `{"id": "https://builder.example", "tenant":
 > "https://company1.example/project1"}`)? What would the use case be for this?
-> How should [verification] work?
+> How does [verification] work?
 
 ### BuildMetadata
 
@@ -473,14 +481,18 @@ The timestamp of when the build completed.
 
 [Verification]: #verification
 
-> **TODO:** Describe how clients are expected to verify the provenance.
+> **TODO:** Describe how clients are expected to verify the provenance. This
+> includes the idea that a verification tool can check external parameters
+> without knowing the specific buildType.
 
 ## Index of build types
 
 The following is an partial index of build type definitions. Each contains a
 complete example predicate.
 
--   [GitHub Actions Workflow](../../github-actions-workflow/v0.1/)
+-   [GitHub Actions Workflow]
+
+[GitHub Actions Workflow]: /github-actions-workflow/v0.1/
 
 **TODO:** Before marking the spec stable, add at least 1-2 other build types to
 validate that the design is general enough to apply to other builders.
@@ -496,37 +508,26 @@ The meaning of each field is unchanged unless otherwise noted.
         // The `buildType` MUST be updated for v1.0 to describe how to
         // interpret `inputArtifacts`.
         "buildType": /* updated version of */ old.buildType,
-        "externalParameters": old.invocation.parameters + {
+        "externalParameters":
+            old.invocation.parameters + {
             // It is RECOMMENDED to rename "entryPoint" to something more
             // descriptive.
             "entryPoint": old.invocation.configSource.entryPoint,
-            // OPTION 1:
-            // If the old `configSource` was the sole top-level input,
-            // (i.e. containing the source or a pointer to the source):
-            "source": {
-                "artifactRef": {
-                    "uri": old.invocation.configSource.uri,
-                    "digest": old.invocation.configSource.digest,
-                },
-            },
-            // OPTION 2:
-            // If the old `configSource` contained just build configuration
-            // and a separate top-level input contained the source:
-            "source": {
-                "artifactRef": old.materials[indexOfSource],
-            },
-            "config": {
-                "artifactRef": {
-                    "uri": old.invocation.configSource.uri,
-                    "digest": old.invocation.configSource.digest,
-                },
-            },
+            // It is OPTIONAL to rename "source" to something more descriptive,
+            // especially if "source" is ambiguous or confusing.
+            "source": old.invocation.configSource.uri,
         },
         "systemParameters": {
             "artifacts": null, // not in v0.2
             "values": old.invocation.environment,
         },
-        "resolvedDependencies": old.materials,
+        "resolvedDependencies":
+            old.materials + [
+            {
+                "uri": old.invocation.configSource.uri,
+                "digest": old.invocation.configSource.digest,
+            }
+        ]
     },
     "runDetails": {
         "builder": {
@@ -568,19 +569,21 @@ Major refactor to reduce misinterpretation, including a minor change in model.
 -   Altered the model slightly to better align with real-world build systems,
     align with reproducible builds, and make verification easier.
 -   Grouped fields into `buildDefinition` vs `runDetails`.
--   Renamed `parameters` and `environment` to `externalParameters` and
-    `systemParameters`, respectively. Both can now reference artifacts or string
-    values.
--   Split and merged `configSource` into `externalParameters`.
--   Split and merged `materials` into `resolvedDependencies`,
-    `externalParameters`, `systemParameters`, and `builderDependencies`.
--   Added `localName`, `downloadLocation`, and `mediaType` to artifact
-    references.
--   Removed `buildConfig`; can be replaced with
-    `externalParameters.artifacts["config"]`, `byproducts`, or simply omitted.
--   Removed `completeness` and `reproducible`; now implied by `builder.id`.
--   Added `builder.version`.
--   Added `byproducts`.
+-   Renamed, with slight changes in semantics:
+    -   `parameters` -> `externalParameters`
+    -   `environment` -> `systemParameters`
+    -   `materials` -> `resolvedDependencies`
+-   Removed:
+    -   `configSource`: No longer special-cased. Now represented as
+        `externalParameters`  + `resolvedDependencies`.
+    -   `buildConfig`: No longer inlined into the provenance. Can be replaced
+        with a reference in `externalParameters` or `byproducts`, depending on
+        the semantics, or omitted if not needed.
+    -   `completeness` and `reproducible`: Now implied by `builder.id`.
+-   Added:
+    -   `localName`, `downloadLocation`, and `mediaType`
+    -   `builder.version`
+    -   `byproducts`
 
 ### v0.2
 

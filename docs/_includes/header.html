@@ -1,7 +1,7 @@
 
 
 <header
-  x-data="{ open: false, open1: false, open1sub1: false, open2: false, navOpen: false, sticky: false, lastPos: window.scrollY }"
+  x-data="{ open: false, open1: false, open1sub1: false, open1sub2: false, open2: false, navOpen: false, sticky: false, lastPos: window.scrollY }"
   x-ref="navbar"
   x-on:scroll.window="
     sticky = window.scrollY >= $refs.navbar.offsetHeight && lastPos >= window.scrollY;

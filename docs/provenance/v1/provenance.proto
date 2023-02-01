@@ -16,17 +16,9 @@ message Provenance {
 
 message BuildDefinition {
   string build_type = 1;
-  map<string, ParameterValue> external_parameters = 2;
-  map<string, ParameterValue> system_parameters = 3;
+  google.protobuf.Struct external_parameters = 2;
+  google.protobuf.Struct system_parameters = 3;
   repeated ArtifactReference resolved_dependencies = 4;
-}
-
-message ParameterValue {
-  // Logically a oneof, but oneof doesn't support repeated or map.
-  ArtifactReference artifact_ref = 1;
-  string scalar_value = 2;
-  map<string, string> map_value = 3;
-  repeated string array_value = 4;
 }
 
 message ArtifactReference {

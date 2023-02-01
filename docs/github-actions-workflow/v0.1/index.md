@@ -9,87 +9,170 @@ hero_text: |
 ## Description
 
 This `buildType` describes the execution of a top-level [GitHub Actions]
-workflow (as a whole).
+workflow that builds a software artifact.
 
-Note: This type is not meant to describe execution of subsets of the top-level
-workflow, such as an action, a job, or a reusable workflow.
+Only the following [event types] are supported:
 
+| Supported event type  | Event description |
+| --------------------- | ----------------- |
+| [`create`]            | Creation of a git tag or branch. |
+| [`deployment`]        | Creation of a deployment. |
+| [`release`]           | Creation or update of a GitHub release. |
+| [`push`]              | Creation or update of a git tag or branch. |
+| [`workflow_dispatch`] | Manual trigger of a workflow. |
+
+[`create`]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#create
+[`deployment`]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#deployment
+[`release`]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#release
+[`push`]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#push
+[`workflow_dispatch`]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+
+This build type MUST NOT be used for any other event type unless this
+specification is first updated. This ensures that the [external parameters] are
+fully captured and that the semantics are unambiguous. Other event types are
+irrelevant for software builds (such as `issues`) or have complex semantics that
+may be error prone or require further analysis (such as `pull_request` or
+`repository_dispatch`). To add support for another event type, please open a
+[GitHub Issue][SLSA Issues].
+
+Note: Consumers are REQUIRED to reject unrecognized external parameters, so new
+event types can be added without a major version bump as long as they do not
+change the semantics of existing external parameters.
+
+Note: This build type is **not** meant to describe execution of a subset of a
+top-level workflow, such as an action, job, or reusable workflow. Only workflows
+have sufficient [isolation] between invocations, whereas actions and jobs do
+not. Reusable workflows do have sufficient isolation, but supporting both
+top-level and reusable would make the schema too error-prone.
+
+[SLSA Issues]: https://github.com/slsa-framework/slsa/issues
 [GitHub Actions]: https://docs.github.com/en/actions
+[event types]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+[isolation]: /spec/v1.0/requirements#isolation-strength
 
 ## Build Definition
 
 ### External parameters
 
-All external parameters are REQUIRED unless empty.
+[External parameters]: #external-parameters
+
+All external parameters are REQUIRED unless empty. At most one of `deployment`,
+`inputs`, or `release` can be set.
 
 <table>
 <tr><th>Parameter<th>Type<th>Description
 
-<tr id="inputs"><td><code>inputs</code><td>mapValue<td>
+<tr id="deployment"><td><code>deployment</code><td>object<td>
 
-The [inputs context], with each value converted to string. Every non-empty input
-value MUST be recorded. Empty values SHOULD be omitted.
+The non-default [deployment body parameters] for `deployment` events; unset for
+other event types. SHOULD omit parameters that have a default value to make
+verification easier. SHOULD be unset if there are no non-default values.
 
-Note: Only `workflow_dispatch` events and reusable workflows have inputs.
+Only includes the parameters that are passed to the workflow. As of API version
+2022-11-28, this is: `description`, `environment`, `payload`,
+`production_environment`, `transient_environment`.
 
-<tr id="source"><td><code>source</code><td>artifact<td>
+Can be computed from the [github context] using the corresponding fields from
+`github.event.deployment`, filtering out default values (see API docs) and using
+`original_environment` for `environment`.
 
-The git repository containing the top-level workflow YAML file.
+<tr id="inputs"><td><code>inputs</code><td>object<td>
 
-This can be computed from the [github context] using
-`"git+" + github.server_url + "/" + github.repository + "@" + github.ref`.
+The `inputs` from `workflow_dispatch` events; unset for other event types.
+SHOULD omit empty inputs to make verification easier. SHOULD be unset if there
+are no non-empty inputs.
 
-<tr id="vars"><td><code>vars</code><td>vars<td>
+Can be computed from the [github context] using `github.event.inputs`.
 
-The [vars context], with each value converted to string. Every non-empty input
-value MUST be recorded. Empty values SHOULD be omitted.
+<tr id="release"><td><code>release</code><td>object<td>
 
-<tr id="workflowPath"><td><code>workflowPath</code><td>string<td>
+The non-default [release body parameters] for `release` events; unset for
+other event types. SHOULD omit parameters that have a default value to make
+verification easier. SHOULD be unset if there are no non-default values.
 
-The path to the workflow YAML file within `source`.
+Only includes the parameters are passed to the workflow. As of API version
+2022-11-28, this is: `body`, `draft`, `name`, `prerelease`, `target_commitish`.
 
-Note: this cannot be computed directly from the [github context]: the
-`github.workflow` context field only provides the *name* of the workflow, not
-the path. See [getEntryPoint] for one possible implementation.
+Can be computed from the [github context] using the corresponding fields from
+`github.event.release`, filtering out default values (see API docs).
 
-[getEntryPoint]: https://github.com/slsa-framework/slsa-github-generator/blob/ae7e58c315b65aa92b9440d5ce25d795845b3b2a/slsa/buildtype.go#L94-L135
+<tr id="vars"><td><code>vars</code><td>object<td>
+
+The [variables] passed in to the workflow. This SHOULD be unset if there are no
+vars.
+
+Can be computed from the [vars context] using `vars`.
+
+<tr id="workflow"><td><code>workflow</code><td>object<td>
+
+The workflow that was run. For most workflows, this commit is the source code to
+be built.
+
+<tr id="workflow.ref"><td><code>workflow.ref</code><td>string<td>
+
+A git reference to the commit containing the workflow, as either a git ref
+(starting with `refs/`) or commit ID (lowercase hex). This is the value passed
+in via the event. Only `deployment` events support commit IDs.
+
+Can be computed from the [github context] using `github.ref || github.sha`.
+
+<tr id="workflow.repository"><td><code>workflow.repository</code><td>string<td>
+
+HTTPS URI of the git repository, with `https://` protocol and without `.git`
+suffix.
+
+Can be computed from the [github context] using
+`github.server_url + "/" + github.repository`.
+
+<tr id="workflow.path"><td><code>workflow.path</code><td>string<td>
+
+The path to the workflow YAML file within the commit.
+
+Can be computed from the [github context] using
+`github.workflow_ref`, removing the prefix `github.repository + "/"` and the
+suffix `"@" + github.ref`. Take care to consider that the path and/or ref MAY
+contain `@` symbols.
 
 </table>
 
+[deployment body parameters]: https://docs.github.com/en/rest/deployments/deployments?apiVersion=2022-11-28#create-a-deployment--parameters
 [github context]: https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
-[inputs context]: https://docs.github.com/en/actions/learn-github-actions/contexts#inputs-context
+[release body parameters]: https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#create-a-release--parameters
+[variables]: https://docs.github.com/en/actions/learn-github-actions/variables
 [vars context]: https://docs.github.com/en/actions/learn-github-actions/contexts#vars-context
 
 ### System parameters
 
 All system parameters are OPTIONAL.
 
-| Parameter            | Type     | Description |
-| -------------------- | -------- | ----------- |
-| `github`       | mapValue   | A subset of the [github context] as described below. Only includes parameters that are likely to have an effect on the build and that are not already captured elsewhere. |
+| Parameter | Type     | Description |
+| --------- | -------- | ----------- |
+| `github`  | object   | A subset of the [github context] as described below. Only includes parameters that are likely to have an effect on the build and that are not already captured elsewhere. |
 
-The `github` map SHOULD contains the following elements:
+The `github` object SHOULD contains the following elements:
 
-| GitHub Context Parameter        | Description |
-| ------------------------------- | ----------- |
-| `github.mapValue["actor"]`      | The username of the user that triggered the initial workflow run. |
-| `github.mapValue["event_name"]` | The name of the event that triggered the workflow run. |
+| GitHub Context Parameter     | Type   | Description |
+| ---------------------------- | ------ | ----------- |
+| `github.actor_id`            | string | The numeric ID of the user that triggered the initial workflow run. |
+| `github.event_name`          | string | The name of the event that triggered the workflow run. |
+| `github.repository_id`       | string | The numeric ID corresponding to `systemParameters.workflow.repository`. |
+| `github.repository_owner_id` | string | The numeric ID of the user or organization that owns `systemParameters.workflow.repository`. |
+| `github.triggering_actor_id` | string | The numeric ID of the user that triggered the rerun, if different than `actor_id`. |
 
-> TODO: What about `actor_id`, `repository_id`, and `repository_owner_id`? Those
-> are not part of the context so they're harder to describe, and the repository
-> ones should arguably go on the `source` paramater rather than be here.
->
-> Also `base_ref` and `head_ref` are similar in that they are annotations about
-> `source` rather than a proper parameter.
-
-> TODO: None of these are really "parameters", per se, but rather metadata
-> about the build. Perhaps they should go in `runDetails` instead? The problem
-> is that we don't have an appropriate field for it currently.
+Numeric IDs are used here to provide stable identifiers across account and
+repository renames and to detect when an old name is reused for a new entity.
 
 ### Resolved dependencies
 
-The resolved dependencies MAY contain any artifacts known to be input to the
-workflow, such as the specific versions of the virtual environments used.
+The `resolvedDependencies` SHOULD contain an entry identifying the resolved
+git commit ID corresponding to `externalParameters.workflow`. The dependency's
+`uri` MUST be in [SPDX Download Location] format, i.e.
+`"git+" + workflow.uri + "@" + workflow.ref`. See [Example].
+
+The `resolvedDependencies` MAY contain additional artifacts known to be input to
+the workflow, such as the specific versions of the virtual environments used.
+
+[SPDX Download Location]: https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field
 
 ## Run details
 
@@ -99,6 +182,8 @@ The `invocationId` SHOULD be set to `github.server_url + "/actions/runs/" +
 github.run_id + "/attempts/" + github.run_attempt`.
 
 ## Example
+
+[Example]: #example
 
 ```json
 {% include_relative example.json %}
