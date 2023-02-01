@@ -549,21 +549,14 @@ package.
 
 The consumer MAY have to opt-in to enable SLSA verification, depending on the
 package ecosystem.
+
+The consumer MUST ensure that artifacts they consume are built on
+SLSA-conformant build systems. Consumers MUST either audit the build systems
+themselves using the prompts in [verifying systems](verifying-systems.md) or
+rely on the [SLSA certification program](certification.md).
   
 > **TODO:** Anything else? Do they need to make risk-based decisions? Respond to
 > errors/warnings? Do consumers trust builders, or is that up to the package ecosystem?
-  
-## Auditor
-
-An <dfn>auditor</dfn> is an organization or individual that certifies build
-systems for conformance with the SLSA requirements.
-  
-A consumer MAY act as their own auditor.
-  
-An auditor SHOULD use the prompts in [verifying systems](verifying-systems.md)
-when assessing build systems. Auditors MAY go beyond these prompts.
-  
-An auditor SHOULD periodically reassess build systems for conformance.
   
 ## Source control
 
