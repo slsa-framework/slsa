@@ -517,10 +517,7 @@ The meaning of each field is unchanged unless otherwise noted.
             // especially if "source" is ambiguous or confusing.
             "source": old.invocation.configSource.uri,
         },
-        "systemParameters": {
-            "artifacts": null, // not in v0.2
-            "values": old.invocation.environment,
-        },
+        "systemParameters": old.invocation.environment,
         "resolvedDependencies":
             old.materials + [
             {
