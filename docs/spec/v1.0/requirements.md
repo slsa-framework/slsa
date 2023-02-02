@@ -191,16 +191,16 @@ The SLSA Build level describes the minimum bound for:
 
 <tr id="provenance-exists"><td>Provenance Exists<td>
 
-The build process MUST generate provenance describing how the package was
-produced.
+The build process MUST generate provenance that unambiguously identifies the
+output package and describes how that package was produced.
 
 The format MUST be acceptable to the [package ecosystem] and/or [consumer]. It
-is RECOMMENDED to use the [SLSA Provenance] format because it is designed to be
-interoperable, universal, and unambiguous when used for SLSA. See that format's
-documentation for requirements and implementation guidelines. If using an
-alternate format, it MUST contain the equivalent information as SLSA Provenance
-at each level and SHOULD be bi-directionally translatable to SLSA
-Provenance.
+is RECOMMENDED to use the [SLSA Provenance] format and [associated suite]
+because it is designed to be interoperable, universal, and unambiguous when
+used for SLSA. See that format's documentation for requirements and
+implementation guidelines. If using an alternate format, it MUST contain the
+equivalent information as SLSA Provenance at each level and SHOULD be
+bi-directionally translatable to SLSA Provenance.
 
 -   *Completeness:* Best effort. The provenance at L1 SHOULD contain sufficient
     information to catch mistakes and simulate the user experience at higher
@@ -210,7 +210,8 @@ Provenance.
 -   *Authenticity:* No requirements.
 -   *Accuracy:* No requirements.
 
-[SLSA Provenance]: ../../provenance/v1/index.md
+[SLSA Provenance]: ../../provenance/v1/index
+[associated suite]: ../../attestation-model#recommended-suite
 
 <td>✓<td>✓<td>✓
 <tr id="provenance-authenticated"><td>Provenance Authenticated<td>
