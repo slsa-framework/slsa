@@ -45,7 +45,7 @@ Raw signing            | ✓        | ✓         | ✗         |         |     
 [in-toto v2]           | ~        | ✓         |           |         |            |        | In development
 [SPDX]                 |          |           | ✓         |         |            |        | Stable
 [Binary Authorization] | ~        | ~         | ✗         | ~       |            | ✓      | Stable
-[sigstore]             |          |           |           |  ✓      | ✓          | ✓      | Stable (keyless in development)
+[sigstore - cosign]    |          |           |           |  ✓      | ✓          | ✓      | Stable
 
 Legend:
 
