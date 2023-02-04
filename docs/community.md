@@ -103,6 +103,10 @@ Google has been using an internal version of SLSA since 2013 and requires it for
                 <img class="mx-auto w-full" src="https://img.youtube.com/vi/aS_FKrCLh8o/0.jpg" alt="supply chain media image">
                 <p class="text-green-darker font-bold h5 mt-4">Getting Started with Supply Chain Security is Easier Than You... Michael Lieberman & Timothy Miller</p>
             </a>
+             <a href="https://youtu.be/32IhwdAe0yI" class="w-full lg:w-1/2 md:pl-5">
+                <img class="mx-auto w-full" src="https://img.youtube.com/vi/32IhwdAe0yI/0.jpg" alt="supply chain media image">
+                <p class="text-green-darker font-bold h5 mt-4">Spicing up Container Image Security with SLSA & GUAC - Ian Lewis, Google</p>
+            </a>
         </div>
     </div>
 </section>
