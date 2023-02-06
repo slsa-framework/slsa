@@ -50,8 +50,8 @@ SLSA is intended to serve multiple populations:
 
 -   **Consumers,** who use a variety of software and do not know the maintainers
     or their build processes. Their primary goal is confidence that the software
-    is authentic and has not been tampered with. They are concerned about rogue
-    maintainers, compromised credentials, and compromised infrastructure.
+    has not been tampered with. They are concerned about rogue maintainers,
+    compromised credentials, and compromised infrastructure.
 
 -   **Organizations,** who are both producers and consumers of software. In
     addition to the goals above, organizations also want to broadly understand
@@ -213,8 +213,8 @@ All of [Build L1], plus:
     reproducible build, or some equivalent system that ensures the
     trustworthiness of the provenance.
 
--   Downstream verification of provenance includes authenticating the
-    provenance.
+-   Downstream verification of provenance includes validating the authenticity
+    of the provenance attestation.
 
 <dt>Benefits<dd>
 
