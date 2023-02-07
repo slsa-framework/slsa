@@ -62,7 +62,7 @@ Downstream users may verify the provenance with <a href="https://cuelang.org/doc
 
 ### Build observers with hosted services
 These options are user-configured inside a hosted service. They observe the build process and produce signed, formatted provenance. These options do not qualify for SLSA 2 because they are configured by users, not the hosted service.
-    Downstream users verify the provenance with Cue policies and the signature with Cosign. </p>
+    Downstream users may verify the provenance with Cue policies and the signature with Cosign. </p>
  <b>Note:</b> If you are using one of these options with Google Cloud Build or GitHub Actions, jump to SLSA 3 and use the builder itself to generate provenance.
 <ul>
 <li>If you’re using Tejolote with Google Cloud Build or GitHub Actions, jump to SLSA 3  and generate provenance directly from the builder. </li>
