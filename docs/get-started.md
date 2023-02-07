@@ -82,7 +82,7 @@ There is currently only one SLSA 2 builder:
 
 <a href="https://github.com/buildsec/frscahttps://github.com/buildsec/frsca">Factory for Repeatable Secure Creation of Artifacts (FRSCA)</a>
                 
-FRSCA is an OpenSSF project that offers a full build pipeline. It is not yet generally available. It qualifies as a SLSA 2 builder because regular users of the service are not able to inject or alter the contents of the provenance it generates.  FRSCA produces signed, formatted provenance that can be verified by the generic SLSA verifier. 
+FRSCA is an OpenSSF project that aims at offering a full build pipeline. It is not yet generally available. It qualifies as a SLSA 2 builder because regular users of the service are not able to inject or alter the contents of the provenance it generates.  FRSCA produces signed, formatted provenance that can be verified by the generic SLSA verifier. 
 <a id="SLSA3"></a>
 
 ## SLSA&nbsp;3
