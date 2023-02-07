@@ -58,7 +58,7 @@ These options work with your build system to produce unsigned, formatted provena
     <li><a href="https://github.com/slsa-framework/slsa-jenkins-generator">Jenkins SLSA generator</a> </li>
     <li><a href="https://plugins.jenkins.io/in-toto/Jenkins plugin">Jenkins plugin</a></li>
 </ul>
-Downstream users verify the provenance with <a href="https://cuelang.org/docs/">Cue Policies</a>.  
+Downstream users may verify the provenance with <a href="https://cuelang.org/docs/">Cue Policies</a>.  
 
 ### Build observers with hosted services
 These options are user-configured inside a hosted service. They observe the build process and produce signed, formatted provenance. These options do not qualify for SLSA 2 because they are configured by users, not the hosted service.
