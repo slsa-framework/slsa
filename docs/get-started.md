@@ -23,8 +23,6 @@ What differs for each level is the robustness of the build and provenance. For m
 * If you are using FRSCA, jump to <a href="#SLSA2">SLSA 2</a>.  You do not need to implement SLSA 1.
 * If you’re using any other build system or are not using a build system, consider adopting GitHub Actions, Google Cloud Build, or FRSCA. If that isn’t possible, start with <a href="#SLSA1">SLSA 1</a>. Note that if you choose to use SLSA 1, you may not have a growth path to <a href="#SLSA2">SLSA 2</a> or <a href="#SLSA3">SLSA 3</a>.  It is recommended that unless you have a specific reason for using SLSA 1, that you start with <a href="#SLSA2">SLSA 2</a>, or if possible <a href="#SLSA3">SLSA 3</a>.
 
-<b>Note:</b> SLSA 4 is not yet supported by any widely available build system.
-
 ### Provenance verification
 
 Various build methods require different methods to verify provenance. The SLSA community already has some verification methods and is working on additional solutions for provenance verification. Even if there is currently no simple verification method for a particular build system, adopting these builders now means you will be “SLSA ready” when more ecosystem tooling is released. Note that when you create provenance, you must supply to users a method for interpreting what you have created.
