@@ -7,7 +7,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
 
 ## Choosing your SLSA level
 
-For all SLSA levels, you follow the same basic steps:
+For all SLSA levels [SLSA levels](https://slsa.dev/spec/v1.0/levels), you follow the same basic steps:
 
 1) Generate provenance, i.e., document your build process
 2) Allow downstream users to verify that the provenance exists
@@ -16,7 +16,7 @@ What differs for each level is the robustness of the build and provenance. For m
     
 <p>The builders suggested in this guide meet SLSA expectations. If you believe a build option is missing or misclassified, please <a href="https://github.com/slsa-framework/slsa/issues">open an issue</a>.
                     </p>
-                    <p>SLSA levels are progressive: SLSA 3 includes all the guarantees of SLSA 2, and SLSA 2 includes all the guarantees of SLSA 1. Currently, though, the work required to achieve lower SLSA levels will not necessarily accrue toward the work needed to achieve higher SLSA levels. For that reason, <b>you should start with the highest level that’s possible for your project or organization to avoid wasted work</b>. </p>
+                    <p>SLSA levels are progressive: SLSA 3 includes all the guarantees of SLSA 2, and SLSA 2 includes all the guarantees of SLSA 1. Currently, though, the work required to achieve lower SLSA levels will not necessarily accrue toward the work needed to achieve higher SLSA levels because lower SLSA levels may not be compatible with future implementations. For that reason, <b>you should start with the highest level that’s possible for your project or organization to avoid wasted work</b>. </p>
             <p>        The SLSA level you implement depends on your current build situation:
 
 * If you are using GitHub Actions or Google Cloud Build, jump directly to <a href="#SLSA3">SLSA 3</a>.  You do not need to implement SLSA 1 or SLSA 2.
@@ -28,7 +28,7 @@ What differs for each level is the robustness of the build and provenance. For m
 Various build methods require different methods to verify provenance. The SLSA community already has some verification methods and is working on additional solutions for provenance verification. Even if there is currently no simple verification method for a particular build system, adopting these builders now means you will be “SLSA ready” when more ecosystem tooling is released. Note that when you create provenance, you must supply to users a method for interpreting what you have created.
 
 ### Provenance formatting
-Your provenance format depends on who will be consuming it. See <a href="https://slsa.dev/provenance/v0.2">provenance</a> for an explanation of which format to choose. With time, the SLSA community hopes that SLSA Provenance Format will become industry standard, so we encourage you to adopt it if possible.
+Your provenance format depends on who will be consuming it. See <a href="https://slsa.dev/provenance/v0.2">provenance</a> for an explanation of which format to choose. 
 
 ### Provenance storage
 
