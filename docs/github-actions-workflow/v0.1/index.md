@@ -8,6 +8,10 @@ hero_text: |
 
 ## Description
 
+```jsonc
+"buildType": "https://slsa.dev/github-actions-workflow/v0.1?draft"
+```
+
 This `buildType` describes the execution of a top-level [GitHub Actions]
 workflow that builds a software artifact.
 
