@@ -94,9 +94,3 @@ To achieve SLSA 3, you must:<ul>
 
 If you are building on GitHub Actions, adopt the <a href="https://github.com/slsa-framework/slsa-github-generator">Language-agnostic GitHub provenance generator / builder</a> to make your build qualify for SLSA 3. 
 Use the <a href="https://github.com/slsa-framework/slsa-verifier">Generic SLSA Verifier</a> for provenance verification.
-
-### Google cloud builder (paid service)
-
-Google Cloud Build is now SLSA 3 compliant. If you are already using Google Cloud Build, see the documentation on where to find your provenance. 
-Use the <a href="https://github.com/slsa-framework/slsa-verifier">Generic SLSA Verifier</a> for provenance verification.  
-
