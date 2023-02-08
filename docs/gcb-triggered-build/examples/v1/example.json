@@ -1,0 +1,41 @@
+{
+    "predicateType": "https://slsa.dev/provenance/v1?draft",
+    "predicate": {
+        "buildDefinition": {
+            "buildType": "https://slsa.dev/gcb-triggered-build/v1?draft",
+            "externalParameters": {
+                "configSource": {
+                    "ref": "refs/heads/main",
+                    "repository": "https://github.com/GoogleCloudPlatform/cloud-build-samples",
+                    "path": "basic-config/cloudbuild.yaml"
+                },
+                "sourceToBuild": {
+                    "dir": "basic-config"
+                },
+                "substitutions": {
+                    "count": "3",
+                    "mass": "1.3kg",
+                    "name": "wrench"
+                }
+            },
+            "resolvedDependencies": [
+                {
+                    "uri": "git+https://github.com/GoogleCloudPlatform/cloud-build-samples@refs/heads/main",
+                    "digest": { "sha1": "bb0fe8075f92bb82b679afe400a47b106f0cec4b" }
+                }
+            ]
+        },
+        "runDetails": {
+            "metadata": {
+                "invocationId": "TODO",
+                "startedOn": "2023-01-01T12:34:56Z"
+            }
+        }
+    },
+    "subject": [
+        {
+            "name": "_",
+            "digest": { "sha256": "fe4fe40ac7250263c5dbe1cf3138912f3f416140aa248637a60d65fe22c47da4" }
+        }
+    ]
+}
