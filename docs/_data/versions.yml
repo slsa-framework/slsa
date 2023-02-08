@@ -7,30 +7,17 @@
 #           status: <string> # one of: Working Draft, In Review, Stable, Retired
 #           draft: <bool, optional> # if true, display a "draft" warning banner
 #           hidden: <bool, optional> # if true, do not show in dropdown
-#           pages: <list, optional> # the pagenames need to match the filenames
 #       current: <version>
 #
 # Where:
 #   <spec> = specification name, i.e. first component of the URL
 #   <version> = version name, i.e. second component of the URL, e.g. v1.0
-#
-# pages allows defining which pages exist in each version. The selector will
-# show the corresponding option as disabled when a page doesn't exist in
-# that version. When pages isn't defined it is assumed that the same pages
-# exist across the different versions.
 
 spec:
   versions:
     v0.1:
       name: Version 0.1
       status: Stable
-      pages:
-        index,
-        terminology,
-        levels,
-        requirements,
-        threats,
-        faq
     v1.0:
       name: Version 1.0 (DRAFT)
       status: Working Draft
@@ -38,15 +25,6 @@ spec:
       # We will hide 1.0 until it is ready for review. Viewers can still type
       # the URL manually, but we will not link to it from the main page.
       hidden: true
-      pages:
-        index,
-        levels,
-        principles,
-        terminology,
-        requirements,
-        verifying-systems,
-        threats,
-        faq
   current: v0.1
 
 provenance:
