@@ -9,16 +9,19 @@
   {%- endif %}">
 {%- for item in versions reversed %}
 {%- unless item[1].hidden and spec_version != item[0] %}
-  {% assign page_url_parts = page.url | split: '/' %}
-  {% assign page_url = page_url_parts | join: '/' %}
+  {%- assign page_url_parts = page.url | split: '/' %}
+  {%- assign page_url = page_url_parts | join: '/' %}
   {% comment %}
     The url of index pages don't end with index but with /.
     Beware, the contains test is string based so it could give a false positive
     in case of a page name collision, such as if you have "foo" and "foobar"
   {% endcomment %}
-  {% assign terminator = page.url | slice: -1 %}
+  {%- assign terminator = page.url | slice: -1 %}
   {%- if terminator == "/" or item[1].pages == nil or item[1].pages contains page_url_parts.last %}
     <option value="{{ page_url | replace: spec_version, item[0] | relative_url }}" {% if spec_version == item[0] %}selected{% endif %} class="inline-block">{{item[1].name}}</option>
+  {%- elsif terminator != "/" and item[1].pages != nil %}
+    {% comment %}when the page doesn't exist disable the option{% endcomment %}
+    <option disabled class="inline-block">{{item[1].name}}</option>
   {% endif %}
 {%- endunless %}
 {%- endfor %}

@@ -15,9 +15,9 @@
 #   <version> = version name, i.e. second component of the URL, e.g. v1.0
 #
 # pages allows defining which pages exist in each version. The selector will
-# only provide the option to select a different version if the page exists
-# in that version. When pages isn't defined it is assumed that the same
-# pages exist across the different versions.
+# show the corresponding option as disabled when a page doesn't exist in
+# that version. When pages isn't defined it is assumed that the same pages
+# exist across the different versions.
 
 spec:
   versions:
