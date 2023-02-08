@@ -1,0 +1,12 @@
+{% comment %}
+# This mimicks nav.html, walking down the navigation data, to set x-data
+{% endcomment %}
+{%- assign menu = 0 %}
+    {%- for item in site.data.nav -%}
+        {%- unless item.url -%}
+          {%- assign menu = menu | plus: 1 %}
+          {%- assign rootName = 'open' | append: menu %}
+    {{rootName}}: false,
+            {%- include nav-level-init.liquid collection=item.children name=rootName level=menu menuNum=0 %}
+        {%- endunless %}
+    {%- endfor -%}

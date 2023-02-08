@@ -11,9 +11,9 @@
           {{ subitem.title | escape }}
         </a>
       {%- elsif subitem.children.size > 0 %}
-        {% assign menuNum = menuNum | plus: 1 %}
-        {% assign subMenu = sublevel | plus: 1 %}
-        {% assign subName = include.name  | append: 'sub' | append: menuNum %}
+        {%- assign menuNum = menuNum | plus: 1 %}
+        {%- assign subMenu = sublevel | plus: 1 %}
+        {%- assign subName = include.name  | append: 'sub' | append: menuNum %}
         <button x-on:click="{{subName}} = ! {{subName}}" class="dropdown-link cursor">{{ subitem.title | escape }}
           <div class=" ml-2">
             <svg width="9" height="9" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
