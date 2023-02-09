@@ -25,3 +25,4 @@ in the menu at the top of the page.
 | [Verifying build systems](verifying-systems.md) | Guidelines for securing SLSA Build L3+ builders, intended for system implementers. |
 | [Threats & mitigations](threats.md) | Specific supply chain attacks and how SLSA helps. |
 | [FAQ](faq.md) | Questions and more information. |
+| [Future directions](future-directions.md) | Additions and changes being considered for future SLSA versions. |
