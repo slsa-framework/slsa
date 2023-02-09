@@ -9,7 +9,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
 For all [SLSA levels](https://slsa.dev/spec/v1.0/levels), you follow the same steps:
 
 1)  Generate provenance, i.e., document your build process
-2)  Allow downstream users to verify that the provenance exists
+2)  Make the provenance available, to allow downstream users to verify it
 
 What differs for each level is the robustness of the build and provenance. For more information about provenance see [https://slsa.dev/provenance/v0.2](https://slsa.dev/provenance/v0.2).
 
