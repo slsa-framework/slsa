@@ -95,4 +95,4 @@ To achieve SLSA 3, you must:
 
 ### GitHub Actions
 
-If you are building on GitHub Actions, adopt the [Language-agnostic GitHub provenance generator / builder](https://github.com/slsa-framework/slsa-github-generator) to make your build qualify for SLSA 3. Use the [Generic SLSA Verifier](https://github.com/slsa-framework/slsa-verifier) for provenance verification.
+If you are building on GitHub Actions, adopt the [Language-agnostic GitHub provenance generator / builder](https://github.com/slsa-framework/slsa-github-generator) to make your build qualify for SLSA 3. Consumers can use the [Generic SLSA Verifier](https://github.com/slsa-framework/slsa-verifier) for provenance verification.
