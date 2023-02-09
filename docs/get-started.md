@@ -91,7 +91,7 @@ To achieve SLSA 3, you must:
 
 -   Run your build on a hosted service that generates and signs provenance
 -   Ensure that build runs cannot influence each other
--   Produce signed provenance that can be verified and authenticated
+-   Produce signed provenance that can be verified as authentic
 
 ### GitHub Actions
 
