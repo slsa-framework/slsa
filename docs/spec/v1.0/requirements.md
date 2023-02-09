@@ -219,12 +219,12 @@ bi-directionally translatable to SLSA Provenance.
 *Authenticity:* Consumers MUST be able to validate the authenticity of the
 provenance attestation in order to:
 
-- *Ensure integrity:* Verify that the digital signature of the provenance
-  attestation is valid and the provenance was not tampered with after the
-  build.
-- *Define trust:* The provenance attestation identifies the build system or
-  other entities that are necessary to trust in order to trust the artifact
-  they produced.
+-   *Ensure integrity:* Verify that the digital signature of the provenance
+    attestation is valid and the provenance was not tampered with after the
+    build.
+-   *Define trust:* The provenance attestation identifies the build system or
+    other entities that are necessary to trust in order to trust the artifact
+    they produced.
 
 This SHOULD be through a digital signature from a private key
 accessible only to the service which generated the provenance attestation.
