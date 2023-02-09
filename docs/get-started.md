@@ -65,7 +65,7 @@ Downstream users may verify the provenance with Cue policies and the signature w
 
 **Note:** If you are using one of these options with Google Cloud Build or GitHub Actions, jump to SLSA 3 and use the builder itself to generate provenance.
 
--   If you’re using Tejolote with Google Cloud Build or GitHub Actions, jump to SLSA 3 and generate provenance directly from the builder.
+-   If you’re using [Tejolote](https://github.com/kubernetes-sigs/tejolote) with Google Cloud Build or GitHub Actions, jump to SLSA 3 and generate provenance directly from the builder.
 -   [Tekton Chains](https://tekton.dev/docs/chains/signed-provenance-tutorial/) – custom resource definition controller that can generate provenance for Kubernetes OCI containers
 
 <a id="SLSA2"></a>
