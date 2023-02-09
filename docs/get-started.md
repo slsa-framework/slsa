@@ -45,7 +45,7 @@ SLSA 1 requires that the build process is documented. Some tools suggested below
 
 ### Tooling
 
-A build configuration file (i.e., cloudbuild.yml, GitHub workflow) qualifies for SLSA 1. It would be considered unsigned, unformatted provenance.
+A build configuration file (i.e., `cloudbuild.yml`, GitHub workflow) qualifies for SLSA 1. It would be considered unsigned, unformatted provenance.
 
 ### Build service plugins or extensions
 
