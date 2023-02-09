@@ -75,7 +75,7 @@ Downstream users may verify the provenance with Cue policies and the signature w
 To achieve SLSA 2, the goals are to:
 
 -   Run your build on a hosted service that generates and signs provenance
--   Let downstream users verify both the provenance and its signature
+-   Publish the provenance to allow downstream users to verify it
 
 There is currently only one SLSA 2 builder:
 
