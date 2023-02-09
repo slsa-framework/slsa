@@ -4,13 +4,12 @@ layout: standard
 hero_text: If you’re looking to jump straight in and try SLSA, here’s a quick start guide for the steps to take to reach the different SLSA levels.
 ---
 
-
 ## Choosing your SLSA level
 
 For all SLSA levels [SLSA levels](https://slsa.dev/spec/v1.0/levels), you follow the same basic steps:
 
-1) Generate provenance, i.e., document your build process
-2) Allow downstream users to verify that the provenance exists
+1)  Generate provenance, i.e., document your build process
+2)  Allow downstream users to verify that the provenance exists
 
 What differs for each level is the robustness of the build and provenance. For more information about provenance see [https://slsa.dev/provenance/v0.2](https://slsa.dev/provenance/v0.2).
 
@@ -20,9 +19,9 @@ SLSA levels are progressive: SLSA 3 includes all the guarantees of SLSA 2, and S
 
 The SLSA level you implement depends on your current build situation:
 
-* If you are using GitHub Actions or Google Cloud Build, jump directly to [SLSA 3](#SLSA3). You do not need to implement SLSA 1 or SLSA 2.
-* If you are using FRSCA, jump to [SLSA 2](#SLSA2). You do not need to implement SLSA 1.
-* If you’re using any other build system or are not using a build system, consider adopting GitHub Actions, Google Cloud Build, or FRSCA. If that isn’t possible, start with [SLSA 1](#SLSA1). Note that if you choose to use SLSA 1, you may not have a growth path to [SLSA 2](#SLSA2) or [SLSA 3](#SLSA3). It is recommended that unless you have a specific reason for using SLSA 1, that you start with [SLSA 2](#SLSA2), or if possible [SLSA 3](#SLSA3).
+-   If you are using GitHub Actions or Google Cloud Build, jump directly to [SLSA 3](#SLSA3). You do not need to implement SLSA 1 or SLSA 2.
+-   If you are using FRSCA, jump to [SLSA 2](#SLSA2). You do not need to implement SLSA 1.
+-   If you’re using any other build system or are not using a build system, consider adopting GitHub Actions, Google Cloud Build, or FRSCA. If that isn’t possible, start with [SLSA 1](#SLSA1). Note that if you choose to use SLSA 1, you may not have a growth path to [SLSA 2](#SLSA2) or [SLSA 3](#SLSA3). It is recommended that unless you have a specific reason for using SLSA 1, that you start with [SLSA 2](#SLSA2), or if possible [SLSA 3](#SLSA3).
 
 ### Provenance verification
 
@@ -52,9 +51,9 @@ A build configuration file (i.e., cloudbuild.yml, GitHub workflow) qualifies for
 
 These options work with your build system to produce unsigned, formatted provenance. They do not qualify for SLSA 2 because they are unsigned and not run by the hosted server:
 
-* [Azure DevOps extension](https://github.com/slsa-framework/azure-devops-demo)
-* [Jenkins SLSA generator](https://github.com/slsa-framework/slsa-jenkins-generator)
-* [Jenkins plugin](https://plugins.jenkins.io/in-toto/)
+-   [Azure DevOps extension](https://github.com/slsa-framework/azure-devops-demo)
+-   [Jenkins SLSA generator](https://github.com/slsa-framework/slsa-jenkins-generator)
+-   [Jenkins plugin](https://plugins.jenkins.io/in-toto/)
 
 Downstream users may verify the provenance with [Cue Policies](https://cuelang.org/docs/).
 
@@ -66,8 +65,8 @@ Downstream users may verify the provenance with Cue policies and the signature w
 
 **Note:** If you are using one of these options with Google Cloud Build or GitHub Actions, jump to SLSA 3 and use the builder itself to generate provenance.
 
-* If you’re using Tejolote with Google Cloud Build or GitHub Actions, jump to SLSA 3 and generate provenance directly from the builder.
-* [Tekton Chains](https://tekton.dev/docs/chains/signed-provenance-tutorial/) – custom resource definition controller that can generate provenance for Kubernetes OCI containers
+-   If you’re using Tejolote with Google Cloud Build or GitHub Actions, jump to SLSA 3 and generate provenance directly from the builder.
+-   [Tekton Chains](https://tekton.dev/docs/chains/signed-provenance-tutorial/) – custom resource definition controller that can generate provenance for Kubernetes OCI containers
 
 <a id="SLSA2"></a>
 
@@ -75,12 +74,12 @@ Downstream users may verify the provenance with Cue policies and the signature w
 
 To achieve SLSA 2, the goals are to:
 
-* Run your build on a hosted service that generates and signs provenance
-* Let downstream users verify both the provenance and its signature
+-   Run your build on a hosted service that generates and signs provenance
+-   Let downstream users verify both the provenance and its signature
 
 There is currently only one SLSA 2 builder:
 
-* [Factory for Repeatable Secure Creation of Artifacts (FRSCA)](https://github.com/buildsec/frscahttps://github.com/buildsec/frsca)
+-   [Factory for Repeatable Secure Creation of Artifacts (FRSCA)](https://github.com/buildsec/frscahttps://github.com/buildsec/frsca)
 
 FRSCA is an OpenSSF project that aims at offering a full build pipeline. It is not yet generally available. It qualifies as a SLSA 2 builder because regular users of the service are not able to inject or alter the contents of the provenance it generates. FRSCA produces signed, formatted provenance that can be verified by the generic SLSA verifier.
 
@@ -90,9 +89,9 @@ FRSCA is an OpenSSF project that aims at offering a full build pipeline. It is n
 
 To achieve SLSA 3, you must:
 
-* Run your build on a hosted service that generates and signs provenance
-* Ensure that build runs cannot influence each other
-* Produce signed provenance that can be verified and authenticated
+-   Run your build on a hosted service that generates and signs provenance
+-   Ensure that build runs cannot influence each other
+-   Produce signed provenance that can be verified and authenticated
 
 ### GitHub actions
 
