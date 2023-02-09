@@ -93,6 +93,6 @@ To achieve SLSA 3, you must:
 -   Ensure that build runs cannot influence each other
 -   Produce signed provenance that can be verified and authenticated
 
-### GitHub actions
+### GitHub Actions
 
 If you are building on GitHub Actions, adopt the [Language-agnostic GitHub provenance generator / builder](https://github.com/slsa-framework/slsa-github-generator) to make your build qualify for SLSA 3. Use the [Generic SLSA Verifier](https://github.com/slsa-framework/slsa-verifier) for provenance verification.
