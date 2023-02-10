@@ -1,3 +1,4 @@
+# This file controls the version selector
 # Schema:
 #     <spec>:
 #       versions:
@@ -10,7 +11,7 @@
 #
 # Where:
 #   <spec> = specification name, i.e. first component of the URL
-#   <version> = verison name, i.e. second component of the URL, e.g. v1.0
+#   <version> = version name, i.e. second component of the URL, e.g. v1.0
 
 spec:
   versions:
