@@ -14,6 +14,19 @@ the right</span><span class="md:hidden">at the bottom of this page</span>. For
 the recommended attestation formats, including provenance, see "Specifications"
 in the menu at the top of the page.
 
+## About this release candidate
+
+This is release candidate is a preview of version 1.0. It contains all
+anticipated concepts and major changes for v1.0, but there are still outstanding
+TODOs and cleanups. We expect to cover all TODOs and address feedback before the
+1.0 final release.
+
+Known issues:
+
+-   TODO: Use consistent terminology throughout the site: "publish" vs
+    "release", "publisher" vs "maintainer" vs "developer", "consumer" vs
+    "ecosystem" vs "downstream system", "build" vs "produce.
+
 ## Table of contents
 
 | Page | Description |
