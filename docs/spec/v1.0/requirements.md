@@ -210,7 +210,7 @@ bi-directionally translatable to SLSA Provenance.
 -   *Authenticity:* No requirements.
 -   *Accuracy:* No requirements.
 
-[SLSA Provenance]: ../../provenance/v1/index
+[SLSA Provenance]: ../../provenance/v1
 [associated suite]: ../../attestation-model#recommended-suite
 
 <td>✓<td>✓<td>✓
@@ -435,8 +435,8 @@ prescribed by the package ecosystem.
 ### Setting Expectations
 
 <dfn>Expectations</dfn> define the allowed values for
-[`buildType`](/provenance/v1/#buildType) and
-[`externalParameters`](/provenance/v1/#externalParameters)
+[`buildType`](/provenance/v1#buildType) and
+[`externalParameters`](/provenance/v1#externalParameters)
 for a given package (assuming the SLSA provenance format) in order to address
 the [build integrity threats](threats#build-integrity-threats).
 > **TODO:** link to more concrete guidance once it's available.
@@ -520,7 +520,7 @@ Verification MUST include the following steps:
 
 -   Ensuring that the builder identity is one of those in the map of trusted
     builder id's to SLSA level.
--   [Verification of the provenance](/provenance/v1/#verification) metadata.
+-   [Verification of the provenance](/provenance/v1#verification) metadata.
 -   Ensuring that the values for `BuildType` and `ExternalParameters` in the
     provenance match the known expectations. The package ecosystem MAY allow
     an approved list of `ExternalParameters` to be ignored during verification.
