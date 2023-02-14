@@ -106,4 +106,4 @@ The following table shows known build software packages and the SLSA level they 
 | FRSCA                   | 2          |
 | GitHub Actions          | 3          |
 | Google Cloud Build      | 3          |
-| No Build System         | 1          |
+| No Build Service        | 1          |
