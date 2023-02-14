@@ -96,3 +96,14 @@ To achieve SLSA 3, you must:
 ### GitHub Actions
 
 If you are building on GitHub Actions, adopt the [Language-agnostic GitHub provenance generator / builder](https://github.com/slsa-framework/slsa-github-generator) to make your build qualify for SLSA 3. Consumers can use the [Generic SLSA Verifier](https://github.com/slsa-framework/slsa-verifier) for provenance verification.
+
+## Builder SLSA levels
+
+The following table shows known build software packages and the SLSA level they qualify for.
+
+| Builder                 | SLSA Level |
+|-------------------------|------------|
+| FRSCA                   | 2          |
+| GitHub Actions          | 3          |
+| Google Cloud Builder    | 3          |
+
