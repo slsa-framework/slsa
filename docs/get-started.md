@@ -45,7 +45,7 @@ SLSA 1 requires that the build process is documented. Some tools suggested below
 
 ### Tooling
 
-A build configuration file (i.e., `cloudbuild.yml`, GitHub workflow) qualifies for SLSA 1. It would be considered unsigned, unformatted provenance.
+A build configuration file (i.e., GitHub workflow) qualifies for SLSA 1. It would be considered unsigned, unformatted provenance.
 
 ### Build service plugins or extensions
 
@@ -63,9 +63,9 @@ These options are user-configured inside a hosted service. They observe the buil
 
 Downstream users may verify the provenance with Cue policies and the signature with Cosign.
 
-**Note:** If you are using one of these options with Google Cloud Build or GitHub Actions, jump to SLSA 3 and use the builder itself to generate provenance.
+**Note:** If you are using one of these options with GitHub Actions, jump to SLSA 3 and use the builder itself to generate provenance.
 
--   If you’re using [Tejolote](https://github.com/kubernetes-sigs/tejolote) with Google Cloud Build or GitHub Actions, jump to SLSA 3 and generate provenance directly from the builder.
+-   If you’re using [Tejolote](https://github.com/kubernetes-sigs/tejolote) with GitHub Actions, jump to SLSA 3 and generate provenance directly from the builder.
 -   [Tekton Chains](https://tekton.dev/docs/chains/signed-provenance-tutorial/) – custom resource definition controller that can generate provenance for Kubernetes OCI containers
 
 <a id="SLSA2"></a>
