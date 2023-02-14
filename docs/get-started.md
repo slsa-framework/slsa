@@ -19,9 +19,9 @@ SLSA levels are progressive: SLSA 3 includes all the guarantees of SLSA 2, and S
 
 The SLSA level you implement depends on your current build situation:
 
--   If you are using GitHub Actions or Google Cloud Build, jump directly to [SLSA 3](#SLSA3). You do not need to implement SLSA 1 or SLSA 2.
+-   If you are using GitHub Actions, jump directly to [SLSA 3](#SLSA3). You do not need to implement SLSA 1 or SLSA 2.
 -   If you are using [FRSCA](https://github.com/buildsec/frsca), jump to [SLSA 2](#SLSA2). You do not need to implement SLSA 1.
--   If you’re using any other build system or are not using a build system, consider adopting GitHub Actions, Google Cloud Build, or FRSCA. If that isn’t possible, start with [SLSA 1](#SLSA1). Note that if you choose to use SLSA 1, you may not have a growth path to [SLSA 2](#SLSA2) or [SLSA 3](#SLSA3). It is recommended that unless you have a specific reason for using SLSA 1, that you start with [SLSA 2](#SLSA2), or if possible [SLSA 3](#SLSA3).
+-   If you’re using any other build system or are not using a build system, consider adopting GitHub Actions, or FRSCA. If that isn’t possible, start with [SLSA 1](#SLSA1). Note that if you choose to use SLSA 1, you may not have a growth path to [SLSA 2](#SLSA2) or [SLSA 3](#SLSA3). It is recommended that unless you have a specific reason for using SLSA 1, that you start with [SLSA 2](#SLSA2), or if possible [SLSA 3](#SLSA3).
 
 ### Provenance verification
 
