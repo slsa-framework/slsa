@@ -3,7 +3,7 @@
 The initial [draft version (v0.1)] of SLSA had a larger scope including
 protections against tampering with source code and a higher level of build
 integrity (Build L4). This page collects some early thoughts on how SLSA
-**might** evolve in future to re-introduce those notions and add other
+**might** evolve in future version to re-introduce those notions and add other
 additional aspects of automatable supply chain security.
 
 <section id="build-l4">
@@ -117,7 +117,8 @@ the build worker.
 
 ## Source track
 
-A Source track could provide protection against tampering of the source code.
+A Source track could provide protection against tampering of the source code
+prior to the build.
 
 The initial [draft version (v0.1)](../v0.1/requirements.md#source-requirements)
 of SLSA included the following source requirements, which **may or may not**
