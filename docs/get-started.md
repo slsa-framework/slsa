@@ -102,7 +102,7 @@ If you are building on GitHub Actions, adopt the [Language-agnostic GitHub prove
 The following table shows known build software packages and the potential SLSA level they qualify for.  Potential levels are reached with proper provenance.
 
 | Builder                 | Potential SLSA Level |
-|-------------------------|----------------------|
+|-------------------------|:--------------------:|
 | FRSCA                   |           2          |
 | GitHub Actions          |           3          |
 | Google Cloud Build      |           3          |
