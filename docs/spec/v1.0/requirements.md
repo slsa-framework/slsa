@@ -17,14 +17,6 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-## TODO
-
-**TODO:** Use consistent terminology throughout the site: "publish" vs
-"release", "publisher" vs "maintainer" vs "developer", "consumer" vs
-"ecosystem" vs "downstream system", "build" vs "produce.
-
-**TODO:** Generate permalinks to sections.
-
 ## Overview
 
 ### Build levels
@@ -210,7 +202,7 @@ bi-directionally translatable to SLSA Provenance.
 -   *Authenticity:* No requirements.
 -   *Accuracy:* No requirements.
 
-[SLSA Provenance]: ../../provenance/v1/index
+[SLSA Provenance]: ../../provenance/v1
 [associated suite]: ../../attestation-model#recommended-suite
 
 <td>✓<td>✓<td>✓
@@ -320,93 +312,6 @@ initial [draft version (v0.1)](../v0.1/requirements.md).
 <td> <td> <td>✓
 </table>
 
-### Possible future requirements
-
-The initial [draft version (v0.1)](../v0.1/requirements.md) of SLSA defined a
-"SLSA 4" that included the following requirements. A future Build L4 might
-incorporate some or all of the following, in whole or in part. This list is not
-exhaustive.
-
-> WARNING: The draft requirements here are unversioned and subject to change.
-
-<details id="parameterless">
-<summary>Parameterless (draft)</summary>
-
-The build output cannot be affected by user parameters other than the build
-entry point and the top-level source location. In other words, the build is
-fully defined through the build script and nothing else.
-
-Examples:
-
--   GitHub Actions
-    [workflow_dispatch](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch)
-    `inputs` MUST be empty.
--   Google Cloud Build
-    [user-defined substitutions](https://cloud.google.com/build/docs/configuring-builds/substitute-variable-values)
-    MUST be empty. (Default substitutions, whose values are defined by the
-    server, are acceptable.)
-
-</details>
-<details id="hermetic">
-<summary>Hermetic (draft)</summary>
-
-All transitive build steps, sources, and dependencies were fully declared up
-front with *immutable references*, and the build steps ran with no network
-access.
-
-An **immutable reference** is an identifier that is
-guaranteed to always point to the same, immutable artifact. This MUST allow the
-consumer to locate the artifact and SHOULD include a cryptographic hash of the
-artifact's contents to ensure integrity. Examples: git URL + branch/tag/ref \+
-commit ID; cloud storage bucket ID + SHA-256 hash; Subversion URL (no hash).
-
-The user-defined build script:
-
--   MUST declare all dependencies, including sources and other build steps,
-    using *immutable references* in a format that the build service understands.
-
-The build service:
-
--   MUST fetch all artifacts in a trusted control plane.
--   MUST NOT allow mutable references.
--   MUST verify the integrity of each artifact.
-    -   If the *immutable reference* includes a cryptographic hash, the service
-        MUST verify the hash and reject the fetch if the verification fails.
-    -   Otherwise, the service MUST fetch the artifact over a channel that
-        ensures transport integrity, such as TLS or code signing.
--   MUST prevent network access while running the build steps.
-    -   This requirement is "best effort." It SHOULD deter a reasonable team
-        from having a non-hermetic build, but it need not stop a determined
-        adversary. For example, using a container to prevent network access is
-        sufficient.
-
-</details>
-<details id="reproducible">
-<summary>Reproducible (draft)</summary>
-
-Re-running the build steps with identical input artifacts results in bit-for-bit
-identical output. Builds that cannot meet this MUST provide a justification why
-the build cannot be made reproducible.
-
-"○" means that this requirement is "best effort". The user-provided build script
-SHOULD declare whether the build is intended to be reproducible or a
-justification why not. The build service MAY blindly propagate this intent
-without verifying reproducibility. A consumer MAY reject the build if it does
-not reproduce.
-
-</details>
-<details id="dependencies-complete">
-<summary>Dependencies complete (draft)</summary>
-
-Provenance records all build dependencies that were available while running the
-build steps. This includes the initial state of the machine, VM, or container of
-the build worker.
-
--   MUST include all user-specified build steps, sources, dependencies.
--   SHOULD include all service-provided artifacts.
-
-</details>
-
 ## Package ecosystem
 
 [Package ecosystem]: #package-ecosystem
@@ -434,8 +339,8 @@ prescribed by the package ecosystem.
 ### Setting Expectations
 
 <dfn>Expectations</dfn> define the allowed values for
-[`buildType`](/provenance/v1/#buildType) and
-[`externalParameters`](/provenance/v1/#externalParameters)
+[`buildType`](/provenance/v1#buildType) and
+[`externalParameters`](/provenance/v1#externalParameters)
 for a given package (assuming the SLSA provenance format) in order to address
 the [build integrity threats](threats#build-integrity-threats).
 > **TODO:** link to more concrete guidance once it's available.
@@ -519,7 +424,7 @@ Verification MUST include the following steps:
 
 -   Ensuring that the builder identity is one of those in the map of trusted
     builder id's to SLSA level.
--   [Verification of the provenance](/provenance/v1/#verification) metadata.
+-   [Verification of the provenance](/provenance/v1#verification) metadata.
 -   Ensuring that the values for `BuildType` and `ExternalParameters` in the
     provenance match the known expectations. The package ecosystem MAY allow
     an approved list of `ExternalParameters` to be ignored during verification.
@@ -557,127 +462,3 @@ rely on the [SLSA certification program](certification.md).
 
 > **TODO:** Anything else? Do they need to make risk-based decisions? Respond to
 > errors/warnings? Do consumers trust builders, or is that up to the package ecosystem?
-
-## Source control
-
-[Source control]: #source-control
-
-A package's <dfn>source control system</dfn> is the infrastructure for managing
-versions of the package's source code.
-
-There are currently no requirements for the source control system because the
-SLSA [Source track](levels.md#source-track) is not yet defined. The initial
-[draft version (v0.1)](../v0.1/requirements.md#source-requirements) of SLSA
-included the following source requirements, which might form the basis for a
-future Source track. Each entry might or might not be included in the future, in
-whole or in part. The list is not exhaustive.
-
-> WARNING: The draft requirements here are unversioned and subject to change.
-
-<details id="version-controlled">
-<summary>Version controlled (draft)</summary>
-
-Every change to the source is tracked in a version control system that meets the
-following requirements:
-
--   **[Change history]** There exists a record of the history of changes
-    that went into the revision. Each change MUST contain: the identities of
-    the uploader and reviewers (if any), timestamps of the reviews (if any)
-    and submission, the change description/justification, the content of
-    the change, and the parent revisions.
-
--   **\[Immutable reference]** There exists a way to indefinitely reference
-    this particular, immutable revision. In git, this is the {repo URL +
-    branch/tag/ref + commit ID}.
-
-Most popular version control system meet this requirement, such as git,
-Mercurial, Subversion, or Perforce.
-
-NOTE: This does NOT require that the code, uploader/reviewer identities, or
-change history be made public. Rather, some organization attests to the fact
-that these requirements are met, and it is up to the consumer whether this
-attestation is sufficient.
-
-"○" = RECOMMENDED.
-
-</details>
-<details id="verified-history">
-<summary>Verified history (draft)</summary>
-
-Every change in the revision's history has at least one strongly authenticated
-actor identity (author, uploader, reviewer, etc.) and timestamp. It MUST be
-clear which identities were verified, and those identities MUST use [two-step
-verification](https://www.google.com/landing/2step/) or similar. (Exceptions
-noted below.)
-
--   **[First-parent history]** In the case of a non-linear version control
-    system, where a revision can have more than one parent, only the "first
-    parent history" is in scope. In other words, when a feature branch is merged
-    back into the main branch, only the merge itself is in scope.
--   **[Historical cutoff]** There is some TBD exception to allow existing
-    projects to meet SLSA 3/4 even if historical revisions were present in the
-    history. Current thinking is that this could be either last N months or a
-    platform attestation guaranteeing that future changes in the next N months
-    will meet the requirements.
-
-"Strongly authenticated" means that the actor was mapped to a specific person
-using an authentication mechanism which is resistant to account and credential
-compromise. For example, 2-factor authentication (2FA) where one factor is a
-hardware security key (i.e. YubiKey).
-
-</details>
-<details id="retained-indefinitely">
-<summary>Retained indefinitely (draft)</summary>
-
-The revision and its change history are preserved indefinitely and cannot be
-deleted, except when subject to an established and transparent policy for
-obliteration, such as a legal or policy requirement.
-
--   **[Immutable history]** It MUST not be possible for persons to delete or
-    modify the history, even with multi-party approval, except by trusted
-    platform admins with two-party approval following the obliterate policy.
--   **[Limited retention for SLSA 3]** At SLSA 3 (but not 4), it is acceptable
-    for the retention to be limited to 18 months, as attested by the source
-    control platform.
-    -   Example: If a commit is made on 2020-04-05 and then a retention
-        attestation is generated on 2021-01-01, the commit MUST be retained
-        until at least 2022-07-01.
-
-</details>
-<details id="two-person-reviewed">
-<summary>Two-person reviewed (draft)</summary>
-
-Every change in the revision's history was agreed to by two trusted persons
-prior to submission, and both of these trusted persons were strongly
-authenticated. (Exceptions from [Verified History](#verified-history) apply here
-as well.)
-
--   The following combinations are acceptable:
-    -   Uploader and reviewer are two different trusted persons.
-    -   Two different reviewers are trusted persons.
--   **[Different persons]** The platform ensures that no person can use
-  alternate identities to bypass the two-person review requirement.
-    -   Example: if a person uploads with identity X then reviews with alias Y,
-        the platform understands that this is the same person and does not
-        consider the review requirement satisfied.
--   **[Informed review]** The reviewer is able and encouraged to make an
-    informed decision about what they're approving. The reviewer SHOULD be
-    presented with a full, meaningful content diff between the proposed revision
-    and the previously reviewed revision. For example, it is not sufficient to
-    just indicate that file changed without showing the contents.
--   **[Context-specific approvals]** Approvals are for a specific context, such
-    as a repo + branch in git. Moving fully reviewed content from one context to
-    another still requires review. (Exact definition of "context" depends on the
-    project, and this does not preclude well-understood automatic or reviewless
-    merges, such as cutting a release branch.)
-    -   Git example: If a fully reviewed commit in one repo is merged into a
-        different repo, or a commit in one branch is merged into a different
-        branch, then the merge still requires review.
-
-"Trusted persons" are the set of persons who are granted the authority to
-maintain a software project. For example, https://github.com/MarkLodato/dotfiles
-has just one trusted person (MarkLodato), while
-https://hg.mozilla.org/mozilla-central has a set of trusted persons with write
-access to the mozilla-central repository.
-
-</details>
