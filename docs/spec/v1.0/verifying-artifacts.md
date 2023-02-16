@@ -112,7 +112,7 @@ to the registry but not to write to the source repository, nor do they have
 insider access to any trusted systems. Expectations MUST be sufficient to detect
 or prevent this adversary from injecting unofficial behavior into the package.
 Example threats in this category include building from an unofficial fork or
-abusing a build parameter to modify the build. Usually expectations identify 
+abusing a build parameter to modify the build. Usually expectations identify
 the canonical source repository (which is the main external parameter) and
 any other security-relevant external parameters.
 

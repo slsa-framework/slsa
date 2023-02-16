@@ -100,6 +100,7 @@ MAY delegate this responsibility to the package ecosystem, provided that the
 package ecosystem is capable of distributing provenance.
 
 ### How a producer implements SLSA
+>
 > **TODO:** Do we still need this content?
 
 The process differs whether or not the path to SLSA is
