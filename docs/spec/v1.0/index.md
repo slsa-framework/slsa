@@ -6,6 +6,18 @@ SLSA is a specification for describing and incrementally improving supply chain
 security, established by industry consensus. It is organized into a series of
 levels that describe increasing security guarantees.
 
+> **TODO:** Is there a better place for this paragraph?
+
+Using SLSA is a bit like using nutrition labels. It is the software producer's
+responsibility to choose and appropriate build system and produce accurate
+provenance, just as it is a food manufacturer's responsibility to use
+safe manufacturing facilities and produce accurate labels. It is the package
+ecosystem's responsibility to ensure the artifacts they distribute satisfy
+their expectations, just as it is a grocery store's responsibility to ensure
+that food they sell meets some minimum safety standard. And it is the consumer's
+responsibility to verify the artifact's provenance or delegate that
+responsibility to a trusted authority, just as a consumer does for food.
+
 </div>
 
 This is **version 1.0** of the SLSA specification, which defines the SLSA
@@ -34,8 +46,9 @@ Known issues:
 | [Security levels](levels.md) | Overview of SLSA, intended for all audiences. If you read one page, read this. |
 | [Guiding principles](principles.md) | Background on the guiding principles behind SLSA. |
 | [Terminology](terminology.md) | Terminology and model used by SLSA. |
-| [Requirements](requirements.md) | Detailed technical requirements, intended for system implementers. |
+| [Producing artifacts](requirements.md) | Detailed technical requirements for producing software artifacts, intended for system implementers. |
 | [Verifying build systems](verifying-systems.md) | Guidelines for securing SLSA Build L3+ builders, intended for system implementers. |
+| [Verifying artifacts](verifying-artifacts.md) | Guidance for verifying software artifacts and their SLSA provenance, intended for system implementers and software consumers. |
 | [Threats & mitigations](threats.md) | Specific supply chain attacks and how SLSA helps. |
 | [FAQ](faq.md) | Questions and more information. |
 | [Future directions](future-directions.md) | Additions and changes being considered for future SLSA versions. |
