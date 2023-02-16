@@ -1,136 +1,109 @@
 ---
 title: Get started
 layout: standard
-hero_text: If you’re looking to jump straight in and try SLSA, here’s a quick start guide for the steps to take to reach the first SLSA level. Level 1 ensures that you’re setting up the foundation of trust in a system and that all your applications are generating appropriate provenance data. It also sets a baseline to achieve higher SLSA compliance later, which we explain in detail below.
+hero_text: If you’re looking to jump straight in and try SLSA, here’s a quick start guide for the steps to take to reach the different SLSA levels.
 ---
 
-<section class="section bg-pastel-green flex justify-center items-center">
-    <div class="wrapper inner w-full">
-        <div class="md:flex justify-between items-start mb-16">
-            <div class="text w-full md:w-1/3">
-<div class="h2 -mt-16 p-0">
+## Choosing your SLSA level
 
-## Reaching SLSA Level 1
+For all [SLSA levels](https://slsa.dev/spec/v0.1/levels), you follow the same steps:
 
-</div>
-<p class="h4 font-semibold my-6 text-green-dark">Effort: Low</p>
-            </div>
-            <div class="w-full md:w-2/3">
-                <div class="bg-white h-full rounded-lg p-10">
-                    <p class="h4 font-bold mb-6">Overview<p>
-                    <p>
-                        This guide will help you achieve Level 1, and it should take less than a couple of hours for an individual project. The goals is to:
-                    <ul class="list-disc my-6 pl-6">
-                        <li>Automate your builds</li>
-                        <li>Produce provenance data</li>
-                    </ul>
-                    </p>
-                    <p class="mb-10">
-                        The tools listed are optional resources only, there for demonstration and context-specific guidance.
-                    </p>
-                    <p class="h4 font-bold mb-6">Steps</p>
-                    <ul class="list-decimal mt-6 mb-10 pl-6">
-                        <li>If you don't already use a build service or CI/CD, we recommend you set one up. This is not strictly required but it makes the following steps easier and is needed for higher levels. Consider using a service that is supported in the next step.</li>
-                        <li>Generate <a href="provenance">provenance</a> during your build. The <a href="#tools">tools</a> below might be useful. If your build service is not listed there, consider creating a plugin to generate provenance.
-                        <li>Make the provenance available to your consumers. We don't yet have a standard convention for this. Best practises will develop as SLSA becomes more popular and we get more experience.</li>
-                        <li>You’re Level 1! Add the <a href="images/SLSA-Badge-full-level1.svg">SLSA Level 1 badge</a> to your project's readme.</li>
-                    </ul>
-                    <p class="h4 font-bold mb-6" id="tools">Tools</p>
-                    <ul class="list-disc mt-6 pl-6">
-                        <li><a href="https://github.com/slsa-framework/slsa-github-generator#provenance-only-generators">GitHub actions provenance generators</a> (SLSA level 3)</li>
-                        <li><a href="https://github.com/slsa-framework/azure-devops-demo">Azure DevOps provenance generator</a> (SLSA level 1)</li>
-                        <li><a href="https://cloud.google.com/build/docs/securing-builds/use-provenance-and-binary-authorization">Google Cloud Build</a> (SLSA level 2)</li>
-                        <li><a href="https://github.com/sigstore/cosign">Sigstore Cosign for storing signed provenance</a></li>
-                        <li><a href="https://github.com/buildsec/frsca">OpenSSF - Factory for Repeatable Secure Creation of Artifacts (FRSCA)</a> (Currently SLSA level 2)</li>
-                        <li><a href="https://github.com/in-toto">in-toto</a>: Several in-toto implementations (Go, Java, Rust) and integrations (Jenkins Plugin) support the generation of SLSA provenance attestations</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+1)  Generate provenance, i.e., document your build process
+2)  Make the provenance available, to allow downstream users to verify it
 
-<section class="section bg-pastel-green flex justify-center items-center">
-    <div class="wrapper inner w-full">
-        <div class="md:flex justify-between items-start mb-16">
-            <div class="text w-full md:w-1/3">
-<div class="h2 -mt-16 p-0">
+What differs for each level is the robustness of the build and provenance. For more information about provenance see [https://slsa.dev/provenance/v0.2](https://slsa.dev/provenance/v0.2).
 
-## Reaching SLSA Level 3
+The builders suggested in this guide meet SLSA expectations. If you believe a build option is missing or misclassified, please [open an issue](https://github.com/slsa-framework/slsa/pull/589).
 
-</div>
-<p class="h4 font-semibold my-6 text-green-dark">Effort: Low</p>
-            </div>
-            <div class="w-full md:w-2/3">
-                <div class="bg-white h-full rounded-lg p-10">
-                    <p class="h4 font-bold mb-6">Overview<p>
-                    <p>
-                        This guide will help you achieve the <a href="/spec/v0.1/requirements#build-requirements">build</a> and <a href="/spec/v0.1/requirements#provenance-requirements">provenance</a> requirements of Level 3, and it should take less than a couple of hours for an individual project. The goals is to achieve the following requirements:
-                    <ul class="list-disc my-6 pl-6">
-                        <li><a href="/spec/v0.1/requirements#build-as-code">Build as code</a></li>
-                        <li><a href="/spec/v0.1/requirements#ephemeral-environment">Ephemeral environment</a></li>
-                        <li><a href="/spec/v0.1/requirements#isolated">Isolated</a></li>
-                        <li><a href="/spec/v0.1/requirements#parameterless">Parameterless</a></li>
-                        <li><a href="/spec/v0.1/requirements#non-falsifiable">Non-falsifiable</a></li>
-                    </ul>
-                    </p>
-                    <p class="mb-10">
-                        The list of tools is not exhaustive. If there are tools missing from this list, please <a href="https://github.com/slsa-framework/slsa/issues">create a GitHub issue</a>.
-                    </p>
-                    <p class="h4 font-bold mb-6" id="tools">Tools</p>
-                    <ul class="list-disc mt-6 mb-10 pl-6">
-                        <li><a href="https://github.com/slsa-framework/slsa-github-generator">GitHub actions builders and generators</a> (SLSA level 3)</li>
-                    </ul>
-                    <p class="h4 font-bold mb-6">Celebrate</p>
-                    <ul class="list-decimal mt-6 mb-10 pl-6">
-                        <li>Update your documentation to let users know you generate provenance and encourage them to verify it when downloading your binaries. Also, consider contributing to the <a href="/blog">SLSA blog</a> and let others know about your journey, or submit a <a href="https://github.com/slsa-framework/slsa/tree/main/case-studies">case study</a>!</li>
-                        <li>You’re now generating non-forgeable <a href="/provenance/">SLSA provenance</a> that meets the <a href="/spec/v0.1/requirements#build-requirements">build</a> and <a href="/spec/v0.1/requirements#provenance-requirements">provenance</a> requirements for <a href="/spec/v0.1/levels">SLSA level 3 and above</a>! Add the <a href="images/gh-badge-level3.svg">SLSA Level 3 badge</a> to your project's readme.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+SLSA levels are progressive: SLSA 3 includes all the guarantees of SLSA 2, and SLSA 2 includes all the guarantees of SLSA 1. Currently, though, the work required to achieve lower SLSA levels will not necessarily accrue toward the work needed to achieve higher SLSA levels because lower SLSA levels may not be compatible with future implementations. For that reason, **you should start with the highest level that’s possible for your project or organization to avoid wasted work**.
 
-<section class="section bg-white flex justify-center items-center">
-    <div class="wrapper inner w-full">
-        <div class="justify-between items-start md:-mr-10 md:-ml-10">
-            <div class="text w-full md:pl-10">
-<div class="h2 -mt-16 mb-8">
+The SLSA level you implement depends on your current build situation:
 
-## Building to higher levels
+-   If you are using GitHub Actions, jump directly to [SLSA 3](#SLSA3). You do not need to implement SLSA 1 or SLSA 2.
+-   If you are using [FRSCA](https://github.com/buildsec/frsca), jump to [SLSA 2](#SLSA2). You do not need to implement SLSA 1.
+-   If you’re using any other build system or are not using a build system, consider adopting GitHub Actions, or FRSCA. If that isn’t possible, start with [SLSA 1](#SLSA1). Note that if you choose to use SLSA 1, you may not have a growth path to [SLSA 2](#SLSA2) or [SLSA 3](#SLSA3). It is recommended that unless you have a specific reason for using SLSA 1, that you start with [SLSA 2](#SLSA2), or if possible [SLSA 3](#SLSA3).
 
-</div>
-            </div>
-            <div class="w-full md:pl-10">
-                <div class="bg-white">
-                    <p>Once the foundations are in place with Level 1, you can start looking towards the higher levels to further strengthen artifact integrity with central monitoring, authentication and automated compilation, as well as more secure development practices. But there’s a few things to consider first:</p>
-                </div>
-            </div>
-            <div class="w-full mt-8">
-                <div class="bg-white md:flex justify-between">
-                    <div class="mt-6 w-full md:w-1/2 md:pl-10">
-                        <p class="h3 font-semibold mb-6 ">Define your ideal state</p>
-                        <p class="pb-4">Which level is most realistic, which is appropriate for your project in the short term and for your immediate needs? It can take years to achieve the ideal security state, so having intermediate milestones is important.<br><br>Not all projects require Level 4, and for others it’s impossible to achieve. If it seems unrealistic for your project, focus your efforts on Level 3 instead.</p>
-                    </div>
-                    <div class="mt-6 w-full md:w-1/2 md:pl-10">
-                        <p class="h3 font-semibold mb-6 ">Make progress in parallel</p>
-                        <p class="pb-4">You can progressively attain higher SLSA levels. Each artifact’s SLSA level is independent from one another, allowing parallel progress and prioritization based on risk.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="section">
-    <div class="wrapper inner w-full">
-        <div class="md:flex flex-col justify-center items-center mb-8 md:w-2/3 mx-auto md:pl-5">
-            <div class="-mt-8 mb-8 md:mb-4"><h4 class="h2 font-normal">Help us improve SLSA</h4></div>
-            <div class="w-full lg:w-full mx-auto text-center">
-                <p>Already at SLSA Level 1? Let us know what went well, what didn’t, and what could be improved. We’re developing new tools and onboarding resources to make the process even easier, so your contribution really goes a long way.</p>
-                <a href="https://github.com/slsa-framework/slsa/issues" class="cta-link font-semibold h5 center mt-8">Leave a GitHub issue</a><br>
-                <a href="community" class="cta-link font-semibold h5 center mt-8">Join the community</a>
-            </div>
-        </div>
-    </div>
-</section>
+### Provenance verification
+
+Various build methods require different methods to verify provenance. The SLSA community already has some verification methods and is working on additional solutions for provenance verification. Even if there is currently no simple verification method for a particular build system, adopting these builders now means you will be “SLSA ready” when more ecosystem tooling is released. Note that when you create provenance, you must supply to users a method for interpreting what you have created.
+
+### Provenance formatting
+
+Your provenance format depends on who will be consuming it. See [provenance](/provenance) for an explanation of which format to choose.
+
+### Provenance storage
+
+Containers have a standard place to put the provenance in the OCI container registry. With time, the SLSA community hopes to create standard ecosystem-based repositories for provenance. For now, the convention is to keep the provenance attestation with your artifact. Though the sigstore bundle that's used currently is semi-standard, the format of the provenance is currently tool-specific.
+
+<a id="SLSA1"></a>
+
+## SLSA 1
+
+As mentioned, if you don't already use a build service or CI/CD, we recommend you adopt one of the systems listed under SLSA 2 or SLSA 3. While this is not required for SLSA 1, it makes the following steps easier and is required for higher SLSA levels. Individual developers who wish to put a minimal amount of security on their builds can use SLSA 1.
+
+SLSA 1 requires that the build process is documented. Some tools suggested below also support signed provenance. Though not required for SLSA 1, signing your provenance increases trust in the document by showing that it has not been tampered with.
+
+### Tooling
+
+A build configuration file (i.e., GitHub workflow) qualifies for SLSA 1. It would be considered unsigned, unformatted provenance.
+
+### Build service plugins or extensions
+
+These options work with your build system to produce unsigned, formatted provenance. They do not qualify for SLSA 2 because they are unsigned and not run by the hosted server:
+
+-   [Azure DevOps extension](https://github.com/slsa-framework/azure-devops-demo)
+-   [Jenkins SLSA generator](https://github.com/slsa-framework/slsa-jenkins-generator)
+-   [Jenkins plugin](https://plugins.jenkins.io/in-toto/)
+
+Downstream users may verify the provenance with [Cue Policies](https://cuelang.org/docs/).
+
+### Build observers with hosted services
+
+These options are user-configured inside a hosted service. They observe the build process and produce signed, formatted provenance. These options do not qualify for SLSA 2 because they are configured by users, not the hosted service.
+
+Downstream users may verify the provenance with Cue policies and the signature with Cosign.
+
+**Note:** If you are using one of these options with GitHub Actions, jump to SLSA 3 and use the builder itself to generate provenance.
+
+-   If you’re using [Tejolote](https://github.com/kubernetes-sigs/tejolote) with GitHub Actions, jump to SLSA 3 and generate provenance directly from the builder.
+-   [Tekton Chains](https://tekton.dev/docs/chains/signed-provenance-tutorial/) – custom resource definition controller that can generate provenance for Kubernetes OCI containers
+
+<a id="SLSA2"></a>
+
+## SLSA 2
+
+To achieve SLSA 2, the goals are to:
+
+-   Run your build on a hosted service that generates and signs provenance
+-   Publish the provenance to allow downstream users to verify it
+
+There is currently only one SLSA 2 builder:
+
+-   [Factory for Repeatable Secure Creation of Artifacts (FRSCA)](https://github.com/buildsec/frsca)
+
+FRSCA is an OpenSSF project that aims at offering a full build pipeline. It is not yet generally available. It qualifies as a SLSA 2 builder because regular users of the service are not able to inject or alter the contents of the provenance it generates. FRSCA produces signed, formatted provenance that can be verified by the generic SLSA verifier.
+
+<a id="SLSA3"></a>
+
+## SLSA 3
+
+To achieve SLSA 3, you must:
+
+-   Run your build on a hosted service that generates and signs provenance
+-   Ensure that build runs cannot influence each other
+-   Produce signed provenance that can be verified as authentic
+
+### GitHub Actions
+
+If you are building on GitHub Actions, adopt the [Language-agnostic GitHub provenance generator / builder](https://github.com/slsa-framework/slsa-github-generator) to make your build qualify for SLSA 3. Consumers can use the [Generic SLSA Verifier](https://github.com/slsa-framework/slsa-verifier) for provenance verification.
+
+## Builder SLSA levels
+
+The following table shows known build software packages and the SLSA level they qualify for.
+
+| Builder                 | SLSA Level |
+|-------------------------|------------|
+| FRSCA                   | 2          |
+| GitHub Actions          | 3          |
+| Google Cloud Build      | 3          |
+| No Build Service        | 1          |
