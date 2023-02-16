@@ -206,7 +206,7 @@ bi-directionally translatable to SLSA Provenance.
 [associated suite]: ../../attestation-model#recommended-suite
 
 <td>✓<td>✓<td>✓
-<tr id="provenance-authentic"><td>Provenance Authentic<td>
+<tr id="provenance-authentic"><td>Provenance is Authentic<td>
 
 *Authenticity:* Consumers MUST be able to validate the authenticity of the
 provenance attestation in order to:
@@ -242,7 +242,7 @@ are not sufficiently captured in the provenance.
 verifiers.
 
 <td> <td>✓<td>✓
-<tr id="provenance-non-forgeable"><td>Provenance Non-forgeable<td>
+<tr id="provenance-non-forgeable"><td>Provenance is Non-forgeable<td>
 
 *Accuracy:* Provenance MUST be strongly resistant to influence by tenants.
 
