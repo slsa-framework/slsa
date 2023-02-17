@@ -91,7 +91,7 @@ There are several approaches a package ecosystem could take to setting expectati
 The package ecosystem MUST ensure that any changes to expectations are
 authorized by the package's producer. This is to prevent a malicious actor
 from updating the expectations to allow building and publishing from a fork
-under the actor's control. Some ways this could be achieved include:
+under the malicious actor's control. Some ways this could be achieved include:
 
 -   Requiring two authorized individuals from the package producer to approve
     the change.
@@ -107,7 +107,7 @@ under the actor's control. Some ways this could be achieved include:
 
 It is a critical responsibility of the package ecosystem to verify that the
 provenance for a package matches the expectations defined for that package.
-In our threat model, the adversary has ability to invoke a build and to publish
+In our threat model, the adversary has the ability to invoke a build and to publish
 to the registry but not to write to the source repository, nor do they have
 insider access to any trusted systems. Expectations MUST be sufficient to detect
 or prevent this adversary from injecting unofficial behavior into the package.
@@ -121,7 +121,7 @@ package ecosystem has verified its provenance against the package's
 expectations. If expectations are defined for a package but no provenance
 exists for the artifact, this MUST result in verification failure.
 Conversely, if multiple provenance attestations exist, the system SHOULD accept
-any combination that satisifes expectations.
+any combination that satisfies expectations.
 
 Verifying expectations could happen in multiple places within a package
 ecosystem, for example by using one or more of the following approaches:

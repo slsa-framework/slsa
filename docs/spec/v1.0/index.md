@@ -9,12 +9,12 @@ levels that describe increasing security guarantees.
 > **TODO:** Is there a better place for this paragraph?
 
 Using SLSA is a bit like using nutrition labels. It is the software producer's
-responsibility to choose and appropriate build system and produce accurate
+responsibility to choose an appropriate build system and produce accurate
 provenance, just as it is a food manufacturer's responsibility to use
 safe manufacturing facilities and produce accurate labels. It is the package
 ecosystem's responsibility to ensure the artifacts they distribute satisfy
 their expectations, just as it is a grocery store's responsibility to ensure
-that food they sell meets some minimum safety standard. And it is the consumer's
+that the food they sell meets safety standards. And it is the consumer's
 responsibility to verify the artifact's provenance or delegate that
 responsibility to a trusted authority, just as a consumer does for food.
 
