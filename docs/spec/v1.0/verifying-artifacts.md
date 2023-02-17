@@ -1,35 +1,24 @@
 # Verifying Artifacts
 
-This page describes how to verify artifacts and their SLSA provenance. The
-intended audience is system implementers.
+SLSA uses provenance to indicate whether an artifact is authentic or not, but
+provenance doesn't do anything unless somebody inspects it. SLSA calls that inspection
+verification, and this page describes how to verify artifacts and their SLSA
+provenance. The intended audience is system implementers, security engineers,
+and software consumers.
 
 ## Overview
 
-Although there is no formal requirement that consumers verify SLSA provenance,
-artifact consumers cannot be sure to realize SLSA's potential security benefits
-without verifying the artifact's provenance. In practice, the responsibility
-to verify artifacts is split between the package ecosystem and the consumer.
-If a consumer is unwilling or unable to verify artifacts, they may still gain
-some benefit by relying on third-party verification (e.g. a monitoring service
-that publicizes artifacts that violate their expectations).
+Artifact verification is a process that consists of several stages that involves
+the artifact distribution system ("package ecosystem") and artifact consumer.
 
-<table>
-<tr>
-  <td rowspan=3><a href="#package-ecosystem">Package ecosystem</a>
-  <td colspan=2>Provenance distribution
-  <td>✓<td>✓<td>✓
-<tr>
-  <td colspan=2><a href="#setting-expectations">Setting expectations</a>
-  <td>✓<td>✓<td>✓
-<tr>
-  <td colspan=2><a href="#verifying-expectations-for-artifacts">
-    Verifying expectations for artifacts</a>
-  <td>✓<td>✓<td>✓
-<tr>
-  <td rowspan=1><a href="#consumer">Consumer</a>
-  <td colspan=2>Opt-in to verification
-  <td>✓<td>✓<td>✓
-  </table>
+Package ecosystems verify an artifact's provenance against a set of expectations.
+Those expectations are set by the package ecosystem, with optional input from the
+artifact producer. Package ecosystems may choose to distribute only artifacts that
+pass verification, or they may choose to require that consumers opt-in to
+verification.
+
+Consumers can trust their package ecosystem or some other third party to verify
+artifacts, or they can verify artifacts against their own set of expectations.
 
 ## Package ecosystem
 
@@ -47,8 +36,8 @@ Other ecosystems are informal, such as a convention used within a company. Even
 ad-hoc distribution of software, such as through a link on a website, is
 considered an "ecosystem".
 
-The package ecosystem is responsible for ensuring that consumers only use
-artifacts that meet the producers' stated expectations. The pacakge ecosystem
+The package ecosystem's maintainers are responsible for ensuring that consumers only
+use artifacts that meet the producers' stated expectations. The package ecosystem
 may also be responsible for providing provenance to consumers.
 
 ### Setting Expectations
@@ -56,13 +45,25 @@ may also be responsible for providing provenance to consumers.
 <dfn>Expectations</dfn> define the allowed values for
 [`buildType`](/provenance/v1#buildType) and
 [`externalParameters`](/provenance/v1#externalParameters)
-for a given package (assuming the SLSA provenance format) in order to address
+for a given package (assuming it uses the SLSA provenance format) in order to address
 the [build integrity threats](threats#build-integrity-threats).
 > **TODO:** link to more concrete guidance once it's available.
 
+Expectations MUST be sufficient to detect
+or prevent this adversary from injecting unofficial behavior into the package.
+Example threats in this category include building from an unofficial fork or
+abusing a build parameter to modify the build. Usually expectations identify
+the canonical source repository (which is the main external parameter) and
+any other security-relevant external parameters.
+
 It is important to note that expectations are tied to a *package name*, whereas
-provenance is tied to an *artifact*. Package ecosystem's using the
-[RECOMMENDED suite](/attestation-model#recommended-suite) of attestation
+provenance is tied to an *artifact*. Different versions of the same package name
+may have different artifacts and therefore different provenance. Similarly, an
+artifact may have different names in different package ecosystems but use the same
+provenance file.
+
+Package ecosystems
+using the [RECOMMENDED suite](/attestation-model#recommended-suite) of attestation
 formats SHOULD list the package name in the provenance attestation statement's
 `subject` field, though the precise semantics for binding a package name to an
 artifact are defined by the package ecosystem.
@@ -109,12 +110,7 @@ It is a critical responsibility of the package ecosystem to verify that the
 provenance for a package matches the expectations defined for that package.
 In our threat model, the adversary has the ability to invoke a build and to publish
 to the registry but not to write to the source repository, nor do they have
-insider access to any trusted systems. Expectations MUST be sufficient to detect
-or prevent this adversary from injecting unofficial behavior into the package.
-Example threats in this category include building from an unofficial fork or
-abusing a build parameter to modify the build. Usually expectations identify
-the canonical source repository (which is the main external parameter) and
-any other security-relevant external parameters.
+insider access to any trusted systems.
 
 A package version is considered to meet a given SLSA level if and only if the
 package ecosystem has verified its provenance against the package's
@@ -168,6 +164,10 @@ showing what the options are:
 -   How provenance is distributed
 -   What happens on failure: blocking, warning, and/or asynchronous notification
 
+### Provenance Distribution
+
+The package ecosystems MUST distribute provenance for the packages they distribute.
+
 ## Consumer
 
 [Consumer]: #consumer
@@ -175,14 +175,17 @@ showing what the options are:
 A package's <dfn>consumer</dfn> is the organization or individual that uses the
 package.
 
-There are no formal requirements for how artifact consumers interact with SLSA,
+There are no requirements for how artifact consumers interact with SLSA,
 but they will benefit from verifying an artifact's provenance and the build
-system used to produce the artifact.
+system used to produce the artifact. If a consumer is unwilling or unable to verify
+artifacts, they may still gain some benefit by relying on third-party verification
+(e.g. a monitoring service that publicizes artifacts that violate their expectations).
+
 
 The consumer may have to opt-in to enable SLSA verification, depending on the
 package ecosystem.
 
 Consumers may either audit the build systems
 themselves using the prompts in [verifying systems](verifying-systems.md) or
-rely on the [SLSA certification program](certification.md).
+rely on the [SLSA certification program](certification.md) (coming soon).
   
