@@ -48,7 +48,7 @@ ad-hoc distribution of software, such as through a link on a website, is
 considered an "ecosystem".
 
 The package ecosystem is responsible for ensuring that consumers only use
-artifacts that meet the producers' stated expectations. The pacakge ecosystem
+artifacts that meet the producers' stated expectations. The package ecosystem
 may also be responsible for providing provenance to consumers.
 
 ### Setting Expectations
@@ -61,7 +61,7 @@ the [build integrity threats](threats#build-integrity-threats).
 > **TODO:** link to more concrete guidance once it's available.
 
 It is important to note that expectations are tied to a *package name*, whereas
-provenance is tied to an *artifact*. Package ecosystem's using the
+provenance is tied to an *artifact*. Package ecosystems using the
 [RECOMMENDED suite](/attestation-model#recommended-suite) of attestation
 formats SHOULD list the package name in the provenance attestation statement's
 `subject` field, though the precise semantics for binding a package name to an
