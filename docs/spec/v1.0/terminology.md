@@ -32,10 +32,10 @@ supply chains plus its own sources and builds.
 | Term | Description | Example |
 | --- | --- | --- |
 | Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image. |
-| Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform). |
 | [Build] | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform). |
-| Package | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit. |
 | Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform). |
+| Package | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit. |
+| Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform). |
 
 [build]: #build-model
 
@@ -53,29 +53,29 @@ one or more artifacts.
 
 | Term | Description
 | --- | ---
+| Admin | Person with administrative access to the platform, potentially allowing them to tamper with the build process or access secret material.
+| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single environment.
+| Dependencies | Additional input artifacts required by the build.
+| Environment | Machine, container, VM, or similar in which the build runs, initialized by the platform. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
+| Outputs | Collection of artifacts produced by the build.
 | Platform | System that allows tenants to run build. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build.
 | Service | A platform that is hosted, not a developer's machine. (Term used in [requirements](requirements.md).)
-| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single environment.
-| Steps | The set of actions that comprise a build, defined by the tenant.
-| Environment | Machine, container, VM, or similar in which the build runs, initialized by the platform. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
-| Trigger | External event or request causing the platform to run the build.
 | Source | Top-level input artifact required by the build.
-| Dependencies | Additional input artifacts required by the build.
-| Outputs | Collection of artifacts produced by the build.
-| Admin | Person with administrative access to the platform, potentially allowing them to tamper with the build process or access secret material.
+| Steps | The set of actions that comprise a build, defined by the tenant.
+| Trigger | External event or request causing the platform to run the build.
 
 <details><summary>Example: GitHub Actions</summary>
 
 | Term         | Example
 | ------------ | -------
-| Platform     | [GitHub Actions] + runner + runner's dependent services
-| Build        | Workflow or job (either would be OK)
-| Steps        | [`steps`]
-| Environment  | [`runs-on`]
-| Trigger      | [workflow trigger]
-| Source       | git commit defining the workflow
-| Dependencies | any other artifacts fetched during execution
 | Admin        | GitHub personnel
+| Build        | Workflow or job (either would be OK)
+| Dependencies | any other artifacts fetched during execution
+| Environment  | [`runs-on`]
+| Platform     | [GitHub Actions] + runner + runner's dependent services
+| Source       | git commit defining the workflow
+| Steps        | [`steps`]
+| Trigger      | [workflow trigger]
 
 [GitHub Actions]: https://docs.github.com/en/actions
 [`runs-on`]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -105,11 +105,11 @@ workstation, though this does not meet SLSA 2+.
 
 | Term         | Example
 | ------------ | -------
-| Platform     | developer's workstation
-| Build        | whatever they ran
-| Steps        | whatever they ran
-| Environment  | developer's workstation
-| Trigger      | commands that the developer ran
 | Admin        | developer
+| Build        | whatever they ran
+| Environment  | developer's workstation
+| Platform     | developer's workstation
+| Steps        | whatever they ran
+| Trigger      | commands that the developer ran
 
 </details>
