@@ -31,10 +31,14 @@ supply chains plus its own sources and builds.
 
 | Term | Description | Example |
 | --- | --- | --- |
+| Attestation | The process of providing a digital signature for a set of measurements securely stored in hardware, and then having the requester validate the signature and the set of measurements. |
 | Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image. |
 | [Build] | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform). |
 | Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform). |
+| Ecosystem | Environment where the software is tightly integrated with other systems, technologies, infrastructure, and domains (people, organizations and external environments) and where it is configured to support local clinical and business processes. |
 | Package | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit. |
+| Project | Endeavor with defined start and finish criteria undertaken to create a product or service in accordance with specified resources and requirements. |
+| Provenance | The chronology of the origin, development, ownership, location, and changes to a system or system component and associated data. |
 | Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform). |
 
 [build]: #build-model
