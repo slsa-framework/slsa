@@ -8,15 +8,6 @@ of terminology and models to describe what we're protecting.
 
 </div>
 
-## TODO: Terms we still need to define
-
-> **TODO:** Define these terms before the v1.0 release.
-
--   Ecosystem
--   Project
--   Attestation
--   Provenance
-
 ## Software supply chain
 
 SLSA's framework addresses every step of the software supply chain - the
@@ -31,14 +22,14 @@ supply chains plus its own sources and builds.
 
 | Term | Description | Example |
 | --- | --- | --- |
-| Attestation | The process of providing a digital signature for a set of measurements securely stored in hardware, and then having the requester validate the signature and the set of measurements. |
+| Attestation | An authenticated statement (metadata) about a software artifact or collection of software artifacts. | A feed into automated policy engines, such as in-toto and Binary Authorization. |
 | Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image. |
 | [Build] | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform). |
 | Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform). |
-| Ecosystem | Environment where the software is tightly integrated with other systems, technologies, infrastructure, and domains (people, organizations and external environments) and where it is configured to support local clinical and business processes. |
+| Ecosystem | Environment where the software is tightly integrated with other systems, technologies, infrastructure, and domains (people, organizations and external environments) and where it is configured to support local clinical and business processes. | The end-to-end framework for supply chain integrity. |
 | Package | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit. |
-| Project | Endeavor with defined start and finish criteria undertaken to create a product or service in accordance with specified resources and requirements. |
-| Provenance | The chronology of the origin, development, ownership, location, and changes to a system or system component and associated data. |
+| Project | Endeavor with defined start and finish criteria undertaken to create a product or service in accordance with specified resources and requirements. | Any activity that includes engineering elements, technical hardware components, software elements, and or data management requirements. |
+| Provenance | The chronology of the origin, development, ownership, location, and changes to a system or system component and associated data. | Facts about the build process, including details such as build timestamps, build parameters and environment, version control metadata, source code details, etc. |
 | Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform). |
 
 [build]: #build-model
