@@ -22,8 +22,8 @@ supply chains plus its own sources and builds.
 
 | Term | Description | Example |
 | --- | --- | --- |
-| Attestation | An authenticated statement (metadata) about a software artifact or collection of software artifacts. | A feed into automated policy engines, such as in-toto and Binary Authorization. |
 | Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image. |
+| Attestation | An authenticated statement (metadata) about a software artifact or collection of software artifacts. | A feed into automated policy engines, such as in-toto and Binary Authorization. |
 | [Build] | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform). |
 | Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform). |
 | Ecosystem | Environment where the software is tightly integrated with other systems, technologies, infrastructure, and domains (people, organizations and external environments) and where it is configured to support local clinical and business processes. | The end-to-end framework for supply chain integrity. |
