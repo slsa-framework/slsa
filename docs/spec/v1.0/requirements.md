@@ -10,8 +10,8 @@ intended audience is system implementers and security engineers.
 
 For an informative description of the levels intended for all audiences, see
 [Levels](levels.md). For background, see [Terminology](terminology.md). To
-better understand the reasoning behind the requirements, see [Threats and
-mitigations](threats.md).
+better understand the reasoning behind the requirements, see
+[Threats and mitigations](threats.md).
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
