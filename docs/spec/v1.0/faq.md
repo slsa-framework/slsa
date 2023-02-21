@@ -30,6 +30,8 @@ bit-for-bit identical output. This property
 including easier debugging, more confident cherry-pick releases, better build
 caching and storage efficiency, and accurate dependency tracking.
 
+TODO: Fix this to account for the fact that we don't have SLSA 4 in v1.0
+
 For these reasons, SLSA 4 [requires](../levels.md#level-requirements) reproducible builds
 unless there is a justification why the build cannot be made reproducible.
 [Example](https://lists.reproducible-builds.org/pipermail/rb-general/2021-January/002177.html)
