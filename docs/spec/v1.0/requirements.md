@@ -3,8 +3,9 @@ title: Producing artifacts
 ---
 <div class="subtitle">
 
-This page covers the detailed technical requirements for each SLSA level. The
-intended audience is system implementers and security engineers.
+This page covers the detailed technical requirements for producing artifacts at
+each SLSA level. The intended audience is system implementers and security
+engineers.
 
 </div>
 

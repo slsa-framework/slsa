@@ -36,13 +36,15 @@ Other ecosystems are informal, such as a convention used within a company. Even
 ad-hoc distribution of software, such as through a link on a website, is
 considered an "ecosystem".
 
-The package ecosystem's maintainers are responsible for ensuring that consumers only
-use artifacts that meet the producers' stated expectations. The package ecosystem
-may also be responsible for providing provenance to consumers.
+The package ecosystem's maintainers are responsible for reliably redistributing
+artifacts and provenance, making the producers' expectations available to consumers,
+and providing tools to enable safe artifact consumption (e.g. whether an artifact
+meets its producer's expectations).
 
 ### Setting Expectations
 
-<dfn>Expectations</dfn> define the allowed values for
+<dfn>Expectations</dfn> are known provenance values that indicate the corresponding
+artifact is authentic. For example, a producer can define the allowed values for
 [`buildType`](/provenance/v1#buildType) and
 [`externalParameters`](/provenance/v1#externalParameters)
 for a given package (assuming it uses the SLSA provenance format) in order to address
@@ -166,7 +168,8 @@ showing what the options are:
 
 ### Provenance Distribution
 
-The package ecosystems MUST distribute provenance for the packages they distribute.
+The package ecosystems MUST distribute provenance for the artifacts they distribute
+if provided by the producer.
 
 ## Consumer
 
