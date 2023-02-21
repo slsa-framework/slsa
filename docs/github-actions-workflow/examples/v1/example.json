@@ -2,7 +2,7 @@
     "predicateType": "https://slsa.dev/provenance/v1?draft",
     "predicate": {
         "buildDefinition": {
-            "buildType": "https://slsa.dev/github-actions-workflow/v0.1?draft",
+            "buildType": "https://slsa.dev/github-actions-workflow/v1?draft",
             "externalParameters": {
                 "inputs": {
                     "build_id": 123456768,
