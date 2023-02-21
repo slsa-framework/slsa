@@ -34,7 +34,7 @@ Responsibility to implement SLSA is spread across the following parties.
   <td colspan=2>Define expectations
   <td>✓<td>✓<td>✓
 <tr>
-  <td colspan=2>Use acceptable build and release process
+  <td colspan=2>Meet expectations
   <td>✓<td>✓<td>✓
 <tr>
   <td colspan=2>Distribute provenance
