@@ -184,7 +184,6 @@ system used to produce the artifact. If a consumer is unwilling or unable to ver
 artifacts, they may still gain some benefit by relying on third-party verification
 (e.g. a monitoring service that publicizes artifacts that violate their expectations).
 
-
 The consumer may have to opt-in to enable SLSA verification, depending on the
 package ecosystem.
 
