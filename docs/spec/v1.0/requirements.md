@@ -84,7 +84,7 @@ company, or even an individual.
 ### Define expectations
 
 Verifying provenance requires having expectations about the provenance values for
-an authentic artifact. The verifier can set those expectations either implicitly (e.g.
+an authentic artifact. The producer can set those expectations either implicitly (e.g.
 trust on first use) or explicitly (e.g. valid builds come from a known source repo).
 If the expectations are set implicitly, then the producer doesn't need to do anything.
 If the expectations are set explicitly, then the producer MUST provide the
