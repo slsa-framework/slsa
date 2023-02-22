@@ -24,7 +24,7 @@ artifacts, or they can verify artifacts against their own set of expectations.
 
 [Package ecosystem]: #package-ecosystem
 
-> **TODO:** Is there a better term that is more obvious to most readers?
+> ⚠ **RFC:** Is there a better term that is more obvious to most readers?
 
 A <dfn>package ecosystem</dfn> is a set of conventions and tooling for package
 distribution. Every package has an ecosystem, whether it is formal or ad-hoc.
@@ -190,4 +190,3 @@ package ecosystem.
 Consumers may either audit the build systems
 themselves using the prompts in [verifying systems](verifying-systems.md) or
 rely on the [SLSA certification program](certification.md) (coming soon).
-  

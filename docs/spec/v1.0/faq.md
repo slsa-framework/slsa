@@ -5,8 +5,10 @@ layout: specifications
 
 ## Q: Why is SLSA not transitive?
 
-SLSA is not transitive in order to make the problem tractable. If SLSA 4
-required dependencies to be SLSA 4, then reaching SLSA 4 would require starting
+SLSA Build levels only cover the trustworthiness of a single build, with no
+requirements about the build levels of transitive dependencies. The reason for
+this is to make the problem tractable. If a SLSA Build level required
+dependencies to be the same level, then reaching a level would require starting
 at the very beginning of the supply chain and working forward. This is
 backwards, forcing us to work on the least risky component first and blocking
 any progress further downstream. By making each artifact's SLSA rating
@@ -30,15 +32,6 @@ bit-for-bit identical output. This property
 including easier debugging, more confident cherry-pick releases, better build
 caching and storage efficiency, and accurate dependency tracking.
 
-TODO: Fix this to account for the fact that we don't have SLSA 4 in v1.0
-
-For these reasons, SLSA 4 [requires](../levels.md#level-requirements) reproducible builds
-unless there is a justification why the build cannot be made reproducible.
-[Example](https://lists.reproducible-builds.org/pipermail/rb-general/2021-January/002177.html)
-justifications include profile-guided optimizations or code signing that
-invalidates hashes. Note that there is no actual reproduction, just a claim that
-reproduction is possible.
-
 "Verified reproducible" means using two or more independent build systems to
 corroborate the provenance of a build. In this way, one can create an overall
 system that is more trustworthy than any of the individual components. This is
@@ -46,7 +39,7 @@ often
 [suggested](https://www.linuxfoundation.org/en/blog/preventing-supply-chain-attacks-like-solarwinds/)
 as a solution to supply chain integrity. Indeed, this is one option to secure
 build steps of a supply chain. When designed correctly, such a system can
-satisfy all of the SLSA build requirements.
+satisfy all of the SLSA Build level requirements.
 
 That said, verified reproducible builds are not a complete solution to supply
 chain integrity, nor are they practical in all cases:

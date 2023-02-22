@@ -25,8 +25,6 @@ supply chains plus its own sources and builds.
 
 [directed acyclic graph]: https://en.wikipedia.org/wiki/Directed_acyclic_graph
 
-**TODO:** update supply chain model to include verification.
-
 ![Software Supply Chain Model](../../images/supply-chain-model.svg)
 
 | Term | Description | Example |

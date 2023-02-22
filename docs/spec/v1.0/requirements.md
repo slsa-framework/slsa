@@ -121,9 +121,6 @@ The build system is responsible for providing two things: [provenance
 generation] and [isolation between builds]. The [Build level](levels.md#build-track) describes
 the degree to which each of these properties is met.
 
-> **TODO:** Pick better degree names. "Hosted", "Fully isolated", etc are not
-> obvious.
-
 ### Provenance generation
 
 [Provenance generation]: #provenance-generation
@@ -197,9 +194,6 @@ build system (i.e. outside the trust boundary).
 
 *Completeness:* SHOULD be complete, but there MAY be external parameters that
 are not sufficiently captured in the provenance.
-
-**TODO:** Provide guidance on PKI, e.g. make the public key available to
-verifiers.
 
 <td> <td>✓<td>✓
 <tr id="provenance-non-forgeable"><td>Provenance is Non-forgeable<td>

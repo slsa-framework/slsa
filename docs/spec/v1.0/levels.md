@@ -35,9 +35,10 @@ subproblems that can be prioritized based on risk and tackled in parallel. But
 this does mean that SLSA alone is not sufficient to determine if an artifact is
 "safe".
 
-> **TODO:** SLSA is in the eye of the beholder: software consumers make their
-> own SLSA determinations, though in practice they may delegate to some
-> authority.
+Finally, SLSA is in the eye of the beholder: software consumers ultimately make
+their own SLSA determinations, though in practice they may delegate to some
+authority. For example, a build system may claim to conform to SLSA Build L3,
+but it is up to a consumer whether to trust that claim.
 
 ## Who is SLSA for?
 
@@ -194,7 +195,7 @@ though this may be easy to perform. Deters unsophisticated adversaries or those
 who face legal or financial risk.
 
 In practice, this means that builds run on a hosted service that generates and
-signs the provenance.
+signs[^sign] the provenance.
 
 <dt>Intended for<dd>
 
@@ -206,7 +207,7 @@ service itself required by [Build L3].
 
 All of [Build L1], plus:
 
--   The build runs on a hosted build service that generates and signs the
+-   The build runs on a hosted build service that generates and signs[^sign] the
     provenance itself. This may be the original build, an after-the-fact
     reproducible build, or some equivalent system that ensures the
     trustworthiness of the provenance.
@@ -218,7 +219,7 @@ All of [Build L1], plus:
 
 All of [Build L1], plus:
 
--   Prevents tampering after the build through digital signatures.
+-   Prevents tampering after the build through digital signatures[^sign].
 
 -   Deters adversaries who face legal or financial risk by evading security
     controls, such as employees who face risk of getting fired.
@@ -233,7 +234,8 @@ All of [Build L1], plus:
 </section>
 <section id="build-l3">
 
-> **TODO:** If possible, avoid being overly specific about "signing".
+[^sign]: Alternate means of verifying the authenticity of the provenance are
+    also acceptable.
 
 ### Build L3: Hardened builds
 
@@ -260,8 +262,6 @@ All of [Build L2], plus:
     -   prevent runs from influencing one another, even within the same project.
     -   prevent secret material used to sign the provenance from being
         accessible to the user-defined build steps.
-
-> **TODO:** Add requirement about survey and audit as per the v1.0 proposal.
 
 <dt>Benefits<dd>
 
