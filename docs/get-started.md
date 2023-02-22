@@ -99,7 +99,9 @@ If you are building on GitHub Actions, adopt the [Language-agnostic GitHub prove
 
 ## Builder SLSA levels
 
-The following table shows known build software packages and the potential SLSA level they qualify for.  Potential levels are reached with proper provenance.
+The following table shows known build software packages and the potential SLSA level they are believed to qualify for.  Potential levels are reached with proper provenance. Again, if you think a build option is misclassified or want to add one, please [open an issue](https://github.com/slsa-framework/slsa/issues) or [submit a PR](https://github.com/slsa-framework/slsa/pulls) against this page.
+
+Note that this list is provided "as is". OpenSSF makes no claim as to the reliability of this information. A certification program is under development to provide a more definitive list.
 
 | Builder                 | Potential SLSA Level |
 |-------------------------|:--------------------:|
