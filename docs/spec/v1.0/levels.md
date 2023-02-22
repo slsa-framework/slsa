@@ -261,8 +261,6 @@ All of [Build L2], plus:
     -   prevent secret material used to sign the provenance from being
         accessible to the user-defined build steps.
 
-> **TODO:** Add requirement about survey and audit as per the v1.0 proposal.
-
 <dt>Benefits<dd>
 
 All of [Build L2], plus:
