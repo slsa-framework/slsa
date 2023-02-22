@@ -49,7 +49,7 @@ A build configuration file (i.e., GitHub workflow) qualifies for SLSA 1. It woul
 
 ### Build service plugins or extensions
 
-These options work with your build system to produce unsigned, formatted provenance. They do not qualify for SLSA 2 because they are unsigned and not run by the hosted server:
+The following options work with your build system to produce unsigned, formatted provenance. They do not qualify for SLSA 2 because they are unsigned and not run by the hosted server:
 
 -   [Azure DevOps extension](https://github.com/slsa-framework/azure-devops-demo)
 -   [Jenkins SLSA generator](https://github.com/slsa-framework/slsa-jenkins-generator)
