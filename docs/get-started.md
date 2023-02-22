@@ -77,7 +77,7 @@ To achieve SLSA 2, the goals are to:
 -   Run your build on a hosted service that generates and signs provenance
 -   Publish the provenance to allow downstream users to verify it
 
-There is currently only one SLSA 2 builder:
+The following is a SLSA 2 builder:
 
 -   [Factory for Repeatable Secure Creation of Artifacts (FRSCA)](https://github.com/buildsec/frsca)
 
