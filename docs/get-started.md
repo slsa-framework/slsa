@@ -39,7 +39,7 @@ Containers have a standard place to put the provenance in the OCI container regi
 
 ## SLSA 1
 
-As mentioned, if you don't already use a build service or CI/CD, we recommend you adopt one of the systems listed under SLSA 2 or SLSA 3. While this is not required for SLSA 1, it makes the following steps easier and is required for higher SLSA levels. Individual developers who wish to put a minimal amount of security on their builds can use SLSA 1.
+As mentioned before, if you don't already use a build service or CI/CD, you should consider adopting a system that supports SLSA 2 or SLSA 3. This will make the following steps easier and provide for higher SLSA levels later on. Individual developers who wish to put a minimal amount of security on their builds can use SLSA 1.
 
 SLSA 1 requires that the build process is documented. Some tools suggested below also support signed provenance. Though not required for SLSA 1, signing your provenance increases trust in the document by showing that it has not been tampered with.
 
