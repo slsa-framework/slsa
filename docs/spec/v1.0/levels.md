@@ -195,7 +195,7 @@ though this may be easy to perform. Deters unsophisticated adversaries or those
 who face legal or financial risk.
 
 In practice, this means that builds run on a hosted service that generates and
-signs the provenance.
+signs[^sign] the provenance.
 
 <dt>Intended for<dd>
 
@@ -207,7 +207,7 @@ service itself required by [Build L3].
 
 All of [Build L1], plus:
 
--   The build runs on a hosted build service that generates and signs the
+-   The build runs on a hosted build service that generates and signs[^sign] the
     provenance itself. This may be the original build, an after-the-fact
     reproducible build, or some equivalent system that ensures the
     trustworthiness of the provenance.
@@ -219,7 +219,7 @@ All of [Build L1], plus:
 
 All of [Build L1], plus:
 
--   Prevents tampering after the build through digital signatures.
+-   Prevents tampering after the build through digital signatures[^sign].
 
 -   Deters adversaries who face legal or financial risk by evading security
     controls, such as employees who face risk of getting fired.
@@ -234,7 +234,8 @@ All of [Build L1], plus:
 </section>
 <section id="build-l3">
 
-> **TODO:** If possible, avoid being overly specific about "signing".
+[^sign]: Alternate means of verifying the authenticity of the provenance are
+    also acceptable.
 
 ### Build L3: Hardened builds
 
