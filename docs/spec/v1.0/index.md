@@ -18,6 +18,7 @@ in the menu at the top of the page.
 
 | Page | Description |
 | ---- | --- |
+| [What's New](whats-new.md) | What's new in SLSA Version 1.0. |
 | [Security levels](levels.md) | Overview of SLSA, intended for all audiences. If you read one page, read this. |
 | [Key principles](principles.md) | Background on the guiding principles behind SLSA. |
 | [Terminology](terminology.md) | Terminology and model used by SLSA. |
