@@ -1,1 +1,1 @@
-# What's new in SLSA version 1.0
+# What's new SLSA v1.0
