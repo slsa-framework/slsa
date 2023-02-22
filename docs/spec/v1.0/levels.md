@@ -35,9 +35,10 @@ subproblems that can be prioritized based on risk and tackled in parallel. But
 this does mean that SLSA alone is not sufficient to determine if an artifact is
 "safe".
 
-> **TODO:** SLSA is in the eye of the beholder: software consumers make their
-> own SLSA determinations, though in practice they may delegate to some
-> authority.
+Finally, SLSA is in the eye of the beholder: software consumers ultimately make
+their own SLSA determinations, though in practice they may delegate to some
+authority. For example, a build system may claim to conform to SLSA Build L3,
+but it is up to a consumer whether to trust that claim.
 
 ## Who is SLSA for?
 
