@@ -13,7 +13,7 @@ For all [SLSA levels](https://slsa.dev/spec/v0.1/levels), you follow the same st
 
 What differs for each level is the robustness of the build and provenance. For more information about provenance see [https://slsa.dev/provenance/v0.2](https://slsa.dev/provenance/v0.2).
 
-The builders suggested in this guide meet SLSA expectations. If you believe a build option is missing or misclassified, please [open an issue](https://github.com/slsa-framework/slsa/pull/589).
+The tools discussed in this guide are freely available and believed to meet SLSA expectations. The [Builder SLSA levels section](#builder-slsa-levels) provides a more complete list. If you think a build option is misclassified or want to add one, please [open an issue](https://github.com/slsa-framework/slsa/issues) or [submit a PR](https://github.com/slsa-framework/slsa/pulls) against this page.
 
 SLSA levels are progressive: SLSA 3 includes all the guarantees of SLSA 2, and SLSA 2 includes all the guarantees of SLSA 1. Currently, though, the work required to achieve lower SLSA levels will not necessarily accrue toward the work needed to achieve higher SLSA levels because lower SLSA levels may not be compatible with future implementations. For that reason, **you should start with the highest level that’s possible for your project or organization to avoid wasted work**.
 
