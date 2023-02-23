@@ -143,7 +143,7 @@ The SLSA Build level describes the minimum bound for:
 The build process MUST generate provenance that unambiguously identifies the
 output package and describes how that package was produced.
 
-The format MUST be acceptable to the [package ecosystem] and/or [consumer]. It
+The format MUST be acceptable to the [package ecosystem](verifying-artifacts.md#package-ecosystem) and/or [consumer](verifying-artifacts.md#consumer). It
 is RECOMMENDED to use the [SLSA Provenance] format and [associated suite]
 because it is designed to be interoperable, universal, and unambiguous when
 used for SLSA. See that format's documentation for requirements and
