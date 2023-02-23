@@ -14,6 +14,9 @@ MD025:
   # Disable checking of YAML frontmatter.
   front_matter_title: ""
 
+# MD028/no-blanks-blockquote - Blank line inside blockquote
+MD028: false
+
 # MD029/ol-prefix - Ordered list item prefix
 MD029:
   # List style

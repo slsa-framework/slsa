@@ -768,7 +768,7 @@ accept cryptographic hashes with strong collision resistance.
 <!-- Links -->
 
 [Access]: requirements.md#access
-[Authenticated]: requirements.md#authenticated
+[Authentic]: requirements.md#authentic
 [Available]: requirements.md#available
 [Build as code]: requirements.md#build-as-code
 [Build service]: requirements.md#build-service
