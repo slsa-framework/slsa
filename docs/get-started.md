@@ -33,7 +33,7 @@ Your provenance format depends on who will be consuming it. See [provenance](/pr
 
 ### Provenance storage
 
-Containers have a standard place to put the provenance in the OCI container registry. With time, the SLSA community hopes to create standard ecosystem-based repositories for provenance. For now, the convention is to keep the provenance attestation with your artifact. Though the sigstore bundle that's used currently is semi-standard, the format of the provenance is currently tool-specific.
+Containers have a standard place to put the provenance in the OCI container registry. With time, the SLSA community hopes to create standard ecosystem-based repositories for provenance. For now, the convention is to keep the provenance attestation with your artifact. Though [Sigstore](https://www.sigstore.dev/) is becoming more and more popular, the format of the provenance is currently tool-specific.
 
 <a id="SLSA1"></a>
 
