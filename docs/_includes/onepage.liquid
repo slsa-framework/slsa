@@ -1,0 +1,25 @@
+{% comment %}
+This code turns a set of pages contained in a directory into one single page.
+{% endcomment %}
+
+{% assign filenames = include.filenames %}
+{% assign dir = include.dir %}
+
+{% assign files = filenames | split: "," %}
+{% capture pattern %}page.url contains "{{dir}}"{% endcapture %}
+{% assign pages = site.pages | where_exp: "page", pattern %}
+
+<!-- index page begins -->
+{% capture pattern %}page.url == "{{dir}}"{% endcapture %}
+{% assign index = site.pages | where_exp: "page", pattern |first %}
+{% include section.liquid content=index.content files=files baseurl=dir noshift=true %}
+<!-- index page ends -->
+
+{% for file in files %}
+   {% capture pattern %}page.url contains "{{file}}"{% endcapture %}
+   {% assign p = pages | where_exp: "page", pattern | first %}
+   <!-- {{p.url}} begins -->
+   <h2 id="{{file}}">{{p.title}}</h2>
+   {% include section.liquid content=p.content files=files baseurl=dir noshift=false %}
+   <!-- {{p.url}} ends -->
+{% endfor %}

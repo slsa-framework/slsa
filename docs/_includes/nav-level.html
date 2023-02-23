@@ -1,6 +1,7 @@
 {% assign subLevel =  0 %}
 {%- if include.collection.size > 0 -%}
   <ul class="sub-menu level-{{ include.level }}">
+    {% assign menuNum = include.menuNum %}
     {%- for subitem in include.collection -%}
     <li>
       {%- if subitem.spacer %}
@@ -10,8 +11,9 @@
           {{ subitem.title | escape }}
         </a>
       {%- elsif subitem.children.size > 0 %}
-        {% assign subMenu = sublevel | plus: 1 %}
-        {% assign subName = include.name  | append: 'sub' | append: subMenu %}
+        {%- assign menuNum = menuNum | plus: 1 %}
+        {%- assign subMenu = sublevel | plus: 1 %}
+        {%- assign subName = include.name  | append: 'sub' | append: menuNum %}
         <button x-on:click="{{subName}} = ! {{subName}}" class="dropdown-link cursor">{{ subitem.title | escape }}
           <div class=" ml-2">
             <svg width="9" height="9" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
@@ -20,7 +22,7 @@
           </div>
         </button>
         <div @click.outside="{{subName}} = false" x-on:resize.window="{{ subName }} ? {{ subName }} = false : true;" x-show="{{subName}}" x-transition class="dropdown">
-          {% include nav-level.html collection=subitem.children mobile=include.mobile name=subName level=subMenu %}
+          {% include nav-level.html collection=subitem.children mobile=include.mobile name=subName level=subMenu menuNum=menuNum %}
         </div>
       {%- else %}
         <em>{{ subitem.title | escape }}</em>

@@ -1,11 +1,7 @@
 {% assign menu = 0 %}
-
-<nav
-    :class="{ 'active': navOpen === true }" 
-    class="site-nav"
->
+<nav :class="{ 'active': navOpen === true }" class="site-nav">
   <ul class="root-menu list">
-    {%- for item in site.data.nav -%}
+    {%- for item in site.data.nav %}
       <li>
         {%- if item.url -%}
           <a class="{% if item.url == page.url %}active{% endif %} root-link text-white flex items-center" href="{{ item.url | relative_url }}">
@@ -13,8 +9,8 @@
           </a>
         {%- else -%}
           {% comment %}TODO: add "active" class if on a child page{% endcomment %}
-          {% assign menu = menu | plus: 1 %}
-          {% assign rootName = 'open' | append: menu %}
+          {%- assign menu = menu | plus: 1 %}
+          {%- assign rootName = 'open' | append: menu %}
           <button class="root-link cursor" x-on:click="{{rootName}} = ! {{rootName}}">{{ item.title | escape }} 
             <div class="ml-2">
               <svg width="9" height="9" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
@@ -23,10 +19,10 @@
             </div>
           </button>
           <div @click.outside="{{rootName}} = false" x-on:resize.window="{{ rootName }} ? {{ rootName }} = false : true" x-show="{{rootName}}" x-transition class="dropdown">
-            {% include nav-level.html collection=item.children name=rootName mobile=include.mobile level=menu %}
+            {% include nav-level.html collection=item.children name=rootName mobile=include.mobile level=menu menuNum=0 %}
           </div>
         {%- endif -%}
       </li>
-    {%- endfor -%}
+    {%- endfor %}
   </ul>
 </nav>

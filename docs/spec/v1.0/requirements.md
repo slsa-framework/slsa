@@ -1,29 +1,22 @@
 ---
-title: Requirements
+title: Producing artifacts
 ---
 <div class="subtitle">
 
-This page covers the detailed technical requirements for each SLSA level. The
-intended audience is system implementers and security engineers.
+This page covers the detailed technical requirements for producing artifacts at
+each SLSA level. The intended audience is system implementers and security
+engineers.
 
 </div>
 
 For an informative description of the levels intended for all audiences, see
 [Levels](levels.md). For background, see [Terminology](terminology.md). To
-better understand the reasoning behind the requirements, see [Threats and
-mitigations](threats.md).
+better understand the reasoning behind the requirements, see
+[Threats and mitigations](threats.md).
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
-
-## TODO
-
-**TODO:** Use consistent terminology throughout the site: "publish" vs
-"release", "publisher" vs "maintainer" vs "developer", "consumer" vs
-"ecosystem" vs "downstream system", "build" vs "produce.
-
-**TODO:** Generate permalinks to sections.
 
 ## Overview
 
@@ -38,11 +31,14 @@ Responsibility to implement SLSA is spread across the following parties.
   <th>Degree
   <th>L1<th>L2<th>L3
 <tr>
-  <td rowspan=2><a href="#producer">Producer</a>
+  <td rowspan=3><a href="#producer">Producer</a>
   <td colspan=2>Define expectations
   <td>✓<td>✓<td>✓
 <tr>
-  <td colspan=2>Use acceptable build and release process
+  <td colspan=2>Meet expectations
+  <td>✓<td>✓<td>✓
+<tr>
+  <td colspan=2>Distribute provenance
   <td>✓<td>✓<td>✓
 <tr>
   <td rowspan=5><a href="#build-system">Build system</a>
@@ -50,7 +46,7 @@ Responsibility to implement SLSA is spread across the following parties.
   <td><a href="#provenance-exists">Exists</a>
   <td>✓<td>✓<td>✓
 <tr>
-  <td><a href="#provenance-authenticated">Authenticated</a>
+  <td><a href="#provenance-authentic">Authentic</a>
   <td> <td>✓<td>✓
 <tr>
   <td><a href="#provenance-non-forgeable">Non-forgeable</a>
@@ -62,77 +58,50 @@ Responsibility to implement SLSA is spread across the following parties.
 <tr>
   <td><a href="#ephemeral-isolated">Ephemeral and isolated</a>
   <td> <td> <td>✓
-<tr>
-  <td rowspan=2><a href="#packaging-ecosystem">Packaging ecosystem</a>
-  <td colspan=2>Provenance distribution
-  <td>✓<td>✓<td>✓
-<tr>
-  <td colspan=2>Expectations and verification
-  <td>✓<td>✓<td>✓
-<tr>
-  <td rowspan=1><a href="#consumer">Consumer</a>
-  <td colspan=2>Opt-in to verification
-  <td>✓<td>✓<td>✓
 </table>
+
+### Security Best Practices
+
+While the exact definition of what constitutes a secure system is beyond the
+scope of this specification, to be conformant all implementations MUST use
+industry security best practices. This includes, but is not limited to, using
+proper access controls, securing communications, implementing proper management
+of cryptographic secrets, doing frequent updates, and promptly fixing known
+vulnerabilities.
+
+Various relevant standards and guides can be consulted for that matter such as
+the [CIS Critical Security
+Controls](https://www.cisecurity.org/controls/cis-controls-list).
 
 ## Producer
 
 [Producer]: #producer
 
 A package's <dfn>producer</dfn> is the organization that owns and releases the
-software. It may be an open-source project, a company, a team within a company,
-or even an individual.
+software. It might be an open-source project, a company, a team within a
+company, or even an individual.
 
-The producer is responsible for setting expectations on how the package should
-be built and then using that process on every release. How to set expectations
-and what build systems are acceptable is determined by the [packaging ecosystem]
-and/or [consumer]. Higher SLSA Build levels may be reached by choosing a build
-system that supports that level.
+### Define expectations
 
-The process differs whether or not the path to SLSA is
-through reproducible builds.
+Verifying provenance requires having expectations about the provenance values for
+an authentic artifact. The producer can set those expectations either implicitly (e.g.
+trust on first use) or explicitly (e.g. valid builds come from a known source repo).
+If the expectations are set implicitly, then the producer doesn't need to do anything.
+If the expectations are set explicitly, then the producer MUST provide the
+expectations.
 
-> **TODO:** Reorganize to match the [Overview](#overview) table, i.e. "define
-> expectations" and "Use an acceptable builds and release process". There may
-> also need to be a first "decide on a build system" step?
+### Meet expectations
 
-### Without reproducible builds
+The producer MUST select a build system that is capable of reaching their
+desired SLSA Build Level. Note that not all build systems are capable of
+reaching the highest SLSA Build Levels. Additionally, the producer MUST meet any
+expectations they provided to the artifact verifier.
 
-Up front:
+### Distribute provenance
 
--   Decide on a build system, which affects the maximum level that can be
-    reached. Ideally this would be a system that already supports Build L3 or
-    plans to do so in an acceptable time frame.
--   Define how the package is expected to be built, if required by the packaging
-    ecosystem. For example, this might require setting the upstream source
-    repository in the package metadata.
--   Configure the build to reach the desired level, if required by the build
-    system. For example, a project built on GitHub Actions might use the
-    [GitHub Actions Provenance Generator](https://github.com/slsa-framework/slsa-github-generator).
--   Configure the release process to upload provenance generated by the build
-    system, if required by the packaging ecosystem. For example, a packaging
-    tool might require an additional command-line flag to during upload.
-
-Every release:
-
--   Use the expected build and release process. For example, this might mean
-    releasing on a CI/CD platform instead of a maintainer's workstation.
-
-### With reproducible builds
-
-If the packaging ecosystem supports verified [reproducible
-builds](https://reproducible-builds.org), the producer may continue building
-mostly as they have always done, with no specific requirements other than
-generating sufficient provenance. Independent "rebuilders" will reproduce the
-build after-the-fact to corroborate the trustworthiness of the provenance.
-
-Every release:
-
--   Use the build and release process provided by the packaging ecosystem, which
-    should generate provenance in an acceptable format.
--   Ensure that the build is deterministic and that all dependencies are
-    properly declared. Otherwise rebuilders will not be able to reproduce the
-    package.
+The producer MUST distribute provenance to artifact consumers. The producer
+MAY delegate this responsibility to the package ecosystem, provided that the
+package ecosystem is capable of distributing provenance.
 
 ## Build system
 
@@ -152,9 +121,6 @@ The build system is responsible for providing two things: [provenance
 generation] and [isolation between builds]. The [Build level](levels.md#build-track) describes
 the degree to which each of these properties is met.
 
-> **TODO:** Pick better degree names. "Hosted", "Fully isolated", etc are not
-> obvious.
-
 ### Provenance generation
 
 [Provenance generation]: #provenance-generation
@@ -164,7 +130,7 @@ package was produced.
 
 The SLSA Build level describes the minimum bound for:
 
--   *Completeness:* What information is required in the provenance?
+-   *Completeness:* What information is contained in the provenance?
 -   *Authenticity:* How strongly can the provenance be tied back to the builder?
 -   *Accuracy:* How resistant is the provenance generation to tampering within
     the build process?
@@ -174,16 +140,16 @@ The SLSA Build level describes the minimum bound for:
 
 <tr id="provenance-exists"><td>Provenance Exists<td>
 
-The build process MUST generate provenance describing how the package was
-produced.
+The build process MUST generate provenance that unambiguously identifies the
+output package and describes how that package was produced.
 
-The format MUST be acceptable to the [packaging ecosystem] and/or [consumer]. It
-is RECOMMENDED to use the [SLSA Provenance] format because it is designed to be
-interoperable, universal, and unambiguous when used for SLSA. See that format's
-documentation for requirements and implementation guidelines. If using an
-alternate format, it MUST contain the equivalent information required at each
-level by SLSA Provenance and SHOULD be bi-directionally translatable to SLSA
-Provenance.
+The format MUST be acceptable to the [package ecosystem] and/or [consumer]. It
+is RECOMMENDED to use the [SLSA Provenance] format and [associated suite]
+because it is designed to be interoperable, universal, and unambiguous when
+used for SLSA. See that format's documentation for requirements and
+implementation guidelines. If using an alternate format, it MUST contain the
+equivalent information as SLSA Provenance at each level and SHOULD be
+bi-directionally translatable to SLSA Provenance.
 
 -   *Completeness:* Best effort. The provenance at L1 SHOULD contain sufficient
     information to catch mistakes and simulate the user experience at higher
@@ -193,24 +159,26 @@ Provenance.
 -   *Authenticity:* No requirements.
 -   *Accuracy:* No requirements.
 
-**TODO:** Link to local copy of provenance (../../provenance/v1.0.md)
-once [#525](https://github.com/slsa-framework/slsa/pull/525) is merged.
-
-[SLSA Provenance]: https://deploy-preview-525--slsa.netlify.app/provenance/v1.0
+[SLSA Provenance]: ../../provenance/v1
+[associated suite]: ../../attestation-model#recommended-suite
 
 <td>✓<td>✓<td>✓
-<tr id="provenance-authenticated"><td>Provenance Authenticated<td>
+<tr id="provenance-authentic"><td>Provenance is Authentic<td>
 
-*Authenticity:* Consumers MUST be able to authenticate the provenance such that
-they can:
+*Authenticity:* Consumers MUST be able to validate the authenticity of the
+provenance attestation in order to:
 
--   Identify the transitive closure of the build system, i.e. which entities
-    they must trust.
--   Verify the integrity of the provenance, i.e. that it was not tampered with
-    after the build.
+-   *Ensure integrity:* Verify that the digital signature of the provenance
+    attestation is valid and the provenance was not tampered with after the
+    build.
+-   *Define trust:* Identify the build system and other entities that are
+    necessary to trust in order to trust the artifact they produced.
 
 This SHOULD be through a digital signature from a private key accessible only to
-the service generating the provenance.
+the service that generated the provenance attestation.
+
+This allows the consumer to trust the contents of the provenance attestation,
+such as the identity of the build system.
 
 *Accuracy:* The provenance MUST be generated by the build system (i.e. within
 the trust boundary identified in the provenance) and not by a tenant of the
@@ -221,20 +189,14 @@ build system (i.e. outside the trust boundary).
     generator reads the data directly from the build service.
 -   The build system MUST have some security control to prevent tenants from
     tampering with the provenance. However, there is no minimum bound on the
-    strength. The purpose is to deter adversaries who may face legal or
+    strength. The purpose is to deter adversaries who might face legal or
     financial risk from evading controls.
 
 *Completeness:* SHOULD be complete, but there MAY be external parameters that
 are not sufficiently captured in the provenance.
 
-**TODO:** The term "Authenticated" is not quite right, more "authenticatable"
-but that's not a word. Also that term is missing the service-generated bit.
-
-**TODO:** Provide guidance on PKI, e.g. make the public key available to
-verifiers.
-
 <td> <td>✓<td>✓
-<tr id="provenance-non-forgeable"><td>Provenance Non-forgeable<td>
+<tr id="provenance-non-forgeable"><td>Provenance is Non-forgeable<td>
 
 *Accuracy:* Provenance MUST be strongly resistant to influence by tenants.
 
@@ -248,10 +210,8 @@ verifiers.
     service in a trusted control plane. The user-controlled build steps MUST
     NOT be able to inject or alter the contents.
 
-*Completeness:* MUST be complete. In particular, the external parameters must be
+*Completeness:* MUST be complete. In particular, the external parameters MUST be
 fully enumerated in the provenance.
-
-*Authenticity:* Same as [Authenticated](#provenance-authenticated).
 
 Note: This requirement was called "non-falsifiable" in the initial
 [draft version (v0.1)](../v0.1/requirements.md#non-falsifiable).
@@ -268,7 +228,9 @@ The build system is responsible for isolating between builds, even within the
 same tenant project. In other words, how strong of a guarantee do we have that
 the build really executed correctly, without external influence?
 
-The SLSA Build level describes the minimum bar for isolation strength.
+The SLSA Build level describes the minimum bar for isolation strength. For more
+information on assessing a build system's isolation strength, see
+[Verifying build systems](verifying-systems.md).
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
@@ -287,9 +249,6 @@ Examples: GitHub Actions, Google Cloud Build, Travis CI.
 <td>Ephemeral and isolated
 <td>
 
-**TODO:** Use updated wording from
-[#532](https://github.com/slsa-framework/slsa/pull/532).
-
 The build service ensured that the build steps ran in an ephemeral and isolated
 environment provisioned solely for this build, free of influence from other
 build instances, whether prior or concurrent.
@@ -306,262 +265,3 @@ initial [draft version (v0.1)](../v0.1/requirements.md).
 
 <td> <td> <td>✓
 </table>
-
-### Possible future requirements
-
-The initial [draft version (v0.1)](../v0.1/requirements.md) of SLSA defined a
-"SLSA 4" that included the following requirements. A future Build L4 may
-incorporate some or all of the following, in whole or in part. This list is not
-exhaustive.
-
-> WARNING: The draft requirements here are unversioned and subject to change.
-
-<details id="parameterless">
-<summary>Parameterless (draft)</summary>
-
-The build output cannot be affected by user parameters other than the build
-entry point and the top-level source location. In other words, the build is
-fully defined through the build script and nothing else.
-
-Examples:
-
--   GitHub Actions
-    [workflow_dispatch](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch)
-    `inputs` MUST be empty.
--   Google Cloud Build
-    [user-defined substitutions](https://cloud.google.com/build/docs/configuring-builds/substitute-variable-values)
-    MUST be empty. (Default substitutions, whose values are defined by the
-    server, are acceptable.)
-
-</details>
-<details id="hermetic">
-<summary>Hermetic (draft)</summary>
-
-All transitive build steps, sources, and dependencies were fully declared up
-front with *immutable references*, and the build steps ran with no network
-access.
-
-An **immutable reference** is an identifier that is
-guaranteed to always point to the same, immutable artifact. This MUST allow the
-consumer to locate the artifact and SHOULD include a cryptographic hash of the
-artifact's contents to ensure integrity. Examples: git URL + branch/tag/ref \+
-commit ID; cloud storage bucket ID + SHA-256 hash; Subversion URL (no hash).
-
-The user-defined build script:
-
--   MUST declare all dependencies, including sources and other build steps,
-    using *immutable references* in a format that the build service understands.
-
-The build service:
-
--   MUST fetch all artifacts in a trusted control plane.
--   MUST NOT allow mutable references.
--   MUST verify the integrity of each artifact.
-    -   If the *immutable reference* includes a cryptographic hash, the service
-        MUST verify the hash and reject the fetch if the verification fails.
-    -   Otherwise, the service MUST fetch the artifact over a channel that
-        ensures transport integrity, such as TLS or code signing.
--   MUST prevent network access while running the build steps.
-    -   This requirement is "best effort." It SHOULD deter a reasonable team
-        from having a non-hermetic build, but it need not stop a determined
-        adversary. For example, using a container to prevent network access is
-        sufficient.
-
-</details>
-<details id="reproducible">
-<summary>Reproducible (draft)</summary>
-
-Re-running the build steps with identical input artifacts results in bit-for-bit
-identical output. Builds that cannot meet this MUST provide a justification why
-the build cannot be made reproducible.
-
-"○" means that this requirement is "best effort". The user-provided build script
-SHOULD declare whether the build is intended to be reproducible or a
-justification why not. The build service MAY blindly propagate this intent
-without verifying reproducibility. A consumer MAY reject the build if it does
-not reproduce.
-
-</details>
-<details id="dependencies-complete">
-<summary>Dependencies complete (draft)</summary>
-
-Provenance records all build dependencies that were available while running the
-build steps. This includes the initial state of the machine, VM, or container of
-the build worker.
-
--   MUST include all user-specified build steps, sources, dependencies.
--   SHOULD include all service-provided artifacts.
-
-</details>
-
-## Packaging ecosystem
-
-[Packaging ecosystem]: #packaging-ecosystem
-
-> **TODO:** Is there a better term that is more obvious to most readers?
-
-A <dfn>packaging ecosystem</dfn> is a set of conventions and tooling for package
-distribution. Every package has an ecosystem, whether it is formal or ad-hoc.
-Some ecosystems are formal, such as language distribution (e.g.
-[Python/PyPA](https://www.pypa.io)), operating system distribution (e.g.
-[Debian/Apt](https://wiki.debian.org/DebianRepository/Format)), or artifact
-distribution (e.g. [OCI](https://github.com/opencontainers/distribution-spec)).
-Other ecosystems are informal, such as a convention used within a company. Even
-ad-hoc distribution of software, such as through a link on a website, is
-considered an "ecosystem".
-
-The packaging ecosystem is responsible for ensuring that consumers only use
-artifacts ...**TODO**
-
-**TODO:** Provenance MUST be available to the packaging ecosystem and/or
-consumers. For the build system, this usually means outputting the provenance as
-part of the build to allow the release process to upload it in a manner
-prescribed by the packaging ecosystem.
-
-**TODO:** Update the requirements to provide guidelines for how to implement,
-showing what the options are:
-
--   How to define expectations: explicit vs implicit
--   Whether provenance is generated during the initial build and/or
-    after-the-fact using reproducible builds
--   How provenance is distributed
--   When verification happens: during upload, during download, and/or continuous
-    monitoring
--   What happens on failure: blocking, warning, and/or asynchronous notification
-
-## Consumer
-
-[Consumer]: #consumer
-
-A package's <dfn>consumer</dfn> is the organization or individual that uses the
-package.
-
-The only requirement on the consumer is that they MAY have to opt-in to enable
-SLSA verification, depending on the packaging ecosystem.
-
-> **TODO:** Anything else? Do they need to make risk-based decisions? Respond to
-> errors/warnings?
-
-## Source control
-
-[Source control]: #source-control
-
-A package's <dfn>source control system</dfn> is the infrastructure for managing
-versions of the package's source code.
-
-There are currently no requirements for the source control system because the
-SLSA [Source track](levels.md#source-track) is not yet defined. The initial
-[draft version (v0.1)](../v0.1/requirements.md#source-requirements) of SLSA
-included the following source requirements, which may form the basis for a
-future Source track. Each entry may or may not be included in the future, in
-whole or in part. The list is not exhaustive.
-
-> WARNING: The draft requirements here are unversioned and subject to change.
-
-<details id="version-controlled">
-<summary>Version controlled (draft)</summary>
-
-Every change to the source is tracked in a version control system that meets the
-following requirements:
-
--   **[Change history]** There exists a record of the history of changes
-    that went into the revision. Each change must contain: the identities of
-    the uploader and reviewers (if any), timestamps of the reviews (if any)
-    and submission, the change description/justification, the content of
-    the change, and the parent revisions.
-
--   **\[Immutable reference]** There exists a way to indefinitely reference
-    this particular, immutable revision. In git, this is the {repo URL +
-    branch/tag/ref + commit ID}.
-
-Most popular version control system meet this requirement, such as git,
-Mercurial, Subversion, or Perforce.
-
-NOTE: This does NOT require that the code, uploader/reviewer identities, or
-change history be made public. Rather, some organization must attest to the fact
-that these requirements are met, and it is up to the consumer whether this
-attestation is sufficient.
-
-"○" = RECOMMENDED.
-
-</details>
-<details id="verified-history">
-<summary>Verified history (draft)</summary>
-
-Every change in the revision's history has at least one strongly authenticated
-actor identity (author, uploader, reviewer, etc.) and timestamp. It must be
-clear which identities were verified, and those identities must use [two-step
-verification](https://www.google.com/landing/2step/) or similar. (Exceptions
-noted below.)
-
--   **[First-parent history]** In the case of a non-linear version control
-    system, where a revision can have more than one parent, only the "first
-    parent history" is in scope. In other words, when a feature branch is merged
-    back into the main branch, only the merge itself is in scope.
--   **[Historical cutoff]** There is some TBD exception to allow existing
-    projects to meet SLSA 3/4 even if historical revisions were present in the
-    history. Current thinking is that this could be either last N months or a
-    platform attestation guaranteeing that future changes in the next N months
-    will meet the requirements.
-
-"Strongly authenticated" means that the actor was mapped to a specific person
-using an authentication mechanism which is resistant to account and credential
-compromise. For example, 2-factor authentication (2FA) where one factor is a
-hardware security key (i.e. YubiKey).
-
-</details>
-<details id="retained-indefinitely">
-<summary>Retained indefinitely (draft)</summary>
-
-The revision and its change history are preserved indefinitely and cannot be
-deleted, except when subject to an established and transparent policy for
-obliteration, such as a legal or policy requirement.
-
--   **[Immutable history]** It must not be possible for persons to delete or
-    modify the history, even with multi-party approval, except by trusted
-    platform admins with two-party approval following the obliterate policy.
--   **[Limited retention for SLSA 3]** At SLSA 3 (but not 4), it is acceptable
-    for the retention to be limited to 18 months, as attested by the source
-    control platform.
-    -   Example: If a commit is made on 2020-04-05 and then a retention
-        attestation is generated on 2021-01-01, the commit must be retained
-        until at least 2022-07-01.
-
-</details>
-<details id="two-person-reviewed">
-<summary>Two-person reviewed (draft)</summary>
-
-Every change in the revision's history was agreed to by two trusted persons
-prior to submission, and both of these trusted persons were strongly
-authenticated. (Exceptions from [Verified History](#verified-history) apply here
-as well.)
-
--   The following combinations are acceptable:
-    -   Uploader and reviewer are two different trusted persons.
-    -   Two different reviewers are trusted persons.
--   **[Different persons]** The platform ensures that no person can use
-  alternate identities to bypass the two-person review requirement.
-    -   Example: if a person uploads with identity X then reviews with alias Y,
-        the platform understands that this is the same person and does not
-        consider the review requirement satisfied.
--   **[Informed review]** The reviewer is able and encouraged to make an
-    informed decision about what they're approving. The reviewer should be
-    presented with a full, meaningful content diff between the proposed revision
-    and the previously reviewed revision. For example, it is not sufficient to
-    just indicate that file changed without showing the contents.
--   **[Context-specific approvals]** Approvals are for a specific context, such
-    as a repo + branch in git. Moving fully reviewed content from one context to
-    another still requires review. (Exact definition of "context" depends on the
-    project, and this does not preclude well-understood automatic or reviewless
-    merges, such as cutting a release branch.)
-    -   Git example: If a fully reviewed commit in one repo is merged into a
-        different repo, or a commit in one branch is merged into a different
-        branch, then the merge still requires review.
-
-"Trusted persons" are the set of persons who are granted the authority to
-maintain a software project. For example, https://github.com/MarkLodato/dotfiles
-has just one trusted person (MarkLodato), while
-https://hg.mozilla.org/mozilla-central has a set of trusted persons with write
-access to the mozilla-central repository.
-
-</details>
