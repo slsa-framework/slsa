@@ -1,3 +1,5 @@
+Please do not merge until we have a working blog post link!
+
 # What's New in SLSA v1.0
 
 SLSA v1.0 represents changes made in response to feedback from the SLSA
