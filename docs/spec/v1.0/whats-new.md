@@ -1,14 +1,19 @@
 # What's New in SLSA v1.0
 
-SLSA v1.0 represents changes made in response to feedback from the SLSA community and early adopters of SLSA v0.1. At a high level, these changes prioritize simplicity and practicality.
+SLSA v1.0 represents changes made in response to feedback from the SLSA
+community and early adopters of SLSA v0.1. Overall, these changes
+prioritize simplicity and practicality.
 
-## Specification changes
+Check back here for a detailed v1.0 changelog with the official 1.0 release! 
 
-### Division into tracks
+Until then, see the following for more information about what's new:
 
-* v0.1 Build requirements and some Provenance requirements have been combined into v1.0 Build Track.
-* v0.1 Common requirements are now incorporated in Verifying Systems.
-* v0.1 Source requirements will be included in a Source Track in future SLSA versions.
+-  [Release candidate blog post](TODO link): describes the addition of SLSA
+    tracks, verification expectations, and changes to SLSA's model,
+    specification, and format
+
+-  [Provenance changelog](https://slsa.dev/provenance/v1#v10-draft): a
+    detailed summary of changes to the provenance format
 
 
 
