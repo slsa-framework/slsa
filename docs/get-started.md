@@ -6,7 +6,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
 
 ## Choosing your SLSA level
 
-For all [SLSA levels](https://slsa.dev/spec/v0.1/levels), you follow the same steps:
+For all [SLSA levels](https://slsa.dev/spec/v1.0/levels), you follow the same steps:
 
 1)  Generate provenance, i.e., document your build process
 2)  Make the provenance available, to allow downstream users to verify it
