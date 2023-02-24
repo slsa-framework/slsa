@@ -85,11 +85,11 @@ company, or even an individual.
 
 > ⚠ **RFC:** Is this requirement confusing? Should we remove it?
 
-Verifying provenance requires having expectations about the provenance values for
-an authentic artifact. The verifier is ultimately responsible for setting and testing
-expectations on the artifact, but some expectations are best set with input from the
-producer (e.g. source repository, builder.id). The producer MUST provide input for
-expectations on the verifier's request.
+Verifying provenance requires having expectations about the provenance values
+for an authentic artifact. The verifier is ultimately responsible for setting
+and testing expectations on the artifact, but some expectations are best set
+with input from the producer (e.g. source repository, builder.id). The producer
+MUST provide input for expectations on the verifier's request.
 
 ### Meet expectations
 
