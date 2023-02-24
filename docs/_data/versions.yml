@@ -51,6 +51,14 @@ verification_summary:
       status: Stable
   current: v0.2
 
+gcb-triggered-build:
+  versions:
+    v1:
+      name: Version 1 (DRAFT)
+      draft: true
+      status: Working Draft
+  current: v1
+
 github-actions-workflow:
   versions:
     v0.1:
