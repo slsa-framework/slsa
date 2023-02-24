@@ -18,13 +18,13 @@ spec:
     v0.1:
       name: Version 0.1
       status: Stable
+    v1.0-rc1:
+      name: Version 1.0 RC1
+      status: In Review
     v1.0:
       name: Version 1.0 (DRAFT)
       status: Working Draft
       draft: true
-      # We will hide 1.0 until it is ready for review. Viewers can still type
-      # the URL manually, but we will not link to it from the main page.
-      hidden: true
   current: v0.1
 
 provenance:
@@ -35,10 +35,13 @@ provenance:
     v0.2:
       name: Version 0.2
       status: Stable
+    v1-rc1:
+      name: Version 1.0 RC1
+      status: In Review
     v1:
       name: Version 1.0 (DRAFT)
-      draft: true
       status: Working Draft
+      draft: true
   current: v0.2
 
 verification_summary:
@@ -53,8 +56,11 @@ verification_summary:
 
 github-actions-workflow:
   versions:
+    v1-rc1:
+      name: Version 1.0 RC1
+      status: In Review
     v1:
       name: Version 1.0 (DRAFT)
-      draft: true
       status: Working Draft
-  current: v1
+      draft: true
+  current: v1-rc1
