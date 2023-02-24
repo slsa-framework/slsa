@@ -31,14 +31,11 @@ Responsibility to implement SLSA is spread across the following parties.
   <th>Degree
   <th>L1<th>L2<th>L3
 <tr>
-  <td rowspan=3><a href="#producer">Producer</a>
-  <td colspan=2>Define expectations
+  <td rowspan=2><a href="#producer">Producer</a>
+  <td colspan=2>Choose an appropriate build system
   <td>✓<td>✓<td>✓
 <tr>
-  <td colspan=2>Meet expectations
-  <td>✓<td>✓<td>✓
-<tr>
-  <td colspan=2>Distribute provenance
+  <td colspan=2>Follow a consistent build process
   <td>✓<td>✓<td>✓
 <tr>
   <td rowspan=5><a href="#build-system">Build system</a>
@@ -81,37 +78,25 @@ A package's <dfn>producer</dfn> is the organization that owns and releases the
 software. It might be an open-source project, a company, a team within a
 company, or even an individual.
 
-### Choose an appropriate build system and follow a consistent build process
+### Choose an appropriate build system
 
 The producer MUST select a build system that is capable of reaching their
-desired SLSA Build Level. The producer MUST build their artifact in a consistent
+desired SLSA Build Level.
+
+For example, if a producer wishes to produce a Build Level 3 artifact, they MUST
+choose a builder capable of producing Build Level 3 provenance.
+
+### Follow a consistent build process
+
+The producer MUST build their artifact in a consistent
 manner such that verifiers can form expectations about the build process. In
 some implemenatations, the producer MAY provide explicit metadata to a verifier
 about their build process. In others, the verifier will form their expectations
 implicitly (e.g. trust on first use).
 
-For example, if a producer wishes to produce a Build Level 3 artifact, they MUST
-choose a builder capable of producing Build Level 3 provenance. Their package
+For example, if a producer wishes to distribute their artifact through a package
 ecosystem requires explicit metadata about their build process in the form of a
-config file, so they MUST complete that config file and keep it up to date.
-
-
-### Define expectations
-
-> ⚠ **RFC:** Should this requirement be moved to the Verifying Artifacts
-> page? Or should it be removed from the Build track entirely?
-
-Verifying provenance requires having expectations about the provenance values
-for an authentic artifact. The verifier is ultimately responsible for setting
-and testing expectations on the artifact, but some expectations are best set
-with input from the producer (e.g. source repository, builder.id). The producer
-MUST provide input for expectations on the verifier's request.
-
-### Meet expectations
-
-Note that not all build systems are capable of
-reaching the highest SLSA Build Levels. Additionally, the producer MUST meet any
-expectations they provided to the artifact verifier.
+config file, they MUST complete that config file and keep it up to date.
 
 ### Distribute provenance
 
