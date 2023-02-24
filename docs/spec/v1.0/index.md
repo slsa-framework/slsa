@@ -26,6 +26,9 @@ Known issues:
 -   TODO: Use consistent terminology throughout the site: "publish" vs
     "release", "publisher" vs "maintainer" vs "developer", "consumer" vs
     "ecosystem" vs "downstream system", "build" vs "produce.
+    
+-   Verifying artifacts and setting expectations are still in flux. We would
+    like feedback on whether to move these parts out of the build track.
 
 ## Table of contents
 

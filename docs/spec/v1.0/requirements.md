@@ -83,7 +83,8 @@ company, or even an individual.
 
 ### Define expectations
 
-> ⚠ **RFC:** Is this requirement confusing or unnecessary?
+> ⚠ **RFC:** Should this requirement be moved to the Verifying Artifacts
+> page? Or should it be removed from the build track entirely?
 
 Verifying provenance requires having expectations about the provenance values
 for an authentic artifact. The verifier is ultimately responsible for setting
