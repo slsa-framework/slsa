@@ -98,8 +98,8 @@ about their build process. In others, the verifier will form their expectations
 implicitly (e.g. trust on first use).
 
 For example, if a producer wishes to distribute their artifact through a package
-ecosystem requires explicit metadata about their build process in the form of a
-config file. That metadata includes the artifact's source repository and build
+ecosystem that requires explicit metadata about the build process in the form of
+a config file. That metadata includes the artifact's source repository and build
 parameters that stay constant between builds. The producer MUST complete that
 config file and keep it up to date.
 
