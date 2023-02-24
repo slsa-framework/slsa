@@ -81,6 +81,21 @@ A package's <dfn>producer</dfn> is the organization that owns and releases the
 software. It might be an open-source project, a company, a team within a
 company, or even an individual.
 
+### Choose an appropriate build system and follow a consistent build process
+
+The producer MUST select a build system that is capable of reaching their
+desired SLSA Build Level. The producer MUST build their artifact in a consistent
+manner such that verifiers can form expectations about the build process. In
+some implemenatations, the producer MAY provide explicit metadata to a verifier
+about their build process. In others, the verifier will form their expectations
+implicitly (e.g. trust on first use).
+
+For example, if a producer wishes to produce a Build Level 3 artifact, they MUST
+choose a builder capable of producing Build Level 3 provenance. Their package
+ecosystem requires explicit metadata about their build process in the form of a
+config file, so they MUST complete that config file and keep it up to date.
+
+
 ### Define expectations
 
 > ⚠ **RFC:** Should this requirement be moved to the Verifying Artifacts
@@ -94,8 +109,7 @@ MUST provide input for expectations on the verifier's request.
 
 ### Meet expectations
 
-The producer MUST select a build system that is capable of reaching their
-desired SLSA Build Level. Note that not all build systems are capable of
+Note that not all build systems are capable of
 reaching the highest SLSA Build Levels. Additionally, the producer MUST meet any
 expectations they provided to the artifact verifier.
 
