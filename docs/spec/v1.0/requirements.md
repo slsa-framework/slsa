@@ -83,7 +83,7 @@ company, or even an individual.
 
 ### Define expectations
 
-> ⚠ **RFC:** Is this requirement confusing? Should we remove it?
+> ⚠ **RFC:** Is this requirement confusing or unnecessary?
 
 Verifying provenance requires having expectations about the provenance values
 for an authentic artifact. The verifier is ultimately responsible for setting
