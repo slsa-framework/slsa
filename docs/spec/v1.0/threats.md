@@ -200,9 +200,9 @@ review for these changes.
 for "documentation changes," defined as only touching files ending with `.md` or
 `.html`. Adversary submits a malicious executable named `evil.md` without review
 using this exception, and then builds a malicious package containing this
-executable. This would pass the policy because the source repository is correct,
-and the source repository does require two-person review. Solution: Do not allow
-such exceptions.
+executable. This would pass expectations because the source repository is
+correct, and the source repository does require two-person review. Solution: Do
+not allow such exceptions.
 
 > RFC: This solution may not be practical in all circumstances. Are there any
 > valid exceptions? If so, how do we ensure they cannot be exploited?
@@ -284,8 +284,9 @@ approved. Any intermediate revisions don't count as being reviewed.
 *Example:* Adversary sends a pull request containing malicious commit X and
 benign commit Y that undoes X. In the pull request UI, reviewer only reviews and
 approves "changes from all commits", which is a delta from HEAD to Y; they don't
-see X. Adversary then builds from the malicious revision X. Solution: Policy
-does not accept this because the version X is not considered reviewed.
+see X. Adversary then builds from the malicious revision X. Solution:
+Expectations do not accept this because the version X is not considered
+reviewed.
 
 </details>
 
@@ -408,11 +409,11 @@ provenance itself are covered by (D) and (F).)
 *Threat:* Build using the expected CI/CD process but from an unofficial fork of
 the code that may contain unauthorized changes.
 
-*Mitigation:* Policy requires the provenance's source location to match an
+*Mitigation:* Verifier requires the provenance's source location to match an
 expected value.
 
 *Example:* MyPackage is supposed to be built from GitHub repo `good/my-package`.
-Instead, it is built from `evilfork/my-package`. Solution: Policy rejects
+Instead, it is built from `evilfork/my-package`. Solution: Verifier rejects
 because the source location does not match.
 
 </details>
@@ -422,13 +423,13 @@ because the source location does not match.
 checking out an "experimental" branch or similar that may contain code not
 intended for release.
 
-*Mitigation:* Policy requires that the provenance's source branch/tag matches an
-expected value, or that the source revision is reachable from an expected
+*Mitigation:* Verifier requires that the provenance's source branch/tag matches
+an expected value, or that the source revision is reachable from an expected
 branch.
 
 *Example:* MyPackage's releases are tagged from the `main` branch, which has
 branch protections. Adversary builds from the unprotected `experimental` branch
-containing unofficial changes. Solution: Policy rejects because the source
+containing unofficial changes. Solution: Verifier rejects because the source
 revision is not reachable from `main`.
 
 </details>
@@ -437,14 +438,14 @@ revision is not reachable from `main`.
 *Threat:* Build the package using the proper CI/CD platform but with unofficial
 build steps.
 
-*Mitigation:* Policy requires that the provenance's build configuration source
+*Mitigation:* Verifier requires that the provenance's build configuration source
 matches an expected value.
 
 *Example:* MyPackage is expected to be built by Google Cloud Build using the
 build steps defined in the source's `cloudbuild.yaml` file. Adversary builds
 with Google Cloud Build, but using custom build steps provided over RPC.
-Solution: Policy rejects because the build steps did not come from the expected
-source.
+Solution: Verifier rejects because the build steps did not come from the
+expected source.
 
 </details>
 <details><summary>Build from unofficial parameters <span>(expectations)</span></summary>
@@ -452,17 +453,18 @@ source.
 *Threat:* Build using the expected CI/CD process, source location, and
 branch/tag, but using a parameter that injects unofficial behavior.
 
-*Mitigation:* Policy requires that the provenance's external parameters all
+*Mitigation:* Verifier requires that the provenance's external parameters all
 match expected values.
 
 *Example 1:* MyPackage is supposed to be built from the `release.yml` workflow.
-Adversary builds from the `debug.yml` workflow. Solution: Policy rejects because
-the workflow parameter does not match.
+Adversary builds from the `debug.yml` workflow. Solution: Verifier rejects
+because the workflow parameter does not match the expected value.
 
 *Example 2:* MyPackage's GitHub Actions Workflow uses `github.event.inputs` to
 allow users to specify custom compiler flags per invocation. Adversary sets a
 compiler flag that overrides a macro to inject malicious behavior into the
-output binary. Solution: Policy rejects because it does not allow any `inputs`.
+output binary. Solution: Verifier rejects because the `inputs` parameter was not
+expected.
 
 </details>
 <details><summary>Build from modified version of code modified after checkout <span>(expectations)</span></summary>
@@ -475,10 +477,8 @@ accurately records the source location in provenance.
 
 *Example:* Adversary fetches from MyPackage's source repo, makes a local commit,
 then requests a build from that local commit. Builder records the fact that it
-did not pull from the official source repo. Solution: Policy rejects because the
-source repo is not as expected.
-
-These threats are directly addressed by the SLSA Build track.
+did not pull from the official source repo. Solution: Verifier rejects because
+the source repo does not match the expected value.
 
 </details>
 
@@ -487,6 +487,8 @@ These threats are directly addressed by the SLSA Build track.
 An adversary introduces an unauthorized change to a build output through
 tampering of the build process; or introduces false information into the
 provenance.
+
+These threats are directly addressed by the SLSA Build track.
 
 <details><summary>Compromise build environment of subsequent build <span>(Build L3)</span></summary>
 
@@ -498,7 +500,7 @@ no way to persist changes between subsequent builds.
 
 *Example:* Build service uses the same machine for subsequent builds. Adversary
 first runs a build that replaces the `make` binary with a malicious version,
-then runs a subsequent build that otherwise would pass the policy. Solution:
+then runs a subsequent build that otherwise would pass expectations. Solution:
 Builder changes architecture to start each build with a clean machine image.
 
 </details>
@@ -513,7 +515,7 @@ affect the other.
 *Example:* Build service runs all builds for project MyPackage on the same
 machine as the same Linux user. Adversary starts a "bad" build that listens for
 the "good" build and swaps out source files, then starts a "good" build that
-would otherwise pass the policy. Solution: Builder changes architecture to
+would otherwise pass expectations. Solution: Builder changes architecture to
 isolate each build in a separate VM or similar.
 
 </details>
@@ -603,23 +605,23 @@ An adversary uploads a package not built from the proper build process.
 *Threat:* Build using an unofficial CI/CD pipeline that does not build in the
 correct way.
 
-*Mitigation:* Policy requires provenance showing that the builder matched an
+*Mitigation:* Verifier requires provenance showing that the builder matched an
 expected value.
 
 *Example:* MyPackage is expected to be built on Google Cloud Build, which is
 trusted up to Build L3. Adversary builds on SomeOtherBuildService, which is only
 trusted up to Build L2, and then exploits SomeOtherBuildService to inject bad
-behavior. Solution: Policy rejects because builder is not as expected.
+behavior. Solution: Verifier rejects because builder is not as expected.
 
 </details>
 <details><summary>Upload package without provenance <span>(Build L1)</span></summary>
 
 *Threat:* Upload a package without provenance.
 
-*Mitigation:* Package's provenance is verified before accepting the package.
+*Mitigation:* Verifier requires provenance before accepting the package.
 
 *Example:* Adversary uploads a malicious version of MyPackage to the package
-repository without provenance. Solution: Policy rejects because provenance is
+repository without provenance. Solution: Verifier rejects because provenance is
 missing.
 
 </details>
@@ -628,27 +630,28 @@ missing.
 *Threat:* Take a good version of the package, modify it in some way, then
 re-upload it using the original provenance.
 
-*Mitigation:* Provenance verification includes checking that the provenance's
-`subject` matches the hash of the package.
+*Mitigation:* Verifier checks that the provenance's `subject` matches the hash
+of the package.
 
 *Example:* Adversary performs a proper build, modifies the artifact, then
 uploads the modified version of the package to the repository along with the
-provenance. Solution: Policy rejects because the hash of the artifact does not
+provenance. Solution: Verifier rejects because the hash of the artifact does not
 match the `subject` found within the provenance.
 
 </details>
 <details><summary>Tamper with provenance <span>(Build L2)</span></summary>
 
-*Threat:* Perform a build that would not otherwise pass the policy, then modify
-the provenance to make the policy checks pass.
+*Threat:* Perform a build that would not pass expectations, then modify the
+provenance to make the expectations checks pass.
 
-*Mitigation:* Policy only accepts provenance that was [cryptographically
-signed][authentic] by the public key corresponding to an acceptable builder.
+*Mitigation:* Verifier only accepts provenance with a valid [cryptographically
+signature][authentic] or equivalent proving that the provenance came from an
+acceptable builder.
 
 *Example:* MyPackage is expected to be built by GitHub Actions from the
 `good/my-package` repo. Adversary builds with GitHub Actions from the
 `evil/my-package` repo and then modifies the provenance so that the source looks
-like it came from `good/my-package`. Solution: Policy rejects because the
+like it came from `good/my-package`. Solution: Verifier rejects because the
 cryptographic signature is no longer valid.
 
 </details>
@@ -696,9 +699,9 @@ revision except as part of a transparent legal or privacy process.
 *Example:* Adversary submits bad code to the MyPackage GitHub repo, builds from
 that revision, then does a force push to erase that revision from history (or
 requests GitHub to delete the repo.) This would make the revision unavailable
-for inspection. Solution: Policy prevents this by requiring a positive
-attestation showing that some system, such as GitHub, ensures retention and
-availability.
+for inspection. Solution: Verifier rejects the package because it lacks a
+positive attestation showing that some system, such as GitHub, ensured retention
+and availability of the source code.
 
 </details>
 <details><summary>(E) A dependency becomes temporarily or permanently unavailable to the build process</summary>
@@ -716,17 +719,18 @@ threat.
 Threats that can compromise the ability to prevent or detect the supply chain
 security threats above but that do not fall cleanly into any one category.
 
-<details><summary>Tamper with policy</summary>
+<details><summary>Tamper with expectations</summary>
 
-*Threat:* Modify the policy to accept something that would not otherwise be
-accepted.
+*Threat:* Modify the expectations to accept something that would not otherwise
+be accepted.
 
-*Mitigation:* Policies themselves require two-party review.
+*Mitigation:* Changes to expectations require some form of authorization, such
+as two-party review.
 
-*Example:* Policy for MyPackage only allows source repo `good/my-package`.
-Adversary modifies the policy to also accept `evil/my-package`, then builds from
-that repo and uploads a bad version of the package. Solution: Policy changes
-require two-party review.
+*Example:* Expectations for MyPackage only allows source repo `good/my-package`.
+Adversary modifies the expectations to also accept `evil/my-package`, then
+builds from that repo and uploads a bad version of the package. Solution:
+Expectation changes require two-party review.
 
 </details>
 <details><summary>Forge change metadata</summary>
