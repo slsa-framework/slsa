@@ -644,7 +644,7 @@ match the `subject` found within the provenance.
 *Threat:* Perform a build that would not pass expectations, then modify the
 provenance to make the expectations checks pass.
 
-*Mitigation:* Verifier only accepts provenance with a valid [cryptographically
+*Mitigation:* Verifier only accepts provenance with a valid [cryptographic
 signature][authentic] or equivalent proving that the provenance came from an
 acceptable builder.
 
