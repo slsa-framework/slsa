@@ -4,7 +4,7 @@
     "subject": [...],
 
     // Predicate:
-    "predicateType": "https://slsa.dev/provenance/v1?draft",
+    "predicateType": "https://slsa.dev/provenance/v1-rc1",
     "predicate": {
         "buildDefinition": {
             "buildType": string,

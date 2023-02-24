@@ -2,14 +2,14 @@
 title: "Build Type: GitHub Actions Workflow"
 layout: standard
 hero_text: |
-    A [SLSA Provenance](../../provenance/v1) `buildType` that describes the
+    A [SLSA Provenance](../../provenance/v1-rc1) `buildType` that describes the
     execution of a GitHub Actions workflow.
 ---
 
 ## Description
 
 ```jsonc
-"buildType": "https://slsa.dev/github-actions-workflow/v1?draft"
+"buildType": "https://slsa.dev/github-actions-workflow/v1-rc1"
 ```
 
 This `buildType` describes the execution of a top-level [GitHub Actions]
@@ -52,7 +52,7 @@ top-level and reusable would make the schema too error-prone.
 [SLSA Issues]: https://github.com/slsa-framework/slsa/issues
 [GitHub Actions]: https://docs.github.com/en/actions
 [event types]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
-[isolation]: /spec/v1.0/requirements#isolation-strength
+[isolation]: /spec/v1.0-rc1/requirements#isolation-strength
 
 ## Build Definition
 
@@ -190,7 +190,7 @@ github.run_id + "/attempts/" + github.run_attempt`.
 [Example]: #example
 
 ```json
-{% include_relative examples/v1/example.json %}
+{% include_relative examples/v1-rc1/example.json %}
 ```
 
 Note: The `builder.id` in the example assumes that the build runs under

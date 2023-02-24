@@ -37,7 +37,7 @@ supply chains plus its own sources and builds.
 | Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform). |
 
 [build]: #build-model
-[SLSA Provenance]: /provenance/v1
+[SLSA Provenance]: /provenance/v1-rc1
 
 ### Build model
 
@@ -71,7 +71,7 @@ reference to this artifact is a parameter while the artifact itself is a
 dependency.
 
 For examples on how this model applies to real-world build systems, see [index
-of build types](/provenance/v1#index-of-build-types).
+of build types](/provenance/v1-rc1#index-of-build-types).
 
 ### Verification model
 
