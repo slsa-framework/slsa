@@ -32,13 +32,13 @@ Responsibility to implement SLSA is spread across the following parties.
   <th>L1<th>L2<th>L3
 <tr>
   <td rowspan=3><a href="#producer">Producer</a>
-  <td colspan=2>Define expectations
+  <td colspan=2><a href="#choose-an-appropriate-build-system">Choose an appropriate build system</a>
   <td>✓<td>✓<td>✓
 <tr>
-  <td colspan=2>Meet expectations
+  <td colspan=2><a href="#follow-a-consistent-build-process">Follow a consistent build process</a>
   <td>✓<td>✓<td>✓
 <tr>
-  <td colspan=2>Distribute provenance
+  <td colspan=2><a href="#distribute-provenance">Distribute provenance</a>
   <td>✓<td>✓<td>✓
 <tr>
   <td rowspan=5><a href="#build-system">Build system</a>
@@ -81,21 +81,27 @@ A package's <dfn>producer</dfn> is the organization that owns and releases the
 software. It might be an open-source project, a company, a team within a
 company, or even an individual.
 
-### Define expectations
-
-Verifying provenance requires having expectations about the provenance values for
-an authentic artifact. The producer can set those expectations either implicitly (e.g.
-trust on first use) or explicitly (e.g. valid builds come from a known source repo).
-If the expectations are set implicitly, then the producer doesn't need to do anything.
-If the expectations are set explicitly, then the producer MUST provide the
-expectations.
-
-### Meet expectations
+### Choose an appropriate build system
 
 The producer MUST select a build system that is capable of reaching their
-desired SLSA Build Level. Note that not all build systems are capable of
-reaching the highest SLSA Build Levels. Additionally, the producer MUST meet any
-expectations they provided to the artifact verifier.
+desired SLSA Build Level.
+
+For example, if a producer wishes to produce a Build Level 3 artifact, they MUST
+choose a builder capable of producing Build Level 3 provenance.
+
+### Follow a consistent build process
+
+The producer MUST build their artifact in a consistent
+manner such that verifiers can form expectations about the build process. In
+some implemenatations, the producer MAY provide explicit metadata to a verifier
+about their build process. In others, the verifier will form their expectations
+implicitly (e.g. trust on first use).
+
+For example, if a producer wishes to distribute their artifact through a package
+ecosystem that requires explicit metadata about the build process in the form of
+a config file. That metadata includes the artifact's source repository and build
+parameters that stay constant between builds. The producer MUST complete that
+config file and keep it up to date.
 
 ### Distribute provenance
 
