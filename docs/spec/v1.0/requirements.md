@@ -83,12 +83,13 @@ company, or even an individual.
 
 ### Define expectations
 
+> ⚠ **RFC:** Is this requirement confusing? Should we remove it?
+
 Verifying provenance requires having expectations about the provenance values for
-an authentic artifact. The producer can set those expectations either implicitly (e.g.
-trust on first use) or explicitly (e.g. valid builds come from a known source repo).
-If the expectations are set implicitly, then the producer doesn't need to do anything.
-If the expectations are set explicitly, then the producer MUST provide the
-expectations.
+an authentic artifact. The verifier is ultimately responsible for setting and testing
+expectations on the artifact, but some expectations are best set with input from the
+producer (e.g. source repository, builder.id). The producer MUST provide input for
+expectations on the verifier's request.
 
 ### Meet expectations
 
