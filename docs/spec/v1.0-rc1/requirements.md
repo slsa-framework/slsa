@@ -167,7 +167,7 @@ bi-directionally translatable to SLSA Provenance.
 -   *Authenticity:* No requirements.
 -   *Accuracy:* No requirements.
 
-[SLSA Provenance]: ../../provenance/v1
+[SLSA Provenance]: ../../provenance/v1-rc1
 [associated suite]: ../../attestation-model#recommended-suite
 
 <td>✓<td>✓<td>✓

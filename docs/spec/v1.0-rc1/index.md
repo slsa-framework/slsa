@@ -8,7 +8,7 @@ levels that describe increasing security guarantees.
 
 </div>
 
-This is **version 1.0** of the SLSA specification, which defines the SLSA
+This is **version 1.0-rc1** of the SLSA specification, which defines the SLSA
 levels. For other versions, use the chooser <span class="hidden md:inline">to
 the right</span><span class="md:hidden">at the bottom of this page</span>. For
 the recommended attestation formats, including provenance, see "Specifications"
@@ -34,7 +34,6 @@ Known issues:
 
 | Page | Description |
 | ---- | --- |
-| [What's new in v1.0](whats-new.md) | What's new in SLSA Version 1.0. |
 | [Security levels](levels.md) | Overview of SLSA, intended for all audiences. If you read one page, read this. |
 | [Guiding principles](principles.md) | Background on the guiding principles behind SLSA. |
 | [Terminology](terminology.md) | Terminology and model used by SLSA. |

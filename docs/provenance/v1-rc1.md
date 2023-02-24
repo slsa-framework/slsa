@@ -17,7 +17,7 @@ Describe how an artifact or set of artifacts was produced so that:
 -   Others can rebuild the artifact, if desired.
 
 This predicate is the RECOMMENDED way to satisfy the SLSA v1.0 [provenance
-requirements](/spec/v1.0/requirements#provenance-generation).
+requirements](/spec/v1.0-rc1/requirements#provenance-generation).
 
 ## Prerequisite
 
@@ -33,7 +33,7 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 Provenance is an attestation that the `builder` produced the `subject` software
 artifacts through execution of the `buildDefinition`.
 
-![Build Model](../images/provenance/v1/model.svg)
+![Build Model](../images/provenance/v1-rc1/model.svg)
 
 The model is as follows:
 
@@ -70,7 +70,7 @@ The model is as follows:
 -   During execution, the build process might communicate with the build
     platform's control plane and/or build caches. This communication is not
     captured directly in the provenance, but is instead implied by `builder.id`
-    and subject to [SLSA Requirements](/spec/v1.0/requirements). Such
+    and subject to [SLSA Requirements](/spec/v1.0-rc1/requirements). Such
     communication SHOULD NOT influence the definition of the build; if it does,
     it SHOULD go in `resolvedDependencies` instead.
 
@@ -102,16 +102,16 @@ understand cue. For that reason, we are not using any special cue syntax or
 features. -->
 
 ```javascript
-{% include_relative schema/v1/provenance.cue %}
+{% include_relative schema/v1-rc1/provenance.cue %}
 ```
 
 <details>
 <summary>Protocol buffer schema</summary>
 
-Link: [provenance.proto](schema/v1/provenance.proto)
+Link: [provenance.proto](schema/v1-rc1/provenance.proto)
 
 ```proto
-{% include_relative schema/v1/provenance.proto %}
+{% include_relative schema/v1-rc1/provenance.proto %}
 ```
 
 </details>
@@ -533,7 +533,7 @@ Given an artifact and its provenance:
     trust, resulting in a list of recognized public keys (or equivalent).
 2.  [Verify][processing-model] that statement's `subject` matches the digest of
     the artifact in question.
-3.  Verify that the `predicateType` is `https://slsa.dev/provenance/v1?draft`.
+3.  Verify that the `predicateType` is `https://slsa.dev/provenance/v1-rc1`.
 4.  Look up the SLSA Build Level in the roots of trust, using the recognized
     public keys and the `builder.id`, defaulting to SLSA Build L1.
 
@@ -548,7 +548,7 @@ Resulting threat mitigation:
         platform itself, such as by a malicious insider. Instead, verifiers
         SHOULD carefully consider which build platforms are added to the roots
         of trust. For advice on establishing trust in build platforms, see
-        [Verifying build systems](/spec/v1.0/verifying-systems).
+        [Verifying build systems](/spec/v1.0-rc1/verifying-systems).
 -   [Threat "F"]: SLSA Build L2 covers tampering of the artifact or provenance
     after the build. This is accomplished by verifying the `subject` and
     signature in the steps above.
@@ -562,10 +562,10 @@ Resulting threat mitigation:
     -   NOTE: SLSA does not cover adversaries tricking a consumer to use an
         unintended package, such as through typosquatting.
 
-[Threat "D"]: /spec/v1.0/threats#d-compromise-build-process
-[Threat "F"]: /spec/v1.0/threats#f-upload-modified-package
-[Threat "G"]: /spec/v1.0/threats#g-compromise-package-repo
-[Threat "H"]: /spec/v1.0/threats#h-use-compromised-package
+[Threat "D"]: /spec/v1.0-rc1/threats#d-compromise-build-process
+[Threat "F"]: /spec/v1.0-rc1/threats#f-upload-modified-package
+[Threat "G"]: /spec/v1.0-rc1/threats#g-compromise-package-repo
+[Threat "H"]: /spec/v1.0-rc1/threats#h-use-compromised-package
 
 [processing-model]: https://github.com/in-toto/attestation/tree/main/spec#processing-model
 
@@ -631,7 +631,7 @@ source repository, then make put only the source repository in
 `externalParameters`. Such a design is easier to verify because the source
 repository is constant across builds.
 
-[Threat "C"]: /spec/v1.0/threats#c-build-from-modified-source
+[Threat "C"]: /spec/v1.0-rc1/threats#c-build-from-modified-source
 
 ### Step 3: Check dependencies (recursively)
 
@@ -652,7 +652,7 @@ L0. (For example, consider the compiler's compiler's compiler's ... compiler.)
 If `resolvedDependencies` is incomplete, this can be done on a best-effort
 basis.
 
-[Threat "E"]: /spec/v1.0/threats#e-use-compromised-dependency
+[Threat "E"]: /spec/v1.0-rc1/threats#e-use-compromised-dependency
 [VSA]: /verification_summary
 
 ## Index of build types
@@ -662,7 +662,7 @@ complete example predicate.
 
 -   [GitHub Actions Workflow]
 
-[GitHub Actions Workflow]: /github-actions-workflow/v1
+[GitHub Actions Workflow]: /github-actions-workflow/v1-rc1
 
 **TODO:** Before marking the spec stable, add at least 1-2 other build types to
 validate that the design is general enough to apply to other builders.
@@ -728,7 +728,7 @@ The following fields from v0.2 are no longer present in v1.0:
 
 ## Change history
 
-### v1.0 (DRAFT)
+### v1.0 RC1
 
 Major refactor to reduce misinterpretation, including a minor change in model.
 
@@ -779,5 +779,5 @@ Initial version, named "in-toto.io/Provenance"
 [in-toto attestation]: https://github.com/in-toto/attestation
 [parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/README.md#parsing-rules
 [purl]: https://github.com/package-url/purl-spec
-[threats]: /spec/v1.0/threats
-[trusted]: /spec/v1.0/principles#trust-systems-verify-artifacts
+[threats]: /spec/v1.0-rc1/threats
+[trusted]: /spec/v1.0-rc1/principles#trust-systems-verify-artifacts
