@@ -53,8 +53,8 @@ verification_summary:
 
 github-actions-workflow:
   versions:
-    v0.1:
-      name: Version 0.1 (DRAFT)
+    v1:
+      name: Version 1.0 (DRAFT)
       draft: true
       status: Working Draft
-  current: v0.1
+  current: v1
