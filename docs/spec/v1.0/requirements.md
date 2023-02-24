@@ -31,11 +31,14 @@ Responsibility to implement SLSA is spread across the following parties.
   <th>Degree
   <th>L1<th>L2<th>L3
 <tr>
-  <td rowspan=2><a href="#producer">Producer</a>
-  <td colspan=2>Choose an appropriate build system
+  <td rowspan=3><a href="#producer">Producer</a>
+  <td colspan=2><a href="#choose-an-appropriate-build-system">Choose an appropriate build system</a>
   <td>✓<td>✓<td>✓
 <tr>
-  <td colspan=2>Follow a consistent build process
+  <td colspan=2><a href="#follow-a-consistent-build-process">Follow a consistent build process</a>
+  <td>✓<td>✓<td>✓
+<tr>
+  <td colspan=2><a href="#distribute-provenance">Distribute provenance</a>
   <td>✓<td>✓<td>✓
 <tr>
   <td rowspan=5><a href="#build-system">Build system</a>
@@ -96,7 +99,9 @@ implicitly (e.g. trust on first use).
 
 For example, if a producer wishes to distribute their artifact through a package
 ecosystem requires explicit metadata about their build process in the form of a
-config file, they MUST complete that config file and keep it up to date.
+config file. That metadata includes the artifact's source repository and build
+parameters that stay constant between builds. The producer MUST complete that
+config file and keep it up to date. 
 
 ### Distribute provenance
 
