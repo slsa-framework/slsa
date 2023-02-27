@@ -26,6 +26,7 @@ model. Subsequent sections analyze each layer.
 [OpenPGP]: https://tools.ietf.org/html/rfc4880
 [PASETO]: https://paseto.io
 [SPDX]: https://github.com/spdx/spdx-spec
+[sigstore]: https://docs.sigstore.dev/
 [Simple Signing]: https://github.com/containers/image/blob/master/docs/containers-signature.5.md
 [in-toto v1]: https://github.com/in-toto/docs/blob/master/in-toto-spec.md
 [in-toto v2]: https://github.com/in-toto/attestation
@@ -45,7 +46,7 @@ Raw signing            | ✓        | ✓         | ✗         |         |     
 [in-toto v2]           | ~        | ✓         |           |         |            |        | In development
 [SPDX]                 |          |           | ✓         |         |            |        | Stable
 [Binary Authorization] | ~        | ~         | ✗         | ~       |            | ✓      | Stable
-[sigstore - cosign]    |          |           |           |  ✓      | ✓          | ✓      | Stable
+[sigstore/cosign]      |          |           |           |  ✓      | ✓          | ✓      | Stable
 
 Legend:
 
@@ -177,7 +178,6 @@ only contains the subject.
 
 Show how the following are related:
 
--   Cosign / SigStore
 -   Kritis
 -   Grafeas / Container Analysis
 -   Docker Content Trust
