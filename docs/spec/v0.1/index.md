@@ -71,7 +71,7 @@ subpages:
                 Protecting against key threats
             </h>
         </div>
-        <div class="flex flex-wrap md:flex-row justify-between items-start md:-ml-10 md:-mr-10">
+        <div class="flex flex-wrap md:flex-row justify-between items-start md:-ml-10">
             <div class="text w-full md:w-1/2 md:pl-10">
                 <p>Supply chain attacks are an ever-present threat, exploiting weakpoints to interfere with software. The SLSA framework establishes three trust boundaries encouraging the right standards, attestation and technical controls, so you can harden a system from these threats and risks.</p>
             </div>
@@ -89,7 +89,7 @@ subpages:
                 Real world examples
             </p>
         </div>
-        <div class="flex flex-wrap md:flex-row justify-between items-start md:-ml-10 md:-mr-10">
+        <div class="flex flex-wrap md:flex-row justify-between items-start md:-ml-10">
             <div class="text w-full md:w-1/2 md:pl-10">
                 <p>High profile attacks like <strong>SolarWinds</strong>, <strong>Codecov</strong> or <strong>Linux hypocrite commits</strong> exploit the kind of supply chain integrity vulnerabilities which may go unnoticed or be underdeveloped, and quickly become extremely public, disruptive and costly in today’s environment. </p>
             </div>
@@ -143,7 +143,7 @@ subpages:
                 <img src="../../images/badge-exploded.svg" alt="SLSA levels badge">
             </div>
         </div>
-        <div class="flex flex-wrap md:flex-row justify-between items-start mt-16 md:-ml-4 md:-mr-4">
+        <div class="flex flex-wrap md:flex-row justify-between items-start mt-16 md:-ml-4">
           {%- for stage in page.stages -%}
             {%- assign stage_content = stage | map: stage -%}
               <div class="{% if forloop.index == 1 %}w-full{% else %}w-full md:w-1/2{% endif %} md:pl-4 pb-4">
