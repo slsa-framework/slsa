@@ -27,7 +27,7 @@
         },
         "runDetails": {
             "metadata": {
-                "invocationId": "TODO",
+                "invocationId": "https://cloudbuild.googleapis.com/v1/projects/cloud-build-samples-project/locations/us-west1/builds/03eb98be-0390-4b05-b861-ef52ed4d2a34",
                 "startedOn": "2023-01-01T12:34:56Z"
             }
         }
