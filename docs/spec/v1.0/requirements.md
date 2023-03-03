@@ -268,8 +268,8 @@ build instances, whether prior or concurrent.
 -   The build SHOULD NOT call out to remote execution unless it's considered part of the "builder" within the trust boundary.
 -   The build SHOULD NOT open services that allow for remote influence.
 
-Note: This requirement was split into "Isolated" and "Ephemeral Environment" the
-initial [draft version (v0.1)](../v0.1/requirements.md).
+Note: This requirement was split into "Isolated" and "Ephemeral Environment"
+in the initial [draft version (v0.1)](../v0.1/requirements.md).
 
 <td> <td> <td>✓
 </table>
