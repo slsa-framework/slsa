@@ -72,12 +72,14 @@ Theoretically, access control can be configured so that the only path from
 source to release is through the official channels: the CI/CD system pulls only
 from the proper source, package registry allows access only to the CI/CD system,
 and so on. We might infer that we can trust artifacts produced by these systems
-based on the system's configuration.   
+based on the system's configuration. 
+
 In practice, though, these configurations are almost impossible to get right and
 keep right. There are often over-provisioning, confused deputy problems, or
 mistakes. Even if a system is configured properly at one moment, it might not
 stay that way, and humans almost always end up getting in the access control
 lists.  
+
 Access control is still important, but SLSA goes further and **requires proof in
 the form of attestations that the package was built correctly**. 
 
