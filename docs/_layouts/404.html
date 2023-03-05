@@ -3,33 +3,27 @@
 
   {%- include head.html -%}
 
-  <body>
-    <div class="max-width">
+  <body
+    x-data="{navOpen: false}"
+    x-init="$refs.body.style.setProperty('--scrollbar-width', `${window.innerWidth - document.body.offsetWidth}px`)"
+    x-ref="body"
+  >
+    {%- include aside.html -%}
+    <div class="site-main">
       {%- include header.html -%}
-      <main aria-label="Content">
-            <div class="wrapper">
-                <!-- Hero -->
-                <section class="hero markdown-page">
-                    <div class="wrapper text-green-darkest text-left">
-                        <h1 class="pr-32 pb-16 pt-32">{{ page.title }}</h1>
-                        <div class="md:flex justify-between items-start text-black">
-                            <div class="w-full md:w-3/5">
-                                <p>{{ page.hero_text }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <section class="wrapper">
-                <div class="flex flex-wrap h-full justify-between items-start">
-                    <div class="w-full md:w-2/3 markdown pb-36">
-                        {{ content }}
-                    </div>
-                </div>
-            </section>
+      <main class="site-clamp" aria-label="Content">
+        <header class="content-header">
+          <h1 class="mb-16">{{ page.title }}</h1>
+          <p>{{ page.hero_text }}</p>
+        </header>
+        <div class="site-content">
+          <div class="content markdown">
+            {{ content }}
+          </div>
+        </div>
       </main>
+      {%- include footer.html -%}
     </div>
-    {%- include footer.html -%}
   </body>
 
 </html>

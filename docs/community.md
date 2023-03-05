@@ -26,8 +26,8 @@ developing tooling and services, we welcome your contributions.
 <img src="images/slsa-dancing-goose-logo.svg" alt="SLSA dancing goose image">
 
 </div>
-        <div class="flex flex-wrap justify-center items-center w-6/7 mt-8 mx-auto md:-mr-5 md:-ml-5 clear-both">
-            <div class="w-full md:w-1/2 getting_started_card md:pl-5 lg:h-96 h-auto lg:mb-0 mb-8">
+        <div class="flex flex-wrap w-6/7 mt-8 mx-auto md:-ml-5 clear-both">
+            <div class="w-full md:w-1/2 getting_started_card md:pl-5 lg:mb-0 mb-8">
                 <div class="bg-pastel-green h-full rounded-lg p-10">
                     <p class="h4 font-semibold mb-6">General contributions</p>
                     <p>For general questions, suggestions, or status updates, please use one of the following channels.</p>
@@ -38,7 +38,7 @@ developing tooling and services, we welcome your contributions.
                     <a target="_blank" href="https://groups.google.com/g/slsa-discussion" class="cta-link mt-6 font-semibold h5">Mailing list</a>
                 </div>
             </div>
-            <div class="w-full md:w-1/2 getting_started_card md:pl-5 lg:h-96 h-auto lg:mb-0 mb-8">
+            <div class="w-full md:w-1/2 getting_started_card md:pl-5 lg:mb-0 mb-8">
                 <div class="bg-pastel-green h-full rounded-lg p-10">
                     <p class="h4 font-semibold mb-6">Special Interest Groups (SIGs)</p>
                     <p>To get more deeply involved in SLSA, we welcome your participation in the following special interest groups (SIGs). See linked meeting notes for more info, including meeting times and Slack channel.</p>
@@ -52,10 +52,12 @@ developing tooling and services, we welcome your contributions.
 </section>
 <section class="section relative bg-green-transparent flex justify-center items-center overflow-hidden">
     <img class="object-cover absolute w-full h-full z-0" src="images/community-bg.png" alt="Community background image">
-    <div class="bg-light-green h-full rounded-lg p-10 z-10 w-4/5 md:w-2/3 mx-auto">
-        <p class="font-bold h3 mb-6">“SLSA’s really the first of its kind, a framework for supply chain and build integrity. What sets it apart is the thriving community behind it, and it’s resonating with different organizations.”</p>
-        <p class="font-semibold h4 mb-0.5">Kim Lewandowski</p>
-        <p class="font-regular">Founder, Chainguard</p>
+    <div class="wrapper">
+        <div class="bg-light-green h-full rounded-lg p-10 relative z-1 lg:w-2/3 mx-auto">
+            <p class="font-bold h3 mb-6">“SLSA’s really the first of its kind, a framework for supply chain and build integrity. What sets it apart is the thriving community behind it, and it’s resonating with different organizations.”</p>
+            <p class="font-semibold h4 mb-0.5">Kim Lewandowski</p>
+            <p class="font-regular">Founder, Chainguard</p>
+        </div>
     </div>
 </section>
 <section class="section bg-green-dark flex justify-center items-center">
@@ -86,7 +88,7 @@ Google has been using an internal version of SLSA since 2013 and requires it for
 
 </div>
         </div>
-        <div class="flex flex-wrap justify-start items-start mb-16 md:-mr-5 md:-ml-5">
+        <div class="flex flex-wrap justify-start items-start mb-16 md:-ml-5">
             <a href="https://youtu.be/S_MXbt0p_pg" class="w-full lg:w-1/2 md:pl-5 pb-16">
                 <img class="mx-auto w-full" src="https://img.youtube.com/vi/S_MXbt0p_pg/0.jpg" alt="operation slsa episode 1 image">
                 <p class="text-green-darker font-bold h5 mt-4">Operation SLSA: Episode 1</p>
