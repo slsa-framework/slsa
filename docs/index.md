@@ -149,7 +149,7 @@ It’s adaptable, and it’s been designed with the wider security ecosystem in 
         </div>
         <div class="flex flex-wrap justify-center items-center text-center w-full relative mx-auto">
             <div class="w-full md:w-1/4 mb-12">
-                <img src="images/openssf.svg" alt="OpenSSF logo" />
+                <img class="w-2/3 md:w-3/5 h-auto" src="images/openssf.svg" alt="OpenSSF logo" />
             </div>
         </div>
     </div>
