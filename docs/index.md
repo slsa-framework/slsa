@@ -143,7 +143,8 @@ It’s adaptable, and it’s been designed with the wider security ecosystem in 
             {%- endfor -%}
         </div>
         <div class="w-full md:w-1/3 md:mt-0 mt-8">
-                <img src="images/logos/openssf.png" alt="OpenSSF logo">
+                Part of the Open Source Security Foundation
+                <img src="images/logos/openssf.svg" alt="OpenSSF logo">
         </div>
     </div>
 </section>
