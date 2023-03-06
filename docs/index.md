@@ -148,7 +148,7 @@ It’s adaptable, and it’s been designed with the wider security ecosystem in 
             <p class="h2 mb-10">Part of the Open Source Security Foundation</p>
         </div>
         <div class="flex flex-wrap justify-center items-center text-center w-full relative mx-auto">
-            <div class="w-full mx-auto">
+            <div class="w-6/12 mx-auto">
                 <img class="w-full mx-auto" src="images/openssf.svg" alt="OpenSSF logo" />
             </div>
         </div>
