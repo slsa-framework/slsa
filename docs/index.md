@@ -142,9 +142,15 @@ It’s adaptable, and it’s been designed with the wider security ecosystem in 
                 {%- endif -%}
             {%- endfor -%}
         </div>
-        <div class="w-full md:w-1/3 md:mt-0 mt-8">
-                Part of the Open Source Security Foundation
-                <img src="images/logos/openssf.svg" alt="OpenSSF logo">
+    </div>
+    <div class="wrapper inner w-full">
+        <div class="flex flex-col justify-center items-center mb-16 text-center md:w-2/3 relative mx-auto">
+            <p class="h2 mb-10">Part of the Open Source Security Foundation</p>
+        </div>
+        <div class="flex flex-wrap justify-center items-center text-center w-full relative mx-auto">
+            <div class="w-full md:w-1/4 mb-12">
+                <img class="mx-auto w-5/12 md:8/12 h-auto" src="images/openssf.svg" alt="OpenSSF logo" />
+            </div>
         </div>
     </div>
 </section>
