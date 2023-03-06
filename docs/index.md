@@ -142,6 +142,9 @@ It’s adaptable, and it’s been designed with the wider security ecosystem in 
                 {%- endif -%}
             {%- endfor -%}
         </div>
+        <div class="w-full md:w-1/3 md:mt-0 mt-8">
+                <img src="images/logos/openssf.png" alt="OpenSSF logo">
+        </div>
     </div>
 </section>
 <section x-data="{swiper: null}" x-init="swiper = new Swiper($refs.container, {
