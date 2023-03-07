@@ -52,6 +52,10 @@ verification_summary:
     v0.2:
       name: Version 0.2
       status: Stable
+    v1:
+      name: Version 1.0 (DRAFT)
+      status: Working Draft
+      draft: true
   current: v0.2
 
 github-actions-workflow:

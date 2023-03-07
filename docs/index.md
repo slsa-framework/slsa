@@ -104,7 +104,7 @@ testimonials:
                 <img class="w-3/4 mx-auto" src="images/badge-exploded.svg" alt="SLSA levels badge">
             </div>
         </div>
-        <div class="flex flex-wrap justify-between items-center mt-16 md:-ml-4 md:-mr-4">
+        <div class="flex flex-wrap justify-between items-center mt-16 md:-ml-4">
           {%- for level in page.levels -%}
           {%- assign level_content = level | map: level -%}
               <div class="w-full md:w-1/2 md:pl-4 pb-4">
@@ -202,8 +202,8 @@ It’s adaptable, and it’s been designed with the wider security ecosystem in 
         <div class="flex flex-col justify-center items-center text-center md:mb-16 md:w-2/3 relative mx-auto">
             <p class="h2 mb-8">Get started</p>
         </div>
-        <div class="flex flex-wrap justify-center items-center w-6/7 mx-auto md:-ml-4 md:-mr-4">
-            <div class="w-full md:w-1/2 getting_started_card md:pl-4 md:h-80 mb-8 md:mb-0">
+        <div class="flex flex-wrap justify-center w-6/7 mx-auto md:-ml-4">
+            <div class="w-full md:w-1/2 getting_started_card md:pl-4 mb-8 md:mb-0">
               <a href="get-started#reaching-slsa-level-1" class="hover:no-underline">
                   <div class="bg-white h-full rounded-lg p-10 flex flex-col">
                       <p class="h3 font-semibold mb-8 md:mb-6">Start using SLSA</p>
@@ -212,7 +212,7 @@ It’s adaptable, and it’s been designed with the wider security ecosystem in 
                   </div>
                 </a>
             </div>
-            <div class="w-full md:w-1/2 getting_started_card md:pl-4 md:h-80">
+            <div class="w-full md:w-1/2 getting_started_card md:pl-4">
               <a href="spec/{{ site.current_spec_version }}/#specifications" class="hover:no-underline">
                   <div class="bg-white h-full rounded-lg p-10 flex flex-col">
                       <p class="h3 font-semibold mb-8 md:mb-6">Review the specifications</p>
@@ -231,9 +231,9 @@ It’s adaptable, and it’s been designed with the wider security ecosystem in 
                 <p class="h2 p-0">Project status</p>
             </div>
             <div class="w-full md:w-1/2">
-                <div class="rounded-lg text-green p-5 border border-green-400 inline-block mt-8 md:mt-0 mb-8 h4 font-semibold">SLSA is currently in alpha</div>
-                <p>The initial v0.1 specification is out and is now ready to be tried out and tested.<br><br>
-We’ve released a set of tools and services to generate SLSA 1-2 provenance, which we’re looking to develop further soon.<br><br>
+                <div class="rounded-lg text-green p-5 border border-green-400 inline-block mt-8 md:mt-0 mb-8 h4 font-semibold">SLSA v1.0 is coming soon!</div>
+                <p>The SLSA v1.0 release candidate specification is out and <a href="/blog/2023/02/slsa-v1-rc">available for community review</a>. We anticipate a stable release soon. <br><br>
+We’ve released a set of tools and services to generate up to SLSA 3 provenance, and plan to develop further tooling soon.<br><br>
 Google has been using an internal version of SLSA since 2013 and requires it for all of their production workloads.</p>
             </div>
         </div>

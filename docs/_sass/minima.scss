@@ -76,18 +76,19 @@ $spacer-xxl: 40px;
 
 // navigation
 $nav-padding: 20px;
+$header-height: 68px;
 
 // other
 $table-text-align: left !default;
 
 // Width of the content area
-$content-width: 1180px !default;
+$content-width: 1280px !default;
 
 $on-mobile-old: 320px !default;
 $on-mobile: 440px !default;
 $on-palm: 600px !default;
-$on-tablet: 768px !default;
-$on-laptop: 1180px !default;
+$on-tablet: 1024px !default;
+$on-laptop: 1280px !default;
 $media-menu: 870px !default;
 
 @mixin media-query($device) {

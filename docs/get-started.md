@@ -94,7 +94,7 @@ hero_text: If you’re looking to jump straight in and try SLSA, here’s a quic
 
 <section class="section bg-white flex justify-center items-center">
     <div class="wrapper inner w-full">
-        <div class="justify-between items-start md:-mr-10 md:-ml-10">
+        <div class="justify-between items-start md:-ml-10">
             <div class="text w-full md:pl-10">
 <div class="h2 -mt-16 mb-8">
 
