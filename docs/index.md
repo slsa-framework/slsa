@@ -133,7 +133,7 @@ It’s adaptable, and it’s been designed with the wider security ecosystem in 
             <p class="h2 mb-10">An industry collaboration</p>
             <p>SLSA is led by an initial cross-organization, vendor-neutral steering group committed to improving the security ecosystem for everyone.</p>
         </div>
-        <div class="flex flex-wrap justify-center items-center text-center w-full relative mx-auto">
+        <div class="flex flex-wrap justify-center items-center text-center w-full relative mx-auto mb-16">
             {%- for image in site.static_files -%}
                 {%- if image.path contains '/logos' -%}
                     <div class="w-full md:w-1/4 mb-12">
@@ -144,7 +144,7 @@ It’s adaptable, and it’s been designed with the wider security ecosystem in 
         </div>
     </div>
     <div class="wrapper inner w-full">
-        <div class="flex flex-col justify-center items-center mb-16 text-center md:w-2/3 relative mx-auto">
+        <div class="flex flex-col justify-center items-center text-center md:w-2/3 relative mx-auto">
             <p class="h2 mb-10">Part of the Open Source Security Foundation</p>
         </div>
         <div class="flex flex-wrap justify-center items-center text-center w-full relative mx-auto">
