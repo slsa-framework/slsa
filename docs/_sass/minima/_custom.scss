@@ -507,7 +507,20 @@ dl.as-table {
   padding: 0 $spacer-l;
   position: sticky;
   top: $spacer-l;
+  transition: top .25s ease-in-out;
   z-index: 2;
+
+  .site-header.is-fixed + & {
+    top: $header-height + $spacer-l;
+  }
+
+  .site-header.is-hidden + & {
+    top: $spacer-l;
+  }
+
+  @include media-query-min($on-laptop) {
+    top: $spacer-l !important;
+  }
 
   > input[type=checkbox]:checked + div {
     display: none;
@@ -571,19 +584,19 @@ body {
     width: 100%;
     z-index: 40;
 
-    &.is-fixed {
+    .is-fixed & {
         position: fixed;
     }
 
-    &.is-scrolled-past {
+    .is-scrolled-past & {
         top: 0;
     }
 
-    &.is-hidden {
+    .is-hidden & {
         transform: translate3d(0, -100%, 0);
     }
 
-    &.menu-open {
+    .menu-open & {
         position: fixed;
         top: 0;
         transform: none;
