@@ -9,11 +9,9 @@ decisions.
 
 ## Principle 1: Trust systems, verify artifacts
 
-Establish trust in a small number of systems (such as change management, build, and packaging systems) and then automatically verify the many artifacts produced by those systems. 
+Establish trust in a small number of systems (such as change management, build, and packaging systems) and then automatically verify the many artifacts produced by those systems.
 
-### Reason
-
-Trusted computing bases are unavoidable, but analysis to establish that trust is
+Reason: Trusted computing bases are unavoidable, but analysis to establish that trust is
 difficult and expensive. It's infeasible to harden and audit thousands of
 bespoke build systems.   
 
@@ -21,9 +19,7 @@ We can, however, do this for a small number of general purpose systems. **Once
 those systems are trusted, we can verify the supply chain of _artifacts_ by
 ensuring that they were produced by trusted systems**. 
 
-### Benefits
-
-Allows SLSA to scale to entire ecosystems or organizations with a near-constant
+Benefits: Allows SLSA to scale to entire ecosystems or organizations with a near-constant
 amount of central work. 
 
 ### Example
@@ -51,14 +47,10 @@ manual security analysis. Where possible:
 
 Securely trace all software back to source code.  
 
-### Reason
-
-Code is static and analyzable. People, on the other hand, are prone to mistakes,
+Reason: Code is static and analyzable. People, on the other hand, are prone to mistakes,
 credential compromise, and sometimes malicious action. 
 
-### Benefits
-
-Removes the possibility for an individual maintainer to tamper with source code
+Benefits: Removes the possibility for an individual maintainer to tamper with source code
 after it has been committed.
 
 ## Principle 3: Prefer attestations over inferences
@@ -66,9 +58,7 @@ after it has been committed.
 Require explicit attestations about an artifact's provenance; do not infer
 security properties from a system's configurations.
 
-### Reason
-
-Theoretically, access control can be configured so that the only path from
+Reason: Theoretically, access control can be configured so that the only path from
 source to release is through the official channels: the CI/CD system pulls only
 from the proper source, package registry allows access only to the CI/CD system,
 and so on. We might infer that we can trust artifacts produced by these systems
@@ -83,7 +73,5 @@ lists.
 Access control is still important, but SLSA goes further and **requires proof in
 the form of attestations that the package was built correctly**. 
 
-### Benefits
-
-The attestation removes intermediate systems from the trust base and ensures
+Benefits: The attestation removes intermediate systems from the trust base and ensures
 individuals do not have sufficient permission to tamper with the package.
