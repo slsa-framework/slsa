@@ -13,13 +13,16 @@ Establish trust in a small number of systems---such as change management, build,
 and packaging systems---and then automatically verify the many artifacts
 produced by those systems.
 
-**Reasoning**: Trusted computing bases are unavoidable, but analysis to establish that trust is
-difficult and expensive. It's infeasible to harden and audit thousands of
-bespoke build systems.  
+**Reasoning**: Trusted computing bases are unavoidable---there's no choice but to
+trust some systems. It's infeasible to harden and audit thousands of bespoke build systems.
+It's difficult and expensive manual work to harden and verify each individual system,
+and each system increases the attack surface. Verifying that an artifact is produced by a
+trusted system, though, is easy to automate.
 
-We can, however, do this for a small number of general purpose systems. **Once
-those systems are trusted, we can verify the supply chain of _artifacts_ by
-ensuring that they were produced by trusted systems**.
+To simultaniously scale and reduce attack surfaces, it is most efficient to trust a limited
+numbers of systems and then automate verification of the artifacts produced by those systems.
+The attack surfaces and work to estalish trust does not scale with the number of artifacts produced,
+as happens when artifacts each use a different trusted system.
 
 **Benefits**: Allows SLSA to scale to entire ecosystems or organizations with a near-constant
 amount of central work.
@@ -55,7 +58,7 @@ credential compromise, and sometimes malicious action.
 **Benefits**: Removes the possibility for an individual maintainer to tamper with source code
 after it has been committed.
 
-##Prefer attestations over inferences
+## Prefer attestations over inferences
 
 Require explicit attestations about an artifact's provenance; do not infer
 security properties from a system's configurations.
