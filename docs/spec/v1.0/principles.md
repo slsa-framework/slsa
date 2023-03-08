@@ -48,9 +48,9 @@ manual security analysis. Where possible:
 -   Remove the need to trust components. For example, use end-to-end signing
     to avoid the need to trust intermediate distribution systems.
 
-##Trust code, not individuals
+## Trust code, not individuals
 
-Securely trace all software back to source code rather than trust individual maintainers who have write access to package registries. 
+Securely trace all software back to source code rather than trust individual maintainers who have write access to package registries.
 
 **Reasoning**: Code is static and analyzable. People, on the other hand, are prone to mistakes,
 credential compromise, and sometimes malicious action.
