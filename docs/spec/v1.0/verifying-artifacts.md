@@ -20,27 +20,6 @@ verification.
 Consumers can trust their package ecosystem or some other third party to verify
 artifacts, or they can verify artifacts against their own set of expectations.
 
-## Package ecosystem
-
-[Package ecosystem]: #package-ecosystem
-
-> ⚠ **RFC:** Is there a better term that is more obvious to most readers?
-
-A <dfn>package ecosystem</dfn> is a set of conventions and tooling for package
-distribution. Every package has an ecosystem, whether it is formal or ad-hoc.
-Some ecosystems are formal, such as language distribution (e.g.
-[Python/PyPA](https://www.pypa.io)), operating system distribution (e.g.
-[Debian/Apt](https://wiki.debian.org/DebianRepository/Format)), or artifact
-distribution (e.g. [OCI](https://github.com/opencontainers/distribution-spec)).
-Other ecosystems are informal, such as a convention used within a company. Even
-ad-hoc distribution of software, such as through a link on a website, is
-considered an "ecosystem".
-
-The package ecosystem's maintainers are responsible for reliably redistributing
-artifacts and provenance, making the producers' expectations available to consumers,
-and providing tools to enable safe artifact consumption (e.g. whether an artifact
-meets its producer's expectations).
-
 ### Setting Expectations
 
 <dfn>Expectations</dfn> are known provenance values that indicate the corresponding
