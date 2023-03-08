@@ -47,7 +47,7 @@ manual security analysis. Where possible:
 
 ##Trust code, not individuals
 
-Securely trace all software back to source code.  
+Securely trace all software back to source code rather than trust individual maintainers who have write access to package registries. 
 
 **Reasoning**: Code is static and analyzable. People, on the other hand, are prone to mistakes,
 credential compromise, and sometimes malicious action.
@@ -72,7 +72,7 @@ mistakes. Even if a system is configured properly at one moment, it might not
 stay that way, and humans almost always end up getting in the access control
 lists.  
 
-Access control is still important, but SLSA goes further and **requires proof in
+Access control is still important, but SLSA goes further to provide defense in depth: it **requires proof in
 the form of attestations that the package was built correctly**.
 
 **Benefits**: The attestation removes intermediate systems from the trust base and ensures
