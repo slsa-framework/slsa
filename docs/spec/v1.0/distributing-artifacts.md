@@ -87,25 +87,25 @@ There are a number of opportunities and venues to publish attestations during
 and after the build process. It is recommended to publish attestations in a
 number of places:
 
-* **Publish attestations in a transparency log**: Once a build has been made,
-  the resulting attestation should be published to a third-party transparency
-  log that exists outside the source repository and artifact repository.
-* **Publish attestations alongside source releases in the source repository**:
-  For ecosystems where source releases are commonly published to source
-  repositories as well as to artifact repositories (such as GitHub releases),
-  if the source repository supports attaching additional artifacts on a
-  release, it is recommended to additionally include provenance attestations as
-  part of these releases. This option requires no changes to the artifact
-  repository to support build attestation formats, but means that the source
-  repository in use is now in the dependency chain for installers that want to
-  verify policy at build-time.
-* **Publish attestations alongside the artifact in the artifact repository**:
-  Many software repositories already support some variety of publishing 1:1
-  related files alongside an artifact, sometimes known as “sidecar files”. For
-  example, PyPI supports publishing `.asc` files representing the PGP signature
-  for an artifact with the same filename (but different extension). This
-  requires the mapping between artifact and attestation (or attestation vessel)
-  to be 1:1.
+-   **Publish attestations in a transparency log**: Once a build has been made,
+    the resulting attestation should be published to a third-party transparency
+    log that exists outside the source repository and artifact repository.
+-   **Publish attestations alongside source releases in the source
+    repository**: For ecosystems where source releases are commonly published
+    to source repositories as well as to artifact repositories (such as GitHub
+    releases), if the source repository supports attaching additional artifacts
+    on a release, it is recommended to additionally include provenance
+    attestations as part of these releases. This option requires no changes to
+    the artifact repository to support build attestation formats, but means
+    that the source repository in use is now in the dependency chain for
+    installers that want to verify policy at build-time.
+-   **Publish attestations alongside the artifact in the artifact repository**:
+    Many software repositories already support some variety of publishing 1:1
+    related files alongside an artifact, sometimes known as “sidecar files”.
+    For example, PyPI supports publishing `.asc` files representing the PGP
+    signature for an artifact with the same filename (but different extension).
+    This requires the mapping between artifact and attestation (or attestation
+    vessel) to be 1:1.
 
 A combination of these options allows for a bootstrap process where projects
 that want to generate build provenance attestations may begin publishing
@@ -152,6 +152,3 @@ installing through the Go module proxy](https://proxy.golang.org/), these
 intermediaries as transforming the original source repository in some way and
 as a result should be providing build provenance, and the recommendations
 outlined here apply.
-
-
-
