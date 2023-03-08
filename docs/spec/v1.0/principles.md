@@ -9,7 +9,9 @@ decisions.
 
 ## Trust systems, verify artifacts
 
-Establish trust in a small number of systems (such as change management, build, and packaging systems) and then automatically verify the many artifacts produced by those systems.
+Establish trust in a small number of systems---such as change management, build,
+and packaging systems---and then automatically verify the many artifacts
+produced by those systems.
 
 **Reasoning**: Trusted computing bases are unavoidable, but analysis to establish that trust is
 difficult and expensive. It's infeasible to harden and audit thousands of
