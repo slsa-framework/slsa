@@ -1,32 +1,17 @@
 {% assign menu = 0 %}
-
-<nav
-    :class="{ 'active': navOpen === true }" 
-    class="site-nav"
->
-  <ul class="root-menu list">
-    {%- for item in site.data.nav -%}
-      <li>
+<nav class="site-nav">
+  <ul class="nav-list">
+    {%- for item in site.data.nav %}
+      <li class="nav-item">
         {%- if item.url -%}
-          <a class="{% if item.url == page.url %}active{% endif %} root-link text-white flex items-center" href="{{ item.url | relative_url }}">
+          <a class="nav-link{% if item.url == page.url %} is-active{% endif %}" href="{{ item.url | relative_url }}">
             {{ item.title | escape }}
           </a>
         {%- else -%}
-          {% comment %}TODO: add "active" class if on a child page{% endcomment %}
-          {% assign menu = menu | plus: 1 %}
-          {% assign rootName = 'open' | append: menu %}
-          <button class="root-link cursor" x-on:click="{{rootName}} = ! {{rootName}}">{{ item.title | escape }} 
-            <div class="ml-2">
-              <svg width="9" height="9" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-                <path d="M3.05881 5.064L0.972811 0.906H5.13081L3.05881 5.064Z" />
-              </svg>
-            </div>
-          </button>
-          <div @click.outside="{{rootName}} = false" x-on:resize.window="{{ rootName }} ? {{ rootName }} = false : true" x-show="{{rootName}}" x-transition class="dropdown">
-            {% include nav-level.html collection=item.children name=rootName mobile=include.mobile level=menu %}
-          </div>
+          {{ item.title | escape }}
+          {% include nav-level.html collection=item.children name=rootName mobile=include.mobile level=menu menuNum=0 %}
         {%- endif -%}
       </li>
-    {%- endfor -%}
+    {%- endfor %}
   </ul>
 </nav>

@@ -40,7 +40,7 @@ To better understand the reasoning behind the requirements, see
 | Common - [Superusers]                |        |        |        | ✓      |
 
 <!-- markdownlint-disable MD036 -->
-_○ = required unless there is a justification_
+_○ = REQUIRED unless there is a justification_
 
 [access]: #access
 [authenticated]: #authenticated
@@ -112,7 +112,7 @@ Every change to the source is tracked in a version control system that meets the
 following requirements:
 
 -   **[Change history]** There exists a record of the history of changes
-    that went into the revision. Each change must contain: the identities of
+    that went into the revision. Each change MUST contain: the identities of
     the uploader and reviewers (if any), timestamps of the reviews (if any)
     and submission, the change description/justification, the content of
     the change, and the parent revisions.
@@ -125,7 +125,7 @@ Most popular version control system meet this requirement, such as git,
 Mercurial, Subversion, or Perforce.
 
 NOTE: This does NOT require that the code, uploader/reviewer identities, or
-change history be made public. Rather, some organization must attest to the fact
+change history be made public. Rather, some organization MUST attest to the fact
 that these requirements are met, and it is up to the consumer whether this
 attestation is sufficient.
 
@@ -137,8 +137,8 @@ attestation is sufficient.
 <td>
 
 Every change in the revision's history has at least one strongly authenticated
-actor identity (author, uploader, reviewer, etc.) and timestamp. It must be
-clear which identities were verified, and those identities must use [two-step
+actor identity (author, uploader, reviewer, etc.) and timestamp. It MUST be
+clear which identities were verified, and those identities MUST use [two-step
 verification](https://www.google.com/landing/2step/) or similar. (Exceptions
 noted below.)
 
@@ -161,14 +161,14 @@ The revision and its change history are preserved indefinitely and cannot be
 deleted, except when subject to an established and transparent policy for
 obliteration, such as a legal or policy requirement.
 
--   **[Immutable history]** It must not be possible for persons to delete or
+-   **[Immutable history]** It MUST NOT be possible for persons to delete or
     modify the history, even with multi-party approval, except by trusted
     platform admins with two-party approval following the obliterate policy.
 -   **[Limited retention for SLSA 3]** At SLSA 3 (but not 4), it is acceptable
     for the retention to be limited to 18 months, as attested by the source
     control platform.
     -   Example: If a commit is made on 2020-04-05 and then a retention
-        attestation is generated on 2021-01-01, the commit must be retained
+        attestation is generated on 2021-01-01, the commit MUST be retained
         until at least 2022-07-01.
 
 <td> <td> <td>18 mo.<td>✓
@@ -190,7 +190,7 @@ as well.)
         the platform understands that this is the same person and does not
         consider the review requirement satisfied.
 -   **[Informed review]** The reviewer is able and encouraged to make an
-    informed decision about what they're approving. The reviewer should be
+    informed decision about what they're approving. The reviewer SHOULD be
     presented with a full, meaningful content diff between the proposed revision
     and the previously reviewed revision. For example, it is not sufficient to
     just indicate that file changed without showing the contents.
@@ -454,7 +454,7 @@ collisions and second preimages.
 <td>
 
 The provenance identifies the entity that performed the build and generated the
-provenance. This represents the entity that the consumer must trust. Examples:
+provenance. This represents the entity that the consumer MUST trust. Examples:
 "GitHub Actions with a GitHub-hosted worker", "jdoe@example.com's machine".
 
 <td>✓<td>✓<td>✓<td>✓
@@ -465,7 +465,7 @@ provenance. This represents the entity that the consumer must trust. Examples:
 The provenance identifies the top-level instructions used to execute the build.
 
 The identified instructions SHOULD be at the highest level available to the build
-(e.g. if the build is told to run build.sh it should list build.sh and NOT the
+(e.g. if the build is told to run build.sh it SHOULD list build.sh and NOT the
 individual instructions in build.sh).
 
 If <a href="#build-as-code">build-as-code</a> is used, this SHOULD be the
@@ -518,8 +518,8 @@ Example:
 <td>
 
 The provenance includes all build parameters under a user's control. See
-[Parameterless](#parameterless) for details. (At L3, the parameters must be
-listed; at L4, they must be empty.)
+[Parameterless](#parameterless) for details. (At L3, the parameters MUST be
+listed; at L4, they MUST be empty.)
 
 <td> <td> <td>✓<td>✓
 <tr id="includes-all-deps">
@@ -574,7 +574,7 @@ or a subset thereof.)
 <td>Access
 <td>
 
-All physical and remote access must be rare, logged, and gated behind
+All physical and remote access MUST be rare, logged, and gated behind
 multi-party approval.
 
 <td> <td> <td> <td>✓
@@ -582,7 +582,7 @@ multi-party approval.
 <td>Superusers
 <td>
 
-Only a small number of platform admins may override the guarantees listed here.
+Only a small number of platform admins MAY override the guarantees listed here.
 Doing so MUST require approval of a second platform admin.
 
 <td> <td> <td> <td>✓

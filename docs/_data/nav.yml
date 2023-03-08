@@ -1,32 +1,30 @@
-# Pages that show in the navbar at the top.
+# Pages that show in the nav aside.
 - title: Overview
   url: /
 
 - title: Specifications
   children:
 
-    - title: Introduction
-      url: /spec/v0.1/index
+    - title: SLSA
+      children:
 
-    - title: Terminology
-      url: /spec/v0.1/terminology
+      - title: Introduction
+        url: /spec/v0.1/
 
-    - title: Levels
-      url: /spec/v0.1/levels
+      - title: Terminology
+        url: /spec/v0.1/terminology
 
-    - title: Requirements
-      url: /spec/v0.1/requirements
+      - title: Levels
+        url: /spec/v0.1/levels
 
-    - title: Threats
-      url: /spec/v0.1/threats
+      - title: Requirements
+        url: /spec/v0.1/requirements
 
-    - title: FAQ
-      url: /spec/v0.1/faq
+      - title: Threats
+        url: /spec/v0.1/threats
 
-    - title: Stages
-      url: /spec-stages
-
-    - spacer: true
+      - title: FAQ
+        url: /spec/v0.1/faq
 
     - title: Attestations
       children:
@@ -35,10 +33,13 @@
         url: /attestation-model
 
       - title: Provenance
-        url: /provenance
+        url: /provenance/v0.2
 
       - title: VSA
-        url: /verification_summary
+        url: /verification_summary/v0.2
+
+    - title: Stages
+      url: /spec-stages
 
 - title: Use cases
   url: /use-cases

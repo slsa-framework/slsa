@@ -1,40 +1,70 @@
+# This file controls the version selector
 # Schema:
 #     <spec>:
 #       versions:
 #         <version>:
 #           name: <string> # display name
+#           status: <string> # one of: Working Draft, In Review, Stable, Retired
 #           draft: <bool, optional> # if true, display a "draft" warning banner
 #           hidden: <bool, optional> # if true, do not show in dropdown
 #       current: <version>
 #
 # Where:
 #   <spec> = specification name, i.e. first component of the URL
-#   <version> = verison name, i.e. second component of the URL, e.g. v1.0
+#   <version> = version name, i.e. second component of the URL, e.g. v1.0
 
 spec:
   versions:
     v0.1:
       name: Version 0.1
+      status: Stable
+    v1.0-rc1:
+      name: Version 1.0 RC1
+      status: In Review
     v1.0:
       name: Version 1.0 (DRAFT)
+      status: Working Draft
       draft: true
-      # We will hide 1.0 until it is ready for review. Viewers can still type
-      # the URL manually, but we will not link to it from the main page.
-      hidden: true
   current: v0.1
 
 provenance:
   versions:
     v0.1:
       name: Version 0.1
+      status: Retired
     v0.2:
       name: Version 0.2
+      status: Stable
+    v1-rc1:
+      name: Version 1.0 RC1
+      status: In Review
+    v1:
+      name: Version 1.0 (DRAFT)
+      status: Working Draft
+      draft: true
   current: v0.2
 
 verification_summary:
   versions:
     v0.1:
       name: Version 0.1
+      status: Retired
     v0.2:
       name: Version 0.2
+      status: Stable
+    v1:
+      name: Version 1.0 (DRAFT)
+      status: Working Draft
+      draft: true
   current: v0.2
+
+github-actions-workflow:
+  versions:
+    v1-rc1:
+      name: Version 1.0 RC1
+      status: In Review
+    v1:
+      name: Version 1.0 (DRAFT)
+      status: Working Draft
+      draft: true
+  current: v1-rc1

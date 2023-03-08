@@ -1,27 +1,21 @@
-{% assign subLevel =  0 %}
+{% assign subLevel = 0 %}
 {%- if include.collection.size > 0 -%}
-  <ul class="sub-menu level-{{ include.level }}">
+  <ul class="nav-list nav-sub-list level-{{ include.level }}">
+    {% assign menuNum = include.menuNum %}
     {%- for subitem in include.collection -%}
-    <li>
+    <li class="nav-item">
       {%- if subitem.spacer %}
-        <hr>
+        <hr />
       {%- elsif subitem.url %}
-        <a class="dropdown-link" href="{{ subitem.url | relative_url }}">
+        <a class="nav-link{% if subitem.url == page.url %} is-active{% endif %}" href="{{ subitem.url | relative_url }}">
           {{ subitem.title | escape }}
         </a>
       {%- elsif subitem.children.size > 0 %}
-        {% assign subMenu = sublevel | plus: 1 %}
-        {% assign subName = include.name  | append: 'sub' | append: subMenu %}
-        <button x-on:click="{{subName}} = ! {{subName}}" class="dropdown-link cursor">{{ subitem.title | escape }}
-          <div class=" ml-2">
-            <svg width="9" height="9" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-              <path d="M3.05881 5.064L0.972811 0.906H5.13081L3.05881 5.064Z" />
-            </svg>
-          </div>
-        </button>
-        <div @click.outside="{{subName}} = false" x-on:resize.window="{{ subName }} ? {{ subName }} = false : true;" x-show="{{subName}}" x-transition class="dropdown">
-          {% include nav-level.html collection=subitem.children mobile=include.mobile name=subName level=subMenu %}
-        </div>
+        {%- assign menuNum = menuNum | plus: 1 %}
+        {%- assign subMenu = sublevel | plus: 1 %}
+        {%- assign subName = include.name  | append: 'sub' | append: menuNum %}
+        {{ subitem.title | escape }}
+        {% include nav-level.html collection=subitem.children mobile=include.mobile name=subName level=subMenu menuNum=menuNum %}
       {%- else %}
         <em>{{ subitem.title | escape }}</em>
       {%- endif %}

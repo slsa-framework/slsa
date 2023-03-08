@@ -1,110 +1,6 @@
 /**
  * Site header
  */
-.site-header {
-    transition: all .25s ease-in-out;
-    will-change: transform;
-
-    // Positioning context for the mobile navigation icon
-    position: fixed;
-    z-index: 10;
-    right: 0;
-    left: 0;
-    top: 0;
-    width: 100%;
-    z-index: 20;
-
-    @include media-query($on-tablet) {
-        min-height: $spacer-xl * 2;
-    }
-
-    @include media-query($on-palm) {
-        min-height: $spacer-xl;
-    }
-
-    &.fixed {
-        transform: translateY(-100%);
-        background-color: #155757;
-        position: fixed;
-
-        .logo-white {
-            opacity: 1;
-        }
-    }
-
-    &.sticky {
-        transform: translateY(0%);
-        background-color: #155757;
-        position: fixed;
-
-        .logo-white {
-            opacity: 1;
-        }
-
-        .mobile-menu-button {
-            & span {
-                background-color: white;
-            }
-        }
-    }
-
-    &.static {
-        transform: translateY(0%);
-        background-color: transparent;
-
-        .logo-white {
-            opacity:1;
-        }
-    }
-
-    &.static.is-specification-markdown {
-        .logo-white {
-            opacity: 0;
-        }
-    }
-
-    &.static.menu-open {
-        .logo-white { 
-            opacity:1;
-        }
-    }
-}
-
-.site-header-inner {
-    padding: 16px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    @include media-query-min($media-menu) {
-        padding: 0;
-    }
-
-    .desktop-github-icon {
-        display: none;
-    
-        @include media-query-min($media-menu) {
-            display: inline-block;
-            color: white;
-    
-            .is-specification-markdown & {
-                &,
-                &.active, 
-                &:hover {
-                    color: $text-color;
-                }
-            }
-    
-            .sticky.is-specification-markdown & {
-                &,
-                &.active, 
-                &:hover {
-                    color: white;
-                }
-            }
-        }
-    }
-}
 
 .logo {
     width: 100px;
@@ -135,6 +31,10 @@
     }
 }
 
+.desktop-github-icon {
+    color: $text-color-light !important;
+}
+
 .mobile-menu-button {
     background: none;
     border: 0px;
@@ -154,10 +54,6 @@
         margin-bottom: 5px;
         transform-origin: 4px 0px;
         transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1) 0s, background-color .25s cubic-bezier(0.77, 0.2, 0.05, 1) 0s, opacity 0.55s ease 0s;
-
-        .is-specification-markdown & {
-            background-color: #102B2D;
-        }
     }
 
     &.active span {
@@ -176,7 +72,7 @@
         transform: rotate(-45deg) translate(1px, -4px);
     }
 
-    @include media-query-min($media-menu) {
+    @include media-query-min($on-laptop) {
         display: none;
     }
 }
@@ -203,270 +99,29 @@
 }
 
 .site-nav {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    position: absolute;
-    padding: 64px 20px 32px 20px;
-    margin: 0;
-    z-index: 1;
-    width: 100%;
-    top: 0;
-    left: 0;
-    transition: all cubic-bezier(0.77, 0.2, 0.05, 1) 0.3s;
-    background-color: #102B2D;
-    z-index: 1;
 
-    &.active {
-        top: 0;
-        transform: translateY(0);
-        transition: all cubic-bezier(0.77, 0.2, 0.05, 1) 0.3s;
+    .nav-list {
     }
 
-    @include media-query($media-menu) {
-        transform: translateY(-100%);
-
-        label[for="nav-trigger"] {
-            display: block;
-            float: right;
-            width: 36px;
-            height: 36px;
-            z-index: 2;
-            cursor: pointer;
-        }
-
-        .menu-icon {
-            display: block;
-            float: right;
-            width: 36px;
-            height: 26px;
-            line-height: 0;
-            padding-top: 10px;
-            text-align: center;
-        }
-
-        input ~ .trigger {
-            clear: both;
-            display: none;
-        }
-
-        input:checked ~ .trigger {
-            display: block;
-            padding-bottom: 5px;
-        }
+    .nav-sub-list {
+        padding-left: 20px;
     }
 
-    @include media-query-min($media-menu) {
-        display: flex;
-        justify-content: center;
-        flex-direction: row;
-        flex-wrap: no-wrap;
-        padding: $spacer-l 0 $spacer-l 0;
-        background-color: transparent;
-        transition: none;
-        position: static;
-
-        &.active {
-            transition: none;
-        }
-
-        .nav-trigger {
-            display: none;
-        }
-
-        .menu-icon {
-            display: none;
-        }
-    }
-}
-
-.root-menu {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-
-    @include media-query($media-menu) {
-        max-width: 360px;
-    }
-
-    li {
-        position: relative;
-    }
-
-    @include media-query-min($media-menu) {
-        width: auto;
-        flex-direction: row;
-        flex-wrap: no-wrap;
-
-        > li {
-            margin-right: 20px;
-        }
-
-        > li:last-child  {
-            margin-right: 0;
-        }
-
-        > li:last-child .dropdown {
-            right: -10px;
-        }
-    }
-
-    .root-link {
-        font-weight: 400;
-        line-height: $base-line-height;
-        position: relative;
-        display: inline-block;
-        padding: 10px 0;
+    .nav-item {
+        color: $text-color-light;
         font-family: "Prodigy";
-        color: white;
-        font-weight: normal;
+        line-height: $base-line-height;
+    }
 
-        &::after {
-            content: '';
-            height: 1px;
-            background-color: currentColor;
-            position: absolute;
-            bottom:0px;
-            left: 0;
-            right: 0;
-            display: none;
-        }
+    .nav-link {
+        color: $text-color-light;
+        font-weight: $base-font-weight;
+        text-decoration: none;
 
+        &.is-active,
         &:hover {
             text-decoration: underline;
         }
-
-        @include media-query-min($media-menu) {
-            color: $text-color-light;
-            padding: 0;
-
-            &.active, 
-            &:hover {
-                text-decoration: none;
-    
-                &:after {
-                    display: block;
-                }
-            }
-            
-            .is-specification-markdown & {
-                &,
-                &.active, 
-                &:hover {
-                    color: $text-color;
-                }
-            }
-
-            .sticky.is-specification-markdown & {
-                &,
-                &.active, 
-                &:hover {
-                    color: white;
-                }
-            }
-        }
-    }
-
-    button.root-link {
-        display: flex;
-        align-items: center;
-    }
-}
-
-.dropdown {
-    position: relative;
-
-    ul {
-        padding-left: 15px;
-    }
-
-    hr {
-        margin-top: 9px;
-    }
-        
-    em {
-        display: block;
-        padding: 9px 0;
-        color: transparentize(white, .5);
-    }
-
-    @include media-query-min($media-menu) {
-        --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),0 2px 4px -1px rgba(0, 0, 0, 0.2);
-        background-color: #fff;
-        position: absolute;
-        margin: 16px 0 0 -8px;
-        padding: 16px;
-        border-radius: 8px;
-        box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
-        z-index: 1;
-
-        ul {
-            width: 100%;
-            min-width: 200px;
-            padding-left: 0;
-        }
-
-        li {
-            margin:0;
-        }
-
-        em {
-            color: transparentize($text-color, .5);
-        }
-        .dropdown {
-            margin-top: 0;
-            margin-left: 50%;
-        }
-    
-    }
-
-    .dropdown-link {  
-        color: white;
-        font-weight: 400;
-        line-height: $base-line-height;
-        position: relative;
-        display: inline-block;
-        padding: 9px 0;
-        position: relative;
-        font-family: "Prodigy";
-        text-decoration: none; 
-        
-        &:hover {
-            text-decoration: underline;
-        }
-
-        @include media-query-min($media-menu) {
-            color: $text-color;
-            padding: 0;
-        
-            &:hover {
-                text-decoration: none;
-            }
-        }
-
-        .is-specification-markdown & {
-            &.active, 
-            &:hover {
-
-            }
-        }
-
-        .sticky.is-specification-markdown & {
-            &.active, 
-            &:hover {
-
-            }
-        }
-    }
-
-    button.dropdown-link {
-        display: flex;
-        align-items: center;
-    }
-}
-
-.sub-menu { 
-    @include media-query-min($media-menu) {
     }
 }
 
@@ -599,8 +254,6 @@
 .section {
     position: relative;
     padding: 100px 0 100px;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
     height: auto;
 
     @include media-query($on-mobile) {
@@ -622,4 +275,9 @@
             }
         }
     }
+}
+
+.footnotes {
+    border-top: 1px solid $grey-border;
+    padding-top: $spacer-m;
 }

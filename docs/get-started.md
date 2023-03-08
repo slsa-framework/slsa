@@ -4,6 +4,7 @@ layout: standard
 hero_text: If you’re looking to jump straight in and try SLSA, here’s a quick start guide for the steps to take to reach the different SLSA levels.
 ---
 
+
 ## Choosing your SLSA level
 
 For all [SLSA levels](https://slsa.dev/spec/v1.0/levels), you follow the same steps:

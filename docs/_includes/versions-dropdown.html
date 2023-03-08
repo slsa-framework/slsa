@@ -9,7 +9,22 @@
   {%- endif %}">
 {%- for item in versions reversed %}
 {%- unless item[1].hidden and spec_version != item[0] %}
-  <option value="{{ page.url | replace: spec_version, item[0] | relative_url }}" {% if spec_version == item[0] %}selected{% endif %} class="inline-block">{{item[1].name}}</option>
+  {%- assign page_url_parts = page.url | split: '/' %}
+  {%- assign page_url = page_url_parts | join: '/' %}
+  {%- assign other_version = page_url | replace: spec_version, item[0] | relative_url %}
+  {%- comment %}
+    If the other version of the page doesn't exist disable the option
+  {%- endcomment %}
+  {%- assign p = site.pages | where_exp: "page", "page.url contains other_version" | first %}
+  {%- if p and spec_version == item[0] %}
+    {%- assign state = "selected" %}
+  {%- elsif p %}
+    {%- assign state = "" %}  
+  {%- else %}
+    {%- assign state = "disabled" %}
+  {%- endif %}
+<option {{ state }} value="{{ other_version }}" class="inline-block">{{item[1].name}}</option>
+
 {%- endunless %}
 {%- endfor %}
 </select>
