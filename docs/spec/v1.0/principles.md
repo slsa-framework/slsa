@@ -75,5 +75,5 @@ lists.
 Access control is still important, but SLSA goes further to provide defense in depth: it **requires proof in
 the form of attestations that the package was built correctly**.
 
-**Benefits**: The attestation removes intermediate systems from the trust base and ensures
-individuals do not have sufficient permission to tamper with the package.
+**Benefits**: The attestation removes intermediate systems from the trust base and ensures that
+individuals who are accidentally granted access do not have sufficient permission to tamper with the package.
