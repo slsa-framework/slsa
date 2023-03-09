@@ -60,7 +60,60 @@ artifacts and provenance, making the producers' expectations available to consum
 and providing tools to enable safe artifact consumption (e.g. whether an artifact
 meets its producer's expectations).
 
-##### Setting Expectations
+#### Consumer
+
+[Consumer]: #consumer
+
+A package's <dfn>consumer</dfn> is the organization or individual that uses the
+package.
+
+Consumers can set their own expectations for artifacts and check them with
+tools such as [slsa-verifier](https://github.com/slsa-framework/slsa-verifier).
+
+Consumers can either audit the build systems
+themselves using the prompts in [verifying systems](verifying-systems.md) or
+rely on the [SLSA certification program](certification.md) (coming soon).
+
+#### External Monitor
+
+[External monitor]: #external-monitor
+
+A <dfn>monitor</dfn> is a service that verifies provenance for a set
+of packages and publishes the result of that verification. The set of
+packages verified by a monitor is arbitrary, though it MAY mimic the set
+of packages published through one or more package ecosystems. The monitor
+MUST publish its expectations for all the packages it verifies.
+
+### When to verify
+
+Verifying expectations can happen at one or more of the following times.
+
+#### During upload
+
+During package upload, a package ecosystem can ensure that the artifact's
+provenance matches the known expectations for that package name before accepting
+it into the registry.
+
+This option is only available for systems that verify provenance in the
+package ecosystem. If possible, system implementers SHOULD verify provenance
+at upload time since doing so benefits all of the package ecosystem's clients.
+
+#### During consumption
+
+During client-side installation/deployment of a package, the verifier
+can ensure that the artifact's provenance matches the known expectations for
+that package name before use. The verifier can be either the package ecosystem
+client tooling or a standalone tool such as
+[slsa-verifier](https://github.com/slsa-framework/slsa-verifier).
+
+#### Continuously
+
+Verifiers may continuously poll an [external monitor] to detect artifacts that
+do not meet the monitor's expectations. Detecting artifacts that fail
+verification is of limited benefit unless a human or another part of the system
+responds to the failed verification.
+
+## Setting Expectations
 
 <dfn>Expectations</dfn> are known provenance values that indicate the corresponding
 artifact is authentic. For example, a producer can define the allowed values for
@@ -68,7 +121,6 @@ artifact is authentic. For example, a producer can define the allowed values for
 [`externalParameters`](/provenance/v1#externalParameters)
 for a given package (assuming it uses the SLSA provenance format) in order to address
 the [build integrity threats](threats#build-integrity-threats).
-> **TODO:** link to more concrete guidance once it's available.
 
 Expectations MUST be sufficient to detect
 or prevent this adversary from injecting unofficial behavior into the package.
@@ -125,59 +177,6 @@ under the malicious actor's control. Some ways this could be achieved include:
 <td><td>✓<td>✓
 </table>
 
-#### Consumer
-
-[Consumer]: #consumer
-
-A package's <dfn>consumer</dfn> is the organization or individual that uses the
-package.
-
-Consumers can set their own expectations for artifacts and check them with
-tools such as [slsa-verifier](https://github.com/slsa-framework/slsa-verifier).
-
-Consumers can either audit the build systems
-themselves using the prompts in [verifying systems](verifying-systems.md) or
-rely on the [SLSA certification program](certification.md) (coming soon).
-
-#### External Monitor
-
-[External monitor]: #external-monitor
-
-A <dfn>monitor</dfn> is a service that verifies provenance for a set
-of packages and publishes the result of that verification. The set of
-packages verified by a monitor is arbitrary, though it MAY mimic the set
-of packages published through one or more package ecosystems. The monitor
-MUST publish its expectations for all the packages it verifies.
-
-### When to verify
-
-Verifying expectations can happen at one or more of the following times.
-
-#### During upload
-
-During package upload, a package ecosystem can ensure that the artifact's
-provenance matches the known expectations for that package name before accepting
-it into the registry.
-
-This option is only available for systems that verify provenance in the
-package ecosystem. If possible, system implementers SHOULD verify provenance
-at upload time since doing so benefits all of the package ecosystem's clients.
-
-#### During consumption
-
-During client-side installation/deployment of a package, the verifier
-can ensure that the artifact's provenance matches the known expectations for
-that package name before use. The verifier can be either the package ecosystem
-client tooling or a standalone tool such as
-[slsa-verifier](https://github.com/slsa-framework/slsa-verifier).
-
-#### Continuously
-
-Verifiers may continuously poll an [external monitor] to detect artifacts that
-do not meet the monitor's expectations. Detecting artifacts that fail
-verification is of limited benefit unless a human or another part of the system
-responds to the failed verification.
-
 ## How to verify
 
 Verification MUST include the following steps:
@@ -191,6 +190,11 @@ Verification MUST include the following steps:
     Any unrecognized `ExternalParameters` SHOULD cause verification to fail.
 
 ![Threats covered by each step](/images/supply-chain-threats-build-verification.svg)
+
+Note: This section assumes that the provenance is in the recommended
+[provenance format](/provenance/v1). If it is not, then the verifier must
+perform equivalent checks on provenance fields that correspond to the ones
+referenced here.
 
 ### Step 1: Check SLSA Build level
 
