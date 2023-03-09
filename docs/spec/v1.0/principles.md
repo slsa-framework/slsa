@@ -13,11 +13,11 @@ Establish trust in a small number of systems---such as change management, build,
 and packaging systems---and then automatically verify the many artifacts
 produced by those systems.
 
-**Reasoning**: Trusted computing bases are unavoidable---there's no choice but to
-trust some systems. It's infeasible to harden and audit thousands of bespoke build systems.
-It's difficult and expensive manual work to harden and verify each individual system,
-and each system increases the attack surface. Verifying that an artifact is produced by a
-trusted system, though, is easy to automate.
+**Reasoning**: Trusted computing bases are unavoidable---there's no choice but
+to trust some systems. Hardening and verifying systems is difficult and
+expensive manual work, and each trusted system expands the attack surface of the
+supply chain. Verifying that an artifact is produced by a trusted system,
+though, is easy to automate.
 
 To simultaniously scale and reduce attack surfaces, it is most efficient to trust a limited
 numbers of systems and then automate verification of the artifacts produced by those systems.
