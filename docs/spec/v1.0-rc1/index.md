@@ -1,3 +1,9 @@
+---
+next_page:
+  title: Security levels
+  url: levels
+---
+
 # SLSA Specification
 
 <div class="subtitle">

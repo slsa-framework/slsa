@@ -1,3 +1,12 @@
+---
+prev_page:
+  title: Introduction
+  url: ./
+next_page:
+  title: Guiding principles
+  url: principles
+---
+
 # Security levels
 
 <div class="subtitle">

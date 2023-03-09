@@ -1,5 +1,11 @@
 ---
 title: Terminology
+prev_page:
+  title: Introduction
+  url: ./
+next_page:
+  title: Security levels
+  url: levels
 ---
 <div class="subtitle">
 
