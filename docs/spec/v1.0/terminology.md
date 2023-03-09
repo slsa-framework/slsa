@@ -98,7 +98,7 @@ that serves as the registry.
 | Package manager client | Client-side tooling to interact with a package ecosystem. |
 | Package name | <p>A mutable collection of artifacts that all represent different versions of the same software. This is the primary identifier that consumers use to obtain the software. Therefore, it is the thing being protected by SLSA.<p>A package name is specific to an ecosystem + registry, has an owner/maintainer, is more general than a specific hash or version, and has a “correct” source location. A package ecosystem may group package names into some sort of hierarchy, such as the Group ID in Maven, though SLSA does not have a special term for this. |
 | Package registry | An entity responsible for mapping package names to artifacts within a packaging ecosystem. Most ecosystems support multiple registries, usually a single global registry and multiple private registries. |
-| Publish [a package] | Make an artifact available for use by registering it with the package registry. In technical terms, this means associating an artifact to a package name. This does not necessarily mean fully public; an artifact may be published for only a subset of users, such as internal testing or a closed beta. |
+| Publish [a package] | Make an artifact available for use by registering it with the package registry. In technical terms, this means associating an artifact to a package name. This does not necessarily mean making the artifact fully public; an artifact may be published for only a subset of users, such as internal testing or a closed beta. |
 
 Ambiguous terms to avoid:
 
@@ -126,15 +126,15 @@ additions are welcome!
   <tr>
     <td><a href="https://packaging.python.org/en/latest/specifications/binary-distribution-format/#file-name-convention">Python</a>
     <td><a href="https://packaging.python.org/en/latest/glossary/#term-Package-Index">Index</a>
-    <td><a href="https://packaging.python.org/en/latest/glossary/#term-Project">Project</a>
+    <td><a href="https://packaging.python.org/en/latest/glossary/#term-Project">Project Name</a>
     <td><a href="https://packaging.python.org/en/latest/glossary/#term-Distribution-Package">Distribution</a>
   <tr>
-    <td><a href="https://www.npmjs.com/">npm</a> (Javascript)
+    <td><a href="https://www.npmjs.com/">npm</a> (JavaScript)
     <td><a href="https://docs.npmjs.com/about-the-public-npm-registry">Registry</a>
     <td><a href="https://docs.npmjs.com/package-name-guidelines">Package Name</a>
     <td><a href="https://docs.npmjs.com/about-packages-and-modules">Package</a>
   <tr>
-    <td><a href="https://go.dev/ref/mod">go</a>
+    <td><a href="https://go.dev/ref/mod">Go</a>
     <td><em>(see below)</em>
     <td><a href="https://go.dev/ref/mod#glos-module-path">Module path</a>
     <td><a href="https://go.dev/ref/mod#glos-module">Module</a>
@@ -167,7 +167,7 @@ additions are welcome!
     <td>Package
   <tr>
     <td><a href="https://rpm.org">RPM</a> (e.g. Red Hat)
-    <td>Repositry
+    <td>Repository
     <td>Package name
     <td>Package
   <tr>
