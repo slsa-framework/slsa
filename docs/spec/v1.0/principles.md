@@ -21,7 +21,7 @@ though, is easy to automate.
 
 To simultaniously scale and reduce attack surfaces, it is most efficient to trust a limited
 numbers of systems and then automate verification of the artifacts produced by those systems.
-The attack surfaces and work to estalish trust does not scale with the number of artifacts produced,
+The attack surface and work to establish trust does not scale with the number of artifacts produced,
 as happens when artifacts each use a different trusted system.
 
 **Benefits**: Allows SLSA to scale to entire ecosystems or organizations with a near-constant
