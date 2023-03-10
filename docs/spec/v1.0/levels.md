@@ -1,3 +1,12 @@
+---
+prev_page:
+  title: What's New in SLSA v1.0
+  url: whats-new
+next_page:
+  title: Guiding principles
+  url: principles
+---
+
 # Security levels
 
 <div class="subtitle">

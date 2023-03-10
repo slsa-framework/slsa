@@ -1,5 +1,11 @@
 ---
 title: Threats and mitigations
+prev_page:
+    title: Requirements
+    url: requirements
+next_page:
+    title: Frequently Asked Questions
+    url: faq
 ---
 <div class="subtitle">
 

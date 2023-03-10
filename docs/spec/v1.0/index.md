@@ -1,3 +1,9 @@
+---
+next_page:
+  title: What's New in SLSA v1.0
+  url: whats-new
+---
+
 # SLSA Specification
 
 <div class="subtitle">

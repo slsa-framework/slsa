@@ -1,3 +1,12 @@
+---
+prev_page:
+  title: Security levels
+  url: levels
+next_page:
+  title: Terminology
+  url: terminology
+---
+
 # Guiding principles
 
 <div class="subtitle">

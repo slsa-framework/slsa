@@ -1,3 +1,12 @@
+---
+prev_page:
+  title: Introduction
+  url: ./
+next_page:
+  title: Security levels
+  url: levels
+---
+
 # What's New in SLSA v1.0
 
 SLSA v1.0 represents changes made in response to feedback from the SLSA
