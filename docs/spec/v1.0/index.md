@@ -30,17 +30,34 @@ Known issues:
 -   Verifying artifacts and setting expectations are still in flux. We would
     like feedback on whether to move these parts out of the build track.
 
-## Table of contents
+## Understanding SLSA
+[TODO: Add a one-sentence desription to each section]
 
 | Page | Description |
 | ---- | --- |
 | [What's new in v1.0](whats-new.md) | What's new in SLSA Version 1.0. |
-| [Security levels](levels.md) | Overview of SLSA, intended for all audiences. If you read one page, read this. |
-| [Guiding principles](principles.md) | Background on the guiding principles behind SLSA. |
+| [Guiding principles](principles.md) | TODO: possibly rename to SLSA Overview?
+| [Supply-chain threats](threats-overview) | Threats overview |
+| [Use cases](/use-cases) | Use cases |
+| [FAQ](faq.md) | Questions and more information. |
+| [Future directions](future-directions.md) | Additions and changes being considered for future SLSA versions. |
+
+## Core specification
+[TODO: abstract security levels, to be SLSA X you have to follow this stuff]
+
+| Page | Description |
+| ---- | --- |
 | [Terminology](terminology.md) | Terminology and model used by SLSA. |
+| [Security levels](levels.md) | Overview of SLSA's tracks and levels, intended for all audiences. |
 | [Producing artifacts](requirements.md) | Detailed technical requirements for producing software artifacts, intended for system implementers. |
 | [Verifying build systems](verifying-systems.md) | Guidelines for securing SLSA Build L3+ builders, intended for system implementers. |
 | [Verifying artifacts](verifying-artifacts.md) | Guidance for verifying software artifacts and their SLSA provenance, intended for system implementers and software consumers. |
 | [Threats & mitigations](threats.md) | Specific supply chain attacks and how SLSA helps. |
-| [FAQ](faq.md) | Questions and more information. |
-| [Future directions](future-directions.md) | Additions and changes being considered for future SLSA versions. |
+
+## Attestation formats
+[TODO: conrete scemas, recommended formats, but not required by the specification]
+| Page | Description |
+| ---- | --- |
+| [General model](/attestation-model) | General model|
+| [Provenance](/provenance/v1) | Provenance spec and explanation |
+| [VSA](/verification_summary/v1) | VSA spec and explanation |
