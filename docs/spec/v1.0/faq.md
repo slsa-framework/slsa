@@ -1,6 +1,12 @@
 ---
 title: Frequently Asked Questions
 layout: specifications
+prev_page:
+  title: Use cases (TODO)
+  url:  
+next_page:
+  title: Future directions
+  url: future-directions
 ---
 
 ## Q: Why is SLSA not transitive?

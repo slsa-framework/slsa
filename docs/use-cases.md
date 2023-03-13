@@ -1,5 +1,12 @@
 ---
 title: Use cases
+prev_page:
+  title: Supply-chain threats TODO
+  url: 
+next_page:
+  title: FAQ TODO
+  url: 
+
 layout: standard
 hero_text: >
     SLSA protects against tampering during the software supply chain, but how?

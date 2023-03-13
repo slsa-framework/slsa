@@ -1,6 +1,13 @@
 ---
 title: Producing artifacts
+prev_page:
+  title: Security levels
+  url: levels
+next_page:
+  title: Verifying build systems
+  url: verifying-systems
 ---
+
 <div class="subtitle">
 
 This page covers the detailed technical requirements for producing artifacts at

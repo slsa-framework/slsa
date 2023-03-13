@@ -1,5 +1,12 @@
 ---
 title: SLSA Overview
+
+prev_page:
+  title: What's new in SLSA v1.0
+  url: whats-new.md
+next_page:
+  title: Supply-chain threats
+  url: threats-overview.md
 ---
 
 <div class="subtitle">

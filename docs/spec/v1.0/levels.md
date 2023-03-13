@@ -1,3 +1,12 @@
+---
+prev_page:
+  title: Terminology
+  url: terminology
+next_page:
+  title: Producing artifacts
+  url: requirements
+---
+
 # Security levels
 
 <div class="subtitle">

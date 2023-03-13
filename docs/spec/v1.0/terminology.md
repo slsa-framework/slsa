@@ -1,6 +1,13 @@
 ---
 title: Terminology
+prev_page:
+  title: Future directions
+  url: future-directions
+next_page:
+  title: Security levels
+  url: levels
 ---
+
 <div class="subtitle">
 
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set

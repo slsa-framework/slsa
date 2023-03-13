@@ -1,3 +1,9 @@
+---
+next_page:
+  title: What's New in SLSA v1.0
+  url: whats-new
+---
+
 # SLSA Specification
 
 <div class="subtitle">
@@ -31,19 +37,19 @@ Known issues:
     like feedback on whether to move these parts out of the build track.
 
 ## Understanding SLSA
-[TODO: Add a one-sentence desription to each section]
+These pages provide an overview of SLSA, how it helps protect against common supply-chain attacks, and common use cases. If you're new to SLSA or supply-chain security, start here.
 
 | Page | Description |
 | ---- | --- |
 | [What's new in v1.0](whats-new.md) | What's new in SLSA Version 1.0. |
-| [Guiding principles](principles.md) | TODO: possibly rename to SLSA Overview?
-| [Supply-chain threats](threats-overview) | Threats overview |
+| [SLSA overview](principles.md) | An introductory guide to SLSA
+| [Supply-chain threats](threats-overview) | An introduction to supply-chain threats. |
 | [Use cases](/use-cases) | Use cases |
 | [FAQ](faq.md) | Questions and more information. |
 | [Future directions](future-directions.md) | Additions and changes being considered for future SLSA versions. |
 
 ## Core specification
-[TODO: abstract security levels, to be SLSA X you have to follow this stuff]
+These pages describe SLSA's security levels and requirements for each track. If you want to achieve SLSA a particular level, these are the requirements you'll need to meet.
 
 | Page | Description |
 | ---- | --- |
@@ -52,12 +58,20 @@ Known issues:
 | [Producing artifacts](requirements.md) | Detailed technical requirements for producing software artifacts, intended for system implementers. |
 | [Verifying build systems](verifying-systems.md) | Guidelines for securing SLSA Build L3+ builders, intended for system implementers. |
 | [Verifying artifacts](verifying-artifacts.md) | Guidance for verifying software artifacts and their SLSA provenance, intended for system implementers and software consumers. |
-| [Threats & mitigations](threats.md) | Specific supply chain attacks and how SLSA helps. |
+| [Threats & mitigations](threats.md) | Detailed information about specific supply-chain attacks and how SLSA helps. |
 
 ## Attestation formats
-[TODO: conrete scemas, recommended formats, but not required by the specification]
+These pages include the concrete schemas for SLSA attestations. The Provenance and VSA formats are recommended, but not required by the specification.
 | Page | Description |
 | ---- | --- |
-| [General model](/attestation-model) | General model|
-| [Provenance](/provenance/v1) | Provenance spec and explanation |
-| [VSA](/verification_summary/v1) | VSA spec and explanation |
+| [General model](/attestation-model) | General attestation model|
+| [Provenance](/provenance/v1) | Suggested provenance format and explanation |
+| [VSA](/verification_summary/v1) | Suggested VSA format and explanation |
+
+## How to SLSA
+These instructions tell you how to apply the core SLSA specification to use SLSA in your specific situation.
+| Page | Description |
+| ---- | --- |
+| [For developers](/get-started) | How to apply SLSA requirements to your build|
+| [For organizations](X) | TODO add|
+| [For implementers](X) | TODO add |

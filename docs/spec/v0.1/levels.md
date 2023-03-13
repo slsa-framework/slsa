@@ -1,5 +1,11 @@
 ---
 title: Security levels
+prev_page:
+  title: Terminology
+  url: terminology
+next_page:
+  title: Requirements
+  url: requirements
 ---
 <div class="subtitle">
 

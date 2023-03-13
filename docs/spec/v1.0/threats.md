@@ -1,6 +1,13 @@
 ---
 title: Threats in detail
+prev_page:
+  title: Verifying Build Systems
+  url: verifying-systems
+next_page:
+  title: Frequently Asked Questions
+  url: faq
 ---
+
 <div class="subtitle">
 
 What follows is a comprehensive technical analysis of supply chain threats and

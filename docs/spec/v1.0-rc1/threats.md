@@ -1,6 +1,13 @@
 ---
 title: Threats and mitigations
+prev_page:
+  title: Verifying Build Systems
+  url: verifying-systems
+next_page:
+  title: Frequently Asked Questions
+  url: faq
 ---
+
 <div class="subtitle">
 
 Attacks can occur at every link in a typical software supply chain, and these

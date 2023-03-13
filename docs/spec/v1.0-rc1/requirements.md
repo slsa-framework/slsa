@@ -1,6 +1,13 @@
 ---
 title: Producing artifacts
+prev_page:
+  title: Terminology
+  url: terminology
+next_page:
+  title: Verifying Build Systems
+  url: verifying-systems
 ---
+
 <div class="subtitle">
 
 This page covers the detailed technical requirements for producing artifacts at

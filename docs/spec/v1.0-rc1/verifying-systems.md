@@ -1,3 +1,12 @@
+---
+prev_page:
+  title: Producing artifacts
+  url: requirements
+next_page:
+  title: Threats and mitigations
+  url: threats
+---
+
 # Verifying Build Systems
 
 The provenance consumer is responsible for deciding whether they trust a builder to produce SLSA Build L3 provenance. However, assessing Build L3 capabilities requires information about a builder's construction and operating procedures that the consumer cannot glean from the provenance itself. To aid with such assessments, we provide a common threat model and builder model for reasoning about builders' security. We also provide a questionnaire that organizations can use to describe their builders to consumers along with sample answers that do and do not satisfy the SLSA Build L3 requirements.

@@ -27,6 +27,7 @@
           <div class="content main-content">
             <p>{{ page.hero_text | markdownify }}</p>
             {{ content }}
+            {%- include pagination.html -%}
           </div>
         </div>
       </main>
