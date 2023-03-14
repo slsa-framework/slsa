@@ -102,7 +102,7 @@ at upload time since doing so benefits all of the package ecosystem's clients.
 During client-side installation/deployment of a package, the verification
 tooling can ensure that the artifact's provenance matches the known expectations
 for that package name before use. Verification tooling can be either standalone,
-such as [slsa-verifier](https://github.com/slsa-framework/slsa-verifier), or 
+such as [slsa-verifier](https://github.com/slsa-framework/slsa-verifier), or
 built into the package ecosystem client.
 
 #### Continuously
