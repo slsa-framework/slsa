@@ -11,15 +11,14 @@ next_page:
 SLSA uses provenance to indicate whether an artifact is authentic or not, but
 provenance doesn't do anything unless somebody inspects it. SLSA calls that
 inspection verification, and this page describes how to verify artifacts and
-their SLSA provenance. The intended audience is system implementers, security
-engineers, and software consumers.
+their SLSA provenance.
 
 ## Overview
 
 This page is divided into two sections. The first discusses choices system
 implementers must make regarding verifying provenance. The second describes
-the procedure for verifying an artifact and its provenance against a set of
-expectations.
+for tool implementers the procedure for verifying an artifact and its
+provenance against a set of expectations.
 
 ## Architecture options
 
@@ -32,7 +31,7 @@ can verify provenance.
 ### Where to verify
 
 There are three options for where in a system to verify provenance: at the
-[package ecosystem], at the [consumer], or at an external [monitoring] system.
+[package ecosystem], at the [consumer], or at an [external monitor].
 
 System implementers SHOULD prefer to perform verification at the package
 ecosystem because doing so provides security benefits to all of the
@@ -100,11 +99,11 @@ at upload time since doing so benefits all of the package ecosystem's clients.
 
 #### During consumption
 
-During client-side installation/deployment of a package, the verifier
-can ensure that the artifact's provenance matches the known expectations for
-that package name before use. The verifier can be either the package ecosystem
-client tooling or a standalone tool such as
-[slsa-verifier](https://github.com/slsa-framework/slsa-verifier).
+During client-side installation/deployment of a package, the verification
+tooling can ensure that the artifact's provenance matches the known expectations
+for that package name before use. Verification tooling can be either standalone,
+such as [slsa-verifier](https://github.com/slsa-framework/slsa-verifier), or 
+built into the package ecosystem client.
 
 #### Continuously
 
@@ -115,19 +114,20 @@ responds to the failed verification.
 
 ## Setting Expectations
 
-<dfn>Expectations</dfn> are known provenance values that indicate the corresponding
-artifact is authentic. For example, a producer can define the allowed values for
-[`buildType`](/provenance/v1#buildType) and
-[`externalParameters`](/provenance/v1#externalParameters)
-for a given package (assuming it uses the SLSA provenance format) in order to address
-the [build integrity threats](threats#build-integrity-threats).
+<dfn>Expectations</dfn> are known provenance values that indicate the
+corresponding artifact is authentic. For example, a package ecosystem may
+maintain a mapping between package names and their canonical source
+repositories. That mapping constitutes a set of expectations. The package
+ecosystem tooling tests those expectations during upload to ensure all packages
+in the ecosystem are built from their canonical source repo, which
+indicates their authenticity.
 
-Expectations MUST be sufficient to detect
-or prevent this adversary from injecting unofficial behavior into the package.
-Example threats in this category include building from an unofficial fork or
-abusing a build parameter to modify the build. Usually expectations identify
-the canonical source repository (which is the main external parameter) and
-any other security-relevant external parameters.
+Expectations MUST be sufficient to detect or prevent an adversary from injecting
+unofficial behavior into the package. Example threats in this category include
+building from an unofficial fork or abusing a build parameter to modify the
+build. Usually expectations identify the canonical source repository (which is
+the main external parameter) and any other security-relevant external
+parameters.
 
 It is important to note that expectations are tied to a *package name*, whereas
 provenance is tied to an *artifact*. Different versions of the same package name
@@ -183,7 +183,7 @@ Verification MUST include the following steps:
 
 -   Ensuring that the builder identity is one of those in the map of trusted
     builder id's to SLSA level.
--   Verification of the provenance metadata.
+-   Verifying the signature on the provenance envelope.
 -   Ensuring that the values for `BuildType` and `ExternalParameters` in the
     provenance match the known expectations. The package ecosystem MAY allow
     an approved list of `ExternalParameters` to be ignored during verification.
@@ -378,3 +378,4 @@ basis.
 
 [Threat "E"]: /spec/v1.0/threats#e-use-compromised-dependency
 [VSA]: /verification_summary
+[threats]: /spec/v1.0/threats
