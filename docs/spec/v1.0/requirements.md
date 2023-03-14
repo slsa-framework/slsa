@@ -29,7 +29,12 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ### Build levels
 
-Responsibility to implement SLSA is spread across the following parties.
+In order to produce artifacts with a specific build level, responsibility is
+split between the <a href="#producer">Producer</a> and <a href="#build-system">
+Build system</a>. The build system MUST strengthen the security controls in
+order to achieve a specific level while the producer MUST choose and adopt a
+build system capable of achieving a desired build level, implementing any
+controls required by the chosen system.
 
 <table class="no-alternate">
 <tr>
@@ -70,11 +75,11 @@ Responsibility to implement SLSA is spread across the following parties.
 ### Security Best Practices
 
 While the exact definition of what constitutes a secure system is beyond the
-scope of this specification, to be conformant all implementations MUST use
-industry security best practices. This includes, but is not limited to, using
-proper access controls, securing communications, implementing proper management
-of cryptographic secrets, doing frequent updates, and promptly fixing known
-vulnerabilities.
+scope of this specification, all implementations MUST use industry security
+best practices to be conformant to this specification. This includes, but is
+not limited to, using proper access controls, securing communications,
+implementing proper management of cryptographic secrets, doing frequent updates,
+and promptly fixing known vulnerabilities.
 
 Various relevant standards and guides can be consulted for that matter such as
 the [CIS Critical Security
@@ -87,6 +92,12 @@ Controls](https://www.cisecurity.org/controls/cis-controls-list).
 A package's <dfn>producer</dfn> is the organization that owns and releases the
 software. It might be an open-source project, a company, a team within a
 company, or even an individual.
+
+NOTE: There were more requirements for producers in the initial
+[draft version (v0.1)](../v0.1/requirements.md#scripted-build) which impacted
+how a package can be built. These were removed in the v1.0 specification and
+will be reassessed and re-added as indicated in the
+[future directions](future-directions.md).
 
 ### Choose an appropriate build system
 
@@ -247,6 +258,10 @@ The SLSA Build level describes the minimum bar for isolation strength. For more
 information on assessing a build system's isolation strength, see
 [Verifying build systems](verifying-systems.md).
 
+Note: The isolation strength only applies to the build system and not to the
+build itself. A similar hermetic property was associated to the build in the
+initial [draft version (v0.1)](../v0.1/requirements.md#hermetic),
+
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
 
@@ -272,8 +287,8 @@ build instances, whether prior or concurrent.
 -   It MUST NOT be possible for two builds that overlap in time to influence one another.
 -   It MUST NOT be possible for one build to persist or influence the build environment of a subsequent build.
 -   Build caches, if used, MUST be purely content-addressable to prevent tampering.
--   The build SHOULD NOT call out to remote execution unless it's considered part of the "builder" within the trust boundary.
--   The build SHOULD NOT open services that allow for remote influence.
+-   The build system SHOULD NOT call out to remote execution unless it's considered part of the "builder" within the trust boundary.
+-   The build system SHOULD NOT open services that allow for remote influence.
 
 Note: This requirement was split into "Isolated" and "Ephemeral Environment"
 in the initial [draft version (v0.1)](../v0.1/requirements.md).
