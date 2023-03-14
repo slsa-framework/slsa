@@ -1,5 +1,5 @@
 ---
-title: Threats in detail
+title: Threats & mitigations
 prev_page:
   title: Verifying Build Systems
   url: verifying-systems

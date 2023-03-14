@@ -1,7 +1,7 @@
 ---
 next_page:
   title: SLSA overview
-  url: principles.md
+  url: principles
 ---
 
 # What's New in SLSA v1.0

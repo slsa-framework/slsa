@@ -37,28 +37,29 @@ Known issues:
     like feedback on whether to move these parts out of the build track.
 
 ## Understanding SLSA
-These pages provide an overview of SLSA, how it helps protect against common supply-chain attacks, and common use cases. If you're new to SLSA or supply-chain security, start here.
+These pages provide an overview of SLSA, how it helps protect against common
+supply-chain attacks, and common use cases. If you're new to SLSA or supply-chain security, start here.
 
 | Page | Description |
 | ---- | --- |
-| [What's new in v1.0](whats-new.md) | What's new in SLSA Version 1.0. |
+| [What's new in v1.0](whats-new.md) | What's new in SLSA Version 1.0 |
 | [SLSA overview](principles.md) | An introductory guide to SLSA
-| [Supply-chain threats](threats-overview) | An introduction to supply-chain threats. |
+| [Supply-chain threats](threats-overview) | An introduction to supply-chain threats |
 | [Use cases](/use-cases) | Use cases |
-| [FAQ](faq.md) | Questions and more information. |
-| [Future directions](future-directions.md) | Additions and changes being considered for future SLSA versions. |
+| [FAQ](faq.md) | Questions and more information |
+| [Future directions](future-directions.md) | Additions and changes being considered for future SLSA versions |
 
 ## Core specification
 These pages describe SLSA's security levels and requirements for each track. If you want to achieve SLSA a particular level, these are the requirements you'll need to meet.
 
 | Page | Description |
 | ---- | --- |
-| [Terminology](terminology.md) | Terminology and model used by SLSA. |
-| [Security levels](levels.md) | Overview of SLSA's tracks and levels, intended for all audiences. |
-| [Producing artifacts](requirements.md) | Detailed technical requirements for producing software artifacts, intended for system implementers. |
-| [Verifying build systems](verifying-systems.md) | Guidelines for securing SLSA Build L3+ builders, intended for system implementers. |
-| [Verifying artifacts](verifying-artifacts.md) | Guidance for verifying software artifacts and their SLSA provenance, intended for system implementers and software consumers. |
-| [Threats & mitigations](threats.md) | Detailed information about specific supply-chain attacks and how SLSA helps. |
+| [Terminology](terminology.md) | Terminology and model used by SLSA |
+| [Security levels](levels.md) | Overview of SLSA's tracks and levels, intended for all audiences |
+| [Producing artifacts](requirements.md) | Detailed technical requirements for producing software artifacts, intended for system implementers |
+| [Verifying build systems](verifying-systems.md) | Guidelines for securing SLSA Build L3+ builders, intended for system implementers |
+| [Verifying artifacts](verifying-artifacts.md) | Guidance for verifying software artifacts and their SLSA provenance, intended for system implementers and software consumers |
+| [Threats & mitigations](threats.md) | Detailed information about specific supply-chain attacks and how SLSA helps |
 
 ## Attestation formats
 These pages include the concrete schemas for SLSA attestations. The Provenance and VSA formats are recommended, but not required by the specification.
