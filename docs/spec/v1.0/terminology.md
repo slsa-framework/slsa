@@ -74,18 +74,23 @@ according the the rules and conventions of a <dfn>package ecosystem</dfn>.
 Examples of formal ecosystems include [Python/PyPA](https://www.pypa.io),
 [Debian/Apt](https://wiki.debian.org/DebianRepository/Format), and
 [OCI](https://github.com/opencontainers/distribution-spec), while examples of
-informal ecosystems include a linking to a file on a website or distributing
+informal ecosystems include links to files on a website or distribution of
 first-party software within a company.
 
 Abstractly, a consumer locates software within an ecosystem by asking a
 <dfn>package registry</dfn> to resolve a mutable <dfn>package name</dfn> into an
 immutable <dfn>package artifact</dfn>.[^label] To <dfn>publish</dfn> a package
 artifact, the software producer asks the registry to update this mapping to
-resolve to the new artifact. The important bit is that the registry represents
-the entity or entities with the power to alter what artifacts are accepted by
-consumers for a given package name. For example, if consumers only accept
-packages signed by a particular public key, then it is access to that public key
-that serves as the registry.
+resolve to the new artifact. The registry represents the entity or entities with
+the power to alter what artifacts are accepted by consumers for a given package
+name. For example, if consumers only accept packages signed by a particular
+public key, then it is access to that public key that serves as the registry.
+
+The package name is the primary security boundary within a package ecosystem.
+Different package names represent materially different pieces of
+software---different owners, behaviors, security properties, and so on.
+Therefore, **the package name is the primary unit being protected in SLSA**.
+It is the primary identifier to which consumers attach expectations.
 
 [^label]: This resolution might include a version number, label, or some other
     selector in addition to the package name, but that is not important to SLSA.
@@ -96,7 +101,7 @@ that serves as the registry.
 | Package artifact | A file or other immutable object that is intended for distribution. |
 | Package ecosystem | A set of rules and conventions governing how packages are distributed, including how clients resolve a package name into one or more specific artifacts. |
 | Package manager client | Client-side tooling to interact with a package ecosystem. |
-| Package name | <p>A mutable collection of artifacts that all represent different versions of the same software. This is the primary identifier that consumers use to obtain the software. Therefore, it is the thing being protected by SLSA.<p>A package name is specific to an ecosystem + registry, has an owner/maintainer, is more general than a specific hash or version, and has a “correct” source location. A package ecosystem may group package names into some sort of hierarchy, such as the Group ID in Maven, though SLSA does not have a special term for this. |
+| Package name | <p>The primary identifier for a mutable collection of artifacts that all represent different versions of the same software. This is the primary identifier that consumers use to obtain the software.<p>A package name is specific to an ecosystem + registry, has an owner/maintainer, is more general than a specific hash or version, and has a "correct" source location. A package ecosystem may group package names into some sort of hierarchy, such as the Group ID in Maven, though SLSA does not have a special term for this. |
 | Package registry | An entity responsible for mapping package names to artifacts within a packaging ecosystem. Most ecosystems support multiple registries, usually a single global registry and multiple private registries. |
 | Publish [a package] | Make an artifact available for use by registering it with the package registry. In technical terms, this means associating an artifact to a package name. This does not necessarily mean making the artifact fully public; an artifact may be published for only a subset of users, such as internal testing or a closed beta. |
 
@@ -135,7 +140,7 @@ additions are welcome!
     <td><a href="https://docs.npmjs.com/about-packages-and-modules">Package</a>
   <tr>
     <td><a href="https://go.dev/ref/mod">Go</a>
-    <td><em>(see below)</em>
+    <td><a href="https://go.dev/ref/mod#glos-module-proxy">Module proxy</a>
     <td><a href="https://go.dev/ref/mod#glos-module-path">Module path</a>
     <td><a href="https://go.dev/ref/mod#glos-module">Module</a>
   <tr>
@@ -146,8 +151,8 @@ additions are welcome!
   <tr>
     <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html">Cargo</a> (Rust)
     <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html#registry">Registry</a>
-    <td>Crate name
-    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html#crate">Crate</a> (or <a href="https://doc.rust-lang.org/cargo/appendix/glossary.html#artifact">Artifact</a>?)
+    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html#crate">Crate name</a>
+    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html#artifact">Artifact</a>
   <tr>
     <td><a href="https://docs.microsoft.com/en-us/nuget/nuget-org/overview-nuget-org">NuGet</a> (C#)
     <td>Host
@@ -218,12 +223,15 @@ additions are welcome!
 
 Notes:
 
--   Go: Uses a significantly different model than any other ecosystem, where the
-    package name is a git repository URL. Clients can fetch directly from the
-    git repository, in which case there is no "package". But clients usually
-    instead fetch a zip file from a module mirror that proxies the git
-    repository, and consult with a checksum database to detect tampering. It is
-    not yet clear which of these constitute the "registry", if either.
+-   Go uses a significantly different distribution model than other ecosystems.
+    In go, the package name is a source repository URL. While clients can fetch
+    directly from that URL---in which case there is no "package" or
+    "registry"---they usually fetch a zip file from a *module proxy*. The module
+    proxy acts as both a builder (by constructing the package artifact from
+    source) and a registry (by mapping package name to package artifact). People
+    trust the module proxy because builds are independently reproducible and a
+    *checksum database* guarantees that all clients receive the same artifact
+    for a given URL.
 
 ### Verification model
 
