@@ -17,10 +17,9 @@ tampered with and can be securely traced back to its source.
 
 </div>
 
-This page is an informative overview of the SLSA levels, describing their
-purpose and guarantees. For the normative requirements at each level, see
-[Requirements](requirements.md). For a background, see
-[Terminology](terminology.md). [TODO: clarify overview of SLSA vs. overview of levels/tracks] [This page describes the INTENT /descriptive -- the requirements are prescriptive]
+This page is a descriptiove overview of the SLSA levels and tracks, describing their intent. For the prescriptive requirements for each level, see
+[Requirements](requirements.md). For a general overview of SLSA, see
+[SLSA Overview](principles.md).  
 
 ## Levels and tracks
 
