@@ -1,6 +1,6 @@
 {
     // Standard attestation fields:
-    "_type": "https://in-toto.io/Statement/v1",
+    "_type": "https://in-toto.io/Statement/v0.1",
     "subject": [...],
 
     // Predicate:
@@ -10,25 +10,25 @@
             "buildType": string,
             "externalParameters": object,
             "systemParameters": object,
-            "resolvedDependencies": [ ...#ResourceDescriptor ],
+            "resolvedDependencies": [ ...#ArtifactReference ],
         },
         "runDetails": {
             "builder": {
                 "id": string,
                 "version": string,
-                "builderDependencies": [ ...#ResourceDescriptor ],
+                "builderDependencies": [ ...#ArtifactReference ],
             },
             "metadata": {
                 "invocationId": string,
                 "startedOn": #Timestamp,
                 "finishedOn": #Timestamp,
             },
-            "byproducts": [ ...#ResourceDescriptor ],
+            "byproducts": [ ...#ArtifactReference ],
         }
     }
 }
 
-#ResourceDescriptor: {
+#ArtifactReference: {
     "uri": string,
     "digest": {
         "sha256": string,
@@ -37,11 +37,9 @@
         // TODO: list the other standard algorithms
         [string]: string,
     },
-    "name": string,
+    "localName": string,
     "downloadLocation": string,
     "mediaType": string,
-    "content": string, // base64-encoded bytes
-    "annotations": object,
 }
 
 #Timestamp: string  // <YYYY>-<MM>-<DD>T<hh>:<mm>:<ss>Z
