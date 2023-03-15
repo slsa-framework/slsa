@@ -4,7 +4,7 @@
 #       versions:
 #         <version>:
 #           name: <string> # display name
-#           status: <string> # one of: Working Draft, In Review, Stable, Retired
+#           status: <string> # one of: Draft, Candidate, Approved, Retired
 #           draft: <bool, optional> # if true, display a "draft" warning banner
 #           hidden: <bool, optional> # if true, do not show in dropdown
 #       current: <version>
