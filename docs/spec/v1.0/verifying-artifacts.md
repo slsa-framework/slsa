@@ -15,38 +15,32 @@ their SLSA provenance.
 
 ## Overview
 
-This page is divided into two sections. The first discusses choices system
+This page is divided into the sections. The first discusses choices system
 implementers must make regarding verifying provenance. The second describes
-for tool implementers the procedure for verifying an artifact and its
-provenance against a set of expectations.
+how system implementers set the expectations used to verify provenance. The
+third describes for tool implementers the procedure for verifying an artifact
+and its provenance against a set of expectations.
 
 ## Architecture options
 
-System implementers must make two architectural decisions about verifying
-provenance: where in the system to verify and when to do it. Each option
-comes with its own set of considerations, but all are valid. The options
-are also not mutually excluvie -- more than one component of a system
-can verify provenance.
+System implementers decide which part of the system will verify provenance:
+the package ecosystem at upload time, the consumers at download time, or via a
+continuous monitoring system. Each option comes with its own set of
+considerations, but all are valid. The options are also not mutually exclusive
+-- more than one component of a system can verify provenance.
 
-### Where to verify
+> **TODO** Add a diagram.
 
-There are three options for where in a system to verify provenance: at the
-[package ecosystem], at the [consumer], or at an [external monitor].
-
-System implementers SHOULD prefer to perform verification at the package
-ecosystem because doing so provides security benefits to all of the
-package ecosystem's clients.
-
-#### Package ecosystem
+### Package ecosystem
 
 [Package ecosystem]: #package-ecosystem
 
 > ⚠ **TODO** Update this section to use Package model terminology.
 
-A <dfn>package ecosystem</dfn> is a set of conventions and tooling for package
-distribution. Every package has an ecosystem, whether it is formal or ad-hoc.
-Some ecosystems are formal, such as language distribution (e.g.
-[Python/PyPA](https://www.pypa.io)), operating system distribution (e.g.
+A <dfn>package ecosystem</dfn> is a set of conventions and
+tooling for package distribution. Every package has an ecosystem, whether it is
+formal or ad-hoc. Some ecosystems are formal, such as language distribution
+(e.g. [Python/PyPA](https://www.pypa.io)), operating system distribution (e.g.
 [Debian/Apt](https://wiki.debian.org/DebianRepository/Format)), or artifact
 distribution (e.g. [OCI](https://github.com/opencontainers/distribution-spec)).
 Other ecosystems are informal, such as a convention used within a company. Even
@@ -54,26 +48,37 @@ ad-hoc distribution of software, such as through a link on a website, is
 considered an "ecosystem". For more background, see
 [Package Model](terminology.md#package-model).
 
+During package upload, a package ecosystem can ensure that the artifact's
+provenance matches the known expectations for that package name before accepting
+it into the registry.  If possible, system implementers SHOULD prefer this option
+because doing so benefits all of the package ecosystem's clients.
+
 The package ecosystem's maintainers are responsible for reliably redistributing
 artifacts and provenance, making the producers' expectations available to consumers,
 and providing tools to enable safe artifact consumption (e.g. whether an artifact
 meets its producer's expectations).
 
-#### Consumer
+### Consumer
 
 [Consumer]: #consumer
 
 A package's <dfn>consumer</dfn> is the organization or individual that uses the
 package.
 
-Consumers can set their own expectations for artifacts and check them with
-tools such as [slsa-verifier](https://github.com/slsa-framework/slsa-verifier).
+Consumers can set their own expectations for artifacts and use client-side
+verification tooling to ensure that the artifact's provenance matches the
+consumer's expectations for that package name before use (e.g. during
+installation or deployment). Client-side verification tooling can be either
+standalone, such as
+[slsa-verifier](https://github.com/slsa-framework/slsa-verifier), or built into
+the package ecosystem client.
 
 Consumers can either audit the build systems
 themselves using the prompts in [verifying systems](verifying-systems.md) or
 rely on the [SLSA certification program](certification.md) (coming soon).
 
-#### External Monitor
+
+### External Monitor
 
 [External monitor]: #external-monitor
 
@@ -83,31 +88,7 @@ packages verified by a monitor is arbitrary, though it MAY mimic the set
 of packages published through one or more package ecosystems. The monitor
 MUST publish its expectations for all the packages it verifies.
 
-### When to verify
-
-Verifying expectations can happen at one or more of the following times.
-
-#### During upload
-
-During package upload, a package ecosystem can ensure that the artifact's
-provenance matches the known expectations for that package name before accepting
-it into the registry.
-
-This option is only available for systems that verify provenance in the
-package ecosystem. If possible, system implementers SHOULD verify provenance
-at upload time since doing so benefits all of the package ecosystem's clients.
-
-#### During consumption
-
-During client-side installation/deployment of a package, the verification
-tooling can ensure that the artifact's provenance matches the known expectations
-for that package name before use. Verification tooling can be either standalone,
-such as [slsa-verifier](https://github.com/slsa-framework/slsa-verifier), or
-built into the package ecosystem client.
-
-#### Continuously
-
-Verifiers may continuously poll an [external monitor] to detect artifacts that
+Verifiers may continuously poll an external monitor to detect artifacts that
 do not meet the monitor's expectations. Detecting artifacts that fail
 verification is of limited benefit unless a human or another part of the system
 responds to the failed verification.
@@ -206,14 +187,15 @@ the provenance actually applies to the artifact in question and to assess the
 trustworthiness of the provenance. This mitigates some or all of [threats] "D",
 "F", "G", and "H", depending on SLSA Build level and where verification happens.
 
-Up front:
+Once, when bootstrapping the verifier:
 
 -   Configure the verifier's roots of trust, meaning the recognized builder
     identities and the maximum SLSA Build level each builder is trusted up to.
     Different verifiers might use different roots of trust, but usually a
-    verifier uses the same roots of trust for all packages. This is likely in
-    the form of a map from (builder public key identity, `builder.id`) to
-    (SLSA Build level).
+    verifier uses the same roots of trust for all packages. This configuration
+    is likely in the form of a map from (builder public key identity,
+    `builder.id`) to (SLSA Build level) drawn from the [SLSA Conformance
+    Program](certification.md) (coming soon).
 
     <details>
     <summary>Example root of trust configuration</summary>
