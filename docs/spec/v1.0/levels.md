@@ -17,7 +17,8 @@ tampered with and can be securely traced back to its source.
 
 </div>
 
-This page is a descriptiove overview of the SLSA levels and tracks, describing their intent. For the prescriptive requirements for each level, see
+This page is a descriptive overview of the SLSA levels and tracks, describing
+their intent. For the prescriptive requirements for each level, see
 [Requirements](requirements.md). For a general overview of SLSA, see
 [SLSA Overview](principles.md).  
 

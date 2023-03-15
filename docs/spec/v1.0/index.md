@@ -44,7 +44,7 @@ supply-chain attacks, and common use cases. If you're new to SLSA or supply-chai
 | Page | Description |
 | ---- | --- |
 | [What's new in v1.0](whats-new.md) | What's new in SLSA Version 1.0 |
-| [SLSA overview](principles.md) | An introductory guide to SLSA
+| [SLSA overview](principles.md) | An introductory guide to SLSA |
 | [Supply-chain threats](threats-overview) | An introduction to supply-chain threats |
 | [Use cases](/use-cases) | Use cases |
 | [FAQ](faq.md) | Questions and more information |
@@ -65,7 +65,9 @@ These pages describe SLSA's security levels and requirements for each track. If 
 
 ## Attestation formats
 
-These pages include the concrete schemas for SLSA attestations. The Provenance and VSA formats are recommended, but not required by the specification.
+These pages include the concrete schemas for SLSA attestations. The Provenance
+and VSA formats are recommended, but not required by the specification.
+
 | Page | Description |
 | ---- | --- |
 | [General model](/attestation-model) | General attestation model|
@@ -74,9 +76,11 @@ These pages include the concrete schemas for SLSA attestations. The Provenance a
 
 ## How to SLSA
 
-These instructions tell you how to apply the core SLSA specification to use SLSA in your specific situation.
+These instructions tell you how to apply the core SLSA specification to use
+SLSA in your specific situation.
+
 | Page | Description |
 | ---- | --- |
-| [For developers](/get-started) | How to apply SLSA requirements to your build|
-| [For organizations](X) | TODO add|
-| [For implementers](X) | TODO add |
+| [For developers](/get-started) | How to apply SLSA requirements to your build |
+| For organizations | TODO add|
+| For implementers | TODO add |

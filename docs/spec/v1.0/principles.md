@@ -9,12 +9,8 @@ next_page:
   url: threats-overview
 ---
 
-<div class="subtitle">
-
 This page is an introduction to SLSA and its guiding principles. If you're new
 to SLSA, start here!
-
-</div>
 
 ## What is SLSA?
 
