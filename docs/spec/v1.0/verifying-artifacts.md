@@ -77,7 +77,6 @@ Consumers can either audit the build systems
 themselves using the prompts in [verifying systems](verifying-systems.md) or
 rely on the [SLSA certification program](certification.md) (coming soon).
 
-
 ### External Monitor
 
 [External monitor]: #external-monitor
