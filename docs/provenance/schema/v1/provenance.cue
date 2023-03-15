@@ -40,7 +40,7 @@
     "name": string,
     "downloadLocation": string,
     "mediaType": string,
-    "content": string, // base64-encoded bytes
+    "content": bytes, // base64-encoded
     "annotations": object,
 }
 

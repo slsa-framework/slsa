@@ -27,7 +27,7 @@ message ResourceDescriptor {
   string name = 3;
   string download_location = 4;
   string media_type = 5;
-  string content = 6; // base64-encoded bytes
+  bytes content = 6;
   google.Protobuf.Struct annotations = 7;
 }
 
