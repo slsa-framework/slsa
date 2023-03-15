@@ -34,7 +34,7 @@ split between the <a href="#producer">Producer</a> and <a href="#build-system">
 Build system</a>. The build system MUST strengthen the security controls in
 order to achieve a specific level while the producer MUST choose and adopt a
 build system capable of achieving a desired build level, implementing any
-controls required by the chosen system.
+controls as specified by the chosen system.
 
 <table class="no-alternate">
 <tr>
@@ -68,7 +68,7 @@ controls required by the chosen system.
   <td><a href="#build-service">Build service</a>
   <td> <td>✓<td>✓
 <tr>
-  <td><a href="#ephemeral-isolated">Ephemeral and isolated</a>
+  <td><a href="#isolated">Isolated</a>
   <td> <td> <td>✓
 </table>
 
@@ -275,19 +275,25 @@ workstation.
 Examples: GitHub Actions, Google Cloud Build, Travis CI.
 
 <td> <td>✓<td>✓
-<tr id="ephemeral-isolated">
-<td>Ephemeral and isolated
+<tr id="isolated">
+<td>Isolated
 <td>
 
-The build service ensured that the build steps ran in an ephemeral and isolated
-environment provisioned solely for this build, free of influence from other
-build instances, whether prior or concurrent.
+The build service ensured that the build steps ran in an isolated
+environment, free of influence from other build instances, whether
+prior or concurrent.
 
--   It MUST NOT be possible for a build to access any secrets of the build service, such as the provenance signing key.
--   It MUST NOT be possible for two builds that overlap in time to influence one another.
--   It MUST NOT be possible for one build to persist or influence the build environment of a subsequent build.
--   Build caches, if used, MUST be purely content-addressable to prevent tampering.
--   The build system SHOULD NOT call out to remote execution unless it's considered part of the "builder" within the trust boundary.
+-   It MUST NOT be possible for a build to access any secrets of the build
+    service, such as the provenance signing key.
+-   It MUST NOT be possible for two builds that overlap in time to influence
+    one another.
+-   It MUST NOT be possible for one build to persist or influence the build
+    environment of a subsequent build. Examples: An ephemeral environment is
+    provisioned for a single build.
+-   Build caches, if used, MUST be purely content-addressable to prevent
+    tampering.
+-   The build system SHOULD NOT call out to remote execution unless it's
+    considered part of the "builder" within the trust boundary.
 -   The build system SHOULD NOT open services that allow for remote influence.
 
 Note: This requirement was split into "Isolated" and "Ephemeral Environment"
