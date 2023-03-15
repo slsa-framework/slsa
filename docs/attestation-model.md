@@ -3,15 +3,10 @@ title: Software attestations
 layout: specifications
 ---
 
-<div class="subtitle">
-
 A software attestation is an authenticated statement (metadata) about a
 software artifact or collection of software artifacts.
-
 The primary intended use case is to feed into automated policy engines, such as
 [in-toto] and [Binary Authorization].
-
-</div>
 
 This page provides a high-level overview of the attestation model, including
 standardized terminology, data model, layers, and conventions for software

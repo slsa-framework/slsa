@@ -9,12 +9,8 @@ next_page:
 
 # Guiding principles
 
-<div class="subtitle">
-
 This page describes the guiding principles behind SLSA's design
 decisions.
-
-</div>
 
 ## Trust systems, verify artifacts
 
