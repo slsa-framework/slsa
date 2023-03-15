@@ -12,7 +12,7 @@ Every specification page should prominently display a *Status* section
 stating which stage the specification is in with a link to its
 definition.
 
-## Working Draft
+## Draft
 
 This is the first stage of development a specification goes
 through. At this point, not much should be expected of it. The
@@ -25,7 +25,12 @@ work progresses. The status section of the document may provide
 additional information as to its development status and whether
 reviews and feedback are welcome.
 
-## In Review
+See the
+[Governance](https://github.com/slsa-framework/governance/blob/main/5._Governance.md#4-specification-development-process)
+for other considerations related to a
+[Draft Specification](https://github.com/slsa-framework/governance/blob/main/1._Community_Specification_License-v1.md).
+
+## Candidate
 
 At this stage the document is considered to be feature complete and is
 published as a way to invite final reviews. Editorial changes may
@@ -33,12 +38,22 @@ still be made but no addition of new features is expected and short of
 problems being found no significant changes are expected to happen
 anymore.
 
-## Stable
+See the
+[Governance](https://github.com/slsa-framework/governance/blob/main/5._Governance.md#4-specification-development-process)
+for other considerations related to a
+[Candidate for Approved Specification](https://github.com/slsa-framework/governance/blob/main/1._Community_Specification_License-v1.md).
+
+## Approved
 
 At this stage the document is considered stable. No changes that would
 constitute a significant departure from the existing specification are
 expected although changes to address ambiguities and edge cases may
 still occur.
+
+See the
+[Governance](https://github.com/slsa-framework/governance/blob/main/5._Governance.md#4-specification-development-process)
+for other considerations related to an
+[Approved Specification](https://github.com/slsa-framework/governance/blob/main/1._Community_Specification_License-v1.md).
 
 ## Retired
 
