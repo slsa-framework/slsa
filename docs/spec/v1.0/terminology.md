@@ -120,6 +120,8 @@ The table below attempts to document how various ecosystems map to the SLSA
 Package model. There are likely mistakes and omissions; corrections and
 additions are welcome!
 
+<!-- Please keep this list sorted alphabetically within each section. -->
+
 <table>
   <tr>
     <th>Package ecosystem
@@ -129,15 +131,15 @@ additions are welcome!
   <tr>
     <td colspan=4><em>Languages</em>
   <tr>
-    <td><a href="https://packaging.python.org/en/latest/specifications/binary-distribution-format/#file-name-convention">Python</a>
-    <td><a href="https://packaging.python.org/en/latest/glossary/#term-Package-Index">Index</a>
-    <td><a href="https://packaging.python.org/en/latest/glossary/#term-Project">Project Name</a>
-    <td><a href="https://packaging.python.org/en/latest/glossary/#term-Distribution-Package">Distribution</a>
+    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html">Cargo</a> (Rust)
+    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html#registry">Registry</a>
+    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html#crate">Crate name</a>
+    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html#artifact">Artifact</a>
   <tr>
-    <td><a href="https://www.npmjs.com/">npm</a> (JavaScript)
-    <td><a href="https://docs.npmjs.com/about-the-public-npm-registry">Registry</a>
-    <td><a href="https://docs.npmjs.com/package-name-guidelines">Package Name</a>
-    <td><a href="https://docs.npmjs.com/about-packages-and-modules">Package</a>
+    <td><a href="http://neilb.org/2015/09/05/cpan-glossary.html">CPAN</a> (Perl)
+    <td>Upload server
+    <td>Distribution
+    <td>Release (or Distribution)
   <tr>
     <td><a href="https://go.dev/ref/mod">Go</a>
     <td><a href="https://go.dev/ref/mod#glos-module-proxy">Module proxy</a>
@@ -149,20 +151,20 @@ additions are welcome!
     <td>Group ID + Artifact ID
     <td>Artifact
   <tr>
-    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html">Cargo</a> (Rust)
-    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html#registry">Registry</a>
-    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html#crate">Crate name</a>
-    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html#artifact">Artifact</a>
+    <td><a href="https://www.npmjs.com/">npm</a> (JavaScript)
+    <td><a href="https://docs.npmjs.com/about-the-public-npm-registry">Registry</a>
+    <td><a href="https://docs.npmjs.com/package-name-guidelines">Package Name</a>
+    <td><a href="https://docs.npmjs.com/about-packages-and-modules">Package</a>
   <tr>
     <td><a href="https://docs.microsoft.com/en-us/nuget/nuget-org/overview-nuget-org">NuGet</a> (C#)
     <td>Host
     <td>Project
     <td>Package
   <tr>
-    <td><a href="http://neilb.org/2015/09/05/cpan-glossary.html">Perl</a>
-    <td>Upload server
-    <td>Distribution
-    <td>Release (or Distribution)
+    <td><a href="https://packaging.python.org/en/latest/specifications/binary-distribution-format/#file-name-convention">PyPA</a> (Python)
+    <td><a href="https://packaging.python.org/en/latest/glossary/#term-Package-Index">Index</a>
+    <td><a href="https://packaging.python.org/en/latest/glossary/#term-Project">Project Name</a>
+    <td><a href="https://packaging.python.org/en/latest/glossary/#term-Distribution-Package">Distribution</a>
   <tr>
     <td colspan=4><em>Operating systems</em>
   <tr>
@@ -171,25 +173,25 @@ additions are welcome!
     <td>Package name
     <td>Package
   <tr>
-    <td><a href="https://rpm.org">RPM</a> (e.g. Red Hat)
+    <td><a href="https://docs.flatpak.org/en/latest/introduction.html#terminology">Flatpak</a>
     <td>Repository
-    <td>Package name
-    <td>Package
-  <tr>
-    <td><a href="https://wiki.archlinux.org/title/Pacman">Pacman</a> (e.g. Arch)
-    <td>Repository
-    <td>Package name
-    <td>Package
+    <td>Application
+    <td>Bundle
   <tr>
     <td><a href="https://docs.brew.sh/Manpage">Homebrew</a> (e.g. Mac)
     <td>Repository (Tap)
     <td>Package name (Formula)
     <td>Binary package (Bottle)
   <tr>
-    <td><a href="https://docs.flatpak.org/en/latest/introduction.html#terminology">Flatpak</a>
+    <td><a href="https://wiki.archlinux.org/title/Pacman">Pacman</a> (e.g. Arch)
     <td>Repository
-    <td>Application
-    <td>Bundle
+    <td>Package name
+    <td>Package
+  <tr>
+    <td><a href="https://rpm.org">RPM</a> (e.g. Red Hat)
+    <td>Repository
+    <td>Package name
+    <td>Package
   <tr>
     <td><a href="https://nixos.org/guides/how-nix-works.html">nix</a> (e.g. <a href="https://nixos.org/">NixOS</a>)
     <td><em>?</em>
