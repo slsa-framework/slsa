@@ -59,16 +59,11 @@ If you want to achieve SLSA a particular level, these are the requirements you'l
 | Page | Description |
 | ---- | --- |
 | [Terminology](terminology.md) | Terminology and model used by SLSA |
-| [Security levels](levels.md) | Overview of SLSA's tracks and levels, intended
-for all audiences |
-| [Producing artifacts](requirements.md) | Detailed technical requirements for
-producing software artifacts, intended for system implementers |
-| [Verifying build systems](verifying-systems.md) | Guidelines for securing
-SLSA Build L3+ builders, intended for system implementers |
-| [Verifying artifacts](verifying-artifacts.md) | Guidance for verifying
-software artifacts and their SLSA provenance, intended for system implementers and software consumers |
-| [Threats & mitigations](threats.md) | Detailed information about specific
-supply-chain attacks and how SLSA helps |
+| [Security levels](levels.md) | Overview of SLSA's tracks and levels, intended for all audiences |
+| [Producing artifacts](requirements.md) | Detailed technical requirements for producing software artifacts, intended for system implementers |
+| [Verifying build systems](verifying-systems.md) | Guidelines for securing SLSA Build L3+ builders, intended for system implementers |
+| [Verifying artifacts](verifying-artifacts.md) | Guidance for verifying software artifacts and their SLSA provenance, intended for system implementers and software consumers |
+| [Threats & mitigations](threats.md) | Detailed information about specific supply-chain attacks and how SLSA helps |
 
 ## Attestation formats
 
