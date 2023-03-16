@@ -48,8 +48,7 @@ supply-chain attacks, and common use cases. If you're new to SLSA or supply-chai
 | [Supply-chain threats](threats-overview) | An introduction to supply-chain threats |
 | [Use cases](/use-cases) | Use cases |
 | [FAQ](faq.md) | Questions and more information |
-| [Future directions](future-directions.md) | Additions and changes being
-considered for future SLSA versions |
+| [Future directions](future-directions.md) | Additions and changes being considered for future SLSA versions |
 
 ## Core specification
 
@@ -74,8 +73,7 @@ and VSA formats are recommended, but not required by the specification.
 | ---- | --- |
 | [General model](/attestation-model) | General attestation model|
 | [Provenance](/provenance/v1) | Recommended format for provenance|
-| [VSA](/verification_summary/v1) | Recommended format for summarizing
-verification results |
+| [VSA](/verification_summary/v1) | Recommended format for summarizing verification results |
 
 ## How to SLSA
 
