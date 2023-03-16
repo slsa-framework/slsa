@@ -1,4 +1,5 @@
 {
+    "_type": "https://in-toto.io/Statement/v1?draft",
     "predicateType": "https://slsa.dev/provenance/v1?draft",
     "predicate": {
         "buildDefinition": {
@@ -27,7 +28,7 @@
             "resolvedDependencies": [
                 {
                     "uri": "git+https://github.com/octocat/hello-world@refs/heads/main",
-                    "digest": { "sha1": "c27d339ee6075c1f744c5d4b200f7901aad2c369" }
+                    "digest": { "gitCommit": "c27d339ee6075c1f744c5d4b200f7901aad2c369" }
                 },
                 {
                     "uri": "https://github.com/actions/virtual-environments/releases/tag/ubuntu20/20220515.1"

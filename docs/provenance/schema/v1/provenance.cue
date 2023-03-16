@@ -33,8 +33,7 @@
     "digest": {
         "sha256": string,
         "sha512": string,
-        "sha1": string,
-        // TODO: list the other standard algorithms
+        "gitCommit": string,
         [string]: string,
     },
     "name": string,
