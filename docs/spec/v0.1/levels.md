@@ -7,14 +7,11 @@ next_page:
   title: Requirements
   url: requirements
 ---
-<div class="subtitle">
 
 SLSA is organized into a series of levels that provide increasing
 [integrity](terminology.md) guarantees. This gives you confidence that
 software hasn’t been tampered with and can be securely traced back to its
 source.
-
-</div>
 
 This page is an informative overview of the SLSA levels, describing their
 purpose and guarantees. For the normative requirements at each level, see
