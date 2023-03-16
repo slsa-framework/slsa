@@ -34,7 +34,8 @@ Some ecosystems are formal, such as language distribution (e.g.
 distribution (e.g. [OCI](https://github.com/opencontainers/distribution-spec)).
 Other ecosystems are informal, such as a convention used within a company. Even
 ad-hoc distribution of software, such as through a link on a website, is
-considered an "ecosystem".
+considered an "ecosystem". For more background, see
+[Package Model](terminology.md#package-model).
 
 The package ecosystem's maintainers are responsible for reliably redistributing
 artifacts and provenance, making the producers' expectations available to consumers,
