@@ -1,3 +1,9 @@
+---
+prev_page:
+  title: Frequently Asked Questions
+  url: faq
+---
+
 # Future directions
 
 The initial [draft version (v0.1)] of SLSA had a larger scope including

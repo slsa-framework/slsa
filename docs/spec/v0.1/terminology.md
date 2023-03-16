@@ -1,12 +1,14 @@
 ---
 title: Terminology
+prev_page:
+  title: Introduction
+  url: ./
+next_page:
+  title: Security levels
+  url: levels
 ---
-<div class="subtitle">
-
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set
 of terminology and models to describe what we're protecting.
-
-</div>
 
 ## Software supply chain
 

@@ -1,12 +1,17 @@
-# Security levels
+---
+prev_page:
+  title: What's New in SLSA v1.0
+  url: whats-new
+next_page:
+  title: Guiding principles
+  url: principles
+---
 
-<div class="subtitle">
+# Security levels
 
 SLSA is organized into a series of levels that provide increasing supply chain
 security guarantees. This gives you confidence that software hasn’t been
 tampered with and can be securely traced back to its source.
-
-</div>
 
 This page is an informative overview of the SLSA levels, describing their
 purpose and guarantees. For the normative requirements at each level, see

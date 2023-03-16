@@ -60,4 +60,4 @@ defaults:
       path: ""
     values:
       # Set the Social image icon
-      image: /images/icons/android-chrome-512x512.png
+      image: /images/icons/android-chrome-192x192.png

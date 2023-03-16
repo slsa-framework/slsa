@@ -1,0 +1,10 @@
+{% if page.prev_page or page.next_page %}
+  <div class="mt-10 pt-10 border-t flex flex-col sm:flex-row space-between gap-5">
+    {% if page.prev_page %}
+      <a href="{{ page.prev_page.url }}" class="border rounded px-4 py-2 text-left">&lsaquo; {{ page.prev_page.title }}</a>
+    {% endif %}
+    {% if page.next_page %}
+      <a href="{{ page.next_page.url }}" class="sm:ml-auto border rounded px-4 py-2 text-right">{{ page.next_page.title }} &rsaquo;</a>
+    {% endif %}
+  </div>
+{% endif %}

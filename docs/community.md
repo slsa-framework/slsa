@@ -1,8 +1,15 @@
 ---
 title: Community
 layout: standard
-hero_text: There’s an active community of members, contributors and collaborators behind the SLSA framework. We’re drawn together by the shared goals of improving software supply chain security and codifying best practices for development, deployment and governance, all collaborating on an objective framework that works for open source projects and organizations, influences policy and regulations, empowers engineers and builds for the future.
 ---
+
+There's an active community of members, contributors and collaborators behind
+the SLSA framework. We're drawn together by the shared goals of improving
+software supply chain security and codifying best practices for development,
+deployment and governance, all collaborating on an objective framework that
+works for open source projects and organizations, influences policy and
+regulations, empowers engineers and builds for the future.
+
 <section class="section bg-white flex flex-col justify-center items-center">
     <div class="wrapper inner w-full">
 
@@ -71,9 +78,9 @@ developing tooling and services, we welcome your contributions.
 </div>
             </div>
             <div class="w-full md:w-1/2">
-                <div class="rounded-lg text-green p-5 border border-green-400 inline-block mb-8 h4">SLSA is currently in alpha</div>
-                <p>The initial v0.1 specification is out and is now ready to be tried out and tested.<br><br>
-We’ve released an initial set of tools and services to generate SLSA 1-2 provenance, which we’re looking to develop further soon.<br><br>
+                <div class="rounded-lg text-green p-5 border border-green-400 inline-block mb-8 h4">SLSA v1.0 is coming soon!</div>
+                <p>The SLSA v1.0 release candidate specification is out and <a href="/blog/2023/02/slsa-v1-rc">available for community review</a>. We anticipate a stable release soon. <br><br>
+We’ve released a set of tools and services to generate up to SLSA 3 provenance, and plan to develop further tooling soon.<br><br>
 Google has been using an internal version of SLSA since 2013 and requires it for all of their production workloads.</p>
             </div>
         </div>

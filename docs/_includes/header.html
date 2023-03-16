@@ -1,31 +1,36 @@
 
 
-<header class="site-header flex-none {% if page.url != '/spec/{{ site.current_spec_version }}/' and page.url != {{ site.baseurl }} and page.url != '/' or page.url == '/spec/{{ site.current_spec_version }}/' %} is-specification-markdown{% endif %}">
+<header
+  class="site-header flex-none
+    {% if page.url != '/spec/{{ site.current_spec_version }}/' and page.url != {{ site.baseurl }} and page.url != '/' or page.url == '/spec/{{ site.current_spec_version }}/' -%}
+      is-specification-markdown
+    {%- endif %}"
+  x-data="{
+    fixed: false,
+    hidden: false,
+    lastPos: window.scrollY,
+    scrolledPast: false
+  }"
+  x-ref="navbar"
+  x-on:scroll.window="
+    fixed = window.scrollY > lastPos ? window.scrollY >= $refs.navbar.offsetHeight : window.scrollY > 0;
+    hidden = fixed && window.scrollY > lastPos;
+    if (window.scrollY > $refs.navbar.offsetHeight && !scrolledPast) {
+      setTimeout(() => $refs.navbar.classList.add('is-scrolled-past'), 500);
+      scrolledPast = true;
+    } else if (window.scrollY === 0) {
+      $refs.navbar.classList.remove('is-scrolled-past');
+      scrolledPast = false;
+    }
+    lastPos = window.scrollY;
+  "
+  x-bind:class="{
+    'is-fixed': fixed,
+    'is-hidden': hidden,
+    'menu-open': navOpen
+  }"
+>
   <div
-    x-data="{
-      fixed: false,
-      hidden: false,
-      lastPos: window.scrollY,
-      scrolledPast: false
-    }"
-    x-ref="navbar"
-    x-on:scroll.window="
-      fixed = window.scrollY > lastPos ? window.scrollY >= $refs.navbar.offsetHeight : window.scrollY > 0;
-      hidden = fixed && window.scrollY > lastPos;
-      if (window.scrollY > $refs.navbar.offsetHeight && !scrolledPast) {
-        setTimeout(() => $refs.navbar.classList.add('is-scrolled-past'), 500);
-        scrolledPast = true;
-      } else if (window.scrollY === 0) {
-        $refs.navbar.classList.remove('is-scrolled-past');
-        scrolledPast = false;
-      }
-      lastPos = window.scrollY;
-    "
-    x-bind:class="{
-      'is-fixed': fixed,
-      'is-hidden': hidden,
-      'menu-open': navOpen
-    }"
     class="site-header-inner h-full flex items-center gap-5"
   >
     <button x-on:click="navOpen = !navOpen" :class="{ 'active': navOpen }" class="mobile-menu-button inline-block hide-laptop">

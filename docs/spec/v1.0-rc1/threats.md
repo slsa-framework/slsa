@@ -1,13 +1,16 @@
 ---
 title: Threats and mitigations
+prev_page:
+  title: Verifying Build Systems
+  url: verifying-systems
+next_page:
+  title: Frequently Asked Questions
+  url: faq
 ---
-<div class="subtitle">
 
 Attacks can occur at every link in a typical software supply chain, and these
 kinds of attacks are increasingly public, disruptive, and costly in today's
 environment.
-
-</div>
 
 SLSA's [levels](levels.md) are designed to mitigate the risk of these attacks.
 This page enumerates possible attacks throughout the supply chain and shows how
