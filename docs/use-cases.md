@@ -1,6 +1,10 @@
 ---
 title: Use cases
+<<<<<<< HEAD
 
+=======
+description: Applications of SLSA from different use cases.
+>>>>>>> 6ac4ece (Add description across SLSA pages.)
 layout: standard
 ---
 

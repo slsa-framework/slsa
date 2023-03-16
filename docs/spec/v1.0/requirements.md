@@ -1,4 +1,6 @@
 ---
+title: Producing artifacts
+description: This page covers the detailed technical requirements for producing artifacts at each SLSA level. The intended audience is system implementers and security engineers.
 prev_page:
   title: Security levels
   url: levels
@@ -7,7 +9,6 @@ next_page:
   url: verifying-systems
 ---
 
-# Producing artifacts
 
 This page covers the detailed technical requirements for producing artifacts at
 each SLSA level. The intended audience is system implementers and security

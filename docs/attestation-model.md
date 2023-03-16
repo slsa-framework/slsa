@@ -1,5 +1,6 @@
 ---
 title: Software attestations
+description: Overview of software attestations and is specifics related to SLSA.
 layout: specifications
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Threats and mitigations
+description: Specific supply chain attacks and how SLSA helps
 prev_page:
     title: Requirements
     url: requirements

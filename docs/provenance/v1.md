@@ -1,5 +1,6 @@
 ---
 title: Provenance
+description: Description of SLSA provenance specification for verifying where, when, and how something was produced.
 layout: standard
 ---
 <!-- Note: We only include the major version in the URL, e.g. "v1" instead of

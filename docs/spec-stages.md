@@ -1,5 +1,6 @@
 ---
 title: Specification Stages
+description: Life cycle for SLSA specification stages.
 layout: specifications
 ---
 

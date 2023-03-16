@@ -1,10 +1,10 @@
 ---
+title: SLSA specification
+description: SLSA is a specification for describing and incrementally improving supply chain security, established by industry consensus. It is organized into a series of levels that describe increasing security guarantees. This is **version 1.0** of the SLSA specification, which defines the SLSA levels.
 next_page:
   title: What's new in SLSA v1.0
   url: whats-new
 ---
-
-# SLSA specification
 
 SLSA is a specification for describing and incrementally improving supply chain
 security, established by industry consensus. It is organized into a series of

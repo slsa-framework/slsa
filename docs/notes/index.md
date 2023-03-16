@@ -1,4 +1,7 @@
-# Meeting notes
+---
+title: Meeting notes
+description: Links for SLSA community meeting notes.
+---
 
 This directory contains simple aliases for the SLSA community meeting notes
 docs. This way you can type, for example, `https://slsa.dev/notes/community`

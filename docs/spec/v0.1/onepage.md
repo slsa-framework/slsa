@@ -1,5 +1,6 @@
 ---
 title: SLSA Specification
+description: Description of the SLSA standards and technical controls to improve artifact integrity.
 layout: standard
 ---
 {%- comment -%}

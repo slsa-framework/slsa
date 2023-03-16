@@ -1,5 +1,6 @@
 ---
 title: Community
+description: Learn about and get involved in the SLSA community.
 layout: standard
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Get started
+description: A quick start guide for steps needed to reach different SLSA levels.
 layout: standard
 ---
 

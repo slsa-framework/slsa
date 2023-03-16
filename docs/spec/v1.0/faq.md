@@ -1,4 +1,6 @@
 ---
+title: FAQ
+descriptions: Answers to questions frequently asked about the SLSA specification.
 layout: specifications
 prev_page:
   title: Supply-chain threats
@@ -7,7 +9,6 @@ next_page:
   title: Future directions
   url: future-directions
 ---
-# FAQ
 
 ## Q: Why is SLSA not transitive?
 
