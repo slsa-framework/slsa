@@ -10,11 +10,10 @@ next_page:
 
 Attacks can occur at every link in a typical software supply chain, and these
 kinds of attacks are increasingly public, disruptive, and costly in today's
-environment. [TODO: add link to Threats in detail here and bottom]
+environment. 
 
-SLSA's [levels](levels.md) are designed to mitigate the risk of these attacks.
-This page enumerates possible attacks throughout the supply chain and shows how
-SLSA can help. For a background, see [Terminology](terminology.md).
+This page is an introduction to possible attacks throughout the supply chain and how
+SLSA can help. For a more technical discussion, see [Threats & mitigations](threats.md).
 
 ## Summary
 

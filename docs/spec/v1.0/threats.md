@@ -1,10 +1,10 @@
 ---
 prev_page:
-  title: Verifying build systems
-  url: verifying-systems
+  title: Verifying artifacts
+  url: verifying-artifacts
 next_page:
-  title: FAQ
-  url: faq
+  title: 
+  url: 
 ---
 # Threats & mitigations
 

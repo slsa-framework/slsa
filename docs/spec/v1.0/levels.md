@@ -7,7 +7,7 @@ next_page:
   url: requirements
 ---
 
-# Security Levels
+# Security levels
 
 <div class="subtitle">
 
