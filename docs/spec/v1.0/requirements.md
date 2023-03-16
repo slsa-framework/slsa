@@ -1,12 +1,13 @@
 ---
-title: Producing artifacts
 prev_page:
-  title: Terminology
-  url: terminology
+  title: Security levels
+  url: levels
 next_page:
-  title: Verifying Build Systems
+  title: Verifying build systems
   url: verifying-systems
 ---
+
+# Producing artifacts
 
 This page covers the detailed technical requirements for producing artifacts at
 each SLSA level. The intended audience is system implementers and security

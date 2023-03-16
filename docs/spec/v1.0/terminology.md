@@ -1,15 +1,23 @@
 ---
-title: Terminology
 prev_page:
-  title: Guiding principles
-  url: principles
+  title: Future directions
+  url: future-directions
 next_page:
-  title: Producing artifacts
-  url: requirements
+  title: Security levels
+  url: levels
 ---
+
+# Terminology
 
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set
 of terminology and models to describe what we're protecting.
+
+## TODO: Terms we still need to define
+
+> **TODO:** Define these terms before the v1.0 release.
+
+-   Ecosystem
+-   Project
 
 ## Software supply chain
 
