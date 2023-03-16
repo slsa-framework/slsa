@@ -7,12 +7,8 @@ next_page:
     title: Threats and mitigations
     url: threats
 ---
-<div class="subtitle">
-
 This page covers all of the technical requirements for an artifact to meet the
 [SLSA Levels](levels.md).
-
-</div>
 
 For background, see [Introduction](index.md) and [Terminology](terminology.md).
 To better understand the reasoning behind the requirements, see
