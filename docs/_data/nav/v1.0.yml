@@ -1,4 +1,5 @@
 # Pages that show in the nav aside and in the spec index page.
+# The spec index does not show top-level elements without children.
 
 - title: Overview
   url: /
