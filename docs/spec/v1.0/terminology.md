@@ -1,5 +1,4 @@
 ---
-title: Terminology
 prev_page:
   title: Future directions
   url: future-directions
@@ -7,13 +6,10 @@ next_page:
   title: Security levels
   url: levels
 ---
-
-<div class="subtitle">
+# Terminology
 
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set
 of terminology and models to describe what we're protecting.
-
-</div>
 
 ## TODO: Terms we still need to define
 

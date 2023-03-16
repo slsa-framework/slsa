@@ -1,13 +1,13 @@
 ---
-title: Frequently Asked Questions
 layout: specifications
 prev_page:
-  title: Use cases (TODO)
-  url:  
+  title: Supply-chain threats
+  url:  threats-overview
 next_page:
   title: Future directions
   url: future-directions
 ---
+# FAQ
 
 ## Q: Why is SLSA not transitive?
 

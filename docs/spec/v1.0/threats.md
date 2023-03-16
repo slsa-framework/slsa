@@ -1,20 +1,17 @@
 ---
-title: Threats & mitigations
 prev_page:
-  title: Verifying Build Systems
+  title: Verifying build systems
   url: verifying-systems
 next_page:
-  title: Frequently Asked Questions
+  title: FAQ
   url: faq
 ---
-
-<div class="subtitle">
+# Threats & mitigations
 
 What follows is a comprehensive technical analysis of supply chain threats and
 their corresponding mitigations in SLSA. For an introduction to the
 supply-chain threats that SLSA protects agains, see [Supply-chain threats].
 
-</div>
 The examples on this page are meant to:
 
 -   Explain the reasons for each of the SLSA [requirements](requirements.md).

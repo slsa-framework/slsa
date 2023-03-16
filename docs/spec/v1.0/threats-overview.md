@@ -1,20 +1,16 @@
 ---
-title: Supply-chain threats 
-
 prev_page:
   title: SLSA overview
   url: principles
 next_page:
-  title: Use cases TODO
-  url: 
+  title: FAQ
+  url: faq
 ---
-<div class="subtitle">
+# Supply-chain threats 
 
 Attacks can occur at every link in a typical software supply chain, and these
 kinds of attacks are increasingly public, disruptive, and costly in today's
 environment. [TODO: add link to Threats in detail here and bottom]
-
-</div>
 
 SLSA's [levels](levels.md) are designed to mitigate the risk of these attacks.
 This page enumerates possible attacks throughout the supply chain and shows how
