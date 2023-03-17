@@ -1,0 +1,39 @@
+{%- comment %}
+If a onepage exists adds a selector to choose between the multiple
+pages and one page formats.
+{%- endcomment %}
+
+{%- if page.name == "index.md" %}
+{%- assign onepageurl = page.url | append: "onepage" %}
+{%- else %}
+{%- assign url_parts = page.url | split: '/' %}
+{%- assign onepageurl = page.url | replace: url_parts[-1], "onepage" %}
+{%- endif %}
+
+{% capture pattern %}page.url == "{{onepageurl}}"{% endcapture %}
+{% assign onepage = site.pages | where_exp: "page", pattern | first%}
+
+{%- if {{onepage}} %}
+
+{%- if page.layout == "specifications" %}
+<div class="rounded-lg p-4 border border-gray-400 mb-4">
+{%- else %} <!-- page.layout == "standard" -->
+<div class="rounded-lg p-4 border border-green-900 mt-4 md:mt-0 mb-4">
+{%- endif %}
+
+{%- if page.name == "onepage.md" %}
+<a href="." style="display: inline">Multiple pages format</a>
+{%- else %}
+  {%- if page.name == "index.md" %}
+     <a href="onepage" style="display: inline">One page format</a>
+  {%- else %}
+     {%- comment %}
+     If we are not on the index page, go to the corresponding section.
+     {%- endcomment %}
+     {%- assign fragment = "onepage#" | append: url_parts[-1] %}
+     <a href="{{fragment}}" style="display: inline">One page format</a>
+  {%- endif %}
+{%- endif %}
+
+</div>
+{%- endif %}
