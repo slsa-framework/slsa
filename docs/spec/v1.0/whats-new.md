@@ -1,10 +1,8 @@
 ---
 prev_page:
-  title: SLSA v1.0
   url: index
 
 next_page:
-  title: About SLSA
   url: principles
 ---
 

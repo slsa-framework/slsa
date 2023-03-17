@@ -1,9 +1,7 @@
 ---
 prev_page:
-  title: Future directions
   url: future-directions
 next_page:
-  title: Security levels
   url: levels
 ---
 

@@ -1,10 +1,6 @@
 ---
 prev_page:
-  title: Verifying artifacts
   url: verifying-artifacts
-next_page:
-  title: 
-  url: 
 ---
 # Threats & mitigations
 

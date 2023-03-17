@@ -2,7 +2,6 @@
 title: Frequently Asked Questions
 layout: specifications
 prev_page:
-    title: Threats and mitigations
     url: threats
 ---
 
