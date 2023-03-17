@@ -1,6 +1,6 @@
 ---
 prev_page:
-  title: SLSA overview
+  title: About SLSA
   url: principles
 next_page:
   title: FAQ

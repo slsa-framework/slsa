@@ -2,15 +2,6 @@
 # The spec index does not show top-level elements without children.
 
 - title: Overview
-  url: /
-
-- title: Community
-  url: /community
-
-- title: Blog
-  url: /blog
-
-- title: Specification index
   url: /spec/v1.0/
 
 - title: Understanding SLSA
@@ -24,7 +15,7 @@
     url: /spec/v1.0/whats-new
     description: What's new in SLSA Version 1.0
 
-  - title: SLSA overview
+  - title: About SLSA
     url: /spec/v1.0/principles
     description: An introductory guide to SLSA
 
@@ -114,6 +105,12 @@
 
 - title: Specification stages
   url: /spec-stages
+
+- title: Community
+  url: /community
+
+- title: Blog
+  url: /blog
 
 - title: Single-page view
   url: /spec/v1.0/onepage

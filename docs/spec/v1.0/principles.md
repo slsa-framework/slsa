@@ -7,7 +7,7 @@ next_page:
   url: threats-overview
 ---
 
-# SLSA overview
+# About SLSA
 
 This page is an introduction to SLSA and its guiding principles. If you're new
 to SLSA, start here!

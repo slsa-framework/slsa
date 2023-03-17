@@ -1,7 +1,4 @@
 # Pages that show in the nav aside.
-- title: Overview
-  url: /
-
 - title: Specifications
   children:
 
