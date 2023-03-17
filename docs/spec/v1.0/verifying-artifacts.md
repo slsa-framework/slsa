@@ -33,7 +33,6 @@ package ecosystem do not have to verify provenance. Consumers can do so with
 client-side verification tooling or by polling a monitor, but there is no
 requirement that they do so.
 
-
 > **TODO** Add a diagram.
 
 ### Package ecosystem
