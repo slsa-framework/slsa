@@ -13,21 +13,26 @@ provenance doesn't do anything unless somebody inspects it. SLSA calls that
 inspection verification, and this page describes how to verify artifacts and
 their SLSA provenance.
 
-## Overview
-
-This page is divided into the sections. The first discusses choices system
-implementers must make regarding verifying provenance. The second describes
-how system implementers set the expectations used to verify provenance. The
-third describes for tool implementers the procedure for verifying an artifact
+This page is divided into several sections. The first discusses choices
+software distribution and/or deployment system implementers must make regarding
+verifying provenance. The second describes how to set the expectations used to
+verify provenance. The third describes the procedure for verifying an artifact
 and its provenance against a set of expectations.
 
 ## Architecture options
 
-System implementers decide which part of the system will verify provenance:
+System implementers decide which part(s) of the system will verify provenance:
 the package ecosystem at upload time, the consumers at download time, or via a
 continuous monitoring system. Each option comes with its own set of
-considerations, but all are valid. The options are also not mutually exclusive
--- more than one component of a system can verify provenance.
+considerations, but all are valid. The options are not mutually exclusive, but
+at least one part of a SLSA-conformant system must verify provenance.
+
+More than one component can verify provenance. For example, if a package
+ecosystem verifies provenance, then consumers who get artifacts from that
+package ecosystem do not have to verify provenance. Consumers can do so with
+client-side verification tooling or by polling a monitor, but there is no
+requirement that they do so.
+
 
 > **TODO** Add a diagram.
 
@@ -65,21 +70,18 @@ meets its producer's expectations).
 A package's <dfn>consumer</dfn> is the organization or individual that uses the
 package.
 
-Consumers can set their own expectations for artifacts and use client-side
-verification tooling to ensure that the artifact's provenance matches the
-consumer's expectations for that package name before use (e.g. during
-installation or deployment). Client-side verification tooling can be either
-standalone, such as
+Consumers can set their own expectations for artifacts or use default
+expectations provided by the package producer and/or package ecosystem.
+In this situation, the consumer uses client-side verification tooling to ensure
+that the artifact's provenance matches their expectations for that package
+before use (e.g. during installation or deployment). Client-side verification
+tooling can be either standalone, such as
 [slsa-verifier](https://github.com/slsa-framework/slsa-verifier), or built into
 the package ecosystem client.
 
-Consumers can either audit the build systems
-themselves using the prompts in [verifying systems](verifying-systems.md) or
-rely on the [SLSA certification program](certification.md) (coming soon).
+### Monitor
 
-### External Monitor
-
-[External monitor]: #external-monitor
+[Monitor]: #monitor
 
 A <dfn>monitor</dfn> is a service that verifies provenance for a set
 of packages and publishes the result of that verification. The set of
@@ -87,7 +89,7 @@ packages verified by a monitor is arbitrary, though it MAY mimic the set
 of packages published through one or more package ecosystems. The monitor
 MUST publish its expectations for all the packages it verifies.
 
-Verifiers may continuously poll an external monitor to detect artifacts that
+Verifiers can continuously poll a monitor to detect artifacts that
 do not meet the monitor's expectations. Detecting artifacts that fail
 verification is of limited benefit unless a human or another part of the system
 responds to the failed verification.
@@ -332,7 +334,7 @@ be a sign that the `buildType`'s level of abstraction is too low. For example,
 `externalParameters` that record a list of commands to run is likely impractical
 to verify because the commands change on every build. Instead, consider a
 `buildType` that defines the list of commands in a configuration file in a
-source repository, then make put only the source repository in
+source repository, then put only the source repository in
 `externalParameters`. Such a design is easier to verify because the source
 repository is constant across builds.
 
