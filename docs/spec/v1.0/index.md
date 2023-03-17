@@ -33,7 +33,8 @@ Known issues:
     like feedback on whether to move these parts out of the build track.
 
 {%- for section in site.data.nav.v10 %}
-{%- unless section.children %}{%- continue %}{%- endunless %}
+{%- if section.children %}
+
 ## {{ section.title }}
 
 {{ section.description }}
@@ -43,4 +44,6 @@ Known issues:
 {%- for child in section.children %}
 | [{{child.title}}]({{child.url | relative_url}}) | {{child.description}} |
 {%- endfor %}
+
+{%- endif %}
 {%- endfor %}
