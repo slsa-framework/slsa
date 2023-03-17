@@ -204,8 +204,11 @@ build system (i.e. outside the trust boundary).
     strength. The purpose is to deter adversaries who might face legal or
     financial risk from evading controls.
 
-*Completeness:* SHOULD be complete, but there MAY be external parameters that
-are not sufficiently captured in the provenance.
+*Completeness:* SHOULD be complete.
+
+-   There MAY be external parameters that are not sufficiently captured in
+    the provenance.
+-   Completeness of resolved dependencies is best effort.
 
 <td> <td>✓<td>✓
 <tr id="provenance-non-forgeable"><td>Provenance is Non-forgeable<td>
@@ -222,8 +225,10 @@ are not sufficiently captured in the provenance.
     service in a trusted control plane. The user-controlled build steps MUST
     NOT be able to inject or alter the contents.
 
-*Completeness:* MUST be complete. In particular, the external parameters MUST be
-fully enumerated in the provenance.
+*Completeness:* SHOULD be complete.
+
+-   External parameters MUST be fully enumerated.
+-   Completeness of resolved dependencies is best effort.
 
 Note: This requirement was called "non-falsifiable" in the initial
 [draft version (v0.1)](../v0.1/requirements.md#non-falsifiable).
