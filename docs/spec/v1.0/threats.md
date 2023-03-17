@@ -386,33 +386,25 @@ provenance.
 
 These threats are directly addressed by the SLSA Build track.
 
-<details><summary>Compromise build environment of subsequent build <span>(Build L3)</span></summary>
-
-*Threat:* Perform a "bad" build that persists a change in the build environment,
-then run a subsequent "good" build using that environment.
-
-*Mitigation:* Builder ensures that each build environment is [ephemeral], with
-no way to persist changes between subsequent builds.
-
-*Example:* Build service uses the same machine for subsequent builds. Adversary
-first runs a build that replaces the `make` binary with a malicious version,
-then runs a subsequent build that otherwise would pass expectations. Solution:
-Builder changes architecture to start each build with a clean machine image.
-
-</details>
-<details><summary>Compromise parallel build <span>(Build L3)</span></summary>
+<details><summary>Compromise other build <span>(Build L3)</span></summary>
 
 *Threat:* Perform a "bad" build that alters the behavior of another "good" build
-running in parallel.
+running in parallel or subsequent environments.
 
 *Mitigation:* Builds are [isolated] from one another, with no way for one to
-affect the other.
+affect the other or persist changes.
 
-*Example:* Build service runs all builds for project MyPackage on the same
-machine as the same Linux user. Adversary starts a "bad" build that listens for
-the "good" build and swaps out source files, then starts a "good" build that
-would otherwise pass expectations. Solution: Builder changes architecture to
-isolate each build in a separate VM or similar.
+*Example 1:* Build service runs all builds for project MyPackage on
+the same machine as the same Linux user. Adversary starts a "bad" build that
+listens for the "good" build and swaps out source files, then starts a "good"
+build that would otherwise pass expectations. Solution: Builder changes
+architecture to isolate each build in a separate VM or similar.
+
+*Example 2:* Build service uses the same machine for subsequent
+builds. Adversary first runs a build that replaces the `make` binary with a
+malicious version, then runs a subsequent build that otherwise would pass
+expectations. Solution: Builder changes architecture to start each build with a
+clean machine image.
 
 </details>
 <details><summary>Steal cryptographic secrets <span>(Build L3)</span></summary>
@@ -663,9 +655,8 @@ accept cryptographic hashes with strong collision resistance.
 <!-- Links -->
 
 [authentic]: requirements.md#provenance-authentic
-[ephemeral]: requirements.md#ephemeral-isolated
 [exists]: requirements.md#provenance-exists
-[isolated]: requirements.md#ephemeral-isolated
+[isolated]: requirements.md#isolated
 [non-forgeable]: requirements.md#provenance-non-forgeable
 [service]: requirements.md#build-service
 [supply-chain threats]: threats-overview

@@ -60,7 +60,7 @@ Responsibility to implement SLSA is spread across the following parties.
   <td><a href="#build-service">Build service</a>
   <td> <td>✓<td>✓
 <tr>
-  <td><a href="#ephemeral-isolated">Ephemeral and isolated</a>
+  <td><a href="#isolated">Isolated</a>
   <td> <td> <td>✓
 </table>
 
@@ -262,23 +262,48 @@ workstation.
 Examples: GitHub Actions, Google Cloud Build, Travis CI.
 
 <td> <td>✓<td>✓
-<tr id="ephemeral-isolated">
-<td>Ephemeral and isolated
+<tr id="isolated">
+<td>Isolated
 <td>
 
-The build service ensured that the build steps ran in an ephemeral and isolated
-environment provisioned solely for this build, free of influence from other
-build instances, whether prior or concurrent.
+The build service ensured that the build steps ran in an isolated environment,
+free of unintended external influence. In other words, any external influence on
+the build was specifically requested by the build itself. This MUST hold true
+even between builds within the same tenant project.
 
--   It MUST NOT be possible for a build to access any secrets of the build service, such as the provenance signing key.
--   It MUST NOT be possible for two builds that overlap in time to influence one another.
--   It MUST NOT be possible for one build to persist or influence the build environment of a subsequent build.
--   Build caches, if used, MUST be purely content-addressable to prevent tampering.
--   The build SHOULD NOT call out to remote execution unless it's considered part of the "builder" within the trust boundary.
--   The build SHOULD NOT open services that allow for remote influence.
+The build system MUST guarantee the following:
 
-Note: This requirement was split into "Isolated" and "Ephemeral Environment"
+-   It MUST NOT be possible for a build to access any secrets of the build
+    service, such as the provenance signing key, because doing so would
+    compromise the authenticity of the provenance.
+-   It MUST NOT be possible for two builds that overlap in time to influence one
+    another, such as by altering the memory of a different build process running
+    on the same machine.
+-   It MUST NOT be possible for one build to persist or influence the build
+    environment of a subsequent build. In other words, an ephemeral build
+    environment MUST be provisioned for each build.
+-   It MUST NOT be possible for one build to inject false entries into a build
+    cache used by another build, also known as "cache poisoning". In other
+    words, the output of the build MUST be identical whether or not the cache is
+    used.
+-   The build system MUST NOT open services that allow for remote influence
+    unless all such interactions are captured as `externalParameters` in the
+    provenance.
+
+There are no sub-requirements on the build itself. Build L3 is limited to
+ensuring that a well-intentioned build runs securely. It does not require that
+build systems prevent a producer from performing a risky or insecure build. In
+particular, the "Isolated" requirement does not prohibit a build from calling
+out to a remote execution service or a "self-hosted runner" that is outside the
+trust boundary of the build platform.
+
+NOTE: This requirement was split into "Isolated" and "Ephemeral Environment"
 in the initial [draft version (v0.1)](../v0.1/requirements.md).
+
+NOTE: This requirement is not to be confused with "Hermetic", which roughly
+means that the build ran with no network access. Such a requirement requires
+substantial changes to both the build system and each individual build, and is
+considered in the [future directions](future-directions.md).
 
 <td> <td> <td>✓
 </table>
