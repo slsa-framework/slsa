@@ -26,6 +26,9 @@
       - title: FAQ
         url: /spec/v0.1/faq
 
+      - title: Single-page view
+        url: /spec/v0.1/onepage
+
     - title: Attestations
       children:
 

@@ -38,6 +38,9 @@
       - title: Future directions
         url: /spec/v1.0-rc1/future-directions
 
+      - title: Single-page view
+        url: /spec/v1.0-rc1/onepage
+
     - title: Attestations
       children:
 
