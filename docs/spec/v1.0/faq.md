@@ -1,5 +1,5 @@
 ---
-title: FAQ
+title: Frequently asked questions
 descriptions: Answers to questions frequently asked about the SLSA specification.
 layout: specifications
 prev_page:

@@ -1,6 +1,6 @@
 ---
 title: Frequently Asked Questions
-description: Questions and more information
+description: Questions and more information.
 layout: specifications
 prev_page:
     title: Threats and mitigations

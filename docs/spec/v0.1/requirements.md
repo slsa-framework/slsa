@@ -1,6 +1,6 @@
 ---
 title: Requirements
-description: Technical requirements to reach each level
+description: Technical requirements to reach each level.
 prev_page:
     title: Security levels
     url: levels

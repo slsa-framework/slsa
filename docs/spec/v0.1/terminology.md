@@ -1,6 +1,6 @@
 ---
 title: Terminology
-description: Start here to understand how we model supply chains
+description: Start here to understand how we model supply chains.
 prev_page:
   title: Introduction
   url: ./
