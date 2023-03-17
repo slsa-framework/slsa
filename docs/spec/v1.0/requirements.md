@@ -260,7 +260,7 @@ information on assessing a build system's isolation strength, see
 
 Note: The isolation strength only applies to the build system and not to the
 build itself. A similar hermetic property was associated to the build in the
-initial [draft version (v0.1)](../v0.1/requirements.md#hermetic),
+initial [draft version (v0.1)](../v0.1/requirements.md#hermetic).
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
