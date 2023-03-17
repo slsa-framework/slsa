@@ -647,21 +647,26 @@ body {
 }
 
 .site-nav {
-    .nav-sub-list {
+    li li {
         padding-left: $spacer-l;
     }
 
-    .nav-item,
-    .nav-link {
+    li,
+    a[href] {
+        color: $text-color-light;
         display: block;
+        font-family: "Prodigy";
     }
 
-    .nav-item {
+    li {
+        line-height: $base-line-height;
         text-indent: 8px;
     }
 
-    .nav-link {
+    a[href] {
+        font-weight: $base-font-weight;
         padding: 2px 8px 4px;
+        text-decoration: none;
         text-indent: 0;
 
         &:hover,

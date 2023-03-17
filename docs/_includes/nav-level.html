@@ -1,9 +1,7 @@
-{% assign subLevel = 0 %}
 {%- if include.collection.size > 0 -%}
-  <ul class="nav-list nav-sub-list level-{{ include.level }}">
-    {% assign menuNum = include.menuNum %}
+  <ul>
     {%- for subitem in include.collection -%}
-    <li class="nav-item">
+    <li>
       {%- if subitem.spacer %}
         <hr />
       {%- elsif subitem.url %}
@@ -11,15 +9,12 @@
           {{ subitem.title | escape }}
         </a>
       {%- elsif subitem.children.size > 0 %}
-        {%- assign menuNum = menuNum | plus: 1 %}
-        {%- assign subMenu = sublevel | plus: 1 %}
-        {%- assign subName = include.name  | append: 'sub' | append: menuNum %}
         {{ subitem.title | escape }}
-        {% include nav-level.html collection=subitem.children mobile=include.mobile name=subName level=subMenu menuNum=menuNum %}
+        {% include nav-level.html collection=subitem.children %}
       {%- else %}
         <em>{{ subitem.title | escape }}</em>
       {%- endif %}
     </li>
     {%- endfor %}
   </ul>
-  {%- endif -%}
+{%- endif %}
