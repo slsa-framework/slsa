@@ -26,7 +26,12 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ### Build levels
 
-Responsibility to implement SLSA is spread across the following parties.
+In order to produce artifacts with a specific build level, responsibility is
+split between the <a href="#producer">Producer</a> and <a href="#build-system">
+Build system</a>. The build system MUST strengthen the security controls in
+order to achieve a specific level while the producer MUST choose and adopt a
+build system capable of achieving a desired build level, implementing any
+controls as specified by the chosen system.
 
 <table class="no-alternate">
 <tr>
@@ -67,11 +72,11 @@ Responsibility to implement SLSA is spread across the following parties.
 ### Security Best Practices
 
 While the exact definition of what constitutes a secure system is beyond the
-scope of this specification, to be conformant all implementations MUST use
-industry security best practices. This includes, but is not limited to, using
-proper access controls, securing communications, implementing proper management
-of cryptographic secrets, doing frequent updates, and promptly fixing known
-vulnerabilities.
+scope of this specification, all implementations MUST use industry security
+best practices to be conformant to this specification. This includes, but is
+not limited to, using proper access controls, securing communications,
+implementing proper management of cryptographic secrets, doing frequent updates,
+and promptly fixing known vulnerabilities.
 
 Various relevant standards and guides can be consulted for that matter such as
 the [CIS Critical Security
@@ -84,6 +89,12 @@ Controls](https://www.cisecurity.org/controls/cis-controls-list).
 A package's <dfn>producer</dfn> is the organization that owns and releases the
 software. It might be an open-source project, a company, a team within a
 company, or even an individual.
+
+NOTE: There were more requirements for producers in the initial
+[draft version (v0.1)](../v0.1/requirements.md#scripted-build) which impacted
+how a package can be built. These were removed in the v1.0 specification and
+will be reassessed and re-added as indicated in the
+[future directions](future-directions.md).
 
 ### Choose an appropriate build system
 
