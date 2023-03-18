@@ -4,7 +4,7 @@ prev_page:
   url: index
 
 next_page:
-  title: SLSA overview
+  title: About SLSA
   url: principles
 ---
 

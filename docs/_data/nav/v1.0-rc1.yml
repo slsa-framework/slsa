@@ -1,0 +1,66 @@
+# Pages that show in the nav aside.
+- title: Specifications
+  children:
+
+    - title: SLSA
+      children:
+
+      - title: Introduction
+        url: /spec/v1.0-rc1/
+
+      - title: Levels
+        url: /spec/v1.0-rc1/levels
+
+      - title: Guiding principles
+        url: /spec/v1.0-rc1/principles
+
+      - title: Terminology
+        url: /spec/v1.0-rc1/terminology
+
+      - title: Producing artifacts
+        url: /spec/v1.0-rc1/requirements
+
+      - title: Verifying build systems
+        url: /spec/v1.0-rc1/verifying-systems
+
+      - title: Verifying artifacts
+        url: /spec/v1.0-rc1/verifying-artifacts
+
+      - title: Threats & mitigations
+        url: /spec/v1.0-rc1/threats
+
+      - title: FAQ
+        url: /spec/v1.0-rc1/faq
+
+      - title: Future directions
+        url: /spec/v1.0-rc1/future-directions
+
+      - title: Single-page view
+        url: /spec/v1.0-rc1/onepage
+
+    - title: Attestations
+      children:
+
+      - title: General Model
+        url: /attestation-model
+
+      - title: Provenance
+        url: /provenance/v1.0-rc1
+
+      - title: VSA
+        url: /verification_summary/v1.0-rc1
+
+    - title: Stages
+      url: /spec-stages
+
+- title: Use cases
+  url: /use-cases
+
+- title: Get started
+  url: /get-started
+
+- title: Community
+  url: /community
+
+- title: Blog
+  url: /blog

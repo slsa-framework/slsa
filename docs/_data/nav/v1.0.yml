@@ -1,0 +1,116 @@
+# Pages that show in the nav aside and in the spec index page.
+# The spec index does not show top-level elements without children.
+
+- title: Overview
+  url: /spec/v1.0/
+
+- title: Understanding SLSA
+  description: >
+    These pages provide an overview of SLSA, how it helps protect against common
+    supply-chain attacks, and common use cases. If you're new to SLSA or
+    supply-chain security, start here.
+  children:
+
+  - title: What's new in v1.0
+    url: /spec/v1.0/whats-new
+    description: What's new in SLSA Version 1.0
+
+  - title: About SLSA
+    url: /spec/v1.0/principles
+    description: An introductory guide to SLSA
+
+  - title: Supply-chain threats
+    url: /spec/v1.0/threats-overview
+    description: An introduction to supply-chain threats
+
+  - title: Use cases
+    url: /spec/v1.0/use-cases
+    description: Use cases
+
+  - title: FAQ
+    url: /spec/v1.0/faq
+    description: Questions and more information
+
+  - title: Future directions
+    url: /spec/v1.0/future-directions
+    description: Additions and changes being considered for future SLSA versions
+
+- title: Core specification
+  description: >
+    These pages describe SLSA's security levels and requirements for each track.
+    If you want to achieve SLSA a particular level, these are the requirements
+    you'll need to meet.
+  children:
+
+  - title: Terminology
+    url: /spec/v1.0/terminology
+    description: Terminology and model used by SLSA
+
+  - title: Security levels
+    url: /spec/v1.0/levels
+    description: Overview of SLSA's tracks and levels, intended for all audiences
+
+  - title: Producing artifacts
+    url: /spec/v1.0/requirements
+    description: Detailed technical requirements for producing software artifacts, intended for system implementers
+
+  - title: Verifying build systems
+    url: /spec/v1.0/verifying-systems
+    description: Guidelines for securing SLSA Build L3+ builders, intended for system implementers
+
+  - title: Verifying artifacts
+    url: /spec/v1.0/verifying-artifacts
+    description: Guidance for verifying software artifacts and their SLSA provenance, intended for system implementers and software consumers
+
+  - title: Threats & mitigations
+    url: /spec/v1.0/threats
+    description: Detailed information about specific supply-chain attacks and how SLSA helps
+
+- title: Attestation formats
+  description: >
+    These pages include the concrete schemas for SLSA attestations. The
+    Provenance and VSA formats are recommended, but not required by the
+    specification.
+  children:
+
+  - title: General model
+    url: /attestation-model
+    description: General attestation mode
+
+  - title: Provenance
+    url: /provenance/v1
+    description: Suggested provenance format and explanation
+
+  - title: VSA
+    url: /verification_summary/v1
+    description: Suggested VSA format and explanation
+
+- title: How to SLSA
+  description: >
+    These instructions tell you how to apply the core SLSA specification to use
+    SLSA in your specific situation.
+  children:
+
+  - title: For developers
+    url: /get-started
+    description: How to apply SLSA requirements to your build
+
+  - title: For organizations (TODO)
+    # TODO: add page
+    description: How to apply SLSA to an organization
+
+  - title: For implementers (TODO)
+    # TODO: add page
+    description:  How to implement SLSA in source, build, and package systems
+
+- title: Specification stages
+  url: /spec-stages
+
+- title: Community
+  url: /community
+
+- title: Blog
+  url: /blog
+
+- title: Single-page view
+  url: /spec/v1.0/onepage

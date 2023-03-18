@@ -1,3 +1,14 @@
+{%- comment %}
+  Look up the nav bar using the version from the URL. We need to assign
+  temporary variables because liquid does not support nested []'s.
+{%- endcomment %}
+{%- assign url_parts = page.url | split: '/' %}
+{%- assign part_1 = url_parts[1] %}
+{%- assign part_2 = url_parts[2] %}
+{%- assign key = site.data.nav.config.url_to_key[part_1]
+      | default: site.data.nav.config.url_to_key[part_2]
+      | default: site.data.nav.config.url_to_key["latest"] %}
+{%- assign nav = site.data.nav[key] %}
 <nav class="site-nav">
-  {%- include nav-level.html collection=site.data.nav %}
+  {%- include nav-level.html collection=nav %}
 </nav>
