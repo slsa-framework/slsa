@@ -1,4 +1,5 @@
 ---
+description: Frequently asked questions about SLSA
 layout: specifications
 prev_page:
   title: Supply-chain threats

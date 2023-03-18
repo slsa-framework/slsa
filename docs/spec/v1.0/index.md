@@ -1,4 +1,5 @@
 ---
+description: Overview of SLSA information on this site
 next_page:
   title: What's new in SLSA v1.0
   url: whats-new
@@ -40,7 +41,7 @@ supply-chain attacks, and common use cases. If you're new to SLSA or supply-chai
 | Page | Description |
 | ---- | --- |
 | [What's new in v1.0](whats-new.md) | What's new in SLSA Version 1.0 |
-| [SLSA overview](principles.md) | An introductory guide to SLSA |
+| [About SLSA](principles.md) | An introductory guide to SLSA |
 | [Supply-chain threats](threats-overview) | An introduction to supply-chain threats |
 | [Use cases](/use-cases) | Use cases |
 | [FAQ](faq.md) | Questions and more information |
