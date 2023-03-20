@@ -31,7 +31,7 @@ SLSA offers:
 
 ## Why SLSA is needed
 
-High profile attacks like SolarWinds or Codecov have exposed the kind of supply
+High profile attacks like those against [SolarWinds](https://www.crowdstrike.com/blog/sunspot-malware-technical-analysis/) or [Codecov](https://about.codecov.io/apr-2021-post-mortem/) have exposed the kind of supply
 chain integrity weaknesses that may go unnoticed, yet quickly become very
 public, disruptive, and costly in today's environment when exploited. They've
 also shown that there are inherent risks not just in code itself, but at
