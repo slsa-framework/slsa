@@ -1,5 +1,6 @@
 ---
 title: Community
+description: There's an active community of members, contributors and collaborators behind the SLSA framework. We're drawn together by the shared goals of improving software supply chain security and codifying best practices for development, deployment and governance, all collaborating on an objective framework that works for open source projects and organizations, influences policy and regulations, empowers engineers and builds for the future. Learn about and get involved in the SLSA community.
 layout: standard
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Specification Stages
+description: SLSA specifications go through various stages of development from which you should have different expectations. This document defines the different stages the SLSA project uses and their meaning for readers and contributors.
 layout: specifications
 ---
 

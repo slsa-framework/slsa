@@ -1,5 +1,6 @@
 ---
 title: Get started
+description: If you're looking to jump straight in and try SLSA, here's a quick start guide for the steps to take to reach the different SLSA levels.
 layout: standard
 ---
 

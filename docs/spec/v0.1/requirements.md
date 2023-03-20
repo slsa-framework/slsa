@@ -1,5 +1,6 @@
 ---
 title: Requirements
+description: Technical requirements to reach each level.
 prev_page:
     url: levels
 next_page:
