@@ -2,10 +2,8 @@
 title: SLSA overview
 description: This page is an introduction to SLSA and its guiding principles. If you're new to SLSA, start here!
 prev_page:
-  title: What's new in SLSA v1.0
   url: whats-new
 next_page:
-  title: Supply-chain threats
   url: threats-overview
 ---
 

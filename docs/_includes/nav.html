@@ -1,17 +1,14 @@
-{% assign menu = 0 %}
+{%- comment %}
+  Look up the nav bar using the version from the URL. We need to assign
+  temporary variables because liquid does not support nested []'s.
+{%- endcomment %}
+{%- assign url_parts = page.url | split: '/' %}
+{%- assign part_1 = url_parts[1] %}
+{%- assign part_2 = url_parts[2] %}
+{%- assign key = site.data.nav.config.url_to_key[part_1]
+      | default: site.data.nav.config.url_to_key[part_2]
+      | default: site.data.nav.config.url_to_key["latest"] %}
+{%- assign nav = site.data.nav[key] %}
 <nav class="site-nav">
-  <ul class="nav-list">
-    {%- for item in site.data.nav %}
-      <li class="nav-item">
-        {%- if item.url -%}
-          <a class="nav-link{% if item.url == page.url %} is-active{% endif %}" href="{{ item.url | relative_url }}">
-            {{ item.title | escape }}
-          </a>
-        {%- else -%}
-          {{ item.title | escape }}
-          {% include nav-level.html collection=item.children name=rootName mobile=include.mobile level=menu menuNum=0 %}
-        {%- endif -%}
-      </li>
-    {%- endfor %}
-  </ul>
+  {%- include nav-level.html collection=nav %}
 </nav>

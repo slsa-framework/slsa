@@ -2,11 +2,7 @@
 title: Threats & mitigations
 description: A comprehensive technical analysis of supply chain threats and their corresponding mitigations in SLSA.
 prev_page:
-  title: Verifying artifacts
   url: verifying-artifacts
-next_page:
-  title: 
-  url: 
 ---
 
 What follows is a comprehensive technical analysis of supply chain threats and

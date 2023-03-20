@@ -1,7 +1,4 @@
 # Pages that show in the nav aside.
-- title: Overview
-  url: /
-
 - title: Specifications
   children:
 
@@ -25,6 +22,9 @@
 
       - title: FAQ
         url: /spec/v0.1/faq
+
+      - title: Single-page view
+        url: /spec/v0.1/onepage
 
     - title: Attestations
       children:

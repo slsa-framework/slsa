@@ -2,10 +2,8 @@
 title: Terminology
 description: Start here to understand how we model supply chains.
 prev_page:
-  title: Introduction
-  url: ./
+  url: index
 next_page:
-  title: Security levels
   url: levels
 ---
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set
