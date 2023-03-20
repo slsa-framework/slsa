@@ -57,14 +57,3 @@ verification_summary:
       status: Draft
       draft: true
   current: v0.2
-
-github-actions-workflow:
-  versions:
-    v1-rc1:
-      name: Version 1.0 RC1
-      status: Candidate
-    v1:
-      name: Version 1.0 (DRAFT)
-      status: Draft
-      draft: true
-  current: v1-rc1

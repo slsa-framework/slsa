@@ -163,7 +163,7 @@ The URI SHOULD resolve to a human-readable specification that includes: overall
 description of the build type; schema for `externalParameters` and
 `systemParameters`; unambiguous instructions for how to initiate the build given
 this BuildDefinition, and a complete example. Example:
-https://slsa.dev/github-actions-workflow/v1
+https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1
 
 <tr id="externalParameters"><td><code>externalParameters</code>
 <td>object<td>
@@ -666,9 +666,7 @@ basis.
 The following is an partial index of build type definitions. Each contains a
 complete example predicate.
 
--   [GitHub Actions Workflow]
-
-[GitHub Actions Workflow]: /github-actions-workflow/v1-rc1
+-   [GitHub Actions Workflow (community-maintained)](https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1)
 
 **TODO:** Before marking the spec stable, add at least 1-2 other build types to
 validate that the design is general enough to apply to other builders.
