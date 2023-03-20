@@ -23,11 +23,11 @@ decisions about whether to trust a software package.
 
 SLSA offers:
 
--  A common vocabulary to talk about software supply-chain security
--  A way to judge the software you consume and secure your incoming supply chain
--  An actionable checklist to improve your own software's security
--  A way to measure your efforts toward compliance with forthcoming
-    Executive Order standards in the Secure Software Development Framework (SSDF)
+-   A common vocabulary to talk about software supply-chain security
+-   A way to judge the software you consume and secure your incoming supply chain
+-   An actionable checklist to improve your own software's security
+-   A way to measure your efforts toward compliance with forthcoming
+    Executive Order standards in the [Secure Software Development Framework (SSDF)](https://csrc.nist.gov/Projects/ssdf).
 
 ## Why SLSA is needed
 
@@ -59,7 +59,7 @@ complex software supply chain.
 
 ## SLSA in layman's terms
 
-There has been a lot of discussion about the need for "ingredient labels" for
+There has been a [lot of discussion](https://ntia.gov/page/software-bill-materials) about the need for "ingredient labels" for
 software—a "software bill of materials" (SBOM) that tells users what is in their
 software. Building off this analogy, SLSA can be thought of as all the food
 safety handling guidelines that make an ingredient list credible. From standards
@@ -76,11 +76,11 @@ software product, but also that the ingredient label itself wasn't tampered with
 and accurately reflects the software contents. In this way, SLSA helps protect
 against the risk of:
 
--  Code modification (by adding a tamper-evident "seal" to code after
+-   Code modification (by adding a tamper-evident "seal" to code after
     source control)
--  Uploaded artifacts that were not built by a CI/CD system (by marking
+-   Uploaded artifacts that were not built by a CI/CD system (by marking
     artifacts with a factory "stamp" that verifies which build service created it)
--  Threats against the build system (by providing "manufacturing facility"
+-   Threats against the build system (by providing "manufacturing facility"
     best practices for build system services)
 
 For more exploration of this analogy, see the blog post
@@ -88,7 +88,8 @@ For more exploration of this analogy, see the blog post
 
 ## Who is SLSA for?
 
-In short: everyone involved in producing, distributing, or consuming software.
+In short: everyone involved in producing, consuming software, or providing 
+infrastructure for software.
 
 **Software producers**, such as a development team at a software company or open
 source maintainers. SLSA gives you protection against insider risk and tampering
@@ -100,7 +101,7 @@ government agency using vendored software, or a CISO judging organizational
 risk. SLSA gives you a way to judge the security practices of the software you
 rely on and be sure that what you receive is what you expected.
 
-**Software implementers**, who provide infrastructure such as an ecosystem
+**Infrastructure providers**, who provide infrastructure such as an ecosystem
 package manager, build platform, or CI/CD system. As the bridge between the
 producers and consumers, your adoption of SLSA makes a secure software supply
 chain more frictionless for both of them. 
@@ -130,15 +131,17 @@ practices that qualify it for that level.
 
 There are several areas outside SLSA's current framework:
 
--  Code quality: SLSA does not tell you whether the developers writing the
+-   Code quality: SLSA does not tell you whether the developers writing the
     source code followed secure coding practices [TODO: ARE EXAMPLES NEEDED?]
--  Developer trust: SLSA cannot tell you whether a developer is
+-   Developer trust: SLSA cannot tell you whether a developer is
     intentionally writing malicious code. If you trust a developer to write
     code you want to consume, though, SLSA can guarantee that the code will
     reach you without another party maliciously tampering with it.
--  Transitive trust for dependencies: each artifact's SLSA level is
-    independent of its dependencies' levels. For a more detailed explanation of
-    why, see the [FAQ](faq).
+-   Transitive trust for dependencies: each artifact's SLSA level is
+    independent of its dependencies' levels. Though you can of course use
+    SLSA repeatedly down the depdency chain, there is currently no single 
+    number that applies to both an artifact and its transitive dependencies. 
+    For a more detailed explanation of why, see the [FAQ](faq).
 
 ## Guiding principles
 
