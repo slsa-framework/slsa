@@ -1,10 +1,8 @@
 ---
 layout: specifications
 prev_page:
-  title: Supply-chain threats
   url:  threats-overview
 next_page:
-  title: Future directions
   url: future-directions
 ---
 # FAQ

@@ -1,9 +1,7 @@
 ---
 prev_page:
-  title: Producing artifacts
   url: requirements
 next_page:
-  title: Verifying artifacts
   url: verifying-artifacts
 ---
 

@@ -1,9 +1,7 @@
 ---
 prev_page:
-  title: Frequently Asked Questions
   url: faq
 next_page:
-  title: Terminology
   url: terminology
 ---
 

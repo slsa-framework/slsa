@@ -1,7 +1,6 @@
 ---
 title: Introduction
 next_page:
-    title: Terminology
     url: terminology
 layout: standard
 stages:

@@ -1,9 +1,7 @@
 ---
 prev_page:
-  title: Security levels
   url: levels
 next_page:
-  title: Verifying build systems
   url: verifying-systems
 ---
 

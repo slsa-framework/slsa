@@ -1,9 +1,7 @@
 ---
 prev_page:
-  title: Verifying build systems
-  url: verifying-artifacts
+  url: verifying-systems
 next_page:
-  title: Threats & mitigations
   url: threats
 ---
 # Verifying artifacts
