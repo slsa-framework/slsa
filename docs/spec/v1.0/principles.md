@@ -110,7 +110,8 @@ chain more frictionless for both of them.
 We talk about SLSA in terms of [tracks and levels](levels.md).
 A SLSA track focuses on a particular aspect of a supply chain, such as the Build
 Track. SLSA v1.0 consists of only a single track (Build), but future versions of
-SLSA will add tracks that cover other parts of the software supply chain.  
+SLSA will add tracks that cover other parts of the software supply chain.
+
 Within each track, ascending levels indicate increasingly hardened security
 practices. Higher levels provide better guarantees against supply-chain threats,
 but come at higher implementation costs. Lower SLSA levels are designed to be
