@@ -137,8 +137,8 @@ There are several areas outside SLSA's current framework:
     intentionally writing malicious code. If you trust a developer to write
     code you want to consume, though, SLSA can guarantee that the code will
     reach you without another party maliciously tampering with it.
--   Transitive trust for dependencies: each artifact's SLSA level is
-    independent of its dependencies' levels. You can use SLSA recursively to 
+-   Transitive trust for dependencies: the SLSA level of an artifact is
+    independent of the level of its dependencies. You can use SLSA recursively to 
     also judge an artifact's dependencies on their own, but there is 
     currently no single SLSA level that applies to both an artifact and its 
     transitive dependencies together. For a more detailed explanation of why, 
