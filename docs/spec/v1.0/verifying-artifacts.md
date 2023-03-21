@@ -351,7 +351,7 @@ these checks can be done on a best-effort basis.
 
 A [Verification Summary Attestation (VSA)][VSA] can make dependency verificaion
 more efficient by recording the result of prior verifications. A trimming
-heuristic or exception mechanism is almost always necessary while verifying
+heuristic or exception mechanism is almost always necessary when verifying
 dependencies because there will be transitive dependencies that are SLSA Build
 L0. (For example, consider the compiler's compiler's compiler's ... compiler.)
 
