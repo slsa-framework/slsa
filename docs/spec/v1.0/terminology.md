@@ -58,7 +58,7 @@ describing this whole process.
 
 | Primary Term | Description
 | --- | ---
-| Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build.
+| Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. It includes software, hardware, people, and organizations.
 | Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single environment on a platform.
 | Steps | The set of actions that comprise a build, defined by the tenant.
 | Environment | Machine, container, VM, or similar in which the build runs, initialized by the platform. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
