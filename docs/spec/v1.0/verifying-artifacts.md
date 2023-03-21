@@ -10,7 +10,7 @@ next_page:
 
 SLSA uses provenance to indicate whether an artifact is authentic or not, but
 provenance doesn't do anything unless somebody inspects it. SLSA calls that
-inspection verification, and this page describes how to verify artifacts and
+inspection **verification**, and this page describes how to verify artifacts and
 their SLSA provenance.
 
 This page is divided into several sections. The first discusses choices
