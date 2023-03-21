@@ -349,7 +349,7 @@ to verify dependencies in order to mitigate [threat "E"] and protect against
 threats further up the supply chain. If `resolvedDependencies` is incomplete,
 these checks can be done on a best-effort basis.
 
-A [Verification Summary Attestation (VSA)][VSA] can make dependency verificaion
+A [Verification Summary Attestation (VSA)][VSA] can make dependency verification
 more efficient by recording the result of prior verifications. A trimming
 heuristic or exception mechanism is almost always necessary when verifying
 dependencies because there will be transitive dependencies that are SLSA Build
