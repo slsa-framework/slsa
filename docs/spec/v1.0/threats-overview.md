@@ -1,9 +1,9 @@
 ---
 prev_page:
   title: About SLSA
-  url: principles
+  url: about
 next_page:
-  title: FAQ
+  title: principles
   url: faq
 ---
 # Supply-chain threats
