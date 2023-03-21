@@ -5,7 +5,7 @@ prev_page:
 
 next_page:
   title: About SLSA
-  url: principles
+  url: about
 ---
 
 # What's new in SLSA v1.0
