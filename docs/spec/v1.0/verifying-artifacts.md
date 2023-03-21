@@ -33,7 +33,7 @@ package ecosystem do not have to verify provenance. Consumers can do so with
 client-side verification tooling or by polling a monitor, but there is no
 requirement that they do so.
 
-> **TODO** Add a diagram.
+<!-- **TODO** Add a diagram. -->
 
 ### Package ecosystem
 
@@ -88,7 +88,7 @@ packages verified by a monitor is arbitrary, though it MAY mimic the set
 of packages published through one or more package ecosystems. The monitor
 MUST publish its expectations for all the packages it verifies.
 
-Verifiers can continuously poll a monitor to detect artifacts that
+Consumers can continuously poll a monitor to detect artifacts that
 do not meet the monitor's expectations. Detecting artifacts that fail
 verification is of limited benefit unless a human or another part of the system
 responds to the failed verification.
@@ -104,11 +104,11 @@ in the ecosystem are built from their canonical source repo, which
 indicates their authenticity.
 
 Expectations MUST be sufficient to detect or prevent an adversary from injecting
-unofficial behavior into the package. Example threats in this category include
-building from an unofficial fork or abusing a build parameter to modify the
-build. Usually expectations identify the canonical source repository (which is
-the main external parameter) and any other security-relevant external
-parameters.
+unofficial behavior into the package. Example [threats](threats.md) in this
+category include building from an unofficial fork or abusing a build parameter
+to modify the build. Usually expectations identify the canonical source
+repository (which is the main external parameter) and any other
+security-relevant external parameters.
 
 It is important to note that expectations are tied to a *package name*, whereas
 provenance is tied to an *artifact*. Different versions of the same package name
@@ -299,11 +299,10 @@ The expectations SHOULD cover the following:
 | `buildType` | To ensure that `externalParameters` are interpreted as intended |
 | `externalParameters` | To prevent an adversary from injecting unofficial behavior |
 
-Verifiers SHOULD reject unrecognized fields in `externalParameters` to err on
-the side of caution. It is acceptable to allow a parameter to have a range of
-values (possibly any value) if it is known that any value in the range is safe.
-Implementations need not special-case the `buildType` if JSON comparisons are
-sufficient.
+Verification tools SHOULD reject unrecognized fields in `externalParameters` to
+err on the side of caution. It is acceptable to allow a parameter to have a
+range of values (possibly any value) if it is known that any value in the range
+is safe. JSON comparison is sufficient for verifying parameters.
 
 Possible models for implementing expectation setting in package ecosystems (not
 exhaustive):
@@ -339,24 +338,22 @@ repository is constant across builds.
 
 [Threat "C"]: /spec/v1.0/threats#c-build-from-modified-source
 
-### Step 3: Check dependencies (recursively)
+### Step 3: (Optional) Check dependencies recursively
 
-[verify-step-3]: #step-3-check-dependencies-recursively
+[verify-step-3]: #step-3-optional-check-dependencies-recursively
 
 Finally, recursively check the `resolvedDependencies` as available and to the
-extent desired. This mitigates [threat "E"]. While SLSA v1.0 does not have any
-requirements on the completeness or verification of `resolvedDependencies`, one
-might wish to go beyond SLSA's minimum requirements in order to protect against
-threats further up the supply chain.
+extent desired. Note that SLSA v1.0 does not have any requirements on the
+completeness or verification of `resolvedDependencies`. However, one might wish
+to verify dependencies in order to mitigate [threat "E"] and protect against
+threats further up the supply chain. If `resolvedDependencies` is incomplete,
+these checks can be done on a best-effort basis.
 
-One possible approach is to recursively verify each entry in
-`resolvedDependencies`. A [Verification Summary Attestation (VSA)][VSA] can make
-this process more efficient by recording the result of prior verifications. A
-trimming heuristic or exception mechanism will almost always be necessary
-because there will always be some transitive dependencies that are SLSA Build
+A [Verification Summary Attestation (VSA)][VSA] can make dependency verificaion
+more efficient by recording the result of prior verifications. A trimming
+heuristic or exception mechanism is almost always necessary while verifying
+dependencies because there will be transitive dependencies that are SLSA Build
 L0. (For example, consider the compiler's compiler's compiler's ... compiler.)
-If `resolvedDependencies` is incomplete, this can be done on a best-effort
-basis.
 
 [Threat "E"]: /spec/v1.0/threats#e-use-compromised-dependency
 [VSA]: /verification_summary
