@@ -10,7 +10,7 @@ next_page:
 
 # About SLSA
 
-This page is an introduction to SLSA and its guiding principles. If you're new
+This page is an introduction to SLSA and its concepts. If you're new
 to SLSA, start here!
 
 ## What is SLSA?
