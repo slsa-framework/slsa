@@ -43,8 +43,8 @@ supply-chain attacks, and common use cases. If you're new to SLSA or supply-chai
 | [What's new in v1.0](whats-new.md) | What's new in SLSA Version 1.0 |
 | [About SLSA](about.md) | An introductory guide to SLSA |
 | [Supply-chain threats](threats-overview) | An introduction to supply-chain threats |
-| [Guiding principles](principles.md) | The guiding principles behind SLSA's design |
 | [Use cases](/use-cases) | Use cases |
+| [Guiding principles](principles.md) | The guiding principles behind SLSA's design |
 | [FAQ](faq.md) | Questions and more information |
 | [Future directions](future-directions.md) | Additions and changes being considered for future SLSA versions |
 
