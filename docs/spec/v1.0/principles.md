@@ -1,8 +1,8 @@
 ---
-description: An introduction to SLSA
-prev_page: Supply-chain threats
-  title:  threats-overview
-  url: whats-new
+description: SLSA's guiding principles
+prev_page: 
+  title: Supply-chain threats
+  url: threats-overview
 next_page:
   title:  FAQ
   url:  faq
