@@ -50,14 +50,12 @@ packaging and distribution. Any weaknesses in the supply chain undermine
 confidence in whether the code that you run is actually the code that you
 scanned. 
 
-This need to track code handling from source to binary puts an extra burden on
-anyone involved in complex critical systems. SLSA is meant to support automation
-so even the largest and most complex systems can protect against tampering. As a
-result, SLSA increases trust that the analysis and review performed on source
-code can be assumed to still apply to the binary consumed at the end of a
-complex software supply chain. 
+SLSA is designed to support automation that tracks code handling from source 
+to binary. As a result, SLSA increases trust that the analysis and review 
+performed on source code can be assumed to still apply to the binary consumed 
+at the end of a complex software supply chain. 
 
-## SLSA in layman's terms
+## SLSA in layperson's terms
 
 There has been a [lot of discussion](https://ntia.gov/page/software-bill-materials) about the need for "ingredient labels" for
 software—a "software bill of materials" (SBOM) that tells users what is in their
@@ -78,7 +76,7 @@ against the risk of:
 
 -   Code modification (by adding a tamper-evident "seal" to code after
     source control)
--   Uploaded artifacts that were not built by a CI/CD system (by marking
+-   Uploaded artifacts that were not built by the expected CI/CD system (by marking
     artifacts with a factory "stamp" that verifies which build service created it)
 -   Threats against the build system (by providing "manufacturing facility"
     best practices for build system services)
@@ -88,10 +86,10 @@ For more exploration of this analogy, see the blog post
 
 ## Who is SLSA for?
 
-In short: everyone involved in producing, consuming software, or providing 
+In short: everyone involved in producing and consuming software, or providing 
 infrastructure for software.
 
-**Software producers**, such as a development team at a software company or open
+**Software producers**, such as a development team or open
 source maintainers. SLSA gives you protection against insider risk and tampering
 along the supply chain to your consumers, increasing confidence that the
 software you produce reaches your consumers as you intended it.
@@ -119,7 +117,7 @@ but come at higher implementation costs. Lower SLSA levels are designed to be
 easier to adopt, but with only modest security guarantees. SLSA 0 is sometimes
 used to refer to software that doesn't yet meet any SLSA level. Currently, the
 SLSA Build Track encompasses Levels 1 through 3, but we envision higher levels
-to be possible in future revisions.   
+to be possible in [future revisions](future-directions.md).   
 
 The combination of tracks and levels offers an easy way to discuss whether
 software meets a specific set of requirements. By referring to an artifact as
@@ -132,7 +130,7 @@ practices that qualify it for that level.
 There are several areas outside SLSA's current framework:
 
 -   Code quality: SLSA does not tell you whether the developers writing the
-    source code followed secure coding practices [TODO: ARE EXAMPLES NEEDED?]
+    source code followed secure coding practices.
 -   Developer trust: SLSA cannot tell you whether a developer is
     intentionally writing malicious code. If you trust a developer to write
     code you want to consume, though, SLSA can guarantee that the code will
