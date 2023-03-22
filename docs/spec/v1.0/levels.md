@@ -1,67 +1,20 @@
-# Security levels
-
-<div class="subtitle">
+---
+title: Security levels
+description: SLSA is organized into a series of levels that provide increasing supply chain security guarantees. This gives you confidence that software hasn’t been tampered with and can be securely traced back to its source. This page is a descriptive overview of the SLSA levels and tracks, describing their intent.
+prev_page:
+  url: terminology
+next_page:
+  url: requirements
+---
 
 SLSA is organized into a series of levels that provide increasing supply chain
 security guarantees. This gives you confidence that software hasn’t been
 tampered with and can be securely traced back to its source.
 
-</div>
-
-This page is an informative overview of the SLSA levels, describing their
-purpose and guarantees. For the normative requirements at each level, see
-[Requirements](requirements.md). For a background, see
-[Terminology](terminology.md).
-
-## What is SLSA?
-
-SLSA is a set of incrementally adoptable security guidelines, established by
-industry consensus. The standards set by SLSA are guiding principles for both
-software producers and consumers: producers can follow the guidelines to make
-their software more secure, and consumers can make decisions based on a software
-package's security posture. SLSA's levels are designed to be incremental
-and actionable, and to protect against specific classes of supply chain attacks.
-The highest level in each track represents an ideal end state, and the lower
-levels represent intermediate milestones with commensurate security guarantees.
-
-Importantly, SLSA is intended to be a primitive in a broader determination of a
-software's risk. SLSA measures specific aspects of supply chain security,
-particularly those that can be fully automated; other aspects, such as developer
-trust and code quality, are out of scope. Furthermore, each link in the software
-supply chain has its own, independent SLSA level---in other words, it is not
-transitive ([FAQ](faq.md#q-why-is-slsa-not-transitive)). The benefit of this
-approach is to break up the large supply chain security problem into tractable
-subproblems that can be prioritized based on risk and tackled in parallel. But
-this does mean that SLSA alone is not sufficient to determine if an artifact is
-"safe".
-
-Finally, SLSA is in the eye of the beholder: software consumers ultimately make
-their own SLSA determinations, though in practice they may delegate to some
-authority. For example, a build system may claim to conform to SLSA Build L3,
-but it is up to a consumer whether to trust that claim.
-
-## Who is SLSA for?
-
-SLSA is intended to serve multiple populations:
-
--   **Project maintainers,** who are often small teams that know their build
-    process and trust their teammates. Their primary goal is protection against
-    compromise with as low overhead as possible. They may also benefit from
-    easier maintenance and increased consumer confidence.
-
--   **Consumers,** who use a variety of software and do not know the maintainers
-    or their build processes. Their primary goal is confidence that the software
-    has not been tampered with. They are concerned about rogue maintainers,
-    compromised credentials, and compromised infrastructure.
-
--   **Organizations,** who are both producers and consumers of software. In
-    addition to the goals above, organizations also want to broadly understand
-    and reduce risk across the organization.
-
--   **Infrastructure providers,** such as build services and package
-    ecosystems, who are critical to achieving SLSA. While not the primary
-    beneficiary of SLSA, they may benefit from increased security and user
-    trust.
+This page is a descriptive overview of the SLSA levels and tracks, describing
+their intent. For the prescriptive requirements for each level, see
+[Requirements](requirements.md). For a general overview of SLSA, see
+[About SLSA](principles.md).
 
 ## Levels and tracks
 

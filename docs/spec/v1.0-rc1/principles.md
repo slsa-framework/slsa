@@ -1,11 +1,16 @@
-# Guiding principles
+---
+prev_page:
+  title: Security levels
+  url: levels
+next_page:
+  title: Terminology
+  url: terminology
+---
 
-<div class="subtitle">
+# Guiding principles
 
 This page provides a background on the guiding principles behind SLSA. It is
 intended to help the reader better understand SLSA's design decisions.
-
-</div>
 
 ## Trust systems, verify artifacts
 

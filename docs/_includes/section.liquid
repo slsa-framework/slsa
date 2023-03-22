@@ -1,7 +1,7 @@
 {% comment %}
 This code includes the content of a page after massaging it to fix the
 header levels to shift them down one level, make the links relative,
-and change "page" to "section" in the content.
+and change "section" to "sub-section" and "page" to "section" in the content.
 Note: This last step is fragile. It could have adverse effects since
 this is merely text based.
 {% endcomment %}
@@ -78,4 +78,5 @@ this is merely text based.
    {% capture anchor %}href="{{page.url}}"{% endcapture %}
    {% capture fixedcontent %}{{fixedcontent | replace: pattern, anchor}}{% endcapture %}
 {% endfor %}
+{% capture fixedcontent %}{{fixedcontent | replace: " section", " subsection" | replace: "Section", "Subsection" }}{% endcapture %}
 {{fixedcontent | replace: " page", " section" | replace: "Page", "Section" }}

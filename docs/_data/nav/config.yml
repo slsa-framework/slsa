@@ -1,0 +1,11 @@
+# Mapping from version in the URL to the key in site.data.nav.
+url_to_key:
+  v0.1: v01
+  v0.2: v02
+  v1.0-rc1: v10-rc1
+  v1.0: v10
+  v1: v10
+  latest: v02
+
+# TODO: when viewing spec v0.1, it would be better to link to attestations v0.2.
+# Not sure how to implement that though.

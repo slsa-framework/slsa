@@ -1,9 +1,16 @@
-# Future directions
+---
+title: Future directions
+description: The initial draft version (v0.1) of SLSA had a larger scope including protections against tampering with source code and a higher level of build integrity (Build L4). This page collects some early thoughts on how SLSA **might** evolve in future versios to re-introduce these notions and add other additional aspects of automatable supply chain security.
+prev_page:
+  url: faq
+next_page:
+  url: terminology
+---
 
 The initial [draft version (v0.1)] of SLSA had a larger scope including
 protections against tampering with source code and a higher level of build
 integrity (Build L4). This page collects some early thoughts on how SLSA
-**might** evolve in future version to re-introduce those notions and add other
+**might** evolve in future versions to re-introduce those notions and add other
 additional aspects of automatable supply chain security.
 
 <section id="build-l4">

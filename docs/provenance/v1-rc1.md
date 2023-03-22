@@ -1,12 +1,19 @@
 ---
 title: Provenance
+description: Description of SLSA provenance specification for verifying where, when, and how something was produced.
 layout: standard
-hero_text: To trace software back to the source and define the moving parts in a complex supply chain, provenance needs to be there from the very beginning. It’s the verifiable information about software artifacts describing where, when and how something was produced. For higher SLSA levels and more resilient integrity guarantees, provenance requirements are stricter and need a deeper, more technical understanding of the predicate.
 ---
 <!-- Note: We only include the major version in the URL, e.g. "v1" instead of
 "v1.0", because minor versions are guaranteed to be backwards compatible. We
 still include the minor version number in the selector (_data/versions.yml) so
 that readers can easily find the current minor version number. -->
+
+To trace software back to the source and define the moving parts in a complex
+supply chain, provenance needs to be there from the very beginning. It's the
+verifiable information about software artifacts describing where, when and how
+something was produced. For higher SLSA levels and more resilient integrity
+guarantees, provenance requirements are stricter and need a deeper, more
+technical understanding of the predicate.
 
 ## Purpose
 
@@ -157,7 +164,7 @@ The URI SHOULD resolve to a human-readable specification that includes: overall
 description of the build type; schema for `externalParameters` and
 `systemParameters`; unambiguous instructions for how to initiate the build given
 this BuildDefinition, and a complete example. Example:
-https://slsa.dev/github-actions-workflow/v1
+https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1
 
 <tr id="externalParameters"><td><code>externalParameters</code>
 <td>object<td>
@@ -660,9 +667,7 @@ basis.
 The following is an partial index of build type definitions. Each contains a
 complete example predicate.
 
--   [GitHub Actions Workflow]
-
-[GitHub Actions Workflow]: /github-actions-workflow/v1-rc1
+-   [GitHub Actions Workflow (community-maintained)](https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1)
 
 **TODO:** Before marking the spec stable, add at least 1-2 other build types to
 validate that the design is general enough to apply to other builders.

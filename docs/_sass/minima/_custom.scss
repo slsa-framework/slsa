@@ -216,16 +216,10 @@ h5, .h5 {
     font-family: $header-font-family;
 }
 
-.subtitle {
-    display: block;
-    padding-bottom: 3rem;
+// Make the first paragraph of a page have bigger font.
+// To opt out, make sure the first element is not a `<p>` tag.
+.content > p:first-child {
     font-size: $subtitle-font-size;
-
-    // For making subtitles hug closely above headers
-    &.flushed {
-        padding-bottom: 0;
-        margin-bottom: -3rem;
-    }
 }
 
 .markdown {
@@ -653,21 +647,26 @@ body {
 }
 
 .site-nav {
-    .nav-sub-list {
+    li li {
         padding-left: $spacer-l;
     }
 
-    .nav-item,
-    .nav-link {
+    li,
+    a[href] {
+        color: $text-color-light;
         display: block;
+        font-family: "Prodigy";
     }
 
-    .nav-item {
+    li {
+        line-height: $base-line-height;
         text-indent: 8px;
     }
 
-    .nav-link {
+    a[href] {
+        font-weight: $base-font-weight;
         padding: 2px 8px 4px;
+        text-decoration: none;
         text-indent: 0;
 
         &:hover,
