@@ -79,17 +79,17 @@ of places:
 -   **Publish attestations in a transparency log**: Once a build has been made,
     the resulting attestation (or a hash of the attestation and a pointer to
     where it is indexed) SHOULD be published to a third-party transparency log
-    that exists outside the source repository and artifact repository.
+    that exists outside the source repository and package registry.
 -   **Publish attestations alongside source releases in the source
     repository**: For ecosystems where source releases are commonly published
-    to source repositories as well as to artifact repositories (such as GitHub
+    to source repositories as well as to package registries (such as GitHub
     releases), producers SHOULD include provenance attestations as part of
     these releases if the source repository supports attaching additional
     artifacts to a release. This option requires no changes to the artifact
     repository to support build attestation formats, but means that the source
     repository in use is now in the dependency chain for installers that want
     to verify policy at build-time.
--   **Publish attestations alongside the artifact in the artifact repository**:
+-   **Publish attestations alongside the artifact in the package registry**:
     Many software repositories already support some variety of publishing 1:1
     related files alongside an artifact, sometimes known as “sidecar files”.
     For example, PyPI supports publishing `.asc` files representing the PGP
@@ -104,14 +104,14 @@ artifact without needing to wait for the upstream package repository to support
 publishing attestations, by publishing it as part of the source repository
 release.
 
-Long-term, in order to maintain a single dependency on the artifact repository
+Long-term, in order to maintain a single dependency on the package registry
 already in use, repositories should gain support for both uploading and
 distributing the build attestation alongside the artifact.
 
 Short term, consumers of build artifacts can bootstrap a manual policy by using
 the source repository only for projects that publish all artifacts and
 attestations to the source repository, and later extend this to all artifacts
-published to the artifact repository via the canonical installation tools once
+published to the package registry via the canonical installation tools once
 a given ecosystem supports them.
 
 ## Immutability of attestations
