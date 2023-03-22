@@ -15,7 +15,7 @@ In addition, this document is primarily for the benefit of artifact
 distributors, to understand how they should adopt the distribution of SLSA
 provenance. It is primarily concerned with the means of distributing
 attestations and the relationship of attestations to build artifacts, and not
-with the specific format of the attestation or attestation bundle itself.
+with the specific format of the attestation itself.
 
 ## Background
 
@@ -40,10 +40,10 @@ to determine when a release is 'finished' because many ecosystems allow adding
 new artifacts to old releases when adding support for new platforms or
 architectures.
 
-Thus, package ecosystems SHOULD support multiple individual attestations or
-attestation bundles per release. At the time of a given build, the relevant
-build attestations for that build can be added to the release, depending on the
-relationship to the given artifacts.
+Thus, package ecosystems SHOULD support multiple individual attestations per
+release. At the time of a given build, the relevant build attestations for that
+build can be added to the release, depending on the relationship to the given
+artifacts.
 
 ## Relationship between artifacts and attestations
 
