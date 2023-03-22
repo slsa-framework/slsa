@@ -33,7 +33,6 @@ Known issues:
 -   Verifying artifacts and setting expectations are still in flux. We would
     like feedback on whether to move these parts out of the build track.
 
-
 {%- for section in site.data.nav.v10 %}
 {%- if section.children %}
 
