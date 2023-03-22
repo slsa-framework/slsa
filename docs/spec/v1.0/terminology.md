@@ -10,13 +10,6 @@ next_page:
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set
 of terminology and models to describe what we're protecting.
 
-## TODO: Terms we still need to define
-
-> **TODO:** Define these terms before the v1.0 release.
-
--   Ecosystem
--   Project
-
 ## Software supply chain
 
 SLSA's framework addresses every step of the software supply chain - the
