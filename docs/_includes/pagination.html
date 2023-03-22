@@ -1,10 +1,25 @@
 {% if page.prev_page or page.next_page %}
   <div class="mt-10 pt-10 border-t flex flex-col sm:flex-row space-between gap-5">
+    {%- assign url_parts = page.url | split: '/' %}
     {% if page.prev_page %}
-      <a href="{{ page.prev_page.url }}" class="border rounded px-4 py-2 text-left">&lsaquo; {{ page.prev_page.title }}</a>
-    {% endif %}
+        {%- if page.prev_page.url == "index" %}
+            {%- assign prevurl = page.url | replace: url_parts[-1], "" -%}
+        {% else %}
+            {%- assign prevurl = page.url | replace: url_parts[-1], page.prev_page.url -%}
+        {% endif %}
+        {%- capture pattern %}page.url == "{{prevurl}}"{% endcapture -%}
+        {%- assign prevpage = site.pages | where_exp: "page", pattern | first -%}
+        <a href="{{ page.prev_page.url }}" class="border rounded px-4 py-2 text-left">&lsaquo; {{ prevpage.title }}</a>
+    {%- endif %}
     {% if page.next_page %}
-      <a href="{{ page.next_page.url }}" class="sm:ml-auto border rounded px-4 py-2 text-right">{{ page.next_page.title }} &rsaquo;</a>
-    {% endif %}
+        {%- if page.name == "index.md" %}
+            {%- assign nexturl = page.url | append: page.next_page.url -%}
+        {%- else -%}
+            {%- assign nexturl = page.url | replace: url_parts[-1], page.next_page.url -%}
+        {%- endif %}
+        {%- capture pattern %}page.url == "{{nexturl}}"{% endcapture -%}
+        {%- assign nextpage = site.pages | where_exp: "page", pattern | first -%}
+        <a href="{{ page.next_page.url }}" class="sm:ml-auto border rounded px-4 py-2 text-right">{{ nextpage.title }} &rsaquo;</a>
+    {%- endif %}
   </div>
 {% endif %}

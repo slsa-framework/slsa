@@ -1,10 +1,9 @@
 ---
 title: Security levels
+description: Ladder of increasing security guarantees.
 prev_page:
-  title: Terminology
   url: terminology
 next_page:
-  title: Requirements
   url: requirements
 ---
 

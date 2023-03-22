@@ -1,23 +1,14 @@
 ---
+title: Terminology
+description: Before diving into the SLSA specification levels, we need to establish a core set of terminology and models to describe what we're protecting.
 prev_page:
-  title: Future directions
   url: future-directions
 next_page:
-  title: Security levels
   url: levels
 ---
 
-# Terminology
-
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set
 of terminology and models to describe what we're protecting.
-
-## TODO: Terms we still need to define
-
-> **TODO:** Define these terms before the v1.0 release.
-
--   Ecosystem
--   Project
 
 ## Software supply chain
 
@@ -60,7 +51,7 @@ describing this whole process.
 
 | Primary Term | Description
 | --- | ---
-| Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build.
+| Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. It includes software, hardware, people, and organizations.
 | Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single environment on a platform.
 | Steps | The set of actions that comprise a build, defined by the tenant.
 | Environment | Machine, container, VM, or similar in which the build runs, initialized by the platform. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.

@@ -1,6 +1,6 @@
 ---
 title: Use cases
-
+description: SLSA protects against tampering during the software supply chain, but how? The answer depends on the use case in which SLSA is applied. Here are descriptions of the three main use cases for SLSA.
 layout: standard
 ---
 

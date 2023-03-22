@@ -1,13 +1,12 @@
 ---
+title: Producing artifacts
+description: This page covers the detailed technical requirements for producing artifacts at each SLSA level. The intended audience is system implementers and security engineers.
 prev_page:
-  title: Security levels
   url: levels
 next_page:
-  title: Verifying build systems
   url: verifying-systems
 ---
 
-# Producing artifacts
 
 This page covers the detailed technical requirements for producing artifacts at
 each SLSA level. The intended audience is system implementers and security
@@ -26,7 +25,12 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ### Build levels
 
-Responsibility to implement SLSA is spread across the following parties.
+In order to produce artifacts with a specific build level, responsibility is
+split between the <a href="#producer">Producer</a> and <a href="#build-system">
+Build system</a>. The build system MUST strengthen the security controls in
+order to achieve a specific level while the producer MUST choose and adopt a
+build system capable of achieving a desired build level, implementing any
+controls as specified by the chosen system.
 
 <table class="no-alternate">
 <tr>
@@ -60,18 +64,18 @@ Responsibility to implement SLSA is spread across the following parties.
   <td><a href="#build-service">Build service</a>
   <td> <td>✓<td>✓
 <tr>
-  <td><a href="#ephemeral-isolated">Ephemeral and isolated</a>
+  <td><a href="#isolated">Isolated</a>
   <td> <td> <td>✓
 </table>
 
 ### Security Best Practices
 
 While the exact definition of what constitutes a secure system is beyond the
-scope of this specification, to be conformant all implementations MUST use
-industry security best practices. This includes, but is not limited to, using
-proper access controls, securing communications, implementing proper management
-of cryptographic secrets, doing frequent updates, and promptly fixing known
-vulnerabilities.
+scope of this specification, all implementations MUST use industry security
+best practices to be conformant to this specification. This includes, but is
+not limited to, using proper access controls, securing communications,
+implementing proper management of cryptographic secrets, doing frequent updates,
+and promptly fixing known vulnerabilities.
 
 Various relevant standards and guides can be consulted for that matter such as
 the [CIS Critical Security
@@ -84,6 +88,12 @@ Controls](https://www.cisecurity.org/controls/cis-controls-list).
 A package's <dfn>producer</dfn> is the organization that owns and releases the
 software. It might be an open-source project, a company, a team within a
 company, or even an individual.
+
+NOTE: There were more requirements for producers in the initial
+[draft version (v0.1)](../v0.1/requirements.md#scripted-build) which impacted
+how a package can be built. These were removed in the v1.0 specification and
+will be reassessed and re-added as indicated in the
+[future directions](future-directions.md).
 
 ### Choose an appropriate build system
 
@@ -204,8 +214,11 @@ build system (i.e. outside the trust boundary).
     strength. The purpose is to deter adversaries who might face legal or
     financial risk from evading controls.
 
-*Completeness:* SHOULD be complete, but there MAY be external parameters that
-are not sufficiently captured in the provenance.
+*Completeness:* SHOULD be complete.
+
+-   There MAY be external parameters that are not sufficiently captured in
+    the provenance.
+-   Completeness of resolved dependencies is best effort.
 
 <td> <td>✓<td>✓
 <tr id="provenance-non-forgeable"><td>Provenance is Non-forgeable<td>
@@ -222,8 +235,10 @@ are not sufficiently captured in the provenance.
     service in a trusted control plane. The user-controlled build steps MUST
     NOT be able to inject or alter the contents.
 
-*Completeness:* MUST be complete. In particular, the external parameters MUST be
-fully enumerated in the provenance.
+*Completeness:* SHOULD be complete.
+
+-   External parameters MUST be fully enumerated.
+-   Completeness of resolved dependencies is best effort.
 
 Note: This requirement was called "non-falsifiable" in the initial
 [draft version (v0.1)](../v0.1/requirements.md#non-falsifiable).
@@ -257,23 +272,48 @@ workstation.
 Examples: GitHub Actions, Google Cloud Build, Travis CI.
 
 <td> <td>✓<td>✓
-<tr id="ephemeral-isolated">
-<td>Ephemeral and isolated
+<tr id="isolated">
+<td>Isolated
 <td>
 
-The build service ensured that the build steps ran in an ephemeral and isolated
-environment provisioned solely for this build, free of influence from other
-build instances, whether prior or concurrent.
+The build service ensured that the build steps ran in an isolated environment,
+free of unintended external influence. In other words, any external influence on
+the build was specifically requested by the build itself. This MUST hold true
+even between builds within the same tenant project.
 
--   It MUST NOT be possible for a build to access any secrets of the build service, such as the provenance signing key.
--   It MUST NOT be possible for two builds that overlap in time to influence one another.
--   It MUST NOT be possible for one build to persist or influence the build environment of a subsequent build.
--   Build caches, if used, MUST be purely content-addressable to prevent tampering.
--   The build SHOULD NOT call out to remote execution unless it's considered part of the "builder" within the trust boundary.
--   The build SHOULD NOT open services that allow for remote influence.
+The build system MUST guarantee the following:
 
-Note: This requirement was split into "Isolated" and "Ephemeral Environment"
+-   It MUST NOT be possible for a build to access any secrets of the build
+    service, such as the provenance signing key, because doing so would
+    compromise the authenticity of the provenance.
+-   It MUST NOT be possible for two builds that overlap in time to influence one
+    another, such as by altering the memory of a different build process running
+    on the same machine.
+-   It MUST NOT be possible for one build to persist or influence the build
+    environment of a subsequent build. In other words, an ephemeral build
+    environment MUST be provisioned for each build.
+-   It MUST NOT be possible for one build to inject false entries into a build
+    cache used by another build, also known as "cache poisoning". In other
+    words, the output of the build MUST be identical whether or not the cache is
+    used.
+-   The build system MUST NOT open services that allow for remote influence
+    unless all such interactions are captured as `externalParameters` in the
+    provenance.
+
+There are no sub-requirements on the build itself. Build L3 is limited to
+ensuring that a well-intentioned build runs securely. It does not require that
+build systems prevent a producer from performing a risky or insecure build. In
+particular, the "Isolated" requirement does not prohibit a build from calling
+out to a remote execution service or a "self-hosted runner" that is outside the
+trust boundary of the build platform.
+
+NOTE: This requirement was split into "Isolated" and "Ephemeral Environment"
 in the initial [draft version (v0.1)](../v0.1/requirements.md).
+
+NOTE: This requirement is not to be confused with "Hermetic", which roughly
+means that the build ran with no network access. Such a requirement requires
+substantial changes to both the build system and each individual build, and is
+considered in the [future directions](future-directions.md).
 
 <td> <td> <td>✓
 </table>

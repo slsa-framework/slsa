@@ -1,5 +1,6 @@
 ---
-description: SLSA's guiding principles
+title: Guiding principles
+description: An introduction to the guiding principles behind SLSA's design decisions.
 prev_page: 
   title: Supply-chain threats
   url: threats-overview
@@ -7,8 +8,6 @@ next_page:
   title:  FAQ
   url:  faq
 ---
-
-# Guiding principles
 
 This page is an introduction to the guiding principles behind SLSA's design
 decisions.
