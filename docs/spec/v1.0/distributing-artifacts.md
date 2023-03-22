@@ -91,8 +91,9 @@ number of places:
 A combination of these options allows for a bootstrap process where projects
 that want to generate build provenance attestations may begin publishing
 attestations in a way that is directly tied to a source release or built
-artifact without needing to wait, by publishing it as part of the source
-repository release.
+artifact without needing to wait for the upstream package repository to support
+publishing attestations, by publishing it as part of the source repository
+release.
 
 Long-term, in order to maintain a single dependency on the artifact repository
 already in use, repositories should gain support for both uploading and distributing the build
