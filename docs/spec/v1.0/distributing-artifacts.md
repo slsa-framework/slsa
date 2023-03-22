@@ -27,6 +27,8 @@ expectations).
 
 ## Relationship between releases and attestations
 
+Attestations should be bound to artifacts, not releases.
+
 A single "release" of a project, package, or library may
 include multiple artifacts. These artifacts result from builds on
 different platforms, architectures or environments. The builds need not happen
@@ -36,10 +38,6 @@ The complete set of attestations for a given release is
 incomplete until a build is finished. However, it is difficult or impossible to determine
 when a build is 'finished' because many ecosystems allow
 adding new artifacts to old releases when adding support for new platforms or architectures.
-
-As a result, using a single attestation bundle per release is unnecessarily
-restrictive and does not work with the way complex, modern software artifacts
-are built and distributed.
 
 Thus, package ecosystems SHOULD support multiple individual attestations or
 attestation bundles per release. At the time of a given build, the relevant
