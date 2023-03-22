@@ -93,7 +93,7 @@ infrastructure for software.
 **Software producers**, such as a development team or open
 source maintainers. SLSA gives you protection against insider risk and tampering
 along the supply chain to your consumers, increasing confidence that the
-software you produce reaches your consumers as you intended it.
+software you produce reaches your consumers as you intended.
 
 **Software consumers**, such as a development team using open source packages, a
 government agency using vendored software, or a CISO judging organizational
