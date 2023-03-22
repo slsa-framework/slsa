@@ -50,7 +50,6 @@
 </header>
 
 {%- assign url_parts = page.url | split: '/' %}
-{%- assign baseurl = url_parts[0] %}
 {%- assign spec_name = url_parts[1] %}
 {%- assign spec_version = url_parts[2] %}
 {%- if site.data.versions[spec_name].versions[spec_version].draft %}
@@ -58,14 +57,9 @@
   <input id="important-messages-checkbox" type="checkbox" hidden>
   <div>
     <label for="important-messages-checkbox" title="dismiss">✕</label>
-    <p>This is an unpublished draft that is subject to change.</p>
-    {%- assign other_version = page.url | replace: spec_version, site.data.versions[spec_name].current %}
-    {%- assign p = site.pages | where_exp: "page", "page.url contains other_version" | first %}
-    {%- comment %}if the page doesn't exist go to the main one{%- endcomment %}
-    {%- unless p %}
-      {%- capture other_version %}{{baseurl}}/{{spec_name}}/{{site.data.versions[spec_name].current}}/{%- endcapture %}
-    {%- endunless %}
-    <p><a href="{{other_version | relative_url}}">View latest published version</a></p>
+    <p>This is a working draft of {{ spec_version }}.</p>
+    <p style="font-size: smaller">For the latest release candidate or approved
+      version, please use the version selector.</p>
   </div>
 </section>
 {%- endif %}
