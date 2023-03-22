@@ -123,8 +123,8 @@ to be possible in [future revisions](future-directions.md).
 The combination of tracks and levels offers an easy way to discuss whether
 software meets a specific set of requirements. By referring to an artifact as
 meeting SLSA Build Level 3, for example, you're indicating in one phrase that
-the software artifact was built following a defined set of multiple security
-practices that qualify it for that level. 
+the software artifact was built following a set of security practices that 
+industry leaders agree protect against particular supply chain compromises. 
 
 ## What SLSA doesn't cover
 
