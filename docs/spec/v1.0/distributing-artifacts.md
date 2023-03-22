@@ -78,7 +78,7 @@ of places:
 
 -   **Publish attestations in a transparency log**: Once a build has been made,
     the resulting attestation (or a hash of the attestation and a pointer to
-    where it is indexed) should be published to a third-party transparency log
+    where it is indexed) SHOULD be published to a third-party transparency log
     that exists outside the source repository and artifact repository.
 -   **Publish attestations alongside source releases in the source
     repository**: For ecosystems where source releases are commonly published
