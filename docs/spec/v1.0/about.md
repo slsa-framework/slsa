@@ -102,8 +102,8 @@ rely on and be sure that what you receive is what you expected.
 
 **Infrastructure providers**, who provide infrastructure such as an ecosystem
 package manager, build platform, or CI/CD system. As the bridge between the
-producers and consumers, your adoption of SLSA makes a secure software supply
-chain more frictionless for both of them. 
+producers and consumers, your adoption of SLSA enables a secure software supply
+chain between them. 
 
 ## How SLSA works
 
