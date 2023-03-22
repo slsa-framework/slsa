@@ -78,7 +78,7 @@ against the risk of:
 -   Code modification (by adding a tamper-evident "seal" to code after
     source control)
 -   Uploaded artifacts that were not built by the expected CI/CD system (by marking
-    artifacts with a factory "stamp" that verifies which build service created it)
+    artifacts with a factory "stamp" that shows which build service created it)
 -   Threats against the build system (by providing "manufacturing facility"
     best practices for build system services)
 
