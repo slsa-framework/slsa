@@ -34,10 +34,11 @@ include multiple artifacts. These artifacts result from builds on
 different platforms, architectures or environments. The builds need not happen
 at roughly the same point in time and might even span multiple days.
 
-The complete set of attestations for a given release is
-incomplete until a build is finished. However, it is difficult or impossible to determine
-when a build is 'finished' because many ecosystems allow
-adding new artifacts to old releases when adding support for new platforms or architectures.
+The complete set of attestations for a given release is incomplete until all
+builds for a given release are finished. However, it is difficult or impossible
+to determine when a release is 'finished' because many ecosystems allow adding
+new artifacts to old releases when adding support for new platforms or
+architectures.
 
 Thus, package ecosystems SHOULD support multiple individual attestations or
 attestation bundles per release. At the time of a given build, the relevant
