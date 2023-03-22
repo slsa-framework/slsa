@@ -51,9 +51,10 @@ confidence in whether the code that you run is actually the code that you
 scanned. 
 
 SLSA is designed to support automation that tracks code handling from source 
-to binary. As a result, SLSA increases trust that the analysis and review 
-performed on source code can be assumed to still apply to the binary consumed 
-at the end of a complex software supply chain. 
+to binary, protecting against tampering regardless of the complexity 
+of the software supply chain. As a result, SLSA increases trust that the 
+analysis and review performed on source code can be assumed to still apply to 
+the binary consumed after the build and distribution process. 
 
 ## SLSA in layperson's terms
 
