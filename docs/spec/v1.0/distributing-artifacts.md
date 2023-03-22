@@ -107,10 +107,10 @@ a given ecosystem supports them.
 
 ## Immutability of attestations
 
-Attestations should be immutable. Once a build attestation is published as it
+Attestations MUST be immutable. Once a build attestation is published as it
 corresponds to a given artifact, that attestation is immutable and cannot be
 overwritten later with a different attestation that refers to the same
-artifact. Instead, a new release (and new artifacts) should be created.
+artifact. Instead, a new release (and new artifacts) MUST be created.
 
 ## Format of the attestation
 
