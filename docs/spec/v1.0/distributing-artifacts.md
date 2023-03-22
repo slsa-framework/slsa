@@ -133,6 +133,8 @@ However, for ecosystems that install from source repositories _via_ some
 intermediary (e.g. [Homebrew installing from GitHub release artifacts generated
 from the repository or GitHub Packages](https://docs.brew.sh/Bottles), [Go
 installing through the Go module proxy](https://proxy.golang.org/)), these
-intermediaries as transforming the original source repository in some way and
-as a result should be providing build provenance, and the recommendations
+ecosystems distribute "source archives" that are not the bit-for-bit identical
+form from version control.  These intermediaries as transforming the original
+source repository in some way that constitutes a "build" and as a result should
+be providing build provenance for this "package", and the recommendations
 outlined here apply.
