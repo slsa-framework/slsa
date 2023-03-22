@@ -7,8 +7,6 @@ next_page:
   url: verifying-artifacts
 ---
 
-# Distributing Artifacts
-
 SLSA requires the distribution and verification of provenance metadata in the
 form of SLSA attestations, in order to make provenance for related artifacts
 available after generation for verification.
@@ -133,10 +131,9 @@ the other requirements.
 ## Considerations for source-based ecosystems
 
 Some ecosystems have support for installing directly from source repositories
-(optional for Python/`pip`, Go, etc). For these examples in these ecosystems,
-as there is no "build" step that translates between a source repository and an
-artifact that is being installed, there is no need to publish or verify build
-provenance.
+(optional for Python/`pip`, Go, etc). In these cases, there is no need to publish
+or verify provenance because there is no "build" step that translates between
+a source repository and an artifact that is being installed.
 
 However, for ecosystems that install from source repositories _via_ some
 intermediary (e.g. [Homebrew installing from GitHub release artifacts generated
