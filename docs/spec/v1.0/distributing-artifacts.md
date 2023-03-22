@@ -19,22 +19,11 @@ with the specific format of the attestation or attestation bundle itself.
 
 ## Overview
 
-[Package ecosystem]: #package-ecosystem
-
-A <dfn>package ecosystem</dfn> is a set of conventions and tooling for package
-distribution. Every package has an ecosystem, whether it is formal or ad-hoc.
-Some ecosystems are formal, such as language distribution (e.g.
-[Python/PyPI](https://pypi.org)), operating system distribution (e.g.
-[Debian/Apt](https://wiki.debian.org/DebianRepository/Format)), or artifact
-distribution (e.g. [OCI](https://github.com/opencontainers/distribution-spec)).
-Other ecosystems are informal, such as a convention used within a company. Even
-ad-hoc distribution of software, such as through a link on a website, is
-considered an "ecosystem".
-
-The package ecosystem's maintainers are responsible for reliably redistributing
-artifacts and provenance, making the producers' expectations available to consumers,
-and providing tools to enable safe artifact consumption (e.g. whether an artifact
-meets its producer's expectations).
+The [package ecosystem](terminology.md#package-model)'s maintainers are
+responsible for reliably redistributing artifacts and provenance, making the
+producers' expectations available to consumers, and providing tools to enable
+safe artifact consumption (e.g. whether an artifact meets its producer's
+expectations).
 
 ## Relationship between releases and attestations
 
@@ -43,8 +32,8 @@ include multiple artifacts. These artifacts result from builds on
 different platforms, architectures or environments. The builds need not happen
 at roughly the same point in time and might even span multiple days.
 
-The complete set of attestations for a given release is 
-incomplete until a build is finished. However, it is difficult or impossible to determine 
+The complete set of attestations for a given release is
+incomplete until a build is finished. However, it is difficult or impossible to determine
 when a build is 'finished' because many ecosystems allow
 adding new artifacts to old releases when adding support for new platforms or architectures.
 
@@ -67,7 +56,7 @@ attestations that correlate to them.
 Package ecosystems SHOULD support a one-to-many relationship between build artifacts
 and attestations to ensure that anyone is free to produce and publish any
 attestation they may need. Package ecosystems MUST require a strict one-to-one relationship between
-the build artifact and the build provenance attestation for that artifact. 
+the build artifact and the build provenance attestation for that artifact.
 The mappings can be either implicit (e.g. require a custom filename schema that uniquely identifies the build
 attestation over other attestation types) or explicit (e.g. it may happen as a de-facto
 standard based on where the attestation is published).
