@@ -46,11 +46,6 @@ relationship to the given artifacts.
 
 ## Relationship between artifacts and attestations
 
-Given the previous recommendation that a single release may have multiple
-attestations, this raises the question of the relationship between the
-one-or-more artifacts that comprise the output of a release build and the
-attestations that correlate to them.
-
 Package ecosystems SHOULD support a one-to-many relationship between build artifacts
 and attestations to ensure that anyone is free to produce and publish any
 attestation they may need. Package ecosystems MUST require a strict one-to-one relationship between
