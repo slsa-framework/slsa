@@ -99,7 +99,7 @@ Long-term, in order to maintain a single dependency on the artifact repository
 already in use, repositories should gain support for both uploading and distributing the build
 attestation alongside the artifact.
 
-Short term consumers of build artifacts can bootstrap a manual policy by using
+Short term, consumers of build artifacts can bootstrap a manual policy by using
 the source repository only for projects that publish all artifacts and
 attestations to the source repository, and later extend this to all artifacts
 published to the artifact repository via the canonical installation tools once
