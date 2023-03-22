@@ -17,7 +17,7 @@ provenance. It is primarily concerned with the means of distributing
 attestations and the relationship of attestations to build artifacts, and not
 with the specific format of the attestation or attestation bundle itself.
 
-## Overview
+## Background
 
 The [package ecosystem](terminology.md#package-model)'s maintainers are
 responsible for reliably redistributing artifacts and provenance, making the
