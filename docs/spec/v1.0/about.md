@@ -135,7 +135,7 @@ There are several areas outside SLSA's current framework:
 -   Developer trust: SLSA cannot tell you whether a developer is
     intentionally writing malicious code. If you trust a developer to write
     code you want to consume, though, SLSA can guarantee that the code will
-    reach you without another party maliciously tampering with it.
+    reach you without another party tampering with it.
 -   Transitive trust for dependencies: the SLSA level of an artifact is
     independent of the level of its dependencies. You can use SLSA recursively to 
     also judge an artifact's dependencies on their own, but there is 
