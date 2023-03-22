@@ -19,7 +19,7 @@ SLSA is a set of incrementally adoptable guidelines for supply-chain security,
 established by industry consensus. The specification set by SLSA is useful for
 both software producers and consumers: producers can follow SLSA's guidelines to
 make their software supply chain more secure, and consumers can use SLSA to make
-decisions about whether to trust a software package. 
+decisions about whether to trust a software package.
 
 SLSA offers:
 
@@ -48,13 +48,13 @@ from a compromised or malicious insider. Risk for code modification exists at
 each link in a typical software supply chain, from source to build through
 packaging and distribution. Any weaknesses in the supply chain undermine
 confidence in whether the code that you run is actually the code that you
-scanned. 
+scanned.
 
-SLSA is designed to support automation that tracks code handling from source 
-to binary, protecting against tampering regardless of the complexity 
-of the software supply chain. As a result, SLSA increases trust that the 
-analysis and review performed on source code can be assumed to still apply to 
-the binary consumed after the build and distribution process. 
+SLSA is designed to support automation that tracks code handling from source
+to binary, protecting against tampering regardless of the complexity
+of the software supply chain. As a result, SLSA increases trust that the
+analysis and review performed on source code can be assumed to still apply to
+the binary consumed after the build and distribution process.
 
 ## SLSA in layperson's terms
 
@@ -87,7 +87,7 @@ For more exploration of this analogy, see the blog post
 
 ## Who is SLSA for?
 
-In short: everyone involved in producing and consuming software, or providing 
+In short: everyone involved in producing and consuming software, or providing
 infrastructure for software.
 
 **Software producers**, such as a development team or open
@@ -103,7 +103,7 @@ rely on and be sure that what you receive is what you expected.
 **Infrastructure providers**, who provide infrastructure such as an ecosystem
 package manager, build platform, or CI/CD system. As the bridge between the
 producers and consumers, your adoption of SLSA enables a secure software supply
-chain between them. 
+chain between them.
 
 ## How SLSA works
 
@@ -118,13 +118,13 @@ but come at higher implementation costs. Lower SLSA levels are designed to be
 easier to adopt, but with only modest security guarantees. SLSA 0 is sometimes
 used to refer to software that doesn't yet meet any SLSA level. Currently, the
 SLSA Build Track encompasses Levels 1 through 3, but we envision higher levels
-to be possible in [future revisions](future-directions.md).   
+to be possible in [future revisions](future-directions.md).
 
 The combination of tracks and levels offers an easy way to discuss whether
 software meets a specific set of requirements. By referring to an artifact as
 meeting SLSA Build Level 3, for example, you're indicating in one phrase that
-the software artifact was built following a set of security practices that 
-industry leaders agree protect against particular supply chain compromises. 
+the software artifact was built following a set of security practices that
+industry leaders agree protect against particular supply chain compromises.
 
 ## What SLSA doesn't cover
 
@@ -137,8 +137,8 @@ There are several areas outside SLSA's current framework:
     code you want to consume, though, SLSA can guarantee that the code will
     reach you without another party tampering with it.
 -   Transitive trust for dependencies: the SLSA level of an artifact is
-    independent of the level of its dependencies. You can use SLSA recursively to 
-    also judge an artifact's dependencies on their own, but there is 
-    currently no single SLSA level that applies to both an artifact and its 
-    transitive dependencies together. For a more detailed explanation of why, 
+    independent of the level of its dependencies. You can use SLSA recursively to
+    also judge an artifact's dependencies on their own, but there is
+    currently no single SLSA level that applies to both an artifact and its
+    transitive dependencies together. For a more detailed explanation of why,
     see the [FAQ](faq).
