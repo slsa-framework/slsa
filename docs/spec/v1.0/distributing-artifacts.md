@@ -38,22 +38,21 @@ meets its producer's expectations).
 
 ## Relationship between releases and attestations
 
-For many ecosystems, a single "release" of a project, package, or library may
-include multiple artifacts, resulting from because builds that may happen over
-multiple differing platforms, architectures or environments, and may not happen
-at roughly the same point in time (and might even span multiple days).
+A single "release" of a project, package, or library may
+include multiple artifacts. These artifacts result from builds on
+different platforms, architectures or environments. The builds need not happen
+at roughly the same point in time and might even span multiple days.
 
-As a result, the complete set of all attestations for a given release may be
-incomplete until a build is finished, and in reality, a build may never be
-truly 'finished' as in many ecosystems, it is permissible for new artifacts
-that support new platforms or architectures to be introduced for old releases
-long after the initial release.
+The complete set of attestations for a given release is 
+incomplete until a build is finished. However, it is difficult or impossible to determine 
+when a build is 'finished' because many ecosystems allow
+adding new artifacts to old releases when adding support for new platforms or architectures.
 
 As a result, using a single attestation bundle per release is unnecessarily
 restrictive and does not work with the way complex, modern software artifacts
 are built and distributed.
 
-Thus, it is recommended to support multiple individual attestations or
+Thus, package ecosystems SHOULD support multiple individual attestations or
 attestation bundles per release. At the time of a given build, the relevant
 build attestations for that build can be added to the release, depending on the
 relationship to the given artifacts.
@@ -65,15 +64,15 @@ attestations, this raises the question of the relationship between the
 one-or-more artifacts that comprise the output of a release build and the
 attestations that correlate to them.
 
-It is recommended to support a one-to-many relationship between build artifacts
-and attestations, to ensure that anyone is free to produce and publish any
-attestation they may need, but require a strict one-to-one relationship between
-the build artifact and the build provenance attestation for that artifact. This
-may require a custom filename schema that uniquely identifies the build
-attestation over other attestation types, or it may happen as a de-facto
-standard based on where the attestation is published.
+Package ecosystems SHOULD support a one-to-many relationship between build artifacts
+and attestations to ensure that anyone is free to produce and publish any
+attestation they may need. Package ecosystems MUST require a strict one-to-one relationship between
+the build artifact and the build provenance attestation for that artifact. 
+The mappings can be either implicit (e.g. require a custom filename schema that uniquely identifies the build
+attestation over other attestation types) or explicit (e.g. it may happen as a de-facto
+standard based on where the attestation is published).
 
-For example, the build attestation should have a filename that is directly
+The build attestation SHOULD have a filename that is directly
 related to the build artifact filename. For example, for an artifact
 `<filename>.<extension>`, the attestation is `<filename>.attestation` (or some
 similar extension, for example [in-toto](https://in-toto.io/) recommends
@@ -84,7 +83,7 @@ metadata.
 ## Where attestations should be published
 
 There are a number of opportunities and venues to publish attestations during
-and after the build process. It is recommended to publish attestations in a
+and after the build process. Producers SHOULD publish attestations in a
 number of places:
 
 -   **Publish attestations in a transparency log**: Once a build has been made,
@@ -93,9 +92,9 @@ number of places:
 -   **Publish attestations alongside source releases in the source
     repository**: For ecosystems where source releases are commonly published
     to source repositories as well as to artifact repositories (such as GitHub
-    releases), if the source repository supports attaching additional artifacts
-    on a release, it is recommended to additionally include provenance
-    attestations as part of these releases. This option requires no changes to
+    releases), producers SHOULD include provenance
+    attestations as part of these releases if the source repository supports attaching additional artifacts
+    to a release. This option requires no changes to
     the artifact repository to support build attestation formats, but means
     that the source repository in use is now in the dependency chain for
     installers that want to verify policy at build-time.
@@ -104,7 +103,7 @@ number of places:
     related files alongside an artifact, sometimes known as “sidecar files”.
     For example, PyPI supports publishing `.asc` files representing the PGP
     signature for an artifact with the same filename (but different extension).
-    This requires the mapping between artifact and attestation (or attestation
+    This option requires the mapping between artifact and attestation (or attestation
     vessel) to be 1:1.
 
 A combination of these options allows for a bootstrap process where projects
@@ -114,8 +113,8 @@ artifact without needing to wait, by publishing it as part of the source
 repository release.
 
 Long-term, in order to maintain a single dependency on the artifact repository
-already in use, repositories should gain support for both uploading the build
-attestation format, and distributing it 1:1 alongside the artifact.
+already in use, repositories should gain support for both uploading and distributing the build
+attestation alongside the artifact.
 
 Short term consumers of build artifacts can bootstrap a manual policy by using
 the source repository only for projects that publish all artifacts and
@@ -128,7 +127,7 @@ a given ecosystem supports them.
 Attestations should be immutable. Once a build attestation is published as it
 corresponds to a given artifact, that attestation is immutable and cannot be
 overwritten later with a different attestation that refers to the same
-artifact. Instead, a new release (and new artifacts) should be created instead.
+artifact. Instead, a new release (and new artifacts) should be created.
 
 ## Format of the attestation
 
@@ -148,7 +147,7 @@ provenance.
 However, for ecosystems that install from source repositories _via_ some
 intermediary (e.g. [Homebrew installing from GitHub release artifacts generated
 from the repository or GitHub Packages](https://docs.brew.sh/Bottles), [Go
-installing through the Go module proxy](https://proxy.golang.org/), these
+installing through the Go module proxy](https://proxy.golang.org/)), these
 intermediaries as transforming the original source repository in some way and
 as a result should be providing build provenance, and the recommendations
 outlined here apply.
