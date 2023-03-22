@@ -16,7 +16,7 @@
     description: What's new in SLSA Version 1.0
 
   - title: About SLSA
-    url: /spec/v1.0/principles
+    url: /spec/v1.0/about
     description: An introductory guide to SLSA
 
   - title: Supply-chain threats
@@ -26,7 +26,11 @@
   - title: Use cases
     url: /spec/v1.0/use-cases
     description: Use cases
-
+    
+  - title: Guiding principles
+    url: /spec/v1.0/principles
+    description: Use cases
+  
   - title: FAQ
     url: /spec/v1.0/faq
     description: Questions and more information
