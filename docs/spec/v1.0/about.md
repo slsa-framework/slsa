@@ -37,7 +37,7 @@ also shown that there are inherent risks not just in code itself, but at
 multiple points in the complex process of getting that code into software
 systems—that is, in the **software supply chain**. Since these attacks are on
 the rise and show no sign of decreasing, a universal framework for hardening the
-software supply chain is needed, as evidenced by the
+software supply chain is needed, as affirmed by the
 [U.S. Executive Order on Improving the Nation's Cybersecurity](https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/).
 
 Security techniques for vulnerability detection and analysis of source code are
