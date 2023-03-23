@@ -1,4 +1,5 @@
 ---
+title: About SLSA
 description: An introduction to SLSA
 prev_page:
   title: What's new in SLSA v1.0
@@ -7,8 +8,6 @@ next_page:
   title: Supply chain threats
   url: threats-overview
 ---
-
-# About SLSA
 
 This page is an introduction to SLSA and its concepts. If you're new
 to SLSA, start here!
