@@ -65,10 +65,8 @@ standard based on where the attestation is published).
 
 The build attestation SHOULD have a filename that is directly related to the
 build artifact filename. For example, for an artifact `<filename>.<extension>`,
-the attestation is `<filename>.attestation` (or some similar extension, for
-example [in-toto](https://in-toto.io/) recommends `<filename>.intoto.jsonl`),
-or for an artifact with a SHA-256 hash of `abc123...`, the attestation
-incorporates that hash into the filename or metadata.
+the attestation is `<filename>.attestation` or some similar extension (for
+example [in-toto](https://in-toto.io/) recommends `<filename>.intoto.jsonl`.)
 
 ## Where attestations should be published
 
