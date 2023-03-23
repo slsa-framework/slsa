@@ -57,7 +57,7 @@ artifacts.
 Package ecosystems SHOULD support a one-to-many relationship from build
 artifacts to attestations to ensure that anyone is free to produce and publish
 any attestation they may need. Package ecosystems MUST require a strict
-one-to-one relationship between from a build provenance attestation to a given
+one-to-one relationship from a build provenance attestation to a given
 artifact. The mappings can be either implicit (e.g. require a custom filename
 schema that uniquely identifies the build attestation over other attestation
 types) or explicit (e.g. it may happen as a de-facto standard based on where
