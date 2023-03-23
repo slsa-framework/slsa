@@ -80,7 +80,7 @@ of places:
     the resulting attestation (or a hash of the attestation and a pointer to
     where it is indexed) SHOULD be published to a third-party transparency log
     that exists outside the source repository and package registry. Not only
-    are transparency logs are guaranteed to be immutable, but they also more
+    are transparency logs guaranteed to be immutable, but they also more
     easily enable monitoring.  Requiring the presence of the attestation in a
     monitored transparency log during verification helps ensure the attestation
     is trustworthy.
@@ -89,8 +89,8 @@ of places:
     to source repositories as well as to package registries (such as GitHub
     releases), producers SHOULD include provenance attestations as part of
     these releases if the source repository supports attaching additional
-    artifacts to a release. This option requires no changes to the artifact
-    repository to support build attestation formats, but means that the source
+    artifacts to a release. This option requires no changes to the package
+    registry to support build attestation formats, but means that the source
     repository in use is now in the dependency chain for installers that want
     to verify policy at build-time.
 -   **Publish attestations alongside the artifact in the package registry**:
@@ -104,7 +104,7 @@ of places:
 A combination of these options allows for a bootstrap process where projects
 that want to generate build provenance attestations may begin publishing
 attestations in a way that is directly tied to a source release or built
-artifact without needing to wait for the upstream package repository to support
+artifact without needing to wait for the upstream package registry to support
 publishing attestations, by publishing it as part of the source repository
 release.
 
