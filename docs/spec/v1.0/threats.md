@@ -65,7 +65,7 @@ official source control repository.
 
 The mitigation here is to compare the provenance against expectations for the
 package, which depends on SLSA Build L1 for provenance. (Threats against the
-provenance itself are covered by (D) and (F).)
+provenance itself are covered by (E) and (F).)
 
 <details><summary>Build from unofficial fork of code <span>(expectations)</span></summary>
 
@@ -422,7 +422,7 @@ positive attestation showing that some system, such as GitHub, ensured retention
 and availability of the source code.
 
 </details>
-<details><summary>(E) A dependency becomes temporarily or permanently unavailable to the build process</summary>
+<details><summary>(D) A dependency becomes temporarily or permanently unavailable to the build process</summary>
 
 *Threat:* Unable to perform a build with the intended dependencies.
 

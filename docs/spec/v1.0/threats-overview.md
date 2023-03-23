@@ -16,7 +16,7 @@ SLSA can help. For a more technical discussion, see [Threats & mitigations](thre
 
 ## Summary
 
-![Supply Chain Threats](../../images/supply-chain-threats.svg)
+![Supply Chain Threats](../../images/v1.0/supply-chain-threats.svg)
 
 SLSA's primary focus is supply chain integrity, with a secondary focus on
 availability. Integrity means protection against tampering or unauthorized
@@ -102,7 +102,7 @@ Many recent high-profile attacks were consequences of supply-chain integrity vul
 <th>How SLSA can help
 <tbody>
 <tr>
-<td>E
+<td>D
 <td>Dependency becomes unavailable
 <td><a href="https://www.techradar.com/news/this-popular-code-library-is-causing-problems-for-hundreds-of-thousands-of-devs">Mimemagic</a>: Maintainer intentionally removes package or version of package from repository with no warning. Network errors or service outages may also make packages unavailable temporarily.
 <td>SLSA does not directly address this threat.
