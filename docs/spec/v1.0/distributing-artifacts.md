@@ -11,7 +11,7 @@ SLSA requires the distribution and verification of provenance metadata in the
 form of SLSA attestations, in order to make provenance for related artifacts
 available after generation for verification.
 
-This document specifies how these attestations should be distributed, or the
+This document provides specifications for distributing attestations, and the
 relationship between build artifacts and attestations. It is primarily
 concerned with artifacts for ecosystems that distribute "built distributions",
 but some attention is also paid to ecosystems that distribute container images
@@ -19,7 +19,7 @@ or only distribute source artifacts, as many of the same principles generally
 apply to any artifact or group of artifacts.
 
 In addition, this document is primarily for the benefit of artifact
-distributors, to understand how they should adopt the distribution of SLSA
+distributors, to understand how they can adopt the distribution of SLSA
 provenance. It is primarily concerned with the means of distributing
 attestations and the relationship of attestations to build artifacts, and not
 with the specific format of the attestation itself.
@@ -38,9 +38,9 @@ expectations).
 
 ## Relationship between releases and attestations
 
-Attestations should be bound to artifacts, not releases.
+Attestations SHOULD be bound to artifacts, not releases.
 
-A single "release" of a project, package, or library may include multiple
+A single "release" of a project, package, or library might include multiple
 artifacts. These artifacts result from builds on different platforms,
 architectures or environments. The builds need not happen at roughly the same
 point in time and might even span multiple days.
@@ -60,11 +60,11 @@ artifacts.
 
 Package ecosystems SHOULD support a one-to-many relationship from build
 artifacts to attestations to ensure that anyone is free to produce and publish
-any attestation they may need. Package ecosystems MUST require a strict
+any attestation they might need. Package ecosystems MUST require a strict
 one-to-one relationship from a build provenance attestation to a given
 artifact. The mappings can be either implicit (e.g. require a custom filename
 schema that uniquely identifies the build attestation over other attestation
-types) or explicit (e.g. it may happen as a de-facto standard based on where
+types) or explicit (e.g. it could happen as a de-facto standard based on where
 the attestation is published).
 
 The build attestation SHOULD have a filename that is directly related to the
@@ -72,7 +72,7 @@ build artifact filename. For example, for an artifact `<filename>.<extension>`,
 the attestation is `<filename>.attestation` or some similar extension (for
 example [in-toto](https://in-toto.io/) recommends `<filename>.intoto.jsonl`.)
 
-## Where attestations should be published
+## Where attestations are published
 
 There are a number of opportunities and venues to publish attestations during
 and after the build process. Producers SHOULD publish attestations in a number
@@ -104,7 +104,7 @@ of places:
     attestation vessel) to be 1:1.
 
 A combination of these options allows for a bootstrap process where projects
-that want to generate build provenance attestations may begin publishing
+that want to generate build provenance attestations can begin publishing
 attestations in a way that is directly tied to a source release or built
 artifact without needing to wait for the upstream package registry to support
 publishing attestations, by publishing it as part of the source repository
@@ -143,9 +143,9 @@ the other requirements.
 ## Considerations for source-based ecosystems
 
 Some ecosystems have support for installing directly from source repositories
-(optional for Python/`pip`, Go, etc). In these cases, there is no need to publish
-or verify provenance because there is no "build" step that translates between
-a source repository and an artifact that is being installed.
+(an option for Python/`pip`, Go, etc). In these cases, there is no need to
+publish or verify provenance because there is no "build" step that translates
+between a source repository and an artifact that is being installed.
 
 However, for ecosystems that install from source repositories _via_ some
 intermediary (e.g. [Homebrew installing from GitHub release artifacts generated
@@ -153,6 +153,6 @@ from the repository or GitHub Packages](https://docs.brew.sh/Bottles), [Go
 installing through the Go module proxy](https://proxy.golang.org/)), these
 ecosystems distribute "source archives" that are not the bit-for-bit identical
 form from version control.  These intermediaries as transforming the original
-source repository in some way that constitutes a "build" and as a result should
+source repository in some way that constitutes a "build" and as a result SHOULD
 be providing build provenance for this "package", and the recommendations
 outlined here apply.
