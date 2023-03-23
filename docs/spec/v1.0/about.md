@@ -141,4 +141,4 @@ There are several areas outside SLSA's current framework:
     also judge an artifact's dependencies on their own, but there is
     currently no single SLSA level that applies to both an artifact and its
     transitive dependencies together. For a more detailed explanation of why,
-    see the [FAQ](faq).
+    see the [FAQ](faq#q-why-is-slsa-not-transitive).
