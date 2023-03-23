@@ -1,6 +1,6 @@
 ---
 title: Frequently asked questions
-descriptions: Answers to questions frequently asked about SLSA.
+description: Answers to questions frequently asked about SLSA.
 layout: specifications
 prev_page:
   title: Supply-chain threats
