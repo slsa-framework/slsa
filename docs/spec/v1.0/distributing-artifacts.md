@@ -110,11 +110,11 @@ Long-term, package registries SHOULD support uploading and distributing
 build attestations alongside the artifact. This model is preferred
 for two reasons:
 
-- trust: clients already trust the package registry as the source of their
-  artifacts, and don't need to trust an additional service;
-- reliability: clients already depend on the package registry as part of their
-  critical path, so distributing provenance via the registry avoids adding
-  an additional point of failure.
+-   trust: clients already trust the package registry as the source of their
+    artifacts, and don't need to trust an additional service;
+-   reliability: clients already depend on the package registry as part of
+    their critical path, so distributing provenance via the registry avoids
+    adding an additional point of failure.
 
 Short term, consumers of build artifacts can bootstrap a manual policy by using
 the source repository only for projects that publish all artifacts and
