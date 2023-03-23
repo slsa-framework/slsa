@@ -295,7 +295,7 @@ official source control repository.
 
 The mitigation here is to compare the provenance against expectations for the
 package, which depends on SLSA Build L1 for provenance. (Threats against the
-provenance itself are covered by (D) and (F).)
+provenance itself are covered by (E) and (F).)
 
 <details><summary>Build from unofficial fork of code <span>(expectations)</span></summary>
 
@@ -375,7 +375,20 @@ the source repo does not match the expected value.
 
 </details>
 
-### (D) Compromise build process
+### (D) Use compromised dependency
+
+> **TODO:** What exactly is this about? Is it about compromising the build
+> process through a bad build tool, and/or is it about compromising the output
+> package through a bad library? Does it involve all upstream threats to the
+> dependency, or is it just about this particular use of the package (e.g.
+> tampering on input, or choosing a bad dependency)?
+
+<!-- separate TODO -->
+
+> **TODO:** Fill this out to give more examples of threats from compromised
+> dependencies.
+
+### (E) Compromise build process
 
 An adversary introduces an unauthorized change to a build output through
 tampering of the build process; or introduces false information into the
@@ -467,19 +480,6 @@ from that source. A subsequent build then picks up that poisoned cache entry.
 **TODO:** similar to Source
 
 </details>
-
-### (E) Use compromised dependency
-
-> **TODO:** What exactly is this about? Is it about compromising the build
-> process through a bad build tool, and/or is it about compromising the output
-> package through a bad library? Does it involve all upstream threats to the
-> dependency, or is it just about this particular use of the package (e.g.
-> tampering on input, or choosing a bad dependency)?
-
-<!-- separate TODO -->
-
-> **TODO:** Fill this out to give more examples of threats from compromised
-> dependencies.
 
 ### (F) Upload modified package
 
@@ -589,7 +589,7 @@ positive attestation showing that some system, such as GitHub, ensured retention
 and availability of the source code.
 
 </details>
-<details><summary>(E) A dependency becomes temporarily or permanently unavailable to the build process</summary>
+<details><summary>(D) A dependency becomes temporarily or permanently unavailable to the build process</summary>
 
 *Threat:* Unable to perform a build with the intended dependencies.
 

@@ -16,7 +16,7 @@ SLSA can help. For a more technical discussion, see [Threats & mitigations](thre
 
 ## Summary
 
-![Supply Chain Threats](../../images/supply-chain-threats.svg)
+![Supply Chain Threats](../../images/v1.0/supply-chain-threats.svg)
 
 SLSA's primary focus is supply chain integrity, with a secondary focus on
 availability. Integrity means protection against tampering or unauthorized
@@ -68,14 +68,14 @@ Many recent high-profile attacks were consequences of supply-chain integrity vul
 <td>A SLSA-compliant build server would have produced provenance identifying the actual sources used, allowing consumers to detect such tampering.
 <tr>
 <td>D
-<td>Compromise build process
-<td><a href="https://www.crowdstrike.com/blog/sunspot-malware-technical-analysis/">SolarWinds</a>: Attacker compromised the build platform and installed an implant that injected malicious behavior during each build.
-<td>Higher SLSA levels require <a href="requirements#build-requirements">stronger security controls for the build platform</a>, making it more difficult to compromise and gain persistence.
-<tr>
-<td>E
 <td>Use compromised dependency (i.e. A-H, recursively)
 <td><a href="https://web.archive.org/web/20210909051737/https://schneider.dev/blog/event-stream-vulnerability-explained/">event-stream</a>: Attacker added an innocuous dependency and then later updated the dependency to add malicious behavior. The update did not match the code submitted to GitHub (i.e. attack F).
 <td>Applying SLSA recursively to all dependencies would have prevented this particular vector, because the provenance would have indicated that it either wasn't built from a proper builder or that the source did not come from GitHub.
+<tr>
+<td>E
+<td>Compromise build process
+<td><a href="https://www.crowdstrike.com/blog/sunspot-malware-technical-analysis/">SolarWinds</a>: Attacker compromised the build platform and installed an implant that injected malicious behavior during each build.
+<td>Higher SLSA levels require <a href="requirements#build-requirements">stronger security controls for the build platform</a>, making it more difficult to compromise and gain persistence.
 <tr>
 <td>F
 <td>Upload modified package (not matching build process)
@@ -102,7 +102,7 @@ Many recent high-profile attacks were consequences of supply-chain integrity vul
 <th>How SLSA can help
 <tbody>
 <tr>
-<td>E
+<td>D
 <td>Dependency becomes unavailable
 <td><a href="https://www.techradar.com/news/this-popular-code-library-is-causing-problems-for-hundreds-of-thousands-of-devs">Mimemagic</a>: Maintainer intentionally removes package or version of package from repository with no warning. Network errors or service outages may also make packages unavailable temporarily.
 <td>SLSA does not directly address this threat.
