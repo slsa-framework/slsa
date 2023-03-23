@@ -43,7 +43,7 @@ software supply chain is needed, as evidenced by the
 Security techniques for vulnerability detection and analysis of source code are
 essential, but are not enough on their own. Even after fuzzing or vulnerability
 scanning is completed, changes to code can happen, whether unintentionally or
-from a compromised or malicious insider. Risk for code modification exists at
+from insider threats or compromised accounts. Risk for code modification exists at
 each link in a typical software supply chain, from source to build through
 packaging and distribution. Any weaknesses in the supply chain undermine
 confidence in whether the code that you run is actually the code that you
