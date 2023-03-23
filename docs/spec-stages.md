@@ -1,8 +1,10 @@
 ---
-title: Specification Stages
+title: Specification Stages and Versioning
 description: SLSA specifications go through various stages of development from which you should have different expectations. This document defines the different stages the SLSA project uses and their meaning for readers and contributors.
 layout: specifications
 ---
+
+## Specification Stages
 
 Specifications go through various stages of development from which you
 should have different expectations. This document defines the different
@@ -13,7 +15,7 @@ Every specification page should prominently display a *Status* section
 stating which stage the specification is in with a link to its
 definition.
 
-## Draft
+### Draft
 
 This is the first stage of development a specification goes
 through. At this point, not much should be expected of it. The
@@ -31,7 +33,7 @@ See the
 for other considerations related to a
 [Draft Specification](https://github.com/slsa-framework/governance/blob/main/1._Community_Specification_License-v1.md).
 
-## Candidate
+### Candidate
 
 At this stage the document is considered to be feature complete and is
 published as a way to invite final reviews. Editorial changes may
@@ -44,7 +46,7 @@ See the
 for other considerations related to a
 [Candidate for Approved Specification](https://github.com/slsa-framework/governance/blob/main/1._Community_Specification_License-v1.md).
 
-## Approved
+### Approved
 
 At this stage the document is considered stable. No changes that would
 constitute a significant departure from the existing specification are
@@ -56,10 +58,28 @@ See the
 for other considerations related to an
 [Approved Specification](https://github.com/slsa-framework/governance/blob/main/1._Community_Specification_License-v1.md).
 
-## Retired
+### Retired
 
 This stage indicates that the specification is no longer maintained.
 It has been either rendered obsolete by a newer version or
 abandoned for some reason. The status of the document may provide
 additional information and point to the new document to use intead if
 there is one.
+
+## Versioning
+
+SLSA uses a variant of [Semantic Versioning](https://www.semvar.org) to assign
+version numbers to the Core Specification and Attestation Formats, collectivly
+known as the SLSA Specification.
+
+Given a version MAJOR.MINOR.PATCH, we will increment
+
+-   MAJOR version when making backwards incompatible changes to the Core
+  Specification.
+-   MINOR version when making backwards compatible changes to the Core
+  Specification.
+-   PATCH version when making changes to the Attestation Formats.
+
+We expect to release a MINOR version at least every three (3) months, and we
+expect to release a MAJOR version at most once per calendar year. We will
+release PTACH versions as often as necessary.
