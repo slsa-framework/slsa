@@ -19,7 +19,7 @@ supply chains plus its own sources and builds.
 
 [directed acyclic graph]: https://en.wikipedia.org/wiki/Directed_acyclic_graph
 
-![Software Supply Chain Model](../../images/supply-chain-model.svg)
+![Software Supply Chain Model](../../images/v0.1/supply-chain-model.svg)
 
 | Term | Description | Example |
 | --- | --- | --- |
@@ -41,7 +41,7 @@ dependencies, and then starting execution inside the environment. The build then
 performs arbitrary steps, possibly fetching additional dependencies, and outputs
 one or more artifacts.
 
-<p align="center"><img src="../../images/build-model.svg" alt="Model Build"></p>
+<p align="center"><img src="../../images/v0.1/build-model.svg" alt="Model Build"></p>
 
 | Term | Description
 | --- | ---

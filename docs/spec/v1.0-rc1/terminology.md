@@ -28,7 +28,7 @@ supply chains plus its own sources and builds.
 
 [directed acyclic graph]: https://en.wikipedia.org/wiki/Directed_acyclic_graph
 
-![Software Supply Chain Model](../../images/supply-chain-model.svg)
+![Software Supply Chain Model](../../images/v1.0-rc1/supply-chain-model.svg)
 
 | Term | Description | Example |
 | --- | --- | --- |

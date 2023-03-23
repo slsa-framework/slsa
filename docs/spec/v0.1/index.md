@@ -18,19 +18,19 @@ levels:
     - 1:
         title: Basic security steps
         text: Level 1 means the supply chain is documented, there’s infrastructure to generate provenance, and systems are prepared for higher SLSA levels.
-        badge: /images/SLSA-Badge-full-level1.svg
+        badge: /images/v0.1/SLSA-Badge-full-level1.svg
     - 2:
         title: After the build
         text: Level 2 shows more trustworthiness in the build, builders are source-aware, and signatures are used to prevent provenance being tampered with.
-        badge: /images/SLSA-Badge-full-level2.svg
+        badge: /images/v0.1/SLSA-Badge-full-level2.svg
     - 3:
         title: Back to source
         text: Level 3 shows that a system’s builds are fully trustworthy, build definitions come from the source and a system has more hardened CI.
-        badge: /images/SLSA-Badge-full-level3.svg
+        badge: /images/v0.1/SLSA-Badge-full-level3.svg
     - 4:
         title: Across the chain
         text: Level 4 means the build environment is fully accounted for, dependencies are tracked in provenance and insider threats are ruled out.
-        badge: /images/SLSA-Badge-full-level4.svg
+        badge: /images/v0.1/SLSA-Badge-full-level4.svg
 
 subpages:
   - title: Terminology
@@ -90,7 +90,7 @@ below, along with the rest of the essential specifications.
             </div>
         </div>
         <div class="my-16 w-full">
-            <img class="mx-auto w-full md:w-3/4" src="../../images/supply-chain-threats.svg" alt="supply chain full threats image" />
+            <img class="mx-auto w-full md:w-3/4" src="../../images/v0.1/supply-chain-threats.svg" alt="supply chain full threats image" />
         </div>
     </div>
     <div class="wrapper inner w-full">
@@ -128,7 +128,7 @@ below, along with the rest of the essential specifications.
                 <p>There’s more to security than just protection against tampering. From vulnerability management and fuzzing to testing and developer trust, many of these require solutions where effort’s focused on the source. That’s where SLSA complements your wider security efforts, giving you confidence that the code you run is the code you analyzed.</p>
             </div>
             <div class="w-full md:w-1/2">
-                <img class="mx-auto" src="../../images/SLSA-SBOM.svg" alt="How it fits into the security ecosystem image" />
+                <img class="mx-auto" src="../../images/v0.1/SLSA-SBOM.svg" alt="How it fits into the security ecosystem image" />
             </div>
         </div>
     </div>
@@ -150,7 +150,7 @@ below, along with the rest of the essential specifications.
                 <p>SLSA’s requirements look at the three general main areas involved in a software artifact’s creation, and where vulnerabilities target - the build, the source, and the dependencies. As the levels scale up, they show that work’s been done to assure there’s more integrity in each area, which can be helpful in scenario planning.</p>
             </div>
             <div class="w-full md:w-1/3 mx-auto">
-                <img src="../../images/badge-exploded.svg" alt="SLSA levels badge">
+                <img src="../../images/v0.1/badge-exploded.svg" alt="SLSA levels badge">
             </div>
         </div>
         <div class="flex flex-wrap md:flex-row justify-between items-start mt-16 md:-ml-4">

@@ -18,7 +18,7 @@ SLSA can help. For a background, see [Terminology](terminology.md).
 
 ## Summary
 
-![Supply Chain Threats](../../images/supply-chain-threats.svg)
+![Supply Chain Threats](../../images/v1.0-rc1/supply-chain-threats.svg)
 
 SLSA's primary focus is supply chain integrity, with a secondary focus on
 availability. Integrity means protection against tampering or unauthorized
