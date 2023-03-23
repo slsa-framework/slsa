@@ -89,7 +89,7 @@ of places:
     these releases if the source repository supports attaching additional
     artifacts to a release. This option requires no changes to the package
     registry to support build attestation formats, but means that the source
-    repository in use is now in the dependency chain for installers that want
+    repository in use is now in the critical path for installers that want
     to verify policy at build-time.
 -   **Publish attestations alongside the artifact in the package registry**:
     Many software repositories already support some variety of publishing 1:1
