@@ -4,7 +4,7 @@ prev_page:
   title: What's new in SLSA v1.0
   url: whats-new
 next_page:
-  title: Supply-chain threats
+  title: Supply chain threats
   url: threats-overview
 ---
 
@@ -15,7 +15,7 @@ to SLSA, start here!
 
 ## What is SLSA?
 
-SLSA is a set of incrementally adoptable guidelines for supply-chain security,
+SLSA is a set of incrementally adoptable guidelines for supply chain security,
 established by industry consensus. The specification set by SLSA is useful for
 both software producers and consumers: producers can follow SLSA's guidelines to
 make their software supply chain more secure, and consumers can use SLSA to make
@@ -23,7 +23,7 @@ decisions about whether to trust a software package.
 
 SLSA offers:
 
--   A common vocabulary to talk about software supply-chain security
+-   A common vocabulary to talk about software supply chain security
 -   A way to judge the software you consume and secure your incoming supply chain
 -   An actionable checklist to improve your own software's security
 -   A way to measure your efforts toward compliance with forthcoming
@@ -113,7 +113,7 @@ Track. SLSA v1.0 consists of only a single track (Build), but future versions of
 SLSA will add tracks that cover other parts of the software supply chain.
 
 Within each track, ascending levels indicate increasingly hardened security
-practices. Higher levels provide better guarantees against supply-chain threats,
+practices. Higher levels provide better guarantees against supply chain threats,
 but come at higher implementation costs. Lower SLSA levels are designed to be
 easier to adopt, but with only modest security guarantees. SLSA 0 is sometimes
 used to refer to software that doesn't yet meet any SLSA level. Currently, the
