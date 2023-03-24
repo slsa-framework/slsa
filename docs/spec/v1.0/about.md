@@ -1,10 +1,6 @@
 ---
 title: About SLSA
 description: With supply chain attacks on the rise, a shared vocabulary and universal framework is needed to provide incremental guidance to harden supply chains for more secure software production. This page introduces the main concepts behind SLSA and explains how it can help anyone involved in producing, consuming, or providing infrastructure for software. 
-previous_page:
-  url: whats-new
-next_page:
-  url: threats-overview
 ---
 
 This page is an introduction to SLSA and its concepts. If you're new
