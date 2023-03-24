@@ -17,7 +17,7 @@ The examples on this page are meant to:
 
 <article class="threats">
 
-## Source Track
+## Source threats
 
 A source integrity threat is a potential for an adversary to introduce a change
 to the source code that does not reflect the intent of the software producer.
@@ -45,16 +45,6 @@ infrastructure.
 
 SLSA v1.0 does not address this threat, but it may be addressed in a future
 version.
-
-## Build Track
-
-A build integrity threat is a potential for an adversary to introduce behavior
-to a package that is not reflected in the source code, or to build from a
-source, dependency, and/or process that is not intended by the software
-producer.
-
-The SLSA Build track covers these threats when combined with verifying artifacts
-against expectations.
 
 ### (C) Build from modified source
 
@@ -143,6 +133,14 @@ the source repo does not match the expected value.
 
 </details>
 
+## Dependency threats
+
+A dependency threat is a vector for an adversary to introduce behavior to an
+artifact through external software the artifact requires to function.
+
+SLSA does not directly address dependency threats, but you can mitigate
+dependency threats by verifying your dependencies' SLSA provenance.
+
 ### (D) Use compromised dependency
 
 <details><summary>Use a compromised build dependency</summary>
@@ -175,6 +173,16 @@ to run. The adversary compromises `libBar`'s build process and inserts malicious
 code. When your artifact runs, it contains the adversary's malicious code.
 
 </details>
+
+## Build threats
+
+A build integrity threat is a potential for an adversary to introduce behavior
+to a package that is not reflected in the source code, or to build from a
+source, dependency, and/or process that is not intended by the software
+producer.
+
+The SLSA Build track covers these threats when combined with verifying artifacts
+against expectations.
 
 ### (E) Compromise build process
 
@@ -432,7 +440,7 @@ repository do not meet its expectations.
 
 </details>
 
-## Availability Track
+## Availability threats
 
 An availability threat is a potential for an adversary to deny someone from
 reading a source and its associated change history, or from building a package.
