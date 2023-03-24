@@ -60,12 +60,11 @@ artifacts.
 
 Package ecosystems SHOULD support a one-to-many relationship from build
 artifacts to attestations to ensure that anyone is free to produce and publish
-any attestation they might need. Package ecosystems MUST require a strict
-one-to-one relationship from a build provenance attestation to a given
-artifact. The mappings can be either implicit (e.g. require a custom filename
-schema that uniquely identifies the build attestation over other attestation
-types) or explicit (e.g. it could happen as a de-facto standard based on where
-the attestation is published).
+any attestation they might need. Package ecosystems MUST provide a way to map a
+given artifact to a build attestation. The mappings can be either implicit
+(e.g. require a custom filename schema that uniquely identifies the build
+attestation over other attestation types) or explicit (e.g. it could happen as
+a de-facto standard based on where the attestation is published).
 
 The build attestation SHOULD have a filename that is directly related to the
 build artifact filename. For example, for an artifact `<filename>.<extension>`,
