@@ -1,0 +1,15 @@
+{% comment -%}
+  For each page in `include.collection` (recursively), print:
+    [URL]<ENDURL>[TITLE]<ENDTITLE>
+{% endcomment -%}
+{% for entry in include.collection -%}
+  {% if entry.url and entry.skip_next_prev != true -%}
+    {% assign parts = entry.url | split: '/' -%}
+    {% if parts[1] == include.first_url_part -%}
+      {{entry.url}}<ENDURL>{{entry.title}}<ENDTITLE>
+    {%- endif -%}
+  {% endif -%}
+  {% if entry.children -%}
+    {% include pagination-parse.liquid first_url_part=part_1 collection=entry.children -%}
+  {% endif -%}
+{% endfor -%}

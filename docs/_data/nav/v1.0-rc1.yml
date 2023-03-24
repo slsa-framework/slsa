@@ -37,6 +37,7 @@
 
       - title: Single-page view
         url: /spec/v1.0-rc1/onepage
+        skip_next_prev: true  # don't show as a next/prev link
 
     - title: Attestations
       children:
