@@ -11,6 +11,9 @@
       - title: Terminology
         url: /spec/v0.1/terminology
 
+      - title: Use cases
+        url: /spec/v0.1/use-cases
+
       - title: Levels
         url: /spec/v0.1/levels
 
@@ -40,9 +43,6 @@
 
     - title: Stages
       url: /spec-stages
-
-- title: Use cases
-  url: /use-cases
 
 - title: Get started
   url: /get-started
