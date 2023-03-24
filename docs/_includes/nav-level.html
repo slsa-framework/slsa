@@ -11,7 +11,7 @@
           {{ subitem.title | escape }}
         </a>
       {%- elsif subitem.children.size > 0 %}
-        {{ subitem.title | escape }}
+        <span class="section-title">{{ subitem.title | escape }}</span>
         {% include nav-level.html collection=subitem.children %}
       {%- else %}
         <em>{{ subitem.title | escape }}</em>
