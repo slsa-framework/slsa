@@ -2,10 +2,8 @@
 title: About SLSA
 description: An introduction to SLSA
 prev_page:
-  title: What's new in SLSA v1.0
   url: whats-new
 next_page:
-  title: Supply chain threats
   url: threats-overview
 ---
 
@@ -26,7 +24,7 @@ SLSA offers:
 -   A way to secure your incoming supply chain by evaluating the trustworthiness of the artifacts you consume
 -   An actionable checklist to improve your own software's security
 -   A way to measure your efforts toward compliance with forthcoming
-    Executive Order standards in the [Secure Software Development Framework (SSDF)](https://csrc.nist.gov/Projects/ssdf).
+    Executive Order standards in the [Secure Software Development Framework (SSDF)](https://csrc.nist.gov/Projects/ssdf)
 
 ## Why SLSA is needed
 
@@ -108,7 +106,7 @@ chain between them.
 
 We talk about SLSA in terms of [tracks and levels](levels.md).
 A SLSA track focuses on a particular aspect of a supply chain, such as the Build
-Track. SLSA v1.0 consists of only a single track [(Build)](levels.md#build-track), but future versions of
+Track. SLSA v1.0 consists of only a single track ([Build](levels.md#build-track)), but future versions of
 SLSA will add tracks that cover other parts of the software supply chain, such
 as how source code is managed.
 
@@ -128,7 +126,9 @@ industry leaders agree protect against particular supply chain compromises.
 
 ## What SLSA doesn't cover
 
-There are several areas outside SLSA's current framework:
+SLSA is only one part of a thorough approach to supply chain security. There 
+are several areas outside SLSA's current framework that are nevertheless
+important to consider together with SLSA:
 
 -   Code quality: SLSA does not tell you whether the developers writing the
     source code followed secure coding practices.

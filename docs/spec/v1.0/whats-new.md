@@ -5,7 +5,6 @@ prev_page:
   url: index
 
 next_page:
-  title: About SLSA
   url: about
 ---
 
