@@ -1,12 +1,3 @@
----
-prev_page:
-  title: Introduction
-  url: ./
-next_page:
-  title: Guiding principles
-  url: principles
----
-
 # Security levels
 
 SLSA is organized into a series of levels that provide increasing supply chain

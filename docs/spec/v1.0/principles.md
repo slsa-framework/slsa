@@ -1,10 +1,6 @@
 ---
 title: Guiding principles
 description: An introduction to the guiding principles behind SLSA's design decisions.
-prev_page: 
-  url: threats-overview
-next_page:
-  url:  faq
 ---
 
 This page is an introduction to the guiding principles behind SLSA's design

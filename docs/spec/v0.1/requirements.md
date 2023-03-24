@@ -1,10 +1,6 @@
 ---
 title: Requirements
 description: Technical requirements to reach each level.
-prev_page:
-    url: levels
-next_page:
-    url: threats
 ---
 This page covers all of the technical requirements for an artifact to meet the
 [SLSA Levels](levels.md).

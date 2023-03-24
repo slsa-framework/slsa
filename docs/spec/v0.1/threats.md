@@ -1,10 +1,6 @@
 ---
 title: Threats and mitigations
 description: Specific supply chain attacks and how SLSA helps.
-prev_page:
-    url: requirements
-next_page:
-    url: faq
 ---
 Attacks can occur at every link in a typical software supply chain, and these
 kinds of attacks are increasingly public, disruptive, and costly in today's
