@@ -126,7 +126,7 @@ industry leaders agree protect against particular supply chain compromises.
 
 ## What SLSA doesn't cover
 
-SLSA is only one part of a thorough approach to supply chain security. There 
+SLSA is only one part of a thorough approach to supply chain security. There
 are several areas outside SLSA's current framework that are nevertheless
 important to consider together with SLSA:
 
