@@ -1,8 +1,6 @@
 ---
 title: Threats & mitigations
 description: A comprehensive technical analysis of supply chain threats and their corresponding mitigations in SLSA.
-prev_page:
-  url: verifying-artifacts
 ---
 
 What follows is a comprehensive technical analysis of supply chain threats and
@@ -295,7 +293,7 @@ official source control repository.
 
 The mitigation here is to compare the provenance against expectations for the
 package, which depends on SLSA Build L1 for provenance. (Threats against the
-provenance itself are covered by (D) and (F).)
+provenance itself are covered by (E) and (F).)
 
 <details><summary>Build from unofficial fork of code <span>(expectations)</span></summary>
 
@@ -375,7 +373,20 @@ the source repo does not match the expected value.
 
 </details>
 
-### (D) Compromise build process
+### (D) Use compromised dependency
+
+> **TODO:** What exactly is this about? Is it about compromising the build
+> process through a bad build tool, and/or is it about compromising the output
+> package through a bad library? Does it involve all upstream threats to the
+> dependency, or is it just about this particular use of the package (e.g.
+> tampering on input, or choosing a bad dependency)?
+
+<!-- separate TODO -->
+
+> **TODO:** Fill this out to give more examples of threats from compromised
+> dependencies.
+
+### (E) Compromise build process
 
 An adversary introduces an unauthorized change to a build output through
 tampering of the build process; or introduces false information into the
@@ -383,33 +394,25 @@ provenance.
 
 These threats are directly addressed by the SLSA Build track.
 
-<details><summary>Compromise build environment of subsequent build <span>(Build L3)</span></summary>
-
-*Threat:* Perform a "bad" build that persists a change in the build environment,
-then run a subsequent "good" build using that environment.
-
-*Mitigation:* Builder ensures that each build environment is [ephemeral], with
-no way to persist changes between subsequent builds.
-
-*Example:* Build service uses the same machine for subsequent builds. Adversary
-first runs a build that replaces the `make` binary with a malicious version,
-then runs a subsequent build that otherwise would pass expectations. Solution:
-Builder changes architecture to start each build with a clean machine image.
-
-</details>
-<details><summary>Compromise parallel build <span>(Build L3)</span></summary>
+<details><summary>Compromise other build <span>(Build L3)</span></summary>
 
 *Threat:* Perform a "bad" build that alters the behavior of another "good" build
-running in parallel.
+running in parallel or subsequent environments.
 
 *Mitigation:* Builds are [isolated] from one another, with no way for one to
-affect the other.
+affect the other or persist changes.
 
-*Example:* Build service runs all builds for project MyPackage on the same
-machine as the same Linux user. Adversary starts a "bad" build that listens for
-the "good" build and swaps out source files, then starts a "good" build that
-would otherwise pass expectations. Solution: Builder changes architecture to
-isolate each build in a separate VM or similar.
+*Example 1:* Build service runs all builds for project MyPackage on
+the same machine as the same Linux user. Adversary starts a "bad" build that
+listens for the "good" build and swaps out source files, then starts a "good"
+build that would otherwise pass expectations. Solution: Builder changes
+architecture to isolate each build in a separate VM or similar.
+
+*Example 2:* Build service uses the same machine for subsequent
+builds. Adversary first runs a build that replaces the `make` binary with a
+malicious version, then runs a subsequent build that otherwise would pass
+expectations. Solution: Builder changes architecture to start each build with a
+clean machine image.
 
 </details>
 <details><summary>Steal cryptographic secrets <span>(Build L3)</span></summary>
@@ -475,19 +478,6 @@ from that source. A subsequent build then picks up that poisoned cache entry.
 **TODO:** similar to Source
 
 </details>
-
-### (E) Use compromised dependency
-
-> **TODO:** What exactly is this about? Is it about compromising the build
-> process through a bad build tool, and/or is it about compromising the output
-> package through a bad library? Does it involve all upstream threats to the
-> dependency, or is it just about this particular use of the package (e.g.
-> tampering on input, or choosing a bad dependency)?
-
-<!-- separate TODO -->
-
-> **TODO:** Fill this out to give more examples of threats from compromised
-> dependencies.
 
 ### (F) Upload modified package
 
@@ -597,7 +587,7 @@ positive attestation showing that some system, such as GitHub, ensured retention
 and availability of the source code.
 
 </details>
-<details><summary>(E) A dependency becomes temporarily or permanently unavailable to the build process</summary>
+<details><summary>(D) A dependency becomes temporarily or permanently unavailable to the build process</summary>
 
 *Threat:* Unable to perform a build with the intended dependencies.
 
@@ -660,9 +650,8 @@ accept cryptographic hashes with strong collision resistance.
 <!-- Links -->
 
 [authentic]: requirements.md#provenance-authentic
-[ephemeral]: requirements.md#ephemeral-isolated
 [exists]: requirements.md#provenance-exists
-[isolated]: requirements.md#ephemeral-isolated
+[isolated]: requirements.md#isolated
 [non-forgeable]: requirements.md#provenance-non-forgeable
 [service]: requirements.md#build-service
 [supply-chain threats]: threats-overview

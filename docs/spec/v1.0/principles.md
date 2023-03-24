@@ -1,10 +1,6 @@
 ---
 title: SLSA overview
 description: This page is an introduction to SLSA and its guiding principles. If you're new to SLSA, start here!
-prev_page:
-  url: whats-new
-next_page:
-  url: threats-overview
 ---
 
 This page is an introduction to SLSA and its guiding principles. If you're new

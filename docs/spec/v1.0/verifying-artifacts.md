@@ -1,10 +1,6 @@
 ---
 title: Verifying artifacts
 description: SLSA uses provenance to indicate whether an artifact is authentic or not, but provenance doesn't do anything unless somebody inspects it. SLSA calls that inspection verification, and this page describes how to verify artifacts and their SLSA provenenance. The intended audience is system implementers, security engineers, and software consumers.
-prev_page:
-  url: distributing-artifacts
-next_page:
-  url: verifying-systems
 ---
 
 SLSA uses provenance to indicate whether an artifact is authentic or not, but
@@ -140,7 +136,7 @@ Verification MUST include the following steps:
     an approved list of `ExternalParameters` to be ignored during verification.
     Any unrecognized `ExternalParameters` SHOULD cause verification to fail.
 
-![Threats covered by each step](/images/supply-chain-threats-build-verification.svg)
+![Threats covered by each step](/images/v1.0/supply-chain-threats-build-verification.svg)
 
 Note: This section assumes that the provenance is in the recommended
 [provenance format](/provenance/v1). If it is not, then the verifier must
