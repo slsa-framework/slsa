@@ -1,10 +1,6 @@
 ---
 title: Security levels
 description: Ladder of increasing security guarantees.
-prev_page:
-  url: terminology
-next_page:
-  url: requirements
 ---
 
 SLSA is organized into a series of levels that provide increasing

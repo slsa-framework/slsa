@@ -1,25 +1,46 @@
-{% if page.prev_page or page.next_page %}
+{%- comment %}Render next/previous links based on the nav bar.{% endcomment %}
+
+{%- comment %}This chunk is copied from nav.html; it should be kept in sync.{%- endcomment %}
+{%- assign url_parts = page.url | split: '/' %}
+{%- assign part_1 = url_parts[1] %}
+{%- assign part_2 = url_parts[2] %}
+{%- assign key = site.data.nav.config.url_to_key[part_1]
+      | default: site.data.nav.config.url_to_key[part_2]
+      | default: site.data.nav.config.url_to_key["latest"] %}
+{%- assign nav = site.data.nav[key] %}
+
+{%- comment %}matching_pages = array of "[URL] [TITLE]"{% endcomment %}
+{%- capture matching_pages_newline_separated %}
+{%- include pagination-parse.liquid first_url_part=part_1 collection=nav %}
+{%- endcapture %}
+{%- assign matching_pages = matching_pages_newline_separated | split: "<ENDTITLE>" %}
+
+{%- for entry in matching_pages %}
+  {%- assign url = entry | split: "<ENDURL>" | first %}
+  {%- if url == page.url %}
+    {%- unless forloop.first %}
+      {%- assign prev_index = forloop.index0 | minus: 1 %}
+      {%- assign prev_entry = matching_pages[prev_index] | strip %}
+    {%- endunless %}
+    {%- unless forloop.last %}
+      {%- assign next_index = forloop.index0 | plus: 1 %}
+      {%- assign next_entry = matching_pages[next_index] | strip %}
+    {%- endunless %}
+    {%- break %}
+  {%- endif %}
+{%- endfor %}
+
+{%- if prev_entry or next_entry%}
   <div class="mt-10 pt-10 border-t flex flex-col sm:flex-row space-between gap-5">
-    {%- assign url_parts = page.url | split: '/' %}
-    {% if page.prev_page %}
-        {%- if page.prev_page.url == "index" %}
-            {%- assign prevurl = page.url | replace: url_parts[-1], "" -%}
-        {% else %}
-            {%- assign prevurl = page.url | replace: url_parts[-1], page.prev_page.url -%}
-        {% endif %}
-        {%- capture pattern %}page.url == "{{prevurl}}"{% endcapture -%}
-        {%- assign prevpage = site.pages | where_exp: "page", pattern | first -%}
-        <a href="{{ page.prev_page.url }}" class="border rounded px-4 py-2 text-left">&lsaquo; {{ prevpage.title }}</a>
+    {%- if prev_entry %}
+      {%- assign url = prev_entry | split: "<ENDURL>" | first %}
+      {%- assign title = prev_entry | split: "<ENDURL>" | last | escape_once %}
+      <a href="{{ url }}" class="border rounded px-4 py-2 text-left">&lsaquo; {{ title }}</a>
     {%- endif %}
-    {% if page.next_page %}
-        {%- if page.name == "index.md" %}
-            {%- assign nexturl = page.url | append: page.next_page.url -%}
-        {%- else -%}
-            {%- assign nexturl = page.url | replace: url_parts[-1], page.next_page.url -%}
-        {%- endif %}
-        {%- capture pattern %}page.url == "{{nexturl}}"{% endcapture -%}
-        {%- assign nextpage = site.pages | where_exp: "page", pattern | first -%}
-        <a href="{{ page.next_page.url }}" class="sm:ml-auto border rounded px-4 py-2 text-right">{{ nextpage.title }} &rsaquo;</a>
+    {%- if next_entry %}
+      {%- assign url = next_entry | split: "<ENDURL>" | first %}
+      {%- assign title = next_entry | split: "<ENDURL>" | last | escape_once %}
+      <a href="{{ url }}" class="sm:ml-auto border rounded px-4 py-2 text-right">{{ title }} &rsaquo;</a>
     {%- endif %}
   </div>
 {% endif %}

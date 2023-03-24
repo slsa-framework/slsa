@@ -1,12 +1,3 @@
----
-prev_page:
-  title: Security levels
-  url: levels
-next_page:
-  title: Terminology
-  url: terminology
----
-
 # Guiding principles
 
 This page provides a background on the guiding principles behind SLSA. It is

@@ -1,8 +1,6 @@
 ---
 title: Introduction
 description: Overview of the SLSA standards and technical controls to improve artifact integrity.
-next_page:
-    url: terminology
 layout: standard
 stages:
     - 1:

@@ -1,9 +1,3 @@
----
-next_page:
-  title: Security levels
-  url: levels
----
-
 # SLSA Specification
 
 SLSA is a specification for describing and incrementally improving supply chain
