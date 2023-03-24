@@ -1,10 +1,6 @@
 ---
 title: Security levels
 description: SLSA is organized into a series of levels that provide increasing supply chain security guarantees. This gives you confidence that software hasn’t been tampered with and can be securely traced back to its source. This page is a descriptive overview of the SLSA levels and tracks, describing their intent.
-prev_page:
-  url: terminology
-next_page:
-  url: requirements
 ---
 
 SLSA is organized into a series of levels that provide increasing supply chain

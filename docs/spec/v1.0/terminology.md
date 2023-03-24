@@ -1,10 +1,6 @@
 ---
 title: Terminology
 description: Before diving into the SLSA specification levels, we need to establish a core set of terminology and models to describe what we're protecting.
-prev_page:
-  url: future-directions
-next_page:
-  url: levels
 ---
 
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set

@@ -1,10 +1,6 @@
 ---
 title: Supply-chain threats
 description: Attacks can occur at every link in a typical software supply chain, and these kinds of attacks are increasingly public, disruptive, and costly in today's environment. This page is an introduction to possible attacks throughout the supply chain and how SLSA can help.
-prev_page:
-  url: principles
-next_page:
-  url: faq
 ---
 
 Attacks can occur at every link in a typical software supply chain, and these
