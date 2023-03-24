@@ -1,11 +1,5 @@
 ---
 title: Terminology
-prev_page:
-  title: Guiding principles
-  url: principles
-next_page:
-  title: Producing artifacts
-  url: requirements
 ---
 
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set
