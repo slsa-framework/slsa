@@ -250,6 +250,7 @@ build system the package was built.
 | Term         | Description |
 |--------------|---- |
 | Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly. |
+| Verification policy | A set of constraints on the package's provenance metadata. The provenance consumer sets the verification policy based on the expectations. |
 | Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used. |
 | Build system certification | [Build systems are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level. |
 
@@ -260,8 +261,9 @@ implemented for different, broadly defined, package ecosystems.
 
 | Term | Example |
 | ---- | ------- |
-| Expectations | Defined by the producer's security personnel and stored in a database. |
-| Provenance verification | Performed automatically on cluster nodes before execution by querying the expectations database. |
+| Expectations | Defined by the producer and stored in a database. |
+| Verification policy | Defined by security personnel and stored in a database. |
+| Provenance verification | Performed automatically on cluster nodes before execution by querying the verification policy database. |
 | Build system certification | The build system implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their conformance to SLSA requirements. |
 
 </details>
@@ -271,6 +273,7 @@ implemented for different, broadly defined, package ecosystems.
 | Term | Example |
 | ---- | ------- |
 | Expectations | Defined separately for each package and stored in the package registry. |
+| Verification policy | An exact copy of the expectations. |
 | Provenance verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client also verifies expectations prior to installing packages. |
 | Build system certification | Performed by the language ecosystem packaging authority. |
 
