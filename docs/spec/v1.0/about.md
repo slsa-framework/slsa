@@ -128,7 +128,7 @@ industry leaders agree protect against particular supply chain compromises.
 
 SLSA is only one part of a thorough approach to supply chain security. There
 are several areas outside SLSA's current framework that are nevertheless
-important to consider together with SLSA:
+important to consider together with SLSA such as:
 
 -   Code quality: SLSA does not tell you whether the developers writing the
     source code followed secure coding practices.
