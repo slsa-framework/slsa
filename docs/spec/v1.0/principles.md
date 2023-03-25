@@ -49,13 +49,13 @@ manual security analysis. Where possible:
 
 ## Trust code, not individuals
 
-Securely trace all software back to source code rather than trust individual maintainers who have write access to package registries.
+Securely trace all software back to source code rather than trust individuals who have write access to package registries.
 
 **Reasoning**: Code is static and analyzable. People, on the other hand, are prone to mistakes,
 credential compromise, and sometimes malicious action.
 
-**Benefits**: Removes the possibility for an individual maintainer---or an
-attacker abusing a compromised maintainer's credentials---to tamper with source code
+**Benefits**: Removes the possibility for a trusted individual---or an
+attacker abusing compromised credentials---to tamper with source code
 after it has been committed.
 
 ## Prefer attestations over inferences
