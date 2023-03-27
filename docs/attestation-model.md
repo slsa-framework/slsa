@@ -42,7 +42,7 @@ choose the format best for your situation.
 ### First party
 
 As a first party producer, you use SLSA only within your organization,
-primarily manage insider risk. If you are developering entirely in
+primarily to manage insider risk. If you are developing entirely in
 a closed source environment, no particular format is required for internal use.
 
 If you want to make an external claim of meeting a SLSA level, however, there
