@@ -37,20 +37,20 @@ dependencies (as in the case of SLSA [Provenance]).
 ## Formats
 
 There is no single required attestation format. This section explains how to
-choose the format best for your situation. 
+choose the format best for your situation.
 
 ### First party
 
 As a first party producer, you use SLSA only within your organization,
 primarily manage insider risk. If you are developering entirely in
-a closed source environment, no particular format is required for internal use. 
+a closed source environment, no particular format is required for internal use.
 
 If you want to make an external claim of meeting a SLSA level, however, there
 must be a way for external users to consume and verify your provenance.
 Currently, [SLSA Provenance format] is the most widely used format for SLSA
-attestations and the easiest to verify using the [Generic SLSA Verifier]. 
+attestations and the easiest to verify using the [Generic SLSA Verifier].
 
-### Open source 
+### Open source
 
 As an open source producer, you produce software with standard open source
 licenses (no contracts or warranties). You probably use SLSA so that others can
@@ -61,13 +61,13 @@ The SLSA Provenance format offers interoperability and cohesion across the open
 source ecosystem. Users can verify any provenance statement in this format
 using the [Generic SLSA Verifier].
 
-### Closed source, third party 
+### Closed source, third party
 
 If you develop closed source code that is consumed by others, you may not want
 to make all the details of your provenance available externally. This might
 apply to vendors who produce code (usually closed source) for third-party
 consumers, backed with contracts. You likely use SLSA for creating trust in
-your organization and to comply with audits and legal requirements. 
+your organization and to comply with audits and legal requirements.
 
 Consider using Verification Summary Attestations (VSAs) to summarize provenance
 information in a sanitized way that's safe for external consumption. For more
