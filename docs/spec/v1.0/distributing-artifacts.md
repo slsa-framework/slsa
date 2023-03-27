@@ -74,8 +74,8 @@ example [in-toto](https://in-toto.io/) recommends `<filename>.intoto.jsonl`.)
 ## Where attestations are published
 
 There are a number of opportunities and venues to publish attestations during
-and after the build process. Producers SHOULD publish attestations in a number
-of places:
+and after the build process. Producers MUST publish attestations in at least
+one place, and SHOULD publish attestations in more than one place:
 
 -   **Publish attestations in a transparency log**: Once an attestation has
     been generated for a build, the attestation (or a hash of the attestation
