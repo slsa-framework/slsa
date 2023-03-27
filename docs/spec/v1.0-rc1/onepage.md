@@ -1,5 +1,6 @@
 ---
 title: SLSA Specification
+noindex: true
 ---
 {%- comment -%}
 A single page containing all the following files as different sections
