@@ -53,7 +53,7 @@ controls as specified by the chosen system.
   <td><a href="#provenance-authentic">Authentic</a>
   <td> <td>✓<td>✓
 <tr>
-  <td><a href="#provenance-non-forgeable">Non-forgeable</a>
+  <td><a href="#provenance-unforgeable">Unforgeable</a>
   <td> <td> <td>✓
 <tr>
   <td rowspan=2><a href="#isolation-strength">Isolation strength</a>
@@ -217,14 +217,14 @@ build system (i.e. outside the trust boundary).
 -   Completeness of resolved dependencies is best effort.
 
 <td> <td>✓<td>✓
-<tr id="provenance-non-forgeable"><td>Provenance is Non-forgeable<td>
+<tr id="provenance-unforgeable"><td>Provenance is Unforgeable<td>
 
-*Accuracy:* Provenance MUST be strongly resistant to influence by tenants.
+*Accuracy:* Provenance MUST be strongly resistant to forgery by tenants.
 
--   Any secret material used to demonstrate the non-forgeable nature of
-    the provenance, for example the signing key used to generate a digital
-    signature, MUST be stored in a secure management system appropriate for
-    such material and accessible only to the build service account.
+-   Any secret material used for authenticating the provenance, for example the
+    signing key used to generate a digital signature, MUST be stored in a secure
+    management system appropriate for such material and accessible only to the
+    build service account.
 -   Such secret material MUST NOT be accessible to the environment running
     the user-defined build steps.
 -   Every field in the provenance MUST be generated or verified by the build
