@@ -52,8 +52,8 @@ new artifacts to old releases when adding support for new platforms or
 architectures.
 
 Thus, package ecosystems SHOULD support multiple individual attestations per
-release. At the time of a given build, the relevant build attestations for that
-build can be added to the release, depending on the relationship to the given
+release. At the time of a given build, the relevant provenance for that build
+can be added to the release, depending on the relationship to the given
 artifacts.
 
 ## Relationship between artifacts and attestations
@@ -61,15 +61,15 @@ artifacts.
 Package ecosystems SHOULD support a one-to-many relationship from build
 artifacts to attestations to ensure that anyone is free to produce and publish
 any attestation they might need. Package ecosystems MUST provide a way to map a
-given artifact to corresponding build attestations. The mappings can be either
-implicit (e.g. require a custom filename schema that uniquely identifies the
-build attestation over other attestation types) or explicit (e.g. it could
-happen as a de-facto standard based on where the attestation is published).
+given artifact to corresponding provenance. The mappings can be either implicit
+(e.g. require a custom filename schema that uniquely identifies the provenance
+over other attestation types) or explicit (e.g. it could happen as a de-facto
+standard based on where the attestation is published).
 
-The build attestation SHOULD have a filename that is directly related to the
-build artifact filename. For example, for an artifact `<filename>.<extension>`,
-the attestation is `<filename>.attestation` or some similar extension (for
-example [in-toto](https://in-toto.io/) recommends `<filename>.intoto.jsonl`.)
+The provenance SHOULD have a filename that is directly related to the build
+artifact filename. For example, for an artifact `<filename>.<extension>`, the
+attestation is `<filename>.attestation` or some similar extension (for example
+[in-toto](https://in-toto.io/) recommends `<filename>.intoto.jsonl`.)
 
 ## Where attestations are published
 
@@ -88,12 +88,11 @@ one place, and SHOULD publish attestations in more than one place:
 -   **Publish attestations alongside source releases in the source
     repository**: For ecosystems where source releases are commonly published
     to source repositories as well as to package registries (such as GitHub
-    releases), producers SHOULD include provenance attestations as part of
-    these releases if the source repository supports attaching additional
-    artifacts to a release. This option requires no changes to the package
-    registry to support build attestation formats, but means that the source
-    repository in use is now in the critical path for installers that want
-    to verify policy at build-time.
+    releases), producers SHOULD include provenance as part of these releases if
+    the source repository supports attaching additional artifacts to a release.
+    This option requires no changes to the package registry to support
+    provenance formats, but means that the source repository in use is now in
+    the critical path for installers that want to verify policy at build-time.
 -   **Publish attestations alongside the artifact in the package registry**:
     Many software repositories already support some variety of publishing 1:1
     related files alongside an artifact, sometimes known as “sidecar files”.
@@ -110,8 +109,7 @@ publishing attestations, by publishing it as part of the source repository
 release.
 
 Long-term, package registries SHOULD support uploading and distributing
-build attestations alongside the artifact. This model is preferred
-for two reasons:
+provenance alongside the artifact. This model is preferred for two reasons:
 
 -   trust: clients already trust the package registry as the source of their
     artifacts, and don't need to trust an additional service;
@@ -127,7 +125,7 @@ a given ecosystem supports them.
 
 ## Immutability of attestations
 
-Attestations MUST be immutable. Once a build attestation is published as it
+Attestations MUST be immutable. Once an attestation is published as it
 corresponds to a given artifact, that attestation is immutable and cannot be
 overwritten later with a different attestation that refers to the same
 artifact. Instead, a new release (and new artifacts) MUST be created.
