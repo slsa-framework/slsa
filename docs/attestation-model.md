@@ -10,8 +10,8 @@ The primary intended use case is to feed into automated policy engines, such as
 [in-toto] and [Binary Authorization].
 
 This page provides a high-level overview of the attestation model, including
-standardized terminology, data model, layers, and conventions for software
-attestations.
+standardized terminology, data model, layers, conventions for software
+attestations, and recommended formats for different use cases.
 
 ## Overview
 
@@ -33,6 +33,45 @@ arbitrary amount of information, including things that are not possible with
 raw signing. For example, an attestation might state exactly how an artifact
 was produced, including the build command that was run and all of its
 dependencies (as in the case of SLSA [Provenance]).
+
+## Formats
+
+There is no single required attestation format. This section explains how to
+choose the format best for your situation. 
+
+### First party
+
+As a first party producer, you use SLSA only within your organization,
+primarily manage insider risk. If you are developering entirely in
+a closed source environment, no particular format is required for internal use. 
+
+If you want to make an external claim of meeting a SLSA level, however, there
+must be a way for external users to consume and verify your provenance.
+Currently, [SLSA Provenance format] is the most widely used format for SLSA
+attestations and the easiest to verify using the [Generic SLSA Verifier]. 
+
+### Open source 
+
+As an open source producer, you produce software with standard open source
+licenses (no contracts or warranties). You probably use SLSA so that others can
+trust how your code was developed. If you develop open source projects that
+will be consumed by others, you should use the [SLSA Provenance format].  
+
+The SLSA Provenance format offers interoperability and cohesion across the open
+source ecosystem. Users can verify any provenance statement in this format
+using the [Generic SLSA Verifier].
+
+### Closed source, third party 
+
+If you develop closed source code that is consumed by others, you may not want
+to make all the details of your provenance available externally. This might
+apply to vendors who produce code (usually closed source) for third-party
+consumers, backed with contracts. You likely use SLSA for creating trust in
+your organization and to comply with audits and legal requirements. 
+
+Consider using Verification Summary Attestations (VSAs) to summarize provenance
+information in a sanitized way that's safe for external consumption. For more
+about VSAs, see the [Verification Summary Attestation] page.
 
 ## Model and Terminology
 
@@ -99,6 +138,7 @@ recognize that other choices MAY be necessary in various cases.
 [attestation bundle]: https://github.com/in-toto/attestation/blob/main/spec/bundle.md
 [Binary Authorization]: https://cloud.google.com/binary-authorization
 [DSSE]: https://github.com/secure-systems-lab/dsse/
+[Generic SLSA Verifier]: https://github.com/slsa-framework/slsa-verifier
 [hypergraph]: https://en.wikipedia.org/wiki/Hypergraph
 [in-toto]: https://in-toto.io
 [in-toto attestations]: https://github.com/in-toto/attestation/
@@ -107,5 +147,7 @@ recognize that other choices MAY be necessary in various cases.
 [Provenance]: /provenance
 [remote attestation]: https://en.wikipedia.org/wiki/Trusted_Computing#Remote_attestation
 [RFC 2119]: https://tools.ietf.org/html/rfc2119
+[SLSA Provenance format]: /provenance/v1.md
 [sigstore/cosign]: https://github.com/sigstore/cosign
 [SPDX]: https://github.com/in-toto/attestation/blob/main/spec/predicates/spdx.md
+[Verification Summary Attestation]: /attestation-model.md
