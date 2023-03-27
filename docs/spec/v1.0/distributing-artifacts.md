@@ -45,7 +45,7 @@ artifacts. These artifacts result from builds on different platforms,
 architectures or environments. The builds need not happen at roughly the same
 point in time and might even span multiple days.
 
-The complete set of attestations for a given release is incomplete until all
+The set of attestations for a given release is incomplete until all
 builds for a given release are finished. However, it is difficult or impossible
 to determine when a release is 'finished' because many ecosystems allow adding
 new artifacts to old releases when adding support for new platforms or
@@ -102,7 +102,7 @@ of places:
     This option requires the mapping between artifact and attestation (or
     attestation vessel) to be 1:1.
 
-A combination of these options allows for a bootstrap process where projects
+A combination of these options allows for a bootstrapping process where projects
 that want to generate build provenance attestations can begin publishing
 attestations in a way that is directly tied to a source release or built
 artifact without needing to wait for the upstream package registry to support
