@@ -68,18 +68,24 @@ there is one.
 
 ## Versioning
 
-SLSA uses a variant of [Semantic Versioning](https://www.semvar.org) to assign
+SLSA needs revision from time to time, so we version the specification to
+facilitate conformance efforts and prevent confusion. We assign
 version numbers to the Core Specification and Attestation Formats, collectivly
 known as the SLSA Specification.
 
-Given a version MAJOR.MINOR.PATCH, we will increment
-
+Given a version MAJOR.MINOR, we will increment
 -   MAJOR version when making backwards incompatible changes to the Core
-  Specification.
+  Specification. 
 -   MINOR version when making backwards compatible changes to the Core
-  Specification.
--   PATCH version when making changes to the Attestation Formats.
+  Specification, or  when making changes to the Attestation Formats.
 
-We expect to release a MINOR version at least every three (3) months, and we
-expect to release a MAJOR version at most once per calendar year. We will
-release PTACH versions as often as necessary.
+Backwards incompatible changes to the core specification
+include adding a new track and either adding or removing requirements
+from an existing track. All other changes to the Core
+Specification are considered backwards compatible. 
+
+Although we may revise the meaning of level, we will never fundamentally
+change it (e.g. SLSA Build Level 2 will retain its general meaning between
+versions). If you require precision when referring to SLSA levels, then include
+their version number using the syntax "SLSA <Track> <Level> (<Version>)" (e.g.
+"SLSA Build L3 (v1.0)").
