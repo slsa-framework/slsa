@@ -7,9 +7,9 @@ next_page:
   url: verifying-artifacts
 ---
 
-SLSA requires the distribution and verification of provenance metadata in the
-form of SLSA attestations, in order to make provenance for related artifacts
-available after generation for verification.
+In order to make provenance for related artifacts available after generation
+for verification, SLSA requires the distribution and verification of provenance
+metadata in the form of SLSA attestations.
 
 This document provides specifications for distributing attestations, and the
 relationship between build artifacts and attestations. It is primarily
