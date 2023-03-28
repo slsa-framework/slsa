@@ -96,7 +96,7 @@ testimonials:
             </div>
             <div class="w-full md:w-1/2 md:mt-0 mt-8">
                 <p>SLSA is for everyone involved in producing and consuming software, or providing infrastructure for software.
-                Whether you're a producer using SLSA for protection against insider risk and tampering, a consumer using SLSA to judge the security practices of the software you rely, or an infrastructure provider using SLSA to harden the systems connecting them, SLSA helps you create more trust across the entire supply chain.<p> 
+                Whether you're a producer using SLSA for protection against insider risk and tampering, a consumer using SLSA to judge the security practices of the software you rely, or an infrastructure provider using SLSA to harden the systems connecting them, SLSA helps you create more trust across the entire supply chain.<p>
             </div>
         </div>
     </div>
