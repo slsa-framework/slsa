@@ -136,7 +136,7 @@ the source repo does not match the expected value.
 ## Dependency threats
 
 A dependency threat is a vector for an adversary to introduce behavior to an
-artifact through external software the artifact requires to function.
+artifact through external software that the artifact requires to function.
 
 SLSA does not directly address dependency threats, but you can mitigate
 dependency threats by verifying your dependencies' SLSA provenance.
