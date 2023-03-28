@@ -70,7 +70,7 @@ there is one.
 
 SLSA needs revision from time to time, so we version the specification to
 facilitate conformance efforts and prevent confusion. We assign a single
-version number to the Core Specification and Attestation Formats, collectivly
+version number to the Core Specification and Attestation Formats, collectively
 known as the SLSA Specification.
 
 Given a version MAJOR.MINOR, we will increment
