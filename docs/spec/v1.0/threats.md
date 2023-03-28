@@ -5,7 +5,7 @@ description: A comprehensive technical analysis of supply chain threats and thei
 
 What follows is a comprehensive technical analysis of supply chain threats and
 their corresponding mitigations in SLSA. For an introduction to the
-supply-chain threats that SLSA protects agains, see [Supply-chain threats].
+supply chain threats that SLSA protects agains, see [Supply chain threats].
 
 The examples on this page are meant to:
 
@@ -21,8 +21,8 @@ The examples on this page are meant to:
 
 A source integrity threat is a potential for an adversary to introduce a change
 to the source code that does not reflect the intent of the software producer.
-This includes the threat of an authorized developer introducing an unauthorized
-change—in other words, an insider threat.
+This includes the threat of an authorized individual introducing an unauthorized
+change---in other words, an insider threat.
 
 SLSA v1.0 does not address source integrity, though we anticipate a [Source
 track](future-directions.md#source-track) might do so in a future version. In
@@ -191,7 +191,7 @@ proper processes.
 *Mitigation:* **Outside the scope of SLSA.** Trust of the software producer is
 an important but separate property from integrity.
 
-*Example:* A popular extension author sells the rights to a new owner, who then
+*Example:* A popular extension producer sells the rights to a new owner, who then
 modifies the code to secretly mine bitcoin at the users' expense. SLSA does not
 protect against this, though if the extension were open source, regular auditing
 may discourage this from happening.
@@ -654,4 +654,4 @@ accept cryptographic hashes with strong collision resistance.
 [isolated]: requirements.md#isolated
 [non-forgeable]: requirements.md#provenance-non-forgeable
 [service]: requirements.md#build-service
-[supply-chain threats]: threats-overview
+[supply chain threats]: threats-overview

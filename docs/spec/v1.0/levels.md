@@ -101,7 +101,7 @@ SLSA---other than tamper protection---without changing their build workflows.
 
 <dt>Requirements<dd>
 
--   Up front, the package maintainer defines how the package is *expected* to be
+-   Up front, the package producer defines how the package is *expected* to be
     built, including the canonical source repository and build command.
 
 -   On each build, the release process automatically generates and distributes a
@@ -114,7 +114,7 @@ SLSA---other than tamper protection---without changing their build workflows.
 
 <dt>Benefits<dd>
 
--   Makes it easier for both maintainers and consumers to debug, patch, rebuild,
+-   Makes it easier for both producers and consumers to debug, patch, rebuild,
     and/or analyze the software by knowing its precise source version and build
     process.
 
@@ -216,7 +216,7 @@ All of [Build L2], plus:
 
 All of [Build L2], plus:
 
--   Prevents tampering during the build---by maintainers, compromised
+-   Prevents tampering during the build---by insider threats, compromised
     credentials, or other tenants.
 
 -   Greatly reduces the impact of compromised package upload credentials by
