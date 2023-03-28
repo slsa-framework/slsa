@@ -70,7 +70,7 @@ using the [Generic SLSA Verifier].
 
 Producers of closed source code that is consumed by others might consider
 the following questions:
--   Is my code produced for third party consumers, back with contracts?
+-   Is my code produced for third party consumers, backed with contracts?
 -   Is the primary use case to create trust in our organization or to comply with
 audits and legal requirements?
 
