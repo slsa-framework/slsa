@@ -2,23 +2,6 @@
 title: Supply-chain Levels for Software Artifacts
 description: SLSA is a security framework. It is a check-list of standards and controls to prevent tampering, improve integrity, and secure packages and infrastructure in your projects, businesses or enterprises. It’s how you get from safe enough to being as resilient as possible, at any link in the chain.
 subheading: Safeguarding artifact integrity across any software supply chain
-levels:
-    - 1:
-        title: Level 1
-        text: Easy to adopt, giving you supply chain visibility and being able to generate provenance
-        badge: /images/SLSA-Badge-level1.svg
-    - 2:
-        title: Level 2
-        text: Starts to protect against software tampering and adds minimal build integrity guarantees
-        badge: /images/SLSA-Badge-level2.svg
-    - 3:
-        title: Level 3
-        text: Hardens the infrastructure against attacks, more trust integrated into complex systems
-        badge: /images/SLSA-Badge-level3.svg
-    - 4:
-        title: Level 4
-        text: The highest assurances of build integrity and measures for dependency management in place
-        badge: /images/SLSA-Badge-level4.svg
 testimonials:
     - 1:
         quote: This is our chance to work with the industry, set a standard which we can all agree to, and work together to raise the collective bar.
@@ -69,8 +52,8 @@ testimonials:
         <div class="flex flex-wrap justify-between items-center">
             <div class="text w-full md:w-1/2">
                 <h2 class="h2 mb-8">What is SLSA?</h2>
-                <p><strong>Supply chain Levels for Software Artifacts, or SLSA (salsa).</strong></p>
-                <p>It’s a security framework, a check-list of standards and controls to prevent tampering, improve integrity, and secure packages and infrastructure in your projects, businesses or enterprises. It’s how you get from safe enough to being as resilient as possible, at any link in the chain.</p>
+                <p><strong>Supply-chain Levels for Software Artifacts, or SLSA ("salsa").</strong></p>
+                <p>It’s a security framework, a checklist of standards and controls to prevent tampering, improve integrity, and secure packages and infrastructure. It’s how you get from "safe enough" to being as resilient as possible, at any link in the chain.</p>
             </div>
             <div class="w-full md:w-1/3 md:mt-0 mt-8">
                 <img src="images/logo-mono.svg" alt="SLSA logo mark mono version">
@@ -85,7 +68,7 @@ testimonials:
                 <h3 class="h2 p-0">The supply chain problem</h3>
             </div>
             <div class="w-full md:w-1/2 md:mt-0 mt-8">
-                <p>Any software can introduce vulnerabilities into a supply chain. As a system gets more complex, it’s critical to already have checks and best practices in place to guarantee artifact integrity, that the source code you’re relying on is the code you’re actually using. Without solid foundations and a plan for the system as it grows, it’s difficult to focus your efforts against tomorrow’s next hack, breach or compromise.</p>
+                <p>Any software can introduce vulnerabilities into a supply chain. As a system gets more complex, it’s critical to have checks and best practices in place to guarantee artifact integrity, that the source code you’re relying on is the code you’re actually using. Without solid foundations and a plan for the system as it grows, it’s difficult to focus your efforts against tomorrow’s next hack, breach or compromise.</p>
                 <a href="spec/{{ site.current_spec_version }}/#supply-chain-threats" class="cta-link h5 font-semibold mt-8">More about supply chain attacks</a>
             </div>
         </div>
@@ -97,22 +80,12 @@ testimonials:
         <div class="flex flex-wrap justify-between items-center">
             <div class="text w-full md:w-1/2">
                 <h4 class="h2 mb-8">Levels of assurance</h4>
-                <p>SLSA levels are like a common language to talk about how secure software, supply chains and their component parts really are. From source to system, the levels blend together industry-recognized best practices to create four compliance levels of increasing assurance.
-                These look at the builds, sources and dependencies in open source or commercial software. Starting with easy, basic steps at the lower levels to build up and protect against advanced threats later, bringing SLSA into your work means prioritized, practical measures to prevent unauthorized modifications to software, and a plan to harden that security over time.</p>
+                <p>SLSA levels offer a common language to talk about the security of software supply chains and their components. These industry-recognized best practices start with simpler steps at the lower levels that build up and protect against advanced threats at the higher levels, offering increasing assurance for the builds and sources in open source or commercial software. Bringing SLSA into your work means prioritized, practical measures to prevent unauthorized modifications to software, and a plan to harden that security over time.</p>
                 <a href="spec/{{ site.current_spec_version }}/levels" class="cta-link h5 font-semibold mt-8">Read the level specifications</a>
             </div>
             <div class="w-full md:w-2/4 md:mt-0 mt-8 pl-12">
                 <img class="w-3/4 mx-auto" src="images/badge-exploded.svg" alt="SLSA levels badge">
             </div>
-        </div>
-        <div class="flex flex-wrap justify-between items-center mt-16 md:-ml-4">
-          {%- for level in page.levels -%}
-          {%- assign level_content = level | map: level -%}
-              <div class="w-full md:w-1/2 md:pl-4 pb-4">
-                  {% include levels-card.html index=index level=level_content %}
-              </div>
-          {%- endfor -%}
-        </div>
     </div>
 </section>
 <section class="section bg-white flex flex-col justify-center items-center">
@@ -122,8 +95,8 @@ testimonials:
                 <h4 class="h2 p-0">Who is SLSA for?</h4>
             </div>
             <div class="w-full md:w-1/2 md:mt-0 mt-8">
-                <p>Whether you’re a developer, business or an enterprise, SLSA provides a industry standard, a recognizable and agreed-upon level of protection and compliance.<br><br>
-It’s adaptable, and it’s been designed with the wider security ecosystem in mind, for anyone to adopt and use. That could be users requiring that the software they rely on is a particular SLSA level, an open source software project protecting its users by using SLSA compliant infrastructure, or an enterprise using SLSA as guiding principles to harden their own internal supply chains, requiring that dependencies are SLSA compliant too.</p>
+                <p>SLSA is for everyone involved in producing and consuming software, or providing infrastructure for software.
+                Whether you're a producer using SLSA for protection against insider risk and tampering, a consumer using SLSA to judge the security practices of the software you rely, or an infrastructure provider using SLSA to harden the systems connecting them, SLSA helps you create more trust across the entire supply chain.<p> 
             </div>
         </div>
     </div>
@@ -218,7 +191,7 @@ It’s adaptable, and it’s been designed with the wider security ecosystem in 
               <a href="get-started#reaching-slsa-level-1" class="hover:no-underline">
                   <div class="bg-white h-full rounded-lg p-10 flex flex-col">
                       <p class="h3 font-semibold mb-8 md:mb-6">Start using SLSA</p>
-                      <p>Ready to put your project through its paces? The first on-ramp to SLSA Level 1 is generating provenance. We’ve put together a quick walkthrough with the steps you’ll need to take and available tools you can use.</p>
+                      <p>Ready to put your project through its paces? The first on-ramp to SLSA is generating provenance. We’ve put together a walkthrough with the steps you’ll need to take and available tools you can use.</p>
                       <p class="cta-link h5 font-semibold mt-auto pt-8 md:pt-0">Get started</p>
                   </div>
                 </a>
