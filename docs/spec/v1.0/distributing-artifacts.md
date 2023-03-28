@@ -13,7 +13,7 @@ metadata in the form of SLSA attestations.
 
 This document provides specifications for distributing attestations, and the
 relationship between build artifacts and attestations. It is primarily
-concerned with artifacts for ecosystems that distribute "built distributions",
+concerned with artifacts for ecosystems that distribute build artifacts,
 but some attention is also paid to ecosystems that distribute container images
 or only distribute source artifacts, as many of the same principles generally
 apply to any artifact or group of artifacts.
