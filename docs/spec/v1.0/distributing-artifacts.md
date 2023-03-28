@@ -149,7 +149,7 @@ intermediary (e.g. [Homebrew installing from GitHub release artifacts generated
 from the repository or GitHub Packages](https://docs.brew.sh/Bottles), [Go
 installing through the Go module proxy](https://proxy.golang.org/)), these
 ecosystems distribute "source archives" that are not the bit-for-bit identical
-form from version control.  These intermediaries as transforming the original
+form from version control. These intermediaries are transforming the original
 source repository in some way that constitutes a "build" and as a result SHOULD
 be providing build provenance for this "package", and the recommendations
 outlined here apply.
