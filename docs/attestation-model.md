@@ -47,10 +47,9 @@ Producers of first party code might consider the following questions:
 -   Is the primary use case to manage insider risk?
 -   Are we developing entirely in a closed source environment?
 
-In these situations, no particular format is required for internal use.
-
-If you want to make an external claim of meeting a SLSA level, however, there
-must be a way for external users to consume and verify your provenance.
+If these are the main considerations, the organization can choose any format
+for internal use. To make an external claim of meeting a SLSA level, however,
+there must be a way for external users to consume and verify your provenance.
 Currently, [SLSA Provenance format] is the most widely used format for SLSA
 attestations and the easiest to verify using the [Generic SLSA Verifier].
 
