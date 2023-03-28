@@ -16,7 +16,7 @@ This code turns a set of pages contained in a directory into one single page.
 <!-- index page ends -->
 
 {% for file in files %}
-   {% capture pattern %}page.url contains "{{file}}"{% endcapture %}
+   {% capture pattern %}page.url == "{{dir}}{{file}}"{% endcapture %}
    {% assign p = pages | where_exp: "page", pattern | first %}
    <!-- {{p.url}} begins -->
    <h2 id="{{file}}">{{p.title}}</h2>
