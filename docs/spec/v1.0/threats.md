@@ -43,8 +43,8 @@ An adversary introduces a change to the source control repository through an
 administrative interface, or through a compromise of the underlying
 infrastructure.
 
-SLSA v1.0 does not address this threat, but it may be addressed in a future
-version.
+SLSA v1.0 does not address this threat, but it may be addressed in a [future
+version](future-directions.md).
 
 ### (C) Build from modified source
 
@@ -138,8 +138,8 @@ the source repo does not match the expected value.
 A dependency threat is a vector for an adversary to introduce behavior to an
 artifact through external software that the artifact requires to function.
 
-SLSA does not directly address dependency threats, but you can mitigate
-dependency threats by verifying your dependencies' SLSA provenance.
+SLSA mitigates dependency threats when you verify your dependencies' SLSA
+provenance.
 
 ### (D) Use compromised dependency
 
@@ -177,12 +177,12 @@ code. When your artifact runs, it contains the adversary's malicious code.
 ## Build threats
 
 A build integrity threat is a potential for an adversary to introduce behavior
-to a package that is not reflected in the source code, or to build from a
+to an artifact without changing its source code, or to build from a
 source, dependency, and/or process that is not intended by the software
 producer.
 
-The SLSA Build track covers these threats when combined with verifying artifacts
-against expectations.
+The SLSA Build track mitigates these threats when the consumer
+[verifies artifacts](verifying-artifacts.md) against expectations.
 
 ### (E) Compromise build process
 
