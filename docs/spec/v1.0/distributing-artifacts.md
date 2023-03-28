@@ -30,11 +30,10 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ## Background
 
-The [package ecosystem](terminology.md#package-model)'s maintainers are
-responsible for reliably redistributing artifacts and provenance, making the
-producers' expectations available to consumers, and providing tools to enable
-safe artifact consumption (e.g. whether an artifact meets its producer's
-expectations).
+The [package ecosystem]'s maintainers are responsible for reliably
+redistributing artifacts and provenance, making the producers' expectations
+available to consumers, and providing tools to enable safe artifact consumption
+(e.g. whether an artifact meets its producer's expectations).
 
 ## Relationship between releases and attestations
 
@@ -153,3 +152,5 @@ form from version control. These intermediaries are transforming the original
 source repository in some way that constitutes a "build" and as a result SHOULD
 be providing build provenance for this "package", and the recommendations
 outlined here apply.
+
+[package ecosystem]: verifying-artifacts.md#package-ecosystem

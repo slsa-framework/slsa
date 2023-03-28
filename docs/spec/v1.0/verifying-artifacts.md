@@ -28,6 +28,35 @@ package ecosystem do not have to verify provenance. Consumers can do so with
 client-side verification tooling or by polling a monitor, but there is no
 requirement that they do so.
 
+<!-- **TODO** Add a diagram. -->
+
+### Package ecosystem
+
+[Package ecosystem]: #package-ecosystem
+
+> ⚠ **TODO** Update this section to use Package model terminology.
+
+A <dfn>package ecosystem</dfn> is a set of conventions and
+tooling for package distribution. Every package has an ecosystem, whether it is
+formal or ad-hoc. Some ecosystems are formal, such as language distribution
+(e.g. [Python/PyPA](https://www.pypa.io)), operating system distribution (e.g.
+[Debian/Apt](https://wiki.debian.org/DebianRepository/Format)), or artifact
+distribution (e.g. [OCI](https://github.com/opencontainers/distribution-spec)).
+Other ecosystems are informal, such as a convention used within a company. Even
+ad-hoc distribution of software, such as through a link on a website, is
+considered an "ecosystem". For more background, see
+[Package Model](terminology.md#package-model).
+
+During package upload, a package ecosystem can ensure that the artifact's
+provenance matches the known expectations for that package name before accepting
+it into the registry.  If possible, system implementers SHOULD prefer this option
+because doing so benefits all of the package ecosystem's clients.
+
+The package ecosystem is responsible for reliably redistributing
+artifacts and provenance, making the producers' expectations available to consumers,
+and providing tools to enable safe artifact consumption (e.g. whether an artifact
+meets its producer's expectations).
+
 ### Consumer
 
 [Consumer]: #consumer

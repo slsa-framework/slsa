@@ -316,4 +316,4 @@ considered in the [future directions](future-directions.md).
 </table>
 
 [external parameters]: ../../provenance/v1.md#externalParameters
-[package ecosystem]: distributing-artifacts.md#package-ecosystem
+[package ecosystem]: verifying-artifacts.md#package-ecosystem
