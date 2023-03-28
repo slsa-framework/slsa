@@ -44,7 +44,7 @@ Capabilities:
 
 Capabilities:
 
--   All listed under "low privilege".
+-   All listed under "project contributors".
 -   Create new builds under the target build's project or identity.
 -   Modify the target build's source repo and build from it.
 -   Modify the target build's configuration.
@@ -53,7 +53,7 @@ Capabilities:
 
 Capabilities:
 
--   All listed under "low privilege" and "medium privilege".
+-   All listed under "project contributors" and "project maintainers".
 -   Run arbitrary code on the build service.
 -   Read and modify network traffic.
 -   Access the control plane's cryptographic secrets.
