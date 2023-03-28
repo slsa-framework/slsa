@@ -7,8 +7,8 @@
 - title: Understanding SLSA
   description: >
     These pages provide an overview of SLSA, how it helps protect against common
-    supply-chain attacks, and common use cases. If you're new to SLSA or
-    supply-chain security, start here.
+    supply chain attacks, and common use cases. If you're new to SLSA or
+    supply chain security, start here.
   children:
 
   - title: What's new in v1.0
@@ -16,17 +16,21 @@
     description: What's new in SLSA Version 1.0
 
   - title: About SLSA
-    url: /spec/v1.0/principles
+    url: /spec/v1.0/about
     description: An introductory guide to SLSA
 
-  - title: Supply-chain threats
+  - title: Supply chain threats
     url: /spec/v1.0/threats-overview
-    description: An introduction to supply-chain threats
+    description: An introduction to supply chain threats
 
   - title: Use cases
     url: /spec/v1.0/use-cases
     description: Use cases
-
+    
+  - title: Guiding principles
+    url: /spec/v1.0/principles
+    description: Use cases
+  
   - title: FAQ
     url: /spec/v1.0/faq
     description: Questions and more information
@@ -68,7 +72,7 @@
 
   - title: Threats & mitigations
     url: /spec/v1.0/threats
-    description: Detailed information about specific supply-chain attacks and how SLSA helps
+    description: Detailed information about specific supply chain attacks and how SLSA helps
 
 - title: Attestation formats
   description: >

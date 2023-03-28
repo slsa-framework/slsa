@@ -107,17 +107,18 @@ some implemenatations, the producer MAY provide explicit metadata to a verifier
 about their build process. In others, the verifier will form their expectations
 implicitly (e.g. trust on first use).
 
-For example, if a producer wishes to distribute their artifact through a package
-ecosystem that requires explicit metadata about the build process in the form of
-a config file. That metadata includes the artifact's source repository and build
-parameters that stay constant between builds. The producer MUST complete that
-config file and keep it up to date.
+If a producer wishes to distribute their artifact through a [package ecosystem]
+that requires explicit metadata about the build process in the form of a
+configuration file, the producer MUST complete the configuration file and keep
+it up to date. This metadata might include information related to the artifact's
+source repository and build parameters.
 
 ### Distribute provenance
 
 The producer MUST distribute provenance to artifact consumers. The producer
-MAY delegate this responsibility to the package ecosystem, provided that the
-package ecosystem is capable of distributing provenance.
+MAY delegate this responsibility to the
+[package ecosystem], provided that the package ecosystem is capable of
+distributing provenance.
 
 ## Build system
 
@@ -128,7 +129,7 @@ software from source to package. This includes the transitive closure of all
 hardware, software, persons, and organizations that can influence the build. A
 build system is often a hosted, multi-tenant build service, but it could be a
 system of multiple independent rebuilders, a special-purpose build system used
-by a single software project, or even a developer's workstation. Ideally, one
+by a single software project, or even an individual's workstation. Ideally, one
 build system is used by many different software packages so that consumers can
 [minimize the number of trusted systems](principles.md). For more background,
 see [Build Model](terminology.md#build-model).
@@ -144,7 +145,8 @@ the degree to which each of these properties is met.
 The build system is responsible for generating provenance describing how the
 package was produced.
 
-The SLSA Build level describes the minimum bound for:
+The SLSA Build level describes the overall provenance integrity according to
+minimum requirements on its:
 
 -   *Completeness:* What information is contained in the provenance?
 -   *Authenticity:* How strongly can the provenance be tied back to the builder?
@@ -160,8 +162,7 @@ The build process MUST generate provenance that unambiguously identifies the
 output package and describes how that package was produced.
 
 The format MUST be acceptable to the
-[package ecosystem](distributing-artifacts.md#package-ecosystem) and/or
-[consumer](verifying-artifacts.md#consumer). It
+[package ecosystem] and/or [consumer](verifying-artifacts.md#consumer). It
 is RECOMMENDED to use the [SLSA Provenance] format and [associated suite]
 because it is designed to be interoperable, universal, and unambiguous when
 used for SLSA. See that format's documentation for requirements and
@@ -212,7 +213,7 @@ build system (i.e. outside the trust boundary).
 
 *Completeness:* SHOULD be complete.
 
--   There MAY be external parameters that are not sufficiently captured in
+-   There MAY be [external parameters] that are not sufficiently captured in
     the provenance.
 -   Completeness of resolved dependencies is best effort.
 
@@ -233,7 +234,7 @@ build system (i.e. outside the trust boundary).
 
 *Completeness:* SHOULD be complete.
 
--   External parameters MUST be fully enumerated.
+-   [External parameters] MUST be fully enumerated.
 -   Completeness of resolved dependencies is best effort.
 
 Note: This requirement was called "non-falsifiable" in the initial
@@ -262,7 +263,7 @@ information on assessing a build system's isolation strength, see
 <td>Build service
 <td>
 
-All build steps ran using some build service, not on a maintainer's
+All build steps ran using some build service, not on an individual's
 workstation.
 
 Examples: GitHub Actions, Google Cloud Build, Travis CI.
@@ -313,3 +314,6 @@ considered in the [future directions](future-directions.md).
 
 <td> <td> <td>✓
 </table>
+
+[external parameters]: ../../provenance/v1.md#externalParameters
+[package ecosystem]: distributing-artifacts.md#package-ecosystem
