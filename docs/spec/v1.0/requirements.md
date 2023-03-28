@@ -129,7 +129,7 @@ software from source to package. This includes the transitive closure of all
 hardware, software, persons, and organizations that can influence the build. A
 build system is often a hosted, multi-tenant build service, but it could be a
 system of multiple independent rebuilders, a special-purpose build system used
-by a single software project, or even a developer's workstation. Ideally, one
+by a single software project, or even an individual's workstation. Ideally, one
 build system is used by many different software packages so that consumers can
 [minimize the number of trusted systems](principles.md). For more background,
 see [Build Model](terminology.md#build-model).
@@ -263,7 +263,7 @@ information on assessing a build system's isolation strength, see
 <td>Build service
 <td>
 
-All build steps ran using some build service, not on a maintainer's
+All build steps ran using some build service, not on an individual's
 workstation.
 
 Examples: GitHub Actions, Google Cloud Build, Travis CI.
