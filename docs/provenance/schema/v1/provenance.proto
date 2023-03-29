@@ -41,6 +41,7 @@ message Builder {
   string id = 1;
   map<string, string> version = 2;
   repeated ResourceDescriptor builder_dependencies = 3;
+  google.Protobuf.Struct tenant = 4;
 }
 
 message BuildMetadata {

@@ -17,6 +17,7 @@
                 "id": string,
                 "builderDependencies": [ ...#ResourceDescriptor ],
                 "version": { ...string },
+                "tenant": _,
             },
             "metadata": {
                 "invocationId": string,
