@@ -186,7 +186,8 @@ source, dependency, and/or process that is not intended by the software
 producer.
 
 The SLSA Build track mitigates these threats when the consumer
-[verifies artifacts](verifying-artifacts.md) against expectations.
+[verifies artifacts](verifying-artifacts.md) against expectations, confirming
+that the artifact they recieved was built in the expected manner.
 
 ### (E) Compromise build process
 
