@@ -74,11 +74,11 @@ potential policy that requires a certain SLSA level for publication, not
 support the publication of arbitrary attestations by third parties.
 
 As a result, this provenance MUST accompany the artifact at publish time, and
-package ecosystems MUST provide a way to map a given artifact to corresponding
-provenance. The mappings can be either implicit (e.g. require a custom filename
-schema that uniquely identifies the provenance over other attestation types) or
-explicit (e.g. it could happen as a de-facto standard based on where the
-attestation is published).
+package ecosystems MUST provide a way to map a given artifact to its
+corresponding attestations. The mappings can be either implicit (e.g. require a
+custom filename schema that uniquely identifies the provenance over other
+attestation types) or explicit (e.g. it could happen as a de-facto standard
+based on where the attestation is published).
 
 The provenance SHOULD have a filename that is directly related to the build
 artifact filename. For example, for an artifact `<filename>.<extension>`, the
