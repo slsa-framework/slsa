@@ -11,12 +11,12 @@ In order to make provenance for related artifacts available after generation
 for verification, SLSA requires the distribution and verification of provenance
 metadata in the form of SLSA attestations.
 
-This document provides specifications for distributing attestations, and the
-relationship between build artifacts and attestations. It is primarily
-concerned with artifacts for ecosystems that distribute build artifacts,
-but some attention is also paid to ecosystems that distribute container images
-or only distribute source artifacts, as many of the same principles generally
-apply to any artifact or group of artifacts.
+This document provides specifications for distributing provenance, and the
+relationship between build artifacts and provenance (build attestations). It is
+primarily concerned with artifacts for ecosystems that distribute build
+artifacts, but some attention is also paid to ecosystems that distribute
+container images or only distribute source artifacts, as many of the same
+principles generally apply to any artifact or group of artifacts.
 
 In addition, this document is primarily for the benefit of artifact
 distributors, to understand how they can adopt the distribution of SLSA
@@ -44,11 +44,11 @@ artifacts. These artifacts result from builds on different platforms,
 architectures or environments. The builds need not happen at roughly the same
 point in time and might even span multiple days.
 
-The set of attestations for a given release is incomplete until all
-builds for a given release are finished. However, it is difficult or impossible
-to determine when a release is 'finished' because many ecosystems allow adding
-new artifacts to old releases when adding support for new platforms or
-architectures.
+It is often difficult or impossible to determine when a release is 'finished'
+because many ecosystems allow adding new artifacts to old releases when adding
+support for new platforms or architectures. Therefore, the set of attestations
+for a given release MAY grow over time as additional builds and attestations
+are created.
 
 Thus, package ecosystems SHOULD support multiple individual attestations per
 release. At the time of a given build, the relevant provenance for that build
@@ -59,11 +59,26 @@ artifacts.
 
 Package ecosystems SHOULD support a one-to-many relationship from build
 artifacts to attestations to ensure that anyone is free to produce and publish
-any attestation they might need. Package ecosystems MUST provide a way to map a
-given artifact to corresponding provenance. The mappings can be either implicit
-(e.g. require a custom filename schema that uniquely identifies the provenance
-over other attestation types) or explicit (e.g. it could happen as a de-facto
-standard based on where the attestation is published).
+any attestation they might need. However, while there are lots of possible
+attestations that can have a relationship to a given artifact, in this context
+SLSA is primarily concerned with build attestations, i.e. provenance, and as
+such, this specification only considers build attestations, produced by the
+same maintainers as the artifacts themselves.
+
+By providing provenance alongside an artifact in the manner specified by a
+given ecosystem, maintainers are considered to be 'elevating' these build
+attestations above all other possible attestations that may be provided by
+third parties for a given artifact. The ultimate goal is for maintainers to
+provide the provenance necessary for a repository to be able to verify some
+potential policy that requires a certain SLSA level for publication, not
+support the publication of arbitrary attestations by third parties.
+
+As a result, this provenance MUST accompany the artifact at publish time, and
+package ecosystems MUST provide a way to map a given artifact to corresponding
+provenance. The mappings can be either implicit (e.g. require a custom filename
+schema that uniquely identifies the provenance over other attestation types) or
+explicit (e.g. it could happen as a de-facto standard based on where the
+attestation is published).
 
 The provenance SHOULD have a filename that is directly related to the build
 artifact filename. For example, for an artifact `<filename>.<extension>`, the
