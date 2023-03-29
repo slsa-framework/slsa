@@ -656,18 +656,15 @@ body {
         text-decoration: none;
         text-indent: 0;
 
-        &:hover,
-        &:focus,
-        &.is-active {
-            color: $green-light;
-            text-decoration: none;
-        }
-
         &.is-active {
             background: $green-light;
             border-radius: 2px;
             color: $text-color;
         }
+    }
+
+    .section-title {
+        color: $green-light
     }
 }
 
