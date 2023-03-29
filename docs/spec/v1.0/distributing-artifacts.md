@@ -99,14 +99,16 @@ one place, and SHOULD publish attestations in more than one place:
     they also more easily enable monitoring.  Requiring the presence of the
     attestation in a monitored transparency log during verification helps
     ensure the attestation is trustworthy.
--   **Publish attestations alongside source releases in the source
-    repository**: For ecosystems where source releases are commonly published
-    to source repositories as well as to package registries (such as GitHub
-    releases), producers SHOULD include provenance as part of these releases if
-    the source repository supports attaching additional artifacts to a release.
-    This option requires no changes to the package registry to support
-    provenance formats, but means that the source repository in use is now in
-    the critical path for installers that want to verify policy at build-time.
+-   **Publish attestations alongside the source repository releases**: If the
+    source repository hosting provider offers an artifact "release" feature,
+    such as [GitHub
+    releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)
+    or [GitLab releases](https://docs.gitlab.com/ee/user/project/releases/),
+    producers SHOULD include provenance as part of such releases. This option
+    has the benefit of requiring no changes to the package registry to support
+    provenance formats, but has the disadvantage of putting the source
+    repository hosting providing in the critical path for installers that want to
+    verify policy at build-time.
 -   **Publish attestations alongside the artifact in the package registry**:
     Many software repositories already support some variety of publishing 1:1
     related files alongside an artifact, sometimes known as “sidecar files”.
