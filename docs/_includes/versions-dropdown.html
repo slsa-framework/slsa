@@ -3,9 +3,10 @@
 {%- assign spec_version = url_parts[2] %}
 {%- if site.data.versions[spec_name].versions[spec_version] %}
 {%- assign versions = site.data.versions[spec_name].versions | sort %}
-<select id="redirectSelect" class="select-dropdown rounded-lg p-4 border
-  {%- if include.green %} border-green-900 bg-transparent mt-8 md:mb-4 md:mt-0
-  {%- else %} border-gray-400 mb-4
+<select id="redirectSelect.{{include.laptop}}" class="select-dropdown p-1 mx-1 my-4 text-black opacity-80
+  {{include.laptop}}
+  {%- if include.green %} border-green-900 bg-transparent
+  {%- else %} border-gray-400
   {%- endif %}">
 {%- for item in versions reversed %}
 {%- unless item[1].hidden and spec_version != item[0] %}
@@ -29,7 +30,7 @@
 {%- endfor %}
 </select>
 <script>
-    var selectEl = document.getElementById('redirectSelect');
+    var selectEl = document.getElementById('redirectSelect.{{include.laptop}}');
 
     selectEl.onchange = function(){
         var goto = this.value;
@@ -37,4 +38,13 @@
 
     };
 </script>
+{%- else %}
+{%- comment %}invisible placeholder to keep layout constant{% endcomment -%}
+<select id="redirectSelect.{{include.laptop}}" disabled class="select-dropdown p-1 mx-1 my-4 opacity-0
+  {{include.laptop}}
+  {%- if include.green %} border-green-900 bg-transparent
+  {%- else %} border-gray-400
+  {%- endif %}">
+<option selected value="" class="inline-block"></option>
+</select>
 {%- endif %}

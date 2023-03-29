@@ -260,7 +260,7 @@ clean machine image.
 cryptographic secret that should only be available to the build service.
 
 *Mitigation:* Builds are [isolated] from the trusted build service control
-plane, and only the control plane has [access][non-forgeable] to cryptographic
+plane, and only the control plane has [access][unforgeable] to cryptographic
 secrets.
 
 *Example:* Provence is signed on the build worker, which the adversary has
@@ -484,6 +484,6 @@ accept cryptographic hashes with strong collision resistance.
 [authentic]: requirements.md#provenance-authentic
 [exists]: requirements.md#provenance-exists
 [isolated]: requirements.md#isolated
-[non-forgeable]: requirements.md#provenance-non-forgeable
+[unforgeable]: requirements.md#provenance-unforgeable
 [service]: requirements.md#build-service
 [supply chain threats]: threats-overview
