@@ -3,7 +3,7 @@
 {%- assign spec_version = url_parts[2] %}
 {%- if site.data.versions[spec_name].versions[spec_version] %}
 {%- assign versions = site.data.versions[spec_name].versions | sort %}
-<select id="redirectSelect.{{include.laptop}}" class="select-dropdown p-1 mx-1 my-4 text-black
+<select id="redirectSelect.{{include.laptop}}" class="select-dropdown p-1 mx-1 my-4 text-black opacity-80
   {{include.laptop}}
   {%- if include.green %} border-green-900 bg-transparent
   {%- else %} border-gray-400
