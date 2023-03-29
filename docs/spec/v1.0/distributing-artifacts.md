@@ -67,7 +67,7 @@ same maintainers as the artifacts themselves.
 
 By providing provenance alongside an artifact in the manner specified by a
 given ecosystem, maintainers are considered to be 'elevating' these build
-attestations above all other possible attestations that may be provided by
+attestations above all other possible attestations that could be provided by
 third parties for a given artifact. The ultimate goal is for maintainers to
 provide the provenance necessary for a repository to be able to verify some
 potential policy that requires a certain SLSA level for publication, not
