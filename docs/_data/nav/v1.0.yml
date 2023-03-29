@@ -26,11 +26,11 @@
   - title: Use cases
     url: /spec/v1.0/use-cases
     description: Use cases
-    
+
   - title: Guiding principles
     url: /spec/v1.0/principles
     description: Use cases
-  
+
   - title: FAQ
     url: /spec/v1.0/faq
     description: Questions and more information
@@ -58,9 +58,9 @@
     url: /spec/v1.0/requirements
     description: Detailed technical requirements for producing software artifacts, intended for system implementers
 
-  - title: Distributing artifacts
-    url: /spec/v1.0/distributing-artifacts
-    description: Detailed technical requirements for distributing software artifacts, intended for system implementers and software distributors
+  - title: Distributing provenance
+    url: /spec/v1.0/distributing-provenance
+    description: Detailed technical requirements for distributing provenance, intended for system implementers and software distributors
 
   - title: Verifying artifacts
     url: /spec/v1.0/verifying-artifacts
