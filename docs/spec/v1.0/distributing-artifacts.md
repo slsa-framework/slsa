@@ -7,7 +7,7 @@ next_page:
   url: verifying-artifacts
 ---
 
-In order to make provenance for related artifacts available after generation
+In order to make provenance for artifacts available after generation
 for verification, SLSA requires the distribution and verification of provenance
 metadata in the form of SLSA attestations.
 
