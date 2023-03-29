@@ -27,4 +27,7 @@
     {%- if jekyll.environment == 'production' -%}
     {%- include analytics.html -%}
     {%- endif -%}
+    {%- if page.noindex %}
+    <meta name="robots" content="noindex">
+    {% endif -%}
 </head>

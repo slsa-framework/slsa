@@ -189,4 +189,4 @@ package ecosystem.
 
 Consumers may either audit the build systems
 themselves using the prompts in [verifying systems](verifying-systems.md) or
-rely on the [SLSA certification program](certification.md) (coming soon).
+rely on the SLSA certification program (coming soon).

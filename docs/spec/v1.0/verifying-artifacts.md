@@ -52,7 +52,7 @@ provenance matches the known expectations for that package name before accepting
 it into the registry.  If possible, system implementers SHOULD prefer this option
 because doing so benefits all of the package ecosystem's clients.
 
-The package ecosystem's maintainers are responsible for reliably redistributing
+The package ecosystem is responsible for reliably redistributing
 artifacts and provenance, making the producers' expectations available to consumers,
 and providing tools to enable safe artifact consumption (e.g. whether an artifact
 meets its producer's expectations).
@@ -189,8 +189,8 @@ Once, when bootstrapping the verifier:
     Different verifiers might use different roots of trust, but usually a
     verifier uses the same roots of trust for all packages. This configuration
     is likely in the form of a map from (builder public key identity,
-    `builder.id`) to (SLSA Build level) drawn from the [SLSA Conformance
-    Program](certification.md) (coming soon).
+    `builder.id`) to (SLSA Build level) drawn from the SLSA Conformance
+    Program (coming soon).
 
     <details>
     <summary>Example root of trust configuration</summary>

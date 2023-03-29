@@ -2,6 +2,16 @@
 title: Terminology
 description: Before diving into the SLSA specification levels, we need to establish a core set of terminology and models to describe what we're protecting.
 ---
+<!--- Note on updating docs: using terms such as "developer," "maintainer,"
+"producer," "author," and "publisher" interchangeably can cause confusion.
+For consistency: Whenever possible, default to "producer," in line with the
+model of producer--consumer--infrastructure provider.
+"Maintainer" is reserved for sections specifying the act of continuing to
+maintain a project after its creation, or when used in a less technical context
+where it is unlikely to cause confusion. Author is reserved for the act of
+making source code commits or reviews. Individual is used when the context's
+focus is specifying a single person (i.e., "an individual's workstation" or
+"compromised individual").--->
 
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set
 of terminology and models to describe what we're protecting.
@@ -99,7 +109,7 @@ It is the primary identifier to which consumers attach expectations.
 | Package artifact | A file or other immutable object that is intended for distribution. |
 | Package ecosystem | A set of rules and conventions governing how packages are distributed, including how clients resolve a package name into one or more specific artifacts. |
 | Package manager client | Client-side tooling to interact with a package ecosystem. |
-| Package name | <p>The primary identifier for a mutable collection of artifacts that all represent different versions of the same software. This is the primary identifier that consumers use to obtain the software.<p>A package name is specific to an ecosystem + registry, has an owner/maintainer, is more general than a specific hash or version, and has a "correct" source location. A package ecosystem may group package names into some sort of hierarchy, such as the Group ID in Maven, though SLSA does not have a special term for this. |
+| Package name | <p>The primary identifier for a mutable collection of artifacts that all represent different versions of the same software. This is the primary identifier that consumers use to obtain the software.<p>A package name is specific to an ecosystem + registry, has a maintainer, is more general than a specific hash or version, and has a "correct" source location. A package ecosystem may group package names into some sort of hierarchy, such as the Group ID in Maven, though SLSA does not have a special term for this. |
 | Package registry | An entity responsible for mapping package names to artifacts within a packaging ecosystem. Most ecosystems support multiple registries, usually a single global registry and multiple private registries. |
 | Publish [a package] | Make an artifact available for use by registering it with the package registry. In technical terms, this means associating an artifact to a package name. This does not necessarily mean making the artifact fully public; an artifact may be published for only a subset of users, such as internal testing or a closed beta. |
 
