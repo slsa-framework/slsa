@@ -259,7 +259,7 @@ build system the package was built.
 
 | Term         | Description |
 |--------------|---- |
-| Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly. |
+| Expectations | A set of expected values for the purpose of verifying the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly. |
 | Verification policy | A set of constraints on the package's provenance metadata. The provenance consumer sets the verification policy based on the expectations. |
 | Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used. |
 | Build system certification | [Build systems are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level. |
