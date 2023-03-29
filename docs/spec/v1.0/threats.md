@@ -25,7 +25,7 @@ This includes the threat of an authorized individual introducing an unauthorized
 change---in other words, an insider threat.
 
 SLSA v1.0 does not address source integrity, though we anticipate a [Source
-track](future-directions.md#source-track) might do so in a future version. In
+track](future-directions#source-track) might do so in a future version. In
 the meantime, the threats and potential mitigations listed here show how SLSA
 v1.0 can fit into a broader supply chain security program.
 
