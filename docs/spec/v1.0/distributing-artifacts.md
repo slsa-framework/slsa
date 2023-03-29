@@ -100,12 +100,12 @@ one place, and SHOULD publish attestations in more than one place:
     This option requires the mapping between artifact and attestation (or
     attestation vessel) to be 1:1.
 
-A combination of these options allows for a bootstrapping process where projects
-that want to generate build provenance attestations can begin publishing
-attestations in a way that is directly tied to a source release or built
-artifact without needing to wait for the upstream package registry to support
-publishing attestations, by publishing it as part of the source repository
-release.
+Combining these options gives us a process for bootstrapping SLSA adoption
+within an ecosystem, even if the package registry doesn't support publishing
+attestations. First, interested projects modify their release process to
+produce SLSA provenance. Then, they publish that provenance to their source
+repository. Finally, they publish the provenance to the package registry, if
+and when the registry supports it.
 
 Long-term, package registries SHOULD support uploading and distributing
 provenance alongside the artifact. This model is preferred for two reasons:
