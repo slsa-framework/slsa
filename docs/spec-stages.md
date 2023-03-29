@@ -81,13 +81,13 @@ Given a version MAJOR.MINOR, we will increment
 -   MINOR version when adding new tracks or levels to the Core Specification,
     modifying an existing level without fundamentally changing its meaning, or
     adding new fields to an Attestation Format in a backwards-compatible way.
-    For more details on Attestation Format versioning, see the [intoto
+    For more details on Attestation Format versioning, see the [in-toto
     Versioning Rules](https://github.com/in-toto/attestation/blob/main/spec/versioning.md).
 
 Although we can revise the contents of level, we will never change a level's
 high-level meaning after publication (e.g. SLSA Build Level 2 will retain its
 general meaning between major versions). If you require precision when referring
 to SLSA levels, then include their version number using the syntax `SLSA
-[Track] [Level] ([Version]` (e.g. `SLSA Build L3 (v1.0)`). For more
+[Track] [Level] ([Version])` (e.g. `SLSA Build L3 (v1.0)`). For more
 details on SLSA versioning, see the
 [SLSA v1.0 Proposal](https://github.com/slsa-framework/slsa-proposals/tree/main/0003#versioning).
