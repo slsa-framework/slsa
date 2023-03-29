@@ -38,9 +38,9 @@ hermeticity or completness of provenance -->
 
 The SLSA build track describes increasing levels of trustworthiness and
 completeness in a package artifact's <dfn>provenance</dfn>. Provenance describes
-who built the artifact (person or system), what process they used, and what the
-inputs were. The lowest level only requires the provenance to exist, while
-higher levels provide increasing protection against tampering of the build, the
+what entity built the artifact, what process they used, and what the inputs
+were. The lowest level only requires the provenance to exist, while higher
+levels provide increasing protection against tampering of the build, the
 provenance, or the artifact.
 
 The primary purpose of the build track is to enable [verification] that the
@@ -101,9 +101,8 @@ SLSA---other than tamper protection---without changing their build workflows.
     expectations about what a "correct" build looks like.
 
 -   Build system automatically generates [provenance attestation] describing how
-    the artifact was built, including: who built the package (person or system),
-    what build process they used, and what the top-level input to the build
-    were.
+    the artifact was built, including: what entity built the package, what build
+    process they used, and what the top-level input to the build were.
 
 -   Software producer distributes provenance to consumers, preferably using a
     convention determined by the package ecosystem.
