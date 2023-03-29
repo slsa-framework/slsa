@@ -204,7 +204,7 @@ it.
 
 *Mitigation:* At Build L2+, trusted control plane [generates][authentic] all
 information that goes in the provenance, except (optionally) the output artifact
-hash. At Build L3+, this is [hardened][non-forgeable] to prevent compromise even
+hash. At Build L3+, this is [hardened][unforgeable] to prevent compromise even
 by determined adversaries.
 
 *Example 1 (Build L2):* Provenance is generated on the build worker, which the
