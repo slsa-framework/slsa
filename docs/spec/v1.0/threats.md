@@ -27,17 +27,17 @@ This includes the threat of an authorized individual introducing an unauthorized
 change---in other words, an insider threat.
 
 SLSA v1.0 does not address source threats, but we anticipate doing so in a
-[future versio](future-directions.md#source-track). In the meantime, the threats
-and potential mitigations listed here show how SLSA v1.0 can fit into a broader
-supply chain security program.
+[future version](future-directions.md#source-track). In the meantime, the
+threats and potential mitigations listed here show how SLSA v1.0 can fit into a
+broader supply chain security program.
 
 ### (A) Submit unauthorized change
 
 An adversary introduces a change through the official source control management
 interface without any special administrator privileges.
 
-SLSA v1.0 does not address this threat, but it may be addressed in a future
-version.
+SLSA v1.0 does not address this threat, but it may be addressed in a [future
+version](future-directions.md).
 
 ### (B) Compromise source repo
 
@@ -235,23 +235,23 @@ to alter a build in progress.
 </details>
 <details><summary>Compromise other build <span>(Build L3)</span></summary>
 
-*Threat:* Perform a "bad" build that alters the behavior of another "good" build
-running in parallel or subsequent environments.
+*Threat:* Perform a malicious build that alters the behavior of a benign
+build running in parallel or subsequent environments.
 
 *Mitigation:* Builds are [isolated] from one another, with no way for one to
 affect the other or persist changes.
 
-*Example 1:* Build service runs all builds for project MyPackage on
-the same machine as the same Linux user. Adversary starts a "bad" build that
-listens for the "good" build and swaps out source files, then starts a "good"
-build that would otherwise pass expectations. Solution: Builder changes
-architecture to isolate each build in a separate VM or similar.
+*Example 1:* A build service runs all builds for project MyPackage on
+the same machine as the same Linux user. An adversary starts a malicious build
+that listens for another build and swaps out source files, then starts a benign
+build. The benign build uses the malicious build's source files, but its
+provenance says it used benign source files. Solution: The build platform
+changes architecture to isolate each build in a separate VM or similar.
 
-*Example 2:* Build service uses the same machine for subsequent
-builds. Adversary first runs a build that replaces the `make` binary with a
-malicious version, then runs a subsequent build that otherwise would pass
-expectations. Solution: Builder changes architecture to start each build with a
-clean machine image.
+*Example 2:* A build service uses the same machine for subsequent
+builds. An adversary first runs a build that replaces the `make` binary with a
+malicious version, then subsequently runs an otherwise benign build. Solution:
+The builder changes architecture to start each build with a clean machine image.
 
 </details>
 <details><summary>Steal cryptographic secrets <span>(Build L3)</span></summary>
@@ -272,8 +272,8 @@ key.
 </details>
 <details><summary>Poison the build cache <span>(Build L3)</span></summary>
 
-*Threat:* Add a "bad" artifact to a build cache that is later picked up by a
-"good" build process.
+*Threat:* Add a malicious artifact to a build cache that is later picked up by a
+benign build process.
 
 *Mitigation:* Build caches must be [isolate][isolated] between builds to prevent
 such cache poisoning attacks.
@@ -290,12 +290,13 @@ from that source. A subsequent build then picks up that poisoned cache entry.
 
 *Mitigation:* The build platform must have controls in place to prevent and
 detect abusive behavior from administrators (e.g. two-person approvals, audit
-logging). Consumers should not accept provenance from the build platform unless
-they trust sufficient controls are in place.
+logging).
 
 *Example:* MyPackage is built on Awesome Builder. Awesome Builder allows
 engineers on-call to SSH into build machines to debug production issues. An
-adversary uses this access to modify a build in progress.
+adversary uses this access to modify a build in progress. Solution: Consumers
+do not accept provenance from the build platform unless they trust sufficient
+controls are in place to prevent abusing admin privileges.
 
 </details>
 
@@ -313,8 +314,9 @@ expected value.
 
 *Example:* MyPackage is expected to be built on Google Cloud Build, which is
 trusted up to Build L3. Adversary builds on SomeOtherBuildService, which is only
-trusted up to Build L2, and then exploits SomeOtherBuildService to inject bad
-behavior. Solution: Verifier rejects because builder is not as expected.
+trusted up to Build L2, and then exploits SomeOtherBuildService to inject
+malicious behavior. Solution: Verifier rejects because builder is not as
+expected.
 
 </details>
 <details><summary>Upload package without provenance <span>(Build L1)</span></summary>
@@ -330,7 +332,7 @@ missing.
 </details>
 <details><summary>Tamper with artifact after CI/CD <span>(Build L1)</span></summary>
 
-*Threat:* Take a good version of the package, modify it in some way, then
+*Threat:* Take a benign version of the package, modify it in some way, then
 re-upload it using the original provenance.
 
 *Mitigation:* Verifier checks that the provenance's `subject` matches the hash
@@ -413,12 +415,12 @@ the code.
 making it available for inspection indefinitely. Users cannot delete the
 revision except as part of a transparent legal or privacy process.
 
-*Example:* Adversary submits bad code to the MyPackage GitHub repo, builds from
-that revision, then does a force push to erase that revision from history (or
-requests GitHub to delete the repo.) This would make the revision unavailable
-for inspection. Solution: Verifier rejects the package because it lacks a
-positive attestation showing that some system, such as GitHub, ensured retention
-and availability of the source code.
+*Example:* An adversary submits malicious code to the MyPackage GitHub repo,
+builds from that revision, then does a force push to erase that revision from
+history (or requests that GitHub delete the repo.) This would make the revision
+unavailable for inspection. Solution: Verifier rejects the package because it
+lacks a positive attestation showing that some system, such as GitHub, ensured
+retention and availability of the source code.
 
 </details>
 <details><summary>(D) A dependency becomes temporarily or permanently unavailable to the build process</summary>
@@ -446,7 +448,7 @@ as two-party review.
 
 *Example:* Expectations for MyPackage only allows source repo `good/my-package`.
 Adversary modifies the expectations to also accept `evil/my-package`, then
-builds from that repo and uploads a bad version of the package. Solution:
+builds from that repo and uploads a malicious version of the package. Solution:
 Expectation changes require two-party review.
 
 </details>
@@ -469,13 +471,14 @@ changes are not strongly authenticated and thus not trustworthy.
 *Threat:* Exploit a cryptographic hash collision weakness to bypass one of the
 other controls.
 
-*Mitigation:* Require cryptographically secure hash functions for code review
-and provenance, such as SHA-256.
+*Mitigation:* Require cryptographically secure hash functions for commit
+checksums and provenance subjects, such as SHA-256.
 
-*Examples:* Construct a "good" file and a "bad" file with the same SHA-1 hash.
-Get the "good" file reviewed and then submit the "bad" file, or get the "good"
-file reviewed and submitted and then build from the "bad" file. Solution: Only
-accept cryptographic hashes with strong collision resistance.
+*Examples:* Construct a benign file and a malicious file with the same SHA-1
+hash. Get the benign file reviewed and then submit the malicious file.
+Alternatively, get the benign file reviewed and submitted and then build from
+the malicious file. Solution: Only accept cryptographic hashes with strong
+collision resistance.
 
 </details>
 
