@@ -1,10 +1,6 @@
 ---
 title: Verifying build systems
 description: The provenance consumer is responsible for deciding whether they trust a builder to produce SLSA Build L3 provenance. However, assessing Build L3 capabilities requires information about a builder's construction and operating procedures that the consumer cannot glean from the provenance itself. To aid with such assessments, we provide a common threat model and builder model for reasoning about builders' security. We also provide a questionnaire that organizations can use to describe their builders to consumers along with sample answers that do and do not satisfy the SLSA Build L3 requirements.
-prev_page:
-  url: requirements
-next_page:
-  url: verifying-artifacts
 ---
 
 The provenance consumer is responsible for deciding whether they trust a builder to produce SLSA Build L3 provenance. However, assessing Build L3 capabilities requires information about a builder's construction and operating procedures that the consumer cannot glean from the provenance itself. To aid with such assessments, we provide a common threat model and builder model for reasoning about builders' security. We also provide a questionnaire that organizations can use to describe their builders to consumers along with sample answers that do and do not satisfy the SLSA Build L3 requirements.
@@ -48,7 +44,7 @@ Capabilities:
 
 Capabilities:
 
--   All listed under "low privilege".
+-   All listed under "project contributors".
 -   Create new builds under the target build's project or identity.
 -   Modify the target build's source repo and build from it.
 -   Modify the target build's configuration.
@@ -57,7 +53,7 @@ Capabilities:
 
 Capabilities:
 
--   All listed under "low privilege" and "medium privilege".
+-   All listed under "project contributors" and "project maintainers".
 -   Run arbitrary code on the build service.
 -   Read and modify network traffic.
 -   Access the control plane's cryptographic secrets.

@@ -1,6 +1,8 @@
 {%- comment %}
   Look up the nav bar using the version from the URL. We need to assign
   temporary variables because liquid does not support nested []'s.
+
+  Remember to update pagination.html if you update this.
 {%- endcomment %}
 {%- assign url_parts = page.url | split: '/' %}
 {%- assign part_1 = url_parts[1] %}

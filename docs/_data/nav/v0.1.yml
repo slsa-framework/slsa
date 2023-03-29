@@ -11,6 +11,9 @@
       - title: Terminology
         url: /spec/v0.1/terminology
 
+      - title: Use cases
+        url: /spec/v0.1/use-cases
+
       - title: Levels
         url: /spec/v0.1/levels
 
@@ -25,6 +28,7 @@
 
       - title: Single-page view
         url: /spec/v0.1/onepage
+        skip_next_prev: true  # don't show as a next/prev link
 
     - title: Attestations
       children:
@@ -40,9 +44,6 @@
 
     - title: Stages
       url: /spec-stages
-
-- title: Use cases
-  url: /use-cases
 
 - title: Get started
   url: /get-started

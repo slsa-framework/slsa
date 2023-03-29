@@ -2,8 +2,6 @@
 title: Frequently Asked Questions
 description: Questions and more information.
 layout: specifications
-prev_page:
-    url: threats
 ---
 
 ## Q: Why is SLSA not transitive?

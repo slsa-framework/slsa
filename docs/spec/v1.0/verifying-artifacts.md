@@ -1,10 +1,6 @@
 ---
 title: Verifying artifacts
 description: SLSA uses provenance to indicate whether an artifact is authentic or not, but provenance doesn't do anything unless somebody inspects it. SLSA calls that inspection verification, and this page describes how to verify artifacts and their SLSA provenenance. The intended audience is system implementers, security engineers, and software consumers.
-prev_page:
-  url: verifying-systems
-next_page:
-  url: threats
 ---
 
 SLSA uses provenance to indicate whether an artifact is authentic or not, but
@@ -56,7 +52,7 @@ provenance matches the known expectations for that package name before accepting
 it into the registry.  If possible, system implementers SHOULD prefer this option
 because doing so benefits all of the package ecosystem's clients.
 
-The package ecosystem's maintainers are responsible for reliably redistributing
+The package ecosystem is responsible for reliably redistributing
 artifacts and provenance, making the producers' expectations available to consumers,
 and providing tools to enable safe artifact consumption (e.g. whether an artifact
 meets its producer's expectations).

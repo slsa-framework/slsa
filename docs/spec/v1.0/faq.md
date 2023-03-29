@@ -1,11 +1,7 @@
 ---
 title: Frequently asked questions
-descriptions: Answers to questions frequently asked about the SLSA specification.
+description: Answers to questions frequently asked about SLSA.
 layout: specifications
-prev_page:
-  url:  threats-overview
-next_page:
-  url: future-directions
 ---
 
 ## Q: Why is SLSA not transitive?
