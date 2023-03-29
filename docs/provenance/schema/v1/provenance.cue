@@ -22,6 +22,12 @@
                 "invocationId": string,
                 "startedOn": #Timestamp,
                 "finishedOn": #Timestamp,
+                "completeness": {
+                  "externalParameters": "COMPLETE"|"INCOMPLETE",
+                  "systemParameters": "COMPLETE"|"INCOMPLETE",
+                  "resolvedDependencies": "COMPLETE"|"INCOMPLETE",
+                },
+                "reproducibility": "FULLY_REPRODUCIBLE"|"NOT_REPRODUCIBLE",
             },
             "byproducts": [ ...#ResourceDescriptor ],
         }

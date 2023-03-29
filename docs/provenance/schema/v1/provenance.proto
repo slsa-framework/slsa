@@ -47,4 +47,24 @@ message BuildMetadata {
   string invocation_id = 1;
   google.protobuf.Timestamp started_on = 2;
   google.protobuf.Timestamp finished_on = 3;
+  Completeness completeness = 4;
+  Reproducibility reproducibility = 5;
+}
+
+message Completeness {
+  CompletenessValue external_parameters = 1;
+  CompletenessValue system_parameters = 2;
+  CompletenessValue resolved_dependencies = 3;
+}
+
+enum CompletenessValue {
+  COMPLETENESS_UNKNOWN = 0;
+  COMPLETE = 1;
+  INCOMPLETE = 2;
+}
+
+enum Reproducibility {
+  REPRODUCIBILITY_UNKNOWN = 0;
+  FULLY_REPRODUCIBLE = 1;
+  NOT_REPRODUCIBLE = 2;
 }
