@@ -26,9 +26,9 @@ to the source code that does not reflect the intent of the software producer.
 This includes the threat of an authorized individual introducing an unauthorized
 change---in other words, an insider threat.
 
-SLSA v1.0 does not define a [Source Track](future-directions.md#source-track),
-but we anticipate doing so in a future version. In the meantime, the threats and
-potential mitigations listed here show how SLSA v1.0 can fit into a broader
+SLSA v1.0 does not address source threats, but we anticipate doing so in a
+[future versio](future-directions.md#source-track). In the meantime, the threats
+and potential mitigations listed here show how SLSA v1.0 can fit into a broader
 supply chain security program.
 
 ### (A) Submit unauthorized change
@@ -202,7 +202,7 @@ These threats are directly addressed by the SLSA Build track.
 *Threat:* Generate false provenance and get the trusted control plane to sign
 it.
 
-*Mitigation:* At Build L2+, trusted control plane [generates][authentic] all
+*Mitigation:* At Build L2+, the trusted control plane [generates][authentic] all
 information that goes in the provenance, except (optionally) the output artifact
 hash. At Build L3+, this is [hardened][unforgeable] to prevent compromise even
 by determined adversaries.
@@ -228,9 +228,9 @@ projects.
 build process or provenance generation.
 
 *Example:* MyPackage is built on Awesome Builder under the project "mypackage".
-Adversary is an administrator of the "mypackage" project. Awesome Builder has a
-feature to allow administrators to enable SSH access to build machines to debug
-builds. Adversary uses this feature to alter a build in progress.
+Adversary is an administrator of the "mypackage" project. Awesome Builder allows
+administrators to debug build machines via SSH. An adversary uses this feature
+to alter a build in progress.
 
 </details>
 <details><summary>Compromise other build <span>(Build L3)</span></summary>
@@ -284,16 +284,18 @@ cache entry with a falsified key, meaning that the value wasn't really produced
 from that source. A subsequent build then picks up that poisoned cache entry.
 
 </details>
-<details><summary>Compromise build platform admin <span>(Build L3)</span></summary>
+<details><summary>Compromise build platform admin <span>(verification)</span></summary>
 
 *Threat:* An adversary gains admin permissions for the artifact's build platform.
 
 *Mitigation:* The build platform must have controls in place to prevent and
 detect abusive behavior from administrators (e.g. two-person approvals, audit
-logging).
+logging). Consumers should not accept provenance from the build platform unless
+they trust sufficient controls are in place.
 
-*Example:* An adversary compromises the project owner's account for on
-artifact's CI/CD system.
+*Example:* MyPackage is built on Awesome Builder. Awesome Builder allows
+engineers on-call to SSH into build machines to debug production issues. An
+adversary uses this access to modify a build in progress.
 
 </details>
 
@@ -399,7 +401,7 @@ ad-hoc analysis, and can complement source-based typosquatting solutions.
 An availability threat is a potential for an adversary to deny someone from
 reading a source and its associated change history, or from building a package.
 
-SLSA v1.0 does not define an Availability Track, though future versions might.
+SLSA v1.0 does not address availability threats, though future versions might.
 
 <details><summary>(A)(B) Delete the code</summary>
 
