@@ -43,6 +43,7 @@ the attestation.
 ### First party
 
 Producers of first party code might consider the following questions:
+
 -   Will SLSA be used only within our organization?
 -   Is SLSA's primary use case to manage insider risk?
 -   Are we developing entirely in a closed source environment?
@@ -56,6 +57,7 @@ attestations and the easiest to verify using the [Generic SLSA Verifier].
 ### Open source
 
 Producers of open source code might consider these questions:
+
 -   Is SLSA's primary use case to convey trust in how your code was developed?
 -   Do you develope software with standard open source licenses?
 -   Will the code be consumed by others?
@@ -69,6 +71,7 @@ using the [Generic SLSA Verifier].
 
 Producers of closed source code that is consumed by others might consider
 the following questions:
+
 -   Is my code produced for the sole purpose of specific third party consumers?
 -   Is SLSA's primary use case to create trust in our organization or to comply with
 audits and legal requirements?
