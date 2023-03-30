@@ -91,8 +91,8 @@ one place, and SHOULD publish attestations in more than one place:
     been generated for a build, the attestation (or a hash of the attestation
     and a pointer to where it is indexed) SHOULD be published to a third-party
     transparency log that exists outside the source repository and package
-    registry. Not only are transparency logs guaranteed to be immutable, but
-    they also more easily enable monitoring.  Requiring the presence of the
+    registry. Not only are transparency logs such as [Rekor from Sigstore](https://github.com/sigstore/rekor) guaranteed to be immutable, but
+    they typically also more easily enable monitoring.  Requiring the presence of the
     attestation in a monitored transparency log during verification helps
     ensure the attestation is trustworthy.
 -   **Publish attestations alongside the source repository releases**: If the
