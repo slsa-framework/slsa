@@ -17,7 +17,7 @@ For other ways to engage with the SLSA community, see our [README](README.md).
 
 If you want to start helping but are unsure which issue might be good - you can look for issues with the label [`website`](https://github.com/slsa-framework/slsa/labels/website) if you have CSS or design knowledge, these changes do not require in depth understanding of the SLSA specifications.
 
-Alternately you can look for issues with a "shovel-ready" label, these should be well-defined and ready to be worked on.
+Alternately you can look for issues with a [`shovel-ready`](https://github.com/slsa-framework/slsa/labels/shovel-ready) label, these should be well-defined and ready to be worked on.
 
 ## Proposing changes
 
