@@ -1,5 +1,5 @@
 ---
-title: Supply-chain threats
+title: Supply chain threats
 description: Attacks can occur at every link in a typical software supply chain, and these kinds of attacks are increasingly public, disruptive, and costly in today's environment. This page is an introduction to possible attacks throughout the supply chain and how SLSA can help.
 ---
 
@@ -35,7 +35,9 @@ investigations and incident response.
 
 ### Real-world examples
 
-Many recent high-profile attacks were consequences of supply-chain integrity vulnerabilities, and could have been prevented by SLSA's framework. For example:
+> **TODO:** Update this for v1.0.
+
+Many recent high-profile attacks were consequences of supply chain integrity vulnerabilities, and could have been prevented by SLSA's framework. For example:
 
 <table>
 <thead>
@@ -98,7 +100,7 @@ Many recent high-profile attacks were consequences of supply-chain integrity vul
 <tr>
 <td>D
 <td>Dependency becomes unavailable
-<td><a href="https://www.techradar.com/news/this-popular-code-library-is-causing-problems-for-hundreds-of-thousands-of-devs">Mimemagic</a>: Maintainer intentionally removes package or version of package from repository with no warning. Network errors or service outages may also make packages unavailable temporarily.
+<td><a href="https://www.techradar.com/news/this-popular-code-library-is-causing-problems-for-hundreds-of-thousands-of-devs">Mimemagic</a>: Producer intentionally removes package or version of package from repository with no warning. Network errors or service outages may also make packages unavailable temporarily.
 <td>SLSA does not directly address this threat.
 </table>
 
