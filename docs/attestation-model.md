@@ -11,7 +11,7 @@ The primary intended use case is to feed into automated policy engines, such as
 
 This page provides a high-level overview of the attestation model, including
 standardized terminology, data model, layers, conventions for software
-attestations, and recommended formats for different use cases.
+attestations, and suggested formats for different use cases.
 
 ## Overview
 
