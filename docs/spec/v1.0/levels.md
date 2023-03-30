@@ -32,7 +32,7 @@ hermeticity or completness of provenance -->
 
 > Note: The [previous version] of the specification used a single unnamed track,
 > SLSA 1–4. For version 1.0 the Source aspects were removed to focus on the
-> Build track. A Source track may be added in [future versions].
+> Build track. It is currently incomplete, see [future versions].
 
 ## Build track
 
