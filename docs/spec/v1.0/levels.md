@@ -82,7 +82,7 @@ n/a
 </section>
 <section id="build-l1">
 
-### Build L1: Provenance
+### Build L1: Provenance exists
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -109,7 +109,7 @@ SLSA---other than tamper protection---without changing their build workflows.
 
 <dt>Benefits<dd>
 
--   Makes it easier for both maintainers and consumers to debug, patch, rebuild,
+-   Makes it easier for both producers and consumers to debug, patch, rebuild,
     and/or analyze the software by knowing its precise source version and build
     process.
 
@@ -211,7 +211,7 @@ All of [Build L2], plus:
 
 All of [Build L2], plus:
 
--   Prevents tampering during the build---by maintainers, compromised
+-   Prevents tampering during the build---by insider threats, compromised
     credentials, or other tenants.
 
 -   Greatly reduces the impact of compromised package upload credentials by

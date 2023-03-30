@@ -5,7 +5,7 @@ description: A comprehensive technical analysis of supply chain threats and thei
 
 What follows is a comprehensive technical analysis of supply chain threats and
 their corresponding mitigations in SLSA. For an introduction to the
-supply-chain threats that SLSA protects agains, see [Supply-chain threats].
+supply chain threats that SLSA protects agains, see [Supply chain threats].
 
 The examples on this page are meant to:
 
@@ -21,11 +21,11 @@ The examples on this page are meant to:
 
 A source integrity threat is a potential for an adversary to introduce a change
 to the source code that does not reflect the intent of the software producer.
-This includes the threat of an authorized developer introducing an unauthorized
-change—in other words, an insider threat.
+This includes the threat of an authorized individual introducing an unauthorized
+change---in other words, an insider threat.
 
 SLSA v1.0 does not address source integrity, though we anticipate a [Source
-track](future-directions.md#source-track) might do so in a future version. In
+track](future-directions#source-track) might do so in a future version. In
 the meantime, the threats and potential mitigations listed here show how SLSA
 v1.0 can fit into a broader supply chain security program.
 
@@ -191,7 +191,7 @@ proper processes.
 *Mitigation:* **Outside the scope of SLSA.** Trust of the software producer is
 an important but separate property from integrity.
 
-*Example:* A popular extension author sells the rights to a new owner, who then
+*Example:* A popular extension producer sells the rights to a new owner, who then
 modifies the code to secretly mine bitcoin at the users' expense. SLSA does not
 protect against this, though if the extension were open source, regular auditing
 may discourage this from happening.
@@ -421,7 +421,7 @@ clean machine image.
 cryptographic secret that should only be available to the build service.
 
 *Mitigation:* Builds are [isolated] from the trusted build service control
-plane, and only the control plane has [access][non-forgeable] to cryptographic
+plane, and only the control plane has [access][unforgeable] to cryptographic
 secrets.
 
 *Example:* Provence is signed on the build worker, which the adversary has
@@ -438,7 +438,7 @@ it.
 
 *Mitigation:* At Build L2+, trusted control plane [generates][authentic] all
 information that goes in the provenance, except (optionally) the output artifact
-hash. At Build L3+, this is [hardened][non-forgeable] to prevent compromise even
+hash. At Build L3+, this is [hardened][unforgeable] to prevent compromise even
 by determined adversaries.
 
 *Example 1 (Build L2):* Provenance is generated on the build worker, which the
@@ -652,6 +652,6 @@ accept cryptographic hashes with strong collision resistance.
 [authentic]: requirements.md#provenance-authentic
 [exists]: requirements.md#provenance-exists
 [isolated]: requirements.md#isolated
-[non-forgeable]: requirements.md#provenance-non-forgeable
+[unforgeable]: requirements.md#provenance-unforgeable
 [service]: requirements.md#build-service
-[supply-chain threats]: threats-overview
+[supply chain threats]: threats-overview
