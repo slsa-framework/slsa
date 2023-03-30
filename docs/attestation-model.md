@@ -76,7 +76,7 @@ the following questions:
 -   Is SLSA's primary use case to create trust in our organization or to comply with
 audits and legal requirements?
 
-In these situation, you may not want to make all the details of your
+In these situations, you may not want to make all the details of your
 provenance available externally. Consider using Verification Summary
 Attestations (VSAs) to summarize provenance information in a sanitized way
 that's safe for external consumption. For more about VSAs, see the [Verification
