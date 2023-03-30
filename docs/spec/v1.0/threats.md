@@ -15,6 +15,70 @@ The examples on this page are meant to:
 -   Help implementers better understand what they are protecting against so that
     they can better design and implement controls.
 
+### Attacker Goal
+
+The attacker's primary goal is to tamper with a build to create unexpected,
+vulnerable, or malicious behavior in the output artifact while avoiding
+detection. Their means of doing so is generating build provenance that does
+not faithfully represent the built artifact's origins or build process.
+
+More formally, if a build with external parameters P would produce an artifact
+with binary hash X and a build with external parameters P' would produce an
+artifact with binary hash Y, they wish to produce provenance indicating a build
+with external parameters P produced an artifact with binary hash Y.
+
+This diagram represents a successful attack:
+
+![image](slsa_attack.png)
+
+Note: Platform abuse (e.g. running non-build workloads) and attacks against
+builder availability are out of scope of this document.
+
+TODO: Redraw diagrams in the style used by the rest of the site.
+
+### Types of attackers
+
+We consider three attacker profiles differentiated by the attacker's
+capabilities and privileges as related to the build they wish to subvert
+(the "target build").
+
+TODO: Tie attack profiles into the rest of this page.
+
+#### Project contributors
+
+Capabilities:
+
+-   Create builds on the build service. These are the attacker's controlled
+    builds.
+-   Modify one or more controlled builds' external parameters.
+-   Modify one or more controlled builds' environments and run arbitrary code
+    inside those environments.
+-   Read the target build's source repo.
+-   Fork the target build's source repo.
+-   Modify a fork of the target build's source repo and build from it.
+
+#### Project maintainer
+
+Capabilities:
+
+-   All listed under "project contributors".
+-   Create new builds under the target build's project or identity.
+-   Modify the target build's source repo and build from it.
+-   Modify the target build's configuration.
+
+#### Build service admin
+
+Capabilities:
+
+-   All listed under "project contributors" and "project maintainers".
+-   Run arbitrary code on the build service.
+-   Read and modify network traffic.
+-   Access the platform's cryptographic secrets.
+-   Remotely access build environments (e.g. via SSH).
+
+TODO: List other high-privilege capabilities.
+TODO: Maybe differentiate between unilateral and non-unilateral privileges.
+
 <article class="threats">
 
 ![Supply Chain Threats](../../images/v1.0/supply-chain-threats.svg)
