@@ -87,14 +87,6 @@ There are a number of opportunities and venues to publish attestations during
 and after the build process. Producers MUST publish attestations in at least
 one place, and SHOULD publish attestations in more than one place:
 
--   **Publish attestations in a transparency log**: Once an attestation has
-    been generated for a build, the attestation (or a hash of the attestation
-    and a pointer to where it is indexed) SHOULD be published to a third-party
-    transparency log that exists outside the source repository and package
-    registry. Not only are transparency logs such as [Rekor from Sigstore](https://github.com/sigstore/rekor) guaranteed to be immutable, but
-    they typically also more easily enable monitoring.  Requiring the presence of the
-    attestation in a monitored transparency log during verification helps
-    ensure the attestation is trustworthy.
 -   **Publish attestations alongside the source repository releases**: If the
     source repository hosting provider offers an artifact "release" feature,
     such as [GitHub
@@ -112,6 +104,15 @@ one place, and SHOULD publish attestations in more than one place:
     signature for an artifact with the same filename (but different extension).
     This option requires the mapping between artifact and attestation (or
     attestation vessel) to be 1:1.
+-   **Publish attestations elsewhere, record their existence in a transparency
+    log**: Once an attestation has been generated and published for a build, a
+    hash of the attestation and a pointer to where it is indexed SHOULD be
+    published to a third-party transparency log that exists outside the source
+    repository and package registry. Not only are transparency logs such as
+    [Rekor from Sigstore](https://github.com/sigstore/rekor) guaranteed
+    to be immutable, but they typically also more easily enable monitoring.
+    Requiring the presence of the attestation in a monitored transparency log
+    during verification helps ensure the attestation is trustworthy.
 
 Combining these options gives us a process for bootstrapping SLSA adoption
 within an ecosystem, even if the package registry doesn't support publishing
