@@ -35,8 +35,6 @@ investigations and incident response.
 
 ### Real-world examples
 
-> **TODO:** Update this for v1.0.
-
 Many recent high-profile attacks were consequences of supply chain integrity vulnerabilities, and could have been prevented by SLSA's framework. For example:
 
 <table>
