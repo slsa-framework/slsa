@@ -110,7 +110,7 @@ one place, and SHOULD publish attestations in more than one place:
     published to a third-party transparency log that exists outside the source
     repository and package registry. Not only are transparency logs such as
     [Rekor from Sigstore](https://github.com/sigstore/rekor) guaranteed
-    to be immutable, but they typically also more easily enable monitoring.
+    to be immutable, but they typically also make monitoring easier.
     Requiring the presence of the attestation in a monitored transparency log
     during verification helps ensure the attestation is trustworthy.
 
