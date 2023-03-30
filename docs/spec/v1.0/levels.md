@@ -87,8 +87,8 @@ n/a
 <dl class="as-table">
 <dt>Summary<dd>
 
-Package has a provenance attestation showing how it was built. Can be used to
-prevent mistakes but is trivial to bypass or forge.
+Package has provenance showing how it was built. Can be used to prevent mistakes
+but is trivial to bypass or forge.
 
 <dt>Intended for<dd>
 
@@ -100,8 +100,8 @@ SLSA---other than tamper protection---without changing their build workflows.
 -   Software producer follows a consistent build process so that others can form
     expectations about what a "correct" build looks like.
 
--   Build system automatically generates [provenance attestation] describing how
-    the artifact was built, including: what entity built the package, what build
+-   Build system automatically generates [provenance] describing how the
+    artifact was built, including: what entity built the package, what build
     process they used, and what the top-level input to the build were.
 
 -   Software producer distributes provenance to consumers, preferably using a
@@ -157,7 +157,7 @@ All of [Build L1], plus:
     trustworthiness of the provenance.
 
 -   Downstream verification of provenance includes validating the authenticity
-    of the provenance attestation.
+    of the provenance.
 
 <dt>Benefits<dd>
 
@@ -231,5 +231,5 @@ All of [Build L2], plus:
 [build l3]: #build-l3
 [future versions]: future-directions.md
 [previous version]: ../v0.1/levels.md
-[provenance attestation]: terminology.md
+[provenance]: terminology.md
 [verification]: verifying-artifacts.md
