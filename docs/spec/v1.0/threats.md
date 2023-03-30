@@ -436,7 +436,7 @@ threat.
 ## Verification threats
 
 Threats that can compromise the ability to prevent or detect the supply chain
-security threats above but that do not fall cleanly into any one category.
+security threats above.
 
 <details><summary>Tamper with expectations</summary>
 
