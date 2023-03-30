@@ -62,7 +62,7 @@ Producers of open source code might consider these questions:
 -   Do you develope software with standard open source licenses?
 -   Will the code be consumed by others?
 
-In these situations, it is recommended you use the [SLSA Provenance format]. The SLSA
+In these situations, it is suggested you use the [SLSA Provenance format]. The SLSA
 Provenance format offers a path towards interoperability and cohesion across the open
 source ecosystem. Users can verify any provenance statement in this format
 using the [Generic SLSA Verifier].
