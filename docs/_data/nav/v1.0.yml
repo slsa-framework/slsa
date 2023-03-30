@@ -26,11 +26,11 @@
   - title: Use cases
     url: /spec/v1.0/use-cases
     description: Use cases
-    
+
   - title: Guiding principles
     url: /spec/v1.0/principles
     description: Use cases
-  
+
   - title: FAQ
     url: /spec/v1.0/faq
     description: Questions and more information
@@ -58,13 +58,17 @@
     url: /spec/v1.0/requirements
     description: Detailed technical requirements for producing software artifacts, intended for system implementers
 
-  - title: Verifying build systems
-    url: /spec/v1.0/verifying-systems
-    description: Guidelines for securing SLSA Build L3+ builders, intended for system implementers
+  - title: Distributing provenance
+    url: /spec/v1.0/distributing-provenance
+    description: Detailed technical requirements for distributing provenance, intended for system implementers and software distributors
 
   - title: Verifying artifacts
     url: /spec/v1.0/verifying-artifacts
     description: Guidance for verifying software artifacts and their SLSA provenance, intended for system implementers and software consumers
+
+  - title: Verifying build systems
+    url: /spec/v1.0/verifying-systems
+    description: Guidelines for securing SLSA Build L3+ builders, intended for system implementers
 
   - title: Threats & mitigations
     url: /spec/v1.0/threats
