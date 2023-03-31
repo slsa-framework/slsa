@@ -311,7 +311,7 @@ exhaustive):
     about safe git refs.
 
 -   **Explicit policy:** Package producer defines expectations for the
-    package and distributes them to the verifier; the verifier uses these
+    package and distributes them to the consumer; the consumer uses these
     expectations as a verification policy after verifying their authenticity.
     In this model, there MUST be some protection against an adversary
     unilaterally modifying the verification policy. For example, this might
@@ -321,8 +321,8 @@ exhaustive):
 -   **Immutable policy:** The verification policy for a package cannot change.
     In this model, the verification policy consists of an immutable mapping from
     package name to source repository, and the build process must be defined
-    in the source repository. This is how go works, for example, since the
-    package name *is* the source repository location.
+    in the source repository. This is how the Go ecosystem works, for example,
+    since the package name *is* the source repository location.
 
 TIP: Difficulty in setting a meaningful verification policy for
 `externalParameters` can be a sign that the `buildType`'s level of abstraction
