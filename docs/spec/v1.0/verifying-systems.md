@@ -1,6 +1,6 @@
 ---
 title: Verifying build systems
-description: The provenance consumer is responsible for deciding whether they trust a builder to produce SLSA Build L3 provenance. However, assessing Build L3 capabilities requires information about a builder's construction and operating procedures that the consumer cannot glean from the provenance itself. To aid with such assessments, we provide a common threat model and builder model for reasoning about builders' security. We also provide a questionnaire that organizations can use to describe their builders to consumers along with sample answers that do and do not satisfy the SLSA Build L3 requirements.
+description: Guidelines for assessing build system security.
 ---
 
 One of SLSA's guiding [principles](principles.md) is to "trust systems, verify
@@ -16,14 +16,27 @@ See also [Threats & mitigations](threats.md) and the
 
 ## Threats
 
-When assessing a build system, consumers SHOULD evaluate its ability to defend
-against threats [C], [D], [E], and [F].
+### Adversary goal
+The SLSA Build track defends against an adversary whose primary goal is to
+tamper with a build to create unexpected, vulnerable, or malicious behavior in
+the output artifact while avoiding detection. Their means of doing so is
+generating build provenance that does not faithfully represent the built
+artifact's origins or build process.
+
+More formally, if a build with external parameters P would produce an artifact
+with binary hash X and a build with external parameters P' would produce an
+artifact with binary hash Y, they wish to produce provenance indicating a build
+with external parameters P produced an artifact with binary hash Y.
+
+See threats [C], [D], [E], and [F] for examples of specific threats.
+
+### Adversary profiles
 
 Consumers SHOULD also evaluate the build system's ability to defend against the
-following types of attackers.
+following types of adversaries.
 
 1.  Project contributors, who can:
-     -   Create builds on the build service. These are the attacker's controlled
+     -   Create builds on the build service. These are the adversary's controlled
          builds.
      -   Modify one or more controlled builds' external parameters.
      -   Modify one or more controlled builds' environments and run arbitrary
@@ -41,7 +54,7 @@ following types of attackers.
         maintainers".
     -   Run arbitrary code on the build service.
     -   Read and modify network traffic.
-    -   Access the platform's cryptographic secrets.
+    -   Access the control plane's cryptographic secrets.
     -   Remotely access build environments (e.g. via SSH).
 
 [C]: threats.md#c-build-from-modified-source
@@ -53,9 +66,9 @@ following types of attackers.
 
 Consumers SHOULD consider at least these five elements of the
 [build model](terminology.md#build-model) when assessing build systems for SLSA
-conformance: external parameters, platform, environments, caches, and outputs.
+conformance: external parameters, control plane, environments, caches, and outputs.
 
-![image](/images/build-model.svg)
+![image](/images/v1.0/build-model.svg)
 
 The following sections detail these elements of the build model and give prompts
 for assessing a build system's ability to produce SLSA Build L3 provenance.
@@ -64,32 +77,33 @@ for assessing a build system's ability to produce SLSA Build L3 provenance.
 
 External parameters are the external interface to the builder and include all
 inputs to the build process. Examples include the source to be built, the build
-definition/script to be executed, user-provided instructions to the platform
-for how to create the build environment (e.g. which operating system to use),
-and any additional user-provided strings.
+definition/script to be executed, user-provided instructions to the 
+control plane for how to create the build environment (e.g. which operating 
+system to use), and any additional user-provided strings.
 
 #### Prompts for assessing external parameters
 
--   How does the platform process user-provided external parameters? Examples:
-    sanitizing, parsing, not at all
--   Which external parameters are processed by the platform and which are
+-   How does the control plane process user-provided external parameters?
+    Examples: sanitizing, parsing, not at all
+-   Which external parameters are processed by the control plane and which are
     processed by the environment?
--   What sort of external parameters does the platform accept for environment
-    configuration?
+-   What sort of external parameters does the control plane accept for
+    environment configuration?
 -   How do you ensure that all external parameters are represented in the
     provenance?
 -   How will you ensure that future design changes will not add additional
     external parameters without representing them in the provenance?
 
-### Platform
+### Control Plane
 
-The platform is the build system component that orchestrates each independent
-build execution. It is responsible for setting up each build and cleaning up
-afterwards. At SLSA Build L2+ the platform generates and signs provenance for
-each build performed on the build service. The platform is operated by one or
-more administrators, who have privileges to modify the platform.
+The control plane is the build system component that orchestrates each
+independent build execution. It is responsible for setting up each build and
+cleaning up afterwards. At SLSA Build L2+ the control plane generates and signs
+provenance for each build performed on the build service. The control plane is
+operated by one or more administrators, who have privileges to modify the
+control plane.
 
-#### Prompts for assessing platforms
+#### Prompts for assessing the control plane
 
 -   Administration
     -   What are the ways an employee can use privileged access to influence a
@@ -105,32 +119,32 @@ more administrators, who have privileges to modify the platform.
         outages? Are they tested? How frequently?
 
 -   Provenance generation
-    -   How does the platform observe the build to ensure the provenance's
+    -   How does the control plane observe the build to ensure the provenance's
         accuracy?
-    -   Are there situations in which the platform will not generate provenance
-        for a completed build? What are they?
+    -   Are there situations in which the control plane will not generate
+        provenance for a completed build? What are they?
 
 -   Development practices
-    -   How do you track the platform's software and configuration? Example:
-        version control
-    -   How do you build confidence in the platform's software supply chain?
-        Example: SLSA L3+ provenance, build from source
-    -   How do you secure communications between builder components? Example: TLS
-        with certificate transparency.
+    -   How do you track the control plane's software and configuration?
+        Example: version control
+    -   How do you build confidence in the control plane's software supply
+        chain? Example: SLSA L3+ provenance, build from source
+    -   How do you secure communications between builder components? Example:
+        TLS with certificate transparency.
     -   Are you able to perform forensic analysis on compromised environments?
         How? Example: retain base images indefinitely
 
 -   Creating environments
-    -   How does the platform share data with environments? Example: mounting a
-        shared file system partition
-    -   How does the platform protect its integrity from environments? Example:
-        not mount its own file system partitions on environments
-    -   How does the platform prevent environments from accessing its
+    -   How does the control plane share data with environments? Example:
+        mounting a shared file system partition
+    -   How does the control plane protect its integrity from environments?
+        Example: not mount its own file system partitions on environments
+    -   How does the control plane prevent environments from accessing its
         cryptographic secrets? Examples: dedicated secret storage, not mounting
 
 -   Managing cryptographic secrets
-    -   How do you store the platform's cryptographic secrets?
-    -   Which parts of the organization have access to the platform's
+    -   How do you store the control plane's cryptographic secrets?
+    -   Which parts of the organization have access to the control plane's
         cryptographic secrets?
     -   What controls are in place to detect or prevent employees abusing such
         access? Examples: two-person approvals, audit logging
@@ -144,17 +158,17 @@ more administrators, who have privileges to modify the platform.
 ### Environment
 
 The build environment is the independent execution environment where the build
-takes place. Each environment must be isolated from the platform and from all
-other environments, including environments running builds from the same build
-user or project. Build users are free to modify the environment inside the
+takes place. Each environment must be isolated from the control plane and from
+all other environments, including environments running builds from the same
+build user or project. Build users are free to modify the environment inside the
 environment arbitrarily. Build environments must have a means to fetch input
 artifacts (source, dependencies, etc).
 
 #### Prompts for assessing environments
 
 -   Isolation technologies
-    -   How are environments isolated from the platform and each other? Examples:
-        VMs, containers, sandboxed processes
+    -   How are environments isolated from the control plane and each other?
+        Examples: VMs, containers, sandboxed processes
     -   How have you hardened your environments against malicious tenants?
         Examples: configuration hardening, limiting attack surface
     -   How frequently do you update your isolation software?
@@ -172,8 +186,8 @@ artifacts (source, dependencies, etc).
 
 -   Network access
     -   Are environments able to call out to remote execution? If so, how do you
-        prevent them from tampering with the platform or other environments over
-        the network?
+        prevent them from tampering with the control plane or other environments
+        over the network?
     -   Are environments able to open services on the network? If so, how do you
         prevent remote interference through these services?
 
@@ -197,7 +211,7 @@ shared between build projects or allocated separately per-project.
 
 -   How do you prevent builds from reading or overwriting files that belong to
     another build? Example: authorization on storage
--   What processing, if any, does the platform do on output artifacts?
+-   What processing, if any, does the control plane do on output artifacts?
 
 ## Builder evaluation
 
