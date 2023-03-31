@@ -31,6 +31,9 @@ with external parameters P produced an artifact with binary hash Y.
 
 See threats [C], [D], [E], and [F] for examples of specific threats.
 
+Note: Platform abuse (e.g. running non-build workloads) and attacks against
+builder availability are out of scope of this document.
+
 ### Adversary profiles
 
 Consumers SHOULD also evaluate the build system's ability to defend against the
@@ -142,6 +145,7 @@ control plane.
         Example: not mount its own file system partitions on environments
     -   How does the control plane prevent environments from accessing its
         cryptographic secrets? Examples: dedicated secret storage, not mounting
+        its own file system partitions on executors, hardware security modules
 
 -   Managing cryptographic secrets
     -   How do you store the control plane's cryptographic secrets?
