@@ -34,10 +34,8 @@ requirement that they do so.
 
 [Package ecosystem]: #package-ecosystem
 
-> ⚠ **TODO** Update this section to use Package model terminology.
-
-A <dfn>package ecosystem</dfn> is a set of conventions and
-tooling for package distribution. Every package has an ecosystem, whether it is
+A <dfn>package ecosystem</dfn> is a set of rules and conventions governing
+how packages are distributed. Every package artifact has an ecosystem, whether it is
 formal or ad-hoc. Some ecosystems are formal, such as language distribution
 (e.g. [Python/PyPA](https://www.pypa.io)), operating system distribution (e.g.
 [Debian/Apt](https://wiki.debian.org/DebianRepository/Format)), or artifact
@@ -49,8 +47,8 @@ considered an "ecosystem". For more background, see
 
 During package upload, a package ecosystem can ensure that the artifact's
 provenance matches the known expectations for that package name before accepting
-it into the registry.  If possible, system implementers SHOULD prefer this option
-because doing so benefits all of the package ecosystem's clients.
+it into the package registry.  If possible, system implementers SHOULD prefer this
+option because doing so benefits all of the package ecosystem's clients.
 
 The package ecosystem is responsible for reliably redistributing
 artifacts and provenance, making the producers' expectations available to consumers,
@@ -61,8 +59,8 @@ meets its producer's expectations).
 
 [Consumer]: #consumer
 
-A package's <dfn>consumer</dfn> is the organization or individual that uses the
-package.
+A package artifact's <dfn>consumer</dfn> is the organization or individual that uses the
+package artifact.
 
 Consumers can set their own expectations for artifacts or use default
 expectations provided by the package producer and/or package ecosystem.
