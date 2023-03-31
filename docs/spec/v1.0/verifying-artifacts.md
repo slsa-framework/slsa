@@ -121,7 +121,7 @@ artifact are defined by the package ecosystem.
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
 
 <tr id="verification-policy-known">
-<td>Verification policy known
+<td>Verification policy
 <td>
 
 The package ecosystem MUST ensure that a verification policy is defined for the
