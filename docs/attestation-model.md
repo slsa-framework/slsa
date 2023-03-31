@@ -90,7 +90,7 @@ recognize that other choices MAY be necessary in various cases.
 
 | Component | Recommendation |
 | --- | --- |
-| Envelope | **[DSSE]** (ECDSA over NIST P-256 and SHA-256) |
+| Envelope | **[DSSE]** (ECDSA over NIST P-256 (or stronger) and SHA-256.) |
 | Statement | **[in-toto attestations]** |
 | Predicate | Choose as appropriate, i.e.; [Provenance], [SPDX], [other predicates defined by third-parties]. If none are a good fit, invent a new one |
 | Bundle | **[JSON Lines]**, see [attestation bundle] |
