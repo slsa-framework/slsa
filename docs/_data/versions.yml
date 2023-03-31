@@ -4,7 +4,7 @@
 #       versions:
 #         <version>:
 #           name: <string> # display name
-#           status: <string> # one of: Working Draft, In Review, Stable, Retired
+#           status: <string> # one of: Draft, Candidate, Approved, Retired
 #           draft: <bool, optional> # if true, display a "draft" warning banner
 #           hidden: <bool, optional> # if true, do not show in dropdown
 #       current: <version>
@@ -17,13 +17,13 @@ spec:
   versions:
     v0.1:
       name: Version 0.1
-      status: Stable
+      status: Approved
     v1.0-rc1:
       name: Version 1.0 RC1
-      status: In Review
+      status: Candidate
     v1.0:
       name: Version 1.0 (DRAFT)
-      status: Working Draft
+      status: Draft
       draft: true
   current: v0.1
 
@@ -34,13 +34,13 @@ provenance:
       status: Retired
     v0.2:
       name: Version 0.2
-      status: Stable
+      status: Approved
     v1-rc1:
       name: Version 1.0 RC1
-      status: In Review
+      status: Candidate
     v1:
       name: Version 1.0 (DRAFT)
-      status: Working Draft
+      status: Draft
       draft: true
   current: v0.2
 
@@ -51,20 +51,9 @@ verification_summary:
       status: Retired
     v0.2:
       name: Version 0.2
-      status: Stable
+      status: Approved
     v1:
       name: Version 1.0 (DRAFT)
-      status: Working Draft
+      status: Draft
       draft: true
   current: v0.2
-
-github-actions-workflow:
-  versions:
-    v1-rc1:
-      name: Version 1.0 RC1
-      status: In Review
-    v1:
-      name: Version 1.0 (DRAFT)
-      status: Working Draft
-      draft: true
-  current: v1-rc1

@@ -1,7 +1,7 @@
 ---
 title: Introduction
+description: Overview of the SLSA standards and technical controls to improve artifact integrity.
 layout: standard
-hero_text: SLSA is a set of standards and technical controls you can adopt to improve artifact integrity, and build towards completely resilient systems. It’s not a single tool, but a step-by-step outline to prevent artifacts being tampered with and tampered artifacts from being used, and at the higher levels, hardening up the platforms that make up a supply chain. These requirements are explained below, along with the rest of the essential specifications.
 stages:
     - 1:
         title: Build integrity
@@ -51,6 +51,14 @@ subpages:
     description: Questions and more information
     relative_url: faq
 ---
+
+SLSA is a set of standards and technical controls you can adopt to improve
+artifact integrity, and build towards completely resilient systems. It's not a
+single tool, but a step-by-step outline to prevent artifacts being tampered with
+and tampered artifacts from being used, and at the higher levels, hardening up
+the platforms that make up a supply chain. These requirements are explained
+below, along with the rest of the essential specifications.
+
 <section class="section bg-white">
 <!-- no indentation here to get markdown working with jekyll commonmark for styling the headings better -->
 <div class="wrapper inner w-full">

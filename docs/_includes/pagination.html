@@ -1,0 +1,46 @@
+{%- comment %}Render next/previous links based on the nav bar.{% endcomment %}
+
+{%- comment %}This chunk is copied from nav.html; it should be kept in sync.{%- endcomment %}
+{%- assign url_parts = page.url | split: '/' %}
+{%- assign part_1 = url_parts[1] %}
+{%- assign part_2 = url_parts[2] %}
+{%- assign key = site.data.nav.config.url_to_key[part_1]
+      | default: site.data.nav.config.url_to_key[part_2]
+      | default: site.data.nav.config.url_to_key["latest"] %}
+{%- assign nav = site.data.nav[key] %}
+
+{%- comment %}matching_pages = array of "[URL] [TITLE]"{% endcomment %}
+{%- capture matching_pages_newline_separated %}
+{%- include pagination-parse.liquid first_url_part=part_1 collection=nav %}
+{%- endcapture %}
+{%- assign matching_pages = matching_pages_newline_separated | split: "<ENDTITLE>" %}
+
+{%- for entry in matching_pages %}
+  {%- assign url = entry | split: "<ENDURL>" | first %}
+  {%- if url == page.url %}
+    {%- unless forloop.first %}
+      {%- assign prev_index = forloop.index0 | minus: 1 %}
+      {%- assign prev_entry = matching_pages[prev_index] | strip %}
+    {%- endunless %}
+    {%- unless forloop.last %}
+      {%- assign next_index = forloop.index0 | plus: 1 %}
+      {%- assign next_entry = matching_pages[next_index] | strip %}
+    {%- endunless %}
+    {%- break %}
+  {%- endif %}
+{%- endfor %}
+
+{%- if prev_entry or next_entry%}
+  <div class="mt-10 pt-10 border-t flex flex-col sm:flex-row space-between gap-5">
+    {%- if prev_entry %}
+      {%- assign url = prev_entry | split: "<ENDURL>" | first %}
+      {%- assign title = prev_entry | split: "<ENDURL>" | last | escape_once %}
+      <a href="{{ url }}" class="border rounded px-4 py-2 text-left">&lsaquo; {{ title }}</a>
+    {%- endif %}
+    {%- if next_entry %}
+      {%- assign url = next_entry | split: "<ENDURL>" | first %}
+      {%- assign title = next_entry | split: "<ENDURL>" | last | escape_once %}
+      <a href="{{ url }}" class="sm:ml-auto border rounded px-4 py-2 text-right">{{ title }} &rsaquo;</a>
+    {%- endif %}
+  </div>
+{% endif %}

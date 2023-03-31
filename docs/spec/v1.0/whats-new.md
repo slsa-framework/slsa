@@ -1,4 +1,7 @@
-# What's New in SLSA v1.0
+---
+title: What's new in SLSA v1.0
+description: SLSA v1.0 represents changes made in response to feedback from the SLSA community and early adopters of SLSA v0.1. Overall, these changes prioritize simplicity and practicality.
+---
 
 SLSA v1.0 represents changes made in response to feedback from the SLSA
 community and early adopters of SLSA v0.1. Overall, these changes

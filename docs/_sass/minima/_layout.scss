@@ -98,33 +98,6 @@
     }
 }
 
-.site-nav {
-
-    .nav-list {
-    }
-
-    .nav-sub-list {
-        padding-left: 20px;
-    }
-
-    .nav-item {
-        color: $text-color-light;
-        font-family: "Prodigy";
-        line-height: $base-line-height;
-    }
-
-    .nav-link {
-        color: $text-color-light;
-        font-weight: $base-font-weight;
-        text-decoration: none;
-
-        &.is-active,
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-}
-
 /**
  * Site footer
  */

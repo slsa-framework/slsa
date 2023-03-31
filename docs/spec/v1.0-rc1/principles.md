@@ -1,11 +1,7 @@
 # Guiding principles
 
-<div class="subtitle">
-
 This page provides a background on the guiding principles behind SLSA. It is
 intended to help the reader better understand SLSA's design decisions.
-
-</div>
 
 ## Trust systems, verify artifacts
 

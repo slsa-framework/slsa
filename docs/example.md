@@ -1,7 +1,8 @@
 ---
+title: Motivating example
+description: A brief example motivating the need for a SLSA specification.
 layout: specifications
 ---
-# Motivating example
 
 Consider the example of using [curl](https://curl.se) through its
 [official docker image][curlimages/curl]. What threats are we exposed to in the
