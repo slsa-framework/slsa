@@ -96,7 +96,7 @@ recognize that other choices MAY be necessary in various cases.
 | Bundle | **[JSON Lines]**, see [attestation bundle] |
 | Storage/Lookup | **TBD** |
 
-[attestation bundle]: https://github.com/in-toto/attestation/blob/main/spec/bundle.md
+[attestation bundle]: https://github.com/in-toto/attestation/blob/main/spec/v1.0/bundle.md
 [Binary Authorization]: https://cloud.google.com/binary-authorization
 [DSSE]: https://github.com/secure-systems-lab/dsse/
 [hypergraph]: https://en.wikipedia.org/wiki/Hypergraph
