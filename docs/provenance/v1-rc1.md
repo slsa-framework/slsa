@@ -155,7 +155,7 @@ REQUIRED for SLSA Build L1: `buildType`, `externalParameters`
 <tr><th>Field<th>Type<th>Description
 
 <tr id="buildType"><td><code>buildType</code>
-<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0-draft/scalar_field_types.md#typeuri">TypeURI</a>)<td>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0/field_types.md#typeuri">TypeURI</a>)<td>
 
 Identifies the template for how to perform the build and interpret the
 parameters and dependencies.
@@ -302,7 +302,7 @@ be a universal and stable identifier, such as a source location or Package
 URL ([purl]).
 
 <tr id="digest"><td><code>digest</code>
-<td><a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0-draft/digest_set.md">DigestSet</a><td>
+<td><a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0/digest_set.md">DigestSet</a><td>
 
 One or more cryptographic digests of the contents of this artifact.
 
@@ -382,7 +382,7 @@ REQUIRED for SLSA Build L1: `id`
 <tr><th>Field<th>Type<th>Description
 
 <tr id="builder.id"><td><code>id</code>
-<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0-draft/scalar_field_types.md#typeuri">TypeURI</a>)<td>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0/field_types.md#typeuri">TypeURI</a>)<td>
 
 URI indicating the transitive closure of the trusted builder. This is
 [intended][Step 1] to be the sole determiner of the SLSA Build level.
@@ -460,12 +460,12 @@ defined by `builder.id`; by default it is treated as opaque and case-sensitive.
 The value SHOULD be globally unique.
 
 <tr id="startedOn"><td><code>startedOn</code>
-<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0-draft/scalar_field_types.md#timestamp">Timestamp</a>)<td>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0/field_types.md#timestamp">Timestamp</a>)<td>
 
 The timestamp of when the build started.
 
 <tr id="finishedOn"><td><code>finishedOn</code>
-<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0-draft/scalar_field_types.md#timestamp">Timestamp</a>)<td>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0/field_types.md#timestamp">Timestamp</a>)<td>
 
 The timestamp of when the build completed.
 
@@ -778,9 +778,9 @@ Renamed to "slsa.dev/provenance".
 
 Initial version, named "in-toto.io/Provenance"
 
-[Statement]: https://github.com/in-toto/attestation/blob/main/spec/v1.0-draft/statement.md
+[Statement]: https://github.com/in-toto/attestation/blob/main/spec/v1.0/statement.md
 [in-toto attestation]: https://github.com/in-toto/attestation
-[parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/v1.0-draft/README.md#parsing-rules
+[parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/v1.0/README.md#parsing-rules
 [purl]: https://github.com/package-url/purl-spec
 [threats]: /spec/v1.0-rc1/threats
 [trusted]: /spec/v1.0-rc1/principles#trust-systems-verify-artifacts
