@@ -301,7 +301,7 @@ err on the side of caution. It is acceptable to allow a parameter to have a
 range of values (possibly any value) if it is known that any value in the range
 is safe. JSON comparison is sufficient for verifying parameters.
 
-Possible models for implementing expectation setting in package ecosystems (not
+Possible models for setting verification policies in package ecosystems (not
 exhaustive):
 
 -   **Trust on first use:** Accept the first version of the package as-is. On
