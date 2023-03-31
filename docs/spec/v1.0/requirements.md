@@ -102,7 +102,7 @@ choose a builder capable of producing Build Level 3 provenance.
 ### Follow a consistent build process
 
 The producer MUST build their artifact in a consistent
-manner such that verifiers can form a verification policy for the build process.
+manner such that consumers can form a verification policy for the build process.
 In some implemenatations, the producer MAY provide expectations to a verifier
 about their build process. In others, the verifier will form their verification
 policy implicitly (e.g. trust on first use).

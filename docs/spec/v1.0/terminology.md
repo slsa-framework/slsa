@@ -283,7 +283,7 @@ implemented for different, broadly defined, package ecosystems.
 | Term | Example |
 | ---- | ------- |
 | Expectations | Defined separately for each package and stored in the package registry. |
-| Verification policy | An exact copy of the expectations. |
+| Verification policy | Defined separately for each package and stored in the package registry. In practice, may be an exact copy of the expectations. |
 | Provenance verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client also verifies expectations prior to installing packages. |
 | Build system certification | Performed by the language ecosystem packaging authority. |
 

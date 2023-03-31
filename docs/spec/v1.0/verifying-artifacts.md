@@ -120,7 +120,7 @@ artifact are defined by the package ecosystem.
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
 
-<tr id="verification-policy-known">
+<tr id="verification-policy">
 <td>Verification policy known
 <td>
 
