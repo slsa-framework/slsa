@@ -17,6 +17,7 @@ See also [Threats & mitigations](threats.md) and the
 ## Threats
 
 ### Adversary goal
+
 The SLSA Build track defends against an adversary whose primary goal is to
 tamper with a build to create unexpected, vulnerable, or malicious behavior in
 the output artifact while avoiding detection. Their means of doing so is
@@ -77,8 +78,8 @@ for assessing a build system's ability to produce SLSA Build L3 provenance.
 
 External parameters are the external interface to the builder and include all
 inputs to the build process. Examples include the source to be built, the build
-definition/script to be executed, user-provided instructions to the 
-control plane for how to create the build environment (e.g. which operating 
+definition/script to be executed, user-provided instructions to the
+control plane for how to create the build environment (e.g. which operating
 system to use), and any additional user-provided strings.
 
 #### Prompts for assessing external parameters
