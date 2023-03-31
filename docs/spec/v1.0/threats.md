@@ -197,7 +197,7 @@ provenance.
 
 These threats are directly addressed by the SLSA Build track.
 
-<details><summary>Set values of the provenance <span>(Build L2+)</span></summary>
+<details><summary>Forge values of the provenance (other than output digest) <span>(Build L2+)</span></summary>
 
 *Threat:* Generate false provenance and get the trusted control plane to sign
 it.
@@ -218,6 +218,36 @@ artifacts but otherwise has no influence over the provenance.
 but workers can break out of the container to access the signing material.
 Solution: Builder is hardened to provide strong isolation against tenant
 projects.
+
+</details>
+<details id="forged-digest"><summary>Forge output digest of the provenance <span>(n/a)</span></summary>
+
+*Threat:* The tenant-controlled build process sets output artifact digest
+(`subject` in SLSA Provenance) without the trusted control plane verifying that
+such an artifact was actually produced.
+
+*Mitigation:* None; this is not a problem. Any build claiming to produce a given
+artifact could have actually produced it by copying it verbatim from input to
+output.[^preimage] (Reminder: Provenance is only a claim that a particular
+artifact was *built*, not that it was *published* to a particular registry.)
+
+*Example 1:* A legitimate MyPackage artifact has digest `abcdef` and is built
+from source repo `good/my-package`. A malicious build from source repo
+`evil/my-package` claims that it build artifact `abcdef` when it did not.
+Solution: Verifier rejects because the source location does not match; the
+forged digest is irrelevant.
+
+*Example 2:* Adversary builds a legitimate version of MyPackage with provenance
+that would be acceptable to verifiers, but does not publish it to a package
+registry. Solution: This is out of scope of SLSA.
+
+[^preimage]: Technically this requires the artifact to be known to the
+    adversary. If they only know the digest but not the actual contents, they
+    cannot actually build the artifact without a [preimage attack] on the digest
+    algorithm. However, even still there are no known concerns where this is a
+    problem.
+
+[preimage attack]: https://en.wikipedia.org/wiki/Preimage_attack
 
 </details>
 <details><summary>Compromise project owner <span>(Build L2+)</span></summary>
