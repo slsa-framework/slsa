@@ -101,7 +101,7 @@ canonical source repo, which indicates their authenticity.
 A verification policy MUST be sufficient to detect or prevent an adversary from
 injecting unofficial behavior into the package. Example [threats](threats.md) in
 this category include building from an unofficial fork or abusing a build
-parameter to modify the build. Usually verification policy identifies the
+parameter to modify the build. Usually the verification policy identifies the
 canonical source repository (which is the main external parameter) and any other
 security-relevant external parameters.
 
