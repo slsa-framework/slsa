@@ -231,15 +231,11 @@ artifact could have actually produced it by copying it verbatim from input to
 output.[^preimage] (Reminder: Provenance is only a claim that a particular
 artifact was *built*, not that it was *published* to a particular registry.)
 
-*Example 1:* A legitimate MyPackage artifact has digest `abcdef` and is built
+*Example:* A legitimate MyPackage artifact has digest `abcdef` and is built
 from source repo `good/my-package`. A malicious build from source repo
 `evil/my-package` claims that it build artifact `abcdef` when it did not.
 Solution: Verifier rejects because the source location does not match; the
 forged digest is irrelevant.
-
-*Example 2:* Adversary builds a legitimate version of MyPackage with provenance
-that would be acceptable to verifiers, but does not publish it to a package
-registry. Solution: This is out of scope of SLSA.
 
 [^preimage]: Technically this requires the artifact to be known to the
     adversary. If they only know the digest but not the actual contents, they
