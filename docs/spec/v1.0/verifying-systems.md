@@ -168,7 +168,7 @@ control plane.
 ### Build environment
 
 The build environment is the independent execution context where the build
-takes place. In the case of a distributed build, the build environment is the 
+takes place. In the case of a distributed build, the build environment is the
 collection of all execution contexts that run build steps. Each build
 environment must be isolated from the control plane and from all other build
 environments, including those running builds from the same tenant or project.
