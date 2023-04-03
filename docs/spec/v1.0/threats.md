@@ -233,7 +233,7 @@ artifact was *built*, not that it was *published* to a particular registry.)
 
 *Example:* A legitimate MyPackage artifact has digest `abcdef` and is built
 from source repo `good/my-package`. A malicious build from source repo
-`evil/my-package` claims that it build artifact `abcdef` when it did not.
+`evil/my-package` claims that it built artifact `abcdef` when it did not.
 Solution: Verifier rejects because the source location does not match; the
 forged digest is irrelevant.
 
