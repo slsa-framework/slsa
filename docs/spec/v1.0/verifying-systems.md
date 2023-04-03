@@ -20,10 +20,11 @@ See also [Threats & mitigations](threats.md) and the
 
 The SLSA Build track defends against an adversary whose primary goal is to
 inject unofficial behavior into a package artifact while avoiding detection.
-Remember that verifiers only accept artifacts whose provenance matches
-expectations. To bypass this, the adversary tries to either (a) tamper with a
-legitimate build whose provenance already matches expectations, or (b) tamper
-with an illegitimate build's provenance to make it match expectations.
+Remember that [verifiers](verifying-artifacts.md) only accept artifacts whose
+provenance matches expectations. To bypass this, the adversary tries to either
+(a) tamper with a legitimate build whose provenance already matches
+expectations, or (b) tamper with an illegitimate build's provenance to make it
+match expectations.
 
 More formally, if a build with external parameters P would produce an artifact
 with binary hash X and a build with external parameters P' would produce an
