@@ -166,12 +166,14 @@ control plane.
 
 ### Build environment
 
-The build environment is the independent execution environment where the build
-takes place. Each build environment must be isolated from the control plane and
-from all other build environments, including those running builds from the same
-tenant or project. Tenants are free to modify the build environment arbitrarily.
-Build environments must have a means to fetch input artifacts (source,
-dependencies, etc).
+The build environment is the independent execution context where the build
+takes place. In the case of a distributed build, the build environment is the 
+collection of all execution contexts that run build steps. Each build
+environment must be isolated from the control plane and from all other build
+environments, including those running builds from the same tenant or project.
+Tenants are free to modify the build environment arbitrarily. Build
+environments must have a means to fetch input artifacts (source, dependencies,
+etc).
 
 #### Prompts for assessing build environments
 
