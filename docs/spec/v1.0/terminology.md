@@ -41,6 +41,21 @@ supply chains plus its own sources and builds.
 [package]: #package-model
 [SLSA Provenance]: /provenance/v1
 
+### Roles
+
+Throughout the specification, you will see reference to the following roles
+that take part in the software supply chain. Note that in practice a role may
+be filled by more than one person or an organization. Similarly, a person or
+organization may act as more than one role in a particular software supply
+chain.
+
+| Role | Description | Examples
+| --- | --- | ---
+| Producer | A party who creates software and provides it to others. Producers are often also consumers. | An open source project's maintainers. A software vendor.
+| Verifier | A party who inspect an artifact's provenance to determine the artifact's authenticity. | A business's software ingestion system. A programming language ecosystem's package registry.
+| Consumer | A party who uses software provided by a producer. The consumer may verify provenance for software they consume or delegate that responsibility to a separate verifier. | A developer who uses open source software distributions. A business that uses a point of sale system.
+| Infrastructure provider | A party who provides software or services to other roles. | A package registry's maintainers. A build system's maintainers.
+
 ### Build model
 
 We model a build as running on a multi-tenant platform, where each execution is
