@@ -36,9 +36,9 @@ dependencies (as in the case of SLSA [Provenance]).
 
 ## Formats
 
-This section explains how to choose the attestation format best for your
-situation by considering factors such as use case and who will be consuming
-the attestation.
+This section explains how to choose the attestation format that's best suited
+for your situation by considering factors such as intended use and who will be
+consuming the attestation.
 
 ### First party
 
@@ -62,7 +62,7 @@ Producers of open source code might consider these questions:
 -   Do you develop software with standard open source licenses?
 -   Will the code be consumed by others?
 
-In these situations, it is suggested you use the [SLSA Provenance format]. The SLSA
+In these situations, we encourage you to use the [SLSA Provenance format]. The SLSA
 Provenance format offers a path towards interoperability and cohesion across the open
 source ecosystem. Users can verify any provenance statement in this format
 using the [Generic SLSA Verifier].
@@ -159,4 +159,4 @@ recognize that other choices MAY be necessary in various cases.
 [SLSA Provenance format]: /provenance/v1.md
 [sigstore/cosign]: https://github.com/sigstore/cosign
 [SPDX]: https://github.com/in-toto/attestation/blob/main/spec/predicates/spdx.md
-[Verification Summary Attestation]: /attestation-model.md
+[Verification Summary Attestation]: /verification_summary/v1.md
