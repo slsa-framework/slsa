@@ -8,148 +8,11 @@ provenance doesn't do anything unless somebody inspects it. SLSA calls that
 inspection **verification**, and this page describes how to verify artifacts and
 their SLSA provenance.
 
-This page is divided into several sections. The first discusses choices
-software distribution and/or deployment system implementers must make regarding
-verifying provenance. The second describes how to set the expectations used to
-verify provenance. The third describes the procedure for verifying an artifact
-and its provenance against a set of expectations.
-
-## Architecture options
-
-System implementers decide which part(s) of the system will verify provenance:
-the package ecosystem at upload time, the consumers at download time, or via a
-continuous monitoring system. Each option comes with its own set of
-considerations, but all are valid. The options are not mutually exclusive, but
-at least one part of a SLSA-conformant system must verify provenance.
-
-More than one component can verify provenance. For example, if a package
-ecosystem verifies provenance, then consumers who get artifacts from that
-package ecosystem do not have to verify provenance. Consumers can do so with
-client-side verification tooling or by polling a monitor, but there is no
-requirement that they do so.
-
-<!-- **TODO** Add a diagram. -->
-
-### Package ecosystem
-
-[Package ecosystem]: #package-ecosystem
-
-A <dfn>package ecosystem</dfn> is a set of rules and conventions governing
-how packages are distributed. Every package artifact has an ecosystem, whether it is
-formal or ad-hoc. Some ecosystems are formal, such as language distribution
-(e.g. [Python/PyPA](https://www.pypa.io)), operating system distribution (e.g.
-[Debian/Apt](https://wiki.debian.org/DebianRepository/Format)), or artifact
-distribution (e.g. [OCI](https://github.com/opencontainers/distribution-spec)).
-Other ecosystems are informal, such as a convention used within a company. Even
-ad-hoc distribution of software, such as through a link on a website, is
-considered an "ecosystem". For more background, see
-[Package Model](terminology.md#package-model).
-
-During package upload, a package ecosystem can ensure that the artifact's
-provenance matches the known expectations for that package name before accepting
-it into the package registry.  If possible, system implementers SHOULD prefer this
-option because doing so benefits all of the package ecosystem's clients.
-
-The package ecosystem is responsible for reliably redistributing
-artifacts and provenance, making the producers' expectations available to consumers,
-and providing tools to enable safe artifact consumption (e.g. whether an artifact
-meets its producer's expectations).
-
-### Consumer
-
-[Consumer]: #consumer
-
-A package artifact's <dfn>consumer</dfn> is the organization or individual that uses the
-package artifact.
-
-Consumers can set their own expectations for artifacts or use default
-expectations provided by the package producer and/or package ecosystem.
-In this situation, the consumer uses client-side verification tooling to ensure
-that the artifact's provenance matches their expectations for that package
-before use (e.g. during installation or deployment). Client-side verification
-tooling can be either standalone, such as
-[slsa-verifier](https://github.com/slsa-framework/slsa-verifier), or built into
-the package ecosystem client.
-
-### Monitor
-
-[Monitor]: #monitor
-
-A <dfn>monitor</dfn> is a service that verifies provenance for a set
-of packages and publishes the result of that verification. The set of
-packages verified by a monitor is arbitrary, though it MAY mimic the set
-of packages published through one or more package ecosystems. The monitor
-MUST publish its expectations for all the packages it verifies.
-
-Consumers can continuously poll a monitor to detect artifacts that
-do not meet the monitor's expectations. Detecting artifacts that fail
-verification is of limited benefit unless a human or another part of the system
-responds to the failed verification.
-
-## Setting Expectations
-
-<dfn>Expectations</dfn> are known provenance values that indicate the
-corresponding artifact is authentic. For example, a package ecosystem may
-maintain a mapping between package names and their canonical source
-repositories. That mapping constitutes a set of expectations. The package
-ecosystem tooling tests those expectations during upload to ensure all packages
-in the ecosystem are built from their canonical source repo, which
-indicates their authenticity.
-
-Expectations MUST be sufficient to detect or prevent an adversary from injecting
-unofficial behavior into the package. Example [threats](threats.md) in this
-category include building from an unofficial fork or abusing a build parameter
-to modify the build. Usually expectations identify the canonical source
-repository (which is the main external parameter) and any other
-security-relevant external parameters.
-
-It is important to note that expectations are tied to a *package name*, whereas
-provenance is tied to an *artifact*. Different versions of the same package name
-may have different artifacts and therefore different provenance. Similarly, an
-artifact may have different names in different package ecosystems but use the same
-provenance file.
-
-Package ecosystems
-using the [RECOMMENDED suite](/attestation-model#recommended-suite) of attestation
-formats SHOULD list the package name in the provenance attestation statement's
-`subject` field, though the precise semantics for binding a package name to an
-artifact are defined by the package ecosystem.
-
-<table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
-
-<tr id="expectations-known">
-<td>Expectations known
-<td>
-
-The package ecosystem MUST ensure that expectations are defined for the package before it is made available to package ecosystem users.
-
-There are several approaches a package ecosystem could take to setting expectations, for example:
-
--   Requiring the producer to set expectations when registering a new package
-    in the package ecosystem.
--   Using the values from the package's provenance during its initial
-    publication (trust on first use).
-
-<td>✓<td>✓<td>✓
-<tr id="expectations-changes-auth">
-<td>Changes authorized
-<td>
-
-The package ecosystem MUST ensure that any changes to expectations are
-authorized by the package's producer. This is to prevent a malicious actor
-from updating the expectations to allow building and publishing from a fork
-under the malicious actor's control. Some ways this could be achieved include:
-
--   Requiring two authorized individuals from the package producer to approve
-    the change.
--   Requiring consumers to approve changes, in a similar fashion to how SSH
-    host fingerprint changes have to be approved by users.
--   Disallowing changes altogether, for example by binding the package name to
-    the source repository.
-
-<td><td>✓<td>✓
-</table>
+This page is divided into several sections. The first describes the procedure
+for verifying an artifact and its provenance against a set of expectations. The
+second discusses choices software distribution and/or deployment system
+implementers must make regarding verifying provenance. The third describes how
+to set the expectations used to verify provenance.
 
 ## How to verify
 
@@ -297,29 +160,6 @@ err on the side of caution. It is acceptable to allow a parameter to have a
 range of values (possibly any value) if it is known that any value in the range
 is safe. JSON comparison is sufficient for verifying parameters.
 
-Possible models for implementing expectation setting in package ecosystems (not
-exhaustive):
-
--   **Trust on first use:** Accept the first version of the package as-is. On
-    each version update, compare the old provenance to the new provenance and
-    alert on any differences. This can be augmented by having rules about what
-    changes are benign, such as a parameter known to be safe or a heuristic
-    about safe git refs.
-
--   **Explicit policy:** Package producer defines the expectations for the
-    package and distributes it to the verifier; the verifier uses these
-    expectations after verifying their authenticity. In this model, there MUST
-    be some protection against an adversary unilaterally modifying the policy.
-    For example, this might involve two-party control over policy modifications,
-    or having consumers accept each policy change (another form of trust on
-    first use).
-
--   **Immutable policy:** Expectations for a package cannot change. In this
-    model, the package name is immutably bound to a source repository and all
-    other expectations are defined in the source repository. This is how go
-    works, for example, since the package name *is* the source repository
-    location.
-
 TIP: Difficulty in setting meaningful expectations for `externalParameters` can
 be a sign that the `buildType`'s level of abstraction is too low. For example,
 `externalParameters` that record a list of commands to run is likely impractical
@@ -351,3 +191,114 @@ L0. (For example, consider the compiler's compiler's compiler's ... compiler.)
 [Threat "E"]: /spec/v1.0/threats#e-use-compromised-dependency
 [VSA]: /verification_summary
 [threats]: /spec/v1.0/threats
+
+## Architecture options
+
+System implementers decide which part(s) of the system will verify provenance:
+the package ecosystem at upload time, the consumers at download time, or via a
+continuous monitoring system. Each option comes with its own set of
+considerations, but all are valid. The options are not mutually exclusive, but
+at least one part of a SLSA-conformant system must verify provenance.
+
+More than one component can verify provenance. For example, if a package
+ecosystem verifies provenance, then consumers who get artifacts from that
+package ecosystem do not have to verify provenance. Consumers can do so with
+client-side verification tooling or by polling a monitor, but there is no
+requirement that they do so.
+
+<!-- **TODO** Add a diagram. -->
+
+### Package ecosystem
+
+[Package ecosystem]: #package-ecosystem
+
+A <dfn>package ecosystem</dfn> is a set of rules and conventions governing
+how packages are distributed. Every package artifact has an ecosystem, whether it is
+formal or ad-hoc. Some ecosystems are formal, such as language distribution
+(e.g. [Python/PyPA](https://www.pypa.io)), operating system distribution (e.g.
+[Debian/Apt](https://wiki.debian.org/DebianRepository/Format)), or artifact
+distribution (e.g. [OCI](https://github.com/opencontainers/distribution-spec)).
+Other ecosystems are informal, such as a convention used within a company. Even
+ad-hoc distribution of software, such as through a link on a website, is
+considered an "ecosystem". For more background, see
+[Package Model](terminology.md#package-model).
+
+During package upload, a package ecosystem can ensure that the artifact's
+provenance matches the known expectations for that package name before accepting
+it into the package registry.  If possible, system implementers SHOULD prefer this
+option because doing so benefits all of the package ecosystem's clients.
+
+The package ecosystem is responsible for reliably redistributing
+artifacts and provenance, making the producers' expectations available to consumers,
+and providing tools to enable safe artifact consumption (e.g. whether an artifact
+meets its producer's expectations).
+
+### Consumer
+
+[Consumer]: #consumer
+
+A package artifact's <dfn>consumer</dfn> is the organization or individual that uses the
+package artifact.
+
+Consumers can set their own expectations for artifacts or use default
+expectations provided by the package producer and/or package ecosystem.
+In this situation, the consumer uses client-side verification tooling to ensure
+that the artifact's provenance matches their expectations for that package
+before use (e.g. during installation or deployment). Client-side verification
+tooling can be either standalone, such as
+[slsa-verifier](https://github.com/slsa-framework/slsa-verifier), or built into
+the package ecosystem client.
+
+### Monitor
+
+[Monitor]: #monitor
+
+A <dfn>monitor</dfn> is a service that verifies provenance for a set
+of packages and publishes the result of that verification. The set of
+packages verified by a monitor is arbitrary, though it MAY mimic the set
+of packages published through one or more package ecosystems. The monitor
+MUST publish its expectations for all the packages it verifies.
+
+Consumers can continuously poll a monitor to detect artifacts that
+do not meet the monitor's expectations. Detecting artifacts that fail
+verification is of limited benefit unless a human or another part of the system
+responds to the failed verification.
+
+## Setting Expectations
+
+<dfn>Expectations</dfn> are known provenance values that indicate the
+corresponding artifact is authentic. For example, a package ecosystem may
+maintain a mapping between package names and their canonical source
+repositories. That mapping constitutes a set of expectations. The package
+ecosystem tooling tests those expectations during upload to ensure all packages
+in the ecosystem are built from their canonical source repo, which
+indicates their authenticity.
+
+Possible models for implementing expectation setting in package ecosystems (not
+exhaustive):
+
+-   **Trust on first use:** Accept the first version of the package as-is. On
+    each version update, compare the old provenance to the new provenance and
+    alert on any differences. This can be augmented by having rules about what
+    changes are benign, such as a parameter known to be safe or a heuristic
+    about safe git refs.
+
+-   **Explicit policy:** Package producer defines the expectations for the
+    package and distributes it to the verifier; the verifier uses these
+    expectations after verifying their authenticity. In this model, there MUST
+    be some protection against an adversary unilaterally modifying the policy.
+    For example, this might involve two-party control over policy modifications,
+    or having consumers accept each policy change (another form of trust on
+    first use).
+
+-   **Immutable policy:** Expectations for a package cannot change. In this
+    model, the package name is immutably bound to a source repository and all
+    other expectations are defined in the source repository. This is how go
+    works, for example, since the package name *is* the source repository
+    location.
+
+It is important to note that expectations are tied to a *package name*, whereas
+provenance is tied to an *artifact*. Different versions of the same package name
+may have different artifacts and therefore different provenance. Similarly, an
+artifact may have different names in different package ecosystems but use the same
+provenance file.
