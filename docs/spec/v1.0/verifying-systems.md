@@ -19,10 +19,11 @@ See also [Threats & mitigations](threats.md) and the
 ### Adversary goal
 
 The SLSA Build track defends against an adversary whose primary goal is to
-tamper with a build to create unexpected, vulnerable, or malicious behavior in
-the output artifact while avoiding detection. Their means of doing so is
-generating build provenance that does not faithfully represent the built
-artifact's origins or build process.
+inject unofficial behavior into a package artifact while avoiding detection.
+Remember that verifiers only accept artifacts whose provenance matches
+expectations. To bypass this, the adversary tries to either (a) tamper with a
+legitimate build whose provenance already matches expectations, or (b) tamper
+with an illegitimate build's provenance to make it match expectations.
 
 More formally, if a build with external parameters P would produce an artifact
 with binary hash X and a build with external parameters P' would produce an
@@ -40,14 +41,14 @@ Consumers SHOULD also evaluate the build system's ability to defend against the
 following types of adversaries.
 
 1.  Project contributors, who can:
-     -   Create builds on the build service. These are the adversary's controlled
-         builds.
-     -   Modify one or more controlled builds' external parameters.
-     -   Modify one or more controlled builds' environments and run arbitrary
-         code inside those environments.
-     -   Read the target build's source repo.
-     -   Fork the target build's source repo.
-     -   Modify a fork of the target build's source repo and build from it.
+    -   Create builds on the build service. These are the adversary's controlled
+        builds.
+    -   Modify one or more controlled builds' external parameters.
+    -   Modify one or more controlled builds' environments and run arbitrary
+        code inside those environments.
+    -   Read the target build's source repo.
+    -   Fork the target build's source repo.
+    -   Modify a fork of the target build's source repo and build from it.
 2.  Project maintainer, who can:
     -   Do everything listed under "project contributors".
     -   Create new builds under the target build's project or identity.
