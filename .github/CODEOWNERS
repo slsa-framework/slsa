@@ -4,3 +4,4 @@
 # Reviewers
 /docs/provenance/ @TomHennen
 /docs/verification_summary/ @TomHennen
+/docs/spec/**/distributing-provenance.md @di

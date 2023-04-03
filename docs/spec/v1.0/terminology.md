@@ -60,6 +60,7 @@ describing this whole process.
 | Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. It includes software, hardware, people, and organizations.
 | Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single environment on a platform.
 | Steps | The set of actions that comprise a build, defined by the tenant.
+| Control plane | Build system component that orchestrates each independent build execution and produces provenance.
 | Environment | Machine, container, VM, or similar in which the build runs, initialized by the platform. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
 | External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the platform to initialize the build.
 | Dependencies | Artifacts fetched during initialization or execution of the build process, such as configuration files, source artifacts, or build tools.
