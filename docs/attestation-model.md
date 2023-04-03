@@ -59,7 +59,7 @@ attestations since it is easy to verify using the [Generic SLSA Verifier].
 Producers of open source code might consider these questions:
 
 -   Is SLSA's primary use case to convey trust in how your code was developed?
--   Do you develope software with standard open source licenses?
+-   Do you develop software with standard open source licenses?
 -   Will the code be consumed by others?
 
 In these situations, it is suggested you use the [SLSA Provenance format]. The SLSA
