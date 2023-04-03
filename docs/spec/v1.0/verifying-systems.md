@@ -71,7 +71,8 @@ following types of adversaries.
 
 Consumers SHOULD consider at least these five elements of the
 [build model](terminology.md#build-model) when assessing build systems for SLSA
-conformance: external parameters, control plane, environments, caches, and outputs.
+conformance: external parameters, control plane, build environments, caches,
+and outputs.
 
 ![image](/images/v1.0/build-model.svg)
 
@@ -91,15 +92,15 @@ system to use), and any additional user-provided strings.
 -   How does the control plane process user-provided external parameters?
     Examples: sanitizing, parsing, not at all
 -   Which external parameters are processed by the control plane and which are
-    processed by the environment?
+    processed by the build environment?
 -   What sort of external parameters does the control plane accept for
-    environment configuration?
+    build environment configuration?
 -   How do you ensure that all external parameters are represented in the
     provenance?
 -   How will you ensure that future design changes will not add additional
     external parameters without representing them in the provenance?
 
-### Control Plane
+### Control plane
 
 The control plane is the build system component that orchestrates each
 independent build execution. It is responsible for setting up each build and
@@ -136,17 +137,19 @@ control plane.
         chain? Example: SLSA L3+ provenance, build from source
     -   How do you secure communications between builder components? Example:
         TLS with certificate transparency.
-    -   Are you able to perform forensic analysis on compromised environments?
-        How? Example: retain base images indefinitely
+    -   Are you able to perform forensic analysis on compromised build
+        environments? How? Example: retain base images indefinitely
 
--   Creating environments
-    -   How does the control plane share data with environments? Example:
+-   Creating build environments
+    -   How does the control plane share data with build environments? Example:
         mounting a shared file system partition
-    -   How does the control plane protect its integrity from environments?
-        Example: not mount its own file system partitions on environments
-    -   How does the control plane prevent environments from accessing its
+    -   How does the control plane protect its integrity from build
+        environments? Example: not mount its own file system partitions on
+        build environments
+    -   How does the control plane prevent build environments from accessing its
         cryptographic secrets? Examples: dedicated secret storage, not mounting
-        its own file system partitions on executors, hardware security modules
+        its own file system partitions to build environments, hardware security
+        modules
 
 -   Managing cryptographic secrets
     -   How do you store the control plane's cryptographic secrets?
@@ -161,21 +164,21 @@ control plane.
     -   What is your plan for remediating cryptographic secret compromise? How
         frequently is this plan tested?
 
-### Environment
+### Build environment
 
 The build environment is the independent execution environment where the build
-takes place. Each environment must be isolated from the control plane and from
-all other environments, including environments running builds from the same
-build user or project. Build users are free to modify the environment inside the
-environment arbitrarily. Build environments must have a means to fetch input
-artifacts (source, dependencies, etc).
+takes place. Each build environment must be isolated from the control plane and
+from all other build environments, including those running builds from the same
+tenant or project. Tenants are free to modify the build environment arbitrarily.
+Build environments must have a means to fetch input artifacts (source,
+dependencies, etc).
 
-#### Prompts for assessing environments
+#### Prompts for assessing build environments
 
 -   Isolation technologies
-    -   How are environments isolated from the control plane and each other?
-        Examples: VMs, containers, sandboxed processes
-    -   How have you hardened your environments against malicious tenants?
+    -   How are build environments isolated from the control plane and each
+        other? Examples: VMs, containers, sandboxed processes
+    -   How have you hardened your build environments against malicious tenants?
         Examples: configuration hardening, limiting attack surface
     -   How frequently do you update your isolation software?
     -   What is your process for responding to vulnerability disclosures? What
@@ -184,18 +187,18 @@ artifacts (source, dependencies, etc).
         subsequent builds?
 
 -   Creation and destruction
-    -   What tools and environment are available in environments on creation? How
-        were the elements of this environment chosen? Examples: A minimal Linux
+    -   What operating system and utilities are available in build environments
+        on creation? How were these elements chosen? Examples: A minimal Linux
         distribution with its package manager, OSX with HomeBrew
-    -   How long could a compromised environment remain active in the build
-        system?
+    -   How long could a compromised build environment remain active in the
+        build system?
 
 -   Network access
-    -   Are environments able to call out to remote execution? If so, how do you
-        prevent them from tampering with the control plane or other environments
-        over the network?
-    -   Are environments able to open services on the network? If so, how do you
-        prevent remote interference through these services?
+    -   Are build environments able to call out to remote execution? If so, how
+        do you prevent them from tampering with the control plane or other build
+        environments over the network?
+    -   Are build environments able to open services on the network? If so, how
+        do you prevent remote interference through these services?
 
 ### Cache
 
