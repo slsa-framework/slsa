@@ -6,7 +6,7 @@ is_guest_post: false
 
 Interested in getting involved? Now’s the chance to [provide your feedback on the foundational v1 release of the SLSA framework.](https://slsa.dev/blog/2023/02/slsa-v1-rc)
 
-“Software Supply chain security is more than just the build” is a common response when folks learn about SLSA. This is true. SLSA 1.0 is entirely focused on generating build provenance and assurance around that provenance due to the security capabilities of the build system and security properties of a particular running build. Software Supply Chain Security is the cybersecurity practice of extending left into System Delivery Lifecycle or Software Delivery Lifecycle and the SDLC is more than just the build.
+“Software Supply chain security is more than just the build” is a common response when folks learn about SLSA. This is true. SLSA 1.0 is entirely focused on generating [build provenance](../provenance/v1.md) and assurance around that provenance due to the security capabilities of the build system and security properties of a particular running build. Software Supply Chain Security is the cybersecurity practice of extending left into System Delivery Lifecycle or Software Delivery Lifecycle and the SDLC is more than just the build.
 
 If the SDLC is more than the build, why is the SLSA community only focused on that one aspect? We’re not. We’re just starting with the build. The initial focus on the **build track** is a strategic decision made due to its significance in the overall process. The build serves as the bridge between various inputs, such as source code and dependencies, and the final product, which is the software package or artifact intended to run in production environments or be used as a dependency to downstream consumers.
 
