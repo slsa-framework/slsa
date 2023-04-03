@@ -53,7 +53,7 @@ steps, possibly fetching additional dependencies, and outputs one or more
 artifacts. Finally, for SLSA Build L2+, the control plane outputs provenance
 describing this whole process.
 
-<p align="center"><img src="build-model.svg" alt="Model Build"></p>
+<p align="center"><img src="../../images/v1.0/build-model.svg" alt="Model Build"></p>
 
 | Primary Term | Description
 | --- | ---
