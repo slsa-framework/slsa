@@ -34,10 +34,8 @@ requirement that they do so.
 
 [Package ecosystem]: #package-ecosystem
 
-> ⚠ **TODO** Update this section to use Package model terminology.
-
-A <dfn>package ecosystem</dfn> is a set of conventions and
-tooling for package distribution. Every package has an ecosystem, whether it is
+A <dfn>package ecosystem</dfn> is a set of rules and conventions governing
+how packages are distributed. Every package artifact has an ecosystem, whether it is
 formal or ad-hoc. Some ecosystems are formal, such as language distribution
 (e.g. [Python/PyPA](https://www.pypa.io)), operating system distribution (e.g.
 [Debian/Apt](https://wiki.debian.org/DebianRepository/Format)), or artifact
@@ -49,8 +47,8 @@ considered an "ecosystem". For more background, see
 
 During package upload, a package ecosystem can ensure that the artifact's
 provenance matches the known expectations for that package name before accepting
-it into the registry.  If possible, system implementers SHOULD prefer this option
-because doing so benefits all of the package ecosystem's clients.
+it into the package registry.  If possible, system implementers SHOULD prefer this
+option because doing so benefits all of the package ecosystem's clients.
 
 The package ecosystem is responsible for reliably redistributing
 artifacts and provenance, making the producers' expectations available to consumers,
@@ -61,8 +59,8 @@ meets its producer's expectations).
 
 [Consumer]: #consumer
 
-A package's <dfn>consumer</dfn> is the organization or individual that uses the
-package.
+A package artifact's <dfn>consumer</dfn> is the organization or individual that uses the
+package artifact.
 
 Consumers can set their own expectations for artifacts or use default
 expectations provided by the package producer and/or package ecosystem.
@@ -160,10 +158,10 @@ Verification MUST include the following steps:
 -   Ensuring that the builder identity is one of those in the map of trusted
     builder id's to SLSA level.
 -   Verifying the signature on the provenance envelope.
--   Ensuring that the values for `BuildType` and `ExternalParameters` in the
+-   Ensuring that the values for `buildType` and `externalParameters` in the
     provenance match the known expectations. The package ecosystem MAY allow
-    an approved list of `ExternalParameters` to be ignored during verification.
-    Any unrecognized `ExternalParameters` SHOULD cause verification to fail.
+    an approved list of `externalParameters` to be ignored during verification.
+    Any unrecognized `externalParameters` SHOULD cause verification to fail.
 
 ![Threats covered by each step](/images/v1.0/supply-chain-threats-build-verification.svg)
 
@@ -179,7 +177,7 @@ referenced here.
 First, check the SLSA Build level by comparing the artifact to its provenance
 and the provenance to a preconfigured root of trust. The goal is to ensure that
 the provenance actually applies to the artifact in question and to assess the
-trustworthiness of the provenance. This mitigates some or all of [threats] "D",
+trustworthiness of the provenance. This mitigates some or all of [threats] "E",
 "F", "G", and "H", depending on SLSA Build level and where verification happens.
 
 Once, when bootstrapping the verifier:
@@ -240,7 +238,7 @@ Given an artifact and its provenance:
 
 Resulting threat mitigation:
 
--   [Threat "D"]: SLSA Build L3 requires protection against compromise of the
+-   [Threat "E"]: SLSA Build L3 requires protection against compromise of the
     build process and provenance generation by an external adversary, such as
     persistence between builds or theft of the provenance signing key. In other
     words, SLSA Build L3 establishes that the provenance is accurate and
@@ -249,7 +247,7 @@ Resulting threat mitigation:
         platform itself, such as by a malicious insider. Instead, verifiers
         SHOULD carefully consider which build platforms are added to the roots
         of trust. For advice on establishing trust in build platforms, see
-        [Verifying build systems](/spec/v1.0/verifying-systems).
+        [Verifying build systems](verifying-systems).
 -   [Threat "F"]: SLSA Build L2 covers tampering of the artifact or provenance
     after the build. This is accomplished by verifying the `subject` and
     signature in the steps above.
@@ -263,10 +261,10 @@ Resulting threat mitigation:
     -   NOTE: SLSA does not cover adversaries tricking a consumer to use an
         unintended package, such as through typosquatting.
 
-[Threat "D"]: /spec/v1.0/threats#d-compromise-build-process
-[Threat "F"]: /spec/v1.0/threats#f-upload-modified-package
-[Threat "G"]: /spec/v1.0/threats#g-compromise-package-repo
-[Threat "H"]: /spec/v1.0/threats#h-use-compromised-package
+[Threat "E"]: threats#e-compromise-build-process
+[Threat "F"]: threats#f-upload-modified-package
+[Threat "G"]: threats#g-compromise-package-repo
+[Threat "H"]: threats#h-use-compromised-package
 
 [processing-model]: https://github.com/in-toto/attestation/tree/main/spec#processing-model
 
@@ -331,7 +329,7 @@ source repository, then put only the source repository in
 `externalParameters`. Such a design is easier to verify because the source
 repository is constant across builds.
 
-[Threat "C"]: /spec/v1.0/threats#c-build-from-modified-source
+[Threat "C"]: threats#c-build-from-modified-source
 
 ### Step 3: (Optional) Check dependencies recursively
 
@@ -350,6 +348,6 @@ heuristic or exception mechanism is almost always necessary when verifying
 dependencies because there will be transitive dependencies that are SLSA Build
 L0. (For example, consider the compiler's compiler's compiler's ... compiler.)
 
-[Threat "E"]: /spec/v1.0/threats#e-use-compromised-dependency
+[Threat "E"]: threats#e-use-compromised-dependency
 [VSA]: /verification_summary
-[threats]: /spec/v1.0/threats
+[threats]: threats

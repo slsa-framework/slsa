@@ -10,8 +10,8 @@ The primary intended use case is to feed into automated policy engines, such as
 [in-toto] and [Binary Authorization].
 
 This page provides a high-level overview of the attestation model, including
-standardized terminology, data model, layers, and conventions for software
-attestations.
+standardized terminology, data model, layers, conventions for software
+attestations, and formats for different use cases.
 
 ## Overview
 
@@ -33,6 +33,54 @@ arbitrary amount of information, including things that are not possible with
 raw signing. For example, an attestation might state exactly how an artifact
 was produced, including the build command that was run and all of its
 dependencies (as in the case of SLSA [Provenance]).
+
+## Formats
+
+This section explains how to choose the attestation format that's best suited
+for your situation by considering factors such as intended use and who will be
+consuming the attestation.
+
+### First party
+
+Producers of first party code might consider the following questions:
+
+-   Will SLSA be used only within our organization?
+-   Is SLSA's primary use case to manage insider risk?
+-   Are we developing entirely in a closed source environment?
+
+If these are the main considerations, the organization can choose any format
+for internal use. To make an external claim of meeting a SLSA level, however,
+there needs to be a way for external users to consume and verify your provenance.
+Currently, SLSA recommends using the [SLSA Provenance format] for SLSA
+attestations since it is easy to verify using the [Generic SLSA Verifier].
+
+### Open source
+
+Producers of open source code might consider these questions:
+
+-   Is SLSA's primary use case to convey trust in how your code was developed?
+-   Do you develop software with standard open source licenses?
+-   Will the code be consumed by others?
+
+In these situations, we encourage you to use the [SLSA Provenance format]. The SLSA
+Provenance format offers a path towards interoperability and cohesion across the open
+source ecosystem. Users can verify any provenance statement in this format
+using the [Generic SLSA Verifier].
+
+### Closed source, third party
+
+Producers of closed source code that is consumed by others might consider
+the following questions:
+
+-   Is my code produced for the sole purpose of specific third party consumers?
+-   Is SLSA's primary use case to create trust in our organization or to comply with
+audits and legal requirements?
+
+In these situations, you might not want to make all the details of your
+provenance available externally. Consider using Verification Summary
+Attestations (VSAs) to summarize provenance information in a sanitized way
+that's safe for external consumption. For more about VSAs, see the [Verification
+Summary Attestation] page.
 
 ## Model and Terminology
 
@@ -90,15 +138,16 @@ recognize that other choices MAY be necessary in various cases.
 
 | Component | Recommendation |
 | --- | --- |
-| Envelope | **[DSSE]** (**TODO**: Recommend Crypto/PKI) |
+| Envelope | **[DSSE]** (ECDSA over NIST P-256 (or stronger) and SHA-256.) |
 | Statement | **[in-toto attestations]** |
 | Predicate | Choose as appropriate, i.e.; [Provenance], [SPDX], [other predicates defined by third-parties]. If none are a good fit, invent a new one |
 | Bundle | **[JSON Lines]**, see [attestation bundle] |
 | Storage/Lookup | **TBD** |
 
-[attestation bundle]: https://github.com/in-toto/attestation/blob/main/spec/bundle.md
+[attestation bundle]: https://github.com/in-toto/attestation/blob/main/spec/v1.0/bundle.md
 [Binary Authorization]: https://cloud.google.com/binary-authorization
 [DSSE]: https://github.com/secure-systems-lab/dsse/
+[Generic SLSA Verifier]: https://github.com/slsa-framework/slsa-verifier
 [hypergraph]: https://en.wikipedia.org/wiki/Hypergraph
 [in-toto]: https://in-toto.io
 [in-toto attestations]: https://github.com/in-toto/attestation/
@@ -107,5 +156,7 @@ recognize that other choices MAY be necessary in various cases.
 [Provenance]: /provenance
 [remote attestation]: https://en.wikipedia.org/wiki/Trusted_Computing#Remote_attestation
 [RFC 2119]: https://tools.ietf.org/html/rfc2119
+[SLSA Provenance format]: /provenance/v1.md
 [sigstore/cosign]: https://github.com/sigstore/cosign
 [SPDX]: https://github.com/in-toto/attestation/blob/main/spec/predicates/spdx.md
+[Verification Summary Attestation]: /verification_summary/v1.md

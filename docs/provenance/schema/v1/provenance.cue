@@ -15,8 +15,8 @@
         "runDetails": {
             "builder": {
                 "id": string,
-                "version": string,
                 "builderDependencies": [ ...#ResourceDescriptor ],
+                "version": { ...string },
             },
             "metadata": {
                 "invocationId": string,
