@@ -177,7 +177,7 @@ referenced here.
 First, check the SLSA Build level by comparing the artifact to its provenance
 and the provenance to a preconfigured root of trust. The goal is to ensure that
 the provenance actually applies to the artifact in question and to assess the
-trustworthiness of the provenance. This mitigates some or all of [threats] "D",
+trustworthiness of the provenance. This mitigates some or all of [threats] "E",
 "F", "G", and "H", depending on SLSA Build level and where verification happens.
 
 Once, when bootstrapping the verifier:
@@ -238,7 +238,7 @@ Given an artifact and its provenance:
 
 Resulting threat mitigation:
 
--   [Threat "D"]: SLSA Build L3 requires protection against compromise of the
+-   [Threat "E"]: SLSA Build L3 requires protection against compromise of the
     build process and provenance generation by an external adversary, such as
     persistence between builds or theft of the provenance signing key. In other
     words, SLSA Build L3 establishes that the provenance is accurate and
@@ -247,7 +247,7 @@ Resulting threat mitigation:
         platform itself, such as by a malicious insider. Instead, verifiers
         SHOULD carefully consider which build platforms are added to the roots
         of trust. For advice on establishing trust in build platforms, see
-        [Verifying build systems](/spec/v1.0/verifying-systems).
+        [Verifying build systems](verifying-systems).
 -   [Threat "F"]: SLSA Build L2 covers tampering of the artifact or provenance
     after the build. This is accomplished by verifying the `subject` and
     signature in the steps above.
@@ -261,10 +261,10 @@ Resulting threat mitigation:
     -   NOTE: SLSA does not cover adversaries tricking a consumer to use an
         unintended package, such as through typosquatting.
 
-[Threat "D"]: /spec/v1.0/threats#d-compromise-build-process
-[Threat "F"]: /spec/v1.0/threats#f-upload-modified-package
-[Threat "G"]: /spec/v1.0/threats#g-compromise-package-repo
-[Threat "H"]: /spec/v1.0/threats#h-use-compromised-package
+[Threat "E"]: threats#e-compromise-build-process
+[Threat "F"]: threats#f-upload-modified-package
+[Threat "G"]: threats#g-compromise-package-repo
+[Threat "H"]: threats#h-use-compromised-package
 
 [processing-model]: https://github.com/in-toto/attestation/tree/main/spec#processing-model
 
@@ -329,7 +329,7 @@ source repository, then put only the source repository in
 `externalParameters`. Such a design is easier to verify because the source
 repository is constant across builds.
 
-[Threat "C"]: /spec/v1.0/threats#c-build-from-modified-source
+[Threat "C"]: threats#c-build-from-modified-source
 
 ### Step 3: (Optional) Check dependencies recursively
 
@@ -348,6 +348,6 @@ heuristic or exception mechanism is almost always necessary when verifying
 dependencies because there will be transitive dependencies that are SLSA Build
 L0. (For example, consider the compiler's compiler's compiler's ... compiler.)
 
-[Threat "E"]: /spec/v1.0/threats#e-use-compromised-dependency
+[Threat "E"]: threats#e-use-compromised-dependency
 [VSA]: /verification_summary
-[threats]: /spec/v1.0/threats
+[threats]: threats
