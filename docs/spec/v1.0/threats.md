@@ -464,19 +464,20 @@ threat.
 Threats that can compromise the ability to prevent or detect the supply chain
 security threats above.
 
-<details><summary>Tamper with the verifier</summary>
+<details><summary>Tamper with recorded expectations</summary>
 
-*Threat:* Modify the verifier to accept something that would not otherwise
-meet expectations.
+*Threat:* Modify the verifier's recorded expectations, causing the verifier to
+accept an unofficial package artifact.
 
-*Mitigation:* Changes to the verifier tool requires some form of authorization, such
-as two-party review.
+*Mitigation:* Changes to recorded expectations requires some form of
+authorization, such as two-party review.
 
-*Example:* MyVerifier stores its expectations for each package in a file. The
-file says MyPackage will always build from the source repository
-`good/my-package`. Adversary modifies the file to also accept `evil/my-package`,
-then builds from that repository and uploads a malicious version of the package.
-Solution: Changes to the verifier require two-party review.
+*Example:* The package ecosystem stores its expectations for a given package
+name in a configuration file that is modifiable by that package's producer. The
+configuration for MyPackage expects the source repository to be good/my-package.
+Adversary modifies the configuration to also accept evil/my-package, then builds
+from that repository and uploads a malicious version of the package. Solution:
+Changes to the expectations configuration require two-party review.
 
 </details>
 <details><summary>Forge change metadata</summary>
