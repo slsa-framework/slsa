@@ -222,8 +222,8 @@ Possible models for forming expectations include:
 
 It is important to note that expectations are tied to a *package name*, whereas
 provenance is tied to an *artifact*. Different versions of the same package name
-may have different artifacts and therefore different provenance. Similarly, an
-artifact may have different names in different package ecosystems but use the same
+will likely have different artifacts and therefore different provenance. Similarly, an
+artifact might have different names in different package ecosystems but use the same
 provenance file.
 
 ## Architecture options
