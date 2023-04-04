@@ -5,8 +5,8 @@ description: SLSA uses provenance to indicate whether an artifact is authentic o
 
 SLSA uses provenance to indicate whether an artifact is authentic or not, but
 provenance doesn't do anything unless somebody inspects it. SLSA calls that
-inspection **verification**, and this page describes how to verify artifacts and
-their SLSA provenance.
+inspection **verification**, and this page describes recommendations for how to
+verify artifacts and their SLSA provenance.
 
 This page is divided into several sections. The first describes the process
 for verifying an artifact and its provenance against a set of expectations. The
@@ -16,7 +16,7 @@ happen.
 
 ## How to verify
 
-Verification MUST include the following steps:
+Verification SHOULD include the following steps:
 
 -   Ensuring that the builder identity is one of those in the map of trusted
     builder id's to SLSA level.
@@ -29,7 +29,7 @@ Verification MUST include the following steps:
 ![Threats covered by each step](/images/v1.0/supply-chain-threats-build-verification.svg)
 
 Note: This section assumes that the provenance is in the recommended
-[provenance format](/provenance/v1). If it is not, then the verifier must
+[provenance format](/provenance/v1). If it is not, then the verifier SHOULD
 perform equivalent checks on provenance fields that correspond to the ones
 referenced here.
 
@@ -140,7 +140,7 @@ package in order to mitigate [threat "C"].
 
 In our threat model, the adversary has ability to invoke a build and to publish
 to the registry. The adversary is not able to write to the source repository, nor do
-they have insider access to any trusted systems. Your expectations MUST be
+they have insider access to any trusted systems. Your expectations SHOULD be
 sufficient to detect or prevent this adversary from injecting unofficial
 behavior into the package.
 
@@ -210,9 +210,9 @@ Possible models for forming expectations include:
     about safe git branches or tags.
 
 -   **Defined by producer:** The package producer tells the verifier what their
-    expectations should be. In this model, the verifier MUST provide an
+    expectations should be. In this model, the verifier SHOULD provide an
     authenticated communication mechanism for the producer to set the package's
-    expectations, and there MUST be some protection against an adversary
+    expectations, and there SHOULD be some protection against an adversary
     unilaterally modifying them. For example, modifications may require
     two-party control, or consumers may have to accept each policy change
     (another form of trust on first use).
@@ -295,7 +295,7 @@ A <dfn>monitor</dfn> is a service that verifies provenance for a set
 of packages and publishes the result of that verification. The set of
 packages verified by a monitor is arbitrary, though it MAY mimic the set
 of packages published through one or more package ecosystems. The monitor
-MUST publish its expectations for all the packages it verifies.
+SHOULD publish its expectations for all the packages it verifies.
 
 Consumers can continuously poll a monitor to detect artifacts that
 do not meet the monitor's expectations. Detecting artifacts that fail

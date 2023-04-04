@@ -1,119 +1,107 @@
 ---
 title: Verifying build systems
-description: The provenance consumer is responsible for deciding whether they trust a builder to produce SLSA Build L3 provenance. However, assessing Build L3 capabilities requires information about a builder's construction and operating procedures that the consumer cannot glean from the provenance itself. To aid with such assessments, we provide a common threat model and builder model for reasoning about builders' security. We also provide a questionnaire that organizations can use to describe their builders to consumers along with sample answers that do and do not satisfy the SLSA Build L3 requirements.
+description: Guidelines for assessing build system security.
 ---
 
-The provenance consumer is responsible for deciding whether they trust a builder
-to produce SLSA Build L3 provenance. However, assessing Build L3 capabilities
-requires information about a builder's construction and operating procedures
-that the consumer cannot glean from the provenance itself. To aid with such
-assessments, we provide a common threat model and builder model for reasoning
-about builders' security. We also provide a questionnaire that organizations can
-use to describe their builders to consumers along with sample answers that do
-and do not satisfy the SLSA Build L3 requirements.
+One of SLSA's guiding [principles](principles.md) is to "trust systems, verify
+artifacts". However, consumers cannot trust systems to produce Build L3
+artifacts and provenance unless they have some proof that the provenance is
+[unforgeable](requirements.md#provenance-unforgeable) and the builds are
+[isolated](requirements.md#isolated).
 
-## Threat Model
+This page describes the parts of a build system that consumers SHOULD assess
+and provides sample questions consumers can ask when assessing a build system.
+See also [Threats & mitigations](threats.md) and the
+[build model](terminology.md#build-model).
 
-### Attacker Goal
+## Threats
 
-The attacker's primary goal is to tamper with a build to create unexpected,
-vulnerable, or malicious behavior in the output artifact while avoiding
-detection. Their means of doing so is generating build provenance that does not
-faithfully represent the built artifact's origins or build process.
+### Adversary goal
+
+The SLSA Build track defends against an adversary whose primary goal is to
+inject unofficial behavior into a package artifact while avoiding detection.
+Remember that [verifiers](verifying-artifacts.md) only accept artifacts whose
+provenance matches expectations. To bypass this, the adversary tries to either
+(a) tamper with a legitimate build whose provenance already matches
+expectations, or (b) tamper with an illegitimate build's provenance to make it
+match expectations.
 
 More formally, if a build with external parameters P would produce an artifact
 with binary hash X and a build with external parameters P' would produce an
 artifact with binary hash Y, they wish to produce provenance indicating a build
 with external parameters P produced an artifact with binary hash Y.
 
-This diagram represents a successful attack:
-
-![image](slsa_attack.png)
+See threats [C], [D], [E], and [F] for examples of specific threats.
 
 Note: Platform abuse (e.g. running non-build workloads) and attacks against
 builder availability are out of scope of this document.
 
-TODO: Align/cross-reference with SLSA Provenance Model.
+### Adversary profiles
 
-TODO: Redraw diagrams in the style used by the rest of the site.
+Consumers SHOULD also evaluate the build system's ability to defend against the
+following types of adversaries.
 
-### Types of attackers
+1.  Project contributors, who can:
+    -   Create builds on the build service. These are the adversary's controlled
+        builds.
+    -   Modify one or more controlled builds' external parameters.
+    -   Modify one or more controlled builds' environments and run arbitrary
+        code inside those environments.
+    -   Read the target build's source repo.
+    -   Fork the target build's source repo.
+    -   Modify a fork of the target build's source repo and build from it.
+2.  Project maintainer, who can:
+    -   Do everything listed under "project contributors".
+    -   Create new builds under the target build's project or identity.
+    -   Modify the target build's source repo and build from it.
+    -   Modify the target build's configuration.
+3.  Build service administrators, who can:
+    -   Do everything listed under "project contributors" and "project
+        maintainers".
+    -   Run arbitrary code on the build service.
+    -   Read and modify network traffic.
+    -   Access the control plane's cryptographic secrets.
+    -   Remotely access build environments (e.g. via SSH).
 
-We consider three attacker profiles differentiated by the attacker's capabilities
-and privileges as related to the build they wish to subvert (the "target build").
+[C]: threats.md#c-build-from-modified-source
+[D]: threats.md#d-use-compromised-dependency
+[E]: threats.md#e-compromise-build-process
+[F]: threats.md#f-upload-modified-package
 
-TODO: Tie attack profiles into the rest of this page.
+## Build system components
 
-#### Project contributors
+Consumers SHOULD consider at least these five elements of the
+[build model](terminology.md#build-model) when assessing build systems for SLSA
+conformance: external parameters, control plane, build environments, caches,
+and outputs.
 
-Capabilities:
+![image](build-model.svg)
 
--   Create builds on the build service. These are the attacker's controlled
-builds.
--   Modify one or more controlled builds' external parameters.
--   Modify one or more controlled builds' environments and run arbitrary code
-inside those environments.
--   Read the target build's source repo.
--   Fork the target build's source repo.
--   Modify a fork of the target build's source repo and build from it.
+The following sections detail these elements of the build model and give prompts
+for assessing a build system's ability to produce SLSA Build L3 provenance.
 
-#### Project maintainer
-
-Capabilities:
-
--   All listed under "project contributors".
--   Create new builds under the target build's project or identity.
--   Modify the target build's source repo and build from it.
--   Modify the target build's configuration.
-
-#### Build service admin
-
-Capabilities:
-
--   All listed under "project contributors" and "project maintainers".
--   Run arbitrary code on the build service.
--   Read and modify network traffic.
--   Access the control plane's cryptographic secrets.
--   Remotely access build executors (e.g. via SSH).
-
-TODO: List other high-privilege capabilities.
-TODO: Maybe differentiate between unilateral and non-unilateral privileges.
-
-## Build Model
-
-The build model consists of five components: parameters, the control plane, one
-or more build executors, a build cache, and output storage. The data flow
-between these components is shown in the diagram below.
-
-![image](slsa_build_model.png)
-
-TODO: Align with provenance and build models.
-
-The following sections detail each element of the build model and prompts for
-assessing its ability to produce SLSA Build L3 provenance.
-
-### External Parameters
+### External parameters
 
 External parameters are the external interface to the builder and include all
 inputs to the build process. Examples include the source to be built, the build
-definition/script to be executed, user-provided instructions to the control
-plane for how to create the build executor (e.g. which operating system to use),
-and any additional user-provided strings.
+definition/script to be executed, user-provided instructions to the
+control plane for how to create the build environment (e.g. which operating
+system to use), and any additional user-provided strings.
 
-#### Prompts for Assessing External Parameters
+#### Prompts for assessing external parameters
 
 -   How does the control plane process user-provided external parameters?
     Examples: sanitizing, parsing, not at all
 -   Which external parameters are processed by the control plane and which are
-    processed by the executor?
--   What sort of external parameters does the control plane accept for executor
-    configuration?
+    processed by the build environment?
+-   What sort of external parameters does the control plane accept for
+    build environment configuration?
 -   How do you ensure that all external parameters are represented in the
     provenance?
 -   How will you ensure that future design changes will not add additional
     external parameters without representing them in the provenance?
 
-### Control Plane
+### Control plane
 
 The control plane is the build system component that orchestrates each
 independent build execution. It is responsible for setting up each build and
@@ -122,7 +110,7 @@ provenance for each build performed on the build service. The control plane is
 operated by one or more administrators, who have privileges to modify the
 control plane.
 
-#### Prompts for Assessing Control Planes
+#### Prompts for assessing the control plane
 
 -   Administration
     -   What are the ways an employee can use privileged access to influence a
@@ -144,23 +132,25 @@ control plane.
         provenance for a completed build? What are they?
 
 -   Development practices
-    -   How do you track the control plane's software and configuration? Example:
-        version control
-    -   How do you build confidence in the control plane's software supply chain?
-        Example: SLSA L3+ provenance, build from source
+    -   How do you track the control plane's software and configuration?
+        Example: version control
+    -   How do you build confidence in the control plane's software supply
+        chain? Example: SLSA L3+ provenance, build from source
     -   How do you secure communications between builder components? Example:
         TLS with certificate transparency.
-    -   Are you able to perform forensic analysis on compromised executors? How?
-        Example: retain base images indefinitely
+    -   Are you able to perform forensic analysis on compromised build
+        environments? How? Example: retain base images indefinitely
 
--   Creating executors
-    -   How does the control plane share data with executors? Example: mounting
-        a shared file system partition
-    -   How does the control plane protect its integrity from executors?
-        Example: not mount its own file system partitions on executors
-    -   How does the control plane prevent executors from accessing its
+-   Creating build environments
+    -   How does the control plane share data with build environments? Example:
+        mounting a shared file system partition
+    -   How does the control plane protect its integrity from build
+        environments? Example: not mount its own file system partitions on
+        build environments
+    -   How does the control plane prevent build environments from accessing its
         cryptographic secrets? Examples: dedicated secret storage, not mounting
-        its own file system partitions on executors, hardware security modules
+        its own file system partitions to build environments, hardware security
+        modules
 
 -   Managing cryptographic secrets
     -   How do you store the control plane's cryptographic secrets?
@@ -175,22 +165,24 @@ control plane.
     -   What is your plan for remediating cryptographic secret compromise? How
         frequently is this plan tested?
 
-### Executor
+### Build environment
 
-The build executor is the independent execution environment where the build
-takes place. Each executor must be isolated from the control plane and from all
-other executors, including executors running builds from the same build user or
-project. Build users are free to modify the environment inside the executor
-arbitrarily. Build executors must have a means to fetch input artifacts (source,
-dependencies, etc).
+The build environment is the independent execution context where the build
+takes place. In the case of a distributed build, the build environment is the
+collection of all execution contexts that run build steps. Each build
+environment must be isolated from the control plane and from all other build
+environments, including those running builds from the same tenant or project.
+Tenants are free to modify the build environment arbitrarily. Build
+environments must have a means to fetch input artifacts (source, dependencies,
+etc).
 
-#### Prompts for Assessing Executors
+#### Prompts for assessing build environments
 
 -   Isolation technologies
-    -   How are executors isolated from the control plane and each other?
-        Examples: VMs, containers, sandboxed processes
-    -   How have you hardened your executors against malicious tenants? Examples:
-        configuration hardening, limiting attack surface
+    -   How are build environments isolated from the control plane and each
+        other? Examples: VMs, containers, sandboxed processes
+    -   How have you hardened your build environments against malicious tenants?
+        Examples: configuration hardening, limiting attack surface
     -   How frequently do you update your isolation software?
     -   What is your process for responding to vulnerability disclosures? What
         about vulnerabilities in your dependencies?
@@ -198,48 +190,44 @@ dependencies, etc).
         subsequent builds?
 
 -   Creation and destruction
-    -   What tools and environment are available in executors on creation? How
-        were the elements of this environment chosen? Examples: A minimal Linux
+    -   What operating system and utilities are available in build environments
+        on creation? How were these elements chosen? Examples: A minimal Linux
         distribution with its package manager, OSX with HomeBrew
-    -   How long could a compromised executor remain active in the build system?
+    -   How long could a compromised build environment remain active in the
+        build system?
 
 -   Network access
-    -   Are executors able to call out to remote execution? If so, how do you
-        prevent them from tampering with the control plane or other executors
-        over the network?
-    -   Are executors able to open services on the network? If so, how do you
-        prevent remote interference through these services?
+    -   Are build environments able to call out to remote execution? If so, how
+        do you prevent them from tampering with the control plane or other build
+        environments over the network?
+    -   Are build environments able to open services on the network? If so, how
+        do you prevent remote interference through these services?
 
 ### Cache
 
 Builders may have zero or more caches to store frequently used dependencies.
-Build executors may have either read-only or read-write access to caches.
+Build environments may have either read-only or read-write access to caches.
 
-#### Prompts for Assessing Caches
+#### Prompts for assessing caches
 
--   What sorts of caches are available to build executors?
+-   What sorts of caches are available to build environments?
 -   How are those caches populated?
 -   How are cache contents validated before use?
 
-### Output Storage
+### Output storage
 
 Output Storage holds built artifacts and their provenance. Storage may either be
 shared between build projects or allocated separately per-project.
 
-#### Prompts for Assessing Output Storage
+#### Prompts for assessing output storage
 
 -   How do you prevent builds from reading or overwriting files that belong to
     another build? Example: authorization on storage
 -   What processing, if any, does the control plane do on output artifacts?
 
-## Builder Evaluation
+## Builder evaluation
 
-Organizations can either self-attest to their answers or seek an
-audit/certification from a third party. Questionnaires for self-attestation
-should be published on the internet. Questionnaires for third-party
-certification need not be published. All provenance generated by L3+ builders
-must contain a unforgeable attestation of the builder's L3+ capabilities with a
-limited validity period. Any secret materials used to prove the unforgeability
-of the attestation must belong to the attesting party.
-
-TODO: Add build system attestation spec
+Organizations can either self-attest to their answers or seek certification from
+a third-party auditor. Evidence for self-attestation should be published on
+the internet. Evidence submitted for third-party certification need not be
+published.
