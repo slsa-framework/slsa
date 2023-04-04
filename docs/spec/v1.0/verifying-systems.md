@@ -5,11 +5,11 @@ description: Guidelines for assessing build system security.
 
 One of SLSA's guiding [principles](principles.md) is to "trust systems, verify
 artifacts". However, consumers cannot trust systems to produce Build L3
-artifacts and provenance unless the have some proof that the provenance is
+artifacts and provenance unless they have some proof that the provenance is
 [unforgeable](requirements.md#provenance-unforgeable) and the builds are
 [isolated](requirements.md#isolated).
 
-This page describes the parts of a build system that consumers should assess
+This page describes the parts of a build system that consumers SHOULD assess
 and provides sample questions consumers can ask when assessing a build system.
 See also [Threats & mitigations](threats.md) and the
 [build model](terminology.md#build-model).
