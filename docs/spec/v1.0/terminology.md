@@ -76,9 +76,9 @@ describing this whole process.
 | Admin | A privileged user with administrative access to the platform, potentially allowing them to tamper with builds or the control plane.
 | Tenant | An untrusted user that builds an artifact on the platform. The tenant defines the build steps and external parameters.
 | Control plane | Build system component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control.
-| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single environment on a platform.
+| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single build environment on a platform.
 | Steps | The set of actions that comprise a build, defined by the tenant.
-| Environment | Machine, container, VM, or similar in which the build runs, initialized by the control plane. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
+| Build environment | The independent execution context in which the build runs, initialized by the control plane. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
 | External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the control plane to initialize the build.
 | Dependencies | Artifacts fetched during initialization or execution of the build process, such as configuration files, source artifacts, or build tools.
 | Outputs | Collection of artifacts produced by the build.
