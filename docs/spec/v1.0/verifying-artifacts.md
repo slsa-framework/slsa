@@ -238,7 +238,7 @@ More than one component can verify provenance. For example, even if a package
 ecosystem verifies provenance, consumers who get artifacts from that package
 ecosystem might wish to verify provenance themselves for defense in depth. They
 can do so using either client-side verification tooling or by polling a
-monitor. 
+monitor.
 
 <!-- **TODO** Add a diagram. -->
 
