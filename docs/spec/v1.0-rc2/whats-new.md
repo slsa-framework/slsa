@@ -15,5 +15,5 @@ Until then, see the following for more information about what's new:
     addition of SLSA tracks, verification expectations, and changes to SLSA's
     model, specification, and format
 
--   [Provenance changelog](/provenance/v1-rc1#v10-draft): a detailed summary of
-    changes to the provenance format
+-   [Provenance changelog](/provenance/v1-rc2#change-history): a detailed
+    summary of changes to the provenance format

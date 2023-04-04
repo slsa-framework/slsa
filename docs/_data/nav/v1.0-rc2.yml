@@ -2,7 +2,7 @@
 # The spec index does not show top-level elements without children.
 
 - title: Overview
-  url: /spec/v1.0/
+  url: /spec/v1.0-rc2/
 
 - title: Understanding SLSA
   description: >
@@ -12,31 +12,31 @@
   children:
 
   - title: What's new in v1.0
-    url: /spec/v1.0/whats-new
+    url: /spec/v1.0-rc2/whats-new
     description: What's new in SLSA Version 1.0
 
   - title: About SLSA
-    url: /spec/v1.0/about
+    url: /spec/v1.0-rc2/about
     description: An introductory guide to SLSA
 
   - title: Supply chain threats
-    url: /spec/v1.0/threats-overview
+    url: /spec/v1.0-rc2/threats-overview
     description: An introduction to supply chain threats
 
   - title: Use cases
-    url: /spec/v1.0/use-cases
+    url: /spec/v1.0-rc2/use-cases
     description: Use cases
 
   - title: Guiding principles
-    url: /spec/v1.0/principles
+    url: /spec/v1.0-rc2/principles
     description: Use cases
 
   - title: FAQ
-    url: /spec/v1.0/faq
+    url: /spec/v1.0-rc2/faq
     description: Questions and more information
 
   - title: Future directions
-    url: /spec/v1.0/future-directions
+    url: /spec/v1.0-rc2/future-directions
     description: Additions and changes being considered for future SLSA versions
 
 - title: Core specification
@@ -47,31 +47,31 @@
   children:
 
   - title: Terminology
-    url: /spec/v1.0/terminology
+    url: /spec/v1.0-rc2/terminology
     description: Terminology and model used by SLSA
 
   - title: Security levels
-    url: /spec/v1.0/levels
+    url: /spec/v1.0-rc2/levels
     description: Overview of SLSA's tracks and levels, intended for all audiences
 
   - title: Producing artifacts
-    url: /spec/v1.0/requirements
+    url: /spec/v1.0-rc2/requirements
     description: Detailed technical requirements for producing software artifacts, intended for system implementers
 
   - title: Distributing provenance
-    url: /spec/v1.0/distributing-provenance
+    url: /spec/v1.0-rc2/distributing-provenance
     description: Detailed technical requirements for distributing provenance, intended for system implementers and software distributors
 
   - title: Verifying artifacts
-    url: /spec/v1.0/verifying-artifacts
+    url: /spec/v1.0-rc2/verifying-artifacts
     description: Guidance for verifying software artifacts and their SLSA provenance, intended for system implementers and software consumers
 
   - title: Verifying build systems
-    url: /spec/v1.0/verifying-systems
+    url: /spec/v1.0-rc2/verifying-systems
     description: Guidelines for securing SLSA Build L3+ builders, intended for system implementers
 
   - title: Threats & mitigations
-    url: /spec/v1.0/threats
+    url: /spec/v1.0-rc2/threats
     description: Detailed information about specific supply chain attacks and how SLSA helps
 
 - title: Attestation formats
@@ -86,11 +86,11 @@
     description: General attestation mode
 
   - title: Provenance
-    url: /provenance/v1
+    url: /provenance/v1-rc2
     description: Suggested provenance format and explanation
 
   - title: VSA
-    url: /verification_summary/v1
+    url: /verification_summary/v1-rc2
     description: Suggested VSA format and explanation
 
 - title: How to SLSA
@@ -121,5 +121,5 @@
   url: /blog
 
 - title: Single-page view
-  url: /spec/v1.0/onepage
+  url: /spec/v1.0-rc2/onepage
   skip_next_prev: true  # don't show as a next/prev link

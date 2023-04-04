@@ -1,6 +1,6 @@
 ---
 title: SLSA Verification Summary Attestation (VSA)
-description: SLSA v1.0 specification for a verification summary of artifacts by a trusted verifier entity.
+description: SLSA v1.0 RC2 specification for a verification summary of artifacts by a trusted verifier entity.
 layout: standard
 ---
 
@@ -43,7 +43,7 @@ needing to evaluate the artifact or to have access to the attestations the
 The VSA also allows consumers to determine the verified levels of
 all of an artifact’s _transitive_ dependencies.  The verifier does this by
 either a) verifying the provenance of each non-source dependency listed in
-the [resolvedDependencies](/provenance/v1#resolvedDependencies) of the artifact
+the [resolvedDependencies](/provenance/v1-rc2#resolvedDependencies) of the artifact
 being verified (recursively) or b) matching the non-source dependency
 listed in `resolvedDependencies` (`subject.digest` ==
 `resolvedDependencies.digest` and, ideally, `vsa.resourceUri` ==
@@ -63,7 +63,7 @@ to establish minimum requirements on dependencies SLSA levels may use
 }],
 
 // Predicate
-"predicateType": "https://slsa.dev/verification_summary/v1",
+"predicateType": "https://slsa.dev/verification_summary/v1-rc2",
 "predicate": {
   // Required
   "verifier": {
@@ -210,7 +210,7 @@ WARNING: This is just for demonstration purposes.
 }],
 
 // Predicate
-"predicateType": "https://slsa.dev/verification_summary/v1",
+"predicateType": "https://slsa.dev/verification_summary/v1-rc2",
 "predicate": {
   "verifier": {
     "id": "https://example.com/publication_verifier"

@@ -7,7 +7,7 @@ noindex: true
 A single page containing all the following files as different sections
 {%- endcomment -%}
 
-{% assign dir = "/spec/v1.0/" %}
+{% assign dir = "/spec/v1.0-rc2/" %}
 {% assign filenames = "whats-new,about,threats-overview,use-cases,principles,faq,future-directions,terminology,levels,requirements,distributing-provenance,verifying-systems,verifying-artifacts,threats" %}
 
 {% include onepage.liquid dir=dir filenames=filenames %}

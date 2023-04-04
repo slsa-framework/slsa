@@ -39,7 +39,7 @@ supply chains plus its own sources and builds.
 
 [build]: #build-model
 [package]: #package-model
-[SLSA Provenance]: /provenance/v1
+[SLSA Provenance]: /provenance/v1-rc2
 
 ### Roles
 
@@ -91,7 +91,7 @@ reference to this artifact is a parameter while the artifact itself is a
 dependency.
 
 For examples on how this model applies to real-world build systems, see [index
-of build types](/provenance/v1#index-of-build-types).
+of build types](/provenance/v1-rc2#index-of-build-types).
 
 ### Package model
 

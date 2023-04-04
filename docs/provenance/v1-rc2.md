@@ -24,7 +24,7 @@ Describe how an artifact or set of artifacts was produced so that:
 -   Others can rebuild the artifact, if desired.
 
 This predicate is the RECOMMENDED way to satisfy the SLSA v1.0 [provenance
-requirements](/spec/v1.0/requirements#provenance-generation).
+requirements](/spec/v1.0-rc2/requirements#provenance-generation).
 
 ## Prerequisite
 
@@ -40,7 +40,7 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 Provenance is an attestation that a particular build platform produced a set of
 software artifacts through execution of the `buildDefinition`.
 
-![Build Model](../images/provenance/v1/model.svg)
+![Build Model](../images/provenance/v1-rc2/model.svg)
 
 The model is as follows:
 
@@ -77,7 +77,7 @@ The model is as follows:
 -   During execution, the build process might communicate with the build
     platform's control plane and/or build caches. This communication is not
     captured directly in the provenance, but is instead implied by `builder.id`
-    and subject to [SLSA Requirements](/spec/v1.0/requirements). Such
+    and subject to [SLSA Requirements](/spec/v1.0-rc2/requirements). Such
     communication SHOULD NOT influence the definition of the build; if it does,
     it SHOULD go in `resolvedDependencies` instead.
 
@@ -108,16 +108,16 @@ understand cue. For that reason, we are not using any special cue syntax or
 features. -->
 
 ```javascript
-{% include_relative schema/v1/provenance.cue %}
+{% include_relative schema/v1-rc2/provenance.cue %}
 ```
 
 <details>
 <summary>Protocol buffer schema</summary>
 
-Link: [provenance.proto](schema/v1/provenance.proto)
+Link: [provenance.proto](schema/v1-rc2/provenance.proto)
 
 ```proto
-{% include_relative schema/v1/provenance.proto %}
+{% include_relative schema/v1-rc2/provenance.proto %}
 ```
 
 </details>
@@ -326,7 +326,7 @@ REQUIRED for SLSA Build L1: `id`
 <td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0/field_types.md#typeuri">TypeURI</a>)<td>
 
 URI indicating the transitive closure of the trusted build platform. This is
-[intended](/spec/v1.0/verifying-artifacts#step-1-check-slsa-build-level)
+[intended](/spec/v1.0-rc2/verifying-artifacts#step-1-check-slsa-build-level)
 to be the sole determiner of the SLSA Build level.
 
 If a build platform has multiple modes of operations that have differing
@@ -363,7 +363,7 @@ the build and record the provenance. This includes not only the software but the
 hardware and people involved in running the service. For example, a particular
 instance of [Tekton](https://tekton.dev/) could be a build platform, while
 Tekton itself is not. For more info, see [Build
-model](/spec/v1.0/terminology#build-model).
+model](/spec/v1.0-rc2/terminology#build-model).
 
 The `id` MUST reflect the trust base that consumers care about. How detailed to
 be is a judgement call. For example, GitHub Actions supports both GitHub-hosted
@@ -441,7 +441,7 @@ information that is not captured in a standard field. Guidelines:
 
 ## Verification
 
-[Verification]: /spec/v1.0/verifying-artifacts.md
+[Verification]: /spec/v1.0-rc2/verifying-artifacts.md
 
 Please see [Verifying Artifacts][Verification] for a detailed discussion of
 provenance verification.
@@ -519,7 +519,7 @@ The following fields from v0.2 are no longer present in v1.0:
 
 ## Change history
 
-### v1.0 (DRAFT)
+### v1.0 RC2
 
 Major refactor to reduce misinterpretation, including a minor change in model.
 
@@ -575,5 +575,5 @@ Initial version, named "in-toto.io/Provenance"
 [in-toto attestation]: https://github.com/in-toto/attestation
 [parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/v1.0/README.md#parsing-rules
 [purl]: https://github.com/package-url/purl-spec
-[threats]: /spec/v1.0/threats
-[trusted]: /spec/v1.0/principles#trust-systems-verify-artifacts
+[threats]: /spec/v1.0-rc2/threats
+[trusted]: /spec/v1.0-rc2/principles#trust-systems-verify-artifacts

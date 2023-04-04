@@ -180,7 +180,7 @@ Provenance.
 -   *Authenticity:* No requirements.
 -   *Accuracy:* No requirements.
 
-[SLSA Provenance]: ../../provenance/v1
+[SLSA Provenance]: ../../provenance/v1-rc2
 [associated suite]: ../../attestation-model#recommended-suite
 
 <td>✓<td>✓<td>✓
@@ -328,5 +328,5 @@ considered in the [future directions](future-directions.md).
 <td> <td> <td>✓
 </table>
 
-[external parameters]: ../../provenance/v1.md#externalParameters
+[external parameters]: ../../provenance/v1-rc2.md#externalParameters
 [package ecosystem]: verifying-artifacts.md#package-ecosystem

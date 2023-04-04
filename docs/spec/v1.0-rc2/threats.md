@@ -17,7 +17,7 @@ The examples on this page are meant to:
 
 <article class="threats">
 
-![Supply Chain Threats](../../images/v1.0/supply-chain-threats.svg)
+![Supply Chain Threats](../../images/v1.0-rc2/supply-chain-threats.svg)
 
 ## Source threats
 

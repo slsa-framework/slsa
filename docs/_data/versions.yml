@@ -21,6 +21,9 @@ spec:
     v1.0-rc1:
       name: Version 1.0 RC1
       status: Candidate
+    v1.0-rc2:
+      name: Version 1.0 RC2
+      status: Candidate
     v1.0:
       name: Version 1.0 (DRAFT)
       status: Draft
@@ -38,6 +41,9 @@ provenance:
     v1-rc1:
       name: Version 1.0 RC1
       status: Candidate
+    v1-rc2:
+      name: Version 1.0 RC2
+      status: Candidate
     v1:
       name: Version 1.0 (DRAFT)
       status: Draft
@@ -52,6 +58,9 @@ verification_summary:
     v0.2:
       name: Version 0.2
       status: Approved
+    v1-rc2:
+      name: Version 1.0 RC2
+      status: Candidate
     v1:
       name: Version 1.0 (DRAFT)
       status: Draft
