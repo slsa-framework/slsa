@@ -196,10 +196,7 @@ L0. (For example, consider the compiler's compiler's compiler's ... compiler.)
 <dfn>Expectations</dfn> are known provenance values that indicate the
 corresponding artifact is authentic. For example, a package ecosystem may
 maintain a mapping between package names and their canonical source
-repositories. That mapping constitutes a set of expectations. The package
-ecosystem tooling compares a package's provenance to those expectations during
-upload to ensure all packages in the ecosystem are built from their canonical
-source repository, which indicates their authenticity.
+repositories. That mapping constitutes a set of expectations.
 
 Possible models for forming expectations include:
 
