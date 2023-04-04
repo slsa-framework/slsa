@@ -372,7 +372,7 @@ match the `subject` found within the provenance.
 </details>
 <details><summary>Tamper with provenance <span>(Build L2)</span></summary>
 
-*Threat:* Perform a build that would not pass expectations, then modify the
+*Threat:* Perform a build that would not meet expectations, then modify the
 provenance to make the expectations checks pass.
 
 *Mitigation:* Verifier only accepts provenance with a valid [cryptographic
@@ -464,18 +464,19 @@ threat.
 Threats that can compromise the ability to prevent or detect the supply chain
 security threats above.
 
-<details><summary>Tamper with expectations</summary>
+<details><summary>Tamper with the verifier</summary>
 
-*Threat:* Modify the expectations to accept something that would not otherwise
-be accepted.
+*Threat:* Modify the verifier to accept something that would not otherwise
+meet expectations.
 
-*Mitigation:* Changes to expectations require some form of authorization, such
+*Mitigation:* Changes to the verifier tool requires some form of authorization, such
 as two-party review.
 
-*Example:* Expectations for MyPackage only allows source repo `good/my-package`.
-Adversary modifies the expectations to also accept `evil/my-package`, then
-builds from that repo and uploads a malicious version of the package. Solution:
-Expectation changes require two-party review.
+*Example:* MyVerifier stores its expectations for each package in a file. The
+file says MyPackage will always build from the source repository
+`good/my-package`. Adversary modifies the file to also accept `evil/my-package`,
+then builds from that repo and uploads a malicious version of the package.
+Solution: Changes to the verifier require two-party review.
 
 </details>
 <details><summary>Forge change metadata</summary>
