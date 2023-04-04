@@ -158,10 +158,10 @@ Verification MUST include the following steps:
 -   Ensuring that the builder identity is one of those in the map of trusted
     builder id's to SLSA level.
 -   Verifying the signature on the provenance envelope.
--   Ensuring that the values for `BuildType` and `ExternalParameters` in the
+-   Ensuring that the values for `buildType` and `externalParameters` in the
     provenance match the known expectations. The package ecosystem MAY allow
-    an approved list of `ExternalParameters` to be ignored during verification.
-    Any unrecognized `ExternalParameters` SHOULD cause verification to fail.
+    an approved list of `externalParameters` to be ignored during verification.
+    Any unrecognized `externalParameters` SHOULD cause verification to fail.
 
 ![Threats covered by each step](/images/v1.0/supply-chain-threats-build-verification.svg)
 
