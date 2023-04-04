@@ -11,8 +11,8 @@ their SLSA provenance.
 This page is divided into several sections. The first describes the process
 for verifying an artifact and its provenance against a set of expectations. The
 second describes how to form the expectations used to verify provenance. The
-third discusses choices software distribution and/or deployment system
-implementers must make regarding verifying provenance.
+third discusses architecture choices for where provenance verification can
+happen.
 
 ## How to verify
 
