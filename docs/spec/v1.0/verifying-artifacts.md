@@ -207,11 +207,11 @@ Possible models for forming expectations include:
     about safe git branches or tags.
 
 -   **Defined by producer:** The package producer tells the verifier what their
-    expectations should be. In this model, the verifier SHOULD provide an
+    expectations ought to be. In this model, the verifier SHOULD provide an
     authenticated communication mechanism for the producer to set the package's
     expectations, and there SHOULD be some protection against an adversary
-    unilaterally modifying them. For example, modifications may require
-    two-party control, or consumers may have to accept each policy change
+    unilaterally modifying them. For example, modifications might require
+    two-party control, or consumers might have to accept each policy change
     (another form of trust on first use).
 
 -   **Defined in source:** The source repository tells the verifier what their
