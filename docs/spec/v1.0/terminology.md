@@ -61,11 +61,11 @@ chain.
 We model a build as running on a multi-tenant platform, where each execution is
 independent. A tenant defines the build by specifying parameters through some
 sort of external interface, often including a reference to a configuration file
-in source control. The platform then runs the build by interpreting the
+in source control. The control plane then runs the build by interpreting the
 parameters, fetching some initial set of dependencies, initializing the build
 environment, and then starting execution. The build then performs arbitrary
 steps, possibly fetching additional dependencies, and outputs one or more
-artifacts. Finally, for SLSA Build L2+, the platform outputs provenance
+artifacts. Finally, for SLSA Build L2+, the control plane outputs provenance
 describing this whole process.
 
 <p align="center"><img src="build-model.svg" alt="Model Build"></p>
@@ -73,11 +73,13 @@ describing this whole process.
 | Primary Term | Description
 | --- | ---
 | Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. It includes software, hardware, people, and organizations.
+| Admin | A privileged user with administrative access to the platform, potentially allowing them to tamper with builds or the control plane.
+| Tenant | An untrusted user that builds an artifact on the platform. The tenant defines the build steps and external parameters.
+| Control plane | Build system component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control.
 | Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single environment on a platform.
 | Steps | The set of actions that comprise a build, defined by the tenant.
-| Control plane | Build system component that orchestrates each independent build execution and produces provenance.
-| Environment | Machine, container, VM, or similar in which the build runs, initialized by the platform. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
-| External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the platform to initialize the build.
+| Environment | Machine, container, VM, or similar in which the build runs, initialized by the control plane. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
+| External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the control plane to initialize the build.
 | Dependencies | Artifacts fetched during initialization or execution of the build process, such as configuration files, source artifacts, or build tools.
 | Outputs | Collection of artifacts produced by the build.
 | Provenance | Attestation (metadata) describing how the outputs were produced, including identification of the platform and external parameters.
