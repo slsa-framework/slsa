@@ -215,7 +215,7 @@ Possible models for forming expectations include:
     (another form of trust on first use).
 
 -   **Defined in source:** The source repository tells the verifier what their
-    expectations should be. In this model, the package name is immutably bound
+    expectations ought to be. In this model, the package name is immutably bound
     to a source repository and all other external parameters are defined in the
     source repository. This is how the Go ecosystem  works, for example, since
     the package name *is* the source repository location.
