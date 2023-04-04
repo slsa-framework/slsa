@@ -5,14 +5,13 @@ description: SLSA uses provenance to indicate whether an artifact is authentic o
 
 SLSA uses provenance to indicate whether an artifact is authentic or not, but
 provenance doesn't do anything unless somebody inspects it. SLSA calls that
-inspection **verification**, and this page describes how to verify artifacts and
-their SLSA provenance.
+inspection **verification**, and this page describes recommendations for how to
+verify artifacts and their SLSA provenance.
 
-This page is divided into several sections. The first discusses choices
-software distribution and/or deployment system implementers must make regarding
-verifying provenance. The second describes how to set the expectations used to
-verify provenance. The third describes the procedure for verifying an artifact
-and its provenance against a set of expectations.
+This page is divided into several sections. The first discusses choices for
+where provenance verification can happen. The second describes how to set the
+expectations used to verify provenance. The third describes the procedure for
+verifying an artifact and its provenance against a set of expectations.
 
 ## Architecture options
 
@@ -20,7 +19,7 @@ System implementers decide which part(s) of the system will verify provenance:
 the package ecosystem at upload time, the consumers at download time, or via a
 continuous monitoring system. Each option comes with its own set of
 considerations, but all are valid. The options are not mutually exclusive, but
-at least one part of a SLSA-conformant system must verify provenance.
+at least one part of a SLSA-conformant system SHOULD verify provenance.
 
 More than one component can verify provenance. For example, if a package
 ecosystem verifies provenance, then consumers who get artifacts from that
@@ -79,7 +78,7 @@ A <dfn>monitor</dfn> is a service that verifies provenance for a set
 of packages and publishes the result of that verification. The set of
 packages verified by a monitor is arbitrary, though it MAY mimic the set
 of packages published through one or more package ecosystems. The monitor
-MUST publish its expectations for all the packages it verifies.
+SHOULD publish its expectations for all the packages it verifies.
 
 Consumers can continuously poll a monitor to detect artifacts that
 do not meet the monitor's expectations. Detecting artifacts that fail
@@ -96,7 +95,7 @@ ecosystem tooling tests those expectations during upload to ensure all packages
 in the ecosystem are built from their canonical source repo, which
 indicates their authenticity.
 
-Expectations MUST be sufficient to detect or prevent an adversary from injecting
+Expectations SHOULD be sufficient to detect or prevent an adversary from injecting
 unofficial behavior into the package. Example [threats](threats.md) in this
 category include building from an unofficial fork or abusing a build parameter
 to modify the build. Usually expectations identify the canonical source
@@ -116,13 +115,13 @@ formats SHOULD list the package name in the provenance attestation statement's
 artifact are defined by the package ecosystem.
 
 <table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+<tr><th>Recommendation<th>Description
 
 <tr id="expectations-known">
 <td>Expectations known
 <td>
 
-The package ecosystem MUST ensure that expectations are defined for the package before it is made available to package ecosystem users.
+The package ecosystem SHOULD ensure that expectations are defined for the package before it is made available to package ecosystem users.
 
 There are several approaches a package ecosystem could take to setting expectations, for example:
 
@@ -131,12 +130,11 @@ There are several approaches a package ecosystem could take to setting expectati
 -   Using the values from the package's provenance during its initial
     publication (trust on first use).
 
-<td>✓<td>✓<td>✓
 <tr id="expectations-changes-auth">
 <td>Changes authorized
 <td>
 
-The package ecosystem MUST ensure that any changes to expectations are
+The package ecosystem SHOULD ensure that any changes to expectations are
 authorized by the package's producer. This is to prevent a malicious actor
 from updating the expectations to allow building and publishing from a fork
 under the malicious actor's control. Some ways this could be achieved include:
@@ -148,12 +146,11 @@ under the malicious actor's control. Some ways this could be achieved include:
 -   Disallowing changes altogether, for example by binding the package name to
     the source repository.
 
-<td><td>✓<td>✓
 </table>
 
 ## How to verify
 
-Verification MUST include the following steps:
+Verification SHOULD include the following steps:
 
 -   Ensuring that the builder identity is one of those in the map of trusted
     builder id's to SLSA level.
@@ -166,7 +163,7 @@ Verification MUST include the following steps:
 ![Threats covered by each step](/images/v1.0/supply-chain-threats-build-verification.svg)
 
 Note: This section assumes that the provenance is in the recommended
-[provenance format](/provenance/v1). If it is not, then the verifier must
+[provenance format](/provenance/v1). If it is not, then the verifier SHOULD
 perform equivalent checks on provenance fields that correspond to the ones
 referenced here.
 
@@ -277,7 +274,7 @@ order to mitigate [threat "C"].
 
 In our threat model, the adversary has ability to invoke a build and to publish
 to the registry but not to write to the source repository, nor do they have
-insider access to any trusted systems. Expectations MUST be sufficient to detect
+insider access to any trusted systems. Expectations SHOULD be sufficient to detect
 or prevent this adversary from injecting unofficial behavior into the package.
 Example threats in this category include building from an unofficial fork or
 abusing a build parameter to modify the build. Usually expectations identify the
@@ -308,7 +305,7 @@ exhaustive):
 
 -   **Explicit policy:** Package producer defines the expectations for the
     package and distributes it to the verifier; the verifier uses these
-    expectations after verifying their authenticity. In this model, there MUST
+    expectations after verifying their authenticity. In this model, there SHOULD
     be some protection against an adversary unilaterally modifying the policy.
     For example, this might involve two-party control over policy modifications,
     or having consumers accept each policy change (another form of trust on

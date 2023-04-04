@@ -69,8 +69,8 @@ provide the provenance necessary for a repository to be able to verify some
 potential policy that requires a certain SLSA level for publication, not
 support the publication of arbitrary attestations by third parties.
 
-As a result, this provenance MUST accompany the artifact at publish time, and
-package ecosystems MUST provide a way to map a given artifact to its
+As a result, this provenance SHOULD accompany the artifact at publish time, and
+package ecosystems SHOULD provide a way to map a given artifact to its
 corresponding attestations. The mappings can be either implicit (e.g. require a
 custom filename schema that uniquely identifies the provenance over other
 attestation types) or explicit (e.g. it could happen as a de-facto standard
@@ -138,10 +138,10 @@ a given ecosystem supports them.
 
 ## Immutability of attestations
 
-Attestations MUST be immutable. Once an attestation is published as it
+Attestations SHOULD be immutable. Once an attestation is published as it
 corresponds to a given artifact, that attestation is immutable and cannot be
 overwritten later with a different attestation that refers to the same
-artifact. Instead, a new release (and new artifacts) MUST be created.
+artifact. Instead, a new release (and new artifacts) SHOULD be created.
 
 ## Format of the attestation
 
