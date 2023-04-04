@@ -8,7 +8,7 @@ provenance doesn't do anything unless somebody inspects it. SLSA calls that
 inspection **verification**, and this page describes how to verify artifacts and
 their SLSA provenance.
 
-This page is divided into several sections. The first describes the procedure
+This page is divided into several sections. The first describes the process
 for verifying an artifact and its provenance against a set of expectations. The
 second describes how to form the expectations used to verify provenance. The
 third discusses choices software distribution and/or deployment system
