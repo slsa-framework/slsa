@@ -139,7 +139,7 @@ Next, check that the package's provenance meets your expectations for that
 package in order to mitigate [threat "C"].
 
 In our threat model, the adversary has ability to invoke a build and to publish
-to the registry. The adversary is not to write to the source repository, nor do
+to the registry. The adversary is not able to write to the source repository, nor do
 they have insider access to any trusted systems. Your expectations MUST be
 sufficient to detect or prevent this adversary from injecting unofficial
 behavior into the package.
@@ -199,7 +199,7 @@ maintain a mapping between package names and their canonical source
 repositories. That mapping constitutes a set of expectations. The package
 ecosystem tooling compares a package's provenance to those expectations during
 upload to ensure all packages in the ecosystem are built from their canonical
-source repo, which indicates their authenticity.
+source repository, which indicates their authenticity.
 
 Possible models for forming expectations include:
 
@@ -207,7 +207,7 @@ Possible models for forming expectations include:
     each version update, compare the old provenance to the new provenance and
     alert on any differences. This can be augmented by having rules about what
     changes are benign, such as a parameter known to be safe or a heuristic
-    about safe git refs.
+    about safe git branches or tags.
 
 -   **Defined by producer:** The package producer tells the verifier what their
     expectations should be. In this model, the verifier MUST provide an
@@ -218,7 +218,7 @@ Possible models for forming expectations include:
     (another form of trust on first use).
 
 -   **Defined in source:** The source repository tells the verifier what their
-    expectations should be . In this model, the package name is immutably bound
+    expectations should be. In this model, the package name is immutably bound
     to a source repository and all other external parameters are defined in the
     source repository. This is how the Go ecosystem  works, for example, since
     the package name *is* the source repository location.
@@ -235,7 +235,7 @@ System implementers decide which part(s) of the system will verify provenance:
 the package ecosystem at upload time, the consumers at download time, or via a
 continuous monitoring system. Each option comes with its own set of
 considerations, but all are valid. The options are not mutually exclusive, but
-at least one part of a SLSA-conformant system must verify provenance.
+at least one part of a SLSA-conformant system SHOULD verify provenance.
 
 More than one component can verify provenance. For example, if a package
 ecosystem verifies provenance, then consumers who get artifacts from that
@@ -280,7 +280,7 @@ package artifact.
 
 Consumers can form their own expectations for artifacts or use the default
 expectations provided by the package producer and/or package ecosystem.
-In this situation, the consumer uses client-side verification tooling to ensure
+When forming their own expectations, the consumer uses client-side verification tooling to ensure
 that the artifact's provenance matches their expectations for that package
 before use (e.g. during installation or deployment). Client-side verification
 tooling can be either standalone, such as

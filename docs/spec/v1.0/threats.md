@@ -475,7 +475,7 @@ as two-party review.
 *Example:* MyVerifier stores its expectations for each package in a file. The
 file says MyPackage will always build from the source repository
 `good/my-package`. Adversary modifies the file to also accept `evil/my-package`,
-then builds from that repo and uploads a malicious version of the package.
+then builds from that repository and uploads a malicious version of the package.
 Solution: Changes to the verifier require two-party review.
 
 </details>
