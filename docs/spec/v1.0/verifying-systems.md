@@ -75,7 +75,7 @@ Consumers SHOULD consider at least these five elements of the
 conformance: external parameters, control plane, build environments, caches,
 and outputs.
 
-![image](/images/v1.0/build-model.svg)
+![image](build-model.svg)
 
 The following sections detail these elements of the build model and give prompts
 for assessing a build system's ability to produce SLSA Build L3 provenance.
