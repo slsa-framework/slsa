@@ -234,11 +234,11 @@ continuous monitoring system. Each option comes with its own set of
 considerations, but all are valid. The options are not mutually exclusive, but
 at least one part of a SLSA-conformant system SHOULD verify provenance.
 
-More than one component can verify provenance. For example, if a package
-ecosystem verifies provenance, then consumers who get artifacts from that
-package ecosystem do not have to verify provenance. Consumers can do so with
-client-side verification tooling or by polling a monitor, but there is no
-requirement that they do so.
+More than one component can verify provenance. For example, even if a package
+ecosystem verifies provenance, consumers who get artifacts from that package
+ecosystem might wish to verify provenance themselves for defense in depth. They
+can do so using either client-side verification tooling or by polling a
+monitor. 
 
 <!-- **TODO** Add a diagram. -->
 
