@@ -131,7 +131,7 @@ important to consider together with SLSA such as:
     source code followed secure coding practices.
 -   Producer trust: SLSA does not address organizations that intentionally
     produce malicious software, but it can reduce insider risks within an
-    organization you trust. SLSA's Build track protects against tampering during
+    organization you trust. SLSA's Build Track protects against tampering during
     or after the build, and [future SLSA tracks](future-directions.md) intend to
     protect against unauthorized modifications of source code and dependencies.
 -   Transitive trust for dependencies: the SLSA level of an artifact is
