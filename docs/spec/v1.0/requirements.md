@@ -1,11 +1,11 @@
 ---
 title: Producing artifacts
-description: This page covers the detailed technical requirements for producing artifacts at each SLSA level. The intended audience is system implementers and security engineers.
+description: This page covers the detailed technical requirements for producing artifacts at each SLSA level. The intended audience is platform implementers and security engineers.
 ---
 
 
 This page covers the detailed technical requirements for producing artifacts at
-each SLSA level. The intended audience is system implementers and security
+each SLSA level. The intended audience is platform implementers and security
 engineers.
 
 For an informative description of the levels intended for all audiences, see
@@ -23,10 +23,10 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 In order to produce artifacts with a specific build level, responsibility is
 split between the <a href="#producer">Producer</a> and <a href="#build-system">
-Build system</a>. The build system MUST strengthen the security controls in
+Build platform</a>. The build platform MUST strengthen the security controls in
 order to achieve a specific level while the producer MUST choose and adopt a
-build system capable of achieving a desired build level, implementing any
-controls as specified by the chosen system.
+build platform capable of achieving a desired build level, implementing any
+controls as specified by the chosen platform.
 
 <table class="no-alternate">
 <tr>
@@ -36,7 +36,7 @@ controls as specified by the chosen system.
   <th>L1<th>L2<th>L3
 <tr>
   <td rowspan=3><a href="#producer">Producer</a>
-  <td colspan=2><a href="#choose-an-appropriate-build-system">Choose an appropriate build system</a>
+  <td colspan=2><a href="#choose-an-appropriate-build-platform">Choose an appropriate build platform</a>
   <td>✓<td>✓<td>✓
 <tr>
   <td colspan=2><a href="#follow-a-consistent-build-process">Follow a consistent build process</a>
@@ -45,7 +45,7 @@ controls as specified by the chosen system.
   <td colspan=2><a href="#distribute-provenance">Distribute provenance</a>
   <td>✓<td>✓<td>✓
 <tr>
-  <td rowspan=5><a href="#build-system">Build system</a>
+  <td rowspan=5><a href="#build-platform">Build platform</a>
   <td rowspan=3><a href="#provenance-generation">Provenance generation</a>
   <td><a href="#provenance-exists">Exists</a>
   <td>✓<td>✓<td>✓
@@ -91,9 +91,9 @@ how a package can be built. These were removed in the v1.0 specification and
 will be reassessed and re-added as indicated in the
 [future directions](future-directions.md).
 
-### Choose an appropriate build system
+### Choose an appropriate build platform
 
-The producer MUST select a build system that is capable of reaching their
+The producer MUST select a build platform that is capable of reaching their
 desired SLSA Build Level.
 
 For example, if a producer wishes to produce a Build Level 3 artifact, they MUST
@@ -120,21 +120,21 @@ MAY delegate this responsibility to the
 [package ecosystem], provided that the package ecosystem is capable of
 distributing provenance.
 
-## Build system
+## Build Platform
 
-[Build system]: #build-system
+[Build platform]: #build-platform
 
-A package's <dfn>build system</dfn> is the infrastructure used to transform the
+A package's <dfn>build platform</dfn> is the infrastructure used to transform the
 software from source to package. This includes the transitive closure of all
 hardware, software, persons, and organizations that can influence the build. A
-build system is often a hosted, multi-tenant build service, but it could be a
-system of multiple independent rebuilders, a special-purpose build system used
+build platform is often a hosted, multi-tenant build service, but it could be a
+system of multiple independent rebuilders, a special-purpose build platform used
 by a single software project, or even an individual's workstation. Ideally, one
-build system is used by many different software packages so that consumers can
+build platform is used by many different software packages so that consumers can
 [minimize the number of trusted systems](principles.md). For more background,
 see [Build Model](terminology.md#build-model).
 
-The build system is responsible for providing two things: [provenance
+The build platform is responsible for providing two things: [provenance
 generation] and [isolation between builds]. The [Build level](levels.md#build-track) describes
 the degree to which each of these properties is met.
 
@@ -142,7 +142,7 @@ the degree to which each of these properties is met.
 
 [Provenance generation]: #provenance-generation
 
-The build system is responsible for generating provenance describing how the
+The build platform is responsible for generating provenance describing how the
 package was produced.
 
 The SLSA Build level describes the overall provenance integrity according to
@@ -192,23 +192,23 @@ provenance attestation in order to:
 -   *Ensure integrity:* Verify that the digital signature of the provenance
     attestation is valid and the provenance was not tampered with after the
     build.
--   *Define trust:* Identify the build system and other entities that are
+-   *Define trust:* Identify the build platform and other entities that are
     necessary to trust in order to trust the artifact they produced.
 
 This SHOULD be through a digital signature from a private key accessible only to
 the service that generated the provenance attestation.
 
 This allows the consumer to trust the contents of the provenance attestation,
-such as the identity of the build system.
+such as the identity of the build platform.
 
-*Accuracy:* The provenance MUST be generated by the build system (i.e. within
-the trust boundary identified in the provenance) and not by a tenant of the
+*Accuracy:* The provenance MUST be generated by the control plane (i.e. within
+the trust boundary [identified in the provenance]) and not by a tenant of the
 build system (i.e. outside the trust boundary), except as noted below.
 
 -   The data in the provenance MUST be obtained from the build service, either
     because the generator *is* the build service or because the provenance
     generator reads the data directly from the build service.
--   The build system MUST have some security control to prevent tenants from
+-   The build platform MUST have some security control to prevent tenants from
     tampering with the provenance. However, there is no minimum bound on the
     strength. The purpose is to deter adversaries who might face legal or
     financial risk from evading controls.
@@ -261,7 +261,7 @@ Note: This requirement was called "non-falsifiable" in the initial
 [Isolation strength]: #isolation-strength
 [Isolation between builds]: #isolation-strength
 
-The build system is responsible for isolating between builds, even within the
+The control plane is responsible for isolating between builds, even within the
 same tenant project. In other words, how strong of a guarantee do we have that
 the build really executed correctly, without external influence?
 
@@ -291,7 +291,7 @@ free of unintended external influence. In other words, any external influence on
 the build was specifically requested by the build itself. This MUST hold true
 even between builds within the same tenant project.
 
-The build system MUST guarantee the following:
+The build platform MUST guarantee the following:
 
 -   It MUST NOT be possible for a build to access any secrets of the build
     service, such as the provenance signing key, because doing so would
@@ -306,13 +306,13 @@ The build system MUST guarantee the following:
     cache used by another build, also known as "cache poisoning". In other
     words, the output of the build MUST be identical whether or not the cache is
     used.
--   The build system MUST NOT open services that allow for remote influence
+-   The build service MUST NOT open services that allow for remote influence
     unless all such interactions are captured as `externalParameters` in the
     provenance.
 
 There are no sub-requirements on the build itself. Build L3 is limited to
 ensuring that a well-intentioned build runs securely. It does not require that
-build systems prevent a producer from performing a risky or insecure build. In
+build services prevent a producer from performing a risky or insecure build. In
 particular, the "Isolated" requirement does not prohibit a build from calling
 out to a remote execution service or a "self-hosted runner" that is outside the
 trust boundary of the build platform.
@@ -322,11 +322,12 @@ in the initial [draft version (v0.1)](../v0.1/requirements.md).
 
 NOTE: This requirement is not to be confused with "Hermetic", which roughly
 means that the build ran with no network access. Such a requirement requires
-substantial changes to both the build system and each individual build, and is
+substantial changes to both the build service and each individual build, and is
 considered in the [future directions](future-directions.md).
 
 <td> <td> <td>✓
 </table>
 
 [external parameters]: ../../provenance/v1.md#externalParameters
+[identified in the provenance]: ../../provenance/v1.md#model
 [package ecosystem]: verifying-artifacts.md#package-ecosystem

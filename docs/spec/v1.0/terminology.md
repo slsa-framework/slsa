@@ -72,7 +72,9 @@ describing this whole process.
 
 | Primary Term | Description
 | --- | ---
-| Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. It includes software, hardware, people, and organizations.
+| Platform | The transitive closure of software and services that must be trusted to faithfully execute builds in the build system. It includes software, hardware, people, and organizations.
+| System | Collection of processes and tools which allows tenants to run builds. This includes both the trusted control plane as well as the processes that execute untrusted tenant build steps.
+| Service | A hosted build system that is run on shared infrastructure (i.e. not an individual's workstation)
 | Admin | A privileged user with administrative access to the platform, potentially allowing them to tamper with builds or the control plane.
 | Tenant | An untrusted user that builds an artifact on the platform. The tenant defines the build steps and external parameters.
 | Control plane | Build system component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control.
