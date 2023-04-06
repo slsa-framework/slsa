@@ -85,7 +85,7 @@ infrastructure for software.
 
 **Software producers**, such as an open source project, a software vendor, or a
 team writing first-party code for use within the same company. SLSA gives you
-protection against tampering along the supply chain to your consumers, thereby
+protection against tampering along the supply chain to your consumers, both
 reducing insider risk and increasing confidence that the software you produce
 reaches your consumers as you intended.
 
@@ -133,7 +133,7 @@ important to consider together with SLSA such as:
     produce malicious software, but it can reduce insider risks within an
     organization you trust. SLSA's Build track protects against tampering during
     or after the build, and [future SLSA tracks](future-directions.md) intend to
-    protect against unauthorized modifications of source code and dependenies.
+    protect against unauthorized modifications of source code and dependencies.
 -   Transitive trust for dependencies: the SLSA level of an artifact is
     independent of the level of its dependencies. You can use SLSA recursively to
     also judge an artifact's dependencies on their own, but there is
