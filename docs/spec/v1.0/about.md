@@ -83,10 +83,11 @@ For more exploration of this analogy, see the blog post
 In short: everyone involved in producing and consuming software, or providing
 infrastructure for software.
 
-**Software producers**, such as a development team or open
-source maintainers. SLSA gives you protection against insider risk and tampering
-along the supply chain to your consumers, increasing confidence that the
-software you produce reaches your consumers as you intended.
+**Software producers**, such as an open source project, a software vendor, or a
+team writing first-party code for use within the same company. SLSA gives you
+protection against tampering along the supply chain to your consumers, thereby
+reducing insider risk and increasing confidence that the software you produce
+reaches your consumers as you intended.
 
 **Software consumers**, such as a development team using open source packages, a
 government agency using vendored software, or a CISO judging organizational
@@ -128,10 +129,13 @@ important to consider together with SLSA such as:
 
 -   Code quality: SLSA does not tell you whether the developers writing the
     source code followed secure coding practices.
--   Developer trust: SLSA cannot tell you whether a developer is
-    intentionally writing malicious code. If you trust a developer to write
-    code you want to consume, though, SLSA can guarantee that the code will
-    reach you without another party tampering with it.
+-   Producer trust: SLSA does not address organizations that intentionally
+    produce malicious software, but it can reduce insider risks within an
+    organization you trust. Currently SLSA's build track protects against
+    tampering during or after the build; a
+    [future SLSA Source track](future-directions#source-track) will also protect
+    against tampering before the build, particularly modifications to source
+    code.
 -   Transitive trust for dependencies: the SLSA level of an artifact is
     independent of the level of its dependencies. You can use SLSA recursively to
     also judge an artifact's dependencies on their own, but there is
