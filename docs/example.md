@@ -41,7 +41,7 @@ significant manual effort, guesswork, and blind trust. Working backwards:
     running the commands `./buildconf && ./configure && make && ./maketgz
     7.72.0`. That command has a set of dependencies, but those are not well
     documented.
--   Finally, there are the systems that actually ran the builds above. We have
+-   Finally, there are the platforms that actually ran the builds above. We have
     no indication about their software, configuration, or runtime state
     whatsoever.
 
@@ -50,7 +50,7 @@ be performed unilaterally with only that developer's credentials? (None of these
 are confirmed.)
 
 -   Directly upload a malicious image to Docker Hub.
--   Point the CI/CD system to build from an unofficial Dockerfile.
+-   Point the CI/CD platform to build from an unofficial Dockerfile.
 -   Upload a malicious Dockerfile (or other file) in the
     [curl/curl-docker](https://github.com/curl/curl-docker/blob/d6525c840a62b398424a78d792f457477135d0cf/alpine/latest/Dockerfile)
     git repo.

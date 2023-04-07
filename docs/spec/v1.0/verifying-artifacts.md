@@ -1,6 +1,6 @@
 ---
 title: Verifying artifacts
-description: SLSA uses provenance to indicate whether an artifact is authentic or not, but provenance doesn't do anything unless somebody inspects it. SLSA calls that inspection verification, and this page describes how to verify artifacts and their SLSA provenenance. The intended audience is system implementers, security engineers, and software consumers.
+description: SLSA uses provenance to indicate whether an artifact is authentic or not, but provenance doesn't do anything unless somebody inspects it. SLSA calls that inspection verification, and this page describes how to verify artifacts and their SLSA provenenance. The intended audience is platform implementers, security engineers, and software consumers.
 ---
 
 SLSA uses provenance to indicate whether an artifact is authentic or not, but
@@ -110,7 +110,7 @@ Resulting threat mitigation:
         platform itself, such as by a malicious insider. Instead, verifiers
         SHOULD carefully consider which build platforms are added to the roots
         of trust. For advice on establishing trust in build platforms, see
-        [Verifying build systems](verifying-systems).
+        [Verifying build platforms](verifying-systems).
 -   [Threat "F"]: SLSA Build L2 covers tampering of the artifact or provenance
     after the build. This is accomplished by verifying the `subject` and
     signature in the steps above.
@@ -228,11 +228,11 @@ provenance file.
 
 ## Architecture options
 
-System implementers decide which part(s) of the system will verify provenance:
+System implementers decide which part(s) of the platform will verify provenance:
 the package ecosystem at upload time, the consumers at download time, or via a
 continuous monitoring system. Each option comes with its own set of
 considerations, but all are valid. The options are not mutually exclusive, but
-at least one part of a SLSA-conformant system SHOULD verify provenance.
+at least one part of a SLSA-conformant platform SHOULD verify provenance.
 
 More than one component can verify provenance. For example, even if a package
 ecosystem verifies provenance, consumers who get artifacts from that package
@@ -259,7 +259,7 @@ considered an "ecosystem". For more background, see
 
 During package upload, a package ecosystem can ensure that the artifact's
 provenance matches the expected values for that package name's provenance before
-accepting it into the package registry.  If possible, system implementers SHOULD
+accepting it into the package registry.  If possible, platform implementers SHOULD
 prefer this option because doing so benefits all of the package ecosystem's
 clients.
 
@@ -296,5 +296,5 @@ SHOULD publish its expectations for all the packages it verifies.
 
 Consumers can continuously poll a monitor to detect artifacts that
 do not meet the monitor's expectations. Detecting artifacts that fail
-verification is of limited benefit unless a human or another part of the system
+verification is of limited benefit unless a human or another part of the platform
 responds to the failed verification.

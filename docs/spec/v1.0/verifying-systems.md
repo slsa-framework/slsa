@@ -1,16 +1,16 @@
 ---
-title: Verifying build systems
-description: Guidelines for assessing build system security.
+title: Verifying build platforms
+description: Guidelines for assessing build platform security.
 ---
 
-One of SLSA's guiding [principles](principles.md) is to "trust systems, verify
-artifacts". However, consumers cannot trust systems to produce Build L3
+One of SLSA's guiding [principles](principles.md) is to "trust platforms, verify
+artifacts". However, consumers cannot trust platforms to produce Build L3
 artifacts and provenance unless they have some proof that the provenance is
 [unforgeable](requirements.md#provenance-unforgeable) and the builds are
 [isolated](requirements.md#isolated).
 
-This page describes the parts of a build system that consumers SHOULD assess
-and provides sample questions consumers can ask when assessing a build system.
+This page describes the parts of a build platform that consumers SHOULD assess
+and provides sample questions consumers can ask when assessing a build platform.
 See also [Threats & mitigations](threats.md) and the
 [build model](terminology.md#build-model).
 
@@ -38,7 +38,7 @@ builder availability are out of scope of this document.
 
 ### Adversary profiles
 
-Consumers SHOULD also evaluate the build system's ability to defend against the
+Consumers SHOULD also evaluate the build platform's ability to defend against the
 following types of adversaries.
 
 1.  Project contributors, who can:
@@ -68,17 +68,17 @@ following types of adversaries.
 [E]: threats.md#e-compromise-build-process
 [F]: threats.md#f-upload-modified-package
 
-## Build system components
+## Build platform components
 
 Consumers SHOULD consider at least these five elements of the
-[build model](terminology.md#build-model) when assessing build systems for SLSA
+[build model](terminology.md#build-model) when assessing build platforms for SLSA
 conformance: external parameters, control plane, build environments, caches,
 and outputs.
 
 ![image](build-model.svg)
 
 The following sections detail these elements of the build model and give prompts
-for assessing a build system's ability to produce SLSA Build L3 provenance.
+for assessing a build platform's ability to produce SLSA Build L3 provenance.
 
 ### External parameters
 
@@ -122,7 +122,7 @@ control plane.
     -   Roughly how many employees have such access?
     -   How are privileged accounts protected? Examples: two-factor
         authentication, client device security policies
-    -   What plans do you have for recovering from security incidents and system
+    -   What plans do you have for recovering from security incidents and platform
         outages? Are they tested? How frequently?
 
 -   Provenance generation
@@ -194,7 +194,7 @@ etc).
         on creation? How were these elements chosen? Examples: A minimal Linux
         distribution with its package manager, OSX with HomeBrew
     -   How long could a compromised build environment remain active in the
-        build system?
+        build platform?
 
 -   Network access
     -   Are build environments able to call out to remote execution? If so, how

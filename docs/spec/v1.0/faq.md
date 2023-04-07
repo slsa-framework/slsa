@@ -33,13 +33,13 @@ bit-for-bit identical output. This property
 including easier debugging, more confident cherry-pick releases, better build
 caching and storage efficiency, and accurate dependency tracking.
 
-"Verified reproducible" means using two or more independent build systems to
+"Verified reproducible" means using two or more independent build platforms to
 corroborate the provenance of a build. In this way, one can create an overall
-system that is more trustworthy than any of the individual components. This is
+platform that is more trustworthy than any of the individual components. This is
 often
 [suggested](https://www.linuxfoundation.org/en/blog/preventing-supply-chain-attacks-like-solarwinds/)
 as a solution to supply chain integrity. Indeed, this is one option to secure
-build steps of a supply chain. When designed correctly, such a system can
+build steps of a supply chain. When designed correctly, such a platform can
 satisfy all of the SLSA Build level requirements.
 
 That said, verified reproducible builds are not a complete solution to supply
@@ -84,3 +84,15 @@ in-toto's official implementations written in
 SLSA Provenance metadata. These APIs are used in other tools generating SLSA
 Provenance such as Sigstore's cosign, the SLSA GitHub Generator, and the in-toto
 Jenkins plugin.
+
+## Q. What is the difference between a build platform, system, and service?
+
+Build platform and build system have been used interchangably in the past. With
+the v1.0 specification, however, there has been a unification around the term
+platform as indicated in the [Terminology](terminology.md). The use of the word
+`system` still exists related to software and services within the build platform
+and to systems outside of a build platform like change managent systems.
+
+A build service is a hosted build platform that is often run on shared infrastructure
+instead of individuals' machines and workstations. Its use has also been replaced outside
+of the requirements as it relates to the build platform.

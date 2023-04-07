@@ -100,7 +100,7 @@ SLSA---other than tamper protection---without changing their build workflows.
 -   Software producer follows a consistent build process so that others can form
     expectations about what a "correct" build looks like.
 
--   Build system automatically generates [provenance] describing how the
+-   Build platform automatically generates [provenance] describing how the
     artifact was built, including: what entity built the package, what build
     process they used, and what the top-level input to the build were.
 
@@ -116,7 +116,7 @@ SLSA---other than tamper protection---without changing their build workflows.
 -   With [verification], prevents mistakes during the release process, such as
     building from a commit that is not present in the upstream repo.
 
--   Aids organizations in creating an inventory of software and build systems
+-   Aids organizations in creating an inventory of software and build platforms
     used across a variety of teams.
 
 <dt>Notes<dd>
@@ -153,7 +153,7 @@ All of [Build L1], plus:
 
 -   The build runs on a hosted build platform that generates and signs[^sign] the
     provenance itself. This may be the original build, an after-the-fact
-    reproducible build, or some equivalent system that ensures the
+    reproducible build, or some equivalent platform that ensures the
     trustworthiness of the provenance.
 
 -   Downstream verification of provenance includes validating the authenticity

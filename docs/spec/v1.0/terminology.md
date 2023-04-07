@@ -2,16 +2,28 @@
 title: Terminology
 description: Before diving into the SLSA specification levels, we need to establish a core set of terminology and models to describe what we're protecting.
 ---
-<!--- Note on updating docs: using terms such as "developer," "maintainer,"
-"producer," "author," and "publisher" interchangeably can cause confusion.
+<!--- Note on updating docs:
+
+Using terms such as "developer," "maintainer," "producer," "author," and
+"publisher" interchangeably can cause confusion.
+
 For consistency: Whenever possible, default to "producer," in line with the
-model of producer--consumer--infrastructure provider.
-"Maintainer" is reserved for sections specifying the act of continuing to
-maintain a project after its creation, or when used in a less technical context
-where it is unlikely to cause confusion. Author is reserved for the act of
-making source code commits or reviews. Individual is used when the context's
-focus is specifying a single person (i.e., "an individual's workstation" or
-"compromised individual").--->
+  model of producer--consumer--infrastructure provider. "Maintainer" is reserved
+  for sections specifying the act of continuing to maintain a project after its
+  creation, or when used in a less technical context where it is unlikely to cause
+  confusion. Author is reserved for the act of making source code commits or
+  reviews. Individual is used when the context's focus is specifying a single
+  person (i.e., "an individual's workstation" or "compromised individual").
+
+Using terms such as "platform," "system," and "service" interchangeably can cause
+confusion.
+
+For consistency: Whenever possible, default to "platform." "Service" is reserved
+  for use within the requirements and "system" is reserved for use to describe both
+  software and tools internal to a platform. External self-sescribed services and
+  systems can continue to be called by these terms.
+
+--->
 
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set
 of terminology and models to describe what we're protecting.
@@ -54,7 +66,7 @@ chain.
 | Producer | A party who creates software and provides it to others. Producers are often also consumers. | An open source project's maintainers. A software vendor.
 | Verifier | A party who inspect an artifact's provenance to determine the artifact's authenticity. | A business's software ingestion system. A programming language ecosystem's package registry.
 | Consumer | A party who uses software provided by a producer. The consumer may verify provenance for software they consume or delegate that responsibility to a separate verifier. | A developer who uses open source software distributions. A business that uses a point of sale system.
-| Infrastructure provider | A party who provides software or services to other roles. | A package registry's maintainers. A build system's maintainers.
+| Infrastructure provider | A party who provides software or services to other roles. | A package registry's maintainers. A build platform's maintainers.
 
 ### Build model
 
@@ -72,12 +84,10 @@ describing this whole process.
 
 | Primary Term | Description
 | --- | ---
-| Platform | The transitive closure of software and services that must be trusted to faithfully execute builds in the build system. It includes software, hardware, people, and organizations.
-| System | Collection of processes and tools which allows tenants to run builds. This includes both the trusted control plane as well as the processes that execute untrusted tenant build steps.
-| Service | A hosted build system that is run on shared infrastructure (i.e. not an individual's workstation)
+| Platform | The transitive closure of software and services (systems) that must be trusted to faithfully execute builds. The systems include both the trusted control plane as well as the processes that execute untrusted tenant build steps. The platform includes software, hardware, people, and organizations.
 | Admin | A privileged user with administrative access to the platform, potentially allowing them to tamper with builds or the control plane.
 | Tenant | An untrusted user that builds an artifact on the platform. The tenant defines the build steps and external parameters.
-| Control plane | Build system component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control.
+| Control plane | Build platform component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control.
 | Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single build environment on a platform.
 | Steps | The set of actions that comprise a build, defined by the tenant.
 | Build environment | The independent execution context in which the build runs, initialized by the control plane. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
@@ -92,7 +102,7 @@ artifact to be built, which is often a git repository; in the build model, the
 reference to this artifact is a parameter while the artifact itself is a
 dependency.
 
-For examples on how this model applies to real-world build systems, see [index
+For examples on how this model applies to real-world build platforms, see [index
 of build types](/provenance/v1#index-of-build-types).
 
 ### Package model
@@ -265,15 +275,15 @@ Notes:
 
 ### Verification model
 
-Verification in SLSA is performed in two ways. Firstly, the build system is
+Verification in SLSA is performed in two ways. Firstly, the build platform is
 certified to ensure conformance with the requirements at the level claimed by
-the build system. This certification should happen on a recurring cadence with
+the build platform. This certification should happen on a recurring cadence with
 the outcomes published by the platform operator for their users to review and
 make informed decisions about which builders to trust.
 
 Secondly, artifacts are verified to ensure they meet the producer defined
 expectations of where the package source code was retrieved from and on what
-build system the package was built.
+build platform the package was built.
 
 ![Verification Model](verification-model.svg)
 
@@ -281,7 +291,7 @@ build system the package was built.
 |--------------|---- |
 | Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly. |
 | Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used. |
-| Build system certification | [Build systems are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level. |
+| Build platform certification | [Build platforms are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level. |
 
 The examples below suggest some ways that expectations and verification may be
 implemented for different, broadly defined, package ecosystems.
@@ -292,7 +302,7 @@ implemented for different, broadly defined, package ecosystems.
 | ---- | ------- |
 | Expectations | Defined by the producer's security personnel and stored in a database. |
 | Provenance verification | Performed automatically on cluster nodes before execution by querying the expectations database. |
-| Build system certification | The build system implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their conformance to SLSA requirements. |
+| Build platform certification | The build platform implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their conformance to SLSA requirements. |
 
 </details>
 
@@ -302,6 +312,6 @@ implemented for different, broadly defined, package ecosystems.
 | ---- | ------- |
 | Expectations | Defined separately for each package and stored in the package registry. |
 | Provenance verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client also verifies expectations prior to installing packages. |
-| Build system certification | Performed by the language ecosystem packaging authority. |
+| Build platform certification | Performed by the language ecosystem packaging authority. |
 
 </details>

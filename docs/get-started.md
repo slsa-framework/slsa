@@ -18,17 +18,17 @@ What differs for each level is the robustness of the build and provenance. For m
 
 The tools discussed in this guide are freely available and believed to meet SLSA expectations. The [Builder SLSA levels section](#builder-slsa-levels) provides a more complete list. If you think a build option is misclassified or want to add one, please [open an issue](https://github.com/slsa-framework/slsa/issues) or [submit a PR](https://github.com/slsa-framework/slsa/pulls) against this page.
 
-SLSA levels are progressive: SLSA 3 includes all the guarantees of SLSA 2, and SLSA 2 includes all the guarantees of SLSA 1. Currently, though, the work required to achieve lower SLSA levels will not necessarily accrue toward the work needed for higher levels, because achieving a higher level may require migrating to a different build system altogether. For that reason, **you should start with the highest level that’s possible for your project or organization to avoid wasted work**.
+SLSA levels are progressive: SLSA 3 includes all the guarantees of SLSA 2, and SLSA 2 includes all the guarantees of SLSA 1. Currently, though, the work required to achieve lower SLSA levels will not necessarily accrue toward the work needed for higher levels, because achieving a higher level may require migrating to a different build platform altogether. For that reason, **you should start with the highest level that’s possible for your project or organization to avoid wasted work**.
 
 The SLSA level you implement depends on your current build situation:
 
 -   If you are using GitHub Actions, jump directly to [SLSA 3](#SLSA3). You do not need to implement SLSA 1 or SLSA 2.
 -   If you are using [FRSCA](https://github.com/buildsec/frsca), jump to [SLSA 2](#SLSA2). You do not need to implement SLSA 1.
--   If you’re using any other build system, consult its documentation to find out what SLSA level it supports and how to proceed. If your build system doesn't support the SLSA level you are aiming for or you do not use any build system, you should consider adopting one that does, such as GitHub Actions and FRSCA discussed below.
+-   If you’re using any other build platform, consult its documentation to find out what SLSA level it supports and how to proceed. If your build platform doesn't support the SLSA level you are aiming for or you do not use any build platform, you should consider adopting one that does, such as GitHub Actions and FRSCA discussed below.
 
 ### Provenance verification
 
-Various build methods require different methods to verify provenance. The SLSA community already has some verification methods and is working on additional solutions for provenance verification. Even if there is currently no simple verification method for a particular build system, adopting these builders now means you will be “SLSA ready” when more ecosystem tooling is released. Note that when you create provenance, you must supply to users a method for interpreting what you have created.
+Various build methods require different methods to verify provenance. The SLSA community already has some verification methods and is working on additional solutions for provenance verification. Even if there is currently no simple verification method for a particular build platform, adopting these builders now means you will be “SLSA ready” when more ecosystem tooling is released. Note that when you create provenance, you must supply to users a method for interpreting what you have created.
 
 ### Provenance formatting
 
@@ -42,7 +42,7 @@ Containers have a standard place to put the provenance in the OCI container regi
 
 ## SLSA 1
 
-As mentioned before, if you don't already use a build platform or CI/CD, you should consider adopting a system that supports SLSA 2 or SLSA 3. This will make the following steps easier and provide for higher SLSA levels later on. Individual developers who wish to put a minimal amount of security on their builds can use SLSA 1.
+As mentioned before, if you don't already use a build platform or CI/CD, you should consider adopting a platform that supports SLSA 2 or SLSA 3. This will make the following steps easier and provide for higher SLSA levels later on. Individual developers who wish to put a minimal amount of security on their builds can use SLSA 1.
 
 SLSA 1 requires that the build process is documented. Some tools suggested below also support signed provenance. Though not required for SLSA 1, signing your provenance increases trust in the document by showing that it has not been tampered with.
 
@@ -52,7 +52,7 @@ A build configuration file (i.e., GitHub workflow) qualifies for SLSA 1. It woul
 
 ### Build platform plugins or extensions
 
-The following options work with your build system to produce unsigned, formatted provenance. They do not qualify for SLSA 2 because they are unsigned and not run by the hosted server:
+The following options work with your build platform to produce unsigned, formatted provenance. They do not qualify for SLSA 2 because they are unsigned and not run by the hosted server:
 
 -   [Azure DevOps extension](https://github.com/slsa-framework/azure-devops-demo)
 -   [Jenkins SLSA generator](https://github.com/slsa-framework/slsa-jenkins-generator)
