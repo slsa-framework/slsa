@@ -129,7 +129,7 @@ SLSA---other than tamper protection---without changing their build workflows.
 </section>
 <section id="build-l2">
 
-### Build L2: Build platform
+### Build L2: Hosted build platform
 
 <dl class="as-table">
 <dt>Summary<dd>
