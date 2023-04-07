@@ -122,11 +122,11 @@ In the updated diagram, the provenance attestation says that the artifact
 At SLSA 1, the provenance does not protect against tampering or forging but may
 be useful for vulnerability management.
 
-#### SLSA 2 and 3: Build service
+#### SLSA 2 and 3: Build platform
 
 ![slsa2](images/slsa-2.svg)
 
-To reach SLSA 2 (and later SLSA 3), we must switch to a hosted build service
+To reach SLSA 2 (and later SLSA 3), we must switch to a hosted build platform
 that generates provenance for us. This updated provenance should also include
 dependencies on a best-effort basis. SLSA 3 additionally requires the source and
 build platforms to implement additional security controls, which might need to

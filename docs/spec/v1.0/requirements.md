@@ -276,8 +276,8 @@ information on assessing a build system's isolation strength, see
 <td>Build service
 <td>
 
-All build steps ran using some build service, not on an individual's
-workstation.
+All build steps ran using a hosted build platform on shared or dedicated
+infrastructure, not on an individual's workstation.
 
 Examples: GitHub Actions, Google Cloud Build, Travis CI.
 
@@ -286,7 +286,7 @@ Examples: GitHub Actions, Google Cloud Build, Travis CI.
 <td>Isolated
 <td>
 
-The build service ensured that the build steps ran in an isolated environment,
+The build platform ensured that the build steps ran in an isolated environment,
 free of unintended external influence. In other words, any external influence on
 the build was specifically requested by the build itself. This MUST hold true
 even between builds within the same tenant project.
@@ -294,7 +294,7 @@ even between builds within the same tenant project.
 The build platform MUST guarantee the following:
 
 -   It MUST NOT be possible for a build to access any secrets of the build
-    service, such as the provenance signing key, because doing so would
+    platform, such as the provenance signing key, because doing so would
     compromise the authenticity of the provenance.
 -   It MUST NOT be possible for two builds that overlap in time to influence one
     another, such as by altering the memory of a different build process running
@@ -306,13 +306,13 @@ The build platform MUST guarantee the following:
     cache used by another build, also known as "cache poisoning". In other
     words, the output of the build MUST be identical whether or not the cache is
     used.
--   The build service MUST NOT open services that allow for remote influence
+-   The build platform MUST NOT open services that allow for remote influence
     unless all such interactions are captured as `externalParameters` in the
     provenance.
 
 There are no sub-requirements on the build itself. Build L3 is limited to
 ensuring that a well-intentioned build runs securely. It does not require that
-build services prevent a producer from performing a risky or insecure build. In
+a build platform prevents a producer from performing a risky or insecure build. In
 particular, the "Isolated" requirement does not prohibit a build from calling
 out to a remote execution service or a "self-hosted runner" that is outside the
 trust boundary of the build platform.
@@ -322,7 +322,7 @@ in the initial [draft version (v0.1)](../v0.1/requirements.md).
 
 NOTE: This requirement is not to be confused with "Hermetic", which roughly
 means that the build ran with no network access. Such a requirement requires
-substantial changes to both the build service and each individual build, and is
+substantial changes to both the build platform and each individual build, and is
 considered in the [future directions](future-directions.md).
 
 <td> <td> <td>✓

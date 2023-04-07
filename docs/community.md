@@ -27,7 +27,7 @@ practical standards, tools, and documentation to reduce software supply chain
 risk in the real world. To succeed, we rely on contributors from a variety
 organizations to help us improve. Whether that's reporting successes or
 challenges, contributing changes to the specification or documentation, or
-developing tooling and services, we welcome your contributions.
+developing tooling and platforms, we welcome your contributions.
 
 </div>
 
@@ -81,7 +81,7 @@ developing tooling and services, we welcome your contributions.
             <div class="w-full md:w-1/2">
                 <div class="rounded-lg text-green p-5 border border-green-400 inline-block mb-8 h4">SLSA v1.0 is coming soon!</div>
                 <p>The SLSA v1.0 release candidate specification is out and <a href="/blog/2023/02/slsa-v1-rc">available for community review</a>. We anticipate a stable release soon. <br><br>
-We’ve released a set of tools and services to generate up to SLSA 3 provenance, and plan to develop further tooling soon.<br><br>
+We’ve released a set of tools and platforms to generate up to SLSA 3 provenance, and plan to develop further tooling soon.<br><br>
 Google has been using an internal version of SLSA since 2013 and requires it for all of their production workloads.</p>
             </div>
         </div>

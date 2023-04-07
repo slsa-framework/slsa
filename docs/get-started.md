@@ -42,7 +42,7 @@ Containers have a standard place to put the provenance in the OCI container regi
 
 ## SLSA 1
 
-As mentioned before, if you don't already use a build service or CI/CD, you should consider adopting a system that supports SLSA 2 or SLSA 3. This will make the following steps easier and provide for higher SLSA levels later on. Individual developers who wish to put a minimal amount of security on their builds can use SLSA 1.
+As mentioned before, if you don't already use a build platform or CI/CD, you should consider adopting a system that supports SLSA 2 or SLSA 3. This will make the following steps easier and provide for higher SLSA levels later on. Individual developers who wish to put a minimal amount of security on their builds can use SLSA 1.
 
 SLSA 1 requires that the build process is documented. Some tools suggested below also support signed provenance. Though not required for SLSA 1, signing your provenance increases trust in the document by showing that it has not been tampered with.
 
@@ -50,7 +50,7 @@ SLSA 1 requires that the build process is documented. Some tools suggested below
 
 A build configuration file (i.e., GitHub workflow) qualifies for SLSA 1. It would be considered unsigned, unformatted provenance.
 
-### Build service plugins or extensions
+### Build platform plugins or extensions
 
 The following options work with your build system to produce unsigned, formatted provenance. They do not qualify for SLSA 2 because they are unsigned and not run by the hosted server:
 
@@ -60,9 +60,9 @@ The following options work with your build system to produce unsigned, formatted
 
 Downstream users may verify the provenance with [Cue Policies](https://cuelang.org/docs/).
 
-### Build observers with hosted services
+### Build observers with hosted platforms
 
-The following options are user-configured inside a hosted service. They observe the build process and produce signed, formatted provenance. These options do not qualify for SLSA 2 because they are configured by users, not the hosted service.
+The following options are user-configured inside a hosted platform. They observe the build process and produce signed, formatted provenance. These options do not qualify for SLSA 2 because they are configured by users, not the hosted platform.
 
 Downstream users may verify the provenance with Cue policies and the signature with Cosign.
 
@@ -77,14 +77,14 @@ Downstream users may verify the provenance with Cue policies and the signature w
 
 To achieve SLSA 2, the goals are to:
 
--   Run your build on a hosted service that generates and signs provenance
+-   Run your build on a hosted platform that generates and signs provenance
 -   Publish the provenance to allow downstream users to verify it
 
 The following is a SLSA 2 builder:
 
 -   [Factory for Repeatable Secure Creation of Artifacts (FRSCA)](https://github.com/buildsec/frsca)
 
-FRSCA is an OpenSSF project that aims at offering a full build pipeline. It is not yet generally available. It qualifies as a SLSA 2 builder because regular users of the service are not able to inject or alter the contents of the provenance it generates. FRSCA produces signed, formatted provenance that can be verified by the generic SLSA verifier.
+FRSCA is an OpenSSF project that aims at offering a full build pipeline. It is not yet generally available. It qualifies as a SLSA 2 builder because regular users of the platform are not able to inject or alter the contents of the provenance it generates. FRSCA produces signed, formatted provenance that can be verified by the generic SLSA verifier.
 
 <a id="SLSA3"></a>
 
@@ -92,7 +92,7 @@ FRSCA is an OpenSSF project that aims at offering a full build pipeline. It is n
 
 To achieve SLSA 3, you must:
 
--   Run your build on a hosted service that generates and signs provenance
+-   Run your build on a hosted platform that generates and signs provenance
 -   Ensure that build runs cannot influence each other
 -   Produce signed provenance that can be verified as authentic
 
@@ -106,9 +106,9 @@ The following table shows known build software packages and the potential SLSA l
 
 Note that this list is provided "as is". OpenSSF makes no claim as to the reliability of this information. A certification program is under development to provide a more definitive list.
 
-| Builder                 | Potential SLSA Level |
-|-------------------------|:--------------------:|
-| FRSCA                   |           2          |
-| GitHub Actions          |           3          |
-| Google Cloud Build      |           3          |
-| No Build Service        |           1          |
+| Builder                  | Potential SLSA Level |
+|--------------------------|:--------------------:|
+| FRSCA                    |           2          |
+| GitHub Actions           |           3          |
+| Google Cloud Build       |           3          |
+| No Hosted Build Platform |           1          |

@@ -42,7 +42,7 @@ Consumers SHOULD also evaluate the build system's ability to defend against the
 following types of adversaries.
 
 1.  Project contributors, who can:
-    -   Create builds on the build service. These are the adversary's controlled
+    -   Create builds on the build platform. These are the adversary's controlled
         builds.
     -   Modify one or more controlled builds' external parameters.
     -   Modify one or more controlled builds' environments and run arbitrary
@@ -55,10 +55,10 @@ following types of adversaries.
     -   Create new builds under the target build's project or identity.
     -   Modify the target build's source repo and build from it.
     -   Modify the target build's configuration.
-3.  Build service administrators, who can:
+3.  Build platform administrators, who can:
     -   Do everything listed under "project contributors" and "project
         maintainers".
-    -   Run arbitrary code on the build service.
+    -   Run arbitrary code on the build platform.
     -   Read and modify network traffic.
     -   Access the control plane's cryptographic secrets.
     -   Remotely access build environments (e.g. via SSH).
@@ -103,10 +103,10 @@ system to use), and any additional user-provided strings.
 
 ### Control plane
 
-The control plane is the build system component that orchestrates each
+The control plane is the build platform component that orchestrates each
 independent build execution. It is responsible for setting up each build and
 cleaning up afterwards. At SLSA Build L2+ the control plane generates and signs
-provenance for each build performed on the build service. The control plane is
+provenance for each build performed on the build platform. The control plane is
 operated by one or more administrators, who have privileges to modify the
 control plane.
 
