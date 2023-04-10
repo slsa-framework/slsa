@@ -78,7 +78,12 @@ and outputs.
 ![image](build-model.svg)
 
 The following sections detail these elements of the build model and give prompts
-for assessing a build system's ability to produce SLSA Build L3 provenance.
+for assessing a build system's ability to produce SLSA Build L3 provenance. The
+assessment SHOULD take into account the security model used to identify the
+transitive closure of the `builder.id` for the [provenance model], specifically
+around the platform's boundaries, actors, and interfaces.
+
+[provenance model]: ../../provenance/v1.md#model
 
 ### External parameters
 
@@ -181,6 +186,7 @@ etc).
 -   Isolation technologies
     -   How are build environments isolated from the control plane and each
         other? Examples: VMs, containers, sandboxed processes
+    -   How is separation achieved between trusted and untrusted processes?
     -   How have you hardened your build environments against malicious tenants?
         Examples: configuration hardening, limiting attack surface
     -   How frequently do you update your isolation software?
@@ -229,5 +235,6 @@ shared between build projects or allocated separately per-project.
 
 Organizations can either self-attest to their answers or seek certification from
 a third-party auditor. Evidence for self-attestation should be published on
-the internet. Evidence submitted for third-party certification need not be
-published.
+the internet and can include information such as the security model defined as
+part of the provenance. Evidence submitted for third-party certification need not
+be published.
