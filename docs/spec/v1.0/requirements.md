@@ -260,7 +260,7 @@ Note: This requirement was called "non-falsifiable" in the initial
 [Isolation strength]: #isolation-strength
 [Isolation between builds]: #isolation-strength
 
-The control plane is responsible for isolating between builds, even within the
+The build platform is responsible for isolating between builds, even within the
 same tenant project. In other words, how strong of a guarantee do we have that
 the build really executed correctly, without external influence?
 
