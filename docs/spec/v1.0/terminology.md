@@ -3,27 +3,22 @@ title: Terminology
 description: Before diving into the SLSA specification levels, we need to establish a core set of terminology and models to describe what we're protecting.
 ---
 <!--- Note on updating docs:
-
-Using terms such as "developer," "maintainer," "producer," "author," and
-"publisher" interchangeably can cause confusion.
-
-For consistency: Whenever possible, default to "producer," in line with the
-  model of producer--consumer--infrastructure provider. "Maintainer" is reserved
-  for sections specifying the act of continuing to maintain a project after its
-  creation, or when used in a less technical context where it is unlikely to cause
-  confusion. Author is reserved for the act of making source code commits or
-  reviews. Individual is used when the context's focus is specifying a single
-  person (i.e., "an individual's workstation" or "compromised individual").
-
-Using terms such as "platform," "system," and "service" interchangeably can cause
-confusion.
-
-For consistency: Whenever possible, default to "platform." Instead of using "service,"
-  a reference to a "hosted platform" should be used. A reference to some specific
-  software or tools internal to a platform can be made with "platform component" unless
-  there is a more appropriate definition to use directly like "control plane." External
-  self-sescribed services and systems can continue to be called by these terms.
-
+* Using terms such as "developer," "maintainer," "producer," "author," and
+  "publisher" interchangeably can cause confusion.
+  *  For consistency: Whenever possible, default to "producer," in line with the
+     model of producer--consumer--infrastructure provider. "Maintainer" is reserved
+     for sections specifying the act of continuing to maintain a project after its
+     creation, or when used in a less technical context where it is unlikely to cause
+     confusion. Author is reserved for the act of making source code commits or
+     reviews. Individual is used when the context's focus is specifying a single
+     person (i.e., "an individual's workstation" or "compromised individual").
+* Using terms such as "platform," "system," and "service" interchangeably can cause
+  confusion.
+  * For consistency: Whenever possible, default to "platform." Instead of using "service,"
+    a reference to a "hosted platform" should be used. A reference to some specific
+    software or tools internal to a platform can be made with "platform component" unless
+    there is a more appropriate definition to use directly like "control plane." External
+    self-sescribed services and systems can continue to be called by these terms.
 --->
 
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set
