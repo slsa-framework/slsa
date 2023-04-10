@@ -53,4 +53,25 @@ form the basis for a future Source track:
 
 </section>
 
+<section id="build-platform-operations-track">
+
+## Build Platform Operations track
+
+A Build Platform Operations track could provide assurances around the hardening
+of build platforms as they are operated.
+
+The initial [draft version (v0.1)] of SLSA included a section on
+[common requirements](../v0.1/requirements.md#common-requirements) that formed
+the foundation of the guidance for
+[verifying build systems](verifying-systems.md), which **may or may not** form
+the basis for a future Build Platform Operations track:
+
+-   Controls for access to build infrastructure and secrets along with records
+    when access is used.
+-   Systems meet a to be determined set of security practices to minimize the
+    attack surface.
+-   How cryptographic secrets used by the build system are stored and managed.
+
+</section>
+
 [draft version (v0.1)]: ../v0.1/requirements.md
