@@ -22,11 +22,10 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 ### Build levels
 
 In order to produce artifacts with a specific build level, responsibility is
-split between the <a href="#producer">Producer</a> and <a href="#build-system">
-Build platform</a>. The build platform MUST strengthen the security controls in
-order to achieve a specific level while the producer MUST choose and adopt a
-build platform capable of achieving a desired build level, implementing any
-controls as specified by the chosen platform.
+split between the [Producer] and [Build platform]. The build platform MUST
+strengthen the security controls in order to achieve a specific level while the
+producer MUST choose and adopt a build platform capable of achieving a desired
+build level, implementing any controls as specified by the chosen platform.
 
 <table class="no-alternate">
 <tr>
@@ -57,7 +56,7 @@ controls as specified by the chosen platform.
   <td> <td> <td>✓
 <tr>
   <td rowspan=2><a href="#isolation-strength">Isolation strength</a>
-  <td><a href="#build-service">Build service</a>
+  <td><a href="#hosted">Hosted</a>
   <td> <td>✓<td>✓
 <tr>
   <td><a href="#isolated">Isolated</a>
@@ -196,7 +195,7 @@ provenance attestation in order to:
     necessary to trust in order to trust the artifact they produced.
 
 This SHOULD be through a digital signature from a private key accessible only to
-the service that generated the provenance attestation.
+the build platform component that generated the provenance attestation.
 
 This allows the consumer to trust the contents of the provenance attestation,
 such as the identity of the build platform.
@@ -205,9 +204,9 @@ such as the identity of the build platform.
 the trust boundary [identified in the provenance]) and not by a tenant of the
 build platform (i.e. outside the trust boundary), except as noted below.
 
--   The data in the provenance MUST be obtained from the build service, either
-    because the generator *is* the build service or because the provenance
-    generator reads the data directly from the build service.
+-   The data in the provenance MUST be obtained from the build platform, either
+    because the generator *is* the build platform or because the provenance
+    generator reads the data directly from the build platform.
 -   The build platform MUST have some security control to prevent tenants from
     tampering with the provenance. However, there is no minimum bound on the
     strength. The purpose is to deter adversaries who might face legal or
@@ -240,7 +239,7 @@ build platform (i.e. outside the trust boundary), except as noted below.
 -   Such secret material MUST NOT be accessible to the environment running
     the user-defined build steps.
 -   Every field in the provenance MUST be generated or verified by the build
-    service in a trusted control plane. The user-controlled build steps MUST
+    platform in a trusted control plane. The user-controlled build steps MUST
     NOT be able to inject or alter the contents, except as noted in [Provenance
     is Authentic](#provenance-authentic). (Build L3 does not require additional
     fields beyond those of L2.)
@@ -272,8 +271,8 @@ information on assessing a build platform's isolation strength, see
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
 
-<tr id="build-service">
-<td>Build service
+<tr id="hosted">
+<td>Hosted
 <td>
 
 All build steps ran using a hosted build platform on shared or dedicated
