@@ -27,7 +27,7 @@ practical standards, tools, and documentation to reduce software supply chain
 risk in the real world. To succeed, we rely on contributors from a variety
 organizations to help us improve. Whether that's reporting successes or
 challenges, contributing changes to the specification or documentation, or
-developing tooling and platforms, we welcome your contributions.
+developing tooling, we welcome your contributions.
 
 </div>
 
