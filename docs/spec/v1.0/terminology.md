@@ -18,10 +18,11 @@ For consistency: Whenever possible, default to "producer," in line with the
 Using terms such as "platform," "system," and "service" interchangeably can cause
 confusion.
 
-For consistency: Whenever possible, default to "platform." "Service" is reserved
-  for use within the requirements and "system" is reserved for use to describe both
-  software and tools internal to a platform. External self-sescribed services and
-  systems can continue to be called by these terms.
+For consistency: Whenever possible, default to "platform." Instead of using "service,"
+  a reference to a "hosted platform" should be used. A reference to some specific
+  software or tools internal to a platform can be made with "platform component" unless
+  there is a more appropriate definition to use directly like "control plane." External
+  self-sescribed services and systems can continue to be called by these terms.
 
 --->
 
@@ -84,7 +85,7 @@ describing this whole process.
 
 | Primary Term | Description
 | --- | ---
-| Platform | The transitive closure of software and services (systems) that must be trusted to faithfully execute builds. The systems include both the trusted control plane as well as the processes that execute untrusted tenant build steps. The platform includes software, hardware, people, and organizations.
+| Platform | The transitive closure of software and services (components) that must be trusted to faithfully execute builds. The systems include both the trusted control plane as well as the processes that execute untrusted tenant build steps. The platform includes software, hardware, people, and organizations.
 | Admin | A privileged user with administrative access to the platform, potentially allowing them to tamper with builds or the control plane.
 | Tenant | An untrusted user that builds an artifact on the platform. The tenant defines the build steps and external parameters.
 | Control plane | Build platform component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control.
