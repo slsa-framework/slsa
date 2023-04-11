@@ -37,15 +37,16 @@ consumers, or both. In practice, most organizations that produce software also
 consume software.
 
 ### For software consumers
+
 As a software consumer, you need to verify that the software you consume meets
-your chosen SLSA Build level. 
+your chosen SLSA Build level.
 
 Ideally, [package ecosystems](/spec/v1.0/terminology.md#package-model) verify
 SLSA provenance for the packages they distribute. Check with the package
 ecosystem where you get software to see if they verify SLSA provenance. If they
 do, then inspect its verification practices to ensure that they meet your
 needs. If they do not, then you may want to request that they add SLSA support.
- 
+
 Regardless of whether your package ecosystem verifies SLSA provenance, you may
 wish to verify SLSA provenance yourself using tools such as
 [`slsa-verifier`](https://github.com/slsa-framework/slsa-verifier).
@@ -54,23 +55,25 @@ To learn more about the verification process, see
 [Verifying Artifacts](/spec/v1.0/verifying-artifacts.md).
 
 ### For software producers
+
 As a software producer, you need to produce and distribute attestations that
 demonstrate your software meets your desired SLSA Build level. SLSA
 recommends either the [SLSA provenance format](/provenance/) or a
 [SLSA Verification Summary Attestation (VSA)](/attestation_summary/), although
-the SLSA specification allows for other formats. 
+the SLSA specification allows for other formats.
 
 Ideally, build automation tools produce SLSA provenance rather than individual
 developers. If your organization...
-- does not use a build automation tool, then consider adopting one that supports
+
+-   does not use a build automation tool, then consider adopting one that supports
 SLSA.
-- uses a third-party build automation tool, then check with its provider to see
+-   uses a third-party build automation tool, then check with its provider to see
 if they support generating SLSA provenance at your desired level. If they do,
 then follow their instructions for producing provenance. If they do not, then
 consider requesting that they add SLSA support or adopting a tool that does
 support SLSA.
-- maintains its own build automation tool, then add support for generating SLSA
-provenance. 
+-   maintains its own build automation tool, then add support for generating SLSA
+provenance.
 
 For more information about producing provenance, see
 [Producing artifact](/spec/v1.0/requirements) and
@@ -78,12 +81,13 @@ For more information about producing provenance, see
 
 Ideally, [package ecosystems](/spec/v1.0/terminology.md#package-model)
 distribute provenance alongside packages. If your organization...
-- distributes software through a third-party software ecosystem, then check with
+
+-   distributes software through a third-party software ecosystem, then check with
 its provider to see if they support distributing SLSA provenance. If they do,
 then follow their instructions for distributing provenance. If they do not, then
 consider requesting that they add SLSA support or using a package ecosystem
 that does support SLSA.
-- distributes software itself (e.g. directly to consumers), then add SLSA
+-   distributes software itself (e.g. directly to consumers), then add SLSA
 provenance to your software distributions.
 
 For more information about distributing provenance, see
