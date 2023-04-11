@@ -80,15 +80,15 @@ community: developers contributing to SLSA can parallelize work on multiple
 tracks without blocking each other, and members of the community can contribute
 specifically to their areas of expertise.
 
-SLSA v1.0 defines the SLSA Build Track to begin this separation of
+SLSA v1.0 defines the SLSA Build track to begin this separation of
 requirements, with other tracks to come in future versions. The new
-[SLSA Build Track Levels 1-3](levels#build-track) roughly
+[SLSA Build track Levels 1-3](levels#build-track) roughly
 correspond to [Levels 1-3 of v0.1](requirements#build-requirements),
 minus the source requirements. We anticipate future versions of the
 specification to continue building on requirements without changing the existing
 requirements defined in v1.0. The specification will likely expand to
 incorporate both new tracks and additional levels for existing tracks. We
-currently have [plans][future] for Build Level 4 and a Source Track.
+currently have [plans][future] for Build Level 4 and a Source track.
 
 The v1.0 also defines the [principles](principles) behind SLSA track
 requirements, which will guide future track additions. For more information
