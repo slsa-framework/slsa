@@ -215,9 +215,8 @@ testimonials:
                 <p class="h2 p-0">Project status</p>
             </div>
             <div class="w-full md:w-1/2">
-                <div class="rounded-lg text-green p-5 border border-green-400 inline-block mt-8 md:mt-0 mb-8 h4 font-semibold">SLSA v1.0 is coming soon!</div>
-                <p>The SLSA v1.0 release candidate specification is out and <a href="/blog/2023/02/slsa-v1-rc">available for community review</a>. We anticipate a stable release soon. <br><br>
-We’ve released a set of tools and services to generate up to SLSA 3 provenance, and plan to develop further tooling soon.<br><br>
+                <div class="rounded-lg text-green p-5 border border-green-400 inline-block mt-8 md:mt-0 mb-8 h4 font-semibold">SLSA v1.0 is now available!</div>
+               <br><br>
 Google has been using an internal version of SLSA since 2013 and requires it for all of their production workloads.</p>
             </div>
         </div>
