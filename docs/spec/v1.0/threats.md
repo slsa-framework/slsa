@@ -125,7 +125,7 @@ expected.
 *Threat:* Build from a version of the code that includes modifications after
 checkout.
 
-*Mitigation:* Build service pulls directly from the source repository and
+*Mitigation:* Build platform pulls directly from the source repository and
 accurately records the source location in provenance.
 
 *Example:* Adversary fetches from MyPackage's source repo, makes a local commit,
@@ -209,7 +209,7 @@ by determined adversaries.
 
 *Example 1 (Build L2):* Provenance is generated on the build worker, which the
 adversary has control over. Adversary uses a malicious process to get the build
-service to claim that it was built from source repo `good/my-package` when it
+platform to claim that it was built from source repo `good/my-package` when it
 was really built from `evil/my-package`. Solution: Builder generates and signs
 the provenance in the trusted control plane; the worker reports the output
 artifacts but otherwise has no influence over the provenance.
@@ -267,14 +267,14 @@ build running in parallel or subsequent environments.
 *Mitigation:* Builds are [isolated] from one another, with no way for one to
 affect the other or persist changes.
 
-*Example 1:* A build service runs all builds for project MyPackage on
+*Example 1:* A build platform runs all builds for project MyPackage on
 the same machine as the same Linux user. An adversary starts a malicious build
 that listens for another build and swaps out source files, then starts a benign
 build. The benign build uses the malicious build's source files, but its
 provenance says it used benign source files. Solution: The build platform
 changes architecture to isolate each build in a separate VM or similar.
 
-*Example 2:* A build service uses the same machine for subsequent
+*Example 2:* A build platform uses the same machine for subsequent
 builds. An adversary first runs a build that replaces the `make` binary with a
 malicious version, then subsequently runs an otherwise benign build. Solution:
 The builder changes architecture to start each build with a clean machine image.
@@ -283,9 +283,9 @@ The builder changes architecture to start each build with a clean machine image.
 <details><summary>Steal cryptographic secrets <span>(Build L3)</span></summary>
 
 *Threat:* Use or exfiltrate the provenance signing key or some other
-cryptographic secret that should only be available to the build service.
+cryptographic secret that should only be available to the build platform.
 
-*Mitigation:* Builds are [isolated] from the trusted build service control
+*Mitigation:* Builds are [isolated] from the trusted build platform control
 plane, and only the control plane has [access][unforgeable] to cryptographic
 secrets.
 
@@ -304,7 +304,7 @@ benign build process.
 *Mitigation:* Build caches must be [isolate][isolated] between builds to prevent
 such cache poisoning attacks.
 
-*Example:* Build system uses a build cache across builds, keyed by the hash of
+*Example:* Build platform uses a build cache across builds, keyed by the hash of
 the source file. Adversary runs a malicious build that creates a "poisoned"
 cache entry with a falsified key, meaning that the value wasn't really produced
 from that source. A subsequent build then picks up that poisoned cache entry.
@@ -339,8 +339,8 @@ correct way.
 expected value.
 
 *Example:* MyPackage is expected to be built on Google Cloud Build, which is
-trusted up to Build L3. Adversary builds on SomeOtherBuildService, which is only
-trusted up to Build L2, and then exploits SomeOtherBuildService to inject
+trusted up to Build L3. Adversary builds on SomeOtherBuildPlatform, which is only
+trusted up to Build L2, and then exploits SomeOtherBuildPlatform to inject
 malicious behavior. Solution: Verifier rejects because builder is not as
 expected.
 
@@ -519,5 +519,4 @@ collision resistance.
 [exists]: requirements.md#provenance-exists
 [isolated]: requirements.md#isolated
 [unforgeable]: requirements.md#provenance-unforgeable
-[service]: requirements.md#build-service
 [supply chain threats]: threats-overview

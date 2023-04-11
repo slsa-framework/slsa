@@ -97,7 +97,7 @@ testimonials:
         <div class="flex flex-wrap justify-between items-center">
             <div class="text w-full md:w-1/2">
                 <h4 class="h2 mb-8">Levels of assurance</h4>
-                <p>SLSA levels are like a common language to talk about how secure software, supply chains and their component parts really are. From source to system, the levels blend together industry-recognized best practices to create four compliance levels of increasing assurance.
+                <p>SLSA levels are like a common language to talk about how secure software, supply chains and their component parts really are. From source to platform, the levels blend together industry-recognized best practices to create four compliance levels of increasing assurance.
                 These look at the builds, sources and dependencies in open source or commercial software. Starting with easy, basic steps at the lower levels to build up and protect against advanced threats later, bringing SLSA into your work means prioritized, practical measures to prevent unauthorized modifications to software, and a plan to harden that security over time.</p>
                 <a href="spec/{{ site.current_spec_version }}/levels" class="cta-link h5 font-semibold mt-8">Read the level specifications</a>
             </div>
@@ -244,7 +244,6 @@ It’s adaptable, and it’s been designed with the wider security ecosystem in 
             <div class="w-full md:w-1/2">
                 <div class="rounded-lg text-green p-5 border border-green-400 inline-block mt-8 md:mt-0 mb-8 h4 font-semibold">SLSA v1.0 is coming soon!</div>
                 <p>The SLSA v1.0 release candidate specification is out and <a href="/blog/2023/02/slsa-v1-rc">available for community review</a>. We anticipate a stable release soon. <br><br>
-We’ve released a set of tools and services to generate up to SLSA 3 provenance, and plan to develop further tooling soon.<br><br>
 Google has been using an internal version of SLSA since 2013 and requires it for all of their production workloads.</p>
             </div>
         </div>

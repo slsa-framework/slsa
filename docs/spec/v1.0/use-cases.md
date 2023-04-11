@@ -67,7 +67,7 @@ Reducing risk from consuming open source software
 SLSA can also be used to reduce risk for consumers of open source software. The
 focus here is to map built packages back to their canonical sources and
 dependencies. In this way, consumers need only trust a small number of secure
-build systems rather than the many thousands of developers with upload
+build platforms rather than the many thousands of developers with upload
 permissions across various packages.
 
 Example ways an open source ecosystem might use SLSA to protect users:
