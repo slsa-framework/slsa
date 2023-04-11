@@ -9,7 +9,7 @@
         "buildDefinition": {
             "buildType": string,
             "externalParameters": object,
-            "systemParameters": object,
+            "internalParameters": object,
             "resolvedDependencies": [ ...#ResourceDescriptor ],
         },
         "runDetails": {

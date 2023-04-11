@@ -70,10 +70,10 @@ against the risk of:
 
 -   Code modification (by adding a tamper-evident "seal" to code after
     source control)
--   Uploaded artifacts that were not built by the expected CI/CD system (by marking
-    artifacts with a factory "stamp" that shows which build service created it)
--   Threats against the build system (by providing "manufacturing facility"
-    best practices for build system services)
+-   Uploaded artifacts that were not built by the expected CI/CD platform (by marking
+    artifacts with a factory "stamp" that shows which build platform created it)
+-   Threats against the build platform (by providing "manufacturing facility"
+    best practices for build platform services)
 
 For more exploration of this analogy, see the blog post
 [SLSA + SBOM: Accelerating SBOM success with the help of SLSA](https://slsa.dev/blog/2022/05/slsa-sbom).
@@ -95,7 +95,7 @@ risk. SLSA gives you a way to judge the security practices of the software you
 rely on and be sure that what you receive is what you expected.
 
 **Infrastructure providers**, who provide infrastructure such as an ecosystem
-package manager, build platform, or CI/CD system. As the bridge between the
+package manager, build platform, or CI/CD platform. As the bridge between the
 producers and consumers, your adoption of SLSA enables a secure software supply
 chain between them.
 

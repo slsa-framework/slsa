@@ -1,6 +1,6 @@
 ---
 title: Distributing provenance
-description: This page covers the detailed technical requirements for distributing provenance at each SLSA level. The intended audience is system implementers and software distributors.
+description: This page covers the detailed technical requirements for distributing provenance at each SLSA level. The intended audience is platform implementers and software distributors.
 ---
 
 In order to make provenance for artifacts available after generation
