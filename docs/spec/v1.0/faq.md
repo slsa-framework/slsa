@@ -91,7 +91,7 @@ Build platform and build system have been used interchangably in the past. With
 the v1.0 specification, however, there has been a unification around the term
 platform as indicated in the [Terminology](terminology.md). The use of the word
 `system` still exists related to software and services within the build platform
-and to systems outside of a build platform like change managent systems.
+and to systems outside of a build platform like change management systems.
 
 A build service is a hosted build platform that is often run on shared infrastructure
 instead of individuals' machines and workstations. Its use has also been replaced outside

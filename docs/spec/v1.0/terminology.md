@@ -18,7 +18,7 @@ description: Before diving into the SLSA specification levels, we need to establ
     a reference to a "hosted platform" should be used. A reference to some specific
     software or tools internal to a platform can be made with "platform component" unless
     there is a more appropriate definition to use directly like "control plane." External
-    self-sescribed services and systems can continue to be called by these terms.
+    self-described services and systems can continue to be called by these terms.
 --->
 
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set
