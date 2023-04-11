@@ -66,11 +66,11 @@ the foundation of the guidance for
 [verifying build systems](verifying-systems.md), which **may or may not** form
 the basis for a future Build Platform Operations track:
 
--   Controls for access to build infrastructure and secrets along with records
-    when access is used.
--   Systems meet a to be determined set of security practices to minimize the
-    attack surface.
--   How cryptographic secrets used by the build system are stored and managed.
+-   Controls for approval, logging, and auditing of all physical and remote
+    access to platform infrastructure, cryptographic secrets, and privileged
+    debugging interfaces.
+-   Conformance to security best practices to minimize the risk of compromise.
+-   Protection of cryptographic secrets used by the build platform.
 
 </section>
 
