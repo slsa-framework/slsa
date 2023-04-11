@@ -503,7 +503,7 @@ dl.as-table {
     top: $spacer-l !important;
   }
 
-  > input[type=checkbox]:checked + div {
+  #important-messages-checkbox:checked + & {
     display: none;
   }
 
@@ -529,6 +529,12 @@ dl.as-table {
       width: 1rem;
     }
   }
+}
+
+// When the banner is shown, add enough scroll-margin to all clickable links so
+// that the clicked element is not occluded by the banner.
+#important-messages-checkbox:not(:checked) ~ main *[id] {
+  scroll-margin-top: 100px;
 }
 
 body {

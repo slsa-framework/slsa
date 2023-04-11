@@ -54,8 +54,8 @@
 {%- assign spec_name = url_parts[1] %}
 {%- assign spec_version = url_parts[2] %}
 {%- if site.data.versions[spec_name].versions[spec_version].draft %}
+<input id="important-messages-checkbox" type="checkbox" hidden>
 <section class="important-messages">
-  <input id="important-messages-checkbox" type="checkbox" hidden>
   <div>
     <label for="important-messages-checkbox" title="dismiss">✕</label>
     <p>This is a working draft of {{ spec_version }}.</p>
