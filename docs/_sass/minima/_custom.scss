@@ -556,6 +556,22 @@ body {
     }
 }
 
+// When a link is clicked, add enough scroll-padding to sure the header does not
+// occlude it, and briefly highlight it with a different color.
+html {
+    scroll-padding-top: $header-height+$spacer-m;
+    @include media-query-min($on-laptop) {
+        scroll-padding-top: $spacer-m;
+    }
+}
+.site-content :target {
+  animation: briefHighlight 2s;
+}
+@keyframes briefHighlight {
+  0% { background: $green-lighter; }
+  100% { background: none; }
+}
+
 .site-header-inner {
     background: $green-dark;
     height: $header-height;
