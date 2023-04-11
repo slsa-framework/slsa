@@ -103,12 +103,12 @@
     url: /get-started
     description: How to apply SLSA requirements to your build
 
-  - title: For organizations (TODO)
-    # TODO: add page
+  - title: For organizations
+    url: /how-to-orgs
     description: How to apply SLSA to an organization
 
-  - title: For implementers (TODO)
-    # TODO: add page
+  - title: For implementers
+    url: /how-to-infra
     description:  How to implement SLSA in source, build, and package platforms
 
 - title: Specification stages
