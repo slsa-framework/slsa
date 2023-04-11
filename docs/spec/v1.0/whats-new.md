@@ -53,9 +53,7 @@ Going forward, we commit to a consistent [versioning](/spec-stages#versioning)
 scheme based on semantic versioning. Backwards-incompatible changes will result
 in a major version increase (v2.0, v3.0, etc.); significant backwards-compatible
 changes will result in a minor version increase (v1.1, v1.2, etc.), while
-editorial changes may be made without a version increase. Regardless of version,
-the high-level meaning of a level will not change; for example "Build L3" will
-retain its meaning across major versions.
+editorial changes may be made without a version increase.
 
 For further explanation of the decisions behind v1.0, see the [SLSA v1.0
 Proposal][proposal].
