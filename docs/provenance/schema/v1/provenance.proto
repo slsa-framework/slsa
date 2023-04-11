@@ -17,7 +17,7 @@ message Provenance {
 message BuildDefinition {
   string build_type = 1;
   google.protobuf.Struct external_parameters = 2;
-  google.protobuf.Struct system_parameters = 3;
+  google.protobuf.Struct internal_parameters = 3;
   repeated ResourceDescriptor resolved_dependencies = 4;
 }
 
