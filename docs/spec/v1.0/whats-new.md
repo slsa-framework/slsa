@@ -9,21 +9,21 @@ v1.0 relative to the prior release, [v0.1].
 
 ## Summary of changes
 
-SLSA v1.0 significantly reworked the specification in response to ongoing
+SLSA v1.0 is a significant rework of the specification in response to ongoing
 feedback, filed issues, suggestions for course corrections, and other input from
 the SLSA community and early adopters. Overall, the changes prioritize
 simplicity, practicality, and stability.
 
 Overall, SLSA v1.0 is more stable and better defined than v0.1, but less
 ambitious. It corresponds roughly to the build and provenance requirements of
-the prior version's SLSA 1 through SLSA 3, deferring SLSA 4 and the source and
-common requirements to a future version. The rationale is explained
+the prior version's SLSA Levels 1 through 3, deferring SLSA Level 4 and the
+source and common requirements to a future version. The rationale is explained
 [below][stability].
 
 Other significant changes:
 
 -   [Division of the levels into multiple tracks][tracks], which are separate
-    sets of levels that measure a particular aspect of software supply chain
+    sets of levels that measure different aspects of software supply chain
     security
 -   [Reorganization and simplification of the core specification][core-spec] to
     make it easier to understand and to provide better guidance
@@ -43,7 +43,7 @@ changes.
 
 That said, some concepts from v0.1 had to be deferred to a [future
 version][future] in order to allow us to release v1.0 in a reasonable time
-frame. The deferred concepts---source requirements, hermetic builds (SLSA 4),
+frame. The deferred concepts---source requirements, hermetic builds (SLSA L4),
 and common requirements---were at significant risk of breaking changes in the
 future to address concerns from v0.1. We believed it was more valuable to
 release a small but stable base now while we work towards solidifying those
