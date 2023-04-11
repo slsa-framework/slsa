@@ -96,7 +96,7 @@ testimonials:
             </div>
             <div class="w-full md:w-1/2 md:mt-0 mt-8">
                 <p>SLSA is for everyone involved in producing, consuming, and providing infrastructure for software such as build platforms and package ecosystems.
-                SLSA can help create more trust across the entire supply chain. It can be used by producers for protection against tampering and insider threats, by consumers to verify the software they rely on is secure, and by infrastructure providers as a guideline for hardening build systems and processes.<p>
+                SLSA can help create more trust across the entire supply chain. It can be used by producers for protection against tampering and insider threats, by consumers to verify the software they rely on is secure, and by infrastructure providers as a guideline for hardening build platforms and processes.<p>
             </div>
         </div>
     </div>
