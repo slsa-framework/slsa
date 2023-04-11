@@ -80,7 +80,7 @@ describing this whole process.
 
 | Primary Term | Description
 | --- | ---
-| Platform | The transitive closure of software and services (components) that must be trusted to faithfully execute builds. The components include both the trusted control plane as well as the processes that execute untrusted tenant build steps. The platform includes software, hardware, people, and organizations.
+| Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. It includes software, hardware, people, and organizations.
 | Admin | A privileged user with administrative access to the platform, potentially allowing them to tamper with builds or the control plane.
 | Tenant | An untrusted user that builds an artifact on the platform. The tenant defines the build steps and external parameters.
 | Control plane | Build platform component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control.
