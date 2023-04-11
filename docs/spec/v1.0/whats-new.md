@@ -16,7 +16,7 @@ simplicity, practicality, and stability.
 
 Overall, SLSA v1.0 is more stable and better defined than v0.1, but less
 ambitious. It corresponds roughly to the build and provenance requirements of
-the prior version's SLSA 1 thru SLSA 3, deferring SLSA 4 and the source and
+the prior version's SLSA 1 through SLSA 3, deferring SLSA 4 and the source and
 common requirements to a future version. The rationale is explained
 [below][stability].
 
@@ -148,7 +148,7 @@ Another significant change in the v1.0 is documenting the need for provenance
 verification.
 
 SLSA v0.1 specified guidance for how to produce provenance but not how to verify
-it. This left a large gap—most threats targeted by SLSA are only mitigated by
+it. This left a large gap as most threats targeted by SLSA are only mitigated by
 verifying provenance and comparing it to expectations.
 
 SLSA v1.0 addresses this gap by providing more explicit guidance on how to
@@ -188,8 +188,8 @@ the two. The main change is to represent all "external parameters" that are
 exposed to the build platform's users, instead of differentiating between
 various inputs. Now, you can represent arbitrary parameters, as long as it is
 possible to compare these parameters to expectations. Other parts of the
-provenance format were renamed, though conceptually most concepts translate from
-the old format to the new format. For a detailed list of changes, see
+provenance format were renamed, though most concepts translate from the old
+format to the new format. For a detailed list of changes, see
 [provenance change history](/provenance/v1#change-history).
 
 In addition, the recommended
