@@ -80,7 +80,7 @@ testimonials:
         <div class="flex flex-wrap justify-between items-center">
             <div class="text w-full md:w-1/2">
                 <h4 class="h2 mb-8">Levels of assurance</h4>
-                <p>SLSA levels offer a common language to talk about the security of software supply chains and their components. These industry-recognized best practices start with simpler steps at the lower levels that build up and protect against advanced threats at the higher levels, offering increasing assurance for the builds and sources in open source or commercial software. Bringing SLSA into your work means prioritized, practical measures to prevent unauthorized modifications to software, and a plan to harden that security over time.</p>
+                <p>SLSA levels offer a common language to talk about the security of software supply chains and their components. These industry-recognized best practices start with simpler steps at the lower levels that build up and protect against advanced threats at the higher levels, offering increasing assurance for the builds and sources in software. Bringing SLSA into your work, whether that is open source or commercial, means prioritized, practical measures to prevent unauthorized modifications to software, and a plan to harden that security over time.</p>
                 <a href="spec/{{ site.current_spec_version }}/levels" class="cta-link h5 font-semibold mt-8">Read the level specifications</a>
             </div>
             <div class="w-full md:w-2/4 md:mt-0 mt-8 pl-12">
