@@ -1,10 +1,7 @@
 
 
 <header
-  class="site-header flex-none
-    {% if page.url != '/spec/{{ site.current_spec_version }}/' and page.url != {{ site.baseurl }} and page.url != '/' or page.url == '/spec/{{ site.current_spec_version }}/' -%}
-      is-specification-markdown
-    {%- endif %}"
+  class="site-header flex-none"
   x-data="{
     fixed: false,
     hidden: false,
@@ -54,8 +51,8 @@
 {%- assign spec_name = url_parts[1] %}
 {%- assign spec_version = url_parts[2] %}
 {%- if site.data.versions[spec_name].versions[spec_version].draft %}
+<input id="important-messages-checkbox" type="checkbox" hidden>
 <section class="important-messages">
-  <input id="important-messages-checkbox" type="checkbox" hidden>
   <div>
     <label for="important-messages-checkbox" title="dismiss">✕</label>
     <p>This is a working draft of {{ spec_version }}.</p>
