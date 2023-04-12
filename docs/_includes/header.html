@@ -1,10 +1,7 @@
 
 
 <header
-  class="site-header flex-none
-    {% if page.url != '/spec/{{ site.current_spec_version }}/' and page.url != {{ site.baseurl }} and page.url != '/' or page.url == '/spec/{{ site.current_spec_version }}/' -%}
-      is-specification-markdown
-    {%- endif %}"
+  class="site-header flex-none"
   x-data="{
     fixed: false,
     hidden: false,
