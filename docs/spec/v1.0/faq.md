@@ -97,7 +97,7 @@ A build service is a hosted build platform that is often run on shared infrastru
 instead of individuals' machines and workstations. Its use has also been replaced outside
 of the requirements as it relates to the build platform.
 
-## Q: How does SLSA and SLSA Provenance related to SBOM?
+## Q: How does SLSA and SLSA Provenance relate to SBOM?
 
 [Software Bill of Materials (SBOM)] are a frequently recommended tool for
 increased software supply chain rigor. An SBOM is typically focused on
