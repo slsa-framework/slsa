@@ -10,10 +10,6 @@ levels that describe increasing security guarantees.
 This is **version 1.0** of the SLSA specification, which defines the SLSA
 levels and recommended attestation formats, including provenance.
 
-## About this release candidate
-
-This release candidate is a preview of version 1.0.
-
 {%- for section in site.data.nav.v10 %}
 {%- if section.children %}
 
