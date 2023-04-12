@@ -61,7 +61,7 @@ As a software producer, you need to follow the requirements for your target
 Build level. You also need to produce and distribute attestations that
 demonstrate your software meets your desired SLSA Build level. SLSA
 recommends either the [SLSA provenance format](/provenance/) or,
-when you wish to keep the details of your build pipeline confidential, a
+if you wish to keep the details of your build pipeline confidential, a
 [SLSA Verification Summary Attestation (VSA)](/attestation_summary/) although
 the SLSA specification allows for other formats.
 
@@ -85,10 +85,10 @@ For more information about producing provenance, see
 Ideally, [package ecosystems](/spec/v1.0/terminology.md#package-model)
 distribute provenance alongside packages. If your organization...
 
--   distributes software through a third-party package ecosystem, then check with
-its provider to see if they support distributing SLSA provenance. If they do,
-then follow their instructions for distributing provenance. If they do not, then
-consider requesting that they add SLSA support or using a package ecosystem
+-   distributes software through a third-party package ecosystem, then check
+with its provider to see if they support distributing SLSA provenance. If they
+do, then follow their instructions for distributing provenance. If they do not,
+then consider requesting that they add SLSA support or using a package ecosystem
 that does support SLSA.
 -   distributes software itself (e.g. directly to consumers), then add SLSA
 provenance to your set of package artifacts.
