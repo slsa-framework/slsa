@@ -96,3 +96,22 @@ and to systems outside of a build platform like change management systems.
 A build service is a hosted build platform that is often run on shared infrastructure
 instead of individuals' machines and workstations. Its use has also been replaced outside
 of the requirements as it relates to the build platform.
+
+## Q: How does SLSA and SLSA Provenance related to SBOM
+
+Software Bill of Materials (SBOM) are a frequently recommended tool for
+increased software supply chain rigor. An SBOM is typically focused on
+understanding software in order to evaluate risk through known vulnerabilities
+and license compliance. These use-cases require fine-grained and timely data
+which can be refined to improve signal-to-noise ratio.
+
+SLSA Provenance and the Build track are focused on trustworthiness of the build
+process. To improve trustworthiness, Provenance is generated in the build
+platform's trusted control plane, which in practice results in it being coarse
+grained.
+
+While they likely include similar data, SBOMs and SLSA Provenance operate at
+different levels of abstraction. While an SBOM is not well suited as a
+requirement for the Build track, SBOMs are good practice which may form part
+of a future SLSA Vulnerabilities track. Further, SLSA Provenance can increase the
+trustworthiness of an SBOM by describing how the SBOM was created.
