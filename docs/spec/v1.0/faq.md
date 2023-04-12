@@ -117,5 +117,5 @@ of a future SLSA Vulnerabilities track. Further, SLSA Provenance can increase th
 trustworthiness of an SBOM by describing how the SBOM was created.
 
 [Software Bill of Materials (SBOM)]: https://ntia.gov/sbom
-[SLSA Provenance]: ../provenance/v1.md
+[SLSA Provenance]: ../../provenance/v1.md
 [Build track]: levels.md#build-track
