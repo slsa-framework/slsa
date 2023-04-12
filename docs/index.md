@@ -188,7 +188,7 @@ testimonials:
         </div>
         <div class="flex flex-wrap justify-center w-6/7 mx-auto md:-ml-4">
             <div class="w-full md:w-1/2 getting_started_card md:pl-4 mb-8 md:mb-0">
-              <a href="get-started#reaching-slsa-level-1" class="hover:no-underline">
+              <a href="get-started" class="hover:no-underline">
                   <div class="bg-white h-full rounded-lg p-10 flex flex-col">
                       <p class="h3 font-semibold mb-8 md:mb-6">Start using SLSA</p>
                       <p>Ready to put your project through its paces? The first on-ramp to SLSA is generating provenance. We’ve put together a walkthrough with the steps you’ll need to take and available tools you can use.</p>
