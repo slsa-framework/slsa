@@ -19,14 +19,15 @@ spec:
       status: Approved
     v1.0-rc1:
       name: Version 1.0 RC1
-      status: Candidate
+      status: Retired
+      hidden: true
     v1.0-rc2:
       name: Version 1.0 RC2
-      status: Candidate
+      status: Retired
+      hidden: true
     v1.0:
-      name: Version 1.0 (DRAFT)
-      status: Draft
-      draft: true
+      name: Version 1.0
+      status: Approved
 
 provenance:
   versions:
@@ -38,14 +39,15 @@ provenance:
       status: Approved
     v1-rc1:
       name: Version 1.0 RC1
-      status: Candidate
+      status: Retired
+      hidden: true
     v1-rc2:
       name: Version 1.0 RC2
-      status: Candidate
+      status: Retired
+      hidden: true
     v1:
-      name: Version 1.0 (DRAFT)
-      status: Draft
-      draft: true
+      name: Version 1.0
+      status: Approved
 
 verification_summary:
   versions:
@@ -57,8 +59,8 @@ verification_summary:
       status: Approved
     v1-rc2:
       name: Version 1.0 RC2
-      status: Candidate
+      status: Retired
+      hidden: true
     v1:
-      name: Version 1.0 (DRAFT)
-      status: Draft
-      draft: true
+      name: Version 1.0
+      status: Approved
