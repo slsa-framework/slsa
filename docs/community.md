@@ -134,7 +134,7 @@ Google has been using an internal version of SLSA since 2013 and requires it for
                     <ul>
                         <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/brunodom">Bruno Domingues</a> - Intel</li>
                         <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/david-a-wheeler">David A. Wheeler</a> - Linux Foundation</li>
-                        <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/joshuagl">Joshua Lock</a> - VMware</li>
+                        <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/joshuagl">Joshua Lock</a> - Verizon</li>
                         <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/kimsterv">Kim Lewandowski</a> - Chainguard</li>
                         <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/MarkLodato">Mark Lodato</a> - Google</li>
                         <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/mlieberman85">Mike Lieberman</a> - Kusari/CNCF</li>
