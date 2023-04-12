@@ -107,7 +107,7 @@
     url: /how-to-orgs
     description: How to apply SLSA to an organization
 
-  - title: For implementers
+  - title: For infrastructure providers
     url: /how-to-infra
     description:  How to implement SLSA in source, build, and package platforms
 

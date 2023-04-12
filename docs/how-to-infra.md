@@ -8,23 +8,26 @@ This is a quick-start guide for implementers that want to support
 SLSA for their users. The work involved in supporting SLSA differs depending
 on the sort of infrastructure or tooling you provide.
 
-If you provide...
+## Types of infrastructure
 
--   **build automation or CI/CD,** then you first need to verify that your
-infrastructure is suitable to produce SLSA provenance. To learn more about
-verifying your system for SLSA conformance, see
+### Build platform
+
+1. Verify that your infrastructure is suitable to produce SLSA provenance. To
+learn more about verifying your system for SLSA conformance, see
 [Verifying build platforms](/spec/v1.0/verifying-systems).
-After verifying your system, you need to support generating SLSA provenance. To
-learn more about producing provenance, see
-[Producing artifacts](/spec/v1.0/requirements). To learn more about the SLSA
-provenance format, see [Provenance](/provenance/v1).
--   **a [package registry](/spec/v1.0/terminology.md#package-model),** then you
-need to verify and distribute provenance for the software you distribute. To
-learn more about verifying provenance, see
-[Verifying artifacts](/spec/v1.0/verifying-artifacts). To learn more about
+2. Add support generating SLSA provenance. To learn more about producing
+provenance, see [Producing artifacts](/spec/v1.0/requirements). To learn more
+about the SLSA provenance format, see [Provenance](/provenance/v1).
+
+## [Package registry](/spec/v1.0/terminology.md#package-model)
+1. Verify provenance for the software you distribute. To
+learn more about verifying provenance, see 
+[Verifying artifacts](/spec/v1.0/verifying-artifacts).
+2. Distribute provenance for the software you distribute. To learn more about
 distributing provenance, see
 [Distributing provenance](/spec/v1.0/distributing-provenance).
--   **a compiler or other CLI build tool,** then we recommend you do nothing.
-While your tool can produce SLSA provenance, it will never be able to reach
-Build levels beyond Build Level 1. Instead, encourage your users to produce
-SLSA provenance in their build automation tool or CI/CD pipeline.
+
+## Compiler or other CLI build tool
+1. Do nothing. While your tool can produce SLSA provenance, it will never be
+able to reach Build levels beyond Build Level 1. Instead, encourage your users
+to produce SLSA provenance in their build platform.

@@ -5,8 +5,8 @@ layout: standard
 ---
 
 This is a quick-start guide for organizations that want to adopt SLSA. Your
-organization has two major responsibilities: choosing a SLSA level for your
-organization, and selecting tools that support your desired SLSA level.
+organization has two major responsibilities: choosing a target SLSA level for
+your organization, and selecting tools that support your desired SLSA level.
 
 ## Choosing your SLSA level
 
@@ -56,23 +56,24 @@ To learn more about the verification process, see
 
 ### For software producers
 
-As a software producer, you need to produce and distribute attestations that
+As a software producer, you need to follow the requirements for your target
+Build level. You also need to produce and distribute attestations that
 demonstrate your software meets your desired SLSA Build level. SLSA
 recommends either the [SLSA provenance format](/provenance/) or a
 [SLSA Verification Summary Attestation (VSA)](/attestation_summary/), although
 the SLSA specification allows for other formats.
 
-Ideally, build automation tools produce SLSA provenance rather than individual
+Ideally, build platformss produce SLSA provenance rather than individual
 developers. If your organization...
 
--   does not use a build automation tool, then consider adopting one that supports
+-   does not use a build platform, then consider adopting one that supports
 SLSA.
--   uses a third-party build automation tool, then check with its provider to see
+-   uses a third-party build platform, then check with its provider to see
 if they support generating SLSA provenance at your desired level. If they do,
 then follow their instructions for producing provenance. If they do not, then
 consider requesting that they add SLSA support or adopting a tool that does
 support SLSA.
--   maintains its own build automation tool, then add support for generating SLSA
+-   maintains its own build platform, then add support for generating SLSA
 provenance.
 
 For more information about producing provenance, see
@@ -88,7 +89,7 @@ then follow their instructions for distributing provenance. If they do not, then
 consider requesting that they add SLSA support or using a package ecosystem
 that does support SLSA.
 -   distributes software itself (e.g. directly to consumers), then add SLSA
-provenance to your software distributions.
+provenance to your set of package artifacts.
 
 For more information about distributing provenance, see
 [Distributing provenance](/spec/v1.0/distributing-provenance).
