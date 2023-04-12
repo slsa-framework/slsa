@@ -65,7 +65,7 @@ if you wish to keep the details of your build pipeline confidential, a
 [SLSA Verification Summary Attestation (VSA)](/attestation_summary/) although
 the SLSA specification allows for other formats.
 
-Ideally, build platformss produce SLSA provenance rather than individual
+Ideally, build platforms produce SLSA provenance rather than individual
 developers. If your organization...
 
 -   does not use a build platform, then consider adopting one that supports
