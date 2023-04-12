@@ -4,7 +4,7 @@ description: If you're looking to jump straight in and try SLSA, here's a quick 
 layout: standard
 ---
 
-This is a quick-start guide for implementers that want to support
+This is a quick-start guide for infrastructure providers such as build platforms or package registries that want to support
 SLSA for their users. The work involved in supporting SLSA differs depending
 on the sort of infrastructure or tooling you provide.
 

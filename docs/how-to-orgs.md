@@ -24,8 +24,9 @@ SLSA Build L2, and SLSA Build L2 includes all the guarantees of SLSA Build L1.
 Currently, though, the work required to achieve lower SLSA levels will not
 necessarily accrue toward the work needed for higher levels, because achieving a
 higher level may require migrating to a different build platform altogether.
-For that reason, **you should start with the highest level that’s possible for
-your project or organization to avoid wasted work**.
+For that reason, you should set a target level for your project or
+organization to work towards and choose a build platform which supports the
+target level, so as to avoid wasted work.
 
 <a id="tooling"></a>
 
@@ -59,8 +60,9 @@ To learn more about the verification process, see
 As a software producer, you need to follow the requirements for your target
 Build level. You also need to produce and distribute attestations that
 demonstrate your software meets your desired SLSA Build level. SLSA
-recommends either the [SLSA provenance format](/provenance/) or a
-[SLSA Verification Summary Attestation (VSA)](/attestation_summary/), although
+recommends either the [SLSA provenance format](/provenance/) or,
+when you wish to keep the details of your build pipeline confidential, a
+[SLSA Verification Summary Attestation (VSA)](/attestation_summary/) although
 the SLSA specification allows for other formats.
 
 Ideally, build platformss produce SLSA provenance rather than individual
@@ -83,7 +85,7 @@ For more information about producing provenance, see
 Ideally, [package ecosystems](/spec/v1.0/terminology.md#package-model)
 distribute provenance alongside packages. If your organization...
 
--   distributes software through a third-party software ecosystem, then check with
+-   distributes software through a third-party package ecosystem, then check with
 its provider to see if they support distributing SLSA provenance. If they do,
 then follow their instructions for distributing provenance. If they do not, then
 consider requesting that they add SLSA support or using a package ecosystem
