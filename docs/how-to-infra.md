@@ -16,7 +16,7 @@ tooling you provide.
 1.  Verify that your infrastructure is suitable to produce SLSA provenance. To
 learn more about verifying your system for SLSA conformance, see
 [Verifying build platforms](/spec/v1.0/verifying-systems).
-2.  Add support generating SLSA provenance. To learn more about producing
+2.  Add support for generating SLSA provenance. To learn more about producing
 provenance, see [Producing artifacts](/spec/v1.0/requirements). To learn more
 about the SLSA provenance format, see [Provenance](/provenance/v1).
 
