@@ -108,12 +108,21 @@ which can be refined to improve signal-to-noise ratio.
 [SLSA Provenance] and the [Build track] are focused on trustworthiness of the
 build process. To improve trustworthiness, Provenance is generated in the build
 platform's trusted control plane, which in practice results in it being coarse
-grained.
+grained. For example, in Provenance metadata completeness of
+`resolvedDependencies` information is on a best-effort basis. Further, the
+`ResourceDescriptor` type does not require version and license information or
+even a URI to the dependency's original location.
 
 While they likely include similar data, SBOMs and SLSA Provenance operate at
-different levels of abstraction. While an SBOM is not well suited as a
-requirement for the Build track, SBOMs are good practice which may form part
-of a future SLSA Vulnerabilities track. Further, SLSA Provenance can increase the
+different levels of abstraction. The fine-grained data in an SBOM typically
+describes the components present in a produced artifact, whereas SLSA
+Provenance more coarsely describes parameters of a build which are external to
+the build platform.
+
+The granularity and expressiveness of the two use-cases differs enough that
+current SBOM formats were deemed not a good fit for the requirements of
+the Build track. Yet SBOMs are a good practice and may form part of a future
+SLSA Vulnerabilities track. Further, SLSA Provenance can increase the
 trustworthiness of an SBOM by describing how the SBOM was created.
 
 SLSA Provenance, the wider [in-toto Attestation Framework] in which the
