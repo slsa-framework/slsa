@@ -403,23 +403,10 @@ details {
 }
 
 .select-dropdown {
-  background-image: url("data:image/svg+xml,%3Csvg width='12' height='7' viewBox='0 0 12 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 7L11.1962 0.25H0.803847L6 7Z' fill='%23000000'/%3E%3C/svg%3E%0A");
-  background-position: right 10px center;
-  background-repeat: no-repeat;
-  background-size: auto 15%;
-  background-color: transparent;
-  // disable default appearance
-  outline: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-  &::-ms-expand { display: none };
   cursor: pointer;
-
   position: relative;
-  min-width: 100%;
-  outline: none;
   font-family: "Prodigy";
+  font-size: 80%;
   line-height: 1;
 }
 
@@ -516,7 +503,7 @@ dl.as-table {
     top: $spacer-l !important;
   }
 
-  > input[type=checkbox]:checked + div {
+  #important-messages-checkbox:checked + & {
     display: none;
   }
 
@@ -544,6 +531,12 @@ dl.as-table {
   }
 }
 
+// When the banner is shown, add enough scroll-margin to all clickable links so
+// that the clicked element is not occluded by the banner.
+#important-messages-checkbox:not(:checked) ~ main *[id] {
+  scroll-margin-top: 100px;
+}
+
 body {
     --scrollbar-width: 0px;
     --sidebar-width: 250px;
@@ -567,6 +560,22 @@ body {
     @include media-query-min($on-laptop) {
         display: none;
     }
+}
+
+// When a link is clicked, add enough scroll-padding to sure the header does not
+// occlude it, and briefly highlight it with a different color.
+html {
+    scroll-padding-top: $header-height+$spacer-m;
+    @include media-query-min($on-laptop) {
+        scroll-padding-top: $spacer-m;
+    }
+}
+.site-content :target {
+  animation: briefHighlight 2s;
+}
+@keyframes briefHighlight {
+  0% { background: $green-lighter; }
+  100% { background: none; }
 }
 
 .site-header-inner {
@@ -669,18 +678,15 @@ body {
         text-decoration: none;
         text-indent: 0;
 
-        &:hover,
-        &:focus,
-        &.is-active {
-            color: $green-light;
-            text-decoration: none;
-        }
-
         &.is-active {
             background: $green-light;
             border-radius: 2px;
             color: $text-color;
         }
+    }
+
+    .section-title {
+        color: $green-light
     }
 }
 

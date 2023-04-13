@@ -155,7 +155,7 @@ REQUIRED for SLSA Build L1: `buildType`, `externalParameters`
 <tr><th>Field<th>Type<th>Description
 
 <tr id="buildType"><td><code>buildType</code>
-<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/field_types.md#TypeURI">TypeURI</a>)<td>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0/field_types.md#typeuri">TypeURI</a>)<td>
 
 Identifies the template for how to perform the build and interpret the
 parameters and dependencies.
@@ -302,7 +302,7 @@ be a universal and stable identifier, such as a source location or Package
 URL ([purl]).
 
 <tr id="digest"><td><code>digest</code>
-<td><a href="https://github.com/in-toto/attestation/blob/main/spec/field_types.md#DigestSet">DigestSet</a><td>
+<td><a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0/digest_set.md">DigestSet</a><td>
 
 One or more cryptographic digests of the contents of this artifact.
 
@@ -382,7 +382,7 @@ REQUIRED for SLSA Build L1: `id`
 <tr><th>Field<th>Type<th>Description
 
 <tr id="builder.id"><td><code>id</code>
-<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/field_types.md#TypeURI">TypeURI</a>)<td>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0/field_types.md#typeuri">TypeURI</a>)<td>
 
 URI indicating the transitive closure of the trusted builder. This is
 [intended][Step 1] to be the sole determiner of the SLSA Build level.
@@ -460,12 +460,12 @@ defined by `builder.id`; by default it is treated as opaque and case-sensitive.
 The value SHOULD be globally unique.
 
 <tr id="startedOn"><td><code>startedOn</code>
-<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/field_types.md#Timestamp">Timestamp</a>)<td>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0/field_types.md#timestamp">Timestamp</a>)<td>
 
 The timestamp of when the build started.
 
 <tr id="finishedOn"><td><code>finishedOn</code>
-<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/field_types.md#Timestamp">Timestamp</a>)<td>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0/field_types.md#timestamp">Timestamp</a>)<td>
 
 The timestamp of when the build completed.
 
@@ -536,10 +536,10 @@ Up front:
 
 Given an artifact and its provenance:
 
-1.  [Verify][processing-model] the envelope's signature using the roots of
-    trust, resulting in a list of recognized public keys (or equivalent).
-2.  [Verify][processing-model] that statement's `subject` matches the digest of
-    the artifact in question.
+1.  Verify the envelope's signature using the roots of trust, resulting in a
+    list of recognized public keys (or equivalent).
+2.  Verify that statement's `subject` matches the digest of the artifact in
+    question.
 3.  Verify that the `predicateType` is `https://slsa.dev/provenance/v1-rc1`.
 4.  Look up the SLSA Build Level in the roots of trust, using the recognized
     public keys and the `builder.id`, defaulting to SLSA Build L1.
@@ -573,8 +573,6 @@ Resulting threat mitigation:
 [Threat "F"]: /spec/v1.0-rc1/threats#f-upload-modified-package
 [Threat "G"]: /spec/v1.0-rc1/threats#g-compromise-package-repo
 [Threat "H"]: /spec/v1.0-rc1/threats#h-use-compromised-package
-
-[processing-model]: https://github.com/in-toto/attestation/tree/main/spec#processing-model
 
 ### Step 2: Check expectations
 
@@ -780,9 +778,9 @@ Renamed to "slsa.dev/provenance".
 
 Initial version, named "in-toto.io/Provenance"
 
-[Statement]: https://github.com/in-toto/attestation/blob/main/spec/README.md#statement
+[Statement]: https://github.com/in-toto/attestation/blob/main/spec/v1.0/statement.md
 [in-toto attestation]: https://github.com/in-toto/attestation
-[parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/README.md#parsing-rules
+[parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/v1.0/README.md#parsing-rules
 [purl]: https://github.com/package-url/purl-spec
 [threats]: /spec/v1.0-rc1/threats
 [trusted]: /spec/v1.0-rc1/principles#trust-systems-verify-artifacts

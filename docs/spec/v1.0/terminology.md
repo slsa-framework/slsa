@@ -2,6 +2,24 @@
 title: Terminology
 description: Before diving into the SLSA specification levels, we need to establish a core set of terminology and models to describe what we're protecting.
 ---
+<!--- Note on updating docs:
+* Using terms such as "developer," "maintainer," "producer," "author," and
+  "publisher" interchangeably can cause confusion.
+  *  For consistency: Whenever possible, default to "producer," in line with the
+     model of producer--consumer--infrastructure provider. "Maintainer" is reserved
+     for sections specifying the act of continuing to maintain a project after its
+     creation, or when used in a less technical context where it is unlikely to cause
+     confusion. Author is reserved for the act of making source code commits or
+     reviews. Individual is used when the context's focus is specifying a single
+     person (i.e., "an individual's workstation" or "compromised individual").
+* Using terms such as "platform," "system," and "service" interchangeably can cause
+  confusion.
+  * For consistency: Whenever possible, default to "platform." Instead of using "service,"
+    a reference to a "hosted platform" should be used. A reference to some specific
+    software or tools internal to a platform can be made with "platform component" unless
+    there is a more appropriate definition to use directly like "control plane." External
+    self-described services and systems can continue to be called by these terms.
+--->
 
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set
 of terminology and models to describe what we're protecting.
@@ -31,16 +49,31 @@ supply chains plus its own sources and builds.
 [package]: #package-model
 [SLSA Provenance]: /provenance/v1
 
+### Roles
+
+Throughout the specification, you will see reference to the following roles
+that take part in the software supply chain. Note that in practice a role may
+be filled by more than one person or an organization. Similarly, a person or
+organization may act as more than one role in a particular software supply
+chain.
+
+| Role | Description | Examples
+| --- | --- | ---
+| Producer | A party who creates software and provides it to others. Producers are often also consumers. | An open source project's maintainers. A software vendor.
+| Verifier | A party who inspect an artifact's provenance to determine the artifact's authenticity. | A business's software ingestion system. A programming language ecosystem's package registry.
+| Consumer | A party who uses software provided by a producer. The consumer may verify provenance for software they consume or delegate that responsibility to a separate verifier. | A developer who uses open source software distributions. A business that uses a point of sale system.
+| Infrastructure provider | A party who provides software or services to other roles. | A package registry's maintainers. A build platform's maintainers.
+
 ### Build model
 
 We model a build as running on a multi-tenant platform, where each execution is
 independent. A tenant defines the build by specifying parameters through some
 sort of external interface, often including a reference to a configuration file
-in source control. The platform then runs the build by interpreting the
+in source control. The control plane then runs the build by interpreting the
 parameters, fetching some initial set of dependencies, initializing the build
 environment, and then starting execution. The build then performs arbitrary
 steps, possibly fetching additional dependencies, and outputs one or more
-artifacts. Finally, for SLSA Build L2+, the platform outputs provenance
+artifacts. Finally, for SLSA Build L2+, the control plane outputs provenance
 describing this whole process.
 
 <p align="center"><img src="build-model.svg" alt="Model Build"></p>
@@ -48,10 +81,13 @@ describing this whole process.
 | Primary Term | Description
 | --- | ---
 | Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. It includes software, hardware, people, and organizations.
-| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single environment on a platform.
+| Admin | A privileged user with administrative access to the platform, potentially allowing them to tamper with builds or the control plane.
+| Tenant | An untrusted user that builds an artifact on the platform. The tenant defines the build steps and external parameters.
+| Control plane | Build platform component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control.
+| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single build environment on a platform.
 | Steps | The set of actions that comprise a build, defined by the tenant.
-| Environment | Machine, container, VM, or similar in which the build runs, initialized by the platform. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
-| External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the platform to initialize the build.
+| Build environment | The independent execution context in which the build runs, initialized by the control plane. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
+| External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the control plane to initialize the build.
 | Dependencies | Artifacts fetched during initialization or execution of the build process, such as configuration files, source artifacts, or build tools.
 | Outputs | Collection of artifacts produced by the build.
 | Provenance | Attestation (metadata) describing how the outputs were produced, including identification of the platform and external parameters.
@@ -62,7 +98,7 @@ artifact to be built, which is often a git repository; in the build model, the
 reference to this artifact is a parameter while the artifact itself is a
 dependency.
 
-For examples on how this model applies to real-world build systems, see [index
+For examples on how this model applies to real-world build platforms, see [index
 of build types](/provenance/v1#index-of-build-types).
 
 ### Package model
@@ -99,7 +135,7 @@ It is the primary identifier to which consumers attach expectations.
 | Package artifact | A file or other immutable object that is intended for distribution. |
 | Package ecosystem | A set of rules and conventions governing how packages are distributed, including how clients resolve a package name into one or more specific artifacts. |
 | Package manager client | Client-side tooling to interact with a package ecosystem. |
-| Package name | <p>The primary identifier for a mutable collection of artifacts that all represent different versions of the same software. This is the primary identifier that consumers use to obtain the software.<p>A package name is specific to an ecosystem + registry, has an owner/maintainer, is more general than a specific hash or version, and has a "correct" source location. A package ecosystem may group package names into some sort of hierarchy, such as the Group ID in Maven, though SLSA does not have a special term for this. |
+| Package name | <p>The primary identifier for a mutable collection of artifacts that all represent different versions of the same software. This is the primary identifier that consumers use to obtain the software.<p>A package name is specific to an ecosystem + registry, has a maintainer, is more general than a specific hash or version, and has a "correct" source location. A package ecosystem may group package names into some sort of hierarchy, such as the Group ID in Maven, though SLSA does not have a special term for this. |
 | Package registry | An entity responsible for mapping package names to artifacts within a packaging ecosystem. Most ecosystems support multiple registries, usually a single global registry and multiple private registries. |
 | Publish [a package] | Make an artifact available for use by registering it with the package registry. In technical terms, this means associating an artifact to a package name. This does not necessarily mean making the artifact fully public; an artifact may be published for only a subset of users, such as internal testing or a closed beta. |
 
@@ -235,15 +271,15 @@ Notes:
 
 ### Verification model
 
-Verification in SLSA is performed in two ways. Firstly, the build system is
+Verification in SLSA is performed in two ways. Firstly, the build platform is
 certified to ensure conformance with the requirements at the level claimed by
-the build system. This certification should happen on a recurring cadence with
+the build platform. This certification should happen on a recurring cadence with
 the outcomes published by the platform operator for their users to review and
 make informed decisions about which builders to trust.
 
 Secondly, artifacts are verified to ensure they meet the producer defined
 expectations of where the package source code was retrieved from and on what
-build system the package was built.
+build platform the package was built.
 
 ![Verification Model](verification-model.svg)
 
@@ -251,7 +287,7 @@ build system the package was built.
 |--------------|---- |
 | Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly. |
 | Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used. |
-| Build system certification | [Build systems are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level. |
+| Build platform certification | [Build platforms are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level. |
 
 The examples below suggest some ways that expectations and verification may be
 implemented for different, broadly defined, package ecosystems.
@@ -262,7 +298,7 @@ implemented for different, broadly defined, package ecosystems.
 | ---- | ------- |
 | Expectations | Defined by the producer's security personnel and stored in a database. |
 | Provenance verification | Performed automatically on cluster nodes before execution by querying the expectations database. |
-| Build system certification | The build system implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their conformance to SLSA requirements. |
+| Build platform certification | The build platform implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their conformance to SLSA requirements. |
 
 </details>
 
@@ -272,6 +308,6 @@ implemented for different, broadly defined, package ecosystems.
 | ---- | ------- |
 | Expectations | Defined separately for each package and stored in the package registry. |
 | Provenance verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client also verifies expectations prior to installing packages. |
-| Build system certification | Performed by the language ecosystem packaging authority. |
+| Build platform certification | Performed by the language ecosystem packaging authority. |
 
 </details>

@@ -7,7 +7,6 @@
 #           status: <string> # one of: Draft, Candidate, Approved, Retired
 #           draft: <bool, optional> # if true, display a "draft" warning banner
 #           hidden: <bool, optional> # if true, do not show in dropdown
-#       current: <version>
 #
 # Where:
 #   <spec> = specification name, i.e. first component of the URL
@@ -21,11 +20,13 @@ spec:
     v1.0-rc1:
       name: Version 1.0 RC1
       status: Candidate
+    v1.0-rc2:
+      name: Version 1.0 RC2
+      status: Candidate
     v1.0:
       name: Version 1.0 (DRAFT)
       status: Draft
       draft: true
-  current: v0.1
 
 provenance:
   versions:
@@ -38,11 +39,13 @@ provenance:
     v1-rc1:
       name: Version 1.0 RC1
       status: Candidate
+    v1-rc2:
+      name: Version 1.0 RC2
+      status: Candidate
     v1:
       name: Version 1.0 (DRAFT)
       status: Draft
       draft: true
-  current: v0.2
 
 verification_summary:
   versions:
@@ -52,8 +55,10 @@ verification_summary:
     v0.2:
       name: Version 0.2
       status: Approved
+    v1-rc2:
+      name: Version 1.0 RC2
+      status: Candidate
     v1:
       name: Version 1.0 (DRAFT)
       status: Draft
       draft: true
-  current: v0.2

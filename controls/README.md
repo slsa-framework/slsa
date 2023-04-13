@@ -35,7 +35,7 @@ desire.
 (2) Provide recipes for achieving SLSA, built on the ecosystem above:
 
 -   Identify base technologies that meet the SLSA requirements, which serves as
-    guidance to system implementers on how to build SLSA-compliant services.
-    Example: "CI/CD systems should produce provenance attestations in format X."
+    guidance to platform implementers on how to build SLSA-compliant platforms.
+    Example: "CI/CD platforms should produce provenance attestations in format X."
 -   Recommend simple end-to-end solutions for end users (software developers) to
     achieve SLSA. Example: "Configure GitHub this way to reach SLSA 3."

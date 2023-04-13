@@ -39,8 +39,6 @@ plugins:
   - jekyll-readme-index
   - jekyll-titles-from-headings
   - jekyll-relative-links
-# WARNING: Remember to update _data/nav.yml as well.
-current_spec_version: "v0.1"
 relative_links:
   collections: true
 defaults:

@@ -70,10 +70,10 @@ against the risk of:
 
 -   Code modification (by adding a tamper-evident "seal" to code after
     source control)
--   Uploaded artifacts that were not built by the expected CI/CD system (by marking
-    artifacts with a factory "stamp" that shows which build service created it)
--   Threats against the build system (by providing "manufacturing facility"
-    best practices for build system services)
+-   Uploaded artifacts that were not built by the expected CI/CD platform (by marking
+    artifacts with a factory "stamp" that shows which build platform created it)
+-   Threats against the build platform (by providing "manufacturing facility"
+    best practices for build platform services)
 
 For more exploration of this analogy, see the blog post
 [SLSA + SBOM: Accelerating SBOM success with the help of SLSA](https://slsa.dev/blog/2022/05/slsa-sbom).
@@ -83,10 +83,11 @@ For more exploration of this analogy, see the blog post
 In short: everyone involved in producing and consuming software, or providing
 infrastructure for software.
 
-**Software producers**, such as a development team or open
-source maintainers. SLSA gives you protection against insider risk and tampering
-along the supply chain to your consumers, increasing confidence that the
-software you produce reaches your consumers as you intended.
+**Software producers**, such as an open source project, a software vendor, or a
+team writing first-party code for use within the same company. SLSA gives you
+protection against tampering along the supply chain to your consumers, both
+reducing insider risk and increasing confidence that the software you produce
+reaches your consumers as you intended.
 
 **Software consumers**, such as a development team using open source packages, a
 government agency using vendored software, or a CISO judging organizational
@@ -94,7 +95,7 @@ risk. SLSA gives you a way to judge the security practices of the software you
 rely on and be sure that what you receive is what you expected.
 
 **Infrastructure providers**, who provide infrastructure such as an ecosystem
-package manager, build platform, or CI/CD system. As the bridge between the
+package manager, build platform, or CI/CD platform. As the bridge between the
 producers and consumers, your adoption of SLSA enables a secure software supply
 chain between them.
 
@@ -128,10 +129,11 @@ important to consider together with SLSA such as:
 
 -   Code quality: SLSA does not tell you whether the developers writing the
     source code followed secure coding practices.
--   Developer trust: SLSA cannot tell you whether a developer is
-    intentionally writing malicious code. If you trust a developer to write
-    code you want to consume, though, SLSA can guarantee that the code will
-    reach you without another party tampering with it.
+-   Producer trust: SLSA does not address organizations that intentionally
+    produce malicious software, but it can reduce insider risks within an
+    organization you trust. SLSA's Build Track protects against tampering during
+    or after the build, and [future SLSA tracks](future-directions.md) intend to
+    protect against unauthorized modifications of source code and dependencies.
 -   Transitive trust for dependencies: the SLSA level of an artifact is
     independent of the level of its dependencies. You can use SLSA recursively to
     also judge an artifact's dependencies on their own, but there is

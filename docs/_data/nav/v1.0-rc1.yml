@@ -11,6 +11,9 @@
       - title: Levels
         url: /spec/v1.0-rc1/levels
 
+      - title: Use cases
+        url: /spec/v1.0-rc1/use-cases
+
       - title: Guiding principles
         url: /spec/v1.0-rc1/principles
 
@@ -46,16 +49,13 @@
         url: /attestation-model
 
       - title: Provenance
-        url: /provenance/v1.0-rc1
+        url: /provenance/v1-rc1
 
       - title: VSA
-        url: /verification_summary/v1.0-rc1
+        url: /verification_summary/v1-rc1
 
     - title: Stages
       url: /spec-stages
-
-- title: Use cases
-  url: /use-cases
 
 - title: Get started
   url: /get-started
