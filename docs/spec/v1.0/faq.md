@@ -116,6 +116,15 @@ requirement for the Build track, SBOMs are good practice which may form part
 of a future SLSA Vulnerabilities track. Further, SLSA Provenance can increase the
 trustworthiness of an SBOM by describing how the SBOM was created.
 
+SLSA Provenance, the wider [in-toto Attestation Framework] in which the
+recommended format sits, and the various SBOM standards, are all rapidly
+evolving spaces. There is ongoing investigation into linking between the
+different formats and exploration of alignment on common models. This FAQ entry
+describes our understanding of the intersection efforts today. We do not know
+how things will evolve over the coming months and years, but we look forward to
+the collaboration and improved software supply chain security.
+
 [Software Bill of Materials (SBOM)]: https://ntia.gov/sbom
 [SLSA Provenance]: ../../provenance/v1.md
 [Build track]: levels.md#build-track
+[in-toto Attestation Framework]: https://github.com/in-toto/attestation/blob/main/spec/
