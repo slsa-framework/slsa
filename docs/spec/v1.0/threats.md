@@ -19,6 +19,8 @@ The examples on this page are meant to:
 
 ![Supply Chain Threats](../../images/v1.0/supply-chain-threats.svg)
 
+See [Terminology](terminology.md) for an explanation of supply chain model.
+
 ## Source threats
 
 A source integrity threat is a potential for an adversary to introduce a change

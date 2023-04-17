@@ -28,7 +28,10 @@ Verification SHOULD include the following steps:
 
 ![Threats covered by each step](/images/v1.0/supply-chain-threats-build-verification.svg)
 
-Note: This section assumes that the provenance is in the recommended
+See [Terminology](terminology.md) for an explanation of supply chain model and
+[Threats & mitigations](threats.md) for a detailed explanation of each threat.
+
+**Note:** This section assumes that the provenance is in the recommended
 [provenance format](/provenance/v1). If it is not, then the verifier SHOULD
 perform equivalent checks on provenance fields that correspond to the ones
 referenced here.
