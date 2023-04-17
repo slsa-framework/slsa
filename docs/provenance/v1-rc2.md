@@ -191,6 +191,8 @@ reproducing the build. There is no need to [verify][Verification] these
 parameters because the build system is already trusted, and in many cases it is
 not practical to do so.
 
+***NOTE:** This field is named `internalParameters` in [v1](v1.md) final.*
+
 <tr id="resolvedDependencies"><td><code>resolvedDependencies</code>
 <td>array (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0/resource_descriptor.md">ResourceDescriptor</a>)<td>
 
