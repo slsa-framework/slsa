@@ -1,5 +1,5 @@
 ---
 layout: redirect
-redirect_to_url: v0.2
+redirect_to_url: v1
 sitemap: false
 ---

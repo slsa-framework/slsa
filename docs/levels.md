@@ -1,5 +1,5 @@
 ---
 layout: redirect
-redirect_to_url: spec/v0.1/levels
+redirect_to_url: spec/v1.0/levels
 sitemap: false
 ---
