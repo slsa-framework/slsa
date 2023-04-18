@@ -98,7 +98,7 @@ Given an artifact and its provenance:
     trust, resulting in a list of recognized public keys (or equivalent).
 2.  [Verify][processing-model] that statement's `subject` matches the digest of
     the artifact in question.
-3.  Verify that the `predicateType` is `https://slsa.dev/provenance/v1?draft`.
+3.  Verify that the `predicateType` is `https://slsa.dev/provenance/v1`.
 4.  Look up the SLSA Build Level in the roots of trust, using the recognized
     public keys and the `builder.id`, defaulting to SLSA Build L1.
 
