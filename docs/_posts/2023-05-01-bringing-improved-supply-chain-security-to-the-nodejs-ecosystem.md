@@ -1,5 +1,5 @@
 ---
-title: Bringing Improved Supply Chain Security to the Node.js Ecosystem
+title: "Bringing Improved Supply Chain Security to the Node.js Ecosystem"
 author: "Ian Lewis, Laurent Simon"
 is_guest_post: false
 ---
