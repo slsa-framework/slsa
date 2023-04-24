@@ -1,4 +1,8 @@
-## Bringing Improved Supply Chain Security to the Node.js Ecosystem
+---
+title: Bringing Improved Supply Chain Security to the Node.js Ecosystem
+author: "Ian Lewis, Laurent Simon"
+is_guest_post: false
+---
 
 It has been a big month for supply chain security!
 [GitHub recently announced the public beta](https://github.blog/2023-04-19-introducing-npm-package-provenance/)
