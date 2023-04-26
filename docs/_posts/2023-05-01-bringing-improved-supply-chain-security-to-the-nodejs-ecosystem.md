@@ -55,7 +55,7 @@ for easier migration to more hardened SLSA Build levels in the future.
 
 ## Going Further with SLSA on GitHub Actions
 
-[SLSA Build L3](https://slsa.dev/spec/v1.0/levels#build-l3-hardened-builds)
+[SLSA Build L3](/spec/v1.0/levels#build-l3-hardened-builds)
 improves upon SLSA Build L2 with additional requirements. These include further
 hardening the build process by preventing build runs from influencing one
 another, and preventing secret material used to sign the provenance from being
