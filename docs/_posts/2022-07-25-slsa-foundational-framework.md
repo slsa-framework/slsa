@@ -10,7 +10,7 @@ is_guest_post: true
 SUMMARY: Software security frameworks are beginning to give organizations foundational guidance they can build on so that they can start small with easily achievable tasks, and then increase to the highest assurances of integrity. SLSA does this in four levels of maturity. NIST also recently updated one of its main cybersecurity frameworks with foundational guidance. This blog shows examples of foundational guidance from both SLSA and NIST and introduces a mapping document that illustrates the correlation among SLSA and other existing frameworks.
 <p>&nbsp;</p>
 
-Organizations large and small are eager for measured, actionable guidance on how to improve their cybersecurity supply chain posture. Well before the United States President's [Executive Order mandate](https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/), frameworks like [Supply chain Levels for Software Artifacts (SLSA)](https://slsa.dev/) were organizing practical advice for supply chain security divided into increasingly sophisticated levels that built a foundation for success.
+Organizations large and small are eager for measured, actionable guidance on how to improve their cybersecurity supply chain posture. Well before the United States President's [Executive Order mandate](https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/), frameworks like [Supply chain Levels for Software Artifacts (SLSA)](/) were organizing practical advice for supply chain security divided into increasingly sophisticated levels that built a foundation for success.
 
 These SLSA levels for software, supply chains, and their component parts start small, with easily achievable tasks to help organizations gain visibility right away and then increase to the highest assurances of integrity.
 
@@ -56,21 +56,21 @@ Organizations of all sizes and sophistication levels can prioritize, customize, 
 
 Establish a governance capability for managing and monitoring components of embedded software to manage risk across the enterprise (e.g. SBOMs paired with criticality, vulnerability, threat, and exploitability to make this more automated.)
 
-**SLSA Examples:** [Source Version Control](https://slsa.dev/spec/v0.1/requirements#version-controlled), [Scripted Builds](https://slsa.dev/spec/v0.1/requirements#scripted-build), [Provenance Available.](https://slsa.dev/spec/v0.1/requirements#available)
+**SLSA Examples:** [Source Version Control](/spec/v0.1/requirements#version-controlled), [Scripted Builds](/spec/v0.1/requirements#scripted-build), [Provenance Available.](/spec/v0.1/requirements#available)
 <p>&nbsp;</p>
 
 ### Sustaining Guidance Example
 
 Next steps to enhance Cybersecurity Supply Chain Risk Management (C-SCRM). Use confidence building mechanisms such as third-party assessment surveys, on-site visits, and formal certifications such as the ISO 27000 family.
 
-**SLSA Examples:** [Verified History Retention](https://slsa.dev/spec/v0.1/requirements#verified-history), [Build Service](https://slsa.dev/spec/v0.1/requirements#build-service), [Provenance Service Generated](https://slsa.dev/spec/v0.1/requirements#service-generated).
+**SLSA Examples:** [Verified History Retention](/spec/v0.1/requirements#verified-history), [Build Service](/spec/v0.1/requirements#build-service), [Provenance Service Generated](/spec/v0.1/requirements#service-generated).
 <p>&nbsp;</p>
 
 ### Enhancing Guidance Example
 
 Applied with the goal of advancing toward adaptive and predictive C-SCRM capabilities. Automate C-SCRM processes where applicable and practical.
 
-**SLSA Examples**: [Provenance Non-falsifiable](https://slsa.dev/spec/v0.1/requirements#non-falsifiable), [Ephemerial Environment](https://slsa.dev/spec/v0.1/requirements#ephemeral-environment), [Reproducible Build](https://slsa.dev/spec/v0.1/requirements#reproducible).
+**SLSA Examples**: [Provenance Non-falsifiable](/spec/v0.1/requirements#non-falsifiable), [Ephemerial Environment](/spec/v0.1/requirements#ephemeral-environment), [Reproducible Build](/spec/v0.1/requirements#reproducible).
 <p>&nbsp;</p>
 
 ## The Cybersecurity Framework: 2.0 and Beyond
