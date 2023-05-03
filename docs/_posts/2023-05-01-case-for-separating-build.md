@@ -19,7 +19,7 @@ SLSA v0.1 levels only work when a single entity controls the entire software sup
 ### Scenario 1: Controlled Build, CI/CD, & Partial Controlled Source 
 <image align = "right" image height = "175px" img src="https://user-images.githubusercontent.com/101211710/235576995-c15449fe-f8f6-4af0-8d5d-5bcf0e6b6d70.png" alt = "Scenario 1" />
 
-Real-world systems have complex trust boundaries, which makes it difficult to make meaningful security statements with a single attestation. The simple example (illustrated to the right) enables us to see why Build came to be separated.
+Real-world systems have complex trust and operational boundaries that make it difficult to make meaningful security statements with a single attestation. The following example illustrates why we separated SLSA into different tracks.
 
 Outsourcing portions of infrastructure to a service provider, may hinder the ability to provide a full SLSA attestation.  Organizations may want to outsource due to lack of skills or resources. However, if the provider does not have full control/visibility, 100% SLSA attestation would be unlikely.   
 
