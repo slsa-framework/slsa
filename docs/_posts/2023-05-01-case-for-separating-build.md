@@ -7,7 +7,7 @@ is_guest_post: false
 
 SLSA’s mission is to ensure the integrity of build systems and the software they produce. Our original vision was a single set of comprehensive security standards that encompassed the full software supply chain. As we iterated on the specification, we came to see that the original vision was flawed. 
 
-Supply chains by their very nature span operational domains; Interoperability is crucial in supply chains, and standards must be carefully decomposed and applied locally to ensure end-to-end security.
+Supply chains by their very nature span operational domains, and it is not common or realistic to expect a single team or organization to secure one end-to-end. Instead, we decided to decompose SLSA in a way that establishes clear ownership for each component of the supply chain and allows each owner to work in parallel.
 
 ## The case for separation
 
