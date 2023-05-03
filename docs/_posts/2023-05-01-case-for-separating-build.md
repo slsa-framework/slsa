@@ -39,6 +39,6 @@ Software Supply Chain Security is a multi-faceted problem that extends well beyo
 
 Additionally, the Supply Chain Integrity Working Group is collaborating with [SLSA and S2C2F](https://docs.google.com/document/d/1E9BvXkNhbLPj6AnUjoAbci3TI5FdnCY2zpi4UZnM7D8/edit?disco=AAAAq2cLbqE) to leverage the full potential of OSSF’s technologies together further reducing software supply chain risks.  As we continue our journey, we welcome collaboration and input from the community! 
 
-For more about our SLSA tracks, please see another great blog post [“The Breadth and Depth of SLSA”](https://slsa.dev/blog/2023/04/the-breadth-and-depth-of-slsa), by another maintainer.
+For more about our SLSA tracks, please see SLSA maintainer Michael Lieberman's blog post [“The Breadth and Depth of SLSA”](https://slsa.dev/blog/2023/04/the-breadth-and-depth-of-slsa).
 
 
