@@ -76,7 +76,7 @@ against the risk of:
     best practices for build platform services)
 
 For more exploration of this analogy, see the blog post
-[SLSA + SBOM: Accelerating SBOM success with the help of SLSA](https://slsa.dev/blog/2022/05/slsa-sbom).
+[SLSA + SBOM: Accelerating SBOM success with the help of SLSA](/blog/2022/05/slsa-sbom).
 
 ## Who is SLSA for?
 

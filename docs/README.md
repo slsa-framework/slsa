@@ -1,6 +1,6 @@
 # slsa.dev sources
 
-This directory contains sources for [https://slsa.dev](https://slsa.dev), served
+This directory contains sources for https://slsa.dev, served
 via GitHub pages and rendered with Jekyll.
 
 ## Developing and testing locally
