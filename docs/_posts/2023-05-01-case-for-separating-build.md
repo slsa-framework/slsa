@@ -33,14 +33,11 @@ CI/CD-aaS service providers may attest to some aspects of the build, while consu
 <image align = "float" image height = "275px" img src="https://user-images.githubusercontent.com/101211710/235576527-d3ab6f42-f690-482d-ae8e-2854b9f0a232.png" alt = "Scenario 2" /> 
 
 
-## Future of SLSA Tracks
+## Future SLSA Tracks
 
-The SLSA community wanted to ensure that the requirements were clear with no ambiguity for the SLSA 1.0 release.  When considering expanded use cases and the complexity that comes with them, we decided collectively to create Build as a separate track.   This allows flexibility for organizations and the open source community to adhere to some (or all) of the SLSA requirements. 
+Software Supply Chain Security is a multi-faceted problem that extends well beyond the build process, so the SLSA community expects that the Build Track is just the first of many SLSA tracks. As the framework evolves, we will expand its scope to include other critical aspects of the SDLC, such as secure source code management and dependency ingestion. For instance, future iterations of SLSA will introduce more stringent requirements for source code management in a Source Track that will ensure that the source code ingested into a build is authentic and free of common vulnerabilities. Similarly, SLSA may also explore ways to ensure that dependencies, such as third-party libraries, are following security standards, up-to-date, and free from known security issues in a dependency track. Our up-to-date roadmap is available on SLSA's [Future directions](https://slsa.dev/spec/v1.0/future-directions) page.
 
 Additionally, the Supply Chain Integrity Working Group is collaborating with [SLSA and S2C2F](https://docs.google.com/document/d/1E9BvXkNhbLPj6AnUjoAbci3TI5FdnCY2zpi4UZnM7D8/edit?disco=AAAAq2cLbqE) to leverage the full potential of OSSF’s technologies together further reducing software supply chain risks.  As we continue our journey, we welcome collaboration and input from the community! 
-
-## Closure/Conclusion
-While the build process is crucial, the SLSA contributors and maintainers recognize that Software Supply Chain Security is a multi-faceted problem that extends beyond this stage. As the framework evolves, it will expand its scope to include other critical aspects of the SDLC, such as secure source code management and dependency ingestion. For instance, future iterations of SLSA will introduce more stringent requirements for source code management in a source track that might include code reviews, vulnerability scanning, and secure coding practices. These measures will ensure that the source code ingested into a build is secure and free of common vulnerabilities. Similarly, SLSA may also explore ways to ensure that dependencies, such as third-party libraries, are following security standards, up-to-date, and free from known security issues in a dependency track.
 
 For more about our SLSA tracks, please see another great blog post [“The Breadth and Depth of SLSA”](https://slsa.dev/blog/2023/04/the-breadth-and-depth-of-slsa), by another maintainer.
 
