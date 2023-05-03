@@ -21,7 +21,7 @@ SLSA v0.1 levels only work when a single entity controls the entire software sup
 
 Real-world systems have complex trust and operational boundaries that make it difficult to make meaningful security statements with a single attestation. The following example illustrates why we separated SLSA into different tracks.
 
-Outsourcing portions of infrastructure to a service provider, may hinder the ability to provide a full SLSA attestation.  Organizations may want to outsource due to lack of skills or resources. However, if the provider does not have full control/visibility, 100% SLSA attestation would be unlikely.   
+Outsourcing portions of infrastructure to a service provider may hinder the ability to provide a full SLSA attestation.  Organizations may want to outsource due to lack of skills or resources. However, if the provider does not have full control/visibility, 100% SLSA attestation would be unlikely.   
 
 <image align = "right" image height = "200px" img src="https://user-images.githubusercontent.com/101211710/235576570-62b23cb2-fdde-4056-b4f1-9d96fc379d4d.png" alt = "Scenario 1" /> The example in the diagrams may be more common, especially in the open source community.  As the community focuses on code development, they may “outsource” the build, security checks, etc. to an organization such as GitHub.  Thus, the open source community may be able to make claim of SLSA compliance for source, but would need the attestation for the build/security vetting from the service provider (GitHub as provided in this example).
 
