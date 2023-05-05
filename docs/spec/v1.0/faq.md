@@ -96,3 +96,16 @@ and to systems outside of a build platform like change management systems.
 A build service is a hosted build platform that is often run on shared infrastructure
 instead of individuals' machines and workstations. Its use has also been replaced outside
 of the requirements as it relates to the build platform.
+
+## Q: Is SLSA the same as TACOS?
+
+No.
+[Trusted Attestation and Compliance for Open Source (TACOS)](https://github.com/tacosframework)
+is a framework authored by Tidelift.
+Per their website, TACOS is a framework for
+"for assessing the development practices of open source projects
+against a set of secure development standards specified by the (US)
+NIST Secure Software Development Framework (SSDF) V1.1."
+
+In contrast, SLSA is a community-developed framework (including criteria)
+that is part of the Open Source Security Foundation (OpenSSF).
