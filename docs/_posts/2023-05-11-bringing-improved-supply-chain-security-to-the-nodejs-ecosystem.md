@@ -111,11 +111,11 @@ npm official registry.
 
 Explore some packages that generate provenance today:
 
-- [js-cookie](https://deps.dev/npm/js-cookie)
-- [jose](https://deps.dev/npm/jose)
-- [sigstore](https://deps.dev/npm/sigstore)
-- [pacote](https://deps.dev/npm/pacote)
-- [swr](https://deps.dev/npm/swr)
+-   [js-cookie](https://deps.dev/npm/js-cookie)
+-   [jose](https://deps.dev/npm/jose)
+-   [sigstore](https://deps.dev/npm/sigstore)
+-   [pacote](https://deps.dev/npm/pacote)
+-   [swr](https://deps.dev/npm/swr)
 
 ## The value of cooperation
 
