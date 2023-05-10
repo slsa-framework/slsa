@@ -9,12 +9,12 @@ for the steps to take to reach the different SLSA levels.
 
 ## Choosing your SLSA level
 
-For all [SLSA levels](https://slsa.dev/spec/v1.0/levels), you follow the same steps:
+For all [SLSA levels](/spec/v1.0/levels), you follow the same steps:
 
 1)  Generate provenance, i.e., document your build process
 2)  Make the provenance available, to allow downstream users to verify it
 
-What differs for each level is the robustness of the build and provenance. For more information about provenance see [https://slsa.dev/provenance/](https://slsa.dev/provenance/).
+What differs for each level is the robustness of the build and provenance. For more information about provenance see [https://slsa.dev/provenance/](/provenance/).
 
 The tools discussed in this guide are freely available and believed to meet SLSA expectations. The [Builder SLSA levels section](#builder-slsa-levels) provides a more complete list. If you think a build option is misclassified or want to add one, please [open an issue](https://github.com/slsa-framework/slsa/issues) or [submit a PR](https://github.com/slsa-framework/slsa/pulls) against this page.
 
