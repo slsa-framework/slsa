@@ -86,9 +86,9 @@ seamlessly.
 jobs:
   build:
     permissions:
-      id-token: write # for creating OIDC tokens for signing.
-      contents: write # for uploading to releases.
-      packages: write # for uploading attestations.
+      id-token: write # For signing
+      contents: read # For repo checkout.
+      actions: read # For getting workflow run info.
     if: startsWith(github.ref, 'refs/tags/')
     uses: slsa-framework/slsa-github-generator/.github/workflows/builder_nodejs_slsa3.yml@v1.6.0
     with:
@@ -111,11 +111,11 @@ npm official registry.
 
 Explore some packages that generate provenance today:
 
--   [js-cookie](https://deps.dev/npm/js-cookie)
--   [jose](https://deps.dev/npm/jose)
--   [sigstore](https://deps.dev/npm/sigstore)
--   [pacote](https://deps.dev/npm/pacote)
--   [swr](https://deps.dev/npm/swr)
+- [js-cookie](https://deps.dev/npm/js-cookie)
+- [jose](https://deps.dev/npm/jose)
+- [sigstore](https://deps.dev/npm/sigstore)
+- [pacote](https://deps.dev/npm/pacote)
+- [swr](https://deps.dev/npm/swr)
 
 ## The value of cooperation
 
