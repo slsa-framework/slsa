@@ -96,3 +96,44 @@ and to systems outside of a build platform like change management systems.
 A build service is a hosted build platform that is often run on shared infrastructure
 instead of individuals' machines and workstations. Its use has also been replaced outside
 of the requirements as it relates to the build platform.
+
+## Q: How does SLSA and SLSA Provenance relate to SBOM?
+
+[Software Bill of Materials (SBOM)] are a frequently recommended tool for
+increased software supply chain rigor. An SBOM is typically focused on
+understanding software in order to evaluate risk through known vulnerabilities
+and license compliance. These use-cases require fine-grained and timely data
+which can be refined to improve signal-to-noise ratio.
+
+[SLSA Provenance] and the [Build track] are focused on trustworthiness of the
+build process. To improve trustworthiness, Provenance is generated in the build
+platform's trusted control plane, which in practice results in it being coarse
+grained. For example, in Provenance metadata completeness of
+`resolvedDependencies` information is on a best-effort basis. Further, the
+`ResourceDescriptor` type does not require version and license information or
+even a URI to the dependency's original location.
+
+While they likely include similar data, SBOMs and SLSA Provenance operate at
+different levels of abstraction. The fine-grained data in an SBOM typically
+describes the components present in a produced artifact, whereas SLSA
+Provenance more coarsely describes parameters of a build which are external to
+the build platform.
+
+The granularity and expressiveness of the two use-cases differs enough that
+current SBOM formats were deemed not a good fit for the requirements of
+the Build track. Yet SBOMs are a good practice and may form part of a future
+SLSA Vulnerabilities track. Further, SLSA Provenance can increase the
+trustworthiness of an SBOM by describing how the SBOM was created.
+
+SLSA Provenance, the wider [in-toto Attestation Framework] in which the
+recommended format sits, and the various SBOM standards, are all rapidly
+evolving spaces. There is ongoing investigation into linking between the
+different formats and exploration of alignment on common models. This FAQ entry
+describes our understanding of the intersection efforts today. We do not know
+how things will evolve over the coming months and years, but we look forward to
+the collaboration and improved software supply chain security.
+
+[Software Bill of Materials (SBOM)]: https://ntia.gov/sbom
+[SLSA Provenance]: ../../provenance/v1.md
+[Build track]: levels.md#build-track
+[in-toto Attestation Framework]: https://github.com/in-toto/attestation/blob/main/spec/
