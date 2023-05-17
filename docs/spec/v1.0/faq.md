@@ -102,7 +102,7 @@ of the requirements as it relates to the build platform.
 No.
 [Trusted Attestation and Compliance for Open Source (TACOS)](https://github.com/tacosframework)
 is a framework authored by Tidelift.
-Per their website, TACOS is a framework for
+Per their website, TACOS is a framework
 "for assessing the development practices of open source projects
 against a set of secure development standards specified by the (US)
 NIST Secure Software Development Framework (SSDF) V1.1" which
