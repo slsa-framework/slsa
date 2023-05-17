@@ -1,18 +1,22 @@
 # This file controls the version selector
 # Schema:
 #     <spec>:
+#       name: <string>                # display name
+#       current: <version>            # the current version id.
 #       versions:
-#         <version>:
-#           name: <string> # display name
-#           status: <string> # one of: Draft, Candidate, Approved, Retired
-#           draft: <bool, optional> # if true, display a "draft" warning banner
-#           hidden: <bool, optional> # if true, do not show in dropdown
+#         <version>:                  # version id; used in url path.
+#           name: <string>            # display name
+#           status: <string>          # one of: Draft, Candidate, Approved, Retired
+#           draft: <bool, optional>   # if true, display a "draft" warning banner
+#           hidden: <bool, optional>  # if true, do not show in dropdown
 #
 # Where:
 #   <spec> = specification name, i.e. first component of the URL
 #   <version> = version name, i.e. second component of the URL, e.g. v1.0
 
 spec:
+  name: Core specification
+  current: v1.0
   versions:
     v0.1:
       name: Version 0.1
@@ -30,6 +34,8 @@ spec:
       status: Approved
 
 provenance:
+  name: Provenance attestation
+  current: v1
   versions:
     v0.1:
       name: Version 0.1
@@ -50,6 +56,8 @@ provenance:
       status: Approved
 
 verification_summary:
+  name: Verification summary (VSA)
+  current: v1
   versions:
     v0.1:
       name: Version 0.1
