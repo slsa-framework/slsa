@@ -48,16 +48,39 @@
 </header>
 
 {%- assign url_parts = page.url | split: '/' %}
-{%- assign spec_name = url_parts[1] %}
+{%- assign spec_id = url_parts[1] %}
 {%- assign spec_version = url_parts[2] %}
-{%- if site.data.versions[spec_name].versions[spec_version].draft %}
-<input id="important-messages-checkbox" type="checkbox" hidden>
-<section class="important-messages">
-  <div>
-    <label for="important-messages-checkbox" title="dismiss">✕</label>
-    <p>This is a working draft of {{ spec_version }}.</p>
-    <p style="font-size: smaller">For the latest release candidate or approved
-      version, please use the version selector.</p>
-  </div>
-</section>
+{%- assign spec = site.data.versions[spec_id] %}
+{%- assign version = spec.versions[spec_version] %}
+{%- if spec and version %}
+  {%- if spec_version != spec.current or version.draft %}
+    <input id="important-messages-checkbox" type="checkbox" hidden>
+    <section class="important-messages">
+      <div>
+        <label for="important-messages-checkbox" title="dismiss">✕</label>
+        {%- if version.draft %}
+        <p>This is a working draft of {{ spec_version }}.</p>
+        <p style="font-size: smaller">For the latest release candidate or approved
+          version, please use the version selector.</p>
+        {%- endif %}
+
+        {%- if spec_version != spec.current %}
+          {%- assign current_version = spec.versions[spec.current] %}
+          {%- if current_version %}
+            {%- comment %}
+            Check if there is a page for the newest version. If there is link there, otherwise link to the spec version top page.
+            {% endcomment %}
+            {%- assign other_version = page.url | replace: spec_version, spec.current | relative_url -%}
+            {%- assign other_page = site.pages | where_exp: "page", "page.url == other_version" | first -%}
+            {%- if other_page %}
+              {%- assign new_url = other_page.url %}
+            {%- else %}
+              {%- assign new_url = "/" + spec_id + "/" + spec.current %}
+            {%- endif %}
+            <p>{{ spec.name }} {{ current_version.name | downcase }} is available now! See the newest documentation <a href="{{ new_url }}">here</a>.</p>
+          {%- endif %}
+        {%- endif %}
+      </div>
+    </section>
+  {%- endif %}
 {%- endif %}
