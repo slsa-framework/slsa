@@ -28,7 +28,7 @@ message ResourceDescriptor {
   string download_location = 4;
   string media_type = 5;
   bytes content = 6;
-  google.Protobuf.Struct annotations = 7;
+  google.protobuf.Struct annotations = 7;
 }
 
 message RunDetails {
