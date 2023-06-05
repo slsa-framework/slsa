@@ -18,21 +18,16 @@ jobs:
   build:
       runs-on: ubuntu-latest
       steps:
-      - name: Checkout
+      - name: Checkout the repository
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
-      - name: Setup pages
-        uses: actions/configure-pages@f156874f8191504dae5b037505266ed5dda6c382 # v3.0.6
-      - name: Build
+      - name: Build the SLSA webstie from `docs/` directory
         uses: actions/jekyll-build-pages@0143c158f4fa0c5dcd99499a5d00859d79f70b0e # v1.0.7
         with:
             source: ./docs
-      - name: Upload artifacts
+      - name: Upload build artifacts for deploying
         uses: actions/upload-pages-artifact@64bcae551a7b18bcb9a09042ddf1960979799187 # v1.0.8
   
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
