@@ -23,11 +23,11 @@ jobs:
       - name: Setup pages
         uses: actions/configure-pages@f156874f8191504dae5b037505266ed5dda6c382 # v3.0.6
       - name: Build
-        uses: actions/jekyll-build-pages@0143c15 # v1.0.7
+        uses: actions/jekyll-build-pages@0143c158f4fa0c5dcd99499a5d00859d79f70b0e # v1.0.7
         with:
             source: ./docs
       - name: Upload artifacts
-        uses: actions/upload-pages-artifact@64bcae5 # v1.0.8
+        uses: actions/upload-pages-artifact@64bcae551a7b18bcb9a09042ddf1960979799187 # v1.0.8
   
   deploy:
     environment:
@@ -38,4 +38,4 @@ jobs:
     steps:
       - name: Deploy Website
         id: deployment
-        uses: actions/deploy-pages@af48cf9 # v2.0.1
+        uses: actions/deploy-pages@b580d214b4e13b2a70d0e04376a86ed862ebb558 # v2.0.1
