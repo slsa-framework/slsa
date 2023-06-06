@@ -20,7 +20,7 @@ jobs:
       steps:
       - name: Checkout the repository
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
-      - name: Build the SLSA webstie from `docs/` directory
+      - name: Build the SLSA website from `docs/` directory
         uses: actions/jekyll-build-pages@0143c158f4fa0c5dcd99499a5d00859d79f70b0e # v1.0.7
         with:
             source: ./docs
