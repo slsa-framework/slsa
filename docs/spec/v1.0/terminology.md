@@ -67,30 +67,31 @@ chain.
 ### Build model
 
 We model a build as running on a multi-tenant platform, where each execution is
-independent. A tenant defines the build by specifying parameters through some
-sort of external interface, often including a reference to a configuration file
-in source control. The control plane then runs the build by interpreting the
-parameters, fetching some initial set of dependencies, initializing the build
-environment, and then starting execution. The build then performs arbitrary
-steps, possibly fetching additional dependencies, and outputs one or more
-artifacts. Finally, for SLSA Build L2+, the control plane outputs provenance
-describing this whole process.
+independent. (1) A tenant defines the build by specifying external parameters
+through some sort of interface, often including a reference to a configuration
+file in source control. The control plane then runs the build by (2)
+interpreting the parameters, (3) fetching some initial set of dependencies,
+initializing the build environment, and then starting execution. The build then
+performs arbitrary steps, (4) possibly fetching additional dependencies, (5) and
+outputs one or more artifacts. Finally, for SLSA Build L2+, (6) the control
+plane outputs provenance describing this whole process.
 
 <p align="center"><img src="build-model.svg" alt="Model Build"></p>
 
 | Primary Term | Description
 | --- | ---
-| Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. It includes software, hardware, people, and organizations.
 | Admin | A privileged user with administrative access to the platform, potentially allowing them to tamper with builds or the control plane.
-| Tenant | An untrusted user that builds an artifact on the platform. The tenant defines the build steps and external parameters.
-| Control plane | Build platform component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control.
 | Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single build environment on a platform.
-| Steps | The set of actions that comprise a build, defined by the tenant.
+| Build caches | An intermediate artifact storage managed by the platform and keyed by the hash of input sources. A build may share build caches with another following build running on the platform.
 | Build environment | The independent execution context in which the build runs, initialized by the control plane. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
-| External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the control plane to initialize the build.
+| Control plane | Build platform component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control.
 | Dependencies | Artifacts fetched during initialization or execution of the build process, such as configuration files, source artifacts, or build tools.
+| External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the control plane to initialize the build.
 | Outputs | Collection of artifacts produced by the build.
+| Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. It includes software, hardware, people, and organizations.
 | Provenance | Attestation (metadata) describing how the outputs were produced, including identification of the platform and external parameters.
+| Steps | The set of actions that comprise a build, defined by the tenant.
+| Tenant | An untrusted user that builds an artifact on the platform. The tenant defines the build steps and external parameters.
 
 Notably, there is no formal notion of "source" in the build model, just
 parameters and dependencies. Most build platforms have an explicit "source"
@@ -100,6 +101,19 @@ dependency.
 
 For examples on how this model applies to real-world build platforms, see [index
 of build types](/provenance/v1#index-of-build-types).
+
+<details><summary>Ambiguous term to avoid</summary>
+
+-   *Build recipe:* Could mean `external parameters`, but may include concrete
+    steps of how to perform a build. To avoid implementation details, we don't
+    define this term, but always use `external parameters` which is the
+    interface to a `build platform`. Similar terms are *build configuration
+    source* and *build definition*.
+-   *Builder:* Is `build platform`, but sometimes is used as `build environment`
+    or a build tool from `dependencies`. To avoid confusion, we always use
+    `build platform` which allows tenants to run builds.
+
+</details>
 
 ### Package model
 
@@ -139,13 +153,15 @@ It is the primary identifier to which consumers attach expectations.
 | Package registry | An entity responsible for mapping package names to artifacts within a packaging ecosystem. Most ecosystems support multiple registries, usually a single global registry and multiple private registries. |
 | Publish [a package] | Make an artifact available for use by registering it with the package registry. In technical terms, this means associating an artifact to a package name. This does not necessarily mean making the artifact fully public; an artifact may be published for only a subset of users, such as internal testing or a closed beta. |
 
-Ambiguous terms to avoid:
+<details><summary>Ambiguous term to avoid</summary>
 
--   *Package repository* --- Could mean either package registry or package name,
+-   *Package repository*: Could mean either package registry or package name,
     depending on the ecosystem. To avoid confusion, we always use "repository"
     exclusively to mean "source repository", where there is no ambiguity.
--   *Package manager* (without "client") --- Could mean either package
-    ecosystem, package registry, or client-side tooling.
+-   *Package manager* (without "client"): Could mean either package ecosystem,
+    package registry, or client-side tooling.
+
+</details>
 
 ### Mapping to real-world ecosystems
 
