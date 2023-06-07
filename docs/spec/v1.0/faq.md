@@ -97,6 +97,23 @@ A build service is a hosted build platform that is often run on shared infrastru
 instead of individuals' machines and workstations. Its use has also been replaced outside
 of the requirements as it relates to the build platform.
 
+## Q: Is SLSA the same as TACOS?
+
+No.
+[Trusted Attestation and Compliance for Open Source (TACOS)](https://github.com/tacosframework)
+is a framework authored by Tidelift.
+Per their website, TACOS is a framework
+"for assessing the development practices of open source projects
+against a set of secure development standards specified by the (US)
+NIST Secure Software Development Framework (SSDF) V1.1" which
+"vendors can use to provide self-attestation for the open source components
+they rely on."
+
+In contrast, SLSA is a community-developed framework---including
+adoptable guidelines for securing a software supply chain and
+mechanism to evaluate the trustworthiness of artifacts you consume---that
+is part of the Open Source Security Foundation (OpenSSF).
+
 ## Q: How does SLSA and SLSA Provenance relate to SBOM?
 
 [Software Bill of Materials (SBOM)] are a frequently recommended tool for
