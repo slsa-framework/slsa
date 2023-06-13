@@ -7,8 +7,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages.
 
 concurrency:
   group: "pages"
@@ -28,6 +26,9 @@ jobs:
         uses: actions/upload-pages-artifact@64bcae551a7b18bcb9a09042ddf1960979799187 # v1.0.8
   
   deploy:
+    permissions:
+      pages: write
+      id-token: write # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages.
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
