@@ -87,7 +87,7 @@ provenance describing this whole process.
 | Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single build environment on a platform.
 | Steps | The set of actions that comprise a build, defined by the tenant.
 | Build environment | The independent execution context in which the build runs, initialized by the control plane. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
-| Build caches | An intermediate artifact storage managed by the platform and keyed by the hash of input sources. A build may share build caches with any subsequent build running on the platform.
+| Build caches | An intermediate artifact storage managed by the platform that maps intermediate artifacts to their explicit inputs. A build may share build caches with any subsequent build running on the platform.
 | External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the control plane to initialize the build.
 | Dependencies | Artifacts fetched during initialization or execution of the build process, such as configuration files, source artifacts, or build tools.
 | Outputs | Collection of artifacts produced by the build.
