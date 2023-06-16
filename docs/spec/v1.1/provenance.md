@@ -107,8 +107,10 @@ This predicate follows the in-toto attestation [parsing rules]. Summary:
 
 ## Schema
 
-*NOTE: This section describes the fields within `predicate`. For a description
-of the other top-level fields, such as `subject`, see [Statement].*
+### Summary
+
+*NOTE: This summary (in cue) is informative. In the event of a
+disagreement with the text description, the text is authoritative.*
 
 <!-- Note: While this happens to be a valid cue file, we're really just using it
 as a human-readable summary of the schema. We don't want readers to have to
@@ -122,7 +124,15 @@ features. -->
 <details>
 <summary>Protocol buffer schema</summary>
 
+*NOTE: This summary (in protobuf) is informative. In the event of a
+disagreement with the text description, the text is authoritative.*
+
 Link: [provenance.proto](schema/provenance.proto)
+
+<!-- Note: This protobuf definition prioritises being a human-readable summary
+of the schema for readers of the specification. A version of the protobuf
+definition useful for code generation is maintained in the
+[in-toto attestation] repository. -->
 
 ```proto
 {% include_relative schema/provenance.proto %}
@@ -131,6 +141,9 @@ Link: [provenance.proto](schema/provenance.proto)
 </details>
 
 ### Provenance
+
+*NOTE: This section describes the fields within `predicate`. For a description
+of the other top-level fields, such as `subject`, see [Statement].*
 
 [Provenance]: #provenance
 
@@ -162,7 +175,7 @@ REQUIRED for SLSA Build L1: `buildType`, `externalParameters`
 <tr><th>Field<th>Type<th>Description
 
 <tr id="buildType"><td><code>buildType</code>
-<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1/field_types.md#typeuri">TypeURI</a>)<td>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/field_types.md#typeuri">TypeURI</a>)<td>
 
 Identifies the template for how to perform the build and interpret the
 parameters and dependencies.
@@ -200,7 +213,7 @@ parameters because the build platform is already trusted, and in many cases it i
 not practical to do so.
 
 <tr id="resolvedDependencies"><td><code>resolvedDependencies</code>
-<td>array (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1/resource_descriptor.md">ResourceDescriptor</a>)<td>
+<td>array (<a href="https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/resource_descriptor.md">ResourceDescriptor</a>)<td>
 
 Unordered collection of artifacts needed at build time. Completeness is best
 effort, at least through SLSA Build L3. For example, if the build script
@@ -308,7 +321,7 @@ have correctly performed the operation and populated this provenance.
 Metadata about this particular execution of the build.
 
 <tr id="byproducts"><td><code>byproducts</code>
-<td>array (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1/resource_descriptor.md">ResourceDescriptor</a>)<td>
+<td>array (<a href="https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/resource_descriptor.md">ResourceDescriptor</a>)<td>
 
 Additional artifacts generated during the build that are not considered
 the "output" of the build but that might be needed during debugging or
@@ -331,7 +344,7 @@ REQUIRED for SLSA Build L1: `id`
 <tr><th>Field<th>Type<th>Description
 
 <tr id="builder.id"><td><code>id</code>
-<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1/field_types.md#typeuri">TypeURI</a>)<td>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/field_types.md#typeuri">TypeURI</a>)<td>
 
 URI indicating the transitive closure of the trusted build platform. This is
 [intended](verifying-artifacts#step-1-check-slsa-build-level)
@@ -352,7 +365,7 @@ The `builder.id` URI SHOULD resolve to documentation explaining:
 -   The interpretation of any extension fields.
 
 <tr id="builderDependencies"><td><code>builderDependencies</code>
-<td>array (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1/resource_descriptor.md">ResourceDescriptor</a>)<td>
+<td>array (<a href="https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/resource_descriptor.md">ResourceDescriptor</a>)<td>
 
 Dependencies used by the orchestrator that are not run within the workload
 and that do not affect the build, but might affect the provenance generation
@@ -409,12 +422,12 @@ defined by `builder.id`; by default it is treated as opaque and case-sensitive.
 The value SHOULD be globally unique.
 
 <tr id="startedOn"><td><code>startedOn</code>
-<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1/field_types.md#timestamp">Timestamp</a>)<td>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/field_types.md#timestamp">Timestamp</a>)<td>
 
 The timestamp of when the build started.
 
 <tr id="finishedOn"><td><code>finishedOn</code>
-<td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1/field_types.md#timestamp">Timestamp</a>)<td>
+<td>string (<a href="https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/field_types.md#timestamp">Timestamp</a>)<td>
 
 The timestamp of when the build completed.
 
@@ -578,9 +591,9 @@ Renamed to "slsa.dev/provenance".
 
 Initial version, named "in-toto.io/Provenance"
 
-[Statement]: https://github.com/in-toto/attestation/blob/main/spec/v1/statement.md
+[Statement]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/statement.md
 [in-toto attestation]: https://github.com/in-toto/attestation
-[parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/v1/README.md#parsing-rules
+[parsing rules]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/README.md#parsing-rules
 [purl]: https://github.com/package-url/purl-spec
 [threats]: threats
 [trusted]: principles#trust-systems-verify-artifacts
