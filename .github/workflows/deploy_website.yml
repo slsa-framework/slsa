@@ -17,13 +17,13 @@ jobs:
       runs-on: ubuntu-latest
       steps:
       - name: Checkout the repository
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
       - name: Build the SLSA website from `docs/` directory
         uses: actions/jekyll-build-pages@0143c158f4fa0c5dcd99499a5d00859d79f70b0e # v1.0.7
         with:
             source: ./docs
       - name: Upload build artifacts for deploying
-        uses: actions/upload-pages-artifact@64bcae551a7b18bcb9a09042ddf1960979799187 # v1.0.8
+        uses: actions/upload-pages-artifact@66b63f4a7de003f4f00cc8e9af4b83b8f2abdb96 # v1.0.9
   
   deploy:
     permissions:
@@ -37,4 +37,4 @@ jobs:
     steps:
       - name: Deploy Website
         id: deployment
-        uses: actions/deploy-pages@b580d214b4e13b2a70d0e04376a86ed862ebb558 # v2.0.1
+        uses: actions/deploy-pages@ee48c7b82e077d7b8ef30b50a719e6a792a50c9a # v2.0.2
