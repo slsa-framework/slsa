@@ -104,14 +104,14 @@ of build types](/provenance/v1#index-of-build-types).
 
 <details><summary>Ambiguous terms to avoid</summary>
 
--   *Build recipe*: Could mean `external parameters`, but may include concrete
+-   *Build recipe:* Could mean *external parameters,* but may include concrete
     steps of how to perform a build. To avoid implementation details, we don't
-    define this term, but always use `external parameters` which is the
-    interface to a `build platform`. Similar terms are *build configuration
+    define this term, but always use "external parameters" which is the
+    interface to a build platform. Similar terms are *build configuration
     source* and *build definition*.
--   *Builder*: Is `build platform`, but sometimes is used as `build environment`
-    or a build tool from `dependencies`. To avoid confusion, we always use
-    `build platform` to mean the system which allows tenants to run builds.
+-   *Builder*: Is *build platform*, but sometimes is used as *build environment*
+    or a build tool from *dependencies*. To avoid confusion, we always use
+    "build platform" to mean the system which allows tenants to run builds.
 
 </details>
 
@@ -155,7 +155,7 @@ It is the primary identifier to which consumers attach expectations.
 
 <details><summary>Ambiguous terms to avoid</summary>
 
--   *Package repository*: Could mean either package registry or package name,
+-   *Package repository:* Could mean either package registry or package name,
     depending on the ecosystem. To avoid confusion, we always use "repository"
     exclusively to mean "source repository", where there is no ambiguity.
 -   *Package manager* (without "client"): Could mean either package ecosystem,
