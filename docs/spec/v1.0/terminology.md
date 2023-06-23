@@ -109,9 +109,11 @@ of build types](/provenance/v1#index-of-build-types).
     define this term, but always use "external parameters" which is the
     interface to a build platform. Similar terms are *build configuration
     source* and *build definition*.
--   *Builder*: Is *build platform*, but sometimes is used as *build environment*
-    or a build tool from *dependencies*. To avoid confusion, we always use
-    "build platform" to mean the system which allows tenants to run builds.
+-   *Builder:* Usually means *build platform*, but might be used for *build
+    environment*, the user who invoke the build, or a build tool from
+    *dependencies*. To avoid confusion, we always use "build platform". The only
+    exception is in the [provenance](/provenance/v1), where `builder` is used as
+    a more concise field name.
 
 </details>
 
