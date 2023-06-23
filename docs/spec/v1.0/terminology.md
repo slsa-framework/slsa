@@ -120,7 +120,7 @@ of build types](/provenance/v1#index-of-build-types).
 ### Package model
 
 Software is distributed in identifiable units called <dfn>packages</dfn>
-according the the rules and conventions of a <dfn>package ecosystem</dfn>.
+according the rules and conventions of a <dfn>package ecosystem</dfn>.
 Examples of formal ecosystems include [Python/PyPA](https://www.pypa.io),
 [Debian/Apt](https://wiki.debian.org/DebianRepository/Format), and
 [OCI](https://github.com/opencontainers/distribution-spec), while examples of
