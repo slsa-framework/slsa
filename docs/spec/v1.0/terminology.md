@@ -110,7 +110,7 @@ of build types](/provenance/v1#index-of-build-types).
     interface to a build platform. Similar terms are *build configuration
     source* and *build definition*.
 -   *Builder:* Usually means *build platform*, but might be used for *build
-    environment*, the user who invoke the build, or a build tool from
+    environment*, the user who invoked the build, or a build tool from
     *dependencies*. To avoid confusion, we always use "build platform". The only
     exception is in the [provenance](/provenance/v1), where `builder` is used as
     a more concise field name.
