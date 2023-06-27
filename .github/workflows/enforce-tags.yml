@@ -1,0 +1,30 @@
+name: "Lint PR name"
+
+on:
+  pull_request_target:
+  pull_request:
+
+permissions:
+  pull-requests: read
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: semantic-pull-request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: amannn/action-semantic-pull-request@c3cd5d1ea3580753008872425915e343e351ab54
+        with:
+          types: |
+            spec
+            editorial
+            docs
+            style
+            impl
+	  subjectPatternError: |
+            The subject "{subject}" found in the pull request title "{title}"
+            didn't match the configured pattern. Please ensure that the subject
+            doesn't start with an uppercase character. For acceptable tags, see
+	    CONTRIBUTING.md.
+

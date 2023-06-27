@@ -54,20 +54,31 @@ this is not currently enforced).
 
 All changes require peer review through GitHub's pull request feature.
 
--   Changes to the specification, such as [Requirements](docs/requirements.md)
-    or the [Provenance schema](docs/provenance/), require approval from **two
-    steering committee members**, unless the change does not affect the meaning
-    (e.g. typo fix or minor reformatting.)
+Review process:
+1. Ensure your PR and all its commits have an appropriate tag and a descriptive
+title. See the chart below for the list of tags and their meanings.
+2. Do an initial round of review with a single reviewer.
+3. Add @slsa-framework/slsa-steering-committee as a reviewer. You will need a
+different number of approvers for different PR tags. Your reviewers may ask that
+you change to a different PR tag.
+4. Wait an appropriate amount of time to allow for lazy consensus. Different
+tags have different minimum waiting periods. The waiting period begins at the
+timestamp of either tha final required approval or the latest non-author
+comment, whichever is later.
+5. Once the waiting period has passed, squash+merge your PR. Always squash+merge
+unless your reviewers ask you to do otherwise.
 
-    -   Do an initial round of review with a single reviewer.
-    -   Add @slsa-framework/slsa-steering-committee as a reviewer and make it
-        clear that you are looking for at least two approvers.
-    -   Wait at least one week before submitting to give the community time to
-        comment.
+| Tag | Description | Waiting period | # Approvers |
+|---|---|---|---|
+| `spec` | A change to the meaning of the specification | 72h | 3 |
+| `editorial` | A clarification to the specification that does not change its meaning | 24h | 2 |
+| `docs` | A change to a non-specification page. | 24h | 2 |
+| `style` | A user-visible style or layout change. No context changes. | 0h | 1 |
+| `impl` | A user-invisible change, such as editing a README or the repo configuration. | 0h | 1 |
 
--   Other changes only require **one approver**. Any member of @slsa-framework
-    can approve. There is no requirement for the author and reviewer to
-    represent different companies/organizations.
+Note: PR authors with write access to the repo count as approvers for their own
+PRs. For example, if the author of a PR with the `spec` tag has write access to
+to the repo, then the PR only requires two additional approvers before merging.
 
 ### Signing your work
 
