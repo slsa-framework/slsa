@@ -55,18 +55,18 @@ this is not currently enforced).
 All changes require peer review through GitHub's pull request feature.
 
 Review process:
-1. Ensure your PR and all its commits have an appropriate tag and a descriptive
+
+1.  Ensure your PR and all its commits have an appropriate tag and a descriptive
 title. See the chart below for the list of tags and their meanings.
-2. Do an initial round of review with a single reviewer.
-3. Add @slsa-framework/slsa-steering-committee as a reviewer. You will need a
-different number of approvers for different PR tags. Your reviewers may ask that
+2.  GitHub will automatically assign the maintainers as reviewers. You will need a
+different number of approvals for different PR tags. Your reviewers may ask that
 you change to a different PR tag.
-4. Wait an appropriate amount of time to allow for lazy consensus. Different
+3.  Wait an appropriate amount of time to allow for lazy consensus. Different
 tags have different minimum waiting periods. The waiting period begins at the
-timestamp of either tha final required approval or the latest non-author
+timestamp of either the final required approval or the latest non-author
 comment, whichever is later.
-5. Once the waiting period has passed, squash+merge your PR. Always squash+merge
-unless your reviewers ask you to do otherwise.
+4.  Once the waiting period has passed, a maintainer will merge your PR. Expect
+your PR to be squashed+merged unless your reviewers advise you otherwise.
 
 | Tag | Description | Waiting period | # Approvers |
 |---|---|---|---|
