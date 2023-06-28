@@ -67,6 +67,9 @@ timestamp of either the final required approval or the latest non-author
 comment, whichever is later.
 4.  Once the waiting period has passed, a maintainer will merge your PR. Expect
 your PR to be squashed+merged unless your reviewers advise you otherwise.
+If your PR has not been merged within 48h of the waiting period having passed,
+and a reason for that has not been added as a PR comment, use the PR's comment
+thread to request the PR be merged.
 
 | Tag | Description | Waiting period | # Approvers |
 |---|---|---|---|
