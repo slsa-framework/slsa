@@ -66,17 +66,33 @@ chain.
 
 ### Build model
 
-We model a build as running on a multi-tenant platform, where each execution is
-independent. A tenant defines the build by specifying external parameters
-through some sort of interface, often including a reference to a configuration
-file in source control. The control plane then runs the build by interpreting
-the parameters, fetching some initial set of dependencies, initializing the
-build environment, and then starting execution. The build then performs
-arbitrary steps, possibly fetching additional dependencies, and outputs one or
-more artifacts. Finally, for SLSA Build L2+, the control plane outputs
-provenance describing this whole process.
-
 <p align="center"><img src="build-model.svg" alt="Model Build"></p>
+
+We model a build as running on a multi-tenant *build platform*, where each
+execution is independent.
+
+1.  A tenant invokes the build by specifying *external parameters* through an
+    interface, either directly or via some trigger. Usually, at least one of
+    these parameters is a reference to a dependency, as noted below.
+2.  The build platform's *control plane* interprets these external parameters,
+    fetches an initial set of *dependencies*, initializes a *build environment*,
+    and then starts the execution within that environment.
+3.  The build then performs arbitrary steps, which might include fetching
+    additional *dependencies*, and then writes one or more *output* artifacts.
+    The steps within the build environment are under the tenant's control.
+    The build platform isolates between build environments to some
+    degree (which is measured by the SLSA Build Level).
+4.  Finally, for SLSA Build L2+, the control plane outputs *provenance*
+    describing this whole process.
+
+Notably, there is no formal notion of "source" in the build model, just
+parameters and dependencies. Most build platforms have an explicit "source"
+artifact to be built, which is often a git repository; in the build model, the
+reference to this artifact is a parameter while the artifact itself is a
+dependency.
+
+For examples on how this model applies to real-world build platforms, see [index
+of build types](/provenance/v1#index-of-build-types).
 
 | Primary Term | Description
 | --- | ---
@@ -92,15 +108,6 @@ provenance describing this whole process.
 | Dependencies | Artifacts fetched during initialization or execution of the build process, such as configuration files, source artifacts, or build tools.
 | Outputs | Collection of artifacts produced by the build.
 | Provenance | Attestation (metadata) describing how the outputs were produced, including identification of the platform and external parameters.
-
-Notably, there is no formal notion of "source" in the build model, just
-parameters and dependencies. Most build platforms have an explicit "source"
-artifact to be built, which is often a git repository; in the build model, the
-reference to this artifact is a parameter while the artifact itself is a
-dependency.
-
-For examples on how this model applies to real-world build platforms, see [index
-of build types](/provenance/v1#index-of-build-types).
 
 <details><summary>Ambiguous terms to avoid</summary>
 
