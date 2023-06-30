@@ -60,28 +60,35 @@ Review process:
 
     -   PR title is of the form `<tag>: <title>`, where `<tag>` is one of the
         values in the table below.
+
     -   PR title concisely explains *what* the PR does.
+
     -   PR description explains *what* and *why* in a bit more detail, providing
         enough context for a reader to understand the change. See
         [Writing good CL descriptions](https://google.github.io/eng-practices/review/developer/cl-descriptions.html)
         for more advice ("CL" = PR and "first line" = PR title; ignore the
         section about tags.) Summary:
+
     -   Use imperative tense, e.g. "update X" (not "updated X" or "updates X")
+
     -   Example of a good PR title and description:
         https://github.com/slsa-framework/slsa/pull/840 (predates our `<tag>`
         convention).
-2.  GitHub will automatically assign the maintainers as reviewers. You will need a
-different number of approvals for different PR tags. Your reviewers may ask that
-you change to a different PR tag.
+
+2.  GitHub will automatically assign the maintainers as reviewers. You will need
+    a different number of approvals for different PR tags. Your reviewers may
+    ask that you use a different PR tag.
+
 3.  Wait an appropriate amount of time to allow for lazy consensus. Different
-tags have different minimum waiting periods. The waiting period begins at the
-timestamp of either the final required approval or the latest non-author
-comment, whichever is later.
+    tags have different minimum waiting periods. The waiting period begins at
+    the timestamp of either the final required approval or the latest non-author
+    comment, whichever is later.
+
 4.  Once the waiting period has passed, a maintainer will merge your PR. Expect
-your PR to be squashed+merged unless your reviewers advise you otherwise.
-If your PR has not been merged within 48h of the waiting period having passed,
-and a reason for that has not been added as a PR comment, use the PR's comment
-thread to request the PR be merged.
+    your PR to be squashed+merged unless your reviewers advise you otherwise.
+    If your PR has not been merged within 48h of the waiting period having
+    passed, and a reason for that has not been added as a PR comment, use the
+    PR's comment thread to request the PR be merged.
 
 | Tag | Description | Waiting period | # Approvers |
 |---|---|---|---|
