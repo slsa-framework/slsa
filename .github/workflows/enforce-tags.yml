@@ -14,7 +14,7 @@ jobs:
       - name: semantic-pull-request
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: amannn/action-semantic-pull-request@c3cd5d1ea3580753008872425915e343e351ab54
+        uses: amannn/action-semantic-pull-request@c3cd5d1ea3580753008872425915e343e351ab54 # v5.2.0
         with:
           types: |
             spec
