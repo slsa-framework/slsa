@@ -2,7 +2,6 @@ name: "Lint PR name"
 
 on:
   pull_request_target:
-  pull_request:
 
 permissions:
   pull-requests: read
@@ -22,9 +21,3 @@ jobs:
             docs
             style
             impl
-          subjectPatternError: |
-            The subject "{subject}" found in the pull request title "{title}"
-            didn't match the configured pattern. Please ensure that the subject
-            doesn't start with an uppercase character. For acceptable tags, see
-            CONTRIBUTING.md.
-
