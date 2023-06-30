@@ -289,7 +289,7 @@ cryptographic secret that should only be available to the build service.
 plane, and only the control plane has [access][unforgeable] to cryptographic
 secrets.
 
-*Example:* Provence is signed on the build worker, which the adversary has
+*Example:* Provenance is signed on the build worker, which the adversary has
 control over. Adversary uses a malicious process that generates false provenance
 and signs it using the provenance signing key. Solution: Builder generates and
 signs provenance in the trusted control plane; the worker has no access to the
