@@ -20,7 +20,7 @@ learn more about verifying your system for SLSA conformance, see
 provenance, see [Producing artifacts](/spec/v1.0/requirements). To learn more
 about the SLSA provenance format, see [Provenance](/provenance/v1).
 
-## [Package registry](/spec/v1.0/terminology.md#package-model)
+### [Package registry](/spec/v1.0/terminology.md#package-model)
 
 1.  Verify provenance for the software you distribute. To
 learn more about verifying provenance, see
@@ -29,7 +29,7 @@ learn more about verifying provenance, see
 distributing provenance, see
 [Distributing provenance](/spec/v1.0/distributing-provenance).
 
-## Compiler or other CLI build tool
+### Compiler or other CLI build tool
 
 1.  Do nothing. While your tool can produce SLSA provenance, it will never be
 able to reach Build levels beyond Build Level 1. Instead, encourage your users
