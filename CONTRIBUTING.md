@@ -54,20 +54,55 @@ this is not currently enforced).
 
 All changes require peer review through GitHub's pull request feature.
 
--   Changes to the specification, such as [Requirements](docs/requirements.md)
-    or the [Provenance schema](docs/provenance/), require approval from **two
-    steering committee members**, unless the change does not affect the meaning
-    (e.g. typo fix or minor reformatting.)
+Review process:
 
-    -   Do an initial round of review with a single reviewer.
-    -   Add @slsa-framework/slsa-steering-committee as a reviewer and make it
-        clear that you are looking for at least two approvers.
-    -   Wait at least one week before submitting to give the community time to
-        comment.
+1.  Ensure the PR title and description meet the following guidelines:
 
--   Other changes only require **one approver**. Any member of @slsa-framework
-    can approve. There is no requirement for the author and reviewer to
-    represent different companies/organizations.
+    -   PR title is of the form `<tag>: <title>`, where `<tag>` is one of the
+        values in the table below.
+
+    -   PR title concisely explains *what* the PR does.
+
+    -   PR description explains *what* and *why* in a bit more detail, providing
+        enough context for a reader to understand the change. See
+        [Writing good CL descriptions](https://google.github.io/eng-practices/review/developer/cl-descriptions.html)
+        for more advice ("CL" = PR and "first line" = PR title; ignore the
+        section about tags.)
+
+    -   Use imperative tense, e.g. "update X" (not "updated X" or "updates X")
+
+    -   Example of a good PR title and description:
+        https://github.com/slsa-framework/slsa/pull/840 (predates our `<tag>`
+        convention).
+
+2.  GitHub will automatically assign the maintainers as reviewers. You will need
+    a different number of approvals for different PR tags. Your reviewers may
+    ask that you use a different PR tag.
+
+3.  Wait an appropriate amount of time to allow for lazy consensus. Different
+    tags have different minimum waiting periods. The waiting period begins at
+    the timestamp of either the final required approval or the latest non-author
+    comment, whichever is later.
+
+4.  Once the waiting period has passed, a maintainer will merge your PR. Expect
+    your PR to be squashed+merged unless your reviewers advise you otherwise.
+    If your PR has not been merged within 48h of the waiting period having
+    passed, and a reason for that has not been added as a PR comment, use the
+    PR's comment thread to request the PR be merged.
+
+| Tag | Description | Waiting period | # Approvers |
+|---|---|---|---|
+| `spec-content` | A change to the meaning of the specification | 72h | 3 |
+| `spec-editorial` | A clarification to the specification that does not change its meaning | 24h | 2 |
+| `non-spec` | A change to a non-specification page. | 24h | 2 |
+| `style` | A user-visible style or layout change. No context changes. | 0h | 1 |
+| `impl` | A user-invisible change, such as editing a README or the repo configuration. | 0h | 1 |
+
+Note: PR authors with write access to the repo count as second or third
+approvers for their own PRs. For example, if the author of a PR with the
+`spec-content` tag has write access to to the repo, then the PR only requires
+two additional approvers before merging. However, a PR with the `impl` tag
+always requires one reviewer, even if the author has write access.
 
 ### Signing your work
 
