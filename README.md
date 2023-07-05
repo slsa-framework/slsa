@@ -19,6 +19,22 @@ specification, and overall project management. Other git repositories within the
 [slsa-framework](https://github.com/slsa-framework) organization have
 repo-specific issue trackers.
 
+## URL Aliases
+
+We have several [redirect](docs/_redirects) configured on slsa.dev for
+convenience of the team:
+
+-   https://slsa.dev/gh &rArr; SLSA GitHub repo
+    -   https://slsa.dev/gh/issues
+    -   https://slsa.dev/gh/pulls
+    -   etc...
+-   https://slsa.dev/notes &rArr; meeting notes
+    -   https://slsa.dev/notes/community
+    -   https://slsa.dev/notes/positioning
+    -   https://slsa.dev/notes/specification
+        (or [.../spec](https://slsa.dev/notes/spec))
+    -   https://slsa.dev/notes/tooling
+
 ## How to get involved
 
 See https://slsa.dev/community for ways to get involved in SLSA development.

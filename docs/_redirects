@@ -1,0 +1,4 @@
+# Documentation: https://docs.netlify.com/routing/redirects/redirect-options/
+
+# Convenience aliases for the team. Remember to document on ../README.md.
+/gh/*           https://github.com/slsa-framework/slsa/:splat

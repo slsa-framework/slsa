@@ -535,7 +535,7 @@ cryptographic secret that should only be available to the build service.
 and only the control plane has access to cryptographic secrets. <sup>[[Isolated]
 @ SLSA 3]</sup>
 
-*Example:* Provence is signed on the build worker, which the adversary has
+*Example:* Provenance is signed on the build worker, which the adversary has
 control over. Adversary uses a malicious process that generates false provenance
 and signs it using the provenance signing key. Solution: Builder generates and
 signs provenance in the trusted control plane; the worker has no access to the
