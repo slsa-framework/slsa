@@ -5,7 +5,7 @@ served by [Netlify](https://netlify.com).
 
 ## Development
 
-### Developing and testing locally
+### Building and testing locally
 
 1.  Clone this repo and change directory to `/docs`:
 
