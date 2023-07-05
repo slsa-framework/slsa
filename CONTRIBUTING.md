@@ -67,7 +67,7 @@ Review process:
         enough context for a reader to understand the change. See
         [Writing good CL descriptions](https://google.github.io/eng-practices/review/developer/cl-descriptions.html)
         for more advice ("CL" = PR and "first line" = PR title; ignore the
-        section about tags.) Summary:
+        section about tags.)
 
     -   Use imperative tense, e.g. "update X" (not "updated X" or "updates X")
 
