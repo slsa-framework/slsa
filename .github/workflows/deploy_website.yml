@@ -19,7 +19,7 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
       - name: Build the SLSA website from `docs/` directory
-        uses: actions/jekyll-build-pages@0143c158f4fa0c5dcd99499a5d00859d79f70b0e # v1.0.7
+        uses: actions/jekyll-build-pages@058068233b22675635bdf8dfa178d6ae77f12694 # v1.0.8
         with:
             source: ./docs
       - name: Upload build artifacts for deploying
