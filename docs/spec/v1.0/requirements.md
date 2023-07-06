@@ -307,13 +307,18 @@ The build platform MUST guarantee the following:
 -   It MUST NOT be possible for one build to persist or influence the build
     environment of a subsequent build. In other words, an ephemeral build
     environment MUST be provisioned for each build.
+-   The build platform MUST NOT open services that allow for remote influence
+    unless all such interactions are captured as `externalParameters` in the
+    provenance.
+
+If the build platform leverages a cache for builds, it MUST guarantee the following:
+
 -   It MUST NOT be possible for one build to inject false entries into a build
     cache used by another build, also known as "cache poisoning". In other
     words, the output of the build MUST be identical whether or not the cache is
     used.
--   The build platform MUST NOT open services that allow for remote influence
-    unless all such interactions are captured as `externalParameters` in the
-    provenance.
+-   The resolved dependencies used to generate the cached artifacts MUST be captured
+    in the provenance.
 
 There are no sub-requirements on the build itself. Build L3 is limited to
 ensuring that a well-intentioned build runs securely. It does not require that
