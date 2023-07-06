@@ -122,7 +122,7 @@ www.slsa.dev  CNAME  slsa.netlify.app
 Go to https://app.netlify.com/sites/slsa/deploys?filter=main to see recent
 deployments. You need to be logged into Netlify to see the list.
 
-View previous a version of the site by clicking on a deployment's date:
+View a previous version of the site by clicking on a deployment's date:
 
 ![screenshot of permalinks](../readme_images/netlify_permalinks_screenshot.png)
 
