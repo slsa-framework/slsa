@@ -120,7 +120,8 @@ www.slsa.dev  CNAME  slsa.netlify.app
 ### Something is wrong with the site. How do I debug and/or roll back?
 
 Go to https://app.netlify.com/sites/slsa/deploys?filter=main to see recent
-deployments. You need to be logged into Netlify to see the list.
+deployments. You need to be logged into Netlify to see the list of deployments,
+and in the "slsa" team to perform mutations (e.g. Publish).
 
 View a previous version of the site by clicking on a deployment's date:
 
