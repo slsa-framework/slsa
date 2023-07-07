@@ -92,9 +92,9 @@ Review process:
 
 | Tag | Description | Waiting period | # Approvers |
 |---|---|---|---|
-| `spec-content` | A change to the meaning of the specification | 72h | 3 |
-| `spec-editorial` | A clarification to the specification that does not change its meaning | 24h | 2 |
-| `non-spec` | A change to a non-specification page. | 24h | 2 |
+| `specContent` | A change to the meaning of the specification | 72h | 3 |
+| `specEditorial` | A clarification to the specification that does not change its meaning | 24h | 2 |
+| `nonSpec` | A change to a non-specification page. | 24h | 2 |
 | `style` | A user-visible style or layout change. No context changes. | 0h | 1 |
 | `impl` | A user-invisible change, such as editing a README or the repo configuration. | 0h | 1 |
 
