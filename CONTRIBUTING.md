@@ -100,7 +100,7 @@ Review process:
 
 Note: PR authors with write access to the repo count as second or third
 approvers for their own PRs. For example, if the author of a PR with the
-`spec-content` tag has write access to to the repo, then the PR only requires
+`specContent` tag has write access to to the repo, then the PR only requires
 two additional approvers before merging. However, a PR with the `impl` tag
 always requires one reviewer, even if the author has write access.
 
