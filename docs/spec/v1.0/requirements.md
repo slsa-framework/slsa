@@ -317,15 +317,18 @@ If the build platform leverages a cache for builds, it MUST guarantee the follow
     cache used by another build, also known as "cache poisoning". In other
     words, the output of the build MUST be identical whether or not the cache is
     used.
--   The resolved dependencies used to generate the cached artifacts MUST be captured
-    in the provenance.
+-   If the build platform is capable of providing the provenance for an external
+    resource without a cache, then the provenance SHOULD remain unchanged if a cache
+    is used. In other words, the output of the provenance MUST be identical whether
+    or not the cache is used.
 
 There are no sub-requirements on the build itself. Build L3 is limited to
 ensuring that a well-intentioned build runs securely. It does not require that
 a build platform prevents a producer from performing a risky or insecure build. In
 particular, the "Isolated" requirement does not prohibit a build from calling
 out to a remote execution service or a "self-hosted runner" that is outside the
-trust boundary of the build platform.
+trust boundary of the build platform. Additionally, build L3 does not prohibit
+builds from resolving dependencies outside of the knowledge of the build platform.
 
 NOTE: This requirement was split into "Isolated" and "Ephemeral Environment"
 in the initial [draft version (v0.1)](../v0.1/requirements.md).
