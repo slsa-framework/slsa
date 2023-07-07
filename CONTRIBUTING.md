@@ -92,15 +92,15 @@ Review process:
 
 | Tag | Description | Waiting period | # Approvers |
 |---|---|---|---|
-| `spec-content` | A change to the meaning of the specification | 72h | 3 |
-| `spec-editorial` | A clarification to the specification that does not change its meaning | 24h | 2 |
-| `non-spec` | A change to a non-specification page. | 24h | 2 |
+| `specContent` | A change to the meaning of the specification | 72h | 3 |
+| `specEditorial` | A clarification to the specification that does not change its meaning | 24h | 2 |
+| `nonSpec` | A change to a non-specification page. | 24h | 2 |
 | `style` | A user-visible style or layout change. No context changes. | 0h | 1 |
 | `impl` | A user-invisible change, such as editing a README or the repo configuration. | 0h | 1 |
 
 Note: PR authors with write access to the repo count as second or third
 approvers for their own PRs. For example, if the author of a PR with the
-`spec-content` tag has write access to to the repo, then the PR only requires
+`specContent` tag has write access to to the repo, then the PR only requires
 two additional approvers before merging. However, a PR with the `impl` tag
 always requires one reviewer, even if the author has write access.
 
