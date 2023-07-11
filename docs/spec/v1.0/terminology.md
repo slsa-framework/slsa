@@ -72,26 +72,26 @@ We model a build as running on a multi-tenant *build platform*, where each
 execution is independent.
 
 1.  A tenant invokes the build by specifying *external parameters* through an
-    interface, either directly or via some trigger. Usually, at least one of
+    *interface*, either directly or via some trigger. Usually, at least one of
     these parameters is a reference to a dependency, as noted below.
 2.  The build platform's *control plane* interprets these external parameters,
     fetches an initial set of *dependencies*, initializes a *build environment*,
     and then starts the execution within that environment.
 3.  The build then performs arbitrary steps, which might include fetching
-    additional *dependencies*, and then writes one or more *output* artifacts.
+    additional *dependencies*, and then produces one or more *output* artifacts.
     The steps within the build environment are under the tenant's control.
-    The build platform isolates between build environments to some
+    The build platform isolates build environments from one another to some
     degree (which is measured by the SLSA Build Level).
 4.  Finally, for SLSA Build L2+, the control plane outputs *provenance*
     describing this whole process.
 
 Notably, there is no formal notion of "source" in the build model, just
-parameters and dependencies. Most build platforms have an explicit "source"
-artifact to be built, which is often a git repository; in the build model, the
-reference to this artifact is a parameter while the artifact itself is a
+external parameters and dependencies. Most build platforms have an explicit "source"
+artifact to build from, which is often a git repository; in the build model, the
+reference to this artifact is an external parameter while the artifact itself is a
 dependency.
 
-For examples on how this model applies to real-world build platforms, see [index
+For examples of how this model applies to real-world build platforms, see [index
 of build types](/provenance/v1#index-of-build-types).
 
 | Primary Term | Description
