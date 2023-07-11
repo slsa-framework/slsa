@@ -73,7 +73,7 @@ execution is independent.
 
 1.  A tenant invokes the build by specifying *external parameters* through an
     *interface*, either directly or via some trigger. Usually, at least one of
-    these parameters is a reference to a dependency, as noted below.
+    these external parameters is a reference to a dependency, as noted below.
 2.  The build platform's *control plane* interprets these external parameters,
     fetches an initial set of *dependencies*, initializes a *build environment*,
     and then starts the execution within that environment.
@@ -85,11 +85,11 @@ execution is independent.
 4.  Finally, for SLSA Build L2+, the control plane outputs *provenance*
     describing this whole process.
 
-Notably, there is no formal notion of "source" in the build model, just
-external parameters and dependencies. Most build platforms have an explicit "source"
+Notably, there is no formal notion of "source" in the build model, just external
+parameters and dependencies. Most build platforms have an explicit "source"
 artifact to build from, which is often a git repository; in the build model, the
-reference to this artifact is an external parameter while the artifact itself is a
-dependency.
+reference to this artifact is an external parameter while the artifact itself is
+a dependency.
 
 For examples of how this model applies to real-world build platforms, see [index
 of build types](/provenance/v1#index-of-build-types).
