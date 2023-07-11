@@ -10,7 +10,7 @@ meeting link, etc. at the top.
 
 URL                            | Alias        | Meeting
 ------------------------------ | ------------ | ---------------------------
-[community](community)         |              | Bi-weekly community meeting
+[community](community)         |              | General community meeting
 [positioning](positioning)     |              | Positioning SIG
 [specification](specification) | [spec](spec) | Specification SIG
 [tooling](tooling)             |              | Tooling SIG
