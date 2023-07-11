@@ -73,12 +73,13 @@ execution is independent.
 
 1.  A tenant invokes the build by specifying *external parameters* through an
     *interface*, either directly or via some trigger. Usually, at least one of
-    these external parameters is a reference to a *dependency*, as noted below.
+    these external parameters is a reference to a *dependency*. (External
+    parameters are literal values while dependencies are artifacts.)
 2.  The build platform's *control plane* interprets these external parameters,
-    fetches an initial set of *dependencies*, initializes a *build environment*,
+    fetches an initial set of dependencies, initializes a *build environment*,
     and then starts the execution within that environment.
 3.  The build then performs arbitrary steps, which might include fetching
-    additional *dependencies*, and then produces one or more *output* artifacts.
+    additional dependencies, and then produces one or more *output* artifacts.
     The steps within the build environment are under the tenant's control.
     The build platform isolates build environments from one another to some
     degree (which is measured by the SLSA Build Level).
