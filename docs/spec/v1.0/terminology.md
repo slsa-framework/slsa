@@ -73,7 +73,7 @@ execution is independent.
 
 1.  A tenant invokes the build by specifying *external parameters* through an
     *interface*, either directly or via some trigger. Usually, at least one of
-    these external parameters is a reference to a dependency, as noted below.
+    these external parameters is a reference to a *dependency*, as noted below.
 2.  The build platform's *control plane* interprets these external parameters,
     fetches an initial set of *dependencies*, initializes a *build environment*,
     and then starts the execution within that environment.
