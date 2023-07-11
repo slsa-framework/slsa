@@ -318,7 +318,7 @@ If the build platform leverages a cache for builds, it MUST guarantee the follow
     words, the output of the build MUST be identical whether or not the cache is
     used.
 -   If the build platform is capable of providing the provenance for an external
-    resource without a cache, then the provenance SHOULD remain unchanged if a cache
+    resource without a cache, then the provenance MUST remain unchanged if a cache
     is used. In other words, the output of the provenance MUST be identical whether
     or not the cache is used.
 
