@@ -21,8 +21,11 @@ Alternately you can look for issues with a [`shovel-ready`](https://github.com/s
 
 ## Proposing changes
 
-Unless a change is small enough to be fully discussed in a pull request, we
-recommend the following process to propose and reach agreement on changes:
+If a change is small enough to be fully discussed in a pull request, jump
+straight to [Submitting changes].
+
+Otherwise, we recommend the following process to propose and reach agreement on
+changes:
 
 1.  The proposer finds or creates a [GitHub Issue][Issues] describing the
     problem and proposes an idea to address that problem.
@@ -36,14 +39,16 @@ recommend the following process to propose and reach agreement on changes:
     to fully describe in an Issue comment.
 
 4.  Once there is general agreement that the proposal is sound, the proposer
-    [submits](#submitting-changes) a pull request implementing the idea. Final
+    [submits][submitting changes] a pull request implementing the idea. Final
     agreement happens on the pull request.
 
 [proposal document]: https://github.com/slsa-framework/slsa-proposals
 
 ## Submitting changes
 
-All changes require peer review through GitHub's pull request feature.
+[submitting changes]: #submitting-changes
+
+All changes require peer review through GitHub's pull request (PR) feature.
 
 ### Markdown style
 
@@ -58,22 +63,28 @@ this is not currently enforced).
 
 PRs are expected to meet the following conventions:
 
-    -   PR title is of the form `<tag>: <title>`, where `<tag>` is one of the
-        values in the table below.
+-   PR title is of the form `<tag>: <title>`, where:
+    -   `<tag>` is one of the values in the table below.
+    -   `<title>` concisely explains *what* the PR does.
+-   PR description explains *what* and *why* in a bit more detail, providing
+    enough context for a reader to understand the change. See
+    [Writing good CL descriptions](https://google.github.io/eng-practices/review/developer/cl-descriptions.html)
+    for more advice (in that doc, "CL" means PR and "first line" means PR title;
+    ignore the section about tags.)
+-   PR title and description use imperative tense, e.g. "update X" (not "updated
+    X" or "updates X").
+-   Every commit has a [signed-off-by] tag.
+    -   Note: Commit messages do not otherwise matter because we use the [squash
+        and merge] method, with the PR title and description as the squash
+        commit message.
+-   Example of a good PR title and description:
+    https://github.com/slsa-framework/slsa/pull/840 (predates our `<tag>`
+    convention).
 
-    -   PR title concisely explains *what* the PR does.
-
-    -   PR description explains *what* and *why* in a bit more detail, providing
-        enough context for a reader to understand the change. See
-        [Writing good CL descriptions](https://google.github.io/eng-practices/review/developer/cl-descriptions.html)
-        for more advice ("CL" = PR and "first line" = PR title; ignore the
-        section about tags.)
-
-    -   Use imperative tense, e.g. "update X" (not "updated X" or "updates X")
-
-    -   Example of a good PR title and description:
-        https://github.com/slsa-framework/slsa/pull/840 (predates our `<tag>`
-        convention).
+Every PR must use one of the following `<tag>` values. Earlier entries in the
+table have higher precedence. (See [review and approval] for the meaning of
+"waiting period" and "# approvers".) If you are not sure, take a guess and a
+maintainer will update if needed.
 
 | Tag | Description | Waiting period | # Approvers |
 |---|---|---|---|
@@ -89,7 +100,11 @@ approvers for their own PRs. For example, if the author of a PR with the
 two additional approvers before merging. However, a PR with the `impl` tag
 always requires one reviewer, even if the author has write access.
 
+[squash and merge]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits
+
 ### Review and approval
+
+[review and approval]: #review-and-approval
 
 Review process:
 
@@ -111,6 +126,8 @@ Review process:
     PR's comment thread to request the PR be merged.
 
 ### Signing your work
+
+[signed-off-by]: #signing-your-work
 
 When contributing patches to the project via pull request, please indicate that
 you wrote the patch or have permission to pass it on by including your sign-off.
