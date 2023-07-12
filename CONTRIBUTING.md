@@ -43,6 +43,8 @@ recommend the following process to propose and reach agreement on changes:
 
 ## Submitting changes
 
+All changes require peer review through GitHub's pull request feature.
+
 ### Markdown style
 
 Changes to any of the Markdown files in the repository should meet our Markdown
@@ -50,13 +52,11 @@ style, as encoded in our [markdownlint configuration](.markdownlint.yaml). In
 addition we prefer to keep our Markdown documents wrapped at 80 columns (though
 this is not currently enforced).
 
-### Review and approval
+### Pull request conventions
 
-All changes require peer review through GitHub's pull request feature.
+[pull request conventions]: #pull-request-conventions
 
-Review process:
-
-1.  Ensure the PR title and description meet the following guidelines:
+PRs are expected to meet the following conventions:
 
     -   PR title is of the form `<tag>: <title>`, where `<tag>` is one of the
         values in the table below.
@@ -75,6 +75,26 @@ Review process:
         https://github.com/slsa-framework/slsa/pull/840 (predates our `<tag>`
         convention).
 
+| Tag | Description | Waiting period | # Approvers |
+|---|---|---|---|
+| `content` | A change to the meaning of the specification | 72h | 3 |
+| `editorial` | A clarification to the specification that does not change its meaning | 24h | 2 |
+| `nonspec` | A change to a non-specification page. | 24h | 2 |
+| `style` | A user-visible style or layout change. No context changes. | 0h | 1 |
+| `impl` | A user-invisible change, such as editing a README or the repo configuration. | 0h | 1 |
+
+Note: PR authors with write access to the repo count as second or third
+approvers for their own PRs. For example, if the author of a PR with the
+`content` tag has write access to the repo, then the PR only requires
+two additional approvers before merging. However, a PR with the `impl` tag
+always requires one reviewer, even if the author has write access.
+
+### Review and approval
+
+Review process:
+
+1.  Ensure that the PR meets the [pull request conventions].
+
 2.  GitHub will automatically assign the maintainers as reviewers. You will need
     a different number of approvals for different PR tags. Your reviewers may
     ask that you use a different PR tag.
@@ -89,20 +109,6 @@ Review process:
     If your PR has not been merged within 48h of the waiting period having
     passed, and a reason for that has not been added as a PR comment, use the
     PR's comment thread to request the PR be merged.
-
-| Tag | Description | Waiting period | # Approvers |
-|---|---|---|---|
-| `content` | A change to the meaning of the specification | 72h | 3 |
-| `editorial` | A clarification to the specification that does not change its meaning | 24h | 2 |
-| `nonspec` | A change to a non-specification page. | 24h | 2 |
-| `style` | A user-visible style or layout change. No context changes. | 0h | 1 |
-| `impl` | A user-invisible change, such as editing a README or the repo configuration. | 0h | 1 |
-
-Note: PR authors with write access to the repo count as second or third
-approvers for their own PRs. For example, if the author of a PR with the
-`content` tag has write access to the repo, then the PR only requires
-two additional approvers before merging. However, a PR with the `impl` tag
-always requires one reviewer, even if the author has write access.
 
 ### Signing your work
 
