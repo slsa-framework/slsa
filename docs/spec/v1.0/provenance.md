@@ -87,7 +87,8 @@ The model is as follows:
     captured directly in the provenance, but is instead implied by `builder.id`
     and subject to [SLSA Requirements](requirements.md). Such
     communication SHOULD NOT influence the definition of the build; if it does,
-    it SHOULD go in `resolvedDependencies` instead.
+    it SHOULD go in `resolvedDependencies` instead. Cache communications MUST NOT
+    be present at SLSA Build L3.
 
 -   Finally, the build process outputs one or more artifacts, identified by
     `subject`.

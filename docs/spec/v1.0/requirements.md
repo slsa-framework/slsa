@@ -320,7 +320,8 @@ If the build platform leverages a cache for builds, it MUST guarantee the follow
 -   If the build platform is capable of providing the provenance for an external
     resource without a cache, then the provenance MUST remain unchanged if a cache
     is used. In other words, the output of the provenance MUST be identical whether
-    or not the cache is used.
+    or not the cache is used. Communication with the build cache MUST NOT be present
+    in `resolvedDependencies`.
 
 There are no sub-requirements on the build itself. Build L3 is limited to
 ensuring that a well-intentioned build runs securely. It does not require that
