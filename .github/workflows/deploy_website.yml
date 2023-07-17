@@ -23,7 +23,7 @@ jobs:
         with:
             source: ./docs
       - name: Upload build artifacts for deploying
-        uses: actions/upload-pages-artifact@84bb4cd4b733d5c320c9c9cfbc354937524f4d64 # v1.0.10
+        uses: actions/upload-pages-artifact@a753861a5debcf57bf8b404356158c8e1e33150c # v2.0.0
   
   deploy:
     permissions:
