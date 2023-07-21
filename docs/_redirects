@@ -26,6 +26,7 @@
 /faq                    /spec/v1.0/faq          302
 /levels                 /spec/v1.0/levels       302
 /terminology            /spec/v1.0/terminology  302
+/requirements           /spec/v1.0/requirements 302
 /threats                /spec/v1.0/threats      302
 /use-cases              /spec/v1.0/use-cases    302
 
