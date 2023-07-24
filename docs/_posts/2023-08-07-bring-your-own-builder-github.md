@@ -7,7 +7,7 @@ It has been an exciting quarter for supply chain security and SLSA, with the rel
 
 SLSA now provides and maintains official builders for [Go](https://slsa.dev/blog/2022/06/slsa-github-workflows), [Node.js](https://slsa.dev/blog/2023/05/bringing-improved-supply-chain-security-to-the-nodejs-ecosystem) and [Container](https://slsa.dev/blog/2023/06/slsa-github-worfklows-container-based) based projects, but what if you don't use any of these languages or use custom tooling that isn't supported by the official builders?
 
-To empower the community to create their own provenance builders and leverage the secure architecture of of the official SLSA builders we are releasing the ["Build Your Own Builder" framework](https://github.com/slsa-framework/slsa-github-generator/tree/main#build-your-own-builder) for GitHub Actions. This makes it easy to take an existing GitHub Action (e.g. [JReleaser](https://jreleaser.org/)) and make it produce [SLSA Build Level 3 provenance](https://slsa.dev/spec/v1.0/requirements#provenance-generation).
+To empower the community to create their own provenance builders and leverage the secure architecture of the official SLSA builders we are releasing the ["Build Your Own Builder" framework](https://github.com/slsa-framework/slsa-github-generator/tree/main#build-your-own-builder) for GitHub Actions. This makes it easy to take an existing GitHub Action (e.g. [JReleaser](https://jreleaser.org/)) and make it produce [SLSA Build Level 3 provenance](https://slsa.dev/spec/v1.0/requirements#provenance-generation).
 
 As a tool or ecosystem maintainer you can focus on enabling your ecosystem to produce SLSA Level 3 provenance attestations without needing to worry about keeping signing keys secure, isolation between builds, and the creation of attestations; all this is handled seamlessly by the framework, using the [same security design principles](https://github.com/slsa-framework/slsa-github-generator/tree/main#specifications) as our existing builders.
 
@@ -17,7 +17,7 @@ To demonstrate the flexibility of this framework, we are also announcing three S
 
 The BYOB framework provides a set of GitHub Actions and workflows that a builder calls to generate provenance. The high-level architecture is depicted in the diagram below. The `builder_workflow.yml` represents the builder being created. The BYOB framework, on the right of the diagram, acts as a dispatcher. 
 
-![BYOB architecture](https://github.com/slsa-framework/slsa/assets/64505099/2e8bc2a1-3a83-4e67-8254-578ecb980d61)
+![BYOB architecture](https://github.com/slsa-framework/slsa/assets/64505099/51c796e3-754e-4cd8-b2ea-dd8c23662411)
 
 There are two main steps to using the BYOB framework. First, you initialize the BYOB framework ("Initialize" box on the left). Then you call the framework ("Run" box on the left). Running the framework transfers execution to the BYOB framework which will run the build in an isolated environment and then generate provenance.
 
