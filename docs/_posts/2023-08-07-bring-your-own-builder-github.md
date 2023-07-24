@@ -1,3 +1,4 @@
+---
 title: "Build your own SLSA 3+ provenance builder on GitHub Actions"
 author: "Andres Almiray (JReleaser), Adam Korczynski (AdaLogics), Philip Harrison (GitHub), Laurent Simon (Google)"
 is_guest_post: false
