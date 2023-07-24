@@ -45,7 +45,7 @@ uses: slsa-framework/slsa-github-generator/.github/workflows/delegator_generic_s
     secret2: ${{ inputs.token }}
 ```
 
-When the run completes, the BYOB framework will generate a list of attestations for the artifacts indicated by the builder (more information is available in our [documentation]https://github.com/slsa-framework/slsa-github-generator/blob/main/BYOB.md#generation-of-metadata-layout-file).
+When the run completes, the BYOB framework will generate a list of attestations for the artifacts indicated by the builder. More information is available in our [documentation](https://github.com/slsa-framework/slsa-github-generator/blob/main/BYOB.md#generation-of-metadata-layout-file).
 
 # SLSA Java builders for JReleaser, Maven and Gradle
 
@@ -72,8 +72,8 @@ Once you have the link to the artifact, you can verify it as follows:
 ```shell
 $ export ARTIFACT=test-artifact-0.1.0-jar
 $ export ARTIFACT_URL="https://repo1.maven.org/maven2/path/to/${ARTFACT}"
-$ export PROVENANCE_URL=”${ARTIFACT_URL}”.build.slsa
-$ wget “${ARTIFACT_URL}” && wget “${PROVENANCE_URL}”
+$ export PROVENANCE_URL="${ARTIFACT_URL}".build.slsa
+$ wget "${ARTIFACT_URL}" && wget "${PROVENANCE_URL}"
 $ slsa-verifier verify-artifact "${ARTIFACT}" --provenance-path="${ARTIFACT}.build.slsa" --source-uri github.com/org/repo
 ```
 
