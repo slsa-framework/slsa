@@ -4,7 +4,7 @@ author: "Andres Almiray (JReleaser), Adam Korczynski (AdaLogics), Philip Harriso
 is_guest_post: false
 ---
 
-It has been an exciting quarter for supply chain security and SLSA, with the release of the [SLSA v1.0 specification](https://slsa.dev/blog/2023/04/slsa-v1-final), [SLSA provenance support for npm](https://github.blog/2023-04-19-introducing-npm-package-provenance/), and the announcement of new SLSA Level 3 builders for [Node.js](https://slsa.dev/blog/2023/05/bringing-improved-supply-chain-security-to-the-nodejs-ecosystem) and [containers](https://slsa.dev/blog/2023/06/slsa-github-worfklows-container-based)! 
+It has been an exciting quarter for supply chain security and SLSA, with the release of the [SLSA v1.0 specification](2023-04-19-slsa-v1-final.md), [SLSA provenance support for npm](https://github.blog/2023-04-19-introducing-npm-package-provenance/), and the announcement of new SLSA Level 3 builders for [Node.js](2023-05-11-bringing-improved-supply-chain-security-to-the-nodejs-ecosystem.md) and [containers](2023-06-13-slsa-github-worfklows-container-based.md)! 
 
 SLSA now provides and maintains official builders for [Go](https://slsa.dev/blog/2022/06/slsa-github-workflows), [Node.js](https://slsa.dev/blog/2023/05/bringing-improved-supply-chain-security-to-the-nodejs-ecosystem) and [Container](https://slsa.dev/blog/2023/06/slsa-github-worfklows-container-based) based projects, but what if you don't use any of these languages or use custom tooling that isn't supported by the official builders?
 
