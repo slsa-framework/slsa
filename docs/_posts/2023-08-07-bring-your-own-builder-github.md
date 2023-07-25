@@ -86,6 +86,7 @@ The plugin automatically performs the verification when configured in the ["pom.
 The plugin is still a proof-of-concept, but it demonstrates what's possible with and likely to come from the BYOB Framework. With the framework producing L3 provenance for GitHub Actions users, and the plugin automatically verifying Maven packages, you can build an end-to-end solution for an entire ecosystem.
 
 ## Conclusion
+
 Thanks to the BYOB framework, it's now possible for maintainers of existing GitHub Actions to start producing SLSA Level 3 provenance attestations! 
 
 If you are a maintainer of an existing GitHub Action, try it out by following the [BYOB documentation](https://github.com/slsa-framework/slsa-github-generator/tree/main#build-your-own-builder) and don't hesitate to report issues or ask questions on the [slsa-github-generator](https://github.com/slsa-framework/slsa-github-generator/issues) repository. 
