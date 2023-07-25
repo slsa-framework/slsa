@@ -71,9 +71,9 @@ Maven Central allows you to browse the files of each release, and from there you
 Once you have the link to the artifact, you can verify it as follows:
 
 ```shell
-$ export ARTIFACT=test-artifact-0.1.0-jar
-$ export ARTIFACT_URL="https://repo1.maven.org/maven2/path/to/${ARTFACT}"
-$ export PROVENANCE_URL="${ARTIFACT_URL}".build.slsa
+$ ARTIFACT=test-artifact-0.1.0-jar
+$ ARTIFACT_URL="https://repo1.maven.org/maven2/path/to/${ARTFACT}"
+$ PROVENANCE_URL="${ARTIFACT_URL}".build.slsa
 $ wget "${ARTIFACT_URL}" && wget "${PROVENANCE_URL}"
 $ slsa-verifier verify-artifact "${ARTIFACT}" --provenance-path="${ARTIFACT}.build.slsa" --source-uri github.com/org/repo
 ```
