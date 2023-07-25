@@ -88,10 +88,11 @@ maintainer will update if needed.
 
 | Tag | Description | Waiting period | # Approvers |
 |---|---|---|---|
-| `content` | A change to the meaning of the specification | 72h | 3 |
-| `editorial` | A clarification to the specification that does not change its meaning | 24h | 2 |
-| `nonspec` | A change to a non-specification page. | 24h | 2 |
-| `style` | A user-visible style or layout change. No context changes. | 0h | 1 |
+| `content` | A change to the meaning of the specification. | 72h | 3 |
+| `editorial` | A clarification to the specification that does not change its meaning. | 24h | 2 |
+| `nonspec` | A change to a non-specification, non-blog page. | 24h | 2 |
+| `blog` | A new or updated blog post. (Do not mix with categories above.) | 24h | 2 |
+| `style` | A user-visible style or layout change. No content changes. | 0h | 1 |
 | `impl` | A user-invisible change, such as editing a README or the repo configuration. | 0h | 1 |
 
 Note: PR authors with write access to the repo count as second or third
