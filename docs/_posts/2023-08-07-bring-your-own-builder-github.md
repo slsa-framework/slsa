@@ -83,7 +83,7 @@ $ slsa-verifier verify-artifact "${ARTIFACT}" --provenance-path="${ARTIFACT}.bui
 A Java project contains not only the main application code, but also its dependencies consumed as "packages". We can therefore recursively verify each dependency's provenance. To this end, we're releasing an [experimental Maven plugin](https://github.com/slsa-framework/slsa-verifier/tree/main/experimental/maven-plugin). The plugin resolves all dependencies of a given project and checks if they have provenance attestations along with their releases. When the plugin finds a dependency that has a provenance statement, it verifies it against the dependency.
 The plugin automatically performs the verification when configured in the ["pom.xml"](TODO:link to doc). Or it may be run [manually](TODO:link to doc). See our [documentation](https://github.com/slsa-framework/slsa-verifier/tree/main/experimental/maven-plugin).
 
-The plugin is still POC, but it demonstrates what's possible with and likely to come from the BYOB Framework. With the framework producing L3 provenance for GitHub Actions users, and the plugin automatically verifying Maven packages, you can build an end-to-end solution for an entire ecosystem.
+The plugin is still a proof-of-concept, but it demonstrates what's possible with and likely to come from the BYOB Framework. With the framework producing L3 provenance for GitHub Actions users, and the plugin automatically verifying Maven packages, you can build an end-to-end solution for an entire ecosystem.
 
 ## Conclusion
 Thanks to the BYOB framework, it's now possible for maintainers of existing GitHub Actions to start producing SLSA Level 3 provenance attestations! 
