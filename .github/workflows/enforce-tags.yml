@@ -23,5 +23,6 @@ jobs:
             content
             editorial
             nonspec
+            blog
             style
             impl
