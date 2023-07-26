@@ -17,11 +17,18 @@ To demonstrate the flexibility of this framework, we are also announcing three S
 
 ## Build Your Own Builder Framework
 
-The BYOB framework provides a set of GitHub Actions and workflows that a builder calls to generate provenance. The high-level architecture is depicted in the diagram below. The `builder_workflow.yml` represents the builder being created. The BYOB framework, on the right of the diagram, acts as a dispatcher. 
+The BYOB framework benefits both GitHub Action maintainers and GitHub Action users:
+
+1. For a Action maintainers, it makes it easy to meet the [SLSA Build L3](https://slsa.dev/spec/v1.0/levels#build-l3).
+1. For Action users, it makes it easy to adopt SLSA by trusting the BYOB project and the Action code - without worrying about which machine runs the Action.
+
+The BYOB framework provides a set of GitHub Actions and workflows that helps builder writers generate provenance.
+
+The high-level architecture is depicted in the diagram below. The `builder_workflow.yml` represents the builder being created. The BYOB framework, on the right of the diagram, acts as an orchestrator. 
 
 ![BYOB architecture](https://github.com/slsa-framework/slsa/assets/64505099/51c796e3-754e-4cd8-b2ea-dd8c23662411)
 
-There are two main steps to using the BYOB framework. First, you initialize the BYOB framework ("Initialize" box on the left). Then you call the framework ("Run" box on the left). Running the framework transfers execution to the BYOB framework which will run the build in an isolated environment and then generate provenance.
+There are two main steps to using the BYOB framework. First, the builder (`builder_workflow.yml`) initializes the BYOB framework ("Initialize" box on the left). Then you call the framework ("Run" box on the left). Running the framework transfers execution to the BYOB framework which will run the build in an isolated environment and then generate provenance.
 
 Let's see each of these steps in more detail.
 
