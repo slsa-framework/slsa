@@ -28,7 +28,7 @@ The high-level architecture is depicted in the diagram below. The `builder_workf
 
 ![BYOB architecture](https://github.com/slsa-framework/slsa/assets/64505099/51c796e3-754e-4cd8-b2ea-dd8c23662411)
 
-There are two main steps to using the BYOB framework. First, the builder (`builder_workflow.yml`) initializes the BYOB framework ("Initialize" box on the left). Then you call the framework ("Run" box on the left). Running the framework transfers execution to the BYOB framework which will run the build in an isolated environment and then generate provenance.
+There are two main steps to using the BYOB framework. First, the builder (`builder_workflow.yml`) initializes the BYOB framework ("Initialize" box on the left). Then it calls the framework ("Run" box on the left). Running the framework transfers execution to the BYOB framework which will run the build in an isolated environment and then generate provenance.
 
 Let's see each of these steps in more detail.
 
