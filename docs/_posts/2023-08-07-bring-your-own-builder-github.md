@@ -6,11 +6,12 @@ is_guest_post: false
 
 It has been an exciting quarter for supply chain security and SLSA, with the release of the [SLSA v1.0 specification](2023-04-19-slsa-v1-final.md), [SLSA provenance support for npm](https://github.blog/2023-04-19-introducing-npm-package-provenance/), and the announcement of new SLSA Level 3 builders for [Node.js](2023-05-11-bringing-improved-supply-chain-security-to-the-nodejs-ecosystem.md) and [containers](2023-06-13-slsa-github-worfklows-container-based.md)! 
 
-SLSA now provides and maintains official builders for [Go](2022/06/slsa-github-workflows), [Node.js](2023/05/bringing-improved-supply-chain-security-to-the-nodejs-ecosystem) and [Container](2023/06/slsa-github-worfklows-container-based) based projects, but what if you don't use any of these languages or use custom tooling that isn't supported by the official builders?
+SLSA now provides and maintains official builders for [Go](2022/06/slsa-github-workflows), [Node.js](2023/05/bringing-improved-supply-chain-security-to-the-nodejs-ecosystem) and [Container](2023/06/slsa-github-worfklows-container-based) based projects.
+But what if you don't use any of these languages or use custom tooling that isn't supported by the official builders?
 
 To empower the community to create their own provenance builders and leverage the secure architecture of the official SLSA builders we are releasing the ["Build Your Own Builder" framework](https://github.com/slsa-framework/slsa-github-generator/tree/main#build-your-own-builder) for GitHub Actions. This makes it easy to take an existing GitHub Action (e.g. [JReleaser](https://jreleaser.org/)) and make it produce [SLSA Build Level 3 provenance](https://slsa.dev/spec/v1.0/requirements#provenance-generation).
 
-As a tool or ecosystem maintainer you can focus on enabling your ecosystem to produce SLSA Level 3 provenance attestations without needing to worry about keeping signing keys secure, isolation between builds, and the creation of attestations; all this is handled seamlessly by the framework, using the [same security design principles](https://github.com/slsa-framework/slsa-github-generator/tree/main#specifications) as our existing builders.
+Writing a builder from scratch is a tedious multi-month effort. The BYOB framework streamlines this process by cutting the development time down to a few days. As a builder writer, you need not worry about keeping signing keys secure, isolation between builds, the creation of attestations; all this is handled seamlessly by the framework, using the [same security design principles](https://github.com/slsa-framework/slsa-github-generator/tree/main#specifications) as our existing builders.
 
 To demonstrate the flexibility of this framework, we are also announcing three SLSA builders created by [community contributors](https://github.com/laurentsimon/slsa-github-generator/blob/feat/hof/README.md#builder-creation) for the Java ecosystems.
 
