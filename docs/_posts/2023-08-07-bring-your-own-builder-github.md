@@ -22,7 +22,7 @@ The BYOB framework benefits both GitHub Action maintainers and GitHub Action use
 1. For Action maintainers, it makes it easy to meet the [SLSA Build L3](https://slsa.dev/spec/v1.0/levels#build-l3).
 1. For Action users, it makes it easy to adopt SLSA by trusting the BYOB project and the Action code - without worrying about which machine runs the Action.
 
-The BYOB framework provides a set of GitHub Actions and workflows that helps builder writers generate provenance.
+The BYOB framework provides a set of GitHub Actions and workflows that helps builder authors generate provenance.
 
 The high-level architecture is depicted in the diagram below. The `builder_workflow.yml` represents the builder being created. The BYOB framework, on the right of the diagram, acts as an orchestrator. 
 
