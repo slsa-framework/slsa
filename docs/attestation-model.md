@@ -144,7 +144,7 @@ recognize that other choices MAY be necessary in various cases.
 | Bundle | **[JSON Lines]**, see [attestation bundle] |
 | Storage/Lookup | **TBD** |
 
-[attestation bundle]: https://github.com/in-toto/attestation/blob/main/spec/v1.0/bundle.md
+[attestation bundle]: https://github.com/in-toto/attestation/blob/main/spec/v1/bundle.md
 [Binary Authorization]: https://cloud.google.com/binary-authorization
 [DSSE]: https://github.com/secure-systems-lab/dsse/
 [Generic SLSA Verifier]: https://github.com/slsa-framework/slsa-verifier

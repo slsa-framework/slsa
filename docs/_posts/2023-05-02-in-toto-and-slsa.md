@@ -69,7 +69,7 @@ predicates they generate during the execution of their software supply chain.
 For example, they can embed SLSA Provenance specific checks alongside others
 that verify best practices such as two party code reviews, successful test runs,
 and so on were adhered to. Taken together, a
-[bundle of in-toto attestations](https://github.com/in-toto/attestation/blob/main/spec/v1.0/bundle.md)
+[bundle of in-toto attestations](https://github.com/in-toto/attestation/blob/main/spec/v1/bundle.md)
 and a layout can be used to comprehensively verify a software supply chain’s
 security posture.
 
