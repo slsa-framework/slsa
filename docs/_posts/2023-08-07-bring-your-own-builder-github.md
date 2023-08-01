@@ -1,6 +1,6 @@
 ---
 title: "Build your own SLSA 3+ provenance builder on GitHub Actions"
-author: "Andres Almiray (JReleaser), Adam Korczynski (AdaLogics), Philip Harrison (GitHub), Laurent Simon (Google)"
+author: "Andres Almiray (JReleaser), Adam Korczynski (Ada Logics), Philip Harrison (GitHub), Laurent Simon (Google)"
 is_guest_post: false
 ---
 
@@ -33,7 +33,7 @@ However, this is a lot of work that requires careful design and implementation. 
 
 ![BYOB architecture](https://github.com/slsa-framework/slsa/assets/64505099/9d0a8133-ae1a-4b43-b7a1-5090e263eb47)
 
-There are two main steps to using the BYOB framework. First, the builder (`MyReusableWorkflow`) initializes the BYOB framework ("BYOB_Initialize" box in the middle box). Then it calls the framework ("BYOB_Run" box). Running the framework transfers execution to the BYOB framework which will run the `MyAction` in an isolated environment and then generate provenance.
+There are two main steps to using the BYOB framework. First, the builder (`MyReusableWorkflow`) initializes the BYOB framework (`BYOB_Initialize` box in the middle box). Then it calls the framework (`BYOB_Run` box). Running the framework transfers execution to the BYOB framework which will run the `MyAction` in an isolated environment and then generate provenance.
 
 Let's see each of these steps in more detail.
 
@@ -67,9 +67,9 @@ To validate the design of the BYOB framework and demonstrate its flexibility, we
 
 1.  A [JReleaser](https://github.com/jreleaser/release-action/tree/java#slsa-builder) Java builder which wraps the existing [GitHub Action for JReleaser](https://github.com/jreleaser/release-action) into a SLSA3-compliant builder. The integration was done by [aalmiray@](https://github.com/aalmiray), the maintainer of the [JReleaser](https://jreleaser.org) project. The resulting builder is hosted in the same repository as its original [Action](https://github.com/jreleaser/release-action/blob/java/.github/workflows/builder_slsa3.yml), so that JReleaser users can continue using the repositories they are already accustomed to.
 
-2.  A [Maven builder](https://github.com/slsa-framework/slsa-github-generator/tree/main/internal/builders/maven#readme), contributed by [AdaLogics](https://adalogics.com). This builder is currently hosted in the OpenSSF SLSA repository.
+2.  A [Maven builder](https://github.com/slsa-framework/slsa-github-generator/tree/main/internal/builders/maven#readme), contributed by [Ada Logics](https://adalogics.com). This builder is currently hosted in the OpenSSF SLSA repository.
 
-3.  A [Gradle builder](https://github.com/slsa-framework/slsa-github-generator/tree/main/internal/builders/gradle#readme), contributed by [AdaLogics](https://adalogics.com). This builder is currently hosted in the OpenSSF SLSA repository.
+3.  A [Gradle builder](https://github.com/slsa-framework/slsa-github-generator/tree/main/internal/builders/gradle#readme), contributed by [Ada Logics](https://adalogics.com). This builder is currently hosted in the OpenSSF SLSA repository.
 
 These Java builders can publish provenance attestation on Maven central. Additionally, the JReleaser SLSA builder can provide attestation for artifacts published as GitHub release assets and/or uploaded to cloud storage such as AWS S3. Like other builders released by the SLSA Tooling SIG, the provenance can be verified using the [slsa-verifier](https://github.com/slsa-framework/slsa-verifier).
 
