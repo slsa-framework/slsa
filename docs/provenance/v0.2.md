@@ -11,17 +11,24 @@ something was produced. For higher SLSA levels and more resilient integrity
 guarantees, provenance requirements are stricter and need a deeper, more
 technical understanding of the predicate.
 
+This document defines the following predicate type within the [in-toto
+attestation] framework:
+
+```json
+"predicateType": "https://slsa.dev/provenance/v0.2"
+```
+
+> Important: Always use the above string for `predicateType` rather than what is
+> in the URL bar. The `predicateType` URI will always resolve to the latest
+> minor version of this specification. See [parsing rules](#parsing-rules) for
+> more information.
+
 ## Purpose
 
 Describe how an artifact or set of artifacts was produced.
 
 This predicate is the recommended way to satisfy the SLSA [provenance
 requirements].
-
-## Prerequisite
-
-Understanding of SLSA [Software Attestations](/attestation-model)
-and the larger [in-toto attestation] framework.
 
 ## Model
 

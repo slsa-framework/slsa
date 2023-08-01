@@ -15,6 +15,22 @@ something was produced. For higher SLSA levels and more resilient integrity
 guarantees, provenance requirements are stricter and need a deeper, more
 technical understanding of the predicate.
 
+This document defines the following predicate type within the [in-toto
+attestation] framework:
+
+```json
+"predicateType": "https://slsa.dev/provenance/v1-rc2"
+```
+
+> Important: Always use the above string for `predicateType` rather than what is
+> in the URL bar. The `predicateType` URI will always resolve to the latest
+> minor version of this specification. See [parsing rules](#parsing-rules) for
+> more information.
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
 ## Purpose
 
 Describe how an artifact or set of artifacts was produced so that:
@@ -25,15 +41,6 @@ Describe how an artifact or set of artifacts was produced so that:
 
 This predicate is the RECOMMENDED way to satisfy the SLSA v1.0 [provenance
 requirements](/spec/v1.0-rc2/requirements#provenance-generation).
-
-## Prerequisite
-
-Understanding of SLSA [Software Attestations](/attestation-model)
-and the larger [in-toto attestation] framework.
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ## Model
 
