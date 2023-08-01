@@ -8,7 +8,6 @@ It has been an exciting quarter for supply chain security and SLSA, with the rel
 
 SLSA now provides and maintains official builders for [Go](2022-06-20-slsa-github-workflows.md), [Node.js](2023-05-11-bringing-improved-supply-chain-security-to-the-nodejs-ecosystem.md) and [Container](2023-06-13-slsa-github-worfklows-container-based.md) based projects. But what if you don't use any of these languages or use custom tooling that isn't supported by the official builders?
 
-
 To empower the community to create their own provenance builders and leverage the secure architecture of the official SLSA builders we are releasing the ["Build Your Own Builder" (BYOB) framework](https://github.com/slsa-framework/slsa-github-generator/tree/main#build-your-own-builder) for GitHub Actions. This makes it easy to take an existing GitHub Action (e.g. [JReleaser](https://jreleaser.org/)) and make it produce [SLSA Build Level 3 provenance](/spec/v1.0/requirements#provenance-generation).
 
 Writing a builder from scratch is a tedious multi-month effort. The BYOB framework streamlines this process and cuts the development time down to a few days. As a builder author, you don't need to worry about keeping signing keys secure, isolation between builds, the creation of attestations; all this is handled seamlessly by the framework, using the [same security design principles](https://github.com/slsa-framework/slsa-github-generator/tree/main#specifications) as our existing builders.
@@ -25,7 +24,6 @@ The BYOB framework benefits both GitHub Action maintainers and GitHub Action use
 The BYOB framework provides a set of GitHub Actions and workflows that helps builder authors generate provenance. Suppose you own a GitHub Action called `MyAction` and want to generate provenance showing that it ran on some input and generated some output, without having to trust the Workflow that called your Action. This is not possible using a regular Action because Actions run under the control of the calling Workflow: this option is depicted in the diagram below, where a project's `release.yml` workflow calls `MyAction`.
 
 ![action-release](https://github.com/slsa-framework/slsa/assets/64505099/367ecc46-28f6-4029-853e-161a028e6a35)
-
 
 To solve this problem, you could turn your Action into a Reusable Workflow. This results in `MyAction` running in a VM under your control, not the caller's control. In fact, this is how the SLSA go, Node.js, and container builders work. This option is depicted in the diagram below: The project's `release.yml` calls the reusable workflow `MyReusableWorkflow` which in turn calls `MyAction` and generates provenance for the run.
 
