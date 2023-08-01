@@ -6,9 +6,10 @@ is_guest_post: false
 
 It has been an exciting quarter for supply chain security and SLSA, with the release of the [SLSA v1.0 specification](2023-04-19-slsa-v1-final.md), [SLSA provenance support for npm](https://github.blog/2023-04-19-introducing-npm-package-provenance/), and the announcement of new SLSA Level 3 builders for [Node.js](2023-05-11-bringing-improved-supply-chain-security-to-the-nodejs-ecosystem.md) and [containers](2023-06-13-slsa-github-worfklows-container-based.md)!
 
-SLSA now provides and maintains official builders for [Go](2022/06/slsa-github-workflows), [Node.js](2023/05/bringing-improved-supply-chain-security-to-the-nodejs-ecosystem) and [Container](2023/06/slsa-github-worfklows-container-based) based projects. But what if you don't use any of these languages or use custom tooling that isn't supported by the official builders?
+SLSA now provides and maintains official builders for [Go](2022-06-20-slsa-github-workflows.md), [Node.js](2023-05-11-bringing-improved-supply-chain-security-to-the-nodejs-ecosystem.md) and [Container](2023-06-13-slsa-github-worfklows-container-based.md) based projects. But what if you don't use any of these languages or use custom tooling that isn't supported by the official builders?
 
-To empower the community to create their own provenance builders and leverage the secure architecture of the official SLSA builders we are releasing the ["Build Your Own Builder" framework](https://github.com/slsa-framework/slsa-github-generator/tree/main#build-your-own-builder) for GitHub Actions. This makes it easy to take an existing GitHub Action (e.g. [JReleaser](https://jreleaser.org/)) and make it produce [SLSA Build Level 3 provenance](/spec/v1.0/requirements#provenance-generation).
+
+To empower the community to create their own provenance builders and leverage the secure architecture of the official SLSA builders we are releasing the ["Build Your Own Builder" (BYOB) framework](https://github.com/slsa-framework/slsa-github-generator/tree/main#build-your-own-builder) for GitHub Actions. This makes it easy to take an existing GitHub Action (e.g. [JReleaser](https://jreleaser.org/)) and make it produce [SLSA Build Level 3 provenance](/spec/v1.0/requirements#provenance-generation).
 
 Writing a builder from scratch is a tedious multi-month effort. The BYOB framework streamlines this process and cuts the development time down to a few days. As a builder author, you don't need to worry about keeping signing keys secure, isolation between builds, the creation of attestations; all this is handled seamlessly by the framework, using the [same security design principles](https://github.com/slsa-framework/slsa-github-generator/tree/main#specifications) as our existing builders.
 
@@ -21,24 +22,30 @@ The BYOB framework benefits both GitHub Action maintainers and GitHub Action use
 1.  For Action maintainers, it makes it easy to meet the [SLSA Build L3](/spec/v1.0/levels#build-l3) requirements.
 2.  For Action users, it makes it easy to adopt SLSA by trusting the BYOB project and the Action code - without worrying about which machine runs the Action.
 
-The BYOB framework provides a set of GitHub Actions and workflows that helps builder authors generate provenance.
+The BYOB framework provides a set of GitHub Actions and workflows that helps builder authors generate provenance. Suppose you own a GitHub Action called `MyAction` and want to generate provenance showing that it ran on some input and generated some output, without having to trust the Workflow that called your Action. This is not possible using a regular Action because Actions run under the control of the calling Workflow: this option is depicted in the diagram below, where a project's `release.yml` workflow calls `MyAction`.
 
-The high-level architecture is depicted in the diagram below. The `builder_workflow.yml` represents the builder being created. The BYOB framework, on the right of the diagram, acts as an orchestrator.
+![release-action](https://github.com/slsa-framework/slsa/assets/64505099/d6b42c6e-637a-4bb0-a19e-852882dde9c1)
 
-![BYOB architecture](https://github.com/slsa-framework/slsa/assets/64505099/51c796e3-754e-4cd8-b2ea-dd8c23662411)
+To solve this problem, you could turn your Action into a Reusable Workflow. This results in `MyAction` running in a VM under your control, not the caller's control. In fact, this is how the SLSA go, Node.js, and container builders work. This option is depicted in the diagram below: The project's `release.yml` calls the reusable workflow `MyReusableWorkflow` which in turn calls `MyAction` and generates provenance for the run.
 
-There are two main steps to using the BYOB framework. First, the builder (`builder_workflow.yml`) initializes the BYOB framework ("Initialize" box on the left). Then it calls the framework ("Run" box on the left). Running the framework transfers execution to the BYOB framework which will run the build in an isolated environment and then generate provenance.
+![action-reusable](https://github.com/slsa-framework/slsa/assets/64505099/a0603e5f-4ebb-4c93-8216-b63f22bcf08d)
+
+However, this is a lot of work that requires careful design and implementation. That's where the BYOB framework comes in! BYOB offloads all of the security critical work so that you can wrap your Action in a Reusable Workflow and call BYOB to do the heavy lifting. This high-level architecture is depicted in the diagram below: The `MyReusableWorkflow` calls the `BYOBWorkflow` which acts as an orchestrator.
+
+![BYOB architecture](https://github.com/slsa-framework/slsa/assets/64505099/9d0a8133-ae1a-4b43-b7a1-5090e263eb47)
+
+There are two main steps to using the BYOB framework. First, the builder (`MyReusableWorkflow`) initializes the BYOB framework ("BYOB_Initialize" box in the middle box). Then it calls the framework ("BYOB_Run" box). Running the framework transfers execution to the BYOB framework which will run the `MyAction` in an isolated environment and then generate provenance.
 
 Let's see each of these steps in more detail.
 
-The snippet below shows how the initialization step is performed: the builder initializes the BYOB framework for the ubuntu-latest runner, with a build Action path "./internal/callback_action" and asks it to attest to its inputs. At runtime, the BYOB framework will isolate the "./internal/callback_action" into an ephemeral VM and run it on an ubuntu-latest runner. The call below returns a so-called "slsa-token" object which can then be used to run the framework itself.
+The snippet below shows how the initialization step is performed: the builder `MyReusableWorkflow` initializes the BYOB framework for the ubuntu-latest runner, with a build Action path `MyAction` and asks it to attest to its inputs. At runtime, the BYOB framework will isolate the `MyAction` into an ephemeral VM and run it on an ubuntu-latest runner. The call below returns a so-called "slsa-token" object which can then be used to run the framework itself.
 
 ```yaml
 uses: slsa-framework/slsa-github-generator/actions/delegator/setup-generic@v1.8.0
   with:
     ...
     slsa-runner-label: "ubuntu-latest"
-    slsa-build-action-path: "./internal/callback_action"
+    slsa-build-action-path: "path/to/MyAction"
     slsa-workflow-inputs: {% raw %}${{ toJson(inputs) }}{% endraw %}
 ```
 
@@ -53,7 +60,7 @@ uses: slsa-framework/slsa-github-generator/.github/workflows/delegator_generic_s
     secret2: {% raw %}${{ inputs.token }}{% endraw %}
 ```
 
-When the run completes, the BYOB framework will generate a list of attestations for the artifacts indicated by the builder. More information is available in our [documentation](https://github.com/slsa-framework/slsa-github-generator/blob/main/BYOB.md#generation-of-metadata-layout-file).
+When the run completes, the BYOB framework will generate a list of attestations for the artifacts indicated by the builder (`MyReusableWorkflow`). More information is available in our [documentation](https://github.com/slsa-framework/slsa-github-generator/blob/main/BYOB.md#generation-of-metadata-layout-file).
 
 ## SLSA Java builders for JReleaser, Maven and Gradle
 
