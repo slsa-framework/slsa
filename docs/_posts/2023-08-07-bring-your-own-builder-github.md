@@ -21,11 +21,11 @@ The BYOB framework benefits both GitHub Action maintainers and GitHub Action use
 1.  For Action maintainers, it makes it easy to meet the [SLSA Build L3](/spec/v1.0/levels#build-l3) requirements.
 2.  For Action users, it makes it easy to adopt SLSA by trusting the BYOB project and the Action code - without worrying about which machine runs the Action.
 
-The BYOB framework provides a set of GitHub Actions and workflows that helps builder authors generate provenance. Suppose you own a GitHub Action called `MyAction` and want to generate provenance showing that it ran on some input and generated some output, without having to trust the Workflow that called your Action. This is not possible using a regular Action because Actions run under the control of the calling Workflow: this option is depicted in the diagram below, where a project's `release.yml` workflow calls `MyAction`.
+The BYOB framework provides a set of GitHub Actions and workflows that helps builder authors generate provenance. Suppose you own a GitHub Action called `MyAction` and want to generate provenance showing that it ran on some input and generated some output, without having to trust the Workflow that called your Action. This is not possible using a regular Action because Actions run under the control of the calling Workflow (the diagram below depicts a project's `release.yml` workflow calling `MyAction`).
 
 ![action-release](https://github.com/slsa-framework/slsa/assets/64505099/367ecc46-28f6-4029-853e-161a028e6a35)
 
-To solve this problem, you could turn your Action into a Reusable Workflow. This results in `MyAction` running in a VM under your control, not the caller's control. In fact, this is how the SLSA go, Node.js, and container builders work. This option is depicted in the diagram below: The project's `release.yml` calls the reusable workflow `MyReusableWorkflow` which in turn calls `MyAction` and generates provenance for the run.
+To solve this problem, you could turn your Action into a Reusable Workflow. This results in `MyAction` running in a VM under your control, not the caller's control. In fact, this is how the SLSA go, Node.js, and container builders work. This option is depicted in the diagram below: The project's `release.yml` calls the Reusable Workflow `MyReusableWorkflow` which in turn calls `MyAction` and generates provenance for the run.
 
 ![action-reusable](https://github.com/slsa-framework/slsa/assets/64505099/a0603e5f-4ebb-4c93-8216-b63f22bcf08d)
 
