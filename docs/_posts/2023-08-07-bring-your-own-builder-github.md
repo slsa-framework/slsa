@@ -24,7 +24,8 @@ The BYOB framework benefits both GitHub Action maintainers and GitHub Action use
 
 The BYOB framework provides a set of GitHub Actions and workflows that helps builder authors generate provenance. Suppose you own a GitHub Action called `MyAction` and want to generate provenance showing that it ran on some input and generated some output, without having to trust the Workflow that called your Action. This is not possible using a regular Action because Actions run under the control of the calling Workflow: this option is depicted in the diagram below, where a project's `release.yml` workflow calls `MyAction`.
 
-![release-action](https://github.com/slsa-framework/slsa/assets/64505099/d6b42c6e-637a-4bb0-a19e-852882dde9c1)
+![action-release](https://github.com/slsa-framework/slsa/assets/64505099/367ecc46-28f6-4029-853e-161a028e6a35)
+
 
 To solve this problem, you could turn your Action into a Reusable Workflow. This results in `MyAction` running in a VM under your control, not the caller's control. In fact, this is how the SLSA go, Node.js, and container builders work. This option is depicted in the diagram below: The project's `release.yml` calls the reusable workflow `MyReusableWorkflow` which in turn calls `MyAction` and generates provenance for the run.
 
