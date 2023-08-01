@@ -40,7 +40,7 @@ uses: slsa-framework/slsa-github-generator/actions/delegator/setup-generic@v1.8.
     ...
     slsa-runner-label: "ubuntu-latest"
     slsa-build-action-path: "./internal/callback_action"
-    slsa-workflow-inputs: ${{ toJson(inputs) }}
+    slsa-workflow-inputs: {% raw %} ${{ toJson(inputs) }} {% endraw %}
 ```
 
 The second step is to run the BYOB framework with the initialized "slsa-token":
@@ -48,10 +48,10 @@ The second step is to run the BYOB framework with the initialized "slsa-token":
 ```yaml
 uses: slsa-framework/slsa-github-generator/.github/workflows/delegator_generic_slsa3.yml@v1.8.0
   with:
-    slsa-token: ${{ needs.slsa-setup.outputs.slsa-token }}
+    slsa-token: {% raw %} ${{ needs.slsa-setup.outputs.slsa-token }} {% endraw %}
   secrets:
-    secret1: ${{ inputs.password }}
-    secret2: ${{ inputs.token }}
+    secret1: {% raw %} ${{ inputs.password }} {% endraw %}
+    secret2: {% raw %} ${{ inputs.token }} {% endraw %}
 ```
 
 When the run completes, the BYOB framework will generate a list of attestations for the artifacts indicated by the builder. More information is available in our [documentation](https://github.com/slsa-framework/slsa-github-generator/blob/main/BYOB.md#generation-of-metadata-layout-file).
