@@ -25,7 +25,7 @@ The BYOB framework provides a set of GitHub Actions and workflows that helps bui
 
 ![action-release](https://github.com/slsa-framework/slsa/assets/64505099/367ecc46-28f6-4029-853e-161a028e6a35)
 
-To solve this problem, you could turn your Action into a Reusable Workflow. This results in `MyAction` running in a VM under your control, not the caller's control. In fact, this is how the SLSA go, Node.js, and container builders work. This option is depicted in the diagram below: The project's `release.yml` calls the Reusable Workflow `MyReusableWorkflow` which in turn calls `MyAction` and generates provenance for the run.
+To solve this problem, you could turn your Action into a Reusable Workflow. This results in `MyAction` running in a VM under your control, not the caller's control. In fact, this is how the SLSA Go, Node.js, and Container builders work. This option is depicted in the diagram below: The project's `release.yml` calls the Reusable Workflow `MyReusableWorkflow` which in turn calls `MyAction` and generates provenance for the run.
 
 ![action-reusable](https://github.com/slsa-framework/slsa/assets/64505099/a0603e5f-4ebb-4c93-8216-b63f22bcf08d)
 
@@ -79,14 +79,17 @@ To verify the provenance of an artifact built by the Maven builder, we need to d
 
 ![Maven provenance link](https://github.com/slsa-framework/slsa/assets/64505099/14ff1de1-a30c-4683-860c-352dc490c1ef)
 
-We download and verify it as follows:
+The [slsa-verifier](https://github.com/slsa-framework/slsa-verifier) can be used to verify the provenance. The tool verifies the signature on the provenance and the source used to build the artifact, as per the [SLSA specifications](/spec/v1.0/verifying-artifacts).
 
 ```shell
 ARTIFACT=test-artifact-0.1.0-jar
 ARTIFACT_URL="https://repo1.maven.org/maven2/path/to/${ARTFACT}"
 PROVENANCE_URL="${ARTIFACT_URL}".build.slsa
 wget "${ARTIFACT_URL}" && wget "${PROVENANCE_URL}"
-slsa-verifier verify-artifact "${ARTIFACT}" --provenance-path="${ARTIFACT}.build.slsa" --source-uri github.com/org/repo
+slsa-verifier verify-artifact "${ARTIFACT}" \
+  --provenance-path="${ARTIFACT}.build.slsa" \
+  --source-uri github.com/org/repo \
+  [--source-tag v1.2.3]
 ```
 
 ### Verification of Dependencies
