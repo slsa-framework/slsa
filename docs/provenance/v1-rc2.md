@@ -3,11 +3,6 @@ title: Provenance
 description: Description of SLSA provenance specification for verifying where, when, and how something was produced.
 layout: standard
 ---
-<!-- Note: We only include the major version in the URL, e.g. "v1" instead of
-"v1.0", because minor versions are guaranteed to be backwards compatible. We
-still include the minor version number in the selector (_data/versions.yml) so
-that readers can easily find the current minor version number. -->
-
 To trace software back to the source and define the moving parts in a complex
 supply chain, provenance needs to be there from the very beginning. It's the
 verifiable information about software artifacts describing where, when and how
