@@ -40,7 +40,7 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 Provenance is an attestation that a particular build platform produced a set of
 software artifacts through execution of the `buildDefinition`.
 
-![Build Model](../images/provenance/v1-rc2/model.svg)
+![Build Model](images/provenance-model.svg)
 
 The model is as follows:
 
@@ -108,16 +108,16 @@ understand cue. For that reason, we are not using any special cue syntax or
 features. -->
 
 ```javascript
-{% include_relative schema/v1-rc2/provenance.cue %}
+{% include_relative schema/provenance.cue %}
 ```
 
 <details>
 <summary>Protocol buffer schema</summary>
 
-Link: [provenance.proto](schema/v1-rc2/provenance.proto)
+Link: [provenance.proto](schema/provenance.proto)
 
 ```proto
-{% include_relative schema/v1-rc2/provenance.proto %}
+{% include_relative schema/provenance.proto %}
 ```
 
 </details>
@@ -191,7 +191,7 @@ reproducing the build. There is no need to [verify][Verification] these
 parameters because the build system is already trusted, and in many cases it is
 not practical to do so.
 
-***NOTE:** This field is named `internalParameters` in [v1](v1.md) final.*
+***NOTE:** This field is named `internalParameters` in [v1](/provenance/v1) final.*
 
 <tr id="resolvedDependencies"><td><code>resolvedDependencies</code>
 <td>array (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1.0/resource_descriptor.md">ResourceDescriptor</a>)<td>
@@ -443,7 +443,7 @@ information that is not captured in a standard field. Guidelines:
 
 ## Verification
 
-[Verification]: /spec/v1.0-rc2/verifying-artifacts.md
+[Verification]: verifying-artifacts.md
 
 Please see [Verifying Artifacts][Verification] for a detailed discussion of
 provenance verification.
@@ -462,8 +462,8 @@ To add an entry here, please send a pull request on GitHub.
 
 ## Migrating from 0.2
 
-To migrate from [version 0.2](../v0.2) (`old`), use the following pseudocode.
-The meaning of each field is unchanged unless otherwise noted.
+To migrate from [version 0.2](/provenance/v0.2) (`old`), use the following
+pseudocode. The meaning of each field is unchanged unless otherwise noted.
 
 ```javascript
 {

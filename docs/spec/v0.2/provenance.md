@@ -18,22 +18,28 @@ Describe how an artifact or set of artifacts was produced.
 This predicate is the recommended way to satisfy the SLSA [provenance
 requirements].
 
+## Prerequisite
+
+Understanding of SLSA [Software Attestations](/attestation-model)
+and the larger [in-toto attestation] framework.
+
 ## Model
 
-Provenance is a claim that some entity (`builder`) produced one or more software
-artifacts ([Statement]'s `subject`) by executing some `recipe`, using some other
-artifacts as input (`materials`). The builder is trusted to have faithfully
-recorded the provenance; there is no option but to trust the builder. However,
-the builder may have performed this operation at the request of some external,
-possibly untrusted entity. These untrusted parameters are captured in the
-recipe's `entryPoint`, `arguments`, and some of the `materials`. Finally, the
-build may have depended on various environmental parameters (`environment`) that
-are needed for [reproducing][reproducible] the build but that are not under
-external control.
+Provenance is an attestation that some entity (`builder`) produced one or more
+software artifacts (the `subject` of an in-toto attestation [Statement]) by
+executing some `invocation`, using some other artifacts as input (`materials`).
+The invocation in turn runs the `buildConfig`, which is a record of what was
+executed. The builder is trusted to have faithfully recorded the provenance;
+there is no option but to trust the builder. However, the builder may have
+performed this operation at the request of some external, possibly untrusted
+entity. These untrusted parameters are captured in the invocation's `parameters`
+and some of the `materials`. Finally, the build may have depended on various
+environmental parameters (`environment`) that are needed for
+[reproducing][reproducible] the build but that are not under external control.
 
 See [Example](#example) for a concrete example.
 
-![Model Diagram](../images/provenance/v0.1/provenance.svg)
+![Model Diagram](images/provenance.svg)
 
 ## Schema
 
@@ -44,24 +50,28 @@ See [Example](#example) for a concrete example.
   "subject": [{ ... }],
 
   // Predicate:
-  "predicateType": "https://slsa.dev/provenance/v0.1",
+  "predicateType": "https://slsa.dev/provenance/v0.2",
   "predicate": {
     "builder": {
       "id": "<URI>"
     },
-    "recipe": {
-      "type": "<URI>",
-      "definedInMaterial": /* integer */,
-      "entryPoint": "<STRING>",
-      "arguments": { /* object */ },
+    "buildType": "<URI>",
+    "invocation": {
+      "configSource": {
+        "uri": "<URI>",
+        "digest": { /* DigestSet */ },
+        "entryPoint": "<STRING>"
+      },
+      "parameters": { /* object */ },
       "environment": { /* object */ }
     },
+    "buildConfig": { /* object */ },
     "metadata": {
       "buildInvocationId": "<STRING>",
       "buildStartedOn": "<TIMESTAMP>",
       "buildFinishedOn": "<TIMESTAMP>",
       "completeness": {
-        "arguments": true/false,
+        "parameters": true/false,
         "environment": true/false,
         "materials": true/false
       },
@@ -87,6 +97,8 @@ This predicate follows the in-toto attestation [parsing rules]. Summary:
 -   Minor version changes are always backwards compatible and "monotonic." Such
     changes do not update the `predicateType`.
 -   Producers MAY add extension fields using field names that are URIs.
+-   Optional fields MAY be unset or null, and should be treated equivalently.
+    Both are equivalent to empty for _object_ or _array_ values.
 
 ### Fields
 
@@ -96,17 +108,17 @@ of the other top-level fields, such as `subject`, see [Statement]._
 <a id="builder"></a>
 `builder` _object, required_
 
-> Identifies the entity that executed the recipe, which is trusted to have
+> Identifies the entity that executed the invocation, which is trusted to have
 > correctly performed the operation and populated this provenance.
 >
 > The identity MUST reflect the trust base that consumers care about. How
 > detailed to be is a judgement call. For example, [GitHub Actions] supports
 > both GitHub-hosted runners and self-hosted runners. The GitHub-hosted runner
-> might be a single identity because, it's all GitHub from the consumer's
+> might be a single identity because it's all GitHub from the consumer's
 > perspective. Meanwhile, each self-hosted runner might have its own identity
 > because not all runners are trusted by all consumers.
 >
-> Consumers MUST accept only specific (signer, builder) pairs. For example, the
+> Consumers MUST accept only specific (signer, builder) pairs. For example,
 > "GitHub" can sign provenance for the "GitHub Actions" builder, and "Google"
 > can sign provenance for the "Google Cloud Build" builder, but "GitHub" cannot
 > sign for the "Google Cloud Build" builder.
@@ -122,86 +134,91 @@ of the other top-level fields, such as `subject`, see [Statement]._
 
 > URI indicating the builder's identity.
 
-<a id="recipe"></a>
-`recipe` _object, optional_
+<a id="buildType"></a>
+`buildType` _string ([TypeURI]), required_
 
-> Identifies the configuration used for the build. When combined with
+> URI indicating what type of build was performed. It determines the meaning of
+> `invocation`, `buildConfig` and `materials`.
+
+<a id="invocation"></a>
+`invocation` _object, optional_
+
+> Identifies the event that kicked off the build. When combined with
 > `materials`, this SHOULD fully describe the build, such that re-running this
-> recipe results in bit-for-bit identical output (if the build is
+> invocation results in bit-for-bit identical output (if the build is
 > [reproducible]).
 >
 > MAY be unset/null if unknown, but this is DISCOURAGED.
 
-<a id="recipe.type"></a>
-`recipe.type` _string ([TypeURI]), required_
+<a id="invocation.configSource"></a>
+`invocation.configSource` _object, optional_
 
-> URI indicating what type of recipe was performed. It determines the meaning of
-> `recipe.entryPoint`, `recipe.arguments`, `recipe.environment`, and
-> `materials`.
+> Describes where the config file that kicked off the build came from.
+> This is effectively a pointer to the source where `buildConfig` came from.
 
-<a id="recipe.definedInMaterial"></a>
-`recipe.definedInMaterial` _integer, optional_
+<a id="invocation.configSource.uri"></a>
+`invocation.configSource.uri` _string ([ResourceURI]), optional_
 
-> Index in `materials` containing the recipe steps that are not implied by
-> `recipe.type`. For example, if the recipe type were "make", then this would
-> point to the source containing the Makefile, not the `make` program itself.
->
-> Omit this field (or use null) if the recipe doesn't come from a material.
->
-> TODO: What if there is more than one material?
+> URI indicating the identity of the source of the config.
 
-<a id="recipe.entryPoint"></a>
-`recipe.entryPoint` _string, optional_
+<a id="invocation.configSource.digest"></a>
+`invocation.configSource.digest` _object ([DigestSet]), optional_
+
+> Collection of cryptographic digests for the contents of the artifact
+> specified by `invocation.configSource.uri`.
+
+<a id="invocation.configSource.entryPoint"></a>
+`invocation.configSource.entryPoint` _string, optional_
 
 > String identifying the entry point into the build. This is often a path to a
 > configuration file and/or a target label within that file. The syntax and
-> meaning are defined by `recipe.type`. For example, if the recipe type were
+> meaning are defined by `buildType`. For example, if the `buildType` were
 > "make", then this would reference the directory in which to run `make` as well
 > as which target to use.
 >
-> Consumers SHOULD accept only specific `recipe.entryPoint` values. For example,
+> Consumers SHOULD accept only specific `invocation.entryPoint` values. For example,
 > a policy might only allow the "release" entry point but not the "debug" entry
 > point.
 >
-> MAY be omitted if the recipe type specifies a default value.
+> MAY be omitted if the `buildType` specifies a default value.
 >
-> Design rationale: The `entryPoint` is distinct from `arguments` to make it
-> easier to write secure policies without having to parse `arguments`.
+> Design rationale: The `entryPoint` is distinct from `parameters` to make it
+> easier to write secure policies without having to parse `parameters`.
 
-<a id="recipe.arguments"></a>
-`recipe.arguments` _object, optional_
+<a id="invocation.parameters"></a>
+`invocation.parameters` _object, optional_
 
 > Collection of all external inputs that influenced the build on top of
-> `recipe.definedInMaterial` and `recipe.entryPoint`. For example, if the recipe
+> `invocation.configSource`. For example, if the invocation
 > type were "make", then this might be the flags passed to `make` aside from the
-> target, which is captured in `recipe.entryPoint`.
+> target, which is captured in `invocation.configSource.entryPoint`.
 >
-> Consumers SHOULD accept only "safe" `recipe.arguments`. The simplest and
-> safest way to achieve this is to disallow any `arguments` altogether.
+> Consumers SHOULD accept only "safe" `invocation.parameters`. The simplest and
+> safest way to achieve this is to disallow any `parameters` altogether.
 >
-> This is an arbitrary JSON object with a schema is defined by `recipe.type`.
+> This is an arbitrary JSON object with a schema defined by `buildType`.
 >
-> This is considered to be incomplete unless `metadata.completeness.arguments`
-> is true. Unset or null is equivalent to empty.
+> This is considered to be incomplete unless `metadata.completeness.parameters`
+> is true.
 
-<a id="recipe.environment"></a>
-`recipe.environment` _object, optional_
+<a id="invocation.environment"></a>
+`invocation.environment` _object, optional_
 
 > Any other builder-controlled inputs necessary for correctly evaluating the
-> recipe. Usually only needed for [reproducing][reproducible] the build but not
+> build. Usually only needed for [reproducing][reproducible] the build but not
 > evaluated as part of policy.
 >
 > This SHOULD be minimized to only include things that are part of the public
 > API, that cannot be recomputed from other values in the provenance, and that
-> actually affect the evaluation of the recipe. For example, this might include
+> actually affect the evaluation of the build. For example, this might include
 > variables that are referenced in the workflow definition, but it SHOULD NOT
 > include a dump of all environment variables or include things like the
 > hostname (assuming hostname is not part of the public API).
 >
-> This is an arbitrary JSON object with a schema is defined by `recipe.type`.
+> This is an arbitrary JSON object with a schema defined by `buildType`.
 >
 > This is considered to be incomplete unless `metadata.completeness.environment`
-> is true. Unset or null is equivalent to empty.
+> is true.
 
 <a id="metadata"></a>
 `metadata` _object, optional_
@@ -232,17 +249,16 @@ of the other top-level fields, such as `subject`, see [Statement]._
 > Indicates that the `builder` claims certain fields in this message to be
 > complete.
 
-<a id="metadata.completeness.arguments"></a>
-`metadata.completeness.arguments` _boolean, optional_
+<a id="metadata.completeness.parameters"></a>
+`metadata.completeness.parameters` _boolean, optional_
 
-> If true, the `builder` claims that `recipe.arguments` is complete, meaning
-> that all external inputs are propertly captured in `recipe`.
+> If true, the `builder` claims that `invocation.parameters` is complete, meaning
+> that all external inputs are propertly captured in `invocation.parameters`.
 
 <a id="metadata.completeness.environment"></a>
 `metadata.completeness.environment` _boolean, optional_
 
-> If true, the `builder` claims that `recipe.environment` is claimed to be
-> complete.
+> If true, the `builder` claims that `invocation.environment` is complete.
 
 <a id="metadata.completeness.materials"></a>
 `metadata.completeness.materials` _boolean, optional_
@@ -253,8 +269,17 @@ of the other top-level fields, such as `subject`, see [Statement]._
 <a id="metadata.reproducible"></a>
 `metadata.reproducible` _boolean, optional_
 
-> If true, the `builder` claims that running `recipe` on `materials` will
+> If true, the `builder` claims that running `invocation` on `materials` will
 > produce bit-for-bit identical output.
+
+<a id="buildConfig"></a>
+`buildConfig` _object, optional_
+
+> Lists the steps in the build.
+> If `invocation.configSource` is not available, `buildConfig` can be used
+> to verify information about the build.
+>
+> This is an arbitrary JSON object with a schema defined by `buildType`.
 
 <a id="materials"></a>
 `materials` _array of objects, optional_
@@ -263,7 +288,7 @@ of the other top-level fields, such as `subject`, see [Statement]._
 > dependencies, build tools, base images, and so on.
 >
 > This is considered to be incomplete unless `metadata.completeness.materials`
-> is true. Unset or null is equivalent to empty.
+> is true.
 
 <a id="materials.uri"></a>
 `materials[*].uri` _string ([ResourceURI]), optional_
@@ -294,14 +319,17 @@ provenance might look like this:
   "_type": "https://in-toto.io/Statement/v0.1",
   // Output file; name is "_" to indicate "not important".
   "subject": [{"name": "_", "digest": {"sha256": "5678..."}}],
-  "predicateType": "https://slsa.dev/provenance/v0.1",
+  "predicateType": "https://slsa.dev/provenance/v0.2",
   "predicate": {
+    "buildType": "https://example.com/Makefile",
     "builder": { "id": "mailto:person@example.com" },
-    "recipe": {
-      "type": "https://example.com/Makefile",
-      "definedInMaterial": 0,                 // material containing the Makefile
-      "entryPoint": "src:foo",                // target "foo" in directory "src"
-      "arguments": {"CFLAGS": "-O3"}          // extra args to `make`
+    "invocation": {
+      "configSource": {
+        "uri": "https://example.com/example-1.2.3.tar.gz",
+        "digest": {"sha256": "1234..."},
+        "entryPoint": "src:foo",                // target "foo" in directory "src"
+      },
+      "parameters": {"CFLAGS": "-O3"}           // extra args to `make`
     },
     "materials": [{
       "uri": "https://example.com/example-1.2.3.tar.gz",
@@ -335,17 +363,20 @@ in `builder`.
 #### GitHub Actions Workflow
 
 ```jsonc
-"recipe": {
-  // Build steps were defined in a GitHub Actions Workflow file ...
-  "type": "https://github.com/Attestations/GitHubActionsWorkflow@v1",
-  // ... in the git repo described by `materials[0]` ...
-  "definedInMaterial": 0,
-  // ... at the path .github/workflows/build.yaml, using the job "build".
-  "entryPoint": "build.yaml:build",
+"buildType": "https://github.com/Attestations/GitHubActionsWorkflow@v1",
+"invocation": {
+  "configSource": {
+    "entryPoint": "build.yaml:build",
+    // The git repo that contains the build.yaml referenced in the entrypoint.
+    "uri": "git+https://github.com/foo/bar.git",
+    // The resolved git commit hash reflecting the version of the repo used
+    // for this build.
+    "digest": {"sha1": "abc..."}
+  },
   // The only possible user-defined parameters that can affect the build are the
   // "inputs" to a workflow_dispatch event. This is unset/null for all other
   // events.
-  "arguments": {
+  "parameters": {
     "inputs": { ... }
   },
   // Other variables that are required to reproduce the build and that cannot be
@@ -383,6 +414,65 @@ in `builder`.
 }]
 ```
 
+### GitLab CI
+
+The GitLab CI team has implemented an [artifact attestation](https://docs.gitlab.com/ee/ci/runners/configure_runners.html#artifact-attestation) capability in their GitLab Runner 15.1 release.
+
+If GitLab is the one to generate provenance, and the runner is GitLab-hosted or self-hosted,
+then the builder would be as follows:
+
+```jsonc
+"builder": {
+  "id": "https://gitlab.com/foo/bar/-/runners/12345678"
+}
+```
+
+#### GitLab CI Job
+
+```jsonc
+"buildType": "https://gitlab.com/gitlab-org/gitlab-runner/-/blob/v15.1.0/PROVENANCE.md",
+"invocation": {
+  "configSource": {
+    // the git repo that contains the GitLab CI job referenced in the entrypoint
+    "uri": "https://gitlab.com//foo/bar",
+    // The resolved git commit hash reflecting the version of the repo used
+    // for this build.
+    "digest": {
+        "sha256": "abc..."
+    },
+    // the name of the CI job that triggered the build
+    "entryPoint": "build"
+  },
+  // Other variables that are required to reproduce the build and that cannot be
+  // recomputed using existing information. (Documentation would explain how to
+  // recompute the rest of the fields.)
+  "environment": {
+      // Name of the GitLab runner
+      "name": "hosted-gitlab-runner",
+      // The runner executor
+      "executor": "kubernetes",
+      // The architecture on which the CI job is run
+      "architecture": "amd64"
+  },
+  // Collection of all external inputs (CI variables) related to the job
+  "parameters": {
+      "CI_PIPELINE_ID": "",
+      "CI_PIPELINE_URL": "",
+      // All other CI variable names are listed here. Values are always represented as empty strings to avoid leaking secrets.
+  }
+},
+"metadata": {
+  "buildStartedOn": "2022-06-17T00:47:27+03:00",
+  "buildFinishedOn": "2022-06-17T00:47:28+03:00",
+  "completeness": {
+      "parameters": true,
+      "environment": true,
+      "materials": false
+  },
+  "reproducible": false
+}
+```
+
 ### Google Cloud Build
 
 WARNING: This is only for demonstration purposes. The Google Cloud Build team
@@ -408,18 +498,32 @@ Here `entryPoint` references the `filename` from the CloudBuild
 [BuildTrigger](https://cloud.google.com/build/docs/api/reference/rest/v1/projects.triggers).
 
 ```jsonc
-"recipe": {
-  // Build steps were defined in a cloudbuild.yaml file ...
-  "type": "https://cloudbuild.googleapis.com/CloudBuildYaml@v1",
+"buildType": "https://cloudbuild.googleapis.com/CloudBuildYaml@v1",
+"invocation": {
   // ... in the git repo described by `materials[0]` ...
-  "definedInMaterial": 0,
-  // ... at the path path/to/cloudbuild.yaml.
-  "entryPoint": "path/to/cloudbuild.yaml",
+  "configSource": {
+    "entryPoint": "path/to/cloudbuild.yaml",
+    // The git repo that contains the cloudbuild.yaml referenced above.
+    "uri": "git+https://source.developers.google.com/p/foo/r/bar",
+    // The resolved git commit hash reflecting the version of the repo used
+    // for this build.
+    "digest": {"sha1": "abc..."}
+  },
   // The only possible user-defined parameters that can affect a BuildTrigger
   // are the subtitutions in the BuildTrigger.
-  "arguments": {
+  "parameters": {
     "substitutions": {...}
   }
+}
+"buildConfig": {
+  // each step in the recipe corresponds to a step in the cloudbuild.yaml
+  // the format of this is determined by `buildType`
+  "steps": [
+    {
+      "image": "pkg:docker/make@sha256:244fd47e07d1004f0aed9c",
+      "arguments": ["build"]
+    }
+  ]
 }
 "materials": [{
   // The git repo that contains the cloudbuild.yaml referenced above.
@@ -435,17 +539,18 @@ Here `entryPoint` references the `filename` from the CloudBuild
 Here we list the steps defined in a trigger or over RPC:
 
 ```jsonc
-"recipe": {
-  // Build steps were provided as an argument. No `definedInMaterial` or
-  // `entryPoint`.
-  "type": "https://cloudbuild.googleapis.com/CloudBuildSteps@v1",
-  "arguments": {
-    // The steps that were performed. (Format TBD.)
-    "steps": [...],
+"buildType": "https://cloudbuild.googleapis.com/CloudBuildSteps@v1",
+"invocation": {
+  // Build steps were provided as an argument. No `configSource`
+  "parameters": {
     // The substitutions in the build trigger.
     "substitutions": {...}
     // TODO: Any other arguments?
   }
+}
+"buildConfig": {
+  // The steps that were performed. (Format TBD.)
+  "steps": [...]
 }
 ```
 
@@ -456,11 +561,11 @@ WARNING: This is just a proof-of-concept. It is not yet standardized.
 Execution of arbitrary commands:
 
 ```jsonc
-"recipe": {
-  // There was no entry point, and the commands were run in an ad-hoc fashion.
-  // There is no `definedInMaterial` or `entryPoint`.
-  "type": "https://example.com/ManuallyRunCommands@v1",
-  "arguments": {
+"buildType": "https://example.com/ManuallyRunCommands@v1",
+// There was no entry point, and the commands were run in an ad-hoc fashion.
+// There is no `configSource`.
+"invocation": null,
+"buildConfig": {
     // The list of commands that were executed.
     "commands": [
       "tar xvf foo-1.2.3.tar.gz",
@@ -470,17 +575,57 @@ Execution of arbitrary commands:
     ],
     // Indicates how to parse the strings in `commands`.
     "shell": "bash"
-  }
+}
+```
+
+## Migrating from 0.1
+
+To migrate from [version 0.1][0.1] (`old`):
+
+```javascript
+{
+  "builder": old.builder,  // (unchanged)
+  "buildType": old.recipe.type,
+  "invocation": {
+    "configSource": {
+      "uri": old.materials[old.recipe.definedInMaterial].uri,
+      "digest": old.materials[old.recipe.definedInMaterial].digest,
+      "entrypoint": old.recipe.entryPoint
+    },
+    "parameters": old.recipe.arguments,
+    "environment": old.recipe.environment   // (unchanged)
+  },
+  "buildConfig": null,  // no equivalent in 0.1
+  "metadata": {
+    "buildInvocationId": old.metadata.buildInvocationId,    // (unchanged)
+    "buildStartedOn": old.metadata.buildStartedOn,          // (unchanged)
+    "buildFinishedOn": old.metadata.buildFinishedOn,        // (unchanged)
+    "completeness": {
+      "parameters": old.metadata.completeness.arguments,
+      "environment": old.metadata.completeness.environment, // (unchanged)
+      "materials": old.metadata.completeness.materials,     // (unchanged)
+    },
+    "reproducible": old.metadata.reproducible               // (unchanged)
+  },
+  "materials": old.materials  // optionally removing the configSource
 }
 ```
 
 ## Change history
 
+-   0.2: Refactored to aid clarity and added `buildConfig`. The model is
+    unchanged.
+    -   Replaced `definedInMaterial` and `entryPoint` with `configSource`.
+    -   Renamed `recipe` to `invocation`.
+    -   Moved `invocation.type` to top-level `buildType`.
+    -   Renamed `arguments` to `parameters`.
+    -   Added `buildConfig`, which can be used as an alternative to
+        `configSource` to validate the configuration.
 -   Renamed to "slsa.dev/provenance".
 -   0.1.1: Added `metadata.buildInvocationId`.
 -   0.1: Initial version, named "in-toto.io/Provenance"
 
-[0.2]: v0.2.md
+[0.1]: /provenance/v0.1
 [DigestSet]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/field_types.md#DigestSet
 [GitHub Actions]: #github-actions
 [Reproducible]: https://reproducible-builds.org
@@ -488,5 +633,6 @@ Execution of arbitrary commands:
 [Statement]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/README.md#statement
 [Timestamp]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/field_types.md#Timestamp
 [TypeURI]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/field_types.md#TypeURI
+[in-toto attestation]: https://github.com/in-toto/attestation
 [parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/README.md#parsing-rules
-[provenance requirements]: ../spec/v0.1/requirements#provenance-requirements
+[provenance requirements]: ../v0.1/requirements#provenance-requirements

@@ -77,7 +77,7 @@
             {%- else %}
               {%- assign new_url = "/" + spec_id + "/" + spec.current %}
             {%- endif %}
-            <p>{{ spec.name }} {{ current_version.name | downcase }} is available now! See the newest documentation <a href="{{ new_url }}">here</a>.</p>
+            <p>{{ current_version.name }} is available now! See the newest documentation <a href="{{ new_url }}">here</a>.</p>
           {%- endif %}
         {%- endif %}
       </div>

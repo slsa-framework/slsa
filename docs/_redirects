@@ -38,13 +38,27 @@
 /github-actions-workflow/v1         https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1    301
 /github-actions-workflow/v1.0       https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1    301
 
-/provenance             /provenance/v1          302
-/provenance/v0.2-draft  /provenance/v0.2        301
-/provenance/v1.0        /provenance/v1          302
+/images/provenance/v1/model.svg         /spec/v1.0/images/provenance-model.svg      302
+
+/provenance             /spec/v1.0/provenance       302  # floating
+/provenance/v0.1        /spec/v0.1/provenance       301
+/provenance/v0.2        /spec/v0.2/provenance       301
+/provenance/v0.2-draft  /spec/v0.2/provenance       301
+/provenance/v1          /spec/v1.0/provenance       302  # floating
+/provenance/v1-rc1      /spec/v1.0-rc1/provenance   301
+/provenance/v1-rc2      /spec/v1.0-rc2/provenance   301
+/provenance/v1.0        /spec/v1.0/provenance       301
 
 /spec                   /spec/v1.0              302
 /spec/faq               /spec/v1.0/faq          302
 /spec/v1/*              /spec/v1.0/:splat       302
 
-/verification_summary       /verification_summary/v1    302
-/verification_summary/v1.0  /verification_summary/v1    302
+# Note: Versions prior to v1.0 stay in /verification_summary.
+/verification_summary           /spec/v1.0/verification_summary     302  # floating
+/verification_summary/v0.1      /spec/v0.1/verification_summary     301
+/verification_summary/v0.2      /spec/v0.2/verification_summary     301
+/verification_summary/v1        /spec/v1.0/verification_summary     302  # floating
+# Note: there is no v1-rc1, so just redirect to rc2.
+/verification_summary/v1-rc1    /spec/v1.0-rc2/verification_summary 301
+/verification_summary/v1-rc2    /spec/v1.0-rc2/verification_summary 301
+/verification_summary/v1.0      /spec/v1.0/verification_summary     301

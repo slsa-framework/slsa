@@ -151,6 +151,6 @@ how things will evolve over the coming months and years, but we look forward to
 the collaboration and improved software supply chain security.
 
 [Software Bill of Materials (SBOM)]: https://ntia.gov/sbom
-[SLSA Provenance]: ../../provenance/v1.md
+[SLSA Provenance]: provenance.md
 [Build track]: levels.md#build-track
 [in-toto Attestation Framework]: https://github.com/in-toto/attestation/blob/main/spec/
