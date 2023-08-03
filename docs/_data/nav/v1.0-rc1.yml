@@ -49,10 +49,10 @@
         url: /attestation-model
 
       - title: Provenance
-        url: /provenance/v1-rc1
+        url: /spec/v1.0-rc1/provenance
 
       - title: VSA
-        url: /verification_summary/v1-rc1
+        url: /spec/v1.0-rc1/verification_summary
 
     - title: Stages
       url: /spec-stages
