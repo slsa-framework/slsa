@@ -26,7 +26,7 @@ Verification SHOULD include the following steps:
     an approved list of `externalParameters` to be ignored during verification.
     Any unrecognized `externalParameters` SHOULD cause verification to fail.
 
-![Threats covered by each step](/images/v1.0/supply-chain-threats-build-verification.svg)
+![Threats covered by each step](images/supply-chain-threats-build-verification.svg)
 
 See [Terminology](terminology.md) for an explanation of supply chain model and
 [Threats & mitigations](threats.md) for a detailed explanation of each threat.

@@ -34,7 +34,7 @@ supply chains plus its own sources and builds.
 
 [directed acyclic graph]: https://en.wikipedia.org/wiki/Directed_acyclic_graph
 
-![Software Supply Chain Model](../../images/supply-chain-model.svg)
+![Software Supply Chain Model](images/supply-chain-model.svg)
 
 | Term | Description | Example |
 | --- | --- | --- |
@@ -66,7 +66,7 @@ chain.
 
 ### Build model
 
-<p align="center"><img src="build-model.svg" alt="Model Build"></p>
+<p align="center"><img src="images/build-model.svg" alt="Model Build"></p>
 
 We model a build as running on a multi-tenant *build platform*, where each
 execution is independent.
@@ -307,7 +307,7 @@ Secondly, artifacts are verified to ensure they meet the producer defined
 expectations of where the package source code was retrieved from and on what
 build platform the package was built.
 
-![Verification Model](verification-model.svg)
+![Verification Model](images/verification-model.svg)
 
 | Term         | Description |
 |--------------|---- |
