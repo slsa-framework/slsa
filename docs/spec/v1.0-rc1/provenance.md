@@ -3,17 +3,28 @@ title: Provenance
 description: Description of SLSA provenance specification for verifying where, when, and how something was produced.
 layout: standard
 ---
-<!-- Note: We only include the major version in the URL, e.g. "v1" instead of
-"v1.0", because minor versions are guaranteed to be backwards compatible. We
-still include the minor version number in the selector (_data/versions.yml) so
-that readers can easily find the current minor version number. -->
-
 To trace software back to the source and define the moving parts in a complex
 supply chain, provenance needs to be there from the very beginning. It's the
 verifiable information about software artifacts describing where, when and how
 something was produced. For higher SLSA levels and more resilient integrity
 guarantees, provenance requirements are stricter and need a deeper, more
 technical understanding of the predicate.
+
+This document defines the following predicate type within the [in-toto
+attestation] framework:
+
+```json
+"predicateType": "https://slsa.dev/provenance/v1-rc1"
+```
+
+> Important: Always use the above string for `predicateType` rather than what is
+> in the URL bar. The `predicateType` URI will always resolve to the latest
+> minor version of this specification. See [parsing rules](#parsing-rules) for
+> more information.
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ## Purpose
 
@@ -25,15 +36,6 @@ Describe how an artifact or set of artifacts was produced so that:
 
 This predicate is the RECOMMENDED way to satisfy the SLSA v1.0 [provenance
 requirements](/spec/v1.0-rc1/requirements#provenance-generation).
-
-## Prerequisite
-
-Understanding of SLSA [Software Attestations](/attestation-model)
-and the larger [in-toto attestation] framework.
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ## Model
 

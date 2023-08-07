@@ -7,6 +7,18 @@ layout: standard
 Verification summary attestations communicate that an artifact has been verified
 at a specific SLSA level and details about that verification.
 
+This document defines the following predicate type within the [in-toto
+attestation] framework:
+
+```json
+"predicateType": "https://slsa.dev/verification_summary/v0.2"
+```
+
+> Important: Always use the above string for `predicateType` rather than what is
+> in the URL bar. The `predicateType` URI will always resolve to the latest
+> minor version of this specification. See [parsing rules](#parsing-rules) for
+> more information.
+
 ## Purpose
 
 Describe what SLSA level an artifact or set of artifacts was verified at
@@ -24,11 +36,6 @@ confidential while still communicating that some verification has taken place.
 This might be necessary for legal reasons (keeping a software supplier
 confidential) or for security reasons (not revealing that an embargoed patch has
 been included).
-
-## Prerequisite
-
-Understanding of SLSA [Software Attestations](/attestation-model),
-[SLSA Provenance](/provenance), and the larger [in-toto attestation] framework.
 
 ## Model
 

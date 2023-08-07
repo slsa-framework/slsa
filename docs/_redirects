@@ -39,6 +39,10 @@
 /github-actions-workflow/v1.0       https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1    301
 
 /images/provenance/v1/model.svg         /spec/v1.0/images/provenance-model.svg      302
+/images/v1.0/supply-chain-threats-build-verification.svg    /spec/v1.0/images/supply-chain-threats-build-verification.svg   302
+/images/v1.0/supply-chain-threats.svg   /spec/v1.0/images/supply-chain-threats.svg  302
+/spec/v1.0/build-model.svg              /spec/v1.0/images/build-model.svg           302
+/spec/v1.0/verification-model.svg       /spec/v1.0/images/verification-model.svg    302
 
 /provenance             /spec/v1.0/provenance       302  # floating
 /provenance/v0.1        /spec/v0.1/provenance       301
