@@ -45,7 +45,7 @@ external control.
 
 See [Example](#example) for a concrete example.
 
-![Model Diagram](../images/provenance/v0.1/provenance.svg)
+![Model Diagram](images/provenance.svg)
 
 ## Schema
 
@@ -502,4 +502,4 @@ Execution of arbitrary commands:
 [TypeURI]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/field_types.md#TypeURI
 [in-toto attestation]: https://github.com/in-toto/attestation
 [parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/README.md#parsing-rules
-[provenance requirements]: ../spec/v0.1/requirements#provenance-requirements
+[provenance requirements]: requirements#provenance-requirements

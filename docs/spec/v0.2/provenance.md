@@ -46,7 +46,7 @@ environmental parameters (`environment`) that are needed for
 
 See [Example](#example) for a concrete example.
 
-![Model Diagram](../images/provenance/v0.2/provenance.svg)
+![Model Diagram](images/provenance.svg)
 
 ## Schema
 
@@ -632,7 +632,7 @@ To migrate from [version 0.1][0.1] (`old`):
 -   0.1.1: Added `metadata.buildInvocationId`.
 -   0.1: Initial version, named "in-toto.io/Provenance"
 
-[0.1]: v0.1.md
+[0.1]: /provenance/v0.1
 [DigestSet]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/field_types.md#DigestSet
 [GitHub Actions]: #github-actions
 [Reproducible]: https://reproducible-builds.org
@@ -642,4 +642,4 @@ To migrate from [version 0.1][0.1] (`old`):
 [TypeURI]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/field_types.md#TypeURI
 [in-toto attestation]: https://github.com/in-toto/attestation
 [parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/README.md#parsing-rules
-[provenance requirements]: ../spec/v0.1/requirements#provenance-requirements
+[provenance requirements]: ../v0.1/requirements#provenance-requirements
