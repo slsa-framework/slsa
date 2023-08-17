@@ -235,7 +235,7 @@ WARNING: This is just for demonstration purposes.
     }
   ],
   "verificationResult": "PASSED",
-  "verifiedLevels": ["SLSA_LEVEL_3"],
+  "verifiedLevels": ["SLSA_BUILD_LEVEL_3"],
   "dependencyLevels": {
     "SLSA_BUILD_LEVEL_3": 5,
     "SLSA_BUILD_LEVEL_2": 7,
