@@ -100,9 +100,8 @@ SLSA---other than tamper protection---without changing their build workflows.
 -   Software producer follows a consistent build process so that others can form
     expectations about what a "correct" build looks like.
 
--   Build platform automatically generates [provenance] describing how the
-    artifact was built, including: what entity built the package, what build
-    process they used, and what the top-level input to the build were.
+-   [Provenance] exists describing how the artifact was built, including the
+    build platform, build process, and top-level inputs.
 
 -   Software producer distributes provenance to consumers, preferably using a
     convention determined by the package ecosystem.
@@ -151,10 +150,9 @@ platform itself required by [Build L3].
 
 All of [Build L1], plus:
 
--   The build runs on a hosted build platform that generates and signs[^sign] the
-    provenance itself. This may be the original build, an after-the-fact
-    reproducible build, or some equivalent platform that ensures the
-    trustworthiness of the provenance.
+-   Build platform runs on dedicated infrastructure, not an individual's
+    workstation, and the provenance is tied to that infrastructure through
+    a digital signature[^sign].
 
 -   Downstream verification of provenance includes validating the authenticity
     of the provenance.
@@ -178,8 +176,9 @@ All of [Build L1], plus:
 </section>
 <section id="build-l3">
 
-[^sign]: Alternate means of verifying the authenticity of the provenance are
-    also acceptable.
+[^sign]: Usually this means that the provenance is signed by a key that is only
+    accessible to the build platform, but alternate means of verifying the
+    authenticity of the provenance are also acceptable.
 
 ### Build L3: Hardened builds
 
