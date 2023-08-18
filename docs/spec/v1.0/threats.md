@@ -39,7 +39,7 @@ An adversary introduces a change through the official source control management
 interface without any special administrator privileges.
 
 SLSA v1.0 does not address this threat, but it may be addressed in a [future
-version](future-directions.md).
+version](future-directions).
 
 ### (B) Compromise source repo
 
@@ -48,7 +48,7 @@ administrative interface, or through a compromise of the underlying
 infrastructure.
 
 SLSA v1.0 does not address this threat, but it may be addressed in a [future
-version](future-directions.md).
+version](future-directions).
 
 ### (C) Build from modified source
 

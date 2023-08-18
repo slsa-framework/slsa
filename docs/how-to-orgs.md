@@ -17,7 +17,7 @@ For all [SLSA levels](/spec/v1.0/levels.md), you follow the same steps:
 
 What differs for each level is the robustness of the build and provenance. For
 more information about SLSA provenance see
-[https://slsa.dev/provenance/](/provenance/v1.md).
+[https://slsa.dev/provenance/](/provenance/v1).
 
 SLSA Build levels are progressive: SLSA Build L3 includes all the guarantees of
 SLSA Build L2, and SLSA Build L2 includes all the guarantees of SLSA Build L1.
