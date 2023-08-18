@@ -52,6 +52,7 @@
 /provenance/v1-rc1      /spec/v1.0-rc1/provenance   301
 /provenance/v1-rc2      /spec/v1.0-rc2/provenance   301
 /provenance/v1.0        /spec/v1.0/provenance       301
+/provenance/v1.1        /spec/v1.1/provenance       301
 
 /spec                   /spec/v1.0              302
 /spec/faq               /spec/v1.0/faq          302
@@ -66,3 +67,4 @@
 /verification_summary/v1-rc1    /spec/v1.0-rc2/verification_summary 301
 /verification_summary/v1-rc2    /spec/v1.0-rc2/verification_summary 301
 /verification_summary/v1.0      /spec/v1.0/verification_summary     301
+/verification_summary/v1.1      /spec/v1.1/verification_summary     301
