@@ -64,7 +64,7 @@ this is not currently enforced).
 PRs are expected to meet the following conventions:
 
 -   PR title is of the form `<tag>: <title>`, where:
-    -   `<tag>` is one of the values in the table below.
+    -   `<tag>` is one of the values in the [table below](#pull-request-tags).
     -   `<title>` concisely explains *what* the PR does.
 -   PR description explains *what* and *why* in a bit more detail, providing
     enough context for a reader to understand the change. See
@@ -81,17 +81,25 @@ PRs are expected to meet the following conventions:
     https://github.com/slsa-framework/slsa/pull/840 (predates our `<tag>`
     convention).
 
-Every PR must use one of the following `<tag>` values. Earlier entries in the
-table have higher precedence. (See [review and approval] for the meaning of
-"waiting period" and "# approvers".) If you are not sure, take a guess and a
-maintainer will update if needed.
+### Pull request tags
+
+Every PR must be categorized using one of the following `<tag>` values. The
+purpose is twofold: to make it easier for readers to understand the scope of the
+PR at a glance, and to allow us to adjust the minimum review period and number
+of approvers based on how sensitive the PR is.
+
+Use the closest entry in the table that applies, selecting the first one if
+multiple apply. If you are not sure which tag to use, take a guess and a
+maintainer will update if needed. See [review and approval] for the meaning of
+"waiting period" and "# approvers".
 
 | Tag | Description | Waiting period | # Approvers |
 |---|---|---|---|
 | `content` | A change to the meaning of the specification. | 72h | 3 |
-| `editorial` | A clarification to the specification that does not change its meaning. | 24h | 2 |
-| `nonspec` | A change to a non-specification, non-blog page. | 24h | 2 |
+| `editorial` | A clarification to the specification that does not change its meaning, beyond a simple `fix`. | 24h | 2 |
+| `nonspec` | A change to a non-specification, non-blog page, beyond a simple `fix`. | 24h | 2 |
 | `blog` | A new or updated blog post. (Do not mix with categories above.) | 24h | 2 |
+| `fix` | A fix for obvious typos, broken links, and similar. | 0h | 1 |
 | `style` | A user-visible style or layout change. No content changes. | 0h | 1 |
 | `impl` | A user-invisible change, such as editing a README or the repo configuration. | 0h | 1 |
 
