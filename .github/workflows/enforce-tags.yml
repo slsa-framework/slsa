@@ -24,5 +24,6 @@ jobs:
             editorial
             nonspec
             blog
+            fix
             style
             impl
