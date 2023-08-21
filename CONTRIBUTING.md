@@ -103,11 +103,14 @@ maintainer will update if needed. See [review and approval] for the meaning of
 | `style` | A user-visible style or layout change. No content changes. | 0h | 1 |
 | `impl` | A user-invisible change, such as editing a README or the repo configuration. | 0h | 1 |
 
-Note: PR authors with write access to the repo count as second or third
+Note 1: PR authors with write access to the repo count as second or third
 approvers for their own PRs. For example, if the author of a PR with the
 `content` tag has write access to the repo, then the PR only requires
 two additional approvers before merging. However, a PR with the `impl` tag
 always requires one reviewer, even if the author has write access.
+
+Note 2: The "waiting period" and "# reviewers" are relaxed during the Draft
+specification stage, leaving it up to Maintainer discretion.
 
 [squash and merge]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits
 
