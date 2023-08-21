@@ -68,3 +68,6 @@
 /verification_summary/v1-rc2    /spec/v1.0-rc2/verification_summary 301
 /verification_summary/v1.0      /spec/v1.0/verification_summary     301
 /verification_summary/v1.1      /spec/v1.1/verification_summary     301
+
+# Removed files. Keep URLs working forever.
+/example    https://github.com/slsa-framework/slsa/blob/a25364a3b312f572e4620c812820249853bb40e5/docs/example.md  301
