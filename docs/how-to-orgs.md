@@ -62,7 +62,7 @@ Build level. You also need to produce and distribute attestations that
 demonstrate your software meets your desired SLSA Build level. SLSA
 recommends either the [SLSA provenance format](/provenance/) or,
 if you wish to keep the details of your build pipeline confidential, a
-[SLSA Verification Summary Attestation (VSA)](/attestation_summary/) although
+[SLSA Verification Summary Attestation (VSA)](/verification_summary/) although
 the SLSA specification allows for other formats.
 
 Ideally, build platforms produce SLSA provenance rather than individual

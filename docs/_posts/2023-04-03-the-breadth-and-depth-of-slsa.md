@@ -4,7 +4,7 @@ author: "Mike Lieberman"
 is_guest_post: false
 ---
 
-Interested in getting involved? Now’s the chance to [provide your feedback on the foundational v1 release of the SLSA framework.](2023-02-24-slsa-v1-rc)
+Interested in getting involved? Now’s the chance to [provide your feedback on the foundational v1 release of the SLSA framework.](/blog/2023/02/slsa-v1-rc)
 
 “Software Supply chain security is more than just the build” is a common response when folks learn about SLSA. This is true. SLSA 1.0 is entirely focused on generating [build provenance](/spec/v1.0/provenance) and assurance around that provenance due to the security capabilities of the build system and security properties of a particular running build. Software Supply Chain Security is the cybersecurity practice of extending left into System Delivery Lifecycle or Software Delivery Lifecycle and the SDLC is more than just the build.
 
