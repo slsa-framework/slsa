@@ -334,7 +334,7 @@ REQUIRED for SLSA Build L1: `id`
 <td>string (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1/field_types.md#typeuri">TypeURI</a>)<td>
 
 URI indicating the transitive closure of the trusted build platform. This is
-[intended](/spec/v1.0/verifying-artifacts#step-1-check-slsa-build-level)
+[intended](verifying-artifacts#step-1-check-slsa-build-level)
 to be the sole determiner of the SLSA Build level.
 
 If a build platform has multiple modes of operations that have differing
@@ -371,7 +371,7 @@ the build and record the provenance. This includes not only the software but the
 hardware and people involved in running the service. For example, a particular
 instance of [Tekton](https://tekton.dev/) could be a build platform, while
 Tekton itself is not. For more info, see [Build
-model](/spec/v1.0/terminology#build-model).
+model](terminology#build-model).
 
 The `id` MUST reflect the trust base that consumers care about. How detailed to
 be is a judgement call. For example, GitHub Actions supports both GitHub-hosted
@@ -441,7 +441,7 @@ information that is not captured in a standard field. Guidelines:
 
 ## Verification
 
-[Verification]: /spec/v1.0/verifying-artifacts
+[Verification]: verifying-artifacts
 
 Please see [Verifying Artifacts][Verification] for a detailed discussion of
 provenance verification.
@@ -582,5 +582,5 @@ Initial version, named "in-toto.io/Provenance"
 [in-toto attestation]: https://github.com/in-toto/attestation
 [parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/v1/README.md#parsing-rules
 [purl]: https://github.com/package-url/purl-spec
-[threats]: /spec/v1.0/threats
-[trusted]: /spec/v1.0/principles#trust-systems-verify-artifacts
+[threats]: threats
+[trusted]: principles#trust-systems-verify-artifacts
