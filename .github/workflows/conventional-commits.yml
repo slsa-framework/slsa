@@ -1,4 +1,4 @@
-name: "Lint PR name"
+name: "PR title follows `<type>: <subject>`"
 
 on:
   pull_request_target:

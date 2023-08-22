@@ -63,37 +63,43 @@ this is not currently enforced).
 
 PRs are expected to meet the following conventions:
 
--   PR title is of the form `<tag>: <title>`, where:
-    -   `<tag>` is one of the values in the [table below](#pull-request-tags).
-    -   `<title>` concisely explains *what* the PR does.
--   PR description explains *what* and *why* in a bit more detail, providing
+-   PR title follows [Conventional Commits][][^semantic-action] using the form
+    `<type>: <subject>`, where:
+    -   `<type>` is one of the values in the [table below](#pull-request-types).
+    -   `<subject>` concisely explains *what* the PR does.
+-   PR body explains *what* and *why* in a bit more detail, providing
     enough context for a reader to understand the change. See
     [Writing good CL descriptions](https://google.github.io/eng-practices/review/developer/cl-descriptions.html)
     for more advice (in that doc, "CL" means PR and "first line" means PR title;
     ignore the section about tags.)
--   PR title and description use imperative tense, e.g. "update X" (not "updated
+-   PR title and body use imperative tense, e.g. "update X" (not "updated
     X" or "updates X").
 -   Every commit has a [signed-off-by] tag.
     -   Note: Commit messages do not otherwise matter because we use the [squash
-        and merge] method, with the PR title and description as the squash
+        and merge] method, with the PR title and body as the squash
         commit message.
--   Example of a good PR title and description:
-    https://github.com/slsa-framework/slsa/pull/840 (predates our `<tag>`
+-   Example of a good PR title and body:
+    https://github.com/slsa-framework/slsa/pull/840 (predates our `<type>`
     convention).
 
-### Pull request tags
+[^semantic-action]: As implemented via [action-semantic-pull-request].
 
-Every PR must be categorized using one of the following `<tag>` values. The
+[Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0/
+[action-semantic-pull-request]: https://github.com/amannn/action-semantic-pull-request
+
+### Pull request types
+
+Every PR must be categorized using one of the following `<type>` values. The
 purpose is twofold: to make it easier for readers to understand the scope of the
 PR at a glance, and to allow us to adjust the minimum review period and number
 of approvers based on how sensitive the PR is.
 
 Use the closest entry in the table that applies, selecting the first one if
-multiple apply. If you are not sure which tag to use, take a guess and a
+multiple apply. If you are not sure which type to use, take a guess and a
 maintainer will update if needed. See [review and approval] for the meaning of
 "waiting period" and "# approvers".
 
-| Tag | Description | Waiting period | # Approvers |
+| Type | Meaning | Waiting period | # Approvers |
 |---|---|---|---|
 | `content` | A change to the meaning of the specification. | 72h | 3 |
 | `editorial` | A clarification to the specification that does not change its meaning, beyond a simple `fix`. | 24h | 2 |
@@ -105,8 +111,8 @@ maintainer will update if needed. See [review and approval] for the meaning of
 
 Note: PR authors with write access to the repo count as second or third
 approvers for their own PRs. For example, if the author of a PR with the
-`content` tag has write access to the repo, then the PR only requires
-two additional approvers before merging. However, a PR with the `impl` tag
+`content` type has write access to the repo, then the PR only requires
+two additional approvers before merging. However, a PR with the `impl` type
 always requires one reviewer, even if the author has write access.
 
 [squash and merge]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits
@@ -120,11 +126,11 @@ Review process:
 1.  Ensure that the PR meets the [pull request conventions].
 
 2.  GitHub will automatically assign the maintainers as reviewers. You will need
-    a different number of approvals for different PR tags. Your reviewers may
-    ask that you use a different PR tag.
+    a different number of approvals for different PR types. Your reviewers may
+    ask that you use a different PR type.
 
 3.  Wait an appropriate amount of time to allow for lazy consensus. Different
-    tags have different minimum waiting periods. The waiting period begins at
+    types have different minimum waiting periods. The waiting period begins at
     the timestamp of either the final required approval or the latest non-author
     comment, whichever is later.
 
