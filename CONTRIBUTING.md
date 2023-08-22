@@ -109,9 +109,10 @@ approvers for their own PRs. For example, if the author of a PR with the
 two additional approvers before merging. However, a PR with the `impl` tag
 always requires one reviewer, even if the author has write access.
 
-Note 2: The "waiting period" and "# reviewers" are relaxed during the
-[Draft](docs/spec-stages.md) specification stage, leaving it up to Maintainer
-discretion.
+Note 2: If the PR only touches files in the [Draft](docs/spec-stages.md)
+specification stage, then the "waiting period" and "# reviewers" are relaxed and
+up to Maintainer discretion. Files in the Draft stage have a large banner at the
+top of each rendered page, as well as the text "Status: Draft".
 
 [squash and merge]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits
 
