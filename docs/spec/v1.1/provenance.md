@@ -129,10 +129,10 @@ disagreement with the text description, the text is authoritative.*
 
 Link: [provenance.proto](schema/provenance.proto)
 
-<!-- Note: This protobuf definition prioritises being a human-readable summary
+*NOTE: This protobuf definition prioritises being a human-readable summary
 of the schema for readers of the specification. A version of the protobuf
 definition useful for code generation is maintained in the
-[in-toto attestation] repository. -->
+[in-toto attestation] repository.*
 
 ```proto
 {% include_relative schema/provenance.proto %}
