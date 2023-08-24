@@ -101,7 +101,7 @@ maintainer will update if needed. See [review and approval] for the meaning of
 
 | Type | Meaning | Waiting period | # Approvers |
 |---|---|---|---|
-| `content` | A change to the meaning of the specification. | 72h | 3 |
+| `content` | A change to the meaning of the specification. Must include a [changelog entry]. | 72h | 3 |
 | `editorial` | A clarification to the specification that does not change its meaning, beyond a simple `fix`. | 24h | 2 |
 | `nonspec` | A change to a non-specification, non-blog page, beyond a simple `fix`. | 24h | 2 |
 | `blog` | A new or updated blog post. (Do not mix with categories above.) | 24h | 2 |
@@ -116,6 +116,15 @@ two additional approvers before merging. However, a PR with the `impl` type
 always requires one reviewer, even if the author has write access.
 
 [squash and merge]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits
+
+### Changelog entry
+
+[changelog entry]: #changelog-entry
+
+All `content` changes to the specification should also include a brief
+description of the change in the adjacent `whats-new.md` file, in order to help
+readers of an updated version of the specification to more easily identify
+changes.
 
 ### Review and approval
 
