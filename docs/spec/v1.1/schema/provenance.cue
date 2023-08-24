@@ -40,7 +40,9 @@
     "downloadLocation": string,
     "mediaType": string,
     "content": bytes, // base64-encoded
-    "annotations": object,
+    "annotations": {
+        [string]: _  // any JSON type
+    }
 }
 
 #Timestamp: string  // <YYYY>-<MM>-<DD>T<hh>:<mm>:<ss>Z
