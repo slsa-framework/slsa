@@ -72,9 +72,12 @@ to establish minimum requirements on dependencies SLSA levels may use
 // Predicate
 "predicateType": "https://slsa.dev/verification_summary/v1",
 "predicate": {
-  // Required
   "verifier": {
-    "id": "<URI>"
+    "id": "<URI>",
+    "version": {
+      "<COMPONENT>": "<VERSION>",
+      ...
+    }
   },
   "timeVerified": <TIMESTAMP>,
   "resourceUri": <artifact-URI-in-request>,
@@ -137,6 +140,11 @@ of the other top-level fields, such as `subject`, see [Statement]._
 `verifier.id` _string ([TypeURI]), required_
 
 > URI indicating the verifier’s identity.
+
+<a id="verifier.version"></a>
+`verifier.version` _map (string→string), optional_
+
+> Map of names of components of the verification platform to their version.
 
 <a id="timeVerified"></a>
 `timeVerified` _string ([Timestamp]), required_
@@ -220,7 +228,11 @@ WARNING: This is just for demonstration purposes.
 "predicateType": "https://slsa.dev/verification_summary/v1",
 "predicate": {
   "verifier": {
-    "id": "https://example.com/publication_verifier"
+    "id": "https://example.com/publication_verifier",
+    "version": {
+      "slsa-verifier-linux-amd64": "v2.3.0",
+      "slsa-framework/slsa-verifier/actions/installer": "v2.3.0"
+    }
   },
   "timeVerified": "1985-04-12T23:20:50.52Z",
   "resourceUri": "https://example.com/example-1.2.3.tar.gz",
@@ -235,7 +247,7 @@ WARNING: This is just for demonstration purposes.
     }
   ],
   "verificationResult": "PASSED",
-  "verifiedLevels": ["SLSA_LEVEL_3"],
+  "verifiedLevels": ["SLSA_BUILD_LEVEL_3"],
   "dependencyLevels": {
     "SLSA_BUILD_LEVEL_3": 5,
     "SLSA_BUILD_LEVEL_2": 7,
@@ -269,7 +281,9 @@ Users MAY use custom values here but MUST NOT use custom values starting with
 
 ## Change history
 
--   1:
+-   1.1:
+    -   Added optional `verifier.version` field to record verification tools.
+-   1.0:
     -   Replaced `materials` with `resolvedDependencies`.
     -   Relaxed `SlsaResult` to allow other values.
     -   Converted to lowerCamelCase for consistency with [SLSA Provenance].
@@ -288,4 +302,4 @@ Users MAY use custom values here but MUST NOT use custom values starting with
 [Timestamp]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/field_types.md#timestamp
 [TypeURI]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/field_types.md#TypeURI
 [in-toto attestation]: https://github.com/in-toto/attestation
-[parsing rules]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/README.md#parsing-rules
+[parsing rules]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571
