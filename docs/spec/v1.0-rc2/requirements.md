@@ -328,5 +328,5 @@ considered in the [future directions](future-directions.md).
 <td> <td> <td>✓
 </table>
 
-[external parameters]: ../../provenance/v1-rc2.md#externalParameters
+[external parameters]: provenance.md#externalParameters
 [package ecosystem]: verifying-artifacts.md#package-ecosystem

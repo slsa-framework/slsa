@@ -5,7 +5,7 @@ description: A comprehensive technical analysis of supply chain threats and thei
 
 What follows is a comprehensive technical analysis of supply chain threats and
 their corresponding mitigations in SLSA. For an introduction to the
-supply chain threats that SLSA protects agains, see [Supply chain threats].
+supply chain threats that SLSA protects against, see [Supply chain threats].
 
 The examples on this page are meant to:
 
@@ -37,7 +37,7 @@ An adversary introduces a change through the official source control management
 interface without any special administrator privileges.
 
 SLSA v1.0 does not address this threat, but it may be addressed in a [future
-version](future-directions.md).
+version](future-directions).
 
 ### (B) Compromise source repo
 
@@ -46,7 +46,7 @@ administrative interface, or through a compromise of the underlying
 infrastructure.
 
 SLSA v1.0 does not address this threat, but it may be addressed in a [future
-version](future-directions.md).
+version](future-directions).
 
 ### (C) Build from modified source
 

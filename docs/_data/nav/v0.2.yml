@@ -37,10 +37,10 @@
         url: /attestation-model
 
       - title: Provenance
-        url: /provenance/v0.2
+        url: /spec/v0.2/provenance
 
       - title: VSA
-        url: /verification_summary/v0.2
+        url: /spec/v0.2/verification_summary
 
     - title: Stages
       url: /spec-stages

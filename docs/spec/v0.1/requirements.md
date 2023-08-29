@@ -452,7 +452,7 @@ collisions and second preimages.
 
 The provenance identifies the entity that performed the build and generated the
 provenance. This represents the entity that the consumer MUST trust. Examples:
-"GitHub Actions with a GitHub-hosted worker", "jdoe@example.com's machine".
+"GitHub Actions with a GitHub-hosted worker", "`jdoe@example.com`'s machine".
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="identifies-build-instructions">
