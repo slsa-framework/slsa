@@ -14,7 +14,7 @@ In **May 2021**, President Biden’s White House published [Executive Order (EO)
 
 After a [request for comments](https://www.ntia.gov/files/ntia/publications/frn-sbom-rfc-06022021.pdf) in **June 2021**, the US Department of Commerce [issued in July 2021](https://www.ntia.gov/blog/2021/ntia-releases-minimum-elements-software-bill-materials) a report [Minimum Elements for an SBOM](https://www.ntia.doc.gov/files/ntia/publications/sbom_minimum_elements_report.pdf), as part of establishing new baseline security standards for development of software used by the US Federal Government. We published a [blog post on SLSA and SBOMs](2022-05-02-slsa-sbom.md) a little while ago.
 
-In **February 2022**, in accordance with with EO, the US National Institute of Standards and Technology ([NIST](nist.gov)) issued two documents with further standards, now collectively known as the “NIST Guidance”:
+In **February 2022**, in accordance with with EO, the US National Institute of Standards and Technology ([NIST](https://www.nist.gov/)) issued two documents with further standards, now collectively known as the “NIST Guidance”:
 
 -   Secure Software Development Framework (SSDF), SP 800-218 [[link](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218.pdf)]
 -   Software Supply Chain Security Guidance [[link](https://www.nist.gov/system/files/documents/2022/02/04/software-supply-chain-security-guidance-under-EO-14028-section-4e.pdf)]
