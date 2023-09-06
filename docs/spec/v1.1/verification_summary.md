@@ -4,9 +4,8 @@ description: SLSA v1.0 specification for a verification summary of artifacts by 
 layout: standard
 ---
 
-Verification summary attestations convey high-level information about an
-artifact's verification, allowing  consumers to delegate verification decisions
-to trusted third parties.
+Verification summary attestations communicate that an artifact has been verified
+at a specific SLSA level and details about that verification.
 
 This document defines the following predicate type within the [in-toto
 attestation] framework:
@@ -22,17 +21,17 @@ attestation] framework:
 
 ## Purpose
 
-Assert that the verifier has verified an artifact or set of artifacts. Optionally
-include details about the verification process, such as the verified SLSA
-level(s) and the verifier's expectations.
+Describe what SLSA level an artifact or set of artifacts was verified at
+and other details about the verification process including what SLSA level
+the dependencies were verified at.
 
-VSAs allow software consumers to make a decision about the validity of an
+This allows software consumers to make a decision about the validity of an
 artifact without needing to have access to all of the attestations about the
-artifact or all of its transitive dependencies. Consumers can use VSAs to delegate
+artifact or all of its transitive dependencies.  They can use it to delegate
 complex policy decisions to some trusted party and then simply trust that
 party's decision regarding the artifact.
 
-VSAs also allow software producers to keep the details of their build pipeline
+It also allows software producers to keep the details of their build pipeline
 confidential while still communicating that some verification has taken place.
 This might be necessary for legal reasons (keeping a software supplier
 confidential) or for security reasons (not revealing that an embargoed patch has
@@ -42,20 +41,23 @@ been included).
 
 A Verification Summary Attestation (VSA) is an attestation that some entity
 (`verifier`) verified one or more software artifacts (the `subject` of an
-in-toto attestation [Statement]) by evaluating the artifact and its associated
-attestation(s) against the `policy` for `resourceUri`. Consumers who trust
-the `verifier` may assume that the artifacts identified by the
-`(subject, resourceUri)` pair met the indicated SLSA level without
-themselves needing to evaluate the artifact or to have access to the
-attestations the `verifier` used to make its determination.
+in-toto attestation [Statement]) by evaluating the artifact and a `bundle`
+of attestations against some `policy`.  Users who trust the `verifier` may
+assume that the artifacts met the indicated SLSA level without themselves
+needing to evaluate the artifact or to have access to the attestations the
+`verifier` used to make its determination.
 
-VSAs can also be chained together to meet higher level goals, such as tracking
-the verified SLSA level(s) for the `subject`'s transitive dependencies. Rather
-than verifying provenance for the artifact and each of its transitive
-dependencies all at once, the verifier can verify each dependency independently
-and produce VSAs. Finally, the verifier combines those VSAs; the artifact
-is the final VSA's `subject` and each transitive dependency is an
-entry in `dependencyLevels`.
+The VSA also allows consumers to determine the verified levels of
+all of an artifact’s _transitive_ dependencies.  The verifier does this by
+either a) verifying the provenance of each non-source dependency listed in
+the [resolvedDependencies](/provenance/v1#resolvedDependencies) of the artifact
+being verified (recursively) or b) matching the non-source dependency
+listed in `resolvedDependencies` (`subject.digest` ==
+`resolvedDependencies.digest` and, ideally, `vsa.resourceUri` ==
+`resolvedDependencies.uri`) to a VSA _for that dependency_ and using
+`vsa.verifiedLevels` and `vsa.dependencyLevels`.  Policy verifiers wishing
+to establish minimum requirements on dependencies SLSA levels may use
+`vsa.dependencyLevels` to do so.
 
 ## Schema
 
@@ -127,7 +129,7 @@ of the other top-level fields, such as `subject`, see [Statement]._
 > can sign provenance for the "Google Cloud Deploy" verifier, but "GitHub" cannot
 > sign for the "Google Cloud Deploy" verifier.
 >
-> This field is required, even if it is implicit from the signer, to aid readability and
+> The field is required, even if it is implicit from the signer, to aid readability and
 > debugging. It is an object to allow additional fields in the future, in case one
 > URI is not sufficient.
 
@@ -145,19 +147,13 @@ of the other top-level fields, such as `subject`, see [Statement]._
 `resourceUri` _string ([ResourceURI]), required_
 
 > URI that identifies the resource associated with the artifact being verified.
->
-> This field is required to prevent confusion attacks. E.g., a VSA indicating
-> that a package can be published as `foo` should not be usable to publish
-> the package as `bar`; a VSA indicating that a package passed the policy for
-> a `dev` environment should not be usable to deploy the package to a `prod`
-> environment.
 
 <a id="policy"></a>
-`policy` _object ([ResourceDescriptor]), optional_
+`policy` _object ([ResourceDescriptor]), required_
 
 > Describes the policy that the `subject` was verified against.
 >
-> This field is RECOMMENDED.
+> The entry MUST contain a `uri`.
 
 <a id="inputAttestations"></a>
 `inputAttestations` _array ([ResourceDescriptor]), optional_
@@ -183,17 +179,10 @@ of the other top-level fields, such as `subject`, see [Statement]._
 > Indicates the highest level of each track verified for the artifact (and not
 > its dependencies), or "FAILED" if policy verification failed.
 >
-> VSA producers MUST NOT include more than one level per SLSA track. Note that
-> each SLSA  level implies all levels below it (e.g. SLSA_BUILD_LEVEL_3 implies
+> Users MUST NOT include more than one level per SLSA track. Note that each SLSA
+> level implies all levels below it (e.g. SLSA_BUILD_LEVEL_3 implies
 > SLSA_BUILD_LEVEL_2 and SLSA_BUILD_LEVEL_1), so there is no need to
 > include more than one level per track.
->
-> VSA producers MAY add additional, non-SLSA properties to this field provided
-> the values do not conflict with the definition of [SlsaResult]. VSA Producers
-> SHOULD negotiate the meaning of such properties with their intended verifier.
->
-> This field MAY be absent if the verifier is not attesting to a specific SLSA
-> level.
 
 <a id="dependencyLevels"></a>
 `dependencyLevels` _object, optional_
@@ -204,8 +193,8 @@ of the other top-level fields, such as `subject`, see [Statement]._
 > that were verified at the indicated level. Absence of a given level of
 > [SlsaResult] MUST be interpreted as reporting _0_ dependencies at that level.
 >
-> VSA producers MUST count each dependency only once per SLSA track, at the
-> highest level verified. For example, if a dependency meets SLSA_BUILD_LEVEL_2,
+> Users MUST count each dependency only once per SLSA track, at the highest
+> level verified. For example, if a dependency meets SLSA_BUILD_LEVEL_2,
 > you include it with the count for SLSA_BUILD_LEVEL_2 but not the count for
 >SLSA_BUILD_LEVEL_1.
 
@@ -246,7 +235,7 @@ WARNING: This is just for demonstration purposes.
     }
   ],
   "verificationResult": "PASSED",
-  "verifiedLevels": ["SLSA_BUILD_LEVEL_3"],
+  "verifiedLevels": ["SLSA_LEVEL_3"],
   "dependencyLevels": {
     "SLSA_BUILD_LEVEL_3": 5,
     "SLSA_BUILD_LEVEL_2": 7,
@@ -256,11 +245,9 @@ WARNING: This is just for demonstration purposes.
 }
 ```
 
-<div id="slsaresult">
-
 ## How to verify
 
-Consumers use VSAs to accomplish goals based on delegated trust. We call the
+VSA consumers use VSAs to accomplish goals based on delegated trust. We call the
 process of establishing a VSA's authenticity and determining whether it meets
 the consumer's goals 'verification'. Goals differ, as do levels of confidence
 in VSA producers, so the verification procedure changes to suit its context.
@@ -355,6 +342,8 @@ verifiers they add to their roots of trust.
     [Verifying artifacts](/spec/v1.0/verifying-artifacts) for details about which
     threats are addressed by verifying each SLSA level.
 
+<div id="slsaresult">
+
 ## _SlsaResult (String)_
 
 </div>
@@ -373,14 +362,13 @@ Note that each SLSA level implies the levels below it. For example,
 SLSA_BUILD_LEVEL_3 means (SLSA_BUILD_LEVEL_1 + SLSA_BUILD_LEVEL_2 +
 SLSA_BUILD_LEVEL_3).
 
-VSA producers MAY use custom values here but MUST NOT use custom values starting
-with `SLSA_`.
+Users MAY use custom values here but MUST NOT use custom values starting with
+`SLSA_`.
 
 ## Change history
 
 -   1.1:
     -   Added Verification section with examples.
-    -   Made `policy` optional.
     -   Made `timeVerified` optional.
 -   1.0:
     -   Replaced `materials` with `resolvedDependencies`.
@@ -394,11 +382,11 @@ with `SLSA_`.
 
 [SLSA Provenance]: /provenance
 [SlsaResult]: #slsaresult
-[DigestSet]: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md
-[ResourceURI]: https://github.com/in-toto/attestation/blob/main/spec/v1/field_types.md#ResourceURI
-[ResourceDescriptor]: https://github.com/in-toto/attestation/blob/main/spec/v1/resource_descriptor.md
-[Statement]: https://github.com/in-toto/attestation/blob/main/spec/v1/statement.md
-[Timestamp]: https://github.com/in-toto/attestation/blob/main/spec/v1/field_types.md#Timestamp
-[TypeURI]: https://github.com/in-toto/attestation/blob/main/spec/v1/field_types.md#TypeURI
+[DigestSet]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/digest_set.md
+[ResourceURI]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/field_types.md#resourceuri
+[ResourceDescriptor]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/resource_descriptor.md
+[Statement]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/statement.md
+[Timestamp]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/field_types.md#timestamp
+[TypeURI]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/field_types.md#TypeURI
 [in-toto attestation]: https://github.com/in-toto/attestation
-[parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/v1/README.md#parsing-rules
+[parsing rules]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/README.md#parsing-rules
