@@ -22,15 +22,15 @@ attestation] framework:
 
 ## Purpose
 
-Assert that the verifier has verified an artifact or set of artifacts. Optionally
-include details about the verification process, such as the verified SLSA
-level(s) and the verifier's expectations.
+Assert that the VSA producer has verified an artifact or set of artifacts.
+Optionally include details about the verification process, such as the verified
+SLSA level(s) and the verifier's expectations.
 
 VSAs allow software consumers to make a decision about the validity of an
 artifact without needing to have access to all of the attestations about the
-artifact or all of its transitive dependencies. Consumers can use VSAs to delegate
-complex policy decisions to some trusted party and then simply trust that
-party's decision regarding the artifact.
+artifact or all of its transitive dependencies. The software consumer delegates
+complex policy decisions to a trusted party and then acts on those decisions by
+consuming the VSA.
 
 VSAs also allow software producers to keep the details of their build pipeline
 confidential while still communicating that some verification has taken place.
@@ -137,7 +137,7 @@ of the other top-level fields, such as `subject`, see [Statement]._
 > URI indicating the verifier’s identity.
 
 <a id="timeVerified"></a>
-`timeVerified` _string ([Timestamp]), optional_
+`timeVerified` _string ([Timestamp]), required_
 
 > Timestamp indicating what time the verification occurred.
 
@@ -153,11 +153,11 @@ of the other top-level fields, such as `subject`, see [Statement]._
 > environment.
 
 <a id="policy"></a>
-`policy` _object ([ResourceDescriptor]), optional_
+`policy` _object ([ResourceDescriptor]), required_
 
 > Describes the policy that the `subject` was verified against.
 >
-> This field is RECOMMENDED.
+> The entry MUST contain a `uri`.
 
 <a id="inputAttestations"></a>
 `inputAttestations` _array ([ResourceDescriptor]), optional_
@@ -184,16 +184,9 @@ of the other top-level fields, such as `subject`, see [Statement]._
 > its dependencies), or "FAILED" if policy verification failed.
 >
 > VSA producers MUST NOT include more than one level per SLSA track. Note that
-> each SLSA  level implies all levels below it (e.g. SLSA_BUILD_LEVEL_3 implies
+> each SLSA level implies all levels below it (e.g. SLSA_BUILD_LEVEL_3 implies
 > SLSA_BUILD_LEVEL_2 and SLSA_BUILD_LEVEL_1), so there is no need to
 > include more than one level per track.
->
-> VSA producers MAY add additional, non-SLSA properties to this field provided
-> the values do not conflict with the definition of [SlsaResult]. VSA Producers
-> SHOULD negotiate the meaning of such properties with their intended verifier.
->
-> This field MAY be absent if the verifier is not attesting to a specific SLSA
-> level.
 
 <a id="dependencyLevels"></a>
 `dependencyLevels` _object, optional_
@@ -258,103 +251,6 @@ WARNING: This is just for demonstration purposes.
 
 <div id="slsaresult">
 
-## How to verify
-
-Consumers use VSAs to accomplish goals based on delegated trust. We call the
-process of establishing a VSA's authenticity and determining whether it meets
-the consumer's goals 'verification'. Goals differ, as do levels of confidence
-in VSA producers, so the verification procedure changes to suit its context.
-However, there are certain steps that most verification procedures have in
-common.
-
-Verification MUST include the following steps:
-
-1.  Verify the signature on the VSA envelope using the preconfigured roots of
-    trust. This step ensures that the VSA was produced by a trusted producer
-    and that it hasn't been tampered with.
-
-2.  Verify the statement's `subject` matches the digest of the artifact in
-    question. This step ensures that the VSA pertains to the intended artifact.
-
-3.  Verify that the `predicateType` is
-    `https://slsa.dev/verification_summary/v1`. This step ensures that the
-    in-toto predicate is using this version of the VSA format.
-
-4.  Verify that the `verifier` matches the public key (or equivalent) used to
-    verify the signature in step 1. This step identifies the VSA producer in
-    cases where their identity is not implicitly revealed in step 1.
-
-5.  Verify that the value for `resourceUri` in the VSA matches the expected
-    value. This step ensures that the consumer is using the VSA for the
-    producer's intended purpose.
-
-6.  Verify that the value for `slsaResult` is `PASSED`. This step ensures the
-    artifact is suitable for the consumer's purposes.
-
-7.  Verify that `verifiedLevels` contains the expected value. This step ensures
-    that the artifact is suitable for the consumer's purposes.
-
-Verification MAY additionally contain the following step:
-
-1.  (Optional) Verify additional fields required to determine whether the VSA
-    meets your goal.
-
-Verification mitigates different threats depending on the VSA's contents and the
-verification procudure.
-
-IMPORTANT: A VSA does not protect against compromise of the verifier, such as by
-a malicious insider. Instead, VSA consumers SHOULD carefully consider which
-verifiers they add to their roots of trust.
-
-### Examples
-
-1.  Suppose consumer C wants to delegate to verifier V the decision for whether
-    to accept artifact A as resource R. Consumer C verifies that:
-
-    -   The signature on the VSA envelope using V's public signing key from their
-      preconfigured root of trust.
-
-    -   `subject` is A.
-
-    -   `predicateType` is `https://slsa.dev/verification_summary/v1`.
-
-    -   `verifier.id` is V.
-
-    -   `resourceUri` is R.
-
-    -   `slsaResult` is `PASSED`.
-
-    -   `verifiedLevels` contains `SLSA_BUILD_LEVEL_UNEVALUATED`.
-
-    Note: This example is analogous to traditional code signing. The expected
-    value for `verifiedLevels` is arbitrary but prenegotiated by the producer and
-    the consumer. The consumer does not need to check additional fields, as C
-    fully delegates the decision to V.
-
-2.  Suppose consumer C wants to enforce the rule "Artifact A at resource R must
-    have a passing VSA from verifier V showing it meets SLSA Build Level 2+."
-    Consumer C verifies that:
-
-    -   The signature on the VSA envelope using V's public signing key from their
-      preconfigured root of trust.
-
-    -   `subject` is A.
-
-    -   `predicateType` is `https://slsa.dev/verification_summary/v1`.
-
-    -   `verifier.id` is V.
-
-    -   `resourceUri` is R.
-
-    -   `slsaResult` is `PASSED`.
-
-    -   `verifiedLevels` is `SLSA_BUILD_LEVEL_2` or `SLSA_BUILD_LEVEL_3`.
-
-    Note: In this example, verifying the VSA mitigates the same threats as
-    verifying the artifact's SLSA provenance. See
-    [Verifying artifacts](/spec/v1.0/verifying-artifacts) for details about which
-    threats are addressed by verifying each SLSA level.
-
 ## _SlsaResult (String)_
 
 </div>
@@ -362,7 +258,6 @@ verifiers they add to their roots of trust.
 The result of evaluating an artifact (or set of artifacts) against SLSA.
 SHOULD be one of these values:
 
--   SLSA_BUILD_LEVEL_UNEVALUATED
 -   SLSA_BUILD_LEVEL_0
 -   SLSA_BUILD_LEVEL_1
 -   SLSA_BUILD_LEVEL_2
@@ -373,15 +268,11 @@ Note that each SLSA level implies the levels below it. For example,
 SLSA_BUILD_LEVEL_3 means (SLSA_BUILD_LEVEL_1 + SLSA_BUILD_LEVEL_2 +
 SLSA_BUILD_LEVEL_3).
 
-VSA producers MAY use custom values here but MUST NOT use custom values starting
-with `SLSA_`.
+Users MAY use custom values here but MUST NOT use custom values starting with
+`SLSA_`.
 
 ## Change history
 
--   1.1:
-    -   Added Verification section with examples.
-    -   Made `policy` optional.
-    -   Made `timeVerified` optional.
 -   1.0:
     -   Replaced `materials` with `resolvedDependencies`.
     -   Relaxed `SlsaResult` to allow other values.
