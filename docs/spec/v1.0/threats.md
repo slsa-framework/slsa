@@ -189,7 +189,7 @@ producer.
 
 The SLSA Build track mitigates these threats when the consumer
 [verifies artifacts](verifying-artifacts.md) against expectations, confirming
-that the artifact they recieved was built in the expected manner.
+that the artifact they received was built in the expected manner.
 
 ### (E) Compromise build process
 
