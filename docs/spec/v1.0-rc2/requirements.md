@@ -103,7 +103,7 @@ choose a builder capable of producing Build Level 3 provenance.
 
 The producer MUST build their artifact in a consistent
 manner such that verifiers can form expectations about the build process. In
-some implemenatations, the producer MAY provide explicit metadata to a verifier
+some implementations, the producer MAY provide explicit metadata to a verifier
 about their build process. In others, the verifier will form their expectations
 implicitly (e.g. trust on first use).
 

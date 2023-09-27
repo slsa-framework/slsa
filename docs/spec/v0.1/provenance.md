@@ -248,7 +248,7 @@ of the other top-level fields, such as `subject`, see [Statement]._
 `metadata.completeness.arguments` _boolean, optional_
 
 > If true, the `builder` claims that `recipe.arguments` is complete, meaning
-> that all external inputs are propertly captured in `recipe`.
+> that all external inputs are properly captured in `recipe`.
 
 <a id="metadata.completeness.environment"></a>
 `metadata.completeness.environment` _boolean, optional_
