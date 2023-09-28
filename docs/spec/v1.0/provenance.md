@@ -380,10 +380,11 @@ identity because it's all GitHub from the consumer's perspective. Meanwhile,
 each self-hosted runner might have its own identity because not all runners are
 trusted by all consumers.
 
-Consumers MUST accept only specific signer-builder pairs. For example, "GitHub"
-can sign provenance for the "GitHub Actions" builder, and "Google" can sign
-provenance for the "Google Cloud Build" builder, but "GitHub" cannot sign for
-the "Google Cloud Build" builder.
+Consumers MUST accept only specific signer-builder pairs. The signer is the public key identity, 
+and the builder is the builder.id. For example, "GitHub" can sign provenance 
+for the "GitHub Actions" builder, and "Google" can sign provenance for the 
+"Google Cloud Build" builder, but "GitHub" cannot sign for the 
+"Google Cloud Build" builder.
 
 Design rationale: The builder is distinct from the signer in order to support
 the case where one signer generates attestations for more than one builder, as
