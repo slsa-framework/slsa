@@ -142,7 +142,7 @@ of the other top-level fields, such as `subject`, see [Statement]._
 > URI indicating the verifier’s identity.
 
 <a id="verifier.version"></a>
-`verifier.version` _map (string→string), optional_
+`verifier.version` _map (string->string), optional_
 
 > Map of names of components of the verification platform to their version.
 
