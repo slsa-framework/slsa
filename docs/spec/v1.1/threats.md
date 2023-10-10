@@ -391,7 +391,7 @@ cryptographic signature is no longer valid.
 
 ### (G) Compromise package registry
 
-An adversary modifies the package on the package repository using an
+An adversary modifies the package on the package registry using an
 administrative interface or through a compromise of the infrastructure.
 
 <details><summary>De-list artifact</summary>
