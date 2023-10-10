@@ -13,6 +13,7 @@ changes in v1.1 relative to the prior release, [v1.0].
     specification texts (SLSA and [in-toto attestation]) are the canonical
     source of definitions.
 -   Add procedure for verifying VSAs.
+-   Add verifier metadata to VSA format.
 
 <!-- Footnotes and link definitions -->
 
