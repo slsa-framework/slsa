@@ -28,7 +28,7 @@ See https://slsa.dev/community for ways to get involved in SLSA development.
 | Project | [Shepherd] |
 | ------- | ---------- |
 | [Build Level 4] | David A Wheeler (@david-a-wheeler) |
-| [Build Platform Operations Track] | Marcela Melera (@marcelamelera), Chad Kimes (@chkimes) |
+| [Build Platform Operations Track] | Marcela Melara (@marcelamelara), Chad Kimes (@chkimes) |
 | [Source Track] | Kris K (@kpk47) |
 | [Version 1.1 release] | Joshua Lock (@joshuagl) |
 
