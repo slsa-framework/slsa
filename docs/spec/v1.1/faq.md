@@ -87,7 +87,7 @@ Jenkins plugin.
 
 ## Q. What is the difference between a build platform, system, and service?
 
-Build platform and build system have been used interchangably in the past. With
+Build platform and build system have been used interchangeably in the past. With
 the v1.0 specification, however, there has been a unification around the term
 platform as indicated in the [Terminology](terminology.md). The use of the word
 `system` still exists related to software and services within the build platform

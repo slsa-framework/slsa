@@ -5,7 +5,7 @@ description: A comprehensive technical analysis of supply chain threats and thei
 
 What follows is a comprehensive technical analysis of supply chain threats and
 their corresponding mitigations in SLSA. For an introduction to the
-supply chain threats that SLSA protects agains, see [Supply chain threats].
+supply chain threats that SLSA protects against, see [Supply chain threats].
 
 The examples on this page are meant to:
 
@@ -189,7 +189,7 @@ producer.
 
 The SLSA Build track mitigates these threats when the consumer
 [verifies artifacts](verifying-artifacts.md) against expectations, confirming
-that the artifact they recieved was built in the expected manner.
+that the artifact they received was built in the expected manner.
 
 ### (E) Compromise build process
 

@@ -682,7 +682,7 @@ ad-hoc analysis, and can complement source-based typosquatting solutions.
 
 ## Availability threats
 
-An availabiliy threat is a potential for an adversary to deny someone from
+An availability threat is a potential for an adversary to deny someone from
 reading a source and its associated change history, or from building a package.
 
 <details><summary>(A)(B) Delete the code <span>(SLSA 3)</span></summary>
@@ -704,11 +704,11 @@ attestation showing that some system, such as GitHub, ensures retention and
 availability.
 
 </details>
-<details><summary>(E) A dependency becomes temporarily or permenantly unavailable to the build process <span>(out of scope)</span></summary>
+<details><summary>(E) A dependency becomes temporarily or permanently unavailable to the build process <span>(out of scope)</span></summary>
 
 *Threat:* Unable to perform a build with the intended dependencies.
 
-*Mitigation:* **Outside the scope of SLSA.** That said, some solutions to support Hermetic and Reproducable builds may also reduce the impact of this threat.
+*Mitigation:* **Outside the scope of SLSA.** That said, some solutions to support Hermetic and Reproducible builds may also reduce the impact of this threat.
 <sup>[[Hermetic] [Reproducible] @ SLSA 4]</sup>
 
 </details>

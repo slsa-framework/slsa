@@ -260,7 +260,7 @@ of the other top-level fields, such as `subject`, see [Statement]._
 `metadata.completeness.parameters` _boolean, optional_
 
 > If true, the `builder` claims that `invocation.parameters` is complete, meaning
-> that all external inputs are propertly captured in `invocation.parameters`.
+> that all external inputs are properly captured in `invocation.parameters`.
 
 <a id="metadata.completeness.environment"></a>
 `metadata.completeness.environment` _boolean, optional_
