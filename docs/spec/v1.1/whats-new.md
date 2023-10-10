@@ -12,6 +12,7 @@ changes in v1.1 relative to the prior release, [v1.0].
 -   Clarify that attestation format schema are informative and the
     specification texts (SLSA and [in-toto attestation]) are the canonical
     source of definitions.
+-   Add procedure for verifying VSAs.
 
 <!-- Footnotes and link definitions -->
 
