@@ -28,13 +28,13 @@ See https://slsa.dev/community for ways to get involved in SLSA development.
 | Project | [Shepherd] |
 | ------- | ---------- |
 | [Build Level 4] | David A Wheeler (@david-a-wheeler) |
-| [Hardware Attested Builds] | Marcela Melara (@marcelamelara), Chad Kimes (@chkimes) |
+| [Hardware Attested Platforms] | Marcela Melara (@marcelamelara), Chad Kimes (@chkimes) |
 | [Source Track] | Kris K (@kpk47) |
 | [Version 1.1 release] | Joshua Lock (@joshuagl) |
 
 [Shepherd]: CONTRIBUTING.md#project-lifecycle
 [Build Level 4]: https://github.com/slsa-framework/slsa/issues/977
-[Hardware Attested Builds]: https://github.com/slsa-framework/slsa/issues/975
+[Hardware Attested Platforms]: https://github.com/slsa-framework/slsa/issues/975
 [Source Track]: https://github.com/slsa-framework/slsa/issues/956
 [Version 1.1 release]: https://github.com/slsa-framework/slsa/issues/900
 
