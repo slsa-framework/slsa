@@ -253,10 +253,10 @@ additions are welcome!
     <td>Package name
     <td>Package
   <tr>
-    <td><a href="https://nixos.org/guides/how-nix-works.html">nix</a> (e.g. <a href="https://nixos.org/">NixOS</a>)
-    <td><em>?</em>
-    <td><a href="https://nixos.org/manual/nix/stable/glossary.html#gloss-store-object">Store Object</a>?
-    <td>Package or <a href="https://nixos.org/manual/nix/stable/glossary.html#gloss-derivation">Derivation</a>
+    <td><a href="https://nixos.org/manual/nix">Nix</a> (e.g. <a href="https://nixos.org/">NixOS</a>)
+    <td>Repository (e.g. <a href="https://github.com/NixOS/nixpkgs">Nixpkgs</a>) or <a href="https://nixos.org/manual/nix/stable/glossary.html#gloss-binary-cache">binary cache</a>
+    <td><a href="https://nixos.org/manual/nix/stable/language/derivations.html">Derivation name</a>
+    <td><a href="https://nixos.org/manual/nix/stable/language/derivations.html">Derivation</a> or <a href="https://nixos.org/manual/nix/stable/glossary.html#gloss-store-object">store object</a>
   <tr>
     <td colspan=4><em>Storage systems</em>
   <tr>
