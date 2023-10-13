@@ -80,8 +80,8 @@ Many recent high-profile attacks were consequences of supply chain integrity vul
 <td>Provenance of the artifact in the GCS bucket would have shown that the artifact was not built in the expected manner from the expected source repo.
 <tr>
 <td>G
-<td>Compromise package repo
-<td><a href="https://theupdateframework.io/papers/attacks-on-package-managers-ccs2008.pdf">Attacks on Package Mirrors</a>: Researcher ran mirrors for several popular package repositories, which could have been used to serve malicious packages.
+<td>Compromise package registry
+<td><a href="https://theupdateframework.io/papers/attacks-on-package-managers-ccs2008.pdf">Attacks on Package Mirrors</a>: Researcher ran mirrors for several popular package registries, which could have been used to serve malicious packages.
 <td>Similar to above (F), provenance of the malicious artifacts would have shown that they were not built as expected or from the expected source repo.
 <tr>
 <td>H

@@ -389,14 +389,14 @@ cryptographic signature is no longer valid.
 
 </details>
 
-### (G) Compromise package repo
+### (G) Compromise package registry
 
-An adversary modifies the package on the package repository using an
+An adversary modifies the package on the package registry using an
 administrative interface or through a compromise of the infrastructure.
 
 <details><summary>De-list artifact</summary>
 
-*Threat:* The package repository stops serving the artifact.
+*Threat:* The package registry stops serving the artifact.
 
 *Mitigation:* N/A - This threat is out of scope of SLSA v1.0.
 
@@ -404,7 +404,7 @@ administrative interface or through a compromise of the infrastructure.
 
 <details><summary>De-list provenance</summary>
 
-*Threat:* The package repository stops serving the provenance.
+*Threat:* The package registry stops serving the provenance.
 
 *Mitigation:* N/A - This threat is out of scope of SLSA v1.0.
 
@@ -412,7 +412,7 @@ administrative interface or through a compromise of the infrastructure.
 
 ### (H) Use compromised package
 
-An adversary modifies the package after it has left the package repository, or
+An adversary modifies the package after it has left the package registry, or
 tricks the user into using an unintended package.
 
 <details><summary>Typosquatting</summary>
