@@ -210,3 +210,46 @@ You can automatically append a sign-off to a commit by passing the `-s` /
 
 **Note**: this requires your `user.name` and `user.email` are set correctly
 in your git config.
+
+## Project lifecycle
+
+Major projects that require considerable effort, such as a new release, a new
+track, or a new level, should have a top-level GitHub issue and a shepherd to
+oversee the project and move it along. Without a shepherd, a project is likely
+to stagnate. If you would like to be a shepherd for a project, just nominate
+yourself in the issue.
+
+Responsibilities of the shepherd:
+
+-   Maintaining the top-level GitHub issue to track the overall project
+-   Breaking down the project into tasks
+-   Pinging open issues and pull requests when stale
+-   Getting consensus among Contributors and Maintainers
+-   Suggesting priorities
+-   Providing regular updates to the community
+-   Adding a project entry in [README.md](README.md)
+
+Template for GitHub issue:
+
+-   Title: `Project: <name>`
+-   Assignee: \<shepherd\>
+-   Labels: [`project`](https://github.com/slsa-framework/slsa/labels/project)
+-   Description:
+
+    ```markdown
+    This is a tracking issue for [SHORT DESCRIPTION].
+
+    [Project shepherd]: YOUR NAME (@GITHUB_USERNAME)
+
+    Sub-issues:
+
+    -   [ ] #1234
+    -   [ ] #4568
+
+    [Project shepherd]: https://github.com/slsa-framework/slsa/blob/main/CONTRIBUTING.md#project-lifecycle
+
+    ---
+
+    [any other text]
+
+    ```

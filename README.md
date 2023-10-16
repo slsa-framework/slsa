@@ -19,6 +19,25 @@ specification, and overall project management. Other git repositories within the
 [slsa-framework](https://github.com/slsa-framework) organization have
 repo-specific issue trackers.
 
+## How to get involved
+
+See https://slsa.dev/community for ways to get involved in SLSA development.
+
+## Active projects
+
+| Project | [Shepherd] |
+| ------- | ---------- |
+| [Build Level 4] | David A Wheeler (@david-a-wheeler) |
+| [Hardware Attested Platforms] | Marcela Melara (@marcelamelara), Chad Kimes (@chkimes) |
+| [Source Track] | Kris K (@kpk47) |
+| [Version 1.1 release] | Joshua Lock (@joshuagl) |
+
+[Shepherd]: CONTRIBUTING.md#project-lifecycle
+[Build Level 4]: https://github.com/slsa-framework/slsa/issues/977
+[Hardware Attested Platforms]: https://github.com/slsa-framework/slsa/issues/975
+[Source Track]: https://github.com/slsa-framework/slsa/issues/956
+[Version 1.1 release]: https://github.com/slsa-framework/slsa/issues/900
+
 ## URL Aliases
 
 We have several [redirect](docs/_redirects) configured on slsa.dev for
@@ -34,10 +53,6 @@ convenience of the team:
     -   https://slsa.dev/notes/specification
         (or [.../spec](https://slsa.dev/notes/spec))
     -   https://slsa.dev/notes/tooling
-
-## How to get involved
-
-See https://slsa.dev/community for ways to get involved in SLSA development.
 
 ## Governance
 
