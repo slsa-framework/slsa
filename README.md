@@ -23,16 +23,16 @@ repo-specific issue trackers.
 
 See https://slsa.dev/community for ways to get involved in SLSA development.
 
-## Active projects
+## Active workstreams
 
-| Project | [Shepherd] |
-| ------- | ---------- |
+| Workstream | [Shepherd] |
+| ---------- | ---------- |
 | [Build Level 4] | David A Wheeler (@david-a-wheeler) |
 | [Hardware Attested Platforms] | Marcela Melara (@marcelamelara), Chad Kimes (@chkimes) |
 | [Source Track] | Kris K (@kpk47) |
 | [Version 1.1 release] | Joshua Lock (@joshuagl) |
 
-[Shepherd]: CONTRIBUTING.md#project-lifecycle
+[Shepherd]: CONTRIBUTING.md#workstream-lifecycle
 [Build Level 4]: https://github.com/slsa-framework/slsa/issues/977
 [Hardware Attested Platforms]: https://github.com/slsa-framework/slsa/issues/975
 [Source Track]: https://github.com/slsa-framework/slsa/issues/956
