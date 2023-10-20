@@ -51,7 +51,7 @@
       - title: Provenance
         url: /spec/v1.0-rc1/provenance
 
-      - title: VSA
+      - title: Verification Summary
         # There was no v1.0-rc VSA. This confuses the version selector.
         url: /spec/v0.2/verification_summary
 

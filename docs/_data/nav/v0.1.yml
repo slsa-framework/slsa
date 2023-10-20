@@ -39,7 +39,7 @@
       - title: Provenance
         url: /spec/v0.1/provenance
 
-      - title: VSA
+      - title: Verification Summary
         url: /spec/v0.1/verification_summary
 
     - title: Stages

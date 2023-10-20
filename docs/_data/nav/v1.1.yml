@@ -89,7 +89,7 @@
     url: /spec/v1.1/provenance
     description: Suggested provenance format and explanation
 
-  - title: VSA
+  - title: Verification Summary
     url: /spec/v1.1/verification_summary
     description: Suggested VSA format and explanation
 

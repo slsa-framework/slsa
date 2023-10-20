@@ -1,6 +1,6 @@
 ---
-title: SLSA Verification Summary Attestation (VSA)
-description: SLSA v1.0 RC2 specification for a verification summary of artifacts by a trusted verifier entity.
+title: Verification Summary Attestation (VSA)
+description: Specification for a verification summary of artifacts by a trusted verifier entity.
 layout: standard
 ---
 
