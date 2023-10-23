@@ -188,8 +188,8 @@ of the other top-level fields, such as `subject`, see [Statement]._
 > its dependencies), or "FAILED" if policy verification failed.
 >
 > Users MUST NOT include more than one level per SLSA track. Note that each SLSA
-> level implies all levels below it (e.g. SLSA_BUILD_LEVEL_3 implies
-> SLSA_BUILD_LEVEL_2 and SLSA_BUILD_LEVEL_1), so there is no need to
+> level implies all levels below it (e.g. `SLSA_BUILD_LEVEL_3` implies
+> `SLSA_BUILD_LEVEL_2` and `SLSA_BUILD_LEVEL_1`), so there is no need to
 > include more than one level per track.
 
 <a id="dependencyLevels"></a>
@@ -200,11 +200,14 @@ of the other top-level fields, such as `subject`, see [Statement]._
 > Map from [SlsaResult] to the number of the artifact's _transitive_ dependencies
 > that were verified at the indicated level. Absence of a given level of
 > [SlsaResult] MUST be interpreted as reporting _0_ dependencies at that level.
+> A set but empty `dependencyLevels` object means that the artifact has **no**
+> dependency at all, while an unset or null `dependencyLevels` means that the
+> verifier makes no claims about the artifact's dependencies.
 >
 > Users MUST count each dependency only once per SLSA track, at the highest
-> level verified. For example, if a dependency meets SLSA_BUILD_LEVEL_2,
-> you include it with the count for SLSA_BUILD_LEVEL_2 but not the count for
->SLSA_BUILD_LEVEL_1.
+> level verified. For example, if a dependency meets `SLSA_BUILD_LEVEL_2`,
+> you include it with the count for `SLSA_BUILD_LEVEL_2` but not the count for
+> `SLSA_BUILD_LEVEL_1`.
 
 <a id="slsaVersion"></a>
 `slsaVersion` _string, optional_
@@ -363,16 +366,16 @@ verifiers they add to their roots of trust.
 The result of evaluating an artifact (or set of artifacts) against SLSA.
 SHOULD be one of these values:
 
--   SLSA_BUILD_LEVEL_UNEVALUATED
--   SLSA_BUILD_LEVEL_0
--   SLSA_BUILD_LEVEL_1
--   SLSA_BUILD_LEVEL_2
--   SLSA_BUILD_LEVEL_3
--   FAILED (Indicates policy evaluation failed)
+-   `SLSA_BUILD_LEVEL_UNEVALUATED`
+-   `SLSA_BUILD_LEVEL_0`
+-   `SLSA_BUILD_LEVEL_1`
+-   `SLSA_BUILD_LEVEL_2`
+-   `SLSA_BUILD_LEVEL_3`
+-   `FAILED` (Indicates policy evaluation failed)
 
-Note that each SLSA level implies the levels below it. For example,
-SLSA_BUILD_LEVEL_3 means (SLSA_BUILD_LEVEL_1 + SLSA_BUILD_LEVEL_2 +
-SLSA_BUILD_LEVEL_3).
+Note that each SLSA level implies the levels below it in the same track.
+For example, `SLSA_BUILD_LEVEL_3` means (`SLSA_BUILD_LEVEL_1` +
+`SLSA_BUILD_LEVEL_2` + `SLSA_BUILD_LEVEL_3`).
 
 Users MAY use custom values here but MUST NOT use custom values starting with
 `SLSA_`.
