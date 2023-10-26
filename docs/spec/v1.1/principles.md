@@ -8,8 +8,9 @@ decisions.
 
 ## Simple levels with clear outcomes
 
-Use levels to communicate security state and to encourage a large population to
-improve its security stance over time.
+Use [levels](levels) to communicate security state and to encourage a large
+population to improve its security stance over time. When necessary, split
+levels into separate tracks to recognize progress in unrelated security areas.
 
 **Reasoning:** Levels simplify how to think about security by boiling a complex
 topic into an easy-to-understand number. It is clear that level N is better than
@@ -21,19 +22,20 @@ Guidelines:
 -   **Define levels in terms of concrete security outcomes.** Each level should
     have clear and meaningful security value, such as stopping a particular
     class of threats. Levels should represent security milestones, not just
-    incremental progress.
+    incremental progress. Give each level an easy-to-remember mnemonic, such as
+    "Provenance exists".
 
 -   **Balance level granularity.** Too many levels makes SLSA hard to understand
     and remember, while too few makes each level hard to achieve. Try to bundle
     requirements into levels such that an implementer is likely implement all at
     the same time.
 
--   **Use tracks sparingly.** SLSA has independent sets of levels called
-    *tracks* that measure progress along independent axes. Strive for no more
-    than 3-5 tracks, lest SLSA be too complex to understand. Furthermore, avoid
-    creating overlapping or confusingly similar tracks. When a track is
-    warranted, define a crisp objective of the track, such as "trustworthy
-    provenance" for the [Build track](levels#build-track).
+-   **Use tracks sparingly.** Additional tracks add extra complexity to SLSA, so
+    a new track should be seen as a last resort. Each track should have a clear,
+    distinct purpose with a crisply defined objective, such as trustworthy
+    provenance for the [Build track](levels#build-track). As a rule of thumb, a
+    new track may be warranted the threats it addresses are unrelated to those
+    of other tracks. Try to avoid tracks that sound confusingly similar.
 
 ## Trust platforms, verify artifacts
 
