@@ -26,7 +26,7 @@ Guidelines:
     "Provenance exists".
 
 -   **Balance level granularity.** Too many levels makes SLSA hard to understand
-    and remember, while too few makes each level hard to achieve. Try to bundle
+    and remember; too few makes each level hard to achieve. Try to bundle
     requirements into levels such that an implementer is likely implement all at
     the same time.
 
@@ -34,8 +34,9 @@ Guidelines:
     a new track should be seen as a last resort. Each track should have a clear,
     distinct purpose with a crisply defined objective, such as trustworthy
     provenance for the [Build track](levels#build-track). As a rule of thumb, a
-    new track may be warranted the threats it addresses are unrelated to those
-    of other tracks. Try to avoid tracks that sound confusingly similar.
+    new track may be warranted if the threats it addresses are unrelated to
+    those of other tracks. Try to avoid tracks that sound confusingly similar in
+    either name or objective.
 
 ## Trust platforms, verify artifacts
 
