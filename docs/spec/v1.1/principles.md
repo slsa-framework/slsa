@@ -34,9 +34,9 @@ Guidelines:
     a new track should be seen as a last resort. Each track should have a clear,
     distinct purpose with a crisply defined objective, such as trustworthy
     provenance for the [Build track](levels#build-track). As a rule of thumb, a
-    new track may be warranted if the threats it addresses are unrelated to
-    those of other tracks. Try to avoid tracks that sound confusingly similar in
-    either name or objective.
+    new track may be warranted if it addresses threats unrelated to another
+    track. Try to avoid tracks that sound confusingly similar in either name or
+    objective.
 
 ## Trust platforms, verify artifacts
 
