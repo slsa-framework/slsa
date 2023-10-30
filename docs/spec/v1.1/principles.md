@@ -27,8 +27,8 @@ Guidelines:
 
 -   **Balance level granularity.** Too many levels makes SLSA hard to understand
     and remember; too few makes each level hard to achieve. Try to bundle
-    requirements into levels such that an implementer is likely implement all at
-    the same time.
+    requirements into levels such that an implementer is likely to implement all
+    at the same time.
 
 -   **Use tracks sparingly.** Additional tracks add extra complexity to SLSA, so
     a new track should be seen as a last resort. Each track should have a clear,
