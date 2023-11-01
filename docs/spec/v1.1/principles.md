@@ -28,7 +28,9 @@ Guidelines:
 -   **Balance level granularity.** Too many levels makes SLSA hard to understand
     and remember; too few makes each level hard to achieve. Collapse levels
     until each step requires a non-trivial but manageable amount of work to
-    implement.
+    implement. Separate levels if they require significant work from multiple
+    distinct parties, such as infrastructure work plus user behavior changes, so
+    long as the intermediate level still has some security value (prior bullet).
 
 -   **Use tracks sparingly.** Additional tracks add extra complexity to SLSA, so
     a new track should be seen as a last resort. Each track should have a clear,
