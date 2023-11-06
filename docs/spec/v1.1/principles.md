@@ -6,6 +6,40 @@ description: An introduction to the guiding principles behind SLSA's design deci
 This page is an introduction to the guiding principles behind SLSA's design
 decisions.
 
+## Simple levels with clear outcomes
+
+Use [levels](levels) to communicate security state and to encourage a large
+population to improve its security stance over time. When necessary, split
+levels into separate tracks to recognize progress in unrelated security areas.
+
+**Reasoning:** Levels simplify how to think about security by boiling a complex
+topic into an easy-to-understand number. It is clear that level N is better than
+level N-1, even to someone with passing familiarity. This provides a convenient
+way to describe current security state as well as a natural path to improvement.
+
+Guidelines:
+
+-   **Define levels in terms of concrete security outcomes.** Each level should
+    have clear and meaningful security value, such as stopping a particular
+    class of threats. Levels should represent security milestones, not just
+    incremental progress. Give each level an easy-to-remember mnemonic, such as
+    "Provenance exists".
+
+-   **Balance level granularity.** Too many levels makes SLSA hard to understand
+    and remember; too few makes each level hard to achieve. Collapse levels
+    until each step requires a non-trivial but manageable amount of work to
+    implement. Separate levels if they require significant work from multiple
+    distinct parties, such as infrastructure work plus user behavior changes, so
+    long as the intermediate level still has some security value (prior bullet).
+
+-   **Use tracks sparingly.** Additional tracks add extra complexity to SLSA, so
+    a new track should be seen as a last resort. Each track should have a clear,
+    distinct purpose with a crisply defined objective, such as trustworthy
+    provenance for the [Build track](levels#build-track). As a rule of thumb, a
+    new track may be warranted if it addresses threats unrelated to another
+    track. Try to avoid tracks that sound confusingly similar in either name or
+    objective.
+
 ## Trust platforms, verify artifacts
 
 Establish trust in a small number of platforms and systems---such as change management, build,
