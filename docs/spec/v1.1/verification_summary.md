@@ -83,7 +83,7 @@ to establish minimum requirements on dependencies SLSA levels may use
   "resourceUri": <artifact-URI-in-request>,
   "policy": {
     "uri": "<URI>",
-    "digest": { /* DigestSet */ }
+    "digest": { <digest-of-policy-data> }
   }
   "inputAttestations": [
     {
@@ -161,7 +161,8 @@ of the other top-level fields, such as `subject`, see [Statement]._
 
 > Describes the policy that the `subject` was verified against.
 >
-> The entry MUST contain a `uri`.
+> The entry MUST contain a `uri` identifying which policy was applied and
+> SHOULD contain a `digest` to indicate the exact version of that policy.
 
 <a id="inputAttestations"></a>
 `inputAttestations` _array ([ResourceDescriptor]), optional_
@@ -380,6 +381,8 @@ Users MAY use custom values here but MUST NOT use custom values starting with
 ## Change history
 
 -   1.1:
+    -   Changed the `policy` object to recommend that the `digest` field of
+        the `ResourceDescriptor` is set.
     -   Added optional `verifier.version` field to record verification tools.
     -   Added Verification section with examples.
     -   Made `timeVerified` optional.
