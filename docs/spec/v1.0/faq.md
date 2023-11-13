@@ -165,7 +165,7 @@ the provenance generated.
 
 Some common situations may include:
 
--   The platform generates the provenance and just calls a runner for individual items.
+-   The platform generates the provenance and just calls a runner for individual build steps.
     In this situation, the provenance is only affected by the platform so there would be
     no requirements imposed on the runner.
 -   The runner generates the provenance. In this situation, the orchestrating platform
