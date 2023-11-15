@@ -10,8 +10,9 @@
 
 ### Adding a new maintainer
 
-We manage Maintainer permissions with the GitHub team "Specification
-Maintainers". We keep that group and this documentation in sync manually.
+We manage Maintainer permissions with the GitHub team,
+[Specification Maintainers](https://github.com/orgs/slsa-framework/teams/specification-maintainers).
+We keep that group and this documentation in sync manually.
 Whenever adding a new maintainer in this file, please add the user to the group.
 For instructions, see the [GitHub documentation](https://docs.github.com/en/organizations/organizing-members-into-teams/adding-organization-members-to-a-team).
 
