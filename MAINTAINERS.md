@@ -1,4 +1,6 @@
-## Maintainers of the SLSA Specification (in alphabetical order)
+# Maintainers of the SLSA Specification
+
+## Current maintainers (in alphabetical order)
 
 | Name | Email | OpenSSF Slack | GitHub | Affilitaion|
 | --- | --- | --- | --- | --- |
@@ -6,7 +8,7 @@
 | Joshua Lock | joshuagloe@gmail.com | @Joshua Lock |  [joshuagl](https://github.com/joshuagl) | Verizon |
 | Mark Lodato | lodato@google.com |  @Mark Lodato | [MarkLodato](https://github.com/MarkLodato) | Google |
 
-## Emeritus maintainers
+## Emeritus maintainers (in alphabetical order)
 
 Emeritus maintainers have maintained the SLSA specification in the past.
 
