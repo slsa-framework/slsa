@@ -25,8 +25,6 @@ Emeritus maintainers have maintained the SLSA specification in the past.
 
 ### Transitioning to emeritus
 
-We manage Maintainer permissions with the GitHub team "Specification
-Maintainers". We keep that group and this documentation in sync manually.
 Whenever transitioning a maintainer to emeritus status, please remove the user
 from that group and move their row from the Current maintainers table to the
 Emeritus maintainers table. For instructions, see the [GitHub documentation](https://docs.github.com/en/organizations/organizing-members-into-teams/removing-organization-members-from-a-team).
