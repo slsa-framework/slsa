@@ -150,6 +150,35 @@ describes our understanding of the intersection efforts today. We do not know
 how things will evolve over the coming months and years, but we look forward to
 the collaboration and improved software supply chain security.
 
+## Q: How to SLSA with a self-hosted runner
+
+Some CI systems allow producers to provide their own self-hosted runners as a build
+environment (e.g. [GitHub Actions]). While there are many valid reasons to leverage
+these, classifying the SLSA build level for the resulting artifact can be confusing.
+
+Since the SLSA Build track describes increasing levels of trustworthiness and
+completeness in a package artifact's <dfn>provenance</dfn>, interpretation of the
+specification hinges on the platform entities involved in the provenance generation.
+The SLSA [build level requirements] (secure key storage, isolation, etc.) should be
+imposed on the transitive closure of the systems which are responsible for informing
+the provenance generated.
+
+Some common situations may include:
+
+-   The platform generates the provenance and just calls a runner for individual build steps.
+    In this situation, the provenance is only affected by the platform so there would be
+    no requirements imposed on the runner.
+-   The runner generates the provenance. In this situation, the orchestrating platform
+    is irrelevant and all requirements are imposed on the runner.
+-   The platform provides the runner with some credentials for generating the provenance
+    or both the platform and the runner provide information for the provenance. Trust is
+    shared between the platform and the runner so the requirements are imposed on both.
+
+Additional requirements on the self-hosted runners may be added to Build levels
+greater than L3 when such levels get defined.
+
+[build level requirements]: requirements.md
+[GitHub Actions]: https://docs.github.com/en/actions/hosting-your-own-runners
 [Software Bill of Materials (SBOM)]: https://ntia.gov/sbom
 [SLSA Provenance]: provenance.md
 [Build track]: levels.md#build-track
