@@ -174,8 +174,8 @@ Some common situations may include:
     or both the platform and the runner provide information for the provenance. Trust is
     shared between the platform and the runner so the requirements are imposed on both.
 
-Additional requirements on the self-hosted runners may be added to Build levels greater than
-L3 when such levels get defined.
+Additional requirements on the self-hosted runners may be added to Build levels
+greater than L3 when such levels get defined.
 
 [build level requirements]: requirements.md
 [GitHub Actions]: https://docs.github.com/en/actions/hosting-your-own-runners
