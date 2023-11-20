@@ -4,11 +4,11 @@
 
 | Name | Email | OpenSSF Slack | GitHub | Affilitaion |
 | --- | --- | --- | --- | --- |
-| Joshua Lock | joshuagloe@gmail.com | @Joshua Lock |  [joshuagl](https://github.com/joshuagl) | Verizon |
-| Kris K | kkris@google.com | @Kris K | [kpk47](https://github.com/kpk47) | Google |
 | Luca Bandini | luca.vombato@gmail.com | @Luca Bandini | [Vombato](https://github.com/Vombato) | SIGHUP |
-| Mark Lodato | lodato@google.com |  @Mark Lodato | [MarkLodato](https://github.com/MarkLodato) | Google |
+| Kris K | kkris@google.com | @Kris K | [kpk47](https://github.com/kpk47) | Google |
 | Michael Lieberman | mlieberman85@gmail.com | @Michael Lieberman | [mlieberman85](https://github.com/mlieberman85) | Kusari |
+| Joshua Lock | joshuagloe@gmail.com | @Joshua Lock |  [joshuagl](https://github.com/joshuagl) | Verizon |
+| Mark Lodato | lodato@google.com |  @Mark Lodato | [MarkLodato](https://github.com/MarkLodato) | Google |
 
 Proposals to change the list of maintainers should be made in the form of a PR
 against this file.
