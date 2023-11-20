@@ -32,7 +32,7 @@ not currently doing so.
 Maintainers may transition to emeritus status by request. They may also
 transition to emeritus status automatically if they are not active in the SLSA
 community for six (6) months. "Active" is loosely defined to mean performing the
-duties defined in the [SLSA Governance](https://github.com/slsa-framework/governance/blob/main/5._Governance.md) documentation.
+Maintainer duties defined in the [SLSA Governance](https://github.com/slsa-framework/governance/blob/main/5._Governance.md) documentation.
 Any ambiguity in whether or not a maintainer is considered active will be
 resolved by the other maintainers. There should always be at least three active
 maintainers, so automatic transitions to emeritus status will pause if there
