@@ -8,6 +8,9 @@
 | Joshua Lock | joshuagloe@gmail.com | @Joshua Lock |  [joshuagl](https://github.com/joshuagl) | Verizon |
 | Mark Lodato | lodato@google.com |  @Mark Lodato | [MarkLodato](https://github.com/MarkLodato) | Google |
 
+Proposals to change the list of maintainers should be made in the form of a PR
+against this file.
+
 ### Adding a new maintainer
 
 We manage Maintainer permissions with the GitHub team,
@@ -28,8 +31,8 @@ not currently doing so.
 
 Maintainers may transition to emeritus status by request. They may also
 transition to emeritus status automatically if they are not active in the SLSA
-community for six (6) months. "Active" is loosely defined to mean attending
-meetings, sending or reviewing PRs, or posting on the Slack or mailing lists.
+community for six (6) months. "Active" is loosely defined to mean performing the
+duties defined in the [SLSA Governance](https://github.com/slsa-framework/governance/blob/main/5._Governance.md) documentation.
 Any ambiguity in whether or not a maintainer is considered active will be
 resolved by the other maintainers. There should always be at least three active
 maintainers, so automatic transitions to emeritus status will pause if there
