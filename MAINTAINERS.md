@@ -5,6 +5,7 @@
 | Name | Email | OpenSSF Slack | GitHub | Affilitaion |
 | --- | --- | --- | --- | --- |
 | Kris K | kkris@google.com | @Kris K | [kpk47](https://github.com/kpk47) | Google |
+| Arnaud Le Hors | lehors@us.ibm.com | @Arnaud Le Hors | [lehors](https://github.com/lehors) | IBM |
 | Michael Lieberman | mlieberman85@gmail.com | @Michael Lieberman | [mlieberman85](https://github.com/mlieberman85) | Kusari |
 | Joshua Lock | joshuagloe@gmail.com | @Joshua Lock |  [joshuagl](https://github.com/joshuagl) | Verizon |
 | Mark Lodato | lodato@google.com |  @Mark Lodato | [MarkLodato](https://github.com/MarkLodato) | Google |
