@@ -1,45 +1,70 @@
 # Maintainers of the SLSA Specification
 
-## Current maintainers (in alphabetical order)
+Maintainers are [responsible][SLSA Governance] for day-to-day operation of the
+project. Every pull request in this repository must be approved by
+at least one Maintainer, as per [CONTRIBUTING.md](CONTRIBUTING.md).
 
-| Name | Email | OpenSSF Slack | GitHub | Affilitaion |
+This file contains the canonical list of SLSA Specification Maintainers. It is
+manually mirrored to the [Specification Maintainers] GitHub team, which confers
+permissions in this repository.
+
+## Current Maintainers
+
+<!-- Please keep the list sorted alphabetically by first name. -->
+<!-- Remember to add new candidates to the GitHub group. -->
+
+| Name | Email | OpenSSF Slack | GitHub | Affiliation |
 | --- | --- | --- | --- | --- |
-| Kris K | kkris@google.com | @Kris K | [kpk47](https://github.com/kpk47) | Google |
 | Arnaud Le Hors | lehors@us.ibm.com | @Arnaud Le Hors | [lehors](https://github.com/lehors) | IBM |
-| Michael Lieberman | mlieberman85@gmail.com | @Michael Lieberman | [mlieberman85](https://github.com/mlieberman85) | Kusari |
 | Joshua Lock | joshuagloe@gmail.com | @Joshua Lock |  [joshuagl](https://github.com/joshuagl) | Verizon |
+| Kris K | kkris@google.com | @Kris K | [kpk47](https://github.com/kpk47) | Google |
 | Mark Lodato | lodato@google.com |  @Mark Lodato | [MarkLodato](https://github.com/MarkLodato) | Google |
+| Michael Lieberman | mlieberman85@gmail.com | @Michael Lieberman | [mlieberman85](https://github.com/mlieberman85) | Kusari |
 
-Proposals to change the list of maintainers should be made in the form of a PR
-against this file.
+### Becoming a Maintainer
 
-### Adding a new maintainer
+The criteria for becoming a Maintainer is documented in the [SLSA Governance]
+repository and copied here for convenience:
 
-We manage Maintainer permissions with the GitHub team,
-[Specification Maintainers](https://github.com/orgs/slsa-framework/teams/specification-maintainers).
-We keep that group and this documentation in sync manually.
-Whenever adding a new maintainer in this file, please add the user to the group.
-For instructions, see the [GitHub documentation](https://docs.github.com/en/organizations/organizing-members-into-teams/adding-organization-members-to-a-team).
+-   Demonstrated track record of PR reviews (both quality and quantity of reviews)
+-   Demonstrated thought leadership in the project
+-   Demonstrated shepherding of project work and contributors
 
-## Emeritus maintainers (in alphabetical order)
+The best way to get started is to regularly contribute and review pull requests.
 
-Emeritus maintainers have maintained the SLSA specification in the past but are
-not currently doing so.
+To nominate a candidate, send a PR adding the candidate's name to the list of
+[Current Maintainers]. If the candidate is not the author, have the candidate
+approve the PR as well.
 
-| Name | Email | OpenSSF Slack | GitHub | Affilitaion |
+Once the PR is approved and merged, an existing Maintainer will [add] the
+candidate to the [Specification Maintainers] GitHub team.
+
+[add]: https://docs.github.com/en/organizations/organizing-members-into-teams/adding-organization-members-to-a-team
+
+## Retired Maintainers
+
+<!-- Please keep the list sorted alphabetically by first name. -->
+<!-- Remember to remove candidates from the GitHub group. -->
+
+| Name | Email | OpenSSF Slack | GitHub | Affiliation |
 | --- | --- | --- | --- | --- |
 
-### Transitioning to emeritus
+### Removing a Maintainer
 
-Maintainers may transition to emeritus status by request. They may also
-transition to emeritus status automatically if they are not active in the SLSA
-community for six (6) months. "Active" is loosely defined to mean performing the
-Maintainer duties defined in the [SLSA Governance](https://github.com/slsa-framework/governance/blob/main/5._Governance.md) documentation.
-Any ambiguity in whether or not a maintainer is considered active will be
-resolved by the other maintainers. There should always be at least three active
-maintainers, so automatic transitions to emeritus status will pause if there
-are three or fewer active maintainers.
+The criteria for removing a Maintainer is documented in the [SLSA Governance]
+repository.
 
-Whenever transitioning a maintainer to emeritus status, please remove the user
-from that group and move their row from the Current maintainers table to the
-Emeritus maintainers table. For instructions, see the [GitHub documentation](https://docs.github.com/en/organizations/organizing-members-into-teams/removing-organization-members-from-a-team).
+To remove Maintainer, send a PR to move the candidate from [Current Maintainers]
+to [Retired Maintainers]. If the candidate is not the author, request review
+from the candidate to inform them of their removal. Approval from the candidate
+is *not* required, though it is desirable.
+
+Once the PR is approved and merged, a Maintainer will [remove] the person from
+the [Specification Maintainers] GitHub team.
+
+[remove]: https://docs.github.com/en/organizations/organizing-members-into-teams/removing-organization-members-from-a-team
+
+[Current Maintainers]: #current-maintainers
+[Retired Maintainers]: #retired-maintainers
+[SLSA Governance]: https://github.com/slsa-framework/governance/blob/main/5._Governance.md
+[Specification Maintainers]: https://github.com/orgs/slsa-framework/teams/specification-maintainers
