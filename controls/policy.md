@@ -13,6 +13,7 @@ policy based on [software attestations](attestations.md).
 
 *TODO: Define what an attestation-based admission control policy is.*
 
+<!-- markdownlint-disable MD045 -->
 <p align="center"><img width="50%" src="images/policy_model.svg"></p>
 
 To make the decision, a policy engine combines the following:
