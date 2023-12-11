@@ -2,7 +2,7 @@
 title: Terminology
 description: Before diving into the SLSA specification levels, we need to establish a core set of terminology and models to describe what we're protecting.
 ---
-<!--- Note on updating docs:
+<!-- Note on updating docs:
 * Using terms such as "developer," "maintainer," "producer," "author," and
   "publisher" interchangeably can cause confusion.
   *  For consistency: Whenever possible, default to "producer," in line with the
@@ -19,7 +19,7 @@ description: Before diving into the SLSA specification levels, we need to establ
     software or tools internal to a platform can be made with "platform component" unless
     there is a more appropriate definition to use directly like "control plane." External
     self-described services and systems can continue to be called by these terms.
---->
+-->
 
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set
 of terminology and models to describe what we're protecting.
