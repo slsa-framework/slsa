@@ -95,17 +95,19 @@ but is trivial to bypass or forge.
 Projects and organizations wanting to easily and quickly gain some benefits of
 SLSA---other than tamper protection---without changing their build workflows.
 
-<dt>Requirements<dd>
+<dt>Software Producer Requirements<dd>
 
--   Software producer follows a consistent build process so that others can form
-    expectations about what a "correct" build looks like.
+-   Follow a consistent build process so that others can form expectations
+    about what a "correct" build looks like.
 
--   Build platform automatically generates [provenance] describing how the
-    artifact was built, including: what entity built the package, what build
-    process they used, and what the top-level input to the build were.
+-   Distribute provenance to consumers, preferably using a convention
+    determined by the package ecosystem.
 
--   Software producer distributes provenance to consumers, preferably using a
-    convention determined by the package ecosystem.
+<dt>Build Platform Requirements<dd>
+
+-   Automatically generate [provenance] describing how the artifact was
+    built, including: what entity built the package, what build process they
+    used, and what the top-level input to the build were.
 
 <dt>Benefits<dd>
 
@@ -147,17 +149,22 @@ Projects and organizations wanting to gain moderate security benefits of SLSA by
 switching to a hosted build platform, while waiting for changes to the build
 platform itself required by [Build L3].
 
-<dt>Requirements<dd>
+<dt>Software Producer Requirements<dd>
 
 All of [Build L1], plus:
 
--   The build runs on a hosted build platform that generates and signs[^sign] the
-    provenance itself. This may be the original build, an after-the-fact
-    reproducible build, or some equivalent platform that ensures the
-    trustworthiness of the provenance.
+-   Run builds on a hosted build platform that meets Build L2 requirements.
 
--   Downstream verification of provenance includes validating the authenticity
+-   Enable downstream verifiers of provenance to validate the authenticity
     of the provenance.
+
+<dt>Build Platform Requirements<dd>
+
+All of [Build L1], plus:
+
+-   Generate and sign[^sign] the provenance itself. This may be done during
+    the original build, an after-the-fact reproducible build, or some
+    equivalent platform that ensures the trustworthiness of the provenance.
 
 <dt>Benefits<dd>
 
@@ -197,11 +204,17 @@ strong tamper protection.
 Most software releases. Build L3 usually requires significant changes to
 existing build platforms.
 
-<dt>Requirements<dd>
+<dt>Software Producer Requirements<dd>
 
 All of [Build L2], plus:
 
--   Build platform implements strong controls to:
+-   Run builds on a hosted build platform that meets Build L3 requirements.
+
+<dt>Build Platform Requirements<dd>
+
+All of [Build L2], plus:
+
+-   Implement strong controls to:
 
     -   prevent runs from influencing one another, even within the same project.
     -   prevent secret material used to sign the provenance from being
