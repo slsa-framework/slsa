@@ -97,11 +97,12 @@ SLSA---other than tamper protection---without changing their build workflows.
 
 <dt>Requirements<dd>
 
--   Software producer:
     -   Follow a consistent build process so that others can form
         expectations about what a "correct" build looks like.
+    -   Run builds on a build platform that meets Build L1 requirements.
     -   Distribute provenance to consumers, preferably using a convention
         determined by the package ecosystem.
+
 -   Build platform:
     -   Automatically generate [provenance] describing how the artifact was
         built, including: what entity built the package, what build process
@@ -152,7 +153,7 @@ platform itself required by [Build L3].
 All of [Build L1], plus:
 
 -   Software producer:
-    -   Run builds on a hosted build platform that meets Build L2
+    -   Run builds on a [hosted] build platform that meets Build L2
         requirements.
 -   Build platform:
     -   Generate and sign[^sign] the provenance itself. This may be done
@@ -237,6 +238,7 @@ All of [Build L2], plus:
 [build l2]: #build-l2
 [build l3]: #build-l3
 [future versions]: future-directions.md
+[hosted]: requirements.md#isolation-strength
 [previous version]: ../v0.1/levels.md
 [provenance]: terminology.md
 [verification]: verifying-artifacts.md
