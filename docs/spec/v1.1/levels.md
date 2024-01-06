@@ -97,6 +97,7 @@ SLSA---other than tamper protection---without changing their build workflows.
 
 <dt>Requirements<dd>
 
+-   Software Producer:
     -   Follow a consistent build process so that others can form
         expectations about what a "correct" build looks like.
     -   Run builds on a build platform that meets Build L1 requirements.
