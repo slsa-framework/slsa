@@ -1,6 +1,6 @@
 ---
 title: Supply chain threats
-description: Attacks can occur at every link in a typical software supply chain, and these kinds of attacks are increasingly public, disruptive, and costly in today's environment. This page is an introduction to possible attacks throughout the supply chain and how SLSA can help.
+description: Attacks can occur at every link in a typical software supply chain, and these kinds of attacks are increasingly public, disruptive, and costly in today's environment. This page is an introduction to possible attacks throughout the supply chain and how SLSA could help.
 ---
 
 Attacks can occur at every link in a typical software supply chain, and these
@@ -8,14 +8,15 @@ kinds of attacks are increasingly public, disruptive, and costly in today's
 environment.
 
 This page is an introduction to possible attacks throughout the supply chain and how
-SLSA can help. For a more technical discussion, see [Threats & mitigations](threats.md).
+SLSA could help. For a more technical discussion, see [Threats & mitigations](threats.md).
 
 ## Summary
 
 ![Supply Chain Threats](images/supply-chain-threats.svg)
 
-See [Terminology](terminology.md) for an explanation of the supply chain
-model.
+**Note that SLSA does not currently address all of the threats presented here.**
+See [Threats & mitigations](threats.md) for what is currently addressed and
+[Terminology](terminology.md) for an explanation of the supply chain model.
 
 SLSA's primary focus is supply chain integrity, with a secondary focus on
 availability. Integrity means protection against tampering or unauthorized
@@ -24,7 +25,7 @@ integrity into source integrity vs build integrity.
 
 **Source integrity:** Ensure that all changes to the source code reflect the
 intent of the software producer. Intent of an organization is difficult to
-define, so SLSA approximates this as approval from two authorized
+define, so SLSA is expected to approximate this as approval from two authorized
 representatives.
 
 **Build integrity:** Ensure that the package is built from the correct,
@@ -46,7 +47,7 @@ Many recent high-profile attacks were consequences of supply chain integrity vul
 <th>
 <th>Integrity threat
 <th>Known example
-<th>How SLSA can help
+<th>How SLSA could help
 <tbody>
 <tr>
 <td>A
@@ -96,7 +97,7 @@ Many recent high-profile attacks were consequences of supply chain integrity vul
 <th>
 <th>Availability threat
 <th>Known example
-<th>How SLSA can help
+<th>How SLSA could help
 <tbody>
 <tr>
 <td>D
