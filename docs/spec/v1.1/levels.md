@@ -103,7 +103,6 @@ SLSA---other than tamper protection---without changing their build workflows.
     -   Run builds on a build platform that meets Build L1 requirements.
     -   Distribute provenance to consumers, preferably using a convention
         determined by the package ecosystem.
-
 -   Build platform:
     -   Automatically generate [provenance] describing how the artifact was
         built, including: what entity built the package, what build process
@@ -159,7 +158,7 @@ All of [Build L1], plus:
 -   Build platform:
     -   Generate and sign[^sign] the provenance itself. This may be done
         during the original build, an after-the-fact reproducible build, or
-        some equivalent platform that ensures the trustworthiness of the
+        some equivalent system that ensures the trustworthiness of the
         provenance.
 -   Consumer:
     -   Validate the authenticity of the provenance.
