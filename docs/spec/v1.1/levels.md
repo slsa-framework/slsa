@@ -97,15 +97,16 @@ SLSA---other than tamper protection---without changing their build workflows.
 
 <dt>Requirements<dd>
 
--   Software producer follows a consistent build process so that others can form
-    expectations about what a "correct" build looks like.
-
--   Build platform automatically generates [provenance] describing how the
-    artifact was built, including: what entity built the package, what build
-    process they used, and what the top-level input to the build were.
-
--   Software producer distributes provenance to consumers, preferably using a
-    convention determined by the package ecosystem.
+-   Software Producer:
+    -   Follow a consistent build process so that others can form
+        expectations about what a "correct" build looks like.
+    -   Run builds on a build platform that meets Build L1 requirements.
+    -   Distribute provenance to consumers, preferably using a convention
+        determined by the package ecosystem.
+-   Build platform:
+    -   Automatically generate [provenance] describing how the artifact was
+        built, including: what entity built the package, what build process
+        they used, and what the top-level input to the build were.
 
 <dt>Benefits<dd>
 
@@ -151,13 +152,16 @@ platform itself required by [Build L3].
 
 All of [Build L1], plus:
 
--   The build runs on a hosted build platform that generates and signs[^sign] the
-    provenance itself. This may be the original build, an after-the-fact
-    reproducible build, or some equivalent platform that ensures the
-    trustworthiness of the provenance.
-
--   Downstream verification of provenance includes validating the authenticity
-    of the provenance.
+-   Software producer:
+    -   Run builds on a [hosted] build platform that meets Build L2
+        requirements.
+-   Build platform:
+    -   Generate and sign[^sign] the provenance itself. This may be done
+        during the original build, an after-the-fact reproducible build, or
+        some equivalent system that ensures the trustworthiness of the
+        provenance.
+-   Consumer:
+    -   Validate the authenticity of the provenance.
 
 <dt>Benefits<dd>
 
@@ -201,11 +205,15 @@ existing build platforms.
 
 All of [Build L2], plus:
 
--   Build platform implements strong controls to:
-
-    -   prevent runs from influencing one another, even within the same project.
-    -   prevent secret material used to sign the provenance from being
-        accessible to the user-defined build steps.
+-   Software producer:
+    -   Run builds on a hosted build platform that meets Build L3
+        requirements.
+-   Build platform:
+    -   Implement strong controls to:
+        -   prevent runs from influencing one another, even within the same
+            project.
+        -   prevent secret material used to sign the provenance from being
+            accessible to the user-defined build steps.
 
 <dt>Benefits<dd>
 
@@ -230,6 +238,7 @@ All of [Build L2], plus:
 [build l2]: #build-l2
 [build l3]: #build-l3
 [future versions]: future-directions.md
+[hosted]: requirements.md#isolation-strength
 [previous version]: ../v0.1/levels.md
 [provenance]: terminology.md
 [verification]: verifying-artifacts.md
