@@ -9,5 +9,6 @@
       "matchManagers": ["github-actions"],
       "groupName": "github-actions"
     }
-  ]
+  ],
+  "commitMessagePrefix": "impl:"
 }

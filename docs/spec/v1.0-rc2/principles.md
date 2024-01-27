@@ -18,7 +18,7 @@ expensive manual work, and each trusted system expands the attack surface of the
 supply chain. Verifying that an artifact is produced by a trusted system,
 though, is easy to automate.
 
-To simultaniously scale and reduce attack surfaces, it is most efficient to trust a limited
+To simultaneously scale and reduce attack surfaces, it is most efficient to trust a limited
 numbers of systems and then automate verification of the artifacts produced by those systems.
 The attack surface and work to establish trust does not scale with the number of artifacts produced,
 as happens when artifacts each use a different trusted system.

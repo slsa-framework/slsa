@@ -535,7 +535,7 @@ cryptographic secret that should only be available to the build service.
 and only the control plane has access to cryptographic secrets. <sup>[[Isolated]
 @ SLSA 3]</sup>
 
-*Example:* Provence is signed on the build worker, which the adversary has
+*Example:* Provenance is signed on the build worker, which the adversary has
 control over. Adversary uses a malicious process that generates false provenance
 and signs it using the provenance signing key. Solution: Builder generates and
 signs provenance in the trusted control plane; the worker has no access to the
@@ -682,7 +682,7 @@ ad-hoc analysis, and can complement source-based typosquatting solutions.
 
 ## Availability threats
 
-An availabiliy threat is a potential for an adversary to deny someone from
+An availability threat is a potential for an adversary to deny someone from
 reading a source and its associated change history, or from building a package.
 
 <details><summary>(A)(B) Delete the code <span>(SLSA 3)</span></summary>
@@ -704,11 +704,11 @@ attestation showing that some system, such as GitHub, ensures retention and
 availability.
 
 </details>
-<details><summary>(E) A dependency becomes temporarily or permenantly unavailable to the build process <span>(out of scope)</span></summary>
+<details><summary>(E) A dependency becomes temporarily or permanently unavailable to the build process <span>(out of scope)</span></summary>
 
 *Threat:* Unable to perform a build with the intended dependencies.
 
-*Mitigation:* **Outside the scope of SLSA.** That said, some solutions to support Hermetic and Reproducable builds may also reduce the impact of this threat.
+*Mitigation:* **Outside the scope of SLSA.** That said, some solutions to support Hermetic and Reproducible builds may also reduce the impact of this threat.
 <sup>[[Hermetic] [Reproducible] @ SLSA 4]</sup>
 
 </details>

@@ -1,0 +1,74 @@
+# Documentation: https://docs.netlify.com/routing/redirects/redirect-options/
+# vim: set sw=4 sts=4:
+#
+# Guidance:
+# - Always specify 301 vs 302. (301 is the default, but better to be explicit.)
+# - Only use 301 when it's OK for client to cache indefinitely. Common use case
+#   is for moved content, e.g. /foo is renamed to /bar.
+# - Rule of thumb: if it's an alias, e.g. /foo -> /foo/v1, use 302.
+# - Align columns on multiples of 4.
+
+# --- Team-internal convenience aliases ---
+#
+# Remember to document on ../README.md.
+
+/gh/*                   https://github.com/slsa-framework/slsa/:splat   301
+
+/notes/community        https://docs.google.com/document/d/1JbJZxeZOWE7rxT24iEozX35LIUl_Yoqd-DeSm6309GA/edit    302
+/notes/positioning      https://docs.google.com/document/d/1yguI9NEmEGM0OQvJi8E0nteo6fU3lxy-qpoq1DQtbhc/edit    302
+/notes/spec             https://docs.google.com/document/d/1PwhekVB1iDpcgCQRNVN_aesoVdOiTruoebCs896aGxw/edit    302
+/notes/specification    https://docs.google.com/document/d/1PwhekVB1iDpcgCQRNVN_aesoVdOiTruoebCs896aGxw/edit    302
+/notes/tooling          https://docs.google.com/document/d/18oj3CLJQhZj1dMHKDTq_1kKg0syysKCS7pLyXlw1SRc/edit    302
+
+# --- Page renames and user-facing convenience aliases ---
+
+# Quick links to the latest version.
+/faq                    /spec/v1.0/faq          302
+/levels                 /spec/v1.0/levels       302
+/terminology            /spec/v1.0/terminology  302
+/requirements           /spec/v1.0/requirements 302
+/threats                /spec/v1.0/threats      302
+/use-cases              /spec/v1.0/use-cases    302
+
+# Renamed files.
+/getinvolved            /community              301
+
+/github-actions-workflow            https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1    301
+/github-actions-workflow/v1-rc1     https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1    301
+/github-actions-workflow/v1         https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1    301
+/github-actions-workflow/v1.0       https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1    301
+
+/images/provenance/v1/model.svg         /spec/v1.0/images/provenance-model.svg      302
+/images/v1.0/supply-chain-threats-build-verification.svg    /spec/v1.0/images/supply-chain-threats-build-verification.svg   302
+/images/v1.0/supply-chain-threats.svg   /spec/v1.0/images/supply-chain-threats.svg  302
+/spec/v1.0/build-model.svg              /spec/v1.0/images/build-model.svg           302
+/spec/v1.0/verification-model.svg       /spec/v1.0/images/verification-model.svg    302
+
+/provenance             /spec/v1.0/provenance       302  # floating
+/provenance/v0.1        /spec/v0.1/provenance       301
+/provenance/v0.2        /spec/v0.2/provenance       301
+/provenance/v0.2-draft  /spec/v0.2/provenance       301
+/provenance/v1          /spec/v1.0/provenance       302  # floating
+/provenance/v1-rc1      /spec/v1.0-rc1/provenance   301
+/provenance/v1-rc2      /spec/v1.0-rc2/provenance   301
+/provenance/v1.0        /spec/v1.0/provenance       301
+/provenance/v1.1        /spec/v1.1/provenance       301
+
+/spec                   /spec/v1.0              302
+/spec/faq               /spec/v1.0/faq          302
+/spec/v1/*              /spec/v1.0/:splat       302
+
+# Note: Versions prior to v1.0 stay in /verification_summary.
+/verification_summary           /spec/v1.0/verification_summary     302  # floating
+/verification_summary/v0.1      /spec/v0.1/verification_summary     301
+/verification_summary/v0.2      /spec/v0.2/verification_summary     301
+/verification_summary/v1        /spec/v1.0/verification_summary     302  # floating
+# Note: there is no v1-rc1, so just redirect to rc2.
+/verification_summary/v1-rc1    /spec/v1.0-rc2/verification_summary 301
+/verification_summary/v1-rc2    /spec/v1.0-rc2/verification_summary 301
+/verification_summary/v1.0      /spec/v1.0/verification_summary     301
+/verification_summary/v1.1      /spec/v1.1/verification_summary     301
+
+# Removed files. Keep URLs working forever.
+/example       https://github.com/slsa-framework/slsa/blob/a25364a3b312f572e4620c812820249853bb40e5/docs/example.md  301
+/example.md    https://github.com/slsa-framework/slsa/blob/a25364a3b312f572e4620c812820249853bb40e5/docs/example.md  301

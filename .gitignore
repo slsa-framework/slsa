@@ -10,3 +10,6 @@ node_modules
 # Ignore the following files markdownlint that are already tracked by git (thus
 # uanffected by gitignore).
 /LICENSE.md
+
+# Local Netlify folder
+.netlify

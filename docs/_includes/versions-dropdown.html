@@ -1,6 +1,7 @@
 {%- assign url_parts = page.url | split: '/' %}
 {%- assign spec_name = url_parts[1] %}
 {%- assign spec_version = url_parts[2] %}
+{%- assign spec_page = url_parts[3] %}
 {%- if site.data.versions[spec_name].versions[spec_version] %}
 {%- assign versions = site.data.versions[spec_name].versions | sort %}
 <select id="redirectSelect.{{include.laptop}}" class="select-dropdown p-1 mx-1 my-4 text-black opacity-80
@@ -9,7 +10,11 @@
   {%- else %} border-gray-400
   {%- endif %}">
 {%- for item in versions reversed %}
-{%- unless item[1].hidden and spec_version != item[0] %}
+  {%- if item[1].hidden %}
+    {%- unless spec_version == item[0] or item[1].unhide_for contains spec_page %}
+      {%- continue %}
+    {%- endunless %}
+  {%- endif %}
   {%- assign page_url_parts = page.url | split: '/' %}
   {%- assign page_url = page_url_parts | join: '/' %}
   {%- assign other_version = page_url | replace: spec_version, item[0] | relative_url %}
@@ -25,8 +30,6 @@
     {%- assign state = "disabled" %}
   {%- endif %}
 <option {{ state }} value="{{ other_version }}" class="inline-block">{{item[1].name}}</option>
-
-{%- endunless %}
 {%- endfor %}
 </select>
 <script>
