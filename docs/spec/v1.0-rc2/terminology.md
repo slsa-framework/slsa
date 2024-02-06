@@ -49,12 +49,12 @@ be filled by more than one person or an organization. Similarly, a person or
 organization may act as more than one role in a particular software supply
 chain.
 
-| Role | Description | Examples
-| --- | --- | ---
-| Producer | A party who creates software and provides it to others. Producers are often also consumers. | An open source project's maintainers. A software vendor.
-| Verifier | A party who inspect an artifact's provenance to determine the artifact's authenticity. | A business's software ingestion system. A programming language ecosystem's package registry.
-| Consumer | A party who uses software provided by a producer. The consumer may verify provenance for software they consume or delegate that responsibility to a separate verifier. | A developer who uses open source software distributions. A business that uses a point of sale system.
-| Infrastructure provider | A party who provides software or services to other roles. | A package registry's maintainers. A build system's maintainers.
+| Role | Description | Examples |
+| --- | --- | --- |
+| Producer | A party who creates software and provides it to others. Producers are often also consumers. | An open source project's maintainers. A software vendor. |
+| Verifier | A party who inspect an artifact's provenance to determine the artifact's authenticity. | A business's software ingestion system. A programming language ecosystem's package registry. |
+| Consumer | A party who uses software provided by a producer. The consumer may verify provenance for software they consume or delegate that responsibility to a separate verifier. | A developer who uses open source software distributions. A business that uses a point of sale system. |
+| Infrastructure provider | A party who provides software or services to other roles. | A package registry's maintainers. A build system's maintainers. |
 
 ### Build model
 
@@ -70,19 +70,19 @@ describing this whole process.
 
 <p align="center"><img src="build-model.svg" alt="Model Build"></p>
 
-| Primary Term | Description
-| --- | ---
-| Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. It includes software, hardware, people, and organizations.
-| Admin | A privileged user with administrative access to the platform, potentially allowing them to tamper with builds or the control plane.
-| Tenant | An untrusted user that builds an artifact on the platform. The tenant defines the build steps and external parameters.
-| Control plane | Build system component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control.
-| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single build environment on a platform.
-| Steps | The set of actions that comprise a build, defined by the tenant.
-| Build environment | The independent execution context in which the build runs, initialized by the control plane. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
-| External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the control plane to initialize the build.
-| Dependencies | Artifacts fetched during initialization or execution of the build process, such as configuration files, source artifacts, or build tools.
-| Outputs | Collection of artifacts produced by the build.
-| Provenance | Attestation (metadata) describing how the outputs were produced, including identification of the platform and external parameters.
+| Primary Term | Description |
+| --- | --- |
+| Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. It includes software, hardware, people, and organizations. |
+| Admin | A privileged user with administrative access to the platform, potentially allowing them to tamper with builds or the control plane. |
+| Tenant | An untrusted user that builds an artifact on the platform. The tenant defines the build steps and external parameters. |
+| Control plane | Build system component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control. |
+| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single build environment on a platform. |
+| Steps | The set of actions that comprise a build, defined by the tenant. |
+| Build environment | The independent execution context in which the build runs, initialized by the control plane. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps. |
+| External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the control plane to initialize the build. |
+| Dependencies | Artifacts fetched during initialization or execution of the build process, such as configuration files, source artifacts, or build tools. |
+| Outputs | Collection of artifacts produced by the build. |
+| Provenance | Attestation (metadata) describing how the outputs were produced, including identification of the platform and external parameters. |
 
 Notably, there is no formal notion of "source" in the build model, just
 parameters and dependencies. Most build platforms have an explicit "source"

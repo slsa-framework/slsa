@@ -39,31 +39,31 @@ one or more artifacts.
 
 <p align="center"><img src="../../images/build-model.svg" alt="Model Build"></p>
 
-| Term | Description
-| --- | ---
-| Platform | System that allows tenants to run build. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build.
-| Service | A platform that is hosted, not a developer's machine. (Term used in [requirements](requirements.md).)
-| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single environment.
-| Steps | The set of actions that comprise a build, defined by the tenant.
-| Environment | Machine, container, VM, or similar in which the build runs, initialized by the platform. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
-| Trigger | External event or request causing the platform to run the build.
-| Source | Top-level input artifact required by the build.
-| Dependencies | Additional input artifacts required by the build.
-| Outputs | Collection of artifacts produced by the build.
-| Admin | Person with administrative access to the platform, potentially allowing them to tamper with the build process or access secret material.
+| Term | Description |
+| --- | --- |
+| Platform | System that allows tenants to run build. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. |
+| Service | A platform that is hosted, not a developer's machine. (Term used in [requirements](requirements.md).) |
+| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single environment. |
+| Steps | The set of actions that comprise a build, defined by the tenant. |
+| Environment | Machine, container, VM, or similar in which the build runs, initialized by the platform. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps. |
+| Trigger | External event or request causing the platform to run the build. |
+| Source | Top-level input artifact required by the build. |
+| Dependencies | Additional input artifacts required by the build. |
+| Outputs | Collection of artifacts produced by the build. |
+| Admin | Person with administrative access to the platform, potentially allowing them to tamper with the build process or access secret material. |
 
 <details><summary>Example: GitHub Actions</summary>
 
-| Term         | Example
-| ------------ | -------
-| Platform     | [GitHub Actions] + runner + runner's dependent services
-| Build        | Workflow or job (either would be OK)
-| Steps        | [`steps`]
-| Environment  | [`runs-on`]
-| Trigger      | [workflow trigger]
-| Source       | git commit defining the workflow
-| Dependencies | any other artifacts fetched during execution
-| Admin        | GitHub personnel
+| Term         | Example |
+| ------------ | ------- |
+| Platform     | [GitHub Actions] + runner + runner's dependent services |
+| Build        | Workflow or job (either would be OK) |
+| Steps        | [`steps`] |
+| Environment  | [`runs-on`] |
+| Trigger      | [workflow trigger] |
+| Source       | git commit defining the workflow |
+| Dependencies | any other artifacts fetched during execution |
+| Admin        | GitHub personnel |
 
 [GitHub Actions]: https://docs.github.com/en/actions
 [`runs-on`]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -91,13 +91,13 @@ runner environment plus the remote execution environment.
 The model can still work for the case of a developer building on their local
 workstation, though this does not meet SLSA 2+.
 
-| Term         | Example
-| ------------ | -------
-| Platform     | developer's workstation
-| Build        | whatever they ran
-| Steps        | whatever they ran
-| Environment  | developer's workstation
-| Trigger      | commands that the developer ran
-| Admin        | developer
+| Term         | Example |
+| ------------ | ------- |
+| Platform     | developer's workstation |
+| Build        | whatever they ran |
+| Steps        | whatever they ran |
+| Environment  | developer's workstation |
+| Trigger      | commands that the developer ran |
+| Admin        | developer |
 
 </details>
