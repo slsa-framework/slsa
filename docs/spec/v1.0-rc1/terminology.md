@@ -50,16 +50,16 @@ describing this whole process.
 
 <p align="center"><img src="build-model.svg" alt="Model Build"></p>
 
-| Primary Term | Description
-| --- | ---
-| Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build.
-| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single environment on a platform.
-| Steps | The set of actions that comprise a build, defined by the tenant.
-| Environment | Machine, container, VM, or similar in which the build runs, initialized by the platform. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
-| External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the platform to initialize the build.
-| Dependencies | Artifacts fetched during initialization or execution of the build process, such as configuration files, source artifacts, or build tools.
-| Outputs | Collection of artifacts produced by the build.
-| Provenance | Attestation (metadata) describing how the outputs were produced, including identification of the platform and external parameters.
+| Primary Term | Description |
+| --- | --- |
+| Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. |
+| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single environment on a platform. |
+| Steps | The set of actions that comprise a build, defined by the tenant. |
+| Environment | Machine, container, VM, or similar in which the build runs, initialized by the platform. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps. |
+| External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the platform to initialize the build. |
+| Dependencies | Artifacts fetched during initialization or execution of the build process, such as configuration files, source artifacts, or build tools. |
+| Outputs | Collection of artifacts produced by the build. |
+| Provenance | Attestation (metadata) describing how the outputs were produced, including identification of the platform and external parameters. |
 
 Notably, there is no formal notion of "source" in the build model, just
 parameters and dependencies. Most build platforms have an explicit "source"
