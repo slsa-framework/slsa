@@ -28,14 +28,14 @@ supply chains plus its own sources and builds.
 
 ![Software Supply Chain Model](../../images/supply-chain-model.svg)
 
-| Term | Description | Example |
-| --- | --- | --- |
-| Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image. |
-| Attestation | An authenticated statement (metadata) about a software artifact or collection of software artifacts. | A signed [SLSA Provenance] file. |
-| Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform). |
-| [Build] | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform). |
-| [Package] | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit. |
-| Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform). |
+| Term | Description | Example
+| --- | --- | ---
+| Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image.
+| Attestation | An authenticated statement (metadata) about a software artifact or collection of software artifacts. | A signed [SLSA Provenance] file.
+| Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform).
+| [Build] | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform).
+| [Package] | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit.
+| Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform).
 
 [build]: #build-model
 [package]: #package-model
@@ -49,12 +49,12 @@ be filled by more than one person or an organization. Similarly, a person or
 organization may act as more than one role in a particular software supply
 chain.
 
-| Role | Description | Examples |
-| --- | --- | --- |
-| Producer | A party who creates software and provides it to others. Producers are often also consumers. | An open source project's maintainers. A software vendor. |
-| Verifier | A party who inspect an artifact's provenance to determine the artifact's authenticity. | A business's software ingestion system. A programming language ecosystem's package registry. |
-| Consumer | A party who uses software provided by a producer. The consumer may verify provenance for software they consume or delegate that responsibility to a separate verifier. | A developer who uses open source software distributions. A business that uses a point of sale system. |
-| Infrastructure provider | A party who provides software or services to other roles. | A package registry's maintainers. A build system's maintainers. |
+| Role | Description | Examples
+| --- | --- | ---
+| Producer | A party who creates software and provides it to others. Producers are often also consumers. | An open source project's maintainers. A software vendor.
+| Verifier | A party who inspect an artifact's provenance to determine the artifact's authenticity. | A business's software ingestion system. A programming language ecosystem's package registry.
+| Consumer | A party who uses software provided by a producer. The consumer may verify provenance for software they consume or delegate that responsibility to a separate verifier. | A developer who uses open source software distributions. A business that uses a point of sale system.
+| Infrastructure provider | A party who provides software or services to other roles. | A package registry's maintainers. A build system's maintainers.
 
 ### Build model
 
@@ -70,19 +70,19 @@ describing this whole process.
 
 <p align="center"><img src="build-model.svg" alt="Model Build"></p>
 
-| Primary Term | Description |
-| --- | --- |
-| Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. It includes software, hardware, people, and organizations. |
-| Admin | A privileged user with administrative access to the platform, potentially allowing them to tamper with builds or the control plane. |
-| Tenant | An untrusted user that builds an artifact on the platform. The tenant defines the build steps and external parameters. |
-| Control plane | Build system component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control. |
-| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single build environment on a platform. |
-| Steps | The set of actions that comprise a build, defined by the tenant. |
-| Build environment | The independent execution context in which the build runs, initialized by the control plane. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps. |
-| External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the control plane to initialize the build. |
-| Dependencies | Artifacts fetched during initialization or execution of the build process, such as configuration files, source artifacts, or build tools. |
-| Outputs | Collection of artifacts produced by the build. |
-| Provenance | Attestation (metadata) describing how the outputs were produced, including identification of the platform and external parameters. |
+| Primary Term | Description
+| --- | ---
+| Platform | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. It includes software, hardware, people, and organizations.
+| Admin | A privileged user with administrative access to the platform, potentially allowing them to tamper with builds or the control plane.
+| Tenant | An untrusted user that builds an artifact on the platform. The tenant defines the build steps and external parameters.
+| Control plane | Build system component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control.
+| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single build environment on a platform.
+| Steps | The set of actions that comprise a build, defined by the tenant.
+| Build environment | The independent execution context in which the build runs, initialized by the control plane. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.
+| External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the control plane to initialize the build.
+| Dependencies | Artifacts fetched during initialization or execution of the build process, such as configuration files, source artifacts, or build tools.
+| Outputs | Collection of artifacts produced by the build.
+| Provenance | Attestation (metadata) describing how the outputs were produced, including identification of the platform and external parameters.
 
 Notably, there is no formal notion of "source" in the build model, just
 parameters and dependencies. Most build platforms have an explicit "source"
@@ -121,15 +121,15 @@ It is the primary identifier to which consumers attach expectations.
 [^label]: This resolution might include a version number, label, or some other
     selector in addition to the package name, but that is not important to SLSA.
 
-| Term | Description |
-| ---- | ----------- |
-| Package | An identifiable unit of software intended for distribution, ambiguously meaning either an "artifact" or a "package name". Only use this term when the ambiguity is acceptable or desirable. |
-| Package artifact | A file or other immutable object that is intended for distribution. |
-| Package ecosystem | A set of rules and conventions governing how packages are distributed, including how clients resolve a package name into one or more specific artifacts. |
-| Package manager client | Client-side tooling to interact with a package ecosystem. |
-| Package name | <p>The primary identifier for a mutable collection of artifacts that all represent different versions of the same software. This is the primary identifier that consumers use to obtain the software.<p>A package name is specific to an ecosystem + registry, has a maintainer, is more general than a specific hash or version, and has a "correct" source location. A package ecosystem may group package names into some sort of hierarchy, such as the Group ID in Maven, though SLSA does not have a special term for this. |
-| Package registry | An entity responsible for mapping package names to artifacts within a packaging ecosystem. Most ecosystems support multiple registries, usually a single global registry and multiple private registries. |
-| Publish [a package] | Make an artifact available for use by registering it with the package registry. In technical terms, this means associating an artifact to a package name. This does not necessarily mean making the artifact fully public; an artifact may be published for only a subset of users, such as internal testing or a closed beta. |
+| Term | Description
+| ---- | -----------
+| Package | An identifiable unit of software intended for distribution, ambiguously meaning either an "artifact" or a "package name". Only use this term when the ambiguity is acceptable or desirable.
+| Package artifact | A file or other immutable object that is intended for distribution.
+| Package ecosystem | A set of rules and conventions governing how packages are distributed, including how clients resolve a package name into one or more specific artifacts.
+| Package manager client | Client-side tooling to interact with a package ecosystem.
+| Package name | <p>The primary identifier for a mutable collection of artifacts that all represent different versions of the same software. This is the primary identifier that consumers use to obtain the software.<p>A package name is specific to an ecosystem + registry, has a maintainer, is more general than a specific hash or version, and has a "correct" source location. A package ecosystem may group package names into some sort of hierarchy, such as the Group ID in Maven, though SLSA does not have a special term for this.
+| Package registry | An entity responsible for mapping package names to artifacts within a packaging ecosystem. Most ecosystems support multiple registries, usually a single global registry and multiple private registries.
+| Publish [a package] | Make an artifact available for use by registering it with the package registry. In technical terms, this means associating an artifact to a package name. This does not necessarily mean making the artifact fully public; an artifact may be published for only a subset of users, such as internal testing or a closed beta.
 
 Ambiguous terms to avoid:
 
@@ -275,31 +275,31 @@ build system the package was built.
 
 ![Verification Model](verification-model.svg)
 
-| Term         | Description |
-|--------------|---- |
-| Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly. |
-| Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used. |
-| Build system certification | [Build systems are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level. |
+| Term         | Description
+|--------------|----
+| Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly.
+| Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used.
+| Build system certification | [Build systems are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level.
 
 The examples below suggest some ways that expectations and verification may be
 implemented for different, broadly defined, package ecosystems.
 
 <details><summary>Example: Small software team</summary>
 
-| Term | Example |
-| ---- | ------- |
-| Expectations | Defined by the producer's security personnel and stored in a database. |
-| Provenance verification | Performed automatically on cluster nodes before execution by querying the expectations database. |
-| Build system certification | The build system implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their conformance to SLSA requirements. |
+| Term | Example
+| ---- | -------
+| Expectations | Defined by the producer's security personnel and stored in a database.
+| Provenance verification | Performed automatically on cluster nodes before execution by querying the expectations database.
+| Build system certification | The build system implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their conformance to SLSA requirements.
 
 </details>
 
 <details><summary>Example: Open source language distribution</summary>
 
-| Term | Example |
-| ---- | ------- |
-| Expectations | Defined separately for each package and stored in the package registry. |
-| Provenance verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client also verifies expectations prior to installing packages. |
-| Build system certification | Performed by the language ecosystem packaging authority. |
+| Term | Example
+| ---- | -------
+| Expectations | Defined separately for each package and stored in the package registry.
+| Provenance verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client also verifies expectations prior to installing packages.
+| Build system certification | Performed by the language ecosystem packaging authority.
 
 </details>

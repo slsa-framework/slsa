@@ -13,14 +13,14 @@ permissions in this repository.
 <!-- Please keep the list sorted alphabetically by first name. -->
 <!-- Remember to add new candidates to the GitHub group. -->
 
-| Name | Email | OpenSSF Slack | GitHub | Affiliation |
-| --- | --- | --- | --- | --- |
-| Andrew McNamara | arewm@redhat.com |  @arewm | [arewm](https://github.com/arewm) | Red Hat |
-| Arnaud Le Hors | lehors@us.ibm.com | @Arnaud Le Hors | [lehors](https://github.com/lehors) | IBM |
-| Joshua Lock | joshuagloe@gmail.com | @Joshua Lock |  [joshuagl](https://github.com/joshuagl) | Verizon |
-| Kris K | kkris@google.com | @Kris K | [kpk47](https://github.com/kpk47) | Google |
-| Mark Lodato | lodato@google.com |  @Mark Lodato | [MarkLodato](https://github.com/MarkLodato) | Google |
-| Michael Lieberman | mlieberman85@gmail.com | @Michael Lieberman | [mlieberman85](https://github.com/mlieberman85) | Kusari |
+| Name | Email | OpenSSF Slack | GitHub | Affiliation
+| --- | --- | --- | --- | ---
+| Andrew McNamara | arewm@redhat.com |  @arewm | [arewm](https://github.com/arewm) | Red Hat
+| Arnaud Le Hors | lehors@us.ibm.com | @Arnaud Le Hors | [lehors](https://github.com/lehors) | IBM
+| Joshua Lock | joshuagloe@gmail.com | @Joshua Lock |  [joshuagl](https://github.com/joshuagl) | Verizon
+| Kris K | kkris@google.com | @Kris K | [kpk47](https://github.com/kpk47) | Google
+| Mark Lodato | lodato@google.com |  @Mark Lodato | [MarkLodato](https://github.com/MarkLodato) | Google
+| Michael Lieberman | mlieberman85@gmail.com | @Michael Lieberman | [mlieberman85](https://github.com/mlieberman85) | Kusari
 
 ### Becoming a Maintainer
 
@@ -47,8 +47,8 @@ candidate to the [Specification Maintainers] GitHub team.
 <!-- Please keep the list sorted alphabetically by first name. -->
 <!-- Remember to remove candidates from the GitHub group. -->
 
-| Name | Email | OpenSSF Slack | GitHub | Affiliation |
-| --- | --- | --- | --- | --- |
+| Name | Email | OpenSSF Slack | GitHub | Affiliation
+| --- | --- | --- | --- | ---
 
 ### Removing a Maintainer
 

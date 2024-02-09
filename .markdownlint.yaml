@@ -50,6 +50,10 @@ MD047: true
 MD048:
   style: "backtick"
 
+# MD055/table-pipe-style - Table pipe style
+MD055:
+  style: "leading_only"
+
 # Disable checks that currently have bugs:
 MD051: false  # https://github.com/DavidAnson/markdownlint/issues/538
 MD053: false  # https://github.com/DavidAnson/markdownlint/issues/537
