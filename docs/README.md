@@ -97,15 +97,18 @@ $ mv _site _site.A
 # Prepare version B
 $ JEKYLL_BUILD_REVISION=COMMIT bundle exec jekyll build
 $ mv _site _site.B
-$ sed -i -e 's@<updated>[^<]\+</updated>@<updated>DATE</updated>@' _site.{A,B}/feed.xml
+$ sed -i.bak -r -e '1s@<updated>[^<]+</updated>@<updated>DATE</updated>@' _site.{A,B}/feed.xml
+$ rm _site.{A,B}/feed.xml.bak
 $ git diff --no-index --no-prefix _site.A _site.B
 ```
 
 Alternatively, if you already built without `JEKYLL_BUILD_REVISION`, you can
-scrub the commit like this, though it is less accurate:
+scrub the commit like this, though it is less accurate. On MacOS or BSD, use
+`-i ''` instead of just `-i`.
 
 ```bash
-sed -i -e 's@/slsa/blob/[0-9a-f]\+/docs/@/slsa/blob/COMMIT/docs/@g' _site/**/*
+shopt -s globstar
+sed -i -r -e 's@/slsa/blob/[0-9a-f]+/docs/@/slsa/blob/COMMIT/docs/@g' _site/**/*
 ```
 
 ## Production
