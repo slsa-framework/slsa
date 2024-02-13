@@ -85,6 +85,29 @@ after creating a PR, Netlify will add a comment with a link to a preview. The
 URL is of the form `https://deploy-preview-#--slsa.netlify.app` where `#` is the
 pull request number. This preview is updated on every push.
 
+### Comparing built versions
+
+To compute a diff of two different build results, you need to scrub commit IDs
+and timestamps:
+
+```bash
+# Prepare version A
+$ JEKYLL_BUILD_REVISION=COMMIT bundle exec jekyll build
+$ mv _site _site.A
+# Prepare version B
+$ JEKYLL_BUILD_REVISION=COMMIT bundle exec jekyll build
+$ mv _site _site.B
+$ sed -i -e 's@<updated>[^<]\+</updated>@<updated>DATE</updated>@' _site.{A,B}/feed.xml
+$ git diff --no-index --no-prefix _site.A _site.B
+```
+
+Alternatively, if you already built without `JEKYLL_BUILD_REVISION`, you can
+scrub the commit like this, though it is less accurate:
+
+```bash
+sed -i -e 's@/slsa/blob/[0-9a-f]\+/docs/@/slsa/blob/COMMIT/docs/@g' _site/**/*
+```
+
 ## Production
 
 ### Netlify configuration
