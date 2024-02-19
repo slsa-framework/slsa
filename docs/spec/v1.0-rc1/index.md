@@ -28,15 +28,15 @@ Known issues:
 
 ## Table of contents
 
-| Page | Description |
-| ---- | --- |
-| [What's new in v1.0](whats-new.md) | What's new in SLSA Version 1.0. |
-| [Security levels](levels.md) | Overview of SLSA, intended for all audiences. If you read one page, read this. |
-| [Guiding principles](principles.md) | Background on the guiding principles behind SLSA. |
-| [Terminology](terminology.md) | Terminology and model used by SLSA. |
-| [Producing artifacts](requirements.md) | Detailed technical requirements for producing software artifacts, intended for system implementers. |
-| [Verifying build systems](verifying-systems.md) | Guidelines for securing SLSA Build L3+ builders, intended for system implementers. |
-| [Verifying artifacts](verifying-artifacts.md) | Guidance for verifying software artifacts and their SLSA provenance, intended for system implementers and software consumers. |
-| [Threats & mitigations](threats.md) | Specific supply chain attacks and how SLSA helps. |
-| [FAQ](faq.md) | Questions and more information. |
-| [Future directions](future-directions.md) | Additions and changes being considered for future SLSA versions. |
+| Page | Description
+| ---- | ---
+| [What's new in v1.0](whats-new.md) | What's new in SLSA Version 1.0.
+| [Security levels](levels.md) | Overview of SLSA, intended for all audiences. If you read one page, read this.
+| [Guiding principles](principles.md) | Background on the guiding principles behind SLSA.
+| [Terminology](terminology.md) | Terminology and model used by SLSA.
+| [Producing artifacts](requirements.md) | Detailed technical requirements for producing software artifacts, intended for system implementers.
+| [Verifying build systems](verifying-systems.md) | Guidelines for securing SLSA Build L3+ builders, intended for system implementers.
+| [Verifying artifacts](verifying-artifacts.md) | Guidance for verifying software artifacts and their SLSA provenance, intended for system implementers and software consumers.
+| [Threats & mitigations](threats.md) | Specific supply chain attacks and how SLSA helps.
+| [FAQ](faq.md) | Questions and more information.
+| [Future directions](future-directions.md) | Additions and changes being considered for future SLSA versions.

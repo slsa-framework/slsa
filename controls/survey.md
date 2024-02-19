@@ -30,21 +30,21 @@ model. Subsequent sections analyze each layer.
 [in-toto v1]: https://github.com/in-toto/docs/blob/master/in-toto-spec.md
 [in-toto v2]: https://github.com/in-toto/attestation
 
-Project                | Envelope | Statement | Predicate | Storage | Generation | Policy | Status
----------------------- | -------- | --------- | --------- | ------- | ---------- | ------ | ------
-Raw signing            | ✓        | ✓         | ✗         |         |            |        | (varies)
-[JSS]                  | ✓        |           |           |         |            |        | Abandoned
-[JWS]                  | ✓        |           |           |         |            |        | IETF Standard
-[JWT]                  | ✓        |           |           |         |            |        | IETF Standard
-[OpenPGP]              | ✓        |           |           |         |            |        | IETF Standard
-[PASETO]               | ✓        |           |           |         |            |        | Stable
-[DSSE]                 | ✓        |           |           |         |            |        | In development
-[in-toto v1]           | ✓        | ✓         | ✓         |         | ✓          | ✓      | Stable
-[Notary v2]            | ~        | ✓         | ✗         | ✓       |            | ✓      | In development
-[Simple Signing]       | ~        | ✓         |           |         |            |        | Stable
-[in-toto v2]           | ~        | ✓         |           |         |            |        | In development
-[SPDX]                 |          |           | ✓         |         |            |        | Stable
-[Binary Authorization] | ~        | ~         | ✗         | ~       |            | ✓      | Stable
+| Project                | Envelope | Statement | Predicate | Storage | Generation | Policy | Status
+| ---------------------- | -------- | --------- | --------- | ------- | ---------- | ------ | ------
+| Raw signing            | ✓        | ✓         | ✗         |         |            |        | (varies)
+| [JSS]                  | ✓        |           |           |         |            |        | Abandoned
+| [JWS]                  | ✓        |           |           |         |            |        | IETF Standard
+| [JWT]                  | ✓        |           |           |         |            |        | IETF Standard
+| [OpenPGP]              | ✓        |           |           |         |            |        | IETF Standard
+| [PASETO]               | ✓        |           |           |         |            |        | Stable
+| [DSSE]                 | ✓        |           |           |         |            |        | In development
+| [in-toto v1]           | ✓        | ✓         | ✓         |         | ✓          | ✓      | Stable
+| [Notary v2]            | ~        | ✓         | ✗         | ✓       |            | ✓      | In development
+| [Simple Signing]       | ~        | ✓         |           |         |            |        | Stable
+| [in-toto v2]           | ~        | ✓         |           |         |            |        | In development
+| [SPDX]                 |          |           | ✓         |         |            |        | Stable
+| [Binary Authorization] | ~        | ~         | ✗         | ~       |            | ✓      | Stable
 
 Legend:
 
@@ -66,15 +66,15 @@ Columns:
 
 ## Envelope Layer (not specific to Attestations)
 
-Property                | [DSSE]         | [OpenPGP] | [JWS] | [JWT] | [PASETO] | [in-toto v1] | [JSS]
------------------------ | -------------- | --------- | ----- | ----- | -------- | ------------ | -----
-Authenticated Purpose   | ✓              | ✗         | ✓     | ✓     | ✗        | ✓            | ✗
-Arbitrary Message Type  | ✓              | ✓         | ✓     | ✗     | ✗        | ✗            | ✗
-Simple                  | ✓              | ✗         | ✗     | ✗     | ✓        | ✓            | ✓
-Avoids Canonicalization | ✓              | ✓         | ✓     | ✓     | ✓        | ✗            | ✓
-Pluggable Crypto        | ✓              | ✗         | ✓     | ✓     | ✗        | ✓            | ✓
-Efficient Encoding      | ✓              | ✗         | ✗     | ✗     | ✗        | ✓            | ✗
-Widely Adopted          | ✗ (not yet!)   | ✓         | ✓     | ✓     | ✗        | ✗            | ✗
+| Property                | [DSSE]         | [OpenPGP] | [JWS] | [JWT] | [PASETO] | [in-toto v1] | [JSS]
+| ----------------------- | -------------- | --------- | ----- | ----- | -------- | ------------ | -----
+| Authenticated Purpose   | ✓              | ✗         | ✓     | ✓     | ✗        | ✓            | ✗
+| Arbitrary Message Type  | ✓              | ✓         | ✓     | ✗     | ✗        | ✗            | ✗
+| Simple                  | ✓              | ✗         | ✗     | ✗     | ✓        | ✓            | ✓
+| Avoids Canonicalization | ✓              | ✓         | ✓     | ✓     | ✓        | ✗            | ✓
+| Pluggable Crypto        | ✓              | ✗         | ✓     | ✓     | ✗        | ✓            | ✓
+| Efficient Encoding      | ✓              | ✗         | ✗     | ✗     | ✗        | ✓            | ✗
+| Widely Adopted          | ✗ (not yet!)   | ✓         | ✓     | ✓     | ✗        | ✗            | ✗
 
 Properties:
 
@@ -107,17 +107,17 @@ Properties:
 
 ## Statement Layer
 
-Property              | [in-toto v2] | [in-toto v1] | [Simple Signing] | [Notary v2] | Raw Signing
---------------------- | ------------ | ------------ | ---------------- | ----------- | -----------
-Recommended Envelope  | DSSE         | in-toto v1   | OpenPGP          | JWT         | (various)
-Subject: Clear        | ✓            | ✗            | ✓                | ✓           | ✓
-Subject: Any Type     | ✓            | ✓            | ✗                | ✓           | (depends)
-Subject: Multi-Digest | ✓            | ✓            | ✗                | ✗           | (depends)
-Predicate: Supported  | ✓            | ✓            | ✓                | ✗           | ✗
-Predicate: Flexible   | ✓            | ✗ (*)        | ✓                | (n/a)       | (n/a)
-Predicate: Typed      | ✓            | ✗            | ✗                | (n/a)       | (n/a)
-Layered               | ✓            | ✗            | ✓                | (n/a)       | (n/a)
-Evolvable             | ✓            | ✓            | ✗                | ✓           | ✗
+| Property              | [in-toto v2] | [in-toto v1] | [Simple Signing] | [Notary v2] | Raw Signing
+| --------------------- | ------------ | ------------ | ---------------- | ----------- | -----------
+| Recommended Envelope  | DSSE         | in-toto v1   | OpenPGP          | JWT         | (various)
+| Subject: Clear        | ✓            | ✗            | ✓                | ✓           | ✓
+| Subject: Any Type     | ✓            | ✓            | ✗                | ✓           | (depends)
+| Subject: Multi-Digest | ✓            | ✓            | ✗                | ✗           | (depends)
+| Predicate: Supported  | ✓            | ✓            | ✓                | ✗           | ✗
+| Predicate: Flexible   | ✓            | ✗ (*)        | ✓                | (n/a)       | (n/a)
+| Predicate: Typed      | ✓            | ✗            | ✗                | (n/a)       | (n/a)
+| Layered               | ✓            | ✗            | ✓                | (n/a)       | (n/a)
+| Evolvable             | ✓            | ✓            | ✗                | ✓           | ✗
 
 Properties:
 

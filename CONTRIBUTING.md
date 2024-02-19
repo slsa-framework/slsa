@@ -99,15 +99,15 @@ multiple apply. If you are not sure which type to use, take a guess and a
 maintainer will update if needed. See [review and approval] for the meaning of
 "waiting period" and "# approvers".
 
-| Type | Meaning | Waiting period | # Approvers |
-|---|---|---|---|
-| `content` | A change to the meaning of the specification. Must include a [changelog entry]. | 72h | 3 |
-| `editorial` | A clarification to the specification that does not change its meaning, beyond a simple `fix`. | 24h | 2 |
-| `nonspec` | A change to a non-specification, non-blog page, beyond a simple `fix`. | 24h | 2 |
-| `blog` | A new or updated blog post. (Do not mix with categories above.) | 24h | 2 |
-| `fix` | A fix for obvious typos, broken links, and similar. | 0h | 1 |
-| `style` | A user-visible style or layout change. No content changes. | 0h | 1 |
-| `impl` | A user-invisible change, such as editing a README or the repo configuration. | 0h | 1 |
+| Type | Meaning | Waiting period | # Approvers
+|---|---|---|---
+| `content` | A change to the meaning of the specification. Must include a [changelog entry]. | 72h | 3
+| `editorial` | A clarification to the specification that does not change its meaning, beyond a simple `fix`. | 24h | 2
+| `nonspec` | A change to a non-specification, non-blog page, beyond a simple `fix`. | 24h | 2
+| `blog` | A new or updated blog post. (Do not mix with categories above.) | 24h | 2
+| `fix` | A fix for obvious typos, broken links, and similar. | 0h | 1
+| `style` | A user-visible style or layout change. No content changes. | 0h | 1
+| `impl` | A user-invisible change, such as editing a README or the repo configuration. | 0h | 1
 
 Note 1: PR authors with write access to the repo count as second or third
 approvers for their own PRs. For example, if the author of a PR with the

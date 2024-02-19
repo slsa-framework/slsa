@@ -106,9 +106,9 @@ The following table shows known build software packages and the potential SLSA l
 
 Note that this list is provided "as is". OpenSSF makes no claim as to the reliability of this information. A certification program is under development to provide a more definitive list.
 
-| Builder                  | Potential SLSA Level |
-|--------------------------|:--------------------:|
-| FRSCA                    |           2          |
-| GitHub Actions           |           3          |
-| Google Cloud Build       |           3          |
-| No Hosted Build Platform |           1          |
+| Builder                  | Potential SLSA Level
+|--------------------------|:--------------------:
+| FRSCA                    |           2
+| GitHub Actions           |           3
+| Google Cloud Build       |           3
+| No Hosted Build Platform |           1

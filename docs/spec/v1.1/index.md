@@ -17,11 +17,14 @@ levels and recommended attestation formats, including provenance.
 
 {{ section.description }}
 
-| Page | Description |
-| ---- | ----------- |
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable MD055 MD056 -->
+| Page | Description
+| ---- | -----------
 {%- for child in section.children %}
-| [{{child.title}}]({{child.url | relative_url}}) | {{child.description}} |
+| [{{child.title}}]({{child.url | relative_url}}) | {{child.description}}
 {%- endfor %}
+<!-- markdownlint-restore -->
 
 {%- endif %}
 {%- endfor %}

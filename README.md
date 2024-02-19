@@ -25,12 +25,12 @@ See https://slsa.dev/community for ways to get involved in SLSA development.
 
 ## Active workstreams
 
-| Workstream | [Shepherd] |
-| ---------- | ---------- |
-| [Build Level 4] | David A Wheeler (@david-a-wheeler) |
-| [Hardware Attested Platforms] | Marcela Melara (@marcelamelara), Chad Kimes (@chkimes) |
-| [Source Track] | Kris K (@kpk47) |
-| [Version 1.1 release] | Joshua Lock (@joshuagl) |
+| Workstream | [Shepherd]
+| ---------- | ----------
+| [Build Level 4] | David A Wheeler (@david-a-wheeler)
+| [Hardware Attested Platforms] | Marcela Melara (@marcelamelara), Chad Kimes (@chkimes)
+| [Source Track] | Kris K (@kpk47)
+| [Version 1.1 release] | Joshua Lock (@joshuagl)
 
 [Shepherd]: CONTRIBUTING.md#workstream-lifecycle
 [Build Level 4]: https://github.com/slsa-framework/slsa/issues/977
