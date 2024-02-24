@@ -91,9 +91,9 @@ Once, when bootstrapping the verifier:
 
 Given an artifact and its provenance:
 
-1.  [Verify][processing-model] the envelope's signature using the roots of
+1.  [Verify][validation-model] the envelope's signature using the roots of
     trust, resulting in a list of recognized public keys (or equivalent).
-2.  [Verify][processing-model] that statement's `subject` matches the digest of
+2.  [Verify][validation-model] that statement's `subject` matches the digest of
     the artifact in question.
 3.  Verify that the `predicateType` is `https://slsa.dev/provenance/v1-rc2`.
 4.  Look up the SLSA Build Level in the roots of trust, using the recognized
@@ -129,7 +129,7 @@ Resulting threat mitigation:
 [Threat "G"]: threats#g-compromise-package-repo
 [Threat "H"]: threats#h-use-compromised-package
 
-[processing-model]: https://github.com/in-toto/attestation/tree/main/spec#processing-model
+[validation-model]: https://github.com/in-toto/attestation/blob/main/docs/validation.md#validation-model
 
 ### Step 2: Check expectations
 
@@ -147,12 +147,12 @@ behavior into the package.
 You SHOULD compare the provenance against expected values for at least the
 following fields:
 
-| What | Why |
-| ---- | --- |
-| Builder identity from [Step 1] | To prevent an adversary from building the correct code on an unintended system |
-| Canonical source repository | To prevent an adversary from building from an unofficial fork (or other disallowed source) |
-| `buildType` | To ensure that `externalParameters` are interpreted as intended |
-| `externalParameters` | To prevent an adversary from injecting unofficial behavior |
+| What | Why
+| ---- | ---
+| Builder identity from [Step 1] | To prevent an adversary from building the correct code on an unintended system
+| Canonical source repository | To prevent an adversary from building from an unofficial fork (or other disallowed source)
+| `buildType` | To ensure that `externalParameters` are interpreted as intended
+| `externalParameters` | To prevent an adversary from injecting unofficial behavior
 
 Verification tools SHOULD reject unrecognized fields in `externalParameters` to
 err on the side of caution. It is acceptable to allow a parameter to have a

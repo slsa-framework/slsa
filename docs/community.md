@@ -52,7 +52,6 @@ developing tooling, we welcome your contributions.
                     <p>To get more deeply involved in SLSA, we welcome your participation in the following special interest groups (SIGs). See linked meeting notes for more info, including meeting times and Slack channel.</p>
                     <a href="notes/specification" class="cta-link mt-6 font-semibold h5">Specification SIG</a>
                     <a href="notes/tooling" class="cta-link mt-6 font-semibold h5">Tooling SIG</a>
-                    <a href="notes/positioning" class="cta-link mt-6 font-semibold h5">Positioning SIG</a>
                 </div>
             </div>
         </div>

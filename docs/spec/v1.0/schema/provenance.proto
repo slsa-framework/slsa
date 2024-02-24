@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package slsa.v1;
+
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+// NOTE: While file uses snake_case as per the Protocol Buffers Style Guide, the
+// provenance is always serialized using JSON with lowerCamelCase. Protobuf
+// tooling performs this case conversion automatically.
+
+message Provenance {
+  BuildDefinition build_definition = 1;
+  RunDetails run_details = 2;
+}
+
+message BuildDefinition {
+  string build_type = 1;
+  google.protobuf.Struct external_parameters = 2;
+  google.protobuf.Struct internal_parameters = 3;
+  repeated ResourceDescriptor resolved_dependencies = 4;
+}
+
+message ResourceDescriptor {
+  string uri = 1;
+  map<string, string> digest = 2;
+  string name = 3;
+  string download_location = 4;
+  string media_type = 5;
+  bytes content = 6;
+  google.protobuf.Struct annotations = 7;
+}
+
+message RunDetails {
+  Builder builder = 1;
+  BuildMetadata metadata = 2;
+  repeated ResourceDescriptor byproducts = 3;
+}
+
+message Builder {
+  string id = 1;
+  map<string, string> version = 2;
+  repeated ResourceDescriptor builder_dependencies = 3;
+}
+
+message BuildMetadata {
+  string invocation_id = 1;
+  google.protobuf.Timestamp started_on = 2;
+  google.protobuf.Timestamp finished_on = 3;
+}

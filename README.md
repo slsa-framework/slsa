@@ -1,6 +1,6 @@
 # SLSA ("salsa") is Supply-chain Levels for Software Artifacts
 
-<img align="right" src="https://github.com/slsa-framework/slsa/blob/main/docs/images/slsa-dancing-goose-logo.svg">
+<img align="right" src="https://github.com/slsa-framework/slsa/blob/main/docs/images/slsa-dancing-goose-logo.svg" alt="The OpenSSF mascot, a goose in armor, strikes a pose wearing a red salsa dress">
 
 SLSA (pronounced ["salsa"](https://www.google.com/search?q=how+to+pronounce+salsa)) is a security framework from source to service, giving anyone working with software a common language for increasing levels of software security and supply chain integrity. It’s how you get from safe enough to being as resilient as possible, at any link in the chain.
 
@@ -22,6 +22,37 @@ repo-specific issue trackers.
 ## How to get involved
 
 See https://slsa.dev/community for ways to get involved in SLSA development.
+
+## Active workstreams
+
+| Workstream | [Shepherd]
+| ---------- | ----------
+| [Build Level 4] | David A Wheeler (@david-a-wheeler)
+| [Hardware Attested Platforms] | Marcela Melara (@marcelamelara), Chad Kimes (@chkimes)
+| [Source Track] | Kris K (@kpk47)
+| [Version 1.1 release] | Joshua Lock (@joshuagl)
+
+[Shepherd]: CONTRIBUTING.md#workstream-lifecycle
+[Build Level 4]: https://github.com/slsa-framework/slsa/issues/977
+[Hardware Attested Platforms]: https://github.com/slsa-framework/slsa/issues/975
+[Source Track]: https://github.com/slsa-framework/slsa/issues/956
+[Version 1.1 release]: https://github.com/slsa-framework/slsa/issues/900
+
+## URL Aliases
+
+We have several [redirect](docs/_redirects) configured on slsa.dev for
+convenience of the team:
+
+-   https://slsa.dev/gh &rArr; SLSA GitHub repo
+    -   https://slsa.dev/gh/issues
+    -   https://slsa.dev/gh/pulls
+    -   etc...
+-   https://slsa.dev/notes &rArr; meeting notes
+    -   https://slsa.dev/notes/community
+    -   https://slsa.dev/notes/positioning
+    -   https://slsa.dev/notes/specification
+        (or [.../spec](https://slsa.dev/notes/spec))
+    -   https://slsa.dev/notes/tooling
 
 ## Governance
 

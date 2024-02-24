@@ -28,14 +28,14 @@ supply chains plus its own sources and builds.
 
 ![Software Supply Chain Model](../../images/supply-chain-model.svg)
 
-| Term | Description | Example |
-| --- | --- | --- |
-| Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image. |
-| Attestation | An authenticated statement (metadata) about a software artifact or collection of software artifacts. | A signed [SLSA Provenance] file. |
-| Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform). |
-| [Build] | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform). |
-| [Package] | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit. |
-| Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform). |
+| Term | Description | Example
+| --- | --- | ---
+| Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image.
+| Attestation | An authenticated statement (metadata) about a software artifact or collection of software artifacts. | A signed [SLSA Provenance] file.
+| Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform).
+| [Build] | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform).
+| [Package] | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit.
+| Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform).
 
 [build]: #build-model
 [package]: #package-model
@@ -121,15 +121,15 @@ It is the primary identifier to which consumers attach expectations.
 [^label]: This resolution might include a version number, label, or some other
     selector in addition to the package name, but that is not important to SLSA.
 
-| Term | Description |
-| ---- | ----------- |
-| Package | An identifiable unit of software intended for distribution, ambiguously meaning either an "artifact" or a "package name". Only use this term when the ambiguity is acceptable or desirable. |
-| Package artifact | A file or other immutable object that is intended for distribution. |
-| Package ecosystem | A set of rules and conventions governing how packages are distributed, including how clients resolve a package name into one or more specific artifacts. |
-| Package manager client | Client-side tooling to interact with a package ecosystem. |
-| Package name | <p>The primary identifier for a mutable collection of artifacts that all represent different versions of the same software. This is the primary identifier that consumers use to obtain the software.<p>A package name is specific to an ecosystem + registry, has a maintainer, is more general than a specific hash or version, and has a "correct" source location. A package ecosystem may group package names into some sort of hierarchy, such as the Group ID in Maven, though SLSA does not have a special term for this. |
-| Package registry | An entity responsible for mapping package names to artifacts within a packaging ecosystem. Most ecosystems support multiple registries, usually a single global registry and multiple private registries. |
-| Publish [a package] | Make an artifact available for use by registering it with the package registry. In technical terms, this means associating an artifact to a package name. This does not necessarily mean making the artifact fully public; an artifact may be published for only a subset of users, such as internal testing or a closed beta. |
+| Term | Description
+| ---- | -----------
+| Package | An identifiable unit of software intended for distribution, ambiguously meaning either an "artifact" or a "package name". Only use this term when the ambiguity is acceptable or desirable.
+| Package artifact | A file or other immutable object that is intended for distribution.
+| Package ecosystem | A set of rules and conventions governing how packages are distributed, including how clients resolve a package name into one or more specific artifacts.
+| Package manager client | Client-side tooling to interact with a package ecosystem.
+| Package name | <p>The primary identifier for a mutable collection of artifacts that all represent different versions of the same software. This is the primary identifier that consumers use to obtain the software.<p>A package name is specific to an ecosystem + registry, has a maintainer, is more general than a specific hash or version, and has a "correct" source location. A package ecosystem may group package names into some sort of hierarchy, such as the Group ID in Maven, though SLSA does not have a special term for this.
+| Package registry | An entity responsible for mapping package names to artifacts within a packaging ecosystem. Most ecosystems support multiple registries, usually a single global registry and multiple private registries.
+| Publish [a package] | Make an artifact available for use by registering it with the package registry. In technical terms, this means associating an artifact to a package name. This does not necessarily mean making the artifact fully public; an artifact may be published for only a subset of users, such as internal testing or a closed beta.
 
 Ambiguous terms to avoid:
 
@@ -219,10 +219,10 @@ additions are welcome!
     <td>Package name
     <td>Package
   <tr>
-    <td><a href="https://nixos.org/guides/how-nix-works.html">nix</a> (e.g. <a href="https://nixos.org/">NixOS</a>)
-    <td><em>?</em>
-    <td><a href="https://nixos.org/manual/nix/stable/glossary.html#gloss-store-object">Store Object</a>?
-    <td>Package or <a href="https://nixos.org/manual/nix/stable/glossary.html#gloss-derivation">Derivation</a>
+    <td><a href="https://nixos.org/manual/nix">Nix</a> (e.g. <a href="https://nixos.org/">NixOS</a>)
+    <td>Repository (e.g. <a href="https://github.com/NixOS/nixpkgs">Nixpkgs</a>) or <a href="https://nixos.org/manual/nix/stable/glossary.html#gloss-binary-cache">binary cache</a>
+    <td><a href="https://nixos.org/manual/nix/stable/language/derivations.html">Derivation name</a>
+    <td><a href="https://nixos.org/manual/nix/stable/language/derivations.html">Derivation</a> or <a href="https://nixos.org/manual/nix/stable/glossary.html#gloss-store-object">store object</a>
   <tr>
     <td colspan=4><em>Storage systems</em>
   <tr>
@@ -275,31 +275,31 @@ build system the package was built.
 
 ![Verification Model](verification-model.svg)
 
-| Term         | Description |
-|--------------|---- |
-| Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly. |
-| Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used. |
-| Build system certification | [Build systems are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level. |
+| Term         | Description
+|--------------|----
+| Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly.
+| Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used.
+| Build system certification | [Build systems are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level.
 
 The examples below suggest some ways that expectations and verification may be
 implemented for different, broadly defined, package ecosystems.
 
 <details><summary>Example: Small software team</summary>
 
-| Term | Example |
-| ---- | ------- |
-| Expectations | Defined by the producer's security personnel and stored in a database. |
-| Provenance verification | Performed automatically on cluster nodes before execution by querying the expectations database. |
-| Build system certification | The build system implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their conformance to SLSA requirements. |
+| Term | Example
+| ---- | -------
+| Expectations | Defined by the producer's security personnel and stored in a database.
+| Provenance verification | Performed automatically on cluster nodes before execution by querying the expectations database.
+| Build system certification | The build system implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their conformance to SLSA requirements.
 
 </details>
 
 <details><summary>Example: Open source language distribution</summary>
 
-| Term | Example |
-| ---- | ------- |
-| Expectations | Defined separately for each package and stored in the package registry. |
-| Provenance verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client also verifies expectations prior to installing packages. |
-| Build system certification | Performed by the language ecosystem packaging authority. |
+| Term | Example
+| ---- | -------
+| Expectations | Defined separately for each package and stored in the package registry.
+| Provenance verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client also verifies expectations prior to installing packages.
+| Build system certification | Performed by the language ecosystem packaging authority.
 
 </details>

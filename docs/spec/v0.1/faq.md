@@ -27,7 +27,7 @@ reproducible."
 bit-for-bit identical output. This property
 [provides](https://reproducible-builds.org/docs/buy-in/)
 [many](https://wiki.debian.org/ReproducibleBuilds/About)
-[benefits](https://static.googleusercontent.com/media/sre.google/en//static/pdf/building_secure_and_reliable_systems.pdf#page=357),
+[benefits](https://google.github.io/building-secure-and-reliable-systems/raw/ch14.html#hermeticcomma_reproduciblecomma_or_veri),
 including easier debugging, more confident cherry-pick releases, better build
 caching and storage efficiency, and accurate dependency tracking.
 
@@ -67,7 +67,7 @@ Therefore, SLSA does not require verified reproducible builds directly. Instead,
 verified reproducible builds are one option for implementing the requirements.
 
 For more on reproducibility, see
-[Hermetic, Reproducible, or Verifiable?](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=357)
+[Hermetic, Reproducible, or Verifiable?](https://google.github.io/building-secure-and-reliable-systems/raw/ch14.html#hermeticcomma_reproduciblecomma_or_veri)
 
 ## Q: How does SLSA relate to in-toto?
 

@@ -136,15 +136,15 @@ and have desirable security properties. Our hope is to align the industry around
 this particular suite because it makes everything easier. That said, we
 recognize that other choices MAY be necessary in various cases.
 
-| Component | Recommendation |
-| --- | --- |
-| Envelope | **[DSSE]** (ECDSA over NIST P-256 (or stronger) and SHA-256.) |
-| Statement | **[in-toto attestations]** |
-| Predicate | Choose as appropriate, i.e.; [Provenance], [SPDX], [other predicates defined by third-parties]. If none are a good fit, invent a new one |
-| Bundle | **[JSON Lines]**, see [attestation bundle] |
-| Storage/Lookup | **TBD** |
+| Component | Recommendation
+| --- | ---
+| Envelope | **[DSSE]** (ECDSA over NIST P-256 (or stronger) and SHA-256.)
+| Statement | **[in-toto attestations]**
+| Predicate | Choose as appropriate, i.e.; [Provenance], [SPDX], [other predicates defined by third-parties]. If none are a good fit, invent a new one
+| Bundle | **[JSON Lines]**, see [attestation bundle]
+| Storage/Lookup | **TBD**
 
-[attestation bundle]: https://github.com/in-toto/attestation/blob/main/spec/v1.0/bundle.md
+[attestation bundle]: https://github.com/in-toto/attestation/blob/main/spec/v1/bundle.md
 [Binary Authorization]: https://cloud.google.com/binary-authorization
 [DSSE]: https://github.com/secure-systems-lab/dsse/
 [Generic SLSA Verifier]: https://github.com/slsa-framework/slsa-verifier
@@ -156,7 +156,7 @@ recognize that other choices MAY be necessary in various cases.
 [Provenance]: /provenance
 [remote attestation]: https://en.wikipedia.org/wiki/Trusted_Computing#Remote_attestation
 [RFC 2119]: https://tools.ietf.org/html/rfc2119
-[SLSA Provenance format]: /provenance/v1.md
+[SLSA Provenance format]: /provenance/v1
 [sigstore/cosign]: https://github.com/sigstore/cosign
 [SPDX]: https://github.com/in-toto/attestation/blob/main/spec/predicates/spdx.md
-[Verification Summary Attestation]: /verification_summary/v1.md
+[Verification Summary Attestation]: /verification_summary/v1

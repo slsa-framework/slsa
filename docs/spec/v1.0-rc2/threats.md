@@ -5,7 +5,7 @@ description: A comprehensive technical analysis of supply chain threats and thei
 
 What follows is a comprehensive technical analysis of supply chain threats and
 their corresponding mitigations in SLSA. For an introduction to the
-supply chain threats that SLSA protects agains, see [Supply chain threats].
+supply chain threats that SLSA protects against, see [Supply chain threats].
 
 The examples on this page are meant to:
 
@@ -37,7 +37,7 @@ An adversary introduces a change through the official source control management
 interface without any special administrator privileges.
 
 SLSA v1.0 does not address this threat, but it may be addressed in a [future
-version](future-directions.md).
+version](future-directions).
 
 ### (B) Compromise source repo
 
@@ -46,7 +46,7 @@ administrative interface, or through a compromise of the underlying
 infrastructure.
 
 SLSA v1.0 does not address this threat, but it may be addressed in a [future
-version](future-directions.md).
+version](future-directions).
 
 ### (C) Build from modified source
 
@@ -187,7 +187,7 @@ producer.
 
 The SLSA Build track mitigates these threats when the consumer
 [verifies artifacts](verifying-artifacts.md) against expectations, confirming
-that the artifact they recieved was built in the expected manner.
+that the artifact they received was built in the expected manner.
 
 ### (E) Compromise build process
 
@@ -289,7 +289,7 @@ cryptographic secret that should only be available to the build service.
 plane, and only the control plane has [access][unforgeable] to cryptographic
 secrets.
 
-*Example:* Provence is signed on the build worker, which the adversary has
+*Example:* Provenance is signed on the build worker, which the adversary has
 control over. Adversary uses a malicious process that generates false provenance
 and signs it using the provenance signing key. Solution: Builder generates and
 signs provenance in the trusted control plane; the worker has no access to the

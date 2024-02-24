@@ -29,7 +29,7 @@ reproducible."
 bit-for-bit identical output. This property
 [provides](https://reproducible-builds.org/docs/buy-in/)
 [many](https://wiki.debian.org/ReproducibleBuilds/About)
-[benefits](https://static.googleusercontent.com/media/sre.google/en//static/pdf/building_secure_and_reliable_systems.pdf#page=357),
+[benefits](https://google.github.io/building-secure-and-reliable-systems/raw/ch14.html#hermeticcomma_reproduciblecomma_or_veri),
 including easier debugging, more confident cherry-pick releases, better build
 caching and storage efficiency, and accurate dependency tracking.
 
@@ -62,7 +62,7 @@ Therefore, SLSA does not require verified reproducible builds directly. Instead,
 verified reproducible builds are one option for implementing the requirements.
 
 For more on reproducibility, see
-[Hermetic, Reproducible, or Verifiable?](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=357)
+[Hermetic, Reproducible, or Verifiable?](https://google.github.io/building-secure-and-reliable-systems/raw/ch14.html#hermeticcomma_reproduciblecomma_or_veri)
 
 ## Q: How does SLSA relate to in-toto?
 
@@ -87,7 +87,7 @@ Jenkins plugin.
 
 ## Q. What is the difference between a build platform, system, and service?
 
-Build platform and build system have been used interchangably in the past. With
+Build platform and build system have been used interchangeably in the past. With
 the v1.0 specification, however, there has been a unification around the term
 platform as indicated in the [Terminology](terminology.md). The use of the word
 `system` still exists related to software and services within the build platform
@@ -96,3 +96,90 @@ and to systems outside of a build platform like change management systems.
 A build service is a hosted build platform that is often run on shared infrastructure
 instead of individuals' machines and workstations. Its use has also been replaced outside
 of the requirements as it relates to the build platform.
+
+## Q: Is SLSA the same as TACOS?
+
+No.
+[Trusted Attestation and Compliance for Open Source (TACOS)](https://github.com/tacosframework)
+is a framework authored by Tidelift.
+Per their website, TACOS is a framework
+"for assessing the development practices of open source projects
+against a set of secure development standards specified by the (US)
+NIST Secure Software Development Framework (SSDF) V1.1" which
+"vendors can use to provide self-attestation for the open source components
+they rely on."
+
+In contrast, SLSA is a community-developed framework---including
+adoptable guidelines for securing a software supply chain and
+mechanism to evaluate the trustworthiness of artifacts you consume---that
+is part of the Open Source Security Foundation (OpenSSF).
+
+## Q: How does SLSA and SLSA Provenance relate to SBOM?
+
+[Software Bill of Materials (SBOM)] are a frequently recommended tool for
+increased software supply chain rigor. An SBOM is typically focused on
+understanding software in order to evaluate risk through known vulnerabilities
+and license compliance. These use-cases require fine-grained and timely data
+which can be refined to improve signal-to-noise ratio.
+
+[SLSA Provenance] and the [Build track] are focused on trustworthiness of the
+build process. To improve trustworthiness, Provenance is generated in the build
+platform's trusted control plane, which in practice results in it being coarse
+grained. For example, in Provenance metadata completeness of
+`resolvedDependencies` information is on a best-effort basis. Further, the
+`ResourceDescriptor` type does not require version and license information or
+even a URI to the dependency's original location.
+
+While they likely include similar data, SBOMs and SLSA Provenance operate at
+different levels of abstraction. The fine-grained data in an SBOM typically
+describes the components present in a produced artifact, whereas SLSA
+Provenance more coarsely describes parameters of a build which are external to
+the build platform.
+
+The granularity and expressiveness of the two use-cases differs enough that
+current SBOM formats were deemed not a good fit for the requirements of
+the Build track. Yet SBOMs are a good practice and may form part of a future
+SLSA Vulnerabilities track. Further, SLSA Provenance can increase the
+trustworthiness of an SBOM by describing how the SBOM was created.
+
+SLSA Provenance, the wider [in-toto Attestation Framework] in which the
+recommended format sits, and the various SBOM standards, are all rapidly
+evolving spaces. There is ongoing investigation into linking between the
+different formats and exploration of alignment on common models. This FAQ entry
+describes our understanding of the intersection efforts today. We do not know
+how things will evolve over the coming months and years, but we look forward to
+the collaboration and improved software supply chain security.
+
+## Q: How to SLSA with a self-hosted runner
+
+Some CI systems allow producers to provide their own self-hosted runners as a build
+environment (e.g. [GitHub Actions]). While there are many valid reasons to leverage
+these, classifying the SLSA build level for the resulting artifact can be confusing.
+
+Since the SLSA Build track describes increasing levels of trustworthiness and
+completeness in a package artifact's <dfn>provenance</dfn>, interpretation of the
+specification hinges on the platform entities involved in the provenance generation.
+The SLSA [build level requirements] (secure key storage, isolation, etc.) should be
+imposed on the transitive closure of the systems which are responsible for informing
+the provenance generated.
+
+Some common situations may include:
+
+-   The platform generates the provenance and just calls a runner for individual build steps.
+    In this situation, the provenance is only affected by the platform so there would be
+    no requirements imposed on the runner.
+-   The runner generates the provenance. In this situation, the orchestrating platform
+    is irrelevant and all requirements are imposed on the runner.
+-   The platform provides the runner with some credentials for generating the provenance
+    or both the platform and the runner provide information for the provenance. Trust is
+    shared between the platform and the runner so the requirements are imposed on both.
+
+Additional requirements on the self-hosted runners may be added to Build levels
+greater than L3 when such levels get defined.
+
+[build level requirements]: requirements.md
+[GitHub Actions]: https://docs.github.com/en/actions/hosting-your-own-runners
+[Software Bill of Materials (SBOM)]: https://ntia.gov/sbom
+[SLSA Provenance]: provenance.md
+[Build track]: levels.md#build-track
+[in-toto Attestation Framework]: https://github.com/in-toto/attestation/blob/main/spec/

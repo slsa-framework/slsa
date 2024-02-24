@@ -13,28 +13,28 @@ To better understand the reasoning behind the requirements, see
 
 ## Summary table
 
-| Requirement                          | SLSA 1 | SLSA 2 | SLSA 3 | SLSA 4 |
-| ------------------------------------ | ------ | ------ | ------ | ------ |
-| Source - [Version controlled]        |        | ✓      | ✓      | ✓      |
-| Source - [Verified history]          |        |        | ✓      | ✓      |
-| Source - [Retained indefinitely]     |        |        | 18 mo. | ✓      |
-| Source - [Two-person reviewed]       |        |        |        | ✓      |
-| Build - [Scripted build]             | ✓      | ✓      | ✓      | ✓      |
-| Build - [Build service]              |        | ✓      | ✓      | ✓      |
-| Build - [Build as code]              |        |        | ✓      | ✓      |
-| Build - [Ephemeral environment]      |        |        | ✓      | ✓      |
-| Build - [Isolated]                   |        |        | ✓      | ✓      |
-| Build - [Parameterless]              |        |        |        | ✓      |
-| Build - [Hermetic]                   |        |        |        | ✓      |
-| Build - [Reproducible]               |        |        |        | ○      |
-| Provenance - [Available]             | ✓      | ✓      | ✓      | ✓      |
-| Provenance - [Authenticated]         |        | ✓      | ✓      | ✓      |
-| Provenance - [Service generated]     |        | ✓      | ✓      | ✓      |
-| Provenance - [Non-falsifiable]       |        |        | ✓      | ✓      |
-| Provenance - [Dependencies complete] |        |        |        | ✓      |
-| Common - [Security]                  |        |        |        | ✓      |
-| Common - [Access]                    |        |        |        | ✓      |
-| Common - [Superusers]                |        |        |        | ✓      |
+| Requirement                          | SLSA 1 | SLSA 2 | SLSA 3 | SLSA 4
+| ------------------------------------ | ------ | ------ | ------ | ------
+| Source - [Version controlled]        |        | ✓      | ✓      | ✓
+| Source - [Verified history]          |        |        | ✓      | ✓
+| Source - [Retained indefinitely]     |        |        | 18 mo. | ✓
+| Source - [Two-person reviewed]       |        |        |        | ✓
+| Build - [Scripted build]             | ✓      | ✓      | ✓      | ✓
+| Build - [Build service]              |        | ✓      | ✓      | ✓
+| Build - [Build as code]              |        |        | ✓      | ✓
+| Build - [Ephemeral environment]      |        |        | ✓      | ✓
+| Build - [Isolated]                   |        |        | ✓      | ✓
+| Build - [Parameterless]              |        |        |        | ✓
+| Build - [Hermetic]                   |        |        |        | ✓
+| Build - [Reproducible]               |        |        |        | ○
+| Provenance - [Available]             | ✓      | ✓      | ✓      | ✓
+| Provenance - [Authenticated]         |        | ✓      | ✓      | ✓
+| Provenance - [Service generated]     |        | ✓      | ✓      | ✓
+| Provenance - [Non-falsifiable]       |        |        | ✓      | ✓
+| Provenance - [Dependencies complete] |        |        |        | ✓
+| Common - [Security]                  |        |        |        | ✓
+| Common - [Access]                    |        |        |        | ✓
+| Common - [Superusers]                |        |        |        | ✓
 
 <!-- markdownlint-disable MD036 -->
 _○ = REQUIRED unless there is a justification_
@@ -452,7 +452,7 @@ collisions and second preimages.
 
 The provenance identifies the entity that performed the build and generated the
 provenance. This represents the entity that the consumer MUST trust. Examples:
-"GitHub Actions with a GitHub-hosted worker", "jdoe@example.com's machine".
+"GitHub Actions with a GitHub-hosted worker", "`jdoe@example.com`'s machine".
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="identifies-build-instructions">

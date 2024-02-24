@@ -30,12 +30,6 @@ testimonials:
         logo: /images/intel-logo.png
 
 ---
-<!--{% if false %}-->
-
-**NOTE: This site is best viewed at https://slsa.dev.**
-
-<!--{% endif %}-->
-
 <!-- Hero -->
 <section class="hero home flex justify-center items-center relative">
     <video class="absolute object-cover h-full w-full z-0" autoplay muted loop>

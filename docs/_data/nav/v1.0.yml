@@ -86,11 +86,11 @@
     description: General attestation mode
 
   - title: Provenance
-    url: /provenance/v1
+    url: /spec/v1.0/provenance
     description: Suggested provenance format and explanation
 
-  - title: VSA
-    url: /verification_summary/v1
+  - title: Verification Summary
+    url: /spec/v1.0/verification_summary
     description: Suggested VSA format and explanation
 
 - title: How to SLSA

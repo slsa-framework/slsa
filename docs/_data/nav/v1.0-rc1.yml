@@ -49,10 +49,11 @@
         url: /attestation-model
 
       - title: Provenance
-        url: /provenance/v1-rc1
+        url: /spec/v1.0-rc1/provenance
 
-      - title: VSA
-        url: /verification_summary/v1-rc1
+      - title: Verification Summary
+        # There was no v1.0-rc VSA. This confuses the version selector.
+        url: /spec/v0.2/verification_summary
 
     - title: Stages
       url: /spec-stages

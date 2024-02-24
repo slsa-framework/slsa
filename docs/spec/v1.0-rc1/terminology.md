@@ -24,14 +24,14 @@ supply chains plus its own sources and builds.
 
 ![Software Supply Chain Model](../../images/supply-chain-model.svg)
 
-| Term | Description | Example |
-| --- | --- | --- |
-| Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image. |
-| Attestation | An authenticated statement (metadata) about a software artifact or collection of software artifacts. | A signed [SLSA Provenance] file. |
-| Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform). |
-| [Build] | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform). |
-| Package | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit. |
-| Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform). |
+| Term | Description | Example
+| --- | --- | ---
+| Artifact | An immutable blob of data; primarily refers to software, but SLSA can be used for any artifact. | A file, a git commit, a directory of files (serialized in some way), a container image, a firmware image.
+| Attestation | An authenticated statement (metadata) about a software artifact or collection of software artifacts. | A signed [SLSA Provenance] file.
+| Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform).
+| [Build] | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform).
+| Package | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit.
+| Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform).
 
 [build]: #build-model
 [SLSA Provenance]: /provenance/v1-rc1
@@ -84,31 +84,31 @@ build system the package was built.
 
 ![Verification Model](verification-model.svg)
 
-| Term         | Description |
-|--------------|---- |
-| Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly. |
-| Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used. |
-| Build system certification | [Build systems are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level. |
+| Term         | Description
+|--------------|----
+| Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly.
+| Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used.
+| Build system certification | [Build systems are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level.
 
 The examples below suggest some ways that expectations and verification may be
 implemented for different, broadly defined, package ecosystems.
 
 <details><summary>Example: Small software team</summary>
 
-| Term | Example |
-| ---- | ------- |
-| Expectations | Defined by the producer's security personnel and stored in a database. |
-| Provenance verification | Performed automatically on cluster nodes before execution by querying the expectations database. |
-| Build system certification | The build system implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their conformance to SLSA requirements. |
+| Term | Example
+| ---- | -------
+| Expectations | Defined by the producer's security personnel and stored in a database.
+| Provenance verification | Performed automatically on cluster nodes before execution by querying the expectations database.
+| Build system certification | The build system implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their conformance to SLSA requirements.
 
 </details>
 
 <details><summary>Example: Open source language distribution</summary>
 
-| Term | Example |
-| ---- | ------- |
-| Expectations | Defined separately for each package and stored in the package registry. |
-| Provenance verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client also verifies expectations prior to installing packages. |
-| Build system certification | Performed by the language ecosystem packaging authority. |
+| Term | Example
+| ---- | -------
+| Expectations | Defined separately for each package and stored in the package registry.
+| Provenance verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client also verifies expectations prior to installing packages.
+| Build system certification | Performed by the language ecosystem packaging authority.
 
 </details>

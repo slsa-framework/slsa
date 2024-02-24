@@ -4,9 +4,9 @@ author: "Mike Lieberman"
 is_guest_post: false
 ---
 
-Interested in getting involved? Now’s the chance to [provide your feedback on the foundational v1 release of the SLSA framework.](2023-02-24-slsa-v1-rc.md)
+Interested in getting involved? Now’s the chance to [provide your feedback on the foundational v1 release of the SLSA framework.](/blog/2023/02/slsa-v1-rc)
 
-“Software Supply chain security is more than just the build” is a common response when folks learn about SLSA. This is true. SLSA 1.0 is entirely focused on generating [build provenance](../provenance/v1.md) and assurance around that provenance due to the security capabilities of the build system and security properties of a particular running build. Software Supply Chain Security is the cybersecurity practice of extending left into System Delivery Lifecycle or Software Delivery Lifecycle and the SDLC is more than just the build.
+“Software Supply chain security is more than just the build” is a common response when folks learn about SLSA. This is true. SLSA 1.0 is entirely focused on generating [build provenance](/spec/v1.0/provenance) and assurance around that provenance due to the security capabilities of the build system and security properties of a particular running build. Software Supply Chain Security is the cybersecurity practice of extending left into System Delivery Lifecycle or Software Delivery Lifecycle and the SDLC is more than just the build.
 
 If the SDLC is more than the build, why is the SLSA community only focused on that one aspect? We’re not. We’re just starting with the build. The initial focus on the **build track** is a strategic decision made due to its significance in the overall process. The build serves as the bridge between various inputs, such as source code and dependencies, and the final product, which is the software package or artifact intended to run in production environments or be used as a dependency to downstream consumers.
 
@@ -19,4 +19,4 @@ For instance, future iterations of SLSA will introduce more stringent requiremen
 
 Ultimately, SLSA aims to create a comprehensive, adaptable framework that addresses critical pieces of Software Supply Chain Security. By starting with the **build track**, SLSA establishes a robust foundation on which to build and expand the framework to address other critical aspects of the SDLC. This approach will help end users, whether they are open source project maintainers or stakeholders in a corporation, better understand and mitigate the risks associated with software supply chains, and ultimately develop more secure and reliable software.
 
-For more information visit the SLSA website, [give feedback](https://github.com/slsa-framework/slsa/issues) on the [SLSA v1.0 release candidate](https://slsa.dev/spec/v1.0/) and get involved with the SLSA [community](https://slsa.dev/community).
+For more information visit the SLSA website, [give feedback](https://github.com/slsa-framework/slsa/issues) on the [SLSA v1.0 release candidate](/spec/v1.0/) and get involved with the SLSA [community](/community).

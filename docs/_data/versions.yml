@@ -1,22 +1,30 @@
 # This file controls the version selector
 # Schema:
 #     <spec>:
+#       current: <version>            # the current version id.
 #       versions:
-#         <version>:
-#           name: <string> # display name
-#           status: <string> # one of: Draft, Candidate, Approved, Retired
-#           draft: <bool, optional> # if true, display a "draft" warning banner
-#           hidden: <bool, optional> # if true, do not show in dropdown
+#         <version>:                  # version id; used in url path.
+#           name: <string>            # display name
+#           status: <string>          # one of: Draft, Candidate, Approved, Retired
+#           draft: <bool, optional>   # if true, display a "draft" warning banner
+#           hidden: <bool, optional>  # if true, do not show in dropdown
+#           unhide_for: <array[string], optional>  # do not hide for these pages
 #
 # Where:
 #   <spec> = specification name, i.e. first component of the URL
 #   <version> = version name, i.e. second component of the URL, e.g. v1.0
 
 spec:
+  current: v1.0
   versions:
     v0.1:
       name: Version 0.1
       status: Approved
+    v0.2:
+      name: Version 0.2
+      status: Approved
+      hidden: true
+      unhide_for: [provenance, verification_summary]
     v1.0-rc1:
       name: Version 1.0 RC1
       status: Retired
@@ -28,39 +36,8 @@ spec:
     v1.0:
       name: Version 1.0
       status: Approved
-
-provenance:
-  versions:
-    v0.1:
-      name: Version 0.1
-      status: Retired
-    v0.2:
-      name: Version 0.2
-      status: Approved
-    v1-rc1:
-      name: Version 1.0 RC1
-      status: Retired
+    v1.1:
+      name: Version 1.1 (DRAFT)
+      status: Draft
+      draft: true
       hidden: true
-    v1-rc2:
-      name: Version 1.0 RC2
-      status: Retired
-      hidden: true
-    v1:
-      name: Version 1.0
-      status: Approved
-
-verification_summary:
-  versions:
-    v0.1:
-      name: Version 0.1
-      status: Retired
-    v0.2:
-      name: Version 0.2
-      status: Approved
-    v1-rc2:
-      name: Version 1.0 RC2
-      status: Retired
-      hidden: true
-    v1:
-      name: Version 1.0
-      status: Approved
