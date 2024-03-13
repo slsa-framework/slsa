@@ -9,8 +9,9 @@ Source level a project satisfies, if any.
 ## Purpose
 
 Describe how a project manages its source code so that:
-- Consumers of the source can determine its authenticity.
-- Consumers of the project can assess its maturity and fitness for use.
+
+-   Consumers of the source can determine its authenticity.
+-   Consumers of the project can assess its maturity and fitness for use.
 
 ## Model
 
@@ -52,10 +53,11 @@ Build track. Please see
 ## Verification
 
 Verification MUST include the following steps:
-1. Ensure the version control platform is one of those in the verifier's preconfigured root of trust.
-2. Verify the signature on the attestation envelope.
-3. Ensure the values for `projectID`, `revisionID`, and `digest` match the expected values.
-4. Determine SLSA Source level.
+
+1.  Ensure the version control platform is one of those in the verifier's preconfigured root of trust.
+2.  Verify the signature on the attestation envelope.
+3.  Ensure the values for `projectID`, `revisionID`, and `digest` match the expected values.
+4.  Determine SLSA Source level.
 
 Note: Although there is no requirement that a project maintain a certain Source
 level for any period of time, it is RECOMMENDED that consumers enforce policies
@@ -68,7 +70,7 @@ value.
 
 Use the following procedure to determine the Soure level the attestation is asserting.
 
-```
+```pseudocode
 def getSourceLevel(attestation):
   bool meetsL2 = attestation.timestamp
     AND attestation.2FA.enabled
