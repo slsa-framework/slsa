@@ -66,6 +66,25 @@ chain.
 | Consumer | A party who uses software provided by a producer. The consumer may verify provenance for software they consume or delegate that responsibility to a separate verifier. | A developer who uses open source software distributions. A business that uses a point of sale system.
 | Infrastructure provider | A party who provides software or services to other roles. | A package registry's maintainers. A build platform's maintainers.
 
+### Source model
+
+The Source track is scoped to a single project that is controlled by some organization. That organization determines what Source level should apply to the project and administers technical controls to enforce that level.
+| Term | Description
+| --- | ---
+| Source | An identifiable set of text and binary files and associated metadata usually used as input for the build system (see SLSA Build Track).
+| Revision | The canonical source at a given point in time as identified by the version control system. Git identifies revisions by digest, but other version control systems may use other identifiers.
+| Change | A set of modifications to one or more source files and associated metadata. Change metadata MUST include any information required to situate the change in relation to other changes (e.g. parent Revision).
+| Change History | A record of the history of changes that went into the revision.
+| Version Control System | Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
+| Version Control Platform | A service for hosting version controlled software. GitHub and GitLab are examples of version control platforms.
+
+| Role | Description
+| --- | ---
+| Administrator | A human who can perform privileged operations on one or more projects. Privileged actions include, but are not limited to, modifying the change history and modifying project- or organization-wide security policies.
+| Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
+| Trusted robot | A machine that is authorized by the organization to propose and/or approve changes to the source.
+| Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
+
 ### Build model
 
 <p align="center"><img src="images/build-model.svg" alt="Model Build"></p>
