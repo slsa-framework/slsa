@@ -2,7 +2,7 @@
 
 ## Objective
 
-The SLSA Source Track mitigates [Threat A ("Submit unauthorized change")](https://slsa.dev/spec/v1.0/threats#a-submit-unauthorized-change), scoped to a code repository and the organization that owns that repository. Concretely: an attacker must compromise the accounts of two organization members to publish code in a Source Level 3-conformant repository, and the evidence of those unauthorized changes cannot be destroyed without further attacks.
+The SLSA Source Track mitigates [Threat A ("Submit unauthorized change")](/spec/v1.0/threats#a-submit-unauthorized-change), scoped to a code repository and the organization that owns that repository. Concretely: an attacker must compromise the accounts of two organization members to publish code in a Source Level 3-conformant repository, and the evidence of those unauthorized changes cannot be destroyed without further attacks.
 
 ## Changes from v0.1
 
