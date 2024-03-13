@@ -50,29 +50,41 @@
     url: /spec/v1.1/terminology
     description: Terminology and model used by SLSA
 
+  - title: Threats & mitigations
+    url: /spec/v1.1/threats
+    description: Detailed information about specific supply chain attacks and how SLSA helps
+
   - title: Security levels
     url: /spec/v1.1/levels
     description: Overview of SLSA's tracks and levels, intended for all audiences
 
-  - title: Producing artifacts
-    url: /spec/v1.1/requirements
-    description: Detailed technical requirements for producing software artifacts, intended for platform implementers
+  - title: Build Track
+    description: Technical requirements and implementation guidance for protecting software builds
+    children:
+  
+    - title: Producing artifacts
+      url: /spec/v1.1/requirements
+      description: Detailed technical requirements for producing software artifacts, intended for platform implementers
 
-  - title: Distributing provenance
-    url: /spec/v1.1/distributing-provenance
-    description: Detailed technical requirements for distributing provenance, intended for platform implementers and software distributors
+    - title: Distributing provenance
+      url: /spec/v1.1/distributing-provenance
+      description: Detailed technical requirements for distributing provenance, intended for platform implementers and software distributors
+  
+    - title: Verifying artifacts
+      url: /spec/v1.1/verifying-artifacts
+      description: Guidance for verifying software artifacts and their SLSA provenance, intended for platform implementers and software consumers
+  
+    - title: Verifying build platforms
+      url: /spec/v1.1/verifying-systems
+      description: Guidelines for securing SLSA Build L3+ builders, intended for platform implementers
 
-  - title: Verifying artifacts
-    url: /spec/v1.1/verifying-artifacts
-    description: Guidance for verifying software artifacts and their SLSA provenance, intended for platform implementers and software consumers
-
-  - title: Verifying build platforms
-    url: /spec/v1.1/verifying-systems
-    description: Guidelines for securing SLSA Build L3+ builders, intended for platform implementers
-
-  - title: Threats & mitigations
-    url: /spec/v1.1/threats
-    description: Detailed information about specific supply chain attacks and how SLSA helps
+  - title: Source Track
+    description: Technical requirements and implementation guidance for protecting source code
+    children:
+    
+    - title: Securing Source Code
+      url: /spec/v1.1/source-reqs
+      description: Detailed technical requirements for securing source code, intended for platform implementers
 
 - title: Attestation formats
   description: >
@@ -85,9 +97,13 @@
     url: /attestation-model
     description: General attestation mode
 
-  - title: Provenance
+  - title: Build Provenance
     url: /spec/v1.1/provenance
-    description: Suggested provenance format and explanation
+    description: Suggested Build provenance format and explanation
+
+  - title: Source Attestation
+    url: /spec/v1.1/source-att
+    description: Suggested source attestation format and explanation
 
   - title: Verification Summary
     url: /spec/v1.1/verification_summary
