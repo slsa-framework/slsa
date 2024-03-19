@@ -16,15 +16,15 @@ Why?: SLSA does not yet have a model for version control systems, and we need su
 
 The version control platform MUST provide at least:
 
--   An account system or some other means of identifying persons. This account system MUST support two-factor authentication or an equivalent.
+-   An account system or some other means of identifying persons.
 -   A mechanism for modifying the canonical source through a **revision process**.
 
 The version control platform SHOULD additionally provide:
 
 -   A mechanism for assigning roles and/or permissions to identities.
 -   A mechanism for including code review in the revision process.
--   Mechanisms for **strongly authenticating** identities, such as 2FA.
--   Audit logs
+-   Two-factor authentication for the account system (L2+ only).
+-   Audit logs for sensitive actions, such as modifying security controls.
 
 ## Levels
 
@@ -64,7 +64,7 @@ Benefits: Version control solves software development challenges from ranging ch
 
 ### Level 2: Verified history
 
-Summary: The project is stored and managed through a source control platform that ensures the change history's integrity..
+Summary: The project is stored and managed through a source control platform that ensures the change history's integrity.
 
 Intended for: Organizations that are unwilling or unable to incorporate code review into their software development practices.
 
