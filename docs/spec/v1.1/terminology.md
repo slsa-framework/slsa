@@ -81,6 +81,9 @@ The Source track is scoped to a single project that is controlled by some organi
 | Role | Description
 | --- | ---
 | Administrator | A human who can perform privileged operations on one or more projects. Privileged actions include, but are not limited to, modifying the change history and modifying project- or organization-wide security policies.
+| Merger | The person who applies a change to the source. This person may be the submitter or a different trusted person, depending on the version control platform.
+| Proposer | The human who proposes a particular change to the source.
+| Reviewer | The human who reviews a particular proposed change to the source.
 | Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
 | Trusted robot | A machine that is authorized by the organization to propose and/or approve changes to the source.
 | Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.

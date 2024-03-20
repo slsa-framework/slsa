@@ -14,6 +14,20 @@ Why?: SLSA does not yet have a model for version control systems, and we need su
 
 ## Infrastructure Requirements
 
+The version control system MUST provide at least:
+
+-   **[Change history]** There exists a record of the history of changes that went into the revision. Each change MUST contain:
+    -   The immutable reference to the new revision
+    -   The identities of the proposer, reviewers (if any), and merger (if different to the proposer)
+    -   Timestamps of the reviews (if any) and submission
+    -   The change description/justification
+    -   The content of the change
+    -   The parent revisions.
+
+-   **[Immutable reference]** There exists a way to indefinitely reference this particular, immutable revision. This is usually {project identifier + revision ID}. When the revision ID is a digest of the revision, as in git, nothing more is needed. When the revision ID is a number or otherwise not a digest, then the project server MUST guarantee the immutability of the reference.
+
+Most popular version control systems meet these requirement, such as git, Subversion, Mercurial, and Perforce.
+
 The version control platform MUST provide at least:
 
 -   An account system or some other means of identifying persons.
@@ -46,19 +60,7 @@ Intended for: Organizations that are unwilling or unable to host their source on
 
 Requirements:
 
-**[Version controlled]** Every change to the source is tracked in a version control system that meets the following requirements
-
--   **[Change history]** There exists a record of the history of changes that went into the revision. Each change MUST contain:
-    -   The immutable reference to the new revision
-    -   The identities of the uploader, reviewers (if any), and submitter/merger (if different to the uploader)
-    -   Timestamps of the reviews (if any) and submission
-    -   The change description/justification
-    -   The content of the change
-    -   The parent revisions.
-
--   **[Immutable reference]** There exists a way to indefinitely reference this particular, immutable revision. This is usually {project identifier + revision ID}. When the revision ID is a digest of the revision, as in git, nothing more is needed. When the revision ID is a number or otherwise not a digest, then the project server MUST guarantee the immutability of the reference.
-
-Most popular version control systems meet these requirement, such as git, Subversion, Mercurial, and Perforce.
+**[Version controlled]** Every change to the source is tracked in a version control system that meets the requirements listed in [Infrastructure Requirements](#infrastructure-requirements).
 
 Benefits: Version control solves software development challenges from ranging change attribution to effective collaboration. It is a software development best practice with more benefits than we can discuss here.
 
