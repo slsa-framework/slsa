@@ -51,42 +51,7 @@ supply chains plus its own sources and builds.
 [package]: #package-model
 [SLSA Provenance]: /provenance/v1
 
-### Roles
-
-Throughout the specification, you will see reference to the following roles
-that take part in the software supply chain. Note that in practice a role may
-be filled by more than one person or an organization. Similarly, a person or
-organization may act as more than one role in a particular software supply
-chain.
-
-| Role | Description | Examples
-| --- | --- | ---
-| Producer | A party who creates software and provides it to others. Producers are often also consumers. | An open source project's maintainers. A software vendor.
-| Verifier | A party who inspect an artifact's provenance to determine the artifact's authenticity. | A business's software ingestion system. A programming language ecosystem's package registry.
-| Consumer | A party who uses software provided by a producer. The consumer may verify provenance for software they consume or delegate that responsibility to a separate verifier. | A developer who uses open source software distributions. A business that uses a point of sale system.
-| Infrastructure provider | A party who provides software or services to other roles. | A package registry's maintainers. A build platform's maintainers.
-
-### Source model
-
-The Source track is scoped to a single project that is controlled by some organization. That organization determines what Source level should apply to the project and administers technical controls to enforce that level.
-| Term | Description
-| --- | ---
-| Source | An identifiable set of text and binary files and associated metadata usually used as input for the build system (see SLSA Build Track).
-| Revision | The canonical source at a given point in time as identified by the version control system. Git identifies revisions by digest, but other version control systems may use other identifiers.
-| Change | A set of modifications to one or more source files and associated metadata. Change metadata MUST include any information required to situate the change in relation to other changes (e.g. parent Revision).
-| Change History | A record of the history of changes that went into the revision.
-| Version Control System | Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
-| Version Control Platform | A service for hosting version controlled software. GitHub and GitLab are examples of version control platforms.
-
-| Role | Description
-| --- | ---
-| Administrator | A human who can perform privileged operations on one or more projects. Privileged actions include, but are not limited to, modifying the change history and modifying project- or organization-wide security policies.
-| Merger | The person who applies a change to the source. This person may be the submitter or a different trusted person, depending on the version control platform.
-| Proposer | The human who proposes a particular change to the source.
-| Reviewer | The human who reviews a particular proposed change to the source.
-| Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
-| Trusted robot | A machine that is authorized by the organization to propose and/or approve changes to the source.
-| Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
+## Models
 
 ### Build model
 
@@ -149,6 +114,21 @@ of build types](/provenance/v1#index-of-build-types).
 
 </details>
 
+#### Build Roles
+
+Throughout the specification, you will see reference to the following roles
+that take part in the software supply chain. Note that in practice a role may
+be filled by more than one person or an organization. Similarly, a person or
+organization may act as more than one role in a particular software supply
+chain.
+
+| Role | Description | Examples
+| --- | --- | ---
+| Producer | A party who creates software and provides it to others. Producers are often also consumers. | An open source project's maintainers. A software vendor.
+| Verifier | A party who inspect an artifact's provenance to determine the artifact's authenticity. | A business's software ingestion system. A programming language ecosystem's package registry.
+| Consumer | A party who uses software provided by a producer. The consumer may verify provenance for software they consume or delegate that responsibility to a separate verifier. | A developer who uses open source software distributions. A business that uses a point of sale system.
+| Infrastructure provider | A party who provides software or services to other roles. | A package registry's maintainers. A build platform's maintainers.
+
 ### Package model
 
 Software is distributed in identifiable units called <dfn>packages</dfn>
@@ -197,7 +177,7 @@ It is the primary identifier to which consumers attach expectations.
 
 </details>
 
-### Mapping to real-world ecosystems
+#### Mapping to real-world ecosystems
 
 Most real-world ecosystems fit the package model above but use different terms.
 The table below attempts to document how various ecosystems map to the SLSA
@@ -318,6 +298,30 @@ Notes:
     trust the module proxy because builds are independently reproducible and a
     *checksum database* guarantees that all clients receive the same artifact
     for a given URL.
+
+### Source model
+
+The Source track is scoped to a single project that is controlled by some organization. That organization determines what Source level should apply to the project and administers technical controls to enforce that level.
+| Term | Description
+| --- | ---
+| Source | An identifiable set of text and binary files and associated metadata usually used as input for the build system (see SLSA Build Track).
+| Revision | The canonical source at a given point in time as identified by the version control system. As an example, you can identify a git revision by its tree hash.
+| Change | A set of modifications to one or more source files and associated metadata. Change metadata MUST include any information required to situate the change in relation to other changes (e.g. parent revision).
+| Change History | A record of the history of changes that went into the revision.
+| Version Control System | Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
+| Source Control Platform | A service or suite of services for hosting version controlled software. GitHub and GitLab are examples of source control platforms, as are combinations of tools like Gerrit code reviews with GitHub source control.
+
+#### Source Roles
+
+| Role | Description
+| --- | ---
+| Administrator | A human who can perform privileged operations on one or more projects. Privileged actions include, but are not limited to, modifying the change history and modifying project- or organization-wide security policies.
+| Merger | The person who applies a change to the source. This person may be the submitter or a different trusted person, depending on the version control platform.
+| Proposer | The human who proposes a particular change to the source.
+| Reviewer | The human who reviews a particular proposed change to the source.
+| Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
+| Trusted robot | A machine that is authorized by the organization to propose and/or approve changes to the source.
+| Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
 
 ### Verification model
 
