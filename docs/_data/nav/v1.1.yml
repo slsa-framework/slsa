@@ -83,7 +83,7 @@
     children:
     
     - title: Securing Source Code
-      url: /spec/v1.1/source-reqs
+      url: /spec/v1.1/source-requirements
       description: Detailed technical requirements for securing source code, intended for platform implementers
 
 - title: Attestation formats
@@ -102,7 +102,7 @@
     description: Suggested Build provenance format and explanation
 
   - title: Source Attestation
-    url: /spec/v1.1/source-att
+    url: /spec/v1.1/source-attestation
     description: Suggested source attestation format and explanation
 
   - title: Verification Summary

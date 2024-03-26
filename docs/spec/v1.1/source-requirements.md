@@ -24,16 +24,16 @@ The version control system MUST provide at least:
     -   The content of the change
     -   The parent revisions.
 
--   **[Immutable reference]** There exists a way to indefinitely reference this particular, immutable revision. This is usually {project identifier + revision ID}. When the revision ID is a digest of the revision, as in git, nothing more is needed. When the revision ID is a number or otherwise not a digest, then the project server MUST guarantee the immutability of the reference.
+-   **[Immutable reference]** There exists a deterministic way to reference this particular, immutable revision. This is usually {project identifier + revision ID}. When the revision ID is a digest of the revision, as in git, nothing more is needed. When the revision ID is a number or otherwise not a digest, then the project server MUST guarantee the immutability of the reference.
 
 Most popular version control systems meet these requirement, such as git, Subversion, Mercurial, and Perforce.
 
-The version control platform MUST provide at least:
+The source control platform MUST provide at least:
 
 -   An account system or some other means of identifying persons.
 -   A mechanism for modifying the canonical source through a **revision process**.
 
-The version control platform SHOULD additionally provide:
+The source control platform SHOULD additionally provide:
 
 -   A mechanism for assigning roles and/or permissions to identities.
 -   A mechanism for including code review in the revision process.
@@ -42,21 +42,11 @@ The version control platform SHOULD additionally provide:
 
 ## Levels
 
-### Level 0: No guarantees
-
-Summary: L0 represents the lack of a Source level. Projects are L0 by definition before adopting SLSA.
-
-Intended for: Experimental Projects, or other Projects early in their lifecycle.
-
-Requirements: N/A
-
-Benefits: N/A
-
 ### Level 1: Version controlled
 
 Summary: The project source is stored and managed through a modern version control system.
 
-Intended for: Organizations that are unwilling or unable to host their source on a version control platform. If possible, skip to Level 2.
+Intended for: Organizations that are unwilling or unable to host their source on a source control platform. If possible, skip to Level 2.
 
 Requirements:
 

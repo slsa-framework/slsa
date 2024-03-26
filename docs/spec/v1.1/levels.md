@@ -23,7 +23,7 @@ tracks without invalidating previous levels.
 > Note: The [previous version] of the specification used a single unnamed track,
 > SLSA 1–4.
 
-## Build track
+### Build track
 
 | Build Levels | Requirements | Focus
 | ----------- | ------------ | -----
@@ -229,7 +229,7 @@ All of [Build L2], plus:
 
 </dl>
 
-## Source Track
+### Source track
 
 | Source Levels | Requirements | Focus
 | ----------- | ------------ | -----
@@ -238,8 +238,6 @@ All of [Build L2], plus:
 | [Source L2] | Strong authentication, Retained history, Verified timestamps | Change attribution
 | [Source L3] | Code review, Different persons | Change authorization
 
-
-
 ### Source L0: No guarantees
 
 <dl class="as-table">
@@ -247,7 +245,7 @@ All of [Build L2], plus:
 L0 represents the lack of a Source level. Projects are L0 by definition before adopting SLSA.
 
 <dt> Intended for <dd>
-Experimental Projects, or other Projects early in their lifecycle.
+Experimental projects, or other projects early in their lifecycle.
 
 <dt> Requirements <dd>
 N/A
@@ -261,10 +259,10 @@ N/A
 
 <dl class="as-table">
 <dt> Summary <dd>
-The project source is stored and managed through a modern version control system.
+The project source is stored and managed through a version control system.
 
 <dt> Intended for <dd>
-Organizations that are unwilling or unable to host their source on a version control platform. If possible, skip to Level 2.
+Organizations that are unwilling or unable to host their source on a source control platform. If possible, skip to Level 2.
 
 <dt> Requirements <dd>
 
@@ -299,7 +297,7 @@ Organizations that are unwilling or unable to incorporate code review into their
 
 <dt> Requirements <dd>
 
-**[Strong authentication]** User accounts that can modify the source or the project's configuration must use two-factor authentication or its equivalent.
+**[Strong authentication]** User accounts that can modify the source or the project's configuration must use two-factor authentication.
 
 **[Verified timestamps]** Each entry in the change history must contain at least one timestamp that is determined by the source control platform and cannot be modified by clients. It MUST be clear in the change history which timestamps are determined by the source control platform.
 
