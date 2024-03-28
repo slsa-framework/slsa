@@ -57,7 +57,7 @@ failure. Guidelines for implementers can be found in the
 
 <section id="build-l0">
 
-### Build L0: No guarantees
+#### Build L0: No guarantees
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -81,7 +81,7 @@ n/a
 </section>
 <section id="build-l1">
 
-### Build L1: Provenance exists
+#### Build L1: Provenance exists
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -129,7 +129,7 @@ SLSA---other than tamper protection---without changing their build workflows.
 </section>
 <section id="build-l2">
 
-### Build L2: Hosted build platform
+#### Build L2: Hosted build platform
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -184,7 +184,7 @@ All of [Build L1], plus:
 [^sign]: Alternate means of verifying the authenticity of the provenance are
     also acceptable.
 
-### Build L3: Hardened builds
+#### Build L3: Hardened builds
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -238,7 +238,7 @@ All of [Build L2], plus:
 | [Source L2] | Strong authentication, Retained history, Verified timestamps | Change attribution
 | [Source L3] | Code review, Different persons | Change authorization
 
-### Source L0: No guarantees
+#### Source L0: No guarantees
 
 <dl class="as-table">
 <dt> Summary <dd>
@@ -255,7 +255,7 @@ N/A
 
 </dl>
 
-### Source L1: Version controlled
+#### Source L1: Version controlled
 
 <dl class="as-table">
 <dt> Summary <dd>
@@ -286,7 +286,7 @@ Most popular version control systems meet these requirement, such as git, Subver
 Version control is a software development best practice, and discussing its benefits is beyond the scope of this page.
 </dl>
 
-### Source L2: Verified history
+#### Source L2: Verified history
 
 <dl class="as-table">
 <dt> Summary <dd>
@@ -308,7 +308,7 @@ Attributes changes in the version history to specific actors and timestamps, whi
 
 </dl>
 
-### Source L3: Changes are authorized
+#### Source L3: Changes are authorized
 
 <dl class="as-table">
 <dt> Summary <dd>
