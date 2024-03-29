@@ -80,7 +80,7 @@ Requirements:
 **[Code review]** All changes to the source are approved by two trusted persons prior to submission. User accounts that can perform code reviews MUST use two-factor authentication or its equivalent.
 The following combinations are acceptable:
 
--   Contributor and reviewer are two different trusted persons.
+-   Proposer and reviewer are two different trusted persons.
 -   Two different reviewers are trusted persons.
 
 The code review system must meet the following requirements:

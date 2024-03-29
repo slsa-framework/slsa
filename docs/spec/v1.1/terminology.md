@@ -321,7 +321,7 @@ The Source track is scoped to a single project that is controlled by some organi
 | Proposer | The human who proposes a particular change to the source.
 | Reviewer | The human who reviews a particular proposed change to the source.
 | Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
-| Trusted robot | A machine that is authorized by the organization to propose and/or approve changes to the source.
+| Trusted robot | Automation with an authentic identity that is authorized by the organization to propose and/or approve changes to the source.
 | Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
 
 ### Verification model
