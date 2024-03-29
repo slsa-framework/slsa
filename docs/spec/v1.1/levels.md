@@ -277,10 +277,10 @@ Organizations that are unwilling or unable to host their source on a source cont
     -   The content of the change
     -   The parent revisions.
 
--   **[Immutable reference]** There exists a way to reference this particular, immutable revision. This is usually {project identifier + revision ID}. When the revision ID is a digest of the revision, as in git, nothing more is needed. When the revision ID is a number or otherwise not a digest, then the project server MUST guarantee the immutability of the reference.
+-   **[Immutable reference]** There exists a way to reference this particular, immutable revision. This is usually {project identifier + revision ID}. When the revision ID is a digest of the revision, as in Git, nothing more is needed. When the revision ID is a number or otherwise not a digest, then the project server MUST guarantee the immutability of the reference.
 
 <dt> Notes <dd>
-Most popular version control systems meet these requirement, such as git, Subversion, Mercurial, and Perforce.
+Most popular version control systems meet these requirement, such as Git, Subversion, Mercurial, and Perforce.
 
 <dt> Benefits <dd>
 Version control is a software development best practice, and discussing its benefits is beyond the scope of this page.
@@ -328,10 +328,10 @@ The following combinations are acceptable:
 The code review system must meet the following requirements:
 
 -   **[Informed review]** The reviewer is able and encouraged to make an informed decision about what they're approving. The reviewer MUST be presented with a full, meaningful content diff between the proposed revision and the previously reviewed revision. For example, it is not sufficient to just indicate that a file changed without showing the contents.
--   **[Context-specific approvals]** Approvals are for a specific context, such as a repo + target branch + revision in git. Moving fully reviewed content from one context to another still requires review. (Exact definition of "context" depends on the project, and this does not preclude well-understood automatic or reviewless merges, such as cutting a release branch.) Git example: If a fully reviewed commit in one repo is merged into a different repo, or a commit in one branch is merged into a different branch, then the merge still requires review.
+-   **[Context-specific approvals]** Approvals are for a specific context, such as a repo + target branch + revision in Git. Moving fully reviewed content from one context to another still requires review. (Exact definition of "context" depends on the project, and this does not preclude well-understood automatic or reviewless merges, such as cutting a release branch.) For example, if a fully reviewed commit in one repo is merged into a different repo, or a commit in one branch is merged into a different branch, then the merge still requires review.
 -   **[Atomic change sets]** Changes are recorded in the change history as a single revision that consists of the net delta between the proposed revision and the parent revision. In the case of a nonlinear version control system, where a revision can have more than one parent, the diff must be against the "first common parent" between the parents. In other words, when a feature branch is merged back into the main branch, only the merge itself is in scope.
 
-Trusted robots MAY be exempted from the code review process. It is RECOMMENDED that trusted robots so exempted be run only software built at Build L3+ from sources that meet Source L3.
+Trusted robots MAY be exempted from the code review process. It is RECOMMENDED that trusted robots so exempted run only software built at Build L3+ from sources that meet Source L3. Note: Meeting Build L3+ and Source L3 are not necessarily sufficient evidence that software is safe to run as a trusted robot.
 
 **[Different persons]** The organization strives to ensure that no two user accounts correspond to the same person. Should the organization discover that it issued multiple accounts to the same person, it MUST act to rectify the situation. For example, it might revoke project privileges for all but one of the accounts and perform retroactive code reviews on any changes where that person's accounts are the author and/or code reviewer(s).
 

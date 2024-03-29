@@ -35,8 +35,8 @@ Build track. Please see
 
 | Field | Type | Required at Level | Description
 | --- | --- | --- | ---
-| `projectID` | string | L1+ | Immutable project ID. For example, the SLSA Specification's project ID is `www.github.com/slsa-framework/slsa`.
-| `revisionID` | string | L1+ | Immutable revision ID. In git terminology, this is the commit hash.
+| `projectID` | string | L1+ | Project ID. For example, the SLSA Specification's project ID is `www.github.com/slsa-framework/slsa`.
+| `revisionID` | string | L1+ | Revision ID. In git terminology, this is the commit hash.
 | `digest` | string | L1+ | Digest of the source. In git terminology, this is the repo's tree hash.
 | `timestamp` | string | L2+ | ISO 8601 representation of the time at which the source control platform generated the attestation. This timestamp MUST be determined by the platform.
 | `2FA` | FeatureHistory | L2+ | Whether 2FA was enabled for this project.
