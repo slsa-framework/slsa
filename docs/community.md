@@ -46,7 +46,7 @@ developing tooling, we welcome your contributions.
                     <a target="_blank" href="https://groups.google.com/g/slsa-discussion" class="cta-link mt-6 font-semibold h5">Mailing list</a>
                 </div>
             </div>
-	    <div class="w-full md:w-1/2 getting_started_card md:pl-5 lg:mb-0 mb-8">
+     <div class="w-full md:w-1/2 getting_started_card md:pl-5 lg:mb-0 mb-8">
                 <div class="bg-pastel-green h-full rounded-lg p-10">
                     <p class="h4 font-semibold mb-6">Archived meeting notes</p>
                     <p>The SLSA community no longer holds these meetings regularly. Their meeting notes are archived here for posterity.</p>
