@@ -37,7 +37,7 @@ developing tooling, we welcome your contributions.
         <div class="flex flex-wrap w-6/7 mt-8 mx-auto md:-ml-5 clear-both">
             <div class="w-full md:w-1/2 getting_started_card md:pl-5 lg:mb-0 mb-8">
                 <div class="bg-pastel-green h-full rounded-lg p-10">
-                    <p class="h4 font-semibold mb-6">General contributions</p>
+                    <p class="h4 font-semibold mb-6">How to contribute</p>
                     <p>For questions, suggestions, or status updates, please use one of the following channels.</p>
                     <a target="_blank" href="https://github.com/slsa-framework/slsa/blob/main/CONTRIBUTING.md" class="cta-link mt-6 font-semibold h5">Contribution guidelines</a>
                     <a target="_blank" href="notes/specification" class="cta-link mt-6 font-semibold h5">Specification meeting (weekly)</a>
