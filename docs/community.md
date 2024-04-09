@@ -50,7 +50,7 @@ developing tooling, we welcome your contributions.
                 <div class="bg-pastel-green h-full rounded-lg p-10">
                     <p class="h4 font-semibold mb-6">Archived meeting notes</p>
                     <p>The SLSA community no longer holds these meetings regularly. Their meeting notes are archived here for posterity.</p>
-                    <a href="notes/community" class="cta-link mt-6 font-semibold h5">Community meeting (monthly)</a>
+                    <a href="notes/community" class="cta-link mt-6 font-semibold h5">Community meeting</a>
                     <a href="notes/tooling" class="cta-link mt-6 font-semibold h5">Tooling Special Interest Group</a>
                 </div>
             </div>
