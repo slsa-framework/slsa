@@ -1,0 +1,20 @@
+#!/usr/bin/sed -f
+# Script to normalize files to prepare for diffing. This script is a git
+# `textconv` filter; see gitattributes(5) for details.
+
+# --- feed.xml ---
+
+1 {
+  # Ignore Jekyll version number
+  s@\(<generator uri="https://jekyllrb.com/" version=\)"[0-9.]\+">@\1"#.#.#"@
+  # Ignore "updated" timestamp
+  s@<updated>[^<]\+</updated>@<updated>DATE</updated>@
+}
+
+# --- all files ---
+
+# Ignore Jekyll version number
+s@Jekyll v[0-9.]\+@Jekyll v#.#.#@
+
+# Ignore git commit ID
+s@/slsa/blob/[0-9a-f]\+/docs/@/slsa/blob/COMMIT/docs/@g
