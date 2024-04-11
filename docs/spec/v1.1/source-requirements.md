@@ -12,7 +12,7 @@ Why?: To facilitate verification without anchoring it to a build.
 -   **Model** Added a model, definitions, and the concept of verification.
 Why?: SLSA does not yet have a model for version control systems, and we need such a model to be able to discuss them.
 
-## Infrastructure Requirements
+## Source Platform Requirements
 
 The version control system MUST provide at least:
 
