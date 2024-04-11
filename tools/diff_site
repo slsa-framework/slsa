@@ -1,0 +1,82 @@
+#!/bin/bash
+USAGE="USAGE: $0 DIR_OR_FILE DIR_OR_FILE"'
+
+Displays the diff of two built site directories, each of which can be a
+local directory (usually `docs/_site`) or a `deploy-*.zip` archive downloaded
+from Netlify. Before diffing, we filter out innocuous changes such as the
+Jekyll version or git commit IDs; see `textconv` in this directory for details.
+
+The diff is displayed using `git diff`.'
+
+set -o nounset
+set -o errexit
+
+readonly SCRIPTPATH=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
+readonly BASENAME=$(basename $0)
+
+main() {
+  if (( $# != 2 )); then
+    echo "$USAGE" >&2
+    exit 1
+  fi
+
+  # Ideally we could just use `git diff --no-index $1 $2`, but unfortunately
+  # that doesn't work with textconv filter, since `--no-index` does not honor
+  # gitattributes. So instead we need to create a real git repo. However, we
+  # just need to add one side to the index and then compare the other side to
+  # a worktree. No commits needed.
+
+  # Create a temporary git directory. Ignore ~/.gitconfig in case the user has
+  # hooks set up.
+  local D=$(mktemp -d "${BASENAME}".XXXXXXXXXX)
+  trap "rm -rf -- $(printf %q "$D")" EXIT
+  GIT_CONFIG_GLOBAL=/dev/null git -C "$D" init -q
+  export GIT_DIR=$D/.git
+
+  # Set up the textconv filter.
+  echo '* diff=clean' > "$D"/.git/info/attributes
+  git config diff.clean.textconv "$SCRIPTPATH"/textconv
+
+  # Add $1 to the index.
+  if [[ -d $1 ]]; then
+    A=$1
+  else
+    A=$D/a
+    extract "$1" "$A"
+  fi
+  git --work-tree="$A" add -f .
+
+  # Set $2 as the working directory and run `git diff`.
+  if [[ -d $2 ]]; then
+    B=$2
+  else
+    B=$D/b
+    extract "$2" "$B"
+  fi
+  git --work-tree="$B" diff --no-prefix
+}
+
+# If given an archive as an argument, unpack it to a temporary directory.
+extract() {
+  local archive=$1
+  local tmpdir=$2
+  if ! [[ -f $archive ]]; then
+    echo "ERROR: file not found: $archive" >&2
+    exit 1
+  fi
+  mkdir -p "$tmpdir"
+  case "$archive" in
+    *.zip)
+      unzip -q -d "$tmpdir" "$archive"
+      ;;
+    *.tar.gz|*.tar.bz2|*.tar.xz|*.tgz|*.tbz2)
+      tar -xf "$archive" -C "$tmpdir"
+      ;;
+    *)
+      echo "ERROR: unsupported archive format: $archive" >&2
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"
