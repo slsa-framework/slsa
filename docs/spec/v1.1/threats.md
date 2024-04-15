@@ -139,46 +139,80 @@ the source repo does not match the expected value.
 
 ## Dependency threats
 
-A dependency threat is a vector for an adversary to introduce behavior to an
-artifact through external software that the artifact requires to function.
+A dependency threat is a potential for an adversary to introduce unintended
+behavior in one artifact by compromising some other artifact that the former
+depends on.
 
-SLSA mitigates dependency threats when you verify your dependencies' SLSA
-provenance.
+Dependency threats are projections of other threats onto another piece of
+software, and they are recursive by nature. For example, if application *X*
+includes library *Y* and *Y* is built by tool *Z*, then a Source or Build threat
+to *Z* is also a Dependency threat to *Y* and *X*.
 
-### (D) Use compromised dependency
+This version of SLSA does not explicitly address dependency threats, but we
+expect that a future version will. In the meantime, you can [apply SLSA
+recursively] to your dependencies in order to reduce the risk of dependency
+threats.
 
-<details><summary>Use a compromised build dependency</summary>
+[apply SLSA recursively]: verifying-artifacts.md#step-3-optional-check-dependencies-recursively
 
-*Threat:* The adversary injects malicious code into software required to build
-the artifact.
+### (D) Compromise build dependency
 
-*Mitigation:* N/A - This threat is out of scope of SLSA v1.0, though the build
-provenance may list build dependencies on a best-effort basis for forensic
-analysis. You may be able to mitigate this threat by pinning your build
-dependencies, preferably by digest rather than version number. Alternatively,
-you can [apply SLSA recursively](verifying-artifacts.md#step-3-optional-check-dependencies-recursively),
-but we have not yet standardized how to do so.
+[build dependency]: #d-compromise-build-dependency
 
-*Example:* The artifact uses `libFoo` and requires its source code to compile.
-The adversary compromises `libFoo`'s source repository and inserts malicious
-code. When your artifact builds, it contains the adversary's malicious code.
+An adversary compromises the target artifact through one of its build
+dependencies. Any artifact that is present in the build environment and has the
+ability to influence the output is considered a build dependency. This includes:
+
+-   Libraries, container base images, bundled files, and so on that are
+    "included" in the target artifact.
+-   Build tools, interpreters, command-line utilities, OS packages, and so on
+    that are "used" during the build process.
+
+**Reminder:** A [runtime dependency] that is loaded a build time is also a build
+dependency!
+
+<details><summary>Include a vulnerable dependency</summary>
+
+*Threat:* Target artifact statically links, bundles, or otherwise includes an
+artifact that is compromised or has some vulnerabilty.
+
+*Example:* The C++ program MyPackage statically links libDep at build time,
+which includes parts of libDep in the output artifact. A contributor
+accidentally introduces a security vulnerability into libDep. The next time
+MyPackage is built, it picks up the vulnerable version of libDep and the
+resulting MyPackage program is itself vulnerable.
+
+</details>
+<details><summary>Use a compromised build tool</summary>
+
+*Threat:* The build process of the target artifact executes or otherwise depends
+on some other compromised artifact that results in the output artifact having
+unintended behavior.
+
+*Example:* MyPackage is a tarball containing an ELF executable, created by
+running `/usr/bin/tar` during its build process. An adversary compromises the
+`tar` OS package such that `/usr/bin/tar` injects a backdoor into every ELF
+executable it writes. The next time MyPackage is built, the build picks up the
+vulnerable `tar` package, which injects the backdoor into the resulting
+MyPackage artifact.
 
 </details>
 
-<details><summary>Use a compromised runtime dependency</summary>
+### (n/a) Compromise runtime dependency
 
-*Threat:* The adversary injects malicious code into software required to run the
-artifact.
+[runtime dependency]: #na-compromise-runtime-dependency
 
-*Mitigation:* N/A - This threat is out of scope of SLSA v1.0. However, you can
-mitigate this threat by verifying SLSA provenance for all of your runtime
-dependencies that provide provenance.
+An adversary compromises a runtime dependency of target artifact, meaning an
+independent software artifact that the target artifact requires for use. A
+runtime dependency cannot, by definition, affect the build process of the target
+artifact. (But remember that any artifact loaded at build time is also
+considered a [build dependency]!) Examples of runtime dependencies include
+dynamically linked libraries or packages, or command-line utilities invoked by
+the target artifact but not bundled with the target artifact.
 
-*Example:* The artifact dynamically links `libBar` and requires a binary version
-to run. The adversary compromises `libBar`'s build process and inserts malicious
-code. When your artifact runs, it contains the adversary's malicious code.
-
-</details>
+SLSA's threat model does not explicitly model runtime dependencies. Instead,
+each runtime dependency is considered a distinct piece of software with its own
+threats.
 
 ## Build threats
 
