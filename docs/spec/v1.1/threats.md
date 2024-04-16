@@ -141,12 +141,15 @@ the source repo does not match the expected value.
 
 A dependency threat is a potential for an adversary to introduce unintended
 behavior in one artifact by compromising some other artifact that the former
-depends on.
+depends on at build time. (Runtime dependencies are excluded from the model, as
+[noted below](#runtime-dep).)
 
-Dependency threats are projections of other threats onto another piece of
-software, and they are recursive by nature. For example, if application *X*
-includes library *Y* and *Y* is built by tool *Z*, then a Source or Build threat
-to *Z* is also a Dependency threat to *Y* and *X*.
+Unlike other threat categories, dependency threats develop recursively through
+the supply chain and can only be exploited indirectly. For example, if
+application *A* includes library *B* as part of its build process, then a build
+or source threats to *B* is also a dependency threat to *A*. Furthermore, if
+library *B* uses build tool *C*, then a source or build threat to *C* is also a
+dependency threat to both *A* and *B*.
 
 This version of SLSA does not explicitly address dependency threats, but we
 expect that a future version will. In the meantime, you can [apply SLSA
@@ -167,27 +170,26 @@ ability to influence the output is considered a build dependency. This includes:
     "included" in the target artifact.
 -   Build tools, interpreters, command-line utilities, OS packages, and so on
     that are "used" during the build process.
+-   Runtime dependencies that are loaded during the build process and have the
+    ability to affect the build process.
 
-**Reminder:** A [runtime dependency] that is loaded a build time is also a build
-dependency!
+<details id="included-dep"><summary>Include a vulnerable dependency</summary>
 
-<details><summary>Include a vulnerable dependency</summary>
+*Threat:* Statically link, bundle, or otherwise include an artifact that is
+compromised or has some vulnerability, causing the output artifact to have the
+same vulnerability and the original artifact.
 
-*Threat:* Target artifact statically links, bundles, or otherwise includes an
-artifact that is compromised or has some vulnerabilty.
-
-*Example:* The C++ program MyPackage statically links libDep at build time,
-which includes parts of libDep in the output artifact. A contributor
-accidentally introduces a security vulnerability into libDep. The next time
-MyPackage is built, it picks up the vulnerable version of libDep and the
-resulting MyPackage program is itself vulnerable.
+*Example:* The C++ program MyPackage statically links libDep at build time. A
+contributor accidentally introduces a security vulnerability into libDep. The
+next time MyPackage is built, it picks up and includes the vulnerable version of
+libDep, resulting in MyPackage also having the security vulnerability.
 
 </details>
-<details><summary>Use a compromised build tool</summary>
+<details id="build-tool"><summary>Use a compromised build tool</summary>
 
-*Threat:* The build process of the target artifact executes or otherwise depends
-on some other compromised artifact that results in the output artifact having
-unintended behavior.
+*Threat:* Use a compromised tool or other software artifact during the build
+process, which alters the build process and injects unintended behavior into the
+output artifact.
 
 *Example:* MyPackage is a tarball containing an ELF executable, created by
 running `/usr/bin/tar` during its build process. An adversary compromises the
@@ -197,22 +199,47 @@ vulnerable `tar` package, which injects the backdoor into the resulting
 MyPackage artifact.
 
 </details>
+<details id="runtime-dep-at-build-time"><summary>Use a compromised runtime dependency during the build</summary>
 
-### (n/a) Compromise runtime dependency
+*Threat:* During the build process, use a compromised runtime dependency (such
+as during testing), which alters the build process and injects unwanted behavior
+into the output.
 
-[runtime dependency]: #na-compromise-runtime-dependency
+**NOTE:** This is technically the same case as [Use a compromised build
+tool](#build-tool). We call it out to remind the reader that
+[runtime dependencies](#runtime-dep) can become build dependencies if they are
+loaded during the build.
 
-An adversary compromises a runtime dependency of target artifact, meaning an
-independent software artifact that the target artifact requires for use. A
-runtime dependency cannot, by definition, affect the build process of the target
-artifact. (But remember that any artifact loaded at build time is also
-considered a [build dependency]!) Examples of runtime dependencies include
-dynamically linked libraries or packages, or command-line utilities invoked by
-the target artifact but not bundled with the target artifact.
+*Example:* MyPackage has a runtime dependency on package Dep, meaning that Dep
+is not included in MyPackage but required to be installed on the user's machine
+at the time MyPackage is run. However, Dep is also loaded during the build
+process of MyPackage as part of a test. An adversary compromises Dep such that,
+when run during a build, it injects a backdoor into the output artifact. The
+next time MyPackage is built, it picks up and loads Dep during the build
+process. The malicious code then injects the backdoor into the new MyPackage
+artifact.
 
-SLSA's threat model does not explicitly model runtime dependencies. Instead,
-each runtime dependency is considered a distinct piece of software with its own
-threats.
+*Mitigation:* In addition to all the mitigations for build tools, you can often
+avoid runtime dependencies becoming build dependencies by isolating tests to a
+separate environment that does not have write access to the output artifact.
+
+</details>
+
+### Related threats
+
+The following threats are related to "dependencies" but are not modeled as
+"dependency threats".
+
+<details id="runtime-dep"><summary>Use a compromised dependency at runtime <span>(modeled separately)</span></summary>
+
+*Threat:* Load a compromised artifact at runtime, thereby compromising the user
+or environment where the software ran.
+
+*Out of scope:* SLSA's threat model does not explicitly model runtime
+dependencies. Instead, each runtime dependency is considered a distinct piece of
+software with its own threats.
+
+</details>
 
 ## Build threats
 
