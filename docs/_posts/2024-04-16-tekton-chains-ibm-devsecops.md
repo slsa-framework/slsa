@@ -6,11 +6,9 @@ is_guest_post: true
 
 Tekton Chains and the IBM DevSecOps offering that builds on it can now be used to secure software artifacts with SLSA.
 
-
 ## From DevOps to DevSecOps
 
 For years the industry has been advocating the modernization of development processes with the adoption of what is known as "DevOps" with the promise that, by combining and automating software development and IT operations, DevOps can speed delivery of higher-quality software. However, with the constant rise in security attacks against all software we've seen a quick shift towards "DevSecOps" which continuously integrates and automates security throughout the DevOps lifecycle. DevSecOps makes security a first class citizen by addressing security concerns throughout the development lifecycle rather than as an afterthought and often last check.
-
 
 ## Tekton Chains
 
@@ -26,7 +24,6 @@ Indeed, one must set the Tekton Chains configuration output format option to `sl
 
 Obviously, it would make sense for the v1 format to be the default and I will do what I can to make this happen but in the meantime you now have the right incantation to get the desired result.
 
-
 ## IBM DevSecOps
 
 The [IBM DevSecOps offering](https://cloud.ibm.com/docs/devsecops) available to IBM Cloud users is based on Tekton and Tekton Chains and since January this year one can use it as a SLSA Level 3 build platform producing SLSA Provenance v1 attestations.
@@ -38,7 +35,6 @@ I'm happy to say that the configuration is a bit more straightforward than that 
 You can then use [cosign](https://github.com/sigstore/cosign) to verify the signature on the produced attestation.
 
 More details can be found in the [Configuring collection of SLSA attestations for images](https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-slsa) and the [Pipeline Private Workers - What is SLSA?](https://cloud.ibm.com/docs/ContinuousDelivery?topic=ContinuousDelivery-slsa-whatis) documentation.
-
 
 ## Related information
 
