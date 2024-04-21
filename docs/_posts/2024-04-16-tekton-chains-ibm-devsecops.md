@@ -16,7 +16,7 @@ For years the industry has been advocating the modernization of development proc
 
 As a sign of SLSA's growing adoption, Tekton Chains has been adding support for the production of SLSA Provenance attestations along with the ability to sign and verify artifacts with [sigstore](https://sigstore.dev).
 
-However, if you follow the [Getting Started Supply Chain Security Tekton tutorial](https://tekton.dev/docs/getting-started/supply-chain-security/) you will see that the attestation that you get is in the Provenance v0.1 or v0.2 format. While this is sufficient to achieve SLSA compliance you will probably want to get it in the Provenance v1 format rather since this is what is part of [SLSA v1.0 released last year](https://slsa.dev/blog/2023/04/slsa-v1-final).
+However, if you follow the [Getting Started Supply Chain Security Tekton tutorial](https://tekton.dev/docs/getting-started/supply-chain-security/) you will see that the attestation that you get is in the Provenance v0.1 or v0.2 format. While this is sufficient to achieve SLSA compliance you will probably want to get it in the Provenance v1 format rather since this is what is part of [SLSA v1.0 released last year](/blog/2023/04/slsa-v1-final).
 
 The good news is that thanks to a change introduced in [Tekton Chains v0.17.0](https://github.com/tektoncd/chains/releases/tag/v0.17.0), which was released last summer, Tekton Chains can now produce attestations in the SLSA Provenance v1 format. The challenge is that getting the right configuration to enable this capability involves option names that are rather puzzling.
 
@@ -38,8 +38,8 @@ More details can be found in the [Configuring collection of SLSA attestations fo
 
 ## Related information
 
-[SLSA 1.0](https://slsa.dev/spec/v1.0/)
+[SLSA 1.0](/spec/v1.0/)
 
-[SLSA Provenance v1](https://slsa.dev/spec/v1.0/provenance)
+[SLSA Provenance v1](/spec/v1.0/provenance)
 
 [Secure Your Software Supply Chain with SLSA Level 3 Support on IBM Cloud](https://community.ibm.com/community/user/cloud/blogs/steve-weaver1/2024/01/11/secure-your-software-supply-chain-with-slsa-level)
