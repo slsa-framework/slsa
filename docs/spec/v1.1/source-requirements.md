@@ -12,30 +12,38 @@ Why?: To facilitate verification without anchoring it to a build.
 -   **Model** Added a model, definitions, and the concept of verification.
 Why?: SLSA does not yet have a model for version control systems, and we need such a model to be able to discuss them.
 
+## Outstanding TODOs
+
+- [] Flesh out the definition and bounds of 'identity', and why they're required.
+- [] Refine requirements/guidance for trusted robots.
+- [] Either identify the unique value of L1 or merge it with L2.
+
 ## Source model
 
 The Source track is scoped to a single project that is controlled by some organization. That organization determines what Source level should apply to the project and administers technical controls to enforce that level.
+
 | Term | Description
 | --- | ---
-| Change | A set of modifications to one or more source files and associated metadata. Change metadata MUST include any information required to situate the change in relation to other changes (e.g. parent revision).
-| Change History | A record of the history of changes that went into the revision.
-| Organization | A collection of people who collectively create the Source. Examples of organizations include an open-source projects, a company, or a team within a company.
-| Revision | The canonical source at a given point in time as identified by the version control system. As an example, you can identify a git revision by its tree hash.
 | Source | An identifiable set of text and binary files and associated metadata usually used as input for the build system (see SLSA Build Track).
+| Organization | A collection of people who collectively create the Source. Examples of organizations include an open-source projects, a company, or a team within a company.
+| Change | A set of modifications to one or more source files and associated metadata. Change metadata MUST include any information required to situate the change in relation to othe| Version Control System | Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
+| Revision | The canonical source at a given point in time as identified by the version control system. As an example, you can identify a git revision by its tree hash.
+r changes (e.g. parent revision).
+| Change History | A record of the history of changes that went into the revision.
 | Source Control Platform | A service or suite of services for hosting version controlled software. GitHub and GitLab are examples of source control platforms, as are combinations of tools like Gerrit code reviews with GitHub source control.
-| Version Control System | Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
 
 ### Source Roles
 
 | Role | Description
 | --- | ---
 | Administrator | A human who can perform privileged operations on one or more projects. Privileged actions include, but are not limited to, modifying the change history and modifying project- or organization-wide security policies.
-| Merger | The person who applies a change to the source. This person may be the submitter or a different trusted person, depending on the version control platform.
-| Proposer | The human who proposes a particular change to the source.
-| Reviewer | The human who reviews a particular proposed change to the source.
 | Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
 | Trusted robot | Automation with an authentic identity that is authorized by the organization to propose and/or approve changes to the source.
 | Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
+| Proposer | The role that proposes a particular change to the source.
+| Reviewer | The role that reviews a particular proposed change to the source.
+| Approver | The role that approves a particular change to the source.
+| Merger | The role that applies a change to the source. This person may be the proposer or a different trusted person, depending on the version control platform.
 
 ## Source Platform Requirements
 
@@ -44,11 +52,11 @@ The version control system MUST provide at least:
 -   **[Immutable reference]** There exists a deterministic way to identify this particular revision. This is usually {project identifier + revision ID}. When the revision ID is a digest of the revision, as in git, nothing more is needed. When the revision ID is a number or otherwise not a digest, then the project server MUST guarantee that revisions cannot be altered once created.
 
 -   **[Change history]** There exists a record of the history of changes that went into the revision. Each change MUST contain:
-    -   The immutable reference to the new revision
-    -   The identities of the proposer, reviewers (if any), and merger (if different to the proposer)
+    -   The immutable reference to the new revision.
+    -   The identities of the proposer, reviewers (if any), and merger (if different to the proposer).
     -   Timestamps of change submission. If a change is reviewed, then the change history MUST also include timestamps for any reviews.
-    -   The change description/justification
-    -   The content of the change
+    -   The change description/justification.
+    -   The content of the change.
     -   The parent revisions.
 
 Most popular version control systems meet these requirement, such as git, Subversion, Mercurial, and Perforce.
@@ -81,7 +89,7 @@ Benefits: Version control solves software development challenges from ranging ch
 
 ### Level 2: Verified history
 
-Summary: The project is stored and managed through a source control platform that ensures the change history's integrity.
+Summary: The source code and its change history metadata are retained and authenticated to allow trustworthy auditing and analysis of the source code.
 
 Intended for: Organizations that are unwilling or unable to incorporate code review into their software development practices.
 
