@@ -17,6 +17,17 @@ changes in v1.1 relative to the prior release, [v1.0].
 -   It is now recommended that the `digest` field of `ResourceDescriptor` is
     set in a Verification Summary Attestation's (VSA) `policy` object.
 -   Further refine the [threat model](threats).
+-   Add a draft Source track.
+
+### Source track changes from v0.1
+
+-   **Scope** The Source track is now scoped to Revisions rather than builds.
+Why?: To facilitate verification without anchoring it to a build.
+
+-   **Model** Added a model, definitions, and the concept of verification.
+Why?: SLSA does not yet have a model for version control systems, and we need such a model to be able to discuss them.
+
+
 
 <!-- Footnotes and link definitions -->
 

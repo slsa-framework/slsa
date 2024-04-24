@@ -12,6 +12,31 @@ Why?: To facilitate verification without anchoring it to a build.
 -   **Model** Added a model, definitions, and the concept of verification.
 Why?: SLSA does not yet have a model for version control systems, and we need such a model to be able to discuss them.
 
+## Source model
+
+The Source track is scoped to a single project that is controlled by some organization. That organization determines what Source level should apply to the project and administers technical controls to enforce that level.
+| Term | Description
+| --- | ---
+| Change | A set of modifications to one or more source files and associated metadata. Change metadata MUST include any information required to situate the change in relation to other changes (e.g. parent revision).
+| Change History | A record of the history of changes that went into the revision.
+| Organization | A collection of people who collectively create the Source. Examples of organizations include an open-source projects, a company, or a team within a company.
+| Revision | The canonical source at a given point in time as identified by the version control system. As an example, you can identify a git revision by its tree hash.
+| Source | An identifiable set of text and binary files and associated metadata usually used as input for the build system (see SLSA Build Track).
+| Source Control Platform | A service or suite of services for hosting version controlled software. GitHub and GitLab are examples of source control platforms, as are combinations of tools like Gerrit code reviews with GitHub source control.
+| Version Control System | Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
+
+### Source Roles
+
+| Role | Description
+| --- | ---
+| Administrator | A human who can perform privileged operations on one or more projects. Privileged actions include, but are not limited to, modifying the change history and modifying project- or organization-wide security policies.
+| Merger | The person who applies a change to the source. This person may be the submitter or a different trusted person, depending on the version control platform.
+| Proposer | The human who proposes a particular change to the source.
+| Reviewer | The human who reviews a particular proposed change to the source.
+| Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
+| Trusted robot | Automation with an authentic identity that is authorized by the organization to propose and/or approve changes to the source.
+| Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
+
 ## Source Platform Requirements
 
 The version control system MUST provide at least:
@@ -21,7 +46,7 @@ The version control system MUST provide at least:
 -   **[Change history]** There exists a record of the history of changes that went into the revision. Each change MUST contain:
     -   The immutable reference to the new revision
     -   The identities of the proposer, reviewers (if any), and merger (if different to the proposer)
-    -   Timestamps of the reviews (if any) and submission
+    -   Timestamps of change submission. If a change is reviewed, then the change history MUST also include timestamps for any reviews.
     -   The change description/justification
     -   The content of the change
     -   The parent revisions.
@@ -50,7 +75,7 @@ Intended for: Organizations that are unwilling or unable to host their source on
 
 Requirements:
 
-**[Version controlled]** Every change to the source is tracked in a version control system that meets the requirements listed in [Infrastructure Requirements](#infrastructure-requirements).
+**[Version controlled]** Every change to the source is tracked in a version control system that meets the requirements listed in [Source Platform Requirements](#source-platform-requirements).
 
 Benefits: Version control solves software development challenges from ranging change attribution to effective collaboration. It is a software development best practice with more benefits than we can discuss here.
 
@@ -61,13 +86,13 @@ Summary: The project is stored and managed through a source control platform tha
 Intended for: Organizations that are unwilling or unable to incorporate code review into their software development practices.
 
 Requirements:
-**[Strong authentication]** User accounts that can modify the source or the project's configuration must use two-factor authentication or its equivalent.
+**[Strong authentication]** User accounts that can modify the source or the project's configuration must use multi-factor authentication or its equivalent.
 
 **[Verified timestamps]** Each entry in the change history must contain at least one timestamp that is determined by the source control platform and cannot be modified by clients. It MUST be clear in the change history which timestamps are determined by the source control platform.
 
 **[Retained history]** The change history MUST be preserved as long as the source is hosted on the source control system. The source MAY migrate to another source control system, but the organization MUST retain the change history if possible. It MUST NOT be possible for persons to delete or modify the change history, even with multi-party approval, except by trusted platform admins following an established deletion policy.
 
-Benefits: Attributes changes in the version history to specific actors and timestamps, which allows for post-auditing, incident response, and deterrence for bad actors.
+Benefits: Attributes changes in the version history to specific actors and timestamps, which allows for post-auditing, incident response, and deterrence for bad actors. Multi-factor authentication makes account compromise more difficult, further ensuring the integrity of change attribution.
 
 ### Level 3: Changes are authorized
 
@@ -78,7 +103,7 @@ Intended for: Enterprise projects and mature open source projects.
 Requirements:
 
 **[Code review]** All changes to the source are approved by two trusted persons prior to submission. User accounts that can perform code reviews MUST use two-factor authentication or its equivalent.
-The following combinations are acceptable:
+The following combinations of trusted persons are acceptable:
 
 -   Proposer and reviewer are two different trusted persons.
 -   Two different reviewers are trusted persons.

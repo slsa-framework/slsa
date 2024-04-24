@@ -299,32 +299,7 @@ Notes:
     *checksum database* guarantees that all clients receive the same artifact
     for a given URL.
 
-### Source model
-
-The Source track is scoped to a single project that is controlled by some organization. That organization determines what Source level should apply to the project and administers technical controls to enforce that level.
-| Term | Description
-| --- | ---
-| Change | A set of modifications to one or more source files and associated metadata. Change metadata MUST include any information required to situate the change in relation to other changes (e.g. parent revision).
-| Change History | A record of the history of changes that went into the revision.
-| Organization | A collection of people who collectively create the Source. Examples of organizations include an open-source projects, a company, or a team within a company.
-| Revision | The canonical source at a given point in time as identified by the version control system. As an example, you can identify a git revision by its tree hash.
-| Source | An identifiable set of text and binary files and associated metadata usually used as input for the build system (see SLSA Build Track).
-| Source Control Platform | A service or suite of services for hosting version controlled software. GitHub and GitLab are examples of source control platforms, as are combinations of tools like Gerrit code reviews with GitHub source control.
-| Version Control System | Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
-
-#### Source Roles
-
-| Role | Description
-| --- | ---
-| Administrator | A human who can perform privileged operations on one or more projects. Privileged actions include, but are not limited to, modifying the change history and modifying project- or organization-wide security policies.
-| Merger | The person who applies a change to the source. This person may be the submitter or a different trusted person, depending on the version control platform.
-| Proposer | The human who proposes a particular change to the source.
-| Reviewer | The human who reviews a particular proposed change to the source.
-| Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
-| Trusted robot | Automation with an authentic identity that is authorized by the organization to propose and/or approve changes to the source.
-| Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
-
-### Verification model
+### Build verification model
 
 Verification in SLSA is performed in two ways. Firstly, the build platform is
 certified to ensure conformance with the requirements at the level claimed by
@@ -366,3 +341,4 @@ implemented for different, broadly defined, package ecosystems.
 | Build platform certification | Performed by the language ecosystem packaging authority.
 
 </details>
+

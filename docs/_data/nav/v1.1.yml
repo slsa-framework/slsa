@@ -101,10 +101,6 @@
     url: /spec/v1.1/provenance
     description: Suggested Build provenance format and explanation
 
-  - title: Source Attestation
-    url: /spec/v1.1/source-attestation
-    description: Suggested source attestation format and explanation
-
   - title: Verification Summary
     url: /spec/v1.1/verification_summary
     description: Suggested VSA format and explanation
