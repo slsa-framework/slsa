@@ -147,7 +147,7 @@ depends on at build time. (Runtime dependencies are excluded from the model, as
 Unlike other threat categories, dependency threats develop recursively through
 the supply chain and can only be exploited indirectly. For example, if
 application *A* includes library *B* as part of its build process, then a build
-or source threats to *B* is also a dependency threat to *A*. Furthermore, if
+or source threat to *B* is also a dependency threat to *A*. Furthermore, if
 library *B* uses build tool *C*, then a source or build threat to *C* is also a
 dependency threat to both *A* and *B*.
 
@@ -164,16 +164,9 @@ threats.
 
 An adversary compromises the target artifact through one of its build
 dependencies. Any artifact that is present in the build environment and has the
-ability to influence the output is considered a build dependency. This includes:
+ability to influence the output is considered a build dependency.
 
--   Libraries, container base images, bundled files, and so on that are
-    "included" in the target artifact.
--   Build tools, interpreters, command-line utilities, OS packages, and so on
-    that are "used" during the build process.
--   Runtime dependencies that are loaded during the build process and have the
-    ability to affect the build process.
-
-<details id="included-dep"><summary>Include a vulnerable dependency</summary>
+<details id="included-dep"><summary>Include a vulnerable dependency (library, base image, bundled file, etc.)</summary>
 
 *Threat:* Statically link, bundle, or otherwise include an artifact that is
 compromised or has some vulnerability, causing the output artifact to have the
@@ -184,8 +177,10 @@ contributor accidentally introduces a security vulnerability into libDep. The
 next time MyPackage is built, it picks up and includes the vulnerable version of
 libDep, resulting in MyPackage also having the security vulnerability.
 
+*Mitigation:* **TODO**
+
 </details>
-<details id="build-tool"><summary>Use a compromised build tool</summary>
+<details id="build-tool"><summary>Use a compromised build tool (compiler, utility, interpreter, OS package, etc.)</summary>
 
 *Threat:* Use a compromised tool or other software artifact during the build
 process, which alters the build process and injects unintended behavior into the
@@ -198,12 +193,14 @@ executable it writes. The next time MyPackage is built, the build picks up the
 vulnerable `tar` package, which injects the backdoor into the resulting
 MyPackage artifact.
 
+*Mitigation:* **TODO**
+
 </details>
-<details id="runtime-dep-at-build-time"><summary>Use a compromised runtime dependency during the build</summary>
+<details id="runtime-dep-at-build-time"><summary>Use a compromised runtime dependency during the build (for tests, dynamic linking, etc.)</summary>
 
 *Threat:* During the build process, use a compromised runtime dependency (such
-as during testing), which alters the build process and injects unwanted behavior
-into the output.
+as during testing or dynamic linking), which alters the build process and
+injects unwanted behavior into the output.
 
 **NOTE:** This is technically the same case as [Use a compromised build
 tool](#build-tool). We call it out to remind the reader that
@@ -236,8 +233,8 @@ The following threats are related to "dependencies" but are not modeled as
 or environment where the software ran.
 
 *Out of scope:* SLSA's threat model does not explicitly model runtime
-dependencies. Instead, each runtime dependency is considered a distinct piece of
-software with its own threats.
+dependencies. Instead, each runtime dependency is considered a distinct artifact
+with its own threats.
 
 </details>
 
