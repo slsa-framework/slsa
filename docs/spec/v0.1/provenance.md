@@ -428,7 +428,7 @@ Here `entryPoint` references the `filename` from the CloudBuild
   // ... at the path path/to/cloudbuild.yaml.
   "entryPoint": "path/to/cloudbuild.yaml",
   // The only possible user-defined parameters that can affect a BuildTrigger
-  // are the subtitutions in the BuildTrigger.
+  // are the substitutions in the BuildTrigger.
   "arguments": {
     "substitutions": {...}
   }

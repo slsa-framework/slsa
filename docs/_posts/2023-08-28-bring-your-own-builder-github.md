@@ -4,9 +4,9 @@ author: "Andres Almiray (JReleaser), Adam Korczynski (Ada Logics), Philip Harris
 is_guest_post: false
 ---
 
-It has been an exciting quarter for supply chain security and SLSA, with the release of the [SLSA v1.0 specification](2023-04-19-slsa-v1-final.md), [SLSA provenance support for npm](https://github.blog/2023-04-19-introducing-npm-package-provenance/), and the announcement of new SLSA Level 3 builders for [Node.js](2023-05-11-bringing-improved-supply-chain-security-to-the-nodejs-ecosystem.md) and [containers](2023-06-13-slsa-github-worfklows-container-based.md)!
+It has been an exciting quarter for supply chain security and SLSA, with the release of the [SLSA v1.0 specification](2023-04-19-slsa-v1-final.md), [SLSA provenance support for npm](https://github.blog/2023-04-19-introducing-npm-package-provenance/), and the announcement of new SLSA Level 3 builders for [Node.js](2023-05-11-bringing-improved-supply-chain-security-to-the-nodejs-ecosystem.md) and [containers](2023-06-13-slsa-github-workflows-container-based.md)!
 
-SLSA already provides and maintains official builders for [Go](2022-06-20-slsa-github-workflows.md), [Node.js](2023-05-11-bringing-improved-supply-chain-security-to-the-nodejs-ecosystem.md) and [Container](2023-06-13-slsa-github-worfklows-container-based.md) based projects. But what if you don't use any of these languages or use custom tooling that isn't supported by the official builders?
+SLSA already provides and maintains official builders for [Go](2022-06-20-slsa-github-workflows.md), [Node.js](2023-05-11-bringing-improved-supply-chain-security-to-the-nodejs-ecosystem.md) and [Container](2023-06-13-slsa-github-workflows-container-based.md) based projects. But what if you don't use any of these languages or use custom tooling that isn't supported by the official builders?
 
 To empower the community to create their own provenance builders and leverage the secure architecture of the official SLSA builders we are releasing the ["Build Your Own Builder" (BYOB) framework](https://github.com/slsa-framework/slsa-github-generator/tree/main#build-your-own-builder) for GitHub Actions. This makes it easy to take an existing GitHub Action (e.g. [JReleaser](https://jreleaser.org/)) and make it produce [SLSA Build Level 3 provenance](/spec/v1.0/requirements#provenance-generation).
 

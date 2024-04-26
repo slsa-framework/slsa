@@ -63,7 +63,7 @@ _○ = REQUIRED unless there is a justification_
 ## Definitions
 
 > See also [Terminology](terminology.md) for general SLSA concepts. The
-> defintions below are only used in this document.
+> definitions below are only used in this document.
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
