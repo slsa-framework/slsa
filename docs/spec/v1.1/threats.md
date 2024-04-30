@@ -156,6 +156,19 @@ expect that a future version will. In the meantime, you can [apply SLSA
 recursively] to your dependencies in order to reduce the risk of dependency
 threats.
 
+-   **TODO:** Should we distinguish 1P vs 3P boundaries in the diagram, or
+    otherwise visualize 1P/3P?
+-   **TODO:** Expand to cover typosquatting, dependency confusion, and other
+    "dependency" threats.
+-   **TODO:** The word "compromised" is a bit too restrictive. If the publisher
+    intends to do harm, either because they tricked you into using a dependency
+    (typosquatting or dependency confusion), or because they were good and now
+    do something bad, that's not really "compromised" per se.
+-   **TODO:** Should we expand this to cover "transitive SLSA verification"?
+-   **TODO:** Update the Terminology page to show "build time" vs "runtime",
+    since the latter term results in confusion. Also consider the term "deploy
+    time" as an alternative.
+
 [apply SLSA recursively]: verifying-artifacts.md#step-3-optional-check-dependencies-recursively
 
 ### (D) Compromise build dependency
@@ -196,6 +209,10 @@ MyPackage artifact.
 *Mitigation:* **TODO**
 
 </details>
+
+Reminder: dependencies that look like [runtime dependencies](#runtime-dep)
+actually become build dependencies if they get loaded at build time.
+
 <details id="runtime-dep-at-build-time"><summary>Use a compromised runtime dependency during the build (for tests, dynamic linking, etc.)</summary>
 
 *Threat:* During the build process, use a compromised runtime dependency (such
