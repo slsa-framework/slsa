@@ -249,7 +249,7 @@ The following threats are related to "dependencies" but are not modeled as
 *Threat:* Load a compromised artifact at runtime, thereby compromising the user
 or environment where the software ran.
 
-*Out of scope:* SLSA's threat model does not explicitly model runtime
+*Mitigation:* N/A - This threat is out of scope of SLSA. SLSA's threat model does not explicitly model runtime
 dependencies. Instead, each runtime dependency is considered a distinct artifact
 with its own threats.
 
