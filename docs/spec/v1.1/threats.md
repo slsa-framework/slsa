@@ -183,7 +183,7 @@ ability to influence the output is considered a build dependency.
 
 *Threat:* Statically link, bundle, or otherwise include an artifact that is
 compromised or has some vulnerability, causing the output artifact to have the
-same vulnerability and the original artifact.
+same vulnerability.
 
 *Example:* The C++ program MyPackage statically links libDep at build time. A
 contributor accidentally introduces a security vulnerability into libDep. The
