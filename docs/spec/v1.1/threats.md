@@ -15,6 +15,21 @@ The examples on this page are meant to:
 -   Help implementers better understand what they are protecting against so that
     they can better design and implement controls.
 
+**TODO:** Expand this threat model to also cover "unknowns". Not sure if that is
+a "threat" or a "risk". Example: If libFoo is compromised, how do you know if
+you are compromised? At a first level, if you don't even know whether you
+include libFoo or not, that's a big risk. But even then, it might be that you
+don't use libFoo in a way that makes your product vulnerable. We should capture
+that somehow. This isn't specific to dependencies - it applies to the entire
+diagram.
+([discussion](https://github.com/slsa-framework/slsa/pull/1046/files/ebf34a8f9e874b219f152bad62673eae0b3ba2c3#r1585440922))
+
+**TODO:** This model only covers the artifact itself but not how it is used.
+However, in most cases, the attacker's goal is not to compromise an artifact but
+to compromise the *user* of that artifact. If no one uses the artifact, then it
+doesn't matter. It would be good to either (a) explain this nuance or (b) expand
+the model to cover this better.
+
 <article class="threats">
 
 ![Supply Chain Threats](images/supply-chain-threats.svg)
@@ -249,9 +264,15 @@ The following threats are related to "dependencies" but are not modeled as
 *Threat:* Load a compromised artifact at runtime, thereby compromising the user
 or environment where the software ran.
 
-*Mitigation:* N/A - This threat is out of scope of SLSA. SLSA's threat model does not explicitly model runtime
-dependencies. Instead, each runtime dependency is considered a distinct artifact
-with its own threats.
+*Example:* MyPackage lists package Dep as a runtime dependency. Adversary
+publishes a compromised version of Dep that runs malicious code on the user's
+machine when Dep is loaded at runtime. An end user installs MyPackage, which in
+turn installs the compromised version of Dep. When the user runs MyPackage, it
+loads and executes the malicious code from Dep.
+
+*Mitigation:* N/A - This threat is out of scope of SLSA. SLSA's threat model
+does not explicitly model runtime dependencies. Instead, each runtime dependency
+is considered a distinct artifact with its own threats.
 
 </details>
 
