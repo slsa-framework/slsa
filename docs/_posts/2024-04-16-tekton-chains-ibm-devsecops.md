@@ -12,7 +12,7 @@ For years the industry has been advocating the modernization of development proc
 
 ## Tekton Chains
 
-[Tekton](https://tekton.dev) is a powerful and flexible open-source framework for creating continuous integration and delivery (CI/CD) systems which is widely used in the industry to manage the production and deployments of software artifacts in the cloud as part of a DevOps strategy. [Tekton Chains](https://tekton.dev/docs/chains/) adds to Tekton a resource controller which can be used to secure Tekton pipelines and move one to DevSecOps.
+[Tekton](https://tekton.dev) is a powerful and flexible open-source framework for creating continuous integration and delivery (CI/CD) systems which is widely used in the industry to manage the production and deployments of software artifacts in the cloud as part of a DevOps strategy. [Tekton Chains](https://tekton.dev/docs/chains/) adds to Tekton a resource controller which can be used to manage your supply chain security in Tekton pipelines and move you towards DevSecOps.
 
 As a sign of SLSA's growing adoption, Tekton Chains has been adding support for the production of SLSA Provenance attestations along with the ability to sign and verify artifacts with [sigstore](https://sigstore.dev).
 
