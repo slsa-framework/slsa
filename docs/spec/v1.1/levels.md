@@ -262,7 +262,7 @@ All of [Build L3], plus:
     -   MUST run builds on a hosted build platform that meets Build L4
         requirements.
     -   SHOULD verify the build platform's attestations prior to a build and
-        produce a [VSA]() about the check.
+        produce a [verification summary] about the check.
 
 -   Build platform:
     -   Each build image (i.e., VM or container) made available to software
@@ -272,7 +272,7 @@ All of [Build L3], plus:
     -   Distribution of SLSA Provenance for pre-installed software within the
         build image MAY be best-effort.
     -   The boot process of each build environment MUST be measured and
-        attested using a [TCG-compliant Measured Boot]() mechanism. The
+        attested using a [TCG-compliant measured boot] mechanism. The
         attestation MUST be authenticated and distributed for independent
         verification.
     -   The initial state of the build environment's disk image MUST be
@@ -299,11 +299,11 @@ All of [Build L3], plus:
         ID) MUST be generated and cryptographically bound to a valid build
         environment integrity chain.
     -   All build platform generated attestations and cryptographic bindings
-        MUST be backed by a hardware root of trust (e.g., [TPM]() or [trusted
-        execution environment]()). Note: Virtual hardware (e.g., vTPM) MAY be
+        MUST be backed by a hardware root of trust (e.g., [TPM] or [trusted
+        execution environment]). Note: Virtual hardware (e.g., vTPM) MAY be
         used to meet this requirement.
     -   Runtime changes to the build environment's disk image SHOULD be
-        observable at runtime by the executing build requst.
+        observable at runtime by the executing build request.
 
 <dt>Benefits<dd>
 
@@ -315,12 +315,12 @@ All of [Build L3], plus:
     beyond self-attestation by the build platform operator.
 -   Provides cryptographic, hardware-rooted evidence about:
     -   The initial state of the compute environment executing a build, such
-    as its boot settings (e.g., secure boot enabled), the bootloader and
+    as its boot settings (e.g., measured boot enabled), the bootloader and
     kernel image.
     -   The initial state of the environment's disk image and its
     configuration.
     -   The build environment that executed a particular run of a build.
--   The use of [confidential computing technologies]() to meet these
+-   The use of [confidential computing] to meet these
     requirements provides builds with additional data and code
     confidentiality and tamper-evidence properties during build execution.
 
@@ -334,8 +334,13 @@ All of [Build L3], plus:
 [build l2]: #build-l2
 [build l3]: #build-l3
 [build l4]: #build-l4
+[confidential computing]: https://confidentialcomputing.io/wp-content/uploads/sites/10/2023/03/Common-Terminology-for-Confidential-Computing.pdf
 [future versions]: future-directions.md
 [hosted]: requirements.md#isolation-strength
 [previous version]: ../v0.1/levels.md
 [provenance]: terminology.md
+[TCG-compliant measured boot]: https://trustedcomputinggroup.org/resource/tcg-efi-platform-specification/
+[TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
+[trusted execution environment]: https://csrc.nist.gov/glossary/term/trusted_execution_environment
 [verification]: verifying-artifacts.md
+[verification summary]: verification_summary.md
