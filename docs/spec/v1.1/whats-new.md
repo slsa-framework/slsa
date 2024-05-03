@@ -16,6 +16,7 @@ changes in v1.1 relative to the prior release, [v1.0].
 -   Add verifier metadata to VSA format.
 -   It is now recommended that the `digest` field of `ResourceDescriptor` is
     set in a Verification Summary Attestation's (VSA) `policy` object.
+-   Further refine the [threat model](threats).
 
 <!-- Footnotes and link definitions -->
 
