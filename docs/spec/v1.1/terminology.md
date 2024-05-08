@@ -125,6 +125,38 @@ of build types](/provenance/v1#index-of-build-types).
 
 </details>
 
+### Build environment model
+
+Following the [build model](#build-model), we model a *build environment*
+as a single instance of an execution context that runs a tenant's build
+on a hosted build platform. Specifically, a build environment comprises
+resources from the *compute platform* and a *build image*.
+
+A typical build environment will go through the following lifecycle:
+
+1.  A hosted build platform creates different build images through a separate
+    build process. For SLSA Build L4, the build platform outputs provenance
+    describing this process.
+2.  The hosted build platform provisions resources on the compute platform
+    and a build image launch a new build environment. For SLSA Build L4, the
+    build platform validates the *measurement* of the *boot process*.
+3.  When a new *build request* arrives at the hosted build platform, the
+    platform assigns the request to a pre-provisioned build environment.
+    For SLSA Build L4, the tenant may validate the measurement of the build
+    environment.
+4.  Finally, the build environment executes the tenant's build steps.
+
+| Primary Term | Description
+| --- | ---
+| Build image | The run-time context within a build environment, such as the VM or container image. Individual components of a build image are provided by both the hosted build platform and tenant, and include the build executor, platform-provided pre-installed guest OS and packages, and the tenant’s build steps and external parameters.
+| Build executor | The platform-provided program dedicated to executing the tenant’s build definition, i.e., running the build, within the build image.
+| Build request | The process of assigning a build to a pre-provisioned build environment on a hosted build process.
+| Compute platform | The compute system and infrastructure, i.e., the host system (hypervisor and/or OS) and hardware, underlying a build platform. In practice, the compute platform and the build platform may be managed by the same or distinct organizations.
+| Boot process | In the context of builds, the process of loading and executing the layers of firmware and software needed to start up a build environment.
+| Measurement | The cryptographic hash of some system state in the build environment, including software binaries, configuration, or initialized run-time data. Software layers that are commonly measured include the bootloader, kernel, and kernel cmdline.
+
+TODO: Disambiguate similar terms (e.g., build job, build runner)
+
 ### Package model
 
 Software is distributed in identifiable units called <dfn>packages</dfn>
