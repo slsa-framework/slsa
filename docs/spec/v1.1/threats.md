@@ -100,7 +100,7 @@ review for these changes.
 > accounts?
 
 </details>
-<details><summary>Abuse review exceptions<span>(SLSA 4)</span></summary>
+<details><summary>Abuse review exceptions</summary>
 
 *Threat:* Exploit a review exception to submit a bad change without review.
 
