@@ -244,7 +244,7 @@ platform's supply chain or physical access to the underlying compute
 platform.
 
 In practice, this means that builds are configured to run on a build platform
-that supports hardware capabilities for attestesting to the state of the
+that supports hardware capabilities for attesting to the state of the
 compute environment executing builds.
 
 <dt>Intended for<dd>
