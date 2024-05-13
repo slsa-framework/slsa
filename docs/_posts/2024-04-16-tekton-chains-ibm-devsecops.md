@@ -4,7 +4,7 @@ author: "Arnaud J Le Hors"
 is_guest_post: true
 ---
 
-Tekton Chains and the IBM DevSecOps offering that builds on it can now be used to secure software artifacts with SLSA.
+Tekton Chains, and the IBM DevSecOps offering that builds on it, can now be used to secure software artifacts with SLSA.
 
 ## From DevOps to DevSecOps
 
@@ -12,7 +12,7 @@ For years the industry has been advocating the modernization of development proc
 
 ## Tekton Chains
 
-[Tekton](https://tekton.dev) is a powerful and flexible open-source framework for creating continuous integration and delivery (CI/CD) systems which is widely used in the industry to manage the production and deployments of software artifacts in the cloud as part of a DevOps strategy. [Tekton Chains](https://tekton.dev/docs/chains/) adds to Tekton a resource controller which can be used to manage your supply chain security in Tekton pipelines and move you towards DevSecOps.
+[Tekton](https://tekton.dev) is a powerful and flexible open-source framework for creating continuous integration and delivery (CI/CD) systems which is used in the industry to manage the production and deployments of software artifacts in the cloud as part of a DevOps strategy. [Tekton Chains](https://tekton.dev/docs/chains/) adds to Tekton a resource controller which can be used to manage your supply chain security in Tekton pipelines and move you towards DevSecOps.
 
 As a sign of SLSA's growing adoption, Tekton Chains has been adding support for the production of SLSA Provenance attestations along with the ability to sign and verify artifacts with [sigstore](https://sigstore.dev).
 
@@ -22,15 +22,15 @@ The good news is that thanks to a change introduced in [Tekton Chains v0.17.0](h
 
 Indeed, one must set the Tekton Chains configuration output format option to `slsa/v2alpha3` to get the Provenance v1 format, while setting the format to `slsa/v1` (which is currently the default) produces an attestation in Provenance v0.2. These values are obviously unfortunate. There is actually evidence in the repo that they weren't meant to be exposed to the user but, as it sometimes happens, things that are meant to be temporary stick beyond the initial phase and, as specified in the [How to configure Tekton Chains](https://tekton.dev/docs/chains/slsa-provenance/#how-to-configure-tekton-chains) documentation, `slsa/v2alpha3` is what you must use for now.
 
-Obviously, it would make sense to have more straightforward values and for the v1 format to be the default. I will do what I can to help make this happen, but in the meantime you now have the right configuration to get the desired result.
+Obviously, it would make sense to have more straightforward values and for the v1 format to be the default. I will do what I can by engaging with the Tekton Chains community to help make this happen, but in the meantime you now have the right configuration to get the desired result.
 
 ## IBM DevSecOps
 
 The [IBM DevSecOps offering](https://cloud.ibm.com/docs/devsecops) available to IBM Cloud users is based on Tekton and Tekton Chains and since January this year one can use it as a SLSA Level 3 build platform producing SLSA Provenance v1 attestations.
 
-This build platform is used internally to produce software artifacts such as the [IBM Cloud Paks](https://www.ibm.com/cloud-paks) generating along with them both SBOMs and SLSA Provenance attestations, and IBM Cloud users can equally benefit from it by using it to produce their own software artifacts.
+This build platform is used internally by IBM to produce software artifacts such as the [IBM Cloud Paks](https://www.ibm.com/cloud-paks) generating along with them both SBOMs and SLSA Provenance attestations, and IBM Cloud users can equally benefit from it by using it to produce their own software artifacts.
 
-I'm happy to say that the configuration is a bit more straightforward than that of Tekton Chains and one can simply set the `slsa-attestation` parameter to `1` to get the build platform to produce SLSA attestations in the Provenance v1 format.
+I'm happy to say that the configuration of IBM DevSecOps is a bit more straightforward than that of Tekton Chains and one can simply set the `slsa-attestation` parameter to `1` to get the build platform to produce SLSA attestations in the Provenance v1 format.
 
 You can then use [cosign](https://github.com/sigstore/cosign) to verify the signature on the produced attestation.
 
