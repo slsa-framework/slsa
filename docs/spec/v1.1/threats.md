@@ -36,6 +36,33 @@ the model to cover this better.
 
 See [Terminology](terminology.md) for an explanation of supply chain model.
 
+## Overview
+
+This model describes the threats to a consumer stemming from its use of
+software, scoped specifically to threats how the software is obtained and
+developed. In other words, we are protecting against an adversary who intends to
+do harm to a consumer.
+
+Out of scope:
+
+-   Application-specific threats, such as correctness of the code.
+-   Physical or virtual threats to the environment where the consumer is
+    running, such as physical or remote administrative access to a consumer's
+    machine.
+
+A consumer is the environment where the software package is used. Examples
+include an end user's machine, a build of another software package, a runtime
+environment like Kubernetes, or firmware delivered in a piece of hardware to
+customers.
+
+In this model, a consumer uses *many* software packages, and we model the risk
+of each software package individually. This is important to keep in mind, since
+the diagram just shows a single package. In reality, a consumer has aggregate
+risk from all of the software they consume. It is not reasonable to say, "Well,
+I trust my build system," because a consumer often uses *thousands* of software
+packages and cannot reasonably understand and trust the build process of them
+all. If any single one is compromised, the consumer is compromised.
+
 ## Source threats
 
 A source integrity threat is a potential for an adversary to introduce a change
