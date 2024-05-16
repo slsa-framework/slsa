@@ -15,6 +15,51 @@ The examples on this page are meant to:
 -   Help implementers better understand what they are protecting against so that
     they can better design and implement controls.
 
+<article class="threats">
+
+## Overview
+
+![Supply Chain Threats](images/supply-chain-threats.svg)
+
+See [Terminology](terminology.md) for an explanation of supply chain model.
+
+This model describes the threats to a consumer stemming from its use of
+software. In other words, we are protecting against an adversary who intends to
+do harm to a consumer.
+
+A consumer is any environment where software is used. Examples include an end
+user's machine, a build of another software package, a runtime environment like
+Kubernetes, or firmware delivered in a piece of hardware to customers. In fact,
+a consumer could be an entire organization or company.
+
+A consumer uses multiple software packages (often thousands!), and this model
+and diagram discusses the threat of each software package individually. In
+reality, the consumer faces aggregate risk across all of these packages it uses.
+Some of those packages may be "first party", meaning that the producer and
+consumer belong to the same organization, while others may be "third party".
+
+The model clusters threats into useful groupings to enable more easy discussion.
+For example, the Go checksum database protects against a particular class of
+threats. Instead of having to describe that in detail, they can now say, "It's
+threat (H) in the SLSA threat mode."
+
+**TODO:** Can/should we better expand the model to cover the usage of the
+artifact, or other threats on the consumer?
+
+**TODO:** Better phrase the above.
+
+## Cross-cutting threats
+
+The following threats cut across all parts of the software supply chain, not in
+any particular location.
+
+**TODO:** Should this be listed first or last?
+
+### (Z) Lack of observability
+
+**TODO:** Explain the lack of observability / visibility into the supply chain.
+This is what SLSA Build L1 gives you, to some degree.
+
 **TODO:** Expand this threat model to also cover "unknowns". Not sure if that is
 a "threat" or a "risk". Example: If libFoo is compromised, how do you know if
 you are compromised? At a first level, if you don't even know whether you
@@ -23,45 +68,6 @@ don't use libFoo in a way that makes your product vulnerable. We should capture
 that somehow. This isn't specific to dependencies - it applies to the entire
 diagram.
 ([discussion](https://github.com/slsa-framework/slsa/pull/1046/files/ebf34a8f9e874b219f152bad62673eae0b3ba2c3#r1585440922))
-
-**TODO:** This model only covers the artifact itself but not how it is used.
-However, in most cases, the attacker's goal is not to compromise an artifact but
-to compromise the *user* of that artifact. If no one uses the artifact, then it
-doesn't matter. It would be good to either (a) explain this nuance or (b) expand
-the model to cover this better.
-
-<article class="threats">
-
-![Supply Chain Threats](images/supply-chain-threats.svg)
-
-See [Terminology](terminology.md) for an explanation of supply chain model.
-
-## Overview
-
-This model describes the threats to a consumer stemming from its use of
-software, scoped specifically to threats how the software is obtained and
-developed. In other words, we are protecting against an adversary who intends to
-do harm to a consumer.
-
-Out of scope:
-
--   Application-specific threats, such as correctness of the code.
--   Physical or virtual threats to the environment where the consumer is
-    running, such as physical or remote administrative access to a consumer's
-    machine.
-
-A consumer is the environment where the software package is used. Examples
-include an end user's machine, a build of another software package, a runtime
-environment like Kubernetes, or firmware delivered in a piece of hardware to
-customers.
-
-In this model, a consumer uses *many* software packages, and we model the risk
-of each software package individually. This is important to keep in mind, since
-the diagram just shows a single package. In reality, a consumer has aggregate
-risk from all of the software they consume. It is not reasonable to say, "Well,
-I trust my build system," because a consumer often uses *thousands* of software
-packages and cannot reasonably understand and trust the build process of them
-all. If any single one is compromised, the consumer is compromised.
 
 ## Source threats
 
@@ -75,12 +81,31 @@ SLSA v1.0 does not address source threats, but we anticipate doing so in a
 threats and potential mitigations listed here show how SLSA v1.0 can fit into a
 broader supply chain security program.
 
-### (A) Submit unauthorized change
+### (A) Untrustworthy producer
+
+The producer of the software intentionally 
+
+<details><summary>Software producer intentionally submits bad code</summary>
+
+*Threat:* Software producer intentionally submits "bad" code, following all
+proper processes.
+
+*Mitigation:* Vet 
+an important but separate property from integrity.
+
+*Example:* A popular extension author sells the rights to a new owner, who then
+modifies the code to secretly mine bitcoin at the users' expense. SLSA does not
+protect against this, though if the extension were open source, regular auditing
+may discourage this from happening.
+
+</details>
+
+### (B) Unintended change to source
 
 An adversary introduces a change through the official source control management
 interface without any special administrator privileges.
 
-#### (A1) Submit change without review
+#### (B1) Submit change without review
 
 <details><summary>Directly submit without review</summary>
 
@@ -233,20 +258,6 @@ does not accept this because the version X is not considered reviewed.
 
 #### (A3) Code review bypasses that are out of scope of SLSA
 
-<details><summary>Software producer intentionally submits bad code</summary>
-
-*Threat:* Software producer intentionally submits "bad" code, following all
-proper processes.
-
-*Mitigation:* **Outside the scope of SLSA.** Trust of the software producer is
-an important but separate property from integrity.
-
-*Example:* A popular extension author sells the rights to a new owner, who then
-modifies the code to secretly mine bitcoin at the users' expense. SLSA does not
-protect against this, though if the extension were open source, regular auditing
-may discourage this from happening.
-
-</details>
 <details><summary>Collude with another trusted person</summary>
 
 *Threat:* Two trusted persons collude to author and approve a bad change.
@@ -418,6 +429,8 @@ the source repo does not match the expected value.
 </details>
 
 ## Dependency threats
+
+TODO: Move this after Build Threats so that it stays in alphabetical order.
 
 A dependency threat is a potential for an adversary to introduce unintended
 behavior in one artifact by compromising some other artifact that the former
