@@ -21,11 +21,12 @@ The examples on this page are meant to:
 
 ![Supply Chain Threats](images/supply-chain-threats.svg)
 
-See [Terminology](terminology.md) for an explanation of supply chain model.
+See [Terminology](terminology.md) for an explanation of the base supply chain
+model.
 
-This model describes the threats to a consumer stemming from its use of
-software. In other words, we are protecting against an adversary who intends to
-do harm to a consumer.
+This document enumerates software supply chain threats that a consumer faces
+through its use of software. It clusters threats into useful groupings labeled
+(A) through (Z) in order to more easily discuss risks and mitigations.
 
 A consumer is any environment where software is used. Examples include an end
 user's machine, a build of another software package, a runtime environment like
@@ -38,35 +39,20 @@ reality, the consumer faces aggregate risk across all of these packages it uses.
 Some of those packages may be "first party", meaning that the producer and
 consumer belong to the same organization, while others may be "third party".
 
-The model clusters threats into useful groupings to enable more easy discussion.
-For example, the Go checksum database protects against a particular class of
-threats. Instead of having to describe that in detail, they can now say, "It's
-threat (H) in the SLSA threat mode."
+## Visibility threats
 
-**TODO:** Can/should we better expand the model to cover the usage of the
-artifact, or other threats on the consumer?
+### (Z) Lack of supply chain visibility
 
-**TODO:** Better phrase the above.
+The consumer lacks visibility into the supply chain of the software it consumes,
+preventing it from understanding and mitigating any other threat. This is
+arguably the highest priority threat to address.
 
-## Cross-cutting threats
+**TODO:** Explain mitigations: SLSA Build L1, SBOM, etc.
 
-The following threats cut across all parts of the software supply chain, not in
-any particular location.
-
-**TODO:** Should this be listed first or last?
-
-### (Z) Lack of observability
-
-**TODO:** Explain the lack of observability / visibility into the supply chain.
-This is what SLSA Build L1 gives you, to some degree.
-
-**TODO:** Expand this threat model to also cover "unknowns". Not sure if that is
-a "threat" or a "risk". Example: If libFoo is compromised, how do you know if
+**TODO:** Example: If libFoo is compromised, how do you know if
 you are compromised? At a first level, if you don't even know whether you
 include libFoo or not, that's a big risk. But even then, it might be that you
-don't use libFoo in a way that makes your product vulnerable. We should capture
-that somehow. This isn't specific to dependencies - it applies to the entire
-diagram.
+don't use libFoo in a way that makes your product vulnerable.
 ([discussion](https://github.com/slsa-framework/slsa/pull/1046/files/ebf34a8f9e874b219f152bad62673eae0b3ba2c3#r1585440922))
 
 ## Source threats
@@ -83,15 +69,16 @@ broader supply chain security program.
 
 ### (A) Untrustworthy producer
 
-The producer of the software intentionally 
+The producer of the software intentionally produces code that harms the
+consumer, or the producer otherwise uses practices that are not deserving of the
+consumer's trust.
 
 <details><summary>Software producer intentionally submits bad code</summary>
 
 *Threat:* Software producer intentionally submits "bad" code, following all
 proper processes.
 
-*Mitigation:* Vet 
-an important but separate property from integrity.
+*Mitigation:* **TODO**
 
 *Example:* A popular extension author sells the rights to a new owner, who then
 modifies the code to secretly mine bitcoin at the users' expense. SLSA does not
@@ -100,10 +87,19 @@ may discourage this from happening.
 
 </details>
 
+**TODO:** More threats?
+
 ### (B) Unintended change to source
 
 An adversary introduces a change through the official source control management
 interface without any special administrator privileges.
+
+The threats in this category are theoretically mitigated by code review or some
+other quality controls. Contrast this with (A), where such controls are
+ineffective.
+
+**TODO:** Many readers find the split between (A) and (B) confusing. Perhaps we
+want to organize a different way.
 
 #### (B1) Submit change without review
 
@@ -256,7 +252,7 @@ does not accept this because the version X is not considered reviewed.
 
 </details>
 
-#### (A3) Code review bypasses that are out of scope of SLSA
+#### (A3) Render code review ineffective
 
 <details><summary>Collude with another trusted person</summary>
 
@@ -283,7 +279,7 @@ stamping."
 
 </details>
 
-### (B) Compromise source repo
+### (C) Compromise source control
 
 An adversary introduces a change to the source control repository through an
 administrative interface, or through a compromise of the underlying
@@ -341,10 +337,11 @@ management system to bypass controls.
 
 </details>
 
-### (C) Build from modified source
+### (D) Wrong SoT or build params
 
 An adversary builds from a version of the source code that does not match the
-official source control repository.
+official Source of Truth (SoT), or uses parameters to the build that inject
+behavior that was not intended by the owners of the SoT.
 
 The mitigation here is to compare the provenance against expectations for the
 package, which depends on SLSA Build L1 for provenance. (Threats against the
@@ -430,7 +427,7 @@ the source repo does not match the expected value.
 
 ## Dependency threats
 
-TODO: Move this after Build Threats so that it stays in alphabetical order.
+**TODO:** Move this after Build Threats so that it stays in alphabetical order.
 
 A dependency threat is a potential for an adversary to introduce unintended
 behavior in one artifact by compromising some other artifact that the former
@@ -464,9 +461,9 @@ threats.
 
 [apply SLSA recursively]: verifying-artifacts.md#step-3-optional-check-dependencies-recursively
 
-### (D) Compromise build dependency
+### (J) "Bad" build dependency
 
-[build dependency]: #d-compromise-build-dependency
+[build dependency]: #d-bad-build-dependency
 
 An adversary compromises the target artifact through one of its build
 dependencies. Any artifact that is present in the build environment and has the
@@ -702,9 +699,12 @@ controls are in place to prevent abusing admin privileges.
 
 </details>
 
-### (F) Upload modified package
+### (F) Direct package upload
 
-An adversary uploads a package not built from the proper build process.
+An adversary directly uploads a package that does not reflect the proper
+Source of Truth (SoT).
+
+This is the most direct threat because it is the easiest to pull off.
 
 <details><summary>Build with untrusted CI/CD <span>(expectations)</span></summary>
 
@@ -765,6 +765,9 @@ cryptographic signature is no longer valid.
 
 ### (G) Compromise package registry
 
+**TODO:** Rewrite this section and differentiate from (H). The content here is
+not right.
+
 An adversary modifies the package on the package registry using an
 administrative interface or through a compromise of the infrastructure.
 
@@ -784,11 +787,28 @@ administrative interface or through a compromise of the infrastructure.
 
 </details>
 
-### (H) Use compromised package
+### (H) Wrong artifact returned
 
-An adversary modifies the package after it has left the package registry, or
-tricks the user into using an unintended package.
+**TODO:** The title does not match this description, and we do not yet have
+consensus on what the split between (G) and (H) should be.
 
+An adversaries modifies the package after it has left the package registry.
+
+**TODO:** Enumerate the threats here.
+
+### (I) Use of unintended package
+
+The consumer requests a package that it did not intend.
+
+**TODO:** Update text below to stop saying it's out of scope of SLSA. Also
+should we write the these from the adversary's perspective or from the
+consumer's perspective?
+
+<details><summary>Dependency confusion</summary>
+
+**TODO**
+
+</details>
 <details><summary>Typosquatting</summary>
 
 *Threat:* Register a package name that is similar looking to a popular package
@@ -825,7 +845,7 @@ lacks a positive attestation showing that some system, such as GitHub, ensured
 retention and availability of the source code.
 
 </details>
-<details><summary>(D) A dependency becomes temporarily or permanently unavailable to the build process</summary>
+<details><summary>(J) A dependency becomes temporarily or permanently unavailable to the build process</summary>
 
 *Threat:* Unable to perform a build with the intended dependencies.
 
