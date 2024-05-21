@@ -32,35 +32,42 @@ build level, implementing any controls as specified by the chosen platform.
   <th>Implementer
   <th>Requirement
   <th>Degree
-  <th>L1<th>L2<th>L3
+  <th>L1<th>L2<th>L3<th>L4
 <tr>
   <td rowspan=3><a href="#producer">Producer</a>
   <td colspan=2><a href="#choose-an-appropriate-build-platform">Choose an appropriate build platform</a>
-  <td>✓<td>✓<td>✓
+  <td>✓<td>✓<td>✓<td>✓
 <tr>
   <td colspan=2><a href="#follow-a-consistent-build-process">Follow a consistent build process</a>
-  <td>✓<td>✓<td>✓
+  <td>✓<td>✓<td>✓<td>✓
 <tr>
   <td colspan=2><a href="#distribute-provenance">Distribute provenance</a>
-  <td>✓<td>✓<td>✓
+  <td>✓<td>✓<td>✓<td>✓
 <tr>
-  <td rowspan=5><a href="#build-platform">Build platform</a>
+  <td rowspan=7><a href="#build-platform">Build platform</a>
   <td rowspan=3><a href="#provenance-generation">Provenance generation</a>
   <td><a href="#provenance-exists">Exists</a>
-  <td>✓<td>✓<td>✓
+  <td>✓<td>✓<td>✓<td>✓
 <tr>
   <td><a href="#provenance-authentic">Authentic</a>
-  <td> <td>✓<td>✓
+  <td> <td>✓<td>✓<td>✓
 <tr>
   <td><a href="#provenance-unforgeable">Unforgeable</a>
-  <td> <td> <td>✓
+  <td> <td> <td>✓<td>✓
 <tr>
   <td rowspan=2><a href="#isolation-strength">Isolation strength</a>
   <td><a href="#hosted">Hosted</a>
-  <td> <td>✓<td>✓
+  <td> <td>✓<td>✓<td>
 <tr>
   <td><a href="#isolated">Isolated</a>
-  <td> <td> <td>✓
+  <td> <td> <td>✓<td>
+<tr>
+  <td rowspan=2><a href="#build-environment-integrity">Build environment integrity</a>
+  <td><a href="#measured">Measured</a>
+  <td> <td> <td> <td>✓
+<tr>
+  <td><a href="#hardware-attested">Hardware Attested</a>
+  <td> <td> <td> <td>✓
 </table>
 
 ### Security Best Practices
@@ -153,7 +160,7 @@ minimum requirements on its:
     the build process?
 
 <table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
 
 <tr id="provenance-exists"><td>Provenance Exists<td>
 
@@ -182,7 +189,7 @@ Provenance.
 [SLSA Provenance]: provenance.md
 [associated suite]: ../../attestation-model#recommended-suite
 
-<td>✓<td>✓<td>✓
+<td>✓<td>✓<td>✓<td>✓
 <tr id="provenance-authentic"><td>Provenance is Authentic<td>
 
 *Authenticity:* Consumers MUST be able to validate the authenticity of the
@@ -233,7 +240,7 @@ build platform (i.e. outside the trust boundary), except as noted below.
     the provenance.
 -   Completeness of resolved dependencies is best effort.
 
-<td> <td>✓<td>✓
+<td> <td>✓<td>✓<td>✓
 <tr id="provenance-unforgeable"><td>Provenance is Unforgeable<td>
 
 *Accuracy:* Provenance MUST be strongly resistant to forgery by tenants.
@@ -258,7 +265,7 @@ build platform (i.e. outside the trust boundary), except as noted below.
 Note: This requirement was called "non-falsifiable" in the initial
 [draft version (v0.1)](../v0.1/requirements.md#non-falsifiable).
 
-<td> <td> <td>✓
+<td> <td> <td>✓<td>✓
 </table>
 
 ### Isolation strength
@@ -275,7 +282,7 @@ information on assessing a build platform's isolation strength, see
 [Verifying build platforms](verifying-systems.md).
 
 <table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
 
 <tr id="hosted">
 <td>Hosted
@@ -286,7 +293,7 @@ infrastructure, not on an individual's workstation.
 
 Examples: GitHub Actions, Google Cloud Build, Travis CI.
 
-<td> <td>✓<td>✓
+<td> <td>✓<td>✓<td>✓
 <tr id="isolated">
 <td>Isolated
 <td>
@@ -330,7 +337,79 @@ means that the build ran with no network access. Such a requirement requires
 substantial changes to both the build platform and each individual build, and is
 considered in the [future directions](future-directions.md).
 
-<td> <td> <td>✓
+<td> <td> <td>✓<td>✓
+</table>
+
+### Build Environment Integrity
+
+[Build environment integrity]: #build-environment-integrity
+
+TODO
+
+<table>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
+
+<tr id="measured">
+<td>Measured
+<td>
+
+TODO
+
+<td> <td> <td> <td>✓
+<tr id="hardware-attested">
+<td>Hardware Attested
+<td>
+
+The build platform ensured that the build steps ran in an isolated environment,
+free of unintended external influence. In other words, any external influence on
+the build was specifically requested by the build itself. This MUST hold true
+even between builds within the same tenant project.
+
+The build platform MUST guarantee the following:
+
+**FIXME**
+
+-   Each build image (i.e., VM or container) made available to software
+        producers MUST be built on a SLSA Build L3+ platform. The generated
+        SLSA Provenance MUST be distributed to allow for independent
+        verification.
+-   Distribution of SLSA Provenance for pre-installed software within the
+        build image MAY be best-effort.
+-   The boot process of each build environment MUST be measured and
+        attested using a [TCG-compliant measured boot] mechanism. The
+        attestation MUST be authenticated and distributed for independent
+        verification.
+-   The initial state of the build environment's disk image MUST be
+        integrity measured and attested. The attestation MUST be
+        authenticated and distributed for independent verification.
+-   Read-write block devices or file system paths MUST be encrypted
+        with a key that is only accessible within the build image.
+-   Before launching a new environment based on a build image (i.e., VM
+        or container instance), its SLSA Provenance MUST be verified.
+-   Before making a build environment available for a build request:
+        -   The boot process and state of disk image MUST be verified, and
+        cryptographically bound to the build image's valid SLSA provenance
+        to establish a verifiable integrity chain between a build image and
+        a build environment.
+        -   A unique immutable build environment identifier (e.g.,
+        cryptographic keypair) MUST be generated and cryptographically bound
+        to the build environment's integrity chain.
+        -   These bindings MUST be authenticated and distributed for
+        independent verification.
+-   Before executing a tenant's build request (e.g., GHA build job):
+        -   The build environment's integrity chain and uniqueness of its
+        immutable identifier MUST be verified.
+        -   A unique immutable build request identifier (e.g., GHA build job
+        ID) MUST be generated and cryptographically bound to a valid build
+        environment integrity chain.
+-   All build platform generated attestations and cryptographic bindings
+        MUST be backed by a hardware root of trust (e.g., [TPM] or [trusted
+        execution environment]). Note: Virtual hardware (e.g., vTPM) MAY be
+        used to meet this requirement.
+-   Runtime changes to the build environment's disk image SHOULD be
+        observable at runtime by the executing build request.
+
+<td> <td> <td> <td>✓
 </table>
 
 [external parameters]: provenance.md#externalParameters
