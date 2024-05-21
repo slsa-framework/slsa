@@ -57,10 +57,10 @@ build level, implementing any controls as specified by the chosen platform.
 <tr>
   <td rowspan=2><a href="#isolation-strength">Isolation strength</a>
   <td><a href="#hosted">Hosted</a>
-  <td> <td>✓<td>✓<td>
+  <td> <td>✓<td>✓<td>✓
 <tr>
   <td><a href="#isolated">Isolated</a>
-  <td> <td> <td>✓<td>
+  <td> <td> <td>✓<td>✓
 <tr>
   <td rowspan=2><a href="#build-environment-integrity">Build environment integrity</a>
   <td><a href="#measured">Measured</a>
