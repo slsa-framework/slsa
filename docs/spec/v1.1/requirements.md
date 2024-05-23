@@ -44,7 +44,7 @@ build level, implementing any controls as specified by the chosen platform.
   <td colspan=2><a href="#distribute-provenance">Distribute provenance</a>
   <td>✓<td>✓<td>✓<td>✓
 <tr>
-  <td rowspan=7><a href="#build-platform">Build platform</a>
+  <td rowspan=6><a href="#build-platform">Build platform</a>
   <td rowspan=3><a href="#provenance-generation">Provenance generation</a>
   <td><a href="#provenance-exists">Exists</a>
   <td>✓<td>✓<td>✓<td>✓
@@ -55,18 +55,14 @@ build level, implementing any controls as specified by the chosen platform.
   <td><a href="#provenance-unforgeable">Unforgeable</a>
   <td> <td> <td>✓<td>✓
 <tr>
-  <td rowspan=2><a href="#isolation-strength">Isolation strength</a>
+  <td rowspan=3><a href="#isolation-strength">Isolation strength</a>
   <td><a href="#hosted">Hosted</a>
   <td> <td>✓<td>✓<td>✓
 <tr>
   <td><a href="#isolated">Isolated</a>
   <td> <td> <td>✓<td>✓
 <tr>
-  <td rowspan=2><a href="#build-environment-integrity">Build environment integrity</a>
-  <td><a href="#measured">Measured</a>
-  <td> <td> <td> <td>✓
-<tr>
-  <td><a href="#hardware-attested">Hardware Attested</a>
+  <td><a href="#hardware-attested">Hardware-Attested</a>
   <td> <td> <td> <td>✓
 </table>
 
@@ -268,6 +264,8 @@ Note: This requirement was called "non-falsifiable" in the initial
 <td> <td> <td>✓<td>✓
 </table>
 
+TODO: Add completeness of resolved dependencies
+
 ### Isolation strength
 
 [Isolation strength]: #isolation-strength
@@ -277,9 +275,9 @@ The build platform is responsible for isolating between builds, even within the
 same tenant project. In other words, how strong of a guarantee do we have that
 the build really executed correctly, without external influence?
 
-The SLSA Build level describes the minimum bar for isolation strength. For more
-information on assessing a build platform's isolation strength, see
-[Verifying build platforms](verifying-systems.md).
+The SLSA Build level describes the minimum bar for isolation strength.
+For more information on assessing a build platform's isolation strength,
+see [Verifying build platforms](verifying-systems.md).
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
@@ -338,80 +336,76 @@ substantial changes to both the build platform and each individual build, and is
 considered in the [future directions](future-directions.md).
 
 <td> <td> <td>✓<td>✓
-</table>
-
-### Build Environment Integrity
-
-[Build environment integrity]: #build-environment-integrity
-
-TODO
-
-<table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
-
-<tr id="measured">
-<td>Measured
-<td>
-
-TODO
-
-<td> <td> <td> <td>✓
 <tr id="hardware-attested">
-<td>Hardware Attested
+<td>Hardware-Attested
 <td>
 
-The build platform ensured that the build steps ran in an isolated environment,
-free of unintended external influence. In other words, any external influence on
-the build was specifically requested by the build itself. This MUST hold true
-even between builds within the same tenant project.
+The build platform generated an authenticated attestation to the integrity
+of the entire initial state of the build environment (i.e., VM/container
+image, kernel, and filesystem) was generated at creation time and verified
+at deployment time. The build platform also attested to the build request.
+In other words, tampering with the initial state of the build environment
+MUST be detectable by the platform itself and the build.
 
 The build platform MUST guarantee the following:
 
-**FIXME**
-
--   Each build image (i.e., VM or container) made available to software
-        producers MUST be built on a SLSA Build L3+ platform. The generated
-        SLSA Provenance MUST be distributed to allow for independent
-        verification.
--   Distribution of SLSA Provenance for pre-installed software within the
-        build image MAY be best-effort.
--   The boot process of each build environment MUST be measured and
-        attested using a [TCG-compliant measured boot] mechanism. The
-        attestation MUST be authenticated and distributed for independent
-        verification.
--   The initial state of the build environment's disk image MUST be
-        integrity measured and attested. The attestation MUST be
-        authenticated and distributed for independent verification.
--   Read-write block devices or file system paths MUST be encrypted
-        with a key that is only accessible within the build image.
--   Before launching a new environment based on a build image (i.e., VM
-        or container instance), its SLSA Provenance MUST be verified.
--   Before making a build environment available for a build request:
-        -   The boot process and state of disk image MUST be verified, and
-        cryptographically bound to the build image's valid SLSA provenance
-        to establish a verifiable integrity chain between a build image and
-        a build environment.
-        -   A unique immutable build environment identifier (e.g.,
-        cryptographic keypair) MUST be generated and cryptographically bound
-        to the build environment's integrity chain.
-        -   These bindings MUST be authenticated and distributed for
+-   When creating a new build environment:
+    -   The integrity of the build image (i.e., VM or container) MUST be
+        authenticated and verifiable. That is, SLSA Build L3+ Provenance for
+        the build image MUST be generated and distributed to allow for
         independent verification.
--   Before executing a tenant's build request (e.g., GHA build job):
-        -   The build environment's integrity chain and uniqueness of its
-        immutable identifier MUST be verified.
-        -   A unique immutable build request identifier (e.g., GHA build job
-        ID) MUST be generated and cryptographically bound to a valid build
-        environment integrity chain.
--   All build platform generated attestations and cryptographic bindings
-        MUST be backed by a hardware root of trust (e.g., [TPM] or [trusted
-        execution environment]). Note: Virtual hardware (e.g., vTPM) MAY be
-        used to meet this requirement.
--   Runtime changes to the build environment's disk image SHOULD be
-        observable at runtime by the executing build request.
+    -   The boot process of each build environment MUST be measured and
+        attested using a [TCG-compliant measured boot] mechanism. In
+        addition, the initial state of the build environment's disk image
+        MUST be integrity measured and attested. The boot and disk
+        attestations MUST be distributed to allow for independent
+        verification.
+-   When deploying a new build environment:
+    -   The build image's SLSA Provenance MUST be verified to ensure the
+        VM/container image has not been tampered with.
+    -   The boot process and state of disk image attestations MUST be
+        verified to ensure the guest kernel and filesystem have not been
+        tampered with.
+    -   A unique immutable build environment identifier (e.g.,
+        cryptographic keypair) MUST be generated and cryptographically bound
+        to the build environment via attestation. This _deploy-time
+        attestation_ MUST be generated only after build image, boot process
+        and disk image integrity have been verified, and distributed to
+        allow for independent verification.
+-   When accepting a new build request (e.g., GHA build job):
+    -   The build environment's deploy-time attestation and uniqueness of its
+        immutable identifier MUST be verified to ensure the initial state
+        of the build environment has not been tampered with.
+    -   A unique immutable build identifier (e.g., GHA build job
+        ID) MUST be generated and cryptographically bound to the build
+        environment via attestation. This _request-time attestation_
+        MUST be generated only after the deploy-time attestation has been
+        verified, and distributed to allow for independent verification.
+    -   Run-time changes to the build environment's disk image SHOULD be
+        observable at run-time by the executing build. These changes NEED NOT
+        be attested.
+-   Boot, disk, deploy- and request-time attestations MUST be authenticated
+    by a hardware root of trust (e.g., [TPM] or [trusted execution
+    environment]). In addition, these attestations MUST be distributed in a
+    consistent format that follows the SLSA [attestation model], such as
+    [SCAI].
+
+NOTE: Virtual hardware (e.g., vTPM) MAY be used to meet this requirement.
+
+NOTE: A [confidential computing] technology MAY be used to meet this
+requirement. Such technologies SHOULD be chosen for builds with a need for
+additional data and code confidentiality, and tamper-evidence properties
+during build execution.
 
 <td> <td> <td> <td>✓
 </table>
 
+[attestation model]: attestation-model.md#model-and-terminology
+[confidential computing]: https://confidentialcomputing.io/wp-content/uploads/sites/10/2023/03/Common-Terminology-for-Confidential-Computing.pdf
 [external parameters]: provenance.md#externalParameters
 [identified in the provenance]: provenance.md#model
 [package ecosystem]: verifying-artifacts.md#package-ecosystem
+[SCAI]: https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md
+[TCG-compliant measured boot]: https://trustedcomputinggroup.org/resource/tcg-efi-platform-specification/
+[TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
+[trusted execution environment]: https://csrc.nist.gov/glossary/term/trusted_execution_environment

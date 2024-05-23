@@ -137,14 +137,15 @@ A typical build environment will go through the following lifecycle:
 1.  A hosted build platform creates different build images through a separate
     build process. For SLSA Build L4, the build platform outputs provenance
     describing this process.
-2.  The hosted build platform provisions resources on the compute platform
-    and a build image launch a new build environment. For SLSA Build L4, the
-    build platform validates the *measurement* of the *boot process*.
-3.  When a new *build request* arrives at the hosted build platform, the
-    platform assigns the request to a pre-provisioned build environment.
-    For SLSA Build L4, the tenant may validate the measurement of the build
-    environment.
-4.  Finally, the build environment executes the tenant's build steps.
+2.  The hosted build platform deploys a build image on a compute platform to
+    provision a new build environment. For SLSA Build L4, the
+    build platform validates the *measurement* of the environment's
+    *boot process*.
+3.  When a new *build request* is made, the platform assigns the request to
+    a deployed build environment. For SLSA Build L4, the tenant may validate
+    the measurement of the build environment.
+4.  Finally, the *build executior* running within the environment executes
+    the tenant's build steps.
 
 | Primary Term | Description
 | --- | ---

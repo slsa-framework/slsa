@@ -261,8 +261,8 @@ All of [Build L3], plus:
 -   Software producer:
     -   MUST run builds on a hosted build platform that meets Build L4
         requirements.
-    -   SHOULD verify the build platform's attestations prior to a build and
-        produce a [verification summary] about the check.
+    -   SHOULD verify the [build environment attestations] at the start of a
+        build and produce a [verification summary] about the check.
 
 -   Build platform:
     -   MUST generate and distribute attestations to good known integrity
@@ -280,18 +280,11 @@ All of [Build L3], plus:
 
 -   Greatly reduces trust in a hosted build platform by increasing
     observability into the level of integrity of the build environment.
--   Provides machine-checkable information about the build image’s provenance
-    beyond self-attestation by the build platform operator.
--   Provides cryptographic, hardware-rooted evidence about:
-    -   The initial state of the compute environment executing a build, such
-    as its boot settings (e.g., measured boot enabled), the bootloader and
-    kernel image.
-    -   The initial state of the environment's disk image and its
-    configuration.
-    -   The build environment that executed a particular run of a build.
--   The use of [confidential computing] to meet these
-    requirements provides builds with additional data and code
-    confidentiality and tamper-evidence properties during build execution.
+-   Provides machine-checkable, cryptographic, hardware-rooted evidence
+    about:
+    -   The initial state of the build environment executing a build, such
+        as its VM/container image, boot process, kernel and filesystem.
+    -   The specific build environment that executed a build.
 
 </dl>
 </section>
@@ -303,13 +296,10 @@ All of [Build L3], plus:
 [build l2]: #build-l2
 [build l3]: #build-l3
 [build l4]: #build-l4
-[confidential computing]: https://confidentialcomputing.io/wp-content/uploads/sites/10/2023/03/Common-Terminology-for-Confidential-Computing.pdf
+[build environment attestations]: requirements.md#hardware-attested
 [future versions]: future-directions.md
 [hosted]: requirements.md#isolation-strength
 [previous version]: ../v0.1/levels.md
 [provenance]: terminology.md
-[TCG-compliant measured boot]: https://trustedcomputinggroup.org/resource/tcg-efi-platform-specification/
-[TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
-[trusted execution environment]: https://csrc.nist.gov/glossary/term/trusted_execution_environment
 [verification]: verifying-artifacts.md
 [verification summary]: verification_summary.md
