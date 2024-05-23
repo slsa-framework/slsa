@@ -368,8 +368,8 @@ The build platform MUST guarantee the following:
         tampered with.
     -   A unique immutable build environment identifier (e.g.,
         cryptographic keypair) MUST be generated and cryptographically bound
-        to the build environment via attestation. This _deploy-time
-        attestation_ MUST be generated only after build image, boot process
+        to the build environment via attestation. This *deploy-time
+        attestation* MUST be generated only after build image, boot process
         and disk image integrity have been verified, and distributed to
         allow for independent verification.
 -   When accepting a new build request (e.g., GHA build job):
@@ -378,7 +378,7 @@ The build platform MUST guarantee the following:
         of the build environment has not been tampered with.
     -   A unique immutable build identifier (e.g., GHA build job
         ID) MUST be generated and cryptographically bound to the build
-        environment via attestation. This _request-time attestation_
+        environment via attestation. This *request-time attestation*
         MUST be generated only after the deploy-time attestation has been
         verified, and distributed to allow for independent verification.
     -   Run-time changes to the build environment's disk image SHOULD be
