@@ -21,23 +21,29 @@ The examples on this page are meant to:
 
 ![Supply Chain Threats](images/supply-chain-threats.svg)
 
-See [Terminology](terminology.md) for an explanation of the base supply chain
-model.
+(See [Terminology](terminology.md) for an explanation of the base supply chain
+model.)
 
-This document enumerates software supply chain threats that a consumer faces
-through its use of software. It clusters threats into useful groupings labeled
-(A) through (Z) in order to more easily discuss risks and mitigations.
-
-A consumer is any environment where software is used. Examples include an end
-user's machine, a build of another software package, a runtime environment like
-Kubernetes, or firmware delivered in a piece of hardware to customers. In fact,
-a consumer could be an entire organization or company.
+SLSA's goal is to measure and reduce the risk that a consumer faces through its
+use of software. A consumer is any environment where software is used, such as
+an end user's machine, a build of another software package, a runtime
+environment like Kubernetes, or firmware delivered in a piece of hardware to
+customers. In fact, a consumer could be an entire organization or company.
 
 A consumer uses multiple software packages (often thousands!), and this model
 and diagram discusses the threat of each software package individually. In
 reality, the consumer faces aggregate risk across all of these packages it uses.
 Some of those packages may be "first party", meaning that the producer and
 consumer belong to the same organization, while others may be "third party".
+Furthermore, each software package depends on other software packages, and the
+resulting graph of dependencies is very deep. (The diagram represents the
+*concept* as a cycle, but in reality there cannot be cycles because a package
+cannot depend on itself.)
+
+We describe and clusters threats based on where in the software development
+pipeline those threats occur for a single software package, labeled (A) through
+(I). This is useful because priorities and mitigations mostly cluster along
+those same lines.
 
 ## Visibility threats
 
