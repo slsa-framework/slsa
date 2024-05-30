@@ -801,6 +801,8 @@ ad-hoc analysis, and can complement source-based typosquatting solutions.
 
 ## Availability threats
 
+**TODO:** Merge into the list above rather than having a separate section.
+
 An availability threat is a potential for an adversary to deny someone from
 reading a source and its associated change history, or from building a package.
 
