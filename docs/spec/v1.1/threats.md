@@ -764,7 +764,7 @@ cryptographic signature is no longer valid.
 An adversary modifies the package on the package registry using an
 administrative interface or through a compromise of the infrastructure.
 
-**TODO:** 
+**TODO:**
 
 ## Usage threats
 
@@ -849,7 +849,6 @@ threat.
 *Mitigation:* N/A - This threat is out of scope of SLSA v1.0.
 
 </details>
-
 
 ## Verification threats
 
