@@ -766,6 +766,11 @@ administrative interface or through a compromise of the infrastructure.
 
 **TODO:** 
 
+## Usage threats
+
+A usage threat is a potential for an adversary to exploit behavior of the
+consumer.
+
 ### (H) Package selection
 
 The consumer requests a package that it did not intend.
