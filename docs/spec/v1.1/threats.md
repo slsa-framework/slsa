@@ -27,6 +27,12 @@ that somehow. This isn't specific to dependencies - it applies to the entire
 diagram.
 ([discussion](https://github.com/slsa-framework/slsa/pull/1046/files/ebf34a8f9e874b219f152bad62673eae0b3ba2c3#r1585440922))
 
+**TODO:** Revisit and possibly update any item that says "out of scope", since
+we want to really expand SLSA's scope to include all of these threats. A more
+nuanced answer would be that the current version does not define a specific
+mitigation, but it's in scope for the project overall. We can also list specific
+mitigations even if they're not listed as a level requirement.
+
 <article class="threats">
 
 ## Overview
@@ -34,7 +40,7 @@ diagram.
 ![Supply Chain Threats](images/supply-chain-threats.svg)
 
 This threat model covers the *software supply chain*, meaning the process by
-which software is produced and consumed. We describe and clusters threats based
+which software is produced and consumed. We describe and cluster threats based
 on where in the software development pipeline those threats occur, labeled (A)
 through (I). This is useful because priorities and mitigations mostly cluster
 along those same lines. Keep in mind that dependencies are
@@ -45,7 +51,7 @@ detailed explanation of the supply chain model, see
 
 Importantly, producers and consumers face *aggregate* risk across all of the
 software they produce and consume, respectively. Many organizations produce
-and/or consumer thousands of software packages, both first- and third-party, and
+and/or consume thousands of software packages, both first- and third-party, and
 it is not practical to rely on every individual team in the organization to do
 the right thing. For this reason, SLSA prioritizes mitigations that can be
 broadly adopted in an automated fashion, minimizing the chance of mistakes.
@@ -76,9 +82,9 @@ proper processes.
 *Mitigation:* **TODO**
 
 *Example:* A popular extension author sells the rights to a new owner, who then
-modifies the code to secretly mine bitcoin at the users' expense. SLSA does not
-protect against this, though if the extension were open source, regular auditing
-may discourage this from happening.
+modifies the code to secretly mine cryptocurrency at the users' expense. SLSA
+does not protect against this, though if the extension were open source, regular
+auditing may discourage this from happening.
 
 </details>
 
