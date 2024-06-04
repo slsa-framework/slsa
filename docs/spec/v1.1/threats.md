@@ -99,9 +99,9 @@ contributor gained enhanced privileges through social engineering?
 An adversary introduces a change through the official source control management
 interface without any special administrator privileges.
 
-Threats in this category *can* in theory be mitigated by code review or some
-other quality controls during teh authoring/reviewing process. Contrast this
-with (A), where such controls are likely ineffective.
+Threats in this category *can* be mitigated by code review or some other
+controls during the authoring/reviewing process, at least in theory. Contrast
+this with (A), where such controls are likely ineffective.
 
 **TODO:** Is the split between (A) and (B) clear and valuable?
 
