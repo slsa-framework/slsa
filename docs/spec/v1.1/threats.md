@@ -74,6 +74,9 @@ The producer of the software intentionally produces code that harms the
 consumer, or the producer otherwise uses practices that are not deserving of the
 consumer's trust.
 
+Threats in this category likely *cannot* be mitigated through controls placed
+during the authoring/reviewing process, in contrast with (B).
+
 <details><summary>Software producer intentionally submits bad code</summary>
 
 *Threat:* Software producer intentionally submits "bad" code, following all
@@ -88,16 +91,17 @@ auditing may discourage this from happening.
 
 </details>
 
-**TODO:** More producer threats?
+**TODO:** More producer threats? Perhaps the attack to xz where a malicious
+contributor gained enhanced privileges through social engineering?
 
 ### (B) Authoring & reviewing
 
 An adversary introduces a change through the official source control management
 interface without any special administrator privileges.
 
-The threats in this category are theoretically mitigated by code review or some
-other quality controls. Contrast this with (A), where such controls are
-ineffective.
+Threats in this category *can* in theory be mitigated by code review or some
+other quality controls during teh authoring/reviewing process. Contrast this
+with (A), where such controls are likely ineffective.
 
 **TODO:** Is the split between (A) and (B) clear and valuable?
 
@@ -167,7 +171,7 @@ such exceptions.
 
 </details>
 
-#### (A2) Evade code review requirements
+#### (B2) Evade code review requirements
 
 <details><summary>Modify code after review</summary>
 
@@ -252,7 +256,7 @@ does not accept this because the version X is not considered reviewed.
 
 </details>
 
-#### (A3) Render code review ineffective
+#### (B3) Render code review ineffective
 
 <details><summary>Collude with another trusted person</summary>
 
@@ -707,6 +711,13 @@ package's official source control repository.
 This is the most direct threat because it is the easiest to pull off. If there
 are no mitigations for this threat, then (D) and (E) are often indistinguishable
 from this threat.
+
+**TODO:** We need to define "official source control repository". Its meaning is
+not obvious. The gist is that each package theoretically has some "official" or
+"canonical" repository from which is "should" be built, and the attack here is
+that you either build from a different source repository or otherwise do
+something that doesn't reflect that source repository. But we need to nail down
+this concept.
 
 <details><summary>Build with untrusted CI/CD <span>(expectations)</span></summary>
 
