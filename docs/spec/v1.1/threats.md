@@ -346,7 +346,7 @@ management system to bypass controls.
 **TODO:** Move under "Build threats".
 
 An adversary builds from a version of the source code that does not match the
-official source control repository, or uses parameters to the build that inject
+official source control repository, or changes the build parameters to inject
 behavior that was not intended by the official source.
 
 The mitigation here is to compare the provenance against expectations for the
