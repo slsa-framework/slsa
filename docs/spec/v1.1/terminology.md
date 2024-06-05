@@ -26,6 +26,8 @@ of terminology and models to describe what we're protecting.
 
 ## Software supply chain
 
+**TODO:** Update the text to match the new diagram.
+
 SLSA's framework addresses every step of the software supply chain - the
 sequence of steps resulting in the creation of an artifact. We represent a
 supply chain as a [directed acyclic graph] of sources, builds, dependencies, and

@@ -15,6 +15,9 @@ The examples on this page are meant to:
 -   Help implementers better understand what they are protecting against so that
     they can better design and implement controls.
 
+**TODO:** Update the ordering to match the diagram. We're currently in the
+middle of refactoring, with a jumble of new and old.
+
 **TODO:** Expand this threat model to also cover "unknowns". Not sure if that is
 a "threat" or a "risk". Example: If libFoo is compromised, how do you know if
 you are compromised? At a first level, if you don't even know whether you
@@ -24,17 +27,34 @@ that somehow. This isn't specific to dependencies - it applies to the entire
 diagram.
 ([discussion](https://github.com/slsa-framework/slsa/pull/1046/files/ebf34a8f9e874b219f152bad62673eae0b3ba2c3#r1585440922))
 
-**TODO:** This model only covers the artifact itself but not how it is used.
-However, in most cases, the attacker's goal is not to compromise an artifact but
-to compromise the *user* of that artifact. If no one uses the artifact, then it
-doesn't matter. It would be good to either (a) explain this nuance or (b) expand
-the model to cover this better.
+**TODO:** Revisit and possibly update any item that says "out of scope", since
+we want to really expand SLSA's scope to include all of these threats. A more
+nuanced answer would be that the current version does not define a specific
+mitigation, but it's in scope for the project overall. We can also list specific
+mitigations even if they're not listed as a level requirement.
 
 <article class="threats">
 
+## Overview
+
 ![Supply Chain Threats](images/supply-chain-threats.svg)
 
-See [Terminology](terminology.md) for an explanation of supply chain model.
+This threat model covers the *software supply chain*, meaning the process by
+which software is produced and consumed. We describe and cluster threats based
+on where in the software development pipeline those threats occur, labeled (A)
+through (I). This is useful because priorities and mitigations mostly cluster
+along those same lines. Keep in mind that dependencies are
+[highly recursive](#dependency-threats), so each dependency has its own threats
+(A) through (I), and the same for *their* dependencies, and so on. For a more
+detailed explanation of the supply chain model, see
+[Terminology](terminology.md).
+
+Importantly, producers and consumers face *aggregate* risk across all of the
+software they produce and consume, respectively. Many organizations produce
+and/or consume thousands of software packages, both first- and third-party, and
+it is not practical to rely on every individual team in the organization to do
+the right thing. For this reason, SLSA prioritizes mitigations that can be
+broadly adopted in an automated fashion, minimizing the chance of mistakes.
 
 ## Source threats
 
@@ -48,12 +68,46 @@ SLSA v1.0 does not address source threats, but we anticipate doing so in a
 threats and potential mitigations listed here show how SLSA v1.0 can fit into a
 broader supply chain security program.
 
-### (A) Submit unauthorized change
+### (A) Producer
+
+The producer of the software intentionally produces code that harms the
+consumer, or the producer otherwise uses practices that are not deserving of the
+consumer's trust.
+
+Threats in this category likely *cannot* be mitigated through controls placed
+during the authoring/reviewing process, in contrast with (B).
+
+**TODO:** The difference between (A) and (B) is still a bit fuzzy, which would
+be nice to resolve. For example, compromised developer credentials - is that (A)
+or (B)?
+
+<details><summary>Software producer intentionally submits bad code</summary>
+
+*Threat:* Software producer intentionally submits "bad" code, following all
+proper processes.
+
+*Mitigation:* **TODO**
+
+*Example:* A popular extension author sells the rights to a new owner, who then
+modifies the code to secretly mine cryptocurrency at the users' expense. SLSA
+does not protect against this, though if the extension were open source, regular
+auditing may discourage this from happening.
+
+</details>
+
+**TODO:** More producer threats? Perhaps the attack to xz where a malicious
+contributor gained enhanced privileges through social engineering?
+
+### (B) Authoring & reviewing
 
 An adversary introduces a change through the official source control management
 interface without any special administrator privileges.
 
-#### (A1) Submit change without review
+Threats in this category *can* be mitigated by code review or some other
+controls during the authoring/reviewing process, at least in theory. Contrast
+this with (A), where such controls are likely ineffective.
+
+#### (B1) Submit change without review
 
 <details><summary>Directly submit without review</summary>
 
@@ -119,7 +173,7 @@ such exceptions.
 
 </details>
 
-#### (A2) Evade code review requirements
+#### (B2) Evade code review requirements
 
 <details><summary>Modify code after review</summary>
 
@@ -204,22 +258,8 @@ does not accept this because the version X is not considered reviewed.
 
 </details>
 
-#### (A3) Code review bypasses that are out of scope of SLSA
+#### (B3) Render code review ineffective
 
-<details><summary>Software producer intentionally submits bad code</summary>
-
-*Threat:* Software producer intentionally submits "bad" code, following all
-proper processes.
-
-*Mitigation:* **Outside the scope of SLSA.** Trust of the software producer is
-an important but separate property from integrity.
-
-*Example:* A popular extension author sells the rights to a new owner, who then
-modifies the code to secretly mine bitcoin at the users' expense. SLSA does not
-protect against this, though if the extension were open source, regular auditing
-may discourage this from happening.
-
-</details>
 <details><summary>Collude with another trusted person</summary>
 
 *Threat:* Two trusted persons collude to author and approve a bad change.
@@ -245,7 +285,7 @@ stamping."
 
 </details>
 
-### (B) Compromise source repo
+### (C) Source code management
 
 An adversary introduces a change to the source control repository through an
 administrative interface, or through a compromise of the underlying
@@ -303,10 +343,13 @@ management system to bypass controls.
 
 </details>
 
-### (C) Build from modified source
+### (D) External build parameters
+
+**TODO:** Move under "Build threats".
 
 An adversary builds from a version of the source code that does not match the
-official source control repository.
+official source control repository, or changes the build parameters to inject
+behavior that was not intended by the official source.
 
 The mitigation here is to compare the provenance against expectations for the
 package, which depends on SLSA Build L1 for provenance. (Threats against the
@@ -392,6 +435,8 @@ the source repo does not match the expected value.
 
 ## Dependency threats
 
+**TODO:** Move after Usage Threats.
+
 A dependency threat is a potential for an adversary to introduce unintended
 behavior in one artifact by compromising some other artifact that the former
 depends on at build time. (Runtime dependencies are excluded from the model, as
@@ -424,9 +469,7 @@ threats.
 
 [apply SLSA recursively]: verifying-artifacts.md#step-3-optional-check-dependencies-recursively
 
-### (D) Compromise build dependency
-
-[build dependency]: #d-compromise-build-dependency
+### Build dependency
 
 An adversary compromises the target artifact through one of its build
 dependencies. Any artifact that is present in the build environment and has the
@@ -525,7 +568,7 @@ The SLSA Build track mitigates these threats when the consumer
 [verifies artifacts](verifying-artifacts.md) against expectations, confirming
 that the artifact they received was built in the expected manner.
 
-### (E) Compromise build process
+### (E) Build process
 
 An adversary introduces an unauthorized change to a build output through
 tampering of the build process; or introduces false information into the
@@ -662,9 +705,21 @@ controls are in place to prevent abusing admin privileges.
 
 </details>
 
-### (F) Upload modified package
+### (F) Artifact publication
 
-An adversary uploads a package not built from the proper build process.
+An adversary uploads a package artifact that does not reflect the intent of the
+package's official source control repository.
+
+This is the most direct threat because it is the easiest to pull off. If there
+are no mitigations for this threat, then (D) and (E) are often indistinguishable
+from this threat.
+
+**TODO:** We need to define "official source control repository". Its meaning is
+not obvious. The gist is that each package theoretically has some "official" or
+"canonical" repository from which it "should" be built, and the attack here is
+that you either build from a different source repository or otherwise do
+something that doesn't reflect that source repository. But we need to nail down
+this concept.
 
 <details><summary>Build with untrusted CI/CD <span>(expectations)</span></summary>
 
@@ -723,32 +778,31 @@ cryptographic signature is no longer valid.
 
 </details>
 
-### (G) Compromise package registry
+### (G) Distribution channel
 
 An adversary modifies the package on the package registry using an
 administrative interface or through a compromise of the infrastructure.
 
-<details><summary>De-list artifact</summary>
+**TODO:**
 
-*Threat:* The package registry stops serving the artifact.
+## Usage threats
 
-*Mitigation:* N/A - This threat is out of scope of SLSA v1.0.
+A usage threat is a potential for an adversary to exploit behavior of the
+consumer.
+
+### (H) Package selection
+
+The consumer requests a package that it did not intend.
+
+<details><summary>Dependency confusion</summary>
+
+*Threat:* Register a package name in a public registry that shadows a name used
+on the victim's internal registry, and wait for a misconfigured victim to fetch
+from the public registry instead of the internal one.
+
+**TODO:** fill out the rest of this section
 
 </details>
-
-<details><summary>De-list provenance</summary>
-
-*Threat:* The package registry stops serving the provenance.
-
-*Mitigation:* N/A - This threat is out of scope of SLSA v1.0.
-
-</details>
-
-### (H) Use compromised package
-
-An adversary modifies the package after it has left the package registry, or
-tricks the user into using an unintended package.
-
 <details><summary>Typosquatting</summary>
 
 *Threat:* Register a package name that is similar looking to a popular package
@@ -760,7 +814,13 @@ ad-hoc analysis, and can complement source-based typosquatting solutions.
 
 </details>
 
+### (I) Usage
+
+**TODO:** What should we put here?
+
 ## Availability threats
+
+**TODO:** Merge into the list above rather than having a separate section.
 
 An availability threat is a potential for an adversary to deny someone from
 reading a source and its associated change history, or from building a package.
@@ -785,13 +845,27 @@ lacks a positive attestation showing that some system, such as GitHub, ensured
 retention and availability of the source code.
 
 </details>
-<details><summary>(D) A dependency becomes temporarily or permanently unavailable to the build process</summary>
+<details><summary>A dependency becomes temporarily or permanently unavailable to the build process</summary>
 
 *Threat:* Unable to perform a build with the intended dependencies.
 
 *Mitigation:* **Outside the scope of SLSA.** That said, some solutions to
 support hermetic and reproducible builds may also reduce the impact of this
 threat.
+
+</details>
+<details><summary>De-list artifact</summary>
+
+*Threat:* The package registry stops serving the artifact.
+
+*Mitigation:* N/A - This threat is out of scope of SLSA v1.0.
+
+</details>
+<details><summary>De-list provenance</summary>
+
+*Threat:* The package registry stops serving the provenance.
+
+*Mitigation:* N/A - This threat is out of scope of SLSA v1.0.
 
 </details>
 
