@@ -77,6 +77,10 @@ consumer's trust.
 Threats in this category likely *cannot* be mitigated through controls placed
 during the authoring/reviewing process, in contrast with (B).
 
+**TODO:** The difference between (A) and (B) is still a bit fuzzy, which would
+be nice to resolve. For example, compromised developer credentials - is that (A)
+or (B)?
+
 <details><summary>Software producer intentionally submits bad code</summary>
 
 *Threat:* Software producer intentionally submits "bad" code, following all
@@ -102,8 +106,6 @@ interface without any special administrator privileges.
 Threats in this category *can* be mitigated by code review or some other
 controls during the authoring/reviewing process, at least in theory. Contrast
 this with (A), where such controls are likely ineffective.
-
-**TODO:** Is the split between (A) and (B) clear and valuable?
 
 #### (B1) Submit change without review
 
