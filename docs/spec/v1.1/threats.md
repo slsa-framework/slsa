@@ -714,7 +714,7 @@ from this threat.
 
 **TODO:** We need to define "official source control repository". Its meaning is
 not obvious. The gist is that each package theoretically has some "official" or
-"canonical" repository from which is "should" be built, and the attack here is
+"canonical" repository from which it "should" be built, and the attack here is
 that you either build from a different source repository or otherwise do
 something that doesn't reflect that source repository. But we need to nail down
 this concept.
