@@ -14,9 +14,9 @@ Why?: SLSA does not yet have a model for version control systems, and we need su
 
 ## Outstanding TODOs
 
-- [] Flesh out the definition and bounds of 'identity', and why they're required.
-- [] Refine requirements/guidance for trusted robots.
-- [] Either identify the unique value of L1 or merge it with L2.
+-   [] Flesh out the definition and bounds of 'identity', and why they're required.
+-   [] Refine requirements/guidance for trusted robots.
+-   [] Either identify the unique value of L1 or merge it with L2.
 
 ## Source model
 
