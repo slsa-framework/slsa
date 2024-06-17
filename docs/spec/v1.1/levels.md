@@ -342,7 +342,7 @@ All of [Source L1], plus:
 
 Attributes changes in the version history to specific actors and timestamps,
 which allows for post-auditing, incident response, and deterrence for bad
-actors. Multi-factor authentication makes account compromise more difficult,
+actors. Strong authentication makes account compromise more difficult,
 further ensuring the integrity of change attribution.
 
 </dl>
