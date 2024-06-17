@@ -377,8 +377,9 @@ indicate that a file changed without showing the contents.
 
 All of [Source L2], plus:
 
-A compromise of a single entity account does not result in compromise of
-the project, since all changes require review from two entities.
+Since all changes have been agreed to by at least two distinct trusted
+entities, a compromise of a single entity does not result in compromise
+of the project.
 
 </dl>
 </section>
