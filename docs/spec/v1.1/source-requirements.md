@@ -1,22 +1,12 @@
 # SLSA Source Track
 
+## Status: DRAFT
+Open issues are tracked with the [source-track](https://github.com/slsa-framework/slsa/issues?q=is%3Aissue+is%3Aopen+label%3Asource-track) label in the [slsa-framework/slsa](https://github.com/slsa-framework/slsa) repository.
+
+
 ## Objective
 
 The SLSA Source Track mitigates [Threat A ("Submit unauthorized change")](/spec/v1.0/threats#a-submit-unauthorized-change), scoped to a code repository and the organization that owns that repository. Concretely: an attacker must compromise the accounts of two organization members to publish code in a Source Level 3-conformant repository, and the evidence of those unauthorized changes cannot be destroyed without further attacks.
-
-## Changes from v0.1
-
--   **Scope** The Source track is now scoped to Revisions rather than builds.
-Why?: To facilitate verification without anchoring it to a build.
-
--   **Model** Added a model, definitions, and the concept of verification.
-Why?: SLSA does not yet have a model for version control systems, and we need such a model to be able to discuss them.
-
-## Outstanding TODOs
-
--   [] Flesh out the definition and bounds of 'identity', and why they're required.
--   [] Refine requirements/guidance for trusted robots.
--   [] Either identify the unique value of L1 or merge it with L2.
 
 ## Source model
 
