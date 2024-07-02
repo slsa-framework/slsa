@@ -17,6 +17,7 @@ changes in v1.1 relative to the prior release, [v1.0].
 -   It is now recommended that the `digest` field of `ResourceDescriptor` is
     set in a Verification Summary Attestation's (VSA) `policy` object.
 -   Further refine the [threat model](threats).
+-   Add draft of [SLSA Source Track](source-requirements.md).
 
 <!-- Footnotes and link definitions -->
 
