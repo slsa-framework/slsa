@@ -4,17 +4,17 @@
 
 Open issues are tracked with the [source-track](https://github.com/slsa-framework/slsa/issues?q=is%3Aissue+is%3Aopen+label%3Asource-track) label in the [slsa-framework/slsa](https://github.com/slsa-framework/slsa) repository.
 
-- [] https://github.com/slsa-framework/slsa/issues/1069
-- [] https://github.com/slsa-framework/slsa/issues/1070
-- [] https://github.com/slsa-framework/slsa/issues/1071
-- [] https://github.com/slsa-framework/slsa/issues/1072
-- [] https://github.com/slsa-framework/slsa/issues/1074
-- [] https://github.com/slsa-framework/slsa/issues/1075
-- [] https://github.com/slsa-framework/slsa/issues/1076
-- [] https://github.com/slsa-framework/slsa/issues/1077
-- [] https://github.com/slsa-framework/slsa/issues/1078
-- [] https://github.com/slsa-framework/slsa/issues/1079
-- [] https://github.com/slsa-framework/slsa/issues/1080
+-   [] https://github.com/slsa-framework/slsa/issues/1069
+-   [] https://github.com/slsa-framework/slsa/issues/1070
+-   [] https://github.com/slsa-framework/slsa/issues/1071
+-   [] https://github.com/slsa-framework/slsa/issues/1072
+-   [] https://github.com/slsa-framework/slsa/issues/1074
+-   [] https://github.com/slsa-framework/slsa/issues/1075
+-   [] https://github.com/slsa-framework/slsa/issues/1076
+-   [] https://github.com/slsa-framework/slsa/issues/1077
+-   [] https://github.com/slsa-framework/slsa/issues/1078
+-   [] https://github.com/slsa-framework/slsa/issues/1079
+-   [] https://github.com/slsa-framework/slsa/issues/1080
 
 ## Objective
 
