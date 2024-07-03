@@ -1,6 +1,5 @@
 # SLSA Source Track
 
-## Status: DRAFT
 
 Open issues are tracked with the [source-track](https://github.com/slsa-framework/slsa/issues?q=is%3Aissue+is%3Aopen+label%3Asource-track) label in the [slsa-framework/slsa](https://github.com/slsa-framework/slsa) repository.
 
