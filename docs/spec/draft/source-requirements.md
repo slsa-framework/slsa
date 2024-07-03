@@ -18,7 +18,7 @@ Open issues are tracked with the [source-track](https://github.com/slsa-framewor
 
 ## Objective
 
-The SLSA SOURCE track describes increasing levels of trustworthiness and completeness in a repository revision's provenance. 
+The SLSA source track describes increasing levels of trustworthiness and completeness in a repository revision's provenance. 
 Provenance describes which Source Control Provider produced the revision, what process was used, and who were the contributors. 
 The lowest level only requires the provenance to exist, while higher levels provide increasing protection against tampering of the version control system, the provenance, or the revision.
 
@@ -35,7 +35,7 @@ The Source track is scoped to a single project that is controlled by some organi
 | Version Control System | Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
 =======
 The primary purpose of the source track is to enable verification that a revision followed the expected process. 
-Consumers have some way of knowing what the expected provenance should look like for a given package and then compare each source revision's actual provenance to those expectations. 
+Consumers have some way of knowing what the expected provenance should look like for a given revision and then compare a revision's actual provenance to those expectations. 
 Doing so prevents several classes of supply chain threats.
 
 The Source track is scoped to revisions of a single repository that is controlled by an organization. 
@@ -43,9 +43,8 @@ That organization determines the intent of the software in the repository, what 
 
 ## Definitions
 
-| Term | Description|
-| --- | — |
-| Subject | The subject of the attestation is the immutable identifier of a repository revision. EG: https://github.com/slsa-framework/slsa/commit/306642f21dbdaca2eaafe2df8e98432b4d4f2f02
+| Term | Description
+| --- | —
 | Source | An identifiable set of text and binary files and associated metadata.
 | Organization | A collection of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals and methods of the repository.
 | Repository | A uniquely identifiable instance of a VCS hosted on an SCP. The repository controls access to the Source in the version control system. The objective of a repository is to reflect the intent of the organization that controls it.
