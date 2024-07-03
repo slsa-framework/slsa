@@ -4,6 +4,18 @@
 
 Open issues are tracked with the [source-track](https://github.com/slsa-framework/slsa/issues?q=is%3Aissue+is%3Aopen+label%3Asource-track) label in the [slsa-framework/slsa](https://github.com/slsa-framework/slsa) repository.
 
+- [] https://github.com/slsa-framework/slsa/issues/1069
+- [] https://github.com/slsa-framework/slsa/issues/1070
+- [] https://github.com/slsa-framework/slsa/issues/1071
+- [] https://github.com/slsa-framework/slsa/issues/1072
+- [] https://github.com/slsa-framework/slsa/issues/1074
+- [] https://github.com/slsa-framework/slsa/issues/1075
+- [] https://github.com/slsa-framework/slsa/issues/1076
+- [] https://github.com/slsa-framework/slsa/issues/1077
+- [] https://github.com/slsa-framework/slsa/issues/1078
+- [] https://github.com/slsa-framework/slsa/issues/1079
+- [] https://github.com/slsa-framework/slsa/issues/1080
+
 ## Objective
 
 The SLSA Source Track mitigates [Threat A ("Submit unauthorized change")](/spec/v1.0/threats#a-submit-unauthorized-change), scoped to a code repository and the organization that owns that repository. Concretely: an attacker must compromise the accounts of two organization members to publish code in a Source Level 3-conformant repository, and the evidence of those unauthorized changes cannot be destroyed without further attacks.
