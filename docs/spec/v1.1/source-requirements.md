@@ -1,22 +1,24 @@
 # SLSA Source Track
 
+## Outstanding TODOs
+
+Open issues are tracked with the [source-track](https://github.com/slsa-framework/slsa/issues?q=is%3Aissue+is%3Aopen+label%3Asource-track) label in the [slsa-framework/slsa](https://github.com/slsa-framework/slsa) repository.
+
+-   [] [Structure & formatting don't match the build track](https://github.com/slsa-framework/slsa/issues/1069)
+-   [] [Either identify the unique value of L1 or merge it with L2](https://github.com/slsa-framework/slsa/issues/1070)
+-   [] [How to communicate SLSA source track metadata?](https://github.com/slsa-framework/slsa/issues/1071)
+-   [] [Clarify source track objective](https://github.com/slsa-framework/slsa/issues/1072)
+-   [] [Clarify the 'merger' identity in source track](https://github.com/slsa-framework/slsa/issues/1074)
+-   [] [Flesh out the definition and bounds of 'identity', and why they're required](https://github.com/slsa-framework/slsa/issues/1075)
+-   [] [VCS and SCP concerns are mixed or too prescriptive](https://github.com/slsa-framework/slsa/issues/1076)
+-   [] [Clarify that self-hosted SCPs are allowed](https://github.com/slsa-framework/slsa/issues/1077)
+-   [] [Create guidance for consumers on how to evaluate the source platform](https://github.com/slsa-framework/slsa/issues/1078)
+-   [] [Clarify what must be retained during source migrations](https://github.com/slsa-framework/slsa/issues/1079)
+-   [] [Refine requirements/guidance for trusted robots](https://github.com/slsa-framework/slsa/issues/1080)
+
 ## Objective
 
 The SLSA Source Track mitigates [Threat A ("Submit unauthorized change")](/spec/v1.0/threats#a-submit-unauthorized-change), scoped to a code repository and the organization that owns that repository. Concretely: an attacker must compromise the accounts of two organization members to publish code in a Source Level 3-conformant repository, and the evidence of those unauthorized changes cannot be destroyed without further attacks.
-
-## Changes from v0.1
-
--   **Scope** The Source track is now scoped to Revisions rather than builds.
-Why?: To facilitate verification without anchoring it to a build.
-
--   **Model** Added a model, definitions, and the concept of verification.
-Why?: SLSA does not yet have a model for version control systems, and we need such a model to be able to discuss them.
-
-## Outstanding TODOs
-
--   [] Flesh out the definition and bounds of 'identity', and why they're required.
--   [] Refine requirements/guidance for trusted robots.
--   [] Either identify the unique value of L1 or merge it with L2.
 
 ## Source model
 
@@ -28,7 +30,7 @@ The Source track is scoped to a single project that is controlled by some organi
 | Organization | A collection of people who collectively create the Source. Examples of organizations include an open-source projects, a company, or a team within a company.
 | Change | A set of modifications to one or more source files and associated metadata. Change metadata MUST include any information required to situate the change in relation to other changes (e.g. parent revision).
 | Version Control System | Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
-| Revision | The canonical source at a given point in time as identified by the version control system. As an example, you can identify a git revision by its tree hash.
+| Revision | A specific identifier provided by the version control system that identifies a given state of the source. As an example, you can identify a git revision by its tree hash.
 | Change History | A record of the history of changes that went into the revision.
 | Source Control Platform | A service or suite of services for hosting version controlled software. GitHub and GitLab are examples of source control platforms, as are combinations of tools like Gerrit code reviews with GitHub source control.
 
