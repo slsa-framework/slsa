@@ -4,17 +4,17 @@
 
 Open issues are tracked with the [source-track](https://github.com/slsa-framework/slsa/issues?q=is%3Aissue+is%3Aopen+label%3Asource-track) label in the [slsa-framework/slsa](https://github.com/slsa-framework/slsa) repository.
 
--   [] https://github.com/slsa-framework/slsa/issues/1069
--   [] https://github.com/slsa-framework/slsa/issues/1070
--   [] https://github.com/slsa-framework/slsa/issues/1071
--   [] https://github.com/slsa-framework/slsa/issues/1072
--   [] https://github.com/slsa-framework/slsa/issues/1074
--   [] https://github.com/slsa-framework/slsa/issues/1075
--   [] https://github.com/slsa-framework/slsa/issues/1076
--   [] https://github.com/slsa-framework/slsa/issues/1077
--   [] https://github.com/slsa-framework/slsa/issues/1078
--   [] https://github.com/slsa-framework/slsa/issues/1079
--   [] https://github.com/slsa-framework/slsa/issues/1080
+-   [] [Structure & formatting don't match the build track](https://github.com/slsa-framework/slsa/issues/1069)
+-   [] [Either identify the unique value of L1 or merge it with L2](https://github.com/slsa-framework/slsa/issues/1070)
+-   [] [How to communicate SLSA source track metadata?](https://github.com/slsa-framework/slsa/issues/1071)
+-   [] [Clarify source track objective](https://github.com/slsa-framework/slsa/issues/1072)
+-   [] [Clarify the 'merger' identity in source track](https://github.com/slsa-framework/slsa/issues/1074)
+-   [] [Flesh out the definition and bounds of 'identity', and why they're required](https://github.com/slsa-framework/slsa/issues/1075)
+-   [] [VCS and SCP concerns are mixed or too prescriptive](https://github.com/slsa-framework/slsa/issues/1076)
+-   [] [Clarify that self-hosted SCPs are allowed](https://github.com/slsa-framework/slsa/issues/1077)
+-   [] [Create guidance for consumers on how to evaluate the source platform](https://github.com/slsa-framework/slsa/issues/1078)
+-   [] [Clarify what must be retained during source migrations](https://github.com/slsa-framework/slsa/issues/1079)
+-   [] [Refine requirements/guidance for trusted robots](https://github.com/slsa-framework/slsa/issues/1080)
 
 ## Objective
 
