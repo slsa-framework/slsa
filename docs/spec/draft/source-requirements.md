@@ -19,7 +19,7 @@ Open issues are tracked with the [source-track](https://github.com/slsa-framewor
 ## Objective
 
 The SLSA source track describes increasing levels of trustworthiness and completeness in a repository revision's provenance. 
-Provenance describes which Source Control Provider produced the revision, what process was used, and who were the contributors. 
+Provenance describes which Source Control Platform (SCP) produced the revision, what process was used, and who were the contributors. 
 The lowest level only requires the provenance to exist, while higher levels provide increasing protection against tampering of the version control system, the provenance, or the revision.
 
 <<<<<<< HEAD:docs/spec/draft/source-requirements.md
