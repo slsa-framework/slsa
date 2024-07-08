@@ -18,44 +18,31 @@ Open issues are tracked with the [source-track](https://github.com/slsa-framewor
 
 ## Objective
 
-The SLSA source track describes increasing levels of trustworthiness and completeness in a repository revision's provenance. 
-Provenance describes which Source Control Platform (SCP) produced the revision, what process was used, and who were the contributors. 
-The lowest level only requires the provenance to exist, while higher levels provide increasing protection against tampering with any parts of the Source Control Platform, the provenance, or the revision.
+The SLSA source track describes increasing levels of trustworthiness and completeness in a repository revision's provenance.
+Source provenance describes which Source Control Platform (SCP) produced the revision, when it was generated, what process was used, and who were the contributors.
+Higher levels provide increasing protection against tampering with any parts of the Version Control System, Source Control Platform, or the source provenance.
 
-<<<<<<< HEAD:docs/spec/draft/source-requirements.md
-## Source model
-
-The Source track is scoped to a single project that is controlled by some organization. That organization determines what Source level should apply to the project and administers technical controls to enforce that level.
-
-| Term | Description
-| --- | ---
-| Source | An identifiable set of text and binary files and associated metadata usually used as input for the build system (see SLSA Build Track).
-| Organization | A collection of people who collectively create the Source. Examples of organizations include an open-source projects, a company, or a team within a company.
-| Change | A set of modifications to one or more source files and associated metadata. Change metadata MUST include any information required to situate the change in relation to other changes (e.g. parent revision).
-| Version Control System | Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
-=======
-The primary purpose of the source track is to enable verification that a revision followed the expected process. 
-Consumers have some way of knowing what the expected provenance should look like for a given revision and then compare a revision's actual provenance to those expectations. 
+The primary purpose of the source track is to enable verification that the creation of a revision followed the expected process.
+Consumers have some way of knowing what the expected provenance should look like for a given revision and compare a revision's actual provenance to those expectations.
 Doing so prevents several classes of supply chain threats.
 
-The Source track is scoped to revisions of a single repository that is controlled by an organization. 
+The Source track is scoped to revisions of a single repository that is controlled by an organization.
 That organization determines the intent of the software in the repository, what Source level should apply to the repository and administers technical controls to enforce that level.
 
 ## Definitions
 
 | Term | Description
-| --- | —
-| Source | An identifiable set of text and binary files and associated metadata.
+| --- | ---
+| Source | An identifiable set of text and binary files and associated metadata. Source is regularly used as input to a build system (see [SLSA Build Track](requirements.md)).
+| Version Control System (VCS)| Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
+| Revision | A specific state of the source with an identifier provided by the version control system. As an example, you can identify a git revision by its tree hash.
+| Source Control Platform (SCP) | A service or suite of services for hosting version-controlled software. GitHub and GitLab are examples of source control platforms, as are combinations of tools like Gerrit code reviews with GitHub source control.
+| Source Provenance | Verifiable information about a source revision describing where, when and how it was produced.
 | Organization | A collection of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals and methods of the repository.
 | Repository | A uniquely identifiable instance of a VCS hosted on an SCP. The repository controls access to the Source in the version control system. The objective of a repository is to reflect the intent of the organization that controls it.
-| Change | A set of modifications to one or more source files and associated metadata. A change is proposed by a “publisher,” and applied to specific revision to create a new revision. 
-Change metadata MUST include any information required to situate the change in relation to other changes (e.g. parent revision).
-| Version Control System (VCS)| Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
->>>>>>> cb88e07 (align source and build track objectives):docs/spec/v1.1/source-requirements.md
-| Revision | A specific identifier provided by the version control system that identifies a given state of the source. As an example, you can identify a git revision by its tree hash.
-| Change History | A record of the history of changes that went into the revision.
-| Source Control Platform (SCP) | A service or suite of services for hosting version-controlled software. GitHub and GitLab are examples of source control platforms, as are combinations of tools like Gerrit code reviews with GitHub source control.
-| Source Provenance Attestation | A signed document describing the security claims associated with a revision.
+| Change | A set of modifications to the source, or the computed difference between two revisions. A change is proposed by a [publisher](#source-roles), and applied to a specific revision to create a new revision. Change metadata MUST include any information required to situate the change in relation to other changes (e.g. parent revision).
+| Change History | A record of the history of revisions that preceded a specific revision.
+| Branch | A named pointer to a revision. The pointer may be modified by authorized actors.
 
 ## Source Roles
 
@@ -66,7 +53,7 @@ Change metadata MUST include any information required to situate the change in r
 | Trusted robot | Automation with an authentic identity that is authorized by the organization to propose and/or approve changes to the source.
 | Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
 | Proposer | The role that proposes a particular change to the source.
-| Reviewer | The role that reviews a particular proposed change to the source.
+| Reviewer | The role that reviews a particular change to the source.
 | Approver | The role that approves a particular change to the source.
 | Merger | The role that applies a change to the source. This person may be the proposer or a different trusted person, depending on the version control platform.
 
