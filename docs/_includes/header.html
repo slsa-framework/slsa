@@ -59,7 +59,11 @@
       <div>
         <label for="important-messages-checkbox" title="dismiss">✕</label>
         {%- if version.draft %}
-        <p>This is a working draft of {{ spec_version }}.</p>
+          {%- if spec_version == "draft" %}
+            <p>This is a working draft. This document may be modified, replaced, or discarded at any time.</p>
+        {%- else %}
+            <p>This is a working draft of {{ spec_version }}. This document may be modified, replaced, or discarded at any time.</p>
+        {%- endif %}
         <p style="font-size: smaller">For the latest release candidate or approved
           version, please use the version selector.</p>
         {%- endif %}
@@ -77,7 +81,7 @@
             {%- else %}
               {%- assign new_url = "/" + spec_id + "/" + spec.current %}
             {%- endif %}
-            <p>{{ current_version.name }} is available now! See the newest documentation <a href="{{ new_url }}">here</a>.</p>
+            <p>{{ current_version.name }} is available! See <a href="{{ new_url }}">the newest documentation</a>.</p>
           {%- endif %}
         {%- endif %}
       </div>
