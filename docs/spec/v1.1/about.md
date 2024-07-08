@@ -8,7 +8,7 @@ to SLSA, start here!
 
 ## What is SLSA?
 
-SLSA is a set of incrementally adoptable guidelines for supply chain security,
+Supply-chain Levels for Software Artifacts, or SLSA ("salsa"), is a set of incrementally adoptable guidelines for supply chain security,
 established by industry consensus. The specification set by SLSA is useful for
 both software producers and consumers: producers can follow SLSA's guidelines to
 make their software supply chain more secure, and consumers can use SLSA to make
