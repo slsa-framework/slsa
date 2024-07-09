@@ -1,11 +1,10 @@
 ---
-title: What's new in SLSA v1.1
-description: SLSA v1.1 is a minor release of SLSA. That is, all changes are intended to be backwards compatible. This document describes what has changed since v1.0.
+title: What's new
+description: The changes brought by this Working Draft.
 ---
 
-SLSA v1.1 is a minor release of SLSA v1 which adds additional content without
-changing the meaning of the specification. This document describes the major
-changes in v1.1 relative to the prior release, [v1.0].
+This document describes the major changes brought by this Working
+Draft relative to the prior release, [v1.0].
 
 ## Summary of changes
 
