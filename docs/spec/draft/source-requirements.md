@@ -134,8 +134,8 @@ Benefits: A compromise of a single human or account does not result in compromis
 
 There are two uses for source attestations within the source track:
 
-1. Assertions: Communicate to downstream users what high level security properties a given source revision meets.
-2. Evidence: Provide trustworthy metadata which can be used to determine what high level security properties a given source revision meets.
+1.  Assertions: Communicate to downstream users what high level security properties a given source revision meets.
+2.  Evidence: Provide trustworthy metadata which can be used to determine what high level security properties a given source revision meets.
 
 To provide interoperability and ensure ease of use, it's essential that the 'assertions' are applicable across all Source Control Platforms.
 Due to the significant differences in how SCPs operate and how they may chose to meet the Source Track requirements it is preferable to
@@ -149,26 +149,25 @@ revision's source level.
 
 These assertions are communicated in [Verification Summary Attestations (VSAs)](./verification_summary.md) as follows:
 
-1. `subject.uri` SHOULD be set to a human readable URI of the revision.
-1. `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
+1.  `subject.uri` SHOULD be set to a human readable URI of the revision.
+2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
 SCPs that do not use cryptographic digests MUST define a canonical type that is used to identify immutable revisions (e.g. `svn_revision_id`)[^1].
-1. `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field) and SHOULD
+3.  `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field) and SHOULD
 provide the branch or refs.  E.g. `git+https://github.com/foo/hello-world@refs/heads/main`.
-1. `verifiedLevels` MUST include the SLSA source track level the issuer asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
-1. `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
+4.  `verifiedLevels` MUST include the SLSA source track level the issuer asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
+5.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
 
 Source Level Assertion issuers MAY issue assertions based on their understanding of the underlying system, but SHOULD prefer to issue assertions based on Source Level Evidence appropriate to their SCP.
 
 #### Example
 
-```
+```json
 "_type": "https://in-toto.io/Statement/v1",
 "subject": [{
   "uri": "https://github.com/foo/hello-world/commit/9a04d1ee393b5be2773b1ce204f61fe0fd02366a"
   "digest": {"gitCommit": "9a04d1ee393b5be2773b1ce204f61fe0fd02366a"}
 }],
 
-// Predicate
 "predicateType": "https://slsa.dev/verification_summary/v1",
 "predicate": {
   "verifier": {
@@ -185,5 +184,3 @@ Source Level Assertion issuers MAY issue assertions based on their understanding
 ```
 
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
-
-
