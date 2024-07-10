@@ -152,10 +152,11 @@ These assertions are communicated in [Verification Summary Attestations (VSAs)](
 1.  `subject.uri` SHOULD be set to a human readable URI of the revision.
 2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
 SCPs that do not use cryptographic digests MUST define a canonical type that is used to identify immutable revisions (e.g. `svn_revision_id`)[^1].
-3.  `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field) and SHOULD
-provide the branch or refs.  E.g. `git+https://github.com/foo/hello-world@refs/heads/main`.
-4.  `verifiedLevels` MUST include the SLSA source track level the issuer asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
-5.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
+3.  `subject.annotations.source_branches` SHOULD be set to a list of branches that pointed to this revision at any point in their history.
+4.  `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field). 
+E.g. `git+https://github.com/foo/hello-world`.
+5.  `verifiedLevels` MUST include the SLSA source track level the issuer asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
+6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
 
 Source Level Assertion issuers MAY issue assertions based on their understanding of the underlying system, but SHOULD prefer to issue assertions based on Source Level Evidence appropriate to their SCP.
 
@@ -164,8 +165,9 @@ Source Level Assertion issuers MAY issue assertions based on their understanding
 ```json
 "_type": "https://in-toto.io/Statement/v1",
 "subject": [{
-  "uri": "https://github.com/foo/hello-world/commit/9a04d1ee393b5be2773b1ce204f61fe0fd02366a"
-  "digest": {"gitCommit": "9a04d1ee393b5be2773b1ce204f61fe0fd02366a"}
+  "uri": "https://github.com/foo/hello-world/commit/9a04d1ee393b5be2773b1ce204f61fe0fd02366a",
+  "digest": {"gitCommit": "9a04d1ee393b5be2773b1ce204f61fe0fd02366a"},
+  "annotations": {"source_branches": ["main", "release_1.0"]}
 }],
 
 "predicateType": "https://slsa.dev/verification_summary/v1",
