@@ -211,6 +211,35 @@ You can automatically append a sign-off to a commit by passing the `-s` /
 **Note**: this requires your `user.name` and `user.email` are set correctly
 in your git config.
 
+## SLSA versions management
+
+The main working draft is located in the `spec/draft` folder while the various versions are in specific folders:
+
+```none
+spec/draft
+spec/v0.1
+spec/v0.2
+spec/v1.0
+spec/v1.0-rc1
+spec/v1.0-rc2
+spec/v1.1
+```
+
+`spec/draft` is where all new work should take place. To publish a new version of the SLSA specification, copy the draft folder to a version specific folder (e.g., `spec/v1.1`) and make the necessary changes to that folder: it is possible for instance that not all that is in the draft should be included in which case you will need to remove that content, and several config and navigation files need to be updated such as:
+
+```none
+_data/nav/config.yml
+_data/nav/v1.1.yml (corresponding to the version you are creating)
+_data/versions.yml
+_redirects
+```
+
+To patch a specific version of the specification, the changes should be made to both the corresponding folder as well as, if applicable, to all later versions including the draft folder.
+
+Unfortunately we've not figured out a better way to handle the different versions with Jekyll. If you do, please let us know!
+
+**Note**: When publishing new versions of the SLSA specification, make sure to follow the [Specification stages and versions documentation](docs/spec-stages.md) and the [Specification Development Process](https://github.com/slsa-framework/governance/blob/main/5._Governance.md#4-specification-development-process) to ensure compliance with the [Community Specification License](https://github.com/slsa-framework/governance/blob/main/1._Community_Specification_License-v1.md).
+
 ## Workstream lifecycle
 
 Major workstreams that require considerable effort, such as a new release, a new
