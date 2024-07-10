@@ -42,7 +42,7 @@ That organization determines the intent of the software in the repository, what 
 | Repository | A uniquely identifiable instance of a VCS hosted on an SCP. The repository controls access to the Source in the version control system. The objective of a repository is to reflect the intent of the organization that controls it.
 | Change | A set of modifications to the source, or the computed difference between two revisions. A change is proposed by a [publisher](#source-roles), and applied to a specific revision to create a new revision. Change metadata MUST include any information required to situate the change in relation to other changes (e.g. parent revision).
 | Change History | A record of the history of revisions that preceded a specific revision.
-| Branch | A named pointer to a revision. The pointer may be modified by authorized actors.
+| Branch | A named pointer to a revision. Branches may be modified by authorized actors.
 
 ## Source Roles
 
