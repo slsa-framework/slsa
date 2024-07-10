@@ -35,7 +35,7 @@ Doing so prevents several classes of supply chain threats.
 | Version Control System (VCS)| Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
 | Revision | A specific state of the source with an identifier provided by the version control system. As an example, you can identify a git revision by its tree hash.
 | Source Control Platform (SCP) | A service or suite of services for hosting version-controlled software. GitHub and GitLab are examples of source control platforms, as are combinations of tools like Gerrit code reviews with GitHub source control.
-| Source Provenance | Information  about which Source Control Platform (SCP) produced a revision, when it was generated, what process was used, who were the contributors, and what parent revisions it was based on.
+| Source Provenance | Information  about which Source Control Platform (SCP) produced a revision, when it was generated, what process was used, who the contributors were, and what parent revisions it was based on.
 | Organization | A collection of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals and methods of the repository.
 | Repository | A uniquely identifiable instance of a VCS hosted on an SCP. The repository controls access to the Source in the version control system. The objective of a repository is to reflect the intent of the organization that controls it.
 | Branch | A named pointer to a revision. Branches may be modified by authorized actors. In git, cloning a repo will download all revisions in the history of the "default" branch to the local machine.
