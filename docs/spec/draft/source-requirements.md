@@ -24,7 +24,7 @@ The Source track is scoped to revisions of a single repository that is controlle
 That organization determines the intent of the software in the repository, what Source level should apply to the repository and administers technical controls to enforce that level.
 
 The primary purpose of the Source track is to enable verification that the creation of a revision followed the expected process.
-Consumers have some way of knowing what the expected provenance should be for a given revision and compare a revision's actual provenance to those expectations.
+Consumers can examine the various source provenance attestations to determine if all sources used during the build meet their requirements
 Doing so prevents several classes of supply chain threats.
 
 ## Definitions
@@ -53,7 +53,7 @@ Doing so prevents several classes of supply chain threats.
 | Proposer | An actor that proposes a particular change to the source.
 | Reviewer | An actor that reviews a particular change to the source.
 | Approver | An actor that approves a particular change to the source.
-| Merger | An actor that applies a change to the source. This person may be the proposer or a different trusted person, depending on the version control platform.
+| Merger | An actor that applies a change to the source. This typically involves creating the new revision and updating a branch. This person may be the proposer or a different trusted person, depending on the version control platform.
 
 ## Source Platform Requirements
 
