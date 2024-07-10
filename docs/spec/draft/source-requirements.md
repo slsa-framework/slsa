@@ -18,7 +18,7 @@ Open issues are tracked with the [source-track](https://github.com/slsa-framewor
 
 ## Objective
 
-The SLSA source track describes increasing levels of trustworthiness and completeness in a repository revision's provenance.
+The SLSA source track describes increasing levels of trustworthiness and completeness in a repository revision's provenance (e.g. how it was generated, who the contributors were, etc...).
 Source provenance describes which Source Control Platform (SCP) produced the revision, when it was generated, what process was used, and who were the contributors.
 Higher source levels provide increasing protection against tampering with any parts of the Version Control System, Source Control Platform, or the source provenance information.
 
