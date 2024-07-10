@@ -53,7 +53,7 @@ That organization determines the intent of the software in the repository, what 
 | Trusted robot | Automation with an authentic identity that is authorized by the organization to propose and/or approve changes to the source.
 | Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
 | Proposer | The role that proposes a particular change to the source.
-| Reviewer | The role that reviews a particular change to the source.
+| Reviewer | A role that reviews a particular change to the source.
 | Approver | The role that approves a particular change to the source.
 | Merger | The role that applies a change to the source. This person may be the proposer or a different trusted person, depending on the version control platform.
 
