@@ -177,7 +177,7 @@ Source Level Assertion issuers MAY issue assertions based on their understanding
     "id": "https://example.com/source_verifier",
   },
   "timeVerified": "1985-04-12T23:20:50.52Z",
-  "resourceUri": "git+https://github.com/foo/hello-world@refs/heads/main",
+  "resourceUri": "git+https://github.com/foo/hello-world",
   "policy": {
     "uri": "https://example.com/slsa_source.policy",
   },
