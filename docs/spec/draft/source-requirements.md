@@ -137,7 +137,7 @@ There are two uses for source attestations within the source track:
 1. Assertions: Communicate to downstream users what high level security properties a given source revision meets.
 2. Evidence: Provide trustworthy metadata which can be used to determine what high level security properties a given source revision meets.
 
-To provide interoperability and ensure ease of use, it's essential that the 'assertions' are applicabile across all Source Control Platforms.
+To provide interoperability and ensure ease of use, it's essential that the 'assertions' are applicable across all Source Control Platforms.
 Due to the significant differences in how SCPs operate and how they may chose to meet the Source Track requirements it is preferable to
 allow for flexibility with 'evidence' attestations.  To that end SLSA leaves 'evidence' attestations undefined and up to the SCPs to determine
 what works best in their environment.
