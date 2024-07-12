@@ -24,7 +24,7 @@ The Source track is scoped to revisions of a single repository that is controlle
 That organization determines the intent of the software in the repository, what Source level should apply to the repository and administers technical controls to enforce that level.
 
 The primary purpose of the Source track is to enable verification that the creation of a revision followed the expected process.
-Consumers can examine the various source provenance attestations to determine if all sources used during the build meet their requirements
+Consumers can examine the various source provenance attestations to determine if all sources used during the build meet their requirements.
 
 ## Definitions
 
