@@ -57,6 +57,25 @@ style, as encoded in our [markdownlint configuration](.markdownlint.yaml). In
 addition we prefer to keep our Markdown documents wrapped at 80 columns (though
 this is not currently enforced).
 
+To check (and fix) style problems before sending a PR you can install
+and run [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2).
+
+```shell
+$ markdownlint-cli2 CONTRIBUTING.md
+markdownlint-cli2 v0.13.0 (markdownlint v0.34.0)
+Finding: CONTRIBUTING.md
+Linting: 1 file(s)
+Summary: 2 error(s)
+CONTRIBUTING.md:70 MD031/blanks-around-fences Fenced code blocks should be surrounded by blank lines [Context: "```"]
+CONTRIBUTING.md:71 MD022/blanks-around-headings Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Above] [Context: "### Pull request conventions"]
+$ markdownlint-cli2 CONTRIBUTING.md --fix
+markdownlint-cli2 v0.13.0 (markdownlint v0.34.0)
+Finding: CONTRIBUTING.md
+Linting: 1 file(s)
+Summary: 0 error(s)
+$
+```
+
 ### Pull request conventions
 
 [pull request conventions]: #pull-request-conventions
