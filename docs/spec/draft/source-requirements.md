@@ -157,7 +157,7 @@ SCPs that do not use cryptographic digests MUST define a canonical type that is 
 4.  `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field).
 E.g. `git+https://github.com/foo/hello-world`.
 5.  `verifiedLevels` MUST include the SLSA source track level the issuer asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
-MAY include additional properties as asserted by the issuer.
+MAY include additional properties as asserted by the issuer.  The issuer MUST include _only_ the highest SLSA source level met by the revision.
 6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
 
 Source Level Assertion issuers MAY issue assertions based on their understanding of the underlying system, but SHOULD prefer to issue assertions based on Source Level Evidence appropriate to their SCP.
@@ -186,5 +186,12 @@ Source Level Assertion issuers MAY issue assertions based on their understanding
   "verifiedLevels": ["SLSA_SOURCE_LEVEL_3"],
 }
 ```
+
+#### How to verify
+
+*   VSAs for source revisions MUST follow [the standard method of VSA verification](./verification_summary.md#how-to-verify).
+*   Users SHOULD check that an allowed branch is listed in `subject.annotations.source_branches` to ensure the revision is from an appropriate context within the repository.
+*   Users SHOULD check that the expected `SLSA_SOURCE_LEVEL_` is listed within `verifiedLevels`.
+*   Users MUST ignore any unrecognized values in `verifiedLevels`.
 
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
