@@ -47,33 +47,63 @@ The Source track is scoped to a single project that is controlled by some organi
 | Approver | The role that approves a particular change to the source.
 | Merger | The role that applies a change to the source. This person may be the proposer or a different trusted person, depending on the version control platform.
 
-## Source Platform Requirements
+## Source Control Platform and Version Control System Requirements
 
-The version control system MUST provide at least:
+The combination of SCP and VCS MUST provide:
 
--   **[Immutable reference]** There exists a deterministic way to identify this particular revision. This is usually {project identifier + revision ID}. When the revision ID is a digest of the revision, as in git, nothing more is needed. When the revision ID is a number or otherwise not a digest, then the project server MUST guarantee that revisions cannot be altered once created.
+### **[Immutable reference]**
 
--   **[Change history]** There exists a record of the history of changes that went into the revision. Each change MUST contain:
+There exists a deterministic way to identify a particular revision.
+
+This is usually a combination of the repository ID and revision ID.
+When the revision ID is a digest of the revision, as in git, nothing more is needed.
+When the revision ID is a number or otherwise not a digest, then the repository server MUST guarantee that revisions cannot be altered once created.
+The SCP MUST guarantee that repository IDs track the complete history of changes that occur to the source while hosted on the platform.
+
+### **[Identity Management]**
+
+There exists an identity management system or some other means of identifying actors.
+
+The SCP will use these identities for recording change history and writing provenance attestations.
+
+### **[Change history]**
+
+There exists a record of the history of changes conducted on this SCP that went into the revision.
+
+A merged GitHub pull request is an example of a change record.
+Each change MUST contain:
     -   The immutable reference to the new revision.
-    -   The identities of the proposer, reviewers (if any), and merger (if different to the proposer).
-    -   Timestamps of change submission. If a change is reviewed, then the change history MUST also include timestamps for any reviews.
+    -   The list of parent revisions.
     -   The change description/justification.
     -   The content of the change.
-    -   The parent revisions.
+    -   The [Merger](#source-roles) of the change.
+    -   The timestamp when the change was received by the SCP
 
-Most popular version control systems meet these requirement, such as git, Subversion, Mercurial, and Perforce.
+Administrators have the necessary permissions to replace the source in a known repo.
+In mechanical terms, this means changing the source for a known repository ID without publishing a change record.
+This includes changing files, history, or changing references in git.
+When used as an attack, this is called “repo hijacking” (or “repo-jacking”) and is one of the primary threats source provenance attestations protect against.
+If an organization must change the source without publishing a change record, the organization will need to demonstrate that the change was necessary and executed responsibly.
 
-The source control platform MUST provide at least:
+### **[Change Management]**
 
--   An account system or some other means of identifying persons.
--   A mechanism for modifying the canonical source through a **revision process**.
+There exists a trusted mechanism for modifying the canonical source through a **revision process**.
 
-The source control platform SHOULD additionally provide:
+The revision process MUST record at least:
 
--   A mechanism for assigning roles and/or permissions to identities.
+-   The identities of the proposer, reviewers (if any), and merger (if different from the proposer).
+-   Timestamps of change submission. If a change is reviewed, then the change history MUST also include timestamps for any reviews.
+-   The specific change reviewed during the revision process or instructions to recreate it. In git, this might be the two compared object ids and the computed best merge base between them at the time of review.
+
+### Additional features
+
+The combination of SCP and VCS SHOULD additionally provide:
+
+-   A mechanism for assigning roles and/or permissions to actors.
 -   A mechanism for including code review in the revision process.
 -   Two-factor authentication for the account system (L2+ only).
 -   Audit logs for sensitive actions, such as modifying security controls.
+-   A mechanism to define code ownership for all files in the source repository.
 
 ## Levels
 
