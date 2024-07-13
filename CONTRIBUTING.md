@@ -238,6 +238,8 @@ To patch a specific version of the specification, the changes should be made to 
 
 Unfortunately we've not figured out a better way to handle the different versions with Jekyll. If you do, please let us know!
 
+To compare the changes between two versions you may find it handy to use the [diff site script](https://github.com/slsa-framework/slsa/tree/main/docs#comparing-built-versions).
+
 **Note**: When publishing new versions of the SLSA specification, make sure to follow the [Specification stages and versions documentation](docs/spec-stages.md) and the [Specification Development Process](https://github.com/slsa-framework/governance/blob/main/5._Governance.md#4-specification-development-process) to ensure compliance with the [Community Specification License](https://github.com/slsa-framework/governance/blob/main/1._Community_Specification_License-v1.md).
 
 ## Workstream lifecycle
