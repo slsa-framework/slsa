@@ -32,35 +32,38 @@ build level, implementing any controls as specified by the chosen platform.
   <th>Implementer
   <th>Requirement
   <th>Degree
-  <th>L1<th>L2<th>L3
+  <th>L1<th>L2<th>L3<th>L4
 <tr>
   <td rowspan=3><a href="#producer">Producer</a>
   <td colspan=2><a href="#choose-an-appropriate-build-platform">Choose an appropriate build platform</a>
-  <td>✓<td>✓<td>✓
+  <td>✓<td>✓<td>✓<td>✓
 <tr>
   <td colspan=2><a href="#follow-a-consistent-build-process">Follow a consistent build process</a>
-  <td>✓<td>✓<td>✓
+  <td>✓<td>✓<td>✓<td>✓
 <tr>
   <td colspan=2><a href="#distribute-provenance">Distribute provenance</a>
-  <td>✓<td>✓<td>✓
+  <td>✓<td>✓<td>✓<td>✓
 <tr>
-  <td rowspan=5><a href="#build-platform">Build platform</a>
+  <td rowspan=6><a href="#build-platform">Build platform</a>
   <td rowspan=3><a href="#provenance-generation">Provenance generation</a>
   <td><a href="#provenance-exists">Exists</a>
-  <td>✓<td>✓<td>✓
+  <td>✓<td>✓<td>✓<td>✓
 <tr>
   <td><a href="#provenance-authentic">Authentic</a>
-  <td> <td>✓<td>✓
+  <td> <td>✓<td>✓<td>✓
 <tr>
   <td><a href="#provenance-unforgeable">Unforgeable</a>
-  <td> <td> <td>✓
+  <td> <td> <td>✓<td>✓
 <tr>
-  <td rowspan=2><a href="#isolation-strength">Isolation strength</a>
+  <td rowspan=3><a href="#isolation-strength">Isolation strength</a>
   <td><a href="#hosted">Hosted</a>
-  <td> <td>✓<td>✓
+  <td> <td>✓<td>✓<td>✓
 <tr>
   <td><a href="#isolated">Isolated</a>
-  <td> <td> <td>✓
+  <td> <td> <td>✓<td>✓
+<tr>
+  <td><a href="#hardware-attested">Hardware-Attested</a>
+  <td> <td> <td> <td>✓
 </table>
 
 ### Security Best Practices
@@ -153,7 +156,7 @@ minimum requirements on its:
     the build process?
 
 <table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
 
 <tr id="provenance-exists"><td>Provenance Exists<td>
 
@@ -182,7 +185,7 @@ Provenance.
 [SLSA Provenance]: provenance.md
 [associated suite]: ../../attestation-model#recommended-suite
 
-<td>✓<td>✓<td>✓
+<td>✓<td>✓<td>✓<td>✓
 <tr id="provenance-authentic"><td>Provenance is Authentic<td>
 
 *Authenticity:* Consumers MUST be able to validate the authenticity of the
@@ -233,7 +236,7 @@ build platform (i.e. outside the trust boundary), except as noted below.
     the provenance.
 -   Completeness of resolved dependencies is best effort.
 
-<td> <td>✓<td>✓
+<td> <td>✓<td>✓<td>✓
 <tr id="provenance-unforgeable"><td>Provenance is Unforgeable<td>
 
 *Accuracy:* Provenance MUST be strongly resistant to forgery by tenants.
@@ -258,8 +261,10 @@ build platform (i.e. outside the trust boundary), except as noted below.
 Note: This requirement was called "non-falsifiable" in the initial
 [draft version (v0.1)](../v0.1/requirements.md#non-falsifiable).
 
-<td> <td> <td>✓
+<td> <td> <td>✓<td>✓
 </table>
+
+TODO: Add completeness of resolved dependencies
 
 ### Isolation strength
 
@@ -270,12 +275,12 @@ The build platform is responsible for isolating between builds, even within the
 same tenant project. In other words, how strong of a guarantee do we have that
 the build really executed correctly, without external influence?
 
-The SLSA Build level describes the minimum bar for isolation strength. For more
-information on assessing a build platform's isolation strength, see
-[Verifying build platforms](verifying-systems.md).
+The SLSA Build level describes the minimum bar for isolation strength.
+For more information on assessing a build platform's isolation strength,
+see [Verifying build platforms](verifying-systems.md).
 
 <table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
 
 <tr id="hosted">
 <td>Hosted
@@ -286,7 +291,7 @@ infrastructure, not on an individual's workstation.
 
 Examples: GitHub Actions, Google Cloud Build, Travis CI.
 
-<td> <td>✓<td>✓
+<td> <td>✓<td>✓<td>✓
 <tr id="isolated">
 <td>Isolated
 <td>
@@ -330,9 +335,77 @@ means that the build ran with no network access. Such a requirement requires
 substantial changes to both the build platform and each individual build, and is
 considered in the [future directions](future-directions.md).
 
-<td> <td> <td>✓
+<td> <td> <td>✓<td>✓
+<tr id="hardware-attested">
+<td>Hardware-Attested
+<td>
+
+The build platform generated an authenticated attestation to the integrity
+of the entire initial state of the build environment (i.e., VM/container
+image, kernel, and filesystem) was generated at creation time and verified
+at deployment time. The build platform also attested to the build request.
+In other words, tampering with the initial state of the build environment
+MUST be detectable by the platform itself and the build.
+
+The build platform MUST guarantee the following:
+
+-   When creating a new build environment:
+    -   The integrity of the build image (i.e., VM or container) MUST be
+        authenticated and verifiable. That is, SLSA Build L3+ Provenance for
+        the build image MUST be generated and distributed to allow for
+        independent verification.
+    -   The boot process of each build environment MUST be measured and
+        attested using a [TCG-compliant measured boot] mechanism. In
+        addition, the initial state of the build environment's disk image
+        MUST be integrity measured and attested. The boot and disk
+        attestations MUST be distributed to allow for independent
+        verification.
+-   When deploying a new build environment:
+    -   The build image's SLSA Provenance MUST be verified to ensure the
+        VM/container image has not been tampered with.
+    -   The boot process and state of disk image attestations MUST be
+        verified to ensure the guest kernel and filesystem have not been
+        tampered with.
+    -   A unique immutable build environment identifier (e.g.,
+        cryptographic keypair) MUST be generated and cryptographically bound
+        to the build environment via attestation. This *deploy-time
+        attestation* MUST be generated only after build image, boot process
+        and disk image integrity have been verified, and distributed to
+        allow for independent verification.
+-   When accepting a new build request (e.g., GHA build job):
+    -   The build environment's deploy-time attestation and uniqueness of its
+        immutable identifier MUST be verified to ensure the initial state
+        of the build environment has not been tampered with.
+    -   A unique immutable build identifier (e.g., GHA build job
+        ID) MUST be generated and cryptographically bound to the build
+        environment via attestation. This *request-time attestation*
+        MUST be generated only after the deploy-time attestation has been
+        verified, and distributed to allow for independent verification.
+    -   Run-time changes to the build environment's disk image SHOULD be
+        observable at run-time by the executing build. These changes NEED NOT
+        be attested.
+-   Boot, disk, deploy- and request-time attestations MUST be authenticated
+    by a hardware root of trust (e.g., [TPM] or [trusted execution
+    environment]). In addition, these attestations MUST be distributed in a
+    consistent format that follows the SLSA [attestation model], such as
+    [SCAI].
+
+NOTE: Virtual hardware (e.g., vTPM) MAY be used to meet this requirement.
+
+NOTE: A [confidential computing] technology MAY be used to meet this
+requirement. Such technologies SHOULD be chosen for builds with a need for
+additional data and code confidentiality, and tamper-evidence properties
+during build execution.
+
+<td> <td> <td> <td>✓
 </table>
 
+[attestation model]: attestation-model.md#model-and-terminology
+[confidential computing]: https://confidentialcomputing.io/wp-content/uploads/sites/10/2023/03/Common-Terminology-for-Confidential-Computing.pdf
 [external parameters]: provenance.md#externalParameters
 [identified in the provenance]: provenance.md#model
 [package ecosystem]: verifying-artifacts.md#package-ecosystem
+[SCAI]: https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md
+[TCG-compliant measured boot]: https://trustedcomputinggroup.org/resource/tcg-efi-platform-specification/
+[TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
+[trusted execution environment]: https://csrc.nist.gov/glossary/term/trusted_execution_environment
