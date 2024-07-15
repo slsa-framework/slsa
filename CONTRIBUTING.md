@@ -57,6 +57,27 @@ style, as encoded in our [markdownlint configuration](.markdownlint.yaml). In
 addition we prefer to keep our Markdown documents wrapped at 80 columns (though
 this is not currently enforced).
 
+To check (and fix) style problems before sending a PR you can run linting
+locally with `npm run lint && ./lint.sh` or `npm run format && ./lint.sh`.
+
+```shell
+$ npm run lint && ./lint.sh
+
+> lint
+> markdownlint .
+
+CONTRIBUTING.md:77 MD022/blanks-around-headings Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Above] [Context: "### Pull request conventions"]
+$ npm run format && ./lint.sh
+
+> format
+> markdownlint . --fix
+
+$
+```
+
+If you haven't already you'll need to install npm (e.g. `sudo apt install npm`)
+and package dependencies (`npm install`).
+
 ### Pull request conventions
 
 [pull request conventions]: #pull-request-conventions

@@ -21,6 +21,7 @@ permissions in this repository.
 | Kris K | kkris@google.com | @Kris K | [kpk47](https://github.com/kpk47) | Google
 | Mark Lodato | lodato@google.com |  @Mark Lodato | [MarkLodato](https://github.com/MarkLodato) | Google
 | Michael Lieberman | mlieberman85@gmail.com | @Michael Lieberman | [mlieberman85](https://github.com/mlieberman85) | Kusari
+| Tom Hennen | tomhennen@google.com | @Tom Hennen | [TomHennen](https://github.com/TomHennen) | Google
 
 ### Becoming a Maintainer
 
