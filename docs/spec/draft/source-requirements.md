@@ -54,7 +54,6 @@ Consumers can examine the various source provenance attestations to determine if
 | Approver | An actor that approves a particular change to the source.
 | Merger | An actor that applies a change to the source. This typically involves creating the new revision and updating a branch. This person may be the proposer or a different trusted person, depending on the version control platform.
 
-
 ## Safe Expunging Process
 
 (placeholder text)
@@ -96,13 +95,13 @@ There exists a trusted mechanism for modifying the source pointed-to by a [branc
 For each [branch](#definitions), the SCP MUST record and keep the full history of changes conducted on this SCP, with exceptions allowed following the [Safe Expunging Process](#safe-expunging-process).
 
 The revision process MUST:
+
 -   Provide an accurate description of the currently proprosed change, or instructions to recreate it.
--   Provide the ability to review a change before it is accepted
+-   Provide the ability to review a change before it is accepted.
 -   Provide the ability to require pre-approval from specific actors before a change proposal is accepted.
 -   Record all actors that contributed to the process, including the proposers, merger and reviewers (if any).
 -   Record timestamps of critical activities including process start, process completion, reception of change proposals by the SCP, and reviews.
 -   Record the specific state of the process when each approval was granted. This is most relevant when the proposal content is allowed to change after aprovals have been granted.
-
 
 ### Additional features
 
