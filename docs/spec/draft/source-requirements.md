@@ -82,12 +82,15 @@ The SCP MUST guarantee that repository IDs track the complete history of changes
 ### Identity Management
 
 There exists an identity management system or some other means of identifying actors.
+This system may be a federated authentication system (AAD, Google, Okta, GitHub, etc) or custom (gittuf, gpg-signatures on commits, etc).
+SCPs SHOULD pick one and use a single identity management system when issuing content in provenance attestations.
+
 
 The SCP will use these identities to:
 
--   Implement actor-based rules (such as required review from code experts)
--   Record contributors to a code revision process
--   Issuing source provenance attestations.
+-   Implement actor-based rules (such as requiring review from code experts).
+-   Record contributors to a code revision process (in git, this may differ from what is in the commit metadata).
+-   Refer to actors in issued source provenance attestations.
 
 ### Revision process
 
@@ -99,7 +102,7 @@ The revision process MUST:
 -   Provide an accurate description of the currently proprosed change, or instructions to recreate it.
 -   Provide the ability to review a change before it is accepted.
 -   Provide the ability to require pre-approval from specific actors before a change proposal is accepted.
--   Record all actors that contributed to the process, including the proposers, merger and reviewers (if any).
+-   Record all actors that contributed to the process, see [Source Roles](#source-roles).
 -   Record timestamps of critical activities including process start, process completion, reception of change proposals by the SCP, and reviews.
 -   Record the specific state of the process when each approval was granted. This is most relevant when the proposal content is allowed to change after aprovals have been granted.
 
