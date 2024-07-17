@@ -85,7 +85,6 @@ There exists an identity management system or some other means of identifying ac
 This system may be a federated authentication system (AAD, Google, Okta, GitHub, etc) or custom (gittuf, gpg-signatures on commits, etc).
 SCPs SHOULD pick one and use a single identity management system when issuing content in provenance attestations.
 
-
 The SCP will use these identities to:
 
 -   Implement actor-based rules (such as requiring review from code experts).
