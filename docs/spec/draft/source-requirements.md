@@ -58,7 +58,7 @@ Consumers can examine the various source provenance attestations to determine if
 
 (placeholder text)
 
-Administrators have the necessary permissions to replace the source in a known repo without publishing a change record.
+Administrators have the ability to expunge (remove) content from a repository and its change history without leaving a record of the removed content.
 
 This includes changing files, history, or changing references in git.
 
