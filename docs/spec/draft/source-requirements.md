@@ -56,15 +56,11 @@ Consumers can examine the various source provenance attestations to determine if
 
 ## Safe Expunging Process
 
-(placeholder text)
-
 Administrators have the ability to expunge (remove) content from a repository and its change history without leaving a record of the removed content.
-
 This includes changing files, history, or changing references in git.
-
 When used as an attack, this is called “repo hijacking” (or “repo-jacking”) and is one of the primary threats source provenance attestations protect against.
 
-If an organization must change the source without publishing a change record, the organization will need to demonstrate that the change was necessary and executed responsibly.
+TODO: Determine how organizations can provide transparency around this process.
 
 ## Source Control Platform and Version Control System Requirements
 
@@ -83,13 +79,10 @@ The SCP MUST guarantee that repository IDs track the complete history of changes
 
 There exists an identity management system or some other means of identifying actors.
 This system may be a federated authentication system (AAD, Google, Okta, GitHub, etc) or custom (gittuf, gpg-signatures on commits, etc).
-SCPs SHOULD pick one and use a single identity management system when issuing content in provenance attestations.
+SCPs SHOULD pick one and use a single identity management system when issuing source provenance attestations.
 
-The SCP will use these identities to:
-
--   Implement actor-based rules (such as requiring review from code experts).
--   Record contributors to a code revision process (in git, this may differ from what is in the commit metadata).
--   Refer to actors in issued source provenance attestations.
+When there are conflicting identity claims the authenticated identity MUST be used.
+For example in a single git commit the "author", "committer," and the gpg signature's "user id" may be different, and they may all be different than the authenticated identity used to push the commit to the SCP.
 
 ### Revision process
 
@@ -110,7 +103,6 @@ The revision process MUST:
 The combination of SCP and VCS SHOULD provide:
 
 -   A mechanism for assigning roles and/or permissions to [actors](#source-roles).
--   A mechanism for including code review in the [revision process](#revision-process).
 -   Two-factor authentication for the [identity management system](#identity-management).
 -   Audit logs for sensitive actions, such as modifying security controls.
 -   A mechanism to define code ownership for all files in the source.
