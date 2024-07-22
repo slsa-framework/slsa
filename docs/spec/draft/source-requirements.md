@@ -76,7 +76,7 @@ There exists a deterministic way to identify a particular revision.
 
 This is usually a combination of the repository ID and revision ID.
 When the revision ID is a digest of the revision, as in git, nothing more is needed.
-When the revision ID is a number or otherwise not a digest, then the repository server MUST guarantee that revisions cannot be altered once created.
+When the revision ID is a number or otherwise not a digest, then the SCP MUST document how the immutability of the revision is established.  See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
 The SCP MUST guarantee that repository IDs track the complete history of changes that occur to the source while hosted on the platform.
 
 ### Identity Management
