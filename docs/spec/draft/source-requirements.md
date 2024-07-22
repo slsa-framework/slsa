@@ -105,7 +105,7 @@ The combination of SCP and VCS SHOULD provide:
 -   A mechanism for assigning roles and/or permissions to [actors](#source-roles).
 -   Two-factor authentication for the [identity management system](#identity-management).
 -   Audit logs for sensitive actions, such as modifying security controls.
--   A mechanism to define code ownership for all files in the source.
+-   A mechanism to define a set of expert reviewers for each file in the source, and the ability to require their approval on any changes.
 
 ## Levels
 
