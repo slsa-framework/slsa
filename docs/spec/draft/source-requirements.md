@@ -135,7 +135,7 @@ Benefits: A compromise of a single human or account does not result in compromis
 There are two uses for source attestations within the source track:
 
 1.  Assertions: Communicate to downstream users what high level security properties a given source revision meets.
-2.  Evidence: Provide trustworthy metadata which can be used to determine what high level security properties a given source revision meets.
+2.  Evidence: Provide trustworthy, tamper-proof, metadata which can be used to determine what high level security properties a given source revision meets.
 
 To provide interoperability and ensure ease of use, it's essential that the 'assertions' are applicable across all Source Control Platforms.
 Due to the significant differences in how SCPs operate and how they may chose to meet the Source Track requirements it is preferable to
@@ -160,7 +160,8 @@ E.g. `git+https://github.com/foo/hello-world`.
 MAY include additional properties as asserted by the issuer.  The issuer MUST include _only_ the highest SLSA source level met by the revision.
 6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
 
-Source Level Assertion issuers MAY issue assertions based on their understanding of the underlying system, but SHOULD prefer to issue assertions based on Source Level Evidence appropriate to their SCP.
+Source Level Assertion issuers MAY issue assertions based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
+but SHOULD prefer to issue assertions based on tamper-proof Source Level Evidence appropriate to their SCP.
 
 #### Example
 
@@ -193,5 +194,8 @@ Source Level Assertion issuers MAY issue assertions based on their understanding
 -   Users SHOULD check that an allowed branch is listed in `subject.annotations.source_branches` to ensure the revision is from an appropriate context within the repository.
 -   Users SHOULD check that the expected `SLSA_SOURCE_LEVEL_` is listed within `verifiedLevels`.
 -   Users MUST ignore any unrecognized values in `verifiedLevels`.
+
+### Source Level Evidence
+
 
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
