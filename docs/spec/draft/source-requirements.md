@@ -136,3 +136,85 @@ Trusted robots MAY be exempted from the code review process. It is RECOMMENDED t
 **[Different persons]** The organization strives to ensure that no two user accounts correspond to the same person. Should the organization discover that it issued multiple accounts to the same person, it MUST act to rectify the situation. For example, it might revoke project privileges for all but one of the accounts and perform retroactive code reviews on any changes where that person's accounts are the author and/or code reviewer(s).
 
 Benefits: A compromise of a single human or account does not result in compromise of the project, since all changes require review from two humans.
+
+## Source Attestations
+
+There are two uses for source attestations within the source track:
+
+1.  Assertions: Communicate to downstream users what high level security properties a given source revision meets.
+2.  Evidence: Provide trustworthy, tamper-proof, metadata which can be used to determine what high level security properties a given source revision meets.
+
+To provide interoperability and ensure ease of use, it's essential that the 'assertions' are applicable across all Source Control Platforms.
+Due to the significant differences in how SCPs operate and how they may chose to meet the Source Track requirements it is preferable to
+allow for flexibility with 'evidence' attestations.  To that end SLSA leaves 'evidence' attestations undefined and up to the SCPs to determine
+what works best in their environment.
+
+### Source Level Assertions
+
+Source level assertions are issued by some authority that has sufficient evidence to make the determination of a given
+revision's source level.
+
+These assertions are communicated in [Verification Summary Attestations (VSAs)](./verification_summary.md) as follows:
+
+1.  `subject.uri` SHOULD be set to a human readable URI of the revision.
+2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
+SCPs that do not use cryptographic digests MUST define a canonical type that is used to identify immutable revisions (e.g. `svn_revision_id`)[^1].
+3.  `subject.annotations.source_branches` SHOULD be set to a list of branches that pointed to this revision at any point in their history.
+    -   git branches MUST be fully qualified (e.g. `refs/head/main`) to reduce the likelyhood of confusing downstream tooling.
+4.  `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field).
+E.g. `git+https://github.com/foo/hello-world`.
+5.  `verifiedLevels` MUST include the SLSA source track level the issuer asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
+MAY include additional properties as asserted by the issuer.  The issuer MUST include _only_ the highest SLSA source level met by the revision.
+6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
+
+Source Level Assertion issuers MAY issue assertions based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
+but SHOULD prefer to issue assertions based on tamper-proof [Source Level Evidence](#source-level-evidence) appropriate to their SCP.
+
+#### Example
+
+```json
+"_type": "https://in-toto.io/Statement/v1",
+"subject": [{
+  "uri": "https://github.com/foo/hello-world/commit/9a04d1ee393b5be2773b1ce204f61fe0fd02366a",
+  "digest": {"gitCommit": "9a04d1ee393b5be2773b1ce204f61fe0fd02366a"},
+  "annotations": {"source_branches": ["refs/heads/main", "refs/heads/release_1.0"]}
+}],
+
+"predicateType": "https://slsa.dev/verification_summary/v1",
+"predicate": {
+  "verifier": {
+    "id": "https://example.com/source_verifier",
+  },
+  "timeVerified": "1985-04-12T23:20:50.52Z",
+  "resourceUri": "git+https://github.com/foo/hello-world",
+  "policy": {
+    "uri": "https://example.com/slsa_source.policy",
+  },
+  "verificationResult": "PASSED",
+  "verifiedLevels": ["SLSA_SOURCE_LEVEL_3"],
+}
+```
+
+#### How to verify
+
+-   VSAs for source revisions MUST follow [the standard method of VSA verification](./verification_summary.md#how-to-verify).
+-   Users SHOULD check that an allowed branch is listed in `subject.annotations.source_branches` to ensure the revision is from an appropriate context within the repository.
+-   Users SHOULD check that the expected `SLSA_SOURCE_LEVEL_` is listed within `verifiedLevels`.
+-   Users MUST ignore any unrecognized values in `verifiedLevels`.
+
+### Source Level Evidence
+
+Source level evidence is the tamper-proof (ideally signed in-toto attestations) that can be used to determine what SLSA Source Level a given revision meets.
+This evidence can be used by an authority as the basis for issuing a [Source Level Assertion](#source-level-assertion).
+
+SCPs and VCSes may have different methods of operating that necessetate different forms of evidence.
+E.g. GitHub based workflows may need different evidence than Gerrit based workflows, which would both likely be different from workflows that operate over Subversion repositories.
+
+Examples of evidence:
+
+-   A "code review" attestation which describes the basics of any code review that took place.
+-   An "authentication" attestation which describes how the actors involved in any revision were authenticated.
+
+TODO: Can we define or recommend any canonical formats?
+
+[^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
