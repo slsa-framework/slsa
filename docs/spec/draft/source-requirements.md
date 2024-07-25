@@ -144,7 +144,7 @@ what works best in their environment.
 
 ### Source Level Assertions
 
-Source level assertions are issued by the SCP or some other authority that has sufficient evidence to make the determination of a given
+Source level assertions are issued by some authority that has sufficient evidence to make the determination of a given
 revision's source level.
 
 These assertions are communicated in [Verification Summary Attestations (VSAs)](./verification_summary.md) as follows:
