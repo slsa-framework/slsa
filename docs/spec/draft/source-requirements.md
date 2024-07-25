@@ -161,7 +161,7 @@ MAY include additional properties as asserted by the issuer.  The issuer MUST in
 6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
 
 Source Level Assertion issuers MAY issue assertions based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
-but SHOULD prefer to issue assertions based on tamper-proof Source Level Evidence appropriate to their SCP.
+but SHOULD prefer to issue assertions based on tamper-proof [Source Level Evidence](#source-level-evidence) appropriate to their SCP.
 
 #### Example
 
@@ -196,6 +196,18 @@ but SHOULD prefer to issue assertions based on tamper-proof Source Level Evidenc
 -   Users MUST ignore any unrecognized values in `verifiedLevels`.
 
 ### Source Level Evidence
+
+Source level evidence is the tamper-proof (ideally signed in-toto attestations) that can be used to determine what SLSA Source Level a given revision meets.
+This evidence can be used by an authority as the basis for issuing a [Source Level Assertion](#source-level-assertion).
+
+SCPs and VCSes may have different methods of operating that necessetate different forms of evidence.
+E.g. GitHub based workflows may need different evidence than Gerrit based workflows, which would both likely be different from workflows that operate over Subversion repositories.
+
+Examples of evidence
+* A "code review" attestation which describes the basics of any code review that took place.
+* An "authentication" attestation which describes how the actors involved in any revision were authenticated.
+
+TODO: Can we define or recommend any canonical formats?
 
 
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
