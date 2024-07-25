@@ -203,11 +203,11 @@ This evidence can be used by an authority as the basis for issuing a [Source Lev
 SCPs and VCSes may have different methods of operating that necessetate different forms of evidence.
 E.g. GitHub based workflows may need different evidence than Gerrit based workflows, which would both likely be different from workflows that operate over Subversion repositories.
 
-Examples of evidence
-* A "code review" attestation which describes the basics of any code review that took place.
-* An "authentication" attestation which describes how the actors involved in any revision were authenticated.
+Examples of evidence:
+
+-   A "code review" attestation which describes the basics of any code review that took place.
+-   An "authentication" attestation which describes how the actors involved in any revision were authenticated.
 
 TODO: Can we define or recommend any canonical formats?
-
 
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
