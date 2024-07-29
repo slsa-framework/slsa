@@ -68,7 +68,7 @@ TODO: Determine how organizations can provide transparency around this process.
 
 Summary: The source is stored and managed through a modern version control system with a revision process.
 
-Intended for: Organizations that are unwilling or unable to host their source on a source control platform. If possible, skip to Level 2.
+Intended for: Organizations wanting to easily and quickly gain some benefits of SLSA and better integrate with the SLSA ecosystem without changing their source workflows.
 
 Benefits: Version control solves software development challenges ranging from change attribution to effective collaboration.
 It is a software development best practice with more benefits than we can discuss here.
@@ -82,7 +82,7 @@ There exists a deterministic way to identify a particular revision.
 This is usually a combination of the repository ID and revision ID.
 When the revision ID is a digest of the revision, as in git, nothing more is needed.
 When the revision ID is a number or otherwise not a digest, then the SCP MUST document how the immutability of the revision is established.  See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
-The SCP MUST guarantee that repository IDs track the complete history of changes that occur to the source while hosted on the platform with exceptions allowed following the [Safe Expunging Process](#safe-expunging-process).
+The SCP MUST guarantee that repository IDs track the complete history of changes that occur to the source while hosted on the platform.
 
 #### Identity Management
 
@@ -90,8 +90,9 @@ There exists an identity management system or some other means of identifying ac
 This system may be a federated authentication system (AAD, Google, Okta, GitHub, etc) or custom (gittuf, gpg-signatures on commits, etc).
 SCPs SHOULD pick one and use a single identity management system when issuing source provenance attestations.
 
-When there are conflicting identity claims the authenticated identity MUST be used.
+When there are conflicting identity claims the authenticated identity MUST be used for generating attestations, but other forms of identity MAY be used for informational purposes.
 For example in a single git commit the "author", "committer," and the gpg signature's "user id" may be different, and they may all be different than the authenticated identity used to push the commit to the SCP.
+In this case, the identity used to push the commit MUST be used for source provenance, however the other forms of identity MAY be included as informational.
 
 #### Revision process
 
@@ -101,11 +102,9 @@ For each [branch](#definitions), the SCP MUST record and keep the full history o
 The revision process MUST:
 
 -   Provide an accurate description of the currently proprosed change, or instructions to recreate it.
--   Provide the ability to review a change before it is accepted.
 -   Provide the ability to require pre-approval from specific actors before a change proposal is accepted.
 -   Record all actors that contributed to the process, see [Source Roles](#source-roles).
 -   Record timestamps of critical activities including process start, process completion, reception of change proposals by the SCP, and reviews.
--   Record the specific state of the process when each approval was granted. This is most relevant when the proposal content is allowed to change after aprovals have been granted.
 
 ### Level 2: TODO, but maybe: Generates Source Provenance Attestations
 
@@ -130,7 +129,9 @@ TODO:
 
 Summary: All changes to the source are approved by two trusted actors prior to submission.
 
-Intended for: Enterprise projects and mature open source projects.
+Intended for: Enterprise repositories and mature open source projects.
+
+Benefits: A compromise of a single account does not result in compromise of the source.
 
 Benefits: A compromise of a single account does not result in compromise of the source.
 
@@ -148,6 +149,7 @@ The code review system must meet the following requirements:
 -   **[Informed review]** The reviewer is able and encouraged to make an informed decision about what they're approving. The reviewer MUST be presented with a full, meaningful content diff between the proposed revision and the previously reviewed revision. For example, it is not sufficient to just indicate that a file changed without showing the contents.
 -   **[Context-specific approvals]** Approvals are for a specific context, such as a repo + target branch in git. Moving fully reviewed content from one context to another still requires review, except for well-understood automatic processes. For example, you do not need to review each change to cut a release branch, but you do need review when backporting changes from the main branch to an existing release branch.
 -   **[Atomic change sets]** Changes are recorded in the change history as a single revision that consists of the net delta between the proposed revision and the parent revision. In the case of a nonlinear version control system, where a revision can have more than one parent, the diff must be against the "first common parent" between the parents. In other words, when a feature branch is merged back into the main branch, only the merge itself is in scope.
+-   **[Record keeping]** Provenance must include the timestamp and the state of proposed revision at the point when each approval was granted. This is most relevant when the proposal content is allowed to change after aprovals have been granted.
 
 #### Different actors
 
