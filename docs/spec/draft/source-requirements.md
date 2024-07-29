@@ -40,6 +40,8 @@ Consumers can examine the various source provenance attestations to determine if
 | Branch | A named pointer to a revision. Branches may be modified by authorized actors. In git, cloning a repo will download all revisions in the history of the "default" branch to the local machine.
 | Change | A set of modifications to the source in a specific context. As an example, a proposed change to a "releases/1" branch may require higher scrutiny than a change to "users/1".
 | Change History | A record of the history of revisions that preceded a specific revision.
+| Push / upload / publish | When an actor authenticates to an SCP to upload content.
+| Review / approve / vote | When an actor authenticates to an change review tool and positively or negatively endorses the exact source change they were presented.
 
 ## Source Roles
 
