@@ -75,7 +75,7 @@ It is a software development best practice with more benefits than we can discus
 
 Requirements: The combination of SCP and VCS MUST provide:
 
-#### Immutable references
+#### Immutable revisions
 
 There exists a deterministic way to identify a particular revision.
 
@@ -88,11 +88,6 @@ The SCP MUST guarantee that repository IDs track the complete history of changes
 
 There exists an identity management system or some other means of identifying actors.
 This system may be a federated authentication system (AAD, Google, Okta, GitHub, etc) or custom (gittuf, gpg-signatures on commits, etc).
-SCPs SHOULD pick one and use a single identity management system when issuing source provenance attestations.
-
-When there are conflicting identity claims the authenticated identity MUST be used for generating attestations, but other forms of identity MAY be used for informational purposes.
-For example in a single git commit the "author", "committer," and the gpg signature's "user id" may be different, and they may all be different than the authenticated identity used to push the commit to the SCP.
-In this case, the identity used to push the commit MUST be used for source provenance, however the other forms of identity MAY be included as informational.
 
 #### Revision process
 
@@ -119,19 +114,35 @@ Requirements:
 #### Source provenance attestation
 
 Results from the revision process are codified into a source provenance attestation document.
+Must record who, what, when.
 
-TODO:
+##### Who
 
--   (minimum requirements for provenance attestations)
--   (optional features of provenance attestations)
+Source provenance attestation issuers SHOULD use a single identity definiton.
+
+The strongly authenticated idenenty used to login to the SCP MUST be used for the generation of source provenance attestations.
+This is typically the identity used to push to a git server.
+
+Other forms of identity MAY be included as informational.
+Examples include a git commit "author" and "committer," and a gpg signature's "user id."
+These forms of identity are user-provided and not typically verified by the issuer.
+
+##### What
+
+Must record the proposal provided to reviewers for approval or instructions to reproduce it.
+Git-specific stuff: TODO: provide instructions for three sha merge-same diff generation.
+
+Must record target branch.
+
+##### When
+
+Must record when commits and review are received by the server.
 
 ### Level 3: TODO but maybe: Changes are authorized
 
 Summary: All changes to the source are approved by two trusted actors prior to submission.
 
 Intended for: Enterprise repositories and mature open source projects.
-
-Benefits: A compromise of a single account does not result in compromise of the source.
 
 Benefits: A compromise of a single account does not result in compromise of the source.
 
