@@ -56,7 +56,7 @@ Consumers can examine the various source provenance attestations to determine if
 
 ## Safe Expunging Process
 
-Administrators have the ability to expunge (remove) content from a repository and its change history without leaving a record of the removed content.
+Administrators have the ability to expunge (remove) content from a repository and its change history without leaving a record of the removed content (to accommodate legal or privacy compliance requirements).
 This includes changing files, history, or changing references in git.
 When used as an attack, this is called “repo hijacking” (or “repo-jacking”) and is one of the primary threats source provenance attestations protect against.
 
