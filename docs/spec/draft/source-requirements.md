@@ -214,3 +214,16 @@ If the proposal is modified after receiving expert approval, all previously gran
 A new approval MUST be granted from ALL required reviewers.
 
 The new approval MAY be granted by an actor who approved a previous iteration.
+
+### Choose your own adventure: Automated testing
+
+Summary: The final revision was validated against a suite of vetted automated tests.
+
+Intended for: All organizations and repositories.
+
+Benefits: Automatic testing has many benefits, including improved accuracy, error prevention and reduced workload on your human developers.
+
+Requirements: For each configured automatic test, results MUST be collected by the change review tool and included in the source provenance attestation.
+
+For example, you may configure a "required GitHub Actions workflow" to run your test suites.
+Only change proposals with a successful workflow run id would be allowed to be submitted.
