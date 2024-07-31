@@ -157,7 +157,12 @@ User-provided values MUST NOT be used.
 The change management tool SHOULD record a description of the proposed change and all discussions / commentary related to it.
 All collected content SHOULD be made immutable if the change is accepted.
 
-### Choose your own adventure: Changes are pre-authorized by two different authorized actors
+## Choose your own adventure
+
+Now that you have a trustworthy way to communicate your security claims, what should you be looking for in those claims?
+Here are a few extremely common examples.
+
+### Changes are pre-authorized by two different authorized actors
 
 Summary: All changes to the source are approved by two trusted actors prior to submission.
 
@@ -179,7 +184,7 @@ It MUST NOT be possible for a single actor to control more than one voting accou
 Should the organization discover that it issued multiple accounts to the same actors, it MUST act to rectify the situation.
 For example, it might revoke project privileges for all but one of the accounts and perform retroactive code reviews on any changes where that actors' accounts are the author and/or code reviewer(s).
 
-### Choose your own adventure: Expert Code Reivew
+### Expert Code Reivew
 
 Summary: All changes to the source are pre-approved by experts in those areas.
 
@@ -198,7 +203,7 @@ Each part of the source MUST have a clearly identified set of experts.
 For each portion of the source modified by a change proposal, pre-approval MUST be granted by a member of the defined expert set.
 A approval from an actor that is a member of multiple expert groups may satisfy the requirement for all groups in which they are a member.
 
-### Choose your own adventure: Review Every Single Revision
+### Review Every Single Revision
 
 Summary: The final revision was reviewed by all relevant experts prior to submission.
 
@@ -215,7 +220,7 @@ A new approval MUST be granted from ALL required reviewers.
 
 The new approval MAY be granted by an actor who approved a previous iteration.
 
-### Choose your own adventure: Automated testing
+### Automated testing
 
 Summary: The final revision was validated against a suite of vetted automated tests.
 
