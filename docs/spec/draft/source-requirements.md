@@ -198,7 +198,7 @@ Each part of the source MUST have a clearly identified set of experts.
 For each portion of the source modified by a change proposal, pre-approval MUST be granted by a member of the defined expert set.
 A approval from an actor that is a member of multiple expert groups may satisfy the requirement for all groups in which they are a member.
 
-### Choose your own adventure: Maximum security
+### Choose your own adventure: Review Every Single Revision
 
 Summary: The final revision was reviewed by all relevant experts prior to submission.
 
