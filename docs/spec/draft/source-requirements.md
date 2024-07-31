@@ -37,11 +37,11 @@ Consumers can examine the various source provenance attestations to determine if
 | Source Provenance | Information about which Source Control Platform (SCP) produced a revision, when it was generated, what process was used, who the contributors were, and what parent revisions it was based on.
 | Organization | A collection of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals and methods of the repository.
 | Repository | A uniquely identifiable instance of a VCS hosted on an SCP. The repository controls access to the Source in the version control system. The objective of a repository is to reflect the intent of the organization that controls it.
-| Branch | A named pointer to a revision. Branches may be modified by authorized actors. In git, cloning a repo will download all revisions in the history of the "default" branch to the local machine.
-| Change | A set of modifications to the source in a specific context. As an example, a proposed change to a "releases/1" branch may require higher scrutiny than a change to "users/1".
+| Branch | A named pointer to a revision. Branches may be modified by authorized actors. In git, cloning a repo will download all revisions in the history of the "default" branch to the local machine. Branches may have different security requirements.
+| Change | A set of modifications to the source in a specific context. Can be proposed and reviewed before being accepted.
 | Change History | A record of the history of revisions that preceded a specific revision.
-| Push / upload / publish | When an actor authenticates to an SCP to upload content.
-| Review / approve / vote | When an actor authenticates to an change review tool and positively or negatively endorses the exact source change they were presented.
+| Push / upload / publish | When an actor authenticates to an SCP to add or modify content. Typically makes a new revision reachable from a branch.
+| Review / approve / vote | When an actor authenticates to a change review tool to leave comments or endorse / reject the source change proposal they were presented.
 
 ## Source Roles
 
@@ -51,96 +51,113 @@ Consumers can examine the various source provenance attestations to determine if
 | Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
 | Trusted robot | Automation with an authentic identity that is authorized by the organization to propose and/or approve changes to the source.
 | Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
-| Proposer | An actor that proposes a particular change to the source.
-| Reviewer | An actor that reviews a particular change to the source.
-| Approver | An actor that approves a particular change to the source.
-| Merger | An actor that applies a change to the source. This typically involves creating the new revision and updating a branch. This person may be the proposer or a different trusted person, depending on the version control platform.
+| Proposer | An actor that proposes (or uploads) a particular change to the source.
+| Reviewer / Voter / Approver | An actor that reviews (or votes on) a particular change to the source.
+| Merger | An actor that applies a change to the source. This actor may be the proposer.
 
 ## Safe Expunging Process
 
-Administrators have the ability to expunge (remove) content from a repository and its change history without leaving a record of the removed content (to accommodate legal or privacy compliance requirements).
-This includes changing files, history, or changing references in git.
+Administrators have the ability to expunge (remove) content from a repository and its change history without leaving a record of the removed content.
+This includes changing files, history, or changing references in git and is used to accommodate legal or privacy compliance requirements.
 When used as an attack, this is called “repo hijacking” (or “repo-jacking”) and is one of the primary threats source provenance attestations protect against.
 
 TODO: Determine how organizations can provide transparency around this process.
 
 ## Levels
 
-### Level 1: Version controlled
+### Level 1: Immutable revisions and Change Management Processeses
 
-Summary: The source is stored and managed through a modern version control system with a revision process.
+Summary: The source is stored and managed through a modern version control system and modified via a codified revision process.
 
 Intended for: Organizations wanting to easily and quickly gain some benefits of SLSA and better integrate with the SLSA ecosystem without changing their source workflows.
 
-Benefits: Version control solves software development challenges ranging from change attribution to effective collaboration.
+Benefits:
+Version control solves software development challenges ranging from change attribution to effective collaboration.
 It is a software development best practice with more benefits than we can discuss here.
 
 Requirements: The combination of SCP and VCS MUST provide:
 
-#### Immutable revisions
+#### Revisions are immutable and uniquely identifiable
 
 There exists a deterministic way to identify a particular revision.
 
 This is usually a combination of the repository ID and revision ID.
-When the revision ID is a digest of the revision, as in git, nothing more is needed.
-When the revision ID is a number or otherwise not a digest, then the SCP MUST document how the immutability of the revision is established.  See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
-The SCP MUST guarantee that repository IDs track the complete history of changes that occur to the source while hosted on the platform.
+When the revision ID is a digest of the contend of the revision (as in git) nothing more is needed.
+When the revision ID is a number or otherwise not a digest, then the SCP MUST document how the immutability of the revision is established.
+See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
 
 #### Identity Management
 
 There exists an identity management system or some other means of identifying actors.
-This system may be a federated authentication system (AAD, Google, Okta, GitHub, etc) or custom (gittuf, gpg-signatures on commits, etc).
+This system may be a federated authentication system (AAD, Google, Okta, GitHub, etc) or custom implementation (gittuf, gpg-signatures on commits, etc).
+The SCP MUST document how actors are identified for the purposes of attribution.
 
-#### Revision process
+Activities conducted on the SCP SHOULD be attributed to authenticated identities.
+
+#### Trusted revision process
 
 There exists a trusted mechanism for modifying the source pointed-to by a [branch](#definitions).
-For each [branch](#definitions), the SCP MUST record and keep the full history of changes conducted on this SCP, with exceptions allowed following the [Safe Expunging Process](#safe-expunging-process).
+It MUST NOT be possible to modify the content of a branch without following the documented process.
 
-The revision process MUST:
+An example of a revision process could be: all proposed changes MUST be pre-approved by code experts before being included on a protected branch in git.
 
--   Provide an accurate description of the currently proprosed change, or instructions to recreate it.
--   Provide the ability to require pre-approval from specific actors before a change proposal is accepted.
--   Record all actors that contributed to the process, see [Source Roles](#source-roles).
--   Record timestamps of critical activities including process start, process completion, reception of change proposals by the SCP, and reviews.
+The revision process MUST specify the branch a contributor is proposing to update.
 
-### Level 2: TODO, but maybe: Generates Source Provenance Attestations
+### Level 2: Provenance
 
-Summary: A consumer can ask the SCP for everything it knows about a specific revision of a repository.
+Summary: A consumer can ask the SCP for everything it knows about a specific revision of a repository. The information is provided in a standardized format.
 
 Intended for: Organizations that need to enforce policy on consumed source.
 
-Benefits: Prevents many classes of accidents and pin-to-sha attacks. Provides information to VSA-generation bots.
+Benefits: Provides reliable information to policy enforcement tools.
 
 Requirements:
 
 #### Source provenance attestation
 
-Results from the revision process are codified into a source provenance attestation document.
-Must record who, what, when.
+Source attestations are associated with the revision identifier delivered to consumers and are a record of everything the SCP knows about the revision's creation process.
 
-##### Who
+For example, if you perform a `git clone` operation, a consumer MUST be able to fetch the source attestation document using the commit id at the tip of the checked-out branch.
 
-Source provenance attestation issuers SHOULD use a single identity definiton.
+Failure of the SCP to return a source attestation for the commit id is the same as saying the revision was not known to have been produced on the SCP.
+
+#### Trusted revision process requirements
+
+The change management tool MUST provide at a minimum:
+
+##### Strong Authentication
 
 The strongly authenticated idenenty used to login to the SCP MUST be used for the generation of source provenance attestations.
 This is typically the identity used to push to a git server.
 
 Other forms of identity MAY be included as informational.
-Examples include a git commit "author" and "committer," and a gpg signature's "user id."
-These forms of identity are user-provided and not typically verified by the issuer.
+Examples include a git commit "author" and "committer" and a gpg signature's "user id."
+These forms of identity are user-provided and not typically verified by the source provenance attestation issuer.
 
-##### What
+See [source roles](#source-roles).
 
-Must record the proposal provided to reviewers for approval or instructions to reproduce it.
-Git-specific stuff: TODO: provide instructions for three sha merge-same diff generation.
+##### Change context
 
-Must record target branch.
+The change management tool MUST record the "target" context for the change proposal and the previous / current revision in that context.
 
-##### When
+##### Informed Review
 
-Must record when commits and review are received by the server.
+The change management tool MUST record the specific code change proposal (a "diff" in git) displayed to reivewers (if any) or instructions to recreate it.
+The reviewer is able and encouraged to make an informed decision about what they're approving.
+The reviewer MUST be presented with a full, meaningful content diff between the proposed revision and the previously reviewed revision.
+It is not sufficient to indicate that a file changed without showing the contents.
 
-### Level 3: TODO but maybe: Changes are authorized
+##### Verified Timestamps
+
+The change management tool MUST record timestamps for all contributions and review activities.
+User-provided values MUST NOT be used.
+
+##### Human-readable change description
+
+The change management tool SHOULD record a description of the proposed change and all discussions / commentary related to it.
+All collected content SHOULD be made immutable if the change is accepted.
+
+### Choose your own adventure: Changes are pre-authorized by two different authorized actors
 
 Summary: All changes to the source are approved by two trusted actors prior to submission.
 
@@ -150,31 +167,42 @@ Benefits: A compromise of a single account does not result in compromise of the 
 
 Requirements:
 
-#### Code review by two authorized actors
+#### Two authorized actors
 
 All changes to the source are approved by two authorized actors prior to submission.
-User accounts that can perform code reviews MUST use two-factor authentication or its equivalent.
-
 If the proposer is also an authorized actor, the proposer MAY approve their own proposal and count as one of the two required actors.
-
-The code review system must meet the following requirements:
-
--   **[Informed review]** The reviewer is able and encouraged to make an informed decision about what they're approving. The reviewer MUST be presented with a full, meaningful content diff between the proposed revision and the previously reviewed revision. For example, it is not sufficient to just indicate that a file changed without showing the contents.
--   **[Context-specific approvals]** Approvals are for a specific context, such as a repo + target branch in git. Moving fully reviewed content from one context to another still requires review, except for well-understood automatic processes. For example, you do not need to review each change to cut a release branch, but you do need review when backporting changes from the main branch to an existing release branch.
--   **[Atomic change sets]** Changes are recorded in the change history as a single revision that consists of the net delta between the proposed revision and the parent revision. In the case of a nonlinear version control system, where a revision can have more than one parent, the diff must be against the "first common parent" between the parents. In other words, when a feature branch is merged back into the main branch, only the merge itself is in scope.
--   **[Record keeping]** Provenance must include the timestamp and the state of proposed revision at the point when each approval was granted. This is most relevant when the proposal content is allowed to change after aprovals have been granted.
 
 #### Different actors
 
-The organization strives to ensure that no two user accounts correspond to the same actors.
+It MUST NOT be possible for a single actor to control more than one voting accounts.
+
 Should the organization discover that it issued multiple accounts to the same actors, it MUST act to rectify the situation.
 For example, it might revoke project privileges for all but one of the accounts and perform retroactive code reviews on any changes where that actors' accounts are the author and/or code reviewer(s).
 
-### Level 4: TODO but maybe: Maximum security
+### Choose your own adventure: Expert Code Reivew
 
-Summary: All changes are reviewed by experts.
+Summary: All changes to the source are pre-approved by experts in those areas.
 
-Intended for: The highest of high-security-posture repos / code that is flying to Mars.
+Intended for: Enterprise repositories and mature open source projects.
+
+Benefits: Prevents mistakes made by developers who are unfamiliar with the area.
+
+Requirements:
+
+#### Code ownership
+
+Each part of the source MUST have a clearly identified set of experts.
+
+#### Approvals from all relevant experts
+
+For each portion of the source modified by a change proposal, pre-approval MUST be granted by a member of the defined expert set.
+A approval from an actor that is a member of multiple expert groups may satisfy the requirement for all groups in which they are a member.
+
+### Choose your own adventure: Maximum security
+
+Summary: The final revision was reviewed by all relevant experts prior to submission.
+
+Intended for: The highest-of-high-security-posture repos.
 
 Benefits: Provides the maximum chance for experts to spot and reject problems before they ship.
 
@@ -182,7 +210,7 @@ Requirements:
 
 #### Reset votes on all changes
 
-The code review tool MUST ensure that the final proposal is approved by actors identified as experts for all changed files.
+If the proposal is modified after receiving expert approval, all previously granted approvals MUST be revoked.
+A new approval MUST be granted from ALL required reviewers.
 
-If a file is modified after receiving expert approval, a new approval MUST be granted.
-The new approval MAY be granted by the same actor who granted the first approval.
+The new approval MAY be granted by an actor who approved a previous iteration.
