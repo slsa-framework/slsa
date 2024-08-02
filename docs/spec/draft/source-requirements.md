@@ -117,7 +117,7 @@ Requirements:
 
 Source attestations are associated with the revision identifier delivered to consumers and are a record of everything the SCP knows about the revision's creation process.
 
-For example, if you perform a `git clone` operation, a consumer MUST be able to fetch the source attestation document using the commit id at the tip of the checked-out branch.
+For example, if you perform a `git clone` operation, a consumer MUST be able to fetch the source attestation documents using the commit id at the tip of the checked-out branch.
 
 Failure of the SCP to return a source attestation for the commit id is the same as saying the revision was not known to have been produced on the SCP.
 
