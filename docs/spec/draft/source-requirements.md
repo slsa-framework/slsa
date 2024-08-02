@@ -107,7 +107,7 @@ The revision process MUST specify the branch a contributor is proposing to updat
 
 Summary: A consumer can ask the SCP for everything it knows about a specific revision of a repository. The information is provided in a standardized format.
 
-Intended for: Organizations that need to enforce policy on consumed source.
+Intended for: Organizations that want strong guarantees and auditability of their change management processes.
 
 Benefits: Provides reliable information to policy enforcement tools.
 
