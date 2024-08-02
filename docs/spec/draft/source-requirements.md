@@ -164,7 +164,7 @@ Here are a few extremely common examples.
 
 ### Changes are pre-authorized by two different authorized actors
 
-Summary: All changes to the source are approved by two trusted actors prior to submission.
+Summary: All changes to the source are approved by two trusted actors prior to acceptance.
 
 Intended for: Enterprise repositories and mature open source projects.
 
