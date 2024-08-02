@@ -228,7 +228,7 @@ Intended for: All organizations and repositories.
 
 Benefits: Automatic testing has many benefits, including improved accuracy, error prevention and reduced workload on your human developers.
 
-Requirements: For each configured automatic test, results MUST be collected by the change review tool and included in the source provenance attestation.
+Requirements: For each configured automatic test, results MUST be collected by the change review tool, recorded in an attestation, and made available for verification.
 
 For example, you may configure a "required GitHub Actions workflow" to run your test suites.
 Only change proposals with a successful workflow run id would be allowed to be submitted.
