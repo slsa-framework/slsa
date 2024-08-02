@@ -127,7 +127,7 @@ The change management tool MUST provide at a minimum:
 
 ##### Strong Authentication
 
-The strongly authenticated idenenty used to login to the SCP MUST be used for the generation of source provenance attestations.
+The strongly authenticated identity used to login to the SCP MUST be used for the generation of source provenance attestations.
 This is typically the identity used to push to a git server.
 
 Other forms of identity MAY be included as informational.
