@@ -82,7 +82,7 @@ Requirements: The combination of SCP and VCS MUST provide:
 There exists a deterministic way to identify a particular revision.
 
 This is usually a combination of the repository ID and revision ID.
-When the revision ID is a digest of the contend of the revision (as in git) nothing more is needed.
+When the revision ID is a digest of the content of the revision (as in git) nothing more is needed.
 When the revision ID is a number or otherwise not a digest, then the SCP MUST document how the immutability of the revision is established.
 See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
 
@@ -142,7 +142,7 @@ The change management tool MUST record the "target" context for the change propo
 
 ##### Informed Review
 
-The change management tool MUST record the specific code change proposal (a "diff" in git) displayed to reivewers (if any) or instructions to recreate it.
+The change management tool MUST record the specific code change proposal (a "diff" in git) displayed to reviewers (if any) or instructions to recreate it.
 The reviewer is able and encouraged to make an informed decision about what they're approving.
 The reviewer MUST be presented with a full, meaningful content diff between the proposed revision and the previously reviewed revision.
 It is not sufficient to indicate that a file changed without showing the contents.
@@ -184,7 +184,7 @@ It MUST NOT be possible for a single actor to control more than one voting accou
 Should the organization discover that it issued multiple accounts to the same actors, it MUST act to rectify the situation.
 For example, it might revoke project privileges for all but one of the accounts and perform retroactive code reviews on any changes where that actors' accounts are the author and/or code reviewer(s).
 
-### Expert Code Reivew
+### Expert Code Review
 
 Summary: All changes to the source are pre-approved by experts in those areas.
 
