@@ -174,7 +174,7 @@ Requirements:
 
 #### Two authorized actors
 
-All changes to the source are approved by two authorized actors prior to submission.
+All changes to the source are approved by two authorized actors prior to acceptance.
 If the proposer is also an authorized actor, the proposer MAY approve their own proposal and count as one of the two required actors.
 
 #### Different actors
