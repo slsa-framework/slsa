@@ -184,6 +184,10 @@ It MUST NOT be possible for a single actor to control more than one voting accou
 Should the organization discover that it issued multiple accounts to the same actors, it MUST act to rectify the situation.
 For example, it might revoke project privileges for all but one of the accounts and perform retroactive code reviews on any changes where that actors' accounts are the author and/or code reviewer(s).
 
+#### Post-approval changes allowed
+
+When performing a review a reviewer may both approve the change and request modifications. Any modifications made need not reset the approval status of the change.  To protect against post-approval change see [Review Every Single Revision](#review-every-single-revision).
+
 ### Expert Code Review
 
 Summary: All changes to the source are pre-approved by experts in those areas.
