@@ -222,7 +222,7 @@ The new approval MAY be granted by an actor who approved a previous iteration.
 
 ### Automated testing
 
-Summary: The final revision was validated against a suite of vetted automated tests.
+Summary: The final revision was validated against a suite of automated tests.
 
 Intended for: All organizations and repositories.
 
