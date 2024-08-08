@@ -61,13 +61,17 @@ Administrators have the ability to expunge (remove) content from a repository an
 This includes changing files, history, or changing references in git and is used to accommodate legal or privacy compliance requirements.
 When used as an attack, this is called “repo hijacking” (or “repo-jacking”) and is one of the primary threats source provenance attestations protect against.
 
+On the git VCS, force pushes allow you to remove data from a protected branch and must follow the safe expunging process.
+
 TODO: Determine how organizations can provide transparency around this process.
+At a minimum the organization would need to declare why data was removed from the branch.
 
 ## Levels
 
-### Level 1: Immutable revisions and Change Management Processeses
+### Level 1: Version controlled
 
-Summary: The source is stored and managed through a modern version control system and modified via a codified revision process.
+Summary:
+The source is stored and managed through a modern version control system.
 
 Intended for: Organizations wanting to easily and quickly gain some benefits of SLSA and better integrate with the SLSA ecosystem without changing their source workflows.
 
@@ -94,44 +98,59 @@ The SCP MUST document how actors are identified for the purposes of attribution.
 
 Activities conducted on the SCP SHOULD be attributed to authenticated identities.
 
-#### Trusted revision process
+#### Branches
 
-There exists a trusted mechanism for modifying the source pointed-to by a [branch](#definitions).
+If the repository supports multiple branches, the organization MUST indicate which branches are intended for consumption.
+
+##### Continuity
+
+For all branches intended for consumption, it MUST be possible to view the ordered prior states of a source.
+Exceptions are allowed via the [safe expunging process](#safe-expunging-process).
+
+### Level 2: Source Provenance Attestations
+
+Summary:
+A consumer can ask the SCP for everything it knows about a specific revision of a repository.
+The information is provided in a standardized format.
+
+Intended for:
+Organizations that want strong guarantees and auditability of their change management processes.
+
+Benefits:
+Provides reliable information to policy enforcement tools.
+
+Requirements:
+
+#### Source provenance attestations
+
+Source attestations are associated with the revision identifier delivered to consumers.
+They are a statement of fact from the perspective of the SCP.
+They contain information about how a specific revision was created and how it came to exist in its present context.
+
+For example, if a consumer is authorized to access source on a particular branch, they MUST be able to fetch the source attestation documents for revisions in the history of that branch.
+
+It is possible that an SCP can make no provenance claims about a particular revision.
+For example, this would happen if the revision was created on another SCP.
+
+#### Change management process
+
+The repo must define how the content of a [branch](#definitions) is allowed to change.
 It MUST NOT be possible to modify the content of a branch without following the documented process.
 
 An example of a revision process could be: all proposed changes MUST be pre-approved by code experts before being included on a protected branch in git.
 
 The revision process MUST specify the branch a contributor is proposing to update.
 
-### Level 2: Provenance
-
-Summary: A consumer can ask the SCP for everything it knows about a specific revision of a repository. The information is provided in a standardized format.
-
-Intended for: Organizations that want strong guarantees and auditability of their change management processes.
-
-Benefits: Provides reliable information to policy enforcement tools.
-
-Requirements:
-
-#### Source provenance attestation
-
-Source attestations are associated with the revision identifier delivered to consumers and are a record of everything the SCP knows about the revision's creation process.
-
-For example, if you perform a `git clone` operation, a consumer MUST be able to fetch the source attestation documents using the commit id at the tip of the checked-out branch.
-
-Failure of the SCP to return source attestations for the commit id is the same as saying the revision was not known to have been produced on the SCP.
-
-#### Trusted revision process requirements
-
 The change management tool MUST provide at a minimum:
 
 ##### Strong Authentication
 
-The strongly authenticated identity used to login to the SCP MUST be used for the generation of source provenance attestations.
-This is typically the identity used to push to a git server.
+A strongly-authenticated identity MUST be used for the generation of source provenance attestations.
+The SCP MUST declare which forms of identity it considers to be trustworthy for this purpose.
+For cloud-based SCPs, this will typically be the identity used to push to a git server.
 
 Other forms of identity MAY be included as informational.
-Examples include a git commit "author" and "committer" and a gpg signature's "user id."
+Examples include a git commit's "author" and "committer" fields and a gpg signature's "user id."
 These forms of identity are user-provided and not typically verified by the source provenance attestation issuer.
 
 See [source roles](#source-roles).
@@ -139,6 +158,8 @@ See [source roles](#source-roles).
 ##### Change context
 
 The change management tool MUST record the "target" context for the change proposal and the previous / current revision in that context.
+
+For example, for the git version control system, the attestation MUST record the branch name that will be updated to point to a proposed
 
 ##### Informed Review
 
@@ -149,8 +170,8 @@ It is not sufficient to indicate that a file changed without showing the content
 
 ##### Verified Timestamps
 
-The change management tool MUST record timestamps for all contributions and review activities.
-User-provided values MUST NOT be used.
+The change management tool MUST record timestamps for all contributions and review-related activities.
+User-provided timestamps MUST NOT be used.
 
 ##### Human-readable change description
 
@@ -236,3 +257,32 @@ Requirements: For each configured automatic test, results MUST be collected by t
 
 For example, you may configure a "required GitHub Actions workflow" to run your test suites.
 Only change proposals with a successful workflow run id would be allowed to be submitted.
+
+### Only merge the diff that was reviewed
+
+Summary:
+New revisions are created based ONLY on the changes that were reviewed.
+
+Benefits: Prevents a large class of internal threat attacks based on hiding a malicious commit in a series of good commits such that the malicious commit does not appear in the reviewed diff.
+
+Requirements:
+
+#### Context
+
+In many organizations it is normal to review only the "net difference" between the tip of  the topic branch and the "best merge base", the closest shared commit between the topic and target branches computed at the time of review.
+
+The topic branch may contain many commits of which not all were intended to represent a shippable state of the repository.
+
+If a repository merges branches with a standard merge commit, all those unreviewed commits on the topic branch will become "reachable" from the protected branch by virtue of the multi-parent merge commit.
+
+When a repo is cloned, all commits _reachable_ from the main branch are fetched and become accessible from the local checkout.
+
+This combination of factors allows attacks where the victim performs a `git clone` operation followed by a `git reset --hard <unreviewed revision id>`.
+
+#### Mitigation
+
+Require a squash merge strategy for the protected branch.
+
+To guarantee that only commits representing reviewed diffs are cloned, the SCP must rebase (or "squash") the reviewed diff into a single new commit (the "squashed" commit) with only a single parent (the revision previously pointed-to by the protected branch).
+
+It is not acceptable to replay the sequence of commits from the topic branch onto the protected branch.
