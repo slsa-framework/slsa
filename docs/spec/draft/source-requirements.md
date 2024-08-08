@@ -61,7 +61,8 @@ Administrators have the ability to expunge (remove) content from a repository an
 This includes changing files, history, or changing references in git and is used to accommodate legal or privacy compliance requirements.
 When used as an attack, this is called “repo hijacking” (or “repo-jacking”) and is one of the primary threats source provenance attestations protect against.
 
-On the git VCS, force pushes allow you to remove data from a protected branch and must follow the safe expunging process.
+On the git VCS, force pushes allow you to remove data from a branch.
+If a branch has been identified as consumable branch, force pushes to that branch must follow the safe expunging process.
 
 TODO: Determine how organizations can provide transparency around this process.
 At a minimum the organization would need to declare why data was removed from the branch.
