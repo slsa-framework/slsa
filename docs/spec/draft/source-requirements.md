@@ -37,9 +37,11 @@ Consumers can examine the various source provenance attestations to determine if
 | Source Provenance | Information about which Source Control Platform (SCP) produced a revision, when it was generated, what process was used, who the contributors were, and what parent revisions it was based on.
 | Organization | A collection of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals and methods of the repository.
 | Repository | A uniquely identifiable instance of a VCS hosted on an SCP. The repository controls access to the Source in the version control system. The objective of a repository is to reflect the intent of the organization that controls it.
-| Branch | A named pointer to a revision. Branches may be modified by authorized actors. In git, cloning a repo will download all revisions in the history of the "default" branch to the local machine.
-| Change | A set of modifications to the source in a specific context. As an example, a proposed change to a "releases/1" branch may require higher scrutiny than a change to "users/1".
+| Branch | A named pointer to a revision. Branches may be modified by authorized actors. In git, cloning a repo will download all revisions in the history of the "default" branch to the local machine. Branches may have different security requirements.
+| Change | A set of modifications to the source in a specific context. Can be proposed and reviewed before being accepted.
 | Change History | A record of the history of revisions that preceded a specific revision.
+| Push / upload / publish | When an actor authenticates to an SCP to add or modify content. Typically makes a new revision reachable from a branch.
+| Review / approve / vote | When an actor authenticates to a change review tool to leave comments or endorse / reject the source change proposal they were presented.
 
 ## Source Roles
 
@@ -49,90 +51,240 @@ Consumers can examine the various source provenance attestations to determine if
 | Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
 | Trusted robot | Automation with an authentic identity that is authorized by the organization to propose and/or approve changes to the source.
 | Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
-| Proposer | An actor that proposes a particular change to the source.
-| Reviewer | An actor that reviews a particular change to the source.
-| Approver | An actor that approves a particular change to the source.
-| Merger | An actor that applies a change to the source. This typically involves creating the new revision and updating a branch. This person may be the proposer or a different trusted person, depending on the version control platform.
+| Proposer | An actor that proposes (or uploads) a particular change to the source.
+| Reviewer / Voter / Approver | An actor that reviews (or votes on) a particular change to the source.
+| Merger | An actor that applies a change to the source. This actor may be the proposer.
 
-## Source Platform Requirements
+## Safe Expunging Process
 
-The version control system MUST provide at least:
+Administrators have the ability to expunge (remove) content from a repository and its change history without leaving a record of the removed content.
+This includes changing files, history, or changing references in git and is used to accommodate legal or privacy compliance requirements.
+When used as an attack, this is called “repo hijacking” (or “repo-jacking”) and is one of the primary threats source provenance attestations protect against.
 
--   **[Immutable reference]** There exists a deterministic way to identify this particular revision. This is usually {project identifier + revision ID}. When the revision ID is a digest of the revision, as in git, nothing more is needed. When the revision ID is a number or otherwise not a digest, then the project server MUST guarantee that revisions cannot be altered once created.
+On the git VCS, force pushes allow you to remove data from a branch.
+If a branch has been identified as consumable branch, force pushes to that branch must follow the safe expunging process.
 
--   **[Change history]** There exists a record of the history of changes that went into the revision. Each change MUST contain:
-    -   The immutable reference to the new revision.
-    -   The identities of the proposer, reviewers (if any), and merger (if different to the proposer).
-    -   Timestamps of change submission. If a change is reviewed, then the change history MUST also include timestamps for any reviews.
-    -   The change description/justification.
-    -   The content of the change.
-    -   The parent revisions.
-
-Most popular version control systems meet these requirement, such as git, Subversion, Mercurial, and Perforce.
-
-The source control platform MUST provide at least:
-
--   An account system or some other means of identifying persons.
--   A mechanism for modifying the canonical source through a **revision process**.
-
-The source control platform SHOULD additionally provide:
-
--   A mechanism for assigning roles and/or permissions to identities.
--   A mechanism for including code review in the revision process.
--   Two-factor authentication for the account system (L2+ only).
--   Audit logs for sensitive actions, such as modifying security controls.
+TODO: Determine how organizations can provide transparency around this process.
+At a minimum the organization would need to declare why data was removed from the branch.
 
 ## Levels
 
 ### Level 1: Version controlled
 
-Summary: The project source is stored and managed through a modern version control system.
+Summary:
+The source is stored and managed through a modern version control system.
 
-Intended for: Organizations that are unwilling or unable to host their source on a source control platform. If possible, skip to Level 2.
+Intended for: Organizations wanting to easily and quickly gain some benefits of SLSA and better integrate with the SLSA ecosystem without changing their source workflows.
+
+Benefits:
+Version control solves software development challenges ranging from change attribution to effective collaboration.
+It is a software development best practice with more benefits than we can discuss here.
+
+Requirements: The combination of SCP and VCS MUST provide:
+
+#### Revisions are immutable and uniquely identifiable
+
+There exists a deterministic way to identify a particular revision.
+
+This is usually a combination of the repository ID and revision ID.
+When the revision ID is a digest of the content of the revision (as in git) nothing more is needed.
+When the revision ID is a number or otherwise not a digest, then the SCP MUST document how the immutability of the revision is established.
+See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
+
+#### Identity Management
+
+There exists an identity management system or some other means of identifying actors.
+This system may be a federated authentication system (AAD, Google, Okta, GitHub, etc) or custom implementation (gittuf, gpg-signatures on commits, etc).
+The SCP MUST document how actors are identified for the purposes of attribution.
+
+Activities conducted on the SCP SHOULD be attributed to authenticated identities.
+
+#### Branches
+
+If the repository supports multiple branches, the organization MUST indicate which branches are intended for consumption.
+
+##### Continuity
+
+For all branches intended for consumption, it MUST be possible to view the ordered prior states of a source.
+Exceptions are allowed via the [safe expunging process](#safe-expunging-process).
+
+### Level 2: Source Provenance Attestations
+
+Summary:
+A consumer can ask the SCP for everything it knows about a specific revision of a repository.
+The information is provided in a standardized format.
+
+Intended for:
+Organizations that want strong guarantees and auditability of their change management processes.
+
+Benefits:
+Provides reliable information to policy enforcement tools.
 
 Requirements:
 
-**[Version controlled]** Every change to the source is tracked in a version control system that meets the requirements listed in [Source Platform Requirements](#source-platform-requirements).
+#### Source provenance attestations
 
-Benefits: Version control solves software development challenges ranging from change attribution to effective collaboration. It is a software development best practice with more benefits than we can discuss here.
+Source attestations are associated with the revision identifier delivered to consumers.
+They are a statement of fact from the perspective of the SCP.
+They contain information about how a specific revision was created and how it came to exist in its present context.
 
-### Level 2: Verified history
+For example, if a consumer is authorized to access source on a particular branch, they MUST be able to fetch the source attestation documents for revisions in the history of that branch.
 
-Summary: The source code and its change history metadata are retained and authenticated to allow trustworthy auditing and analysis of the source code.
+It is possible that an SCP can make no provenance claims about a particular revision.
+For example, this would happen if the revision was created on another SCP.
 
-Intended for: Organizations that are unwilling or unable to incorporate code review into their software development practices.
+#### Change management process
+
+The repo must define how the content of a [branch](#definitions) is allowed to change.
+It MUST NOT be possible to modify the content of a branch without following the documented process.
+
+An example of a revision process could be: all proposed changes MUST be pre-approved by code experts before being included on a protected branch in git.
+
+The revision process MUST specify the branch a contributor is proposing to update.
+
+The change management tool MUST provide at a minimum:
+
+##### Strong Authentication
+
+User accounts that can modify the source or the project's configuration must use multi-factor authentication or its equivalent.
+This strongly authenticated identity MUST be used for the generation of source provenance attestations.
+The SCP MUST declare which forms of identity it considers to be trustworthy for this purpose.
+For cloud-based SCPs, this will typically be the identity used to push to a git server.
+
+Other forms of identity MAY be included as informational.
+Examples include a git commit's "author" and "committer" fields and a gpg signature's "user id."
+These forms of identity are user-provided and not typically verified by the source provenance attestation issuer.
+
+See [source roles](#source-roles).
+
+##### Change context
+
+The change management tool MUST record the "target" context for the change proposal and the previous / current revision in that context.
+
+For example, for the git version control system, the attestation MUST record the branch name that will be updated to point to a proposed
+
+##### Informed Review
+
+The change management tool MUST record the specific code change proposal (a "diff" in git) displayed to reviewers (if any) or instructions to recreate it.
+The reviewer is able and encouraged to make an informed decision about what they're approving.
+The reviewer MUST be presented with a full, meaningful content diff between the proposed revision and the previously reviewed revision.
+It is not sufficient to indicate that a file changed without showing the contents.
+
+##### Verified Timestamps
+
+The change management tool MUST record timestamps for all contributions and review-related activities.
+User-provided timestamps MUST NOT be used.
+
+##### Human-readable change description
+
+The change management tool SHOULD record a description of the proposed change and all discussions / commentary related to it.
+All collected content SHOULD be made immutable if the change is accepted.
+
+## Choose your own adventure
+
+Now that you have a trustworthy way to communicate your security claims, what should you be looking for in those claims?
+Here are a few extremely common examples.
+
+### Changes are pre-authorized by two different authorized actors
+
+Summary: All changes to the source are approved by two trusted actors prior to acceptance.
+
+Intended for: Enterprise repositories and mature open source projects.
+
+Benefits: A compromise of a single account does not result in compromise of the source.
 
 Requirements:
-**[Strong authentication]** User accounts that can modify the source or the project's configuration must use multi-factor authentication or its equivalent.
 
-**[Verified timestamps]** Each entry in the change history must contain at least one timestamp that is determined by the source control platform and cannot be modified by clients. It MUST be clear in the change history which timestamps are determined by the source control platform.
+#### Two authorized actors
 
-**[Retained history]** The change history MUST be preserved as long as the source is hosted on the source control system. The source MAY migrate to another source control system, but the organization MUST retain the change history if possible. It MUST NOT be possible for persons to delete or modify the change history, even with multi-party approval, except by trusted platform admins following an established deletion policy.
+All changes to the source are approved by two authorized actors prior to acceptance.
+If the proposer is also an authorized actor, the proposer MAY approve their own proposal and count as one of the two required actors.
 
-Benefits: Attributes changes in the version history to specific actors and timestamps, which allows for post-auditing, incident response, and deterrence for bad actors. Multi-factor authentication makes account compromise more difficult, further ensuring the integrity of change attribution.
+#### Different actors
 
-### Level 3: Changes are authorized
+It MUST NOT be possible for a single actor to control more than one voting accounts.
 
-Summary: All changes to the source are approved by two trusted persons prior to submission.
+Should the organization discover that it issued multiple accounts to the same actors, it MUST act to rectify the situation.
+For example, it might revoke project privileges for all but one of the accounts and perform retroactive code reviews on any changes where that actors' accounts are the author and/or code reviewer(s).
 
-Intended for: Enterprise projects and mature open source projects.
+#### Post-approval changes allowed
+
+When performing a review a reviewer may both approve the change and request modifications. Any modifications made need not reset the approval status of the change.  To protect against post-approval change see [Review Every Single Revision](#review-every-single-revision).
+
+### Expert Code Review
+
+Summary: All changes to the source are pre-approved by experts in those areas.
+
+Intended for: Enterprise repositories and mature open source projects.
+
+Benefits: Prevents mistakes made by developers who are unfamiliar with the area.
 
 Requirements:
 
-**[Code review]** All changes to the source are approved by two trusted persons prior to submission. User accounts that can perform code reviews MUST use two-factor authentication or its equivalent.
-The following combinations of trusted persons are acceptable:
+#### Code ownership
 
--   Proposer and reviewer are two different trusted persons.
--   Two different reviewers are trusted persons.
+Each part of the source MUST have a clearly identified set of experts.
 
-The code review system must meet the following requirements:
+#### Approvals from all relevant experts
 
--   **[Informed review]** The reviewer is able and encouraged to make an informed decision about what they're approving. The reviewer MUST be presented with a full, meaningful content diff between the proposed revision and the previously reviewed revision. For example, it is not sufficient to just indicate that a file changed without showing the contents.
--   **[Context-specific approvals]** Approvals are for a specific context, such as a repo + target branch + revision in git. Moving fully reviewed content from one context to another still requires review, except for well-understood automatic processes. For example, you do not need to review each change to cut a release branch, but you do need review when backporting changes from the main branch to an existing release branch.
--   **[Atomic change sets]** Changes are recorded in the change history as a single revision that consists of the net delta between the proposed revision and the parent revision. In the case of a nonlinear version control system, where a revision can have more than one parent, the diff must be against the "first common parent" between the parents. In other words, when a feature branch is merged back into the main branch, only the merge itself is in scope.
+For each portion of the source modified by a change proposal, pre-approval MUST be granted by a member of the defined expert set.
+A approval from an actor that is a member of multiple expert groups may satisfy the requirement for all groups in which they are a member.
 
-Trusted robots MAY be exempted from the code review process. It is RECOMMENDED that trusted robots so exempted be run only software built at Build L3+ from sources that meet Source L3.
+### Review Every Single Revision
 
-**[Different persons]** The organization strives to ensure that no two user accounts correspond to the same person. Should the organization discover that it issued multiple accounts to the same person, it MUST act to rectify the situation. For example, it might revoke project privileges for all but one of the accounts and perform retroactive code reviews on any changes where that person's accounts are the author and/or code reviewer(s).
+Summary: The final revision was reviewed by all relevant experts prior to submission.
 
-Benefits: A compromise of a single human or account does not result in compromise of the project, since all changes require review from two humans.
+Intended for: The highest-of-high-security-posture repos.
+
+Benefits: Provides the maximum chance for experts to spot and reject problems before they ship.
+
+Requirements:
+
+#### Reset votes on all changes
+
+If the proposal is modified after receiving expert approval, all previously granted approvals MUST be revoked.
+A new approval MUST be granted from ALL required reviewers.
+
+The new approval MAY be granted by an actor who approved a previous iteration.
+
+### Automated testing
+
+Summary: The final revision was validated against a suite of automated tests.
+
+Intended for: All organizations and repositories.
+
+Benefits: Automatic testing has many benefits, including improved accuracy, error prevention and reduced workload on your human developers.
+
+Requirements: For each configured automatic test, results MUST be collected by the change review tool, recorded in an attestation, and made available for verification.
+
+For example, you may configure a "required GitHub Actions workflow" to run your test suites.
+Only change proposals with a successful workflow run id would be allowed to be submitted.
+
+### Only merge the diff that was reviewed
+
+Summary:
+New revisions are created based ONLY on the changes that were reviewed.
+
+Benefits: Prevents a large class of internal threat attacks based on hiding a malicious commit in a series of good commits such that the malicious commit does not appear in the reviewed diff.
+
+Requirements:
+
+#### Context
+
+In many organizations it is normal to review only the "net difference" between the tip of  the topic branch and the "best merge base", the closest shared commit between the topic and target branches computed at the time of review.
+
+The topic branch may contain many commits of which not all were intended to represent a shippable state of the repository.
+
+If a repository merges branches with a standard merge commit, all those unreviewed commits on the topic branch will become "reachable" from the protected branch by virtue of the multi-parent merge commit.
+
+When a repo is cloned, all commits _reachable_ from the main branch are fetched and become accessible from the local checkout.
+
+This combination of factors allows attacks where the victim performs a `git clone` operation followed by a `git reset --hard <unreviewed revision id>`.
+
+#### Mitigation
+
+Require a squash merge strategy for the protected branch.
+
+To guarantee that only commits representing reviewed diffs are cloned, the SCP must rebase (or "squash") the reviewed diff into a single new commit (the "squashed" commit) with only a single parent (the revision previously pointed-to by the protected branch).
+
+It is not acceptable to replay the sequence of commits from the topic branch onto the protected branch.
