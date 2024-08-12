@@ -67,6 +67,27 @@ If a branch has been identified as consumable branch, force pushes to that branc
 TODO: Determine how organizations can provide transparency around this process.
 At a minimum the organization would need to declare why data was removed from the branch.
 
+The goal of this sections is to document that this process is allowed.
+Different organizations and tech stacks may have different approaches to the problem.
+
+Scenarios that need to be addressed:
+
+### Legal Takedowns
+
+A DMCA takedown request will be addressed by following an agreed-upon process.
+That process should be documented itself and followed.
+It may be the case that the specific set of commits targeted by the takedown can be expunged in ways that do not impact revisions.
+
+### Commit metadata rewrites
+
+A team may decide that all reachable commits in the history of a revision need to follow a new meta data convention.
+In git VCS, compliance with this new policy will require history to be rewritten (commit metadata is included in the computation of the revision id).
+Policies in this category include things like commit signatures, author / committer formatting restrictions, closed-issue-linkage, etc.
+
+### Repository renames
+
+When a repo is transferred to a new org ("donated"), or if a repo must be renamed or otherwise have its url changed within the same org, attestations for previous revisions of this repo will no longer be matched because the combination of the repository id and the revision id will have changed.
+
 ## Levels
 
 ### Level 1: Version controlled
