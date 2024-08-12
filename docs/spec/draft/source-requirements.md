@@ -36,7 +36,7 @@ Consumers can examine the various source provenance attestations to determine if
 | Source Control Platform (SCP) | A service or suite of services (self-hosted or SaaS) for hosting version-controlled software. GitHub and GitLab are examples of source control platforms, as are combinations of tools like Gerrit code reviews with GitHub source control.
 | Source Provenance | Information about which Source Control Platform (SCP) produced a revision, when it was generated, what process was used, who the contributors were, and what parent revisions it was based on.
 | Organization | A collection of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals and methods of the repository.
-| Repository | A uniquely identifiable instance of a VCS hosted on an SCP. The repository controls access to the Source in the version control system. The objective of a repository is to reflect the intent of the organization that controls it.
+| Repository / Repo | A uniquely identifiable instance of a VCS hosted on an SCP. The repository controls access to the Source in the version control system. The objective of a repository is to reflect the intent of the organization that controls it.
 | Branch | A named pointer to a revision. Branches may be modified by authorized actors. In git, cloning a repo will download all revisions in the history of the "default" branch to the local machine. Branches may have different security requirements.
 | Change | A set of modifications to the source in a specific context. Can be proposed and reviewed before being accepted.
 | Change History | A record of the history of revisions that preceded a specific revision.
@@ -80,13 +80,13 @@ It may be the case that the specific set of commits targeted by the takedown can
 
 ### Commit metadata rewrites
 
-A team may decide that all reachable commits in the history of a revision need to follow a new meta data convention.
+A team may decide that all reachable commits in the history of a revision need to follow a new metadata convention.
 In git VCS, compliance with this new policy will require history to be rewritten (commit metadata is included in the computation of the revision id).
 Policies in this category include things like commit signatures, author / committer formatting restrictions, closed-issue-linkage, etc.
 
 ### Repository renames
 
-When a repo is transferred to a new org ("donated"), or if a repo must be renamed or otherwise have its url changed within the same org, attestations for previous revisions of this repo will no longer be matched because the combination of the repository id and the revision id will have changed.
+When a repo is transferred to a new organization ("donated"), or if a repo must be renamed or otherwise have its url changed within the same org, attestations for previous revisions of this repo will no longer be matched because the combination of the repository id and the revision id will have changed.
 
 ## Levels
 
@@ -95,22 +95,80 @@ When a repo is transferred to a new org ("donated"), or if a repo must be rename
 Summary:
 The source is stored and managed through a modern version control system.
 
-Intended for: Organizations wanting to easily and quickly gain some benefits of SLSA and better integrate with the SLSA ecosystem without changing their source workflows.
+Intended for: Organizations currently storing source in non-standard ways who want to quickly gain some benefits of SLSA and better integrate with the SLSA ecosystem with minimal impact to their current workflows.
 
 Benefits:
-Version control solves software development challenges ranging from change attribution to effective collaboration.
-It is a software development best practice with more benefits than we can discuss here.
+Migrating to the appropriate tools is an important first step on the road to operational maturity.
 
-Requirements: The combination of SCP and VCS MUST provide:
+Requirements:
+
+#### Use modern tools
+
+The organization MUST manage the source using tools specifically designed to manage source code.
+Tools like Perforce, GitLab, GitHub, Azure Repos are all great examples.
+
+Storing revisions as differently-named zips in folders on a laptop does not count.
+
+Branch protection is not required, nor are there any other constraints on the configuration of the tools.
+
+#### Canonical location
+
+The source MUST have a location where the "official" revisions are stored and managed.
 
 #### Revisions are immutable and uniquely identifiable
 
-There exists a deterministic way to identify a particular revision.
+This requirement ensures that a consumer can determine that the source revision they have is the same as a canonical revision.
+The combination of SCP and VCS MUST provide a deterministic way to identify a particular revision.
 
-This is usually a combination of the repository ID and revision ID.
+Virtually all modern tools provide this guarantee via a combination of the repository ID and revision ID.
+
+##### Repository IDs
+
+The repository ID is generated by the SCP and MUST be unique in the context of that instance of the SCP.
+
+##### Revision IDs
+
 When the revision ID is a digest of the content of the revision (as in git) nothing more is needed.
-When the revision ID is a number or otherwise not a digest, then the SCP MUST document how the immutability of the revision is established.
+When the revision ID is a number or otherwise not a digest, then the SCP and VCS MUST document how the immutability of the revision is established.
+The same revision ID MAY be present in multiple repositories.
 See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
+
+### Level 2: Branch History
+
+Summary:
+Clarifies which branches in a repo are consumable and guarantees that all changes to protected branches are recorded.
+
+Intended for:
+All organizations of any size producing software of any kind.
+
+Benefits:
+Version control solves software development challenges ranging from attribution to effective collaboration.
+It is a software development best practice with more benefits than we can discuss here.
+
+Requirements:
+
+#### Branches
+
+If the SCP and VCS combination supports multiple branches, the organization MUST indicate which branches are intended for consumption.
+This may be implied or explicit.
+
+For example, an organization may declare that the `default` branch of a repo contains revisions intended for consumption my protected it.
+
+They may also declare that branches named with the prefix `refs/heads/releases/*` contain revisions held to an even higher standard.
+
+They may also declare all revisions are intended to be consumed "except those reachable only from branches beginning with `refs/heads/users/*`."
+This is a typical setup for teams who leverage code review tools.
+
+##### Continuity
+
+For all branches intended for consumption, whenever a branch is updated to point to a new revision, that revision MUST document how it related to the previous revision.
+Exceptions are allowed via the [safe expunging process](#safe-expunging-process).
+
+On VCS like git, the organization MUST enable branch protections that prohibit updating the branch to point to revisions that are not direct descendants of the current revision.
+At a minimum, this typically means preventing "force pushes" and "branch deletion."
+
+It MUST NOT be possible to delete the entire repository (including all branches) and replace it with different source.
+Exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
 #### Identity Management
 
@@ -120,16 +178,7 @@ The SCP MUST document how actors are identified for the purposes of attribution.
 
 Activities conducted on the SCP SHOULD be attributed to authenticated identities.
 
-#### Branches
-
-If the repository supports multiple branches, the organization MUST indicate which branches are intended for consumption.
-
-##### Continuity
-
-For all branches intended for consumption, it MUST be possible to view the ordered prior states of a source.
-Exceptions are allowed via the [safe expunging process](#safe-expunging-process).
-
-### Level 2: Source Provenance Attestations
+### Level 3: Source Provenance Attestations
 
 Summary:
 A consumer can ask the SCP for everything it knows about a specific revision of a repository.
@@ -157,11 +206,7 @@ For example, this would happen if the revision was created on another SCP.
 #### Change management process
 
 The repo must define how the content of a [branch](#definitions) is allowed to change.
-It MUST NOT be possible to modify the content of a branch without following the documented process.
-
-An example of a revision process could be: all proposed changes MUST be pre-approved by code experts before being included on a protected branch in git.
-
-The revision process MUST specify the branch a contributor is proposing to update.
+It MUST NOT be possible to modify the content of a branch without following its documented process.
 
 The change management tool MUST provide at a minimum:
 
@@ -178,28 +223,20 @@ These forms of identity are user-provided and not typically verified by the sour
 
 See [source roles](#source-roles).
 
-##### Change context
+##### Context
+
+The change management tool MUST record the specific code change (a "diff" in git) or instructions to recreate it.
+In git, this typically defined to be three revision IDs: the tip of the "topic" branch, the tip of the target branch, and closest shared ancestor between the two (such as determined by `git-merge-base`).
 
 The change management tool MUST record the "target" context for the change proposal and the previous / current revision in that context.
+For example, for the git version control system, the change management tool MUST record the branch name that was updated.
 
-For example, for the git version control system, the attestation MUST record the branch name that will be updated to point to a proposed
-
-##### Informed Review
-
-The change management tool MUST record the specific code change proposal (a "diff" in git) displayed to reviewers (if any) or instructions to recreate it.
-The reviewer is able and encouraged to make an informed decision about what they're approving.
-The reviewer MUST be presented with a full, meaningful content diff between the proposed revision and the previously reviewed revision.
-It is not sufficient to indicate that a file changed without showing the contents.
+Branches may have differing security postures, and a change can be approved for one context while being unapproved for another.
 
 ##### Verified Timestamps
 
 The change management tool MUST record timestamps for all contributions and review-related activities.
 User-provided timestamps MUST NOT be used.
-
-##### Human-readable change description
-
-The change management tool SHOULD record a description of the proposed change and all discussions / commentary related to it.
-All collected content SHOULD be made immutable if the change is accepted.
 
 ## Choose your own adventure
 
@@ -281,12 +318,13 @@ Requirements: For each configured automatic test, results MUST be collected by t
 For example, you may configure a "required GitHub Actions workflow" to run your test suites.
 Only change proposals with a successful workflow run id would be allowed to be submitted.
 
-### Only merge the diff that was reviewed
+### Every revision reachable from a branch was approved
 
 Summary:
-New revisions are created based ONLY on the changes that were reviewed.
+New revisions are created based ONLY on the changes that were approved.
 
-Benefits: Prevents a large class of internal threat attacks based on hiding a malicious commit in a series of good commits such that the malicious commit does not appear in the reviewed diff.
+Benefits:
+Prevents a large class of internal threat attacks based on hiding a malicious commit in a series of good commits such that the malicious commit does not appear in the reviewed diff.
 
 Requirements:
 
@@ -302,10 +340,55 @@ When a repo is cloned, all commits _reachable_ from the main branch are fetched 
 
 This combination of factors allows attacks where the victim performs a `git clone` operation followed by a `git reset --hard <unreviewed revision id>`.
 
-#### Mitigation
+#### Mitigations
+
+##### Informed Review
+
+The reviewer is able and encouraged to make an informed decision about what they're approving.
+The reviewer MUST be presented with a full, meaningful content diff between the proposed revision and the previously reviewed revision.
+
+It is not sufficient to indicate that a file changed without showing the contents.
+
+##### Use only rebase operations on the protected branch
 
 Require a squash merge strategy for the protected branch.
 
-To guarantee that only commits representing reviewed diffs are cloned, the SCP must rebase (or "squash") the reviewed diff into a single new commit (the "squashed" commit) with only a single parent (the revision previously pointed-to by the protected branch).
+To guarantee that only commits representing reviewed diffs are cloned, the SCP MUST rebase (or "squash") the reviewed diff into a single new commit (the "squashed" commit) that has only a single parent (the revision previously pointed-to by the protected branch).
+This is different than a standard merge commit strategy which would cause all the user-contributed commits to become reachable from the protected branch via the second parent.
 
 It is not acceptable to replay the sequence of commits from the topic branch onto the protected branch.
+The intent is to reduce the accepted changes to the exact diffs that were reviewed.
+Constituent commits of the topic branch may or may not have been reviewed on an individual basis, and should not become reachable from the protected branch.
+
+### Immutable Change Discussion
+
+Summary:
+The discussion around a change may often be as important as the change itself.
+
+Intended for:
+Large organizations, or any where discussion is an important part of the change management process.
+
+Benefits:
+From any revision, it's possible for future developers to read through the discussion that ultimately produced it.
+This has many educational, forensics, and security auditing benefits.
+
+Requirements:
+
+The change management tool SHOULD record a description of the proposed change and all discussions / commentary related to it.
+
+The change management tool MUST link this discussion to the revision itself. This is regularly done via commit metadata.
+
+All collected content SHOULD be made immutable if the change is accepted.
+It SHOULD NOT be possible to edit the discussion around a revision after it has been accepted.
+
+### Fast moving repos and "merge trains"
+
+Large organizations must keep the number of updates to key protected branches under certain limits to allow time for code review to happen.
+For example, if a team tries to merge 60 change requests per hour into the `main` branch, the tip of the `main` branch would only be stable for about 1 minute.
+This would effectively leave only 1 minute for a new diff to be both generated and reviewed before it becomes stale again.
+
+The normal way to work in this environment is to create a buffer branch called a "train" to collect a certain number of approved changes.
+The tip of this train branch represents a potential future state of the protected branch.
+In this model, the protected branch is updated on a less frequent cadence to point to the tip of the entire train.
+
+TODO: Explain how attestation claims can be transferred from proposed merge commits to final revisions via a train.
