@@ -142,8 +142,7 @@ Intended for:
 All organizations of any size producing software of any kind.
 
 Benefits:
-Version control solves software development challenges ranging from attribution to effective collaboration.
-It is a software development best practice with more benefits than we can discuss here.
+Allows source consumers to track changes to the software over time and attribute those changes to the people that made them.
 
 Requirements:
 
