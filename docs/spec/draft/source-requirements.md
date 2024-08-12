@@ -238,10 +238,10 @@ Branches may have differing security postures, and a change can be approved for 
 The change management tool MUST record timestamps for all contributions and review-related activities.
 User-provided timestamps MUST NOT be used.
 
-## Choose your own adventure
+## Choose your own adventure / Typical Source Controls and their Applications
 
 Now that you have a trustworthy way to communicate your security claims, what should you be looking for in those claims?
-Here are a few extremely common examples.
+Here are a few extremely common examples and important implementation details.
 
 ### Changes are pre-authorized by two different authorized actors
 
