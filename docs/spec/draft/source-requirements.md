@@ -181,7 +181,7 @@ Activities conducted on the SCP SHOULD be attributed to authenticated identities
 
 Summary:
 A consumer can ask the SCP for everything it knows about a specific revision of a repository.
-The information is provided in a standardized format.
+The information is provided in a documented and tamper-resistant format.
 
 Intended for:
 Organizations that want strong guarantees and auditability of their change management processes.
@@ -191,21 +191,26 @@ Provides reliable information to policy enforcement tools.
 
 Requirements:
 
-#### Source provenance attestations
+#### Source attestations
 
-Source attestations are associated with the revision identifier delivered to consumers.
-They are a statement of fact from the perspective of the SCP.
-They contain information about how a specific revision was created and how it came to exist in its present context.
+A source attestation contains information about how a specific revision was created and how it came to exist in its present context.
+They are associated with the revision identifier delivered to consumers and are a statement of fact from the perspective of the SCP.
 
-For example, if a consumer is authorized to access source on a particular branch, they MUST be able to fetch the source attestation documents for revisions in the history of that branch.
+If a consumer is authorized to access source on a particular branch, they MUST be able to fetch the source attestation documents for revisions in the history of that branch.
 
-It is possible that an SCP can make no provenance claims about a particular revision.
-For example, this would happen if the revision was created on another SCP.
+It is possible that an SCP can make no claims about a particular revision.
+For example, this would happen if the revision was created on another SCP, or if the revision was not the result of an accepted change management process.
 
 #### Change management process
 
 The repo must define how the content of a [branch](#definitions) is allowed to change.
+This is typically done via the configuration of branch protection rules.
 It MUST NOT be possible to modify the content of a branch without following its documented process.
+
+SLSA Source Level 2 ensures that all changes are recorded and attributable to an actor.
+SLSA Source Level 3 ensures that the documented process was followed.
+
+The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes reviewed via the process.
 
 The change management tool MUST provide at a minimum:
 
@@ -227,7 +232,7 @@ See [source roles](#source-roles).
 The change management tool MUST record the specific code change (a "diff" in git) or instructions to recreate it.
 In git, this typically defined to be three revision IDs: the tip of the "topic" branch, the tip of the target branch, and closest shared ancestor between the two (such as determined by `git-merge-base`).
 
-The change management tool MUST record the "target" context for the change proposal and the previous / current revision in that context.
+The change management tool MUST record the "target" context for the change proposal and the previous revision in that context.
 For example, for the git version control system, the change management tool MUST record the branch name that was updated.
 
 Branches may have differing security postures, and a change can be approved for one context while being unapproved for another.
