@@ -90,6 +90,8 @@ When a repo is transferred to a new organization ("donated"), or if a repo must 
 
 ## Levels
 
+Many examples in this document use the [git version control system](https://git-scm.com/), but use of git is not a requirement to meet any level on the SLSA source track.
+
 ### Level 1: Version controlled
 
 Summary:
