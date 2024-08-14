@@ -132,22 +132,22 @@ Benefits: A compromise of a single human or account does not result in compromis
 
 ## Source Attestations
 
-There are two uses for source attestations within the source track:
+There are two broad categories of source attestations within the source track:
 
-1.  Assertions: Communicate to downstream users what high level security properties a given source revision meets.
-2.  Evidence: Provide trustworthy, tamper-proof, metadata which can be used to determine what high level security properties a given source revision meets.
+1.  Summary attestations: Used to communicate to downstream users what high level security properties a given source revision meets.
+2.  Detailed attestations: Provide trustworthy, tamper-proof, metadata which can be used to determine what high level security properties a given source revision meets.
 
-To provide interoperability and ensure ease of use, it's essential that the 'assertions' are applicable across all Source Control Platforms.
+To provide interoperability and ensure ease of use, it's essential that the summary attestations are applicable across all Source Control Platforms.
 Due to the significant differences in how SCPs operate and how they may chose to meet the Source Track requirements it is preferable to
-allow for flexibility with 'evidence' attestations.  To that end SLSA leaves 'evidence' attestations undefined and up to the SCPs to determine
+allow for flexibility with the detailed attestations.  To that end SLSA leaves detailed attestations undefined and up to the SCPs to determine
 what works best in their environment.
 
-### Source Level Assertions
+### Summary attestation
 
-Source level assertions are issued by some authority that has sufficient evidence to make the determination of a given
+Summary attestations are issued by some authority that has sufficient evidence to make the determination of a given
 revision's source level.
 
-These assertions are communicated in [Verification Summary Attestations (VSAs)](./verification_summary.md) as follows:
+The source track issues summary attestations using [Verification Summary Attestations (VSAs)](./verification_summary.md) as follows:
 
 1.  `subject.uri` SHOULD be set to a human readable URI of the revision.
 2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
@@ -160,8 +160,8 @@ E.g. `git+https://github.com/foo/hello-world`.
 MAY include additional properties as asserted by the issuer.  The issuer MUST include _only_ the highest SLSA source level met by the revision.
 6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
 
-Source Level Assertion issuers MAY issue assertions based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
-but SHOULD prefer to issue assertions based on tamper-proof [Source Level Evidence](#source-level-evidence) appropriate to their SCP.
+Issuers MAY issue these attestations based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
+but at SLSA Source Level 3 MUST used tamper-proof [detailed attestations](#detailed-attestations) appropriate to their SCP when making the assessment.
 
 #### Example
 
@@ -195,13 +195,14 @@ but SHOULD prefer to issue assertions based on tamper-proof [Source Level Eviden
 -   Users SHOULD check that the expected `SLSA_SOURCE_LEVEL_` is listed within `verifiedLevels`.
 -   Users MUST ignore any unrecognized values in `verifiedLevels`.
 
-### Source Level Evidence
+### Detailed attestations
 
 Source level evidence is the tamper-proof (ideally signed in-toto attestations) that can be used to determine what SLSA Source Level a given revision meets.
-This evidence can be used by an authority as the basis for issuing a [Source Level Assertion](#source-level-assertion).
+This evidence can be used by an authority as the basis for issuing a [Summary Attestation](#summary-attestation).
 
 SCPs and VCSes may have different methods of operating that necessetate different forms of evidence.
-E.g. GitHub based workflows may need different evidence than Gerrit based workflows, which would both likely be different from workflows that operate over Subversion repositories.
+E.g. GitHub based workflows may need different evidence than Gerrit based workflows, which would both likely be different from workflows that
+operate over Subversion repositories.
 
 Examples of evidence:
 
