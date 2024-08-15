@@ -110,7 +110,7 @@ The organization MUST manage the source using tools specifically designed to man
 Tools like git, Perforce, Subversion are great examples.
 They may be self-hosted or hosted in the cloud using vendors like GitLab, GitHub, Bitbucket, etc.
 
-Storing revisions as differently-named zips in folders on a laptop does not count.
+When self-hosting a solution, local, unauthenticated storage is not acceptable.
 
 Branch protection is not required, nor are there any other constraints on the configuration of the tools.
 
