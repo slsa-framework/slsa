@@ -26,7 +26,7 @@ Because there is no standardized format, the verification strategy is dependent 
 
 ### SLSA Level 2
 
-Because there is no standardized format, the verification strategy is dependent upon the technologies being used.
+Because there is no required attestation document at this level, the verification strategy is dependent upon the technologies being used.
 
 -   If the repository also has basic history protections, it meets level 2.
 
