@@ -19,7 +19,7 @@ TODO: this section needs work.
 
 ### SLSA Level 1
 
-Because there is no standardized format, the verification strategy is dependent upon the technologies being used.
+Because there is no required attestation document at this level, the verification strategy is dependent upon the technologies being used.
 
 -   If you can prove that the revision comes from the expected canonical location for the repository, the source meets level 1.
 -   If you cannot, it does not meet level 1.
