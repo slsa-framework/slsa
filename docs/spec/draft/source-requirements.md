@@ -107,7 +107,7 @@ Requirements:
 #### Use modern tools
 
 The organization MUST manage the source using tools specifically designed to manage source code.
-Tools like Perforce, GitLab, GitHub, Azure Repos are all great examples.
+Tools like Perforce, GitLab, GitHub, Azure Repos, and self-hosted git _servers_ are all great examples.
 
 Storing revisions as differently-named zips in folders on a laptop does not count.
 
