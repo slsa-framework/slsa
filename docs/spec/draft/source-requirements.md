@@ -248,6 +248,7 @@ User-provided timestamps MUST NOT be used.
 ## Communicating source levels
 
 SLSA source level details are communicated using attestations.
+These attestations either refer to a source revision itself or provide context needed to evaluate an attestation that _does_ refer to a revision.
 
 There are two broad categories of source attestations within the source track:
 
@@ -262,7 +263,8 @@ what works best in their environment.
 ### Summary attestation
 
 Summary attestations are issued by some authority that has sufficient evidence to make the determination of a given
-revision's source level.
+revision's source level.  Summary attestations convey properties about the revision as a whole and summarize properties computed over all
+the changes that contributed to that revision over its history.
 
 The source track issues summary attestations using [Verification Summary Attestations (VSAs)](./verification_summary.md) as follows:
 
