@@ -275,11 +275,11 @@ SCPs that do not use cryptographic digests MUST define a canonical type that is 
     -   git branches MUST be fully qualified (e.g. `refs/head/main`) to reduce the likelyhood of confusing downstream tooling.
 4.  `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field).
 E.g. `git+https://github.com/foo/hello-world`.
-5.  `verifiedLevels` MUST include the SLSA source track level the issuer asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
-MAY include additional properties as asserted by the issuer.  The issuer MUST include _only_ the highest SLSA source level met by the revision.
+5.  `verifiedLevels` MUST include the SLSA source track level the verifier asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
+MAY include additional properties as asserted by the verifier.  The verifier MUST include _only_ the highest SLSA source level met by the revision.
 6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
 
-Issuers MAY issue these attestations based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
+Verifiers MAY issue these attestations based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
 but at SLSA Source Level 3 MUST used tamper-proof [detailed attestations](#detailed-attestations) appropriate to their SCP when making the assessment.
 
 #### Example
