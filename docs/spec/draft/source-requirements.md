@@ -282,6 +282,9 @@ MAY include additional properties as asserted by the verifier.  The verifier MUS
 Verifiers MAY issue these attestations based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
 but at SLSA Source Level 3 MUST used tamper-proof [full attestations](#full-attestations) appropriate to their SCP when making the assessment.
 
+The SLSA source track MAY create additional tags to include in `verifiedLevels` which attest
+to other properties of a revision (e.g. if it was code reviewed).  All SLSA source tags will start with `SLSA_SOURCE_`.
+
 #### Example
 
 ```json
