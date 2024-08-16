@@ -320,7 +320,7 @@ Full attestations provide tamper-proof evidence (ideally signed in-toto attestat
 what SLSA Source Level or other high level properties a given revision meets
 This evidence can be used by an authority as the basis for issuing a [Summary Attestation](#summary-attestation).
 
-SCPs and VCSes may have different methods of operating that necessetate different forms of evidence.
+SCPs and VCSes may have different methods of operating that necessitate different forms of evidence.
 E.g. GitHub based workflows may need different evidence than Gerrit based workflows, which would both likely be different from workflows that
 operate over Subversion repositories.
 
