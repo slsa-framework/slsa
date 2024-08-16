@@ -253,11 +253,11 @@ These attestations either refer to a source revision itself or provide context n
 There are two broad categories of source attestations within the source track:
 
 1.  Summary attestations: Used to communicate to downstream users what high level security properties a given source revision meets.
-2.  Detailed attestations: Provide trustworthy, tamper-proof, metadata which can be used to determine what high level security properties a given source revision meets.
+2.  Full attestations: Provide trustworthy, tamper-proof, metadata with the necessary information to determine what high level security properties a given source revision has.
 
 To provide interoperability and ensure ease of use, it's essential that the summary attestations are applicable across all Source Control Platforms.
 Due to the significant differences in how SCPs operate and how they may chose to meet the Source Track requirements it is preferable to
-allow for flexibility with the detailed attestations.  To that end SLSA leaves detailed attestations undefined and up to the SCPs to determine
+allow for flexibility with the full attestations.  To that end SLSA leaves full attestations undefined and up to the SCPs to determine
 what works best in their environment.
 
 ### Summary attestation
@@ -280,7 +280,7 @@ MAY include additional properties as asserted by the verifier.  The verifier MUS
 6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
 
 Verifiers MAY issue these attestations based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
-but at SLSA Source Level 3 MUST used tamper-proof [detailed attestations](#detailed-attestations) appropriate to their SCP when making the assessment.
+but at SLSA Source Level 3 MUST used tamper-proof [full attestations](#full-attestations) appropriate to their SCP when making the assessment.
 
 #### Example
 
@@ -314,9 +314,9 @@ but at SLSA Source Level 3 MUST used tamper-proof [detailed attestations](#detai
 -   Users SHOULD check that the expected `SLSA_SOURCE_LEVEL_` is listed within `verifiedLevels`.
 -   Users MUST ignore any unrecognized values in `verifiedLevels`.
 
-### Detailed attestations
+### Full attestations
 
-Detailed attestations provide tamper-proof evidence (ideally signed in-toto attestations) that can be used to determine
+Full attestations provide tamper-proof evidence (ideally signed in-toto attestations) that can be used to determine
 what SLSA Source Level or other high level properties a given revision meets
 This evidence can be used by an authority as the basis for issuing a [Summary Attestation](#summary-attestation).
 
