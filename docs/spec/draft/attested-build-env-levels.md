@@ -12,13 +12,13 @@ In this track, provenance describes how the [hosted] build platform built the
 base [build image], what build environment they deployed, and the hardware
 platform they used.
 
-| Track/Level   | Requirements | Focus |
-| ------------- | ------------ | ----- |
-| [Environment L0]  | (none)       | (n/a)    |
-| [Environment L1]  | Signed build image provenance exists | Tampering during build image distribution |
-| [Environment L2]  | Attested build environment deployment | Tampering via the build platform's control plane |
-| [Environment L3]  | Hardware-authenticated build environment | Tampering via the compute platform's host interface |
-| [Environment L4]  | Encrypted build environment | Tampering and data leaks by the build platform or compute platform during the build |
+| Track/Level   | Requirements | Focus
+| ------------- | ------------ | -----
+| [Environment L0]  | (none)       | (n/a)
+| [Environment L1]  | Signed build image provenance exists | Tampering during build image distribution
+| [Environment L2]  | Attested build environment deployment | Tampering via the build platform's control plane
+| [Environment L3]  | Hardware-authenticated build environment | Tampering via the compute platform's host interface
+| [Environment L4]  | Encrypted build environment | Tampering and data leaks by the build platform or compute platform during the build
 
 > [!IMPORTANT]
 > The Environment track currently requires a [hosted] build platform.
@@ -210,6 +210,7 @@ All of [Environment L1], plus:
 <section id="environment-l3">
 
 ### Environment L3: Hardware-authenticated build environment
+
 TODO
 
 </section>
