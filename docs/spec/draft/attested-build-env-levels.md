@@ -231,5 +231,6 @@ TODO
 [Environment L2]: #environment-l2
 [Environment L3]: #environment-l3
 [Environment L4]: #environment-l4
+[VSA]: verification_summary.md
 [future versions]: future-directions.md
 [hosted]: requirements.md#isolation-strength
