@@ -326,8 +326,15 @@ operate over Subversion repositories.
 
 Examples of evidence:
 
+-   A TBD attestation which describes the revision's parents and the actors involved in creating this revision.
 -   A "code review" attestation which describes the basics of any code review that took place.
 -   An "authentication" attestation which describes how the actors involved in any revision were authenticated.
+-   A [Vuln Scan attestation](https://github.com/in-toto/attestation/blob/main/spec/predicates/vuln.md)
+    which describes the results of a vulnerability scan over the contents of the revision.
+-   A [Test Results attestation](https://github.com/in-toto/attestation/blob/main/spec/predicates/test-result.md)
+ which describes the results of any tests run on the revision.
+-   An [SPDX attestation](https://github.com/in-toto/attestation/blob/main/spec/predicates/spdx.md)
+ which provides a software bill of materials for the revision.
 
 TODO: Can we define or recommend any canonical formats?
 
