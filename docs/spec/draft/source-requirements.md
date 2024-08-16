@@ -316,7 +316,8 @@ but at SLSA Source Level 3 MUST used tamper-proof [detailed attestations](#detai
 
 ### Detailed attestations
 
-Source level evidence is the tamper-proof (ideally signed in-toto attestations) that can be used to determine what SLSA Source Level a given revision meets.
+Detailed attestations provide tamper-proof evidence (ideally signed in-toto attestations) that can be used to determine
+what SLSA Source Level or other high level properties a given revision meets
 This evidence can be used by an authority as the basis for issuing a [Summary Attestation](#summary-attestation).
 
 SCPs and VCSes may have different methods of operating that necessetate different forms of evidence.
