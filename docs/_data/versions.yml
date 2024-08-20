@@ -37,8 +37,8 @@ spec:
       name: Version 1.0
       status: Approved
     v1.1:
-      name: Version 1.1 (DRAFT)
-      status: Draft
+      name: Version 1.1 RC
+      status: Candidate
       draft: true
     draft:
       name: Working Draft
