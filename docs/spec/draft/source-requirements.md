@@ -319,13 +319,19 @@ to other properties of a revision (e.g. if it was code reviewed).  All SLSA sour
 
 ### Full attestations
 
-Full attestations provide tamper-proof evidence (ideally signed in-toto attestations) that can be used to determine
-what SLSA Source Level or other high level properties a given revision meets
+Full attestations provide tamper-proof evidence (ideally signed [in-toto attestations](https://github.com/in-toto/attestation/blob/main/README.md))
+that can be used to determine what SLSA Source Level or other high level properties a given revision meets
 This evidence can be used by an authority as the basis for issuing a [Summary Attestation](#summary-attestation).
 
 SCPs and VCSes may have different methods of operating that necessitate different forms of evidence.
 E.g. GitHub based workflows may need different evidence than Gerrit based workflows, which would both likely be different from workflows that
 operate over Subversion repositories.
+
+These differences also mean that depending on the SCP and the repo's configuration the attestor may
+vary from implementation to implementation, often because entities with the knowledge to issue them
+may vary.  The authority that issues [summary-attestations](#summary-attestation) MUST understand
+which entity should issue each full attestation type and ensure the full attestations come from the
+appropriate attestor.
 
 Examples of evidence:
 
