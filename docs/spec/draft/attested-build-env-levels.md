@@ -23,19 +23,19 @@ platform components.
 
 ## Track overview
 
-The SLSA Build Environment track describes increasing levels of integrity and
-trustworthiness of the <dfn>provenance</dfn> of a build's execution context.
-In this track, provenance describes how a [build image] was created, how the
-[hosted] build platform deployed a build image in its environment,
-and the compute platform they used.
+The SLSA Build Environment (BuildEnv) track describes increasing levels of
+integrity and trustworthiness of the <dfn>provenance</dfn> of a build's
+execution context. In this track, provenance describes how a [build image]
+was created, how the [hosted] build platform deployed a build image in its
+environment, and the compute platform they used.
 
 | Track/Level   | Requirements | Focus
 | ------------- | ------------ | -----
-| [Environment L0] | (none)       | (n/a)
-| [Environment L1] | Build image provenance exists | Tampering during build image distribution
-| [Environment L2] | Attested build environment deployment | Tampering via the build platform's control plane
-| [Environment L3] | Hardware-authenticated build environment | Tampering via the compute platform's host interface
-| [Environment L4] | Encrypted build environment | Tampering and data leaks by the build platform or compute platform during the build
+| [BuildEnv L0] | (none)       | (n/a)
+| [BuildEnv L1] | Build image provenance exists | Tampering during build image distribution
+| [BuildEnv L2] | Attested build environment deployment | Tampering via the build platform's control plane
+| [BuildEnv L3] | Hardware-authenticated build environment | Tampering via the compute platform's host interface
+| [BuildEnv L4] | Encrypted build environment | Tampering and data leaks by the build platform or compute platform during the build
 
 > [!IMPORTANT]
 > The Environment track currently requires a [hosted] build platform.
@@ -92,12 +92,12 @@ TODO: Disambiguate similar terms (e.g., image, build job, build runner)
 
 TODO
 
-## Environment levels
+## Build Environment (BuildEnv) levels
 
-The primary purpose of the Environment track is to enable [auditing] that a
-build was run in the expected compute environment.
+The primary purpose of the Build Environment (BuildEnv) track is to enable
+[auditing] that a build was run in the expected execution context.
 
-The lowest level only requires SLSA Build L1 (or higher) Provenance to exist
+The lowest level only requires SLSA [Build L1] (or higher) Provenance to exist
 for the build image, while higher levels provide increasing auditability of
 the build environment's properties and integrity of the generated provenance
 attestations. The highest levels introduce further requirements for hardware-
@@ -120,7 +120,7 @@ what happens on failure.
 
 <section id="environment-l0">
 
-### Environment L0: No guarantees
+### BuildEnv L0: No guarantees
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -143,9 +143,9 @@ n/a
 </dl>
 </section>
 
-<section id="environment-l1">
+<section id="buildenv-l1">
 
-### Environment L1: Signed build image provenance exists
+### BuildEnv L1: Build image provenance exists
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -175,15 +175,15 @@ integrity for build environments at the time of build image generation.
 
 <dt>Benefits<dd>
 
--   Provides evidence that a build image was built from the advertised
-    source and build process.
+Provides evidence that a build image was built from the advertised
+source and build process.
 
 </dl>
 
 </section>
-<section id="environment-l2">
+<section id="buildenv-l2">
 
-### Environment L2: Attested build environment instantiation
+### BuildEnv L2: Attested build environment instantiation
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -194,12 +194,12 @@ environment.
 
 <dt>Intended for<dd>
 
-Organizations wanting to ensure that a specific build is running
+FIXME: Organizations wanting to ensure that a specific build is running
 in the expected build environment.
 
 <dt>Requirements<dd>
 
-All of [Environment L1], plus:
+All of [BuildEnv L1], plus:
 
 -   Build Image Producer:
     -   Build images MUST be created via a SLSA [Build L2] or higher build
@@ -231,25 +231,25 @@ All of [Environment L1], plus:
 
 <dt>Benefits<dd>
 
--   Provides evidence that a build environment deployed by a hosted build
-    platform was instantiated from a known good build image and is at the
-    expected initial state.
+Provides evidence that a build environment deployed by a hosted build
+platform was instantiated from a known good build image and is at the
+expected initial state.
 
 </dl>
 
 </section>
-<section id="environment-l3">
+<section id="buildenv-l3">
 
 [^1]: Since containers are executed as processes on the host platform they do not contain a traditional bootloader that starts up the execution context.
 
-### Environment L3: Hardware-authenticated build environment
+### BuildEnv L3: Hardware-authenticated build environment
 
 TODO
 
 </section>
-<section id="environment-l4">
+<section id="buildenv-l4">
 
-### Environment L4: Encrypted build environment
+### BuildEnv L4: Encrypted build environment
 
 TODO
 
@@ -260,11 +260,11 @@ TODO
 [Build L1]: levels.md#build-l1
 [Build L2]: levels.md#build-l2
 [Build L3]: levels.md#build-l3
-[Environment L0]: #environment-l0
-[Environment L1]: #environment-l1
-[Environment L2]: #environment-l2
-[Environment L3]: #environment-l3
-[Environment L4]: #environment-l4
+[BuildEnv L0]: #buildenv-l0
+[BuildEnv L1]: #buildenv-l1
+[BuildEnv L2]: #buildenv-l2
+[BuildEnv L3]: #buildenv-l3
+[BuildEnv L4]: #buildenv-l4
 [SCAI]: https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md
 [VSA]: verification_summary.md
 [build image]: #definitions
