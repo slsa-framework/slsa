@@ -1,4 +1,4 @@
----
+ ---
 title: Meeting notes
 description: Links for SLSA community meeting notes.
 layout: standard
