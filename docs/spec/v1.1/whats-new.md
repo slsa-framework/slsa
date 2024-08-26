@@ -5,7 +5,7 @@ description: SLSA v1.1 is a minor release of SLSA. That is, all changes are inte
 
 SLSA v1.1 is a minor release of SLSA v1 which brings clarifications and
 additional content without changing the meaning of the specification. This
-document describes the major changes in v1.1 relative to the prior release,
+document describes the main changes in v1.1 relative to the prior release,
 [v1.0].
 
 ## Summary of changes
