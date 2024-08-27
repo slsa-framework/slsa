@@ -4,23 +4,23 @@ author: "Meder Kydyraliev (Google)"
 is_guest_post: false
 ---
 
-Dependency confusion and typosquatting attacks are very similar in their nature. They both exploit the weakness in the way many package managers identify packages using only their names. This weak form of establishing the identity of a package obtained from a package manager is what enables both of the attacks. Successfully exploiting this weakness enables the attacker to run arbitrary code at install time or at application's run time. These attacks are scalable, portable, and extremely cost-effective to carry out—making them very appealing to malicious actors.
+_Dependency confusion_ and _typosquatting_ attacks are very similar in their nature. They both exploit the weakness in the way many package managers identify packages using only their names. Successfully exploiting this weakness enables the attacker to run arbitrary code at install time or at application's run time. These attacks are scalable, portable, and extremely cost-effective to carry out—making them very appealing to malicious actors.
 
 This blog post explores the attacks from the defender's perspective and highlights how SLSA can be used to help defend against them. It also describes some additional capabilities which might be required to mitigate this and other supply chain risks more robustly.
 
-## Dependency Confusion
+## What is Dependency Confusion?
 
-The convenience of package managers for dependency management has been recognized by developers and organizations worldwide. It enabled them to leverage existing tooling to effectively distribute internal dependencies. One common approach involves running an internal, private instance of a package registry to distribute internal dependencies and configuring **_all_** build processes to first look for a package in the private registry and only if it is not found there going to the public instance of the package registry to fetch it[^1].
+The convenience of package registries has been recognized by developers and organizations worldwide as an effective way to manage and distribute internally developed software packages using existing tooling. One common approach involves running an internal, private instance of a package registry to distribute internal dependencies and configuring **_all_** build processes to first look for a package in the private registry and only if it is not found there going to the public instance of the package registry to fetch it[^1].
 
-This works but is fragile. If someone in the organization attempts to build software that uses internal packages but doesn't correctly configure the build to use the private registry instance then the package installer will attempt to fetch internal packages from the public registry instance. Under normal circumstances this will return an error, as the internal package name would not be present in the public instance.
+This works but is fragile. If someone in the organization attempts to build software that uses internal packages but doesn't correctly configure the build to use the private registry instance first then the package installer will attempt to fetch internal packages from the public registry instance. Under normal circumstances this will return an error, as the internal package name would not be present in the public instance.
 
 ### The Attack
 
-The attacker begins by performing reconnaissance to acquire names of internal packages. This can be done using a number of techniques, e.g. trawling through organization's open source repositories, inspecting shipped software or simply guessing the names. Once the attacker has the names of internal packages they register them with the public registry and release a new version with a malicious payload. At this point the attacker has to wait for one of the misconfigured builds to run and use the attacker's package — resulting in compromise. Effective use of this technique is described in detail in blog posts such as [Dependency Confusion: How I Hacked Into Apple, Microsoft and Dozens of Other Companies](https://medium.com/@alex.birsan/dependency-confusion-4a5d60fec610).
+The attacker begins by performing reconnaissance to acquire names of internal packages. This can be done using a number of techniques, e.g., trawling through organization's open source repositories, inspecting shipped software or simply guessing the names. Once the attacker has the names of internal packages, they register these targeted packages with the public registry and release a new version with a malicious payload. At this point the attacker has to wait for one of the misconfigured builds to run and use the attacker's package — resulting in compromise. Effective use of this technique is described in detail in blog posts such as [Dependency Confusion: How I Hacked Into Apple, Microsoft and Dozens of Other Companies](https://medium.com/@alex.birsan/dependency-confusion-4a5d60fec610).
 
-## Typosquatting
+## What is Typosquatting?
 
-The workflow for developers to add a new dependency most often involves modification of a manifest file to add a reference to the new package by its name and version. The package name is usually manually typed in, copied/pasted from the web, or added by the IDE. Most of the input modes that involve humans are prone to transcription errors and typos, ranging from missing hyphens, lookalike characters, to transposed letters. Under normal circumstances the build would fail if a non-existent dependency is requested.
+The workflow for developers to add a new dependency to a software project commonly involves modification of a manifest file to list the new package by its name and version. The package name is usually manually typed in, copied/pasted from the web, or added by the IDE. Most of the input modes that involve humans are prone to transcription errors and typos, ranging from missing hyphens, lookalike characters, to transposed letters. Under normal circumstances the build would fail if a non-existent dependency is requested.
 
 ### The Attack
 
@@ -40,6 +40,8 @@ In case of _typosquatting_ attacks the mitigation is not very straightforward an
 
 ### SLSA
 
+Now let's look at how SLSA's __existing__ controls can can be used to prevent each of the attacks.
+
 #### Dependency Confusion
 
 A much more robust way to address dependency confusion is to use SLSA. SLSA build provenance contains metadata about an artifact, which includes the URL of the source repository and identifies the build system that produced the artifact. This metadata enables secure binding of the package name and version to the canonical source repository and its build system, which is referred to as [expectations forming](https://slsa.dev/spec/v1.0/verifying-artifacts#forming-expectations) in SLSA.
@@ -51,7 +53,7 @@ Let's examine how SLSA build provenance prevents successful dependency confusion
 3.  Client-side policy binds internal package names to their corresponding source repositories and builder systems.
 4.  Upon installation of the internal packages their build provenance is verified to ensure they were built by the authorized build system and from the canonical source repository.
 
-Attackers are unable to forge SLSA build provenance thus all dependency confusion attempts will be immediately detected due to a different canonical source repository or builder ID. Native support for SLSA build provenance and its verification in ecosystems like npm will enable this robust form of protection against dependency confusion attacks.
+Attackers are unable to forge SLSA Level 2+ build provenance thus all dependency confusion attempts will be immediately detected due to a different canonical source repository or builder ID. Native support for SLSA build provenance and its verification in ecosystems like npm will enable this robust form of protection against dependency confusion attacks.
 
 #### Typosquatting
 
@@ -75,7 +77,7 @@ In this context a reasonable baseline for managed ingestion includes:
 -   **Mitigation of typosquatting** attacks by flagging upstream packages based on heuristics.
 -   Opportunity to **deploy existing content scanning tools on OSS packages** to flag known indicators of maliciousness or unexpected changes (e.g. changes in capabilities reported by [CAPSLOCK](https://github.com/google/capslock)).
 
-The process of using OSS packages via registries presents a lot of risks beyond typosquatting and dependency confusion—and requires the same level of attention and control as the build process itself. Managed ingestion defines this fundamental capability required to successfully manage OSS supply chain risk. As part of the ongoing [SLSA dependencies track](https://github.com/slsa-framework/slsa/issues/961) effort we will work to formalize these concepts, including [those from s2c2f](https://github.com/slsa-framework/slsa/issues/1105), within the SLSA specification.
+The process of using OSS packages via registries presents a lot of risks beyond typosquatting and dependency confusion—and requires the same level of attention and control as the build process itself. Managed ingestion is the fundamental capability required to successfully manage OSS supply chain risk. As part of the ongoing [SLSA dependencies track](https://github.com/slsa-framework/slsa/issues/961) effort we will work to formalize these concepts, including [those from s2c2f](https://github.com/slsa-framework/slsa/issues/1105), within the SLSA specification.
 
 <!-- Footnotes themselves at the bottom. -->
 ## Notes
