@@ -30,7 +30,7 @@ There are a number of potential vectors that attackers can use as the source of 
 
 ## Mitigations
 
-The fragility of just using package names as the way to identify software packages is hopefully obvious by now. Let's first explore common recommendations to mitigate _dependency confusion_ attacks and their limitations:
+The fragility of just using package names as the way to identify software packages is hopefully obvious by now. Let's first explore common recommendations([1](https://fossa.com/blog/dependency-confusion-understanding-preventing-attacks/), [2](https://www.activestate.com/blog/how-to-prevent-dependency-confusion/)). to mitigate _dependency confusion_ attacks and their limitations:
 
 -   **Namespacing:** Some package registries support namespacing, sometimes called scoping or organization support. This feature enables organizations to claim a namespace in the public registry for their internal dependencies. This prevents attackers from registering internal names, as they are not authorized to publish to the organization's namespace. Confidentiality concerns would likely prevent large organizations, that are usually targeted by the dependency confusion attacks, from hosting internal dependencies in the public instance; claiming the namespace is, however, sufficient to prevent attackers from exploiting dependency confusion. Namespacing is not supported by all package registries, and moreover the solution is not very robust as trust is placed into another forgeable identifier outside of the organization's control.
 -   **Registering internal names in the public registry:** a common practical workaround for registries that lack namespacing support is for organizations to do what the attackers do and claim internal package names in the public registry instance to prevent attackers from doing so. This recommendation doesn't address the root cause of dependency confusion attacks and requires ongoing coordination and synchronization of the names between public and private registries, which is fragile.
@@ -82,5 +82,5 @@ The process of using OSS packages via registries presents a lot of risks beyond 
 <!-- Footnotes themselves at the bottom. -->
 ## Notes
 
-[^1]:
-     Multi-registry behaviour is ecosystem and configuration specific, e.g. PyPI configured with the discouraged --extra-index-url flag would pick the highest version if a package is present in private and public instance. Overall the mechanics of the attack remain the same
+[^1]: Multi-registry behaviour is ecosystem and configuration specific, e.g. PyPI configured with the discouraged --extra-index-url flag would pick the highest version if a package is present in private and public instance. Overall the mechanics of the attack remain the same.
+
