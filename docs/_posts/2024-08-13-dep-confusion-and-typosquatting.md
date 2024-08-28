@@ -36,7 +36,7 @@ The inadequacy of just using package names as the way to identify software packa
 -   **Registering internal names in the public registry:** a common practical workaround for registries that lack namespacing support is for organizations to do what the attackers do and claim internal package names in the public registry instance to prevent attackers from doing so. This recommendation doesn't address the root cause of dependency confusion attacks and requires ongoing coordination and synchronization of the names between public and private registries, which is fragile.
 -   **Pinning or hash validation:** some client-side tooling supports pinning or locking of dependencies by hash. Both internal and external dependencies will be listed in the lockfile. Effectively preventing a dependency confusion attack using lockfiles requires all updates to the lock file to ensure that hashes for internal packages match the list of authorized hashes for that package. Not all ecosystems universally support pinning with lockfiles, and even those that do may lack the functionality to manage and distinguish between internal and external dependencies.
 
-In case of _typosquatting_ attacks the mitigation is not very straightforward and for the most part requires intervention at the point when developers are adding a new dependency. Effective mitigation could involve presenting the developer with metadata about the package being added (e.g. number of dependents, downloads) and prompting them to verify and ensure that the package being installed is the one that developer intended. This unscalable approach is prone to human errors.
+In case of _typosquatting_ attacks the mitigation is not very straightforward and for the most part requires intervention at the point when developers are adding a new dependency. Effective mitigation could involve presenting the developer with metadata about the package being added (e.g. number of dependents, downloads) and prompting them to verify and ensure that the package being installed is the one that developer intended. This unscalable approach is prone to human errors, which can happen for reasons ranging from time pressure and fatigue to the lack of security expertise and simple misreading of key parts of metadata.
 
 ### SLSA
 
@@ -48,10 +48,10 @@ A much more robust way to address dependency confusion is to use SLSA. SLSA buil
 
 Let's examine how SLSA build provenance prevents successful dependency confusion exploitation:
 
-1.  Organization's internal packages are built with a SLSA-compliant build system, which produces SLSA build provenance.
-2.  SLSA build provenance is [distributed along with the artifact](https://slsa.dev/spec/v1.0/distributing-provenance).
-3.  Client-side policy binds internal package names to their corresponding source repositories and builder systems.
-4.  Upon installation of the internal packages their build provenance is verified to ensure they were built by the authorized build system and from the canonical source repository.
+1.  Organization defines a policy for its internal packages by binding each package to the authorized builder and the expected canonical source repository.
+3.  Organization's internal packages are built with a SLSA-compliant build system, which produces SLSA build provenance.
+4.  SLSA build provenance is [distributed along with the artifact](https://slsa.dev/spec/v1.0/distributing-provenance), e.g. by the internal registry instance.
+5.  Upon installation of the internal packages their build provenance is verified aginst the policy defined earlier. The verification ensures that the internal packages were built by the authorized build system using source code from the canonical source repository.
 
 Attackers are unable to forge SLSA Level 2+ build provenance thus all dependency confusion attempts will be immediately detected due to a different canonical source repository or builder ID. Native support for SLSA build provenance and its verification in ecosystems like npm will enable this robust form of protection against dependency confusion attacks.
 
@@ -69,7 +69,7 @@ For a typical build process this means control over resolution of the OSS depend
 
 Managed ingestion describes a dedicated deliberate process that happens separately from the build and involves an organization importing and assessing OSS packages before making them available to developers internally. While there is more than one way to implement managed ingestion, combining managed ingestion with existing artifact management solutions creates a very potent capability that provides organizations with control over the graph resolution and an opportunity for centralized supply chain risk management. Native support for different package ecosystems provided by most modern artifact management solutions ensures compatibility with most existing build and dependency management tools.
 
-In this context a reasonable baseline for managed ingestion includes:
+In this context, based on practical experience, managed ingestion needs to provide the following capabilities:
 
 -   **Implementation of an ingestion delay** for new versions of OSS packages. A simple but very effective mitigation against a number of supply chain attacks.
 -   **Mitigation of availability concerns** ensuring organizations are able to build and deploy even if upstream infrastructure is down.
