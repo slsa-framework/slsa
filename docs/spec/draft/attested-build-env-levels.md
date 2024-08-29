@@ -32,7 +32,7 @@ environment, and the compute platform they used.
 | Track/Level   | Requirements | Focus
 | ------------- | ------------ | -----
 | [BuildEnv L0] | (none)       | (n/a)
-| [BuildEnv L1] | Build image provenance exists | Tampering during build image distribution
+| [BuildEnv L1] | Signed build image provenance exists | Tampering during build image distribution
 | [BuildEnv L2] | Attested build environment deployment | Tampering via the build platform's control plane
 | [BuildEnv L3] | Hardware-authenticated build environment | Tampering via the compute platform's host interface
 | [BuildEnv L4] | Encrypted build environment | Tampering and data leaks by the build platform or compute platform during the build
@@ -66,7 +66,7 @@ A typical build environment will go through the following lifecycle:
     the SLSA Environment track, the build platform attests to the binding
     between a build environment and *build ID*.
 4.  *Build execution*: Finally, the *build executor* running within the
-environment executes the tenant's build definition.
+    environment executes the tenant's build definition.
 
 ### Definitions
 
@@ -85,6 +85,7 @@ and roles:
 | Host interface | The component in the compute platform that the hosted build platform uses to request resources for deploying new build environments, i.e., the VMM/hypervisor or container orchestrator.
 | Boot process | In the context of builds, the process of loading and executing the layers of firmware and/or software needed to start up a build environment on the build platform.
 | Measurement | The cryptographic hash of some component or system state in the build environment, including software binaries, configuration, or initialized run-time data.
+| Quote | Hardware-signed data that contains one or more hardware-generated measurements. Quotes may additionally include nonces for replay protection, firmware information, or other platform metadata.
 | Reference value | A specific measurement used as the good known value for a given build environment component or state.
 
 TODO: Disambiguate similar terms (e.g., image, build job, build runner)
@@ -98,7 +99,7 @@ TODO
 The primary purpose of the Build Environment (BuildEnv) track is to enable
 [auditing] that a build was run in the expected execution context.
 
-The lowest level only requires SLSA [Build L1] (or higher) Provenance to
+The lowest level only requires SLSA [Build L2] Provenance to
 exist for the build image, while higher levels provide increasing
 auditability of the build environment's properties and integrity of the
 generated provenance attestations. The highest levels introduce further
@@ -108,7 +109,8 @@ computing base of a build.
 Software producers and third-party auditors can check attestations generated
 by the build image producer and build platform against the expected
 properties for a given build environment. This enables any party to detect
-[several classes] of supply chain threats originating the build environment.
+[several classes] of supply chain threats originating in the build
+environment.
 
 As in the Build track, the exact implementation of this track is determined
 by the build platform provider, whether they are a commercial CI/CD service,
@@ -147,7 +149,7 @@ n/a
 
 <section id="buildenv-l1">
 
-### BuildEnv L1: Build image provenance exists
+### BuildEnv L1: Signed build image provenance exists
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -163,17 +165,20 @@ integrity for build environments at the time of build image distrbution.
 <dt>Requirements<dd>
 
 -   Build Image Producer:
-    -   MUST automatially generate SLSA [Build L1] or higher
+    -   MUST automatially generate SLSA [Build L2] or higher
     Provenance for created build images (i.e., VM or container images).
     -   MUST allow independent automatic verification of a build image's SLSA
-    Provenance. If the full Provenance document cannot be distributed, for
-    example due to intellectual property concerns, a [VSA] asserting the
-    build image's SLSA Provenance MUST be distributed instead.
+    Provenance. If the build image artifact cannot be published, for example
+    due to intellectual property concerns, an attestation asserting the
+    expected hash value of the build image MUST be generated and distributed
+    instead (e.g., using [SCAI] or a [Release Attestation]). If the full
+    Provenance document cannot be disclosed, a [VSA] asserting the build
+    image's SLSA Provenance MUST be distributed instead.
 
 -   Build Platform:
     -   MUST meet SLSA [Build L2] requirements.
     -   Prior to deployment of a new build environment, the SLSA Provenance
-    for the selected build image MUST be automatically verified.
+    for the selected build image SHOULD be automatically verified.
 
 <dt>Benefits<dd>
 
@@ -192,7 +197,7 @@ source and build process.
 
 The build environment is measured and authenticated prior to dispatching
 any builds, attesting to the integrity of initial state of the environment
-when it's deployed by the build paltform.
+when it's deployed by the build platform.
 
 <dt>Intended for<dd>
 
@@ -204,7 +209,7 @@ a clean, known good state.
 All of [BuildEnv L1], plus:
 
 -   Build Image Producer:
-    -   Build images MUST be created via a SLSA [Build L2] or higher build
+    -   Build images MUST be created via a SLSA [Build L3] or higher build
     process.
     -   MUST add support in the build image to:
         -   Automatically check build image components against their
@@ -224,11 +229,14 @@ All of [BuildEnv L1], plus:
 
 -   Build Platform Requirements:
     -   MUST meet SLSA [Build L3] requirements.
-    -   Prior to deployment of a new build environment, a signed attestation
-    to the verification of the build image's SLSA Provenance MUST be
-    automatically generated and distributed (e.g., via a [VSA]).
+    -   Prior to deployment of a new build environment, the SLSA Provenance
+    for the selected build image MUST be automatically verified. A signed
+    attestation to the verification of the build image's SLSA Provenance
+    MUST be automatically generated and distributed (e.g., via a [VSA]).
     -   Prior to dispatching a tenant's build to a deployed environment, its
-    initial state attestation MUST be automatically verified.
+    initial state attestation MUST be automatically verified. A signed
+    attestation binding the tenant's build ID to the verified initial state
+    of the selected build environment MUST be generated and distributed.
 
 <dt>Benefits<dd>
 
@@ -261,9 +269,9 @@ a known good environment.
 
 All of [BuildEnv L2], plus:
 
+**TODO:** These requirements need to be re-formulated.
+
 -   Build Image Producer:
-    -   Build images MUST be created via a SLSA [Build L3] or higher build
-    process.
     -   MUST add support in the build image to:
         -   Use trusted hardware to check build image component reference
         values and integrity of the build environment startup.
@@ -274,11 +282,9 @@ All of [BuildEnv L2], plus:
         -   Use trusted hardware to sign all build image-generated
         attestations.
 
--   Build Platform Requirements:
-    -   MUST meet SLSA [Build L3] requirements.
-    -   Prior to assigning a build ID to tenant's build, a signed attestation
-    to the verification of the selected build environment initial state
-    attestations MUST be generated and distributed.
+-   Build Platform Requirements: TODO
+
+-   Compute Platform Requirements: TODO
 
 <dt>Benefits<dd>
 
