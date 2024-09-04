@@ -40,7 +40,7 @@ In case of _typosquatting_ attacks the mitigation is not very straightforward an
 
 ### SLSA
 
-Now let's look at how SLSA's __existing__ controls can can be used to prevent each of the attacks.
+Now let's look at how SLSA's **existing** controls can can be used to prevent each of the attacks.
 
 #### Dependency Confusion
 
@@ -49,9 +49,9 @@ A much more robust way to address dependency confusion is to use SLSA. SLSA buil
 Let's examine how SLSA build provenance prevents successful dependency confusion exploitation:
 
 1.  Organization defines a policy for its internal packages by binding each package to the authorized builder and the expected canonical source repository.
-3.  Organization's internal packages are built with a SLSA-compliant build system, which produces SLSA build provenance.
-4.  SLSA build provenance is [distributed along with the artifact](https://slsa.dev/spec/v1.0/distributing-provenance), e.g. by the internal registry instance.
-5.  Upon installation of the internal packages their build provenance is verified aginst the policy defined earlier. The verification ensures that the internal packages were built by the authorized build system using source code from the canonical source repository.
+2.  Organization's internal packages are built with a SLSA-compliant build system, which produces SLSA build provenance.
+3.  SLSA build provenance is [distributed along with the artifact](https://slsa.dev/spec/v1.0/distributing-provenance), e.g. by the internal registry instance.
+4.  Upon installation of the internal packages their build provenance is verified aginst the policy defined earlier. The verification ensures that the internal packages were built by the authorized build system using source code from the canonical source repository.
 
 Attackers are unable to forge SLSA Level 2+ build provenance thus all dependency confusion attempts will be immediately detected due to a different canonical source repository or builder ID. Native support for SLSA build provenance and its verification in ecosystems like npm will enable this robust form of protection against dependency confusion attacks.
 
@@ -83,4 +83,3 @@ The process of using OSS packages via registries presents a lot of risks beyond 
 ## Notes
 
 [^1]: Multi-registry behaviour is ecosystem and configuration specific, e.g. PyPI configured with the discouraged --extra-index-url flag would pick the highest version if a package is present in private and public instance. Overall the mechanics of the attack remain the same.
-
