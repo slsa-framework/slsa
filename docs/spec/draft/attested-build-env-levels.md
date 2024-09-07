@@ -33,9 +33,9 @@ environment, and the compute platform they used.
 | ------------- | ------------ | -----
 | [BuildEnv L0] | (none)       | (n/a)
 | [BuildEnv L1] | Signed build image provenance exists | Tampering during build image distribution
-| [BuildEnv L2] | Attested build environment deployment | Tampering via the build platform's control plane
+| [BuildEnv L2] | Attested build environment instantiation | Tampering via the build platform's control plane
 | [BuildEnv L3] | Hardware-authenticated build environment | Tampering via the compute platform's host interface
-| [BuildEnv L4] | Encrypted build environment | Tampering and data leaks by the build platform or compute platform during the build
+| [BuildEnv L4] | Runtime monitored build environment | Tampering by the build platform or compute platform during the build
 
 > [!IMPORTANT]
 > The Environment track currently requires a [hosted] build platform.
@@ -55,16 +55,17 @@ A typical build environment will go through the following lifecycle:
 1.  *Build image creation*: A build image producer creates different build
     images through dedicated build process. For the SLSA Environment track,
     the build image producer outputs provenance describing this process.
-2.  *Build environment deployment*: The hosted build platform calls into the
-    *host interface* to deploy a new build environment from a given build
-    image on the underlying compute platform.
-    For the SLSA Environment track, the hosted build platform attests to the
-    *measurement* of the environment's *initial state* during its boot
-    process.
+    2.  *Build environment instantiation*: The hosted build platform calls
+    into the *host interface* to create a new build environment from a given
+    build image. The *build agent* begins to wait for an incoming build
+    dispatch.
+    **[TODO: revise]** For the SLSA Environment track, the hosted build
+    platform attests to the *measurement* of the environment's *initial
+    state* during its boot process.
 3.  *Build dispatch*: When the tenant dispatches a new build, the hosted
-    build platform assigns the build to a deployed build environment. For
-    the SLSA Environment track, the build platform attests to the binding
-    between a build environment and *build ID*.
+    build platform assigns the build to a created build environment.
+    **[TODO: revise]** For the SLSA Environment track, the build platform
+    attests to the binding between a build environment and *build ID*.
 4.  *Build execution*: Finally, the *build executor* running within the
     environment executes the tenant's build definition.
 
@@ -76,10 +77,10 @@ and roles:
 | Primary Term | Description
 | --- | ---
 | Build ID | An immutable identifier assigned uniquely to a specific execution of a tenant's build. In practice, the build ID may be a cryptographic key or other unique and immutable identfier (e.g., a UUID) associated with the build execution.
-| Build image | The template for a build environment, such as a VM or container image. Individual components of a build image include the bootable storage volume containing the build executor, a dedicated build platform client, and pre-installed guest OS and packages.
+| Build image | The template for a build environment, such as a VM or container image. Individual components of a build image include the bootable storage volume containing the build executor, a dedicated build agent, and pre-installed guest OS and packages.
 | Build image producer | The party that creates and distributes build images. In practice, the build image producer may be the hosted build platform or a third party in a BYO build image setting.
 | Build executor | A platform-provided program dedicated to executing the tenant’s build definition, i.e., running the build, within the build environment. The build executor must be included in the build image's measurement.
-| Build platform client | A platform-provided program that interfaces with the hosted build platform's control plane from within a running build environment. The build platform client must be included in the build image's measurement.
+| Build agent | A program that interacts with the hosted build platform's control plane from within a running build environment. The build agent must be included in the build image's measurement.
 | Build dispatch | The process of assigning a tenant's build to a pre-deployed build environment on a hosted build platform.
 | Compute platform | The compute system and infrastructure underlying a build platform, i.e., the host system (hypervisor and/or OS) and hardware. In practice, the compute platform and the build platform may be managed by the same or distinct organizations.
 | Host interface | The component in the compute platform that the hosted build platform uses to request resources for deploying new build environments, i.e., the VMM/hypervisor or container orchestrator.
@@ -211,7 +212,7 @@ All of [BuildEnv L1], plus:
 -   Build Image Producer:
     -   Build images MUST be created via a SLSA [Build L3] or higher build
     process.
-    -   MUST add support in the build image to:
+    -   **[TODO: revise]** MUST add support in the build image to:
         -   Automatically check build image components against their
         reference values during build environment startup.
         In VM-based images, this can be achieved by enabling a [trusted boot]
@@ -223,11 +224,11 @@ All of [BuildEnv L1], plus:
         Provenance (e.g., using [SCAI] or a [VSA]).
     -   MUST automatically generate and distribute signed reference values
     for the following build image components: bootloader or equivalent,
-    guest kernel, build platform client, build executor, and root filesystem.
+    guest kernel, build agent, build executor, and root filesystem.
     Additional build image components whose initial state is to be checked
     MAY be also measured.
 
--   Build Platform Requirements:
+-   **[TODO: revise]** Build Platform Requirements:
     -   MUST meet SLSA [Build L3] requirements.
     -   Prior to deployment of a new build environment, the SLSA Provenance
     for the selected build image MUST be automatically verified. A signed
@@ -269,7 +270,7 @@ a known good environment.
 
 All of [BuildEnv L2], plus:
 
-**TODO:** These requirements need to be re-formulated.
+**[TODO: These requirements need to be re-formulated.]**
 
 -   Build Image Producer:
     -   MUST add support in the build image to:
@@ -297,7 +298,7 @@ face of a compromised host interface (hypervisor/container orchestrator).
 </section>
 <section id="buildenv-l4">
 
-### BuildEnv L4: Encrypted build environment
+### BuildEnv L4: Runtime monitored build environment
 
 TODO
 
