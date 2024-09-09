@@ -9,6 +9,11 @@ MD007:
 # MD013/line-length - Line length
 MD013: false
 
+# MD024/no-duplicate-heading - No duplicate headings
+MD024:
+  # Only check that siblings aren't duplicated.
+  siblings_only: true
+
 # MD025/single-title/single-h1 - Multiple top-level headings
 MD025:
   # Disable checking of YAML frontmatter.
