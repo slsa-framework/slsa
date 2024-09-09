@@ -255,7 +255,7 @@ These attestations either refer to a source revision itself or provide context n
 There are two broad categories of source attestations within the source track:
 
 1.  Summary attestations: Used to communicate to downstream users what high level security properties a given source revision meets.
-2.  Full attestations: Provide trustworthy, tamper-proof, metadata with the necessary information to determine what high level security properties a given source revision has.
+2.  Provenance attestations: Provide trustworthy, tamper-proof, metadata with the necessary information to determine what high level security properties a given source revision has.
 
 To provide interoperability and ensure ease of use, it's essential that the summary attestations are applicable across all Source Control Platforms.
 Due to the significant differences in how SCPs operate and how they may chose to meet the Source Track requirements it is preferable to
@@ -319,9 +319,9 @@ to other properties of a revision (e.g. if it was code reviewed).  All SLSA sour
 -   Users SHOULD check that the expected `SLSA_SOURCE_LEVEL_` is listed within `verifiedLevels`.
 -   Users MUST ignore any unrecognized values in `verifiedLevels`.
 
-### Full attestations
+### Provenance attestations
 
-Full attestations provide tamper-proof evidence (ideally signed [in-toto attestations](https://github.com/in-toto/attestation/blob/main/README.md))
+Source provenance attestations provide tamper-proof evidence (ideally signed [in-toto attestations](https://github.com/in-toto/attestation/blob/main/README.md))
 that can be used to determine what SLSA Source Level or other high level properties a given revision meets
 This evidence can be used by an authority as the basis for issuing a [Summary Attestation](#summary-attestation).
 
@@ -335,7 +335,10 @@ may vary.  The authority that issues [summary-attestations](#summary-attestation
 which entity should issue each full attestation type and ensure the full attestations come from the
 appropriate attestor.
 
-Examples of evidence:
+'Source provenance attestations' is a generic term used to refer to any type of attestation that provides
+evidence the process used to create a revision.
+
+Example source provenance attestations:
 
 -   A TBD attestation which describes the revision's parents and the actors involved in creating this revision.
 -   A "code review" attestation which describes the basics of any code review that took place.
