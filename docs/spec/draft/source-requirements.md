@@ -15,6 +15,8 @@ Open issues are tracked with the [source-track](https://github.com/slsa-framewor
 -   [] [Create guidance for consumers on how to evaluate the source platform](https://github.com/slsa-framework/slsa/issues/1078)
 -   [] [Clarify what must be retained during source migrations](https://github.com/slsa-framework/slsa/issues/1079)
 -   [] [Refine requirements/guidance for trusted robots](https://github.com/slsa-framework/slsa/issues/1080)
+-   [] [Define source control 'system'](https://github.com/slsa-framework/slsa/issues/1128)
+-   [] [Define where source attestations are stored](https://github.com/slsa-framework/slsa/issues/1129)
 
 ## Objective
 
