@@ -344,6 +344,8 @@ Examples of evidence:
  which describes the results of any tests run on the revision.
 -   An [SPDX attestation](https://github.com/in-toto/attestation/blob/main/spec/predicates/spdx.md)
  which provides a software bill of materials for the revision.
+-   A [SCAI attestation](https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md) used to
+ describe which source quality tools were run on the revision.
 
 TODO: Can we define or recommend any canonical formats?
 
