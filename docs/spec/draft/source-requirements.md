@@ -287,6 +287,16 @@ but at SLSA Source Level 3 MUST used tamper-proof [full attestations](#full-atte
 The SLSA source track MAY create additional tags to include in `verifiedLevels` which attest
 to other properties of a revision (e.g. if it was code reviewed).  All SLSA source tags will start with `SLSA_SOURCE_`.
 
+#### Populating source_branches
+
+The summary attestation issuer may chose to populate `source_branches` in any way they wish.
+Downstream users are expected to be familiar with the method used by the issuer.
+
+Example implementations:
+
+-   Issue a new VSA for each merged Pull Request and add the destination branch to `source_branches`.
+-   Issue a new VSA each time a 'consumable branch' is updated to point to a new revision.
+
 #### Example
 
 ```json
