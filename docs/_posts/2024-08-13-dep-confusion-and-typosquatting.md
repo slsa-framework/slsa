@@ -44,20 +44,20 @@ Now let's look at how SLSA's **existing** controls can can be used to prevent ea
 
 #### Dependency Confusion
 
-A much more robust way to address dependency confusion is to use SLSA. SLSA build provenance contains metadata about an artifact, which includes the URL of the source repository and identifies the build system that produced the artifact. This metadata enables secure binding of the package name and version to the canonical source repository and its build system, which is referred to as [expectations forming](https://slsa.dev/spec/v1.0/verifying-artifacts#forming-expectations) in SLSA.
+A much more robust way to address dependency confusion is to use SLSA. SLSA build provenance contains metadata about an artifact, which includes the URL of the source repository and identifies the build system that produced the artifact. This metadata enables secure binding of the package name and version to the canonical source repository and its build system, which is referred to as [expectations forming](/spec/v1.0/verifying-artifacts#forming-expectations) in SLSA.
 
 Let's examine how SLSA build provenance prevents successful dependency confusion exploitation:
 
 1.  Organization defines a policy for its internal packages by binding each package to the authorized builder and the expected canonical source repository.
 2.  Organization's internal packages are built with a SLSA-compliant build system, which produces SLSA build provenance.
-3.  SLSA build provenance is [distributed along with the artifact](https://slsa.dev/spec/v1.0/distributing-provenance), e.g. by the internal registry instance.
+3.  SLSA build provenance is [distributed along with the artifact](/spec/v1.0/distributing-provenance), e.g. by the internal registry instance.
 4.  Upon installation of the internal packages their build provenance is verified aginst the policy defined earlier. The verification ensures that the internal packages were built by the authorized build system using source code from the canonical source repository.
 
 Attackers are unable to forge SLSA Level 2+ build provenance thus all dependency confusion attempts will be immediately detected due to a different canonical source repository or builder ID. Native support for SLSA build provenance and its verification in ecosystems like npm will enable this robust form of protection against dependency confusion attacks.
 
 #### Typosquatting
 
-Dealing with typosquatting attacks is trickier because at the time of the attack the developer is adding a new dependency, potentially interacting with it for the first time. Trust on first use (TOFU) is a common approach to bootstrapping trust and [forming expectations](https://slsa.dev/spec/v1.0/verifying-artifacts#forming-expectations), however, since it's impossible to know the developer's intent, all tooling can do is present them with the metadata about the package they are adding. Unfortunately that metadata could be for the attacker's impostor package.
+Dealing with typosquatting attacks is trickier because at the time of the attack the developer is adding a new dependency, potentially interacting with it for the first time. Trust on first use (TOFU) is a common approach to bootstrapping trust and [forming expectations](/spec/v1.0/verifying-artifacts#forming-expectations), however, since it's impossible to know the developer's intent, all tooling can do is present them with the metadata about the package they are adding. Unfortunately that metadata could be for the attacker's impostor package.
 
 Effective mitigation of typosquatting attacks requires ongoing integration of heuristics to proactively flag packages that appear like typosquatting attempts into all workflows that add new dependencies. Heuristics could range from evaluation over static data (e.g. package age) to ones requiring more time and resources (e.g. graph resolution or dynamic analysis). Managed ingestion, described below, is one very efficient and effective way to deploy such protections across larger enterprises.
 
