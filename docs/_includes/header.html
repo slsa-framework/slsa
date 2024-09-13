@@ -81,7 +81,7 @@
             {%- else %}
               {%- assign new_url = "/" + spec_id + "/" + spec.current %}
             {%- endif %}
-            <p>{{ current_version.name }} is available! See <a href="{{ new_url }}">the newest documentation</a>.</p>
+            <p>{{ current_version.name }} is the current version. See <a href="{{ new_url }}">the {{ current_version.name }} documentation</a>.</p>
           {%- endif %}
         {%- endif %}
       </div>
