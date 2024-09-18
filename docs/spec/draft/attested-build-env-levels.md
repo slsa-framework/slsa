@@ -168,7 +168,7 @@ integrity for build environments at the time of build image distrbution.
 <dt>Requirements<dd>
 
 -   Build Image Producer:
-    -   MUST automatially generate SLSA [Build L2] or higher
+    -   MUST automatically generate SLSA [Build L2] or higher
     Provenance for created build images (i.e., VM or container images).
     -   MUST allow independent automatic verification of a build image's SLSA
     Provenance. If the build image artifact cannot be published, for example
