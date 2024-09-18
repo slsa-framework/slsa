@@ -29,18 +29,21 @@ execution context. In this track, provenance describes how a [build image]
 was created, how the [hosted] build platform deployed a build image in its
 environment, and the compute platform they used.
 
-| Track/Level   | Requirements | Focus
-| ------------- | ------------ | -----
-| [BuildEnv L0] | (none)       | (n/a)
-| [BuildEnv L1] | Signed build image provenance exists | Tampering during build image distribution
-| [BuildEnv L2] | Attested build environment instantiation | Tampering via the build platform's control plane
-| [BuildEnv L3] | Hardware-authenticated build environment | Tampering via the compute platform's host interface
-| [BuildEnv L4] | Runtime monitored build environment | Tampering by the build platform or compute platform during the build
+| Track/Level   | Requirements | Focus | Trust Root
+| ------------- | ------------ | ----- | ----------
+| [BuildEnv L0] | (none)       | (n/a) | (n/a)
+| [BuildEnv L1] | Signed build image provenance exists | Tampering during build image distribution | Signed build image provenance
+| [BuildEnv L2] | Attested build environment instantiation | Tampering via the build platform's control plane | The compute platform's host interface
+| [BuildEnv L3] | Hardware-attested build environment | Tampering via the compute platform's host interface | The compute platform's hardware
 
-> [!IMPORTANT]
-> The Environment track currently requires a [hosted] build platform.
-> A future version of this track may generalize requirements to cover local
-> build environments (e.g., developer laptop).
+> :warning:
+> The Build Environment track currently requires a [hosted] build platform.
+> A future version of this track may generalize requirements to cover bare-metal
+> build environments.
+
+> :grey_exclamation:
+> We may consider the addition of an L4 to the Build Environment track, which
+> covers hardware-attested runtime integrity checking during a build.
 
 ### Build environment model
 
@@ -55,16 +58,15 @@ A typical build environment will go through the following lifecycle:
 1.  *Build image creation*: A build image producer creates different build
     images through dedicated build process. For the SLSA Environment track,
     the build image producer outputs provenance describing this process.
-    2.  *Build environment instantiation*: The hosted build platform calls
-    into the *host interface* to create a new build environment from a given
-    build image. The *build agent* begins to wait for an incoming build
-    dispatch.
-    **[TODO: revise]** For the SLSA Environment track, the hosted build
-    platform attests to the *measurement* of the environment's *initial
+2.  *Build environment instantiation*: The hosted build platform calls
+    into the *host interface* to create a new instance of a build environment
+    from a given build image. The *build agent* begins to wait for an incoming
+    build dispatch. For the SLSA Environment track, the host interface in the
+    compute platform attests to the integrity of the environment's *initial
     state* during its boot process.
 3.  *Build dispatch*: When the tenant dispatches a new build, the hosted
     build platform assigns the build to a created build environment.
-    **[TODO: revise]** For the SLSA Environment track, the build platform
+    For the SLSA Environment track, the build platform
     attests to the binding between a build environment and *build ID*.
 4.  *Build execution*: Finally, the *build executor* running within the
     environment executes the tenant's build definition.
@@ -84,9 +86,9 @@ and roles:
 | Build dispatch | The process of assigning a tenant's build to a pre-deployed build environment on a hosted build platform.
 | Compute platform | The compute system and infrastructure underlying a build platform, i.e., the host system (hypervisor and/or OS) and hardware. In practice, the compute platform and the build platform may be managed by the same or distinct organizations.
 | Host interface | The component in the compute platform that the hosted build platform uses to request resources for deploying new build environments, i.e., the VMM/hypervisor or container orchestrator.
-| Boot process | In the context of builds, the process of loading and executing the layers of firmware and/or software needed to start up a build environment on the build platform.
+| Boot process | In the context of builds, the process of loading and executing the layers of firmware and/or software needed to start up a build environment on the host compute platform.
 | Measurement | The cryptographic hash of some component or system state in the build environment, including software binaries, configuration, or initialized run-time data.
-| Quote | Hardware-signed data that contains one or more hardware-generated measurements. Quotes may additionally include nonces for replay protection, firmware information, or other platform metadata.
+| Quote | (Virtual) hardware-signed data that contains one or more (virtual) hardware-generated measurements. Quotes may additionally include nonces for replay protection, firmware information, or other platform metadata.
 | Reference value | A specific measurement used as the good known value for a given build environment component or state.
 
 TODO: Disambiguate similar terms (e.g., image, build job, build runner)
@@ -178,8 +180,10 @@ integrity for build environments at the time of build image distrbution.
 
 -   Build Platform:
     -   MUST meet SLSA [Build L2] requirements.
-    -   Prior to deployment of a new build environment, the SLSA Provenance
-    for the selected build image SHOULD be automatically verified.
+    -   Prior to the instantiation of a new build environment, the SLSA Provenance
+    for the selected build image MUST be automatically verified.
+    A signed attestation to the result of the SLSA Provenance verification MUST
+    be generated and distributed (e.g., via a [VSA]).
 
 <dt>Benefits<dd>
 
@@ -196,9 +200,9 @@ source and build process.
 <dl class="as-table">
 <dt>Summary<dd>
 
-The build environment is measured and authenticated prior to dispatching
-any builds, attesting to the integrity of initial state of the environment
-when it's deployed by the build platform.
+The build environment is measured and authenticated by the compute platform
+upon instantiation, attesting to the integrity of the initial state
+of the environment prior to executing a build.
 
 <dt>Intended for<dd>
 
@@ -212,32 +216,46 @@ All of [BuildEnv L1], plus:
 -   Build Image Producer:
     -   Build images MUST be created via a SLSA [Build L3] or higher build
     process.
-    -   **[TODO: revise]** MUST add support in the build image to:
-        -   Automatically check build image components against their
-        reference values during build environment startup.
-        In VM-based images, this can be achieved by enabling a [trusted boot]
-        process. In container-based build images, a dedicated program MUST be
-        used to perform these checks.[^1]
-        -   Automatically generate and distribute a signed attestation that
-        the initial state of a given build environment instance has been
-        verified against the corresponding build image, incl. its SLSA
-        Provenance (e.g., using [SCAI] or a [VSA]).
     -   MUST automatically generate and distribute signed reference values
     for the following build image components: bootloader or equivalent,
-    guest kernel, build agent, build executor, and root filesystem.
+    guest kernel, build agent, build executor, and root filesystem (e.g.,
+    via the image's SLSA Provenance, or [SCAI]).
     Additional build image components whose initial state is to be checked
     MAY be also measured.
+    -   The running build environment MUST be capable of:
+        -   Upon completion of the boot process: Automatically interfacing
+        with the host interface to obtain a signed quote for the
+        environment's initial state.
+        -   Upon build dispatch: Automatically generating and distributing
+        a signed attestation that binds its boot process quote to the
+        assigned build ID (e.g., using [SCAI]).
 
--   **[TODO: revise]** Build Platform Requirements:
+-   Build Platform Requirements:
     -   MUST meet SLSA [Build L3] requirements.
-    -   Prior to deployment of a new build environment, the SLSA Provenance
-    for the selected build image MUST be automatically verified. A signed
-    attestation to the verification of the build image's SLSA Provenance
-    MUST be automatically generated and distributed (e.g., via a [VSA]).
-    -   Prior to dispatching a tenant's build to a deployed environment, its
-    initial state attestation MUST be automatically verified. A signed
-    attestation binding the tenant's build ID to the verified initial state
-    of the selected build environment MUST be generated and distributed.
+    -   Prior to dispatching a tenant's build to an instantiated environment,
+    its boot process quote MUST be automatically verified. A signed
+    attestation to the result of the verification MUST be generated and
+    distributed (e.g., via a [VSA]).
+
+-   Compute Platform Requirements:
+    -   The host interface MUST be capable of generating signed quotes for
+    the build environment's system state.
+    In a VM-based environment, this MUST be achieved by enabling a feature
+    like [vTPM], or equivalent, in the hypervisor.
+    For container-based environments, the container orchestrator MAY need
+    modifications to produce these attestations.
+    -   The host interface MUST validate the measurements of the build image
+    components against their references values during the build environment's
+    boot process.
+    In a VM-based environment, this MUST be achieved by enabling a process
+    like [Secure Boot], or equivalent, in the hypervisor.
+    For container-based environments, the container orchestrator MAY need
+    modifications to perform these checks.[^1]
+    -   Prior to instantiating a new build environment, the host interface
+    MUST automatically verify the SLSA Provenance for the selected build
+    image. A signed attestation to the verification of the build image's
+    SLSA Provenance MUST be automatically generated and distributed (e.g.,
+    via a [VSA]).
 
 <dt>Benefits<dd>
 
@@ -251,58 +269,61 @@ adversary.
 </section>
 <section id="buildenv-l3">
 
-### BuildEnv L3: Hardware-authenticated build environment
+### BuildEnv L3: Hardware-attested build environment
 
 <dl class="as-table">
 <dt>Summary<dd>
 
-The initial state of the build environment is measured and autenticated by
-trusted hardware, and the build ID is verifiably bound to the
-deployed build environment, attesting to the integrity of the environment
-when a tenant's build is first dispatched.
+The initial state of the build's host environment is measured
+and autenticated by trusted hardware, attesting to the integrity
+of the build environment's underlying compute stack prior to executing
+a build.
 
 <dt>Intended for<dd>
 
-Organizations wanting strong assurances that their build was dispatched in
-a known good environment.
+Organizations wanting strong assurances that their build ran on a good
+known host environment.
 
 <dt>Requirements<dd>
 
 All of [BuildEnv L2], plus:
 
-**[TODO: These requirements need to be re-formulated.]**
-
 -   Build Image Producer:
-    -   MUST add support in the build image to:
-        -   Use trusted hardware to check build image component reference
-        values and integrity of the build environment startup.
-        -   Automatically generate and distribute a signed attestation
-        that a given build ID was dispatched in the corresponding build
-        environment instance, incl. its initial state attestation (e.g.,
-        using [SCAI] or a [VSA]).
-        -   Use trusted hardware to sign all build image-generated
-        attestations.
+    -   Upon completion of the boot process: The running build environment
+    MUST be capable of automatically interfacing with the *trusted hardware*
+    component to obtain a signed quote for the host interface's boot process
+    quote and the environment's initial state.
+    -   Upon build dispatch: The generated dispatch attestation MUST include
+    the host interface's boot process quote.
 
--   Build Platform Requirements: TODO
+-   Build Platform Requirements:
+    -   Prior to dispatching a tenant's build to an instantiated environment,
+    the *host interface's* boot process quote MUST be automatically verified.
+    A signed attestation to the result of the verification MUST be generated
+    and distributed (e.g., via a [VSA]).
 
--   Compute Platform Requirements: TODO
+-   Compute Platform Requirements:
+    -   MUST have trusted hardware capabilities, i.e., built-in physical
+    hardware features for generating measurements and quotes for its system
+    state. This SHOULD be achieved using a feature like [TPM],
+    [confidential computing], or equivalent.
+    -   MUST enable validation of the host interface's boot process against
+    its reference values. This MUST be achieved by enabling a process
+    like [Secure Boot], or equivalent, in the host platform.
 
 <dt>Benefits<dd>
 
-Provides hardware-authenticated evidence that a build running on a hosted
-build platform was dispatched in the expected build environment, even in the
-face of a compromised host interface (hypervisor/container orchestrator).
+Provides hardware-authenticated evidence that a build ran in the expected host
+environment, even in the face of a compromised host interface
+(hypervisor/container orchestrator).
 
 </dl>
 
 </section>
-<section id="buildenv-l4">
 
-### BuildEnv L4: Runtime monitored build environment
+## Considerations for Distributed Builds
 
 TODO
-
-</section>
 
 <!-- Footnotes -->
 
@@ -317,11 +338,11 @@ TODO
 [BuildEnv L1]: #buildenv-l1
 [BuildEnv L2]: #buildenv-l2
 [BuildEnv L3]: #buildenv-l3
-[BuildEnv L4]: #buildenv-l4
 [SCAI]: https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md
+[Secure Boot]: https://wiki.debian.org/SecureBoot#What_is_UEFI_Secure_Boot.3F
 [VSA]: verification_summary.md
 [build image]: #definitions
 [build model]: terminology.md#build-model
 [hosted]: requirements.md#isolation-strength
 [several classes]: #build-environment-threats
-[trusted boot]: https://csrc.nist.gov/glossary/term/trusted_boot
+[vTPM]: https://trustedcomputinggroup.org/about/what-is-a-virtual-trusted-platform-module-vtpm/
