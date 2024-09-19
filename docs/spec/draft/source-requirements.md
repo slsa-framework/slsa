@@ -332,11 +332,11 @@ SCPs and VCSes may have different methods of operating that necessitate differen
 E.g. GitHub-based workflows may need different evidence than Gerrit-based workflows, which would both likely be different from workflows that
 operate over Subversion repositories.
 
-These differences also mean that depending on the SCP and the repo's configuration the attestor may
-vary from implementation to implementation, often because entities with the knowledge to issue them
-may vary.  The authority that issues [summary-attestations](#summary-attestation) MUST understand
-which entity should issue each full attestation type and ensure the full attestations come from the
-appropriate attestor.
+These differences also mean that depending on the SCP and the repo's configuration the issuers of
+provenance attestations may vary from implementation to implementation, often because entities with
+the knowledge to issue them may vary.  The authority that issues
+[summary-attestations](#summary-attestation) MUST understand which entity should issue each provenance
+attestation type and ensure the full attestations come from the appropriate issuer.
 
 'Source provenance attestations' is a generic term used to refer to any type of attestation that provides
 evidence the process used to create a revision.
