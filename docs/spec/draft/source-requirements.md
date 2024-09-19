@@ -325,7 +325,7 @@ Example implementations:
 ### Provenance attestations
 
 Source provenance attestations provide tamper-proof evidence (ideally signed [in-toto attestations](https://github.com/in-toto/attestation/blob/main/README.md))
-that can be used to determine what SLSA Source Level or other high level properties a given revision meets
+that can be used to determine what SLSA Source Level or other high level properties a given revision meets.
 This evidence can be used by an authority as the basis for issuing a [Summary Attestation](#summary-attestation).
 
 SCPs and VCSes may have different methods of operating that necessitate different forms of evidence.
