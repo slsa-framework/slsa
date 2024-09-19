@@ -329,7 +329,7 @@ that can be used to determine what SLSA Source Level or other high level propert
 This evidence can be used by an authority as the basis for issuing a [Summary Attestation](#summary-attestation).
 
 SCPs and VCSes may have different methods of operating that necessitate different forms of evidence.
-E.g. GitHub based workflows may need different evidence than Gerrit based workflows, which would both likely be different from workflows that
+E.g. GitHub-based workflows may need different evidence than Gerrit-based workflows, which would both likely be different from workflows that
 operate over Subversion repositories.
 
 These differences also mean that depending on the SCP and the repo's configuration the attestor may
