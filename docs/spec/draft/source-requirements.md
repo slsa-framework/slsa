@@ -355,6 +355,4 @@ Example source provenance attestations:
 -   A [SCAI attestation](https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md) used to
  describe which source quality tools were run on the revision.
 
-TODO: Can we define or recommend any canonical formats?
-
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
