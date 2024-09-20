@@ -206,7 +206,7 @@ It MUST NOT be possible to modify the content of a branch without following its 
 SLSA Source Level 2 ensures that all changes are recorded and attributable to an actor.
 SLSA Source Level 3 ensures that the documented process was followed.
 
-The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes reviewed via the process.
+The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes managed via the process.
 
 The change management tool MUST provide at a minimum:
 
