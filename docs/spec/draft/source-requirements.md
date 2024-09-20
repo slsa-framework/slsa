@@ -252,7 +252,7 @@ There are two broad categories of source attestations within the source track:
 
 To provide interoperability and ensure ease of use, it's essential that the summary attestations are applicable across all Source Control Platforms.
 Due to the significant differences in how SCPs operate and how they may chose to meet the Source Track requirements it is preferable to
-allow for flexibility with the full attestations.  To that end SLSA leaves full attestations undefined and up to the SCPs to determine
+allow for flexibility with the full attestations.  To that end SLSA leaves provenance attestations undefined and up to the SCPs to determine
 what works best in their environment.
 
 ### Summary attestation
