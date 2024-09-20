@@ -110,7 +110,7 @@ Intended for:
 Organizations that want strong guarantees and auditability of their change management processes.
 
 Benefits:
-Provides reliable information to policy enforcement tools.
+Provides authenticatable and auditable information to policy enforcement tools.
 
 ## System Requirements
 
