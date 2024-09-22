@@ -15,6 +15,7 @@ The examples on this page are meant to:
 -   Help implementers better understand what they are protecting against so that
     they can better design and implement controls.
 
+<!--
 **TODO:** Expand this threat model to also cover "unknowns". Not sure if that is
 a "threat" or a "risk". Example: If libFoo is compromised, how do you know if
 you are compromised? At a first level, if you don't even know whether you
@@ -23,6 +24,7 @@ don't use libFoo in a way that makes your product vulnerable. We should capture
 that somehow. This isn't specific to dependencies - it applies to the entire
 diagram.
 ([discussion](https://github.com/slsa-framework/slsa/pull/1046/files/ebf34a8f9e874b219f152bad62673eae0b3ba2c3#r1585440922))
+-->
 
 <article class="threats">
 
@@ -68,9 +70,11 @@ consumer's trust.
 Threats in this category likely *cannot* be mitigated through controls placed
 during the authoring/reviewing process, in contrast with (B).
 
+<!--
 **TODO:** The difference between (A) and (B) is still a bit fuzzy, which would
 be nice to resolve. For example, compromised developer credentials - is that (A)
 or (B)?
+-->
 
 <details><summary>Software producer intentionally submits bad code</summary>
 
@@ -86,8 +90,10 @@ auditing may discourage this from happening.
 
 </details>
 
+<!--
 **TODO:** More producer threats? Perhaps the attack to xz where a malicious
 contributor gained enhanced privileges through social engineering?
+-->
 
 ### (B) Authoring & reviewing
 
@@ -140,9 +146,11 @@ robot, which is allowed to submit without review. Adversary compromises the
 robot and submits a malicious change without review. Solution: Require human
 review for these changes.
 
+<!--
 > TODO([#196](https://github.com/slsa-framework/slsa/issues/196)) This solution
 > may not be practical. Should there be an exception for locked down robot
 > accounts?
+-->
 
 </details>
 <details><summary>Abuse review exceptions</summary>
@@ -159,8 +167,10 @@ executable. This would pass the policy because the source repository is correct,
 and the source repository does require two-person review. Solution: Do not allow
 such exceptions.
 
+<!--
 > TODO This solution may not be practical in all circumstances. Are there any
 > valid exceptions? If so, how do we ensure they cannot be exploited?
+-->
 
 </details>
 
@@ -244,8 +254,10 @@ approves "changes from all commits", which is a delta from HEAD to Y; they don't
 see X. Adversary then builds from the malicious revision X. Solution: Policy
 does not accept this because the version X is not considered reviewed.
 
+<!--
 > TODO This is implicit but not clearly spelled out in the requirements. We
 > should consider clarifying if there is confusion or incorrect implementations.
+-->
 
 </details>
 
@@ -299,9 +311,11 @@ Administrators" option for the branch protection.
 change without review, then re-enables "Include Administrators". This currently
 has no solution on GitHub.
 
+<!--
 > TODO This is implicit but not clearly spelled out in the requirements. We
 > should consider clarifying since most if not all existing platforms do not
 > properly address this threat.
+-->
 
 </details>
 <details><summary>Platform admin abuses privileges</summary>
@@ -579,12 +593,14 @@ This is the most direct threat because it is the easiest to pull off. If there
 are no mitigations for this threat, then (D) and (E) are often indistinguishable
 from this threat.
 
+<!--
 **TODO:** We need to define "official source control repository". Its meaning is
 not obvious. The gist is that each package theoretically has some "official" or
 "canonical" repository from which it "should" be built, and the attack here is
 that you either build from a different source repository or otherwise do
 something that doesn't reflect that source repository. But we need to nail down
 this concept.
+-->
 
 <details><summary>Build with untrusted CI/CD <span>(expectations)</span></summary>
 
@@ -703,6 +719,7 @@ expect that a future version will. In the meantime, you can [apply SLSA
 recursively] to your dependencies in order to reduce the risk of dependency
 threats.
 
+<!--
 -   **TODO:** Should we distinguish 1P vs 3P boundaries in the diagram, or
     otherwise visualize 1P/3P?
 -   **TODO:** Expand to cover typosquatting, dependency confusion, and other
@@ -715,6 +732,7 @@ threats.
 -   **TODO:** Update the Terminology page to show "build time" vs "runtime",
     since the latter term results in confusion. Also consider the term "deploy
     time" as an alternative.
+-->
 
 [apply SLSA recursively]: verifying-artifacts.md#step-3-optional-check-dependencies-recursively
 
@@ -808,7 +826,9 @@ runtime dependency is considered a distinct artifact with its own threats.
 
 ## Availability threats
 
+<!--
 **TODO:** Merge into the list above rather than having a separate section.
+-->
 
 An availability threat is a potential for an adversary to deny someone from
 reading a source and its associated change history, or from building a package.
