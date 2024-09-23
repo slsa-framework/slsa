@@ -282,7 +282,7 @@ to other properties of a revision (e.g. if it was code reviewed).  All SLSA sour
 
 #### Populating source_branches
 
-The summary attestation issuer may chose to populate `source_branches` in any way they wish.
+The summary attestation issuer may choose to populate `source_branches` in any way they wish.
 Downstream users are expected to be familiar with the method used by the issuer.
 
 Example implementations:
