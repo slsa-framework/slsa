@@ -168,8 +168,9 @@ Review process:
     -   Feel free to ping the reviwers in the
     [slsa-specification Slack](https://openssf.slack.com/archives/C03NUSAPKC6)
     when the PR is ready for review.
-    -   You will need a different number of approvals for different [PR types](#pull-request-types). Your
-    reviewers may ask that you use a different PR type.
+    -   You will need a different number of approvals for different
+ [PR types](#pull-request-types). Your reviewers may ask that you use a
+ different PR type.
 
 3.  Wait an appropriate amount of time to allow for lazy consensus. Different
     types have different minimum waiting periods. The waiting period begins at
