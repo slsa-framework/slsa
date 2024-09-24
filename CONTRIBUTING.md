@@ -168,18 +168,17 @@ Review process:
     -   Feel free to ping the reviwers in the
     [slsa-specification Slack](https://openssf.slack.com/archives/C03NUSAPKC6)
     when the PR is ready for review.
-
-3.  You will need a different number of approvals for different PR types. Your
+    -   You will need a different number of approvals for different PR types. Your
     reviewers may ask that you use a different PR type.
 
-4.  Wait an appropriate amount of time to allow for lazy consensus. Different
+3.  Wait an appropriate amount of time to allow for lazy consensus. Different
     types have different minimum waiting periods. The waiting period begins at
     the timestamp of either the final required approval or the latest non-author
     comment, whichever is later.
     -   If a few days have passed without any feedback please feel free to ping
     the PR and in Slack.
 
-5.  Once the waiting period has passed, a maintainer will merge your PR. Expect
+4.  Once the waiting period has passed, a maintainer will merge your PR. Expect
     your PR to be squashed+merged unless your reviewers advise you otherwise.
     If your PR has not been merged within 48h of the waiting period having
     passed, and a reason for that has not been added as a PR comment, use the
