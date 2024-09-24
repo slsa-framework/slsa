@@ -176,7 +176,7 @@ Review process:
     the timestamp of either the final required approval or the latest non-author
     comment, whichever is later.
     -   If a few days have passed without any feedback please feel free to ping
-    the PR and in Slack.
+    the PR and [in Slack](https://openssf.slack.com/archives/C03NUSAPKC6).
 
 4.  Once the waiting period has passed, a maintainer will merge your PR. Expect
     your PR to be squashed+merged unless your reviewers advise you otherwise.
