@@ -160,14 +160,24 @@ Review process:
 
 1.  Ensure that the PR meets the [pull request conventions].
 
-2.  GitHub will automatically assign the maintainers as reviewers. You will need
-    a different number of approvals for different PR types. Your reviewers may
-    ask that you use a different PR type.
+2.  If there is a particular set of maintainers you've been working with, feel
+    free to assign the PR to them.  If they don't have time to review they
+    should feel free to assign to someone else, or provide feedback on when
+    they can get to it.  Otherwise, assign to
+    `@slsa-framework/specification-maintainers`.
+    -   Feel free to ping the reviwers in the
+    [slsa-specification Slack](https://openssf.slack.com/archives/C03NUSAPKC6)
+    when the PR is ready for review.
+    -   You will need a different number of approvals for different
+    [PR types](#pull-request-types). Your reviewers may ask that you use a
+    different PR type.
 
 3.  Wait an appropriate amount of time to allow for lazy consensus. Different
     types have different minimum waiting periods. The waiting period begins at
     the timestamp of either the final required approval or the latest non-author
     comment, whichever is later.
+    -   If a few days have passed without any feedback please feel free to ping
+    the PR and [in Slack](https://openssf.slack.com/archives/C03NUSAPKC6).
 
 4.  Once the waiting period has passed, a maintainer will merge your PR. Expect
     your PR to be squashed+merged unless your reviewers advise you otherwise.
