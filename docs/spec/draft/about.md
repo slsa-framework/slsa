@@ -19,8 +19,7 @@ SLSA offers:
 -   A common vocabulary to talk about software supply chain security
 -   A way to secure your incoming supply chain by evaluating the trustworthiness of the artifacts you consume
 -   An actionable checklist to improve your own software's security
--   A way to measure your efforts toward compliance with forthcoming
-    Executive Order standards in the [Secure Software Development Framework (SSDF)](https://csrc.nist.gov/Projects/ssdf)
+-   A way to measure your efforts toward compliance with the [Secure Software Development Framework (SSDF)](https://csrc.nist.gov/Projects/ssdf)
 
 ## Why SLSA is needed
 
