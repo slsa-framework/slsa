@@ -56,7 +56,7 @@ environment and build platform.
 A typical build environment will go through the following lifecycle:
 
 1.  *Build image creation*: A build image producer creates different build
-    images through dedicated build process. For the SLSA Environment track,
+    images through a dedicated build process. For the SLSA Environment track,
     the build image producer outputs provenance describing this process.
 2.  *Build environment instantiation*: The hosted build platform calls
     into the *host interface* to create a new instance of a build environment
@@ -80,7 +80,7 @@ and roles:
 | --- | ---
 | Build ID | An immutable identifier assigned uniquely to a specific execution of a tenant's build. In practice, the build ID may be a cryptographic key or other unique and immutable identfier (e.g., a UUID) associated with the build execution.
 | Build image | The template for a build environment, such as a VM or container image. Individual components of a build image include the bootable storage volume containing the build executor, a dedicated build agent, and pre-installed guest OS and packages.
-| Build image producer | The party that creates and distributes build images. In practice, the build image producer may be the hosted build platform or a third party in a BYO build image setting.
+| Build image producer | The party that creates and distributes build images. In practice, the build image producer may be the hosted build platform or a third party in a bring-your-own (BYO) build image setting.
 | Build executor | A platform-provided program dedicated to executing the tenant’s build definition, i.e., running the build, within the build environment. The build executor must be included in the build image's measurement.
 | Build agent | A program that interacts with the hosted build platform's control plane from within a running build environment. The build agent must be included in the build image's measurement.
 | Build dispatch | The process of assigning a tenant's build to a pre-deployed build environment on a hosted build platform.
