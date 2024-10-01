@@ -245,126 +245,8 @@ There are two broad categories of source attestations within the source track:
 2.  Provenance attestations: Provide trustworthy, tamper-proof, metadata with the necessary information to determine what high level security properties a given source revision has.
 
 To provide interoperability and ensure ease of use, it's essential that the summary attestations are applicable across all Source Control Platforms.
-Due to the significant differences in how SCPs operate and how they may chose to meet the Source Track requirements it is preferable to
-allow for flexibility with the full attestations.  To that end SLSA leaves provenance attestations undefined and up to the SCPs to determine
-what works best in their environment.
-
-### Summary attestation
-
-Summary attestations are issued by some authority that has sufficient evidence to make the determination of a given
-revision's source level.  Summary attestations convey properties about the revision as a whole and summarize properties computed over all
-the changes that contributed to that revision over its history.
-
-The source track issues summary attestations using [Verification Summary Attestations (VSAs)](./verification_summary.md) as follows:
-
-1.  `subject.uri` SHOULD be set to a human readable URI of the revision.
-2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
-SCPs that do not use cryptographic digests MUST define a canonical type that is used to identify immutable revisions (e.g. `svn_revision_id`)[^1].
-3.  `subject.annotations.source_branches` SHOULD be set to a list of branches that pointed to this revision at any point in their history.
-    -   git branches MUST be fully qualified (e.g. `refs/head/main`) to reduce the likelyhood of confusing downstream tooling.
-4.  `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field).
-E.g. `git+https://github.com/foo/hello-world`.
-5.  `verifiedLevels` MUST include the SLSA source track level the verifier asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
-MAY include additional properties as asserted by the verifier.  The verifier MUST include _only_ the highest SLSA source level met by the revision.
-6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
-
-Verifiers MAY issue these attestations based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
-but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#provenance-attestations) appropriate to their SCP when making the assessment.
-
-The SLSA source track MAY create additional tags to include in `verifiedLevels` which attest
-to other properties of a revision (e.g. if it was code reviewed).  All SLSA source tags will start with `SLSA_SOURCE_`.
-
-#### Populating source_branches
-
-The summary attestation issuer may choose to populate `source_branches` in any way they wish.
-Downstream users are expected to be familiar with the method used by the issuer.
-
-Example implementations:
-
--   Issue a new VSA for each merged Pull Request and add the destination branch to `source_branches`.
--   Issue a new VSA each time a 'consumable branch' is updated to point to a new revision.
-
-#### Example
-
-```json
-"_type": "https://in-toto.io/Statement/v1",
-"subject": [{
-  "uri": "https://github.com/foo/hello-world/commit/9a04d1ee393b5be2773b1ce204f61fe0fd02366a",
-  "digest": {"gitCommit": "9a04d1ee393b5be2773b1ce204f61fe0fd02366a"},
-  "annotations": {"source_branches": ["refs/heads/main", "refs/heads/release_1.0"]}
-}],
-
-"predicateType": "https://slsa.dev/verification_summary/v1",
-"predicate": {
-  "verifier": {
-    "id": "https://example.com/source_verifier",
-  },
-  "timeVerified": "1985-04-12T23:20:50.52Z",
-  "resourceUri": "git+https://github.com/foo/hello-world",
-  "policy": {
-    "uri": "https://example.com/slsa_source.policy",
-  },
-  "verificationResult": "PASSED",
-  "verifiedLevels": ["SLSA_SOURCE_LEVEL_3"],
-}
-```
-
-#### How to verify
-
--   VSAs for source revisions MUST follow [the standard method of VSA verification](./verification_summary.md#how-to-verify).
--   Users SHOULD check that an allowed branch is listed in `subject.annotations.source_branches` to ensure the revision is from an appropriate context within the repository.
--   Users SHOULD check that the expected `SLSA_SOURCE_LEVEL_` is listed within `verifiedLevels`.
--   Users MUST ignore any unrecognized values in `verifiedLevels`.
-
-### Provenance attestations
-
-Source provenance attestations provide tamper-proof evidence (ideally signed [in-toto attestations](https://github.com/in-toto/attestation/blob/main/README.md))
-that can be used to determine what SLSA Source Level or other high level properties a given revision meets.
-This evidence can be used by an authority as the basis for issuing a [Summary Attestation](#summary-attestation).
-
-SCPs and VCSes may have different methods of operating that necessitate different forms of evidence.
-E.g. GitHub-based workflows may need different evidence than Gerrit-based workflows, which would both likely be different from workflows that
-operate over Subversion repositories.
-
-These differences also mean that depending on the SCP and the repo's configuration the issuers of
-provenance attestations may vary from implementation to implementation, often because entities with
-the knowledge to issue them may vary.  The authority that issues
-[summary-attestations](#summary-attestation) MUST understand which entity should issue each provenance
-attestation type and ensure the full attestations come from the appropriate issuer.
-
-'Source provenance attestations' is a generic term used to refer to any type of attestation that provides
-evidence the process used to create a revision.
-
-Example source provenance attestations:
-
--   A TBD attestation which describes the revision's parents and the actors involved in creating this revision.
--   A "code review" attestation which describes the basics of any code review that took place.
--   An "authentication" attestation which describes how the actors involved in any revision were authenticated.
--   A [Vuln Scan attestation](https://github.com/in-toto/attestation/blob/main/spec/predicates/vuln.md)
-    which describes the results of a vulnerability scan over the contents of the revision.
--   A [Test Results attestation](https://github.com/in-toto/attestation/blob/main/spec/predicates/test-result.md)
- which describes the results of any tests run on the revision.
--   An [SPDX attestation](https://github.com/in-toto/attestation/blob/main/spec/predicates/spdx.md)
- which provides a software bill of materials for the revision.
--   A [SCAI attestation](https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md) used to
- describe which source quality tools were run on the revision.
-
-[^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
-
-## Communicating source levels
-
-SLSA source level details are communicated using attestations.
-These attestations either refer to a source revision itself or provide context needed to evaluate an attestation that _does_ refer to a revision.
-
-There are two broad categories of source attestations within the source track:
-
-1.  Summary attestations: Used to communicate to downstream users what high level security properties a given source revision meets.
-2.  Provenance attestations: Provide trustworthy, tamper-proof, metadata with the necessary information to determine what high level security properties a given source revision has.
-
-To provide interoperability and ensure ease of use, it's essential that the summary attestations are applicable across all Source Control Platforms.
 Due to the significant differences in how SCSs operate and how they may chose to meet the Source Track requirements it is preferable to
-allow for flexibility with the full attestations.
-To that end SLSA leaves provenance attestations undefined and up to each SCS to determine
+allow for flexibility with the full attestations.  To that end SLSA leaves provenance attestations undefined and up to the SCSs to determine
 what works best in their environment.
 
 ### Summary attestation
@@ -387,7 +269,7 @@ MAY include additional properties as asserted by the verifier.  The verifier MUS
 6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
 
 Verifiers MAY issue these attestations based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
-but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#provenance-attestations) when making the assessment.
+but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#provenance-attestations) appropriate to their SCS when making the assessment.
 
 The SLSA source track MAY create additional tags to include in `verifiedLevels` which attest
 to other properties of a revision (e.g. if it was code reviewed).  All SLSA source tags will start with `SLSA_SOURCE_`.
@@ -444,14 +326,10 @@ SCSs may have different methods of operating that necessitate different forms of
 E.g. GitHub-based workflows may need different evidence than Gerrit-based workflows, which would both likely be different from workflows that
 operate over Subversion repositories.
 
-These differences also mean that depending on configuration the issuers of
-provenance attestations may vary from implementation to implementation, often because entities with
-the knowledge to issue them may vary.  The authority that issues
-[summary-attestations](#summary-attestation) MUST understand which entity should issue each provenance
-attestation type and ensure the full attestations come from the appropriate issuer.
+These differences also mean that depending on the configuration the issuers of provenance attestations may vary from implementation to implementation, often because entities with the knowledge to issue them may vary.
+The authority that issues [summary-attestations](#summary-attestation) MUST understand which entity should issue each provenance attestation type and ensure the full attestations come from the appropriate issuer.
 
-'Source provenance attestations' is a generic term used to refer to any type of attestation that provides
-evidence the process used to create a revision.
+'Source provenance attestations' is a generic term used to refer to any type of attestation that provides evidence the process used to create a revision.
 
 Example source provenance attestations:
 
