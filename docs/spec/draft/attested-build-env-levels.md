@@ -79,7 +79,7 @@ and roles:
 | Primary Term | Description
 | --- | ---
 | Build ID | An immutable identifier assigned uniquely to a specific execution of a tenant's build. In practice, the build ID may be a cryptographic key or other unique and immutable identfier (e.g., a UUID) associated with the build execution.
-| Build image | The template for a build environment, such as a VM or container image. Individual components of a build image include the bootable storage volume containing the build executor, a dedicated build agent, and pre-installed guest OS and packages.
+| Build image | The template for a build environment, such as a VM or container image. Individual components of a build image include the root filesystem, pre-installed guest OS and packages, the build executor, and the build agent.
 | Build image producer | The party that creates and distributes build images. In practice, the build image producer may be the hosted build platform or a third party in a bring-your-own (BYO) build image setting.
 | Build executor | A platform-provided program dedicated to executing the tenant’s build definition, i.e., running the build, within the build environment. The build executor must be included in the build image's measurement.
 | Build agent | A program that interacts with the hosted build platform's control plane from within a running build environment. The build agent must be included in the build image's measurement.
@@ -180,10 +180,10 @@ integrity for build environments at the time of build image distrbution.
 
 -   Build Platform:
     -   MUST meet SLSA [Build L2] requirements.
-    -   Prior to the instantiation of a new build environment, the SLSA Provenance
-    for the selected build image MUST be automatically verified.
-    A signed attestation to the result of the SLSA Provenance verification MUST
-    be generated and distributed (e.g., via a [VSA]).
+    -   Prior to the instantiation of a new build environment, the SLSA
+    Provenance for the selected build image MUST be automatically verified.
+    A signed attestation to the result of the SLSA Provenance verification
+    MUST be generated and distributed (e.g., via a [VSA]).
 
 <dt>Benefits<dd>
 
@@ -222,10 +222,10 @@ All of [BuildEnv L1], plus:
     via the image's SLSA Provenance, or [SCAI]).
     Additional build image components whose initial state is to be checked
     MAY be also measured.
-    -   The running build environment MUST be capable of:
+    -   The build agent MUST be capable of:
         -   Upon completion of the boot process: Automatically interfacing
-        with the host interface to obtain a signed quote for the
-        environment's initial state.
+        with the host interface to obtain and transmit a signed quote for the
+        build environment's system state.
         -   Upon build dispatch: Automatically generating and distributing
         a signed attestation that binds its boot process quote to the
         assigned build ID (e.g., using [SCAI]).
@@ -233,9 +233,10 @@ All of [BuildEnv L1], plus:
 -   Build Platform Requirements:
     -   MUST meet SLSA [Build L3] requirements.
     -   Prior to dispatching a tenant's build to an instantiated environment,
-    its boot process quote MUST be automatically verified. A signed
-    attestation to the result of the verification MUST be generated and
-    distributed (e.g., via a [VSA]).
+    a signed quote MUST be automatically requested from the build agent,
+    and the contained measurements verified against their boot process
+    reference values. A signed attestation to the result of the verification
+    MUST be generated and distributed (e.g., via a [VSA]).
 
 -   Compute Platform Requirements:
     -   The host interface MUST be capable of generating signed quotes for
@@ -245,8 +246,8 @@ All of [BuildEnv L1], plus:
     For container-based environments, the container orchestrator MAY need
     modifications to produce these attestations.
     -   The host interface MUST validate the measurements of the build image
-    components against their references values during the build environment's
-    boot process.
+    components against their signed references values during the build
+    environment's boot process.
     In a VM-based environment, this MUST be achieved by enabling a process
     like [Secure Boot], or equivalent, in the hypervisor.
     For container-based environments, the container orchestrator MAY need
@@ -289,16 +290,17 @@ known host environment.
 All of [BuildEnv L2], plus:
 
 -   Build Image Producer:
-    -   Upon completion of the boot process: The running build environment
-    MUST be capable of automatically interfacing with the *trusted hardware*
-    component to obtain a signed quote for the host interface's boot process
-    quote and the environment's initial state.
+    -   Upon completion of the boot process: The build agent MUST be capable
+    of automatically interfacing with the *trusted hardware* component to
+    obtain a signed quote for the host interface's boot process and
+    the environment's system state.
     -   Upon build dispatch: The generated dispatch attestation MUST include
     the host interface's boot process quote.
 
 -   Build Platform Requirements:
     -   Prior to dispatching a tenant's build to an instantiated environment,
-    the *host interface's* boot process quote MUST be automatically verified.
+    the measurements in the *host interface's* boot process quote MUST be
+    automatically verified against their reference values.
     A signed attestation to the result of the verification MUST be generated
     and distributed (e.g., via a [VSA]).
 
@@ -313,8 +315,8 @@ All of [BuildEnv L2], plus:
 
 <dt>Benefits<dd>
 
-Provides hardware-authenticated evidence that a build ran in the expected host
-environment, even in the face of a compromised host interface
+Provides hardware-authenticated evidence that a build ran in the expected
+host environment, even in the face of a compromised host interface
 (hypervisor/container orchestrator).
 
 </dl>
@@ -340,9 +342,11 @@ TODO
 [BuildEnv L3]: #buildenv-l3
 [SCAI]: https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md
 [Secure Boot]: https://wiki.debian.org/SecureBoot#What_is_UEFI_Secure_Boot.3F
+[TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
 [VSA]: verification_summary.md
 [build image]: #definitions
 [build model]: terminology.md#build-model
+[confidential computing]: https://confidentialcomputing.io/wp-content/uploads/sites/10/2023/03/Common-Terminology-for-Confidential-Computing.pdf
 [hosted]: requirements.md#isolation-strength
 [several classes]: #build-environment-threats
 [vTPM]: https://trustedcomputinggroup.org/about/what-is-a-virtual-trusted-platform-module-vtpm/
