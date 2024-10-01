@@ -245,8 +245,9 @@ There are two broad categories of source attestations within the source track:
 2.  Provenance attestations: Provide trustworthy, tamper-proof, metadata with the necessary information to determine what high level security properties a given source revision has.
 
 To provide interoperability and ensure ease of use, it's essential that the summary attestations are applicable across all Source Control Platforms.
-Due to the significant differences in how SCPs operate and how they may chose to meet the Source Track requirements it is preferable to
-allow for flexibility with the full attestations.  To that end SLSA leaves provenance attestations undefined and up to the SCPs to determine
+Due to the significant differences in how SCSs operate and how they may chose to meet the Source Track requirements it is preferable to
+allow for flexibility with the full attestations.
+To that end SLSA leaves provenance attestations undefined and up to each SCS to determine
 what works best in their environment.
 
 ### Summary attestation
@@ -259,9 +260,9 @@ The source track issues summary attestations using [Verification Summary Attesta
 
 1.  `subject.uri` SHOULD be set to a human readable URI of the revision.
 2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
-SCPs that do not use cryptographic digests MUST define a canonical type that is used to identify immutable revisions (e.g. `svn_revision_id`)[^1].
+SCSs that do not use cryptographic digests MUST define a canonical type that is used to identify immutable revisions (e.g. `svn_revision_id`)[^1].
 3.  `subject.annotations.source_branches` SHOULD be set to a list of branches that pointed to this revision at any point in their history.
-    -   git branches MUST be fully qualified (e.g. `refs/head/main`) to reduce the likelyhood of confusing downstream tooling.
+    -   git branches MUST be fully qualified (e.g. `refs/head/main`) to reduce the likelihood of confusing downstream tooling.
 4.  `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field).
 E.g. `git+https://github.com/foo/hello-world`.
 5.  `verifiedLevels` MUST include the SLSA source track level the verifier asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
@@ -269,7 +270,7 @@ MAY include additional properties as asserted by the verifier.  The verifier MUS
 6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
 
 Verifiers MAY issue these attestations based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
-but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#provenance-attestations) appropriate to their SCP when making the assessment.
+but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#provenance-attestations) when making the assessment.
 
 The SLSA source track MAY create additional tags to include in `verifiedLevels` which attest
 to other properties of a revision (e.g. if it was code reviewed).  All SLSA source tags will start with `SLSA_SOURCE_`.
@@ -322,11 +323,11 @@ Source provenance attestations provide tamper-proof evidence (ideally signed [in
 that can be used to determine what SLSA Source Level or other high level properties a given revision meets.
 This evidence can be used by an authority as the basis for issuing a [Summary Attestation](#summary-attestation).
 
-SCPs and VCSes may have different methods of operating that necessitate different forms of evidence.
+SCSs may have different methods of operating that necessitate different forms of evidence.
 E.g. GitHub-based workflows may need different evidence than Gerrit-based workflows, which would both likely be different from workflows that
 operate over Subversion repositories.
 
-These differences also mean that depending on the SCP and the repo's configuration the issuers of
+These differences also mean that depending on configuration the issuers of
 provenance attestations may vary from implementation to implementation, often because entities with
 the knowledge to issue them may vary.  The authority that issues
 [summary-attestations](#summary-attestation) MUST understand which entity should issue each provenance
