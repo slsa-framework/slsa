@@ -9,7 +9,7 @@ description: |
 SLSA uses attestations to indicate security claims associated with a repository revision, but attestations don't do anything unless somebody inspects them.
 SLSA calls that inspection **verification**, and this page describes how to verify properties of source revisions using their SLSA source provenance attestations.
 
-Source Control Platforms (SCPs) may issue attestations of the process that was used to create specific revisions of a repository.
+Source Control Systems (SCSs) may issue attestations of the process that was used to create specific revisions of a repository.
 
 A Verification Summary Attestation (VSA) can make verification more efficient by recording the result of prior verifications.
 VSA may be issued by a VSA provider to make a SLSA source level determination based on the content of those attestations.
@@ -169,7 +169,7 @@ It is not sufficient to indicate that a file changed without showing the content
 
 Require a squash merge strategy for the protected branch.
 
-To guarantee that only commits representing reviewed diffs are cloned, the SCP MUST rebase (or "squash") the reviewed diff into a single new commit (the "squashed" commit) that has only a single parent (the revision previously pointed-to by the protected branch).
+To guarantee that only commits representing reviewed diffs are cloned, the SCS MUST rebase (or "squash") the reviewed diff into a single new commit (the "squashed" commit) that has only a single parent (the revision previously pointed-to by the protected branch).
 This is different than a standard merge commit strategy which would cause all the user-contributed commits to become reachable from the protected branch via the second parent.
 
 It is not acceptable to replay the sequence of commits from the topic branch onto the protected branch.
