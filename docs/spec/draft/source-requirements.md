@@ -3,13 +3,7 @@
 ## Outstanding TODOs
 
 Open issues are tracked with the [source-track](https://github.com/slsa-framework/slsa/issues?q=is%3Aissue+is%3Aopen+label%3Asource-track) label in the [slsa-framework/slsa](https://github.com/slsa-framework/slsa) repository.
-
--   [] [Structure & formatting don't match the build track](https://github.com/slsa-framework/slsa/issues/1069)
--   [] [How to communicate SLSA source track metadata?](https://github.com/slsa-framework/slsa/issues/1071)
--   [] [Create guidance for consumers on how to evaluate the source platform](https://github.com/slsa-framework/slsa/issues/1078)
--   [] [Clarify what must be retained during source migrations](https://github.com/slsa-framework/slsa/issues/1079)
--   [] [Define source control 'system'](https://github.com/slsa-framework/slsa/issues/1128)
--   [] [Define where source attestations are stored](https://github.com/slsa-framework/slsa/issues/1129)
+Source Track issues are triaged on the [SLSA Source Track](https://github.com/orgs/slsa-framework/projects/5) project board.
 
 ## Objective
 
@@ -26,17 +20,17 @@ Consumers can examine the various source provenance attestations to determine if
 | Term | Description
 | --- | ---
 | Source | An identifiable set of text and binary files and associated metadata. Source is regularly used as input to a build system (see [SLSA Build Track](requirements.md)).
+| Organization | A collection of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals and methods of the source.
 | Version Control System (VCS)| Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
 | Revision | A specific state of the source with an identifier provided by the version control system. As an example, you can identify a git revision by its tree hash.
-| Source Control Platform (SCP) | A service or suite of services (self-hosted or SaaS) for hosting version-controlled software. GitHub and GitLab are examples of source control platforms, as are combinations of tools like Gerrit code reviews with GitHub source control.
-| Source Provenance | Information about which Source Control Platform (SCP) produced a revision, when it was generated, what process was used, who the contributors were, and what parent revisions it was based on.
-| Organization | A collection of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals and methods of the repository.
-| Repository / Repo | A uniquely identifiable instance of a VCS hosted on an SCP. The repository controls access to the Source in the version control system. The objective of a repository is to reflect the intent of the organization that controls it.
-| Branch | A named pointer to a revision. Branches may be modified by authorized actors. In git, cloning a repo will download all revisions in the history of the "default" branch to the local machine. Branches may have different security requirements.
-| Change | A set of modifications to the source in a specific context. Can be proposed and reviewed before being accepted.
+| Source Control System (SCS) | A suite of tools and services (self-hosted or SaaS) relied upon by the organization to produce new revisions of the source. The role of the SCS may be fulfilled by a single service (e.g., GitHub / GitLab) or rely on a combination of services (e.g., GitLab with Gerrit code reviews, GitHub with OpenSSF Scorecard, etc).
+| Source Provenance | Information about how a revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and what parent revisions it was based on.
+| Repository / Repo | A uniquely identifiable instance of a VCS. The repository controls access to the Source in the VCS. The objective of a repository is to reflect the intent of the organization that controls it.
+| Branch | A named pointer to a revision. Branches may be modified by authorized actors. Branches may have different security requirements.
+| Change | A set of modifications to the source in a specific context. A change can be proposed and reviewed before being accepted.
 | Change History | A record of the history of revisions that preceded a specific revision.
-| Push / upload / publish | When an actor authenticates to an SCP to add or modify content. Typically makes a new revision reachable from a branch.
-| Review / approve / vote | When an actor authenticates to a change review tool to leave comments or endorse / reject the source change proposal they were presented.
+| Push / upload / publish | When an actor authenticates to a Repository to add or modify content. Typically makes a new revision reachable from a branch.
+| Review / approve / vote | When an actor authenticates to a change review tool to comment upon, endorse, or reject a source change proposal.
 
 ## Source Roles
 
@@ -116,18 +110,18 @@ The source MUST have a location where the "official" revisions are stored and ma
 #### Revisions are immutable and uniquely identifiable
 
 This requirement ensures that a consumer can determine that the source revision they have is the same as a canonical revision.
-The combination of SCP and VCS MUST provide a deterministic way to identify a particular revision.
+The SCS MUST provide a deterministic way to identify a particular revision.
 
 Virtually all modern tools provide this guarantee via a combination of the repository ID and revision ID.
 
 ##### Repository IDs
 
-The repository ID is generated by the SCP and MUST be unique in the context of that instance of the SCP.
+The repository ID is defined by the SCS and MUST be unique in the context of that instance of the SCS.
 
 ##### Revision IDs
 
 When the revision ID is a digest of the content of the revision (as in git) nothing more is needed.
-When the revision ID is a number or otherwise not a digest, then the SCP and VCS MUST document how the immutability of the revision is established.
+When the revision ID is a number or otherwise not a digest, then the SCS MUST document how the immutability of the revision is established.
 The same revision ID MAY be present in multiple repositories.
 See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
 
@@ -146,7 +140,7 @@ Requirements:
 
 #### Branches
 
-If the SCP and VCS combination supports multiple branches, the organization MUST indicate which branches are intended for consumption.
+If the SCS supports multiple branches, the organization MUST indicate which branches are intended for consumption.
 This may be implied or explicit.
 
 For example, an organization may declare that the `default` branch of a repo contains revisions intended for consumption my protected it.
@@ -171,14 +165,14 @@ Exceptions are allowed via the [safe expunging process](#safe-expunging-process)
 
 There exists an identity management system or some other means of identifying actors.
 This system may be a federated authentication system (AAD, Google, Okta, GitHub, etc) or custom implementation (gittuf, gpg-signatures on commits, etc).
-The SCP MUST document how actors are identified for the purposes of attribution.
+The SCS MUST document how actors are identified for the purposes of attribution.
 
-Activities conducted on the SCP SHOULD be attributed to authenticated identities.
+Activities conducted on the SCS SHOULD be attributed to authenticated identities.
 
 ### Level 3: Source Provenance Attestations
 
 Summary:
-A consumer can ask the SCP for everything it knows about a specific revision of a repository.
+A consumer can ask the SCS for everything it knows about a specific revision of a repository.
 The information is provided in a documented and tamper-resistant format.
 
 Intended for:
@@ -192,12 +186,12 @@ Requirements:
 #### Source attestations
 
 A source attestation contains information about how a specific revision was created and how it came to exist in its present context.
-They are associated with the revision identifier delivered to consumers and are a statement of fact from the perspective of the SCP.
+They are associated with the revision identifier delivered to consumers and are a statement of fact from the perspective of the SCS.
 
 If a consumer is authorized to access source on a particular branch, they MUST be able to fetch the source attestation documents for revisions in the history of that branch.
 
-It is possible that an SCP can make no claims about a particular revision.
-For example, this would happen if the revision was created on another SCP, or if the revision was not the result of an accepted change management process.
+It is possible that an SCS can make no claims about a particular revision.
+For example, this would happen if the revision was created on another SCS, or if the revision was not the result of an accepted change management process.
 
 #### Change management process
 
@@ -216,8 +210,8 @@ The change management tool MUST provide at a minimum:
 
 User accounts that can modify the source or the project's configuration must use multi-factor authentication or its equivalent.
 This strongly authenticated identity MUST be used for the generation of source provenance attestations.
-The SCP MUST declare which forms of identity it considers to be trustworthy for this purpose.
-For cloud-based SCPs, this will typically be the identity used to push to a git server.
+The SCS MUST declare which forms of identity it considers to be trustworthy for this purpose.
+For cloud-based SCSs, this will typically be the identity used to push to a repository.
 
 Other forms of identity MAY be included as informational.
 Examples include a git commit's "author" and "committer" fields and a gpg signature's "user id."
@@ -251,8 +245,8 @@ There are two broad categories of source attestations within the source track:
 2.  Provenance attestations: Provide trustworthy, tamper-proof, metadata with the necessary information to determine what high level security properties a given source revision has.
 
 To provide interoperability and ensure ease of use, it's essential that the summary attestations are applicable across all Source Control Platforms.
-Due to the significant differences in how SCPs operate and how they may chose to meet the Source Track requirements it is preferable to
-allow for flexibility with the full attestations.  To that end SLSA leaves provenance attestations undefined and up to the SCPs to determine
+Due to the significant differences in how SCSs operate and how they may chose to meet the Source Track requirements it is preferable to
+allow for flexibility with the full attestations.  To that end SLSA leaves provenance attestations undefined and up to the SCSs to determine
 what works best in their environment.
 
 ### Summary attestation
@@ -265,9 +259,9 @@ The source track issues summary attestations using [Verification Summary Attesta
 
 1.  `subject.uri` SHOULD be set to a human readable URI of the revision.
 2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
-SCPs that do not use cryptographic digests MUST define a canonical type that is used to identify immutable revisions (e.g. `svn_revision_id`)[^1].
+SCSs that do not use cryptographic digests MUST define a canonical type that is used to identify immutable revisions (e.g. `svn_revision_id`)[^1].
 3.  `subject.annotations.source_branches` SHOULD be set to a list of branches that pointed to this revision at any point in their history.
-    -   git branches MUST be fully qualified (e.g. `refs/head/main`) to reduce the likelyhood of confusing downstream tooling.
+    -   git branches MUST be fully qualified (e.g. `refs/head/main`) to reduce the likelihood of confusing downstream tooling.
 4.  `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field).
 E.g. `git+https://github.com/foo/hello-world`.
 5.  `verifiedLevels` MUST include the SLSA source track level the verifier asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
@@ -275,7 +269,7 @@ MAY include additional properties as asserted by the verifier.  The verifier MUS
 6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
 
 Verifiers MAY issue these attestations based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
-but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#provenance-attestations) appropriate to their SCP when making the assessment.
+but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#provenance-attestations) appropriate to their SCS when making the assessment.
 
 The SLSA source track MAY create additional tags to include in `verifiedLevels` which attest
 to other properties of a revision (e.g. if it was code reviewed).  All SLSA source tags will start with `SLSA_SOURCE_`.
@@ -328,18 +322,14 @@ Source provenance attestations provide tamper-proof evidence (ideally signed [in
 that can be used to determine what SLSA Source Level or other high level properties a given revision meets.
 This evidence can be used by an authority as the basis for issuing a [Summary Attestation](#summary-attestation).
 
-SCPs and VCSes may have different methods of operating that necessitate different forms of evidence.
+SCSs may have different methods of operating that necessitate different forms of evidence.
 E.g. GitHub-based workflows may need different evidence than Gerrit-based workflows, which would both likely be different from workflows that
 operate over Subversion repositories.
 
-These differences also mean that depending on the SCP and the repo's configuration the issuers of
-provenance attestations may vary from implementation to implementation, often because entities with
-the knowledge to issue them may vary.  The authority that issues
-[summary-attestations](#summary-attestation) MUST understand which entity should issue each provenance
-attestation type and ensure the full attestations come from the appropriate issuer.
+These differences also mean that depending on the configuration the issuers of provenance attestations may vary from implementation to implementation, often because entities with the knowledge to issue them may vary.
+The authority that issues [summary-attestations](#summary-attestation) MUST understand which entity should issue each provenance attestation type and ensure the full attestations come from the appropriate issuer.
 
-'Source provenance attestations' is a generic term used to refer to any type of attestation that provides
-evidence the process used to create a revision.
+'Source provenance attestations' is a generic term used to refer to any type of attestation that provides evidence the process used to create a revision.
 
 Example source provenance attestations:
 
