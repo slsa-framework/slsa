@@ -100,7 +100,7 @@ TODO
 ## BuildEnv levels
 
 The primary purpose of the Build Environment (BuildEnv) track is to enable
-[auditing] that a build was run in the expected execution context.
+auditing that a build was run in the expected execution context.
 
 The lowest level only requires SLSA [Build L2] Provenance to
 exist for the build image, while higher levels provide increasing
@@ -340,6 +340,7 @@ TODO
 [BuildEnv L1]: #buildenv-l1
 [BuildEnv L2]: #buildenv-l2
 [BuildEnv L3]: #buildenv-l3
+[Release Attestation]: https://github.com/in-toto/attestation/blob/main/spec/predicates/release.md
 [SCAI]: https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md
 [Secure Boot]: https://wiki.debian.org/SecureBoot#What_is_UEFI_Secure_Boot.3F
 [TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
