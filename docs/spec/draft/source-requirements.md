@@ -155,8 +155,12 @@ This is a typical setup for teams who leverage code review tools.
 For all branches intended for consumption, whenever a branch is updated to point to a new revision, that revision MUST document how it related to the previous revision.
 Exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
-On VCS like git, the organization MUST enable branch protections that prohibit updating the branch to point to revisions that are not direct descendants of the current revision.
-At a minimum, this typically means preventing "force pushes" and "branch deletion."
+It MUST NOT be possible to rewrite the history of branches intended for
+consumption. In other words, when updating the branch to point to a new
+revision, that revision must be a direct descendant of the current revision. In
+an SCS that hosts a Git repository on systems like GitHub or GitLab, this can be
+accomplished by enabling branch protection rules that prevent force pushes and
+branch deletions.
 
 It MUST NOT be possible to delete the entire repository (including all branches) and replace it with different source.
 Exceptions are allowed via the [safe expunging process](#safe-expunging-process).
