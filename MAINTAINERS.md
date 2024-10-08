@@ -24,6 +24,7 @@ permissions in this repository.
 | Michael Lieberman | mlieberman85@gmail.com | @Michael Lieberman | [mlieberman85](https://github.com/mlieberman85) | Kusari
 | Tom Hennen | tomhennen@google.com | @Tom Hennen | [TomHennen](https://github.com/TomHennen) | Google
 | Trishank Karthik Kuppusamy | trishank.kuppusamy@datadoghq.com | @trishank | [trishankatdatadog](https://github.com/trishankatdatadog) | Datadog
+| Zachariah Cox | zachariahcox@github.com | @zachariahcox | [zachariahcox](https://github.com/zachariahcox) | GitHub
 
 ### Becoming a Maintainer
 
