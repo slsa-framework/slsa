@@ -23,6 +23,7 @@ permissions in this repository.
 | Mark Lodato | lodato@google.com |  @Mark Lodato | [MarkLodato](https://github.com/MarkLodato) | Google
 | Michael Lieberman | mlieberman85@gmail.com | @Michael Lieberman | [mlieberman85](https://github.com/mlieberman85) | Kusari
 | Tom Hennen | tomhennen@google.com | @Tom Hennen | [TomHennen](https://github.com/TomHennen) | Google
+| Zachariah Cox | zachariahcox@github.com | @zachariahcox | [zachariahcox](https://github.com/zachariahcox) | GitHub
 
 ### Becoming a Maintainer
 
