@@ -14,8 +14,8 @@ producer secrets, provenance signing).
 This central and privileged role makes hosted build platforms an attractive
 target for supply chain attackers. But even with strong economic and
 reputational incentives to mitigate these risks, it's very challenging to
-implement fully secure build platforms because they are made up of many
-layers of interconnected components and subsystems.
+implement and operate fully secure build platforms because they are made up
+of many layers of interconnected components and subsystems.
 
 The SLSA Build Environment track aims to address these issues by making it
 possible to validate the integrity and trace the provenance of core build
@@ -37,7 +37,7 @@ environment, and the compute platform they used.
 | [BuildEnv L3] | Hardware-attested build environment | Tampering via the compute platform's host interface | The compute platform's hardware
 
 > :warning:
-> The Build Environment track currently requires a [hosted] build platform.
+> The Build Environment track L1+ currently requires a [hosted] build platform.
 > A future version of this track may generalize requirements to cover bare-metal
 > build environments.
 
@@ -72,7 +72,7 @@ by the build platform provider, whether they are a commercial CI/CD service
 or enterprise organization. While this track describes general minimum
 requirements, this track does not dictate the following
 implementation-specific details: the type of build environment, accepted
-attestation formats, the type of technologies used to meet L3/4 requirements,
+attestation formats, the type of technologies used to meet L3 requirements,
 how attestations are distributed, how build environments are identified, and
 what happens on failure.
 
