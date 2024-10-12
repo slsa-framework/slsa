@@ -68,7 +68,7 @@ properties for a given build environment. This enables any party to detect
 environment.
 
 As in the Build track, the exact implementation of this track is determined
-by the build platform provider, whether they are a commercial CI/CD service,
+by the build platform provider, whether they are a commercial CI/CD service
 or enterprise organization. While this track describes general minimum
 requirements, this track does not dictate the following
 implementation-specific details: the type of build environment, accepted
@@ -228,7 +228,7 @@ adversary.
 <dt>Summary<dd>
 
 The initial state of the build's host environment is measured
-and autenticated by trusted hardware, attesting to the integrity
+and authenticated by trusted hardware, attesting to the integrity
 of the build environment's underlying compute stack prior to executing
 a build.
 
