@@ -689,6 +689,19 @@ repository with the malicious package. Solution: Verifier rejects because
 builder is not as expected.
 
 </details>
+<details><summary>Issue VSA from untrusted intermediary <span>(expectations)</span></summary>
+
+*Threat:* Have an unofficial intermediary issue a VSA for a malicious package.
+
+*Mitigation*: Verifier requires VSAs to be issued by a trusted intermediary.
+
+*Example:* Verifier expects VSAs to be issued by TheRepository. Adversary
+builds a malicious package and then issues a VSA of their own for the malicious
+package. Solution: Verifier rejects because they only accept VSAs from
+TheRepository which the adversary cannot issue since they do not have the
+corresponding signing key.
+
+</details>
 <details><summary>Upload package without provenance or VSA <span>(Build L1)</span></summary>
 
 *Threat:* Replace the original package with a malicious one without provenance.
@@ -719,9 +732,9 @@ artifact does not match the `subject` found within the provenance.
 *Threat:* Perform a build that would not meet expectations, then modify the
 provenance or VSA to make the expectations checks pass.
 
-*Mitigation:* Verifier only accepts provenance with a valid [cryptographic
+*Mitigation:* Verifier only accepts provenance or VSA with a valid [cryptographic
 signature][authentic] or equivalent proving that the provenance came from an
-acceptable builder.
+acceptable builder or the VSA came from an expected verifier.
 
 *Example 1:* MyPackage is expected to be built by GitHub Actions from the
 `good/my-package` repo. Adversary builds with GitHub Actions from the
@@ -734,16 +747,9 @@ builds a malicious package and then modifies the original VSA's `subject`
 field to match the digest of the malicious package. Solution: Verifier rejects
 because the cryptographic signature is no longer valid.
 
-*Example 3:* Verifier expects VSAs to be issued by TheRepository. Adversary
-builds a malicious package and then issues a VSA of their own from
-EvilRepository for the malicious package. Solution: Verifier rejects because
-they only accept VSAs from TheRepository which the EvilRepository cannot
-issue since it does not have the corresponding signing key.
-
-*Example 4:* Verifier expects VSAs to be issued by TheRepository. Adversary
-uploads a malicious package to `repo/evil-package`, getting a valid VSA for
-`repo/evil-package` from TheRepository. Adversary then replaces
-`repo/my-pacakge` and its VSA with `repo/evil-package` and its VSA.
+*Example 3:* Adversary uploads a malicious package to `repo/evil-package`,
+getting a valid VSA for `repo/evil-package`. Adversary then replaces
+`repo/my-package` and its VSA with `repo/evil-package` and its VSA.
 Solution: Verifier rejects because the VSA `resourceUri` field lists
 `repo/evil-package` and not the expected `repo/my-package`.
 
