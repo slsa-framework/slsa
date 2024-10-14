@@ -670,7 +670,7 @@ being that these threats are mitigated by having the *consumer* perform
 verification.
 
 The consumer's actions may be simplified if (F) produces a [VSA][vsa].
-In this case the consumer may replace any provenance verification with
+In this case the consumer may replace provenance verification with
 [VSA verification][vsa_verification].
 
 <details><summary>Build with untrusted CI/CD <span>(expectations)</span></summary>
