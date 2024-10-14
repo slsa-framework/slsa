@@ -739,6 +739,14 @@ builds a malicious package and then issues a VSA of their own from
 EvilRepository for the malicious package. Solution: Verifier rejects because
 they only accept VSAs from TheRepository which the EvilRepository cannot
 issue since it does not have the corresponding signing key.
+
+*Example 4:* Verifier expects VSAs to be issued by TheRepository. Adversary
+uploads a malicious package to `repo/evil-package`, getting a valid VSA for
+`repo/evil-package` from TheRepository. Adversary then replaces
+`repo/my-pacakge` and its VSA with `repo/evil-package` and its VSA.
+Solution: Verifier rejects because the VSA `resourceUri` field lists
+`repo/evil-package` and not the expected `repo/my-package`.
+
 </details>
 
 ## Usage threats
