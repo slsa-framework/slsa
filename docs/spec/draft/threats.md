@@ -323,7 +323,9 @@ has no solution on GitHub.
 *Threat:* Platform administrator abuses their privileges to bypass controls or
 to push a malicious version of the software.
 
-*Mitigation:* TODO
+*Mitigation:* The source platform must have controls in place to prevent and
+detect abusive behavior from administrators (e.g. two-person approvals, audit
+logging).
 
 *Example 1:* GitHostingService employee uses an internal tool to push changes to
 the MyPackage source repo.
