@@ -664,7 +664,82 @@ cryptographic signature is no longer valid.
 An adversary modifies the package on the package registry using an
 administrative interface or through a compromise of the infrastructure.
 
-**TODO:**
+The distribution channel threats and mitigations look very similar to the
+Artifact Publication (F) threats and mitigations with the main difference
+being that these threats are mitigated by having the _consumer_ perform
+verification.
+
+The consumer's actions may be simplified if (F) produces a [VSA][vsa].
+In this case the consumer may replace any provenance verification with
+[VSA verification][vsa_verification].
+
+<details><summary>Build with untrusted CI/CD <span>(expectations)</span></summary>
+
+*Threat:* Replace the package with one built using an unofficial CI/CD pipeline
+that does not build in the correct way.
+
+*Mitigation:* Verifier requires provenance showing that the builder matched an
+expected value or a VSA for corresponding `resourceUri`.
+
+*Example:* MyPackage is expected to be built on Google Cloud Build, which is
+trusted up to Build L3. Adversary builds on SomeOtherBuildPlatform, which is only
+trusted up to Build L2, and then exploits SomeOtherBuildPlatform to inject
+malicious behavior. Adversary then replaces the original package within the
+repository with the malicious package. Solution: Verifier rejects because
+builder is not as expected.
+
+</details>
+<details><summary>Upload package without provenance or VSA <span>(Build L1)</span></summary>
+
+*Threat:* Replace the original package with a malicious one without provenance.
+
+*Mitigation:* Verifier requires provenance or a VSA before accepting the package.
+
+*Example:* Adversary replaces MyPackage with a malicious version of MyPackage
+on the package repository and deletes existing provenance. Solution: Verifier
+rejects because provenance is missing.
+
+</details>
+<details><summary>Tamper with artifact after upload <span>(Build L1)</span></summary>
+
+*Threat:* Take a benign version of the package, modify it in some way, then
+replace it while retaining the original provenance or VSA.
+
+*Mitigation:* Verifier checks that the provenance or VSA's `subject` matches
+the hash of the package.
+
+*Example:* Adversary performs a proper build, modifies the artifact, then
+replaces the modified version of the package in the repository and retains the
+original provenance. Solution: Verifier rejects because the hash of the
+artifact does not match the `subject` found within the provenance.
+
+</details>
+<details><summary>Tamper with provenance or VSA <span>(Build L2)</span></summary>
+
+*Threat:* Perform a build that would not meet expectations, then modify the
+provenance or VSA to make the expectations checks pass.
+
+*Mitigation:* Verifier only accepts provenance with a valid [cryptographic
+signature][authentic] or equivalent proving that the provenance came from an
+acceptable builder.
+
+*Example 1:* MyPackage is expected to be built by GitHub Actions from the
+`good/my-package` repo. Adversary builds with GitHub Actions from the
+`evil/my-package` repo and then modifies the provenance so that the source looks
+like it came from `good/my-package`. Solution: Verifier rejects because the
+cryptographic signature is no longer valid.
+
+*Example 2:* Verifier expects VSAs to be issued by TheRepository. Adversary
+builds a malicious package and then modifies the original VSA's `subject`
+field to match the digest of the malicious package. Solution: Verifier rejects
+because the cryptographic signature is no longer valid.
+
+*Example 3:* Verifier expects VSAs to be issued by TheRepository. Adversary
+builds a malicious package and then issues a VSA of their own from
+EvilRepository for the malicious package. Solution: Verifier rejects because
+they only accept VSAs from TheRepository which the EvilRepository cannot
+issue since it does not have the corresponding signing key.
+</details>
 
 ## Usage threats
 
@@ -938,3 +1013,5 @@ collision resistance.
 [isolated]: requirements.md#isolated
 [unforgeable]: requirements.md#provenance-unforgeable
 [supply chain threats]: threats-overview
+[vsa]: verification_summary
+[vsa_verification]: verification_summary#how-to-verify
