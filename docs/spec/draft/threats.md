@@ -666,7 +666,7 @@ administrative interface or through a compromise of the infrastructure.
 
 The distribution channel threats and mitigations look very similar to the
 Artifact Publication (F) threats and mitigations with the main difference
-being that these threats are mitigated by having the _consumer_ perform
+being that these threats are mitigated by having the *consumer* perform
 verification.
 
 The consumer's actions may be simplified if (F) produces a [VSA][vsa].
