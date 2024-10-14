@@ -788,7 +788,16 @@ solutions.
 
 ### (I) Usage
 
-**TODO:** What should we put here?
+The consumer uses a package in an unsafe manner.
+
+<details><summary>Improper usage</summary>
+
+*Threat:* The software can be used in an insecure manner, allowing an
+adversary to compromise the consumer.
+
+*Mitigation:* This threat is not addressed by SLSA, but may be addressed by
+efforts like [Secure by Design][secure-by-design].
+</details>
 
 ## Dependency threats
 
@@ -1027,6 +1036,7 @@ collision resistance.
 [exists]: requirements.md#provenance-exists
 [isolated]: requirements.md#isolated
 [unforgeable]: requirements.md#provenance-unforgeable
+[secure-by-design]: https://www.cisa.gov/securebydesign
 [supply chain threats]: threats-overview
 [vsa]: verification_summary
 [vsa_verification]: verification_summary#how-to-verify
