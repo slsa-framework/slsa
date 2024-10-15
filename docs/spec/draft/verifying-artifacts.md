@@ -124,12 +124,14 @@ Resulting threat mitigation:
 -   [Threat "I"]: Verification by the consumer covers compromise of the package
     in transit. (Many ecosystems also address this threat using package
     signatures or checksums.)
-    -   NOTE: SLSA does not cover adversaries tricking a consumer to use an
-        unintended package, such as through typosquatting.
+    -   NOTE: SLSA does not yet cover adversaries tricking a consumer to use an
+        unintended package, such as through typosquatting. Those threats are
+        discussed in more detail under [Threat "H"].
 
 [Threat "E"]: threats#e-build-process
 [Threat "F"]: threats#f-artifact-publication
 [Threat "G"]: threats#g-distribution-channel
+[Threat "H"]: threats#h-package-selection
 [Threat "I"]: threats#i-usage
 
 [validation-model]: https://github.com/in-toto/attestation/blob/main/docs/validation.md#validation-model
