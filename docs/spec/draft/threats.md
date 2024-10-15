@@ -325,7 +325,9 @@ to push a malicious version of the software.
 
 *Mitigation:* The source platform must have controls in place to prevent and
 detect abusive behavior from administrators (e.g. two-person approvals for
-changes to the infrastructure, audit logging).
+changes to the infrastructure, audit logging). A future [Platform
+Operations Track](/future-directions#build-platform-operations-track) may
+provide more specific guidance on how to secure the underlying platform.
 
 *Example 1:* GitHostingService employee uses an internal tool to push changes to
 the MyPackage source repo. Solution 1: employee cannot push changes without
