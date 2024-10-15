@@ -324,21 +324,27 @@ has no solution on GitHub.
 to push a malicious version of the software.
 
 *Mitigation:* The source platform must have controls in place to prevent and
-detect abusive behavior from administrators (e.g. two-person approvals, audit
-logging).
+detect abusive behavior from administrators (e.g. two-person approvals for
+changes to the infrastructure, audit logging).
 
 *Example 1:* GitHostingService employee uses an internal tool to push changes to
-the MyPackage source repo.
+the MyPackage source repo. Solution 1: employee cannot push changes without
+getting a co-worker to approve. Solution 2: changes are audited and the employee
+would be detected by internal security teams.
 
 *Example 2:* GitHostingService employee uses an internal tool to push a
 malicious version of the server to serve malicious versions of MyPackage sources
 to a specific CI/CD client but the regular version to everyone else, in order to
-hide tracks.
+hide tracks. Solution 1: employee cannot push malicious version without
+getting a co-worker to approve. Solution 2: changes are audited and the employee
+would be detected by internal security teams.
 
 *Example 3:* GitHostingService employee uses an internal tool to push a
 malicious version of the server that includes a backdoor allowing specific users
 to bypass branch protections. Adversary then uses this backdoor to submit a
-change to MyPackage without review.
+change to MyPackage without review. Solution 1: employee cannot push malicious
+version without getting a co-worker to approve. Solution 2: changes are audited
+and the employee would be detected by internal security teams.
 
 </details>
 <details><summary>Exploit vulnerability in SCM</summary>
