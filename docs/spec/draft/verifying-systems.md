@@ -63,10 +63,10 @@ following types of adversaries.
     -   Access the control plane's cryptographic secrets.
     -   Remotely access build environments (e.g. via SSH).
 
-[C]: threats.md#c-build-from-modified-source
-[D]: threats.md#d-use-compromised-dependency
-[E]: threats.md#e-compromise-build-process
-[F]: threats.md#f-upload-modified-package
+[C]: threats.md#c-source-code-management
+[D]: threats.md#d-external-build-parameters
+[E]: threats.md#e-build-process
+[F]: threats.md#f-artifact-publication
 
 ## Build platform components
 
