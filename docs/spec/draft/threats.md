@@ -330,23 +330,17 @@ Operations Track](/future-directions#build-platform-operations-track) may
 provide more specific guidance on how to secure the underlying platform.
 
 *Example 1:* GitHostingService employee uses an internal tool to push changes to
-the MyPackage source repo. Solution 1: employee cannot push changes without
-getting a co-worker to approve. Solution 2: changes are audited and the employee
-would be detected by internal security teams.
+the MyPackage source repo.
 
 *Example 2:* GitHostingService employee uses an internal tool to push a
 malicious version of the server to serve malicious versions of MyPackage sources
 to a specific CI/CD client but the regular version to everyone else, in order to
-hide tracks. Solution 1: employee cannot push malicious version without
-getting a co-worker to approve. Solution 2: changes are audited and the employee
-would be detected by internal security teams.
+hide tracks.
 
 *Example 3:* GitHostingService employee uses an internal tool to push a
 malicious version of the server that includes a backdoor allowing specific users
 to bypass branch protections. Adversary then uses this backdoor to submit a
-change to MyPackage without review. Solution 1: employee cannot push malicious
-version without getting a co-worker to approve. Solution 2: changes are audited
-and the employee would be detected by internal security teams.
+change to MyPackage without review.
 
 </details>
 <details><summary>Exploit vulnerability in SCM</summary>
