@@ -79,8 +79,6 @@ When a repo is transferred to a new organization ("donated"), or if a repo must 
 
 ## Levels
 
-Many examples in this document use the [git version control system](https://git-scm.com/), but use of git is not a requirement to meet any level on the SLSA source track.
-
 ### Level 1: Version controlled
 
 Summary:
@@ -90,40 +88,6 @@ Intended for: Organizations currently storing source in non-standard ways who wa
 
 Benefits:
 Migrating to the appropriate tools is an important first step on the road to operational maturity.
-
-Requirements:
-
-#### Use modern tools
-
-The organization MUST manage the source using tools specifically designed to manage source code.
-Tools like git, Perforce, Subversion are great examples.
-They may be self-hosted or hosted in the cloud using vendors like GitLab, GitHub, Bitbucket, etc.
-
-When self-hosting a solution, local, unauthenticated storage is not acceptable.
-
-Branch protection is not required, nor are there any other constraints on the configuration of the tools.
-
-#### Canonical location
-
-The source MUST have a location where the "official" revisions are stored and managed.
-
-#### Revisions are immutable and uniquely identifiable
-
-This requirement ensures that a consumer can determine that the source revision they have is the same as a canonical revision.
-The SCS MUST provide a deterministic way to identify a particular revision.
-
-Virtually all modern tools provide this guarantee via a combination of the repository ID and revision ID.
-
-##### Repository IDs
-
-The repository ID is defined by the SCS and MUST be unique in the context of that instance of the SCS.
-
-##### Revision IDs
-
-When the revision ID is a digest of the content of the revision (as in git) nothing more is needed.
-When the revision ID is a number or otherwise not a digest, then the SCS MUST document how the immutability of the revision is established.
-The same revision ID MAY be present in multiple repositories.
-See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
 
 ### Level 2: Branch History
 
@@ -136,9 +100,63 @@ All organizations of any size producing software of any kind.
 Benefits:
 Allows source consumers to track changes to the software over time and attribute those changes to the people that made them.
 
-Requirements:
+### Level 3: Source Provenance Attestations
 
-#### Branches
+Summary:
+A consumer can ask the SCS for everything it knows about a specific revision of a repository.
+The information is provided in a documented and tamper-resistant format.
+
+Intended for:
+Organizations that want strong guarantees and auditability of their change management processes.
+
+Benefits:
+Provides reliable information to policy enforcement tools.
+
+## Platform Requirements
+
+Many examples in this document use the [git version control system](https://git-scm.com/), but use of git is not a requirement to meet any level on the SLSA source track.
+
+<table>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+
+<tr id="use-modern-tools"><td>Use modern tools<td>
+
+The organization MUST manage the source using tools specifically designed to manage source code.
+Tools like git, Perforce, Subversion are great examples.
+They may be self-hosted or hosted in the cloud using vendors like GitLab, GitHub, Bitbucket, etc.
+
+When self-hosting a solution, local, unauthenticated storage is not acceptable.
+
+Branch protection is not required, nor are there any other constraints on the configuration of the tools.
+
+<td>✓<td>✓<td>✓
+<tr id="canonical-location"><td>Canonical location<td>
+
+The source MUST have a location where the "official" revisions are stored and managed.
+
+<td>✓<td>✓<td>✓
+<tr id="immutable-revisions"><td>Revisions are immutable and uniquely identifiable<td>
+
+This requirement ensures that a consumer can determine that the source revision they have is the same as a canonical revision.
+The SCS MUST provide a deterministic way to identify a particular revision.
+
+Virtually all modern tools provide this guarantee via a combination of the repository ID and revision ID.
+
+<td>✓<td>✓<td>✓
+<tr id="repository-ids"><td>Repository IDs<td>
+
+The repository ID is defined by the SCS and MUST be unique in the context of that instance of the SCS.
+
+<td>✓<td>✓<td>✓
+<tr id="revision-ids"><td>Revision IDs<td>
+
+When the revision ID is a digest of the content of the revision (as in git) nothing more is needed.
+When the revision ID is a number or otherwise not a digest, then the SCS MUST document how the immutability of the revision is established.
+The same revision ID MAY be present in multiple repositories.
+See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
+
+<td>✓<td>✓<td>✓
+<tr id="branches"><td>Branches<td>
 
 If the SCS supports multiple branches, the organization MUST indicate which branches are intended for consumption.
 This may be implied or explicit.
@@ -150,7 +168,8 @@ They may also declare that branches named with the prefix `refs/heads/releases/*
 They may also declare all revisions are intended to be consumed "except those reachable only from branches beginning with `refs/heads/users/*`."
 This is a typical setup for teams who leverage code review tools.
 
-##### Continuity
+<td><td>✓<td>✓
+<tr id="continuity"><td>Continuity<td>
 
 For all branches intended for consumption, whenever a branch is updated to point to a new revision, that revision MUST document how it related to the previous revision.
 Exceptions are allowed via the [safe expunging process](#safe-expunging-process).
@@ -165,7 +184,8 @@ branch deletions.
 It MUST NOT be possible to delete the entire repository (including all branches) and replace it with different source.
 Exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
-#### Identity Management
+<td><td>✓<td>✓
+<tr id="identity-management"><td>Identity Management<td>
 
 There exists an identity management system or some other means of identifying actors.
 This system may be a federated authentication system (AAD, Google, Okta, GitHub, etc) or custom implementation (gittuf, gpg-signatures on commits, etc).
@@ -173,21 +193,8 @@ The SCS MUST document how actors are identified for the purposes of attribution.
 
 Activities conducted on the SCS SHOULD be attributed to authenticated identities.
 
-### Level 3: Source Provenance Attestations
-
-Summary:
-A consumer can ask the SCS for everything it knows about a specific revision of a repository.
-The information is provided in a documented and tamper-resistant format.
-
-Intended for:
-Organizations that want strong guarantees and auditability of their change management processes.
-
-Benefits:
-Provides reliable information to policy enforcement tools.
-
-Requirements:
-
-#### Source attestations
+<td><td>✓<td>✓
+<tr id="source-attestations"><td>Source attestations<td>
 
 A source attestation contains information about how a specific revision was created and how it came to exist in its present context.
 They are associated with the revision identifier delivered to consumers and are a statement of fact from the perspective of the SCS.
@@ -196,8 +203,8 @@ If a consumer is authorized to access source on a particular branch, they MUST b
 
 It is possible that an SCS can make no claims about a particular revision.
 For example, this would happen if the revision was created on another SCS, or if the revision was not the result of an accepted change management process.
-
-#### Change management process
+<td><td><td>✓
+<tr id="change-management-process"><td>Change management process<td>
 
 The repo must define how the content of a [branch](#definitions) is allowed to change.
 This is typically done via the configuration of branch protection rules.
@@ -205,12 +212,16 @@ It MUST NOT be possible to modify the content of a branch without following its 
 
 SLSA Source Level 2 ensures that all changes are recorded and attributable to an actor.
 SLSA Source Level 3 ensures that the documented process was followed.
+<td><td><td>✓
+</table>
 
+## Change management tool requirements
 The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes managed via the process.
 
-The change management tool MUST provide at a minimum:
+<table>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
 
-##### Strong Authentication
+<tr id="strong-authentication"><td>Strong Authentication<td>
 
 User accounts that can modify the source or the project's configuration must use multi-factor authentication or its equivalent.
 This strongly authenticated identity MUST be used for the generation of source provenance attestations.
@@ -223,7 +234,8 @@ These forms of identity are user-provided and not typically verified by the sour
 
 See [source roles](#source-roles).
 
-##### Context
+<td><td><td>✓
+<tr id="context"><td>Context<td>
 
 The change management tool MUST record the specific code change (a "diff" in git) or instructions to recreate it.
 In git, this typically defined to be three revision IDs: the tip of the "topic" branch, the tip of the target branch, and closest shared ancestor between the two (such as determined by `git-merge-base`).
@@ -233,10 +245,14 @@ For example, for the git version control system, the change management tool MUST
 
 Branches may have differing security postures, and a change can be approved for one context while being unapproved for another.
 
-##### Verified Timestamps
+<td><td><td>✓
+<tr id="verified-timestamps"><td>Verified Timestamps<td>
 
 The change management tool MUST record timestamps for all contributions and review-related activities.
 User-provided timestamps MUST NOT be used.
+
+<td><td><td>✓
+</table>
 
 ## Communicating source levels
 
