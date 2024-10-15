@@ -216,6 +216,7 @@ SLSA Source Level 3 ensures that the documented process was followed.
 </table>
 
 ## Change management tool requirements
+
 The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes managed via the process.
 
 <table>
