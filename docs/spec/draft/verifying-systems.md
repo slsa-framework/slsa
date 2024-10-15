@@ -31,7 +31,7 @@ with binary hash X and a build with external parameters P' would produce an
 artifact with binary hash Y, they wish to produce provenance indicating a build
 with external parameters P produced an artifact with binary hash Y.
 
-See threats [C], [D], [E], and [F] for examples of specific threats.
+See threats [D], [E], [F], and [G] for examples of specific threats.
 
 Note: Platform abuse (e.g. running non-build workloads) and attacks against
 builder availability are out of scope of this document.
@@ -63,10 +63,10 @@ following types of adversaries.
     -   Access the control plane's cryptographic secrets.
     -   Remotely access build environments (e.g. via SSH).
 
-[C]: threats.md#c-source-code-management
 [D]: threats.md#d-external-build-parameters
 [E]: threats.md#e-build-process
 [F]: threats.md#f-artifact-publication
+[G]: threats.md#g-distribution-channel
 
 ## Build platform components
 
