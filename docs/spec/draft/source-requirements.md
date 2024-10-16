@@ -265,7 +265,7 @@ There are two broad categories of source attestations within the source track:
 1.  Summary attestations: Used to communicate to downstream users what high level security properties a given source revision meets.
 2.  Provenance attestations: Provide trustworthy, tamper-proof, metadata with the necessary information to determine what high level security properties a given source revision has.
 
-To provide interoperability and ensure ease of use, it's essential that the summary attestations are applicable across all Source Control Platforms.
+To provide interoperability and ensure ease of use, it's essential that the summary attestations are applicable across all Source Control Systems.
 Due to the significant differences in how SCSs operate and how they may chose to meet the Source Track requirements it is preferable to
 allow for flexibility with the full attestations.  To that end SLSA leaves provenance attestations undefined and up to the SCSs to determine
 what works best in their environment.
