@@ -46,26 +46,31 @@ Consumers can examine the various source provenance attestations to determine if
 
 ## Safe Expunging Process
 
-Administrators have the ability to expunge (remove) content from a repository and its change history without leaving a record of the removed content.
-This includes changing files, history, or changing references in git and is used to accommodate legal or privacy compliance requirements.
+SCSs MAY allow _administrators_ to expunge (remove) content from a repository and its change history without leaving a public record of the removed content.
+This includes changing files, history, or changing references in git and is used to accommodate legal/privacy compliance requirements as well as administrative
+changes within a repository (see below for more information on the various scenarios).
 When used as an attack, this is called “repo hijacking” (or “repo-jacking”) and is one of the primary threats source provenance attestations protect against.
+As such great care must be taken by SCSs when implementing these changes for legitimate purposes.
+
+SCSs SHOULD require multi-party approval for any changes made under this process.
+
+The Safe Expunging Process MUST be documented and describe how requests and actions are tracked and SHOULD log the fact that content was removed.
 
 On the git VCS, force pushes allow you to remove data from a branch.
 If a branch has been identified as consumable branch, force pushes to that branch must follow the safe expunging process.
 
-TODO: Determine how organizations can provide transparency around this process.
-At a minimum the organization would need to declare why data was removed from the branch.
-
-The goal of this sections is to document that this process is allowed.
 Different organizations and tech stacks may have different approaches to the problem.
 
-Scenarios that need to be addressed:
+Safe Expunging Scenarios:
 
 ### Legal Takedowns
 
-A DMCA takedown request will be addressed by following an agreed-upon process.
+A legal takedown request will be addressed by following an agreed-upon process.
 That process should be documented itself and followed.
 It may be the case that the specific set of commits targeted by the takedown can be expunged in ways that do not impact revisions.
+
+This process and the resulting logs MAY be private to both prevent calling attention to potentially sensitive data (e.g. PII) or to comply with local laws
+and regulations which may require the change to be kept private to the extent possible.
 
 ### Commit metadata rewrites
 
@@ -73,9 +78,13 @@ A team may decide that all reachable commits in the history of a revision need t
 In git VCS, compliance with this new policy will require history to be rewritten (commit metadata is included in the computation of the revision id).
 Policies in this category include things like commit signatures, author / committer formatting restrictions, closed-issue-linkage, etc.
 
+SCSs SHOULD make the fact of these changes public when they occur (e.g. an issue, announcement, or other mechanism).
+
 ### Repository renames
 
 When a repo is transferred to a new organization ("donated"), or if a repo must be renamed or otherwise have its url changed within the same org, attestations for previous revisions of this repo will no longer be matched because the combination of the repository id and the revision id will have changed.
+
+SCSs SHOULD make the fact of these changes public when they occur (e.g. an issue, announcement, or other mechanism).
 
 ## Levels
 
