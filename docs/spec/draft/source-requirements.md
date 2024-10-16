@@ -112,7 +112,7 @@ Organizations that want strong guarantees and auditability of their change manag
 Benefits:
 Provides reliable information to policy enforcement tools.
 
-## Platform Requirements
+## System Requirements
 
 Many examples in this document use the [git version control system](https://git-scm.com/), but use of git is not a requirement to meet any level on the SLSA source track.
 
