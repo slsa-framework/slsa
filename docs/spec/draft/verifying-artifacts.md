@@ -120,17 +120,19 @@ Resulting threat mitigation:
 -   [Threat "G"]: Verification by the consumer or otherwise outside of the
     package registry covers compromise of the registry itself. (Verifying within
     the registry at publication time is also valuable, but does not cover Threat
-    "G" or "H".)
--   [Threat "H"]: Verification by the consumer covers compromise of the package
+    "G" or "I".)
+-   [Threat "I"]: Verification by the consumer covers compromise of the package
     in transit. (Many ecosystems also address this threat using package
     signatures or checksums.)
-    -   NOTE: SLSA does not cover adversaries tricking a consumer to use an
-        unintended package, such as through typosquatting.
+    -   NOTE: SLSA does not yet cover adversaries tricking a consumer to use an
+        unintended package, such as through typosquatting. Those threats are
+        discussed in more detail under [Threat "H"].
 
-[Threat "E"]: threats#e-compromise-build-process
-[Threat "F"]: threats#f-upload-modified-package
-[Threat "G"]: threats#g-compromise-package-repo
-[Threat "H"]: threats#h-use-compromised-package
+[Threat "E"]: threats#e-build-process
+[Threat "F"]: threats#f-artifact-publication
+[Threat "G"]: threats#g-distribution-channel
+[Threat "H"]: threats#h-package-selection
+[Threat "I"]: threats#i-usage
 
 [validation-model]: https://github.com/in-toto/attestation/blob/main/docs/validation.md#validation-model
 
@@ -139,7 +141,7 @@ Resulting threat mitigation:
 [verify-step-2]: #check-expectations
 
 Next, check that the package's provenance meets your expectations for that
-package in order to mitigate [threat "C"].
+package in order to mitigate [threat "D"].
 
 In our threat model, the adversary has ability to invoke a build and to publish
 to the registry. The adversary is not able to write to the source repository, nor do
@@ -171,7 +173,7 @@ source repository, then put only the source repository in
 `externalParameters`. Such a design is easier to verify because the source
 repository is constant across builds.
 
-[Threat "C"]: threats#c-build-from-modified-source
+[Threat "D"]: threats#d-external-build-parameters
 
 ### Step 3: (Optional) Check dependencies recursively
 
@@ -180,7 +182,7 @@ repository is constant across builds.
 Finally, recursively check the `resolvedDependencies` as available and to the
 extent desired. Note that SLSA v1.0 does not have any requirements on the
 completeness or verification of `resolvedDependencies`. However, one might wish
-to verify dependencies in order to mitigate [threat "E"] and protect against
+to verify dependencies in order to mitigate [dependency threats] and protect against
 threats further up the supply chain. If `resolvedDependencies` is incomplete,
 these checks can be done on a best-effort basis.
 
@@ -190,7 +192,7 @@ heuristic or exception mechanism is almost always necessary when verifying
 dependencies because there will be transitive dependencies that are SLSA Build
 L0. (For example, consider the compiler's compiler's compiler's ... compiler.)
 
-[Threat "E"]: threats#e-use-compromised-dependency
+[dependency threats]: threats#dependency-threats
 [VSA]: /verification_summary
 [threats]: threats
 
