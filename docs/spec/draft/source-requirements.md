@@ -219,20 +219,24 @@ If a consumer is authorized to access source on a particular branch, they MUST b
 It is possible that an SCS can make no claims about a particular revision.
 For example, this would happen if the revision was created on another SCS, or if the revision was not the result of an accepted change management process.
 <td><td><td>✓
-<tr id="change-management-process"><td>Change management process<td>
+<tr id="change-management-process"><td>Enforced change management process<td>
+The repo MUST ensure that all technical controls governing changes to a [branch](#definitions)
 
-The repo must define how the content of a [branch](#definitions) is allowed to change.
-This is typically done via the configuration of branch protection rules.
-It MUST NOT be possible to modify the content of a branch without following its documented process.
+1. Cannot be bypassed except via the [Safe Expunging Process](#safe-expunging-process).
+2. Are discoverable by authorized users of the repo.
 
-SLSA Source Level 2 ensures that all changes are recorded and attributable to an actor.
-SLSA Source Level 3 ensures that the documented process was followed.
+For example, this can be accomplished:
+
+- Via the configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)).
+- Via application and verification of [gittuf](https://github.com/gittuf/gittuf) policies.
+- Or some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
+
 <td><td><td>✓
 </table>
 
 ## Change management tool requirements
 
-The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes managed via the process.
+The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes managed via the [process](#change-management-process).
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
