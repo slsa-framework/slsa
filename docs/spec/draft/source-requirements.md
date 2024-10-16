@@ -196,7 +196,8 @@ Activities conducted on the SCS SHOULD be attributed to authenticated identities
 <td><td>✓<td>✓
 <tr id="source-attestations"><td>Source attestations<td>
 
-A source attestation contains information about how a specific revision was created and how it came to exist in its present context.
+A source attestation contains information about how a specific revision was created and how it came to exist in its present context
+(e.g. the branches or tags that point, or pointed, at that revision).
 They are associated with the revision identifier delivered to consumers and are a statement of fact from the perspective of the SCS.
 
 If a consumer is authorized to access source on a particular branch, they MUST be able to fetch the source attestation documents for revisions in the history of that branch.
