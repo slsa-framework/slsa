@@ -138,12 +138,11 @@ always requires one reviewer, even if the author has write access.
 
 Note 2: If the PR only touches files in the [Draft](docs/spec-stages.md)
 specification stage, then the "waiting period" and "# reviewers" are relaxed and
-up to Maintainer discretion. By default PRs touching files in draft need only
-be approved by one maintainer and have no waiting period. If the first approving
-maintainer would like additional maintainers to approve then will indicate
-this desire in a comment and assign additional maintainers as approvers of the PR.
-Files in the Draft stage have a large banner at the top of each rendered page, as
-well as the text "Status: Draft".
+up to Maintainer discretion (including the PR author if they're a maintainer). Note
+that a relaxed number of reviewers and waiting period may result in more back
+and forth with the expanded set of reviewers as drafts are finalized.
+Files in the Draft stage have a large banner at the top of each rendered page,
+as well as the text "Status: Draft".
 
 [squash and merge]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits
 
