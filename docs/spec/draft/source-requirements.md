@@ -218,8 +218,10 @@ If a consumer is authorized to access source on a particular branch, they MUST b
 
 It is possible that an SCS can make no claims about a particular revision.
 For example, this would happen if the revision was created on another SCS, or if the revision was not the result of an accepted change management process.
+
 <td><td><td>✓
 <tr id="change-management-process"><td>Enforced change management process<td>
+
 The SCS MUST ensure that all technical controls governing changes to a [branch](#definitions)
 
 1.  Cannot be bypassed except via the [Safe Expunging Process](#safe-expunging-process).
