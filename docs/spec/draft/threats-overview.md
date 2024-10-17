@@ -45,10 +45,15 @@ Many recent high-profile attacks were consequences of supply chain integrity vul
 <thead>
 <tr>
 <th>
-<th>Threats to
+<th>Threats from
 <th>Known example
 <th>How SLSA could help
 <tbody>
+<tr>
+<td>A
+<td>Producer
+<td><a href="https://en.wikipedia.org/wiki/SpySheriff">SpySheriff</a>: Software vendor purports to offer anti-spyware software, but that software is actually malicious.
+<td>SLSA does not address this threat.
 <tr>
 <td>B
 <td>Authoring & reviewing
