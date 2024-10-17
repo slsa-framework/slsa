@@ -52,7 +52,7 @@ Many recent high-profile attacks were consequences of supply chain integrity vul
 <tr>
 <td>A
 <td>Producer
-<td><a href="https://en.wikipedia.org/wiki/SpySheriff">SpySheriff</a>: Software vendor purports to offer anti-spyware software, but that software is actually malicious.
+<td><a href="https://en.wikipedia.org/wiki/XZ_Utils_backdoor">XZ Utils Backdoor</a>: A maintainer intentionally inserted malicious behavior into a legitimate package.
 <td>SLSA does not address this threat.
 <tr>
 <td>B
