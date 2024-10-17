@@ -61,7 +61,7 @@ If a branch has been identified as consumable branch, force pushes to that branc
 
 Different organizations and tech stacks may have different approaches to the problem.
 
-Safe Expunging Scenarios:
+Safe Expunging Scenarios (non-exhaustive):
 
 ### Legal Takedowns
 
@@ -78,13 +78,13 @@ A team may decide that all reachable commits in the history of a revision need t
 In git VCS, compliance with this new policy will require history to be rewritten (commit metadata is included in the computation of the revision id).
 Policies in this category include things like commit signatures, author / committer formatting restrictions, closed-issue-linkage, etc.
 
-SCSs SHOULD make the fact of these changes public when they occur (e.g. an issue, announcement, or other mechanism).
+Organizations MUST make the fact of these changes public when they occur (e.g. an issue, announcement, or other mechanism).
 
 ### Repository renames
 
 When a repo is transferred to a new organization ("donated"), or if a repo must be renamed or otherwise have its url changed within the same org, attestations for previous revisions of this repo will no longer be matched because the combination of the repository id and the revision id will have changed.
 
-SCSs SHOULD make the fact of these changes public when they occur (e.g. an issue, announcement, or other mechanism).
+Organizations MUST make the fact of these changes public when they occur (e.g. an issue, announcement, or other mechanism).
 
 ## Levels
 
