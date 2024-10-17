@@ -87,8 +87,8 @@ Many recent high-profile attacks were consequences of supply chain integrity vul
 <tr>
 <td>I
 <td>Usage
-<td>TODO: Add example?
-<td>SLSA address this threat.
+<td><a href="https://www.horizon3.ai/attack-research/disclosures/cve-2023-27524-insecure-default-configuration-in-apache-superset-leads-to-remote-code-execution/">Default credentials</a>: Attacker could leverage default credentials to access sensitive data.
+<td>SLSA does not address this threat.
 <tr>
 <td>N/A
 <td>Dependency threats (i.e. A-H, recursively)
