@@ -797,6 +797,7 @@ adversary to compromise the consumer.
 
 *Mitigation:* This threat is not addressed by SLSA, but may be addressed by
 efforts like [Secure by Design][secure-by-design].
+
 </details>
 
 ## Dependency threats
