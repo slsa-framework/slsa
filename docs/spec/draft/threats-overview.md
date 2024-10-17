@@ -53,7 +53,7 @@ Many recent high-profile attacks were consequences of supply chain integrity vul
 <td>A
 <td>Producer
 <td><a href="https://en.wikipedia.org/wiki/XZ_Utils_backdoor">XZ Utils Backdoor</a>: A maintainer intentionally inserted malicious behavior into a legitimate package.
-<td>SLSA does not directly address this threat, but in open source software it could make it easier to discover by forcing malicious behavior into the publicly available source code.
+<td>SLSA does not directly address this threat but could make it easier to discover malicious behavior in open source software, by forcing it into the publicly available source code.
 <tr>
 <td>B
 <td>Authoring & reviewing
