@@ -662,7 +662,8 @@ cryptographic signature is no longer valid.
 ### (G) Distribution channel
 
 An adversary modifies the package on the package registry using an
-administrative interface or through a compromise of the infrastructure.
+administrative interface or through a compromise of the infrastructure
+including modification of the package in transit to the consumer.
 
 The distribution channel threats and mitigations look very similar to the
 Artifact Publication (F) threats and mitigations with the main difference
