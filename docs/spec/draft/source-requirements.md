@@ -46,7 +46,7 @@ Consumers can examine the various source provenance attestations to determine if
 
 ## Safe Expunging Process
 
-SCSs MAY allow _administrators_ to expunge (remove) content from a repository and its change history without leaving a public record of the removed content.
+SCSs MAY allow the organization to expunge (remove) content from a repository and its change history without leaving a public record of the removed content.
 This includes changing files, history, or changing references in git and is used to accommodate legal/privacy compliance requirements as well as administrative
 changes within a repository (see below for more information on the various scenarios).
 When used as an attack, this is called “repo hijacking” (or “repo-jacking”) and is one of the primary threats source provenance attestations protect against.
