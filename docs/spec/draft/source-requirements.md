@@ -84,7 +84,8 @@ Organizations MUST make the fact of these changes public when they occur (e.g. a
 
 When a repo is transferred to a new organization ("donated"), or if a repo must be renamed or otherwise have its url changed within the same org, attestations for previous revisions of this repo will no longer be matched because the combination of the repository id and the revision id will have changed.
 
-Organizations MUST make the fact of these changes public when they occur (e.g. an issue, announcement, or other mechanism).
+Organizations MUST inform all consumers of a repo of these changes when they occur.
+Organizations SHOULD provide a means to resolve previous revision IDs to the new revision IDs.
 
 ## Levels
 
