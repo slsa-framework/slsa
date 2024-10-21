@@ -63,7 +63,7 @@ Many recent high-profile attacks were consequences of supply chain integrity vul
 <td>C
 <td>Source code management
 <td><a href="https://news-web.php.net/php.internals/113838">PHP</a>: Attacker compromised PHP's self-hosted git server and injected two malicious commits.
-<td>A better-protected source code platform would have been a much harder target for the attackers.
+<td>A better-protected source code system would have been a much harder target for the attackers.
 <tr>
 <td>D
 <td>External build parameters
