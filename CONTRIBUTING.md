@@ -141,6 +141,7 @@ specification stage, then the "waiting period" and "# reviewers" are relaxed and
 up to Maintainer discretion (including the PR author if they're a maintainer). Note
 that a relaxed number of reviewers and waiting period may result in more back
 and forth with the expanded set of reviewers as drafts are finalized.
+Drafts should be indicated in the PR title following a pattern of `<type>: draft: <subject>`.
 Files in the Draft stage have a large banner at the top of each rendered page,
 as well as the text "Status: Draft".
 
