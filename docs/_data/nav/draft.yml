@@ -70,6 +70,10 @@
     url: /spec/draft/verifying-systems
     description: Guidelines for securing SLSA Build L3+ builders, intended for platform implementers
 
+  - title: Integrity levels for attested build environments
+    url: /spec/draft/attested-build-env-levels
+    description: Overview of SLSA's Attested Build Environment track, intended for all audiences
+
   - title: Threats & mitigations
     url: /spec/draft/threats
     description: Detailed information about specific supply chain attacks and how SLSA helps
