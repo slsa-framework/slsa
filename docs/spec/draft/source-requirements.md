@@ -100,7 +100,7 @@ All organizations of any size producing software of any kind.
 Benefits:
 Allows source consumers to track changes to the software over time and attribute those changes to the people that made them.
 
-### Level 3: Authenticatable and auditable attestations
+### Level 3: Authenticatable and Auditable Attestations
 
 Summary:
 A consumer can ask the SCS for everything it knows about a specific revision of a repository.
