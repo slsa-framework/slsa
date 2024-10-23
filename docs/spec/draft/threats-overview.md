@@ -52,8 +52,9 @@ Many recent high-profile attacks were consequences of supply chain integrity vul
 <tr>
 <td>A
 <td>Producer
-<td><a href="https://en.wikipedia.org/wiki/XZ_Utils_backdoor">XZ Utils Backdoor</a>: A maintainer intentionally inserted malicious behavior into a legitimate package.
+<td><a href="https://en.wikipedia.org/wiki/SpySheriff">SpySheriff</a>: Software producer purports to offer anti-spyware software, but that software is actually malicious.
 <td>SLSA does not directly address this threat but could make it easier to discover malicious behavior in open source software, by forcing it into the publicly available source code.
+For close source software SLSA does not provide any solutions for malicious producers.
 <tr>
 <td>B
 <td>Authoring & reviewing
