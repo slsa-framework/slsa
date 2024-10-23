@@ -28,13 +28,13 @@ See https://slsa.dev/community for ways to get involved in SLSA development.
 | Workstream | [Shepherd]
 | ---------- | ----------
 | [Build Level 4] | David A Wheeler (@david-a-wheeler)
-| [Hardware Attested Platforms] | Marcela Melara (@marcelamelara), Chad Kimes (@chkimes)
+| [Attested Build Environments Track] | Marcela Melara (@marcelamelara), Pavel Iakovenko (@paveliak)
 | [Source Track] | Kris K (@kpk47)
 | [Version 1.1 release] | Joshua Lock (@joshuagl)
 
 [Shepherd]: CONTRIBUTING.md#workstream-lifecycle
 [Build Level 4]: https://github.com/slsa-framework/slsa/issues/977
-[Hardware Attested Platforms]: https://github.com/slsa-framework/slsa/issues/975
+[Attested Build Environments Track]: https://github.com/slsa-framework/slsa/labels/build-environment-track
 [Source Track]: https://github.com/slsa-framework/slsa/issues/956
 [Version 1.1 release]: https://github.com/slsa-framework/slsa/issues/900
 
