@@ -28,7 +28,7 @@ See https://slsa.dev/community for ways to get involved in SLSA development.
 | Workstream | [Shepherd]
 | ---------- | ----------
 | [Build Level 4] | David A Wheeler (@david-a-wheeler)
-| [Hardware Attested Platforms] | Marcela Melara (@marcelamelara), Chad Kimes (@chkimes)
+| [Hardware Attested Platforms] | Marcela Melara (@marcelamelara), Pavel Iakovenko (@paveliak)
 | [Source Track] | Kris K (@kpk47)
 | [Version 1.1 release] | Joshua Lock (@joshuagl)
 
