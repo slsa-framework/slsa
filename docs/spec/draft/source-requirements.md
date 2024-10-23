@@ -49,8 +49,8 @@ Consumers can examine the various source provenance attestations to determine if
 SCSs MAY allow the organization to expunge (remove) content from a repository and its change history without leaving a public record of the removed content.
 This includes changing files, history, or changing references in git and is used to accommodate legal/privacy compliance requirements.
 
-Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact. 
-In version control systems like git, removal of a revision changes the object id of all subsequent revisions that were built on top of it. 
+Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact.
+In version control systems like git, removal of a revision changes the object id of all subsequent revisions that were built on top of it.
 Although there is no "safe" way to do it, it sometimes necessary and there are steps you can take to mitigate the damage.
 
 When used as an attack, this is called “repo hijacking” (or “repo-jacking”) and is one of the primary threats source provenance attestations protect against.
