@@ -194,6 +194,20 @@ The SCS MUST document how actors are identified for the purposes of attribution.
 Activities conducted on the SCS SHOULD be attributed to authenticated identities.
 
 <td><td>✓<td>✓
+<tr id="strong-authentication"><td>Strong Authentication<td>
+
+User accounts that can modify the source or the project's configuration must use multi-factor authentication or its equivalent.
+This strongly authenticated identity MUST be used for the generation of source provenance attestations.
+The SCS MUST declare which forms of identity it considers to be trustworthy for this purpose.
+For cloud-based SCSs, this will typically be the identity used to push to a repository.
+
+Other forms of identity MAY be included as informational.
+Examples include a git commit's "author" and "committer" fields and a gpg signature's "user id."
+These forms of identity are user-provided and not typically verified by the source provenance attestation issuer.
+
+See [source roles](#source-roles).
+
+<td><td><td>✓
 <tr id="source-attestations"><td>Source attestations<td>
 
 A source attestation contains information about how a specific revision was created and how it came to exist in its present context
@@ -223,20 +237,6 @@ The change management tool MUST be able to authoritatively state that each new r
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
 
-<tr id="strong-authentication"><td>Strong Authentication<td>
-
-User accounts that can modify the source or the project's configuration must use multi-factor authentication or its equivalent.
-This strongly authenticated identity MUST be used for the generation of source provenance attestations.
-The SCS MUST declare which forms of identity it considers to be trustworthy for this purpose.
-For cloud-based SCSs, this will typically be the identity used to push to a repository.
-
-Other forms of identity MAY be included as informational.
-Examples include a git commit's "author" and "committer" fields and a gpg signature's "user id."
-These forms of identity are user-provided and not typically verified by the source provenance attestation issuer.
-
-See [source roles](#source-roles).
-
-<td><td><td>✓
 <tr id="context"><td>Context<td>
 
 The change management tool MUST record the specific code change (a "diff" in git) or instructions to recreate it.
