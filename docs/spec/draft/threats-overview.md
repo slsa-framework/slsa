@@ -68,7 +68,7 @@ For close source software SLSA does not provide any solutions for malicious prod
 <tr>
 <td>D
 <td>External build parameters
-<td><a href="https://www.webmin.com/exploit.html">Webmin</a>: Attacker modified the build infrastructure to use source files not matching source control.
+<td><a href="https://www.reddit.com/r/HobbyDrama/comments/jouwq7/open_source_development_the_great_suspender_saga/">The Great Suspender</a>: Attacker published software that was not built from the purported sources.
 <td>A SLSA-compliant build server would have produced provenance identifying the actual sources used, allowing consumers to detect such tampering.
 <tr>
 <td>E
