@@ -230,7 +230,7 @@ The SCS MUST ensure that all technical controls governing changes to a [branch](
 For example, this could be accomplished by:
 
 -   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)), or
--   application and verification of [gittuf](https://github.com/gittuf/gittuf) policies, or
+-   the application and verification of [gittuf](https://github.com/gittuf/gittuf) policies, or
 -   some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
 
 <td><td><td>✓
