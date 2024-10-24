@@ -66,7 +66,7 @@ The content may still exist in other copies of the repository, either in backups
 An SCS MUST document the Safe Expunging Process and describe how requests and actions are tracked and SHOULD log the fact that content was removed.
 Different organizations and tech stacks may have different approaches to the problem.
 
-SCSs SHOULD have technical mechanisms in place which require multiple Trusted Persons to trigger any expunging (removals) made under this process.
+SCSs SHOULD have technical mechanisms in place which require an Administrator plus, at least, one additional 'trusted person' to trigger any expunging (removals) made under this process.
 
 The application of the safe expunging process and the resulting logs MAY be private to both prevent calling attention to potentially sensitive data (e.g. PII) or to comply with local laws
 and regulations which may require the change to be kept private to the extent possible.
