@@ -46,37 +46,31 @@ Consumers can examine the various source provenance attestations to determine if
 
 ## Safe Expunging Process
 
-SCSs MAY allow the organization to expunge (remove) content from a repository and its change history without leaving a public record of the removed content.
-This includes changing files, history, or changing references in git and is used to accommodate legal/privacy compliance requirements.
+SCSs MAY allow the organization to expunge (remove) content from a repository and its change history without leaving a public record of the removed content,
+but MUST only allow these changes in order to meet legal or privacy compliance requirements.
+Content changed under this process includes changing files, history, references, or any other metadata stored by the SCS.
+
+### Warning
 
 Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact.
-In version control systems like Git, removal of a revision changes the object IDs of all subsequent revisions that were built on top of it.
-Although there is no "safe" way to do it, it sometimes necessary and there are steps you can take to mitigate the damage.
+For example, in VCSs like Git, removal of a revision changes the object IDs of all subsequent revisions that were built on top of it,
+this can break downstream consumers ability to refer to source they've already integrated into their products.
 
-When used as an attack, this is called “repo hijacking” (or “repo-jacking”) and is one of the primary threats source provenance attestations protect against.
-As such great care must be taken by SCSs when implementing these changes for legitimate purposes.
+It may be the case that the specific set of commits targeted by the takedown can be expunged in ways that do not impact revisions which can mitigate these problems.
+
+It is also the case that removing content from a repository won't necessarily remove it everywhere.
+The content may still exist in other copies of the repository, either in backups or on developer machines.
+
+### Process
+
+An SCS MUST document the Safe Expunging Process and describe how requests and actions are tracked and SHOULD log the fact that content was removed.
+Different organizations and tech stacks may have different approaches to the problem.
 
 SCSs SHOULD require multi-party approval for any changes made under this process.
 
-The Safe Expunging Process MUST be documented and describe how requests and actions are tracked and SHOULD log the fact that content was removed.
-
-On the git VCS, force pushes allow you to remove data from a branch.
-If a branch has been identified as consumable branch, force pushes to that branch must follow the safe expunging process.
-
-Different organizations and tech stacks may have different approaches to the problem.
-
-Safe Expunging Scenarios:
-
-### Legal Takedowns
-
-The only currently acceptable scenario to expunge data is in response to some legal or compliance request.
-
-The takedown request MUST be addressed by following an agreed-upon process.
-
-It may be the case that the specific set of commits targeted by the takedown can be expunged in ways that do not impact revisions.
-
 The application of the safe expunging process and the resulting logs MAY be private to both prevent calling attention to potentially sensitive data (e.g. PII) or to comply with local laws
 and regulations which may require the change to be kept private to the extent possible.
+Organizations SHOULD prefer to make logs public if possible.
 
 ## Levels
 
