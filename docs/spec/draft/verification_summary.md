@@ -161,7 +161,7 @@ of the other top-level fields, such as `subject`, see [Statement]._
 > determine the expected value when [verifying](#how-to-verify). If the
 > `resourceUri` is set to some other value, the producer MUST communicate the
 > expected value, or how to determine the expected value, to consumers through
-> out-of-band channel.
+> an out-of-band channel.
 
 <a id="policy"></a>
 `policy` _object ([ResourceDescriptor]), required_
