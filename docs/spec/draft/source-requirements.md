@@ -75,7 +75,7 @@ The takedown request MUST be addressed by following an agreed-upon process.
 
 It may be the case that the specific set of commits targeted by the takedown can be expunged in ways that do not impact revisions.
 
-This process and the resulting logs MAY be private to both prevent calling attention to potentially sensitive data (e.g. PII) or to comply with local laws
+The application of the safe expunging process and the resulting logs MAY be private to both prevent calling attention to potentially sensitive data (e.g. PII) or to comply with local laws
 and regulations which may require the change to be kept private to the extent possible.
 
 ## Levels
