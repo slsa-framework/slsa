@@ -103,7 +103,7 @@ Allows source consumers to track changes to the software over time and attribute
 ### Level 3: Authenticatable and Auditable Provenance
 
 Summary:
-The SCS is able to generate credible, tamper-resistant, and contemporaneous evidence, in a documented format,
+The SCS generates credible, tamper-resistant, and contemporaneous evidence, in a documented format,
 of how a specific revision was created to authorized users of the source repository.
 
 Intended for:
@@ -215,8 +215,8 @@ Source Provenance are attestations that contain information about how a specific
 (e.g. the branches or tags that point, or pointed, at that revision).
 They are associated with the revision identifier delivered to consumers and are a statement of fact from the perspective of the SCS.
 
-At Source Level 3 Source Provenance MUST be created contemporaneously with revision creation such that they provide a credible, auditable, record
-of changes.
+At Source Level 3 Source Provenance MUST be created contemporaneously with the revision being made available such that they provide a credible,
+auditable, record of changes.
 
 If a consumer is authorized to access source on a particular branch, they MUST be able to fetch the source attestation documents for revisions in the history of that branch.
 
