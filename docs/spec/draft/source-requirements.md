@@ -54,7 +54,7 @@ Content changed under this process includes changing files, history, references,
 
 Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact.
 For example, in VCSs like Git, removal of a revision changes the object IDs of all subsequent revisions that were built on top of it,
-this can break downstream consumers ability to refer to source they've already integrated into their products.
+, breaking downstream consumers' ability to refer to source they've already integrated into their products.
 
 It may be the case that the specific set of changes targeted by the takedown can be expunged in ways that do not impact consumed revisions, which can mitigate these problems.
 
