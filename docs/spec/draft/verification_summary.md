@@ -156,9 +156,9 @@ of the other top-level fields, such as `subject`, see [Statement]._
 
 > URI that identifies the resource associated with the artifact being verified.
 >
-> The `resourceUri` SHOULD be set to the URI the producer expects the consumer
-> to fetch the artifact being verified from. This enables the consumer to easily
-> determine the expected value when [verifying](#how-to-verify). If the
+> The `resourceUri` SHOULD be set to the URI from which the producer expects the
+> consumer to fetch the artifact for verification. This enables the consumer to
+> easily determine the expected value when [verifying](#how-to-verify). If the
 > `resourceUri` is set to some other value, the producer MUST communicate the
 > expected value, or how to determine the expected value, to consumers through
 > an out-of-band channel.
