@@ -46,36 +46,31 @@ Consumers can examine the various source provenance attestations to determine if
 
 ## Safe Expunging Process
 
-Administrators have the ability to expunge (remove) content from a repository and its change history without leaving a record of the removed content.
-This includes changing files, history, or changing references in git and is used to accommodate legal or privacy compliance requirements.
-When used as an attack, this is called “repo hijacking” (or “repo-jacking”) and is one of the primary threats source provenance attestations protect against.
+SCSs MAY allow the organization to expunge (remove) content from a repository and its change history without leaving a public record of the removed content,
+but MUST only allow these changes in order to meet legal or privacy compliance requirements.
+Content changed under this process includes changing files, history, references, or any other metadata stored by the SCS.
 
-On the git VCS, force pushes allow you to remove data from a branch.
-If a branch has been identified as consumable branch, force pushes to that branch must follow the safe expunging process.
+### Warning
 
-TODO: Determine how organizations can provide transparency around this process.
-At a minimum the organization would need to declare why data was removed from the branch.
+Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact.
+For example, in VCSs like Git, removal of a revision changes the object IDs of all subsequent revisions that were built on top of it,
+, breaking downstream consumers' ability to refer to source they've already integrated into their products.
 
-The goal of this sections is to document that this process is allowed.
+It may be the case that the specific set of changes targeted by a legal takedown can be expunged in ways that do not impact consumed revisions, which can mitigate these problems.
+
+It is also the case that removing content from a repository won't necessarily remove it everywhere.
+The content may still exist in other copies of the repository, either in backups or on developer machines.
+
+### Process
+
+An SCS MUST document the Safe Expunging Process and describe how requests and actions are tracked and SHOULD log the fact that content was removed.
 Different organizations and tech stacks may have different approaches to the problem.
 
-Scenarios that need to be addressed:
+SCSs SHOULD have technical mechanisms in place which require an Administrator plus, at least, one additional 'trusted person' to trigger any expunging (removals) made under this process.
 
-### Legal Takedowns
-
-A DMCA takedown request will be addressed by following an agreed-upon process.
-That process should be documented itself and followed.
-It may be the case that the specific set of commits targeted by the takedown can be expunged in ways that do not impact revisions.
-
-### Commit metadata rewrites
-
-A team may decide that all reachable commits in the history of a revision need to follow a new metadata convention.
-In git VCS, compliance with this new policy will require history to be rewritten (commit metadata is included in the computation of the revision id).
-Policies in this category include things like commit signatures, author / committer formatting restrictions, closed-issue-linkage, etc.
-
-### Repository renames
-
-When a repo is transferred to a new organization ("donated"), or if a repo must be renamed or otherwise have its url changed within the same org, attestations for previous revisions of this repo will no longer be matched because the combination of the repository id and the revision id will have changed.
+The application of the safe expunging process and the resulting logs MAY be private to both prevent calling attention to potentially sensitive data (e.g. PII) or to comply with local laws
+and regulations which may require the change to be kept private to the extent possible.
+Organizations SHOULD prefer to make logs public if possible.
 
 ## Levels
 
