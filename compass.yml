@@ -1,0 +1,16 @@
+name: slsa
+id: ari:cloud:compass:b05bd447-01d9-48bb-8a0e-544f753425d1:component/bfc60ef0-e6fa-4ca2-96b4-363306fd4428/63fe536e-b82b-4bd2-bba8-815a787cfc2e
+description: Supply-chain Levels for Software Artifacts
+configVersion: 1
+typeId: SERVICE
+fields:
+  tier: 4
+links:
+  - name: null
+    type: REPOSITORY
+    url: https://github.com/https-github-com-okeamah/slsa
+relationships:
+  DEPENDS_ON: []
+labels:
+  - source:github
+customFields: null
