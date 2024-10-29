@@ -775,9 +775,18 @@ The consumer requests a package that it did not intend.
 on the victim's internal registry, and wait for a misconfigured victim to fetch
 from the public registry instead of the internal one.
 
-**TODO:** fill out the rest of this section
+*Mitigation:* The mitigation is for the software producer to build internal
+packages on a SLSA Level 2+ compliant build system and define expectations for
+build provenance. Expectations must be verified on installation of the internal
+packages. If a misconfigured victim attempts to install attacker's package with
+an internal name but from the public registry, then verification against
+expectations will fail.
+
+For more information see [Verifying artifacts](https://slsa.dev/spec/v1.1/verifying-artifacts)
+and [Defender's Perspective: Dependency Confusion and Typosquatting Attacks](https://slsa.dev/blog/2024/08/dep-confusion-and-typosquatting).
 
 </details>
+
 <details><summary>Typosquatting</summary>
 
 *Threat:* Register a package name that is similar looking to a popular package
