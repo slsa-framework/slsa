@@ -103,7 +103,7 @@ Allows source consumers to track changes to the software over time and attribute
 ### Level 3: Authenticatable and Auditable Provenance
 
 Summary:
-The SCS generates credible, tamper-resistant, and contemporaneous evidence of how a specific revision was created. 
+The SCS generates credible, tamper-resistant, and contemporaneous evidence of how a specific revision was created.
 It is provided to authorized users of the source repository in a documented format.
 of how a specific revision was created to authorized users of the source repository.
 
