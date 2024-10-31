@@ -98,14 +98,16 @@ Allows source consumers to track changes to the software over time and attribute
 ### Level 3: Authenticatable and Auditable Provenance
 
 Summary:
-A consumer can ask the SCS for everything it knows about a specific revision of a repository.
-The information is provided in a documented and tamper-resistant format.
+The SCS generates credible, tamper-resistant, and contemporaneous evidence of how a specific revision was created.
+It is provided to authorized users of the source repository in a documented format.
+of how a specific revision was created to authorized users of the source repository.
 
 Intended for:
 Organizations that want strong guarantees and auditability of their change management processes.
 
 Benefits:
-Provides authenticatable and auditable information to policy enforcement tools.
+Provides authenticatable and auditable information to policy enforcement tools and reduces the risk of tampering
+within the SCS's storage systems.
 
 ## System Requirements
 
@@ -203,11 +205,14 @@ These forms of identity are user-provided and not typically verified by the sour
 See [source roles](#source-roles).
 
 <td><td><td>✓
-<tr id="source-attestations"><td>Source attestations<td>
+<tr id="source-provenance"><td>Source Provenance<td>
 
-A source attestation contains information about how a specific revision was created and how it came to exist in its present context
+Source Provenance are attestations that contain information about how a specific revision was created and how it came to exist in its present context
 (e.g. the branches or tags that point, or pointed, at that revision).
 They are associated with the revision identifier delivered to consumers and are a statement of fact from the perspective of the SCS.
+
+At Source Level 3 Source Provenance MUST be created contemporaneously with the revision being made available such that they provide a credible,
+auditable, record of changes.
 
 If a consumer is authorized to access source on a particular branch, they MUST be able to fetch the source attestation documents for revisions in the history of that branch.
 
