@@ -77,7 +77,7 @@ Example ways an open source ecosystem might use SLSA to protect users:
 -   At download time, the packaging client rejects the package if it was not
     built by a trusted builder.
 
-**Case study:** [SUSE](https://documentation.suse.com/sbp/server-linux/html/SBP-SLSA4/index.html)
+**Case study:** [SUSE](https://documentation.suse.com/sbp/security/html/SBP-SLSA4/index.html)
 
 </div>
 </div>
