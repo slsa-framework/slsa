@@ -15,6 +15,7 @@ permissions in this repository.
 
 | Name | Email | OpenSSF Slack | GitHub | Affiliation
 | --- | --- | --- | --- | ---
+| Aditya Sirish A Yelgundhalli | aditya.sirish@nyu.edu | @Aditya Sirish | [adityasaky](https://github.com/adityasaky) | New York University and Bloomberg
 | Andrew McNamara | arewm@redhat.com |  @arewm | [arewm](https://github.com/arewm) | Red Hat
 | Arnaud Le Hors | lehors@us.ibm.com | @Arnaud Le Hors | [lehors](https://github.com/lehors) | IBM
 | Joshua Lock | joshuagloe@gmail.com | @Joshua Lock |  [joshuagl](https://github.com/joshuagl) | Verizon
