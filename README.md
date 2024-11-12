@@ -1,6 +1,6 @@
 # SLSA ("salsa") is Supply-chain Levels for Software Artifacts
 
-<img align="right" src="https://github.com/slsa-framework/slsa/blob/main/docs/images/slsa-dancing-goose-logo.svg">
+<img align="right" src="https://github.com/slsa-framework/slsa/blob/main/docs/images/slsa-dancing-goose-logo.svg" alt="The OpenSSF mascot, a goose in armor, strikes a pose wearing a red salsa dress">
 
 SLSA (pronounced ["salsa"](https://www.google.com/search?q=how+to+pronounce+salsa)) is a security framework from source to service, giving anyone working with software a common language for increasing levels of software security and supply chain integrity. It’s how you get from safe enough to being as resilient as possible, at any link in the chain.
 
@@ -25,16 +25,16 @@ See https://slsa.dev/community for ways to get involved in SLSA development.
 
 ## Active workstreams
 
-| Workstream | [Shepherd] |
-| ---------- | ---------- |
-| [Build Level 4] | David A Wheeler (@david-a-wheeler) |
-| [Hardware Attested Platforms] | Marcela Melara (@marcelamelara), Chad Kimes (@chkimes) |
-| [Source Track] | Kris K (@kpk47) |
-| [Version 1.1 release] | Joshua Lock (@joshuagl) |
+| Workstream | [Shepherd]
+| ---------- | ----------
+| [Build Level 4] | David A Wheeler (@david-a-wheeler)
+| [Attested Build Environments Track] | Marcela Melara (@marcelamelara), Pavel Iakovenko (@paveliak)
+| [Source Track] | Kris K (@kpk47)
+| [Version 1.1 release] | Joshua Lock (@joshuagl)
 
 [Shepherd]: CONTRIBUTING.md#workstream-lifecycle
 [Build Level 4]: https://github.com/slsa-framework/slsa/issues/977
-[Hardware Attested Platforms]: https://github.com/slsa-framework/slsa/issues/975
+[Attested Build Environments Track]: https://github.com/slsa-framework/slsa/labels/build-environment-track
 [Source Track]: https://github.com/slsa-framework/slsa/issues/956
 [Version 1.1 release]: https://github.com/slsa-framework/slsa/issues/900
 

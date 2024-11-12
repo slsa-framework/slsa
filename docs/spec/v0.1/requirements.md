@@ -13,28 +13,28 @@ To better understand the reasoning behind the requirements, see
 
 ## Summary table
 
-| Requirement                          | SLSA 1 | SLSA 2 | SLSA 3 | SLSA 4 |
-| ------------------------------------ | ------ | ------ | ------ | ------ |
-| Source - [Version controlled]        |        | ✓      | ✓      | ✓      |
-| Source - [Verified history]          |        |        | ✓      | ✓      |
-| Source - [Retained indefinitely]     |        |        | 18 mo. | ✓      |
-| Source - [Two-person reviewed]       |        |        |        | ✓      |
-| Build - [Scripted build]             | ✓      | ✓      | ✓      | ✓      |
-| Build - [Build service]              |        | ✓      | ✓      | ✓      |
-| Build - [Build as code]              |        |        | ✓      | ✓      |
-| Build - [Ephemeral environment]      |        |        | ✓      | ✓      |
-| Build - [Isolated]                   |        |        | ✓      | ✓      |
-| Build - [Parameterless]              |        |        |        | ✓      |
-| Build - [Hermetic]                   |        |        |        | ✓      |
-| Build - [Reproducible]               |        |        |        | ○      |
-| Provenance - [Available]             | ✓      | ✓      | ✓      | ✓      |
-| Provenance - [Authenticated]         |        | ✓      | ✓      | ✓      |
-| Provenance - [Service generated]     |        | ✓      | ✓      | ✓      |
-| Provenance - [Non-falsifiable]       |        |        | ✓      | ✓      |
-| Provenance - [Dependencies complete] |        |        |        | ✓      |
-| Common - [Security]                  |        |        |        | ✓      |
-| Common - [Access]                    |        |        |        | ✓      |
-| Common - [Superusers]                |        |        |        | ✓      |
+| Requirement                          | SLSA 1 | SLSA 2 | SLSA 3 | SLSA 4
+| ------------------------------------ | ------ | ------ | ------ | ------
+| Source - [Version controlled]        |        | ✓      | ✓      | ✓
+| Source - [Verified history]          |        |        | ✓      | ✓
+| Source - [Retained indefinitely]     |        |        | 18 mo. | ✓
+| Source - [Two-person reviewed]       |        |        |        | ✓
+| Build - [Scripted build]             | ✓      | ✓      | ✓      | ✓
+| Build - [Build service]              |        | ✓      | ✓      | ✓
+| Build - [Build as code]              |        |        | ✓      | ✓
+| Build - [Ephemeral environment]      |        |        | ✓      | ✓
+| Build - [Isolated]                   |        |        | ✓      | ✓
+| Build - [Parameterless]              |        |        |        | ✓
+| Build - [Hermetic]                   |        |        |        | ✓
+| Build - [Reproducible]               |        |        |        | ○
+| Provenance - [Available]             | ✓      | ✓      | ✓      | ✓
+| Provenance - [Authenticated]         |        | ✓      | ✓      | ✓
+| Provenance - [Service generated]     |        | ✓      | ✓      | ✓
+| Provenance - [Non-falsifiable]       |        |        | ✓      | ✓
+| Provenance - [Dependencies complete] |        |        |        | ✓
+| Common - [Security]                  |        |        |        | ✓
+| Common - [Access]                    |        |        |        | ✓
+| Common - [Superusers]                |        |        |        | ✓
 
 <!-- markdownlint-disable MD036 -->
 _○ = REQUIRED unless there is a justification_
@@ -63,7 +63,7 @@ _○ = REQUIRED unless there is a justification_
 ## Definitions
 
 > See also [Terminology](terminology.md) for general SLSA concepts. The
-> defintions below are only used in this document.
+> definitions below are only used in this document.
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be

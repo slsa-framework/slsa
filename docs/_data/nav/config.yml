@@ -1,5 +1,6 @@
 # Mapping from version in the URL to the key in site.data.nav.
 url_to_key:
+  draft: draft
   v0.1: v01
   v0.2: v02
   v1.0-rc1: v10-rc1

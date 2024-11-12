@@ -13,12 +13,17 @@ permissions in this repository.
 <!-- Please keep the list sorted alphabetically by first name. -->
 <!-- Remember to add new candidates to the GitHub group. -->
 
-| Name | Email | OpenSSF Slack | GitHub | Affiliation |
-| --- | --- | --- | --- | --- |
-| Arnaud Le Hors | lehors@us.ibm.com | @Arnaud Le Hors | [lehors](https://github.com/lehors) | IBM |
-| Kris K | kkris@google.com | @Kris K | [kpk47](https://github.com/kpk47) | Google |
-| Mark Lodato | lodato@google.com |  @Mark Lodato | [MarkLodato](https://github.com/MarkLodato) | Google |
-| Michael Lieberman | mlieberman85@gmail.com | @Michael Lieberman | [mlieberman85](https://github.com/mlieberman85) | Kusari |
+| Name | Email | OpenSSF Slack | GitHub | Affiliation
+| --- | --- | --- | --- | ---
+| Aditya Sirish A Yelgundhalli | aditya.sirish@nyu.edu | @Aditya Sirish | [adityasaky](https://github.com/adityasaky) | New York University and Bloomberg
+| Andrew McNamara | arewm@redhat.com |  @arewm | [arewm](https://github.com/arewm) | Red Hat
+| Arnaud Le Hors | lehors@us.ibm.com | @Arnaud Le Hors | [lehors](https://github.com/lehors) | IBM
+| Marcela Melara | marcela.melara@intel.com | @Marcela Melara | [marcelamelara](https://github.com/marcelamelara) | Intel
+| Mark Lodato | lodato@google.com |  @Mark Lodato | [MarkLodato](https://github.com/MarkLodato) | Google
+| Michael Lieberman | mlieberman85@gmail.com | @Michael Lieberman | [mlieberman85](https://github.com/mlieberman85) | Kusari
+| Tom Hennen | tomhennen@google.com | @Tom Hennen | [TomHennen](https://github.com/TomHennen) | Google
+| Trishank Karthik Kuppusamy | trishank.kuppusamy@datadoghq.com | @trishank | [trishankatdatadog](https://github.com/trishankatdatadog) | Datadog
+| Zachariah Cox | zachariahcox@github.com | @zachariahcox | [zachariahcox](https://github.com/zachariahcox) | GitHub
 
 ### Becoming a Maintainer
 
@@ -47,6 +52,7 @@ candidate to the [Specification Maintainers] GitHub team.
 
 | Name | Email | OpenSSF Slack | GitHub | Affiliation |
 | --- | --- | --- | --- | --- |
+| Kris K | kkris@google.com | @Kris K | [kpk47](https://github.com/kpk47) | Google
 | Joshua Lock | joshuagloe@gmail.com | @Joshua Lock |  [joshuagl](https://github.com/joshuagl) | Verizon |
 
 ### Removing a Maintainer

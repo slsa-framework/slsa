@@ -517,7 +517,7 @@ Here `entryPoint` references the `filename` from the CloudBuild
     "digest": {"sha1": "abc..."}
   },
   // The only possible user-defined parameters that can affect a BuildTrigger
-  // are the subtitutions in the BuildTrigger.
+  // are the substitutions in the BuildTrigger.
   "parameters": {
     "substitutions": {...}
   }

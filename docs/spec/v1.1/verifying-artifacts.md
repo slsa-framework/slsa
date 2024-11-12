@@ -150,12 +150,12 @@ behavior into the package.
 You SHOULD compare the provenance against expected values for at least the
 following fields:
 
-| What | Why |
-| ---- | --- |
-| Builder identity from [Step 1] | To prevent an adversary from building the correct code on an unintended platform |
-| Canonical source repository | To prevent an adversary from building from an unofficial fork (or other disallowed source) |
-| `buildType` | To ensure that `externalParameters` are interpreted as intended |
-| `externalParameters` | To prevent an adversary from injecting unofficial behavior |
+| What | Why
+| ---- | ---
+| Builder identity from [Step 1] | To prevent an adversary from building the correct code on an unintended platform
+| Canonical source repository | To prevent an adversary from building from an unofficial fork (or other disallowed source)
+| `buildType` | To ensure that `externalParameters` are interpreted as intended
+| `externalParameters` | To prevent an adversary from injecting unofficial behavior
 
 Verification tools SHOULD reject unrecognized fields in `externalParameters` to
 err on the side of caution. It is acceptable to allow a parameter to have a

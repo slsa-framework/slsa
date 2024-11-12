@@ -57,6 +57,27 @@ style, as encoded in our [markdownlint configuration](.markdownlint.yaml). In
 addition we prefer to keep our Markdown documents wrapped at 80 columns (though
 this is not currently enforced).
 
+To check (and fix) style problems before sending a PR you can run linting
+locally with `npm run lint && ./lint.sh` or `npm run format && ./lint.sh`.
+
+```shell
+$ npm run lint && ./lint.sh
+
+> lint
+> markdownlint .
+
+CONTRIBUTING.md:77 MD022/blanks-around-headings Headings should be surrounded by blank lines [Expected: 1; Actual: 0; Above] [Context: "### Pull request conventions"]
+$ npm run format && ./lint.sh
+
+> format
+> markdownlint . --fix
+
+$
+```
+
+If you haven't already you'll need to install npm (e.g. `sudo apt install npm`)
+and package dependencies (`npm install`).
+
 ### Pull request conventions
 
 [pull request conventions]: #pull-request-conventions
@@ -99,15 +120,15 @@ multiple apply. If you are not sure which type to use, take a guess and a
 maintainer will update if needed. See [review and approval] for the meaning of
 "waiting period" and "# approvers".
 
-| Type | Meaning | Waiting period | # Approvers |
-|---|---|---|---|
-| `content` | A change to the meaning of the specification. Must include a [changelog entry]. | 72h | 3 |
-| `editorial` | A clarification to the specification that does not change its meaning, beyond a simple `fix`. | 24h | 2 |
-| `nonspec` | A change to a non-specification, non-blog page, beyond a simple `fix`. | 24h | 2 |
-| `blog` | A new or updated blog post. (Do not mix with categories above.) | 24h | 2 |
-| `fix` | A fix for obvious typos, broken links, and similar. | 0h | 1 |
-| `style` | A user-visible style or layout change. No content changes. | 0h | 1 |
-| `impl` | A user-invisible change, such as editing a README or the repo configuration. | 0h | 1 |
+| Type | Meaning | Waiting period | # Approvers
+|---|---|---|---
+| `content` | A change to the meaning of the specification. Must include a [changelog entry]. | 72h | 3
+| `editorial` | A clarification to the specification that does not change its meaning, beyond a simple `fix`. | 24h | 2
+| `nonspec` | A change to a non-specification, non-blog page, beyond a simple `fix`. | 24h | 2
+| `blog` | A new or updated blog post. (Do not mix with categories above.) | 24h | 2
+| `fix` | A fix for obvious typos, broken links, and similar. | 0h | 1
+| `style` | A user-visible style or layout change. No content changes. | 0h | 1
+| `impl` | A user-invisible change, such as editing a README or the repo configuration. | 0h | 1
 
 Note 1: PR authors with write access to the repo count as second or third
 approvers for their own PRs. For example, if the author of a PR with the
@@ -117,8 +138,12 @@ always requires one reviewer, even if the author has write access.
 
 Note 2: If the PR only touches files in the [Draft](docs/spec-stages.md)
 specification stage, then the "waiting period" and "# reviewers" are relaxed and
-up to Maintainer discretion. Files in the Draft stage have a large banner at the
-top of each rendered page, as well as the text "Status: Draft".
+up to Maintainer discretion (including the PR author if they're a maintainer). Note
+that a relaxed number of reviewers and waiting period may result in more back
+and forth with the expanded set of reviewers as drafts are finalized.
+Drafts should be indicated in the PR title following a pattern of `<type>: draft: <subject>`.
+Files in the Draft stage have a large banner at the top of each rendered page,
+as well as the text "Status: Draft".
 
 [squash and merge]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits
 
@@ -139,14 +164,24 @@ Review process:
 
 1.  Ensure that the PR meets the [pull request conventions].
 
-2.  GitHub will automatically assign the maintainers as reviewers. You will need
-    a different number of approvals for different PR types. Your reviewers may
-    ask that you use a different PR type.
+2.  If there is a particular set of maintainers you've been working with, feel
+    free to assign the PR to them.  If they don't have time to review they
+    should feel free to assign to someone else, or provide feedback on when
+    they can get to it.  Otherwise, assign to
+    `@slsa-framework/specification-maintainers`.
+    -   Feel free to ping the reviwers in the
+    [slsa-specification Slack](https://openssf.slack.com/archives/C03NUSAPKC6)
+    when the PR is ready for review.
+    -   You will need a different number of approvals for different
+    [PR types](#pull-request-types). Your reviewers may ask that you use a
+    different PR type.
 
 3.  Wait an appropriate amount of time to allow for lazy consensus. Different
     types have different minimum waiting periods. The waiting period begins at
     the timestamp of either the final required approval or the latest non-author
     comment, whichever is later.
+    -   If a few days have passed without any feedback please feel free to ping
+    the PR and [in Slack](https://openssf.slack.com/archives/C03NUSAPKC6).
 
 4.  Once the waiting period has passed, a maintainer will merge your PR. Expect
     your PR to be squashed+merged unless your reviewers advise you otherwise.
@@ -210,6 +245,37 @@ You can automatically append a sign-off to a commit by passing the `-s` /
 
 **Note**: this requires your `user.name` and `user.email` are set correctly
 in your git config.
+
+## SLSA versions management
+
+The main working draft is located in the `spec/draft` folder while the various versions are in specific folders:
+
+```none
+spec/draft
+spec/v0.1
+spec/v0.2
+spec/v1.0
+spec/v1.0-rc1
+spec/v1.0-rc2
+spec/v1.1
+```
+
+`spec/draft` is where all new work should take place. To publish a new version of the SLSA specification, copy the draft folder to a version specific folder (e.g., `spec/v1.1`) and make the necessary changes to that folder: it is possible for instance that not all that is in the draft should be included in which case you will need to remove that content, and several config and navigation files need to be updated such as:
+
+```none
+_data/nav/config.yml
+_data/nav/v1.1.yml (corresponding to the version you are creating)
+_data/versions.yml
+_redirects
+```
+
+To patch a specific version of the specification, the changes should be made to both the corresponding folder as well as, if applicable, to all later versions including the draft folder.
+
+Unfortunately we've not figured out a better way to handle the different versions with Jekyll. If you do, please let us know!
+
+To compare the changes between two versions you may find it handy to use the [diff site script](https://github.com/slsa-framework/slsa/tree/main/docs#comparing-built-versions).
+
+**Note**: When publishing new versions of the SLSA specification, make sure to follow the [Specification stages and versions documentation](docs/spec-stages.md) and the [Specification Development Process](https://github.com/slsa-framework/governance/blob/main/5._Governance.md#4-specification-development-process) to ensure compliance with the [Community Specification License](https://github.com/slsa-framework/governance/blob/main/1._Community_Specification_License-v1.md).
 
 ## Workstream lifecycle
 

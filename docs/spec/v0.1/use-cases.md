@@ -43,7 +43,7 @@ Example ways an organization might use SLSA internally:
 -   A large company uses SLSA to require two person review for every production
     change, scalably across hundreds or thousands of employees/teams.
 -   An open source project uses SLSA to ensure that compromised credentials
-    cannot be abused to release an unofficial package to a package repostory.
+    cannot be abused to release an unofficial package to a package repository.
 
 **Case study:** [Google (Binary Authorization for Borg)](https://cloud.google.com/docs/security/binary-authorization-for-borg)
 
@@ -77,7 +77,7 @@ Example ways an open source ecosystem might use SLSA to protect users:
 -   At download time, the packaging client rejects the package if it was not
     built by a trusted builder.
 
-**Case study:** [SUSE](https://documentation.suse.com/sbp/server-linux/html/SBP-SLSA4/index.html)
+**Case study:** [SUSE](https://documentation.suse.com/sbp/security/html/SBP-SLSA4/index.html)
 
 </div>
 </div>

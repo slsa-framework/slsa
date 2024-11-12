@@ -85,6 +85,39 @@ after creating a PR, Netlify will add a comment with a link to a preview. The
 URL is of the form `https://deploy-preview-#--slsa.netlify.app` where `#` is the
 pull request number. This preview is updated on every push.
 
+### Comparing built versions
+
+The script `../tools/diff_site` allows you to easily compare two different build
+results, for example to check that an upgrade to a new version of Jekyll did not
+break anything. It works with both locally built versions (`_site`) and archives
+downloaded from Netlify (`deploy-*.zip`).
+
+Example 1: comparing two locally built versions of the site
+
+```bash
+# Prepare version A 
+$ bundle exec jekyll build
+$ mv _site _site.A
+# Prepare version B
+$ bundle exec jekyll build
+$ mv _site _site.B
+# Run the script
+$ ../tools/diff_site _site.A _site.B
+```
+
+Example 2: comparing a Netlify pull request preview to the latest production
+version
+
+Download the `deploy-*.zip` snapshots from
+https://app.netlify.com/sites/slsa
+([screenshot](../readme_images/netlify_download_screenshot.png)), one for the
+latest production deploy and one for the pull request. **You must be
+logged in to Netlify to see the Download link.** Then run:
+
+```bash
+../tools/diff_site deploy-latest.zip deploy-preview.zip
+```
+
 ## Production
 
 ### Netlify configuration
