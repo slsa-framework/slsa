@@ -50,8 +50,8 @@ candidate to the [Specification Maintainers] GitHub team.
 <!-- Please keep the list sorted alphabetically by first name. -->
 <!-- Remember to remove candidates from the GitHub group. -->
 
-| Name | Email | OpenSSF Slack | GitHub | Affiliation |
-| --- | --- | --- | --- | --- |
+| Name | Email | OpenSSF Slack | GitHub | Affiliation
+| --- | --- | --- | --- | ---
 | Kris K | kkris@google.com | @Kris K | [kpk47](https://github.com/kpk47) | Google
 | Joshua Lock | joshuagloe@gmail.com | @Joshua Lock |  [joshuagl](https://github.com/joshuagl) | Verizon |
 
