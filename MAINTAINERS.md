@@ -16,7 +16,6 @@ permissions in this repository.
 | Name | Email | OpenSSF Slack | GitHub | Affiliation |
 | --- | --- | --- | --- | --- |
 | Arnaud Le Hors | lehors@us.ibm.com | @Arnaud Le Hors | [lehors](https://github.com/lehors) | IBM |
-| Joshua Lock | joshuagloe@gmail.com | @Joshua Lock |  [joshuagl](https://github.com/joshuagl) | Verizon |
 | Kris K | kkris@google.com | @Kris K | [kpk47](https://github.com/kpk47) | Google |
 | Mark Lodato | lodato@google.com |  @Mark Lodato | [MarkLodato](https://github.com/MarkLodato) | Google |
 | Michael Lieberman | mlieberman85@gmail.com | @Michael Lieberman | [mlieberman85](https://github.com/mlieberman85) | Kusari |
@@ -48,6 +47,7 @@ candidate to the [Specification Maintainers] GitHub team.
 
 | Name | Email | OpenSSF Slack | GitHub | Affiliation |
 | --- | --- | --- | --- | --- |
+| Joshua Lock | joshuagloe@gmail.com | @Joshua Lock |  [joshuagl](https://github.com/joshuagl) | Verizon |
 
 ### Removing a Maintainer
 
