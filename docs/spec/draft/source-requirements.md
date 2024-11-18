@@ -53,8 +53,7 @@ Content changed under this process includes changing files, history, references,
 ### Warning
 
 Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact.
-For example, in VCSs like Git, removal of a revision changes the object IDs of all subsequent revisions that were built on top of it,
-, breaking downstream consumers' ability to refer to source they've already integrated into their products.
+For example, in VCSs like Git, removal of a revision changes the object IDs of all subsequent revisions that were built on top of it, breaking downstream consumers' ability to refer to source they've already integrated into their products.
 
 It may be the case that the specific set of changes targeted by a legal takedown can be expunged in ways that do not impact consumed revisions, which can mitigate these problems.
 
@@ -229,7 +228,7 @@ The SCS MUST ensure that all technical controls governing changes to a [branch](
 
 For example, this could be accomplished by:
 
--   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)), or
+-   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)), or
 -   the application and verification of [gittuf](https://github.com/gittuf/gittuf) policies, or
 -   some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
 
