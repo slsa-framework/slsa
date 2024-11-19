@@ -129,7 +129,7 @@ of build types](/provenance/v1#index-of-build-types).
 
 ### Build environment model
 
-**TODO:** Add figure
+<p align="center"><img src="images/build-env-model.svg" alt="Build Environment Model"></p>
 
 The Build Environment (BuildEnv) track expands upon the [build model](#build-model)
 by explicitily separating the *build image* and *compute platform* from the abstract
