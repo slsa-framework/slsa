@@ -115,7 +115,7 @@ the form of attestations that the package was built correctly**.
 **Benefits**: The attestation removes intermediate platforms from the trust base and ensures that
 individuals who are accidentally granted access do not have sufficient permission to tamper with the package.
 
-## Support anonymous and pseudonymous contribution
+## Support anonymous and pseudonymous contributions
 
 SLSA supports anonymous and pseudonymous 'identities' within the software supply chain.
 While organizations that implement SLSA may chose otherwise, SLSA itself does not require,
