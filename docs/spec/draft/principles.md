@@ -118,7 +118,7 @@ individuals who are accidentally granted access do not have sufficient permissio
 ## Support anonymous and pseudonymous contributions
 
 SLSA supports anonymous and pseudonymous 'identities' within the software supply chain.
-While organizations that implement SLSA may chose otherwise, SLSA itself does not require,
+While organizations that implement SLSA may choose otherwise, SLSA itself does not require,
 or encourage, participants to be mapped to their legal identities.
 
 **Nothing in this specification should be taken to mean that SLSA requires participants to
