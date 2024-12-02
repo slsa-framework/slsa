@@ -107,10 +107,28 @@ In practice, though, these configurations are almost impossible to get right and
 keep right. There are often over-provisioning, confused deputy problems, or
 mistakes. Even if a platform is configured properly at one moment, it might not
 stay that way, and humans almost always end up getting in the access control
-lists.  
+lists.
 
 Access control is still important, but SLSA goes further to provide defense in depth: it **requires proof in
 the form of attestations that the package was built correctly**.
 
 **Benefits**: The attestation removes intermediate platforms from the trust base and ensures that
 individuals who are accidentally granted access do not have sufficient permission to tamper with the package.
+
+## Support anonymous and pseudonymous contribution
+
+SLSA supports anonymous and pseudonymous 'identities' within the software supply chain.
+While organizations that implement SLSA may chose otherwise, SLSA itself does not require,
+or encourage, participants to be mapped to their legal identities.
+
+**Nothing in this specification should be taken to mean that SLSA requires participants to
+to reveal their legal identity.**
+
+**Reasoning**: One of SLSA's other principles is to [trust code, not individuals](#trust-code-not-individuals).
+The legal identity of actor is largely not relevant from a supply chain security perspective.  Further,
+_requiring_ a legal identity would likely preclude the participation of many of open source software's most
+valued participants.
+
+**Benefits**: By _not_ requiring legal identities SLSA lowers the barriers to its adoption, enabling
+all of its other benefits and maintaining support for anonymous and pseudonymous contribution as has been
+practiced in the software industry for decades.
