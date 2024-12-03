@@ -866,14 +866,19 @@ libDep, resulting in MyPackage also having the security vulnerability.
 process, which alters the build process and injects unintended behavior into the
 output artifact.
 
+*Mitigation:* Treat build tooling, including OS images, as any other software
+to be verified prior to use (as described in (G)). This will allow the build
+platform to detect any modified binaries.
+
 *Example:* MyPackage is a tarball containing an ELF executable, created by
 running `/usr/bin/tar` during its build process. An adversary compromises the
 `tar` OS package such that `/usr/bin/tar` injects a backdoor into every ELF
 executable it writes. The next time MyPackage is built, the build picks up the
 vulnerable `tar` package, which injects the backdoor into the resulting
-MyPackage artifact.
-
-*Mitigation:* **TODO**
+MyPackage artifact.  Solution: The build platform verifies the disk image,
+or the individual components on the disk image, against the associated
+provenance or VSAs prior to running a build. The modified `/usr/bin/tar`
+will fail this verification.
 
 </details>
 
