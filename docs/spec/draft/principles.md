@@ -124,11 +124,16 @@ or encourage, participants to be mapped to their legal identities.
 **Nothing in this specification should be taken to mean that SLSA requires participants to
 to reveal their legal identity.**
 
-**Reasoning**: One of SLSA's other principles is to [trust code, not individuals](#trust-code-not-individuals).
-The legal identity of actor is largely not relevant from a supply chain security perspective.  Further,
-_requiring_ a legal identity would likely preclude the participation of many of open source software's most
-valued participants.
+**Reasoning**: SLSA uses identities for multiple purposes: as a trust anchor for attestations
+(i.e. who or what is making this claim and do I trust it to do so) or for attributing actions
+to the actor which took them within the context of the system they're taking them in (e.g. a
+username, cryptographic signing key, etc...).
 
-**Benefits**: By _not_ requiring legal identities SLSA lowers the barriers to its adoption, enabling
-all of its other benefits and maintaining support for anonymous and pseudonymous contribution as has been
-practiced in the software industry for decades.
+When identities are strongly authenticated and used consistently they can be used for both of
+these purposes without requiring them to be mapped to legal identities.  This reflects how
+identities are often used in open source. A legal name means much less to projects than the
+history and behavior of a given handle over time does.
+
+**Benefits**: By _not_ requiring legal identities SLSA lowers the barriers to its adoption,
+enabling all of its other benefits and maintaining support for anonymous and pseudonymous
+contribution as has been practiced in the software industry for decades.
