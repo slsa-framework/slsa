@@ -142,7 +142,7 @@ A typical build environment will go through the following lifecycle:
     the build image producer outputs provenance describing this process.
 2.  *Build environment instantiation*: The hosted build platform calls
     into the *host interface* to create a new instance of a build environment
-    from a given build image. The *build agent* begins to wait for an incoming
+    from a given build image. The *compute agent* waits for an incoming
     build dispatch. For the SLSA BuildEnv track, the host interface in the
     compute platform attests to the integrity of the environment's *initial
     state* during its boot process.
@@ -150,7 +150,7 @@ A typical build environment will go through the following lifecycle:
     build platform assigns the build to a created build environment.
     For the SLSA BuildEnv track, the build platform
     attests to the binding between a build environment and *build ID*.
-4.  *Build execution*: Finally, the *build executor* running within the
+4.  *Build execution*: Finally, the *build runner* within the
     environment executes the tenant's build definition.
 
 The BuildEnv track uses the following roles, components, and concepts:
@@ -160,8 +160,8 @@ The BuildEnv track uses the following roles, components, and concepts:
 | Build ID | An immutable identifier assigned uniquely to a specific execution of a tenant's build. In practice, the build ID may be an identifier, such as a UUID, associated with the build execution.
 | Build image | The template for a build environment, such as a VM or container image. Individual components of a build image include the root filesystem, pre-installed guest OS and packages, the build executor, and the build agent.
 | Build image producer | The party that creates and distributes build images. In practice, the build image producer may be the hosted build platform or a third party in a bring-your-own (BYO) build image setting.
-| Build executor | A platform-provided program dedicated to executing the tenant’s build definition, i.e., running the build, within the build environment. The build executor must be included in the build image's measurement.
-| Build agent | A program that interacts with the hosted build platform's control plane from within a running build environment. The build agent must be included in the build image's measurement.
+| Build runner | A platform-provided program dedicated to executing the tenant’s build definition, i.e., running the build, within the build environment. The build runner must be measured along with the build image.
+| Compute agent | A program that interfaces with the build platform's control plane from within a running build environment. The compute agent must be measured along with the build image.
 | Build dispatch | The process of assigning a tenant's build to a pre-deployed build environment on a hosted build platform.
 | Compute platform | The compute system and infrastructure underlying a build platform, i.e., the host system (hypervisor and/or OS) and hardware. In practice, the compute platform and the build platform may be managed by the same or distinct organizations.
 | Host interface | The component in the compute platform that the hosted build platform uses to request resources for deploying new build environments, i.e., the VMM/hypervisor or container orchestrator.
@@ -170,7 +170,7 @@ The BuildEnv track uses the following roles, components, and concepts:
 | Quote | (Virtual) hardware-signed data that contains one or more (virtual) hardware-generated measurements. Quotes may additionally include nonces for replay protection, firmware information, or other platform metadata.
 | Reference value | A specific measurement used as the good known value for a given build environment component or state.
 
-**TODO:** Disambiguate similar terms (e.g., image, build job, build runner)
+**TODO:** Disambiguate similar terms (e.g., image, build job, build executor)
 
 ### Package model
 
