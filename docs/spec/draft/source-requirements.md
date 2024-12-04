@@ -47,7 +47,7 @@ Consumers can examine the various source provenance attestations to determine if
 ## Safe Expunging Process
 
 SCSs MAY allow the organization to expunge (remove) content from a repository and its change history without leaving a public record of the removed content,
-but MUST only allow these changes in order to meet legal or privacy compliance requirements.
+but the organization MUST only allow these changes in order to meet legal or privacy compliance requirements.
 Content changed under this process includes changing files, history, references, or any other metadata stored by the SCS.
 
 ### Warning
@@ -62,7 +62,7 @@ The content may still exist in other copies of the repository, either in backups
 
 ### Process
 
-An SCS MUST document the Safe Expunging Process and describe how requests and actions are tracked and SHOULD log the fact that content was removed.
+An organization MUST document the Safe Expunging Process and describe how requests and actions are tracked and SHOULD log the fact that content was removed.
 Different organizations and tech stacks may have different approaches to the problem.
 
 SCSs SHOULD have technical mechanisms in place which require an Administrator plus, at least, one additional 'trusted person' to trigger any expunging (removals) made under this process.
