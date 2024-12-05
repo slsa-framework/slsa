@@ -126,8 +126,8 @@ to reveal their legal identity.**
 
 **Reasoning**: SLSA uses identities for multiple purposes: as a trust anchor for attestations
 (i.e. who or what is making this claim and do I trust it to do so) or for attributing actions
-to the actor which took them within the context of the system they're taking them in (e.g. a
-username, cryptographic signing key, etc.).
+to an actor. Choice of identification technology is left to the platform that provides the
+action (e.g. username, cryptographic signing key, etc.).
 
 When identities are strongly authenticated and used consistently they can be leveraged for both of
 these purposes without requiring them to be mapped to legal identities.  This reflects how
