@@ -718,6 +718,19 @@ on the package repository and deletes existing provenance. Solution: Verifier
 rejects because provenance is missing.
 
 </details>
+<details><summary>Replace package and VSA with another <span>(expectations)</span></summary>
+
+*Threat:* Replace a package and its VSA with a malicious package and its valid VSA.
+
+*Mitigation*: Consumer ensures that the VSA matches the package they've requested (not just the package they received) by following the [verification process](verification_summary#how-to-verify).
+
+*Example:* Adversary uploads a malicious package to `repo/evil-package`,
+getting a valid VSA for `repo/evil-package`. Adversary then replaces
+`repo/my-package` and its VSA with `repo/evil-package` and its VSA.
+Solution: Verifier rejects because the VSA `resourceUri` field lists
+`repo/evil-package` and not the expected `repo/my-package`.
+
+</details>
 <details><summary>Tamper with artifact after upload <span>(Build L1)</span></summary>
 
 *Threat:* Take a benign version of the package, modify it in some way, then
@@ -751,12 +764,6 @@ cryptographic signature is no longer valid.
 builds a malicious package and then modifies the original VSA's `subject`
 field to match the digest of the malicious package. Solution: Verifier rejects
 because the cryptographic signature is no longer valid.
-
-*Example 3:* Adversary uploads a malicious package to `repo/evil-package`,
-getting a valid VSA for `repo/evil-package`. Adversary then replaces
-`repo/my-package` and its VSA with `repo/evil-package` and its VSA.
-Solution: Verifier rejects because the VSA `resourceUri` field lists
-`repo/evil-package` and not the expected `repo/my-package`.
 
 </details>
 
