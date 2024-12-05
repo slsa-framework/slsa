@@ -866,7 +866,7 @@ libDep, resulting in MyPackage also having the security vulnerability.
 process, which alters the build process and injects unintended behavior into the
 output artifact.
 
-*Mitigation:* Treat build tooling, including OS images, as any other software
+*Mitigation:* Treat build tooling, including OS images, as any other artifact
 to be verified prior to use (as described in (G)). This will allow the build
 platform to detect any modified binaries.
 
