@@ -722,8 +722,7 @@ rejects because provenance is missing.
 
 *Threat:* Replace a package and its VSA with a malicious package and its valid VSA.
 
-*Mitigation*: Verifier checks that the `resourceUri` in the VSA matches the package
-they've requested not just the package they received.
+*Mitigation*: Consumer ensures that the VSA matches the package they've requested (not just the package they received) by following the [verification process](verification_summary#how-to-verify).
 
 *Example:* Adversary uploads a malicious package to `repo/evil-package`,
 getting a valid VSA for `repo/evil-package`. Adversary then replaces
