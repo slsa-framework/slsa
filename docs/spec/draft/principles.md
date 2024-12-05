@@ -129,10 +129,12 @@ to reveal their legal identity.**
 to an actor. Choice of identification technology is left to the platform that provides the
 action (e.g. username, cryptographic signing key, etc.).
 
-When identities are strongly authenticated and used consistently they can be leveraged for both of
-these purposes without requiring them to be mapped to legal identities.  This reflects how
-identities are often used in open source. A legal name means much less to projects than the
-history and behavior of a given handle over time does.
+When identities are strongly authenticated and used consistently they can often be leveraged
+for both of these purposes without requiring them to be mapped to legal identities.
+This reflects how identities are often used in open source where legal name means much less
+to projects than the history and behavior of a given handle over time does. Meanwhile some
+organizations may choose to levy additional requirements on identities. They are free to do
+so, but SLSA itself does not require it.
 
 **Benefits**: By _not_ requiring legal identities SLSA lowers the barriers to its adoption,
 enabling all of its other benefits and maintaining support for anonymous and pseudonymous
