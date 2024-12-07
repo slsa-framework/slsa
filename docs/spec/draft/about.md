@@ -1,6 +1,6 @@
 ---
 title: About SLSA
-description: With supply chain attacks on the rise, a shared vocabulary and universal framework is needed to provide incremental guidance to harden supply chains for more secure software production. This page introduces the main concepts behind SLSA and explains how it can help anyone involved in producing, consuming, or providing infrastructure for software. 
+description: With supply chain attacks on the rise, a shared vocabulary and universal framework is needed to provide incremental guidance to harden supply chains for more secure software production. This page introduces the main concepts behind SLSA and explains how it can help anyone involved in producing, consuming, or providing infrastructure for software.
 ---
 
 This page is an introduction to SLSA and its concepts. If you're new
@@ -102,9 +102,7 @@ chain between them.
 
 We talk about SLSA in terms of [tracks and levels](levels.md).
 A SLSA track focuses on a particular aspect of a supply chain, such as the Build
-Track. SLSA v1.0 consists of only a single track ([Build](levels.md#build-track)), but future versions of
-SLSA will add tracks that cover other parts of the software supply chain, such
-as how source code is managed.
+Track.
 
 Within each track, ascending levels indicate increasingly hardened security
 practices. Higher levels provide better guarantees against supply chain threats,
@@ -130,9 +128,7 @@ important to consider together with SLSA such as:
     source code followed secure coding practices.
 -   Producer trust: SLSA does not address organizations that intentionally
     produce malicious software, but it can reduce insider risks within an
-    organization you trust. SLSA's Build Track protects against tampering during
-    or after the build, and [future SLSA tracks](future-directions.md) intend to
-    protect against unauthorized modifications of source code and dependencies.
+    organization you trust.
 -   Transitive trust for dependencies: the SLSA level of an artifact is
     independent of the level of its dependencies. You can use SLSA recursively to
     also judge an artifact's dependencies on their own, but there is
