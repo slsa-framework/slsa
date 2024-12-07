@@ -259,7 +259,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.8.0)
-    webrick (1.9.0)
+    webrick (1.9.1)
 
 PLATFORMS
   ruby
