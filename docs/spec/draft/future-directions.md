@@ -45,6 +45,27 @@ of source revisions using SLSA source provenance attestations.
 
 </section>
 
+<section id="buildenv-track">
+
+## Build Environment track
+
+The goal of a Build Environment track is to enable the detection of tampering
+with core components of the compute environment executing builds.
+
+The current [draft version](../draft/attested-build-env-levels.md)
+of the Build Environment track includes the following requirements:
+
+-   Generation and verification of SLSA Build Provenance for build images.
+-   Validation of initial build environment system state against known good
+    reference values.
+-   Deployment of the hosted build platform on a compute system that supports
+    system state measurement and attestation capabilities at the hardware level.
+
+These requirements are **subject to significant change** while this track
+is in draft.
+
+</section>
+
 <section id="build-platform-operations-track">
 
 ## Build Platform Operations track
