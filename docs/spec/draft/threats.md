@@ -871,7 +871,8 @@ including OS images, as any other artifact to be verified prior to use.
 The threats described in this document apply recursively to build tooling
 as do the mitigations and examples.  A future
 [Build Environment track](future-directions#build-environment-track) may
-provide more comprehensive guidance on how to address this threat.
+provide more comprehensive guidance on how to address more specfiic
+aspects this threat.
 
 *Example:* MyPackage is a tarball containing an ELF executable, created by
 running `/usr/bin/tar` during its build process. An adversary compromises the
