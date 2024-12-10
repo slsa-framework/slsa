@@ -883,7 +883,7 @@ MyPackage artifact.  Solution: [apply SLSA recursively] to all build tools
 prior to the build.  The build platform verifies the disk image,
 or the individual components on the disk image, against the associated
 provenance or VSAs prior to running a build.  Depending on where the initial
-compromise took place the modified `/usr/bin/tar` will fail this verification.
+compromise took place (i.e. before/during vs _after_ the build of the build tool itself), the modified `/usr/bin/tar` will fail this verification.
 
 </details>
 
