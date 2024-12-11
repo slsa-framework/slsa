@@ -873,14 +873,24 @@ libDep, resulting in MyPackage also having the security vulnerability.
 process, which alters the build process and injects unintended behavior into the
 output artifact.
 
+*Mitigation:* This can be partially mitigated by treating build tooling,
+including OS images, as any other artifact to be verified prior to use.
+The threats described in this document apply recursively to build tooling
+as do the mitigations and examples.  A future
+[Build Environment track](future-directions#build-environment-track) may
+provide more comprehensive guidance on how to address more specfiic
+aspects of this threat.
+
 *Example:* MyPackage is a tarball containing an ELF executable, created by
 running `/usr/bin/tar` during its build process. An adversary compromises the
 `tar` OS package such that `/usr/bin/tar` injects a backdoor into every ELF
 executable it writes. The next time MyPackage is built, the build picks up the
 vulnerable `tar` package, which injects the backdoor into the resulting
-MyPackage artifact.
-
-*Mitigation:* **TODO**
+MyPackage artifact.  Solution: [apply SLSA recursively] to all build tools
+prior to the build.  The build platform verifies the disk image,
+or the individual components on the disk image, against the associated
+provenance or VSAs prior to running a build.  Depending on where the initial
+compromise took place (i.e. before/during vs *after* the build of the build tool itself), the modified `/usr/bin/tar` will fail this verification.
 
 </details>
 
@@ -1044,6 +1054,7 @@ collision resistance.
 
 <!-- Links -->
 
+[apply SLSA recursively]: verifying-artifacts.md#step-3-optional-check-dependencies-recursively
 [authentic]: requirements.md#provenance-authentic
 [exists]: requirements.md#provenance-exists
 [isolated]: requirements.md#isolated
