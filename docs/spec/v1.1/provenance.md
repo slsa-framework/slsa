@@ -320,7 +320,7 @@ have correctly performed the operation and populated this provenance.
 
 Metadata about this particular execution of the build.
 
-<tr id="runDetailByproducts"><td><code>byproducts</code>
+<tr id="runDetailsByproducts"><td><code>byproducts</code>
 <td>array (<a href="https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/resource_descriptor.md">ResourceDescriptor</a>)<td>
 
 Additional artifacts generated during the build that are not considered
