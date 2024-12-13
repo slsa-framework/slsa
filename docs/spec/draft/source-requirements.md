@@ -140,13 +140,13 @@ for relevant source repositories.
 <td>✓<td>✓<td>✓
 <tr id="distribute-provenance-attestations"><td>Distribute provenance attsetations<td>
 
-The organization MUST document how [provenance attestations](#provenance-attestations) are distributed
-for relevant source repositories.
+The organization MUST document how the detailed [provenance attestations](#provenance-attestations)
+are distributed for relevant source repositories.
 <td><td><td>✓
 
 </table>
 
-### System Requirements
+### Source Control System Requirements
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
