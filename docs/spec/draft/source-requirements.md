@@ -108,9 +108,11 @@ Benefits:
 Provides authenticatable and auditable information to policy enforcement tools and reduces the risk of tampering
 within the SCS's storage systems.
 
-## System Requirements
+## Requirements
 
 Many examples in this document use the [git version control system](https://git-scm.com/), but use of git is not a requirement to meet any level on the SLSA source track.
+
+### Organization Requirements
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
@@ -131,6 +133,23 @@ Branch protection is not required, nor are there any other constraints on the co
 The source MUST have a location where the "official" revisions are stored and managed.
 
 <td>✓<td>✓<td>✓
+<tr id="distribute-summary-attestations"><td>Distribute summary attsetations<td>
+
+The organization MUST document how [summary attestations](#summary-attestation) are distributed
+for relevant source repositories.
+<td>✓<td>✓<td>✓
+<tr id="distribute-provenance-attestations"><td>Distribute provenance attsetations<td>
+
+The organization MUST document how [provenance attestations](#provenance-attestations) are distributed
+for relevant source repositories.
+<td><td><td>✓
+
+</table>
+
+### System Requirements
+
+<table>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
 <tr id="immutable-revisions"><td>Revisions are immutable and uniquely identifiable<td>
 
 This requirement ensures that a consumer can determine that the source revision they have is the same as a canonical revision.
@@ -150,6 +169,16 @@ When the revision ID is a digest of the content of the revision (as in git) noth
 When the revision ID is a number or otherwise not a digest, then the SCS MUST document how the immutability of the revision is established.
 The same revision ID MAY be present in multiple repositories.
 See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
+
+<td>✓<td>✓<td>✓
+<tr id="source-summary"><td>Source Summary Attestations<td>
+
+The SCS MUST generate [summary attestations](#summary-attestation) to enable users to determine the source level of a given revision.
+
+If a consumer is authorized to access source on a particular branch, they MUST be able to fetch the summary attestations for revisions in the history of that branch.
+
+It is possible that an SCS can make no claims about a particular revision.
+For example, this would happen if the revision was created on another SCS, or if the revision was not the result of an accepted change management process.
 
 <td>✓<td>✓<td>✓
 <tr id="branches"><td>Branches<td>
@@ -206,7 +235,7 @@ See [source roles](#source-roles).
 <td><td><td>✓
 <tr id="source-provenance"><td>Source Provenance<td>
 
-Source Provenance are attestations that contain information about how a specific revision was created and how it came to exist in its present context
+[Source Provenance](#provenance-attestations) are attestations that contain information about how a specific revision was created and how it came to exist in its present context
 (e.g. the branches or tags that point, or pointed, at that revision).
 They are associated with the revision identifier delivered to consumers and are a statement of fact from the perspective of the SCS.
 
@@ -235,7 +264,7 @@ For example, this could be accomplished by:
 <td><td><td>✓
 </table>
 
-## Change management tool requirements
+### Change management tool requirements
 
 The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes managed via the [process](#change-management-process).
 
