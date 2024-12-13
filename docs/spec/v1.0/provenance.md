@@ -296,18 +296,18 @@ REQUIRED for SLSA Build L1: `builder`
 <table>
 <tr><th>Field<th>Type<th>Description
 
-<tr id="builder"><td><code>builder</code>
+<tr id="runDetailsBuilder"><td><code>builder</code>
 <td><a href="#builder">Builder</a><td>
 
 Identifies the build platform that executed the invocation, which is trusted to
 have correctly performed the operation and populated this provenance.
 
-<tr id="metadata"><td><code>metadata</code>
+<tr id="runDetailsMetadata"><td><code>metadata</code>
 <td><a href="#buildmetadata">BuildMetadata</a><td>
 
 Metadata about this particular execution of the build.
 
-<tr id="byproducts"><td><code>byproducts</code>
+<tr id="runDetailsByproducts"><td><code>byproducts</code>
 <td>array (<a href="https://github.com/in-toto/attestation/blob/main/spec/v1/resource_descriptor.md">ResourceDescriptor</a>)<td>
 
 Additional artifacts generated during the build that are not considered
