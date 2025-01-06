@@ -10,7 +10,7 @@ Since the release of <a href="spec/v1.0/">SLSA v1.0</a> in 2023,
 the SLSA community has been hard at work to expand the breadth
 and depth of the specification with updates and new tracks.
 
-Learn how you can [get involved](https://slsa.dev/community#get-involved)!
+Learn how you can [get involved](/community#get-involved)!
 
 ### Source track
 
