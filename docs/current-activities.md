@@ -15,7 +15,7 @@ Learn how you can [get involved](/community#get-involved)!
 A Source track will provide protection against tampering of the source code
 prior to the build.
 
-The current [draft version)](/spec/draft/source-requirements.md) describes levels
+The current [draft version](/spec/draft/source-requirements.md) describes levels
 of increasing tamper resistance and ways consumers might verify properties
 of source revisions using SLSA source provenance attestations.
 
