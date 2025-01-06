@@ -1,11 +1,8 @@
 ---
 title: Current activities
-description: There's an active community of members, contributors and collaborators working to enhance the SLSA specification with updates to existing and new
-tracks. This page provides a summary of current ongoing activities.
-layout: specifications
+description: There's an active community of members, contributors and collaborators working to enhance the SLSA specification with updates to existing and new tracks. This page provides a summary of current ongoing activities.
+layout: standard
 ---
-
-## What are we currently working on?
 
 Since the release of <a href="spec/v1.0/">SLSA v1.0</a> in 2023,
 the SLSA community has been hard at work to expand the breadth
