@@ -2,6 +2,7 @@
 title: Current activities
 description: There's an active community of members, contributors and collaborators working to enhance the SLSA specification with updates to existing and new
 tracks. This page provides a summary of current ongoing activities.
+layout: specifications
 ---
 
 ## What are we currently working on?
@@ -42,5 +43,3 @@ is in draft.
 
 Building upon the foundation laid by S2C2F, the depedency track defines
 requirements for consuming dependencies.
-
-**TODO**: Expand this section
