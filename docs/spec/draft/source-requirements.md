@@ -133,12 +133,12 @@ Branch protection is not required, nor are there any other constraints on the co
 The source MUST have a location where the "official" revisions are stored and managed.
 
 <td>✓<td>✓<td>✓
-<tr id="distribute-summary-attestations"><td>Distribute summary attsetations<td>
+<tr id="distribute-summary-attestations"><td>Distribute summary attestations<td>
 
 The organization MUST document how [summary attestations](#summary-attestation) are distributed
 for relevant source repositories.
 <td>✓<td>✓<td>✓
-<tr id="distribute-provenance-attestations"><td>Distribute provenance attsetations<td>
+<tr id="distribute-provenance-attestations"><td>Distribute provenance attestations<td>
 
 The organization MUST document how the detailed [provenance attestations](#provenance-attestations)
 are distributed for relevant source repositories.
