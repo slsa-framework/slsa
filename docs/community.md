@@ -78,12 +78,12 @@ developing tooling, we welcome your contributions.
 </div>
             </div>
             <div class="w-full md:w-1/2">
-			<div class="rounded-lg text-green p-5 border border-green-400 inline-block mb-8 h4">SLSA v1.0 is available now!</div>
+                <div class="rounded-lg text-green p-5 border border-green-400 inline-block mb-8 h4">SLSA v1.0 is available now!</div>
                 <p>
                 The community has been hard at work since the release of
-				<a href="spec/v1.0/">SLSA v1.0</a> in 2023 to expand the breadth
-				and depth of the specification with updates and new tracks.
-				For more information, see our <a href="/spec/current-activities">current activities</a> page!
+                <a href="spec/v1.0/">SLSA v1.0</a> in 2023 to expand the breadth
+                and depth of the specification with updates and new tracks.
+                For more information, see our <a href="/spec/current-activities">current activities</a> page!
                 <br><br>
 Google has been using an internal version of SLSA since 2013 and requires it for all of their production workloads.</p>
             </div>
