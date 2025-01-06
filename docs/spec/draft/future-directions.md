@@ -32,40 +32,6 @@ following requirements, which **may or may not** be part of a future Build L4:
 
 </section>
 
-<section id="source-track">
-
-## Source track
-
-A Source track will provide protection against tampering of the source code
-prior to the build.
-
-The current [draft version (v1.1)](source-requirements.md) describes levels
-of increasing tamper resistance and ways consumers might verify properties
-of source revisions using SLSA source provenance attestations.
-
-</section>
-
-<section id="buildenv-track">
-
-## Build Environment track
-
-The goal of a Build Environment track is to enable the detection of tampering
-with core components of the compute environment executing builds.
-
-The current [draft version](../draft/attested-build-env-levels.md)
-of the Build Environment track includes the following requirements:
-
--   Generation and verification of SLSA Build Provenance for build images.
--   Validation of initial build environment system state against known good
-    reference values.
--   Deployment of the hosted build platform on a compute system that supports
-    system state measurement and attestation capabilities at the hardware level.
-
-These requirements are **subject to significant change** while this track
-is in draft.
-
-</section>
-
 <section id="build-platform-operations-track">
 
 ## Build Platform Operations track

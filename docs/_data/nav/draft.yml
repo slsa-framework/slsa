@@ -4,6 +4,10 @@
 - title: Overview
   url: /spec/draft/
 
+- title: Current activities
+  url: /current-activities
+  description: Additions and updates actively being developed
+
 - title: Understanding SLSA
   description: >
     These pages provide an overview of SLSA, how it helps protect against common
