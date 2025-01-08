@@ -1,5 +1,5 @@
 ---
-title: Verifying build platforms
+title: Assessing build platforms
 description: Guidelines for assessing build platform security.
 ---
 
@@ -178,6 +178,13 @@ environments, including those running builds from the same tenant or project.
 Tenants are free to modify the build environment arbitrarily. Build
 environments must have a means to fetch input artifacts (source, dependencies,
 etc).
+
+<!-- Uncomment when the BuildEnv track verification guidance comes out
+The following assessment prompts focus on operational build environment settings
+and configurations that are helpful in ensuring that SLSA Build track
+requirements are met. To additionally verify build environment integrity, see
+the [verification guidance] of the SLSA [Build Environment track].
+-->
 
 #### Prompts for assessing build environments
 

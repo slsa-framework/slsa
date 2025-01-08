@@ -316,7 +316,7 @@ build platform the package was built.
 |--------------|----
 | Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly.
 | Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used.
-| Build platform certification | [Build platforms are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level.
+| Build platform assessment | [Build platforms are assessed](assessing-systems.md) for their security configurations needed for conformance to the SLSA requirements at the stated level.
 
 The examples below suggest some ways that expectations and verification may be
 implemented for different, broadly defined, package ecosystems.

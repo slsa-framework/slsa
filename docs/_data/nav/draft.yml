@@ -73,13 +73,9 @@
     url: /spec/draft/verifying-artifacts
     description: Guidance for verifying software artifacts and their SLSA provenance, intended for platform implementers and software consumers
 
-  - title: Verifying build platforms
-    url: /spec/draft/verifying-systems
+  - title: Assessing build platforms
+    url: /spec/draft/assessing-systems
     description: Guidelines for securing SLSA Build L3+ builders, intended for platform implementers
-
-  - title: Integrity levels for attested build environments
-    url: /spec/draft/attested-build-env-levels
-    description: Overview of SLSA's Attested Build Environment track, intended for all audiences
 
   - title: Threats & mitigations
     url: /spec/draft/threats
@@ -88,6 +84,22 @@
   - title: Securing Source Code
     url: /spec/draft/source-requirements
     description: Overview of the Source track
+
+- title: Attested Build Environment track
+  description: >
+    These pages describe the integrity levels and requirements for the SLSA
+    Build Environment track.
+    If you want to achieve a particular BuildEnv track level, these are the
+    requirements you'll need to meet.
+  children:
+
+  - title: Integrity levels
+    url: /spec/draft/attested-build-env-levels
+    description: Overview of SLSA's Attested Build Environment track, intended for all audiences
+
+  - title: Hosting build environments
+    url: /spec/draft/attested-build-env-requirements
+    description: Detailed technical requirements for hosting attested build environments, intended for platform implementers
 
 - title: Attestation formats
   description: >
