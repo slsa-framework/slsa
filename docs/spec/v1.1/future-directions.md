@@ -32,27 +32,6 @@ following requirements, which **may or may not** be part of a future Build L4:
 
 </section>
 
-<section id="source-track">
-
-## Source track
-
-A Source track could provide protection against tampering of the source code
-prior to the build.
-
-The initial [draft version (v0.1)](../v0.1/requirements.md#source-requirements)
-of SLSA included the following source requirements, which **may or may not**
-form the basis for a future Source track:
-
--   Strong authentication of author and reviewer identities, such as 2-factor
-    authentication using a hardware security key, to resist account and
-    credential compromise.
--   Retention of the source code to allow for after-the-fact inspection and
-    future rebuilds.
--   Mandatory two-person review of all changes to the source to prevent a single
-    compromised actor or account from introducing malicious changes.
-
-</section>
-
 <section id="build-platform-operations-track">
 
 ## Build Platform Operations track
