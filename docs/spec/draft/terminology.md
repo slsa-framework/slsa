@@ -159,20 +159,20 @@ A typical build environment will go through the following lifecycle:
 
 1.  *Build image creation*: A [build image producer](#build-image-producer)
     creates different [build images](#build-image) through a dedicated build
-	process. For the SLSA BuildEnv track, the build image producer outputs
-	[provenance](#provenance) describing this process.
+ process. For the SLSA BuildEnv track, the build image producer outputs
+ [provenance](#provenance) describing this process.
 2.  *Build environment instantiation*: The [hosted build platform](#platform)
     calls into the [host interface](#host-interface) to create a new instance
-	of a build environment from a given build image. The
-	[build agent](#build-agent) begins to wait for an incoming
-	[build dispatch](#build-dispatch).
-	For the SLSA BuildEnv track, the host interface in the compute platform
-	attests to the integrity of the environment's initial state during its
-	[boot process](#boot-process).
+ of a build environment from a given build image. The
+ [build agent](#build-agent) begins to wait for an incoming
+ [build dispatch](#build-dispatch).
+ For the SLSA BuildEnv track, the host interface in the compute platform
+ attests to the integrity of the environment's initial state during its
+ [boot process](#boot-process).
 3.  *Build dispatch*: When the tenant dispatches a new build, the hosted
     build platform assigns the build to a created build environment.
     For the SLSA BuildEnv track, the build platform attests to the binding
-	between a build environment and [build ID](#build-id).
+ between a build environment and [build ID](#build-id).
 4.  *Build execution*: Finally, the build agent within the environment executes
     the tenant's build definition.
 
