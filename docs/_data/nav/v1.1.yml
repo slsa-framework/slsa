@@ -4,6 +4,10 @@
 - title: Overview
   url: /spec/v1.1/
 
+- title: Current activities
+  url: /current-activities
+  description: What the SLSA community is currently working on
+
 - title: Understanding SLSA
   description: >
     These pages provide an overview of SLSA, how it helps protect against common
