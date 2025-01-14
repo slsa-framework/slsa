@@ -1,24 +1,9 @@
 {%- comment %}Render next/previous links based on the nav bar.{% endcomment %}
 
-{%- comment %}Determine the base url
-The following should do but doesn't work for some unknown reason
-{%- assign url_parts = page.url | split: '/' %}
-{%- assign last_part = url_parts | slice: -1 %}
-{%- assign base_url = page.url | split: last_part %} <- this doesn't work!?
-{% endcomment %}
-{%- assign url_parts = page.url | split: '/' %}
-{%- assign part_1 = url_parts[1] %}
-{%- assign part_2 = url_parts[2] %}
-{%- assign part_3 = url_parts[3] %}
-{%- assign base_url = "/" | append: part_1 | append: "/" %}
-{% if part_3 -%}
-    {%- assign base_url = base_url | append: part_2 | append: "/" %}
-{% endif -%}
-
 {%- comment %}Find the right collection from the navigation data{% endcomment %}
 {%- assign nav = site.data.nav["main"] %}
 {%- for item in nav %}
-  {% if item.url == base_url or item.url == page.url %}
+  {% if item.url == page.dir or item.url == page.url %}
     {% assign this = item %}
     {% break %}
   {% endif %}
@@ -33,6 +18,9 @@ The following should do but doesn't work for some unknown reason
   {%- assign matching_pages_newline_separated = matching_pages_newline_separated | prepend: thisline %}
 {%- else %}
   {%- comment %}Didn't find item in main menu, revert to old behavior for backward compatibility{% endcomment %}
+  {%- assign url_parts = page.url | split: '/' %}
+  {%- assign part_1 = url_parts[1] %}
+  {%- assign part_2 = url_parts[2] %}
   {%- assign key = site.data.nav.config.url_to_key[part_1]
       | default: site.data.nav.config.url_to_key[part_2]
       | default: site.data.nav.config.url_to_key["latest"] %}

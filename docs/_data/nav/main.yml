@@ -101,6 +101,10 @@
       url: /spec/v1.0/verification_summary
       description: Suggested VSA format and explanation
 
+  - title: Single-page view
+    url: /spec/v1.0/onepage
+    skip_next_prev: true  # don't show as a next/prev link
+
 - title: SLSA Specification 1.1
   description: >
     These pages describe SLSA's security levels and requirements for each track.
@@ -116,9 +120,9 @@
       supply chain security, start here.
     children:
 
-    - title: What's new in v1.0
+    - title: What's new in v1.1
       url: /spec/v1.1/whats-new
-      description: What's new in SLSA Version 1.0
+      description: What's new in SLSA Version 1.1
 
     - title: About SLSA
       url: /spec/v1.1/about
@@ -197,6 +201,10 @@
     - title: Verification Summary
       url: /spec/v1.1/verification_summary
       description: Suggested VSA format and explanation
+
+  - title: Single-page view
+    url: /spec/v1.1/onepage
+    skip_next_prev: true  # don't show as a next/prev link
 
 - title: SLSA Working Draft
   url: /spec/draft/
@@ -298,6 +306,10 @@
     - title: Verification Summary
       url: /spec/draft/verification_summary
       description: Suggested VSA format and explanation
+
+  - title: Single-page view
+    url: /spec/draft/onepage
+    skip_next_prev: true  # don't show as a next/prev link
 
 - title: How to SLSA
   description: >
