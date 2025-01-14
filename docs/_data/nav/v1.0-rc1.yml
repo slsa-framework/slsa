@@ -49,7 +49,7 @@
       children:
 
       - title: General Model
-        url: /attestation-model
+        url: /spec/v1.0-rc1/attestation-model
 
       - title: Provenance
         url: /spec/v1.0-rc1/provenance

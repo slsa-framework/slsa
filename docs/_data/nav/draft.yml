@@ -93,7 +93,7 @@
   children:
 
   - title: General model
-    url: /attestation-model
+    url: /spec/draft/attestation-model
     description: General attestation mode
 
   - title: Provenance
