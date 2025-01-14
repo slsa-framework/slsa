@@ -307,15 +307,15 @@
   children:
 
   - title: For developers
-    url: /get-started
+    url: /how-to/get-started
     description: How to apply SLSA requirements to your build
 
   - title: For organizations
-    url: /how-to-orgs
+    url: /how-to/how-to-orgs
     description: How to apply SLSA to an organization
 
   - title: For infrastructure providers
-    url: /how-to-infra
+    url: /how-to/how-to-infra
     description:  How to implement SLSA in source, build, and package platforms
 
 - title: Specification stages

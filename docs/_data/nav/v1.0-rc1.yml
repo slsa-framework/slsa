@@ -5,7 +5,7 @@
 - title: Specifications
   children:
 
-    - title: SLSA
+    - title: SLSA Specification 1.0
       children:
 
       - title: Introduction
