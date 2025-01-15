@@ -4,6 +4,10 @@
 - title: Home
   url: /
 
+- title: Current activities
+  url: /current-activities
+  description: What the SLSA community is currently working on
+
 - title: SLSA Working Draft
   url: /spec/draft/
 

@@ -57,7 +57,7 @@ This includes the threat of an authorized individual introducing an unauthorized
 change---in other words, an insider threat.
 
 SLSA v1.0 does not address source threats, but we anticipate doing so in a
-[future version](future-directions.md#source-track). In the meantime, the
+[future version](current-activities.md#source-track). In the meantime, the
 threats and potential mitigations listed here show how SLSA v1.0 can fit into a
 broader supply chain security program.
 
@@ -886,7 +886,7 @@ output artifact.
 including OS images, as any other artifact to be verified prior to use.
 The threats described in this document apply recursively to build tooling
 as do the mitigations and examples.  A future
-[Build Environment track](future-directions#build-environment-track) may
+[Build Environment track](current-activities#build-environment-track) may
 provide more comprehensive guidance on how to address more specfiic
 aspects of this threat.
 
