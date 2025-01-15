@@ -302,7 +302,7 @@ TODO
 [confidential computing]: https://confidentialcomputing.io/wp-content/uploads/sites/10/2023/03/Common-Terminology-for-Confidential-Computing.pdf
 [execution context]: terminology.md#build-environment
 [hosted]: requirements.md#isolation-strength
-[boot process]:  terminology.md#boot-process
+[boot process]: terminology.md#boot-process
 [build agent]: terminology.md#build-agent
 [build image producer]: terminology.md#build-image-producer
 [build platforms]: terminology.md#platform
