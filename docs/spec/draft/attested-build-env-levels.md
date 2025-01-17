@@ -233,6 +233,8 @@ All of [BuildEnv L1], plus:
 
 -   Build Platform Requirements:
     -   MUST meet SLSA [Build L3] requirements.
+	-   MUST choose a compute platform that meets SLSA BuildEnv L2
+	requirements. 
     -   Prior to dispatching a tenant's build to an instantiated environment,
     a signed [quote] MUST be automatically requested from the build agent,
     and the contained [measurements] verified against their boot process
@@ -299,6 +301,8 @@ All of [BuildEnv L2], plus:
     the host interface's boot process quote.
 
 -   Build Platform Requirements:
+	-   MUST choose a compute platform that meets SLSA BuildEnv L3
+	requirements. 
     -   Prior to dispatching a tenant's build to an instantiated environment,
     the measurements in the *host interface's* boot process quote MUST be
     automatically verified against their reference values.

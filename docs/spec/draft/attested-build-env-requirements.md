@@ -27,21 +27,37 @@ requirements for each role to implement to achieve a desired BuildEnv level.
 <tr>
   <th>Implementer
   <th>Requirement
-  <th>Degree
+  <th>Task
   <th>L1<th>L2<th>L3
 <tr>
-  <td rowspan=4><span id="build-image-producer">Build Image Producer (BI)</span>
+  <td rowspan=6><span id="build-image-producer">Build Image Producer (BI)</span>
   <td colspan=2><span id="distribute-image-provenance">**BI.1**: Distribute build image provenance</span>
   <td>✓<td>✓<td>✓
 <tr>
   <td colspan=2><span id="distribute-image-ref-values">**BI.2**: Distribute reference values for build image components</span>
   <td> <td>✓<td>✓
 <tr>
-  <td rowspan=2><span id="enlightened-build-agent">**BI.3**: Implement enlightened build agent</span>
-  <td><span id="build-env-boot-quote">**BI.3.1**: Provide build environment boot process quote</a>
+  <td rowspan=4><span id="enlightened-build-agent">**BI.3**: Implement enlightened build agent</span>
+  <td><span id="distribute-env-boot-quote">**BI.3.1**: Distribute build environment boot process quote</a>
   <td> <td>✓<td>✓
-  <tr>
-  <td><span id="distribute-build-id-quote">**BI.3.2**: Attest to build dispatch</a>
+<tr>
+  <td><span id="distribute-build-dispatch-attestation">**BI.3.2**: Distribute build environment dispatch attestation</a>
+  <td> <td>✓<td>✓
+<tr>
+  <td><span id="distribute-host-boot-quote">**BI.3.3**: Distribute host inteface boot process quote</a>
+  <td> <td> <td>✓
+<tr>
+  <td><span id="trusted-hardware-attestations">**BI.3.4**: Generate attestations using trusted hardware</a>
+  <td> <td> <td>✓
+<tr>
+  <td rowspan=3><span id="build-platform">Build Platform (BP)</span>
+  <td colspan=2><span id="implement-slsa-build-track">**BP.1**: Implement the SLSA Build track</span>
+  <td>✓<td>✓<td>✓
+<tr>
+  <td colspan=2><span id="verify-build-image-provenance">**BP.2**: Verify build image provenance</a>
+  <td>✓<td>✓<td>✓
+<tr>
+  <td colspan=2><span id="choose-appropriate-compute-platform">**BP.3**: Choose an appropriate compute platform</a>
   <td> <td>✓<td>✓
 </table>
 
