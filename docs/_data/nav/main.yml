@@ -8,7 +8,7 @@
   url: /current-activities
   description: What the SLSA community is currently working on
 
-- title: SLSA Specification 1.1
+- title: SLSA Specification 1.1 Draft
   description: >
     These pages describe SLSA's security levels and requirements for each track.
     If you want to achieve SLSA a particular level, these are the requirements
