@@ -38,27 +38,51 @@ requirements for each role to implement to achieve a desired BuildEnv level.
   <td> <td>✓<td>✓
 <tr>
   <td rowspan=4><span id="enlightened-build-agent">**BI.3**: Implement enlightened build agent</span>
-  <td><span id="distribute-env-boot-quote">**BI.3.1**: Distribute build environment boot process quote</a>
+  <td><span id="attest-env-initial-state">**BI.3.1**: Attest to build environment initial state</span>
   <td> <td>✓<td>✓
 <tr>
-  <td><span id="distribute-build-dispatch-attestation">**BI.3.2**: Distribute build environment dispatch attestation</a>
+  <td><span id="attest-build-dispatch">**BI.3.2**: Attest to build dispatch</span>
   <td> <td>✓<td>✓
 <tr>
-  <td><span id="distribute-host-boot-quote">**BI.3.3**: Distribute host inteface boot process quote</a>
+  <td><span id="distribute-host-integrity-attesttations">**BI.3.3**: Distribute host integrity attestation</span>
   <td> <td> <td>✓
 <tr>
-  <td><span id="trusted-hardware-attestations">**BI.3.4**: Generate attestations using trusted hardware</a>
+  <td><span id="interface-trusted-hardware">**BI.3.4**: Interface with trusted hardware</span>
   <td> <td> <td>✓
 <tr>
-  <td rowspan=3><span id="build-platform">Build Platform (BP)</span>
+  <td rowspan=5><span id="build-platform">Build Platform (BP)</span>
   <td colspan=2><span id="implement-slsa-build-track">**BP.1**: Implement the SLSA Build track</span>
   <td>✓<td>✓<td>✓
 <tr>
-  <td colspan=2><span id="verify-build-image-provenance">**BP.2**: Verify build image provenance</a>
+  <td colspan=2><span id="choose-appropriate-compute-platform">**BP.2**: Choose an appropriate compute platform</span>
+  <td> <td>✓<td>✓
+<tr>
+  <td rowspan=3><span id="verify-build-environment-integrity">**BP.3**: Verify build environment integrity</span>
+  <td><span id="verify-image-provenance">**BP.3.1**: Verify build image provenance</span>
   <td>✓<td>✓<td>✓
 <tr>
-  <td colspan=2><span id="choose-appropriate-compute-platform">**BP.3**: Choose an appropriate compute platform</a>
+  <td><span id="verify-env-initial-state">**BP.3.2**: Verify build environment initial state</span>
   <td> <td>✓<td>✓
+<tr>
+  <td><span id="verify-host-interface">**BP.3.3**: Verify host interface integrity</span>
+  <td> <td> <td>✓
+<tr>
+  <td rowspan=5><span id="compute-platform">Compute Platform (CP)</span>
+  <td rowspan=3><span id="enlightened-host-interface">**CP.1**: Run enlightened host interface</span>
+  <td><span id="generate-guest-attestations">**CP.1.1**: Support guest system state attestation</span>
+  <td> <td>✓<td>✓
+<tr>
+  <td><span id="guest-secure-boot">**CP.1.2**: Verify guest initialization integrity</span>
+  <td> <td>✓<td>✓
+<tr>
+  <td><span id="expose-trusted-hardware">**CP.1.3**: Expose trusted hardware features</span>
+  <td> <td> <td>✓
+<tr>
+  <td colspan=2><span id="trusted-hardware-feature">**CP.2**: Support integrated trusted hardware</span>
+  <td> <td> <td>✓
+<tr>
+  <td colspan=2><span id="host-secure-boot">**CP.3**: Attest host interface integrity</span>
+  <td> <td> <td>✓
 </table>
 
 [Build Environment levels]: attested-build-env-levels.md
