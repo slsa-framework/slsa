@@ -38,7 +38,7 @@ is in draft.
 
 ### Dependency track
 
-The Dependency track defines requirements aimed at mitigating risks introduced to a project through it's dependencies.     
+The Dependency track defines requirements aimed at mitigating risks introduced to a project through its dependencies.     
 
 There is an ongoing effort to develop this track, building upon the foundation laid by [S2C2F](https://openssf.org/projects/s2c2f/).
 S2C2F provides a guide for the safe consumption of open source dependencies.
