@@ -43,4 +43,4 @@ The Dependency track defines requirements aimed at mitigating risks introduced t
 There is an ongoing effort to develop this track, building upon the foundation laid by [S2C2F](https://openssf.org/projects/s2c2f/).
 S2C2F provides a guide for the safe consumption of open source dependencies.
 
-As part of this ongoing effort, community members from both SLSA and S2C2F are collaborating to translate the practices outlined in S2C2F, into requirements that align with the structure of existing SLSA specificationss.
+As part of this ongoing effort, community members from both SLSA and S2C2F are collaborating to translate the practices outlined in S2C2F, into requirements that align with the structure of existing SLSA specifications.
