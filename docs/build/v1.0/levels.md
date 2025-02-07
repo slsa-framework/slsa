@@ -21,7 +21,7 @@ The primary purpose of the build track is to enable [verification] that the
 artifact was built as expected. Consumers have some way of knowing what the
 expected provenance should look like for a given package and then compare each
 package artifact's actual provenance to those expectations. Doing so prevents
-several classes of [supply chain threats](threats.md).
+several classes of [supply chain threats].
 
 Each ecosystem (for open source) or organization (for closed source) defines
 exactly how this is implemented, including: means of defining expectations, what
@@ -227,8 +227,9 @@ All of [Build L2], plus:
 [build l1]: #build-l1
 [build l2]: #build-l2
 [build l3]: #build-l3
-[future versions]: future-directions.md
+[future versions]: ../../spec/v1.0/future-directions.md
 [hosted]: requirements.md#isolation-strength
-[previous version]: ../v0.1/levels.md
+[previous version]: ../../spec/v0.1/levels.md
 [provenance]: terminology.md
 [verification]: verifying-artifacts.md
+[suppy chain threats]: ../../spec/v1.0/threats.md

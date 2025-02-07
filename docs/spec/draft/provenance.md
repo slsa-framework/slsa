@@ -35,7 +35,7 @@ Describe how an artifact or set of artifacts was produced so that:
 -   Others can rebuild the artifact, if desired.
 
 This predicate is the RECOMMENDED way to satisfy the SLSA v1.0 [provenance
-requirements](requirements#provenance-generation).
+requirements].
 
 ## Model
 
@@ -597,3 +597,4 @@ Initial version, named "in-toto.io/Provenance"
 [purl]: https://github.com/package-url/purl-spec
 [threats]: threats
 [trusted]: principles#trust-systems-verify-artifacts
+[provenance requirements]: ../../build/v1.0/requirements#provenance-generation

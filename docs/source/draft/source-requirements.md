@@ -22,7 +22,7 @@ Consumers can examine the various source provenance attestations to determine if
 
 | Term | Description
 | --- | ---
-| Source | An identifiable set of text and binary files and associated metadata. Source is regularly used as input to a build system (see [SLSA Build Track](requirements.md)).
+| Source | An identifiable set of text and binary files and associated metadata. Source is regularly used as input to a build system (see [SLSA Build Track]).
 | Organization | A collection of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals and methods of the source.
 | Version Control System (VCS)| Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
 | Revision | A specific state of the source with an identifier provided by the version control system. As an example, you can identify a git revision by its tree hash.
@@ -410,3 +410,5 @@ Example source provenance attestations:
  describe which source quality tools were run on the revision.
 
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
+[SLSA Build Track]: ../../build/v1.0
+[Verification Summary Attestations (VSAs)]: ../../spec/draft/verification_summary.md

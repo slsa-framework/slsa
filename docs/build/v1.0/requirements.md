@@ -324,16 +324,18 @@ out to a remote execution service or a "self-hosted runner" that is outside the
 trust boundary of the build platform.
 
 NOTE: This requirement was split into "Isolated" and "Ephemeral Environment"
-in the initial [draft version (v0.1)](../v0.1/requirements.md).
+in the initial [draft version (v0.1)].
 
 NOTE: This requirement is not to be confused with "Hermetic", which roughly
 means that the build ran with no network access. Such a requirement requires
 substantial changes to both the build platform and each individual build, and is
-considered in the [future directions](future-directions.md).
+considered in the [future directions].
 
 <td> <td> <td>✓
 </table>
 
-[external parameters]: provenance.md#externalParameters
-[identified in the provenance]: provenance.md#model
+[external parameters]: ../../spec/v1.0/provenance.md#externalParameters
+[identified in the provenance]: ../../spec/v1.0/provenance.md#model
 [package ecosystem]: verifying-artifacts.md#package-ecosystem
+[draft version (v0.1)]: ../../spec/v0.1/requirements.md
+[future directions]: ../../spec/v1.0/future-directions.md

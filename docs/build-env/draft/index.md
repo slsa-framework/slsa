@@ -295,9 +295,9 @@ TODO
 <!-- Link definitions -->
 
 [tracks and levels]: ../../spec/draft/levels
-[Build L1]: ../../build/draft/levels.md#build-l1
-[Build L2]: ../../build/draft/levels.md#build-l2
-[Build L3]: ../../build/draft/levels.md#build-l3
+[Build L1]: ../../build/v1.0/levels#build-l1
+[Build L2]: ../../build/v1.0/levels#build-l2
+[Build L3]: ../../build/v1.0/levels#build-l3
 [BuildEnv L0]: #buildenv-l0
 [BuildEnv L1]: #buildenv-l1
 [BuildEnv L2]: #buildenv-l2
@@ -305,22 +305,22 @@ TODO
 [Release Attestation]: https://github.com/in-toto/attestation/blob/main/spec/predicates/release.md
 [SCAI]: https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md
 [Secure Boot]: https://wiki.debian.org/SecureBoot#What_is_UEFI_Secure_Boot.3F
-[SLSA Build Provenance]: ../../build/draft/provenance.md
+[SLSA Build Provenance]: ../../spec/draft/provenance.md
 [TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
 [VSA]: ../../spec/draft/verification_summary.md
-[build image]: ../../build/draft/terminology.md#build-image
+[build image]: ../../build/v1.0/terminology#build-image
 [confidential computing]: https://confidentialcomputing.io/wp-content/uploads/sites/10/2023/03/Common-Terminology-for-Confidential-Computing.pdf
-[execution context]: ../../build/draft/terminology.md#build-environment
-[hosted]: ../../build/draft/requirements.md#isolation-strength
-[boot process]:  ../../build/draft/terminology.md#boot-process
-[build agent]: ../../build/draft/terminology.md#build-agent
-[build image producer]: ../../build/draft/terminology.md#build-image-producer
-[build platforms]: ../../build/draft/terminology.md#platform
-[compute platform]: ../../build/draft/terminology.md#compute-platform
-[host interface]: ../../build/draft/terminology.md#host-interface
-[measurement]: ../../build/draft/terminology.md#measurement
-[provenance]: ../../build/draft/terminology.md#provenance
-[quote]: ../../build/draft/terminology.md#quote
-[reference values]: ../../build/draft/terminology.md#reference-value
+[execution context]: ../../build/v1.0/terminology#build-environment
+[hosted]: ../../build/v1.0/requirements#isolation-strength
+[boot process]:  ../../build/v1.0/terminology#boot-process
+[build agent]: ../../build/v1.0/terminology#build-agent
+[build image producer]: ../../build/v1.0/terminology#build-image-producer
+[build platforms]: ../../build/v1.0/terminology#platform
+[compute platform]: ../../build/v1.0/terminology#compute-platform
+[host interface]: ../../build/v1.0/terminology#host-interface
+[measurement]: ../../build/v1.0/terminology#measurement
+[provenance]: ../../build/v1.0/terminology#provenance
+[quote]: ../../build/v1.0/terminology#quote
+[reference values]: ../../build/v1.0/terminology#reference-value
 [several classes]: #build-environment-threats
 [vTPM]: https://trustedcomputinggroup.org/about/what-is-a-virtual-trusted-platform-module-vtpm/
