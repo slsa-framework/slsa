@@ -1,6 +1,7 @@
 ---
 title: Terminology
-description: Before diving into the SLSA specification levels, we need to establish a core set of terminology and models to describe what we're protecting.
+description: Before diving into the SLSA Build track specification, we need to establish a core set of terminology and models to describe what we're protecting.
+layout: specifications
 ---
 <!-- Note on updating docs:
 * Using terms such as "developer," "maintainer," "producer," "author," and
@@ -21,7 +22,7 @@ description: Before diving into the SLSA specification levels, we need to establ
     self-described services and systems can continue to be called by these terms.
 -->
 
-Before diving into the [SLSA Levels](levels.md), we need to establish a core set
+Before diving into the [Build track levels](levels.md), we need to establish a core set
 of terminology and models to describe what we're protecting.
 
 ## Software supply chain

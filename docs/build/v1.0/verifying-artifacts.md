@@ -1,6 +1,7 @@
 ---
 title: Verifying artifacts
 description: SLSA uses provenance to indicate whether an artifact is authentic or not, but provenance doesn't do anything unless somebody inspects it. SLSA calls that inspection verification, and this page describes how to verify artifacts and their SLSA provenenance. The intended audience is platform implementers, security engineers, and software consumers.
+layout: specifications
 ---
 
 SLSA uses provenance to indicate whether an artifact is authentic or not, but

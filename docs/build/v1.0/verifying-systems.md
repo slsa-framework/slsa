@@ -1,6 +1,7 @@
 ---
 title: Verifying build platforms
 description: Guidelines for assessing build platform security.
+layout: specifications
 ---
 
 One of SLSA's guiding [principles](principles.md) is to "trust platforms, verify

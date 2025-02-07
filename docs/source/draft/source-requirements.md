@@ -1,4 +1,7 @@
-# SLSA Source Track
+---
+title: SLSA Source Track
+layout: specifications
+---
 
 ## Outstanding TODOs
 
