@@ -36,7 +36,6 @@ tracks without invalidating previous levels.
 
 For more information see the [Build track] specification.
 
-
 ## Source track levels
 
 | Track/Level | Requirements | Focus
@@ -47,7 +46,6 @@ For more information see the [Build track] specification.
 | [Source L3] | Authenticatable and Auditable Provenance       | Tampering within the SCS's storage systems.
 
 For more information see the [Source track] specification.
-
 
 ## Build Environment track levels
 
