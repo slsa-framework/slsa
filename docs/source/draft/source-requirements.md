@@ -319,7 +319,7 @@ Summary attestations are issued by some authority that has sufficient evidence t
 revision's source level.  Summary attestations convey properties about the revision as a whole and summarize properties computed over all
 the changes that contributed to that revision over its history.
 
-The source track issues summary attestations using [Verification Summary Attestations (VSAs)](./verification_summary.md) as follows:
+The source track issues summary attestations using [Verification Summary Attestations (VSAs)] as follows:
 
 1.  `subject.uri` SHOULD be set to a human readable URI of the revision.
 2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
@@ -375,7 +375,7 @@ Example implementations:
 
 #### How to verify
 
--   VSAs for source revisions MUST follow [the standard method of VSA verification](./verification_summary.md#how-to-verify).
+-   VSAs for source revisions MUST follow [the standard method of VSA verification](../../spec/draft/verification_summary.md#how-to-verify).
 -   Users SHOULD check that an allowed branch is listed in `subject.annotations.source_branches` to ensure the revision is from an appropriate context within the repository.
 -   Users SHOULD check that the expected `SLSA_SOURCE_LEVEL_` is listed within `verifiedLevels`.
 -   Users MUST ignore any unrecognized values in `verifiedLevels`.
