@@ -10,7 +10,7 @@ each SLSA level. The intended audience is platform implementers and security
 engineers.
 
 For an informative description of the levels intended for all audiences, see
-[Levels](levels.md). For background, see [Terminology](terminology.md). To
+[Security Levels](levels.md). For background, see [Terminology](terminology.md). To
 better understand the reasoning behind the requirements, see
 [Threats and mitigations](threats.md).
 
