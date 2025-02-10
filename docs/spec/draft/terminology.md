@@ -23,7 +23,7 @@ layout: specifications
 -->
 
 Before diving into the [SLSA Levels](levels.md), we need to establish a core set
-of terminology and models to describe what we're protecting. 
+of terminology and models to describe what we're protecting.
 
 ## Software supply chain
 
