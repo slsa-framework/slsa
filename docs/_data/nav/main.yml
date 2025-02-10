@@ -8,7 +8,7 @@
   url: /current-activities
   description: What the SLSA community is currently working on
 
-- title: SLSA Specification 1.1 Draft
+- title: SLSA 1.1 Draft
   description: >
     This section describes SLSA's security levels and requirements for each track.
     If you want to achieve SLSA a particular level, these are the requirements
@@ -109,7 +109,7 @@
     url: /spec/v1.1/onepage
     skip_next_prev: true  # don't show as a next/prev link
 
-- title: SLSA Specification 1.0
+- title: SLSA 1.0
   description: >
     This section describes SLSA's security levels and requirements for each track.
     If you want to achieve SLSA a particular level, these are the requirements
@@ -210,7 +210,7 @@
     url: /spec/v1.0/onepage
     skip_next_prev: true  # don't show as a next/prev link
 
-- title: SLSA Working Draft
+- title: SLSA Draft
   url: /spec/draft/
   children:
 
@@ -256,6 +256,10 @@
       you'll need to meet.
     children:
 
+    - title: Terminology
+      url: /spec/draft/terminology
+      description: Terminology and model used by SLSA
+
     - title: Security levels and tracks
       url: /spec/draft/levels
       description: Overview of SLSA's tracks and levels, intended for all audiences
@@ -286,7 +290,7 @@
     url: /spec/draft/onepage
     skip_next_prev: true  # don't show as a next/prev link
 
-- title: SLSA Build 1.0
+- title: Build Track 1.0
   url: /build/v1.0/
   children:
 
@@ -313,7 +317,7 @@
     url: /build/v1.0/verifying-systems
     description: Guidelines for securing SLSA Build L3+ builders, intended for platform implementers
 
-- title: SLSA Source WD
+- title: Source Track Draft
   url: /source/draft/
   children:
 
@@ -325,7 +329,7 @@
     url: /source/draft/verifying-source
     description: Guidance for verifying properties of source revisions using SLSA source provenance attestations
 
-- title: SLSA Build Env. WD
+- title: Build Env. Track Draft
   url: /build-env/draft/
 
 - title: How to SLSA

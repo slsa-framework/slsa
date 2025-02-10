@@ -227,9 +227,9 @@ All of [Build L2], plus:
 [build l1]: #build-l1
 [build l2]: #build-l2
 [build l3]: #build-l3
-[future versions]: ../../spec/v1.0/future-directions.md
+[future versions]: /spec/v1.0/future-directions
 [hosted]: requirements.md#isolation-strength
-[previous version]: ../../spec/v0.1/levels.md
-[provenance]: terminology.md
+[previous version]: /spec/v0.1/levels
+[provenance]: /spec/v1.0/terminology
 [verification]: verifying-artifacts.md
-[suppy chain threats]: ../../spec/v1.0/threats.md
+[suppy chain threats]: /spec/v1.0/threats
