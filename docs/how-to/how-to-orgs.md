@@ -10,7 +10,7 @@ your organization, and selecting tools that support your desired SLSA level.
 
 ## Choosing your SLSA level
 
-For all [SLSA levels](/spec/v1.0/levels.md), you follow the same steps:
+For all [SLSA levels](/spec/v1.0/levels), you follow the same steps:
 
 1)  Generate provenance, i.e., document your build process
 2)  Make the provenance available, to allow downstream users to verify it
@@ -42,7 +42,7 @@ consume software.
 As a software consumer, you need to verify that the software you consume meets
 your chosen SLSA Build level.
 
-Ideally, [package ecosystems](/spec/v1.0/terminology.md#package-model) verify
+Ideally, [package ecosystems](/spec/v1.0/terminology#package-model) verify
 SLSA provenance for the packages they distribute. Check with the package
 ecosystem where you get software to see if they verify SLSA provenance. If they
 do, then inspect its verification practices to ensure that they meet your
@@ -53,7 +53,7 @@ wish to verify SLSA provenance yourself using tools such as
 [`slsa-verifier`](https://github.com/slsa-framework/slsa-verifier).
 
 To learn more about the verification process, see
-[Verifying Artifacts](/spec/v1.0/verifying-artifacts.md).
+[Verifying Artifacts](/spec/v1.0/verifying-artifacts).
 
 ### For software producers
 
@@ -82,7 +82,7 @@ For more information about producing provenance, see
 [Producing artifact](/spec/v1.0/requirements) and
 [Verifying build platforms](/spec/v1.0/verifying-systems).
 
-Ideally, [package ecosystems](/spec/v1.0/terminology.md#package-model)
+Ideally, [package ecosystems](/spec/v1.0/terminology#package-model)
 distribute provenance alongside packages. If your organization...
 
 -   distributes software through a third-party package ecosystem, then check

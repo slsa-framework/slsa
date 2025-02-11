@@ -20,7 +20,7 @@ learn more about verifying your system for SLSA conformance, see
 provenance, see [Producing artifacts](/spec/v1.0/requirements). To learn more
 about the SLSA provenance format, see [Provenance](/provenance/v1).
 
-### [Package registry](/spec/v1.0/terminology.md#package-model)
+### [Package registry](/spec/v1.0/terminology#package-model)
 
 1.  Verify provenance for the software you distribute. To
 learn more about verifying provenance, see
