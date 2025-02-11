@@ -132,7 +132,7 @@ of build types](/provenance/v1#index-of-build-types).
 <p align="center"><img src="images/build-env-model.svg" alt="Build Environment Model"></p>
 
 The Build Environment (BuildEnv) track expands upon the
-[build model](#build-model) by explicitily separating the
+[build model](#build-model) by explicitly separating the
 [build image](#build-image) and [compute platform](#compute-platform) from the
 abstract [build environment](#build-environment) and [build platform](#platform).
 Specifically, the BuildEnv track defines the following roles, components, and concepts:
