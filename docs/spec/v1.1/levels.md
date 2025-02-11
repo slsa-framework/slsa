@@ -28,7 +28,7 @@ tracks without invalidating previous levels.
 | [Build L3]  | Hardened build platform | Tampering during the build
 
 <!-- For comparison: a future Build L4's focus might be reproducibility or
-hermeticity or completness of provenance -->
+hermeticity or completeness of provenance -->
 
 > Note: The [previous version] of the specification used a single unnamed track,
 > SLSA 1–4. For version 1.0 the Source aspects were removed to focus on the

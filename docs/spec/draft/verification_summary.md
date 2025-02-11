@@ -310,7 +310,7 @@ Verification MAY additionally contain the following step:
     meets your goal.
 
 Verification mitigates different threats depending on the VSA's contents and the
-verification procudure.
+verification procedure.
 
 IMPORTANT: A VSA does not protect against compromise of the verifier, such as by
 a malicious insider. Instead, VSA consumers SHOULD carefully consider which
