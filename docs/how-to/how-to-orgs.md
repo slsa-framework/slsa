@@ -10,7 +10,7 @@ your organization, and selecting tools that support your desired SLSA level.
 
 ## Choosing your SLSA level
 
-For all [SLSA levels](/spec/v1.0/levels.md), you follow the same steps:
+For all [SLSA levels](/spec/v1.0/levels), you follow the same steps:
 
 1)  Generate provenance, i.e., document your build process
 2)  Make the provenance available, to allow downstream users to verify it
@@ -53,7 +53,7 @@ wish to verify SLSA provenance yourself using tools such as
 [`slsa-verifier`](https://github.com/slsa-framework/slsa-verifier).
 
 To learn more about the verification process, see
-[Verifying Artifacts](/spec/v1.0/verifying-artifacts.md).
+[Verifying Artifacts](/spec/v1.0/verifying-artifacts).
 
 ### For software producers
 
