@@ -67,7 +67,7 @@ consumer's trust.
 
 <details><summary>Software producer intentionally creates a malicious revision of the source</summary>
 
-*Threat:* A producer intentionally creates a malicious revision (or a VSA issuer intentionally creates a malicious attestation) with the intent of harming their consumers.
+*Threat:* A producer intentionally creates a malicious revision with the intent of harming their consumers.
 
 *Mitigation:*
 This kind of attack cannot be directly mitigated through SLSA controls.
