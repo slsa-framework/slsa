@@ -110,7 +110,7 @@ A best practice is to require approval of any changes via a change management to
 
 *Example:* Adversary creates a pull request using a secondary account and approves it using their primary account.
 
-Solution: The producer must require strongly authenticated user accounts and ensure that all accounts map to unique persons.
+Solution: The producer must require all accounts with 'write' and 'approval' permissions to be strongly authenticated and ensure they map to unique persons.
 A common vector for this attack is to take over a robot account with the permission to contribute code.
 Control of the robot and an actors own legitimate account is enough to exploit this vulnerability.
 
