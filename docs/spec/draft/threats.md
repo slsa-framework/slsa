@@ -93,7 +93,7 @@ Threats in this category can be mitigated by following source control management
 
 <details><summary>Directly submit without review</summary>
 
-*Threat:* Submit code to the source repository without another person reviewing.
+*Threat:* Malicious code submitted to the source repository.
 
 *Mitigation:* The producer requires approval of all changes before they are accepted.
 
