@@ -135,9 +135,11 @@ Solution: Require review for such changes.
 
 *Mitigation:* Remove rule exceptions.
 
-*Example:* The intent of a producer is to require two-person review on "all changes except for documentation changes," defined as those only modifying `.md` files.
-Adversary submits a malicious executable masquerading as a documentation file, `help.md`. A code review is not required due to the exception, and a user (or another workflow) is then induced to _execute_ `help.md` and are compromised.
-Technically, the intent of the producer was followed and the produced malicious revision meets all defined policies.
+*Example:* A producer intends to require two-person review on "all changes except for documentation changes," defined as those only modifying `.md` files.
+Adversary submits a malicious executable masquerading as a documentation file, `help.md`.
+This avoids the two-person review rule due to the exception.
+In the future, a user (or another workflow) can be induced to *execute* `help.md` and become compromised.
+Technically the malicious code change met all defined policies yet the intent of the organization was defeated.
 Solution: The producer adjusts the rules to prohibit such exceptions.
 
 </details>
