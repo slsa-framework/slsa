@@ -55,7 +55,6 @@ the basis for a future Build Platform Operations track:
 
 [draft version (v0.1)]: ../v0.1/requirements.md
 
-
 ## Source Track
 
 The SLSA Source track will describe increasing levels of trustworthiness and completeness in a repository revision's provenance (e.g. how it was generated, who the contributors were, etc).

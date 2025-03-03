@@ -73,8 +73,9 @@ consumer's trust.
 This kind of attack cannot be directly mitigated through SLSA controls.
 Consumers must establish some basis to trust the organizations from which they consume software.
 That basis may be:
-* The code is open source and has a sufficiently large user-base that malicious changes are likely to be detected.
-* The organization has sufficient legal or reputational incentives to dissuade it from making malicious changes.
+
+-   The code is open source and has a sufficiently large user-base that malicious changes are likely to be detected.
+-   The organization has sufficient legal or reputational incentives to dissuade it from making malicious changes.
 
 Ultimately this is a judgement call with no straightforward answer.
 
