@@ -818,7 +818,10 @@ contributor accidentally introduces a security vulnerability into libDep. The
 next time MyPackage is built, it picks up and includes the vulnerable version of
 libDep, resulting in MyPackage also having the security vulnerability.
 
-*Mitigation:* **TODO**
+*Mitigation:* A future
+[Dependency track](current-activities#dependency-track) may
+provide more comprehensive guidance on how to address more specfiic
+aspects of this threat.
 
 </details>
 <details id="build-tool"><summary>Use a compromised build tool (compiler, utility, interpreter, OS package, etc.)</summary>
