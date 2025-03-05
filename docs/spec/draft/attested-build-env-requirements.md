@@ -85,6 +85,28 @@ requirements for each role to implement to achieve a desired BuildEnv level.
   <td> <td> <td>✓
 </table>
 
+### Scope
+
+## Build Image Producer
+
+### BI.1 Distribute build image provenance
+
+### BI.2 Distribute reference values for build image components
+
+### BI.3 Implement enlightened build agent
+
+#### BI.3.1 Attest to build environment initial state
+
+#### BI.3.2 Attest to build dispatch
+
+#### BI.3.3 Distribute host integrity attestation
+
+#### BI.3.4 Interface with trusted hardware
+
+## Build Platform
+
+## Compute Platform
+
 [Build Environment levels]: attested-build-env-levels.md
 [build environment]: terminology.md#build-environment
 [build platform]: terminology.md#platform
