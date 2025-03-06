@@ -3,8 +3,8 @@ title: Hosting build environments
 description: This page covers the detailed technical requirements for hosting build environments at each SLSA Build Environment level. The intended audience is build platform implementers, compute infrastructure providers and security engineers.
 ---
 
-This section of the SLSA Build Environment track specification describes the
-detailed conformance requirements for build platforms to achieve the SLSA
+This section of the SLSA Build Environment track specification describes
+detailed implementation guidance for build platforms to achieve the SLSA
 [Build Environment levels].
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
@@ -21,7 +21,7 @@ responsibility lies primarily with the [build image provider] and the
 the underlying [compute platform].
 
 The following table summarizes the specific supply chain and security
-requirements for each role to implement to achieve a desired BuildEnv level.
+requirements for each role to implement a desired BuildEnv level.
 
 <table class="no-alternate">
 <tr>
@@ -86,6 +86,10 @@ requirements for each role to implement to achieve a desired BuildEnv level.
 </table>
 
 ### Scope
+
+The requirements laid out in this guidance for BuildEnv track implementers
+assume VM-based build environments. We plan to extend the scope of these
+requirements in a future version of the BuildEnv spec.
 
 ## Build Image Producer
 
