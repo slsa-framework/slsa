@@ -57,7 +57,7 @@ This includes modification of the source data at rest as well as insider threats
 when an authorized individual introduces an unauthorized change.
 
 SLSA does not yet address source threats, but we anticipate doing so in a
-[future version](future-directions#source-track).
+[future version](../../current-activities.md#source-track).
 
 ### (A) Producer
 
@@ -819,7 +819,7 @@ next time MyPackage is built, it picks up and includes the vulnerable version of
 libDep, resulting in MyPackage also having the security vulnerability.
 
 *Mitigation:* A future
-[Dependency track](current-activities#dependency-track) may
+[Dependency track](../../current-activities#dependency-track) may
 provide more comprehensive guidance on how to address more specfiic
 aspects of this threat.
 
@@ -834,7 +834,7 @@ output artifact.
 including OS images, as any other artifact to be verified prior to use.
 The threats described in this document apply recursively to build tooling
 as do the mitigations and examples.  A future
-[Build Environment track](current-activities#build-environment-track) may
+[Build Environment track](../../current-activities#build-environment-track) may
 provide more comprehensive guidance on how to address more specfiic
 aspects of this threat.
 
