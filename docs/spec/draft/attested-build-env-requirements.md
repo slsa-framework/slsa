@@ -89,11 +89,62 @@ requirements for each role to implement a desired BuildEnv level.
 
 The requirements laid out in this guidance for BuildEnv track implementers
 assume VM-based build environments. We plan to extend the scope of these
-requirements in a future version of the BuildEnv spec.
+requirements to cover container-only environments in a future version of the
+BuildEnv spec.
 
 ## Build Image Producer
 
+The [build image producer] is an organization that releases a VM image (i.e.,
+the [build image]) that is used as a basis for spawning an instance of a build
+environment.Public cloud-based CI/CD services (e.g., GitHub Actions, GitLab
+CI/CD) are major build image producers, offering various VM images for the most
+common build environment configurations.
+
+Enterprises hosting on-premise build platforms may produce their own build
+images for internal software development teams or opt to use VM images produced
+by a third-party. Similarly, software producers that require special-purpose
+build environments, for example to support builds on specific compute
+architectures, may produce their own VM images and bring them to a hosted
+build platform with bring-your-own build image policies.
+
 ### BI.1 Distribute build image provenance
+
+The build image producer is responsible for generating and distributing
+provenance describing how a particular build image was produced.
+
+The BuildEnv level specifies the minimum SLSA [Build track] level at which
+the [producer requirements] MUST be followed by the build image producer. These
+requirements include following a consistent build process, choosing a suitable
+build platform, and  distributing the generated SLSA [Build Provenance] to allow
+consumers to independently verify  provenance.
+
+In scenarios where the build image artifact cannot be published directly, for
+example due to build image producer intellectual property concerns, an
+attestation asserting the expected hash value of the build image MUST be
+generated (e.g., using [SCAI] or a [Release Attestation]) and distributed
+alongside the image's corresponding SLSA Build Provenance.
+
+If the full Build Provenance document cannot be disclosed, for instance to avoid
+disclosing details about build platform internals, a [VSA] asserting the
+produced build image's SLSA Build level MUST be distributed instead,
+irrespective of whether the build image artifact itself is published.
+
+<table>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+
+<tr><td>SLSA Build L2 or higher<td>
+
+The build image producer MUST follow at least SLSA Build L2 [producer
+requirements] when producing VM images to be used as build images.
+
+<td>✓<td>✓<td>✓
+<tr><td>SLSA Build L3 or higher<td>
+
+The build image producer MUST follow at least SLSA Build L3 [producer
+requirements] when producing VM images to be used as build images.
+
+<td> <td>✓<td>✓
+</table>
 
 ### BI.2 Distribute reference values for build image components
 
@@ -112,6 +163,16 @@ requirements in a future version of the BuildEnv spec.
 ## Compute Platform
 
 [Build Environment levels]: attested-build-env-levels.md
+[Build Provenance]: provenance.md
+[Build track]: requirements.md
 [build environment]: terminology.md#build-environment
+[build image]: terminology.md#build-image
+[build image producer]: terminology.md#build-image-producer
 [build platform]: terminology.md#platform
 [compute platform]: terminology.md#compute-platform
+[producer requirements]: requirements.md#producer
+[Release Attestation]: https://github.com/in-toto/attestation/blob/main/spec/predicates/release.md
+[SCAI]: https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md
+[Secure Boot]: https://wiki.debian.org/SecureBoot#What_is_UEFI_Secure_Boot.3F
+[TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
+[VSA]: verification_summary.md
