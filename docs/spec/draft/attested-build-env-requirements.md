@@ -130,20 +130,18 @@ produced build image's SLSA Build level MUST be distributed instead,
 irrespective of whether the build image artifact itself is published.
 
 <table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+<tr><th>Level<th>Requirement Description
 
-<tr><td>SLSA Build L2 or higher<td>
+<tr><td>BuildEnv L1<td>
 
 The build image producer MUST follow at least SLSA Build L2 [producer
 requirements] when producing VM images to be used as build images.
 
-<td>✓<td>✓<td>✓
-<tr><td>SLSA Build L3 or higher<td>
+<tr><td>BuildEnv L2 or higher<td>
 
 The build image producer MUST follow at least SLSA Build L3 [producer
 requirements] when producing VM images to be used as build images.
 
-<td> <td>✓<td>✓
 </table>
 
 ### BI.2 Distribute reference values for build image components
