@@ -74,7 +74,7 @@ This kind of attack cannot be directly mitigated through SLSA controls.
 Consumers must establish some basis to trust the organizations from which they consume software.
 That basis may be:
 
--   The code is open source and has a sufficiently large user-base that malicious changes are likely to be detected.
+-   The repo is open source with an active user-base. High numbers of engaged users may increase the likelihood that bad code is detected during code review and reduce the time-to-detection when bad code makes it in.
 -   The organization has sufficient legal or reputational incentives to dissuade it from making malicious changes.
 
 Ultimately this is a judgement call with no straightforward answer.
@@ -110,9 +110,10 @@ A best practice is to require approval of any changes via a change management to
 
 *Example:* Adversary creates a pull request using a secondary account and approves it using their primary account.
 
-Solution: The producer must require all accounts with 'write' and 'approval' permissions to be strongly authenticated and ensure they map to unique persons.
-A common vector for this attack is to take over a robot account with the permission to contribute code.
-Control of the robot and an actors own legitimate account is enough to exploit this vulnerability.
+Solution: The producer must track all actors who have both explicit review permissions and the independent ability to control a privileged bot.
+A common vector for this attack is to influence a robot account with the permission to review or contribute code.
+Control of the robot account and an actor's own personal account is enough to exploit this vulnerability.
+A common solution to this flow is to deny bot accounts from contributing or reviewing code, or to require more human reviews in those cases.
 
 </details>
 <details><summary>Use a robot account to submit change</summary>
@@ -213,18 +214,16 @@ Solution: The proposed change still requires two-person review in the upstream c
 </details>
 <details><summary>Commit graph attacks</summary>
 
-*Threat:* Request review for a series of two commits, X and Y, where X is bad and Y is good.
-Reviewer thinks they are approving only the final Y state but they are also implicitly approving X.
+*Threat:* A malicious commit can be included in a sequence of commits such that it does not appear malicious in the net diff presented to reviewers.
 
-*Mitigation:* The producer declares that only the final delta is considered approved.
-In this configuration, intermediate revisions are not considered to be approved and are not added to the protected context (e.g. the `main` branch).
-With git version control systems this is called a "squash" merge strategy.
+*Mitigation:* The producer ensures that all revisions in the protected context followed the same contribution process.
 
 *Example:* Adversary sends a pull request containing malicious commit X and benign commit Y that undoes X.
-The produced diff of X + Y contains zero lines of changed code and the reviewer may not notice that X is malicious unless they review each commit in the request.
+The produced diff of X + Y contains zero lines of changed code and the reviewer may not notice that X is malicious unless they review each commit individually.
 If X is allowed to become reachable from the protected branch, the content may become available in secured environments such as developer machines.
 
-Solution: The code review tool does not merge contributor-created commits, and instead merges a single new commit representing only the reviewed "changes from all commits."
+Solution: Each revision in the protected context must have followed the intended process.
+Ultimately, this means that either each code review results in at most a single new commit or that the full process is followed for each constituent commit in a proposed sequence.
 
 </details>
 

@@ -59,8 +59,8 @@ the basis for a future Build Platform Operations track:
 
 The SLSA Source track will describe increasing levels of trustworthiness and completeness in a repository revision's provenance (e.g. how it was generated, who the contributors were, etc).
 
-The Source track will be scoped to revisions of a single repository that is controlled by an organization.
-The organization determines the intent of the software in the repository, what Source level should apply to the repository, and administers technical controls to enforce that level.
+The Source track will be scoped to revisions of a single repository.
+The intent of each revision is determined by the [software producer](terminology.md#roles) who is also responsible for declaring which Source level should apply to each revision and administering technical controls to enforce that level.
 
-The primary purpose of the Source track will be to enable verification that the creation of a revision followed the expected process.
-Consumers will be able to examine source provenance attestations to determine if all sources used during the build meet their requirements.
+The primary purpose of the Source track will be to enable verification that the creation of a revision followed the producer's intended process.
+Consumers will be able to examine source provenance attestations to determine if a revision meet their requirements.
