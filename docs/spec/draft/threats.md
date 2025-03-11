@@ -74,7 +74,7 @@ This kind of attack cannot be directly mitigated through SLSA controls.
 Consumers must establish some basis to trust the organizations from which they consume software.
 That basis may be:
 
--   The repo is open source with an active user-base. High numbers of engaged users may increase the likelihood that bad code is detected during code review and reduce the time-to-detection when bad code makes it in.
+-   The repo is open source with an active user-base. High numbers of engaged users may increase the likelihood that bad code is detected during code review and reduce the time-to-detection when bad revisions are accepted.
 -   The organization has sufficient legal or reputational incentives to dissuade it from making malicious changes.
 
 Ultimately this is a judgement call with no straightforward answer.
