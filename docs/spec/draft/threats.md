@@ -214,12 +214,12 @@ Solution: The proposed change still requires two-person review in the upstream c
 </details>
 <details><summary>Commit graph attacks</summary>
 
-*Threat:* A malicious commit can be included in a sequence of commits such that it does not appear malicious in the net diff presented to reviewers.
+*Threat:* A malicious commit can be included in a sequence of commits such that it does not appear malicious in the net change presented to reviewers.
 
 *Mitigation:* The producer ensures that all revisions in the protected context followed the same contribution process.
 
-*Example:* Adversary sends a pull request containing malicious commit X and benign commit Y that undoes X.
-The produced diff of X + Y contains zero lines of changed code and the reviewer may not notice that X is malicious unless they review each commit individually.
+*Example:* Adversary sends a pull request containing malicious commit X and a commit Y that undoes X.
+The combined change of X + Y displays zero lines of malicious code and the reviewer cannot tell that X is malicious unless they review it individually.
 If X is allowed to become reachable from the protected branch, the content may become available in secured environments such as developer machines.
 
 Solution: Each revision in the protected context must have followed the intended process.
