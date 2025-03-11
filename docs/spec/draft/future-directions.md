@@ -16,7 +16,7 @@ additional aspects of automatable supply chain security.
 ### Build L4
 
 A build L4 could include further hardening of the build platform and enabling
-corraboration of the provenance, for example by providing complete knowledge of
+corroboration of the provenance, for example by providing complete knowledge of
 the build inputs.
 
 The initial [draft version (v0.1)] of SLSA defined a "SLSA 4" that included the
@@ -54,3 +54,13 @@ the basis for a future Build Platform Operations track:
 </section>
 
 [draft version (v0.1)]: ../v0.1/requirements.md
+
+## Source Track
+
+The SLSA Source track will describe increasing levels of trustworthiness and completeness in a repository revision's provenance (e.g. how it was generated, who the contributors were, etc).
+
+The Source track will be scoped to revisions of a single repository.
+The intent of each revision is determined by the [software producer](terminology.md#roles) who is also responsible for declaring which Source level should apply and administering technical controls to enforce that level.
+
+The primary purpose of the Source track will be to enable verification that the creation of a revision followed the producer's intended process.
+Consumers will be able to examine source provenance attestations to determine if a revision meet their requirements.

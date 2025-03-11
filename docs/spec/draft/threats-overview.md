@@ -23,10 +23,7 @@ availability. Integrity means protection against tampering or unauthorized
 modification at any stage of the software lifecycle. Within SLSA, we divide
 integrity into source integrity vs build integrity.
 
-**Source integrity:** Ensure that all changes to the source code reflect the
-intent of the software producer. Intent of an organization is difficult to
-define, so SLSA is expected to approximate this as approval from two authorized
-representatives.
+**Source integrity:** Ensure that the source revision represents the intent of the producer, that all expected processes were followed and that the revision was not modified after being accepted.
 
 **Build integrity:** Ensure that the package is built from the correct,
 unmodified sources and dependencies according to the build recipe defined by the
