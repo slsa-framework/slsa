@@ -45,5 +45,3 @@ S2C2F provides a guide for the safe consumption of open source dependencies.
 
 As part of this ongoing effort, community members from both SLSA and S2C2F are collaborating to translate the practices outlined in S2C2F, into requirements that align with the structure of existing SLSA specifications.
 Join the discussions and ongoing efforts [on the SLSA Dependency Track Slack channel](https://openssf.slack.com/archives/C03THTH3RSM).
-
-
