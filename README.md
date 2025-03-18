@@ -29,8 +29,8 @@ See https://slsa.dev/community for ways to get involved in SLSA development.
 | ---------- | ----------
 | [Build Level 4] | David A Wheeler (@david-a-wheeler)
 | [Attested Build Environments Track] | Marcela Melara (@marcelamelara), Pavel Iakovenko (@paveliak)
-| [Source Track] | Kris K (@kpk47)
-| [Version 1.1 release] | Joshua Lock (@joshuagl)
+| [Source Track] | Tom Hennen (@TomHennen)
+| [Version 1.1 release] | Arnaud J Le Hors (@lehors)
 
 [Shepherd]: CONTRIBUTING.md#workstream-lifecycle
 [Build Level 4]: https://github.com/slsa-framework/slsa/issues/977
