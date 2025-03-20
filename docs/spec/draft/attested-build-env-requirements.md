@@ -38,16 +38,16 @@ requirements for each role to implement a desired BuildEnv level.
   <td> <td>✓<td>✓
 <tr>
   <td rowspan=4><span id="enlightened-build-agent">**BI.3**: Implement enlightened build agent</span>
-  <td><span id="attest-env-initial-state">**BI.3.1**: Attest to build environment initial state</span>
+<tr>
+  <td><span id="root-of-trust">**BI.3.1**: Interface with a root of trust</span>
+  <td> <td>✓<td>✓
+  <td><span id="attest-env-initial-state">**BI.3.2**: Attest to build environment initial state</span>
   <td> <td>✓<td>✓
 <tr>
-  <td><span id="attest-build-dispatch">**BI.3.2**: Attest to build dispatch</span>
+  <td><span id="attest-build-dispatch">**BI.3.3**: Attest to build dispatch</span>
   <td> <td>✓<td>✓
 <tr>
-  <td><span id="distribute-host-integrity-attesttations">**BI.3.3**: Distribute host integrity attestation</span>
-  <td> <td> <td>✓
-<tr>
-  <td><span id="interface-trusted-hardware">**BI.3.4**: Interface with trusted hardware</span>
+  <td><span id="distribute-host-integrity-attestations">**BI.3.3**: Distribute host integrity attestation</span>
   <td> <td> <td>✓
 <tr>
   <td rowspan=5><span id="build-platform">Build Platform (BP)</span>
@@ -112,6 +112,25 @@ build platform with bring-your-own build image policies.
 The build image producer is responsible for generating and distributing
 provenance describing how a particular build image was produced.
 
+<table>
+<tr><th>Level<th>Implementation Guidance
+
+<tr><td>BuildEnv L1<td>
+
+MUST follow SLSA Build L2 or higher [producer requirements] when producing VM
+images to be used as build images.
+
+<tr><td>BuildEnv L2<td>
+
+MUST follow SLSA Build L3 or higher [producer requirements] when producing VM
+images to be used as build images.
+
+<tr><td>BuildEnv L3<td>
+
+Same as L2.
+
+</table>
+
 The BuildEnv level specifies the minimum SLSA [Build track] level at which
 the [producer requirements] MUST be followed by the build image producer. These
 requirements include following a consistent build process, choosing a suitable
@@ -129,32 +148,111 @@ disclosing details about build platform internals, a [VSA] asserting the
 produced build image's SLSA Build level MUST be distributed instead,
 irrespective of whether the build image artifact itself is published.
 
+### BI.2 Distribute reference values for build image components
+
+The build image producer is responsible for generating and distributing
+digitally signed known good values (i.e., [reference values]) for a number of
+components in their produced build images.
+
 <table>
-<tr><th>Level<th>Requirement Description
+<tr><th>Level<th>Implementation Guidance
 
 <tr><td>BuildEnv L1<td>
 
-The build image producer MUST follow at least SLSA Build L2 [producer
-requirements] when producing VM images to be used as build images.
+none
 
-<tr><td>BuildEnv L2 or higher<td>
+<tr><td>BuildEnv L2<td>
 
-The build image producer MUST follow at least SLSA Build L3 [producer
-requirements] when producing VM images to be used as build images.
+MUST collect VM image component reference values:
+-   bootloader
+-   guest kernel
+-   [build agent]
+-   root filesystem
+
+<tr><td>BuildEnv L3<td>
+
+Same as L2.
 
 </table>
 
-### BI.2 Distribute reference values for build image components
+For VM images, reference values for components such as a guest kernel or build =
+agent MAY be collected during the VM's build by computing a [measurement] of
+the particular component. Root filesystems specifically SHOULD be measured using
+tools like [dm-verity] or [fs-verity] run at VM startup.
+
+It is RECOMMENDED that authenticated reference values be captured in the VM
+image's SLSA Build Provenance directly (as part of the `subject` field), or
+using a dedicated [SCAI] attestation.
+If a component is supplied by a third-party producer and the component's
+authenticated reference value is made available, the build image producer SHOULD
+use the available reference value, rather than generating its own.
+
+Build image producers MAY collect and distribute reference values for additional
+build image components for which the integrity of the initial state needs to be
+checked (e.g., initramfs in Linux-based VMs).
 
 ### BI.3 Implement enlightened build agent
 
-#### BI.3.1 Attest to build environment initial state
+The [build agent] is a crucial component in a build environment, whose primary
+role is to enable communication between the build platform's control plane and
+the running build environment. As such, the build image producer is responsible
+for implementing a [build agent] that supports specific features needed to
+validate the integrity of a build environment.
 
-#### BI.3.2 Attest to build dispatch
+#### BI.3.1 Interface with a root of trust
 
-#### BI.3.3 Distribute host integrity attestation
+The enlightened build agent MUST be capable of automatically interfacing with a
+root of trust component provided by the host [compute platform].
 
-#### BI.3.4 Interface with trusted hardware
+<table>
+<tr><th>Level<th>Implementation Guidance
+
+<tr><td>BuildEnv L1<td>
+
+none
+
+<tr><td>BuildEnv L2<td>
+
+MUST be able to send requests and receive data from a software or virtualized
+root of trust, such as a vTPM implemented by the hypervisor.
+
+<tr><td>BuildEnv L3<td>
+
+MUST be able to send requests and receive data from a *hardware* root of trust,
+such as TPM or confidential VM hardware in the compute platform.
+
+</table>
+
+#### BI.3.2 Attest to build environment initial state
+
+The enlightened build agent MUST be capable of attesting to the integrity of the
+initial state of its build environment upon completion of the VM's [boot
+process].
+
+<table>
+<tr><th>Level<th>Implementation Guidance
+
+<tr><td>BuildEnv L1<td>
+
+none
+
+<tr><td>BuildEnv L2<td>
+
+MUST request a signed [quote] from a root of trust (e.g., a vTPM) for the build
+environment's system state at boot time, and transmit this quote to the build
+platform's control plane.
+
+<tr><td>BuildEnv L3<td>
+
+MUST request a signed [quote] from a *hardware* root of trust (e.g., hardware
+TPM or confidential VM hardware) for the environment's system state *and* the
+VMM's boot process.
+
+</table>
+
+#### BI.3.3 Attest to build dispatch
+
+#### BI.3.4 Distribute host integrity attestation
 
 ## Build Platform
 

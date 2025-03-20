@@ -33,7 +33,7 @@ environment, and the compute platform they used.
 | ------------- | ------------ | ----- | ----------
 | [BuildEnv L0] | (none)       | (n/a) | (n/a)
 | [BuildEnv L1] | Signed build image provenance exists | Tampering during build image distribution | Signed build image provenance
-| [BuildEnv L2] | Attested build environment instantiation | Tampering via the build platform's control plane | The compute platform's host interface
+| [BuildEnv L2] | Attested build environment instantiation | Tampering via the build environment's components | The compute platform's host interface
 | [BuildEnv L3] | Hardware-attested build environment | Tampering via the compute platform's host interface | The compute platform's hardware
 
 > :warning:
