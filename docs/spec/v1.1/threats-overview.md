@@ -67,8 +67,8 @@ Many recent high-profile attacks were consequences of supply chain integrity vul
 <tr>
 <td>D
 <td>Use compromised dependency (i.e. A-H, recursively)
-<td><a href="https://web.archive.org/web/20210909051737/https://schneider.dev/blog/event-stream-vulnerability-explained/">event-stream</a>: Attacker added an innocuous dependency and then later updated the dependency to add malicious behavior. The update did not match the code submitted to GitHub (i.e. attack F).
-<td>Applying SLSA recursively to all dependencies would have prevented this particular vector, because the provenance would have indicated that it either wasn't built from a proper builder or that the source did not come from GitHub.
+<td><a href="https://web.archive.org/web/20210909051737/https://schneider.dev/blog/event-stream-vulnerability-explained/">event-stream</a>: Attacker controls an innocuous dependency and publishes a malicious binary version without a corresponding update to the source code.
+<td>Applying SLSA recursively to all dependencies would prevent this particular vector, because the provenance would indicate that it either wasn't built from a proper builder or that the binary did not match the source.
 <tr>
 <td>E
 <td>Compromise build process
