@@ -58,6 +58,7 @@
 /spec                   /spec/v1.0              302
 /spec/faq               /spec/v1.0/faq          302
 /spec/v1/*              /spec/v1.0/:splat       302
+/spec/v1.1/*            /spec/v1.1-rc2/:splat   302
 
 # Note: Versions prior to v1.0 stay in /verification_summary.
 /verification_summary           /spec/v1.0/verification_summary     302  # floating
