@@ -1,5 +1,5 @@
 ---
-title: SLSA Specification
+title: SLSA specification
 description: A one-page rendering of all that is included in SLSA v1.1 RC2.
 noindex: true
 ---
