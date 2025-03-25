@@ -114,28 +114,3 @@ the form of attestations that the package was built correctly**.
 
 **Benefits**: The attestation removes intermediate platforms from the trust base and ensures that
 individuals who are accidentally granted access do not have sufficient permission to tamper with the package.
-
-## Support anonymous and pseudonymous contributions
-
-SLSA supports anonymous and pseudonymous 'identities' within the software supply chain.
-While organizations that implement SLSA may choose otherwise, SLSA itself does not require,
-or encourage, participants to be mapped to their legal identities.
-
-**Nothing in this specification should be taken to mean that SLSA requires participants to
-to reveal their legal identity.**
-
-**Reasoning**: SLSA uses identities for multiple purposes: as a trust anchor for attestations
-(i.e. who or what is making this claim and do I trust it to do so) or for attributing actions
-to an actor. Choice of identification technology is left to the organization and technical
-stacks implementing the SLSA standards.
-
-When identities are strongly authenticated and used consistently they can often be leveraged
-for both of these purposes without requiring them to be mapped to legal identities.
-This reflects how identities are often used in open source where legal name means much less
-to projects than the history and behavior of a given handle over time does. Meanwhile some
-organizations may choose to levy additional requirements on identities. They are free to do
-so, but SLSA itself does not require it.
-
-**Benefits**: By _not_ requiring legal identities SLSA lowers the barriers to its adoption,
-enabling all of its other benefits and maintaining support for anonymous and pseudonymous
-contribution as has been practiced in the software industry for decades.
