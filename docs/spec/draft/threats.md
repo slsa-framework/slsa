@@ -1002,7 +1002,7 @@ two-party review.
 other controls.
 
 *Mitigation:* Require cryptographically secure hash functions for commit
-checksums and provenance subjects, such as SHA-256.
+IDs and provenance subjects, such as SHA-256.
 
 *Examples:* Attacker crafts a malicious executable with the same MD5 hash as a
 target benign executable. Attacker replaces the benign executable with
