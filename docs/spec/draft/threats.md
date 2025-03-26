@@ -256,7 +256,7 @@ stamping."
 
 </details>
 
-#### (B4) Render logs ineffective
+#### (B4) Render change metadata ineffective
 
 <details><summary>Forge change metadata</summary>
 
