@@ -517,6 +517,7 @@ such cache poisoning attacks.
 the source file. Adversary runs a malicious build that creates a "poisoned"
 cache entry with a falsified key, meaning that the value wasn't really produced
 from that source. A subsequent build then picks up that poisoned cache entry.
+Solution: Builder uses a separate cache for each build.
 
 </details>
 <details><summary>Compromise build platform admin <span>(verification)</span></summary>
