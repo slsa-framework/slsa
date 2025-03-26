@@ -263,13 +263,7 @@ stamping."
 *Threat:* Forge the change metadata to alter attribution, timestamp, or
 discoverability of a change.
 
-*Mitigation:* Source control platform strongly authenticates actor identity,
-timestamp, and parent revisions.
-
-*Example:* Adversary submits a git commit with a falsified author and timestamp,
-and then rewrites history with a non-fast-forward update to make it appear to
-have been made long ago. Solution: Consumer detects this by seeing that such
-changes are not strongly authenticated and thus not trustworthy.
+*Mitigation:* This threat is not currently addressed by SLSA.
 
 </details>
 
@@ -916,7 +910,7 @@ machine when Dep is loaded at runtime. An end user installs MyPackage, which in
 turn installs the compromised version of Dep. When the user runs MyPackage, it
 loads and executes the malicious code from Dep.
 
-*Mitigation:* N/A - This threat is not currently addressed by SLSA. SLSA's
+*Mitigation:* N/A - SLSA's
 threat model does not explicitly model runtime dependencies. Instead, each
 runtime dependency is considered a distinct artifact with its own threats.
 
@@ -939,15 +933,7 @@ SLSA v1.0 does not address availability threats, though future versions might.
 revision or cause it to get garbage collected, preventing anyone from inspecting
 the code.
 
-*Mitigation:* Some system retains the revision and its version control history,
-making it available for inspection indefinitely. Users cannot delete the
-revision except as part of a transparent legal or privacy process.
-
-*Example:* An adversary submits malicious code to the MyPackage GitHub repo,
-builds from that revision, then does a force push to erase that revision from
-history or deletes the entire repo. This would make the revision
-unavailable for inspection. Solution: Verifier rejects packages built from
-source repos that do not have strong retention guarantees.
+*Mitigation:* This threat is not currently addressed by SLSA.
 
 </details>
 <details><summary>A dependency becomes temporarily or permanently unavailable to the build process</summary>
@@ -963,14 +949,14 @@ impact of this threat.
 
 *Threat:* The package registry stops serving the artifact.
 
-*Mitigation:* N/A - This threat is not currently addressed by SLSA.
+*Mitigation:* This threat is not currently addressed by SLSA.
 
 </details>
 <details><summary>De-list provenance</summary>
 
 *Threat:* The package registry stops serving the provenance.
 
-*Mitigation:* N/A - This threat is not currently addressed by SLSA.
+*Mitigation:* This threat is not currently addressed by SLSA.
 
 </details>
 
