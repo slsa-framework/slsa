@@ -911,7 +911,7 @@ reading a source and its associated change history, or from building a package.
 
 SLSA does not currently address availability threats, though future versions might.
 
-<details><summary>(A)(B) Delete the code</summary>
+<details><summary>Delete the code</summary>
 
 *Threat:* Perform a build from a particular source revision and then delete that
 revision or cause it to get garbage collected, preventing anyone from inspecting
