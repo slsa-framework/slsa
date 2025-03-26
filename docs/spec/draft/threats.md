@@ -1004,10 +1004,9 @@ other controls.
 *Mitigation:* Require cryptographically secure hash functions for commit
 checksums and provenance subjects, such as SHA-256.
 
-*Examples:* Construct a benign file and a malicious file with the same SHA-1
-hash. Get the benign file reviewed and then submit the malicious file.
-Alternatively, get the benign file reviewed and submitted and then build from
-the malicious file. Solution: Only accept cryptographic hashes with strong
+*Examples:* Attacker crafts a malicious executable with the same MD5 hash as a
+target benign executable. Attacker replaces the benign executable with
+the malicious executable. Solution: Only accept cryptographic hashes with strong
 collision resistance.
 
 </details>
