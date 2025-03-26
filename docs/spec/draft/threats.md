@@ -852,9 +852,6 @@ compromise took place (i.e. before/during vs *after* the build of the build tool
 
 </details>
 
-Reminder: dependencies that look like [runtime dependencies](#runtime-dep)
-actually become build dependencies if they get loaded at build time.
-
 <details id="runtime-dep-at-build-time"><summary>Use a compromised runtime dependency during the build (for tests, dynamic linking, etc.)</summary>
 
 *Threat:* During the build process, use a compromised runtime dependency (such
