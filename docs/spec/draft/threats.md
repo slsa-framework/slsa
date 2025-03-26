@@ -265,7 +265,6 @@ An adversary introduces a change to the source control repository through an
 administrative interface, or through a compromise of the underlying
 infrastructure.
 
-</details>
 <details><summary>Platform admin abuses privileges</summary>
 
 *Threat:* Platform administrator abuses their privileges to bypass controls or
