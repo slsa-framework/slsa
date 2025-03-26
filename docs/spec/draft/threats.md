@@ -945,7 +945,7 @@ revision except as part of a transparent legal or privacy process.
 
 *Example:* An adversary submits malicious code to the MyPackage GitHub repo,
 builds from that revision, then does a force push to erase that revision from
-history (or requests that GitHub delete the repo.) This would make the revision
+history or deletes the entire repo. This would make the revision
 unavailable for inspection. Solution: Verifier rejects packages built from
 source repos that do not have strong retention guarantees.
 
