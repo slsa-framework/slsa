@@ -472,11 +472,12 @@ forged digest is irrelevant.
 build process or provenance generation.
 
 *Example:* MyPackage is built on Awesome Builder under the project "mypackage".
-Adversary is an administrator of the "mypackage" project. Awesome Builder allows
-administrators to debug build machines via SSH. An adversary uses this feature
-to alter a build in progress. Solution: Build L3 requires provenance to be
-resistant to forgery by tenants, so the attacker would be forbidden from
-altering a build in progress.
+Adversary is an owner of the "mypackage" project. Awesome Builder allows
+owners to debug the build environment via SSH. An adversary uses this feature
+to alter a build in progress. Solution: Build L3 requires complete provenance, the
+attackers access and/or actions within the SSH would be enumerated within the
+external parameters. The updated external parameters will not match the declared
+expectations causing verification to fail.
 
 </details>
 <details><summary>Compromise other build <span>(Build L3)</span></summary>
