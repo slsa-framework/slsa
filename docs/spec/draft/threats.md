@@ -509,7 +509,7 @@ key.
 *Threat:* Add a malicious artifact to a build cache that is later picked up by a
 benign build process.
 
-*Mitigation:* Build caches must be [isolate][isolated] between builds to prevent
+*Mitigation:* Build caches must be [isolated][isolated] between builds to prevent
 such cache poisoning attacks.
 
 *Example:* Build platform uses a build cache across builds, keyed by the hash of
