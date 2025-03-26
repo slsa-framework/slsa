@@ -987,13 +987,12 @@ two-party review.
 *Threat:* Exploit a cryptographic hash collision weakness to bypass one of the
 other controls.
 
-*Mitigation:* Require cryptographically secure hash functions for commit
-IDs and provenance subjects, such as SHA-256.
+*Mitigation:* Choose secure algorithms when using cryptographic digests, such
+as SHA-256.
 
-*Examples:* Attacker crafts a malicious executable with the same MD5 hash as a
-target benign executable. Attacker replaces the benign executable with
-the malicious executable. Solution: Only accept cryptographic hashes with strong
-collision resistance.
+*Examples:* Attacker crafts a malicious file with the same MD5 hash as a target
+benign file. Attacker replaces the benign file with the malicious file.
+Solution: Only accept cryptographic hashes with strong collision resistance.
 
 </details>
 
