@@ -159,6 +159,7 @@ Solution: The producer can modify the rule to disallow bypass by administrators,
 
 *Example 2:* GitHub repository-level admin removes a branch requirement, pushes their change, then re-enables the requirement to cover their tracks.
 Solution: The producer can configure higher-permission-level rules (such as organization-level GitHub Rulesets) to prevent repository-level tampering.
+</details>
 
 #### (B2) Evade change management process
 
