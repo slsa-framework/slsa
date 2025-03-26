@@ -912,7 +912,7 @@ runtime dependency is considered a distinct artifact with its own threats.
 An availability threat is a potential for an adversary to deny someone from
 reading a source and its associated change history, or from building a package.
 
-SLSA v1.0 does not address availability threats, though future versions might.
+SLSA does not currently address availability threats, though future versions might.
 
 <details><summary>(A)(B) Delete the code</summary>
 
