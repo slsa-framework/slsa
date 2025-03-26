@@ -256,6 +256,23 @@ stamping."
 
 </details>
 
+#### (B4) Render logs ineffective
+
+<details><summary>Forge change metadata</summary>
+
+*Threat:* Forge the change metadata to alter attribution, timestamp, or
+discoverability of a change.
+
+*Mitigation:* Source control platform strongly authenticates actor identity,
+timestamp, and parent revisions.
+
+*Example:* Adversary submits a git commit with a falsified author and timestamp,
+and then rewrites history with a non-fast-forward update to make it appear to
+have been made long ago. Solution: Consumer detects this by seeing that such
+changes are not strongly authenticated and thus not trustworthy.
+
+</details>
+
 ### (C) Source code management
 
 An adversary introduces a change to the source control repository through an
@@ -977,20 +994,6 @@ configuration for MyPackage expects the source repository to be
 `evil/my-package`, and then builds from that repository and uploads a malicious
 version of the package. Solution: Changes to the recorded expectations require
 two-party review.
-
-</details>
-<details><summary>Forge change metadata</summary>
-
-*Threat:* Forge the change metadata to alter attribution, timestamp, or
-discoverability of a change.
-
-*Mitigation:* Source control platform strongly authenticates actor identity,
-timestamp, and parent revisions.
-
-*Example:* Adversary submits a git commit with a falsified author and timestamp,
-and then rewrites history with a non-fast-forward update to make it appear to
-have been made long ago. Solution: Consumer detects this by seeing that such
-changes are not strongly authenticated and thus not trustworthy.
 
 </details>
 <details><summary>Exploit cryptographic hash collisions</summary>
