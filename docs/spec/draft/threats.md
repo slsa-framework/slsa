@@ -929,9 +929,8 @@ revision except as part of a transparent legal or privacy process.
 *Example:* An adversary submits malicious code to the MyPackage GitHub repo,
 builds from that revision, then does a force push to erase that revision from
 history (or requests that GitHub delete the repo.) This would make the revision
-unavailable for inspection. Solution: Verifier rejects the package because it
-lacks a positive attestation showing that some system, such as GitHub, ensured
-retention and availability of the source code.
+unavailable for inspection. Solution: Verifier rejects packages built from
+source repos that do not have strong retention guarantees.
 
 </details>
 <details><summary>A dependency becomes temporarily or permanently unavailable to the build process</summary>
