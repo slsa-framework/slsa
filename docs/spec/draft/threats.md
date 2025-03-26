@@ -4,8 +4,9 @@ description: A comprehensive technical analysis of supply chain threats and thei
 ---
 
 What follows is a comprehensive technical analysis of supply chain threats and
-their corresponding mitigations in SLSA. For an introduction to the
-supply chain threats that SLSA is aiming to protect against, see [Supply chain threats].
+their corresponding mitigations with SLSA and other best practices. For an
+introduction to the supply chain threats that SLSA is aiming to protect
+against, see [Supply chain threats].
 
 The examples on this page are meant to:
 
