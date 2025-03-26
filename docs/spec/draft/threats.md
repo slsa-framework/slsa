@@ -463,7 +463,9 @@ build process or provenance generation.
 *Example:* MyPackage is built on Awesome Builder under the project "mypackage".
 Adversary is an administrator of the "mypackage" project. Awesome Builder allows
 administrators to debug build machines via SSH. An adversary uses this feature
-to alter a build in progress.
+to alter a build in progress. Solution: Build L3 requires provenance to be
+resistant to forgery by tenants, so the attacker would be forbidden from
+altering a build in progress.
 
 </details>
 <details><summary>Compromise other build <span>(Build L3)</span></summary>
