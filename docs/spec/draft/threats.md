@@ -259,6 +259,17 @@ stamping."
 
 </details>
 
+#### (B4) Render change metadata ineffective
+
+<details><summary>Forge change metadata</summary>
+
+*Threat:* Forge the change metadata to alter attribution, timestamp, or
+discoverability of a change.
+
+*Mitigation:* This threat is not currently addressed by SLSA.
+
+</details>
+
 ### (C) Source code management
 
 An adversary introduces a change to the source control repository through an
@@ -463,9 +474,12 @@ forged digest is irrelevant.
 build process or provenance generation.
 
 *Example:* MyPackage is built on Awesome Builder under the project "mypackage".
-Adversary is an administrator of the "mypackage" project. Awesome Builder allows
-administrators to debug build machines via SSH. An adversary uses this feature
-to alter a build in progress.
+Adversary is an owner of the "mypackage" project. Awesome Builder allows
+owners to debug the build environment via SSH. An adversary uses this feature
+to alter a build in progress. Solution: Build L3 requires complete provenance, the
+attackers access and/or actions within the SSH would be enumerated within the
+external parameters. The updated external parameters will not match the declared
+expectations causing verification to fail.
 
 </details>
 <details><summary>Compromise other build <span>(Build L3)</span></summary>
@@ -517,6 +531,7 @@ such cache poisoning attacks.
 the source file. Adversary runs a malicious build that creates a "poisoned"
 cache entry with a falsified key, meaning that the value wasn't really produced
 from that source. A subsequent build then picks up that poisoned cache entry.
+Solution: Builder uses a separate cache for each build.
 
 </details>
 <details><summary>Compromise build platform admin <span>(verification)</span></summary>
@@ -895,7 +910,7 @@ machine when Dep is loaded at runtime. An end user installs MyPackage, which in
 turn installs the compromised version of Dep. When the user runs MyPackage, it
 loads and executes the malicious code from Dep.
 
-*Mitigation:* N/A - This threat is not currently addressed by SLSA. SLSA's
+*Mitigation:* N/A - SLSA's
 threat model does not explicitly model runtime dependencies. Instead, each
 runtime dependency is considered a distinct artifact with its own threats.
 
@@ -918,16 +933,7 @@ SLSA does not currently address availability threats, though future versions mig
 revision or cause it to get garbage collected, preventing anyone from inspecting
 the code.
 
-*Mitigation:* Some system retains the revision and its version control history,
-making it available for inspection indefinitely. Users cannot delete the
-revision except as part of a transparent legal or privacy process.
-
-*Example:* An adversary submits malicious code to the MyPackage GitHub repo,
-builds from that revision, then does a force push to erase that revision from
-history (or requests that GitHub delete the repo.) This would make the revision
-unavailable for inspection. Solution: Verifier rejects the package because it
-lacks a positive attestation showing that some system, such as GitHub, ensured
-retention and availability of the source code.
+*Mitigation:* This threat is not currently addressed by SLSA.
 
 </details>
 <details><summary>A dependency becomes temporarily or permanently unavailable to the build process</summary>
@@ -943,14 +949,14 @@ impact of this threat.
 
 *Threat:* The package registry stops serving the artifact.
 
-*Mitigation:* N/A - This threat is not currently addressed by SLSA.
+*Mitigation:* This threat is not currently addressed by SLSA.
 
 </details>
 <details><summary>De-list provenance</summary>
 
 *Threat:* The package registry stops serving the provenance.
 
-*Mitigation:* N/A - This threat is not currently addressed by SLSA.
+*Mitigation:* This threat is not currently addressed by SLSA.
 
 </details>
 
@@ -976,33 +982,17 @@ version of the package. Solution: Changes to the recorded expectations require
 two-party review.
 
 </details>
-<details><summary>Forge change metadata</summary>
-
-*Threat:* Forge the change metadata to alter attribution, timestamp, or
-discoverability of a change.
-
-*Mitigation:* Source control platform strongly authenticates actor identity,
-timestamp, and parent revisions.
-
-*Example:* Adversary submits a git commit with a falsified author and timestamp,
-and then rewrites history with a non-fast-forward update to make it appear to
-have been made long ago. Solution: Consumer detects this by seeing that such
-changes are not strongly authenticated and thus not trustworthy.
-
-</details>
 <details><summary>Exploit cryptographic hash collisions</summary>
 
 *Threat:* Exploit a cryptographic hash collision weakness to bypass one of the
 other controls.
 
-*Mitigation:* Require cryptographically secure hash functions for commit
-checksums and provenance subjects, such as SHA-256.
+*Mitigation:* Choose secure algorithms when using cryptographic digests, such
+as SHA-256.
 
-*Examples:* Construct a benign file and a malicious file with the same SHA-1
-hash. Get the benign file reviewed and then submit the malicious file.
-Alternatively, get the benign file reviewed and submitted and then build from
-the malicious file. Solution: Only accept cryptographic hashes with strong
-collision resistance.
+*Examples:* Attacker crafts a malicious file with the same MD5 hash as a target
+benign file. Attacker replaces the benign file with the malicious file.
+Solution: Only accept cryptographic hashes with strong collision resistance.
 
 </details>
 
