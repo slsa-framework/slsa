@@ -522,16 +522,30 @@ key.
 <details><summary>Poison the build cache <span>(Build L3)</span></summary>
 
 *Threat:* Add a malicious artifact to a build cache that is later picked up by a
-benign build process.
+benign build process ([example][build-cache-poisoning-example]).
 
 *Mitigation:* Build caches must be [isolated][isolated] between builds to prevent
 such cache poisoning attacks.
 
-*Example:* Build platform uses a build cache across builds, keyed by the hash of
-the source file. Adversary runs a malicious build that creates a "poisoned"
-cache entry with a falsified key, meaning that the value wasn't really produced
-from that source. A subsequent build then picks up that poisoned cache entry.
-Solution: Builder uses a separate cache for each build.
+*Example 1:* The cache key does not fully cover the transitive closure of all
+inputs and instead only uses the digest of the source file itself. Adversary runs
+a build over `auth.cc` with command line flags to gcc that define a marco
+replacing `CheckAuth(ctx)` with `true`. When subsequent builds build `auth.cc`
+they will get the attacker's poisoned instance that does not call `CheckAuth`.
+Solution: SLSA Build Level 3 requires build cache's to be isolated and a properly
+isolated build cache digest must cover the _transitive closure_ of all inputs to
+the cached artifact.
+
+*Example 2:* The tenant controlled build process has full write access to the
+cache. Adversary observes a legitimate build of `auth.cc` which covers the
+transitive closure of all inputs and notes the digest used for caching. The
+adversary builds a malicious version of `auth.o` and directly writes it to the
+build cache using the observed digest. Subsequent legitimate builds will use
+the malicious version of `auth.o`. Solution: SLSA Build Level 3 requires build
+caches to be isolated and a properly isolated build cache only allows the
+trusted control plane to have write access to the cache and ensures the digest
+used to key the cache comes from the build inputs and is not directly influenced
+by the tenants.
 
 </details>
 <details><summary>Compromise build platform admin <span>(verification)</span></summary>
@@ -1002,6 +1016,7 @@ Solution: Only accept cryptographic hashes with strong collision resistance.
 
 [apply SLSA recursively]: verifying-artifacts.md#step-3-optional-check-dependencies-recursively
 [authentic]: requirements.md#provenance-authentic
+[build-cache-poisoning-example]: https://adnanthekhan.com/2024/05/06/the-monsters-in-your-build-cache-github-actions-cache-poisoning/
 [exists]: requirements.md#provenance-exists
 [isolated]: requirements.md#isolated
 [unforgeable]: requirements.md#provenance-unforgeable
