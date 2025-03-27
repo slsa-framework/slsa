@@ -4,8 +4,9 @@ description: A comprehensive technical analysis of supply chain threats and thei
 ---
 
 What follows is a comprehensive technical analysis of supply chain threats and
-their corresponding mitigations in SLSA. For an introduction to the
-supply chain threats that SLSA is aiming to protect against, see [Supply chain threats].
+their corresponding mitigations with SLSA and other best practices. For an
+introduction to the supply chain threats that SLSA is aiming to protect
+against, see [Supply chain threats].
 
 The examples on this page are meant to:
 
@@ -159,6 +160,8 @@ Solution: The producer can modify the rule to disallow bypass by administrators,
 *Example 2:* GitHub repository-level admin removes a branch requirement, pushes their change, then re-enables the requirement to cover their tracks.
 Solution: The producer can configure higher-permission-level rules (such as organization-level GitHub Rulesets) to prevent repository-level tampering.
 
+</details>
+
 #### (B2) Evade change management process
 
 <details><summary>Modify code after review</summary>
@@ -262,7 +265,6 @@ An adversary introduces a change to the source control repository through an
 administrative interface, or through a compromise of the underlying
 infrastructure.
 
-</details>
 <details><summary>Platform admin abuses privileges</summary>
 
 *Threat:* Platform administrator abuses their privileges to bypass controls or
@@ -508,7 +510,7 @@ key.
 *Threat:* Add a malicious artifact to a build cache that is later picked up by a
 benign build process.
 
-*Mitigation:* Build caches must be [isolate][isolated] between builds to prevent
+*Mitigation:* Build caches must be [isolated][isolated] between builds to prevent
 such cache poisoning attacks.
 
 *Example:* Build platform uses a build cache across builds, keyed by the hash of
@@ -851,9 +853,6 @@ compromise took place (i.e. before/during vs *after* the build of the build tool
 
 </details>
 
-Reminder: dependencies that look like [runtime dependencies](#runtime-dep)
-actually become build dependencies if they get loaded at build time.
-
 <details id="runtime-dep-at-build-time"><summary>Use a compromised runtime dependency during the build (for tests, dynamic linking, etc.)</summary>
 
 *Threat:* During the build process, use a compromised runtime dependency (such
@@ -911,9 +910,9 @@ runtime dependency is considered a distinct artifact with its own threats.
 An availability threat is a potential for an adversary to deny someone from
 reading a source and its associated change history, or from building a package.
 
-SLSA v1.0 does not address availability threats, though future versions might.
+SLSA does not currently address availability threats, though future versions might.
 
-<details><summary>(A)(B) Delete the code</summary>
+<details><summary>Delete the code</summary>
 
 *Threat:* Perform a build from a particular source revision and then delete that
 revision or cause it to get garbage collected, preventing anyone from inspecting
