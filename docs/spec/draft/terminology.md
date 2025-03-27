@@ -26,8 +26,6 @@ of terminology and models to describe what we're protecting.
 
 ## Software supply chain
 
-**TODO:** Update the text to match the new diagram.
-
 SLSA's framework addresses every step of the software supply chain - the
 sequence of steps resulting in the creation of an artifact. We represent a
 supply chain as a [directed acyclic graph] of sources, builds, dependencies, and
@@ -44,11 +42,12 @@ supply chains plus its own sources and builds.
 | Attestation | An authenticated statement (metadata) about a software artifact or collection of software artifacts. | A signed [SLSA Provenance] file.
 | Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform).
 | [Build] | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform).
-| [Package] | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit.
+| [Distribution] | The channel through which artifacts are "published" for use by others. | A registry like DockerHub or npm. Artifacts may also be distributed via physical media (e.g., a USB drive).
+| Package | Artifact that is distributed. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (distribution). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit.
 | Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform).
 
 [build]: #build-model
-[package]: #package-model
+[distribution]: #distribution-model
 [SLSA Provenance]: /provenance/v1
 
 ### Roles
@@ -127,56 +126,7 @@ of build types](/provenance/v1#index-of-build-types).
 
 </details>
 
-### Build environment model
-
-<p align="center"><img src="images/build-env-model.svg" alt="Build Environment Model"></p>
-
-The Build Environment (BuildEnv) track expands upon the
-[build model](#build-model) by explicitly separating the
-[build image](#build-image) and [compute platform](#compute-platform) from the
-abstract [build environment](#build-environment) and [build platform](#platform).
-Specifically, the BuildEnv track defines the following roles, components, and concepts:
-
-| Primary Term | Description
-| --- | ---
-| <span id="build-id">Build ID</span> | An immutable identifier assigned uniquely to a specific execution of a tenant's build. In practice, the build ID may be an identifier, such as a UUID, associated with the build execution.
-| <span id="build-image">Build image</span> | The template for a build environment, such as a VM or container image. Individual components of a build image include the root filesystem, pre-installed guest OS and packages, the build executor, and the build agent.
-| <span id="build-image-producer">Build image producer</span> | The party that creates and distributes build images. In practice, the build image producer may be the hosted build platform or a third party in a bring-your-own (BYO) build image setting.
-| <span id="build-agent">Build agent</span> | A build platform-provided program that interfaces with the build platform's control plane from within a running build environment. The build agent is also responsible for executing the tenant’s build definition, i.e., running the build. In practice, the build agent may be loaded into the build environment after instantiation, and may consist of multiple components. All build agent components must be measured along with the build image.
-| <span id="build-dispatch">Build dispatch</span> | The process of assigning a tenant's build to a pre-deployed build environment on a hosted build platform.
-| <span id="compute-platform">Compute platform</span> | The compute system and infrastructure underlying a build platform, i.e., the host system (hypervisor and/or OS) and hardware. In practice, the compute platform and the build platform may be managed by the same or distinct organizations.
-| <span id="host-interface">Host interface</span> | The component in the compute platform that the hosted build platform uses to request resources for deploying new build environments, i.e., the VMM/hypervisor or container orchestrator.
-| <span id="boot-process">Boot process</span> | In the context of builds, the process of loading and executing the layers of firmware and/or software needed to start up a build environment on the host compute platform.
-| <span id="measurement">Measurement</span> | The cryptographic hash of some component or system state in the build environment, including software binaries, configuration, or initialized run-time data.
-| <span id="quote">Quote</span> | (Virtual) hardware-signed data that contains one or more (virtual) hardware-generated measurements. Quotes may additionally include nonces for replay protection, firmware information, or other platform metadata. (Based on the definition in [section 9.5.3.1](https://trustedcomputinggroup.org/wp-content/uploads/TPM-2.0-1.83-Part-1-Architecture.pdf) of the TPM 2.0 spec)
-| <span id="reference-value">Reference value</span> | A specific measurement used as the good known value for a given build environment component or state.
-
-**TODO:** Disambiguate similar terms (e.g., image, build job, build executor/runner)
-
-#### Build environment lifecycle
-
-A typical build environment will go through the following lifecycle:
-
-1.  *Build image creation*: A [build image producer](#build-image-producer)
-    creates different [build images](#build-image) through a dedicated build
- process. For the SLSA BuildEnv track, the build image producer outputs
- [provenance](#provenance) describing this process.
-2.  *Build environment instantiation*: The [hosted build platform](#platform)
-    calls into the [host interface](#host-interface) to create a new instance
- of a build environment from a given build image. The
- [build agent](#build-agent) begins to wait for an incoming
- [build dispatch](#build-dispatch).
- For the SLSA BuildEnv track, the host interface in the compute platform
- attests to the integrity of the environment's initial state during its
- [boot process](#boot-process).
-3.  *Build dispatch*: When the tenant dispatches a new build, the hosted
-    build platform assigns the build to a created build environment.
-    For the SLSA BuildEnv track, the build platform attests to the binding
- between a build environment and [build ID](#build-id).
-4.  *Build execution*: Finally, the build agent within the environment executes
-    the tenant's build definition.
-
-### Package model
+### Distribution model
 
 Software is distributed in identifiable units called <dfn>packages</dfn>
 according to the rules and conventions of a <dfn>package ecosystem</dfn>.
@@ -187,13 +137,14 @@ informal ecosystems include links to files on a website or distribution of
 first-party software within a company.
 
 Abstractly, a consumer locates software within an ecosystem by asking a
-<dfn>package registry</dfn> to resolve a mutable <dfn>package name</dfn> into an
-immutable <dfn>package artifact</dfn>.[^label] To <dfn>publish</dfn> a package
-artifact, the software producer asks the registry to update this mapping to
-resolve to the new artifact. The registry represents the entity or entities with
-the power to alter what artifacts are accepted by consumers for a given package
-name. For example, if consumers only accept packages signed by a particular
-public key, then it is access to that public key that serves as the registry.
+<dfn>disitrbution platform</dfn>, such as a package registry, to resolve a
+mutable <dfn>package name</dfn> into an immutable <dfn>package artifact</dfn>.
+[^label] To <dfn>publish</dfn> a package artifact, the software producer asks
+the registry to update this mapping to resolve to the new artifact. The registry
+represents the entity or entities with the power to alter what artifacts are
+accepted by consumers for a given package name. For example, if consumers only
+accept packages signed by a particular public key, then it is access to that
+public key that serves as the registry.
 
 The package name is the primary security boundary within a package ecosystem.
 Different package names represent materially different pieces of
