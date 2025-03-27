@@ -137,7 +137,7 @@ informal ecosystems include links to files on a website or distribution of
 first-party software within a company.
 
 Abstractly, a consumer locates software within an ecosystem by asking a
-<dfn>disitrbution platform</dfn>, such as a package registry, to resolve a
+<dfn>distribution platform</dfn>, such as a package registry, to resolve a
 mutable <dfn>package name</dfn> into an immutable <dfn>package artifact</dfn>.
 [^label] To <dfn>publish</dfn> a package artifact, the software producer asks
 the registry to update this mapping to resolve to the new artifact. The registry
