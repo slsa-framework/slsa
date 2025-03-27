@@ -71,7 +71,7 @@ For closed source software SLSA does not provide any solutions for malicious pro
 <td>E
 <td>Build process
 <td><a href="https://www.crowdstrike.com/blog/sunspot-malware-technical-analysis/">SolarWinds</a>: Attacker compromised the build platform and installed an implant that injected malicious behavior during each build.
-<td>Higher SLSA levels require <a href="requirements#build-requirements">stronger security controls for the build platform</a>, making it more difficult to compromise and gain persistence.
+<td>Higher SLSA Build levels have <a href="requirements#build-platform">stronger security requirements for the build platform</a>, making it more difficult for an attacker to forge the SLSA provenance and gain persistence.
 <tr>
 <td>F
 <td>Artifact publication
