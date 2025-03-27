@@ -525,27 +525,27 @@ key.
 benign build process ([example][build-cache-poisoning-example]).
 
 *Mitigation:* Build caches must be [isolated][isolated] between builds to prevent
-such cache poisoning attacks.
+such cache poisoning attacks. In particular, the cache SHOULD be keyed by the
+transitive closure of all inputs to the cached artifact, and the cache must
+either be only writable by the trusted control plane or have SLSA Build L3
+provenance for each cache entry.
 
 *Example 1:* The cache key does not fully cover the transitive closure of all
 inputs and instead only uses the digest of the source file itself. Adversary runs
 a build over `auth.cc` with command line flags to gcc that define a marco
 replacing `CheckAuth(ctx)` with `true`. When subsequent builds build `auth.cc`
 they will get the attacker's poisoned instance that does not call `CheckAuth`.
-Solution: SLSA Build Level 3 requires build cache's to be isolated and a properly
-isolated build cache digest must cover the *transitive closure* of all inputs to
-the cached artifact.
+Solution: Build cache is keyed by digest of auth.cc, command line, and digest of
+compiler so changing the command line flags results in a different cache entry.
 
 *Example 2:* The tenant controlled build process has full write access to the
 cache. Adversary observes a legitimate build of `auth.cc` which covers the
 transitive closure of all inputs and notes the digest used for caching. The
 adversary builds a malicious version of `auth.o` and directly writes it to the
 build cache using the observed digest. Subsequent legitimate builds will use
-the malicious version of `auth.o`. Solution: SLSA Build Level 3 requires build
-caches to be isolated. A properly isolated build cache can be guaranteed to
-be created by the trusted control plane either by restricting write access to
-the cache or ensuring the provenance of the digest used to key the cache
-is not directly influenced by the tenants.
+the malicious version of `auth.o`. Solution: Each cache entry is keyed by the
+transitive closure of the inputs, and the cache entry is itself a SLSA Build L3
+build with its own provenance that corresponds to the key.
 
 </details>
 <details><summary>Compromise build platform admin <span>(verification)</span></summary>
