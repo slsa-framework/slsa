@@ -190,7 +190,8 @@ They may:
 benign but is actually malicious.
 
 *Mitigation:* Code review system ensures that all reviews are informed and
-meaningful.
+meaningful to the extent possible. For example the system could show
+& resolve symlinks, render images, or verify & display provenance.
 
 *Example:* A proposed change updates a JPEG file to include a malicious
 message, but the reviewer is only presented with a diff of the binary
