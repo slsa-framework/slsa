@@ -542,10 +542,10 @@ transitive closure of all inputs and notes the digest used for caching. The
 adversary builds a malicious version of `auth.o` and directly writes it to the
 build cache using the observed digest. Subsequent legitimate builds will use
 the malicious version of `auth.o`. Solution: SLSA Build Level 3 requires build
-caches to be isolated and a properly isolated build cache only allows the
-trusted control plane to have write access to the cache and ensures the digest
-used to key the cache comes from the build inputs and is not directly influenced
-by the tenants.
+caches to be isolated. A properly isolated build cache can be guaranteed to 
+be created by the trusted control plane either by restricting write access to
+the cache and ensures the provenance of the digest used to key the cache
+is not directly influenced by the tenants.
 
 </details>
 <details><summary>Compromise build platform admin <span>(verification)</span></summary>
