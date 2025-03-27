@@ -533,7 +533,7 @@ a build over `auth.cc` with command line flags to gcc that define a marco
 replacing `CheckAuth(ctx)` with `true`. When subsequent builds build `auth.cc`
 they will get the attacker's poisoned instance that does not call `CheckAuth`.
 Solution: SLSA Build Level 3 requires build cache's to be isolated and a properly
-isolated build cache digest must cover the _transitive closure_ of all inputs to
+isolated build cache digest must cover the *transitive closure* of all inputs to
 the cached artifact.
 
 *Example 2:* The tenant controlled build process has full write access to the
