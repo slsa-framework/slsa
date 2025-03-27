@@ -197,8 +197,9 @@ message, but the reviewer is only presented with a diff of the binary
 file contents. The reviewer is unable to parse the contents themselves
 so they do not have enough context to provide a meaningful review.
 Solution: the code review system should present the reviewer with a
-rendering of the image and the embedded metadata, allowing them to make
-an informed decision.
+rendering of the image and the [embedded
+metadata](https://en.wikipedia.org/wiki/Exif), allowing them to make an
+informed decision.
 
 </details>
 <details><summary>Copy a reviewed change to another context</summary>
