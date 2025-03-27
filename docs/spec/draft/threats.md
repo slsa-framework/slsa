@@ -535,8 +535,8 @@ inputs and instead only uses the digest of the source file itself. Adversary run
 a build over `auth.cc` with command line flags to gcc that define a marco
 replacing `CheckAuth(ctx)` with `true`. When subsequent builds build `auth.cc`
 they will get the attacker's poisoned instance that does not call `CheckAuth`.
-Solution: Build cache is keyed by digest of auth.cc, command line, and digest of
-compiler so changing the command line flags results in a different cache entry.
+Solution: Build cache is keyed by digest of `auth.cc`, command line, and digest of
+gcc so changing the command line flags results in a different cache entry.
 
 *Example 2:* The tenant controlled build process has full write access to the
 cache. Adversary observes a legitimate build of `auth.cc` which covers the
