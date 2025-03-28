@@ -45,6 +45,55 @@ environment, and the compute platform they used.
 > We may consider the addition of an L4 to the Build Environment track, which
 > covers hardware-attested runtime integrity checking during a build.
 
+### Build environment model
+
+<p align="center"><img src="images/build-env-model.svg" alt="Build Environment Model"></p>
+
+The Build Environment (BuildEnv) track expands upon the
+[build model](terminology#build-model) by explicitly separating the
+[build image](terminology#build-image) and [compute platform](#compute-platform) from the
+abstract [build environment](#build-environment) and [build platform](terminology#platform).
+Specifically, the BuildEnv track defines the following roles, components, and concepts:
+
+| Primary Term | Description
+| --- | ---
+| <span id="build-id">Build ID</span> | An immutable identifier assigned uniquely to a specific execution of a tenant's build. In practice, the build ID may be an identifier, such as a UUID, associated with the build execution.
+| <span id="build-image">Build image</span> | The template for a build environment, such as a VM or container image. Individual components of a build image include the root filesystem, pre-installed guest OS and packages, the build executor, and the build agent.
+| <span id="build-image-producer">Build image producer</span> | The party that creates and distributes build images. In practice, the build image producer may be the hosted build platform or a third party in a bring-your-own (BYO) build image setting.
+| <span id="build-agent">Build agent</span> | A build platform-provided program that interfaces with the build platform's control plane from within a running build environment. The build agent is also responsible for executing the tenant’s build definition, i.e., running the build. In practice, the build agent may be loaded into the build environment after instantiation, and may consist of multiple components. All build agent components must be measured along with the build image.
+| <span id="build-dispatch">Build dispatch</span> | The process of assigning a tenant's build to a pre-deployed build environment on a hosted build platform.
+| <span id="compute-platform">Compute platform</span> | The compute system and infrastructure underlying a build platform, i.e., the host system (hypervisor and/or OS) and hardware. In practice, the compute platform and the build platform may be managed by the same or distinct organizations.
+| <span id="host-interface">Host interface</span> | The component in the compute platform that the hosted build platform uses to request resources for deploying new build environments, i.e., the VMM/hypervisor or container orchestrator.
+| <span id="boot-process">Boot process</span> | In the context of builds, the process of loading and executing the layers of firmware and/or software needed to start up a build environment on the host compute platform.
+| <span id="measurement">Measurement</span> | The cryptographic hash of some component or system state in the build environment, including software binaries, configuration, or initialized run-time data.
+| <span id="quote">Quote</span> | (Virtual) hardware-signed data that contains one or more (virtual) hardware-generated measurements. Quotes may additionally include nonces for replay protection, firmware information, or other platform metadata. (Based on the definition in [section 9.5.3.1](https://trustedcomputinggroup.org/wp-content/uploads/TPM-2.0-1.83-Part-1-Architecture.pdf) of the TPM 2.0 spec)
+| <span id="reference-value">Reference value</span> | A specific measurement used as the good known value for a given build environment component or state.
+
+**TODO:** Disambiguate similar terms (e.g., image, build job, build executor/runner)
+
+#### Build environment lifecycle
+
+A typical build environment will go through the following lifecycle:
+
+1.  *Build image creation*: A [build image producer](#build-image-producer)
+    creates different [build images](#build-image) through a dedicated build
+ process. For the SLSA BuildEnv track, the build image producer outputs
+ [provenance](terminology#provenance) describing this process.
+2.  *Build environment instantiation*: The [hosted build platform](terminology#platform)
+    calls into the [host interface](#host-interface) to create a new instance
+ of a build environment from a given build image. The
+ [build agent](#build-agent) begins to wait for an incoming
+ [build dispatch](#build-dispatch).
+ For the SLSA BuildEnv track, the host interface in the compute platform
+ attests to the integrity of the environment's initial state during its
+ [boot process](#boot-process).
+3.  *Build dispatch*: When the tenant dispatches a new build, the hosted
+    build platform assigns the build to a created build environment.
+    For the SLSA BuildEnv track, the build platform attests to the binding
+ between a build environment and [build ID](#build-id).
+4.  *Build execution*: Finally, the build agent within the environment executes
+    the tenant's build definition.
+
 ### Build environment threats
 
 TODO
@@ -298,19 +347,19 @@ TODO
 [SLSA Build Provenance]: provenance.md
 [TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
 [VSA]: verification_summary.md
-[build image]: terminology.md#build-image
+[build image]: #build-image
 [confidential computing]: https://confidentialcomputing.io/wp-content/uploads/sites/10/2023/03/Common-Terminology-for-Confidential-Computing.pdf
 [execution context]: terminology.md#build-environment
 [hosted]: requirements.md#isolation-strength
-[boot process]:  terminology.md#boot-process
-[build agent]: terminology.md#build-agent
-[build image producer]: terminology.md#build-image-producer
+[boot process]: #boot-process
+[build agent]: #build-agent
+[build image producer]: #build-image-producer
 [build platforms]: terminology.md#platform
-[compute platform]: terminology.md#compute-platform
-[host interface]: terminology.md#host-interface
-[measurement]: terminology.md#measurement
+[compute platform]: #compute-platform
+[host interface]: #host-interface
+[measurement]: #measurement
 [provenance]: terminology.md#provenance
-[quote]: terminology.md#quote
-[reference values]: terminology.md#reference-value
+[quote]: #quote
+[reference values]: #reference-value
 [several classes]: #build-environment-threats
 [vTPM]: https://trustedcomputinggroup.org/about/what-is-a-virtual-trusted-platform-module-vtpm/
