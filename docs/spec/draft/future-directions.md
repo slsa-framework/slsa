@@ -32,12 +32,12 @@ following requirements, which **may or may not** be part of a future Build L4:
 
 </section>
 
-<section id="build-platform-operations-track">
+<section id="platform-operations-track">
 
-## Build Platform Operations track
+## Platform Operations track
 
-A Build Platform Operations track could provide assurances around the hardening
-of build platforms as they are operated.
+A Platform Operations track could provide assurances around the hardening of
+platforms (e.g. build or source platforms) as they are operated.
 
 The initial [draft version (v0.1)] of SLSA included a section on
 [common requirements](../v0.1/requirements.md#common-requirements) that formed
