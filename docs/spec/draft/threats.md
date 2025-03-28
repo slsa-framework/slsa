@@ -190,13 +190,17 @@ They may:
 benign but is actually malicious.
 
 *Mitigation:* Code review system ensures that all reviews are informed and
-meaningful.
+meaningful to the extent possible. For example the system could show
+& resolve symlinks, render images, or verify & display provenance.
 
-*Example:* A proposed change updates a file, but the reviewer is only presented
-with a diff of the cryptographic hash, not of the file contents. Thus, the
-reviewer does not have enough context to provide a meaningful review.
-Solution: the code review system should present the reviewer with a content diff or some
-other information to make an informed decision.
+*Example:* A proposed change updates a JPEG file to include a malicious
+message, but the reviewer is only presented with a diff of the binary
+file contents. The reviewer is unable to parse the contents themselves
+so they do not have enough context to provide a meaningful review.
+Solution: the code review system should present the reviewer with a
+rendering of the image and the [embedded
+metadata](https://en.wikipedia.org/wiki/Exif), allowing them to make an
+informed decision.
 
 </details>
 <details><summary>Copy a reviewed change to another context</summary>
