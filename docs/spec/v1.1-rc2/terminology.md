@@ -26,8 +26,6 @@ of terminology and models to describe what we're protecting.
 
 ## Software supply chain
 
-**TODO:** Update the text to match the new diagram.
-
 SLSA's framework addresses every step of the software supply chain - the
 sequence of steps resulting in the creation of an artifact. We represent a
 supply chain as a [directed acyclic graph] of sources, builds, dependencies, and
@@ -44,11 +42,12 @@ supply chains plus its own sources and builds.
 | Attestation | An authenticated statement (metadata) about a software artifact or collection of software artifacts. | A signed [SLSA Provenance] file.
 | Source | Artifact that was directly authored or reviewed by persons, without modification. It is the beginning of the supply chain; we do not trace the provenance back any further. | Git commit (source) hosted on GitHub (platform).
 | [Build] | Process that transforms a set of input artifacts into a set of output artifacts. The inputs may be sources, dependencies, or ephemeral build outputs. | .travis.yml (process) run by Travis CI (platform).
-| [Package] | Artifact that is "published" for use by others. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (platform). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit.
+| [Distribution] | The channel through which artifacts are "published" for use by others. | A registry like DockerHub or npm. Artifacts may also be distributed via physical media (e.g., a USB drive).
+| Package | Artifact that is distributed. In the model, it is always the output of a build process, though that build process can be a no-op. | Docker image (package) distributed on DockerHub (distribution). A ZIP file containing source code is a package, not a source, because it is built from some other source, such as a git commit.
 | Dependency | Artifact that is an input to a build process but that is not a source. In the model, it is always a package. | Alpine package (package) distributed on Alpine Linux (platform).
 
 [build]: #build-model
-[package]: #package-model
+[distribution]: #distribution-model
 [SLSA Provenance]: /provenance/v1
 
 ### Roles
@@ -127,7 +126,7 @@ of build types](/provenance/v1#index-of-build-types).
 
 </details>
 
-### Package model
+### Distribution model
 
 Software is distributed in identifiable units called <dfn>packages</dfn>
 according to the rules and conventions of a <dfn>package ecosystem</dfn>.
@@ -138,13 +137,14 @@ informal ecosystems include links to files on a website or distribution of
 first-party software within a company.
 
 Abstractly, a consumer locates software within an ecosystem by asking a
-<dfn>package registry</dfn> to resolve a mutable <dfn>package name</dfn> into an
-immutable <dfn>package artifact</dfn>.[^label] To <dfn>publish</dfn> a package
-artifact, the software producer asks the registry to update this mapping to
-resolve to the new artifact. The registry represents the entity or entities with
-the power to alter what artifacts are accepted by consumers for a given package
-name. For example, if consumers only accept packages signed by a particular
-public key, then it is access to that public key that serves as the registry.
+<dfn>distribution platform</dfn>, such as a package registry, to resolve a
+mutable <dfn>package name</dfn> into an immutable <dfn>package artifact</dfn>.
+[^label] To <dfn>publish</dfn> a package artifact, the software producer asks
+the registry to update this mapping to resolve to the new artifact. The registry
+represents the entity or entities with the power to alter what artifacts are
+accepted by consumers for a given package name. For example, if consumers only
+accept packages signed by a particular public key, then it is access to that
+public key that serves as the registry.
 
 The package name is the primary security boundary within a package ecosystem.
 Different package names represent materially different pieces of

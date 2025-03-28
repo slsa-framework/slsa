@@ -190,13 +190,17 @@ They may:
 benign but is actually malicious.
 
 *Mitigation:* Code review system ensures that all reviews are informed and
-meaningful.
+meaningful to the extent possible. For example the system could show
+& resolve symlinks, render images, or verify & display provenance.
 
-*Example:* A proposed change updates a file, but the reviewer is only presented
-with a diff of the cryptographic hash, not of the file contents. Thus, the
-reviewer does not have enough context to provide a meaningful review.
-Solution: the code review system should present the reviewer with a content diff or some
-other information to make an informed decision.
+*Example:* A proposed change updates a JPEG file to include a malicious
+message, but the reviewer is only presented with a diff of the binary
+file contents. The reviewer is unable to parse the contents themselves
+so they do not have enough context to provide a meaningful review.
+Solution: the code review system should present the reviewer with a
+rendering of the image and the [embedded
+metadata](https://en.wikipedia.org/wiki/Exif), allowing them to make an
+informed decision.
 
 </details>
 <details><summary>Copy a reviewed change to another context</summary>
@@ -522,16 +526,30 @@ key.
 <details><summary>Poison the build cache <span>(Build L3)</span></summary>
 
 *Threat:* Add a malicious artifact to a build cache that is later picked up by a
-benign build process.
+benign build process ([example][build-cache-poisoning-example]).
 
 *Mitigation:* Build caches must be [isolated][isolated] between builds to prevent
-such cache poisoning attacks.
+such cache poisoning attacks. In particular, the cache SHOULD be keyed by the
+transitive closure of all inputs to the cached artifact, and the cache must
+either be only writable by the trusted control plane or have SLSA Build L3
+provenance for each cache entry.
 
-*Example:* Build platform uses a build cache across builds, keyed by the hash of
-the source file. Adversary runs a malicious build that creates a "poisoned"
-cache entry with a falsified key, meaning that the value wasn't really produced
-from that source. A subsequent build then picks up that poisoned cache entry.
-Solution: Builder uses a separate cache for each build.
+*Example 1:* The cache key does not fully cover the transitive closure of all
+inputs and instead only uses the digest of the source file itself. Adversary runs
+a build over `auth.cc` with command line flags to gcc that define a marco
+replacing `CheckAuth(ctx)` with `true`. When subsequent builds build `auth.cc`
+they will get the attacker's poisoned instance that does not call `CheckAuth`.
+Solution: Build cache is keyed by digest of `auth.cc`, command line, and digest of
+gcc so changing the command line flags results in a different cache entry.
+
+*Example 2:* The tenant controlled build process has full write access to the
+cache. Adversary observes a legitimate build of `auth.cc` which covers the
+transitive closure of all inputs and notes the digest used for caching. The
+adversary builds a malicious version of `auth.o` and directly writes it to the
+build cache using the observed digest. Subsequent legitimate builds will use
+the malicious version of `auth.o`. Solution: Each cache entry is keyed by the
+transitive closure of the inputs, and the cache entry is itself a SLSA Build L3
+build with its own provenance that corresponds to the key.
 
 </details>
 <details><summary>Compromise build platform admin <span>(verification)</span></summary>
@@ -1002,6 +1020,7 @@ Solution: Only accept cryptographic hashes with strong collision resistance.
 
 [apply SLSA recursively]: verifying-artifacts.md#step-3-optional-check-dependencies-recursively
 [authentic]: requirements.md#provenance-authentic
+[build-cache-poisoning-example]: https://adnanthekhan.com/2024/05/06/the-monsters-in-your-build-cache-github-actions-cache-poisoning/
 [exists]: requirements.md#provenance-exists
 [isolated]: requirements.md#isolated
 [unforgeable]: requirements.md#provenance-unforgeable
