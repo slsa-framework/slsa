@@ -769,7 +769,7 @@ packages. If a misconfigured victim attempts to install attacker's package with
 an internal name but from the public registry, then verification against
 expectations will fail.
 
-For more information see [Verifying artifacts](/spec/v1.1/verifying-artifacts)
+For more information see [Verifying artifacts](verifying-artifacts.md)
 and [Defender's Perspective: Dependency Confusion and Typosquatting Attacks](/blog/2024/08/dep-confusion-and-typosquatting).
 
 </details>
