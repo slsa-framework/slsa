@@ -157,7 +157,7 @@ It is the primary identifier to which consumers attach expectations.
 
 | Term | Description
 | ---- | -----------
-| Distribution Platform | An entity responsible for mapping package names to immutable package artifacts.
+| Distribution platform | An entity responsible for mapping package names to immutable package artifacts.
 | Package | An identifiable unit of software intended for distribution, ambiguously meaning either an "artifact" or a "package name". Only use this term when the ambiguity is acceptable or desirable.
 | Package artifact | A file or other immutable object that is intended for distribution.
 | Package ecosystem | A set of rules and conventions governing how packages are distributed, including how clients resolve a package name into one or more specific artifacts.
