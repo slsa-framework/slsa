@@ -110,11 +110,11 @@ A best practice is to require approval of any changes via a change management to
 *Mitigation:* The producer must ensure that no actor is able to control or influence multiple accounts with review privileges.
 
 *Example:* Adversary creates a pull request using a secondary account and approves it using their primary account.
-
-Solution: The producer must track all actors who have both explicit review permissions and the independent ability to control a privileged bot.
-A common vector for this attack is to influence a robot account with the permission to review or contribute code.
-Control of the robot account and an actor's own personal account is enough to exploit this vulnerability.
-A common solution to this flow is to deny bot accounts from contributing or reviewing code, or to require more human reviews in those cases.
+Solution: The producer must track all actors who have both explicit review permissions and the independent ability to control
+a privileged bot. A common vector for this attack is to influence a robot account with the permission to review or contribute
+code. Control of the robot account and an actor's own personal account is enough to exploit this vulnerability. A common
+solution to this flow is to deny bot accounts from contributing or reviewing code, or to require more human reviews in those
+cases.
 
 </details>
 <details><summary>Use a robot account to submit change</summary>
