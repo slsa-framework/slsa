@@ -133,7 +133,7 @@ Solution: Require two-person review for such changes, ignoring the robot.
 </details>
 <details><summary>Abuse of rule exceptions</summary>
 
-*Threat:* Rule exceptions provide vector for abuse
+*Threat:* Rule exceptions provide vector for abuse.
 
 *Mitigation:* Remove rule exceptions.
 
