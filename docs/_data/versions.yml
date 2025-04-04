@@ -36,10 +36,14 @@ spec:
     v1.0:
       name: Version 1.0
       status: Approved
-    v1.1:
-      name: Version 1.1 RC
+    v1.1-rc1:
+      name: Version 1.1 RC1
+      status: Retired
+      draft: false
+    v1.1-rc2:
+      name: Version 1.1 RC2
       status: Candidate
-      draft: true
+      draft: false
     draft:
       name: Working Draft
       status: Draft
