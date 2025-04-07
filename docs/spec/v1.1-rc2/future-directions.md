@@ -63,4 +63,4 @@ The Source track will be scoped to revisions of a single repository.
 The intent of each revision is determined by the [software producer](terminology.md#roles) who is also responsible for declaring which Source level should apply and administering technical controls to enforce that level.
 
 The primary purpose of the Source track will be to enable verification that the creation of a revision followed the producer's intended process.
-Consumers will be able to examine source provenance attestations to determine if a revision meet their requirements.
+Consumers will be able to examine source provenance attestations to determine if a revision meets their requirements.
