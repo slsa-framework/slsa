@@ -40,7 +40,7 @@ Example ways an organization might use SLSA internally:
 -   A small company or team uses SLSA to ensure that the code being deployed to
     production in binary form is the same one that was tested and reviewed in
     source form.
--   A large company uses SLSA to require two person review for every production
+-   A large company uses SLSA to require two-person review for every production
     change, scalably across hundreds or thousands of employees/teams.
 -   An open source project uses SLSA to ensure that compromised credentials
     cannot be abused to release an unofficial package to a package registry.
@@ -96,16 +96,16 @@ Reducing risk from consuming vendor provided software and services
 </div>
 <div class="md:w-2/3">
 
-Finally, SLSA can be used to reduce risk for consumers of vendor provided
+Finally, SLSA can be used to reduce risk for consumers of vendor-provided
 software and services. Unlike open source, there is no canonical source
-repository to map to, so instead the focus is on trustworthiness of claims made
+repository to map to, so instead the focus is on the trustworthiness of claims made
 by the vendor.
 
-Example ways a consumer might use SLSA for vendor provided software:
+Example ways a consumer might use SLSA for vendor-provided software:
 
 -   Prefer vendors who make SLSA claims and back them up with credible evidence.
 -   Require a vendor to implement SLSA as part of a contract.
--   Require a vendor to be SLSA certified from a trusted third-party auditor.
+-   Require a vendor to be SLSA certified by a trusted third-party auditor.
 
 </div>
 </div>

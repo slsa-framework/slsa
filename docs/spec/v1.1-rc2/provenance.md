@@ -5,7 +5,7 @@ layout: standard
 ---
 To trace software back to the source and define the moving parts in a complex
 supply chain, provenance needs to be there from the very beginning. It's the
-verifiable information about software artifacts describing where, when and how
+verifiable information about software artifacts describing where, when, and how
 something was produced. For higher SLSA levels and more resilient integrity
 guarantees, provenance requirements are stricter and need a deeper, more
 technical understanding of the predicate.
@@ -129,7 +129,7 @@ disagreement with the text description, the text is authoritative.*
 
 Link: [provenance.proto](schema/provenance.proto)
 
-*NOTE: This protobuf definition prioritises being a human-readable summary
+*NOTE: This protobuf definition prioritizes being a human-readable summary
 of the schema for readers of the specification. A version of the protobuf
 definition useful for code generation is maintained in the
 [in-toto attestation] repository.*
@@ -191,7 +191,7 @@ https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1
 
 The parameters that are under external control, such as those set by a user or
 tenant of the build platform. They MUST be complete at SLSA Build L3, meaning that
-that there is no additional mechanism for an external party to influence the
+there is no additional mechanism for an external party to influence the
 build. (At lower SLSA Build levels, the completeness MAY be best effort.)
 
 The build platform SHOULD be designed to minimize the size and complexity of

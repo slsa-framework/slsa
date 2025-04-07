@@ -289,12 +289,12 @@ additions are welcome!
 Notes:
 
 -   Go uses a significantly different distribution model than other ecosystems.
-    In go, the package name is a source repository URL. While clients can fetch
+    In Go, the package name is a source repository URL. While clients can fetch
     directly from that URL---in which case there is no "package" or
     "registry"---they usually fetch a zip file from a *module proxy*. The module
     proxy acts as both a builder (by constructing the package artifact from
     source) and a registry (by mapping package name to package artifact). People
-    trust the module proxy because builds are independently reproducible and a
+    trust the module proxy because builds are independently reproducible, and a
     *checksum database* guarantees that all clients receive the same artifact
     for a given URL.
 
@@ -302,11 +302,11 @@ Notes:
 
 Verification in SLSA is performed in two ways. Firstly, the build platform is
 certified to ensure conformance with the requirements at the level claimed by
-the build platform. This certification should happen on a recurring cadence with
+the build platform. This certification should happen on a recurring cadence, with
 the outcomes published by the platform operator for their users to review and
 make informed decisions about which builders to trust.
 
-Secondly, artifacts are verified to ensure they meet the producer defined
+Secondly, artifacts are verified to ensure they meet the producer-defined
 expectations of where the package source code was retrieved from and on what
 build platform the package was built.
 
