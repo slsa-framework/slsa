@@ -1,6 +1,6 @@
 ---
 title: About SLSA
-description: With supply chain attacks on the rise, a shared vocabulary and universal framework is needed to provide incremental guidance to harden supply chains for more secure software production. This page introduces the main concepts behind SLSA and explains how it can help anyone involved in producing, consuming, or providing infrastructure for software.
+description: With supply chain attacks on the rise, a shared vocabulary and universal framework are needed to provide incremental guidance to harden supply chains for more secure software production. This page introduces the main concepts behind SLSA and explains how it can help anyone involved in producing, consuming, or providing infrastructure for software.
 ---
 
 This page is an introduction to SLSA and its concepts. If you're new
@@ -23,7 +23,7 @@ SLSA offers:
 
 ## Why SLSA is needed
 
-High profile attacks like those against [SolarWinds](https://www.crowdstrike.com/blog/sunspot-malware-technical-analysis/) or [Codecov](https://about.codecov.io/apr-2021-post-mortem/) have exposed the kind of supply
+High-profile attacks like those against [SolarWinds](https://www.crowdstrike.com/blog/sunspot-malware-technical-analysis/) or [Codecov](https://about.codecov.io/apr-2021-post-mortem/) have exposed the kind of supply
 chain integrity weaknesses that may go unnoticed, yet quickly become very
 public, disruptive, and costly in today's environment when exploited. They've
 also shown that there are inherent risks not just in code itself, but at
@@ -31,7 +31,7 @@ multiple points in the complex process of getting that code into software
 systems—that is, in the **software supply chain**. Since these attacks are on
 the rise and show no sign of decreasing, a universal framework for hardening the
 software supply chain is needed, as affirmed by the U.S. Executive Order on
-Improving the Nation's Cybersecurity of May 12th 2021.
+Improving the Nation's Cybersecurity of May 12th, 2021.
 
 Security techniques for vulnerability detection and analysis of source code are
 essential, but are not enough on their own. Even after fuzzing or vulnerability
