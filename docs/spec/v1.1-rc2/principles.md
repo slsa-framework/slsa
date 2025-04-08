@@ -15,7 +15,7 @@ levels into separate tracks to recognize progress in unrelated security areas.
 **Reasoning:** Levels simplify how to think about security by boiling a complex
 topic into an easy-to-understand number. It is clear that level N is better than
 level N-1, even to someone with passing familiarity. This provides a convenient
-way to describe current security state as well as a natural path to improvement.
+way to describe the current security state as well as a natural path to improvement.
 
 Guidelines:
 
@@ -23,7 +23,7 @@ Guidelines:
     have clear and meaningful security value, such as stopping a particular
     class of threats. Levels should represent security milestones, not just
     incremental progress. Give each level an easy-to-remember mnemonic, such as
-    "Provenance exists".
+    "Provenance exists."
 
 -   **Balance level granularity.** Too many levels makes SLSA hard to understand
     and remember; too few makes each level hard to achieve. Collapse levels
@@ -53,8 +53,8 @@ supply chain. Verifying that an artifact is produced by a trusted platform,
 though, is easy to automate.
 
 To simultaneously scale and reduce attack surfaces, it is most efficient to trust a limited
-numbers of platforms and then automate verification of the artifacts produced by those platforms.
-The attack surface and work to establish trust does not scale with the number of artifacts produced,
+number of platforms and then automate verification of the artifacts produced by those platforms.
+The attack surface and work to establish trust do not scale with the number of artifacts produced,
 as happens when artifacts each use a different trusted platform.
 
 **Benefits**: Allows SLSA to scale to entire ecosystems or organizations with a near-constant
@@ -67,7 +67,7 @@ platform to ensure that it meets the SLSA Build Track requirements. Following th
 analysis, the public keys used by the build platform to sign provenance are
 "trusted" up to the given SLSA level. Downstream platforms verify the provenance
 signed by the public key to automatically determine that an artifact meets the
-SLSA level.  
+SLSA level.
 
 ### Corollary: Minimize the number of trusted platforms
 
@@ -122,7 +122,7 @@ While organizations that implement SLSA may choose otherwise, SLSA itself does n
 or encourage, participants to be mapped to their legal identities.
 
 **Nothing in this specification should be taken to mean that SLSA requires participants to
-to reveal their legal identity.**
+reveal their legal identity.**
 
 **Reasoning**: SLSA uses identities for multiple purposes: as a trust anchor for attestations
 (i.e. who or what is making this claim and do I trust it to do so) or for attributing actions
@@ -132,7 +132,7 @@ stacks implementing the SLSA standards.
 When identities are strongly authenticated and used consistently they can often be leveraged
 for both of these purposes without requiring them to be mapped to legal identities.
 This reflects how identities are often used in open source where legal name means much less
-to projects than the history and behavior of a given handle over time does. Meanwhile some
+to projects than the history and behavior of a given handle over time does. Meanwhile, some
 organizations may choose to levy additional requirements on identities. They are free to do
 so, but SLSA itself does not require it.
 

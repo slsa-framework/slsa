@@ -31,7 +31,7 @@ tracks without invalidating previous levels.
 hermeticity or completeness of provenance -->
 
 > Note: The [previous version] of the specification used a single unnamed track,
-> SLSA 1–4. For version 1.0 the Source aspects were removed to focus on the
+> SLSA 1–4. For version 1.0, the Source aspects were removed to focus on the
 > Build track. A Source track may be added in [future versions].
 
 ## Build track
@@ -223,7 +223,7 @@ All of [Build L2], plus:
     credentials, or other tenants.
 
 -   Greatly reduces the impact of compromised package upload credentials by
-    requiring attacker to perform a difficult exploit of the build process.
+    requiring the attacker to perform a difficult exploit of the build process.
 
 -   Provides strong confidence that the package was built from the official
     source and build process.

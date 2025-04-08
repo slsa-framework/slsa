@@ -1,6 +1,6 @@
 ---
 title: Verifying artifacts
-description: SLSA uses provenance to indicate whether an artifact is authentic or not, but provenance doesn't do anything unless somebody inspects it. SLSA calls that inspection verification, and this page describes how to verify artifacts and their SLSA provenenance. The intended audience is platform implementers, security engineers, and software consumers.
+description: SLSA uses provenance to indicate whether an artifact is authentic or not, but provenance doesn't do anything unless somebody inspects it. SLSA calls that inspection verification, and this page describes how to verify artifacts and their SLSA provenance. The intended audience is platform implementers, security engineers, and software consumers.
 ---
 
 SLSA uses provenance to indicate whether an artifact is authentic or not, but
@@ -28,7 +28,7 @@ Verification SHOULD include the following steps:
 
 ![Threats covered by each step](images/supply-chain-threats-build-verification.svg)
 
-See [Terminology](terminology.md) for an explanation of supply chain model and
+See [Terminology](terminology.md) for an explanation of the supply chain model and
 [Threats & mitigations](threats.md) for a detailed explanation of each threat.
 
 **Note:** This section assumes that the provenance is in the recommended
@@ -143,7 +143,7 @@ Resulting threat mitigation:
 Next, check that the package's provenance meets your expectations for that
 package in order to mitigate [threat "D"].
 
-In our threat model, the adversary has ability to invoke a build and to publish
+In our threat model, the adversary has the ability to invoke a build and to publish
 to the registry. The adversary is not able to write to the source repository, nor do
 they have insider access to any trusted systems. Your expectations SHOULD be
 sufficient to detect or prevent this adversary from injecting unofficial
@@ -222,7 +222,7 @@ Possible models for forming expectations include:
 -   **Defined in source:** The source repository tells the verifier what their
     expectations ought to be. In this model, the package name is immutably bound
     to a source repository and all other external parameters are defined in the
-    source repository. This is how the Go ecosystem  works, for example, since
+    source repository. This is how the Go ecosystem works, for example, since
     the package name *is* the source repository location.
 
 It is important to note that expectations are tied to a *package name*, whereas
