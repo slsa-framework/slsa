@@ -227,9 +227,8 @@ All of [BuildEnv L1], plus:
         -   Upon completion of the [boot process]: Automatically interfacing
         with the host interface to obtain and transmit a signed quote for the
         build environment's system state.
-        -   Upon build dispatch: Automatically generating and distributing
-        a signed attestation that binds its boot process quote to the
-        assigned build ID (e.g., using [SCAI]).
+        -   Upon build dispatch: Automatically interfacing with the host
+		interface to a signed quote that includes the assigned build ID.
 
 -   Build Platform Requirements:
     -   MUST meet SLSA [Build L3] requirements.

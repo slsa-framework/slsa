@@ -47,9 +47,6 @@ requirements for each role to implement a desired BuildEnv level.
   <td><span id="attest-build-dispatch">**BI.3.3**: Attest to build dispatch</span>
   <td> <td>✓<td>✓
 <tr>
-  <td><span id="distribute-host-integrity-attestations">**BI.3.3**: Distribute host integrity attestation</span>
-  <td> <td> <td>✓
-<tr>
   <td rowspan=5><span id="build-platform">Build Platform (BP)</span>
   <td colspan=2><span id="implement-slsa-build-track">**BP.1**: Implement the SLSA Build track</span>
   <td>✓<td>✓<td>✓
@@ -214,20 +211,22 @@ none
 <tr><td>BuildEnv L2<td>
 
 MUST be able to send requests and receive data from a software or virtualized
-root of trust, such as a vTPM implemented by the hypervisor.
+root of trust that supports the [quote] and [extend] operations, such as a vTPM
+implemented by the hypervisor.
 
 <tr><td>BuildEnv L3<td>
 
-MUST be able to send requests and receive data from a *hardware* root of trust,
-such as TPM or confidential VM hardware in the compute platform.
+MUST be able to send requests and receive data from a *hardware* root of trust
+that supports the [quote] and [extend] operations, such as a hardware TPM or
+select confidential VM hardware in the compute platform.
 
 </table>
 
 #### BI.3.2 Attest to build environment initial state
 
-The enlightened build agent MUST be capable of attesting to the integrity of the
-initial state of its build environment upon completion of the VM's [boot
-process].
+The enlightened build agent MUST use the root of trust (per **BI.3.1**) to
+attest to the integrity of the initial state of its build environment upon
+completion of the VM's [boot process].
 
 <table>
 <tr><th>Level<th>Implementation Guidance
@@ -238,37 +237,75 @@ none
 
 <tr><td>BuildEnv L2<td>
 
-MUST request a signed [quote] from a root of trust (e.g., a vTPM) for the build
-environment's system state at boot time, and transmit this quote to the build
-platform's control plane.
+MUST request a signed [quote] from a software/virtualized root of trust for
+the build environment's system state at boot time, and transmit this quote
+to the build platform's control plane.
 
 <tr><td>BuildEnv L3<td>
 
-MUST request a signed [quote] from a *hardware* root of trust (e.g., hardware
-TPM or confidential VM hardware) for the environment's system state *and* the
-VMM's boot process.
+MUST request a signed [quote] from a *hardware* root of trust for the
+environment's system state *and* the VMM's boot process, and transmit this
+quote to the build platform's control plane.
 
 </table>
 
 #### BI.3.3 Attest to build dispatch
 
-#### BI.3.4 Distribute host integrity attestation
+The enlightened build agent MUST use the root of trust (per **BI.3.1**) to
+attest to the integrity of the process of dispatching a build to a build
+environment. That is, the build dispatch occurs when a [software producer]
+sends a request to the build platform to start a new build. As a result,
+the build platform assigns the producer's request a unique [build ID] and
+loads the associated build definition into a running build environment
+instance. Establishing a cryptographic binding between the build ID and
+the build environment allows verifiers to check that a build was not run in an
+unexpected environment.
+
+<table>
+<tr><th>Level<th>Implementation Guidance
+
+<tr><td>BuildEnv L1<td>
+
+none
+
+<tr><td>BuildEnv L2<td>
+
+MUST extend the software/virtualized root of trust [measurement] with the
+assigned [build ID] at build dispatch, request a new signed quote, and
+transmit this quote to the build platform's control plane.
+
+<tr><td>BuildEnv L3<td>
+
+MUST extend the *hardware* root of trust [measurement] with the assigned
+[build ID] at build dispatch, request a new signed quote, and transmit
+this quote to the build platform's control plane.
+
+</table>
+
+Together with **BI.3.2**, **BI.3.3** establishes a chain of verifiable
+integrity information that cryptographically binds the host system, VMM,
+build environment and build ID.
 
 ## Build Platform
 
 ## Compute Platform
 
-[Build Environment levels]: attested-build-env-levels.md
+[Build Environment levels]: build-env-levels.md
 [Build Provenance]: provenance.md
 [Build track]: requirements.md
 [build environment]: terminology.md#build-environment
-[build image]: terminology.md#build-image
-[build image producer]: terminology.md#build-image-producer
+[build ID]: build-env-levels.md#build-id
+[build image]: build-env-levels.md#build-image
+[build image producer]: build-env-levels.md#build-image-producer
 [build platform]: terminology.md#platform
-[compute platform]: terminology.md#compute-platform
+[compute platform]: build-env-levels.md#compute-platform
+[extend]: https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-1-Version-184_pub.pdf
+[measurement]: build-env-levels.md#measurement
 [producer requirements]: requirements.md#producer
+[quote]: build-env-levels.md#quote
 [Release Attestation]: https://github.com/in-toto/attestation/blob/main/spec/predicates/release.md
 [SCAI]: https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md
 [Secure Boot]: https://wiki.debian.org/SecureBoot#What_is_UEFI_Secure_Boot.3F
+[software producer]: terminology.md#producer
 [TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
 [VSA]: verification_summary.md
