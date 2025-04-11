@@ -20,6 +20,10 @@ responsibility lies primarily with the [build image provider] and the
 [build platform], although higher BuildEnv levels also add responsibilities for
 the underlying [compute platform].
 
+The BuildEnv track intends for the defined integrity requirements to expand
+upon the scope of the [Build track]. Thus, the BuildEnv track is expected to
+be implemented as a complement to the Build track.
+
 The following table summarizes the specific supply chain and security
 requirements for each role to implement a desired BuildEnv level.
 
@@ -58,7 +62,7 @@ requirements for each role to implement a desired BuildEnv level.
   <td><span id="verify-image-provenance">**BP.3.1**: Verify build image provenance</span>
   <td>✓<td>✓<td>✓
 <tr>
-  <td><span id="verify-env-initial-state">**BP.3.2**: Verify build environment initial state</span>
+  <td><span id="verify-env-deployment">**BP.3.2**: Verify build environment deployment</span>
   <td> <td>✓<td>✓
 <tr>
   <td><span id="verify-host-interface">**BP.3.3**: Verify host interface integrity</span>
@@ -93,14 +97,14 @@ BuildEnv spec.
 
 The [build image producer] is an organization that releases a VM image (i.e.,
 the [build image]) that is used as a basis for spawning an instance of a build
-environment.Public cloud-based CI/CD services (e.g., GitHub Actions, GitLab
+environment. Public cloud-based CI/CD services (e.g., GitHub Actions, GitLab
 CI/CD) are major build image producers, offering various VM images for the most
 common build environment configurations.
 
 Enterprises hosting on-premise build platforms may produce their own build
 images for internal software development teams or opt to use VM images produced
 by a third-party. Similarly, software producers that require special-purpose
-build environments, for example to support builds on specific compute
+build environments, for example to support builds on specific hardware
 architectures, may produce their own VM images and bring them to a hosted
 build platform with bring-your-own build image policies.
 
@@ -288,6 +292,46 @@ build environment and build ID.
 
 ## Build Platform
 
+From the BuildEnv track's perspective, the [build platform] is a
+system dedicated to orchestrating and deploying build environments
+in which tenant-defined builds can be run. In practice, the build platform
+may manage its own on-premise [compute platform], or it may rely on a
+third-party compute infrastructure provider such as a public cloud service.
+
+### BP.1 Implement the SLSA Build track
+
+The build platform integrity requirements defined in the [Build track]
+serve as an important foundation for enhancing the integrity of
+build environments in a verifiable way.
+
+<table>
+<tr><th>Level<th>Implementation Guidance
+
+<tr><td>BuildEnv L1<td>
+
+MUST follow SLSA Build L2 or higher [build platform requirements].
+
+<tr><td>BuildEnv L2<td>
+
+MUST follow SLSA Build L3 or higher [build platform requirements].
+
+<tr><td>BuildEnv L3<td>
+
+Same as L2.
+
+</table>
+
+### BP.2 Choose an appropriate compute platform
+
+### BP.3 Verify build environment integrity
+
+#### BP.3.1 Verify build image provenance
+
+#### BP.3.2 Verify build environment deployment
+
+#### BP.3.3 Verify host interface integrity
+
+
 ## Compute Platform
 
 [Build Environment levels]: build-env-levels.md
@@ -298,6 +342,7 @@ build environment and build ID.
 [build image]: build-env-levels.md#build-image
 [build image producer]: build-env-levels.md#build-image-producer
 [build platform]: terminology.md#platform
+[build platform requirements]: requirements.md#build-platform
 [compute platform]: build-env-levels.md#compute-platform
 [extend]: https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-1-Version-184_pub.pdf
 [measurement]: build-env-levels.md#measurement
