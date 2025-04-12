@@ -59,30 +59,22 @@ requirements for each role to implement a desired BuildEnv level.
   <td> <td>✓<td>✓
 <tr>
   <td rowspan=3><span id="verify-build-environment-integrity">**BP.3**: Verify build environment integrity</span>
-  <td><span id="verify-image-provenance">**BP.3.1**: Verify build image provenance</span>
-  <td>✓<td>✓<td>✓
-<tr>
-  <td><span id="verify-env-deployment">**BP.3.2**: Verify build environment deployment</span>
-  <td> <td>✓<td>✓
-<tr>
-  <td><span id="verify-host-interface">**BP.3.3**: Verify host interface integrity</span>
-  <td> <td> <td>✓
 <tr>
   <td rowspan=5><span id="compute-platform">Compute Platform (CP)</span>
   <td rowspan=3><span id="enlightened-host-interface">**CP.1**: Run enlightened host interface</span>
-  <td><span id="generate-guest-attestations">**CP.1.1**: Support guest system state attestation</span>
+  <td><span id="expose-rot">**CP.1.1**: Expose a root of trust</span>
   <td> <td>✓<td>✓
 <tr>
-  <td><span id="guest-secure-boot">**CP.1.2**: Verify guest initialization integrity</span>
+  <td><span id="guest-secure-boot">**CP.1.2**: Measure guest boot process</span>
   <td> <td>✓<td>✓
 <tr>
-  <td><span id="expose-trusted-hardware">**CP.1.3**: Expose trusted hardware features</span>
+  <td colspan=2><span id="vmm-secure-boot">**CP.2**: Attest host interface initial state</span>
   <td> <td> <td>✓
 <tr>
-  <td colspan=2><span id="trusted-hardware-feature">**CP.2**: Support integrated trusted hardware</span>
+  <td colspan=2><span id="distribute-vmm-ref-values">**CP.2.1**: Distribute reference values for host interface</span>
   <td> <td> <td>✓
 <tr>
-  <td colspan=2><span id="host-secure-boot">**CP.3**: Attest host interface integrity</span>
+  <td colspan=2><span id="host-secure-boot">**CP.2.2**: Measure host interface initial state</span>
   <td> <td> <td>✓
 </table>
 
@@ -92,6 +84,15 @@ The requirements laid out in this guidance for BuildEnv track implementers
 assume VM-based build environments. We plan to extend the scope of these
 requirements to cover container-only environments in a future version of the
 BuildEnv spec.
+
+### Metadata Distribution Channels
+
+The SLSA BuildEnv track requires implementers to generate and distribute a
+number of build environment provenance and [reference values] metadata.
+Possible distribution channels for authenticated metadata include, but are
+not limited to, [dedicated databases] and [transparency logs].
+The trustworthiness of a particular distribution channel is determined by
+consumers upon verification of a build environment.
 
 ## Build Image Producer
 
@@ -176,9 +177,9 @@ Same as L2.
 
 </table>
 
-For VM images, reference values for components such as a guest kernel or build =
-agent MAY be collected during the VM's build by computing a [measurement] of
-the particular component. Root filesystems specifically SHOULD be measured using
+For VM images, reference values for components such as a guest kernel or build
+agent MAY be collected during the VM's build by computing [measurements] over
+the particular components. Root filesystems specifically SHOULD be measured using
 tools like [dm-verity] or [fs-verity] run at VM startup.
 
 It is RECOMMENDED that authenticated reference values be captured in the VM
@@ -247,9 +248,9 @@ to the build platform's control plane.
 
 <tr><td>BuildEnv L3<td>
 
-MUST request a signed [quote] from a *hardware* root of trust for the
-environment's system state *and* the VMM's boot process, and transmit this
-quote to the build platform's control plane.
+MUST request a signed [quote] from a *hardware* root of trust for each the
+environment's system state *and* the VMM's boot process, and transmit these
+quotes to the build platform's control plane.
 
 </table>
 
@@ -274,13 +275,13 @@ none
 
 <tr><td>BuildEnv L2<td>
 
-MUST extend the software/virtualized root of trust [measurement] with the
+MUST extend the software/virtualized root of trust [measurements] with the
 assigned [build ID] at build dispatch, request a new signed quote, and
 transmit this quote to the build platform's control plane.
 
 <tr><td>BuildEnv L3<td>
 
-MUST extend the *hardware* root of trust [measurement] with the assigned
+MUST extend the *hardware* root of trust [measurements] with the assigned
 [build ID] at build dispatch, request a new signed quote, and transmit
 this quote to the build platform's control plane.
 
@@ -323,17 +324,224 @@ Same as L2.
 
 ### BP.2 Choose an appropriate compute platform
 
+The BuildEnv track relies on the compute platform to provide certain
+mechanisms that enhance the integrity of build platforms. This means
+that build platforms must select to deploy their build environments
+on a compute platform that meets the requirements for the desired
+BuildEnv level.
+
+<table>
+<tr><th>Level<th>Implementation Guidance
+
+<tr><td>BuildEnv L1<td>
+
+none
+
+<tr><td>BuildEnv L2<td>
+
+MUST choose a compute platform that meets SLSA BuildEnv L2 or higher
+[compute platform requirements].
+
+<tr><td>BuildEnv L3<td>
+
+MUST choose a compute platform that meets SLSA BuildEnv L3 or higher
+[compute platform requirements].
+
+</table>
+
 ### BP.3 Verify build environment integrity
 
-#### BP.3.1 Verify build image provenance
+The central purpose of the BuildEnv track is to collect evidence about
+the integrity of build environments. Verifying this evidence enables build
+platforms to detect [tampering with the build environment].
+The following guidelines are meant to ensure more comprehensive
+integrity verification at various stages of a build environment's
+[lifecycle](build-env-levels.md#build-environment-lifecycle).
 
-#### BP.3.2 Verify build environment deployment
+<table>
+<tr><th>Level<th>Implementation Guidance
 
-#### BP.3.3 Verify host interface integrity
+<tr><td>BuildEnv L1<td>
 
+*Prior to the bootup of a new build environment*, the control plane
+MUST verify the SLSA [Build Provenance] for the selected build image
+(captured via [BI.1]).
+
+<tr><td>BuildEnv L2<td>
+
+In addition to L1, the control plane MUST:
+
+-   Support verification of software/virtualized root of trust quotes.
+-   *Prior to dispatching a tenant's build to an instantiated environment*,
+verify the signed boot time [quote] received from the [build agent], incl.
+the contained build environment initial state [measurements], against their
+reference values.
+-   *Prior to starting a tenant's build in a dispatched environment*,
+verify the signed dispatch [quote] received from the build agent, incl.
+the updated root of trust [measurements], against the assigned [build ID]
+generated by the control plane.
+
+<tr><td>BuildEnv L3<td>
+
+In addition to L2, the control plane MUST:
+
+-   Support verification of hardware root of trust quotes.
+-   *Prior to dispatching a tenant's build to an instantiated environment*,
+verify the compute platform-generated VMM boot time [quote] received from the
+build agent, incl. the contained VMM initial state [measurements], against
+their reference values.
+
+</table>
 
 ## Compute Platform
 
+The [compute platform] provides the software and hardware infrastructure
+needed to run a build platform.
+Its high-privilege position in a build environment's stack makes it a
+potential target for attackers that aim to compromise builds by [tampering
+with the build environment] through compute platform components such as
+the hypervisor or VMM.
+
+In practice, compute platforms may be public cloud systems (e.g., Microsoft
+Azure, Google Cloud Platform, Amazon AWS), or on-premise private datacenters.
+Starting at SLSA BuildEnv L2, this track adds responsibilities for compute
+platforms.
+
+### CP.1 Run enlightened host interface
+
+The hypervisor or VMM is the component in the compute platform, whose primary
+role is to manage and provision host resources to the VM guests running on
+the infrastructure. To implement the SLSA BuildEnv track, the compute platform
+is thus responsible for running a [host interface] that supports specific
+features needed to enable the validation of a build environment's integrity.
+
+#### CP.1.1 Expose a root of trust
+
+The enlightened [host interface] MUST expose a root of trust component
+to the VM guest of the build environment.
+
+<table>
+<tr><th>Level<th>Implementation Guidance
+
+<tr><td>BuildEnv L1<td>
+
+none
+
+<tr><td>BuildEnv L2<td>
+
+MUST implement and expose an interface to a software or virtualized root of
+trust that supports the [quote] and [extend] operations, such as a vTPM.
+This interface MUST be able to receive requests for and send signed
+quotes to a VM guest.
+
+<tr><td>BuildEnv L3<td>
+
+MUST expose an interface to a *hardware* root of trust that supports the
+[quote] and [extend] operations, such as a TPM or select confidential VM
+features in the compute platform's hardware. This interface MUST be able to
+receive requests for and send signed quotes to a VM guest.
+
+</table>
+
+#### CP.1.2 Measure guest boot process
+
+The hypervisor/VMM is responsible for booting up VM guests on the compute
+platform on behalf of the build platform. To detect tampering with the
+build environment during instantiation, the enlightened host interface
+measures the guest boot process.
+
+<table>
+<tr><th>Level<th>Implementation Guidance
+
+<tr><td>BuildEnv L1<td>
+
+none
+
+<tr><td>BuildEnv L2<td>
+
+MUST use the software/virtualized root of trust to [measure] a build
+environment VM's bootloader, kernel, root filesystem and build agent
+during the boot process.
+
+<tr><td>BuildEnv L3<td>
+
+MUST use the *hardware* root of trust to [measure] a build environment
+VM's bootloader, kernel, root filesystem and build agent during the boot
+process.
+
+</table>
+
+In a VM-based environment, this can be achieved by enabling a process
+like [Secure Boot] in the hypervisor.
+
+### CP.2 Attest host interface initial state
+
+Certain attacks target the host interface as the pathway to [tampering with
+the build environment]. To enable build platforms and consumers to detect
+such tampering, the compute platform is responsible for attesting to the
+hypervisor/VMM's initial state during the host's boot process.
+
+Where lower levels of the SLSA BuildEnv track rely on the host interface
+to provide integrity for the build environment, validating the VMM's
+integrity requires a shift from trust in the compute platform to trust
+in the hardware. Implement this higher level of integrity for build
+environments is thus left for BuildEnv L3.
+
+#### CP.2.1 Distribute reference values for host interface
+
+The compute platform is responsible for generating and distributing
+digitally signed known good values (i.e., [reference values]) for a number of
+components in the infrastructure on which they host build platforms.
+
+<table>
+<tr><th>Level<th>Implementation Guidance
+
+<tr><td>BuildEnv L1<td>
+
+none
+
+<tr><td>BuildEnv L2<td>
+
+none
+
+<tr><td>BuildEnv L3<td>
+
+MUST collect host system reference values:
+-   bootloader
+-   hypervisor/VMM
+
+</table>
+
+####  CP.2.2 Measure host interface initial state
+
+The compute platform attests to the VMM's initial state by collecting
+[measurements] during the host's boot process.
+
+<table>
+<tr><th>Level<th>Implementation Guidance
+
+<tr><td>BuildEnv L1<td>
+
+none
+
+<tr><td>BuildEnv L2<td>
+
+none
+
+<tr><td>BuildEnv L3<td>
+
+The compute platform's host system MUST use the *hardware* root of trust to
+[measure] the host bootloader and VMM and generate a signed [quote] including
+these [measurements]. This attestation MUST be distributed to enable integrity
+checking of the VMM's initial state.
+
+</table>
+
+## Verification Procedures
+
+TODO
+
+[BI.1]: #bi.1-distribute-build-image-provenance
 [Build Environment levels]: build-env-levels.md
 [Build Provenance]: provenance.md
 [Build track]: requirements.md
@@ -343,9 +551,13 @@ Same as L2.
 [build image producer]: build-env-levels.md#build-image-producer
 [build platform]: terminology.md#platform
 [build platform requirements]: requirements.md#build-platform
+[compute platform requirements]: #compute-platform
 [compute platform]: build-env-levels.md#compute-platform
+[dedicated databases]: https://cloud.google.com/confidential-computing/confidential-vm/docs/verify-firmware#retrieve_launch_endorsements_with_your_own_tools
 [extend]: https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-1-Version-184_pub.pdf
-[measurement]: build-env-levels.md#measurement
+[host interface]: build-env-levels.md#host-interface
+[measure]: build-env-levels.md#measurement
+[measurements]: build-env-levels.md#measurement
 [producer requirements]: requirements.md#producer
 [quote]: build-env-levels.md#quote
 [Release Attestation]: https://github.com/in-toto/attestation/blob/main/spec/predicates/release.md
@@ -353,4 +565,6 @@ Same as L2.
 [Secure Boot]: https://wiki.debian.org/SecureBoot#What_is_UEFI_Secure_Boot.3F
 [software producer]: terminology.md#producer
 [TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
+[tampering with the build environment]: build-env-levels.md#build-environment-threats
+[transparency logs]: https://docs.sigstore.dev/logging/overview/
 [VSA]: verification_summary.md

@@ -116,14 +116,14 @@ properties for a given build environment. This enables any party to detect
 [several classes] of supply chain threats originating in the build
 environment.
 
-As in the Build track, the exact implementation of this track is determined
-by the build platform implementer, whether they are a commercial CI/CD service
-or enterprise organization. While this track describes general minimum
-requirements, this track does not dictate the following
-implementation-specific details: the type of build environment, accepted
-attestation formats, the type of technologies used to meet L3 requirements,
-how attestations are distributed, how build environments are identified, and
-what happens on failure.
+We provide [detailed implementation guidance](build-env-requirements.md), but
+the exact implementation of this track is determined by the build platform
+implementer, whether they are a commercial CI/CD service or enterprise
+organization. While this track describes general minimum requirements, this
+track does not dictate the following implementation-specific details: the type
+of build environment, accepted attestation formats, the type of technologies
+used to meet L3 requirements, how attestations are distributed, how build
+environments are identified, and what happens on failure.
 
 <section id="environment-l0">
 
@@ -247,18 +247,13 @@ All of [BuildEnv L1], plus:
     like [vTPM], or equivalent, in the hypervisor.
     For container-based environments, the container orchestrator MAY need
     modifications to produce these attestations.
-    -   The host interface MUST validate the measurements of the build image
-    components against their signed references values during the build
-    environment's boot process.
+    -   The host interface MUST measure the build image components during the
+	build environment's boot process to enable validation against their
+	reference values.
     In a VM-based environment, this MUST be achieved by enabling a process
     like [Secure Boot], or equivalent, in the hypervisor.
     For container-based environments, the container orchestrator MAY need
     modifications to perform these checks.[^1]
-    -   Prior to instantiating a new build environment, the host interface
-    MUST automatically verify the SLSA Provenance for the selected build
-    image. A signed attestation to the verification of the build image's
-    SLSA Provenance MUST be automatically generated and distributed (e.g.,
-    via a [VSA]).
 
 <dt>Benefits<dd>
 
