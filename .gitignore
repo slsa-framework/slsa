@@ -4,6 +4,7 @@
 .jekyll-metadata
 .sass-cache
 _site
+_build
 node_modules
 /docs/vendor/bundle
 
