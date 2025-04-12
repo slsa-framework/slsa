@@ -20,15 +20,19 @@ fi
 mkdir $BUILD_DIR
 cd $BUILD_DIR
 
+# TODO: update eventually -- this should just be the main branch representing the draft spec.
 git reset --hard
 git checkout users/zc/refactor-main
 mkdir draft 
 cp -r ../docs/spec/* draft/
 
-VERSIONS=("v1.1-rc1" "v1.1-rc2" "v1.0" "v1.0-rc1" "v1.0-rc2")
+# build versioned folders
+VERSIONS=("v1.0" "v1.0-rc1" "v1.0-rc2" "v1.1-rc1" "v1.1-rc2" )
 for version in "${VERSIONS[@]}"; do
+    RELEASE_BRANCH=releases/$version
     git reset --hard
-    git checkout releases/$version
+    git fetch origin $RELEASE_BRANCH:refs/remotes/origin/$RELEASE_BRANCH # not sure if we need this -- depends on the CI setup
+    git checkout $RELEASE_BRANCH
     mkdir $version
     cp -r ../docs/spec/* $version/
 done
