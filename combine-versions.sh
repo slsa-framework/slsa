@@ -11,6 +11,7 @@ if [ ! -d .git ]; then
 fi
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+CURRENT_DIR=$(pwd)
 BUILD_DIR=_build # ignored by git
 
 # Remove the build directory if it exists
@@ -18,7 +19,13 @@ if [ -d $BUILD_DIR ]; then
     rm -rf $BUILD_DIR
 fi
 mkdir $BUILD_DIR
-cd $BUILD_DIR
+
+# seed with site info
+cp -r docs/* _build/
+rm -rf docs/spec
+
+mkdir $BUILD_DIR/spec
+cd $BUILD_DIR/spec
 
 # TODO: update eventually -- this should just be the main branch representing the draft spec.
 git reset --hard
@@ -40,3 +47,4 @@ done
 # back to the original branch
 git reset --hard
 git checkout $CURRENT_BRANCH
+cd $CURRENT_DIR
