@@ -20,7 +20,7 @@ git checkout users/zc/refactor-main
 mkdir draft 
 cp -r ../docs/spec/* draft/
 
-VERSIONS=("v1.1-rc1" "v1.1-rc2" "v1.0", "v1.0-rc1" "v1.0-rc2")
+VERSIONS=("v1.1-rc1" "v1.1-rc2" "v1.0" "v1.0-rc1" "v1.0-rc2")
 for version in "${VERSIONS[@]}"; do
     git reset --hard
     git checkout releases/$version
