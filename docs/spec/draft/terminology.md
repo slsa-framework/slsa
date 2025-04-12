@@ -60,7 +60,7 @@ chain.
 
 | Role | Description | Examples
 | --- | --- | ---
-| Producer | A party who creates software and provides it to others. Producers are often also consumers. | An open source project's maintainers. A software vendor.
+| <span id="producer">Producer</span> | A party who creates software and provides it to others. Producers are often also consumers. | An open source project's maintainers. A software vendor.
 | Verifier | A party who inspect an artifact's provenance to determine the artifact's authenticity. | A business's software ingestion system. A programming language ecosystem's package registry.
 | Consumer | A party who uses software provided by a producer. The consumer may verify provenance for software they consume or delegate that responsibility to a separate verifier. | A developer who uses open source software distributions. A business that uses a point of sale system.
 | Infrastructure provider | A party who provides software or services to other roles. | A package registry's maintainers. A build platform's maintainers.
@@ -316,7 +316,7 @@ build platform the package was built.
 |--------------|----
 | Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly.
 | Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used.
-| Build platform certification | [Build platforms are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level.
+| Build platform assessment | [Build platforms are assessed](assessing-systems.md) for their security configurations needed for conformance to the SLSA requirements at the stated level.
 
 The examples below suggest some ways that expectations and verification may be
 implemented for different, broadly defined, package ecosystems.

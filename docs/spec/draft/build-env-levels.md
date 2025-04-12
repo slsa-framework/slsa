@@ -33,7 +33,7 @@ environment, and the compute platform they used.
 | ------------- | ------------ | ----- | ----------
 | [BuildEnv L0] | (none)       | (n/a) | (n/a)
 | [BuildEnv L1] | Signed build image provenance exists | Tampering during build image distribution | Signed build image provenance
-| [BuildEnv L2] | Attested build environment instantiation | Tampering via the build platform's control plane | The compute platform's host interface
+| [BuildEnv L2] | Attested build environment instantiation | Tampering via the build environment's components | The compute platform's host interface
 | [BuildEnv L3] | Hardware-attested build environment | Tampering via the compute platform's host interface | The compute platform's hardware
 
 > :warning:
@@ -116,14 +116,14 @@ properties for a given build environment. This enables any party to detect
 [several classes] of supply chain threats originating in the build
 environment.
 
-As in the Build track, the exact implementation of this track is determined
-by the build platform implementer, whether they are a commercial CI/CD service
-or enterprise organization. While this track describes general minimum
-requirements, this track does not dictate the following
-implementation-specific details: the type of build environment, accepted
-attestation formats, the type of technologies used to meet L3 requirements,
-how attestations are distributed, how build environments are identified, and
-what happens on failure.
+We provide [detailed implementation guidance](build-env-requirements.md), but
+the exact implementation of this track is determined by the build platform
+implementer, whether they are a commercial CI/CD service or enterprise
+organization. While this track describes general minimum requirements, this
+track does not dictate the following implementation-specific details: the type
+of build environment, accepted attestation formats, the type of technologies
+used to meet L3 requirements, how attestations are distributed, how build
+environments are identified, and what happens on failure.
 
 <section id="environment-l0">
 
@@ -227,12 +227,13 @@ All of [BuildEnv L1], plus:
         -   Upon completion of the [boot process]: Automatically interfacing
         with the host interface to obtain and transmit a signed quote for the
         build environment's system state.
-        -   Upon build dispatch: Automatically generating and distributing
-        a signed attestation that binds its boot process quote to the
-        assigned build ID (e.g., using [SCAI]).
+        -   Upon build dispatch: Automatically interfacing with the host
+		interface to a signed quote that includes the assigned build ID.
 
 -   Build Platform Requirements:
     -   MUST meet SLSA [Build L3] requirements.
+	-   MUST choose a compute platform that meets SLSA BuildEnv L2
+	requirements. 
     -   Prior to dispatching a tenant's build to an instantiated environment,
     a signed [quote] MUST be automatically requested from the build agent,
     and the contained [measurements] verified against their boot process
@@ -246,18 +247,13 @@ All of [BuildEnv L1], plus:
     like [vTPM], or equivalent, in the hypervisor.
     For container-based environments, the container orchestrator MAY need
     modifications to produce these attestations.
-    -   The host interface MUST validate the measurements of the build image
-    components against their signed references values during the build
-    environment's boot process.
+    -   The host interface MUST measure the build image components during the
+	build environment's boot process to enable validation against their
+	reference values.
     In a VM-based environment, this MUST be achieved by enabling a process
     like [Secure Boot], or equivalent, in the hypervisor.
     For container-based environments, the container orchestrator MAY need
     modifications to perform these checks.[^1]
-    -   Prior to instantiating a new build environment, the host interface
-    MUST automatically verify the SLSA Provenance for the selected build
-    image. A signed attestation to the verification of the build image's
-    SLSA Provenance MUST be automatically generated and distributed (e.g.,
-    via a [VSA]).
 
 <dt>Benefits<dd>
 
@@ -299,6 +295,8 @@ All of [BuildEnv L2], plus:
     the host interface's boot process quote.
 
 -   Build Platform Requirements:
+	-   MUST choose a compute platform that meets SLSA BuildEnv L3
+	requirements. 
     -   Prior to dispatching a tenant's build to an instantiated environment,
     the measurements in the *host interface's* boot process quote MUST be
     automatically verified against their reference values.
