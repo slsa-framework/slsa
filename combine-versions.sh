@@ -23,7 +23,7 @@ cd $BUILD_DIR
 # TODO: update eventually -- this should just be the main branch representing the draft spec.
 git reset --hard
 git checkout users/zc/refactor-main
-mkdir draft 
+mkdir draft
 cp -r ../docs/spec/* draft/
 
 # build versioned folders
