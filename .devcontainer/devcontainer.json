@@ -17,6 +17,7 @@
       "version": "3.2"
     }
   },
+<<<<<<< HEAD
   "customizations": {
     "vscode": {
       "extensions": [
@@ -28,6 +29,9 @@
   },
   "postCreateCommand": "bundle install && npm install -g netlify-cli",
 >>>>>>> 5056967 (Create devcontainer.json)
+=======
+  "postCreateCommand": "cd docs && bundle config set --local path 'vendor/bundle' && bundle install && npm install -g netlify-cli && cd ..",
+>>>>>>> 8fbf360 (tune devcontainer)
   "forwardPorts": [4000],
   "portsAttributes": {
     "4000": {
@@ -35,10 +39,14 @@
     }
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8fbf360 (tune devcontainer)
   "customizations": {
     "vscode": {
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash"
+<<<<<<< HEAD
       },
       "extensions": [
         "eamodio.gitlens", // GitLens extension for Git superpowers
@@ -58,5 +66,9 @@
   "settings": {
     "terminal.integrated.defaultProfile.linux": "bash"
 >>>>>>> 5056967 (Create devcontainer.json)
+=======
+      }
+    }
+>>>>>>> 8fbf360 (tune devcontainer)
   }
 }
