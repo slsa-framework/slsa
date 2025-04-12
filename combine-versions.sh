@@ -12,6 +12,11 @@ fi
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 BUILD_DIR=_build # ignored by git
+
+# Remove the build directory if it exists
+if [ -d $BUILD_DIR ]; then
+    rm -rf $BUILD_DIR
+fi
 mkdir $BUILD_DIR
 cd $BUILD_DIR
 
