@@ -5,6 +5,7 @@
 .sass-cache
 node_modules
 /www/vendor/bundle
+/www/spec
 _site
 
 # Ignore the following files markdownlint that are already tracked by git (thus
