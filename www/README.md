@@ -95,7 +95,7 @@ downloaded from Netlify (`deploy-*.zip`).
 Example 1: comparing two locally built versions of the site
 
 ```bash
-# Prepare version A 
+# Prepare version A
 $ bundle exec jekyll build
 $ mv _site _site.A
 # Prepare version B
@@ -168,6 +168,7 @@ deploy**.
 
 This will stay active until the next push to `main`.
 
+<<<<<<< HEAD
 ## Insights on some of the internals of the SLSA website
 
 This section provides a collection of tips on some of the internals of how the
@@ -236,3 +237,20 @@ This lists some of the steps one must take to publish a new version of the speci
 -   Edit `docs/_data/nav/config.yml` to add the new version
 -   Edit `docs/_data/main.yml` to add the new version and possibly remove any older versions to be hidden. If you remove an old version, make sure that a version specific file exists because it will be needed if the hidden version is accessed directly.
 -   Edit `docs/_redirects` as necessary including the definition of `/spec/latest/*`
+=======
+
+# updates
+
+## testing the site locally
+* (optional) Open the slsa repo in a gh codespace.
+* run the following script:
+```bash
+cd path/to/slsa
+./combine-versions.sh
+cd www
+bundle config set --local path 'vendor/bundle'
+bundle install
+npm install -g netlify-cli
+netlify dev
+```
+>>>>>>> 20f605d (add some debug instructions)
