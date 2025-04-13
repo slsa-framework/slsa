@@ -1,5 +1,5 @@
 [build]
-base = "_build/"
+base = "www/"
 publish = "_site/"  # relative to `base` directory
 command = "combine-versions.sh && bundle exec jekyll build"
 

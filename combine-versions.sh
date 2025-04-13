@@ -1,7 +1,7 @@
 #
 # This script is used to combine the different versions of the spec into a single directory
-# for easier access. It creates a new directory called _build and copies the
-# contents of the different versions into it.
+# for easier access. 
+# It will create spec folder in the www directory and deploy the spec from the current and other branches
 # Please run the script from the root of the repository.
 
 # Ensure the script is run from root
@@ -12,36 +12,32 @@ fi
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 CURRENT_DIR=$(pwd)
-BUILD_DIR=_build # ignored by git
 
-# Remove the build directory if it exists
-if [ -d $BUILD_DIR ]; then
-    rm -rf $BUILD_DIR
+# clean spec dir
+if [ -d www/spec ]; then
+    rm -rf www/spec
 fi
-mkdir $BUILD_DIR
+mkdir www/spec
 
-# seed with site info
-cp -r docs/* _build/
-rm -rf docs/spec
+# # deploy blog posts
+# if [ -d docs/_posts ]; then
+#     rm -rf www/_posts
+# fi
+# cp -r docs/_posts www/
 
-mkdir $BUILD_DIR/spec
-cd $BUILD_DIR/spec
+# deploy draft
+mkdir www/spec/draft
+cp -r docs/spec/* www/spec/draft/
 
-# TODO: update eventually -- this should just be the main branch representing the draft spec.
-git reset --hard
-git checkout users/zc/refactor-main
-mkdir draft
-cp -r ../docs/spec/* draft/
-
-# build versioned folders
+# deploy older versions
 VERSIONS=("v1.0" "v1.0-rc1" "v1.0-rc2" "v1.1-rc1" "v1.1-rc2" )
 for version in "${VERSIONS[@]}"; do
     RELEASE_BRANCH=releases/$version
     git reset --hard
     git fetch origin $RELEASE_BRANCH:refs/remotes/origin/$RELEASE_BRANCH # not sure if we need this -- depends on the CI setup
     git checkout $RELEASE_BRANCH
-    mkdir $version
-    cp -r ../docs/spec/* $version/
+    mkdir www/spec/$version
+    cp -r docs/spec/* www/spec/$version/
 done
 
 # back to the original branch
