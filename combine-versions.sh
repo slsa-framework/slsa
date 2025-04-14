@@ -19,13 +19,7 @@ if [ -d www/spec ]; then
 fi
 mkdir www/spec
 
-# # deploy blog posts
-# if [ -d docs/_posts ]; then
-#     rm -rf www/_posts
-# fi
-# cp -r docs/_posts www/
-
-# deploy draft
+# deploy draft from main
 mkdir www/spec/draft
 cp -r docs/spec/* www/spec/draft/
 
