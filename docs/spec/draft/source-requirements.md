@@ -415,7 +415,7 @@ SCSs that do not use cryptographic digests MUST define a canonical type that is 
 E.g. `git+https://github.com/foo/hello-world`.
 5.  `verifiedLevels` MUST include the SLSA source track level the SCS asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
 MAY include additional properties as asserted by the SCS.  The SCS MUST include _only_ the highest SLSA source level met by the revision.
-6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
+6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain. This COULD be used to indicate the source level of any git submodules present in the revision.
 
 The SCS MAY issue these attestations based on its understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
 but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#provenance-attestations) appropriate to their SCS when making the assessment.
