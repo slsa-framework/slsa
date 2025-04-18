@@ -35,15 +35,20 @@ spec:
       hidden: true
     v1.0:
       name: Version 1.0
-      status: Approved
+      status: Retired
     v1.1-rc1:
       name: Version 1.1 RC1
       status: Retired
       draft: false
+      hidden: true
     v1.1-rc2:
       name: Version 1.1 RC2
-      status: Candidate
+      status: Retired
       draft: false
+      hidden: true
+    v1.1:
+      name: Version 1.1
+      status: Approved
     draft:
       name: Working Draft
       status: Draft

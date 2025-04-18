@@ -10,15 +10,16 @@ and expand its breadth and depth with updates and new tracks.
 
 Learn how you can [get involved](/community#get-involved)!
 
-### SLSA v1.1 RC2
+### SLSA v1.1
 
 The SLSA specification follows the [Community Specification](https://github.com/CommunitySpecification/Community_Specification/blob/main/) lifecycle going
 through several [stages of maturation](/spec-stages). [Version 1.1 Release
-Candidate 1 (RC1)](/spec/v1.1-rc1/) was published without much fanfare in August 2024. Shortly
-afterwards, an astute reader pointed out that the new threat model page had
-several unfinished sections. [Version 1.1 RC2](/spec/v1.1-rc2/) addresses all of these and is now
-open for review. If no major issues are found V1.1 RC2 will then be published
-as Version 1.1, effectively replacing Version 1.0.
+Candidate 1 (RC1)](/spec/v1.1-rc1/) was published without much fanfare in
+August 2024. [Version 1.1 RC2](/spec/v1.1-rc2/) followed in April 2025
+addressing a set of issues found in RC1. After an additional 2-week review
+period during which no issues were found, [Version 1.1](/spec/v1.1/) was
+published, effectively replacing [Version 1.0](/spec/v1.0/) which is now
+retired.
 
 ### Source track
 
