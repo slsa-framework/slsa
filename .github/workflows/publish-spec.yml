@@ -1,0 +1,50 @@
+# This workflow publishes the SLSA specification as a GitHub Release when a commit is pushed to a release branch.
+# It creates a zip archive of the spec, generates a build provenance attestation, and attaches both to the release.
+name: Publish Spec as Release
+
+on:
+  push:
+    branches:
+      - 'releases/v*.*.*'
+
+jobs:
+  publish-spec:
+    permissions:
+      attestations: write # Needed to generate and upload build provenance attestations
+      packages: write # Required for provenance and artifact publishing features
+      contents: write # Allows creating, deleting, and updating releases and release assets
+      id-token: write # Grants access to the OIDC token for secure provenance attestation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create source artifact
+        run: |
+          cd docs
+          zip -r spec.zip spec
+
+      - name: Set up GitHub CLI
+        uses: cli/gh-action@v2
+
+      - name: Generate build provenance attestation
+        run: |
+          gh attestation generate build-provenance \
+            --repo "$GITHUB_REPOSITORY" \
+            --subject-path docs/spec.zip \
+            --output docs/spec.attestation.json
+
+      - name: Create or recreate GitHub Release and upload assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Determine the release version from the Git ref
+          VERSION=${GITHUB_REF##*/}
+          # If a release with this version already exists, delete it to avoid errors
+          if gh release view "$VERSION" > /dev/null 2>&1; then
+            gh release delete "$VERSION" --yes
+          fi
+          # Create a new release and upload the spec artifact and attestation
+          gh release create "$VERSION" docs/spec.zip docs/spec.attestation.json \
+            --title "Release $VERSION" \
+            --notes "This is the release of the spec. The source artifact and attestation are attached."

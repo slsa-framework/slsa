@@ -1,7 +1,7 @@
 [build]
 base = "www/"
 publish = "_site/"  # relative to `base` directory
-command = "../combine-versions.sh && bundle exec jekyll build"
+command = "./combine-versions.sh && bundle exec jekyll build"
 
 [context.deploy-preview]
-  command = "../combine-versions.sh && bundle exec jekyll build --drafts --future"
+  command = "./combine-versions.sh && bundle exec jekyll build --drafts --future"
