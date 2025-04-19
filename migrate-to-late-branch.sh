@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # migrate-to-late-branch.sh
-# For each subfolder in docs/spec, create a branch releases/<subfolder>,
+# For each subfolder in docs/spec, create a branch test/releases/<subfolder>,
 # remove all other spec versions and docs content, and commit the result.
 #
 # Usage: Run from the repo root. Make sure you have no uncommitted changes.
@@ -26,38 +26,27 @@ fi
 
 cd "$(git rev-parse --show-toplevel)"
 
-for version in $(ls -1 "$SPECDIR" | grep -vE '^\.|^README'); do
+# --- Collect all version subfolders before starting the loop ---
+VERSIONS=($(ls -1 "$SPECDIR" | grep -vE '^\.|^README'))
+
+for version in "${VERSIONS[@]}"; do
   # --- Create a new branch for this version ---
-  BRANCH="releases/$version"
+  BRANCH="test/releases/$version"
   git checkout -b "$BRANCH"
 
-  # --- Remove all other subfolders in docs/spec except this one ---
-  for other in "$SPECDIR"/*; do
-    if [[ "$(basename "$other")" != "$version" ]]; then
-      rm -rf "$other"
-    fi
-  done
+  # move the version folder to the root of the spec directory
+  mv "$SPECDIR/$version" "spec"
 
-  # --- Remove all other content in docs/ except spec ---
-  for item in docs/*; do
-    if [[ "$(basename "$item")" != "spec" ]]; then
-      rm -rf "$item"
-    fi
-  done
-
-  # --- Remove all content in docs/spec except the current version ---
-  for item in "$SPECDIR"/*; do
-    if [[ "$(basename "$item")" != "$version" ]]; then
-      rm -rf "$item"
-    fi
-  done
+  # remove docs folder
+  rm -rf docs/*
 
   # --- Commit the changes ---
-  git add docs/
+  git add --all
   git commit -m "Migrate $version to its own branch ($BRANCH) with only its spec version."
-
+  
+  # --- Return to the original branch ---
+  git checkout "$ORIG_BRANCH"
 done
 
-# --- Return to the original branch ---
-git checkout "$ORIG_BRANCH"
+
 echo "Done. All branches created."
