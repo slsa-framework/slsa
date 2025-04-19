@@ -26,19 +26,19 @@ fi
 
 cd "$(git rev-parse --show-toplevel)"
 
-# --- Collect all version subfolders before starting the loop ---
-VERSIONS=($(ls -1 "$SPECDIR" | grep -vE '^\.|^README'))
+# --- Collect all released version subfolders before starting the loop ---
+VERSIONS=($(ls -1 "$SPECDIR" | grep -vE '^\.|^README|^draft$'))
 
 for version in "${VERSIONS[@]}"; do
   # --- Create a new branch for this version ---
   BRANCH="test/releases/$version"
   git checkout -b "$BRANCH"
 
-  # move the version folder to the root of the spec directory
+  # --- move the version folder to the root of the spec directory ---
   mv "$SPECDIR/$version" "spec"
 
-  # remove docs folder
-  rm -rf docs/*
+  # --- remove docs folder ---
+  rm -rf docs
 
   # --- Commit the changes ---
   git add --all
