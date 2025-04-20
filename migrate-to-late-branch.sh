@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# migrate-to-late-branch.sh
-# For each subfolder in docs/spec, create a branch test/releases/<subfolder>,
-# remove all other spec versions and docs content, and commit the result.
-#
-# Usage: Run from the repo root. Make sure you have no uncommitted changes.
+# This is a one-time script to migrate the slsa repo-to a late-branch model.
+# Starting from the current tip of main:
+# 1. For each subfolder the spec, create a branch with the name of the version.
+# 2. Remove all other spec versions and docs content
+# 3. Commit the result and publish the branch to the remote.
 
 set -euo pipefail
 
@@ -35,10 +35,10 @@ cd "$(git rev-parse --show-toplevel)"
 
 # --- Collect all released version subfolders before starting the loop ---
 VERSIONS=($(ls -1 "$SPECDIR" | grep -vE '^\.|^README|^draft$'))
-
+REF_SPEC="test/releases"
 for version in "${VERSIONS[@]}"; do
   # --- Create a new branch for this version ---
-  BRANCH="test/releases/$version"
+  BRANCH="$REF_SPEC/$version"
   git checkout -b "$BRANCH"
 
   # --- move the version folder to the root of the spec directory ---
@@ -59,5 +59,5 @@ done
 # Summary of updated branches
 echo "Done. All branches created:"
 for v in "${VERSIONS[@]}"; do
-  echo "  - test/releases/$v"
+  echo "  - $REF_SPEC/$v"
 done
