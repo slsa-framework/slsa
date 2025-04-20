@@ -95,7 +95,7 @@ downloaded from Netlify (`deploy-*.zip`).
 Example 1: comparing two locally built versions of the site
 
 ```bash
-# Prepare version A 
+# Prepare version A
 $ bundle exec jekyll build
 $ mv _site _site.A
 # Prepare version B
@@ -167,3 +167,19 @@ deploy**.
 ![screenshot of rollback button](../readme_images/netlify_rollback_screenshot.png)
 
 This will stay active until the next push to `main`.
+
+
+# updates
+
+## testing the site locally
+* (optional) Open the slsa repo in a gh codespace.
+* run the following script:
+```bash
+cd path/to/slsa
+./combine-versions.sh
+cd www
+bundle config set --local path 'vendor/bundle'
+bundle install
+npm install -g netlify-cli
+netlify dev
+```
