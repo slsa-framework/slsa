@@ -31,6 +31,7 @@ if [[ ! -d "$SPECDIR" ]]; then
   exit 1
 fi
 
+# --- Start from the root of the repo ---
 cd "$(git rev-parse --show-toplevel)"
 
 # --- Collect all released version subfolders before starting the loop ---
@@ -61,3 +62,5 @@ echo "Done. All branches created:"
 for v in "${VERSIONS[@]}"; do
   echo "  - $REF_SPEC/$v"
 done
+
+# for ref in test/releases/v0.1 test/releases/v0.2 test/releases/v1.0 test/releases/v1.0-rc1 test/releases/v1.0-rc2 test/releases/v1.1-rc1 test/releases/v1.1-rc2; do git branch -D "$ref" && git push origin --delete "$ref" || true; done
