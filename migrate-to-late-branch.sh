@@ -8,6 +8,13 @@
 
 set -euo pipefail
 
+# --- Ensure script is run from the repo root ---
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+if [[ "$PWD" != "$REPO_ROOT" ]]; then
+  echo "Error: Please run this script from the repository root: $REPO_ROOT"
+  exit 1
+fi
+
 # --- Check for uncommitted changes ---
 if [[ -n $(git status --porcelain) ]]; then
   echo "Error: You have uncommitted changes. Please commit or stash them first."
@@ -42,11 +49,15 @@ for version in "${VERSIONS[@]}"; do
 
   # --- Commit the changes ---
   git add --all
-  git commit -m "Migrate $version to its own branch ($BRANCH) with only its spec version."
-  
+  git commit -m "Migrate $version to its own branch ($BRANCH)."
+  git push -u origin "$BRANCH"
+
   # --- Return to the original branch ---
   git checkout "$ORIG_BRANCH"
 done
 
-
-echo "Done. All branches created."
+# Summary of updated branches
+echo "Done. All branches created:"
+for v in "${VERSIONS[@]}"; do
+  echo "  - test/releases/$v"
+done
