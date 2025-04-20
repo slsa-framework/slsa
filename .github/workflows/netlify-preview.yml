@@ -1,0 +1,67 @@
+name: Deploy Preview to Netlify
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    permissions:
+        pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: Install dependencies
+        run: |
+          cd docs
+          bundle install --path vendor/bundle
+
+      - name: Build site # always use the main branch
+        run: |
+          git fetch origin main:main 
+          git checkout main
+          cd docs
+          bundle exec jekyll build -d _site
+
+      - name: Deploy to Netlify (Preview) # use the --prod flag if this is the main branch
+        id: netlify_deploy
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          prod_flag=""
+          if [ ${{github.ref_name}} = "main" ]; then prod_flag="--prod"; fi
+          cd docs
+          DEPLOY_URL=$(netlify deploy --dir=_site --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN --json | jq -r '.deploy_url')
+          echo "deploy_url=$DEPLOY_URL" >> $GITHUB_OUTPUT
+
+      - name: add comment with deploy preview link
+        uses: actions/github-script@v7
+        if: ${{ github.ref_name != 'main' }} # skip if this is main branch
+        env:
+            DEPLOY_URL: ${{ steps.netlify_deploy.outputs.deploy_url }}
+        with:
+            script: |
+                const prNumber = context.payload.pull_request.number;
+                const deployUrl = process.env.DEPLOY_URL || core.getInput('deploy_url') || '${{ steps.netlify_deploy.outputs.deploy_url }}';
+                github.rest.issues.createComment({
+                    issue_number: prNumber,
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    body: `🚀 Netlify Preview: [View Site](${deployUrl})`
+                });

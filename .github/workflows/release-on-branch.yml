@@ -1,0 +1,30 @@
+name: Create Release on Release Branch Update
+
+on:
+  push:
+    branches:
+      - 'releases/*'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get version from branch name
+        id: get_version
+        run: |
+          BRANCH_NAME="${GITHUB_REF#refs/heads/releases/}"
+          echo "version=$BRANCH_NAME" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release with CLI
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${GITHUB_REF#refs/heads/releases/}"
+          gh release create "$VERSION" \
+          --title "Release $VERSION" \
+          --notes "Automated release from branch $GITHUB_REF" \
+          --repo "$GITHUB_REPOSITORY" \
+          --generate-notes || echo "Release already exists, skipping."
