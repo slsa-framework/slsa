@@ -11,4 +11,4 @@ jobs:
       uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
     - run: npm ci --ignore-scripts
     - run: npm run lint --silent
-    - run: ./lint.sh
+    - run: ./tools/lint.sh

@@ -1,7 +1,7 @@
-name: Migrate to Late Branch
+name: Migrate to Late Branching Strategy
 
 on:
-  workflow_dispatch: # Allows manual triggering of the workflow
+  workflow_dispatch: # Allows only manual triggering of the workflow
 
 permissions:
   contents: read # Minimum permission required to read the repository

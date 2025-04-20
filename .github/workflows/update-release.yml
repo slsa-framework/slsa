@@ -6,6 +6,7 @@ on:
       - 'releases/*'
 
 jobs:
+  if: false  # This disables the entire workflow
   create-release:
     runs-on: ubuntu-latest
     steps:

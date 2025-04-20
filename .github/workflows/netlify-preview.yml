@@ -5,6 +5,7 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
+  if: false  # This disables the entire workflow
   deploy-preview:
     runs-on: ubuntu-latest
     permissions:
