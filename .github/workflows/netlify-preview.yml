@@ -46,7 +46,7 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: |
           prod_flag=""
-          if [ ${{github.ref_name}} = "main" ]; then prod_flag="--prod"; fi
+          if [ "${{ github.ref_name }}" = "main" ]; then prod_flag="--prod"; fi
           cd docs
           DEPLOY_URL=$(netlify deploy --dir=_site --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN --json | jq -r '.deploy_url')
           echo "deploy_url=$DEPLOY_URL" >> $GITHUB_OUTPUT
