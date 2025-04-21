@@ -15,7 +15,7 @@
 #   <version> = version name, i.e. second component of the URL, e.g. v1.0
 
 spec:
-  current: v1.0
+  current: v1.1
   versions:
     v0.1:
       name: Version 0.1
