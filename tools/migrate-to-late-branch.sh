@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# This is a one-time script to migrate the slsa repo-to a late-branch model.
-# Starting from the current tip of main:
-# 1. For each subfolder the spec, create a branch with the name of the version.
-# 2. Remove all other spec versions and docs content
+# This is a one-time script to migrate the slsa repo to a late-branch model.
+# Currently, all versions are in subfolders in docs/spec/<version>
+#
+# For each subfolder of docs/spec on the main branch:
+# 1. Checkout the main branch. Create a branch with the subfolder name and check it out.
+# 2. On this branch, remove all other spec versions, the content for this release should exist directly under /spec/
 # 3. Commit the result and publish the branch to the remote.
 
 set -euo pipefail
