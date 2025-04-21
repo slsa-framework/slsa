@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check the tip of main
+      - name: Checkout main (no mater what else is requested)
         uses: actions/checkout@v3
         with:
           ref: main # Checkout the main branch
           fetch-depth: 1 # We don't need the full history for this operation
 
-      - name: Run migration script from clean version of main
+      - name: Run migration script
         run: |
           chmod +x tools/migrate-to-late-branch.sh
           ./tools/migrate-to-late-branch.sh
