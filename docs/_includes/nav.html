@@ -14,18 +14,20 @@
   {% endif %}
 {% endfor %}
 {%- if this == nil %}
-  {%- comment %}Didn't find item in main menu, revert to old behavior for backward compatibility{% endcomment %}
+  {%- comment %}Didn't find item in main menu, revert to old behavior for backward compatibility, without expanding the menu if it's the main (displayed on blog posts among other pages).{% endcomment %}
   {%- assign url_parts = page.url | split: '/' %}
   {%- assign part_1 = url_parts[1] %}
   {%- assign part_2 = url_parts[2] %}
   {%- assign key = site.data.nav.config.url_to_key[part_1]
-      | default: site.data.nav.config.url_to_key[part_2]
-      | default: site.data.nav.config.url_to_key["latest"] %}
+      | default: site.data.nav.config.url_to_key[part_2] %}
+  {%- if key == nil %}
+    {%- assign expand = false %}
+    {%- assign key = "main" %}
+  {%- else %}
+    {%- assign expand = true %}
+  {%- endif %}
   {%- assign nav = site.data.nav[key] %}
-  {%- assign expand = true %}
-<!-- @@ here -->
 {% else %}
-<!-- @@ there -->
   {%- assign expand = false %}
 {% endif %}
 <nav class="site-nav">
