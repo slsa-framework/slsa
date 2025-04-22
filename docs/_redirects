@@ -23,13 +23,13 @@
 # --- Page renames and user-facing convenience aliases ---
 
 # Quick links to the latest version.
-/faq                    /spec/v1.1/faq          302  # floating
-/levels                 /spec/v1.1/levels       302  # floating
-/terminology            /spec/v1.1/terminology  302  # floating
-/requirements           /spec/v1.1/requirements 302  # floating
-/threats                /spec/v1.1/threats      302  # floating
-/threats-overview       /spec/v1.1/threats-overview 302  # floating
-/use-cases              /spec/v1.1/use-cases    302  # floating
+/faq                    /spec/latest/faq            302  # floating
+/levels                 /spec/latest/levels         302  # floating
+/terminology            /spec/latest/terminology    302  # floating
+/requirements           /spec/latest/requirements   302  # floating
+/threats                /spec/latest/threats        302  # floating
+/threats-overview       /spec/latest/threats-overview   302  # floating
+/use-cases              /spec/latest/use-cases      302  # floating
 
 # Renamed files.
 /getinvolved            /community              301
@@ -45,7 +45,7 @@
 /spec/v1.0/build-model.svg              /spec/v1.0/images/build-model.svg           302
 /spec/v1.0/verification-model.svg       /spec/v1.0/images/verification-model.svg    302
 
-/provenance             /spec/v1.1/provenance       302  # floating
+/provenance             /spec/latest/provenance     302  # floating
 /provenance/v0.1        /spec/v0.1/provenance       301
 /provenance/v0.2        /spec/v0.2/provenance       301
 /provenance/v0.2-draft  /spec/v0.2/provenance       301
@@ -56,8 +56,8 @@
 /provenance/v1.1        /spec/v1.1/provenance       301
 /provenance/draft       /spec/draft/provenance      301
 
-/spec                   /spec/v1.1              302  # floating
-/spec/faq               /spec/v1.1/faq          302  # floating
+/spec                   /spec/latest            302  # floating
+/spec/faq               /spec/latest/faq        302  # floating
 /spec/v1/*              /spec/v1.1/:splat       302  # floating
 /spec/v1.1/*            /spec/v1.1/:splat       302
 /spec/latest/*          /spec/v1.1/:splat       302  # floating
@@ -65,7 +65,7 @@
 /spec/latest/*          /spec/v1.1/:splat       302
 
 # Note: Versions prior to v1.0 stay in /verification_summary.
-/verification_summary           /spec/v1.1/verification_summary     302  # floating
+/verification_summary           /spec/latest/verification_summary   302  # floating
 /verification_summary/v0.1      /spec/v0.1/verification_summary     301
 /verification_summary/v0.2      /spec/v0.2/verification_summary     301
 /verification_summary/v1        /spec/v1.1/verification_summary     302  # floating
