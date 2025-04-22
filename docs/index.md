@@ -63,7 +63,7 @@ testimonials:
             </div>
             <div class="w-full md:w-1/2 md:mt-0 mt-8">
                 <p>Any software can introduce vulnerabilities into a supply chain. As a system gets more complex, it’s critical to already have checks and best practices in place to guarantee artifact integrity, that the source code you’re relying on is the code you’re actually using. Without solid foundations and a plan for the system as it grows, it’s difficult to focus your efforts against tomorrow’s next hack, breach or compromise.</p>
-                <a href="spec/v1.0/threats-overview" class="cta-link h5 font-semibold mt-8">More about supply chain attacks</a>
+                <a href="spec/latest/threats-overview" class="cta-link h5 font-semibold mt-8">More about supply chain attacks</a>
             </div>
         </div>
         <img class="mt-16 mx-auto w-full md:w-3/4" src="images/SupplyChainDiagram.svg" alt="the supply chain problem image">
@@ -76,7 +76,7 @@ testimonials:
                 <h4 class="h2 mb-8">Levels of assurance</h4>
                 <p>SLSA levels are like a common language to talk about how secure software, supply chains and their component parts really are. From source to platform, the levels blend together industry-recognized best practices to create four compliance levels of increasing assurance.
                 These look at the builds, sources and dependencies in open source or commercial software. Starting with easy, basic steps at the lower levels to build up and protect against advanced threats later, bringing SLSA into your work means prioritized, practical measures to prevent unauthorized modifications to software, and a plan to harden that security over time.</p>
-                <a href="spec/v1.0/levels" class="cta-link h5 font-semibold mt-8">Read the level specifications</a>
+                <a href="spec/latest/levels" class="cta-link h5 font-semibold mt-8">Read the level specifications</a>
             </div>
             <div class="w-full md:w-2/4 md:mt-0 mt-8 pl-12">
                 <img class="w-3/4 mx-auto" src="images/badge-exploded.svg" alt="SLSA levels badge">
