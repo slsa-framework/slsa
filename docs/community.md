@@ -109,10 +109,11 @@ developing tooling, we welcome your contributions.
             <div class="w-full md:w-1/2">
                 <div class="bg-pastel-green h-full rounded-lg p-10">
                     <ul>
-                        <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/joshuagl">Joshua Lock</a> - Verizon</li>
-                        <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/MarkLodato">Mark Lodato</a> - Google</li>
+                        <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/adriandiglio">Adrian Diglio</a> - Microsoft</li>
+                        <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/arewm">Andrew McNamara</a> - Red Hat</li>
                         <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/mlieberman85">Mike Lieberman</a> - Kusari/CNCF</li>
-                        <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/trishankatdatadog">Trishank Karthik Kuppusamy</a> - Datadog</li>
+                        <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/michaelwinser">Michael Winser</a> - Eclipse Foundation</li>
+                        <li class="mb-2"><a target="_blank" class="font-bold text-green-darker" href="https://github.com/TomHennen">Tom Hennen</a> - Google</li>
                     </ul>
                 </div>
             </div>
