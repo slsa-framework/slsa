@@ -60,13 +60,10 @@
         {%- if version.draft %}
           {%- if spec_version == "draft" %}
             <p>This is a working draft. This document may be modified, replaced, or discarded at any time.</p>
-        {%- else %}
+          {%- else %}
             <p>This is a working draft of {{ spec_version }}. This document may be modified, replaced, or discarded at any time.</p>
+          {%- endif %}
         {%- endif %}
-        <p style="font-size: smaller">For the latest release candidate or approved
-          version, please use the version selector.</p>
-        {%- endif %}
-
         {%- if spec_version != spec.current %}
           {%- assign current_version = spec.versions[spec.current] %}
           {%- if current_version %}
@@ -78,7 +75,7 @@
             {%- if other_page %}
               {%- assign new_url = other_page.url %}
             {%- else %}
-              {%- assign new_url = "/" + spec_id + "/" + spec.current %}
+              {%- assign new_url = "/" | append: spec_id | append: "/" | append: spec.current %}
             {%- endif %}
             <p>{{ current_version.name }} is the current version. See <a href="{{ new_url }}">the {{ current_version.name }} documentation</a>.</p>
           {%- endif %}
