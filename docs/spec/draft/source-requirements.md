@@ -118,11 +118,12 @@ Many examples in this document use the [git version control system](https://git-
 
 #### Choose an appropriate source control system
 
-An organization producing source revisions MUST select a source control system
-capable of reaching their desired SLSA Source Level.
+An organization producing source revisions MUST select a SCS capable of reaching
+their desired SLSA Source Level.
 
 For example, if an organization wishes to produce revisions at Source Level 3,
-they MUST choose a source control system of producing Source Level 3 attestations.
+they MUST choose a source control system capable of producing Source Level 3
+attestations.
 
 #### Choose an appropriate change management process
 
