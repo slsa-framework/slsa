@@ -230,7 +230,7 @@ User accounts that can modify the source or the project's configuration must
 use multi-factor authentication or its equivalent.
 The SCS MUST declare which forms of identity it considers to be trustworthy
 for this purpose. All other forms of identity SHOULD be considered informational
-and SHOULD NOT be used for authentication or attribution.
+and SHOULD NOT be used for authentication.
 
 For cloud-based SCSs, this will typically be the identity used to push to a
 repository.
@@ -238,12 +238,6 @@ repository.
 A second factor MUST be required when a user enrolls new access tokens that
 enable modifications (e.g. ssh keys, PATs), or when enrolling additional
 second factors (e.g. hardware tokens, authenticator apps).
-
-Other forms of identity MAY be included as informational.
-Examples include a git commit's "author" and "committer" fields and a gpg
-signature's "user id."
-These forms of identity are user-provided and not typically verified by the
-source provenance attestation issuer.
 
 See [source roles](#source-roles).
 
