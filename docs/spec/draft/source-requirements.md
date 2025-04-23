@@ -191,11 +191,13 @@ Continuity exceptions are allowed via the [safe expunging process](#safe-expungi
 <td><td>✓<td>✓
 <tr id="tag-hygiene"><td>Tag Hygiene<td>
 
-If the SCS supports tags (or other non-branch tracks), it MUST NOT be possible to delete or modify tags intended for consumption.
-The organization MUST indicate which tags are intended for consumption.
+If the SCS supports tags (or other non-branch tracks), additional care must be 
+taken to prevent unintentional changes.
+Unlike branches, tags have no built-in continuity enforcement mechanisms or 
+change management processes.
 
-Unlike branches, tags have no built-in continuity enforcement mechanisms or change management processes.
-Additional care must be taken to prevent unintentional changes.
+If a tag is used to identify a specific commit to external systems, it MUST NOT 
+be possible to move or delete those tags. 
 
 <td><td>✓<td>✓
 <tr id="identity-management"><td>Identity Management<td>
