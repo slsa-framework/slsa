@@ -229,7 +229,9 @@ Activities conducted on the SCS SHOULD be attributed to authenticated identities
 User accounts that can modify the source or the project's configuration must
 use multi-factor authentication or its equivalent.
 The SCS MUST declare which forms of identity it considers to be trustworthy
-for this purpose.
+for this purpose. All other forms of identity SHOULD be considered informational
+and SHOULD NOT be used for authentication or attribution.
+
 For cloud-based SCSs, this will typically be the identity used to push to a
 repository.
 
