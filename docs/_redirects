@@ -23,12 +23,13 @@
 # --- Page renames and user-facing convenience aliases ---
 
 # Quick links to the latest version.
-/faq                    /spec/v1.0/faq          302
-/levels                 /spec/v1.0/levels       302
-/terminology            /spec/v1.0/terminology  302
-/requirements           /spec/v1.0/requirements 302
-/threats                /spec/v1.0/threats      302
-/use-cases              /spec/v1.0/use-cases    302
+/faq                    /spec/latest/faq            302  # floating
+/levels                 /spec/latest/levels         302  # floating
+/terminology            /spec/latest/terminology    302  # floating
+/requirements           /spec/latest/requirements   302  # floating
+/threats                /spec/latest/threats        302  # floating
+/threats-overview       /spec/latest/threats-overview   302  # floating
+/use-cases              /spec/latest/use-cases      302  # floating
 
 # Renamed files.
 /getinvolved            /community              301
@@ -38,35 +39,36 @@
 /github-actions-workflow/v1         https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1    301
 /github-actions-workflow/v1.0       https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1    301
 
-/images/provenance/v1/model.svg         /spec/v1.0/images/provenance-model.svg      302
+/images/provenance/v1/model.svg         /spec/v1.1/images/provenance-model.svg      302  # floating
 /images/v1.0/supply-chain-threats-build-verification.svg    /spec/v1.0/images/supply-chain-threats-build-verification.svg   302
 /images/v1.0/supply-chain-threats.svg   /spec/v1.0/images/supply-chain-threats.svg  302
 /spec/v1.0/build-model.svg              /spec/v1.0/images/build-model.svg           302
 /spec/v1.0/verification-model.svg       /spec/v1.0/images/verification-model.svg    302
 
-/provenance             /spec/v1.0/provenance       302  # floating
+/provenance             /spec/latest/provenance     302  # floating
 /provenance/v0.1        /spec/v0.1/provenance       301
 /provenance/v0.2        /spec/v0.2/provenance       301
 /provenance/v0.2-draft  /spec/v0.2/provenance       301
-/provenance/v1          /spec/v1.0/provenance       302  # floating
+/provenance/v1          /spec/v1.1/provenance       302  # floating
 /provenance/v1-rc1      /spec/v1.0-rc1/provenance   301
 /provenance/v1-rc2      /spec/v1.0-rc2/provenance   301
 /provenance/v1.0        /spec/v1.0/provenance       301
 /provenance/v1.1        /spec/v1.1/provenance       301
 /provenance/draft       /spec/draft/provenance      301
 
-/spec                   /spec/v1.0              302
-/spec/faq               /spec/v1.0/faq          302
-/spec/v1/*              /spec/v1.1/:splat       302
+/spec                   /spec/latest            302  # floating
+/spec/faq               /spec/latest/faq        302  # floating
+/spec/v1/*              /spec/v1.1/:splat       302  # floating
 /spec/v1.1/*            /spec/v1.1/:splat       302
+/spec/latest/*          /spec/v1.1/:splat       302  # floating
 /spec/current-activities /current-activities    301
 /spec/latest/*          /spec/v1.1/:splat       302
 
 # Note: Versions prior to v1.0 stay in /verification_summary.
-/verification_summary           /spec/v1.0/verification_summary     302  # floating
+/verification_summary           /spec/latest/verification_summary   302  # floating
 /verification_summary/v0.1      /spec/v0.1/verification_summary     301
 /verification_summary/v0.2      /spec/v0.2/verification_summary     301
-/verification_summary/v1        /spec/v1.0/verification_summary     302  # floating
+/verification_summary/v1        /spec/v1.1/verification_summary     302  # floating
 # Note: there is no v1-rc1, so just redirect to rc2.
 /verification_summary/v1-rc1    /spec/v1.0-rc2/verification_summary 301
 /verification_summary/v1-rc2    /spec/v1.0-rc2/verification_summary 301
