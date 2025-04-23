@@ -181,7 +181,7 @@ They may also declare all revisions are intended to be consumed "except those re
 <tr id="continuity"><td>Branch Continuity<td>
 
 It MUST NOT be possible to rewrite the history of branches intended for
-consumption. In other words, if the organization updates a branch from commit A to commit B, commit B MUST be a descendant of A. 
+consumption. In other words, if the organization updates a branch from commit A to commit B, commit B MUST be a descendant of A.
 For systems like GitHub or GitLab, this can be accomplished by enabling branch protection rules that prevent force pushes and branch deletions.
 
 It MUST NOT be possible to delete the entire repository (including all branches) and replace it with different source.
@@ -191,10 +191,10 @@ Continuity exceptions are allowed via the [safe expunging process](#safe-expungi
 <td><td>✓<td>✓
 <tr id="tag-hygine"><td>Tag Hygine<td>
 
-If the SCS supports tags (or other non-branch tracks), it MUST NOT be possible to delete or modify tags intended for consumption. 
-The organization MUST indicate which tags are intended for consumption. 
+If the SCS supports tags (or other non-branch tracks), it MUST NOT be possible to delete or modify tags intended for consumption.
+The organization MUST indicate which tags are intended for consumption.
 
-Unlike branches, tags have no built-in continuity enforcement mechanisms or change management processes. 
+Unlike branches, tags have no built-in continuity enforcement mechanisms or change management processes.
 Additional care must be taken to prevent unintentional changes.
 
 <td><td>✓<td>✓
