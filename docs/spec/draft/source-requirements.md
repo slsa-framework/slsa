@@ -174,7 +174,7 @@ For example, this would happen if the revision was created on another SCS, or if
 If the SCS supports multiple branches, the organization MUST indicate which branches are intended for consumption.
 This may be implied or explicit.
 
-For example, an organization may declare that all branches protected by rulesets are intended for consumption, or only those with a certain prefix, such as `refs/heads/releases/*`.
+For example, an organization MAY declare that all branches protected by rulesets are intended for consumption, or only those with a certain prefix, such as `refs/heads/releases/*`.
 They may also declare all revisions are intended to be consumed "except those reachable only from branches beginning with `refs/heads/users/*`."
 
 <td><td>✓<td>✓
