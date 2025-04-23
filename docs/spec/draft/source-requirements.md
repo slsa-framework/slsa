@@ -173,12 +173,16 @@ See also [Use cases for non-cryptographic, immutable, digests](https://github.co
 <td>✓<td>✓<td>✓
 <tr id="source-summary"><td>Source Summary Attestations<td>
 
-The SCS MUST generate [summary attestations](#summary-attestation) to enable users to determine the source level of a given revision.
+The SCS MUST generate [source summary attestations](#summary-attestation) to
+indicate the SLSA Source Level of a given revision.
 
-If a consumer is authorized to access source on a particular branch, they MUST be able to fetch the summary attestations for revisions in the history of that branch.
+If a consumer is authorized to access a revision, they MUST be able to fetch the
+corresponding source summary attestations.
 
-It is possible that an SCS can make no claims about a particular revision.
-For example, this would happen if the revision was created on another SCS, or if the revision was not the result of an accepted change management process.
+It is possible that an SCS makes no claims about a particular revision.
+In these cases the SCS MAY NOT generate a summary attestation. Consumers MUST
+interpret the absence of a source summary attestation as though the revision
+is SLSA Source Level 0.
 
 <td>✓<td>✓<td>✓
 <tr id="branches"><td>Branches<td>
