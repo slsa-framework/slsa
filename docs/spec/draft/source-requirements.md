@@ -419,7 +419,7 @@ Example source provenance attestations:
 
 ### Authentication
 
-* Better protect against phishing by forbidding second factors that are not
+* Better protection against phishing by forbidding second factors that are not
   phishing resistant.
 * Protect against authentication token theft by forbidding bearer tokens
   (e.g. PATs).
