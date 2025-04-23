@@ -232,9 +232,6 @@ The SCS MUST declare which forms of identity it considers to be trustworthy
 for this purpose. All other forms of identity SHOULD be considered informational
 and SHOULD NOT be used for authentication.
 
-For cloud-based SCSs, this will typically be the identity used to push to a
-repository.
-
 A second factor MUST be required when a user enrolls new access tokens that
 enable modifications (e.g. ssh keys, PATs), or when enrolling additional
 second factors (e.g. hardware tokens, authenticator apps).
