@@ -233,8 +233,9 @@ for this purpose.
 For cloud-based SCSs, this will typically be the identity used to push to a
 repository.
 
-A second factor MUST be required when a user enrolls new access tokens (e.g.
-ssh keys, PATs).
+A second factor MUST be required when a user enrolls new access tokens that
+enable modifications (e.g. ssh keys, PATs), or when enrolling additional
+second factors (e.g. hardware tokens, authenticator apps).
 
 Other forms of identity MAY be included as informational.
 Examples include a git commit's "author" and "committer" fields and a gpg
