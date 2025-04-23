@@ -181,17 +181,18 @@ It is possible that an SCS can make no claims about a particular revision.
 For example, this would happen if the revision was created on another SCS, or if the revision was not the result of an accepted change management process.
 
 <td>✓<td>✓<td>✓
-<tr id="branches"><td>Branches<td>
+<tr id="branches"><td>Protected Branches<td>
 
-If the SCS supports multiple branches, the organization MUST indicate which branches are intended for consumption.
-This may be implied or explicit.
+If the SCS supports branches, the organization MUST indicate which branches are
+intended for consumption. This may be implied or explicit.
 
-For example, an organization may declare that the `default` branch of a repo contains revisions intended for consumption my protected it.
+For example, an organization may declare that the `default` branch of a repo
+contains revisions intended for consumption and are protected by their change
+management process.
 
-They may also declare that branches named with the prefix `refs/heads/releases/*` contain revisions held to an even higher standard.
-
-They may also declare all revisions are intended to be consumed "except those reachable only from branches beginning with `refs/heads/users/*`."
-This is a typical setup for teams who leverage code review tools.
+They may also declare all revisions are intended to be consumed "except those
+reachable only from branches beginning with `refs/heads/users/*`." This is a
+typical setup for teams who leverage code review tools.
 
 <td><td>✓<td>✓
 <tr id="continuity"><td>Continuity<td>
