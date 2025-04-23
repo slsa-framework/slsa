@@ -189,7 +189,7 @@ It MUST NOT be possible to delete the entire repository (including all branches)
 Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
 <td><td>✓<td>✓
-<tr id="tag-hygine"><td>Tag Hygine<td>
+<tr id="tag-hygiene"><td>Tag Hygiene<td>
 
 If the SCS supports tags (or other non-branch tracks), it MUST NOT be possible to delete or modify tags intended for consumption.
 The organization MUST indicate which tags are intended for consumption.
