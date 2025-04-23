@@ -224,16 +224,23 @@ The SCS MUST document how actors are identified for the purposes of attribution.
 Activities conducted on the SCS SHOULD be attributed to authenticated identities.
 
 <td><td>✓<td>✓
-<tr id="strong-authentication"><td>Strong Authentication<td>
+<tr id="multi-factor-authentication"><td>Multi-factor Authentication<td>
 
-User accounts that can modify the source or the project's configuration must use multi-factor authentication or its equivalent.
-This strongly authenticated identity MUST be used for the generation of source provenance attestations.
-The SCS MUST declare which forms of identity it considers to be trustworthy for this purpose.
-For cloud-based SCSs, this will typically be the identity used to push to a repository.
+User accounts that can modify the source or the project's configuration must
+use multi-factor authentication or its equivalent.
+The SCS MUST declare which forms of identity it considers to be trustworthy
+for this purpose.
+For cloud-based SCSs, this will typically be the identity used to push to a
+repository.
+
+A second factor MUST be required when a user enrolls new access tokens (e.g.
+ssh keys, PATs).
 
 Other forms of identity MAY be included as informational.
-Examples include a git commit's "author" and "committer" fields and a gpg signature's "user id."
-These forms of identity are user-provided and not typically verified by the source provenance attestation issuer.
+Examples include a git commit's "author" and "committer" fields and a gpg
+signature's "user id."
+These forms of identity are user-provided and not typically verified by the
+source provenance attestation issuer.
 
 See [source roles](#source-roles).
 
@@ -407,3 +414,12 @@ Example source provenance attestations:
  describe which source quality tools were run on the revision.
 
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
+
+## Future Considerations
+
+### Authentication
+
+* Better protect against phishing by forbidding second factors that are not
+  phishing resistant.
+* Protect against authentication token theft by forbidding bearer tokens
+  (e.g. PATs).
