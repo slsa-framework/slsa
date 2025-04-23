@@ -132,7 +132,7 @@ the same source control system which manages the revisions.
 
 ### Source Control System
 
-#### Generate Provenance
+#### Revision management
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
