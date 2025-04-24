@@ -161,19 +161,19 @@ It is possible that an SCS can make no claims about a particular revision.
 For example, this would happen if the revision was created on another SCS, or if the revision was not the result of an accepted change management process.
 
 <td>✓<td>✓<td>✓
-<tr id="branches"><td>Branches<td>
+<tr id="branches"><td>Protected Branches<td>
 
-If the SCS supports multiple branches, the organization MUST indicate which branches are intended for consumption.
-This may be implied or explicit.
+The SCS MUST provide a mechanism for organizations to indicate which branches
+should be protected by SLSA Source Level 2+ requirements.
 
-For example, an organization MAY declare that all branches protected by rulesets are intended for consumption, or only those with a certain prefix, such as `refs/heads/releases/*`.
-They may also declare all revisions are intended to be consumed "except those reachable only from branches beginning with `refs/heads/users/*`."
+E.g. The organization may configure the SCS to protect `main` and
+`refs/heads/releases/*`, but not `refs/heads/playground/*`.
 
 <td><td>✓<td>✓
 <tr id="continuity"><td>Branch Continuity<td>
 
-It MUST NOT be possible to rewrite the history of branches intended for
-consumption. In other words, if the organization updates a branch from commit A to commit B, commit B MUST be a descendant of A.
+It MUST NOT be possible to rewrite the history of protected branches.
+In other words, if the organization updates a branch from commit A to commit B, commit B MUST be a descendant of A.
 For systems like GitHub or GitLab, this can be accomplished by enabling branch protection rules that prevent force pushes and branch deletions.
 
 It MUST NOT be possible to delete the entire repository (including all branches) and replace it with different source.
