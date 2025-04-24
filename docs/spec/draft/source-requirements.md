@@ -223,17 +223,22 @@ See [source roles](#source-roles).
 <td><td><td>✓
 <tr id="source-provenance"><td>Source Provenance<td>
 
-[Source Provenance](#provenance-attestations) are attestations that contain information about how a specific revision was created and how it came to exist in its present context
-(e.g. the branches or tags that point, or pointed, at that revision).
-They are associated with the revision identifier delivered to consumers and are a statement of fact from the perspective of the SCS.
+[Source Provenance](#provenance-attestations) are attestations that contain
+information about how a specific revision was created and how it came to exist
+on a protected branch or how a tag came to point at it. They are associated
+with the revision identifier delivered to consumers and are a statement of fact
+from the perspective of the SCS.
 
-At Source Level 3 Source Provenance MUST be created contemporaneously with the revision being made available such that they provide a credible,
+At Source Level 3 Source Provenance MUST be created contemporaneously with the
+branch being updated to use that revision such that they provide a credible,
 auditable, record of changes.
 
-If a consumer is authorized to access source on a particular branch, they MUST be able to fetch the source attestation documents for revisions in the history of that branch.
+If a consumer is authorized to access, they MUST be able to fetch the source
+provenance documents for relevant revisions.
 
 It is possible that an SCS can make no claims about a particular revision.
-For example, this would happen if the revision was created on another SCS, or if the revision was not the result of an accepted change management process.
+For example, this would happen if the revision was created on another SCS,
+or if the revision was not the result of an accepted change management process.
 
 <td><td><td>✓
 <tr id="change-management-process"><td>Enforced change management process<td>
