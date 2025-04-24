@@ -191,16 +191,7 @@ For systems like GitHub or GitLab, this can be accomplished by enabling branch p
 
 It MUST NOT be possible to delete the entire repository (including all branches) and replace it with different source.
 
-Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
-
-<td><td>✓<td>✓
-<tr id="continuous-controls"><td>Continuous Controls<td>
-
-The SCS MUST provide a mechanism for organizations to indicate which controls
-are enforced for every revision on a protected branch since that protection was
-enabled.
-
-Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
+These branch protection enforcements MUST be verified for [continuity](#revision-continuity).
 
 <td><td>✓<td>✓
 <tr id="tag-hygiene"><td>Tag Hygiene<td>
@@ -266,9 +257,8 @@ or if the revision was not the result of an accepted change management process.
 <tr id="change-management-process"><td>Enforced change management process<td>
 
 The SCS MUST provide a mechanism for organizations to enforce additional
-technical controls which govern changes to a [branch](#definitions). The
-continuity of these controls MAY be enforced by the
-[continuous controls](#continuous-controls) requirement.
+technical controls which govern changes to a [branch](#definitions). These
+technical controls MAY be verified for [continuity](#revision-continuity).
 
 For example, this could be accomplished by:
 
@@ -279,6 +269,22 @@ For example, this could be accomplished by:
 
 <td><td><td>✓
 </table>
+
+#### Revision continuity
+
+Revisions are created by applying a specific code change (a "diff" in git) on
+top of an earlier revision. Since a single revision does not provide sufficient
+context to assess the source code controls on its own, an SCS MUST provide a
+means to ensure continuity of controls from one revision to another. Continuity
+MAY be accomplished by an SCS ensuring that a control has not lapsed between when
+a revision and its parent are created.
+
+While continuity MUST be established and tracked from a specific point in time,
+an SCS MAY choose not to expose that to consumers in attestations it produces.
+If there is a lapse in continuity for a specific control, that continuity MUST
+be re-established from a new point in time.
+
+Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
 ### Provide a change management tool
 
