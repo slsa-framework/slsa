@@ -272,7 +272,7 @@ the build really executed correctly, without external influence?
 
 The SLSA Build level describes the minimum bar for isolation strength. For more
 information on assessing a build platform's isolation strength, see
-[Verifying build platforms](verifying-systems.md).
+[Assessing build platforms](assessing-systems.md).
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
