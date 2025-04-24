@@ -38,7 +38,7 @@ Consumers can examine the various source provenance attestations to determine if
 | --- | ---
 | Administrator | A human who can perform privileged operations on one or more projects. Privileged actions include, but are not limited to, modifying the change history and modifying project- or organization-wide security policies.
 | Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
-| Trusted robot | Automation explicitly authorized by the organization to act in explicitly defined contexts. The Robot’s identity and codebase cannot be unilaterally influenced.
+| Trusted robot | Automation authorized by the organization to act in explicitly defined contexts. The Robot’s identity and codebase cannot be unilaterally influenced.
 | Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
 | Proposer | An actor that proposes (or uploads) a particular change to the source.
 | Reviewer / Voter / Approver | An actor that reviews (or votes on) a particular change to the source.
