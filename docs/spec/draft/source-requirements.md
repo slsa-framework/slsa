@@ -194,6 +194,15 @@ It MUST NOT be possible to delete the entire repository (including all branches)
 Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
 <td><td>✓<td>✓
+<tr id="continuous-controls"><td>Continuous Controls<td>
+
+The SCS MUST provide a mechanism for organizations to indicate which controls
+are enforced for every revision on a protected branch since that protection was
+enabled.
+
+Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
+
+<td><td>✓<td>✓
 <tr id="tag-hygiene"><td>Tag Hygiene<td>
 
 If the SCS supports tags (or other non-branch tracks), additional care must be
@@ -257,7 +266,9 @@ or if the revision was not the result of an accepted change management process.
 <tr id="change-management-process"><td>Enforced change management process<td>
 
 The SCS MUST provide a mechanism for organizations to enforce additional
-technical controls which govern changes to a [branch](#definitions).
+technical controls which govern changes to a [branch](#definitions). The
+continuity of these controls MAY be enforced by the
+[continuous controls](#continuous-controls) requirement.
 
 For example, this could be accomplished by:
 
