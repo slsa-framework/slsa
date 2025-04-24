@@ -279,10 +279,13 @@ means to ensure continuity of controls from one revision to another. Continuity
 MAY be accomplished by an SCS ensuring that a control has not lapsed between when
 a revision and its parent are created.
 
-While continuity MUST be established and tracked from a specific point in time,
-an SCS MAY choose not to expose that to consumers in attestations it produces.
-If there is a lapse in continuity for a specific control, that continuity MUST
-be re-established from a new point in time.
+Continuity MUST be established and tracked from a specific point in time. If
+there is a lapse in continuity for a specific control, that continuity MUST be
+re-established from a new point in time.
+
+An SCS SHOULD expose the time a control was established in the source provenance
+and other attestations it produces (with the exception of the source summary
+attestation).
 
 Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
@@ -434,3 +437,4 @@ Example source provenance attestations:
   phishing resistant.
 -   Protect against authentication token theft by forbidding bearer tokens
   (e.g. PATs).
+-   Including length of continuity in the VSAs
