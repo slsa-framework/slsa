@@ -303,8 +303,8 @@ The source track issues summary attestations using [Verification Summary Attesta
 1.  `subject.uri` SHOULD be set to a human readable URI of the revision.
 2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
 SCSs that do not use cryptographic digests MUST define a canonical type that is used to identify immutable revisions (e.g. `svn_revision_id`)[^1].
-3.  `subject.annotations.source_branches` SHOULD be set to a list of branches that pointed to this revision at any point in their history.
-    -   git branches MUST be fully qualified (e.g. `refs/head/main`) to reduce the likelihood of confusing downstream tooling.
+3.  `subject.annotations.source_refs` SHOULD be set to a list of references that pointed to this revision when the attestation was created. The list MAY NOT be exhaustive
+    -   git references MUST be fully qualified (e.g. `refs/head/main` or `refs/tags/v1.0`) to reduce the likelihood of confusing downstream tooling.
 4.  `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field).
 E.g. `git+https://github.com/foo/hello-world`.
 5.  `verifiedLevels` MUST include the SLSA source track level the verifier asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
@@ -317,15 +317,16 @@ but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#prov
 The SLSA source track MAY create additional tags to include in `verifiedLevels` which attest
 to other properties of a revision (e.g. if it was code reviewed).  All SLSA source tags will start with `SLSA_SOURCE_`.
 
-#### Populating source_branches
+#### Populating source_refs
 
-The summary attestation issuer may choose to populate `source_branches` in any way they wish.
+The summary attestation issuer may choose to populate `source_refs` in any way they wish.
 Downstream users are expected to be familiar with the method used by the issuer.
 
 Example implementations:
 
--   Issue a new VSA for each merged Pull Request and add the destination branch to `source_branches`.
+-   Issue a new VSA for each merged Pull Request and add the destination branch to `source_refs`.
 -   Issue a new VSA each time a 'consumable branch' is updated to point to a new revision.
+-   Issue a new VSA each time a 'consumable tag' is created to point to a new revision.
 
 #### Example
 
@@ -334,7 +335,7 @@ Example implementations:
 "subject": [{
   "uri": "https://github.com/foo/hello-world/commit/9a04d1ee393b5be2773b1ce204f61fe0fd02366a",
   "digest": {"gitCommit": "9a04d1ee393b5be2773b1ce204f61fe0fd02366a"},
-  "annotations": {"source_branches": ["refs/heads/main", "refs/heads/release_1.0"]}
+  "annotations": {"source_refs": ["refs/heads/main", "refs/heads/release_1.0"]}
 }],
 
 "predicateType": "https://slsa.dev/verification_summary/v1",
@@ -355,7 +356,7 @@ Example implementations:
 #### How to verify
 
 -   VSAs for source revisions MUST follow [the standard method of VSA verification](./verification_summary.md#how-to-verify).
--   Users SHOULD check that an allowed branch is listed in `subject.annotations.source_branches` to ensure the revision is from an appropriate context within the repository.
+-   Users SHOULD check that an allowed branch is listed in `subject.annotations.source_refs` to ensure the revision is from an appropriate context within the repository.
 -   Users SHOULD check that the expected `SLSA_SOURCE_LEVEL_` is listed within `verifiedLevels`.
 -   Users MUST ignore any unrecognized values in `verifiedLevels`.
 
