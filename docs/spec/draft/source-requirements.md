@@ -245,14 +245,13 @@ For example, this would happen if the revision was created on another SCS, or if
 <td><td><td>✓
 <tr id="change-management-process"><td>Enforced change management process<td>
 
-The SCS MUST ensure that all technical controls governing changes to a [branch](#definitions)
-
-1.  Are discoverable by authorized users of the repo.
-2.  Cannot be bypassed except via the [Safe Expunging Process](#safe-expunging-process).
+The SCS MUST provide a mechanism for organizations to enforce additional
+technical controls which govern changes to a [branch](#definitions).
 
 For example, this could be accomplished by:
 
--   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)), or
+-   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)) which require additional checks to 'pass'
+    (e.g. unit tests, linters), or
 -   the application and verification of [gittuf](https://github.com/gittuf/gittuf) policies, or
 -   some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
 
