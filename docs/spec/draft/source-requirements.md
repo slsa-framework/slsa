@@ -318,7 +318,7 @@ Examples:
 The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes managed via the [process](#change-management-process).
 
 <table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
 
 <tr id="context"><td>Context<td>
 
