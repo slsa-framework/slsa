@@ -270,7 +270,7 @@ For example, this could be accomplished by:
 <td><td><td>✓
 </table>
 
-#### Revision continuity
+#### Revision control continuity
 
 Revisions are created by applying a specific code change (a "diff" in git) on
 top of an earlier revision. Since a single revision does not provide sufficient
