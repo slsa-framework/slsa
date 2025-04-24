@@ -89,6 +89,10 @@
     url: /spec/draft/source-requirements
     description: Overview of the Source track
 
+  - title: Verifying Source Code
+    url: /spec/draft/verifying-source
+    description: Guidelines for verifying source provenance
+
 - title: Attestation formats
   description: >
     These pages include the concrete schemas for SLSA attestations. The
