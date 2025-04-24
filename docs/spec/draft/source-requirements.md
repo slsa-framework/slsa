@@ -173,15 +173,17 @@ See also [Use cases for non-cryptographic, immutable, digests](https://github.co
 <td>✓<td>✓<td>✓
 <tr id="source-summary"><td>Source Summary Attestations<td>
 
-The SCS MAY generate a [source summary attestation](#summary-attestation) to
-indicate the SLSA Source Level of a revision.
-The summary attestation "interprets" what the data in the source provenance attestation means.
+The SCS MUST generate a [source summary attestation](#summary-attestation) to
+indicate the SLSA Source Level of revisions it wishes to make claims about.
 
 If a consumer is authorized to access a revision, they MUST be able to fetch the
 corresponding source summary attestations.
 
 If the SCS DOES NOT generate a summary attestation for a revision, the revision
 cannot be verified and thus has Source Level 0.
+
+When source provenance is available the SCS MAY use it to generate the
+source summary attestation.
 
 <td>✓<td>✓<td>✓
 <tr id="branches"><td>Branches<td>
