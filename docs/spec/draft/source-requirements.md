@@ -116,6 +116,19 @@ Benefits:
 Provides authenticatable and auditable information to policy enforcement tools and reduces the risk of tampering
 within the SCS's storage systems.
 
+### Level 4: Two-party review
+
+Summary:
+The SCS requires two trusted persons to review all changes to protected
+branches.
+
+Intended for:
+Organizations that want strong guarantees that the software they produce is not
+subject to unilateral changes that would subvert their intent.
+
+Benefits:
+Makes it harder for an actor to introduce malicious changes into the software.
+
 ## Requirements
 
 Many examples in this document use the [git version control system](https://git-scm.com/), but use of git is not a requirement to meet any level on the SLSA source track.
@@ -150,7 +163,7 @@ the same source control system which manages the revisions.
 
 The repository ID is defined by the SCS and MUST be uniquely identifiable within the context of the SCS.
 
-<td>✓<td>✓<td>✓
+<td>✓<td>✓<td>✓<td>✓
 <tr id="revision-ids"><td>Revisions are immutable and uniquely identifiable<td>
 The revision ID is defined by the SCS and MUST be uniquely identifiable within the context of the repository.
 When the revision ID is a digest of the content of the revision (as in git) nothing more is needed.
@@ -158,7 +171,7 @@ When the revision ID is a number or otherwise not a digest, then the SCS MUST do
 The same revision ID MAY be present in multiple repositories.
 See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
 
-<td>✓<td>✓<td>✓
+<td>✓<td>✓<td>✓<td>✓
 <tr id="source-summary"><td>Source Summary Attestations<td>
 
 The SCS MUST generate a [source summary attestation](#summary-attestation) to
@@ -173,7 +186,7 @@ cannot be verified and thus has Source Level 0.
 When source provenance is available the SCS MAY use it to generate the
 source summary attestation.
 
-<td>✓<td>✓<td>✓
+<td>✓<td>✓<td>✓<td>✓
 <tr id="branches"><td>Protected Branches<td>
 
 The SCS MUST provide a mechanism for organizations to indicate which branches
@@ -182,7 +195,7 @@ should be protected by SLSA Source Level 2+ requirements.
 E.g. The organization may configure the SCS to protect `main` and
 `refs/heads/releases/*`, but not `refs/heads/playground/*`.
 
-<td><td>✓<td>✓
+<td><td>✓<td>✓<td>✓
 <tr id="continuity"><td>Branch Continuity<td>
 
 It MUST NOT be possible to rewrite the history of protected branches.
@@ -193,7 +206,7 @@ It MUST NOT be possible to delete the entire repository (including all branches)
 
 Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
-<td><td>✓<td>✓
+<td><td>✓<td>✓<td>✓
 <tr id="tag-hygiene"><td>Tag Hygiene<td>
 
 If the SCS supports tags (or other non-branch tracks), additional care must be
@@ -204,7 +217,7 @@ change management processes.
 If a tag is used to identify a specific commit to external systems, it MUST NOT
 be possible to move or delete those tags.
 
-<td><td>✓<td>✓
+<td><td>✓<td>✓<td>✓
 <tr id="identity-management"><td>Identity Management<td>
 
 There exists an identity management system or some other means of identifying
@@ -218,7 +231,7 @@ The SCS MUST document how actors are identified for the purposes of attribution.
 
 Activities conducted on the SCS SHOULD be attributed to authenticated identities.
 
-<td><td>✓<td>✓
+<td><td>✓<td>✓<td>✓
 <tr id="multi-factor-authentication"><td>Multi-factor Authentication<td>
 
 User accounts that can modify the source or the project's configuration must
@@ -233,7 +246,7 @@ second factors (e.g. hardware tokens, authenticator apps).
 
 See [source roles](#source-roles).
 
-<td><td><td>✓
+<td><td><td>✓<td>✓
 <tr id="source-provenance"><td>Source Provenance<td>
 
 [Source Provenance](#provenance-attestations) are attestations that contain
@@ -253,7 +266,7 @@ It is possible that an SCS can make no claims about a particular revision.
 For example, this would happen if the revision was created on another SCS,
 or if the revision was not the result of an accepted change management process.
 
-<td><td><td>✓
+<td><td><td>✓<td>✓
 <tr id="change-management-process"><td>Enforced change management process<td>
 
 The SCS MUST provide a mechanism for organizations to enforce additional
@@ -266,7 +279,38 @@ For example, this could be accomplished by:
 -   the application and verification of [gittuf](https://github.com/gittuf/gittuf) policies, or
 -   some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
 
-<td><td><td>✓
+<td><td><td>✓<td>✓
+<tr id="two-party-review"><td>Two party review<td>
+
+Changes in protected branches MUST be agreed to by two or more trusted persons prior to submission.
+The following combinations are acceptable:
+
+-   Uploader and reviewer are two different trusted persons.
+-   Two different reviewers are trusted persons.
+
+Reviews SHOULD cover, at least, security relevant properties of the code.
+
+**[Final revision approved]** This requirement applies to the final revision
+submitted. I.e. if a change is made during the review process that change MUST
+be reviewed as well.
+
+**[Context-specific approvals]** Approvals are for a specific context, such as a
+repo + branch in git. Moving fully reviewed content from one context to another
+still requires review. (Exact definition of “context” depends on the project,
+and this does not preclude well-understood automatic or reviewless merges, such
+as cutting a release branch.)
+
+**[Trusted Robot Contributions]** An organization MAY choose to allow a Trusted
+Robot to author and submit changes to source code without 2-party approval if
+the Robot’s identity is specifically allowed to bypass two-party review for the
+protected branch (e.g. by being listed in CODEOWNERS).
+
+Examples:
+
+-   Import and migration bots that move code from one repo to another.
+-   Dependabot
+
+<td><td><td><td>✓
 </table>
 
 ### Provide a change management tool
