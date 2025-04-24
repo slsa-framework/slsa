@@ -230,12 +230,11 @@ with the revision identifier delivered to consumers and are a statement of fact
 from the perspective of the SCS.
 
 At Source Level 3 Source Provenance MUST be created contemporaneously with the
-branch or tag being updated to use that revision such that they provide a
-credible, auditable, record of changes.
+branch being updated to use that revision such that they provide a credible,
+auditable, record of changes.
 
-If a consumer is authorized to access source on a particular branch or tag,
-they MUST be able to fetch the source provenance documents for relevant
-revisions.
+If a consumer is authorized to access, they MUST be able to fetch the source
+provenance documents for relevant revisions.
 
 It is possible that an SCS can make no claims about a particular revision.
 For example, this would happen if the revision was created on another SCS,
