@@ -128,11 +128,6 @@ When self-hosting a solution, local, unauthenticated storage is not acceptable.
 Branch protection is not required, nor are there any other constraints on the configuration of the tools.
 
 <td>✓<td>✓<td>✓
-<tr id="canonical-location"><td>Canonical location<td>
-
-The source MUST have a location where the "official" revisions are stored and managed.
-
-<td>✓<td>✓<td>✓
 <tr id="distribute-summary-attestations"><td>Distribute summary attestations<td>
 
 The organization MUST document how [summary attestations](#summary-attestation) are distributed
@@ -150,21 +145,14 @@ are distributed for relevant source repositories.
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
-<tr id="immutable-revisions"><td>Revisions are immutable and uniquely identifiable<td>
 
-This requirement ensures that a consumer can determine that the source revision they have is the same as a canonical revision.
-The SCS MUST provide a deterministic way to identify a particular revision.
+<tr id="repository-ids"><td>Repositories are uniquely identifiable<td>
 
-Virtually all modern tools provide this guarantee via a combination of the repository ID and revision ID.
+The repository ID is defined by the SCS and MUST be uniquely identifiable within the context of the SCS.
 
 <td>✓<td>✓<td>✓
-<tr id="repository-ids"><td>Repository IDs<td>
-
-The repository ID is defined by the SCS and MUST be unique in the context of that instance of the SCS.
-
-<td>✓<td>✓<td>✓
-<tr id="revision-ids"><td>Revision IDs<td>
-
+<tr id="revision-ids"><td>Revisions are immutable and uniquely identifiable<td>
+The revision ID is defined by the SCS and MUST be uniquely identifiable within the context of the repository.
 When the revision ID is a digest of the content of the revision (as in git) nothing more is needed.
 When the revision ID is a number or otherwise not a digest, then the SCS MUST document how the immutability of the revision is established.
 The same revision ID MAY be present in multiple repositories.
@@ -195,20 +183,26 @@ reachable only from branches beginning with `refs/heads/users/*`." This is a
 typical setup for teams who leverage code review tools.
 
 <td><td>✓<td>✓
-<tr id="continuity"><td>Continuity<td>
-
-For all branches intended for consumption, whenever a branch is updated to point to a new revision, that revision MUST document how it related to the previous revision.
-Exceptions are allowed via the [safe expunging process](#safe-expunging-process).
+<tr id="continuity"><td>Branch Continuity<td>
 
 It MUST NOT be possible to rewrite the history of branches intended for
-consumption. In other words, when updating the branch to point to a new
-revision, that revision must be a direct descendant of the current revision. In
-an SCS that hosts a Git repository on systems like GitHub or GitLab, this can be
-accomplished by enabling branch protection rules that prevent force pushes and
-branch deletions.
+consumption. In other words, if the organization updates a branch from commit A to commit B, commit B MUST be a descendant of A.
+For systems like GitHub or GitLab, this can be accomplished by enabling branch protection rules that prevent force pushes and branch deletions.
 
 It MUST NOT be possible to delete the entire repository (including all branches) and replace it with different source.
-Exceptions are allowed via the [safe expunging process](#safe-expunging-process).
+
+Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
+
+<td><td>✓<td>✓
+<tr id="tag-hygiene"><td>Tag Hygiene<td>
+
+If the SCS supports tags (or other non-branch tracks), additional care must be 
+taken to prevent unintentional changes.
+Unlike branches, tags have no built-in continuity enforcement mechanisms or 
+change management processes.
+
+If a tag is used to identify a specific commit to external systems, it MUST NOT 
+be possible to move or delete those tags. 
 
 <td><td>✓<td>✓
 <tr id="identity-management"><td>Identity Management<td>
