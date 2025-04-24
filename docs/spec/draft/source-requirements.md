@@ -20,7 +20,7 @@ Consumers can examine the various source provenance attestations to determine if
 | Term | Description
 | --- | ---
 | Source | An identifiable set of text and binary files and associated metadata. Source is regularly used as input to a build system (see [SLSA Build Track](requirements.md)).
-| Organization | A collection of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals and methods of the source.
+| Organization | A set of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals and methods of the source.
 | Version Control System (VCS)| Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
 | Revision | A specific state of the source with an identifier provided by the version control system. As an example, you can identify a git revision by its tree hash.
 | Source Control System (SCS) | A suite of tools and services (self-hosted or SaaS) relied upon by the organization to produce new revisions of the source. The role of the SCS may be fulfilled by a single service (e.g., GitHub / GitLab) or rely on a combination of services (e.g., GitLab with Gerrit code reviews, GitHub with OpenSSF Scorecard, etc).
@@ -112,36 +112,28 @@ within the SCS's storage systems.
 
 Many examples in this document use the [git version control system](https://git-scm.com/), but use of git is not a requirement to meet any level on the SLSA source track.
 
-### Organization Requirements
+### Organization
 
-<table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+[Organization]: #organization
 
-<tr id="use-modern-tools"><td>Use modern tools<td>
+#### Choose an appropriate source control system
 
-The organization MUST manage the source using tools specifically designed to manage source code.
-Tools like git, Perforce, Subversion are great examples.
-They may be self-hosted or hosted in the cloud using vendors like GitLab, GitHub, Bitbucket, etc.
+An organization producing source revisions MUST select a SCS capable of reaching
+their desired SLSA Source Level.
 
-When self-hosting a solution, local, unauthenticated storage is not acceptable.
+For example, if an organization wishes to produce revisions at Source Level 3,
+they MUST choose a source control system capable of producing Source Level 3
+attestations.
 
-Branch protection is not required, nor are there any other constraints on the configuration of the tools.
+#### Choose an appropriate change management process
 
-<td>✓<td>✓<td>✓
-<tr id="distribute-summary-attestations"><td>Distribute summary attestations<td>
+An organization producing source revisions MUST select a change management process
+which is capable of providing appropriate controls. This process MAY be offered by
+the same source control system which manages the revisions.
 
-The organization MUST document how [summary attestations](#summary-attestation) are distributed
-for relevant source repositories.
-<td>✓<td>✓<td>✓
-<tr id="distribute-provenance-attestations"><td>Distribute provenance attestations<td>
+### Source Control System
 
-The organization MUST document how the detailed [provenance attestations](#provenance-attestations)
-are distributed for relevant source repositories.
-<td><td><td>✓
-
-</table>
-
-### Source Control System Requirements
+#### Revision management
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
@@ -258,7 +250,7 @@ For example, this could be accomplished by:
 <td><td><td>✓
 </table>
 
-### Change management tool requirements
+### Provide a change management tool
 
 The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes managed via the [process](#change-management-process).
 
