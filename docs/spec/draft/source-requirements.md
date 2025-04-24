@@ -180,10 +180,7 @@ The summary attestation "interprets" what the data in the source provenance atte
 If a consumer is authorized to access a revision, they MUST be able to fetch the
 corresponding source summary attestations.
 
-It is possible that an SCS makes no claims about a particular revision.
-In these cases the SCS MAY NOT generate a summary attestation. Consumers MUST
-interpret the absence of a source summary attestation as though the revision
-is SLSA Source Level 0.
+If the SCS DOES NOT generate a summary attestation for a revision, the revision MUST be verified as having SLSA Source Level 0.
 
 <td>✓<td>✓<td>✓
 <tr id="branches"><td>Branches<td>
