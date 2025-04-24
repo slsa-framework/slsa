@@ -171,22 +171,17 @@ For example, this would happen if the revision was created on another SCS, or if
 <td>✓<td>✓<td>✓
 <tr id="branches"><td>Protected Branches<td>
 
-If the SCS supports branches, the organization MUST indicate which branches are
-intended for consumption. This may be implied or explicit.
+The SCS MUST provide a mechanism for organizations to indicate which branches
+should be protected by SLSA Source Level 2+ requirements.
 
-For example, an organization may declare that the `default` branch of a repo
-contains revisions intended for consumption and are protected by their change
-management process.
-
-They may also declare all revisions are intended to be consumed "except those
-reachable only from branches beginning with `refs/heads/users/*`." This is a
-typical setup for teams who leverage code review tools.
+E.g. The organization may configure the SCS to protect `main` and
+`refs/heads/releases/*`, but not `refs/heads/playground/*`.
 
 <td><td>✓<td>✓
 <tr id="continuity"><td>Branch Continuity<td>
 
-It MUST NOT be possible to rewrite the history of branches intended for
-consumption. In other words, if the organization updates a branch from commit A to commit B, commit B MUST be a descendant of A.
+It MUST NOT be possible to rewrite the history of protected branches.
+In other words, if the organization updates a branch from commit A to commit B, commit B MUST be a descendant of A.
 For systems like GitHub or GitLab, this can be accomplished by enabling branch protection rules that prevent force pushes and branch deletions.
 
 It MUST NOT be possible to delete the entire repository (including all branches) and replace it with different source.
