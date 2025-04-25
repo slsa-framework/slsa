@@ -191,7 +191,7 @@ For systems like GitHub or GitLab, this can be accomplished by enabling branch p
 
 It MUST NOT be possible to delete the entire repository (including all branches) and replace it with different source.
 
-These branch protection enforcements MUST be verified for [continuity](#revision-continuity).
+These branch protection enforcements MUST be verified for [continuity](#revision-control-continuity).
 
 <td><td>✓<td>✓
 <tr id="tag-hygiene"><td>Tag Hygiene<td>
@@ -258,7 +258,7 @@ or if the revision was not the result of an accepted change management process.
 
 The SCS MUST provide a mechanism for organizations to enforce additional
 technical controls which govern changes to a [branch](#definitions). These
-technical controls MAY be verified for [continuity](#revision-continuity).
+technical controls MAY be verified for [continuity](#revision-control-continuity).
 
 For example, this could be accomplished by:
 
