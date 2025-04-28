@@ -1,10 +1,10 @@
 ---
-title: SLSA Source Track Sprint
+title: Source Track Sprint Recap
 author: "Andrew McNamara (RedHat), Tom Hennen (Google), Zachariah Cox (GitHub)"
 is_guest_post: false
 ---
 
-This week the three of us met to try to make more progress on the source track.  Async collaboration can work well for some things, but on ‘squishier’ topics a higher-bandwidth engagement can be really helpful.  All our work was against the draft version of the spec and before anything becomes official it will go through [the approval process](https://github.com/slsa-framework/governance/blob/main/5._Governance.md#4-specification-development-process).  We’d love your feedback on what we accomplished and discussed (summarized below), so please [let us know](/community#:~:text=welcome%20your%20contributions.-,How%20to%20contribute,-For%20questions%2C%20suggestions) what you think!
+Last week the three of us met to try to make more progress on the source track.  Async collaboration can work well for some things, but on ‘squishier’ topics a higher-bandwidth engagement can be really helpful.  All our work was against the draft version of the spec and before anything becomes official it will go through [the approval process](https://github.com/slsa-framework/governance/blob/main/5._Governance.md#4-specification-development-process).  We’d love your feedback on what we accomplished and discussed (summarized below), so please [let us know](/community#:~:text=welcome%20your%20contributions.-,How%20to%20contribute,-For%20questions%2C%20suggestions) what you think!
 
 The biggest changes made or proposed include:
 
