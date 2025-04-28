@@ -36,7 +36,8 @@ We discussed some other changes but didn’t get time to include them.
 
 ### SLSA ‘properties’ that are independent of level
 
-There are some security relevant properties that don’t neatly fit into a level, that affect _multiple_ levels, or that orgs might like to attest to prior to reaching the level they appear in (e.g. an enterprise might want to attest that they’re doing TWO_PARTY_REVIEW before they can adopt a Source Control System that meets all the requirements of Source Level 3).  If we provide a mechanism to define SLSA Properties then we provide a path for enforcing and communicating these properties that is independent of any implementation.  ([issue](https://github.com/slsa-framework/slsa/issues/1355))
+There are some security-relevant properties that don’t neatly fit into a level, that affect _multiple_ levels, or that producers might like to claim in a different order (e.g. a producer might want to attest that they conduct TWO_PARTY_REVIEW before they can claim they use a Source Control System that meets all the requirements of Source Level 3).  
+SLSA "Properties" would be a mechanism for enforcing and communicating these claims that is independent of any implementation.  ([issue](https://github.com/slsa-framework/slsa/issues/1355))
 
 ### Defining how to verify source
 
