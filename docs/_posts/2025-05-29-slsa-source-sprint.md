@@ -20,7 +20,7 @@ You can find [all the changes merged and proposed during the sprint here](https:
 
 Two-party review is a controversial topic within the SLSA community and as a result was deferred due to an inability to get agreement on if it should be included.  We’re taking another shot at it now because the recently revamped [slsa.dev/threats](/threats) page makes it clear that two-party review is the strongest control we have against many of the threats listed for [threat B - Modifying the source](/spec/v1.1/threats#:~:text=(B)%20Modifying%20the%20source,-An%20adversary%20without).
 
-As noted by some this is one of the first controls enterprises enable, while being a control that can be very difficult for small projects to enable. To account for this we are making this the highest source level as 1-3 are much more easily attained by single-maintainer projects. Those projects can advance as far as possible without adopting two-party review.
+As noted by some, this is one of the first controls enterprises enable while also being a control that can be very difficult for small projects to enable. To account for this we are making this the highest source level as 1-3 are much more easily attained by single-maintainer projects. Those projects can advance as far as possible without adopting two-party review.
 
 To further reduce the burden of this requirement we suggest that reviews cover 'security relevant properties' to allow reviewers to focus on the most pressing aspects of code-review and avoid the perception that these reviews require discussion of 'trivial' issues such as variable names. Of course, organizations may still set a higher bar for review if they wish.
 
