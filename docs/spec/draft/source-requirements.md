@@ -127,7 +127,9 @@ Organizations that want strong guarantees that the software they produce is not
 subject to unilateral changes that would subvert their intent.
 
 Benefits:
-Makes it harder for an actor to introduce malicious changes into the software.
+Makes it harder for an actor to introduce malicious changes into the software
+and makes it more likely that the source reflects the intent of the
+organization.
 
 ## Requirements
 
@@ -148,9 +150,8 @@ attestations.
 
 #### Choose an appropriate change management process
 
-An organization producing source revisions MUST select a change management process
-which is capable of providing appropriate controls. This process MAY be offered by
-the same source control system which manages the revisions.
+An organization producing source revisions MUST implement a change management
+process to ensure changes to source matches the organization's intent.
 
 ### Source Control System
 
