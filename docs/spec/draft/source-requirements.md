@@ -303,7 +303,7 @@ as cutting a release branch.)
 **[Trusted Robot Contributions]** An organization MAY choose to allow a Trusted
 Robot to author and submit changes to source code without 2-party approval if
 the Robot’s identity is specifically allowed to bypass two-party review for the
-protected branch (e.g. by being listed in CODEOWNERS).
+protected branch.
 
 Examples:
 
