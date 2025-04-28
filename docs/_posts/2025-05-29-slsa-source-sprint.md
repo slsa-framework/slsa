@@ -48,4 +48,4 @@ We also need to document how the Source track and the Build track fit together. 
 
 ### Get ready for release
 
-We’d like to get the source track released (or at least in a release-candidate) in June ahead of [OSS NA](https://events.linuxfoundation.org/open-source-summit-north-america/).  To do that we’ll need to evaluate open issues and address them as needed, comb through the spec to make sure the language is right and all the links work.  Most importantly we’ll need to get and address feedback from the community.  I think we made a lot of progress this week, but there’s still a lot to do!
+We’d like to get the source track released (or at least in a release-candidate) in June ahead of [OSS NA](https://events.linuxfoundation.org/open-source-summit-north-america/).  To do that we’ll need to evaluate open issues and address them as needed, comb through the spec to make sure the language is right and all the links work.  Most importantly we’ll need to get and address feedback from the community.  We made a lot of progress, but there’s still a lot to do!
