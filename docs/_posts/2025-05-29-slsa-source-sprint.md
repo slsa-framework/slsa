@@ -40,9 +40,10 @@ There are some security relevant properties that don’t neatly fit into a level
 
 ### Defining how to verify source
 
-We need to add better documentation on how consumers can verify source when they interact with the source control system directly.  Whether that’s fetching a branch, tag, or a specific commit.  How can they verify something is the SLSA level they expect?  How can they be sure it’s from the repo/branch/tag they expect? How can they verify that the policy is still what they want? How can they check to ensure that the policy continuity is still intact?
+With the release of the Source Track, we will establish clear guidelines for how SCS can issue tamper-resistant claims about revisions.
+We need to add better documentation on how consumers should verify those claims.  Whether that’s fetching a branch, tag, or a specific commit.  How can they verify a revision is the SLSA level they expect?  How can they be sure it’s from the repo/branch/tag they expect? How can they verify that the policy is still what they want? How can they check to ensure that the policy continuity is still intact?
 
-We also need to document how the Source track and the Build track fit together.  Most users don’t consume source indirectly.  Instead they consume source via artifacts that were built from that source.  ([issue](https://github.com/slsa-framework/slsa/issues/1356))
+We also need to document how the Source track and the Build track fit together.  Most users consume source indirectly in the form of artifacts built from that source.  ([issue](https://github.com/slsa-framework/slsa/issues/1356))
 
 ### Get ready for release
 
