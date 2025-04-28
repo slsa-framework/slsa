@@ -48,7 +48,7 @@ jobs:
           prod_flag=""
           if [ "${{ github.ref_name }}" = "main" ]; then prod_flag="--prod"; fi
           cd docs
-          DEPLOY_URL=$(netlify deploy --dir=_site --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN --json | jq -r '.deploy_url')
+          DEPLOY_URL=$(netlify deploy --dir=_site --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN $prod_flag --json | jq -r '.deploy_url')
           echo "deploy_url=$DEPLOY_URL" >> $GITHUB_OUTPUT
 
       - name: Add comment with deploy preview link
