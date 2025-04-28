@@ -16,6 +16,12 @@ The biggest changes made or proposed include:
 
 You can find [all the changes merged and proposed during the sprint here](https://github.com/slsa-framework/slsa/pulls?q=is%3Apr+label%3Asource-track+updated%3A2025-04-24+updated%3A2025-04-23+updated%3A2025-04-25+).
 
+## Source PoC
+
+As a part of our process we reviewed how the SLSA Source PoC claims to [meet the requirements](https://github.com/slsa-framework/slsa-source-poc/blob/main/REQUIREMENTS_MAPPING.md) ([design](https://github.com/slsa-framework/slsa-source-poc/blob/main/DESIGN.md)) to see if we agree on the approach (this helps make sure we’re all thinking the same thing about the requirements!) and if we can find any gaps in what it’s doing.  The verdict was quite positive!  It seems like a reasonable model that can allow implementation of the SLSA Source Track for GitHub users and will hopefully serve as a model that users of _other_ source control platforms can use to implement their own Source Track compliant SCS (with or without the help of the platform they rely on).  There are some limitations from this approach and it does make some things more difficult.  So it may also result in some feature requests for source platforms that could make controls even stronger. ([issue](https://github.com/slsa-framework/slsa-source-poc/issues/138))
+
+Of course the Source PoC isn’t done yet and the design and implementation will need some updates to match the changes made this week, and whatever the spec winds up being when approved.  It also needs some TLC before it's _safe_ and _easy_ to use.  [This approved proposal](https://github.com/ossf/tac/issues/474) for funding from the OpenSSF TAC will help there.
+
 ## Why two-party review?
 
 Two-party review is a controversial topic within the SLSA community and as a result was deferred due to an inability to get agreement on if it should be included.  We’re taking another shot at it now because the recently revamped [slsa.dev/threats](/threats) page makes it clear that two-party review is the strongest control we have against many of the threats listed for [threat B - Modifying the source](/spec/v1.1/threats#:~:text=(B)%20Modifying%20the%20source,-An%20adversary%20without).
@@ -23,12 +29,6 @@ Two-party review is a controversial topic within the SLSA community and as a res
 As noted by some, this is one of the first controls enterprises enable while also being a control that can be very difficult for small projects to enable. To account for this we are making this the highest source level as 1-3 are much more easily attained by single-maintainer projects. Those projects can advance as far as possible without adopting two-party review.
 
 To further reduce the burden of this requirement we suggest that reviews cover 'security relevant properties' to allow reviewers to focus on the most pressing aspects of code-review and avoid the perception that these reviews require discussion of 'trivial' issues such as variable names. Of course, organizations may still set a higher bar for review if they wish.
-
-## Source PoC
-
-As a part of our process we reviewed how the SLSA Source PoC claims to [meet the requirements](https://github.com/slsa-framework/slsa-source-poc/blob/main/REQUIREMENTS_MAPPING.md) ([design](https://github.com/slsa-framework/slsa-source-poc/blob/main/DESIGN.md)) to see if we agree on the approach (this helps make sure we’re all thinking the same thing about the requirements!) and if we can find any gaps in what it’s doing.  The verdict was quite positive!  It seems like a reasonable model that can allow implementation of the SLSA Source Track for GitHub users and will hopefully serve as a model that users of _other_ source control platforms can use to implement their own Source Track compliant SCS (with or without the help of the platform they rely on).  There are some limitations from this approach and it does make some things more difficult.  So it may also result in some feature requests for source platforms that could make controls even stronger. ([issue](https://github.com/slsa-framework/slsa-source-poc/issues/138))
-
-Of course the Source PoC isn’t done yet and the design and implementation will need some updates to match the changes made this week, and whatever the spec winds up being when approved.  It also needs some TLC before it's _safe_ and _easy_ to use.  [This proposal](https://github.com/ossf/tac/issues/474) in front of the OpenSSF TAC could help there.
 
 ## Next steps
 
