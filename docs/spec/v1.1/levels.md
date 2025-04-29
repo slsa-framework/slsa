@@ -232,6 +232,5 @@ All of [Build L2], plus:
 [build l3]: #build-l3
 [future versions]: future-directions.md
 [hosted]: requirements.md#isolation-strength
-[previous version]: ../v0.1/levels.md
 [provenance]: terminology.md
 [verification]: verifying-artifacts.md
