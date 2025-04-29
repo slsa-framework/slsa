@@ -48,7 +48,7 @@ Consumers can examine the various source provenance attestations to determine if
 
 When onboarding a branch to the SLSA Source Track or increasing the level of
 that branch, organizations are making claims about how the branch is managed
-from that time or revision forward.
+from that time or revision forward. This establishes [continuity](#revision-control-continuity).
 
 No claims are made for prior revisions.
 
