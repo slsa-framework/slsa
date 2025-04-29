@@ -26,7 +26,7 @@ Consumers can examine the various source provenance attestations to determine if
 | Source Control System (SCS) | A suite of tools and services (self-hosted or SaaS) relied upon by the organization to produce new revisions of the source. The role of the SCS may be fulfilled by a single service (e.g., GitHub / GitLab) or rely on a combination of services (e.g., GitLab with Gerrit code reviews, GitHub with OpenSSF Scorecard, etc).
 | Source Provenance | Information about how a revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and what parent revisions it was based on.
 | Repository / Repo | A uniquely identifiable instance of a VCS. The repository controls access to the Source in the VCS. The objective of a repository is to reflect the intent of the organization that controls it.
-| Branch | A named pointer to a revision. Branches may be modified by authorized actors. Branches may have different security requirements.
+| Branch | A named, moveable, pointer to a revision. Branches may be modified to point to different revisions by authorized actors. Different branches may have different security requirements.
 | Change | A set of modifications to the source in a specific context. A change can be proposed and reviewed before being accepted.
 | Change History | A record of the history of revisions that preceded a specific revision.
 | Push / upload / publish | When an actor authenticates to a Repository to add or modify content. Typically makes a new revision reachable from a branch.
@@ -43,6 +43,14 @@ Consumers can examine the various source provenance attestations to determine if
 | Proposer | An actor that proposes (or uploads) a particular change to the source.
 | Reviewer / Voter / Approver | An actor that reviews (or votes on) a particular change to the source.
 | Merger | An actor that applies a change to the source. This actor may be the proposer.
+
+## Onboarding
+
+When onboarding a branch to the SLSA Source Track or increasing the level of
+that branch, organizations are making claims about how the branch is managed
+from that time or revision forward.
+
+No claims are made for prior revisions.
 
 ## Safe Expunging Process
 
