@@ -150,8 +150,9 @@ attestations.
 
 #### Choose an appropriate change management process
 
-An organization producing source revisions MUST implement a change management
-process to ensure changes to source matches the organization's intent.
+At Level 2+ an organization producing source revisions MUST implement a change
+management process to ensure changes to source matches the organization's
+intent.
 
 ### Source Control System
 
