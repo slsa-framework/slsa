@@ -218,7 +218,7 @@ paths that can be updated without requiring any content change.
 
 This lists some of the steps one must take to publish a new version of the specification:
 
-* Edit `docs/_data/versions.yml` to add the new version, with its status, and possibly update the status of the previous one.
-* Edit `docs/_data/nav/config.yml` to add the new version
-* Edit `docs/_data/main.yml` to add the new version and possibly remove any older versions to be hidden. If you remove an old version, make sure that a version specific file exists because it will be needed if the hidden version is accessed directly.
-* Edit `docs/_redirects` as necessary including the definition of `/spec/latest/*`
+-   Edit `docs/_data/versions.yml` to add the new version, with its status, and possibly update the status of the previous one.
+-   Edit `docs/_data/nav/config.yml` to add the new version
+-   Edit `docs/_data/main.yml` to add the new version and possibly remove any older versions to be hidden. If you remove an old version, make sure that a version specific file exists because it will be needed if the hidden version is accessed directly.
+-   Edit `docs/_redirects` as necessary including the definition of `/spec/latest/*`
