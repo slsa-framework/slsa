@@ -214,6 +214,9 @@ Typical website configuration type of file, defining a bunch of redirects used
 to maintain backwards compatibility and provide for some resilience by defining
 paths that can be updated without requiring any content change.
 
+Addition of new redirects should be kept to a minimum to limit maintenance
+burden.
+
 ## Publishing a new version of the SLSA specification
 
 This lists some of the steps one must take to publish a new version of the specification:
