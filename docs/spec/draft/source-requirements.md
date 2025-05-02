@@ -139,7 +139,10 @@ Many examples in this document use the [git version control system](https://git-
 
 [Organization]: #organization
 
-#### Choose an appropriate source control system
+<table>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
+
+<tr id="choose-scs"><td>Choose an appropriate source control system<td>
 
 An organization producing source revisions MUST select a SCS capable of reaching
 their desired SLSA Source Level.
@@ -148,11 +151,46 @@ For example, if an organization wishes to produce revisions at Source Level 3,
 they MUST choose a source control system capable of producing Source Level 3
 attestations.
 
-#### Choose an appropriate change management process
+<td>✓<td>✓<td>✓<td>✓
+
+<tr id="choose-process"><td>Choose an appropriate change management process<td>
 
 At Level 2+ an organization producing source revisions MUST implement a change
 management process to ensure changes to source matches the organization's
 intent.
+
+<td><td>✓<td>✓<td>✓
+
+<tr id="specify-protection"><td>Specify which branches and tags are protected<td>
+
+The organization MUST indicated which branches and tags it protects with Source
+Level 2+ controls.  Only those indicated branches and tags will be eligible for
+Source Level 2+.
+
+For example, if an organization has branches 'main' and 'experimental' and it
+intends for 'main' to be protected then it MUST indicate to the SCS that 'main'
+should be protected. From that point forward revisions on 'main' will be
+eligible for Source Level 2+ while revisions made solely on 'experimental' will
+not.
+
+<td><td>✓<td>✓<td>✓
+
+<tr id="specify-control-expectations"><td>Specify what control expectations<td>
+
+The organization MUST specify what technical controls consumers can expect
+revisions on a branch to have met.
+
+For example, an organization may wish consumers to form an expectation that
+revisions on 'main' require unit tests to have passed prior to merge.  The
+organization would then configure the SCS to enforce this requirement and
+embed the relevant metadata in the [source summary](#summary-attestation) and/or
+[source provenance](#provenance-attestations) attestations for all affected
+revisions.  Consumers of those revisions would be able to determine if these
+expectations have been met via those attestations.
+
+<td><td><td>✓<td>✓
+
+</table>
 
 ### Source Control System
 
@@ -271,8 +309,10 @@ or if the revision was not the result of an accepted change management process.
 <td><td><td>✓<td>✓
 <tr id="change-management-process"><td>Enforced change management process<td>
 
-The SCS MUST provide a mechanism for organizations to enforce additional
-technical controls which govern changes to a [branch](#definitions).
+The SCS MUST ensure organization defined technical controls are enforced for
+changes made to protected branches.  It MUST also embed relevant metadata about
+these controls in the [source summary](#summary-attestation) and/or
+[source provenance](#provenance-attestations) attestations
 
 For example, this could be accomplished by:
 
