@@ -52,33 +52,6 @@ from that time or revision forward.
 
 No claims are made for prior revisions.
 
-## Safe Expunging Process
-
-SCSs MAY allow the organization to expunge (remove) content from a repository and its change history without leaving a public record of the removed content,
-but the organization MUST only allow these changes in order to meet legal or privacy compliance requirements.
-Content changed under this process includes changing files, history, references, or any other metadata stored by the SCS.
-
-### Warning
-
-Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact.
-For example, in VCSs like Git, removal of a revision changes the object IDs of all subsequent revisions that were built on top of it, breaking downstream consumers' ability to refer to source they've already integrated into their products.
-
-It may be the case that the specific set of changes targeted by a legal takedown can be expunged in ways that do not impact consumed revisions, which can mitigate these problems.
-
-It is also the case that removing content from a repository won't necessarily remove it everywhere.
-The content may still exist in other copies of the repository, either in backups or on developer machines.
-
-### Process
-
-An organization MUST document the Safe Expunging Process and describe how requests and actions are tracked and SHOULD log the fact that content was removed.
-Different organizations and tech stacks may have different approaches to the problem.
-
-SCSs SHOULD have technical mechanisms in place which require an Administrator plus, at least, one additional 'trusted person' to trigger any expunging (removals) made under this process.
-
-The application of the safe expunging process and the resulting logs MAY be private to both prevent calling attention to potentially sensitive data (e.g. PII) or to comply with local laws
-and regulations which may require the change to be kept private to the extent possible.
-Organizations SHOULD prefer to make logs public if possible.
-
 ## Levels
 
 ### Level 1: Version controlled
@@ -155,9 +128,8 @@ attestations.
 
 <tr id="choose-process"><td>Choose an appropriate change management process<td>
 
-At Level 2+ an organization producing source revisions MUST implement a change
-management process to ensure changes to source matches the organization's
-intent.
+An organization producing source revisions MUST implement a change management
+process to ensure changes to source matches the organization's intent.
 
 <td><td>✓<td>✓<td>✓
 
@@ -172,6 +144,35 @@ intends for 'main' to be protected then it MUST indicate to the SCS that 'main'
 should be protected. From that point forward revisions on 'main' will be
 eligible for Source Level 2+ while revisions made solely on 'experimental' will
 not.
+
+<td><td>✓<td>✓<td>✓
+
+<tr id="safe-expunging-process"><td>Safe Expunging Process<td>
+
+SCSs MAY allow the organization to expunge (remove) content from a repository and its change history without leaving a public record of the removed content,
+but the organization MUST only allow these changes in order to meet legal or privacy compliance requirements.
+Content changed under this process includes changing files, history, references, or any other metadata stored by the SCS.
+
+#### Warning
+
+Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact.
+For example, in VCSs like Git, removal of a revision changes the object IDs of all subsequent revisions that were built on top of it, breaking downstream consumers' ability to refer to source they've already integrated into their products.
+
+It may be the case that the specific set of changes targeted by a legal takedown can be expunged in ways that do not impact consumed revisions, which can mitigate these problems.
+
+It is also the case that removing content from a repository won't necessarily remove it everywhere.
+The content may still exist in other copies of the repository, either in backups or on developer machines.
+
+#### Process
+
+An organization MUST document the Safe Expunging Process and describe how requests and actions are tracked and SHOULD log the fact that content was removed.
+Different organizations and tech stacks may have different approaches to the problem.
+
+SCSs SHOULD have technical mechanisms in place which require an Administrator plus, at least, one additional 'trusted person' to trigger any expunging (removals) made under this process.
+
+The application of the safe expunging process and the resulting logs MAY be private to both prevent calling attention to potentially sensitive data (e.g. PII) or to comply with local laws
+and regulations which may require the change to be kept private to the extent possible.
+Organizations SHOULD prefer to make logs public if possible.
 
 <td><td>✓<td>✓<td>✓
 
