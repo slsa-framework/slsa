@@ -176,7 +176,7 @@ Organizations SHOULD prefer to make logs public if possible.
 
 <td><td>✓<td>✓<td>✓
 
-<tr id="specify-control-expectations"><td>Specify what control expectations<td>
+<tr id="specify-control-expectations"><td>Specify control expectations<td>
 
 The organization MUST specify what technical controls consumers can expect
 revisions on a branch to have met.
