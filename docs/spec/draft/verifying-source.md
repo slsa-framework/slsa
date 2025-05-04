@@ -17,7 +17,7 @@ VSA may be issued by a VSA provider to make a SLSA source level determination ba
 ## How to verify SLSA a source revision
 
 Verification of a source revision revolves around use of the [
-Verification Summary Attestation (VSA)](/spec/draft/source-requirements#summary-attestation)
+Verification Summary Attestation (VSA)]
 by the consumer of the source code.  This shields the consumer from the details
 of an SCS's bespoke provenance format, and from the specifics about the
 producers change management process.  Instead the source consumer checks:
@@ -26,6 +26,8 @@ producers change management process.  Instead the source consumer checks:
    revision they've fetched.
 2.  If the claims made in the VSA match their expectations for how the source
    should be managed.
+
+[Verification Summary Attestation (VSA)]: source-requirements#summary-attestation
 
 ### Step 1: Check the SCS
 
