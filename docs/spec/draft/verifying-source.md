@@ -14,32 +14,145 @@ Source Control Systems (SCSs) may issue attestations of the process that was use
 A Verification Summary Attestation (VSA) can make verification more efficient by recording the result of prior verifications.
 VSA may be issued by a VSA provider to make a SLSA source level determination based on the content of those attestations.
 
-## How to verify SLSA source level
+## How to verify SLSA a source revision
 
-TODO: this section needs work.
+Verification of a source revision revolves around use of the [
+Verification Summary Attestation (VSA)](/spec/draft/source-requirements#summary-attestation)
+by the consumer of the source code.  This shields the consumer from the details
+of an SCS's bespoke provenance format, and from the specifics about the
+producers change management process.  Instead the source consumer checks:
 
-### SLSA Level 1
+1.  If they trust the SCS that issued the VSA and if the VSA applies to the
+   revision they've fetched.
+2.  If the claims made in the VSA match their expectations for how the source
+   should be managed.
 
-Because there is no required attestation document at this level, the verification strategy is dependent upon the technologies being used.
+### Step 1: Check the SCS
 
--   If you can prove that the revision comes from the expected canonical location for the repository, the source meets level 1.
--   If you cannot, it does not meet level 1.
+First, check the SLSA Source level by comparing the artifact to its VSA and the
+VSA to a preconfigured root of trust. The goal is to ensure that the VSA
+actually applies to the artifact in question and to assess the trustworthiness
+of the VSA. This mitigates some of the threats "B" and "C", depending on SLSA
+Build level.
 
-### SLSA Level 2
+Once, when bootstrapping the verifier:
 
-Because there is no required attestation document at this level, the verification strategy is dependent upon the technologies being used.
+-   Configure the verifier's roots of trust, meaning the recognized SCS
+    identities and the maximum SLSA Source level each SCS is trusted up to.
+    Different verifiers might use different roots of trust, but usually a
+    verifier uses the same roots of trust for all repositories. This
+    configuration is likely in the form of a map from (SCS public key identity,
+    VSA `verifier.id`) to (SLSA Source level).
 
--   If the repository also has basic history protections, it meets level 2.
+    <details>
+    <summary>Example root of trust configuration</summary>
 
-### SLSA Level 3+
+    The following snippet shows conceptually how a verifier's roots of trust
+    might be configured using made-up syntax.
 
-Repos at this level report their claims in a signed attestation.
+    ```jsonc
+    "slsaSourceRootsOfTrust": [
+        // A SCS trusted at SLSA Source L3, using a fixed public key.
+        {
+            "publicKey": "HKJEwI...",
+            "scsId": "https://somescs.example.com/slsa/l3",
+            "slsaSourceLevel": 3
+        },
+        // A different SCS that claims to be SLSA Source L3,
+        // but this verifier only trusts it to L2.
+        {
+            "publicKey": "tLykq9...",
+            "scsId": "https://differentscs.example.com/slsa/l3",
+            "slsaSourceLevel": 2
+        },
+        // A SCS that uses Sigstore for authentication.
+        {
+            "sigstore": {
+                "root": "global",  // identifies fulcio/rekor roots
+                "subjectAlternativeNamePattern": "https://github.com/slsa-framework/slsa-source-poc/.github/workflows/compute_slsa_source.yml@refs/tags/v*.*.*"
+            },
+            "scsId": "https://github.com/slsa-framework/slsa-source-poc/.github/workflows/compute_slsa_source.yml@refs/tags/v*.*.*",
+            "slsaSourceLevel": 3,
+        }
+        ...
+    ],
+    ```
 
-1.  For each repository you have, identify the repository id (such as the URL) and the revision id (such as the git commit SHA)
-2.  Acquire all attestations for that repository id and revision id combination from preconfigured trusted attestation servers.
-3.  Ensure that the source provenance attestations match the revision id.
-4.  Ensure that the source provenance attestation documents were signed by a preconfigured root of trust.
-5.  Ensure that the claims in the revision's provenance attestation meet your expectations for that repository.
+    </details>
+
+Given a revision and its VSA:
+
+1.  [Verify][validation-model] the envelope's signature using the roots of
+    trust, resulting in a list of recognized public keys (or equivalent).
+2.  [Verify][validation-model] that statement's `subject` matches the digest of
+    the revision in question.
+3.  Verify that the `predicateType` is `https://slsa.dev/verification_summary/v1`.
+4.  Look up the SLSA Source Level in the roots of trust, using the recognized
+    public keys and the `verifier.id`, defaulting to SLSA Source L1.
+
+[validation-model]: https://github.com/in-toto/attestation/blob/main/docs/validation.md#validation-model
+
+### Step 2: Check Expectations
+
+Next, check that the revision's VSA meets your expectations in order to mitigate
+[threat "B"].
+
+In our threat model, the adversary has the ability to create revisions within
+the repository and get consumers to fetch that revision.  The adversary is not
+able to subvert controls implemented by the Producer and enforced by the SCS.
+Your expectations SHOULD be sufficient to detect an un-official revision and
+SHOULD make it more difficult for an adversary to create a malicious official
+revision.
+
+You SHOULD compare the VSA against expected values for at least the following
+fields:
+
+| What | Why
+| ---- | ---
+| Verifier (SCS) identity from [Step 1] | To prevent an adversary from substituting a VSA making false claims from an unintended SCS.
+| `predicate.resourceUri` | To prevent an adversary from substituting a VSA for the intended repository (e.g. `git+https://github.com/IntendedOrg/hello-world`) for another (e.g. `git+https://github.com/AdversaryOrg/hello-world`)
+| `subject.annotations.source_refs` | To prevent an adversary from substituting the intended revision from one branch (e.g. `release`) with another (e.g. `experimental_auth`).
+| `verifiedLevels` | To ensure the expected controls were in place for the creation of the revision. E.g. `SLSA_SOURCE_LEVEL_3`, `ACME_STATIC_ANALYSIS`, etc...
+
+[Threat "B"]: threats#b-modifying-the-source
+
+## Forming Expectations
+
+<dfn>Expectations</dfn> are known values that indicate the corresponding
+revision is authentic. For example, an SCS package ecosystem may
+maintain a mapping between repository branch & tags and the controls they
+claim to implement. That mapping constitutes a set of expectations.
+
+Possible models for forming expectations include:
+
+-   **Trust on first use:** Accept the first version of the revision as-is. On
+    each update, compare the old VSA to the new VSA and alert on any
+    differences.
+
+-   **Defined by producer:** The revision producer tells the verifier what their
+    expectations ought to be. In this model, the verifier SHOULD provide an
+    authenticated communication mechanism for the producer to set the revision's
+    expectations, and there SHOULD be some protection against an adversary
+    unilaterally modifying them. For example, modifications might require
+    two-party control, or consumers might have to accept each policy change
+    (another form of trust on first use).
+
+It is important to note that expectations are tied to a *repository branch or
+tag*, whereas a VSA is tied to an *revision*. Different revisions will have
+different VSAs and the claims made by those VSAs may differ.
+
+## Architecture options
+
+There are several options (non-mutually exclusive) for where VSA verification
+can happen: the build system at source fetch time, the package ecosystem at
+build artifact upload time, the consumers at download time, or
+via a continuous monitoring system. Each option comes with its own set of
+considerations, but all are valid and at least one SHOULD be used.
+
+More than one component can verify VSAs. For example, even if a builder verifies
+source VSAs, package ecosystems may wish to verify the source VSAs for the
+artifacts they host that claim to be built from that source (as indicated by the
+build provenance).
 
 ## Common Source Controls and their Applications
 
@@ -152,7 +265,7 @@ The topic branch may contain many commits of which not all were intended to repr
 
 If a repository merges branches with a standard merge commit, all those unreviewed commits on the topic branch will become "reachable" from the protected branch by virtue of the multi-parent merge commit.
 
-When a repo is cloned, all commits _reachable_ from the main branch are fetched and become accessible from the local checkout.
+When a repo is cloned, all commits *reachable* from the main branch are fetched and become accessible from the local checkout.
 
 This combination of factors allows attacks where the victim performs a `git clone` operation followed by a `git reset --hard <unreviewed revision id>`.
 
@@ -215,7 +328,7 @@ A key downside to this approach is that organizations will not know the final re
 A change review process will now be associated with multiple distinct revisions.
 
 -   ID 1: The revision which was reviewed before concluding the change review process. It represents the ideal state of the protected branch applying only this proposed change.
--   ID 2: The revision created when the change is applied to the train branch. It represents the state of the protected branch _after other changes have been applied_.
+-   ID 2: The revision created when the change is applied to the train branch. It represents the state of the protected branch *after other changes have been applied*.
 
 It is important to note that no human or automatic review will have the chance to pre-approve ID2. This will appear to violate any organization policies that require pre-approval of changes before submission.
 The SCS and the organization MUST protect this process in the same way they protect other artifact build pipelines.
