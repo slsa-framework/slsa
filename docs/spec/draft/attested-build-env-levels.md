@@ -368,7 +368,7 @@ TODO
 [BuildEnv L1]: #buildenv-l1
 [BuildEnv L2]: #buildenv-l2
 [BuildEnv L3]: #buildenv-l3
-[Control plane]:  terminology.md#control-plane
+[Control plane]: terminology.md#control-plane
 [dm-verity]: https://docs.kernel.org/admin-guide/device-mapper/verity.html
 [Release Attestation]: https://github.com/in-toto/attestation/blob/main/spec/predicates/release.md
 [SCAI]: https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md
