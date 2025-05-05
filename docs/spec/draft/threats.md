@@ -416,10 +416,9 @@ the source repo does not match the expected value.
 ### (E) Build process
 
 An adversary introduces an unauthorized change to a build output through
-tampering of the build process; or introduces false information into the
-provenance.
+tampering of the build image or build process; or introduces false information into the provenance.
 
-These threats are directly addressed by the SLSA Build track.
+These threats are directly addressed by the SLSA Build and Build Environment tracks.
 
 <details><summary>Forge values of the provenance (other than output digest) <span>(Build L2+)</span></summary>
 
@@ -553,19 +552,71 @@ transitive closure of the inputs, and the cache entry is itself a SLSA Build L3
 build with its own provenance that corresponds to the key.
 
 </details>
-<details><summary>Compromise build platform admin <span>(verification)</span></summary>
+<details><summary>Compromise build platform admin<span>(BuildEnv L2+)</span></summary>
 
 *Threat:* An adversary gains admin permissions for the artifact's build platform.
 
-*Mitigation:* The build platform must have controls in place to prevent and
-detect abusive behavior from administrators (e.g. two-person approvals, audit
-logging).
+*Mitigation:* Remote (SSH) access is disabled in the build image. 
+Control Plane attests build environment before the job is started in it and 
+produces a [VSA][vsa] providing evidence that build environment has no outside-in access.
 
 *Example:* MyPackage is built on Awesome Builder. Awesome Builder allows
 engineers on-call to SSH into build machines to debug production issues. An
 adversary uses this access to modify a build in progress. Solution: Consumers
-do not accept provenance from the build platform unless they trust sufficient
-controls are in place to prevent abusing admin privileges.
+do not accept provenance from the build platform unless they can validate 
+build environment integrity.
+
+</details>
+<details><summary>Compromise build image<span>(BuildEnv L1+)</span></summary>
+
+*Threat:* An adversary injects malicious code into the build image at the generation time 
+or in transit.
+
+*Mitigation:* Build image comes with SLSA provenance. Control plane attests build environment 
+upon creation and at runtime and issues Build provenance only if environment passed attestation.
+
+*Example:* MyPackage is built on Awesome Builder. Awesome Builder uses VM images provided by a 
+Fancy Image partner. Adversary was able to install malicious tool into the image at the Fancy Image 
+side hence infiltrating all build environments that use that image.
+
+*Example 2:* MyPackage is built on Awesome Builder. An adversary gained access to the 
+build image storage and modified image at rest injecting a malicious tool into it. All build 
+environments created after that point were compromised.
+
+</details>
+<details><summary>Unexpected reuse of a build environment</summary>
+
+*Threat:* Adversary injects malicious code into the target build by being able to run random code in the same build environment
+
+_Mitigation_: Unique build identifier is included into the Build environment provenance (and [TPM] measurement) allowing [Control plane] to detect environment reuse. Needs [BuildEnv L2] level
+
+_Example_: Due to a bug in the build platform, the environment was used for running two or more jobs and effectively losing “ephemeral” property. Malicious actors could use this vulnerability to poison the build environments they should not have access to.
+
+</details>
+<details><summary>Compromise secure boot<span>(BuildEnv L3)</span></summary>
+
+*Threat:* An adversary having unauthorized access to the compute provider infrastructure was able 
+to deploy a bootkit and circumvent secure boot.
+
+*Mitigation:* Build platform relies on hardware-assisted mechanisms to attest integrity of the 
+build environment (e.g. hardware [TPM], [AMD SEV], [Intel TDX])
+
+*Example:* Awesome Builder uses Cloudy Sky compute provider for provisioning virtual machines. 
+An adversary got an unauthorized access to Cloudy Sky infrastructure and was able to deploy 
+malicious code into UEFI and vTPM and compromise virtual machine attestations.
+
+</details>
+<details><summary>Compromise compute provider<span>(BuildEnv L3)</span></summary>
+
+*Threat:* An adversary having unauthorized access to the host machine performs malicious change in the 
+build environment by using hypervisor capabilities to manipulate virtual machine state.
+
+*Mitigation:* Build platform uses hardware-assisted mechanisms to attest integrity of the build environment 
+(e.g. [AMD SEV] and [Intel TDX])
+
+*Example:* Awesome Builder uses Cloudy Sky compute provider for provisioning virtual machines. An adversary 
+got an unauthorized access to the host machines in Cloudy Sky and was able to hijack hypervisor and inject 
+malicious code into the virtual machine.
 
 </details>
 
@@ -1029,3 +1080,6 @@ Solution: Only accept cryptographic hashes with strong collision resistance.
 [supply chain threats]: threats-overview
 [vsa]: verification_summary
 [vsa_verification]: verification_summary#how-to-verify
+[TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
+[AMD SEV]: https://www.amd.com/en/developer/sev.html
+[Intel TDX]: https://www.intel.com/content/www/us/en/developer/tools/trust-domain-extensions/overview.html
