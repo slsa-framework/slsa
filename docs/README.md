@@ -180,9 +180,13 @@ Several configuration files govern the website layout and behavior.
 
 #### docs/_data/versions.yml
 
-This files used to control the version selector for the specification. The
-version selector has been abandoned but the file also serves to indicate the
-status of a given version: Draft, Approved, or Retired which is still in use.
+This file defines the status of the different versions of the specification
+(Draft, Approved, or Retired) along with which version is the current one
+(which is used to bring up the header indicating the version being looked at is
+not the current one with a pointer to the current version).
+
+The `hidden` property was used by the version selector which was abandoned and
+is no longer in use.
 
 #### docs/_data/nav/*
 
@@ -198,6 +202,13 @@ The version specific files, such as `v0.1.yml`, are used when someone directly
 accesses an older version which is "hidden" (i.e., not part of the main
 navigation bar and only accessible via a direct link from an old blog post for
 instance).
+
+Care must be taken to ensure that every hidden version has an associated
+navigation file or no navigation side menu will be rendered, making it
+impossible to navigate through the pages of that version of the
+specification. Practically speaking this means that, when you remove a specific
+version from `main.yaml` you should always create a corresponding `v***.yaml`
+if none exists already.
 
 The content of the navigation files is used (in `docs/_includes/nav.html`) to
 define the navigation side bar but also to define (in
