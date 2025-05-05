@@ -35,8 +35,8 @@ Instead the source consumer checks:
 First, check the SLSA Source level by comparing the artifact to its VSA and the
 VSA to a preconfigured root of trust. The goal is to ensure that the VSA
 actually applies to the artifact in question and to assess the trustworthiness
-of the VSA. This mitigates some of the threats "B" and "C", depending on SLSA
-Build level.
+of the VSA. This mitigates threats within "B" and "C", depending on SLSA Source
+level.
 
 Once, when bootstrapping the verifier:
 
