@@ -368,7 +368,7 @@ TODO
 [BuildEnv L1]: #buildenv-l1
 [BuildEnv L2]: #buildenv-l2
 [BuildEnv L3]: #buildenv-l3
-[control plane]:  terminology.md#control-plane
+[Control plane]:  terminology.md#control-plane
 [dm-verity]: https://docs.kernel.org/admin-guide/device-mapper/verity.html
 [Release Attestation]: https://github.com/in-toto/attestation/blob/main/spec/predicates/release.md
 [SCAI]: https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md
@@ -384,8 +384,8 @@ TODO
 [build agent]: #build-agent
 [build environment]: terminology.md#build-environment
 [build image producer]: #build-image-producer
-[build platform]: #platform
-[build platforms]: #platform
+[build platform]: terminology.md#platform
+[build platforms]: terminology.md#platform
 [compute platform]: #compute-platform
 [host interface]: #host-interface
 [measurement]: #measurement
