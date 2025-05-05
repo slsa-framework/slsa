@@ -376,22 +376,22 @@ TODO
 [SLSA Build Provenance]: provenance.md
 [TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
 [VSA]: verification_summary.md
-[build image]: terminology.md#build-image
+[build image]: #build-image
 [confidential computing]: https://confidentialcomputing.io/wp-content/uploads/sites/10/2023/03/Common-Terminology-for-Confidential-Computing.pdf
 [execution context]: terminology.md#build-environment
 [hosted]: requirements.md#isolation-strength
-[boot process]:  terminology.md#boot-process
-[build agent]: terminology.md#build-agent
+[boot process]:  #boot-process
+[build agent]: #build-agent
 [build environment]: terminology.md#build-environment
-[build image producer]: terminology.md#build-image-producer
-[build platform]: terminology.md#platform
-[build platforms]: terminology.md#platform
-[compute platform]: terminology.md#compute-platform
-[host interface]: terminology.md#host-interface
-[measurement]: terminology.md#measurement
+[build image producer]: #build-image-producer
+[build platform]: #platform
+[build platforms]: #platform
+[compute platform]: #compute-platform
+[host interface]: #host-interface
+[measurement]: #measurement
 [provenance]: terminology.md#provenance
-[quote]: terminology.md#quote
-[reference values]: terminology.md#reference-value
+[quote]: #quote
+[reference values]: #reference-value
 [several classes]: #build-environment-threats
 [vTPM]: https://trustedcomputinggroup.org/about/what-is-a-virtual-trusted-platform-module-vtpm/
 [AMD SEV]: https://www.amd.com/en/developer/sev.html
