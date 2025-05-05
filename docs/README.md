@@ -167,3 +167,72 @@ deploy**.
 ![screenshot of rollback button](../readme_images/netlify_rollback_screenshot.png)
 
 This will stay active until the next push to `main`.
+
+## Insights on some of the internals of the SLSA website
+
+This section provides a collection of tips on some of the internals of how the
+slsa.dev website. This is not complete but it should list all the files to know
+about when publishing a new version of the SLSA specification.
+
+### Configuration files
+
+Several configuration files govern the website layout and behavior.
+
+#### docs/_data/versions.yml
+
+This file defines the status of the different versions of the specification
+(Draft, Approved, or Retired) along with which version is the current one
+(which is used to bring up the header indicating the version being looked at is
+not the current one with a pointer to the current version).
+
+The `hidden` property was used by the version selector which was abandoned and
+is no longer in use.
+
+#### docs/_data/nav/*
+
+This folder contains a set of files defining the navigation side bars to be
+used for the different versions of the specification.
+
+When the version selector was abandoned we switched to only using one global
+navigation menu for all pages and versions of the spec meant to be accessible
+through the navigation menu (i.e., not hidden). This menu is defined in
+`main.yaml`.
+
+The version specific files, such as `v0.1.yml`, are used when someone directly
+accesses an older version which is "hidden" (i.e., not part of the main
+navigation bar and only accessible via a direct link from an old blog post for
+instance).
+
+Care must be taken to ensure that every hidden version has an associated
+navigation file or no navigation side menu will be rendered, making it
+impossible to navigate through the pages of that version of the
+specification. Practically speaking this means that, when you remove a specific
+version from `main.yaml` you should always create a corresponding `v***.yaml`
+if none exists already.
+
+The content of the navigation files is used (in `docs/_includes/nav.html`) to
+define the navigation side bar but also to define (in
+`docs/_includes/pagination.html`) how pages are chained via the previous and
+next links displayed at the bottom of a page).
+
+The `config.yml` file defines the mapping of the version of the specification
+taken from the page URL to the key in the site.data.nav array where the various
+navigation menu definitions are stored.
+
+### docs/_redirects
+
+Typical website configuration type of file, defining a bunch of redirects used
+to maintain backwards compatibility and provide for some resilience by defining
+paths that can be updated without requiring any content change.
+
+Addition of new redirects should be kept to a minimum to limit maintenance
+burden.
+
+## Publishing a new version of the SLSA specification
+
+This lists some of the steps one must take to publish a new version of the specification:
+
+-   Edit `docs/_data/versions.yml` to add the new version, with its status, and possibly update the status of the previous one.
+-   Edit `docs/_data/nav/config.yml` to add the new version
+-   Edit `docs/_data/main.yml` to add the new version and possibly remove any older versions to be hidden. If you remove an old version, make sure that a version specific file exists because it will be needed if the hidden version is accessed directly.
+-   Edit `docs/_redirects` as necessary including the definition of `/spec/latest/*`
