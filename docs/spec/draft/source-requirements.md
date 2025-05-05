@@ -310,7 +310,7 @@ or if the revision was not the result of an accepted change management process.
 <td><td><td>✓<td>✓
 <tr id="change-management-process"><td>Enforced change management process<td>
 
-The SCS MUST ensure organization defined technical controls are enforced for
+The SCS MUST ensure organization-defined technical controls are enforced for
 changes made to protected branches.  It MUST also embed relevant metadata about
 these controls in the [source summary](#summary-attestation) and/or
 [source provenance](#provenance-attestations) attestations
