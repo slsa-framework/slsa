@@ -584,11 +584,11 @@ build image storage and modified image at rest injecting a malicious tool into i
 environments created after that point were compromised.
 
 </details>
-<details><summary>Unexpected reuse of a build environment</summary>
+<details><summary>Unexpected reuse of a build environment<span>(BuildEnv L2)</span></summary>
 
 *Threat:* Adversary injects malicious code into the target build by being able to run random code in the same build environment
 
-_Mitigation_: Unique build identifier is included into the Build environment provenance (and [TPM] measurement) allowing [Control plane] to detect environment reuse. Needs [BuildEnv L2] level
+_Mitigation_: Unique build identifier is included into the Build environment provenance (and [TPM] measurement) allowing control plane to detect environment reuse.
 
 _Example_: Due to a bug in the build platform, the environment was used for running two or more jobs and effectively losing “ephemeral” property. Malicious actors could use this vulnerability to poison the build environments they should not have access to.
 
