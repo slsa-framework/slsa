@@ -42,9 +42,9 @@ Once, when bootstrapping the verifier:
 
 -   Configure the verifier's roots of trust, meaning the recognized SCS
     identities and the maximum SLSA Source level each SCS is trusted up to.
-    Different verifiers MAY use different roots of trust for repositories. This
-    configuration is likely in the form of a map from (SCS public key identity,
-    VSA `verifier.id`) to (SLSA Source level).
+    Different verifiers MAY use different roots of trust for repositories. The
+    root of trust configuration is likely in the form of a map from (SCS public
+    key identity, VSA `verifier.id`) to (SLSA Source level).
 
     <details>
     <summary>Example root of trust configuration</summary>
