@@ -1,6 +1,6 @@
 ---
 title: Source Track Sprint Recap
-author: "Andrew McNamara (RedHat), Tom Hennen (Google), Zachariah Cox (GitHub)"
+author: "Andrew McNamara (Red Hat), Tom Hennen (Google), Zachariah Cox (GitHub)"
 is_guest_post: false
 ---
 
