@@ -584,7 +584,7 @@ build image storage and modified image at rest injecting a malicious tool into i
 environments created after that point were compromised.
 
 </details>
-<details><summary>Unexpected reuse of a build environment<span>(BuildEnv L2)</span></summary>
+<details><summary>Unexpected reuse of a build environment<span>(BuildEnv L2+)</span></summary>
 
 *Threat:* Adversary injects malicious code into the target build by being able to run random code in the same build environment
 
