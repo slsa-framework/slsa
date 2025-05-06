@@ -179,8 +179,8 @@ Organizations SHOULD prefer to make logs public if possible.
 
 <tr id="specify-control-expectations"><td>Specify control expectations<td>
 
-The organization MUST specify what technical controls consumers can expect
-revisions on a branch to have met.
+The organization MUST specify what technical controls consumers can expect to be
+enforced for revisions in each branch.
 
 For example, an organization may wish consumers to form an expectation that
 revisions on 'main' require unit tests to have passed prior to merge.  The
@@ -189,6 +189,15 @@ embed the relevant metadata in the [source summary](#summary-attestation) and/or
 [source provenance](#provenance-attestations) attestations for all affected
 revisions.  Consumers of those revisions would be able to determine if these
 expectations have been met via those attestations.
+
+Organizations SHOULD NOT specify technical controls they do not wish consumers
+to form expectations on.
+
+For example, an organization may be conducting a trial of a new control and
+they are not yet sure if they will keep it, or it may have implemented a
+proprietary control it does not want to publicize. In these cases the
+organization would not configure the SCS to embed metadata about this control
+into the attestations.
 
 <td><td><td>✓<td>✓
 
