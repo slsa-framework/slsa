@@ -137,8 +137,7 @@ process to ensure changes to source matches the organization's intent.
 <tr id="specify-protection"><td>Specify which branches and tags are protected<td>
 
 The organization MUST indicate which branches and tags it protects with Source
-Level 2+ controls.  Only those indicated branches and tags will be eligible for
-Source Level 2+.
+Level 2+ controls.
 
 For example, if an organization has branches 'main' and 'experimental' and it
 intends for 'main' to be protected then it MUST indicate to the SCS that 'main'
