@@ -260,7 +260,7 @@ from the perspective of the SCS.
 At Source Level 3 Source Provenance MUST be created contemporaneously with the
 branch being updated to use that revision such that they provide a credible,
 auditable, record of changes. The Source Provenance MUST record the time the
-update occurred. The user MUST NOT be able to falsify this timestamp.
+update occurred. The user MUST NOT be able to falsify this time.
 
 If a consumer is authorized to access, they MUST be able to fetch the source
 provenance documents for relevant revisions.
