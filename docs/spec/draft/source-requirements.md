@@ -136,7 +136,7 @@ process to ensure changes to source matches the organization's intent.
 
 <tr id="specify-protection"><td>Specify which branches and tags are protected<td>
 
-The organization MUST indicated which branches and tags it protects with Source
+The organization MUST indicate which branches and tags it protects with Source
 Level 2+ controls.  Only those indicated branches and tags will be eligible for
 Source Level 2+.
 
