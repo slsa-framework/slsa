@@ -276,7 +276,7 @@ Revisions are created by applying a specific code change (a "diff" in git) on
 top of an earlier revision. Since a single revision does not provide sufficient
 context to assess the source code controls on its own, an SCS MUST provide a
 means to ensure continuity of controls from one revision to another. Continuity
-MAY be accomplished by an SCS ensuring that a control has not lapsed between when
+MAY be accomplished by an SCS showing that a control has been enforced when
 a revision and its parent are created.
 
 Continuity MUST be established and tracked from a specific point in time. If
