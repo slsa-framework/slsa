@@ -27,7 +27,7 @@ Consumers can examine the various source provenance attestations to determine if
 | Source Provenance | Information about how a revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and what parent revisions it was based on.
 | Repository / Repo | A uniquely identifiable instance of a VCS. The repository controls access to the Source in the VCS. The objective of a repository is to reflect the intent of the organization that controls it.
 | Branch | A named, moveable, pointer to a revision that tracks development in the named context over time. Branches may be modified to point to different revisions by authorized actors. Different branches may have different security requirements.
-| Tag | A named pointer to a revision that does not typically move. Tags may be created (and sometimes modified) by authorized actors. Different tags may be used for different purposes (e.g. denote a specific version of the software, or the 'latest' release).
+| Tag | A named pointer to a revision that does not typically move. Similar to branches, tags may be modified by authorized actors. Tags are often used by producers to indicate a more permanent name for a revision.
 | Change | A set of modifications to the source in a specific context. A change can be proposed and reviewed before being accepted.
 | Change History | A record of the history of revisions that preceded a specific revision.
 | Push / upload / publish | When an actor authenticates to a Repository to add or modify content. Typically makes a new revision reachable from a branch.
