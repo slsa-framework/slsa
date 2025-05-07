@@ -421,15 +421,27 @@ SCSs that do not use cryptographic digests MUST define a canonical type that is 
     -   git references MUST be fully qualified (e.g. `refs/head/main` or `refs/tags/v1.0`) to reduce the likelihood of confusing downstream tooling.
 4.  `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field).
 E.g. `git+https://github.com/foo/hello-world`.
-5.  `verifiedLevels` MUST include the SLSA source track level the verifier asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
-MAY include additional properties as asserted by the verifier.  The verifier MUST include _only_ the highest SLSA source level met by the revision.
+5.  `verifiedLevels` MUST include the SLSA source track level the SCS asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
+MAY include additional properties as asserted by the SCS.  The SCS MUST include _only_ the highest SLSA source level met by the revision.
 6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
 
-Verifiers MAY issue these attestations based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
+The SCS MAY issue these attestations based on its understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
 but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#provenance-attestations) appropriate to their SCS when making the assessment.
 
 The SLSA source track MAY create additional tags to include in `verifiedLevels` which attest
-to other properties of a revision (e.g. if it was code reviewed).  All SLSA source tags will start with `SLSA_SOURCE_`.
+to other properties of a revision (e.g. if it was code reviewed).  All SLSA source tags will start with `SLSA_SOURCE_`.  Consumers MAY assume all SLSA source tags are meant
+
+The SCS MAY embed user-provided tags within `verifiedLevels` corresponding to
+technical controls enforced by the SCS if they are prefixed with:
+
+-   `USER_SOURCE_` to indicate a tag that is meant for consumption by external
+   consumers.
+-   `INTERNAL_USER_` to indicate a tag that is not meant for consumption by
+   external consumers.
+
+The meaning of the tags is left entirely to the organization. Inclusion of user
+provided tags within `verifiedLevels` SHOULD NOT be considered an endorsement of
+the veracity of the organization defined claim by the SCS.
 
 #### Populating source_refs
 
