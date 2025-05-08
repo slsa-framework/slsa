@@ -319,12 +319,24 @@ or if the revision was not the result of an accepted change management process.
 <td><td><td>✓<td>✓
 <tr id="change-management-process"><td>Enforced change management process<td>
 
-The SCS MUST ensure organization-defined technical controls are enforced for
-changes made to protected branches.  It MUST also embed relevant metadata about
-these controls in the [source summary](#summary-attestation) and/or
-[source provenance](#provenance-attestations) attestations
+The SCS MUST
 
-For example, this could be accomplished by:
+-   Ensure organization-defined technical controls are enforced for changes made
+   to protected branches.
+-   Allow organizations to specify
+   [additional tags](#additional-tags) to be included in the
+   [source summary](#summary-attestation) when the corresponding controls are
+enforced.
+-   Allow organizations to distribute additional attestations related to their
+   technical controls to consumers authorized to access the corresponding source
+   revision.
+
+The SCS MUST NOT allow organization specified tags to begin with any value other
+than `USER_SOURCE_` or `INTERNAL_USER_` unless the SCS endorses the veracity of
+any corresponding claims.
+
+Enforcement of the organization defined technical controls could be accomplished
+by, for example:
 
 -   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)) which require additional checks to 'pass'
     (e.g. unit tests, linters), or
@@ -427,6 +439,8 @@ MAY include additional properties as asserted by the SCS.  The SCS MUST include 
 
 The SCS MAY issue these attestations based on its understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
 but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#provenance-attestations) appropriate to their SCS when making the assessment.
+
+#### Additional tags
 
 The SLSA source track MAY create additional tags to include in `verifiedLevels` which attest
 to other properties of a revision (e.g. if it was code reviewed).  All SLSA source tags will start with `SLSA_SOURCE_`.  Consumers MAY assume all SLSA source tags are meant
