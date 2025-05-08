@@ -179,24 +179,19 @@ Organizations SHOULD prefer to make logs public if possible.
 <tr id="specify-control-expectations"><td>Specify control expectations<td>
 
 The organization MUST specify what technical controls consumers can expect to be
-enforced for revisions in each branch.
+enforced for revisions in each branch using the
+[Enforced change management process](#enforced-change-management-process).
 
 For example, an organization may wish consumers to form an expectation that
 revisions on 'main' require unit tests to have passed prior to merge.  The
 organization would then configure the SCS to enforce this requirement and
-embed the relevant metadata in the [source summary](#summary-attestation) and/or
-[source provenance](#provenance-attestations) attestations for all affected
-revisions.  Consumers of those revisions would be able to determine if these
-expectations have been met via those attestations.
+embed the `USER_SOURCE_UNIT_TESTED` tag in the
+[source summary](#summary-attestation) and have the SCS store a corresponding
+[test result attestation].  Consumers of those revisions would be able to
+determine if these expectations have been met by looking for the
+`USER_SOURCE_UNIT_TESTED` tag in the VSA.
 
-Organizations SHOULD NOT specify technical controls they do not wish consumers
-to form expectations on.
-
-For example, an organization may be conducting a trial of a new control and
-they are not yet sure if they will keep it, or it may have implemented a
-proprietary control it does not want to publicize. In these cases the
-organization would not configure the SCS to embed metadata about this control
-into the attestations.
+[test result attestation]: https://github.com/in-toto/attestation/blob/main/spec/predicates/test-result.md
 
 <td><td><td>✓<td>✓
 
@@ -317,7 +312,7 @@ For example, this would happen if the revision was created on another SCS,
 or if the revision was not the result of an accepted change management process.
 
 <td><td><td>✓<td>✓
-<tr id="change-management-process"><td>Enforced change management process<td>
+<tr id="enforced-change-management-process"><td>Enforced change management process<td>
 
 The SCS MUST
 
@@ -379,7 +374,7 @@ Examples:
 
 ### Provide a change management tool
 
-The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes managed via the [process](#change-management-process).
+The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes managed via the [process](#enforced-change-management-process).
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
