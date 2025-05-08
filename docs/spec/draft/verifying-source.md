@@ -121,9 +121,9 @@ fields:
 ## Forming Expectations
 
 <dfn>Expectations</dfn> are known values that indicate the corresponding
-revision is authentic. For example, an SCS package ecosystem may
-maintain a mapping between repository branch & tags and the controls they
-claim to implement. That mapping constitutes a set of expectations.
+revision is authentic. For example, an SCS may maintain a mapping between
+repository branches & tags and the controls they claim to implement. That
+mapping constitutes a set of expectations.
 
 Possible models for forming expectations include:
 
