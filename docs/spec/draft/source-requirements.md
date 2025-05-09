@@ -48,7 +48,7 @@ Consumers can examine the various source provenance attestations to determine if
 
 When onboarding a branch to the SLSA Source Track or increasing the level of
 that branch, organizations are making claims about how the branch is managed
-from that time or revision forward.
+from that time or revision forward. This establishes [continuity](#revision-control-continuity).
 
 No claims are made for prior revisions.
 
@@ -206,7 +206,7 @@ For systems like GitHub or GitLab, this can be accomplished by enabling branch p
 
 It MUST NOT be possible to delete the entire repository (including all branches) and replace it with different source.
 
-Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
+These branch protection enforcements MUST be verified for [continuity](#revision-control-continuity).
 
 <td><td>✓<td>✓<td>✓
 <tr id="tag-hygiene"><td>Tag Hygiene<td>
@@ -272,7 +272,8 @@ or if the revision was not the result of an accepted change management process.
 <tr id="change-management-process"><td>Enforced change management process<td>
 
 The SCS MUST provide a mechanism for organizations to enforce additional
-technical controls which govern changes to a [branch](#definitions).
+technical controls which govern changes to a [branch](#definitions). These
+technical controls MAY be verified for [continuity](#revision-control-continuity).
 
 For example, this could be accomplished by:
 
@@ -314,6 +315,25 @@ Examples:
 
 <td><td><td><td>✓
 </table>
+
+#### Revision control continuity
+
+Revisions are created by applying a specific code change (a "diff" in git) on
+top of an earlier revision. Since a single revision does not provide sufficient
+context to assess the source code controls on its own, an SCS MUST provide a
+means to ensure continuity of controls from one revision to another. Continuity
+MAY be accomplished by an SCS showing that a control has been enforced when
+a revision and its parent are created.
+
+Continuity MUST be established and tracked from a specific point in time. If
+there is a lapse in continuity for a specific control, that continuity MUST be
+re-established from a new point in time.
+
+An SCS SHOULD expose the time a control was established in the source provenance
+and other attestations it produces (with the exception of the source summary
+attestation).
+
+Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
 ### Provide a change management tool
 
@@ -463,3 +483,4 @@ Example source provenance attestations:
   phishing resistant.
 -   Protect against authentication token theft by forbidding bearer tokens
   (e.g. PATs).
+-   Including length of continuity in the VSAs
