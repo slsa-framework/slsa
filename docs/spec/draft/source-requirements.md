@@ -440,12 +440,11 @@ but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#prov
 
 The SLSA source track MAY create additional properties to include in
 `verifiedLevels` which attest to other claims concerning a revision (e.g. if it
-was code reviewed). All SLSA source properties will start with `SLSA_SOURCE_`.
-Consumers MAY assume all SLSA source properties are meant
+was code reviewed).
 
 The SCS MAY embed organization-provided properties within `verifiedLevels`
-corresponding to technical controls enforced by the SCS if they are prefixed
-with:
+corresponding to technical controls enforced by the SCS. If such properties are
+provided they MUST be prefixed with:
 
 -   `ORG_SOURCE_` to indicate a property that is meant for consumption by
    external consumers.
