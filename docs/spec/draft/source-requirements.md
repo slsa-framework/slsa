@@ -332,7 +332,7 @@ The SCS MUST NOT allow organization specified tags to begin with any value other
 than `USER_SOURCE_` or `INTERNAL_USER_` unless the SCS endorses the veracity of
 any corresponding claims.
 
-Enforcement of the organization defined technical controls could be accomplished
+Enforcement of the organization-defined technical controls could be accomplished
 by, for example:
 
 -   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)) which require additional checks to 'pass'
