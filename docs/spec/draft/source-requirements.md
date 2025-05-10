@@ -182,15 +182,14 @@ The organization MUST specify what technical controls consumers can expect to be
 enforced for revisions in each branch using the
 [Enforced change management process](#enforced-change-management-process).
 
-For example, an organization may claim that revisions on `main` passed unit tests before being accepted.  The organization could then
-configure the SCS to enforce this requirement and store
-corresponding [test result attestations] for all affected revisions. 
-They may then embed the `USER_SOURCE_UNIT_TESTED` tag in the
-[source summary attestations](#summary-attestation).
-Consumers would be able to establish the expectation that revisions on `main`
-have been united tested and determine if that expectation has been met by
-looking for the `USER_SOURCE_UNIT_TESTED` tag in the VSA and, if desired,
-consult the [test result attestations] as well.
+For example, an organization may claim that revisions on `main` passed unit
+tests before being accepted.  The organization could then configure the SCS to
+enforce this requirement and store corresponding [test result attestations] for
+all affected revisions.  They may then embed the `USER_SOURCE_UNIT_TESTED` tag
+in the [source summary attestations](#summary-attestation). Consumers would then
+expect that future revisions on `main` have been united tested and determine if
+that expectation has been met by looking for the `USER_SOURCE_UNIT_TESTED` tag
+in the VSAs and, if desired, consult the [test result attestations] as well.
 
 [test result attestations]: https://github.com/in-toto/attestation/blob/main/spec/predicates/test-result.md
 
