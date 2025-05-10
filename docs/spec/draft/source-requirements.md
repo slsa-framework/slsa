@@ -185,11 +185,11 @@ enforced for revisions in each branch using the
 For example, an organization may claim that revisions on `main` passed unit
 tests before being accepted.  The organization could then configure the SCS to
 enforce this requirement and store corresponding [test result attestations] for
-all affected revisions.  They may then embed the `USER_SOURCE_UNIT_TESTED`
+all affected revisions.  They may then embed the `ORG_SOURCE_UNIT_TESTED`
 property in the [source summary attestations](#summary-attestation). Consumers
 would then expect that future revisions on `main` have been united tested and
 determine if that expectation has been met by looking for the
-`USER_SOURCE_UNIT_TESTED` property in the VSAs and, if desired, consult the
+`ORG_SOURCE_UNIT_TESTED` property in the VSAs and, if desired, consult the
 [test result attestations] as well.
 
 [test result attestations]: https://github.com/in-toto/attestation/blob/main/spec/predicates/test-result.md
@@ -328,7 +328,7 @@ enforced.
    revision.
 
 The SCS MUST NOT allow organization specified properties to begin with any value
-other than `USER_SOURCE_` or `INTERNAL_USER_` unless the SCS endorses the
+other than `ORG_SOURCE_` or `INTERNAL_ORG_` unless the SCS endorses the
 veracity of any corresponding claims.
 
 Enforcement of the organization-defined technical controls could be accomplished
@@ -443,17 +443,19 @@ The SLSA source track MAY create additional properties to include in
 was code reviewed). All SLSA source properties will start with `SLSA_SOURCE_`.
 Consumers MAY assume all SLSA source properties are meant
 
-The SCS MAY embed user-provided properties within `verifiedLevels` corresponding to
-technical controls enforced by the SCS if they are prefixed with:
+The SCS MAY embed organization-provided properties within `verifiedLevels`
+corresponding to technical controls enforced by the SCS if they are prefixed
+with:
 
--   `USER_SOURCE_` to indicate a property that is meant for consumption by
+-   `ORG_SOURCE_` to indicate a property that is meant for consumption by
    external consumers.
--   `INTERNAL_USER_` to indicate a property that is not meant for consumption by
+-   `INTERNAL_ORG_` to indicate a property that is not meant for consumption by
    external consumers.
 
 The meaning of the properties is left entirely to the organization. Inclusion of
-user provided properties within `verifiedLevels` SHOULD NOT be considered an
-endorsement of the veracity of the organization defined property by the SCS.
+organization-provided properties within `verifiedLevels` SHOULD NOT be
+considered an endorsement of the veracity of the organization defined property
+by the SCS.
 
 #### Populating source_refs
 
