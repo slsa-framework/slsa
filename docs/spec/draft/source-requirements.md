@@ -185,11 +185,12 @@ enforced for revisions in each branch using the
 For example, an organization may claim that revisions on `main` passed unit
 tests before being accepted.  The organization could then configure the SCS to
 enforce this requirement and store corresponding [test result attestations] for
-all affected revisions.  They may then embed the `USER_SOURCE_UNIT_TESTED` tag
-in the [source summary attestations](#summary-attestation). Consumers would then
-expect that future revisions on `main` have been united tested and determine if
-that expectation has been met by looking for the `USER_SOURCE_UNIT_TESTED` tag
-in the VSAs and, if desired, consult the [test result attestations] as well.
+all affected revisions.  They may then embed the `USER_SOURCE_UNIT_TESTED`
+property in the [source summary attestations](#summary-attestation). Consumers
+would then expect that future revisions on `main` have been united tested and
+determine if that expectation has been met by looking for the
+`USER_SOURCE_UNIT_TESTED` property in the VSAs and, if desired, consult the
+[test result attestations] as well.
 
 [test result attestations]: https://github.com/in-toto/attestation/blob/main/spec/predicates/test-result.md
 
@@ -319,16 +320,16 @@ The SCS MUST
 -   Ensure organization-defined technical controls are enforced for changes made
    to protected branches.
 -   Allow organizations to specify
-   [additional tags](#additional-tags) to be included in the
+   [additional properties](#additional-properties) to be included in the
    [source summary](#summary-attestation) when the corresponding controls are
 enforced.
 -   Allow organizations to distribute additional attestations related to their
    technical controls to consumers authorized to access the corresponding source
    revision.
 
-The SCS MUST NOT allow organization specified tags to begin with any value other
-than `USER_SOURCE_` or `INTERNAL_USER_` unless the SCS endorses the veracity of
-any corresponding claims.
+The SCS MUST NOT allow organization specified properties to begin with any value
+other than `USER_SOURCE_` or `INTERNAL_USER_` unless the SCS endorses the
+veracity of any corresponding claims.
 
 Enforcement of the organization-defined technical controls could be accomplished
 by, for example:
@@ -435,22 +436,24 @@ MAY include additional properties as asserted by the SCS.  The SCS MUST include 
 The SCS MAY issue these attestations based on its understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
 but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#provenance-attestations) appropriate to their SCS when making the assessment.
 
-#### Additional tags
+#### Additional properties
 
-The SLSA source track MAY create additional tags to include in `verifiedLevels` which attest
-to other properties of a revision (e.g. if it was code reviewed).  All SLSA source tags will start with `SLSA_SOURCE_`.  Consumers MAY assume all SLSA source tags are meant
+The SLSA source track MAY create additional properties to include in
+`verifiedLevels` which attest to other claims concerning a revision (e.g. if it
+was code reviewed). All SLSA source properties will start with `SLSA_SOURCE_`.
+Consumers MAY assume all SLSA source properties are meant
 
-The SCS MAY embed user-provided tags within `verifiedLevels` corresponding to
+The SCS MAY embed user-provided properties within `verifiedLevels` corresponding to
 technical controls enforced by the SCS if they are prefixed with:
 
--   `USER_SOURCE_` to indicate a tag that is meant for consumption by external
-   consumers.
--   `INTERNAL_USER_` to indicate a tag that is not meant for consumption by
+-   `USER_SOURCE_` to indicate a property that is meant for consumption by
+   external consumers.
+-   `INTERNAL_USER_` to indicate a property that is not meant for consumption by
    external consumers.
 
-The meaning of the tags is left entirely to the organization. Inclusion of user
-provided tags within `verifiedLevels` SHOULD NOT be considered an endorsement of
-the veracity of the organization defined claim by the SCS.
+The meaning of the properties is left entirely to the organization. Inclusion of
+user provided properties within `verifiedLevels` SHOULD NOT be considered an
+endorsement of the veracity of the organization defined property by the SCS.
 
 #### Populating source_refs
 
