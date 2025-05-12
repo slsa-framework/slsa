@@ -189,6 +189,18 @@ When source provenance is available the SCS MAY use it to generate the
 source summary attestation.
 
 <td>✓<td>✓<td>✓<td>✓
+<tr id="context"><td>Context<td>
+
+The SCS MUST record the specific code change (a "diff" in git) or instructions
+to recreate it. In git, this typically defined to be three revision IDs: the tip
+of the "topic" branch, the tip of the target branch, and closest shared ancestor
+between the two (such as determined by `git-merge-base`).
+
+The SCS MUST record the "target" context for the change and the previous
+revision in that context. For example, for the git version control system, the
+SCS MUST record the branch name that was updated.
+
+<td><td>✓<td>✓<td>✓
 <tr id="branches"><td>Protected Branches<td>
 
 The SCS MUST provide a mechanism for organizations to indicate which branches
@@ -313,26 +325,6 @@ Examples:
 -   Dependabot
 
 <td><td><td><td>✓
-</table>
-
-### Provide a change management tool
-
-The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes managed via the [process](#change-management-process).
-
-<table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
-
-<tr id="context"><td>Context<td>
-
-The change management tool MUST record the specific code change (a "diff" in git) or instructions to recreate it.
-In git, this typically defined to be three revision IDs: the tip of the "topic" branch, the tip of the target branch, and closest shared ancestor between the two (such as determined by `git-merge-base`).
-
-The change management tool MUST record the "target" context for the change proposal and the previous revision in that context.
-For example, for the git version control system, the change management tool MUST record the branch name that was updated.
-
-Branches may have differing security postures, and a change can be approved for one context while being unapproved for another.
-
-<td><td><td>✓<td>✓
 </table>
 
 ## Communicating source levels
