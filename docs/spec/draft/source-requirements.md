@@ -328,8 +328,8 @@ enforced.
    revision.
 
 The SCS MUST NOT allow organization specified properties to begin with any value
-other than `ORG_SOURCE_` or `INTERNAL_ORG_` unless the SCS endorses the
-veracity of any corresponding claims.
+other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
+corresponding claims.
 
 Enforcement of the organization-defined technical controls could be accomplished
 by, for example:
@@ -444,12 +444,14 @@ was code reviewed).
 
 The SCS MAY embed organization-provided properties within `verifiedLevels`
 corresponding to technical controls enforced by the SCS. If such properties are
-provided they MUST be prefixed with:
+provided they MUST be prefixed with `ORG_SOURCE_` to distinguish them from other
+properties the SCS may wish use.
+
 
 -   `ORG_SOURCE_` to indicate a property that is meant for consumption by
    external consumers.
--   `INTERNAL_ORG_` to indicate a property that is not meant for consumption by
-   external consumers.
+-   `ORG_SOURCE_INTERNAL_` to indicate a property that is not meant for
+   consumption by external consumers.
 
 The meaning of the properties is left entirely to the organization. Inclusion of
 organization-provided properties within `verifiedLevels` SHOULD NOT be
