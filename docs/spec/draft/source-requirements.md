@@ -447,7 +447,6 @@ corresponding to technical controls enforced by the SCS. If such properties are
 provided they MUST be prefixed with `ORG_SOURCE_` to distinguish them from other
 properties the SCS may wish use.
 
-
 -   `ORG_SOURCE_` to indicate a property that is meant for consumption by
    external consumers.
 -   `ORG_SOURCE_INTERNAL_` to indicate a property that is not meant for
