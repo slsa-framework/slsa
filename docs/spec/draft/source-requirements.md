@@ -333,12 +333,6 @@ For example, for the git version control system, the change management tool MUST
 Branches may have differing security postures, and a change can be approved for one context while being unapproved for another.
 
 <td><td><td>✓<td>✓
-<tr id="verified-timestamps"><td>Verified Timestamps<td>
-
-The change management tool MUST record timestamps for all contributions and review-related activities.
-User-provided timestamps MUST NOT be used.
-
-<td><td><td>✓<td>✓
 </table>
 
 ## Communicating source levels
