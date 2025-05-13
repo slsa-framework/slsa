@@ -53,8 +53,7 @@ Once, when bootstrapping the verifier:
     Different verifiers might use different roots of trust, but usually a
     verifier uses the same roots of trust for all packages. This configuration
     is likely in the form of a map from (builder public key identity,
-    `builder.id`) to (SLSA Build level) drawn from the SLSA Conformance
-    Program (coming soon).
+    `builder.id`) to (SLSA Build level).
 
     <details>
     <summary>Example root of trust configuration</summary>
