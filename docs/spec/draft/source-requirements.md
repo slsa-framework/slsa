@@ -198,7 +198,7 @@ between the two (such as determined by `git-merge-base`).
 
 The SCS MUST record the "target" context for the change and the previous
 revision in that context. For example, for the git version control system, the
-SCS MUST record the branch name that was updated.
+SCS MUST record the branch name that was updated, its new revision and its previous revision.
 
 <td><td>✓<td>✓<td>✓
 <tr id="branches"><td>Protected Branches<td>
