@@ -192,7 +192,7 @@ source summary attestation.
 <tr id="context"><td>Context<td>
 
 The SCS MUST record the specific code change (a "diff" in git) or instructions
-to recreate it. In git, this typically defined to be three revision IDs: the tip
+to recreate it. In git, this is typically defined to be three revision IDs: the tip
 of the "topic" branch, the tip of the target branch, and closest shared ancestor
 between the two (such as determined by `git-merge-base`).
 
