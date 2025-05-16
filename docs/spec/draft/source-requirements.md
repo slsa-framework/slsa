@@ -26,7 +26,8 @@ Consumers can examine the various source provenance attestations to determine if
 | Source Control System (SCS) | A suite of tools and services (self-hosted or SaaS) relied upon by the organization to produce new revisions of the source. The role of the SCS may be fulfilled by a single service (e.g., GitHub / GitLab) or rely on a combination of services (e.g., GitLab with Gerrit code reviews, GitHub with OpenSSF Scorecard, etc).
 | Source Provenance | Information about how a revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and what parent revisions it was based on.
 | Repository / Repo | A uniquely identifiable instance of a VCS. The repository controls access to the Source in the VCS. The objective of a repository is to reflect the intent of the organization that controls it.
-| Branch | A named, moveable, pointer to a revision. Branches may be modified to point to different revisions by authorized actors. Different branches may have different security requirements.
+| Branch | A named, moveable, pointer to a revision that tracks development in the named context over time. Branches may be modified to point to different revisions by authorized actors. Different branches may have different security requirements.
+| Tag | A named pointer to a revision that does not typically move. Similar to branches, tags may be modified by authorized actors. Tags are often used by producers to indicate a more permanent name for a revision.
 | Change | A set of modifications to the source in a specific context. A change can be proposed and reviewed before being accepted.
 | Change History | A record of the history of revisions that preceded a specific revision.
 | Push / upload / publish | When an actor authenticates to a Repository to add or modify content. Typically makes a new revision reachable from a branch.
@@ -51,33 +52,6 @@ that branch, organizations are making claims about how the branch is managed
 from that time or revision forward.
 
 No claims are made for prior revisions.
-
-## Safe Expunging Process
-
-SCSs MAY allow the organization to expunge (remove) content from a repository and its change history without leaving a public record of the removed content,
-but the organization MUST only allow these changes in order to meet legal or privacy compliance requirements.
-Content changed under this process includes changing files, history, references, or any other metadata stored by the SCS.
-
-### Warning
-
-Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact.
-For example, in VCSs like Git, removal of a revision changes the object IDs of all subsequent revisions that were built on top of it, breaking downstream consumers' ability to refer to source they've already integrated into their products.
-
-It may be the case that the specific set of changes targeted by a legal takedown can be expunged in ways that do not impact consumed revisions, which can mitigate these problems.
-
-It is also the case that removing content from a repository won't necessarily remove it everywhere.
-The content may still exist in other copies of the repository, either in backups or on developer machines.
-
-### Process
-
-An organization MUST document the Safe Expunging Process and describe how requests and actions are tracked and SHOULD log the fact that content was removed.
-Different organizations and tech stacks may have different approaches to the problem.
-
-SCSs SHOULD have technical mechanisms in place which require an Administrator plus, at least, one additional 'trusted person' to trigger any expunging (removals) made under this process.
-
-The application of the safe expunging process and the resulting logs MAY be private to both prevent calling attention to potentially sensitive data (e.g. PII) or to comply with local laws
-and regulations which may require the change to be kept private to the extent possible.
-Organizations SHOULD prefer to make logs public if possible.
 
 ## Levels
 
@@ -139,7 +113,10 @@ Many examples in this document use the [git version control system](https://git-
 
 [Organization]: #organization
 
-#### Choose an appropriate source control system
+<table>
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
+
+<tr id="choose-scs"><td>Choose an appropriate source control system<td>
 
 An organization producing source revisions MUST select a SCS capable of reaching
 their desired SLSA Source Level.
@@ -148,11 +125,78 @@ For example, if an organization wishes to produce revisions at Source Level 3,
 they MUST choose a source control system capable of producing Source Level 3
 attestations.
 
-#### Choose an appropriate change management process
+<td>✓<td>✓<td>✓<td>✓
 
-At Level 2+ an organization producing source revisions MUST implement a change
-management process to ensure changes to source matches the organization's
-intent.
+<tr id="choose-process"><td>Choose an appropriate change management process<td>
+
+An organization producing source revisions MUST implement a change management
+process to ensure changes to source matches the organization's intent.
+
+<td><td>✓<td>✓<td>✓
+
+<tr id="specify-protection"><td>Specify which branches and tags are protected<td>
+
+The organization MUST indicate which branches and tags it protects with Source
+Level 2+ controls.
+
+For example, if an organization has branches 'main' and 'experimental' and it
+intends for 'main' to be protected then it MUST indicate to the SCS that 'main'
+should be protected. From that point forward revisions on 'main' will be
+eligible for Source Level 2+ while revisions made solely on 'experimental' will
+not.
+
+<td><td>✓<td>✓<td>✓
+
+<tr id="safe-expunging-process"><td>Safe Expunging Process<td>
+
+SCSs MAY allow the organization to expunge (remove) content from a repository and its change history without leaving a public record of the removed content,
+but the organization MUST only allow these changes in order to meet legal or privacy compliance requirements.
+Content changed under this process includes changing files, history, references, or any other metadata stored by the SCS.
+
+#### Warning
+
+Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact.
+For example, in VCSs like Git, each revision ID is based on the ones before it. When you remove a revision, you must generate new revisions (and new revision IDs) for any revisions that were built on top of it. Consumers who took a dependency on the old revisions may now be unable to refer to the source they've already integrated into their products.
+
+It may be the case that the specific set of changes targeted by a legal takedown can be expunged in ways that do not impact consumed revisions, which can mitigate these problems.
+
+It is also the case that removing content from a repository won't necessarily remove it everywhere.
+The content may still exist in other copies of the repository, either in backups or on developer machines.
+
+#### Process
+
+An organization MUST document the Safe Expunging Process and describe how requests and actions are tracked and SHOULD log the fact that content was removed.
+Different organizations and tech stacks may have different approaches to the problem.
+
+SCSs SHOULD have technical mechanisms in place which require an Administrator plus, at least, one additional 'trusted person' to trigger any expunging (removals) made under this process.
+
+The application of the safe expunging process and the resulting logs MAY be private to both prevent calling attention to potentially sensitive data (e.g. PII) or to comply with local laws
+and regulations which may require the change to be kept private to the extent possible.
+Organizations SHOULD prefer to make logs public if possible.
+
+<td><td>✓<td>✓<td>✓
+
+<tr id="specify-control-expectations"><td>Specify control expectations<td>
+
+The organization MUST specify what technical controls consumers can expect to be
+enforced for revisions in each branch using the
+[Enforced change management process](#enforced-change-management-process).
+
+For example, an organization may claim that revisions on `main` passed unit
+tests before being accepted.  The organization could then configure the SCS to
+enforce this requirement and store corresponding [test result attestations] for
+all affected revisions.  They may then embed the `ORG_SOURCE_UNIT_TESTED`
+property in the [source summary attestations](#summary-attestation). Consumers
+would then expect that future revisions on `main` have been united tested and
+determine if that expectation has been met by looking for the
+`ORG_SOURCE_UNIT_TESTED` property in the VSAs and, if desired, consult the
+[test result attestations] as well.
+
+[test result attestations]: https://github.com/in-toto/attestation/blob/main/spec/predicates/test-result.md
+
+<td><td><td>✓<td>✓
+
+</table>
 
 ### Source Control System
 
@@ -269,12 +313,26 @@ For example, this would happen if the revision was created on another SCS,
 or if the revision was not the result of an accepted change management process.
 
 <td><td><td>✓<td>✓
-<tr id="change-management-process"><td>Enforced change management process<td>
+<tr id="enforced-change-management-process"><td>Enforced change management process<td>
 
-The SCS MUST provide a mechanism for organizations to enforce additional
-technical controls which govern changes to a [branch](#definitions).
+The SCS MUST
 
-For example, this could be accomplished by:
+-   Ensure organization-defined technical controls are enforced for changes made
+   to protected branches.
+-   Allow organizations to specify
+   [additional properties](#additional-properties) to be included in the
+   [source summary](#summary-attestation) when the corresponding controls are
+enforced.
+-   Allow organizations to distribute additional attestations related to their
+   technical controls to consumers authorized to access the corresponding source
+   revision.
+
+The SCS MUST NOT allow organization specified properties to begin with any value
+other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
+corresponding claims.
+
+Enforcement of the organization-defined technical controls could be accomplished
+by, for example:
 
 -   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)) which require additional checks to 'pass'
     (e.g. unit tests, linters), or
@@ -317,7 +375,7 @@ Examples:
 
 ### Provide a change management tool
 
-The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes managed via the [process](#change-management-process).
+The change management tool MUST be able to authoritatively state that each new revision reachable from the protected branch represents only the changes managed via the [process](#enforced-change-management-process).
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
@@ -371,15 +429,33 @@ SCSs that do not use cryptographic digests MUST define a canonical type that is 
     -   git references MUST be fully qualified (e.g. `refs/head/main` or `refs/tags/v1.0`) to reduce the likelihood of confusing downstream tooling.
 4.  `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field).
 E.g. `git+https://github.com/foo/hello-world`.
-5.  `verifiedLevels` MUST include the SLSA source track level the verifier asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
-MAY include additional properties as asserted by the verifier.  The verifier MUST include _only_ the highest SLSA source level met by the revision.
+5.  `verifiedLevels` MUST include the SLSA source track level the SCS asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
+MAY include additional properties as asserted by the SCS.  The SCS MUST include _only_ the highest SLSA source level met by the revision.
 6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain.
 
-Verifiers MAY issue these attestations based on their understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
+The SCS MAY issue these attestations based on its understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
 but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#provenance-attestations) appropriate to their SCS when making the assessment.
 
-The SLSA source track MAY create additional tags to include in `verifiedLevels` which attest
-to other properties of a revision (e.g. if it was code reviewed).  All SLSA source tags will start with `SLSA_SOURCE_`.
+#### Additional properties
+
+The SLSA source track MAY create additional properties to include in
+`verifiedLevels` which attest to other claims concerning a revision (e.g. if it
+was code reviewed).
+
+The SCS MAY embed organization-provided properties within `verifiedLevels`
+corresponding to technical controls enforced by the SCS. If such properties are
+provided they MUST be prefixed with `ORG_SOURCE_` to distinguish them from other
+properties the SCS may wish use.
+
+-   `ORG_SOURCE_` to indicate a property that is meant for consumption by
+   external consumers.
+-   `ORG_SOURCE_INTERNAL_` to indicate a property that is not meant for
+   consumption by external consumers.
+
+The meaning of the properties is left entirely to the organization. Inclusion of
+organization-provided properties within `verifiedLevels` SHOULD NOT be
+considered an endorsement of the veracity of the organization defined property
+by the SCS.
 
 #### Populating source_refs
 
