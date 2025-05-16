@@ -6,8 +6,8 @@ The primary purpose of the SLSA Source track is to provide evidence that a repos
 It describes increasing levels of trustworthiness and completeness of a revision's <dfn>provenance</dfn>.
 In this track, provenance describes how a source revision came to exist.
 
-The Source track is scoped to single revisions of repositories managed by single organizations.
-The organization determines the intent of the software in the repository, the expected process for the creation of new revisions, and administers technical controls to enforce the process.
+Source provenance applies to a single revision of a repository, not the entire repository.
+The expected process for creating a new revision is determined solely by that repository's owner (the organization) who also determines the intent of the software in the repository and administers technical controls to enforce the process.
 
 Consumers can review source provenance attestations to verify whether a particular revision meets their standards.
 
