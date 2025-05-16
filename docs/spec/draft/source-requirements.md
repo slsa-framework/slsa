@@ -1,19 +1,15 @@
 # SLSA Source Track
 
-## Outstanding TODOs
-
-Open issues are tracked with the [source-track](https://github.com/slsa-framework/slsa/issues?q=is%3Aissue+is%3Aopen+label%3Asource-track) label in the [slsa-framework/slsa](https://github.com/slsa-framework/slsa) repository.
-Source Track issues are triaged on the [SLSA Source Track](https://github.com/orgs/slsa-framework/projects/5) project board.
-
 ## Objective
 
-The SLSA source track describes increasing levels of trustworthiness and completeness in a repository revision's provenance (e.g. how it was generated, who the contributors were, etc...).
+The primary purpose of the SLSA Source track is to provide evidence that a repository revision was created following the expected process.
+It describes increasing levels of trustworthiness and completeness of a revision's <dfn>provenance</dfn>. 
+In this track, provenance describes how a source revision came to exist.
 
-The Source track is scoped to revisions of a single repository that is controlled by an organization.
-That organization determines the intent of the software in the repository, what Source level should apply to the repository and administers technical controls to enforce that level.
+The Source track is scoped to single revisions of repositories managed by single organizations. 
+The organization determines the intent of the software in the repository, the exected process for the creation of new revisions, and administers technical controls to enforce the process.
 
-The primary purpose of the Source track is to enable verification that the creation of a revision followed the expected process.
-Consumers can examine the various source provenance attestations to determine if all sources used during the build meet their requirements.
+Consumers can review source provenance attestations to verify whether a particular revision meets their standards.
 
 ## Definitions
 
@@ -22,16 +18,16 @@ Consumers can examine the various source provenance attestations to determine if
 | Source | An identifiable set of text and binary files and associated metadata. Source is regularly used as input to a build system (see [SLSA Build Track](requirements.md)).
 | Organization | A set of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals and methods of the source.
 | Version Control System (VCS)| Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
-| Revision | A specific state of the source with an identifier provided by the version control system. As an example, you can identify a git revision by its tree hash.
-| Source Control System (SCS) | A suite of tools and services (self-hosted or SaaS) relied upon by the organization to produce new revisions of the source. The role of the SCS may be fulfilled by a single service (e.g., GitHub / GitLab) or rely on a combination of services (e.g., GitLab with Gerrit code reviews, GitHub with OpenSSF Scorecard, etc).
-| Source Provenance | Information about how a revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and what parent revisions it was based on.
+| Revision | A specific state of the source with an identifier provided by the version control system. As an example, you can identify a git revision by its commit object ID.
+| Source Control System (SCS) | A suite of tools and services (self-hosted or SaaS) relied upon by the organization to produce new revisions of the source. The role of the SCS may be fulfilled by a single service (e.g., GitHub / GitLab) or a combination of services (e.g., GitLab with Gerrit code reviews, GitHub with OpenSSF Scorecard, etc).
+| Source Provenance | Information about how a revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and which parent revisions preceded it.
 | Repository / Repo | A uniquely identifiable instance of a VCS. The repository controls access to the Source in the VCS. The objective of a repository is to reflect the intent of the organization that controls it.
 | Branch | A named, moveable, pointer to a revision that tracks development in the named context over time. Branches may be modified to point to different revisions by authorized actors. Different branches may have different security requirements.
 | Tag | A named pointer to a revision that does not typically move. Similar to branches, tags may be modified by authorized actors. Tags are often used by producers to indicate a more permanent name for a revision.
 | Change | A set of modifications to the source in a specific context. A change can be proposed and reviewed before being accepted.
 | Change History | A record of the history of revisions that preceded a specific revision.
-| Push / upload / publish | When an actor authenticates to a Repository to add or modify content. Typically makes a new revision reachable from a branch.
-| Review / approve / vote | When an actor authenticates to a change review tool to comment upon, endorse, or reject a source change proposal.
+| Push / upload / publish | When an actor adds a new revision to the repository. Typically also modifies a branch to point to the new revision.
+| Review / approve / vote | When an actor uses a change review tool to comment upon, endorse, or reject a source change proposal.
 
 ## Source Roles
 
