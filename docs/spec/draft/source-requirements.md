@@ -7,7 +7,7 @@ It describes increasing levels of trustworthiness and completeness of a revision
 In this track, provenance describes how a source revision came to exist.
 
 The Source track is scoped to single revisions of repositories managed by single organizations. 
-The organization determines the intent of the software in the repository, the exected process for the creation of new revisions, and administers technical controls to enforce the process.
+The organization determines the intent of the software in the repository, the expected process for the creation of new revisions, and administers technical controls to enforce the process.
 
 Consumers can review source provenance attestations to verify whether a particular revision meets their standards.
 
