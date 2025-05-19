@@ -26,7 +26,7 @@ Consumers can review source provenance attestations to verify whether a particul
 | Tag | A named pointer to a revision that does not typically move. Similar to branches, tags may be modified by authorized actors. Tags are often used by producers to indicate a more permanent name for a revision.
 | Change | A set of modifications to the source in a specific context. A change can be proposed and reviewed before being accepted.
 | Change History | A record of the history of revisions that preceded a specific revision.
-| Push / upload / publish | When an actor adds a new revision to the repository. Typically also modifies a branch to point to the new revision.
+| Push / upload / publish | When an actor adds or modifies the Source, Branches or Tags in the repository.
 | Review / approve / vote | When an actor uses a change review tool to comment upon, endorse, or reject a source change proposal.
 
 ## Source Roles
