@@ -30,13 +30,13 @@ See https://slsa.dev/community for ways to get involved in SLSA development.
 | [Build Level 4] | David A Wheeler (@david-a-wheeler)
 | [Attested Build Environments Track] | Marcela Melara (@marcelamelara), Pavel Iakovenko (@paveliak)
 | [Source Track] | Tom Hennen (@TomHennen)
-| [Version 1.1 release] | Arnaud J Le Hors (@lehors)
+| [Version 1.2 release] | Arnaud J Le Hors (@lehors)
 
 [Shepherd]: CONTRIBUTING.md#workstream-lifecycle
 [Build Level 4]: https://github.com/slsa-framework/slsa/issues/977
 [Attested Build Environments Track]: https://github.com/slsa-framework/slsa/labels/build-environment-track
-[Source Track]: https://github.com/slsa-framework/slsa/issues/956
-[Version 1.1 release]: https://github.com/slsa-framework/slsa/issues/900
+[Source Track]: https://github.com/orgs/slsa-framework/projects/5
+[Version 1.2 release]: https://github.com/slsa-framework/slsa/labels/slsa%201.2
 
 ## URL Aliases
 
