@@ -27,7 +27,7 @@ Consumers can review source provenance attestations to verify whether a particul
 | Change | A set of modifications to the source in a specific context. A change can be proposed and reviewed before being accepted.
 | Change History | A record of the history of revisions that preceded a specific revision.
 | Push / upload / publish | When an actor adds or modifies the Source, Branches or Tags in the repository.
-| Review / approve / vote | When an actor uses a change review tool to comment upon, endorse, or reject a source change proposal.
+| Review / approve / vote | When an actor uses a change management tool to comment upon, endorse, or reject a source change proposal.
 
 ## Source Roles
 
@@ -359,19 +359,18 @@ The following combinations are acceptable:
 Reviews SHOULD cover, at least, security relevant properties of the code.
 
 **[Final revision approved]** This requirement applies to the final revision
-submitted. I.e. if a change is made during the review process that change MUST
+submitted. I.e. if additional changes are made during the review process, those changes MUST
 be reviewed as well.
 
 **[Context-specific approvals]** Approvals are for a specific context, such as a
 repo + branch in git. Moving fully reviewed content from one context to another
-still requires review. (Exact definition of “context” depends on the project,
-and this does not preclude well-understood automatic or reviewless merges, such
-as cutting a release branch.)
+still requires review. Exact definition of “context” depends on the project,
+and this does not preclude well-understood automatic or review-less merges, such
+as cutting a release branch.
 
 **[Trusted Robot Contributions]** An organization MAY choose to allow a Trusted
-Robot to author and submit changes to source code without 2-party approval if
-the Robot’s identity is specifically allowed to bypass two-party review for the
-protected branch.
+Robot to author and submit changes to source code without 2-party approval. Any
+actors with perpetual exceptions of this kind MUST be explicitly documented.
 
 Examples:
 
