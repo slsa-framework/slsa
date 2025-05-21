@@ -368,9 +368,9 @@ still requires review. The exact definition of “context” depends on the proj
 and this does not preclude well-understood automatic merges, such as cutting a 
 release branch.
 
-**[Trusted Robot Contributions]** An organization MAY choose to allow a Trusted
-Robot to author and submit changes to source code without 2-party approval. Any
-actors with perpetual exceptions of this kind MUST be explicitly documented.
+**[Trusted Robot Contributions]** An organization MAY choose to grant a Trusted
+Robot a perpetual exception to a policy (e.g. a bot may be able to merge a change
+that has not been reviewed by two parties). 
 
 Examples:
 
