@@ -557,7 +557,7 @@ build with its own provenance that corresponds to the key.
 *Threat:* An adversary gains admin permissions for the artifact's build platform.
 
 *Mitigation:* Remote (SSH) access is disabled in the build image. 
-Control Plane attests build environment before the job is started in it and 
+Control Plane attests build environment before the build is started in it and 
 produces a [VSA][vsa] providing evidence that build environment has no outside-in access.
 
 *Example:* MyPackage is built on Awesome Builder. Awesome Builder allows
@@ -588,15 +588,15 @@ environments created after that point were compromised.
 
 *Threat:* Adversary injects malicious code into the target build by being able to run random code in the same build environment
 
-_Mitigation_: Unique build identifier is included into the Build environment provenance (and [TPM] measurement) allowing control plane to detect environment reuse.
+*Mitigation*: Unique build identifier is included into the Build environment provenance (and [TPM] measurement) allowing control plane to detect environment reuse.
 
-_Example_: Due to a bug in the build platform, the environment was used for running two or more jobs and effectively losing “ephemeral” property. Malicious actors could use this vulnerability to poison the build environments they should not have access to.
+*Example*: Due to a bug in the build platform, the environment was used for running two or more jobs and effectively losing “ephemeral” property. Malicious actors could use this vulnerability to poison the build environments they should not have access to.
 
 </details>
 <details><summary>Compromise secure boot<span>(BuildEnv L3)</span></summary>
 
 *Threat:* An adversary having unauthorized access to the compute provider infrastructure was able 
-to deploy a bootkit and circumvent secure boot.
+to deploy a bootkit and circumvent secure boot of a virtual machine.
 
 *Mitigation:* Build platform relies on hardware-assisted mechanisms to attest integrity of the 
 build environment (e.g. hardware [TPM], [AMD SEV], [Intel TDX])
