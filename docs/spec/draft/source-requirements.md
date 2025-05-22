@@ -365,12 +365,11 @@ be reviewed as well.
 **[Context-specific approvals]** Approvals are for a specific context, such as a
 repo + branch in git. Moving fully reviewed content from one context to another
 still requires review. The exact definition of “context” depends on the project,
-and this does not preclude well-understood automatic merges, such as cutting a 
-release branch.
+and this does not preclude well-understood automatic merges, such as cutting a release branch.
 
 **[Trusted Robot Contributions]** An organization MAY choose to grant a Trusted
 Robot a perpetual exception to a policy (e.g. a bot may be able to merge a change
-that has not been reviewed by two parties). 
+that has not been reviewed by two parties).
 
 Examples:
 
