@@ -9,7 +9,7 @@ In this track, provenance describes how a source revision came to exist.
 Source provenance applies to a single revision of a repository, not the entire repository.
 The expected process for creating a new revision is determined solely by that repository's owner (the organization) who also determines the intent of the software in the repository and administers technical controls to enforce the process.
 
-Consumers can review source provenance attestations to verify whether a particular revision meets their standards.
+Consumers can review attestations to verify whether a particular revision meets their standards.
 
 ## Definitions
 
