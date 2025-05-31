@@ -49,7 +49,7 @@ Consumers can examine the various source provenance attestations to determine if
 
 When onboarding a branch to the SLSA Source Track or increasing the level of
 that branch, organizations are making claims about how the branch is managed
-from that time or revision forward.
+from that revision forward. This establishes [continuity](#continuity).
 
 No claims are made for prior revisions.
 
@@ -254,13 +254,26 @@ E.g. The organization may configure the SCS to protect `main` and
 `refs/heads/releases/*`, but not `refs/heads/playground/*`.
 
 <td><td>✓<td>✓<td>✓
-<tr id="continuity"><td>Branch Continuity<td>
+<tr id="continuity"><td>Continuity<td>
 
-The SCS MUST prevent rewriting the history of protected branches.
-In other words, if the organization updates a branch from commit A to commit B, commit B MUST be a descendant of A.
-For systems like GitHub or GitLab, this can be accomplished by enabling branch protection rules that prevent force pushes and branch deletions.
+Revisions are created by applying a specific code change (a "diff" in git) on
+top of an earlier revision of a branch. The SCS MUST prevent tampering with the
+history of revisions on protected branches.
 
-The SCS MUST prevent deletion of the entire repository (including all branches) and replace it with different source.
+In other words, if the organization updates a branch from commit A to commit B,
+commit B MUST be a descendant of A. For systems like GitHub or GitLab, this can
+be accomplished by enabling branch protection rules that prevent force pushes
+and branch deletions.
+
+The SCS MUST prevent the entire repository (including all branches) from being
+deleted and replaced by different source.
+
+Continuity MUST be established and tracked from a specific revision. If there is
+a lapse in continuity for a specific control, that continuity MUST be
+re-established from a new revision.
+
+Continuity MUST also apply to any [change management processes](#enforced-change-management-process)
+which are enforced on the protected branches.
 
 Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
@@ -525,3 +538,4 @@ Example source provenance attestations:
   phishing resistant.
 -   Protect against authentication token theft by forbidding bearer tokens
   (e.g. PATs).
+-   Including length of continuity in the VSAs
