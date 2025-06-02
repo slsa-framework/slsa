@@ -160,6 +160,19 @@ abusing privileges.
 
 #### (B2) Evade change management process
 
+<details><summary>Alter change history<span>(Source L2+)</span></summary>
+
+*Threat:* Adversary alters branch history to hide malicious activity.
+
+*Mitigation:* The Source Control System prevents branch history from being
+altered.
+
+*Example:* Adversary submits a malicious commit `X` to the `main` branch. A
+release is built and published from `X`. The adversary then "force pushes"
+to `main` erasing the record of the malicious commit.  Solution: The Source
+Control System is configured to prevent force pushes to `main`.
+
+</details>
 <details><summary>Replace tagged content with malicious content<span>(Source L2+)</span></summary>
 
 *Threat:* Adversary alters a tag to point at malicious content.
