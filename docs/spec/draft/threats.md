@@ -160,6 +160,18 @@ abusing privileges.
 
 #### (B2) Evade change management process
 
+<details><summary>Replace tagged content with malicious content<span>(Source L2+)</span></summary>
+
+*Threat:* Adversary alters a tag to point at malicious content.
+
+*Mitigation:* The Source Control System does not allow tags to be updated.
+
+*Example:* Adversary crafts a malicious commit `X` on a development branch which
+does enforce any controls. They then update the `release_1.2` tag to point to
+`X`. Consumers of `release_1.2` will get the malicious revision. Solution: The
+source control system does not allow tags to be updated.
+
+</details>
 <details><summary>Skip required quality checks<span>(Source L3+)</span></summary>
 
 *Threat:* Code is submitted without following the producers documented
@@ -178,7 +190,7 @@ SCS that requires 95%+ test coverage.
 
 *Threat:* Modify the code after it has been reviewed but before submission.
 
-*Mitigation:* Source Control System invalidates approvals whenever the proposed change is modified.
+*Mitigation:* The Source Control System invalidates approvals whenever the proposed change is modified.
 
 *Example:* Source repository requires two-person review on all changes.
 Adversary sends an initial "good" pull request to a peer, who approves it.
