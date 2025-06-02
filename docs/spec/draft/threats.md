@@ -160,11 +160,25 @@ abusing privileges.
 
 #### (B2) Evade change management process
 
+<details><summary>Skip required quality checks<span>(Source L3+)</span></summary>
+
+*Threat:* Code is submitted without following the producers documented
+development process, introducing unintended behavior.
+
+*Mitigation:* The producer uses the Source Control System to implement technical
+controls ensuring adherence to the development process.
+
+*Example:* An engineer submits a new feature that has a critical flaw on an
+untested code path, in violation of the producer's documented process of having
+high test coverage. Solution: The producer implements a technical control in the
+SCS that requires 95%+ test coverage.
+
+</details>
 <details><summary>Modify code after review<span>(Source L4)</span></summary>
 
 *Threat:* Modify the code after it has been reviewed but before submission.
 
-*Mitigation:* Source control platform invalidates approvals whenever the proposed change is modified.
+*Mitigation:* Source Control System invalidates approvals whenever the proposed change is modified.
 
 *Example:* Source repository requires two-person review on all changes.
 Adversary sends an initial "good" pull request to a peer, who approves it.
@@ -173,10 +187,10 @@ Adversary then modifies their proposal to contain "bad" code.
 Solution: Configure the code review rules to require review of the most recent revision before submission.
 
 </details>
-<details><summary>Submit a change that is unreviewable</summary>
+<details><summary>Submit a change that is unreviewable<span>(Source L4)</span></summary>
 
-*Threat:* Adversary crafts a change that is meaningless for a human to review that looks
-benign but is actually malicious.
+*Threat:* Adversary crafts a change that is meaningless for a human to review
+that looks benign but is actually malicious.
 
 *Mitigation:* Code review system ensures that all reviews are informed and
 meaningful to the extent possible. For example the system could show
