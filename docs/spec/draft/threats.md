@@ -96,7 +96,7 @@ Threats in this category can be mitigated by following source control management
 
 *Threat:* Malicious code submitted to the source repository.
 
-*Mitigation:* At Source L4 the producer requires approval of all changes before they are accepted.
+*Mitigation:* Requires approval of all changes before they are accepted.
 
 *Example:* Adversary directly pushes a change to a git repo's `main` branch.
 Solution: The source control system is configured require two party review for
@@ -107,7 +107,7 @@ contributions to the `main` branch.
 
 *Threat:* An actor is able to control multiple account and effectively approve their own code changes.
 
-*Mitigation:* At Source L4 only changes approved by two trusted persons are able to be submitted. Secondary accounts should not be trusted.
+*Mitigation:* Only accept approvals from 'trusted persons'. Secondary accounts should not be trusted.
 
 *Example:* Adversary creates a pull request using a secondary account and approves it using their primary account.
 Solution: The producer only allows 'trusted persons' to provide approvals for reviews.
