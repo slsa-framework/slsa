@@ -99,7 +99,7 @@ Threats in this category can be mitigated by following source control management
 *Mitigation:* Requires approval of all changes before they are accepted.
 
 *Example:* Adversary directly pushes a change to a git repo's `main` branch.
-Solution: The source control system is configured require two party review for
+Solution: The Source Control System is configured require two party review for
 contributions to the `main` branch.
 
 </details>
@@ -146,13 +146,13 @@ Solution: The producer adjusts the rules to prohibit such exceptions.
 
 *Threat:* Trusted actor with "admin" privileges in a repository submits code by disabling existing controls.
 
-*Mitigation:* The source control system must have controls in place to prevent
+*Mitigation:* The Source Control System must have controls in place to prevent
 and detect abusive behavior from administrators (e.g. two-person approvals,
 audit logging).
 
 *Example:* GitHub repository-level admin removes a branch requirement, pushes
 their change, then re-enables the requirement to cover their tracks.
-Solution: Consumers do not accept claims from the source control system unless
+Solution: Consumers do not accept claims from the Source Control System unless
 they trust sufficient controls are in place to prevent repo admins from
 abusing privileges.
 
@@ -182,7 +182,7 @@ Control System is configured to prevent force pushes to `main`.
 *Example:* Adversary crafts a malicious commit `X` on a development branch which
 does enforce any controls. They then update the `release_1.2` tag to point to
 `X`. Consumers of `release_1.2` will get the malicious revision. Solution: The
-source control system does not allow tags to be updated.
+Source Control System does not allow tags to be updated.
 
 </details>
 <details><summary>Skip required quality checks<span>(Source L3+)</span></summary>
@@ -304,7 +304,7 @@ identities and, Source L3+, records contemporaneous evidence of changes in
 signed attestations.
 
 *Example:* Adversary 'X' creates a commit with unauthenticated metadata claiming
-it was authored by 'Y'. Solution: The source control system records the identity
+it was authored by 'Y'. Solution: The Source Control System records the identity
 of 'X' when 'X' submits the commit to the repository.
 
 </details>
@@ -339,7 +339,7 @@ malicious version of the server that includes a backdoor allowing specific users
 to bypass branch protections. Adversary then uses this backdoor to submit a
 change to MyPackage without review.
 
-*Solution:* Consumers do not accept claims from the source control system unless
+*Solution:* Consumers do not accept claims from the Source Control System unless
 they trust sufficient controls are in place to prevent repo admins from
 abusing privileges.
 
