@@ -209,6 +209,7 @@ The revision ID is defined by the SCS and MUST be uniquely identifiable within t
 When the revision ID is a digest of the content of the revision (as in git) nothing more is needed.
 When the revision ID is a number or otherwise not a digest, then the SCS MUST document how the immutability of the revision is established.
 The same revision ID MAY be present in multiple repositories.
+
 See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
 
 <td>✓<td>✓<td>✓<td>✓
