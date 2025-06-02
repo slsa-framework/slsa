@@ -256,11 +256,11 @@ E.g. The organization may configure the SCS to protect `main` and
 <td><td>✓<td>✓<td>✓
 <tr id="continuity"><td>Branch Continuity<td>
 
-It MUST NOT be possible to rewrite the history of protected branches.
+The SCS MUST prevent rewriting the history of protected branches.
 In other words, if the organization updates a branch from commit A to commit B, commit B MUST be a descendant of A.
 For systems like GitHub or GitLab, this can be accomplished by enabling branch protection rules that prevent force pushes and branch deletions.
 
-It MUST NOT be possible to delete the entire repository (including all branches) and replace it with different source.
+The SCS MUST prevent deletion of the entire repository (including all branches) and replace it with different source.
 
 Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
@@ -272,8 +272,8 @@ taken to prevent unintentional changes.
 Unlike branches, tags have no built-in continuity enforcement mechanisms or
 change management processes.
 
-If a tag is used to identify a specific commit to external systems, it MUST NOT
-be possible to move or delete those tags.
+If a tag is used to identify a specific commit to external systems, the SCS MUST
+prevent those tags from being moved or deleted.
 
 <td><td>✓<td>✓<td>✓
 <tr id="identity-management"><td>Identity Management<td>
