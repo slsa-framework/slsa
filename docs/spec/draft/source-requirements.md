@@ -371,10 +371,9 @@ plain-text changes being reviewed and SHOULD provide mechanisms to provide human
 understandable interpretations of non-plain-text changes (e.g. render images,
 verify and display provenance for binaries, etc...).
 
-**[Trusted Robot Contributions]** An organization MAY choose to allow a Trusted
-Robot to author and submit changes to source code without 2-party approval if
-the Robot’s identity is specifically allowed to bypass two-party review for the
-protected branch.
+**[Trusted Robot Contributions]** An organization MAY choose to grant a Trusted
+Robot a perpetual exception to a policy (e.g. a bot may be able to merge a change
+that has not been reviewed by two parties).
 
 Examples:
 
