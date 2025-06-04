@@ -272,15 +272,17 @@ which are enforced on the protected branches.
 Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
 <td><td>✓<td>✓<td>✓
-<tr id="tag-hygiene"><td>Tag Hygiene<td>
+<tr id="protected-tags"><td>Protected Tags<td>
 
-If the SCS supports tags (or other non-branch tracks), additional care must be
-taken to prevent unintentional changes.
+If the SCS supports tags (or other non-branch revision trackers), additional
+care must be taken to prevent unintentional changes.
 Unlike branches, tags have no built-in continuity enforcement mechanisms or
 change management processes.
 
-If a tag is used to identify a specific commit to external systems, the SCS MUST
-prevent those tags from being moved or deleted.
+The SCS MUST provide a mechanism for organizations to indicate which tags should
+be protected by SLSA Source Level 2+ requirements.
+
+The SCS MUST prevent protected tags from being moved or deleted.
 
 <td><td>✓<td>✓<td>✓
 <tr id="identity-management"><td>Identity Management<td>
