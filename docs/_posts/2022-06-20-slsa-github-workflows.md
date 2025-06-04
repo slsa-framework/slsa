@@ -4,6 +4,8 @@ author: "Laurent Simon, Asra Ali, Ian Lewis, Mark Lodato, Jose Palafox, Joshua L
 is_guest_post: false
 ---
 
+<!-- markdownlint-disable MD059 -->
+
 A couple of months ago, Google and GitHub demonstrated how to generate non-forgeable SLSA 3 provenance for packages/binaries created via GitHub Actions ([1](https://security.googleblog.com/2022/04/improving-software-supply-chain.html), [2](https://github.blog/2022-04-07-slsa-3-compliance-with-github-actions/)). Since then, we've been working hard to turn the reference example into a production-ready system for everyone to use. Today, we're announcing the v1 release of the [trusted builders](https://github.com/slsa-framework/slsa-github-generator) that can be used in GitHub Actions and [verification tools](https://github.com/slsa-framework/slsa-verifier).
 
 As a reminder, [SLSA provenance](/provenance/) extends the principle of artifact signing. Where a signature endorses the final binary, provenance details exactly where and how the artifact was built. Generating SLSA 3 provenance ensures users can trust and verify an artifact's build integrity. By making this information available, you can help your users protect against attacks that tamper with the build process, such as changing the source material or uploading a modified binary that sidelined the authorized build recipe.

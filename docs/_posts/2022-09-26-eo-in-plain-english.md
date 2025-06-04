@@ -4,6 +4,8 @@ author: "Isaac Hepworth"
 is_guest_post: true
 ---
 
+<!-- markdownlint-disable MD059 -->
+
 You may have heard about [EO 14028](https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/), the “Executive Order on Improving the Nation’s Cybersecurity”, which mandates the establishment of minimum supply chain security standards for all software consumed by the US government. On September 14th the White House Office of Management and Budget (OMB) issued [a memorandum](https://www.whitehouse.gov/wp-content/uploads/2022/09/M-22-18.pdf) setting firm and aggressive timelines for implementation of guidelines stemming from the EO, and you might reasonably be wondering what it all means. If so, this post is for you. We’re going to try to lay it out in plain English and share steps to help you get ready to meet the timelines
 
 ## Background
