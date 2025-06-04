@@ -303,21 +303,6 @@ The SCS MUST document how actors are identified for the purposes of attribution.
 Activities conducted on the SCS SHOULD be attributed to authenticated identities.
 
 <td><td>✓<td>✓<td>✓
-<tr id="multi-factor-authentication"><td>Multi-factor Authentication<td>
-
-User accounts that can modify the source or the project's configuration must
-use multi-factor authentication or its equivalent.
-The SCS MUST declare which forms of identity it considers to be trustworthy
-for this purpose. All other forms of identity SHOULD be considered informational
-and SHOULD NOT be used for authentication.
-
-A second factor MUST be required when a user enrolls new access tokens that
-enable modifications (e.g. ssh keys, PATs), or when enrolling additional
-second factors (e.g. hardware tokens, authenticator apps).
-
-See [source roles](#source-roles).
-
-<td><td><td>✓<td>✓
 <tr id="source-provenance"><td>Source Provenance<td>
 
 [Source Provenance](#provenance-attestations) are attestations that contain
