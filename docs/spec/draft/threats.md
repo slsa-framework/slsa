@@ -96,10 +96,10 @@ Threats in this category can be mitigated by following source control management
 
 *Threat:* Malicious code submitted to the source repository.
 
-*Mitigation:* Requires approval of all changes before they are accepted.
+*Mitigation:* Require approval of all changes before they are accepted.
 
 *Example:* Adversary directly pushes a change to a git repo's `main` branch.
-Solution: The Source Control System is configured require two party review for
+Solution: The Source Control System is configured to require two party review for
 contributions to the `main` branch.
 
 </details>
@@ -150,7 +150,7 @@ Solution: The producer adjusts the rules to prohibit such exceptions.
 and detect abusive behavior from administrators (e.g. two-person approvals,
 audit logging).
 
-*Example:* GitHub repository-level admin removes a branch requirement, pushes
+*Example:* GitHub repository-level admin removes a branch protection requirement, pushes
 their change, then re-enables the requirement to cover their tracks.
 Solution: Consumers do not accept claims from the Source Control System unless
 they trust sufficient controls are in place to prevent repo admins from
@@ -177,15 +177,15 @@ Control System is configured to prevent force pushes to `main`.
 
 *Threat:* Adversary alters a tag to point at malicious content.
 
-*Mitigation:* The Source Control System does not allow tags to be updated.
+*Mitigation:* The Source Control System does not allow protected tags to be updated.
 
 *Example:* Adversary crafts a malicious commit `X` on a development branch which
 does enforce any controls. They then update the `release_1.2` tag to point to
 `X`. Consumers of `release_1.2` will get the malicious revision. Solution: The
-Source Control System does not allow tags to be updated.
+Source Control System does not allow protected tags to be updated.
 
 </details>
-<details><summary>Skip required quality checks<span>(Source L3+)</span></summary>
+<details><summary>Skip required checks<span>(Source L3+)</span></summary>
 
 *Threat:* Code is submitted without following the producers documented
 development process, introducing unintended behavior.
@@ -214,8 +214,7 @@ Solution: Configure the code review rules to require review of the most recent r
 </details>
 <details><summary>Submit a change that is unreviewable<span>(Source L4)</span></summary>
 
-*Threat:* Adversary crafts a change that is meaningless for a human to review
-that looks benign but is actually malicious.
+*Threat:* Adversary crafts a change that looks benign to a reviewer but is actually malicious.
 
 *Mitigation:* Code review system ensures that all reviews are informed and
 meaningful to the extent possible. For example the system could show
@@ -300,8 +299,8 @@ stamping."
 discoverability of a change.
 
 *Mitigation:* The Source Control System only attributes changes to authenticated
-identities and, Source L3+, records contemporaneous evidence of changes in
-signed attestations.
+identities and, at Source L3+, records contemporaneous evidence of changes in
+signed source provenance attestations.
 
 *Example:* Adversary 'X' creates a commit with unauthenticated metadata claiming
 it was authored by 'Y'. Solution: The Source Control System records the identity
