@@ -59,16 +59,20 @@ Intended for: Organizations currently storing source in non-standard ways who wa
 Benefits:
 Migrating to the appropriate tools is an important first step on the road to operational maturity.
 
-### Level 2: Branch History
+### Level 2: Controls
 
 Summary:
-Clarifies which branches in a repo are consumable and guarantees that all changes to protected branches are recorded.
+Clarifies which branches and tags in a repo are consumable and guarantees that
+all changes to protected branches and tags are recorded and subject to the
+organization's technical controls.
 
 Intended for:
 All organizations of any size producing software of any kind.
 
 Benefits:
-Allows source consumers to track changes to the software over time and attribute those changes to the people that made them.
+Allows organizations and source consumers the ability to ensure the change
+management process has been followed to track changes to the software over time
+and attribute those changes to the actors that made them.
 
 ### Level 3: Authenticatable and Auditable Provenance
 
