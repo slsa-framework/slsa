@@ -146,8 +146,9 @@ and roles that are allowed to perform sensitive actions on protected branches
 and tags.
 
 > For example, an organization may configure the SCS to:
-> 1. Assign users to a `maintainers` role.
-> 2. Only allow users in `maintainers` to make updates to `main`.
+>
+> 1.  Assign users to a `maintainers` role.
+> 2.  Only allow users in `maintainers` to make updates to `main`.
 
 The organization MUST specify what technical controls consumers can expect to be
 enforced for revisions in each protected branch and tag using the
