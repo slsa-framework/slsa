@@ -128,6 +128,27 @@ process to ensure changes to source matches the organization's intent.
 
 <td><td>✓<td>✓<td>✓
 
+<tr id="specify-control-expectations"><td>Specify control expectations<td>
+
+The organization MUST specify what technical controls consumers can expect to be
+enforced for revisions in each branch using the
+[Enforced change management process](#enforced-change-management-process)
+and it MUST document the meaning of those controls.
+
+For example, an organization may claim that revisions on `main` passed unit
+tests before being accepted.  The organization could then configure the SCS to
+enforce this requirement and store corresponding [test result attestations] for
+all affected revisions.  They may then embed the `ORG_SOURCE_UNIT_TESTED`
+property in the [source summary attestations](#summary-attestation). Consumers
+would then expect that future revisions on `main` have been united tested and
+determine if that expectation has been met by looking for the
+`ORG_SOURCE_UNIT_TESTED` property in the VSAs and, if desired, consult the
+[test result attestations] as well.
+
+[test result attestations]: https://github.com/in-toto/attestation/blob/main/spec/predicates/test-result.md
+
+<td><td>✓<td>✓<td>✓
+
 <tr id="specify-protection"><td>Specify which branches and tags are protected<td>
 
 The organization MUST indicate which branches and tags it protects with Source
@@ -169,26 +190,6 @@ and regulations which may require the change to be kept private to the extent po
 Organizations SHOULD prefer to make logs public if possible.
 
 <td><td>✓<td>✓<td>✓
-
-<tr id="specify-control-expectations"><td>Specify control expectations<td>
-
-The organization MUST specify what technical controls consumers can expect to be
-enforced for revisions in each branch using the
-[Enforced change management process](#enforced-change-management-process).
-
-For example, an organization may claim that revisions on `main` passed unit
-tests before being accepted.  The organization could then configure the SCS to
-enforce this requirement and store corresponding [test result attestations] for
-all affected revisions.  They may then embed the `ORG_SOURCE_UNIT_TESTED`
-property in the [source summary attestations](#summary-attestation). Consumers
-would then expect that future revisions on `main` have been united tested and
-determine if that expectation has been met by looking for the
-`ORG_SOURCE_UNIT_TESTED` property in the VSAs and, if desired, consult the
-[test result attestations] as well.
-
-[test result attestations]: https://github.com/in-toto/attestation/blob/main/spec/predicates/test-result.md
-
-<td><td><td>✓<td>✓
 
 </table>
 
@@ -247,6 +248,33 @@ should be protected by SLSA Source Level 2+ requirements.
 
 E.g. The organization may configure the SCS to protect `main` and
 `refs/heads/releases/*`, but not `refs/heads/playground/*`.
+
+<td><td>✓<td>✓<td>✓
+<tr id="enforced-change-management-process"><td>Enforced change management process<td>
+
+The SCS MUST
+
+-   Ensure organization-defined technical controls are enforced for changes made
+   to protected branches.
+-   Allow organizations to specify
+   [additional properties](#additional-properties) to be included in the
+   [source summary](#summary-attestation) when the corresponding controls are
+enforced.
+-   Allow organizations to distribute additional attestations related to their
+   technical controls to consumers authorized to access the corresponding source
+   revision.
+
+The SCS MUST NOT allow organization specified properties to begin with any value
+other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
+corresponding claims.
+
+Enforcement of the organization-defined technical controls could be accomplished
+by, for example:
+
+-   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)) which require additional checks to 'pass'
+    (e.g. unit tests, linters), or
+-   the application and verification of [gittuf](https://github.com/gittuf/gittuf) policies, or
+-   some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
 
 <td><td>✓<td>✓<td>✓
 <tr id="continuity"><td>Continuity<td>
@@ -318,33 +346,6 @@ provenance documents for relevant revisions.
 It is possible that an SCS can make no claims about a particular revision.
 For example, this would happen if the revision was created on another SCS,
 or if the revision was not the result of an accepted change management process.
-
-<td><td><td>✓<td>✓
-<tr id="enforced-change-management-process"><td>Enforced change management process<td>
-
-The SCS MUST
-
--   Ensure organization-defined technical controls are enforced for changes made
-   to protected branches.
--   Allow organizations to specify
-   [additional properties](#additional-properties) to be included in the
-   [source summary](#summary-attestation) when the corresponding controls are
-enforced.
--   Allow organizations to distribute additional attestations related to their
-   technical controls to consumers authorized to access the corresponding source
-   revision.
-
-The SCS MUST NOT allow organization specified properties to begin with any value
-other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
-corresponding claims.
-
-Enforcement of the organization-defined technical controls could be accomplished
-by, for example:
-
--   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)) which require additional checks to 'pass'
-    (e.g. unit tests, linters), or
--   the application and verification of [gittuf](https://github.com/gittuf/gittuf) policies, or
--   some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
 
 <td><td><td>✓<td>✓
 <tr id="two-party-review"><td>Two party review<td>
