@@ -136,6 +136,11 @@ should be protected. From that point forward revisions on 'main' will be
 eligible for Source Level 2+ while revisions made solely on 'experimental' will
 not.
 
+The organization MUST use the SCS provided
+[Identity Management capability](#identity-management) to configure the actors
+and roles that are allowed to perform sensitive actions on protected branches
+and tags.
+
 The organization MUST specify what technical controls consumers can expect to be
 enforced for revisions in each protected branch and tag using the
 [Enforced change management process](#enforced-change-management-process)
@@ -310,16 +315,23 @@ The SCS MUST prevent protected tags from being moved or deleted.
 <td><td>✓<td>✓<td>✓
 <tr id="identity-management"><td>Identity Management<td>
 
-There exists an identity management system or some other means of identifying
-and authenticating actors. Depending on the SCS, identity management may be
-provided by source control services (e.g., GitHub, GitLab), implemented using
-cryptographic signatures (e.g., using gittuf to manage public keys for actors),
-or extend existing authentication systems used by the organization (e.g., Active
-Directory, Okta, etc.).
+The SCS MUST provide an identity management system or some other means of
+identifying and authenticating actors.
+
+The SCS MUST allow organizations to specify which actors and roles are allowed
+to perform sensitive actions within a repository (e.g. creation or updates of
+branches, approval of changes).
+
+Depending on the SCS, identity management may be provided by source control
+services (e.g., GitHub, GitLab), implemented using cryptographic signatures
+(e.g., using gittuf to manage public keys for actors), or extend existing
+authentication systems used by the organization (e.g., Active Directory, Okta,
+etc.).
 
 The SCS MUST document how actors are identified for the purposes of attribution.
 
-Activities conducted on the SCS SHOULD be attributed to authenticated identities.
+Activities conducted on the SCS SHOULD be attributed to authenticated
+identities.
 
 <td><td>✓<td>✓<td>✓
 <tr id="source-provenance"><td>Source Provenance<td>
