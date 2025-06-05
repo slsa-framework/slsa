@@ -269,7 +269,7 @@ enforced.
    technical controls to consumers authorized to access the corresponding source
    revision.
 
-The SCS MUST NOT allow organization specified properties to begin with any value
+The SCS MUST prevent organization-specified properties from beginning with any value
 other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
 corresponding claims.
 
