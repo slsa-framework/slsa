@@ -193,7 +193,8 @@ of the other top-level fields, such as `subject`, see [Statement]._
 `verifiedLevels` _array ([SlsaResult]), required_
 
 > Indicates the highest level of each track verified for the artifact (and not
-> its dependencies), or "FAILED" if policy verification failed.
+> its dependencies) and any [verified properties](verified-properties) verified
+> for the artifact or "FAILED" if policy verification failed.
 >
 > Users MUST NOT include more than one level per SLSA track. Note that each SLSA
 > level implies all levels below it (e.g. `SLSA_BUILD_LEVEL_3` implies

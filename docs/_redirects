@@ -54,7 +54,7 @@
 /provenance/v1-rc2      /spec/v1.0-rc2/provenance   301
 /provenance/v1.0        /spec/v1.0/provenance       301
 /provenance/v1.1        /spec/v1.1/provenance       301
-/provenance/draft       /spec/draft/provenance      301
+/provenance/draft       /spec/draft/build-provenance      301
 
 /spec                   /spec/latest            302  # floating
 /spec/faq               /spec/latest/faq        302  # floating

@@ -1,6 +1,6 @@
 ---
-title: Provenance
-description: Description of SLSA provenance specification for verifying where, when, and how something was produced.
+title: Build Provenance
+description: Description of SLSA build provenance specification for verifying where, when, and how something was produced.
 layout: standard
 ---
 To trace software back to the source and define the moving parts in a complex

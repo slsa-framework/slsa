@@ -9,7 +9,7 @@ tampered with and can be securely traced back to its source.
 
 This page is a descriptive overview of the SLSA levels and tracks, describing
 their intent. For the prescriptive requirements for each level, see
-[Requirements](requirements.md). For a general overview of SLSA, see
+[Requirements](build-requirements.md). For a general overview of SLSA, see
 [About SLSA](principles.md).
 
 ## Levels and tracks
@@ -54,7 +54,7 @@ exactly how this is implemented, including: means of defining expectations, what
 provenance format is accepted, whether reproducible builds are used, how
 provenance is distributed, when verification happens, and what happens on
 failure. Guidelines for implementers can be found in the
-[requirements](requirements.md).
+[requirements](build-requirements.md).
 
 <section id="build-l0">
 
@@ -238,7 +238,7 @@ All of [Build L2], plus:
 [build l2]: #build-l2
 [build l3]: #build-l3
 [future versions]: future-directions.md
-[hosted]: requirements.md#isolation-strength
+[hosted]: build-requirements.md#isolation-strength
 [previous version]: ../v0.1/levels.md
 [provenance]: terminology.md
 [verification]: verifying-artifacts.md
