@@ -209,6 +209,7 @@ The revision ID is defined by the SCS and MUST be uniquely identifiable within t
 When the revision ID is a digest of the content of the revision (as in git) nothing more is needed.
 When the revision ID is a number or otherwise not a digest, then the SCS MUST document how the immutability of the revision is established.
 The same revision ID MAY be present in multiple repositories.
+
 See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
 
 <td>✓<td>✓<td>✓<td>✓
@@ -364,6 +365,11 @@ be reviewed as well.
 repo + branch in git. Moving fully reviewed content from one context to another
 still requires review. The exact definition of “context” depends on the project,
 and this does not preclude well-understood automatic merges, such as cutting a release branch.
+
+**[Informed Review]** The SCS MUST provide a human readable diff of all
+plain-text changes being reviewed and SHOULD provide mechanisms to provide human
+understandable interpretations of non-plain-text changes (e.g. render images,
+verify and display provenance for binaries, etc...).
 
 **[Trusted Robot Contributions]** An organization MAY choose to grant a Trusted
 Robot a perpetual exception to a policy (e.g. a bot may be able to merge a change

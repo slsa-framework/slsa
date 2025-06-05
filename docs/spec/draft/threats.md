@@ -92,15 +92,15 @@ Threats in this category can be mitigated by following source control management
 
 #### (B1) Submit change without review
 
-<details><summary>Directly submit without review</summary>
+<details><summary>Directly submit without review<span>(Source L4)</span></summary>
 
 *Threat:* Malicious code submitted to the source repository.
 
-*Mitigation:* The producer requires approval of all changes before they are accepted.
+*Mitigation:* Require approval of all changes before they are accepted.
 
 *Example:* Adversary directly pushes a change to a git repo's `main` branch.
-Solution: The producer can configure branch protection rules on the `main` branch.
-A best practice is to require approval of any changes via a change management tool before they are accepted into the source.
+Solution: The Source Control System is configured to require two party review for
+contributions to the `main` branch.
 
 </details>
 <details><summary>Single actor controls multiple accounts</summary>
@@ -146,48 +146,79 @@ Solution: The producer adjusts the rules to prohibit such exceptions.
 
 </details>
 
-<details><summary>Highly-permissioned actor bypasses or disables controls</summary>
+<details><summary>Highly-permissioned actor bypasses or disables controls<span>(verification)</span></summary>
 
 *Threat:* Trusted actor with "admin" privileges in a repository submits code by disabling existing controls.
 
-*Mitigation:* All actors must be subject to same controls, whether or not they have
-administrator privileges.
-Changes to the controls themselves should require their own review process.
+*Mitigation:* The Source Control System must have controls in place to prevent
+and detect abusive behavior from administrators (e.g. two-person approvals,
+audit logging).
 
-*Example 1:* A GitHub repository-level admin pushes a change without review, even though GitHub branch protection is enabled.
-Solution: The producer can modify the rule to disallow bypass by administrators, or move the rule to an organization-level ruleset.
-
-*Example 2:* GitHub repository-level admin removes a branch requirement, pushes their change, then re-enables the requirement to cover their tracks.
-Solution: The producer can configure higher-permission-level rules (such as organization-level GitHub Rulesets) to prevent repository-level tampering.
+*Example:* GitHub repository-level admin removes a branch protection requirement, pushes
+their change, then re-enables the requirement to cover their tracks.
+Solution: Consumers do not accept claims from the Source Control System unless
+they trust sufficient controls are in place to prevent repo admins from
+abusing privileges.
 
 </details>
 
 #### (B2) Evade change management process
 
-<details><summary>Modify code after review</summary>
+<details><summary>Alter change history<span>(Source L2+)</span></summary>
+
+*Threat:* Adversary alters branch history to hide malicious activity.
+
+*Mitigation:* The Source Control System prevents branch history from being
+altered.
+
+*Example:* Adversary submits a malicious commit `X` to the `main` branch. A
+release is built and published from `X`. The adversary then "force pushes"
+to `main` erasing the record of the malicious commit.  Solution: The Source
+Control System is configured to prevent force pushes to `main`.
+
+</details>
+<details><summary>Replace tagged content with malicious content<span>(Source L2+)</span></summary>
+
+*Threat:* Adversary alters a tag to point at malicious content.
+
+*Mitigation:* The Source Control System does not allow protected tags to be updated.
+
+*Example:* Adversary crafts a malicious commit `X` on a development branch which
+does enforce any controls. They then update the `release_1.2` tag to point to
+`X`. Consumers of `release_1.2` will get the malicious revision. Solution: The
+Source Control System does not allow protected tags to be updated.
+
+</details>
+<details><summary>Skip required checks<span>(Source L3+)</span></summary>
+
+*Threat:* Code is submitted without following the producers documented
+development process, introducing unintended behavior.
+
+*Mitigation:* The producer uses the Source Control System to implement technical
+controls ensuring adherence to the development process.
+
+*Example:* An engineer submits a new feature that has a critical flaw on an
+untested code path, in violation of the producer's documented process of having
+high test coverage. Solution: The producer implements a technical control in the
+SCS that requires 95%+ test coverage.
+
+</details>
+<details><summary>Modify code after review<span>(Source L4)</span></summary>
 
 *Threat:* Modify the code after it has been reviewed but before submission.
 
-*Mitigation:* Source control platform invalidates approvals whenever the proposed change is modified.
+*Mitigation:* The Source Control System invalidates approvals whenever the proposed change is modified.
 
 *Example:* Source repository requires two-person review on all changes.
 Adversary sends an initial "good" pull request to a peer, who approves it.
 Adversary then modifies their proposal to contain "bad" code.
 
 Solution: Configure the code review rules to require review of the most recent revision before submission.
-Resetting or "dismissing" votes on a PR introduces substantial friction to the process.
-Depending on the security posture of the source, the producer has a few choices to deal with this situation.
-They may:
-
--   Accept this risk. Code review is already expensive and the pros outweigh the cons here.
--   Dismiss reviews when new changes are added. This is a common outcome when expert code review is required.
--   Leave previous reviews intact, but require that "at least the last revision must be reviewed by someone."
 
 </details>
-<details><summary>Submit a change that is unreviewable</summary>
+<details><summary>Submit a change that is unreviewable<span>(Source L4)</span></summary>
 
-*Threat:* Adversary crafts a change that is meaningless for a human to review that looks
-benign but is actually malicious.
+*Threat:* Adversary crafts a change that looks benign to a reviewer but is actually malicious.
 
 *Mitigation:* Code review system ensures that all reviews are informed and
 meaningful to the extent possible. For example the system could show
@@ -203,7 +234,7 @@ metadata](https://en.wikipedia.org/wiki/Exif), allowing them to make an
 informed decision.
 
 </details>
-<details><summary>Copy a reviewed change to another context</summary>
+<details><summary>Copy a reviewed change to another context<span>(Source L4)</span></summary>
 
 *Threat:* Get a change reviewed in one context and then transfer it to a
 different context.
@@ -214,7 +245,8 @@ different context.
 forks the repo, submits a change in the fork with review from a colluding
 colleague (who is not trusted by MyPackage), then proposes the change to
 the upstream repo.
-Solution: The proposed change still requires two-person review in the upstream context even though it received two-person review in another context.
+Solution: The proposed change still requires two-person review in the upstream
+context even though it received two-person review in another context.
 
 </details>
 
@@ -240,7 +272,7 @@ Ultimately, this means that either each code review results in at most a single 
 
 *Threat:* Two trusted persons collude to author and approve a bad change.
 
-*Mitigation:* The producer can arbitrarily increase friction of their policies to reduce risk, such as requiring additional, or more senior reviewers.
+*Mitigation:* This threat is not currently addressed by SLSA, but the producer can arbitrarily increase friction of their policies to reduce risk, such as requiring additional, or more senior reviewers.
 The goal of policy here is to ensure that the approved changes match the intention of the producer for the source.
 Increasing the friction of the policies may make it harder to circumvent, but doing so has diminishing returns.
 Ultimately the producer will need to land upon a balanced risk profile that makes sense for their security posture.
@@ -265,12 +297,18 @@ stamping."
 
 #### (B4) Render change metadata ineffective
 
-<details><summary>Forge change metadata</summary>
+<details><summary>Forge change metadata<span>(Source L2+)</span></summary>
 
 *Threat:* Forge the change metadata to alter attribution, timestamp, or
 discoverability of a change.
 
-*Mitigation:* This threat is not currently addressed by SLSA.
+*Mitigation:* The Source Control System only attributes changes to authenticated
+identities and, at Source L3+, records contemporaneous evidence of changes in
+signed source provenance attestations.
+
+*Example:* Adversary 'X' creates a commit with unauthenticated metadata claiming
+it was authored by 'Y'. Solution: The Source Control System records the identity
+of 'X' when 'X' submits the commit to the repository.
 
 </details>
 
@@ -280,7 +318,7 @@ An adversary introduces a change to the source control repository through an
 administrative interface, or through a compromise of the underlying
 infrastructure.
 
-<details><summary>Platform admin abuses privileges</summary>
+<details><summary>Platform admin abuses privileges<span>(verification)</span></summary>
 
 *Threat:* Platform administrator abuses their privileges to bypass controls or
 to push a malicious version of the software.
@@ -303,6 +341,10 @@ hide tracks.
 malicious version of the server that includes a backdoor allowing specific users
 to bypass branch protections. Adversary then uses this backdoor to submit a
 change to MyPackage without review.
+
+*Solution:* Consumers do not accept claims from the Source Control System unless
+they trust sufficient controls are in place to prevent repo admins from
+abusing privileges.
 
 </details>
 <details><summary>Exploit vulnerability in SCM</summary>
