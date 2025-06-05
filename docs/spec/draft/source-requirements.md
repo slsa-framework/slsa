@@ -115,27 +115,33 @@ Many examples in this document use the [git version control system](https://git-
 An organization producing source revisions MUST select a SCS capable of reaching
 their desired SLSA Source Level.
 
-For example, if an organization wishes to produce revisions at Source Level 3,
+> For example, if an organization wishes to produce revisions at Source Level 3,
 they MUST choose a source control system capable of producing Source Level 3
 attestations.
 
 <td>✓<td>✓<td>✓<td>✓
 
-<tr id="choose-process"><td>Choose an appropriate change management process<td>
+<tr id="protect-consumable-branches-and-tags"><td>Protect consumable branches and tags<td>
 
 An organization producing source revisions MUST implement a change management
 process to ensure changes to source matches the organization's intent.
 
-<td><td>✓<td>✓<td>✓
+The organization MUST specify which branches and tags are covered by the process
+and are intended for use in its own applications or services or those of
+downstream consumers of the software.
 
-<tr id="specify-control-expectations"><td>Specify control expectations<td>
+> For example, if an organization has branches 'main' and 'experimental' and it
+intends for 'main' to be protected then it MUST indicate to the SCS that 'main'
+should be protected. From that point forward revisions on 'main' will be
+eligible for Source Level 2+ while revisions made solely on 'experimental' will
+not.
 
 The organization MUST specify what technical controls consumers can expect to be
-enforced for revisions in each branch using the
+enforced for revisions in each protected branch and tag using the
 [Enforced change management process](#enforced-change-management-process)
 and it MUST document the meaning of those controls.
 
-For example, an organization may claim that revisions on `main` passed unit
+> For example, an organization may claim that revisions on `main` passed unit
 tests before being accepted.  The organization could then configure the SCS to
 enforce this requirement and store corresponding [test result attestations] for
 all affected revisions.  They may then embed the `ORG_SOURCE_UNIT_TESTED`
@@ -149,19 +155,6 @@ determine if that expectation has been met by looking for the
 
 <td><td>✓<td>✓<td>✓
 
-<tr id="specify-protection"><td>Specify which branches and tags are protected<td>
-
-The organization MUST indicate which branches and tags it protects with Source
-Level 2+ controls.
-
-For example, if an organization has branches 'main' and 'experimental' and it
-intends for 'main' to be protected then it MUST indicate to the SCS that 'main'
-should be protected. From that point forward revisions on 'main' will be
-eligible for Source Level 2+ while revisions made solely on 'experimental' will
-not.
-
-<td><td>✓<td>✓<td>✓
-
 <tr id="safe-expunging-process"><td>Safe Expunging Process<td>
 
 SCSs MAY allow the organization to expunge (remove) content from a repository and its change history without leaving a public record of the removed content,
@@ -171,7 +164,7 @@ Content changed under this process includes changing files, history, references,
 #### Warning
 
 Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact.
-For example, in VCSs like Git, each revision ID is based on the ones before it. When you remove a revision, you must generate new revisions (and new revision IDs) for any revisions that were built on top of it. Consumers who took a dependency on the old revisions may now be unable to refer to the source they've already integrated into their products.
+> For example, in VCSs like Git, each revision ID is based on the ones before it. When you remove a revision, you must generate new revisions (and new revision IDs) for any revisions that were built on top of it. Consumers who took a dependency on the old revisions may now be unable to refer to the source they've already integrated into their products.
 
 It may be the case that the specific set of changes targeted by a legal takedown can be expunged in ways that do not impact consumed revisions, which can mitigate these problems.
 
@@ -237,7 +230,8 @@ of the "topic" branch, the tip of the target branch, and closest shared ancestor
 between the two (such as determined by `git-merge-base`).
 
 The SCS MUST record the "target" context for the change and the previous
-revision in that context. For example, for the git version control system, the
+revision in that context.
+> For example, for the git version control system, the
 SCS MUST record the branch name that was updated, its new revision and its previous revision.
 
 <td><td>✓<td>✓<td>✓
@@ -268,13 +262,13 @@ The SCS MUST NOT allow organization specified properties to begin with any value
 other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
 corresponding claims.
 
-Enforcement of the organization-defined technical controls could be accomplished
-by, for example:
-
--   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)) which require additional checks to 'pass'
+> For example: enforcement of the organization-defined technical controls could be accomplished
+by:
+>
+> -   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)) which require additional checks to 'pass'
     (e.g. unit tests, linters), or
--   the application and verification of [gittuf](https://github.com/gittuf/gittuf) policies, or
--   some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
+> -   the application and verification of [gittuf](https://github.com/gittuf/gittuf) policies, or
+> -   some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
 
 <td><td>✓<td>✓<td>✓
 <tr id="continuity"><td>Continuity<td>
@@ -344,7 +338,8 @@ If a consumer is authorized to access, they MUST be able to fetch the source
 provenance documents for relevant revisions.
 
 It is possible that an SCS can make no claims about a particular revision.
-For example, this would happen if the revision was created on another SCS,
+
+> For example, this would happen if the revision was created on another SCS,
 or if the revision was not the result of an accepted change management process.
 
 <td><td><td>✓<td>✓
