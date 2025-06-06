@@ -610,7 +610,7 @@ The topic branch may contain many commits of which not all were intended to repr
 
 If a repository merges branches with a standard merge commit, all those unreviewed commits on the topic branch will become "reachable" from the protected branch by virtue of the multi-parent merge commit.
 
-When a repo is cloned, all commits *reachable* from the main branch are fetched and become accessible from the local checkout.
+When a repo is cloned, all commits _reachable_ from the main branch are fetched and become accessible from the local checkout.
 
 This combination of factors allows attacks where the victim performs a `git clone` operation followed by a `git reset --hard <unreviewed revision id>`.
 
@@ -673,7 +673,7 @@ A key downside to this approach is that organizations will not know the final re
 A change review process will now be associated with multiple distinct revisions.
 
 -   ID 1: The revision which was reviewed before concluding the change review process. It represents the ideal state of the protected branch applying only this proposed change.
--   ID 2: The revision created when the change is applied to the train branch. It represents the state of the protected branch *after other changes have been applied*.
+-   ID 2: The revision created when the change is applied to the train branch. It represents the state of the protected branch _after other changes have been applied_.
 
 It is important to note that no human or automatic review will have the chance to pre-approve ID2. This will appear to violate any organization policies that require pre-approval of changes before submission.
 The SCS and the organization MUST protect this process in the same way they protect other artifact build pipelines.
