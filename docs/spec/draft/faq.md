@@ -177,7 +177,7 @@ Some common situations may include:
 Additional requirements on the self-hosted runners may be added to Build levels
 greater than L3 when such levels get defined.
 
-[build level requirements]: requirements.md
+[build level requirements]: build-requirements.md
 [GitHub Actions]: https://docs.github.com/en/actions/hosting-your-own-runners
 [Software Bill of Materials (SBOM)]: https://ntia.gov/sbom
 [SLSA Provenance]: provenance.md

@@ -6,8 +6,8 @@ description: Guidelines for assessing build platform security.
 One of SLSA's guiding [principles](principles.md) is to "trust platforms, verify
 artifacts". However, consumers cannot trust platforms to produce Build L3
 artifacts and provenance unless they have some proof that the provenance is
-[unforgeable](requirements.md#provenance-unforgeable) and the builds are
-[isolated](requirements.md#isolated).
+[unforgeable](build-requirements.md#provenance-unforgeable) and the builds are
+[isolated](build-requirements.md#isolated).
 
 This page describes the parts of a build platform that consumers SHOULD assess
 and provides sample questions consumers can ask when assessing a build platform.
