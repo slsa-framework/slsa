@@ -56,13 +56,15 @@
 /provenance/v1.1        /spec/v1.1/provenance       301
 /provenance/draft       /spec/draft/build-provenance      301
 
-/spec                   /spec/latest            302  # floating
-/spec/faq               /spec/latest/faq        302  # floating
-/spec/v1/*              /spec/v1.1/:splat       302  # floating
-/spec/v1.1/*            /spec/v1.1/:splat       302
-/spec/latest/*          /spec/v1.1/:splat       302  # floating
-/spec/current-activities /current-activities    301
-/spec/latest/*          /spec/v1.1/:splat       302
+/spec                     /spec/latest            302  # floating
+/spec/faq                 /spec/latest/faq        302  # floating
+/spec/v1/*                /spec/v1.1/:splat       302  # floating
+/spec/v1.1/*              /spec/v1.1/:splat       302
+/spec/latest/*            /spec/v1.1/:splat       302  # floating
+/spec/current-activities  /current-activities     301
+/spec/latest/*            /spec/v1.1/:splat       302
+/spec/draft/provenance    /spec/draft/build-provenance   302
+/spec/draft/requirements  /spec/draft/build-requirements 302
 
 # Note: Versions prior to v1.0 stay in /verification_summary.
 /verification_summary           /spec/latest/verification_summary   302  # floating
