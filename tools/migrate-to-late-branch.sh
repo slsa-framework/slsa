@@ -12,10 +12,7 @@ set -euo pipefail
 
 # --- Ensure script is run from the repo root ---
 REPO_ROOT="$(git rev-parse --show-toplevel)"
-if [[ "$PWD" != "$REPO_ROOT" ]]; then
-  echo "Error: Please run this script from the repository root: $REPO_ROOT"
-  exit 1
-fi
+cd $REPO_ROOT
 
 # --- Check for uncommitted changes ---
 if [[ -n $(git status --porcelain) ]]; then
