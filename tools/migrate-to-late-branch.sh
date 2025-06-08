@@ -10,15 +10,15 @@
 
 set -euo pipefail
 
-# --- Ensure script is run from the repo root ---
-REPO_ROOT="$(git rev-parse --show-toplevel)"
-cd $REPO_ROOT
-
 # --- Check for uncommitted changes ---
 if [[ -n $(git status --porcelain) ]]; then
   echo "Error: You have uncommitted changes. Please commit or stash them first."
   exit 1
 fi
+
+# --- Ensure script is run from the repo root ---
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd $REPO_ROOT
 
 # --- Save the current branch to return to later ---
 ORIG_BRANCH=$(git rev-parse --abbrev-ref HEAD)
@@ -36,6 +36,17 @@ cd "$(git rev-parse --show-toplevel)"
 # --- Collect all released version subfolders before starting the loop ---
 VERSIONS=($(ls -1 "$SPECDIR" | grep -vE '^\.|^README|^draft$'))
 REF_SPEC="releases"
+
+# --- Check if any of the version refs already exist ---
+echo "Checking for existing version refs..."
+for version in "${VERSIONS[@]}"; do
+  BRANCH="$REF_SPEC/$version"
+  if git show-ref --verify --quiet "refs/heads/$BRANCH" || git show-ref --verify --quiet "refs/remotes/origin/$BRANCH"; then
+    echo "Error: Branch $BRANCH already exists locally or remotely. Please delete it first."
+    exit 1
+  fi
+done
+echo "No existing version refs found. Proceeding with migration..."
 
 for version in "${VERSIONS[@]}"; do
   # --- Create a new branch for this version ---
@@ -57,7 +68,7 @@ for version in "${VERSIONS[@]}"; do
   git checkout "$ORIG_BRANCH"
 done
 
-# Summary of updated branches
+# --- Summary of updated branches ---
 echo "Done. All branches created:"
 for v in "${VERSIONS[@]}"; do
   echo "  - $REF_SPEC/$v"
