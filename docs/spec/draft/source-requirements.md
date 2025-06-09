@@ -155,7 +155,7 @@ and it MUST document the meaning of those controls.
 tests before being accepted.  The organization could then configure the SCS to
 enforce this requirement and store corresponding [test result attestations] for
 all affected revisions.  They may then embed the `ORG_SOURCE_UNIT_TESTED`
-property in the [source summary attestations](#summary-attestation). Consumers
+property in the [Source VSA](#summary-attestation). Consumers
 would then expect that future revisions on `main` have been united tested and
 determine if that expectation has been met by looking for the
 `ORG_SOURCE_UNIT_TESTED` property in the VSAs and, if desired, consult the
@@ -217,19 +217,20 @@ The same revision ID MAY be present in multiple repositories.
 See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
 
 <td>✓<td>✓<td>✓<td>✓
-<tr id="source-summary"><td>Source Summary Attestations<td>
+<tr id="source-summary"><td>Source Verification Summary Attestations<td>
 
-The SCS MUST generate a [source summary attestation](#summary-attestation) to
-indicate the SLSA Source Level of any revision at Level 1 or above.
+The SCS MUST generate a
+[source verification summary attestation](#summary-attestation) (Source VSA)
+to indicate the SLSA Source Level of any revision at Level 1 or above.
 
 If a consumer is authorized to access a revision, they MUST be able to fetch the
-corresponding source summary attestations.
+corresponding source VSA.
 
-If the SCS DOES NOT generate a summary attestation for a revision, the revision
-cannot be verified and thus has Source Level 0.
+If the SCS DOES NOT generate a VSA for a revision, the revision cannot be
+verified and thus has Source Level 0.
 
 When source provenance is available the SCS MAY use it to generate the
-source summary attestation.
+source VSA.
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="context"><td>Context<td>
@@ -262,8 +263,8 @@ The SCS MUST
    to protected branches.
 -   Allow organizations to specify
    [additional properties](#additional-properties) to be included in the
-   [source summary](#summary-attestation) when the corresponding controls are
-enforced.
+   [source VSA](#summary-attestation) when the corresponding controls are
+   enforced.
 -   Allow organizations to distribute additional attestations related to their
    technical controls to consumers authorized to access the corresponding source
    revision.
@@ -403,21 +404,21 @@ These attestations either refer to a source revision itself or provide context n
 
 There are two broad categories of source attestations within the source track:
 
-1.  Summary attestations: Used to communicate to downstream users what high level security properties a given source revision meets.
+1.  Source verification summary attestations: Used to communicate to downstream users what high level security properties a given source revision meets.
 2.  Provenance attestations: Provide trustworthy, tamper-proof, metadata with the necessary information to determine what high level security properties a given source revision has.
 
-To provide interoperability and ensure ease of use, it's essential that the summary attestations are applicable across all Source Control Systems.
+To provide interoperability and ensure ease of use, it's essential that the source verification summary attestations are applicable across all Source Control Systems.
 Due to the significant differences in how SCSs operate and how they may chose to meet the Source Track requirements it is preferable to
 allow for flexibility with the full attestations.  To that end SLSA leaves provenance attestations undefined and up to the SCSs to determine
 what works best in their environment.
 
-### Summary attestation
+### Source verification summary attestation {#summary-attestation}
 
-Summary attestations are issued by some authority that has sufficient evidence to make the determination of a given
-revision's source level.  Summary attestations convey properties about the revision as a whole and summarize properties computed over all
+Source verification summary attestations (Source VSAs) are issued by some authority that has sufficient evidence to make the determination of a given
+revision's source level.  Source VSAs convey properties about the revision as a whole and summarize properties computed over all
 the changes that contributed to that revision over its history.
 
-The source track issues summary attestations using [Verification Summary Attestations (VSAs)](./verification_summary.md) as follows:
+The source track issues Source VSAs using [Verification Summary Attestations](./verification_summary.md) as follows:
 
 1.  `subject.uri` SHOULD be set to a human readable URI of the revision.
 2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
@@ -456,7 +457,7 @@ by the SCS.
 
 #### Populating source_refs
 
-The summary attestation issuer may choose to populate `source_refs` in any way they wish.
+The Source VSA issuer may choose to populate `source_refs` in any way they wish.
 Downstream users are expected to be familiar with the method used by the issuer.
 
 Example implementations:
@@ -501,14 +502,14 @@ Example implementations:
 
 Source provenance attestations provide tamper-proof evidence (ideally signed [in-toto attestations](https://github.com/in-toto/attestation/blob/main/README.md))
 that can be used to determine what SLSA Source Level or other high level properties a given revision meets.
-This evidence can be used by an authority as the basis for issuing a [Summary Attestation](#summary-attestation).
+This evidence can be used by an authority as the basis for issuing a [Source VSA](#summary-attestation).
 
 SCSs may have different methods of operating that necessitate different forms of evidence.
 E.g. GitHub-based workflows may need different evidence than Gerrit-based workflows, which would both likely be different from workflows that
 operate over Subversion repositories.
 
 These differences also mean that depending on the configuration the issuers of provenance attestations may vary from implementation to implementation, often because entities with the knowledge to issue them may vary.
-The authority that issues [summary-attestations](#summary-attestation) MUST understand which entity should issue each provenance attestation type and ensure the full attestations come from the appropriate issuer.
+The authority that issues [Source VSAs](#summary-attestation) MUST understand which entity should issue each provenance attestation type and ensure the full attestations come from the appropriate issuer.
 
 'Source provenance attestations' is a generic term used to refer to any type of attestation that provides evidence the process used to create a revision.
 
