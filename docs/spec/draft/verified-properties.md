@@ -30,5 +30,6 @@ two trusted persons.  This property MUST only be issued in accordance with the
 Indicates the referenced artifact has been reproduced by two or more builders.
 
 This property MUST only be issued if the referenced artifact has
-[build provenance](build-provenance) from two or more distinct, trusted,
-[Build Platforms](build-requirements#build-platform).
+[build provenance](build-provenance) from two or more
+[Build Platforms](build-requirements#build-platform) which are trusted by the
+VSA issuer and believed to be independantly operated.
