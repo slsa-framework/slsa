@@ -269,16 +269,16 @@ _Organization defined controls:_
 
 The SCS MUST ...
 
--  Ensure organization-defined technical controls are enforced for changes made
+-   Ensure organization-defined technical controls are enforced for changes made
    to protected branches.
--  Allow organizations to specify
+-   Allow organizations to specify
    [additional properties](#additional-properties) to be included in the
    [source summary](#summary-attestation) when the corresponding controls are
 enforced.
--  Allow organizations to distribute additional attestations related to their
+-   Allow organizations to distribute additional attestations related to their
    technical controls to consumers authorized to access the corresponding source
    revision.
--  Prevent organization-specified properties from beginning with any value
+-   Prevent organization-specified properties from beginning with any value
    other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
    corresponding claims.
 
@@ -291,6 +291,7 @@ by:
 > -   some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
 
 <a name="continuity">_Continuity:_</a>
+
 The SCS MUST establish the continuity of these controls from a specific
 revision. If there is a lapse in continuity for any control, that continuity
 MUST be re-established from a new revision.
