@@ -153,7 +153,7 @@ recognize that other choices MAY be necessary in various cases.
 [in-toto attestations]: https://github.com/in-toto/attestation/
 [JSON Lines]: https://jsonlines.org/
 [other predicates defined by third-parties]: https://github.com/in-toto/attestation/issues/98
-[Provenance]: /provenance
+[Provenance]: /build-provenance
 [remote attestation]: https://en.wikipedia.org/wiki/Trusted_Computing#Remote_attestation
 [RFC 2119]: https://tools.ietf.org/html/rfc2119
 [SLSA Provenance format]: /provenance/v1

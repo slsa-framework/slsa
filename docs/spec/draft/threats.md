@@ -10,7 +10,8 @@ against, see [Supply chain threats].
 
 The examples on this page are meant to:
 
--   Explain the reasons for each of the SLSA [requirements](requirements.md).
+-   Explain the reasons for each of the SLSA [build](build-requirements.md) and
+    [source](source-requirements.md) requirements.
 -   Increase confidence that the SLSA requirements are sufficient to achieve the
     desired [level](levels.md) of integrity protection.
 -   Help implementers better understand what they are protecting against so that
@@ -1062,11 +1063,11 @@ Solution: Only accept cryptographic hashes with strong collision resistance.
 <!-- Links -->
 
 [apply SLSA recursively]: verifying-artifacts.md#step-3-optional-check-dependencies-recursively
-[authentic]: requirements.md#provenance-authentic
+[authentic]: build-requirements.md#provenance-authentic
 [build-cache-poisoning-example]: https://adnanthekhan.com/2024/05/06/the-monsters-in-your-build-cache-github-actions-cache-poisoning/
-[exists]: requirements.md#provenance-exists
-[isolated]: requirements.md#isolated
-[unforgeable]: requirements.md#provenance-unforgeable
+[exists]: build-requirements.md#provenance-exists
+[isolated]: build-requirements.md#isolated
+[unforgeable]: build-requirements.md#provenance-unforgeable
 [secure-by-design]: https://www.cisa.gov/securebydesign
 [supply chain threats]: threats-overview
 [vsa]: verification_summary

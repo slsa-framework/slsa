@@ -265,7 +265,7 @@
       description: Overview of SLSA's tracks and levels, intended for all audiences
 
     - title: Producing artifacts
-      url: /spec/draft/requirements
+      url: /spec/draft/build-requirements
       description: Detailed technical requirements for producing software artifacts, intended for platform implementers
 
     - title: Distributing provenance
@@ -296,6 +296,10 @@
       url: /spec/draft/verifying-source
       description: Guidelines for verifying source provenance
 
+    - title: Verified Properties
+      url: /spec/draft/verified-properties.md
+      description: SLSA allows a common way to express verified properties that may not fit within a SLSA track.
+
   - title: Attestation formats
     description: >
       These pages include the concrete schemas for SLSA attestations. The
@@ -307,9 +311,9 @@
       url: /spec/draft/attestation-model
       description: General attestation mode
 
-    - title: Provenance
-      url: /spec/draft/provenance
-      description: Suggested provenance format and explanation
+    - title: Build Provenance
+      url: /spec/draft/build-provenance
+      description: Suggested build provenance format and explanation
 
     - title: Verification Summary
       url: /spec/draft/verification_summary
