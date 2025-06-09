@@ -50,8 +50,8 @@ needing to evaluate the artifact or to have access to the attestations the
 The VSA also allows consumers to determine the verified levels of
 all of an artifact’s _transitive_ dependencies.  The verifier does this by
 either a) verifying the provenance of each non-source dependency listed in
-the [resolvedDependencies](/provenance/v1#resolvedDependencies) of the artifact
-being verified (recursively) or b) matching the non-source dependency
+the [resolvedDependencies](/build-provenance/v1#resolvedDependencies) of the
+artifact being verified (recursively) or b) matching the non-source dependency
 listed in `resolvedDependencies` (`subject.digest` ==
 `resolvedDependencies.digest` and, ideally, `vsa.resourceUri` ==
 `resolvedDependencies.uri`) to a VSA _for that dependency_ and using
