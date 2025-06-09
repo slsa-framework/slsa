@@ -1,7 +1,8 @@
 ---
 title: SLSA Verified Properties
 description: |
-  SLSA allows 
+  SLSA allows a common way to express verified properties that may not fit
+  within a SLSA track.
 ---
 
 # SLSA Verified Properties
