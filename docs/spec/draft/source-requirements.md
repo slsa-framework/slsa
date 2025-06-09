@@ -246,32 +246,42 @@ revision in that context.
 SCS MUST record the branch name that was updated, its new revision and its previous revision.
 
 <td><td>✓<td>✓<td>✓
-<tr id="branches"><td>Protected Branches<td>
+<tr id="protect-branches-and-tags"><td>Protect branches and tags<td>
 
 The SCS MUST provide a mechanism for organizations to indicate which branches
-should be protected by SLSA Source Level 2+ requirements.
+and tags are protected by the change management process.
 
-E.g. The organization may configure the SCS to protect `main` and
+> For example the organization may configure the SCS to protect `main` and
 `refs/heads/releases/*`, but not `refs/heads/playground/*`.
 
-<td><td>✓<td>✓<td>✓
-<tr id="enforced-change-management-process"><td>Enforced change management process<td>
+_History:_
 
-The SCS MUST
+The SCS MUST prevent tampering with or deleting the history of revisions on
+protected branches and it MUST prevent the entire repository from being deleted
+and replaced by different source.
 
--   Ensure organization-defined technical controls are enforced for changes made
+The SCS MUST prevent protected tags from being moved or deleted.
+
+> For example on systems like GitHub or GitLab, this can be accomplished by
+enabling branch and protection rules that prevent force pushes, deletions,
+and updates as needed.
+
+_Organization defined controls:_
+
+The SCS MUST ...
+
+-  Ensure organization-defined technical controls are enforced for changes made
    to protected branches.
--   Allow organizations to specify
+-  Allow organizations to specify
    [additional properties](#additional-properties) to be included in the
    [source summary](#summary-attestation) when the corresponding controls are
 enforced.
--   Allow organizations to distribute additional attestations related to their
+-  Allow organizations to distribute additional attestations related to their
    technical controls to consumers authorized to access the corresponding source
    revision.
-
-The SCS MUST prevent organization-specified properties from beginning with any value
-other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
-corresponding claims.
+-  Prevent organization-specified properties from beginning with any value
+   other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
+   corresponding claims.
 
 > For example: enforcement of the organization-defined technical controls could be accomplished
 by:
@@ -281,42 +291,13 @@ by:
 > -   the application and verification of [gittuf](https://github.com/gittuf/gittuf) policies, or
 > -   some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
 
-<td><td>✓<td>✓<td>✓
-<tr id="continuity"><td>Continuity<td>
+_Continuity:_
+The SCS MUST establish the continuity of these controls from a specific
+revision. If there is a lapse in continuity for any control, that continuity
+MUST be re-established from a new revision.
 
-Revisions are created by applying a specific code change (a "diff" in git) on
-top of an earlier revision of a branch. The SCS MUST prevent tampering with the
-history of revisions on protected branches.
-
-In other words, if the organization updates a branch from commit A to commit B,
-commit B MUST be a descendant of A. For systems like GitHub or GitLab, this can
-be accomplished by enabling branch protection rules that prevent force pushes
-and branch deletions.
-
-The SCS MUST prevent the entire repository (including all branches) from being
-deleted and replaced by different source.
-
-Continuity MUST be established and tracked from a specific revision. If there is
-a lapse in continuity for a specific control, that continuity MUST be
-re-established from a new revision.
-
-Continuity MUST also apply to any [change management processes](#enforced-change-management-process)
-which are enforced on the protected branches.
-
-Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
-
-<td><td>✓<td>✓<td>✓
-<tr id="protected-tags"><td>Protected Tags<td>
-
-If the SCS supports tags (or other non-branch revision trackers), additional
-care must be taken to prevent unintentional changes.
-Unlike branches, tags have no built-in continuity enforcement mechanisms or
-change management processes.
-
-The SCS MUST provide a mechanism for organizations to indicate which tags should
-be protected by SLSA Source Level 2+ requirements.
-
-The SCS MUST prevent protected tags from being moved or deleted.
+Continuity exceptions are allowed via the
+[safe expunging process](#safe-expunging-process).
 
 <td><td>✓<td>✓<td>✓
 <tr id="identity-management"><td>Identity Management<td>
