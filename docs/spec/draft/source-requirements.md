@@ -267,18 +267,17 @@ enforced.
 -   Allow organizations to distribute additional attestations related to their
    technical controls to consumers authorized to access the corresponding source
    revision.
+-   Prevent organization-specified properties from beginning with any value
+   other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
+   corresponding claims.
 
-The SCS MUST prevent organization-specified properties from beginning with any value
-other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
-corresponding claims.
-
-> For example: enforcement of the organization-defined technical controls could be accomplished
-by:
->
-> -   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)) which require additional checks to 'pass'
-    (e.g. unit tests, linters), or
-> -   the application and verification of [gittuf](https://github.com/gittuf/gittuf) policies, or
-> -   some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
+> For example: enforcement of the organization-defined technical controls could
+be accomplished by the configuration of branch protection rules (e.g.
+[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets),
+[GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html))
+which require additional checks to 'pass' (e.g. unit tests, linters) or the
+application and verification of [gittuf](https://github.com/gittuf/gittuf)
+policies.
 
 <td><td>✓<td>✓<td>✓
 <tr id="continuity"><td>Continuity<td>
