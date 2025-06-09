@@ -148,9 +148,8 @@ and tags.
 > For example, an organization may configure the SCS to assign users to a `maintainers` role and only allow users in `maintainers` to make updates to `main`.
 
 The organization MUST specify what technical controls consumers can expect to be
-enforced for revisions in each protected branch and tag using the
-[Enforced change management process](#enforced-change-management-process)
-and it MUST document the meaning of those controls.
+enforced for revisions in each protected branch and tag and it MUST document the
+meaning of those controls.
 
 > For example, an organization may claim that revisions on `main` passed unit
 tests before being accepted.  The organization could then configure the SCS to
@@ -291,7 +290,7 @@ by:
 > -   the application and verification of [gittuf](https://github.com/gittuf/gittuf) policies, or
 > -   some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
 
-_Continuity:_
+<a name="continuity">_Continuity:_</a>
 The SCS MUST establish the continuity of these controls from a specific
 revision. If there is a lapse in continuity for any control, that continuity
 MUST be re-established from a new revision.
