@@ -25,6 +25,9 @@ two trusted persons.  This property MUST only be issued in accordance with the
 [Source Track](source-requirements)'s
 [two-party-review](source-requirements#two-party-review) requirements.
 
+The property MAY be added at any source level in which an SCS can make this
+claim.
+
 ## SLSA_BUILD_REPRODUCED
 
 Indicates the referenced artifact has been reproduced by two or more builders.
