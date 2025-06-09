@@ -190,7 +190,7 @@ does enforce any controls. They then update the `release_1.2` tag to point to
 Source Control System does not allow protected tags to be updated.
 
 </details>
-<details><summary>Skip required checks<span>(Source L3+)</span></summary>
+<details><summary>Skip required checks<span>(Source L2+)</span></summary>
 
 *Threat:* Code is submitted without following the producers documented
 development process, introducing unintended behavior.

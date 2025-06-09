@@ -59,16 +59,20 @@ Intended for: Organizations currently storing source in non-standard ways who wa
 Benefits:
 Migrating to the appropriate tools is an important first step on the road to operational maturity.
 
-### Level 2: Branch History
+### Level 2: Controls
 
 Summary:
-Clarifies which branches in a repo are consumable and guarantees that all changes to protected branches are recorded.
+Clarifies which branches and tags in a repo are consumable and guarantees that
+all changes to protected branches and tags are recorded and subject to the
+organization's technical controls.
 
 Intended for:
 All organizations of any size producing software of any kind.
 
 Benefits:
-Allows source consumers to track changes to the software over time and attribute those changes to the people that made them.
+Allows organizations and source consumers the ability to ensure the change
+management process has been followed to track changes to the software over time
+and attribute those changes to the actors that made them.
 
 ### Level 3: Authenticatable and Auditable Provenance
 
@@ -114,29 +118,50 @@ Many examples in this document use the [git version control system](https://git-
 An organization producing source revisions MUST select a SCS capable of reaching
 their desired SLSA Source Level.
 
-For example, if an organization wishes to produce revisions at Source Level 3,
+> For example, if an organization wishes to produce revisions at Source Level 3,
 they MUST choose a source control system capable of producing Source Level 3
 attestations.
 
 <td>✓<td>✓<td>✓<td>✓
 
-<tr id="choose-process"><td>Choose an appropriate change management process<td>
+<tr id="protect-consumable-branches-and-tags"><td>Protect consumable branches and tags<td>
 
 An organization producing source revisions MUST implement a change management
 process to ensure changes to source matches the organization's intent.
 
-<td><td>✓<td>✓<td>✓
+The organization MUST specify which branches and tags are covered by the process
+and are intended for use in its own applications or services or those of
+downstream consumers of the software.
 
-<tr id="specify-protection"><td>Specify which branches and tags are protected<td>
-
-The organization MUST indicate which branches and tags it protects with Source
-Level 2+ controls.
-
-For example, if an organization has branches 'main' and 'experimental' and it
+> For example, if an organization has branches 'main' and 'experimental' and it
 intends for 'main' to be protected then it MUST indicate to the SCS that 'main'
 should be protected. From that point forward revisions on 'main' will be
 eligible for Source Level 2+ while revisions made solely on 'experimental' will
 not.
+
+The organization MUST use the SCS provided
+[Identity Management capability](#identity-management) to configure the actors
+and roles that are allowed to perform sensitive actions on protected branches
+and tags.
+
+> For example, an organization may configure the SCS to assign users to a `maintainers` role and only allow users in `maintainers` to make updates to `main`.
+
+The organization MUST specify what technical controls consumers can expect to be
+enforced for revisions in each protected branch and tag using the
+[Enforced change management process](#enforced-change-management-process)
+and it MUST document the meaning of those controls.
+
+> For example, an organization may claim that revisions on `main` passed unit
+tests before being accepted.  The organization could then configure the SCS to
+enforce this requirement and store corresponding [test result attestations] for
+all affected revisions.  They may then embed the `ORG_SOURCE_UNIT_TESTED`
+property in the [source summary attestations](#summary-attestation). Consumers
+would then expect that future revisions on `main` have been united tested and
+determine if that expectation has been met by looking for the
+`ORG_SOURCE_UNIT_TESTED` property in the VSAs and, if desired, consult the
+[test result attestations] as well.
+
+[test result attestations]: https://github.com/in-toto/attestation/blob/main/spec/predicates/test-result.md
 
 <td><td>✓<td>✓<td>✓
 
@@ -149,7 +174,7 @@ Content changed under this process includes changing files, history, references,
 #### Warning
 
 Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact.
-For example, in VCSs like Git, each revision ID is based on the ones before it. When you remove a revision, you must generate new revisions (and new revision IDs) for any revisions that were built on top of it. Consumers who took a dependency on the old revisions may now be unable to refer to the source they've already integrated into their products.
+> For example, in VCSs like Git, each revision ID is based on the ones before it. When you remove a revision, you must generate new revisions (and new revision IDs) for any revisions that were built on top of it. Consumers who took a dependency on the old revisions may now be unable to refer to the source they've already integrated into their products.
 
 It may be the case that the specific set of changes targeted by a legal takedown can be expunged in ways that do not impact consumed revisions, which can mitigate these problems.
 
@@ -168,26 +193,6 @@ and regulations which may require the change to be kept private to the extent po
 Organizations SHOULD prefer to make logs public if possible.
 
 <td><td>✓<td>✓<td>✓
-
-<tr id="specify-control-expectations"><td>Specify control expectations<td>
-
-The organization MUST specify what technical controls consumers can expect to be
-enforced for revisions in each branch using the
-[Enforced change management process](#enforced-change-management-process).
-
-For example, an organization may claim that revisions on `main` passed unit
-tests before being accepted.  The organization could then configure the SCS to
-enforce this requirement and store corresponding [test result attestations] for
-all affected revisions.  They may then embed the `ORG_SOURCE_UNIT_TESTED`
-property in the [source summary attestations](#summary-attestation). Consumers
-would then expect that future revisions on `main` have been united tested and
-determine if that expectation has been met by looking for the
-`ORG_SOURCE_UNIT_TESTED` property in the VSAs and, if desired, consult the
-[test result attestations] as well.
-
-[test result attestations]: https://github.com/in-toto/attestation/blob/main/spec/predicates/test-result.md
-
-<td><td><td>✓<td>✓
 
 </table>
 
@@ -235,7 +240,8 @@ of the "topic" branch, the tip of the target branch, and closest shared ancestor
 between the two (such as determined by `git-merge-base`).
 
 The SCS MUST record the "target" context for the change and the previous
-revision in that context. For example, for the git version control system, the
+revision in that context.
+> For example, for the git version control system, the
 SCS MUST record the branch name that was updated, its new revision and its previous revision.
 
 <td><td>✓<td>✓<td>✓
@@ -246,6 +252,33 @@ should be protected by SLSA Source Level 2+ requirements.
 
 E.g. The organization may configure the SCS to protect `main` and
 `refs/heads/releases/*`, but not `refs/heads/playground/*`.
+
+<td><td>✓<td>✓<td>✓
+<tr id="enforced-change-management-process"><td>Enforced change management process<td>
+
+The SCS MUST
+
+-   Ensure organization-defined technical controls are enforced for changes made
+   to protected branches.
+-   Allow organizations to specify
+   [additional properties](#additional-properties) to be included in the
+   [source summary](#summary-attestation) when the corresponding controls are
+enforced.
+-   Allow organizations to distribute additional attestations related to their
+   technical controls to consumers authorized to access the corresponding source
+   revision.
+
+The SCS MUST prevent organization-specified properties from beginning with any value
+other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
+corresponding claims.
+
+> For example: enforcement of the organization-defined technical controls could be accomplished
+by:
+>
+> -   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)) which require additional checks to 'pass'
+    (e.g. unit tests, linters), or
+> -   the application and verification of [gittuf](https://github.com/gittuf/gittuf) policies, or
+> -   some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
 
 <td><td>✓<td>✓<td>✓
 <tr id="continuity"><td>Continuity<td>
@@ -287,16 +320,23 @@ The SCS MUST prevent protected tags from being moved or deleted.
 <td><td>✓<td>✓<td>✓
 <tr id="identity-management"><td>Identity Management<td>
 
-There exists an identity management system or some other means of identifying
-and authenticating actors. Depending on the SCS, identity management may be
-provided by source control services (e.g., GitHub, GitLab), implemented using
-cryptographic signatures (e.g., using gittuf to manage public keys for actors),
-or extend existing authentication systems used by the organization (e.g., Active
-Directory, Okta, etc.).
+The SCS MUST provide an identity management system or some other means of
+identifying and authenticating actors.
+
+The SCS MUST allow organizations to specify which actors and roles are allowed
+to perform sensitive actions within a repository (e.g. creation or updates of
+branches, approval of changes).
+
+Depending on the SCS, identity management may be provided by source control
+services (e.g., GitHub, GitLab), implemented using cryptographic signatures
+(e.g., using gittuf to manage public keys for actors), or extend existing
+authentication systems used by the organization (e.g., Active Directory, Okta,
+etc.).
 
 The SCS MUST document how actors are identified for the purposes of attribution.
 
-Activities conducted on the SCS SHOULD be attributed to authenticated identities.
+Activities conducted on the SCS SHOULD be attributed to authenticated
+identities.
 
 <td><td>✓<td>✓<td>✓
 <tr id="source-provenance"><td>Source Provenance<td>
@@ -315,35 +355,9 @@ If a consumer is authorized to access, they MUST be able to fetch the source
 provenance documents for relevant revisions.
 
 It is possible that an SCS can make no claims about a particular revision.
-For example, this would happen if the revision was created on another SCS,
+
+> For example, this would happen if the revision was created on another SCS,
 or if the revision was not the result of an accepted change management process.
-
-<td><td><td>✓<td>✓
-<tr id="enforced-change-management-process"><td>Enforced change management process<td>
-
-The SCS MUST
-
--   Ensure organization-defined technical controls are enforced for changes made
-   to protected branches.
--   Allow organizations to specify
-   [additional properties](#additional-properties) to be included in the
-   [source summary](#summary-attestation) when the corresponding controls are
-enforced.
--   Allow organizations to distribute additional attestations related to their
-   technical controls to consumers authorized to access the corresponding source
-   revision.
-
-The SCS MUST NOT allow organization specified properties to begin with any value
-other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
-corresponding claims.
-
-Enforcement of the organization-defined technical controls could be accomplished
-by, for example:
-
--   The configuration of branch protection rules (e.g.[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets), [GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html)) which require additional checks to 'pass'
-    (e.g. unit tests, linters), or
--   the application and verification of [gittuf](https://github.com/gittuf/gittuf) policies, or
--   some other mechanism as enforced by the [Change management tool](#change-management-tool-requirements).
 
 <td><td><td>✓<td>✓
 <tr id="two-party-review"><td>Two party review<td>
