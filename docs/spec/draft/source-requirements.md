@@ -198,8 +198,6 @@ Organizations SHOULD prefer to make logs public if possible.
 
 ### Source Control System
 
-#### Revision management
-
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
 
@@ -224,13 +222,16 @@ The SCS MUST generate a
 to indicate the SLSA Source Level of any revision at Level 1 or above.
 
 If a consumer is authorized to access a revision, they MUST be able to fetch the
-corresponding source VSA.
+corresponding Source VSA.
 
 If the SCS DOES NOT generate a VSA for a revision, the revision cannot be
 verified and thus has Source Level 0.
 
-When source provenance is available the SCS MAY use it to generate the
-source VSA.
+At Source Levels 1 and 2 the SCS MAY issue these attestations based on its
+understanding of the underlying system (e.g. based on design docs, security
+reviews, etc...), but at Level 3+ the SCS MUST use
+the SCS issued [source provenance](#source-provenance) when making the issuing
+the VSAs.
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="context"><td>Context<td>
@@ -263,7 +264,7 @@ The SCS MUST
    to protected branches.
 -   Allow organizations to specify
    [additional properties](#additional-properties) to be included in the
-   [source VSA](#summary-attestation) when the corresponding controls are
+   [Source VSA](#summary-attestation) when the corresponding controls are
    enforced.
 -   Allow organizations to distribute additional attestations related to their
    technical controls to consumers authorized to access the corresponding source
@@ -430,9 +431,6 @@ E.g. `git+https://github.com/foo/hello-world`.
 5.  `verifiedLevels` MUST include the SLSA source track level the SCS asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
 MAY include additional properties as asserted by the SCS.  The SCS MUST include _only_ the highest SLSA source level met by the revision.
 6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain. This COULD be used to indicate the source level of any git submodules present in the revision.
-
-The SCS MAY issue these attestations based on its understanding of the underlying system (e.g. based on design docs, security reviews, etc...),
-but at SLSA Source Level 3 MUST use tamper-proof [provenance attestations](#provenance-attestations) appropriate to their SCS when making the assessment.
 
 #### Additional properties
 
