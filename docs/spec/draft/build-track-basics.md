@@ -1,24 +1,7 @@
 ---
-title: Security levels
-description: SLSA is organized into a series of levels that provide increasing supply chain security guarantees. This gives you confidence that software hasn’t been tampered with and can be securely traced back to its source. This page is a descriptive overview of the SLSA levels and tracks, describing their intent.
+title: Build Track Level Basics
+description: The SLSA build track is organized into a series of levels that provide increasing supply chain security guarantees. This gives you confidence that software hasn’t been tampered with and can be securely traced back to its source. This page is a descriptive overview of the SLSA build track levels, describing their intent.
 ---
-
-SLSA is organized into a series of levels that provide increasing supply chain
-security guarantees. This gives you confidence that software hasn’t been
-tampered with and can be securely traced back to its source.
-
-This page is a descriptive overview of the SLSA levels and tracks, describing
-their intent. For the prescriptive requirements for each level, see
-[Requirements](build-requirements.md). For a general overview of SLSA, see
-[About SLSA](principles.md).
-
-## Levels and tracks
-
-SLSA levels are split into *tracks*. Each track has its own set of levels that
-measure a particular aspect of supply chain security. The purpose of tracks is
-to recognize progress made in one aspect of security without blocking on an
-unrelated aspect. Tracks also allow the SLSA spec to evolve: we can add more
-tracks without invalidating previous levels.
 
 | Track/Level | Requirements | Focus
 | ----------- | ------------ | -----
@@ -33,28 +16,6 @@ hermeticity or completeness of provenance -->
 > Note: The [previous version] of the specification used a single unnamed track,
 > SLSA 1–4. For version 1.0, the Source aspects were removed to focus on the
 > Build track. A Source track may be added in [future versions].
-
-## Build track
-
-The SLSA build track describes increasing levels of trustworthiness and
-completeness in a package artifact's <dfn>provenance</dfn>. Provenance describes
-what entity built the artifact, what process they used, and what the inputs
-were. The lowest level only requires the provenance to exist, while higher
-levels provide increasing protection against tampering of the build, the
-provenance, or the artifact.
-
-The primary purpose of the build track is to enable [verification] that the
-artifact was built as expected. Consumers have some way of knowing what the
-expected provenance should look like for a given package and then compare each
-package artifact's actual provenance to those expectations. Doing so prevents
-several classes of [supply chain threats](threats.md).
-
-Each ecosystem (for open source) or organization (for closed source) defines
-exactly how this is implemented, including: means of defining expectations, what
-provenance format is accepted, whether reproducible builds are used, how
-provenance is distributed, when verification happens, and what happens on
-failure. Guidelines for implementers can be found in the
-[requirements](build-requirements.md).
 
 <section id="build-l0">
 

@@ -181,5 +181,5 @@ greater than L3 when such levels get defined.
 [GitHub Actions]: https://docs.github.com/en/actions/hosting-your-own-runners
 [Software Bill of Materials (SBOM)]: https://ntia.gov/sbom
 [SLSA Provenance]: provenance.md
-[Build track]: levels.md#build-track
+[Build track]: build-track-basics.md
 [in-toto Attestation Framework]: https://github.com/in-toto/attestation/blob/main/spec/

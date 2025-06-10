@@ -100,7 +100,7 @@ chain between them.
 
 ## How SLSA works
 
-We talk about SLSA in terms of [tracks and levels](levels.md).
+We talk about SLSA in terms of [tracks and levels](tracks.md).
 A SLSA track focuses on a particular aspect of a supply chain, such as the Build
 Track.
 

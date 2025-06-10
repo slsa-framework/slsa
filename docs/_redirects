@@ -66,6 +66,9 @@
 /spec/latest/*            /spec/v1.1/:splat       302  # floating
 /spec/current-activities  /current-activities     301
 /spec/latest/*            /spec/v1.1/:splat       302
+# Levels are defined per track. Send folks to the tracks landing page to
+# disambiguate.
+/spec/draft/levels        /spec/draft/tracks      301
 /spec/draft/provenance    /spec/draft/build-provenance   302
 /spec/draft/requirements  /spec/draft/build-requirements 302
 

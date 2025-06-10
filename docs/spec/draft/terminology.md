@@ -21,8 +21,9 @@ description: Before diving into the SLSA specification levels, we need to establ
     self-described services and systems can continue to be called by these terms.
 -->
 
-Before diving into the [SLSA Levels](levels.md), we need to establish a core set
-of terminology and models to describe what we're protecting.
+Before diving into the [Build Track](build-track-basics.md), we need to
+establish a core set of terminology and models to describe what we're
+protecting.
 
 ## Software supply chain
 
