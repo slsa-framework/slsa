@@ -32,10 +32,10 @@ failure. Guidelines for implementers can be found in the
 
 <!-- TODO update verify-systems.md link after
      https://github.com/slsa-framework/slsa/pull/1403 is merged-->
-* [Basics](build-track-basics.md)
-* [Requirements](build-requirements.md)
-* [Build provenance](build-provenance.md)
-* [Verifying build platforms](verifying-systems.md)
+-   [Basics](build-track-basics.md)
+-   [Requirements](build-requirements.md)
+-   [Build provenance](build-provenance.md)
+-   [Verifying build platforms](verifying-systems.md)
 
 ## Source Track
 
@@ -50,7 +50,7 @@ process.
 
 Consumers can review attestations to verify whether a particular revision meets their standards.
 
-* [Requirements](source-requirements.md)
-* [Source provenance](source-requirements#provenance-attestations)
+-   [Requirements](source-requirements.md)
+-   [Source provenance](source-requirements#provenance-attestations)
 <!-- TODO add link to verifying-source-systems
      https://github.com/slsa-framework/slsa/pull/1403 is merged-->
