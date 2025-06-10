@@ -224,8 +224,7 @@ to indicate the SLSA Source Level of any revision at Level 1 or above.
 If a consumer is authorized to access a revision, they MUST be able to fetch the
 corresponding Source VSA.
 
-If the SCS DOES NOT generate a VSA for a revision, the revision cannot be
-verified and thus has Source Level 0.
+If the SCS DOES NOT generate a VSA for a revision, the revision has Source Level 0.
 
 At Source Levels 1 and 2 the SCS MAY issue these attestations based on its
 understanding of the underlying system (e.g. based on design docs, security
@@ -419,7 +418,7 @@ Source verification summary attestations (Source VSAs) are issued by some author
 revision's source level.  Source VSAs convey properties about the revision as a whole and summarize properties computed over all
 the changes that contributed to that revision over its history.
 
-The source track issues Source VSAs using [Verification Summary Attestations](./verification_summary.md) as follows:
+The source track issues Source VSAs using the [Verification Summary Attestations](./verification_summary.md) format as follows:
 
 1.  `subject.uri` SHOULD be set to a human readable URI of the revision.
 2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
