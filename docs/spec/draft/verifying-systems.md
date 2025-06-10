@@ -78,10 +78,11 @@ and outputs.
 ![image](images/build-model.svg)
 
 The following sections detail these elements of the build model and give prompts
-for assessing a build platform's ability to produce SLSA Build L3 provenance. The
-assessment SHOULD take into account the security model used to identify the
-transitive closure of the `builder.id` for the [provenance model], specifically
-around the platform's boundaries, actors, and interfaces.
+for assessing a build platform's ability to produce SLSA Build L3 provenance.
+The assessment SHOULD take into account the security model used to identify the
+transitive closure of the `builder.id` for the
+[provenance model](build-provenance.md#model), specifically around the
+platform's boundaries, actors, and interfaces.
 
 ### External parameters
 
