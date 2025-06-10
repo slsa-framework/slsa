@@ -11,6 +11,11 @@ describing where, when, and how something was produced.
 The different SLSA tracks have their own, more specific, implementations of
 provenance to account for their unique needs.
 
+NOTE: If you landed here via the
+[in-toto attestation](https://github.com/in-toto/attestation) predicate type
+`https://slsa.dev/provenance/v1` please see
+[Build provenance](build-provenance.md).
+
 -   [Build provenance](build-provenance.md) - tracks the output of a build process
    back to the source code used to produce that output.
 -   [Source provenance](source-requirements#provenance-attestations) - tracks the
