@@ -65,10 +65,6 @@
     url: /spec/draft/provenance
     description: Provides a description of the concept of provenance and links to the various tracks specific definitions.
 
-  - title: Security levels
-    url: /spec/draft/levels
-    description: Overview of SLSA's tracks and levels, intended for all audiences
-
   - title: Producing artifacts
     url: /spec/draft/build-requirements
     description: Detailed technical requirements for producing software artifacts, intended for platform implementers

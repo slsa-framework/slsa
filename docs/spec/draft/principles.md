@@ -8,9 +8,10 @@ decisions.
 
 ## Simple levels with clear outcomes
 
-Use [levels](levels) to communicate security state and to encourage a large
-population to improve its security stance over time. When necessary, split
-levels into separate tracks to recognize progress in unrelated security areas.
+Use [levels](about#how-slsa-works) to communicate security state and to
+encourage a large population to improve its security stance over time. When
+necessary, split levels into separate tracks to recognize progress in unrelated
+security areas.
 
 **Reasoning:** Levels simplify how to think about security by boiling a complex
 topic into an easy-to-understand number. It is clear that level N is better than
