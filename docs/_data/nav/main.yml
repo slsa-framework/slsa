@@ -301,7 +301,7 @@
       description: Guidelines for verifying source provenance
 
     - title: Verified Properties
-      url: /spec/draft/verified-properties.md
+      url: /spec/draft/verified-properties
       description: SLSA allows a common way to express verified properties that may not fit within a SLSA track.
 
   - title: Attestation formats
