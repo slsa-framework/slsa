@@ -401,7 +401,9 @@ Users MAY use custom values here but MUST NOT use custom values starting with
 ## Change history
 
 -   1.2:
-    -   Update SlsaResult definition to discuss how to refer to new tracks.
+    -   Update SlsaResult definition to discuss how to refer to new tracks and
+        link to [verified properties](verified-properties) for additional SLSA
+        endorsed values.
 -   1.1:
     -   Changed the `policy` object to recommend that the `digest` field of
         the `ResourceDescriptor` is set.
