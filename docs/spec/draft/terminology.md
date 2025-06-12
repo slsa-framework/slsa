@@ -317,7 +317,7 @@ build platform the package was built.
 |--------------|----
 | Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, whether explicitly or implicitly.
 | Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used.
-| Build platform certification | [Build platforms are certified](verifying-systems.md) for their conformance to the SLSA requirements at the stated level.
+| Build platform assessment | [Build platforms are assessed](assessing-build-platforms.md) for their ability to meet SLSA requirements at the stated level.
 
 The examples below suggest some ways that expectations and verification may be
 implemented for different, broadly defined, package ecosystems.
@@ -328,7 +328,7 @@ implemented for different, broadly defined, package ecosystems.
 | ---- | -------
 | Expectations | Defined by the producer's security personnel and stored in a database.
 | Provenance verification | Performed automatically on cluster nodes before execution by querying the expectations database.
-| Build platform certification | The build platform implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their conformance to SLSA requirements.
+| Build platform assessment | The build platform implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their adherence to SLSA requirements.
 
 </details>
 
@@ -338,6 +338,6 @@ implemented for different, broadly defined, package ecosystems.
 | ---- | -------
 | Expectations | Defined separately for each package and stored in the package registry.
 | Provenance verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client also verifies expectations prior to installing packages.
-| Build platform certification | Performed by the language ecosystem packaging authority.
+| Build platform assessment | Performed by the language ecosystem packaging authority.
 
 </details>

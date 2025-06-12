@@ -112,7 +112,7 @@ Resulting threat mitigation:
         platform itself, such as by a malicious insider. Instead, verifiers
         SHOULD carefully consider which build platforms are added to the roots
         of trust. For advice on establishing trust in build platforms, see
-        [Verifying build platforms](verifying-systems).
+        [Assessing build platforms](assessing-build-platforms.md).
 -   [Threat "F"]: SLSA Build L2 covers tampering of the artifact or provenance
     after the build. This is accomplished by verifying the `subject` and
     signature in the steps above.
