@@ -45,16 +45,15 @@ against the following types of adversaries.
     -   Modify the behavior of the Source Control System itself.
     -   Access the control plane's cryptographic secrets.
 
-## Souce Control System components
+## Source Control System components
 
 Consumers SHOULD consider at least these elements when assessing a Source
 Control System for SLSA conformance: control configuration, change management
-interface, control plane & verifer, storage.
+interface, control plane, verifier, storage.
 
 ![source control system components](images/source-control-system-components.svg)
 
-The following section details these elements and gives prompts for assessing a
-Source Control System's ability to produced SLSA Source L4 revisions.
+The following section details these elements.
 
 ### Change management interface
 
@@ -62,7 +61,58 @@ The change management interface is the user interface for proposing and
 approving changes to protected branches within a source repository. During
 normal operation all such changes go through this interface.
 
-#### Prompts for assessing the change management interface
+### Control configuration
+
+Control configuration is how organizations establish technical controls in a
+given source repository. If done well the configuration will reflect the intent
+of the organization.
+
+### Technical controls
+
+Technical controls are the organization configured settings that are used to
+determine if a revision can be introduced into storage within any particular
+context and who has access to those revisions.
+
+The technical controls component is responsible for the storage of these
+settings while the [control plane](#control-plane) is responsible for enforcing
+the configured controls.
+
+They include:
+
+-   Read/write ACLs,
+-   If approvals are required to introduce changes within a given context
+-   Which actors are allowed to issue those approvals
+-   Organization defined
+    [change management processes](#enforced-change-management-process)
+    requirements
+-   etc...
+
+### Control plane
+
+The control plane is the SCS component that orchestrates the introduction and
+creation of new revisions into a source repository. It is responsible for
+enforcing [technical controls](#technical-controls) and, at SLSA Source L3+,
+generating and signing source provenance for each revision. The control plane is
+operated by one or more administrators, who have privileges to modify the
+control plane.
+
+### Verifier
+
+The verifier is the SCS component that evaluates source provenance and generates
+and signs a
+[verification summary attestation](source-requirements#summary-attestation)
+(VSA).
+
+### Storage
+
+Storage holds source revisions and their provenance and summary attestations.
+
+## Assessing components
+
+The following are prompts for assessing a Source Control System's ability to
+meet the SLSA requirements.
+
+### Prompts for assessing the change management interface
 
 -   How does the SCS manage which actors are permitted to approve changes?
 -   What types of non-plain-text changes can the change management interface
@@ -71,13 +121,7 @@ normal operation all such changes go through this interface.
     Trusted Robot Contributions? Example: SLSA Build L3+ provenance, built from
     SLSA Source L4+ source.
 
-### Control configuration
-
-Control configuration is how organizations establish technical controls in a
-given source repository. If done well the configuration will reflect the intent
-of the organization.
-
-#### Prompts for assessing control configuration
+### Prompts for assessing control configuration & technical controls
 
 -   How does the SCS prevent regression in control configurations?
     Examples: built-in controls that cannot change, notifying project
@@ -85,24 +129,13 @@ of the organization.
     changes.
 -   How does the SCS prevent individual project maintainers from tampering with
     controls configured by the project?
+-   How does the SCS prevent SCS administrators from tampering with a project's
+    configured technical controls?
 
-### Control plane & verifier
+### Prompts for assessing the control plane & verifier
 
-The control plane and verifier perform related roles within the SCS and should
-typically be assesed together.
-
-The control plane is the SCS component that orchestrates the introduction and
-creation of new revisions into a source repository. It is responsible for
-enforcing technical controls and, at SLSA Source L3+, generating and signing
-source provenance for each revision. The control plane is operated by one or
-more administrators, who have privileges to modify the control plane.
-
-The verifier is the SCS component that evaluates source provenance and generates
-and signs a
-[verification summary attestation](source-requirements#summary-attestation)
-(VSA).
-
-#### Prompts for assessing the control plane & verifier
+NOTE The control plane and verifier perform related roles within the SCS and
+should typically be assessed together.
 
 -   Administration
     -   What are the ways an SCS administrator can use privileged access to
@@ -117,6 +150,10 @@ and signs a
         authentication, client device security policies
     -   What plans do you have for recovering from security incidents and
         platform outages? Are they tested? How frequently?
+
+-   Control effectiveness
+    -   How does the SCS ensure the control plane is enforcing the
+        [technical controls](#technical-controls) are working as intended?
 
 -   Source provenance generation
     -   How does the control plane observe the revision creation to ensure the
@@ -154,11 +191,7 @@ and signs a
     -   What is your plan for remediating cryptographic secret compromise? How
         frequently is this plan tested?
 
-### Storage
-
-Storage holds source revisions and their provenance and summary attestations.
-
-#### Prompts for assessing output storage
+### Prompts for assessing output storage
 
 -   How do you prevent tampering with storage directly?
 -   How do you prevent one project's revisions from affecting another project?
