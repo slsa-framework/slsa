@@ -121,10 +121,8 @@ fields:
 
 ### Step 3: Verify Evidence using Source Provenance [optional]
 
-Optionally, at source level 3 and up, check the source provenance attestations
-directly against a more nuanced set of expectations. This may be to cross-check
-the VSA issued for the revision, or to verify a more nuanced set of expectations
-that are not expressed in the VSA.
+Optionally, at SLSA Source Level 3 and up, check the [source provenance
+attestations](source-requirements#provenance-attestations) directly.
 
 As the format and implementation of source provenance attestations are left to
 the SCS, you SHOULD form expectations about the claims in source provenance
