@@ -334,9 +334,9 @@ TODO
 
 <!-- Link definitions -->
 
-[Build L1]: levels.md#build-l1
-[Build L2]: levels.md#build-l2
-[Build L3]: levels.md#build-l3
+[Build L1]: build-track-basics.md#build-l1
+[Build L2]: build-track-basics.md#build-l2
+[Build L3]: build-track-basics.md#build-l3
 [BuildEnv L0]: #buildenv-l0
 [BuildEnv L1]: #buildenv-l1
 [BuildEnv L2]: #buildenv-l2

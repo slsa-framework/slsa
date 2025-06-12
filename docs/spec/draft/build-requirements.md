@@ -9,9 +9,9 @@ each SLSA level. The intended audience is platform implementers and security
 engineers.
 
 For an informative description of the levels intended for all audiences, see
-[Levels](levels.md). For background, see [Terminology](terminology.md). To
-better understand the reasoning behind the requirements, see
-[Threats and mitigations](threats.md).
+[Build Track Basics](build-track-basics.md). For background, see
+[Terminology](terminology.md). To better understand the reasoning behind the
+requirements, see [Threats and mitigations](threats.md).
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
@@ -134,8 +134,9 @@ build platform is used by many different software packages so that consumers can
 see [Build Model](terminology.md#build-model).
 
 The build platform is responsible for providing two things: [provenance
-generation] and [isolation between builds]. The [Build level](levels.md#build-track) describes
-the degree to which each of these properties is met.
+generation] and [isolation between builds]. The
+[Build level](build-track-basics) describes the degree to which each of these
+properties is met.
 
 ### Provenance generation
 

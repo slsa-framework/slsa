@@ -13,7 +13,7 @@ The examples on this page are meant to:
 -   Explain the reasons for each of the SLSA [build](build-requirements.md) and
     [source](source-requirements.md) requirements.
 -   Increase confidence that the SLSA requirements are sufficient to achieve the
-    desired [level](levels.md) of integrity protection.
+    desired [level](about#how-slsa-works) of integrity protection.
 -   Help implementers better understand what they are protecting against so that
     they can better design and implement controls.
 

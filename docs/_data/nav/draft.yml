@@ -57,9 +57,13 @@
     url: /spec/draft/terminology
     description: Terminology and model used by SLSA
 
-  - title: Security levels
-    url: /spec/draft/levels
-    description: Overview of SLSA's tracks and levels, intended for all audiences
+  - title: Tracks
+    url: /spec/draft/tracks
+    description: Provides an overview of each track and links to more specific information.
+
+  - title: Provenance
+    url: /spec/draft/provenance
+    description: Provides a description of the concept of provenance and links to the various tracks specific definitions.
 
   - title: Producing artifacts
     url: /spec/draft/build-requirements
@@ -94,7 +98,7 @@
     description: Guidelines for verifying source provenance
 
   - title: Verified Properties
-    url: /spec/draft/verified-properties.md
+    url: /spec/draft/verified-properties
     description: SLSA allows a common way to express verified properties that may not fit within a SLSA track.
 
 - title: Attestation formats
