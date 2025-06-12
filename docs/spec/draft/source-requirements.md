@@ -304,11 +304,12 @@ policies.
 <td><td>✓<td>✓<td>✓
 <tr id="continuity"><td>Continuity<td>
 
-Continuity for [history](#history) and the
+On [protected branches](#branches) continuity for [history](#history) and
 [enforced change management process](#enforced-change-management-process)
-controls  MUST be established and tracked from a specific revision. If there is
-a lapse in continuity for a specific control, continuity of that control MUST be
-re-established from a new revision.
+controls MUST be established and tracked from a specific revision forward
+through each new revision created. If there is a lapse in continuity for a
+specific control, continuity of that control MUST be re-established from a new
+revision.
 
 Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
