@@ -119,6 +119,16 @@ fields:
 
 [Threat "B"]: threats#b-modifying-the-source
 
+### Step 3: Verify Evidence using Source Provenance [optional]
+
+Optionally, at SLSA Source Level 3 and up, check the [source provenance
+attestations](source-requirements#provenance-attestations) directly.
+
+As the format and implementation of source provenance attestations are left to
+the SCS, you SHOULD form expectations about the claims in source provenance
+attestations and how they map to a revision's properties claimed in its VSA in
+conjunction with the SCS and the producer.
+
 ## Forming Expectations
 
 <dfn>Expectations</dfn> are known values that indicate the corresponding
