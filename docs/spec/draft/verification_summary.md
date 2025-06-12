@@ -373,10 +373,14 @@ verifiers they add to their roots of trust.
 </div>
 
 The result of evaluating an artifact (or set of artifacts) against SLSA.
-SHOULD be the [SLSA Track](#tracks) level the referenced artifact meant as
-`SLSA_<TRACK_NAME>_LEVEL_<LEVEL_NUMBER>` or
-`SLSA_<TRACK NAME>_LEVEL_UNEVALUATED` if the VSA issuer does not want to make
-a statement about the track level an artifact meets.
+SHOULD be
+
+-   The [SLSA Track](#tracks) level the referenced artifact qualifies for as
+`SLSA_<TRACK_NAME>_LEVEL_<LEVEL_NUMBER>`, or
+-   `SLSA_<TRACK NAME>_LEVEL_UNEVALUATED` if the VSA issuer does not want to
+    make a claim about the track level an artifact meets, or
+-   The SLSA [verified property](verified-properties) the referenced artifact
+    qualifies for.
 
 For example:
 
