@@ -32,7 +32,7 @@ against the following types of adversaries.
     -   Upload new content to the source repo.
 2.  Project maintainer, who can:
     -   Do everything listed under "project contributors".
-    -   Define the purpose of the source repo. 
+    -   Define the purpose of the source repo.
     -   Add or remove contributors to the source repo.
     -   Add or remove permissions granted to contributors of the source repo.
     -   Modify security controls within the source repo.
@@ -59,7 +59,7 @@ Source Control System's ability to produced SLSA Source L4 revisions.
 ### Change management interface
 
 The change management interface is the user interface for proposing and
-approving changes to protected branches within a source repository. During 
+approving changes to protected branches within a source repository. During
 normal operation all such changes go through this interface.
 
 #### Prompts for assessing the change management interface
