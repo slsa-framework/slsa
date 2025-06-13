@@ -1,5 +1,5 @@
 ---
-title: Distributing provenance
+title: Build: Distributing provenance
 description: This page covers the detailed technical requirements for distributing provenance at each SLSA level. The intended audience is platform implementers and software distributors.
 ---
 
