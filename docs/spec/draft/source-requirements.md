@@ -287,7 +287,7 @@ policies.
 <td><td>✓<td>✓<td>✓
 <tr id="continuity"><td>Continuity<td>
 
-In a source control system, each new revisions is built on top of prior
+In a source control system, each new revision is built on top of prior
 revisions. Controls (e.g. [history](#history) or
 [enforced change management process](#enforced-change-management-process)) are
 only  effective if they are used continuously from one revision to another. If
