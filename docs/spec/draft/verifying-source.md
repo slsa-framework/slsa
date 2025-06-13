@@ -14,8 +14,8 @@ properties of source revisions using
 with those revisions.
 
 At Source L3+, Source Control Systems (SCSs) issue detailed
-[provenance attestations](source-requirements#provenance-attestations) of the
-process that was used to create specific revisions of a repository. These
+[provenance attestations](source-requirements#source-provenance-attestations) of
+the process that was used to create specific revisions of a repository. These
 provenance attestations are issued in bespoke formats and may be too burdensome
 to use in some use cases.
 
@@ -127,7 +127,7 @@ fields:
 ### Step 3: Verify Evidence using Source Provenance [optional]
 
 Optionally, at SLSA Source Level 3 and up, check the [source provenance
-attestations](source-requirements#provenance-attestations) directly.
+attestations](source-requirements#source-provenance-attestations) directly.
 
 As the format and implementation of source provenance attestations are left to
 the SCS, you SHOULD form expectations about the claims in source provenance

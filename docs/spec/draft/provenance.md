@@ -18,7 +18,6 @@ NOTE: If you landed here via the
 
 -   [Build provenance](build-provenance.md) - tracks the output of a build process
    back to the source code used to produce that output.
--   [Source provenance](source-requirements#provenance-attestations) - tracks the
+-   [Source provenance](source-requirements#source-provenance-attestations) - tracks the
     creation of source code revisions and the change management processes
     that were in place during their creation.
-  
