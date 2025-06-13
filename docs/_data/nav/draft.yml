@@ -65,27 +65,27 @@
     url: /spec/draft/provenance
     description: Provides a description of the concept of provenance and links to the various tracks specific definitions.
 
-  - title: Build: Producing artifacts
+  - title: "Build: Producing artifacts"
     url: /spec/draft/build-requirements
     description: Detailed technical requirements for producing software artifacts, intended for platform implementers
 
-  - title: Build: Distributing provenance
+  - title: "Build: Distributing provenance"
     url: /spec/draft/distributing-provenance
     description: Detailed technical requirements for distributing provenance, intended for platform implementers and software distributors
 
-  - title: Build: Verifying artifacts
+  - title: "Build: Verifying artifacts"
     url: /spec/draft/verifying-artifacts
     description: Guidance for verifying software artifacts and their SLSA provenance, intended for platform implementers and software consumers
 
-  - title: Build: Assessing platforms
+  - title: "Build: Assessing platforms"
     url: /spec/draft/assessing-build-platforms
     description: Guidelines for securing SLSA Build L3+ builders, intended for platform implementers
 
-  - title: Source: Producing source
+  - title: "Source: Producing source"
     url: /spec/draft/source-requirements
     description: Overview of the Source track
 
-  - title: Source: Verifying source
+  - title: "Source: Verifying source"
     url: /spec/draft/verifying-source
     description: Guidelines for verifying source provenance
 
