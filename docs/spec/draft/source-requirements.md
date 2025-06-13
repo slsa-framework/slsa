@@ -245,7 +245,7 @@ E.g. The organization may configure the SCS to protect `main` and
 <td><td>✓<td>✓<td>✓
 <tr id="history"><td>History<td>
 
-Revisions are created by applying specific code changes (a "diffs" in git) on
+Revisions are created by applying specific code changes (a "diff" in git) on
 top of earlier revisions of a branch. This sequence of changes, the revisions
 they produced, and how they were introduced into a branch constitute the history
 of a revision.
