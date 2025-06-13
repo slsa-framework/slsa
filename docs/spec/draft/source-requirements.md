@@ -55,10 +55,10 @@ level.
 
 | Track/Level | Requirements | Focus
 | ----------- | ------------ | -----
-| [Source L1]  | Use a version control system | First steps towards operational maturity
-| [Source L2]  | History and controls for protected branches & tags | Preserve history and ensure the process has been followed
-| [Source L3]  | Signed provenance | Tampering by the source control system
-| [Source L4]  | Code review | Tampering by project contributors
+| [Source L1](#source-l1)  | Use a version control system | First steps towards operational maturity
+| [Source L2](#source-l2)  | History and controls for protected branches & tags | Preserve history and ensure the process has been followed
+| [Source L3](#source-l3)  | Signed provenance | Tampering by the source control system
+| [Source L4](#source-l4)  | Code review | Tampering by project contributors
 
 <section id="source-l1">
 
