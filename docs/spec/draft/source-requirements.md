@@ -224,7 +224,8 @@ to indicate the SLSA Source Level of any revision at Level 1 or above.
 If a consumer is authorized to access a revision, they MUST be able to fetch the
 corresponding Source VSA.
 
-If the SCS DOES NOT generate a VSA for a revision, the revision has Source Level 0.
+If the SCS DOES NOT generate a VSA for a revision, the revision has Source Level
+0.
 
 At Source Levels 1 and 2 the SCS MAY issue these attestations based on its
 understanding of the underlying system (e.g. based on design docs, security
@@ -233,19 +234,6 @@ the SCS issued [source provenance](#source-provenance) when making the issuing
 the VSAs.
 
 <td>✓<td>✓<td>✓<td>✓
-<tr id="context"><td>Context<td>
-
-The SCS MUST record the specific code change (a "diff" in git) or instructions
-to recreate it. In git, this is typically defined to be three revision IDs: the tip
-of the "topic" branch, the tip of the target branch, and closest shared ancestor
-between the two (such as determined by `git-merge-base`).
-
-The SCS MUST record the "target" context for the change and the previous
-revision in that context.
-> For example, for the git version control system, the
-SCS MUST record the branch name that was updated, its new revision and its previous revision.
-
-<td><td>✓<td>✓<td>✓
 <tr id="branches"><td>Protected Branches<td>
 
 The SCS MUST provide a mechanism for organizations to indicate which branches
@@ -253,6 +241,22 @@ should be protected by SLSA Source Level 2+ requirements.
 
 E.g. The organization may configure the SCS to protect `main` and
 `refs/heads/releases/*`, but not `refs/heads/playground/*`.
+
+<td><td>✓<td>✓<td>✓
+<tr id="history"><td>History<td>
+
+Revisions are created by applying specific code changes (a "diff" in git) on
+top of earlier revisions of a branch. This sequence of changes, the revisions
+they produced, and how they were introduced into a branch constitute the history
+of that branch.
+
+The SCS MUST record the sequence of changes, the revisions they created,
+the actors that introduced them and the context they were introduced into.
+
+The SCS MUST prevent tampering with these records on protected branches.
+
+> For example, in systems like GitHub or GitLab, this can be accomplished by
+enabling branch protection rules that prevent force pushes and branch deletions.
 
 <td><td>✓<td>✓<td>✓
 <tr id="enforced-change-management-process"><td>Enforced change management process<td>
@@ -283,24 +287,22 @@ policies.
 <td><td>✓<td>✓<td>✓
 <tr id="continuity"><td>Continuity<td>
 
-Revisions are created by applying a specific code change (a "diff" in git) on
-top of an earlier revision of a branch. The SCS MUST prevent tampering with the
-history of revisions on protected branches.
+In a source control system, each new revision is built on top of prior
+revisions. Controls (e.g. [history](#history) or
+[enforced change management process](#enforced-change-management-process)) are
+only effective if they are used continuously from one revision to another. If
+a control is disabled for the introduction of a new revision and then re-enabled
+it is difficult to reason about the effectiveness of the control. 'Continuity' is
+the concept of ensuring controls are enforced continuously from the time they
+were introduced, leading to a higher degree of trust in the revisions produced
+after their introduction.
 
-In other words, if the organization updates a branch from commit A to commit B,
-commit B MUST be a descendant of A. For systems like GitHub or GitLab, this can
-be accomplished by enabling branch protection rules that prevent force pushes
-and branch deletions.
-
-The SCS MUST prevent the entire repository (including all branches) from being
-deleted and replaced by different source.
-
-Continuity MUST be established and tracked from a specific revision. If there is
-a lapse in continuity for a specific control, that continuity MUST be
-re-established from a new revision.
-
-Continuity MUST also apply to any [change management processes](#enforced-change-management-process)
-which are enforced on the protected branches.
+On [protected branches](#branches) continuity for [history](#history) and
+[enforced change management process](#enforced-change-management-process)
+controls MUST be established and tracked from a specific revision forward
+through each new revision created. If there is a lapse in continuity for a
+specific control, continuity of that control MUST be re-established from a new
+revision.
 
 Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
