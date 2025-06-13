@@ -255,7 +255,7 @@ the actors that introduced them and the context they were introduced into.
 
 The SCS MUST prevent tampering with these records on protected branches.
 
-> For example, systems like GitHub or GitLab, this can be accomplished by
+> For example, in systems like GitHub or GitLab, this can be accomplished by
 enabling branch protection rules that prevent force pushes and branch deletions.
 
 <td><td>✓<td>✓<td>✓
