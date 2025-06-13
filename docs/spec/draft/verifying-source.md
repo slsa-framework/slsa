@@ -6,30 +6,35 @@ description: |
   The intended audience is platform implementers, security engineers, and software consumers.
 ---
 
-SLSA uses attestations to indicate security claims associated with a repository revision, but attestations don't do anything unless somebody inspects them.
-SLSA calls that inspection **verification**, and this page describes how to verify properties of source revisions using their SLSA source provenance attestations.
+SLSA uses attestations to indicate security claims associated with a repository
+revision, but attestations don't do anything unless somebody inspects them. SLSA
+calls that inspection **verification**, and this page describes how to verify
+properties of source revisions using
+[the attestations](source-requirements#communicating-source-levels) associated
+with those revisions.
 
-Source Control Systems (SCSs) may issue attestations of the process that was used to create specific revisions of a repository.
+At Source L3+ Source Control Systems (SCSs) issue detailed
+[provenance attestations](source-requirements#provenance-attestations) of the
+process that was used to create specific revisions of a repository. These
+provenance attestations are issued in bespoke formats and may be too burdensome
+to use in some use cases.
 
-A Verification Summary Attestation (VSA) can make verification more efficient by recording the result of prior verifications.
-VSA may be issued by a VSA provider to make a SLSA source level determination based on the content of those attestations.
+[Source Verification Summary Attestations](source-requirements#source-verification-summary-attestation)
+(Source VSAs) address this, making verification more efficient and ergonomic by
+recording the result of prior verifications. Source VSAs may be issued by a VSA
+provider to make a SLSA source level determination based on the content of those
+attestations.
 
 ## How to verify SLSA a source revision
 
-Verification of a source revision revolves around use of the
-[Verification Summary Attestation (VSA)] that applies to that source revision
-(a 'Source VSA') by the consumer of the source code. This shields the consumer
-from the details of an SCS's bespoke provenance formats, and from the specifics
-about the producer's change management process.
-
-Instead the source consumer checks:
+The source consumer checks:
 
 1.  If they trust the SCS that issued the VSA and if the VSA applies to the
    revision they've fetched.
 2.  If the claims made in the VSA match their expectations for how the source
    should be managed.
-
-[Verification Summary Attestation (VSA)]: source-requirements#summary-attestation
+3.  (Optional): If the evidence presented in the source provenance matches the
+   claims made in the VSA.
 
 ### Step 1: Check the SCS
 
@@ -115,7 +120,7 @@ fields:
 | Verifier (SCS) identity from [Step 1] | To prevent an adversary from substituting a VSA making false claims from an unintended SCS.
 | `predicate.resourceUri` | To prevent an adversary from substituting a VSA for the intended repository (e.g. `git+https://github.com/IntendedOrg/hello-world`) for another (e.g. `git+https://github.com/AdversaryOrg/hello-world`)
 | `subject.annotations.source_refs` | To prevent an adversary from substituting the intended revision from one branch (e.g. `release`) with another (e.g. `experimental_auth`).
-| `verifiedLevels` | To ensure the expected controls were in place for the creation of the revision. E.g. `SLSA_SOURCE_LEVEL_3`, `ACME_STATIC_ANALYSIS`, etc...
+| `verifiedLevels` | To ensure the expected controls were in place for the creation of the revision. E.g. `SLSA_SOURCE_LEVEL_3`, `ORG_SOURCE_STATIC_ANALYSIS`, etc...
 
 [Threat "B"]: threats#b-modifying-the-source
 
