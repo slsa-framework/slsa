@@ -30,12 +30,10 @@ provenance is distributed, when verification happens, and what happens on
 failure. Guidelines for implementers can be found in the
 [requirements](build-requirements.md).
 
-<!-- TODO update verify-systems.md link after
-     https://github.com/slsa-framework/slsa/pull/1403 is merged-->
 -   [Basics](build-track-basics.md)
 -   [Requirements](build-requirements.md)
 -   [Build provenance](build-provenance.md)
--   [Verifying build platforms](verifying-systems.md)
+-   [Assessing build platforms](assessing-build-platforms.md)
 
 ## Source Track
 
@@ -54,3 +52,18 @@ Consumers can review attestations to verify whether a particular revision meets 
 -   [Source provenance](source-requirements#provenance-attestations)
 <!-- TODO add link to verifying-source-systems
      https://github.com/slsa-framework/slsa/pull/1403 is merged-->
+
+### Build Environment track
+
+The goal of a Build Environment track is to enable the detection of tampering
+with core components of the compute environment executing builds. The track
+describes increasing levels of integrity for different components of the
+build platform and its underlying compute platform.
+
+At a general level, implementers of this track will generate SLSA Build
+Provenance for build images, validate the integrity of a build's environment
+at boot time against good known values, and at L3 deploy the build system on
+compute that supports system state measurement and attestation capabilities at
+the hardware level.
+
+-   [Basics](build-env-track-basics.md)
