@@ -47,60 +47,105 @@ from that revision forward. This establishes [continuity](#continuity).
 
 No claims are made for prior revisions.
 
-## Levels
+## Basics
+
+NOTE: This table presents a simplified view of the requirements. See the
+[Requirements](#requirements) section for the full list of requirements for each
+level.
+
+| Track/Level | Requirements | Focus
+| ----------- | ------------ | -----
+| [Source L1]  | Use a version control system | First steps towards operational maturity
+| [Source L2]  | History and controls for protected branches & tags | Preserve history and ensure the process has been followed
+| [Source L3]  | Signed provenance | Tampering by the source control system
+| [Source L4]  | Code review | Tampering by project contributors
+
+<section id="source-l1">
 
 ### Level 1: Version controlled
 
-Summary:
+<dl class="as-table">
+<dt>Summary<dd>
+
 The source is stored and managed through a modern version control system.
 
-Intended for: Organizations currently storing source in non-standard ways who want to quickly gain some benefits of SLSA and better integrate with the SLSA ecosystem with minimal impact to their current workflows.
+<dt>Intended for<dd>
 
-Benefits:
+Organizations currently storing source in non-standard ways who want to quickly gain some benefits of SLSA and better integrate with the SLSA ecosystem with minimal impact to their current workflows.
+
+<dt>Benefits<dd>
+
 Migrating to the appropriate tools is an important first step on the road to operational maturity.
+
+</dl>
+</section>
+<section id="source-l2">
 
 ### Level 2: Controls
 
-Summary:
+<dl class="as-table">
+<dt>Summary<dd>
+
 Clarifies which branches and tags in a repo are consumable and guarantees that
 all changes to protected branches and tags are recorded and subject to the
 organization's technical controls.
 
-Intended for:
+<dt>Intended for<dd>
+
 All organizations of any size producing software of any kind.
 
-Benefits:
+<dt>Benefits<dd>
+
 Allows organizations and source consumers the ability to ensure the change
 management process has been followed to track changes to the software over time
 and attribute those changes to the actors that made them.
 
+</dl>
+</section>
+<section id="source-l3">
+
 ### Level 3: Authenticatable and Auditable Provenance
 
-Summary:
+<dl class="as-table">
+<dt>Summary<dd>
+
 The SCS generates credible, tamper-resistant, and contemporaneous evidence of how a specific revision was created.
 It is provided to authorized users of the source repository in a documented format.
 
-Intended for:
+<dt>Intended for<dd>
+
 Organizations that want strong guarantees and auditability of their change management processes.
 
-Benefits:
+<dt>Benefits<dd>
+
 Provides authenticatable and auditable information to policy enforcement tools and reduces the risk of tampering
 within the SCS's storage systems.
 
+</dl>
+</section>
+<section id="source-l4">
+
 ### Level 4: Two-party review
 
-Summary:
+<dl class="as-table">
+<dt>Summary<dd>
+
 The SCS requires two trusted persons to review all changes to protected
 branches.
 
-Intended for:
+<dt>Intended for<dd>
+
 Organizations that want strong guarantees that the software they produce is not
 subject to unilateral changes that would subvert their intent.
 
-Benefits:
+<dt>Benefits<dd>
+
 Makes it harder for an actor to introduce malicious changes into the software
 and makes it more likely that the source reflects the intent of the
 organization.
+
+</dl>
+</section>
 
 ## Requirements
 

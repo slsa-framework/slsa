@@ -15,7 +15,8 @@ hermeticity or completeness of provenance -->
 
 > Note: The [previous version] of the specification used a single unnamed track,
 > SLSA 1–4. For version 1.0, the Source aspects were removed to focus on the
-> Build track. A Source track may be added in [future versions].
+> Build track. In 1.2 the [Source Track](tracks#source-track) reintroduces
+> coverage of source code.
 
 <section id="build-l0">
 
