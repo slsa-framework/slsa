@@ -290,9 +290,9 @@ policies.
 In a source control system, each new revision is built on top of prior
 revisions. Controls (e.g. [history](#history) or
 [enforced change management process](#enforced-change-management-process)) are
-only  effective if they are used continuously from one revision to another. If
+only effective if they are used continuously from one revision to another. If
 a control is disabled for the introduction of a new revision and then re-enabled
-it difficult to reason about the effectiveness of the control. 'Continuity' is
+it is difficult to reason about the effectiveness of the control. 'Continuity' is
 the concept of ensuring controls are enforced continuously from the time they
 were introduced, leading to a higher degree of trust in the revisions produced
 after their introduction.
