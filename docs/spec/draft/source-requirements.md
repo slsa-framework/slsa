@@ -250,30 +250,13 @@ top of earlier revisions of a branch. This sequence of changes, the revisions
 they produced, and how they were introduced into a branch constitute the history
 of a revision.
 
-The SCS MUST record the specific code change (a "diff" in git) responsible for
-creating a new revision or instructions to recreate it.
+The SCS MUST record the sequence of changes, the revisions they created,
+the actors that introduced them and the context they were introduced into.
 
-> For example, In git, this is typically defined to be three revision IDs: the
-tip of the "topic" branch, the tip of the target branch, and closest shared
-ancestor between the two (such as determined by `git-merge-base`).
+The SCS MUST prevent tampering with these records on protected branches.
 
-The SCS MUST record the "target" context for the change and the previous
-revision in that context.
-
-> For example, for the git version control system, the
-SCS MUST record the branch name that was updated, its new revision and its
-previous revision.
-
-The SCS MUST prevent tampering with the history of revisions on protected
-branches.
-
-> For example, if the organization updates a branch from commit A to commit B,
-commit B MUST be a descendant of A. For systems like GitHub or GitLab, this can
-be accomplished by enabling branch protection rules that prevent force pushes
-and branch deletions.
-
-The SCS MUST prevent the entire repository (including all branches) from being
-deleted and replaced by different source.
+> For example, systems like GitHub or GitLab, this can be accomplished by
+enabling branch protection rules that prevent force pushes and branch deletions.
 
 <td><td>✓<td>✓<td>✓
 <tr id="enforced-change-management-process"><td>Enforced change management process<td>
