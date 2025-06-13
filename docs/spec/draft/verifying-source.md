@@ -13,7 +13,7 @@ properties of source revisions using
 [the attestations](source-requirements#communicating-source-levels) associated
 with those revisions.
 
-At Source L3+ Source Control Systems (SCSs) issue detailed
+At Source L3+, Source Control Systems (SCSs) issue detailed
 [provenance attestations](source-requirements#provenance-attestations) of the
 process that was used to create specific revisions of a repository. These
 provenance attestations are issued in bespoke formats and may be too burdensome
