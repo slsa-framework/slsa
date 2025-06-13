@@ -248,7 +248,7 @@ E.g. The organization may configure the SCS to protect `main` and
 Revisions are created by applying specific code changes (a "diff" in git) on
 top of earlier revisions of a branch. This sequence of changes, the revisions
 they produced, and how they were introduced into a branch constitute the history
-of a revision.
+of that branch.
 
 The SCS MUST record the sequence of changes, the revisions they created,
 the actors that introduced them and the context they were introduced into.
