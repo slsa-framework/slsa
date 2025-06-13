@@ -51,6 +51,6 @@ process.
 Consumers can review attestations to verify whether a particular revision meets their standards.
 
 -   [Requirements](source-requirements.md)
--   [Source provenance](source-requirements#provenance-attestations)
+-   [Source provenance](source-requirements#source-provenance-attestations)
 <!-- TODO add link to verifying-source-systems
      https://github.com/slsa-framework/slsa/pull/1403 is merged-->

@@ -341,12 +341,12 @@ identities.
 <td><td>✓<td>✓<td>✓
 <tr id="source-provenance"><td>Source Provenance<td>
 
-[Source Provenance](#provenance-attestations) are attestations that contain
-information about how a specific revision was created and how it came to exist
-on a protected branch or how a tag came to point at it. They are associated
-with the revision identifier delivered to consumers and are a statement of fact
-from the perspective of the SCS. The SCS MUST document the format and intent of
-all Source Provenance attestations it produces.
+[Source Provenance](#source-provenance-attestations) are attestations that
+contain information about how a specific revision was created and how it came to
+exist on a protected branch or how a tag came to point at it. They are
+associated with the revision identifier delivered to consumers and are a
+statement of fact from the perspective of the SCS. The SCS MUST document the
+format and intent of all Source Provenance attestations it produces.
 
 At Source Level 3, Source Provenance MUST be created contemporaneously with the
 branch being updated to use that revision such that they provide a credible,
@@ -495,7 +495,7 @@ Example implementations:
 -   Users SHOULD check that the expected `SLSA_SOURCE_LEVEL_` is listed within `verifiedLevels`.
 -   Users MUST ignore any unrecognized values in `verifiedLevels`.
 
-### Provenance attestations
+### Source provenance attestations
 
 Source provenance attestations provide tamper-proof evidence (ideally signed [in-toto attestations](https://github.com/in-toto/attestation/blob/main/README.md))
 that can be used to determine what SLSA Source Level or other high level properties a given revision meets.
@@ -548,8 +548,8 @@ require multiple of these controls as part of their required protections.
 If an organization has indicated that use of these these controls are part of
 their repository's expectations, consumers SHOULD be able to verify that the
 process was followed for the revision they are consuming by examining the
-[summary](#source-verification-summary-attestation) or [source provenance](#provenance-attestations)
-attestations.
+[summary](#source-verification-summary-attestation) or [source
+provenance](#source-provenance-attestations) attestations.
 
 > For example: consumers can look for the related `ORG_SOURCE` properties in the
 `verifiedLevels` field of the [summary attestation](#source-verification-summary-attestation).
