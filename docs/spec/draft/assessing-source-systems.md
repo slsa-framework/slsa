@@ -1,5 +1,5 @@
 ---
-title: Verifying source control systems
+title: Assessing source control systems
 description: Guidelines for assessing source control system security.
 ---
 
