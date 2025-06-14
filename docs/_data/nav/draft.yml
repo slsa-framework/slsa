@@ -89,13 +89,17 @@
     url: /spec/draft/threats
     description: Detailed information about specific supply chain attacks and how SLSA helps
 
-  - title: Securing Source Code
+  - title: Securing source code
     url: /spec/draft/source-requirements
     description: Overview of the Source track
 
-  - title: Verifying Source Code
+  - title: Verifying source code
     url: /spec/draft/verifying-source
     description: Guidelines for verifying source provenance
+
+  - title: Assessing source control systems
+    url: /spec/draft/assessing-source-systems
+    description: Guidelines for assessing source control system security.
 
   - title: Verified Properties
     url: /spec/draft/verified-properties
