@@ -5,8 +5,6 @@ description: |
   within a SLSA track.
 ---
 
-# SLSA Verified Properties
-
 While SLSA is typically focused on expressing the security state of an artifact
 with [levels](principles#simple-levels-with-clear-outcomes), levels may not be
 appropriate in all cases. Some software supply chain controls don't fit neatly
