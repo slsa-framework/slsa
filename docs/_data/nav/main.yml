@@ -292,7 +292,7 @@
       url: /spec/draft/verifying-source
       description: Guidelines for verifying source provenance
 
-    - title: Source: Assessing source control systems
+    - title: "Source: Assessing source control systems"
       url: /spec/draft/assessing-source-systems
       description: Guidelines for assessing source control system security. 
 
