@@ -58,9 +58,6 @@ to the source code that does not reflect the intent of the software producer.
 This includes modification of the source data at rest as well as insider threats,
 when an authorized individual introduces an unauthorized change.
 
-SLSA does not yet address source threats, but we anticipate doing so in a
-[future version](../../current-activities.md#source-track).
-
 ### (A) Producer
 
 The producer of the software intentionally produces code that harms the
