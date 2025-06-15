@@ -276,7 +276,7 @@
       url: /spec/draft/verifying-artifacts
       description: Guidance for verifying software artifacts and their SLSA provenance, intended for platform implementers and software consumers
 
-    - title: Assessing platforms
+    - title: Assessing build platforms
       url: /spec/draft/assessing-build-platforms
       description: Guidelines for securing SLSA Build L3+ builders, intended for platform implementers
 
