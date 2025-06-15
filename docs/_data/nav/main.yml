@@ -82,10 +82,6 @@
       url: /spec/v1.2-rc1/assessing-build-platforms
       description: Guidelines for securing SLSA Build L3+ builders, intended for platform implementers
 
-    - title: Attesting build environments
-      url: /spec/v1.2-rc1/build-env-track-basics
-      description: Overview of SLSA's Attested Build Environment track, intended for all audiences
-
     - title: Threats & mitigations
       url: /spec/v1.2-rc1/threats
       description: Detailed information about specific supply chain attacks and how SLSA helps
