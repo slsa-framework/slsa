@@ -1,10 +1,10 @@
 ---
 title: What's new
-description: The changes brought by this Working Draft.
+description: The changes brought by SLSA 1.2 RC1.
 ---
 
-This document describes the major changes brought by this Working
-Draft relative to the prior release, [v1.1].
+This document describes the major changes brought by SLSA 1.2 RC1 relative to
+the prior release, [v1.1].
 
 ## Summary of changes
 
