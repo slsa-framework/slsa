@@ -30,6 +30,7 @@ provenance is distributed, when verification happens, and what happens on
 failure. Guidelines for implementers can be found in the
 [requirements](build-requirements.md).
 
+-   [Terminology](terminology.md)
 -   [Basics](build-track-basics.md)
 -   [Requirements](build-requirements.md)
 -   [Build provenance](build-provenance.md)

@@ -1,5 +1,5 @@
 ---
-title: Verifying source
+title: "Source: Verifying source"
 description: |
   SLSA uses attestations to indicate security claims associated with a repository revision, but attestations don't do anything unless somebody inspects them.
   SLSA calls that inspection verification, and this page describes how to verify properties of source revisions using their SLSA source provenance attestations.

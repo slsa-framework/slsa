@@ -1,5 +1,5 @@
 ---
-title: Verifying build platforms
+title: "Build: Assessing build platforms"
 description: Guidelines for assessing build platform security.
 ---
 

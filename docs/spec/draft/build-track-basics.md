@@ -1,5 +1,5 @@
 ---
-title: Build Track Level Basics
+title: "Build: Track Basics"
 description: The SLSA build track is organized into a series of levels that provide increasing supply chain security guarantees. This gives you confidence that software hasn’t been tampered with and can be securely traced back to its source. This page is a descriptive overview of the SLSA build track levels, describing their intent.
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Producing artifacts
+title: "Build: Requirements for producing artifacts"
 description: This page covers the detailed technical requirements for producing artifacts at each SLSA level. The intended audience is platform implementers and security engineers.
 ---
 
