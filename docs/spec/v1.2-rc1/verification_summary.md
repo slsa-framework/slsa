@@ -193,8 +193,8 @@ of the other top-level fields, such as `subject`, see [Statement]._
 `verifiedLevels` _array ([SlsaResult]), required_
 
 > Indicates the highest level of each track verified for the artifact (and not
-> its dependencies) and any [verified properties](verified-properties) verified
-> for the artifact or "FAILED" if policy verification failed.
+> its dependencies) verified for the artifact or "FAILED" if policy verification
+> failed.
 >
 > Users MUST NOT include more than one level per SLSA track. Note that each SLSA
 > level implies all levels below it (e.g. `SLSA_BUILD_LEVEL_3` implies
@@ -379,8 +379,6 @@ SHOULD be
 `SLSA_<TRACK_NAME>_LEVEL_<LEVEL_NUMBER>`, or
 -   `SLSA_<TRACK NAME>_LEVEL_UNEVALUATED` if the VSA issuer does not want to
     make a claim about the track level an artifact meets, or
--   The SLSA [verified property](verified-properties) the referenced artifact
-    qualifies for.
 
 For example:
 
@@ -401,9 +399,8 @@ Users MAY use custom values here but MUST NOT use custom values starting with
 ## Change history
 
 -   1.2:
-    -   Update SlsaResult definition to discuss how to refer to new tracks and
-        link to [verified properties](verified-properties) for additional SLSA
-        endorsed values.
+    -   Update SlsaResult definition to discuss how to refer to new tracks for
+        additional SLSA endorsed values.
 -   1.1:
     -   Changed the `policy` object to recommend that the `digest` field of
         the `ResourceDescriptor` is set.
