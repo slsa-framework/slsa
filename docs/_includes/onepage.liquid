@@ -19,7 +19,7 @@ This code turns a set of pages contained in a directory into one single page.
    {% capture pattern %}page.url == "{{dir}}{{file}}"{% endcapture %}
    {% assign p = pages | where_exp: "page", pattern | first %}
    <!-- {{p.url}} begins -->
-   <h2 id="{{file}}">{{p.title}}</h2>
+   <h2 id="onepage-{{file}}">{{p.title}}</h2>
    {% include section.liquid content=p.content files=files baseurl=dir noshift=false %}
    <!-- {{p.url}} ends -->
 {% endfor %}
