@@ -109,10 +109,6 @@
       url: /spec/v1.2-rc1/threats
       description: Detailed information about specific supply chain attacks and how SLSA helps
 
-    - title: Verified Properties
-      url: /spec/v1.2-rc1/verified-properties
-      description: SLSA allows a common way to express verified properties that may not fit within a SLSA track.
-
   - title: Attestation formats
     description: >
       These pages include the concrete schemas for SLSA attestations. The
