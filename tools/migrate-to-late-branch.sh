@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# This is a one-time script to migrate the slsa repo to a late-branch model.
-# Currently, all versions are in subfolders in docs/spec/<version>
+# migrate-to-late-branch.sh
+# 
+# Purpose: Migrate SLSA repository to a late-branch model.
+# 
+# Before: All versions are in subfolders in docs/spec/<version>
+# After:  Each version lives in its own branch under releases/<version>
+#         with content directly under /spec/
 #
 # For each subfolder of docs/spec on the main branch:
 # 1. Checkout the main branch. Create a branch with the subfolder name and check it out.
@@ -54,10 +59,10 @@ for version in "${VERSIONS[@]}"; do
   git checkout -b "$BRANCH"
 
   # --- move the version folder to the root of the spec directory ---
-  mv "$SPECDIR/$version" "spec"
+  git mv "$SPECDIR/$version" "spec"
 
   # --- remove docs folder ---
-  rm -rf docs
+  git rm -rf docs
 
   # --- Commit the changes ---
   git add --all
