@@ -1,4 +1,7 @@
-# SLSA Source Track
+---
+title: "Source: Requirements for producing source"
+description: This page covers the detailed technical requirements for producing producing source revisions at each SLSA level. The intended audience is source control system implementers and security engineers.
+---
 
 ## Objective
 
