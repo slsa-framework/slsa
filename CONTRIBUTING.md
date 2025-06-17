@@ -50,6 +50,54 @@ changes:
 
 All changes require peer review through GitHub's pull request (PR) feature.
 
+### Using the DevContainer
+
+The SLSA project provides a [DevContainer](https://code.visualstudio.com/docs/remote/devcontainerjson-reference) configuration to simplify the development setup. This allows contributors to work in a consistent environment without needing to manually install dependencies or configure their local machines.
+
+#### GitHub Codespaces
+
+[GitHub Codespaces](https://github.com/features/codespaces) offers an easy way to get started with SLSA development:
+
+1.  Navigate to the [SLSA GitHub repository](https://github.com/slsa-framework/slsa)
+2.  Click the "Code" button
+3.  Select the "Codespaces" tab
+4.  Click "Create codespace on main"
+
+This will launch a browser-based VS Code environment with all the necessary tools pre-installed. **The initial setup may take a few minutes as the container is built.**
+
+#### VS Code with DevContainers
+
+If you prefer to work locally, you can use VS Code with the DevContainers extension:
+
+1.  Install [Docker](https://www.docker.com/products/docker-desktop/) on your system
+2.  Install [Visual Studio Code](https://code.visualstudio.com/)
+3.  Install the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+4.  Clone the SLSA repository
+5.  Open the cloned repository in VS Code
+6.  When prompted, click "Reopen in Container" or use the command palette (F1) and select "Dev Containers: Reopen in Container"
+
+VS Code will build the container and configure the development environment automatically. **The initial setup may take a few minutes as the container is built.**
+
+### Deploying the site locally
+
+SLSA.dev is hosted on [Netlify](https://www.netlify.com/), and you can run a local development server using the Netlify CLI.
+
+1.  Install the Netlify CLI globally if you haven't already:
+
+    ```shell
+    npm install -g netlify-cli # this will be pre-installed in the DevContainer
+    ```
+
+2.  `cd` into the `docs` directory
+3.  Run the following command to start the local development server:
+
+    ```shell
+    netlify dev
+    ```
+
+4.  Open the browser and navigate to http://localhost:8888
+5.  Verify that the site is running locally
+
 ### Markdown style
 
 Changes to any of the Markdown files in the repository should meet our Markdown
@@ -320,31 +368,3 @@ Template for GitHub issue:
     [any other text]
 
     ```
-
-## Using the DevContainer
-
-The SLSA project provides a [DevContainer](https://code.visualstudio.com/docs/remote/devcontainerjson-reference) configuration to simplify the development setup. This allows contributors to work in a consistent environment without needing to manually install dependencies or configure their local machines.
-
-### GitHub Codespaces
-
-[GitHub Codespaces](https://github.com/features/codespaces) offers an easy way to get started with SLSA development:
-
-1.  Navigate to the [SLSA GitHub repository](https://github.com/slsa-framework/slsa)
-2.  Click the "Code" button
-3.  Select the "Codespaces" tab
-4.  Click "Create codespace on main"
-
-This will launch a browser-based VS Code environment with all the necessary tools pre-installed. The initial setup may take a few minutes as the container is built.
-
-### VS Code with DevContainers
-
-If you prefer to work locally, you can use VS Code with the DevContainers extension:
-
-1.  Install [Docker](https://www.docker.com/products/docker-desktop/) on your system
-2.  Install [Visual Studio Code](https://code.visualstudio.com/)
-3.  Install the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-4.  Clone the SLSA repository
-5.  Open the cloned repository in VS Code
-6.  When prompted, click "Reopen in Container" or use the command palette (F1) and select "Dev Containers: Reopen in Container"
-
-VS Code will build the container and configure the development environment automatically. This may take a few minutes on first launch.

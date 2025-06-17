@@ -12,8 +12,35 @@
 # 1. Checkout the main branch. Create a branch with the subfolder name and check it out.
 # 2. On this branch, remove all other spec versions, the content for this release should exist directly under /spec/
 # 3. Commit the result and publish the branch to the remote.
+#
+# Options:
+#   --push    Push branches to the remote repository (default: off)
 
 set -euo pipefail
+
+# --- Parse command line arguments ---
+PUSH_BRANCHES=false
+
+for arg in "$@"; do
+  case "$arg" in
+    --push)
+      PUSH_BRANCHES=true
+      ;;
+    --help)
+      echo "Usage: $0 [--push]"
+      echo ""
+      echo "Options:"
+      echo "  --push    Push branches to the remote repository (default: off)"
+      echo "  --help    Show this help message"
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $arg"
+      echo "Use --help for usage information."
+      exit 1
+      ;;
+  esac
+done
 
 # --- Check for uncommitted changes ---
 if [[ -n $(git status --porcelain) ]]; then
@@ -67,7 +94,13 @@ for version in "${VERSIONS[@]}"; do
   # --- Commit the changes ---
   git add --all
   git commit -m "Migrate $version to its own branch ($BRANCH)."
-  git push -u origin "$BRANCH"
+  
+  # --- Push the branch if the flag is enabled ---
+  if [[ "$PUSH_BRANCHES" == true ]]; then
+    git push -u origin "$BRANCH"
+  else
+    echo "Skipping push for branch $BRANCH (use --push to push branches)"
+  fi
 
   # --- Return to the original branch ---
   git checkout "$ORIG_BRANCH"
@@ -78,3 +111,9 @@ echo "Done. All branches created:"
 for v in "${VERSIONS[@]}"; do
   echo "  - $REF_SPEC/$v"
 done
+
+if [[ "$PUSH_BRANCHES" == true ]]; then
+  echo "All branches have been pushed to origin."
+else
+  echo "Branches were created locally but not pushed. Use --push to push them to origin."
+fi
