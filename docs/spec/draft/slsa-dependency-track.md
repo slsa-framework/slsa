@@ -12,7 +12,7 @@ The Dependency Track is primarily aimed at enterprises/organizations, with mediu
 
 The scope of the SLSA Dependency Track is to properly manage and securely consume build dependencies into the developer workflow to mitigate against supply chain threats targeting the open source ecosystem.
 
-**Build dependencies:** Software artifact fetched or otherwise made available to the build environment during the build of the artifact. This includes open and closed source binary dependencies.
+**Build dependencies:** Software artifacts fetched or otherwise made available to the build environment during the build of the artifact. This includes open and closed source binary dependencies.
 
 ---
 
