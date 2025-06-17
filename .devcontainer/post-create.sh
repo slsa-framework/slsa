@@ -2,18 +2,6 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-# Install bundler if not already installed
-if ! command -v bundle &> /dev/null; then
-    echo "Installing bundler..."
-    gem install bundler
-fi
-
-# Install Jekyll if not already installed (for development convenience)
-if ! command -v jekyll &> /dev/null; then
-    echo "Installing Jekyll..."
-    gem install jekyll
-fi
-
 # Change to the 'docs' directory
 cd docs
 
