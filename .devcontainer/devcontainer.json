@@ -1,9 +1,9 @@
 {
   "name": "Jekyll and Netlify",
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "image": "mcr.microsoft.com/devcontainers/ruby:3.2",
   "features": {
-    "ghcr.io/devcontainers/features/ruby:1": {
-      "version": "3.2"
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
     }
   },
   "postCreateCommand": "./.devcontainer/post-create.sh",
@@ -25,7 +25,11 @@
         "github.copilot-chat", // Chat interface for GitHub Copilot
         "github.github-vscode-theme", // GitHub's official VS Code theme
         "github.vscode-github-actions", // GitHub Actions support
-        "github.vscode-pull-request-github" // GitHub Pull Requests and Issues
+        "github.vscode-pull-request-github", // GitHub Pull Requests and Issues
+        "shopify.ruby-lsp", // Ruby LSP for enhanced Ruby support
+        "ginfuru.ginfuru-vscode-jekyll-syntax", // Jekyll syntax highlighting
+        "bierner.markdown-preview-github-styles", // GitHub-style markdown preview
+        "davidanson.vscode-markdownlint" // Markdown linting
       ]
     }
   }
