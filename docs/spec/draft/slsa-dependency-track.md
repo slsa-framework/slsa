@@ -121,7 +121,7 @@ Consumers of third party dependencies, including open source, and third party bi
 
 **NOTES / Discussion:**
 - Build step must enforce use of systems under producer’s control.
-- Compliance with this level enables Level 4.
+- Compliance with this level enables the ability to achieve Level 4 compliance.
 
 **Benefits:**
 All of Dependency L2, plus:
