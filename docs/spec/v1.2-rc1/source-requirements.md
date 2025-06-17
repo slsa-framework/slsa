@@ -161,7 +161,7 @@ Many examples in this document use the [git version control system](https://git-
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
 
-<tr id="choose-scs"><td>Choose an appropriate source control system<td>
+<tr id="choose-scs"><td>Choose an appropriate source control system <a href="#choose-scs">🔗</a><td>
 
 An organization producing source revisions MUST select a SCS capable of reaching
 their desired SLSA Source Level.
@@ -172,7 +172,7 @@ attestations.
 
 <td>✓<td>✓<td>✓<td>✓
 
-<tr id="protect-consumable-branches-and-tags"><td>Protect consumable branches and tags<td>
+<tr id="protect-consumable-branches-and-tags"><td>Protect consumable branches and tags <a href="#protect-consumable-branches-and-tags">🔗</a><td>
 
 An organization producing source revisions MUST implement a change management
 process to ensure changes to source matches the organization's intent.
@@ -213,7 +213,7 @@ determine if that expectation has been met by looking for the
 
 <td><td>✓<td>✓<td>✓
 
-<tr id="safe-expunging-process"><td>Safe Expunging Process<td>
+<tr id="safe-expunging-process"><td>Safe Expunging Process <a href="#safe-expunging-process">🔗</a><td>
 
 SCSs MAY allow the organization to expunge (remove) content from a repository and its change history without leaving a public record of the removed content,
 but the organization MUST only allow these changes in order to meet legal or privacy compliance requirements.
@@ -249,12 +249,12 @@ Organizations SHOULD prefer to make logs public if possible.
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
 
-<tr id="repository-ids"><td>Repositories are uniquely identifiable<td>
+<tr id="repository-ids"><td>Repositories are uniquely identifiable <a href="#repository-ids">🔗</a><td>
 
 The repository ID is defined by the SCS and MUST be uniquely identifiable within the context of the SCS.
 
 <td>✓<td>✓<td>✓<td>✓
-<tr id="revision-ids"><td>Revisions are immutable and uniquely identifiable<td>
+<tr id="revision-ids"><td>Revisions are immutable and uniquely identifiable <a href="#revision-ids">🔗</a><td>
 The revision ID is defined by the SCS and MUST be uniquely identifiable within the context of the repository.
 When the revision ID is a digest of the content of the revision (as in git) nothing more is needed.
 When the revision ID is a number or otherwise not a digest, then the SCS MUST document how the immutability of the revision is established.
@@ -263,7 +263,7 @@ The same revision ID MAY be present in multiple repositories.
 See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
 
 <td>✓<td>✓<td>✓<td>✓
-<tr id="source-summary"><td>Source Verification Summary Attestations<td>
+<tr id="source-summary"><td>Source Verification Summary Attestations <a href="#source-summary">🔗</a><td>
 
 The SCS MUST generate a
 [source verification summary attestation](#source-verification-summary-attestation) (Source VSA)
@@ -282,7 +282,7 @@ the SCS issued [source provenance](#source-provenance) when making the issuing
 the VSAs.
 
 <td>✓<td>✓<td>✓<td>✓
-<tr id="branches"><td>Protected Branches<td>
+<tr id="branches"><td>Protected Branches <a href="#branches">🔗</a><td>
 
 The SCS MUST provide a mechanism for organizations to indicate which branches
 should be protected by SLSA Source Level 2+ requirements.
@@ -291,7 +291,7 @@ E.g. The organization may configure the SCS to protect `main` and
 `refs/heads/releases/*`, but not `refs/heads/playground/*`.
 
 <td><td>✓<td>✓<td>✓
-<tr id="history"><td>History<td>
+<tr id="history"><td>History <a href="#history">🔗</a><td>
 
 Revisions are created by applying specific code changes (a "diff" in git) on
 top of earlier revisions of a branch. This sequence of changes, the revisions
@@ -307,7 +307,7 @@ The SCS MUST prevent tampering with these records on protected branches.
 enabling branch protection rules that prevent force pushes and branch deletions.
 
 <td><td>✓<td>✓<td>✓
-<tr id="enforced-change-management-process"><td>Enforced change management process<td>
+<tr id="enforced-change-management-process"><td>Enforced change management process <a href="#enforced-change-management-process">🔗</a><td>
 
 The SCS MUST
 
@@ -333,7 +333,7 @@ application and verification of [gittuf](https://github.com/gittuf/gittuf)
 policies.
 
 <td><td>✓<td>✓<td>✓
-<tr id="continuity"><td>Continuity<td>
+<tr id="continuity"><td>Continuity <a href="#continuity">🔗</a><td>
 
 In a source control system, each new revision is built on top of prior
 revisions. Controls (e.g. [history](#history) or
@@ -355,7 +355,7 @@ revision.
 Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
 
 <td><td>✓<td>✓<td>✓
-<tr id="protected-tags"><td>Protected Tags<td>
+<tr id="protected-tags"><td>Protected Tags <a href="#protected-tags">🔗</a><td>
 
 If the SCS supports tags (or other non-branch revision trackers), additional
 care must be taken to prevent unintentional changes.
@@ -368,7 +368,7 @@ be protected by SLSA Source Level 2+ requirements.
 The SCS MUST prevent protected tags from being moved or deleted.
 
 <td><td>✓<td>✓<td>✓
-<tr id="identity-management"><td>Identity Management<td>
+<tr id="identity-management"><td>Identity Management <a href="#identity-management">🔗</a><td>
 
 The SCS MUST provide an identity management system or some other means of
 identifying and authenticating actors.
@@ -389,7 +389,7 @@ Activities conducted on the SCS SHOULD be attributed to authenticated
 identities.
 
 <td><td>✓<td>✓<td>✓
-<tr id="source-provenance"><td>Source Provenance<td>
+<tr id="source-provenance"><td>Source Provenance <a href="#source-provenance">🔗</a><td>
 
 [Source Provenance](#source-provenance-attestations) are attestations that
 contain information about how a specific revision was created and how it came to
@@ -411,7 +411,7 @@ It is possible that an SCS can make no claims about a particular revision.
 or if the revision was not the result of an accepted change management process.
 
 <td><td><td>✓<td>✓
-<tr id="two-party-review"><td>Two party review<td>
+<tr id="two-party-review"><td>Two party review <a href="#two-party-review">🔗</a><td>
 
 Changes in protected branches MUST be agreed to by two or more trusted persons prior to submission.
 The following combinations are acceptable:
