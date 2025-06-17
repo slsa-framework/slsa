@@ -1,0 +1,36 @@
+{
+  "name": "Jekyll and Netlify",
+  "image": "mcr.microsoft.com/devcontainers/ruby:2.7",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+  "postCreateCommand": "./.devcontainer/post-create.sh",
+  "forwardPorts": [4000],
+  "portsAttributes": {
+    "4000": {
+      "label": "Jekyll Server"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "eamodio.gitlens", // GitLens extension for Git superpowers
+        "github.codespaces", // Codespaces support
+        "github.copilot", // GitHub Copilot for AI-powered code suggestions
+        "github.copilot-chat", // Chat interface for GitHub Copilot
+        "github.github-vscode-theme", // GitHub's official VS Code theme
+        "github.vscode-github-actions", // GitHub Actions support
+        "github.vscode-pull-request-github", // GitHub Pull Requests and Issues
+        "shopify.ruby-lsp", // Ruby LSP for enhanced Ruby support
+        "ginfuru.ginfuru-vscode-jekyll-syntax", // Jekyll syntax highlighting
+        "bierner.markdown-preview-github-styles", // GitHub-style markdown preview
+        "davidanson.vscode-markdownlint" // Markdown linting
+      ]
+    }
+  }
+}

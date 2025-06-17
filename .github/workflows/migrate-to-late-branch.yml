@@ -1,0 +1,24 @@
+name: Migrate to Late Branching Strategy
+
+on:
+  workflow_dispatch: # Allows only manual triggering of the workflow
+
+permissions:
+  contents: read # Minimum permission required to read the repository
+  pull-requests: write # Required to create branches and push changes
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main (no matter what else is requested)
+        uses: actions/checkout@v3
+        with:
+          ref: main # Checkout the main branch
+          fetch-depth: 1 # We don't need the full history for this operation
+
+      - name: Run migration script
+        run: |
+          chmod +x tools/migrate-to-late-branch.sh
+          ./tools/migrate-to-late-branch.sh
