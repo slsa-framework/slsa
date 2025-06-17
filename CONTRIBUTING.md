@@ -323,7 +323,7 @@ Template for GitHub issue:
 
 ## Using the DevContainer
 
-The SLSA project provides a [DevContainer](https://code.visualstudio.com/docs/remote/devcontainerjson-reference) configuration to simplify the development setup. This allows contributors to work in a consistent environment without needing to manually install dependencies or configure their local machines. 
+The SLSA project provides a [DevContainer](https://code.visualstudio.com/docs/remote/devcontainerjson-reference) configuration to simplify the development setup. This allows contributors to work in a consistent environment without needing to manually install dependencies or configure their local machines.
 
 ### GitHub Codespaces
 
