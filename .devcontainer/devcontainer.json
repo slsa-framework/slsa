@@ -1,6 +1,8 @@
 {
   "name": "Jekyll and Netlify",
   "image": "mcr.microsoft.com/devcontainers/ruby:2.7",
+  "containerUser": "vscode",
+  "remoteUser": "vscode",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
       "version": "lts"
