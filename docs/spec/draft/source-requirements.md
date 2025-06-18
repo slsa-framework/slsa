@@ -30,7 +30,7 @@ Consumers can review attestations to verify whether a particular revision meets 
 | Push / upload / publish | When an actor adds or modifies the Source, Branches or Tags in the repository.
 | Review / approve / vote | When an actor uses a change management tool to comment upon, endorse, or reject a source change proposal.
 
-## Source Roles
+### Source Roles
 
 | Role | Description
 | --- | ---
