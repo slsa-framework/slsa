@@ -585,12 +585,7 @@ revision's properties recorded in the summary attestation.
 
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
 
-## Common Source Controls and their Applications
-
-What sort of controls beyond the set of [requirements](#requirements) defined
-above should organizations look to implement within their change management
-process?  Here are a few extremely common examples and important implementation
-details.
+## Potential Change Management Controls
 
 In addition to the requirements for SLSA Source L4, most organizations will
 require multiple of these controls as part of their required protections.
