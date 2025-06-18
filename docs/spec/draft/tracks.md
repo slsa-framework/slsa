@@ -53,7 +53,7 @@ Consumers can review attestations to verify whether a particular revision meets 
 -   [Source provenance](source-requirements#source-provenance-attestations)
 -   [Assessing source systems](assessing-source-systems.md)
 
-### Build Environment track
+## Build Environment track
 
 The goal of a Build Environment track is to enable the detection of tampering
 with core components of the compute environment executing builds. The track
