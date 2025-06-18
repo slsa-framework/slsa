@@ -107,7 +107,7 @@ and attribute those changes to the actors that made them.
 </section>
 <section id="source-l3">
 
-### Level 3: Authenticatable and Auditable Provenance
+### Level 3: Signed and Auditable Provenance
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -121,7 +121,7 @@ Organizations that want strong guarantees and auditability of their change manag
 
 <dt>Benefits<dd>
 
-Provides authenticatable and auditable information to policy enforcement tools and reduces the risk of tampering
+Provides information to policy enforcement tools to reduce the risk of tampering
 within the SCS's storage systems.
 
 </dl>
