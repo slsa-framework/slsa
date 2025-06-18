@@ -13,6 +13,7 @@ Draft relative to the prior release, [v1.1].
     establish trust in that source.
 -   Updated the [threat model](threats) to account for the threats mitigated by
     the Source Track.
+-   Improved the structure of the spec to accomodate multiple tracks.
 -   Addition of SLSA [Verified Properties](verified-properties) that allows
     software supply chain controls that don't fit neatly within existing SLSA
     levels or that do exist within SLSA levels but where their is utility in
@@ -21,5 +22,4 @@ Draft relative to the prior release, [v1.1].
 
 <!-- Footnotes and link definitions -->
 
-[in-toto attestation]: https://github.com/in-toto/attestation
 [v1.1]: /spec/v1.1/
