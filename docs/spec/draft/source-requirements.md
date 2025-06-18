@@ -547,7 +547,7 @@ Example implementations:
 
 ### Source provenance attestations
 
-Source provenance attestations provide tamper-proof evidence (ideally signed [in-toto attestations](https://github.com/in-toto/attestation/blob/main/README.md))
+Source provenance attestations provide tamper-proof evidence ([attestation model](attestation-model)))
 that can be used to determine what SLSA Source Level or other high level properties a given revision meets.
 This evidence can be used by:
 
