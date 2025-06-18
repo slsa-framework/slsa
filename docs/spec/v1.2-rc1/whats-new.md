@@ -13,6 +13,7 @@ the prior release, [v1.1].
     establish trust in that source.
 -   Updated the [threat model](threats) to account for the threats mitigated by
     the Source Track.
+-   Improved the structure of the spec to accomodate multiple tracks.
 
 <!-- Footnotes and link definitions -->
 
