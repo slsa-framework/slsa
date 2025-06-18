@@ -30,7 +30,7 @@ Consumers can review attestations to verify whether a particular revision meets 
 | Push / upload / publish | When an actor adds or modifies the Source, Branches or Tags in the repository.
 | Review / approve / vote | When an actor uses a change management tool to comment upon, endorse, or reject a source change proposal.
 
-## Source Roles
+### Source Roles
 
 | Role | Description
 | --- | ---
@@ -107,7 +107,7 @@ and attribute those changes to the actors that made them.
 </section>
 <section id="source-l3">
 
-### Level 3: Authenticatable and Auditable Provenance
+### Level 3: Signed and Auditable Provenance
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -121,7 +121,7 @@ Organizations that want strong guarantees and auditability of their change manag
 
 <dt>Benefits<dd>
 
-Provides authenticatable and auditable information to policy enforcement tools and reduces the risk of tampering
+Provides information to policy enforcement tools to reduce the risk of tampering
 within the SCS's storage systems.
 
 </dl>
@@ -547,7 +547,7 @@ Example implementations:
 
 ### Source provenance attestations
 
-Source provenance attestations provide tamper-proof evidence (ideally signed [in-toto attestations](https://github.com/in-toto/attestation/blob/main/README.md))
+Source provenance attestations provide tamper-proof evidence ([attestation model](attestation-model)))
 that can be used to determine what SLSA Source Level or other high level properties a given revision meets.
 This evidence can be used by:
 
@@ -585,12 +585,7 @@ revision's properties recorded in the summary attestation.
 
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
 
-## Common Source Controls and their Applications
-
-What sort of controls beyond the set of [requirements](#requirements) defined
-above should organizations look to implement within their change management
-process?  Here are a few extremely common examples and important implementation
-details.
+## Potential Change Management Controls
 
 In addition to the requirements for SLSA Source L4, most organizations will
 require multiple of these controls as part of their required protections.
