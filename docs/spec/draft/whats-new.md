@@ -22,5 +22,4 @@ Draft relative to the prior release, [v1.1].
 
 <!-- Footnotes and link definitions -->
 
-[in-toto attestation]: https://github.com/in-toto/attestation
 [v1.1]: /spec/v1.1/
