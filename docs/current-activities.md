@@ -10,26 +10,6 @@ and expand its breadth and depth with updates and new tracks.
 
 Learn how you can [get involved](/community#get-involved)!
 
-### SLSA v1.1
-
-The SLSA specification follows the [Community Specification](https://github.com/CommunitySpecification/Community_Specification/blob/main/) lifecycle going
-through several [stages of maturation](/spec-stages). [Version 1.1 Release
-Candidate 1 (RC1)](/spec/v1.1-rc1/) was published without much fanfare in
-August 2024. [Version 1.1 RC2](/spec/v1.1-rc2/) followed in April 2025
-addressing a set of issues found in RC1. After an additional 2-week review
-period during which no issues were found, [Version 1.1](/spec/v1.1/) was
-published, effectively replacing [Version 1.0](/spec/v1.0/) which is now
-retired.
-
-### Source track
-
-A Source track will provide protection against tampering of the source code
-prior to the build.
-
-The current [draft version](/spec/draft/source-requirements.md) describes levels
-of increasing tamper resistance and ways consumers might verify properties
-of source revisions using SLSA source provenance attestations.
-
 ### Build Environment track
 
 The goal of a Build Environment track is to enable the detection of tampering
