@@ -24,7 +24,7 @@ change management process.
 
 ### Adversary profiles
 
-Consumers SHOULD also evaluate the souce control systems's ability to defend
+Consumers SHOULD also evaluate the source control systems' ability to defend
 against the following types of adversaries.
 
 1.  Project contributors, who can:
