@@ -66,6 +66,8 @@
 # disambiguate.
 /spec/draft/levels        /spec/draft/tracks      301
 /spec/draft/provenance    /spec/draft/build-provenance   302
+/spec/v1.2-rc1/build      /spec/v1.2-rc1/tracks#build-track  302
+/spec/v1.2-rc1/source     /spec/v1.2-rc1/tracks#source-track  302
 
 # Note: Versions prior to v1.0 stay in /verification_summary.
 /verification_summary           /spec/latest/verification_summary   302  # floating
