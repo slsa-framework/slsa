@@ -236,9 +236,9 @@ Ultimately, this means that either each code review results in at most a single 
 
 #### (B3) Render code review ineffective
 
-<details><summary>Collude with another trusted person</summary>
+<details><summary>Collude with another trusted actor</summary>
 
-*Threat:* Two trusted persons collude to author and approve a bad change.
+*Threat:* Two trusted actors collude to author and approve a bad change.
 
 *Mitigation:* The producer can arbitrarily increase friction of their policies to reduce risk, such as requiring additional, or more senior reviewers.
 The goal of policy here is to ensure that the approved changes match the intention of the producer for the source.
