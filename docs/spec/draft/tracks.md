@@ -67,3 +67,9 @@ compute that supports system state measurement and attestation capabilities at
 the hardware level.
 
 -   [Basics](build-env-track-basics.md)
+
+## Dependency Track
+
+The goal of Depdency Track is to enable a software producer to measure, control and reduce risk introduced from third party dependencies.
+
+The Dependency Track is primarily aimed at enterprises/organizations, with medium to large-sized organizations benefiting the most from adoption of the dependency track levels. Organizations include enterprises, but also large open source projects that want to manage third party dependency risk.
