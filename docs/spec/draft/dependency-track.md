@@ -1,6 +1,7 @@
 ---
 title: Dependency Track
-description: This page describes the SLSA Dependeny track, which enablse a software producer to measure, control, and reduce risk introduced from third party dependencies.```
+description: This page describes the SLSA Dependeny track, which enablse a software producer to measure, control, and reduce risk introduced from third party dependencies.
+---
 
 ## Objective
 
