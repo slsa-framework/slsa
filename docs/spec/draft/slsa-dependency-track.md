@@ -134,7 +134,7 @@ All of Dependency L2, plus:
 
 ---
 
-## Level 4: Build dependencies meet minimum security requirements for safe consumption.
+## Level 4: Proactive defence against prevailing supply chain threats
 
 **Outcome:**  
 Software producer enforces the following minimum security policy over third-party build dependencies in order to prevent the consumption of compromised upstream artifacts:
