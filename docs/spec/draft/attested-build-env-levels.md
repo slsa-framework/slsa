@@ -132,7 +132,7 @@ flowchart LR
 [BuildEnv L1] protects from threats that happened to the build image in between its creation and distribution to the Build Platform. 
 This covers the case of unauthorized modifications to the image as it is distributed (potentially via untrusted channels).
 
-[BuildEnv L2] delivers boot time integrity providing cryptographic evidence that the build environment has been bootstraped to an expected state.  
+[BuildEnv L2] delivers boot time integrity providing cryptographic evidence that the build environment has been bootstrapped to an expected state.  
 The Compute platform is fully trusted at this level as it provides virtual firmware (i.e. vTPM) that performs boot measurements. 
 [Control plane] is the only Build Platform component that is considered trusted at L2 as it performs remote attestation of the build environment.
 
