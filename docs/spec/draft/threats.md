@@ -567,21 +567,26 @@ do not accept provenance from the build platform unless they can validate
 build environment integrity.
 
 </details>
-<details><summary>Compromise build image<span>(BuildEnv L1+)</span></summary>
+<details><summary>Compromise build image in transit<span>(BuildEnv L1+)</span></summary>
 
-*Threat:* An adversary injects malicious code into the build image at the generation time 
-or in transit.
+*Threat:* An adversary injects malicious code into the build image time in between generation and consumption.
 
-*Mitigation:* Build image comes with SLSA provenance. Control plane attests build environment 
-upon creation and at runtime and issues Build provenance only if environment passed attestation.
+*Mitigation:* Build image comes with SLSA provenance. Control Plane verifies the build image upon the initial consumption.
 
 *Example:* MyPackage is built on Awesome Builder. Awesome Builder uses VM images provided by a 
-Fancy Image partner. Adversary was able to install malicious tool into the image at the Fancy Image 
-side hence infiltrating all build environments that use that image.
+Fancy Image partner. Adversary was able to hijack the supply channel between Fancy Image and Awesome Builder and install malicious tools into the image.
 
-*Example 2:* MyPackage is built on Awesome Builder. An adversary gained access to the 
-build image storage and modified image at rest injecting a malicious tool into it. All build 
-environments created after that point were compromised.
+</details>
+<details><summary>Compromise build image at rest<span>(BuildEnv L2+)</span></summary>
+
+*Threat:* An adversary injects malicious code into the build image after it was accepted by the Build Platform and passed initial verification.
+
+*Mitigation:* Build Environment is bootstrapped using Secure Boot with boot measurements performed by vTPM.
+Control Plane performs remote attestation of the Build Environment prior to scheduling the build on it.  
+
+*Example:* Awesome Builder uses VM images provided by a Fancy Image partner. 
+Adversary was able to get unauthorized access to the Awesome Builder persistent storage and modify the image after it was received from Fancy Image.
+Image size is large enough to make SLSA provenance verification prohibitively expensive upon every Build Environment creation.
 
 </details>
 <details><summary>Unexpected reuse of a build environment<span>(BuildEnv L2+)</span></summary>
@@ -599,7 +604,7 @@ environments created after that point were compromised.
 to deploy a bootkit and circumvent secure boot of a virtual machine.
 
 *Mitigation:* Build platform relies on hardware-assisted mechanisms to attest integrity of the 
-build environment (e.g. hardware [TPM], [AMD SEV], [Intel TDX])
+build environment (e.g. hardware [TPM], [AMD SEV-SNP], [Intel TDX])
 
 *Example:* Awesome Builder uses Cloudy Sky compute provider for provisioning virtual machines. 
 An adversary got an unauthorized access to Cloudy Sky infrastructure and was able to deploy 
@@ -611,8 +616,8 @@ malicious code into UEFI and vTPM and compromise virtual machine attestations.
 *Threat:* An adversary having unauthorized access to the host machine performs malicious change in the 
 build environment by using hypervisor capabilities to manipulate virtual machine state.
 
-*Mitigation:* Build platform uses hardware-assisted mechanisms to attest integrity of the build environment 
-(e.g. [AMD SEV] and [Intel TDX])
+*Mitigation:* Build platform uses hardware-assisted mechanisms to attest integrity of the build environment and the compute provider 
+(e.g. [AMD SEV-SNP] and [Intel TDX])
 
 *Example:* Awesome Builder uses Cloudy Sky compute provider for provisioning virtual machines. An adversary 
 got an unauthorized access to the host machines in Cloudy Sky and was able to hijack hypervisor and inject 
@@ -1081,5 +1086,5 @@ Solution: Only accept cryptographic hashes with strong collision resistance.
 [vsa]: verification_summary
 [vsa_verification]: verification_summary#how-to-verify
 [TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
-[AMD SEV]: https://www.amd.com/en/developer/sev.html
+[AMD SEV-SNP]: https://www.amd.com/en/developer/sev.html
 [Intel TDX]: https://www.intel.com/content/www/us/en/developer/tools/trust-domain-extensions/overview.html
