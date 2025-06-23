@@ -132,15 +132,13 @@ flowchart LR
 [BuildEnv L1] protects from threats that happened to the build image in between its creation and distribution to the Build Platform. 
 This covers the case of unauthorized modifications to the image as it is distributed (potentially via untrusted channels).
 
-[BuildEnv L2] protects from threats occurring at the Build Platform side as it interacts with the Compute Platform for actually creating a build environment. 
+[BuildEnv L2] delivers boot time integrity providing cryptographic evidence that the build environment has been bootstraped to an expected state.  
+The Compute platform is fully trusted at this level as it provides virtual firmware (i.e. vTPM) that performs boot measurements. 
 [Control plane] is the only Build Platform component that is considered trusted at L2 as it performs remote attestation of the build environment.
 
-[BuildEnv L3] protects from threats coming from the Compute Platform.
-It requires build running in a trusted execution environment using technologies like [AMD SEV] and [Intel TDX]. 
-The compute platform (i.e., privileged remote operators and host system software) is considered semi-trusted at L3. 
-Side channels can still be utilized to extract information when analyzing information like memory access patterns, and these cannot be ruled out without further integrity protections and assurances on the system software and human access controls. 
-The [SEV-SNP/TDX threat model](https://www.kernel.org/doc/Documentation/security/snp-tdx-threat-model.rst) describes this level of trust reduction through the use of memory encryption, integrity protection, and remote attestation with cryptographic keys that are certified by the hardware manufacturer. 
-TEE technologies are not infallible, so physical human access to hardware is still a risk that is accepted at L3. 
+[BuildEnv L3] protects from threats coming from the Compute Platform by adopting hardware root of trust.
+Boot time integrity is verifiable using the cryptographic evidences signed by a key unique to each hardware device (i.e. CPU chip). 
+Practically, achieving L3 might require build running in a trusted execution environment using technologies like [AMD SEV-SNP] and [Intel TDX]. 
 
 NOTE: [Control Plane] is considered trusted at L2 and L3 because it _verifies_ the remote attestation of the build environment. 
 Build platforms MAY provide capabilities that let tenants perform remote attestation themselves. 
