@@ -1,4 +1,4 @@
-# SLSA Dependency Track v0.1
+# Dependency Track
 
 ## Objective
 
