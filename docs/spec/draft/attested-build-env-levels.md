@@ -133,7 +133,7 @@ flowchart LR
 This covers the case of unauthorized modifications to the image as it is distributed (potentially via untrusted channels).
 
 [BuildEnv L2] delivers boot time integrity providing cryptographic evidence that the build environment has been bootstrapped to an expected state.  
-The Compute platform is fully trusted at this level as it provides virtual firmware (i.e. vTPM) that performs boot measurements. 
+The Compute platform is fully trusted at this level as it provides a virtual TPM device that performs boot measurements. 
 [Control plane] is the only Build Platform component that is considered trusted at L2 as it performs remote attestation of the build environment.
 
 [BuildEnv L3] protects from threats coming from the Compute Platform by adopting hardware root of trust.
