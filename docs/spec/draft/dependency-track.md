@@ -156,6 +156,7 @@ Consumers of third party dependencies, including open source, and third party bi
 
 
 **NOTES / Discussion:**
+
 - This capability builds on Level 3.
 
 **Benefits:**
