@@ -164,7 +164,7 @@ All of Dependency L3, plus:
 -   Reduces risk of initial compromise from supply chain threats, preventing costs incurred from responding to an incident.
 
 **Threats mitigated at this level:**
-- A malicious actor compromises a known good dependency to add malicious functionality in a newly published version of that dependency (e.g. ESLint incident)
+-   A malicious actor compromises a known good dependency to add malicious functionality in a newly published version of that dependency (e.g. ESLint incident)
 -   A dependency adds a new transitive dependency that is malicious (e.g. Event-Stream incident)
 - Typosquatting
 -   Dependency Confusion
