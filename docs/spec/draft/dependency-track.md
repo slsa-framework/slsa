@@ -176,7 +176,7 @@ All of Dependency L3, plus:
 
 | Requirement | Description | L1 | L2 | L3 | L4 
 | --- | --- | --- | --- | --- | ---
-| Maintain a complete inventory of all dependencies used in development | An organization producing artifacts MUST implement tooling that inventories dependencies for every version they release | ✓ | ✓ | ✓ | ✓ |
+| Maintain a complete inventory of all dependencies used in development | An organization producing artifacts MUST implement tooling that inventories dependencies for every version they release | ✓ | ✓ | ✓ | ✓
 | Scan dependencies for known vulnerabilities | An organization MUST proactively identify 3rd party dependency in their build that have known vulnerabilities |  | ✓ | ✓ | ✓ |
 | Triage all vulnerable dependencies before release | An organization MUST triage all known vulnerabilities and either remediate the vulnerability, or not remediate in the given release. For example, an organization may make the decision for unremediated vulnerabilities to be recorded in a VEX attestation due to not being exploitable in the manner the dependency was integrated into their artifact |  | ✓ | ✓ | ✓ |
 | The build process consumes all third party build dependencies only from producer-controlled sources | An organization MUST consume dependencies through producer-controlled sources, such as an artifact repository manager for packaged dependencies (e.g. NuGet, npm, pypi, maven, crates, rubygems), and vendored source code mirrored from upstream open source repos into repos under producer's control (e.g. C/C++, golang) |  |  | ✓ | ✓ |
