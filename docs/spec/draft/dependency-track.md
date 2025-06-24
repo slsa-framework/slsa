@@ -129,7 +129,7 @@ Consumers of third party dependencies, including open source, and third party bi
 **Benefits:**
 All of Dependency L2, plus:
 -   Enables developers to continue to build even if upstream resources are unavailable
-- Establishes a standardized consumption method to control how dependencies are consumed, thereby reducing your attackable surface
+-   Establishes a standardized consumption method to control how dependencies are consumed, thereby reducing your attackable surface
 
 **Threats mitigated at this level:**
 -   Availability risks of upstream sources being removed or taken down (e.g. left-pad incident) 
