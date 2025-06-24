@@ -68,7 +68,7 @@ Consumers of third party dependencies, including open source, and third party bi
 - Metadata associated with vendored source code, identifying the dependency (e.g. by specifying CPE or ecosystem, name and version or a package URL).
 
 **Benefits:**
-- Complete picture of all third party dependencies enables understanding of the risk exposure.
+-   Complete picture of all third party dependencies enables understanding of the risk exposure
 -   Complete inventory is a prerequisite for known vulnerability management
 - Centralized inventory implementation can enable efficient incident response and risk exposure measurement.
 
