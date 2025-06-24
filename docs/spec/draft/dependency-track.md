@@ -95,7 +95,7 @@ Consumers of third party dependencies, including open source, wanting to validat
 -   Regular updates outside of the artifact release cycle driven by new dependency releases or discovery of new known vulnerabilities using freely available tools like Dependabot/Renovatebot/OSV-Scanner can simplify the compliance process.
 
 **NOTES / Discussion:**
-- Does NOT mean the artifact is free of vulnerabilities, but at the time of release all known vulnerabilities are triaged.
+-   Does NOT mean the artifact is free of vulnerabilities, but at the time of release all known vulnerabilities are triaged.
 - Race condition: new vulnerability can, theoretically, be published on the same day as the release. 
 
 **Benefits:**
