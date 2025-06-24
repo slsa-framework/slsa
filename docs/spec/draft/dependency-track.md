@@ -119,7 +119,7 @@ Consumers of third party dependencies, including open source, and third party bi
 
 **Compliance options:**
 -   Use of artifact management solutions to internally mirror third party dependencies in packaged form.
-- Source code vendoring, e.g. by mirroring a copy of the upstream code in a local VCS or using ecosystems tools like `go mod vendor` or `cargo vendor`.
+-   Source code vendoring, e.g. by mirroring a copy of the upstream code in a local VCS or using ecosystems tools like `go mod vendor` or `cargo vendor`.
 - Republishing third-party Docker base image under producer’s project.
 
 **NOTES / Discussion:**
