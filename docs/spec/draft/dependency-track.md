@@ -160,7 +160,7 @@ Consumers of third party dependencies, including open source, and third party bi
 
 **Benefits:**
 All of Dependency L3, plus:
-- Policy enforcement systems are integrated into the standardized consumption method to check dependencies for issues before the dependency is downloaded.
+-   Policy enforcement systems are integrated into the standardized consumption method to check dependencies for issues before the dependency is downloaded.
 -   Reduces risk of initial compromise from supply chain threats, preventing costs incurred from responding to an incident.
 
 **Threats mitigated at this level:**
