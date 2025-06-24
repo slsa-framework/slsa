@@ -19,7 +19,7 @@ The scope of the SLSA Dependency Track is to properly manage and securely consum
 
 ## Definitions
 
-| Primary Term                | Description                                                                                                                                    
+| Primary Term | Description                                                                                                                                    
 |----|---
 
 | Build dependencies | Software artifacts fetched or otherwise made available to the build environment during the build of the artifact. This includes open and closed source binary dependencies. |
