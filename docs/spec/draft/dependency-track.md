@@ -74,7 +74,7 @@ Consumers of third party dependencies, including open source, and third party bi
 - Centralized inventory implementation can enable efficient incident response and risk exposure measurement.
 
 **Threats mitigated at this level:**
-- Unknown dependencies in your supply chain is unmanaged risk
+-   Unknown dependencies in your supply chain is unmanaged risk
 
 ---
 
