@@ -139,7 +139,7 @@ All of Dependency L2, plus:
 
 **Outcome:**  
 Software producer enforces the following minimum security policy over third-party build dependencies in order to prevent the consumption of compromised upstream artifacts:
-- All versions of build dependencies must be at least 72 hours old, with exemption for versions that address known vulnerabilities.
+-   All versions of build dependencies must be at least 72 hours old, with exemption for versions that address known vulnerabilities.
 -   All private producer-owned build dependencies are acquired from internal sources.
 - Build dependencies must not contain any known malicious packages, or unwanted functionality (e.g. bitcoin miners).
 
