@@ -26,7 +26,7 @@ The scope of the SLSA Dependency Track is to properly manage and securely consum
 | Package registry | An entity responsible for mapping package names to artifacts within a packaging ecosystem. Most ecosystems support multiple registries, usually a single global registry and multiple private registries. |
 | Artifact repository manager | A storage solution that manages your artifact lifecycle and supports different software package management systems while providing consistency to your CI/CD workflow
 | **Dependency security metadata feed** | A metadata feed that provides security or risk information about each dependency to assist consumers in making judgements about the safety of their dependencies
-| **Package source files**    | A language-specific config file in a source code repo that identifies the package registry feeds or artifact repository manager feeds to consume dependencies from
+| Package source files | A language-specific config file in a source code repo that identifies the package registry feeds or artifact repository manager feeds to consume dependencies from
 
 ---
 
