@@ -168,7 +168,7 @@ All of Dependency L3, plus:
 -   A dependency adds a new transitive dependency that is malicious (e.g. Event-Stream incident)
 - Typosquatting
 -   Dependency Confusion
-- Intentional vulnerabilities/backdoors/protestware added to a code base (e.g. Colors v1.4.1 incident, node-ipc incident)
+-   Intentional vulnerabilities/backdoors/protestware added to a code base (e.g. Colors v1.4.1 incident, node-ipc incident)
 
 ---
 
