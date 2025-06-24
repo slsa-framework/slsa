@@ -152,7 +152,7 @@ Consumers of third party dependencies, including open source, and third party bi
   - By only ingesting packages that were released 72 hours ago.
   - By checking all packages and versions against known malicious packages databases (e.g. OpenSSF Malicious Packages).
 - Many artifact management solutions support virtual repositories that enable mitigation of dependency confusion.
-- Leverage dependency security metadata feeds to inform policy decisions on dependencies you consume.
+-   Leverage dependency security metadata feeds to inform policy decisions on dependencies you consume.
 
 
 **NOTES / Discussion:**
