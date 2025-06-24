@@ -43,7 +43,7 @@ No claims are made for prior artifact versions.
 | Dependency L1 | Complete dependency inventory exists
 | Dependency L2 | Known vulnerabilities have been triaged
 | Dependency L3 | Dependencies consumed from sources under producer's control
-| Dependency L4 | Proactive defence against upstream attacks. |
+| Dependency L4 | Proactive defence against upstream attacks
 
 ## Level 0: Uncontrolled dependency consumption
 
