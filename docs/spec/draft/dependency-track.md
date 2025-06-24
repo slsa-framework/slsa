@@ -175,7 +175,7 @@ All of Dependency L3, plus:
 ## Requirements
 
 | Requirement | Description | L1 | L2 | L3 | L4 
-|-----------------|-----------------|--------|--------|--------|--------|
+| --- | --- | --- | --- | --- | ---
 | Maintain a complete inventory of all dependencies used in development | An organization producing artifacts MUST implement tooling that inventories dependencies for every version they release | ✓ | ✓ | ✓ | ✓ |
 | Scan dependencies for known vulnerabilities | An organization MUST proactively identify 3rd party dependency in their build that have known vulnerabilities |  | ✓ | ✓ | ✓ |
 | Triage all vulnerable dependencies before release | An organization MUST triage all known vulnerabilities and either remediate the vulnerability, or not remediate in the given release. For example, an organization may make the decision for unremediated vulnerabilities to be recorded in a VEX attestation due to not being exploitable in the manner the dependency was integrated into their artifact |  | ✓ | ✓ | ✓ |
