@@ -51,7 +51,7 @@ Dependencies are consumed without any verification, security checks, governance,
 
 ---
 
-## Level 1: Maintain a complete inventory of all build dependencies for a released artifact.
+## Level 1: Maintain a complete inventory of all build dependencies for a released artifact
 
 **Outcome:**  
 All third party build dependencies (including transitive) are identified such that a software producer is able to automatically match them against known vulnerabilities and assess exposure to supply chain incidents (e.g. compromised upstream open source package). Build dependencies can be identified by:
