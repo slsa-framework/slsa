@@ -123,7 +123,7 @@ Consumers of third party dependencies, including open source, and third party bi
 -   Republishing third-party Docker base image under producer’s project.
 
 **NOTES / Discussion:**
-- Build step must enforce use of systems under producer’s control.
+-   Build step must enforce use of systems under producer’s control.
 - Compliance with this level enables the ability to achieve Level 4 compliance.
 
 **Benefits:**
