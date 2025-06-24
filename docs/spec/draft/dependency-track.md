@@ -165,7 +165,7 @@ All of Dependency L3, plus:
 
 **Threats mitigated at this level:**
 - A malicious actor compromises a known good dependency to add malicious functionality in a newly published version of that dependency (e.g. ESLint incident)
-- A dependency adds a new transitive dependency that is malicious (e.g. Event-Stream incident)
+-   A dependency adds a new transitive dependency that is malicious (e.g. Event-Stream incident)
 - Typosquatting
 -   Dependency Confusion
 - Intentional vulnerabilities/backdoors/protestware added to a code base (e.g. Colors v1.4.1 incident, node-ipc incident)
