@@ -40,7 +40,7 @@ No claims are made for prior artifact versions.
 | Track/Level | Requirements |
 | --- | ---
 | Dependency L0 | (none)
-| Dependency L1 | Complete dependency inventory exists |
+| Dependency L1 | Complete dependency inventory exists
 | Dependency L2 | Known vulnerabilities have been triaged |
 | Dependency L3 | Dependencies consumed from sources under producer's control |
 | Dependency L4 | Proactive defence against upstream attacks. |
