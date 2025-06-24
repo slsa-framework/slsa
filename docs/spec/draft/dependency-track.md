@@ -174,7 +174,7 @@ All of Dependency L3, plus:
 
 ## Requirements
 
-| **Requirement** | **Description** | **L1** | **L2** | **L3** | **L4** |
+| Requirement | Description | L1 | L2 | L3 | L4 
 |-----------------|-----------------|--------|--------|--------|--------|
 | Maintain a complete inventory of all dependencies used in development | An organization producing artifacts MUST implement tooling that inventories dependencies for every version they release | ✓ | ✓ | ✓ | ✓ |
 | Scan dependencies for known vulnerabilities | An organization MUST proactively identify 3rd party dependency in their build that have known vulnerabilities |  | ✓ | ✓ | ✓ |
