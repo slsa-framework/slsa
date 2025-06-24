@@ -84,7 +84,7 @@ Consumers of third party dependencies, including open source, and third party bi
 Software producer triages all known vulnerabilities in software prior to its release. An outcome of the triage could be:
 -   The decision to remediate vulnerabilities, prior to release
 -   The decision to proceed with the release and remediate vulnerabilities in the next release, following normal release cycle
-- The decision to proceed with the release and remediate vulnerabilities by expediting the next patch release.
+-   The decision to proceed with the release and remediate vulnerabilities by expediting the next patch release.
 
 **Intended for:**
 Consumers of third party dependencies, including open source, wanting to validate the integrity of their ingested dependencies and improve the hygiene of vulnerable dependencies.
