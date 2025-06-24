@@ -147,7 +147,7 @@ Software producer enforces the following minimum security policy over third-part
 Consumers of third party dependencies, including open source, and third party binaries wanting to mitigate against the most prevalent supply chain threats targeting the open source ecosystem.
 
 **Compliance options:**
-- Managed ingestion of artifacts into producer’s systems is one place to enforce the above requirements, e.g.:
+-   Managed ingestion of artifacts into producer’s systems is one place to enforce the above requirements, e.g.:
   - By only ingesting packages that were released 72 hours ago.
   - By checking all packages and versions against known malicious packages databases (e.g. OpenSSF Malicious Packages).
 - Many artifact management solutions support virtual repositories that enable mitigation of dependency confusion.
