@@ -56,7 +56,7 @@ Dependencies are consumed without any verification, security checks, governance,
 **Outcome:**  
 All third party build dependencies (including transitive) are identified such that a software producer is able to automatically match them against known vulnerabilities and assess exposure to supply chain incidents (e.g. compromised upstream open source package). Build dependencies can be identified by:
 - Ecosystem, name and version (e.g. native names and versions used in package registries).
-- Common Platform Enumeration (CPE)
+-   Common Platform Enumeration (CPE).
 - Other identifiers that enable joining with known vulnerabilities data sources.
 
 **Intended for:**
