@@ -188,6 +188,6 @@ All of Dependency L3, plus:
 
 - Ability to apply private patches in response to zero-day vulnerabilities
 - All dependencies are verifiably built by a trusted builder
-- Ability to detect and address dependencies that are End of Life (EOL)
+-   Ability to detect and address dependencies that are End of Life (EOL)
 
 
