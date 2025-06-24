@@ -38,7 +38,7 @@ No claims are made for prior artifact versions.
 ## Levels and tracks
 
 | Track/Level | Requirements |
-|-----------------|------------------|
+| --- | ---
 | Dependency L0 | (none) |
 | Dependency L1 | Complete dependency inventory exists |
 | Dependency L2 | Known vulnerabilities have been triaged |
