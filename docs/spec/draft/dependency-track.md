@@ -96,7 +96,7 @@ Consumers of third party dependencies, including open source, wanting to validat
 
 **NOTES / Discussion:**
 -   Does NOT mean the artifact is free of vulnerabilities, but at the time of release all known vulnerabilities are triaged.
-- Race condition: new vulnerability can, theoretically, be published on the same day as the release. 
+-   Race condition: new vulnerability can, theoretically, be published on the same day as the release. 
 
 **Benefits:**
 All of Dependency L1, plus:
