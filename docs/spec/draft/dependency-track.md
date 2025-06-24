@@ -21,7 +21,6 @@ The scope of the SLSA Dependency Track is to properly manage and securely consum
 
 | Primary Term | Description                                                                                                                                    
 |----|---
-
 | Build dependencies | Software artifacts fetched or otherwise made available to the build environment during the build of the artifact. This includes open and closed source binary dependencies. |
 | Package registry | An entity responsible for mapping package names to artifacts within a packaging ecosystem. Most ecosystems support multiple registries, usually a single global registry and multiple private registries. |
 | Artifact repository manager | A storage solution that manages your artifact lifecycle and supports different software package management systems while providing consistency to your CI/CD workflow
