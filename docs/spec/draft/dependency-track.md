@@ -116,6 +116,7 @@ All of Dependency L1, plus:
 
 **Threats mitigated at this level:**
 
+
 -   Accidental vulnerabilities in dependency code that can impact the security of your artifact
 
 
