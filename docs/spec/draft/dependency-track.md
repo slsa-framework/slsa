@@ -166,7 +166,6 @@ Consumers of third party dependencies, including open source, and third party bi
 -   Many artifact management solutions support virtual repositories that enable mitigation of dependency confusion.
 -   Leverage dependency security metadata feeds to inform policy decisions on dependencies you consume.
 
-
 **NOTES / Discussion:**
 
 -   This capability builds on Level 3.
