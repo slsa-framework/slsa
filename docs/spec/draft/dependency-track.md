@@ -106,7 +106,6 @@ Consumers of third party dependencies, including open source, wanting to validat
 **Benefits:**
 All of Dependency L1, plus:
 
-
 -   Conducting an inventory where each artifact is used, knowing in which services it is deployed, and in which products it was released is required for incident response scenarios so that teams affected by a compromised package can be contacted for  initiation of the appropriate actions that can be taken to remove the affected package.
 
 **Threats mitigated at this level:**
