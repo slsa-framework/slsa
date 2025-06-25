@@ -68,7 +68,7 @@ Consumers of third party dependencies, including open source, and third party bi
 
 **Benefits:**
 
--   Complete picture of all third party dependencies enables understanding of the risk exposure
+-   Comprehensive picture of all third party dependencies enables understanding of the risk exposure
 -   Complete inventory is a prerequisite for known vulnerability management
 -   Centralized inventory implementation can enable efficient incident response and risk exposure measurement.
 
