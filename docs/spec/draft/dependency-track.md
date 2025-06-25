@@ -74,7 +74,6 @@ Consumers of third party dependencies, including open source, and third party bi
 
 **Threats mitigated at this level:**
 
-
 -   Unknown dependencies in your supply chain is unmanaged risk
 
 ---
