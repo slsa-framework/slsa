@@ -142,7 +142,7 @@ All of Dependency L2, plus:
 
 **Threats mitigated at this level:**
 
--   Availability risks of upstream sources being removed or taken down (e.g. left-pad incident) 
+-   Availability risks of upstream sources being removed or taken down (e.g. left-pad incident).
 
 ---
 
