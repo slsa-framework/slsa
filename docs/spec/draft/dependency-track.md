@@ -121,7 +121,7 @@ All of Dependency L1, plus:
 -   Gains control of how dependencies enter the supply chain, reducing your attackable surface through standardization of dependency consumption.
 
 **Intended for:**
-Consumers of third party dependencies, including open source, and third party binaries wanting to improve business continuity and control the consumption of dependencies through a standardized consumption method. 
+Consumers of third party dependencies, including open source, and third party binaries wanting to improve business continuity and control the consumption of dependencies through a standardized consumption method.
 
 **Compliance options:**
 
