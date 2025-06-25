@@ -112,7 +112,6 @@ All of Dependency L1, plus:
 
 -   Accidental vulnerabilities in dependency code that can impact the security of your artifact
 
-
 ---
 
 ## Level 3: All third-party build dependencies are consumed from sources under the producer’s control
