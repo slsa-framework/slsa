@@ -117,7 +117,7 @@ All of Dependency L1, plus:
 
 **Outcome:**
 
--   The build process consumes all third party build dependencies only from producer-controlled sources, which must address availability risks and third-party dependencies are mirrored from their canonical sources. 
+-   The build process consumes all third party build dependencies only from producer-controlled sources, which must address availability risks and third-party dependencies are mirrored from their canonical sources.
 -   Gains control of how dependencies enter the supply chain, reducing your attackable surface through standardization of dependency consumption. 
 
 **Intended for:**
