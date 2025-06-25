@@ -78,7 +78,7 @@ Consumers of third party dependencies, including open source, and third party bi
 
 ---
 
-## Level 2: All known vulnerabilities have been triaged prior to production release
+## Level 2: All known vulnerabilities have been triaged
 
 **Outcome:**  
 Software producer triages all known vulnerabilities in software prior to its release. An outcome of the triage could be:
