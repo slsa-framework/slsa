@@ -81,7 +81,7 @@ Consumers of third party dependencies, including open source, and third party bi
 ## Level 2: All known vulnerabilities have been triaged
 
 **Outcome:**  
-Software producer triages all known vulnerabilities in software prior to its release. An outcome of the triage could be:
+Software producer triages all known vulnerabilities in the artifact. An outcome of the triage could be:
 
 -   The decision to remediate vulnerabilities, prior to release
 -   The decision to proceed with the release and remediate vulnerabilities in the next release, following normal release cycle
