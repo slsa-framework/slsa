@@ -48,7 +48,17 @@ No claims are made for prior artifact versions.
 
 ---
 
-## Level 1: Maintain an inventory of all build dependencies for a released artifact
+## Level 1: Inventory of dependencies exists
+
+| |   
+| ---| ---
+| Summary | Maintain an inventory of all build dependencies for a released artifact
+| Threats | Unknown dependencies in your supply chain is unmanaged risk
+| Outcome | All third party build dependencies (including transitive) are identified such that a software producer is able to automatically match them against known vulnerabilities and assess exposure to supply chain incidents (e.g. compromised upstream open source package). Build dependencies can be identified by:
+
+-   Ecosystem, name and version (e.g. native names and versions used in package registries).
+-   Common Platform Enumeration (CPE).
+-   Other identifiers that enable joining with known vulnerabilities data sources.
 
 **Outcome:**  
 All third party build dependencies (including transitive) are identified such that a software producer is able to automatically match them against known vulnerabilities and assess exposure to supply chain incidents (e.g. compromised upstream open source package). Build dependencies can be identified by:
