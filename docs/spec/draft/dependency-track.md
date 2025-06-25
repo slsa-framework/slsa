@@ -46,7 +46,6 @@ No claims are made for prior artifact versions.
 | Dependency L4 | Proactive defence against upstream attacks
 
 ## Level 0: Uncontrolled dependency consumption
-Dependencies are consumed without any verification, security checks, governance, or controls. This exposes systems to malicious or vulnerable components.
 
 ---
 
