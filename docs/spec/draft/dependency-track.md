@@ -128,10 +128,11 @@ Artifact producer is able to enforce a secure ingestion policy over third-party 
 **Threat:**
 
 Malicious attacks on upstream sources such as package managers, compromised packages, and dependency confusion. Attacks include:
--    A dependency adds a new transitive dependency that is malicious (e.g. Event-Stream incident)
--    Typosquatting
--    Dependency Confusion
--    Intentional vulnerabilities/backdoors/protestware added to a code base (e.g. Colors v1.4.1 incident, node-ipc incident)
+
+-   A dependency adds a new transitive dependency that is malicious (e.g. Event-Stream incident)
+-   Typosquatting
+-   Dependency Confusion
+-   Intentional vulnerabilities/backdoors/protestware added to a code base (e.g. Colors v1.4.1 incident, node-ipc incident)
 
 **Outcome:**
 
@@ -160,6 +161,7 @@ Consumers of third party dependencies, including open source, and third party bi
 **NOTES / Discussion:**
 
 -   This capability builds on Level 3.
+
 ---
 
 ## Requirements
