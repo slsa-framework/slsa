@@ -119,13 +119,6 @@ Malicious attacks on upstream sources such as package managers, compromised pack
 **Outcome**
 Reduced likelihood of a released artifact including a malicious or compromised third-party dependency.
 
-
-**Compliance options:**
-
--   Third party build dependencies of the artifact being released as represented by an SBOM, lockfile, metadata files or other means are scanned for known vulnerabilities. Reported vulnerabilities are triaged and either remediated or not remediated in the given release.
--   Triage decisions for unremediated vulnerabilities can be recorded in a VEX attestation for internal policy enforcement (i.e. VEX is not required to be published to comply with this level).
--   Regular updates outside of the artifact release cycle driven by new dependency releases or discovery of new known vulnerabilities using freely available tools like Dependabot/Renovatebot/OSV-Scanner can simplify the compliance process.
-
 **NOTES / Discussion:**
 
 -   Does NOT mean the artifact is free of vulnerabilities, but at the time of release all known vulnerabilities are triaged.
