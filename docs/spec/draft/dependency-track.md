@@ -37,7 +37,7 @@ When onboarding your development environment to the SLSA Dependency Track, organ
 
 No claims are made for prior artifact versions.
 
-## Levels and tracks
+## Levels
 
 | Track/Level | Requirements
 | --- | ---
