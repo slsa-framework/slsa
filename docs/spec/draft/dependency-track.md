@@ -110,7 +110,8 @@ All third-party build dependencies are consumed from sources under the producerâ
 
 Availability risks of upstream sources being removed or taken down (e.g. left-pad incident). 
 
-**Outcome**
+**Outcome:**
+
 The build process consumes all third party build dependencies only from artifact producer-controlled sources, allowing for control of how dependencies enter the supply chain, reducing the attackable surface. 
 
 
