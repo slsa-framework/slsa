@@ -424,7 +424,7 @@
 
   - title: Dependency Track
     description: >
-      This pages descries the dependency track's security levels and requirements.
+      This pages describes the dependency track's security levels and requirements.
       If you want to achieve a particular level of the SLSA dependency track these
       are the requirements you'll need to meet.
     children:
