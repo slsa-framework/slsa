@@ -47,7 +47,7 @@ The scope of the SLSA Dependency Track is to properly manage and securely consum
   
 **Summary:**
 
-L0 represents the lack of SLSA.
+L0 represents the lack of any SLSA dependency track claims.
 
 **Threats:**
 
