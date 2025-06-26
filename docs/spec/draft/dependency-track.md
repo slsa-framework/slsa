@@ -66,7 +66,8 @@ N/A
 **Summary**
 Maintain an inventory of all build dependencies for a released artifact.
 
-**Threat**
+**Threat:**
+
 Inability to respond to incidents or remediate vulnerabilities.
 
 **Outcome:**
