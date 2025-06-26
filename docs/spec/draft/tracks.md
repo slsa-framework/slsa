@@ -74,4 +74,4 @@ The goal of Dependency Track is to enable a software producer to measure, contro
 
 The Dependency Track is primarily aimed at enterprises/organizations, with medium to large-sized organizations benefiting the most from adoption of the dependency track levels. Organizations include enterprises, but also large open source projects that want to manage third party dependency risk.
 
--   [Basics](dependency-track.md)
+-   [Requirements](dependency-track.md)
