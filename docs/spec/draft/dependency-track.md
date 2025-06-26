@@ -31,12 +31,6 @@ The scope of the SLSA Dependency Track is to properly manage and securely consum
 
 ---
 
-## Onboarding
-
-When onboarding your development environment to the SLSA Dependency Track, organizations are making claims about how dependencies are managed and consumed from that artifact version forward. This establishes continuity.
-
-No claims are made for prior artifact versions.
-
 ## Levels
 
 | Level | Requirements
