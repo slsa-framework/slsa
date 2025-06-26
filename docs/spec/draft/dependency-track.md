@@ -50,6 +50,7 @@ No claims are made for prior artifact versions.
 
 ## Level 1: Inventory of dependencies exists
 
+|     |     
 | --- | ---
 | Summary | Maintain an inventory of all build dependencies for a released artifact
 | Threats | Unknown dependencies in your supply chain is unmanaged risk
