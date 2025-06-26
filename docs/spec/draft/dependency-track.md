@@ -116,7 +116,7 @@ Availability risks of upstream sources being removed or taken down (e.g. left-pa
 
 **Outcome:**
 
-The build process consumes all third party build dependencies only from artifact producer-controlled sources, allowing for control of how dependencies enter the supply chain, reducing the attackable surface. 
+The build process consumes all third party build dependencies only from artifact producer-controlled sources, allowing for control of how dependencies enter the supply chain, reducing the attackable surface.  This also enables developers to continue to build even if upstream resources are unavailable.
 
 
 ## Level 4: Proactive defence against upstream attack
