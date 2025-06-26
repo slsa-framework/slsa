@@ -63,7 +63,8 @@ N/A
 
 ## Level 1: Inventory of dependencies exists
    
-**Summary**
+**Summary:**
+
 Maintain an inventory of all build dependencies for a released artifact.
 
 **Threat:**
