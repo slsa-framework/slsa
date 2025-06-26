@@ -54,7 +54,8 @@ No claims are made for prior artifact versions.
 **Summary**
 L0 represents the lack of SLSA.
 
-**Threats**
+**Threats:**
+
 N/A
 
 **Outcome:**
