@@ -381,7 +381,7 @@ Map of names of components of the build platform to their version.
 The build platform, or <dfn>builder</dfn> for short, represents the transitive
 closure of all the entities that are, by necessity, [trusted] to faithfully run
 the build and record the provenance. This includes not only the software but the
-hardware and people involved in running the service. For example, a particular
+hardware and actors involved in running the service. For example, a particular
 instance of [Tekton](https://tekton.dev/) could be a build platform, while
 Tekton itself is not. For more info, see [Build
 model](terminology#build-model).
