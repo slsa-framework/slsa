@@ -61,7 +61,7 @@ N/A
 
 **Summary:**
 
-Maintain an inventory of all build dependencies for a released artifact.
+An inventory of all build dependencies within the artifact exists.
 
 **Threat:**
 
