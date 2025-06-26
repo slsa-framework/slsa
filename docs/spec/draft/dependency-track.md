@@ -39,7 +39,7 @@ No claims are made for prior artifact versions.
 
 ## Levels
 
-| Track/Level | Requirements
+| Level | Requirements
 | --- | ---
 | Dependency L0 | (none)
 | Dependency L1 | Inventory of dependencies exists
