@@ -83,7 +83,8 @@ All third party build dependencies (including transitive) are identified.
 
 All known vulnerabilities in the artifact have been triaged.
 
-**Threat**
+**Threat:**
+
 Introducing vulnerable dependencies into artifact.
 
 **Outcome:**
