@@ -422,6 +422,16 @@
       url: /spec/draft/build-env-track-basics
       description: Overview of SLSA's Attested Build Environment track, intended for all audiences
 
+  - title: Dependency Track
+    description: >
+      This pages describes the dependency track's security levels and requirements.
+      If you want to achieve a particular level of the SLSA dependency track these
+      are the requirements you'll need to meet.
+    children:
+    - title: Consuming dependencies  
+      url: /spec/draft/dependency-track
+      description: Overview of the Dependency track
+
   - title: Source Track
     description: >
       These pages describe the source track's security levels and requirements.
