@@ -55,7 +55,6 @@ No claims are made for prior artifact versions.
 | Threats | Unknown dependencies in your supply chain is unmanaged risk
 | Outcome | All third party build dependencies (including transitive) are identified such that a software producer is able to automatically match them against known vulnerabilities and assess exposure to supply chain incidents (e.g. compromised upstream open source package).
 
--   Common Platform Enumeration (CPE).
 -   Other identifiers that enable joining with known vulnerabilities data sources.
 
 **Outcome:**  
