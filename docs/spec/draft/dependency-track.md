@@ -129,6 +129,9 @@ Malicious attacks on upstream sources such as package managers, compromised pack
 
 Reduced likelihood of a released artifact including a malicious or compromised third-party dependency.
 
+**Note:**
+
+This capability builds on Level 3.
 **Compliance options:**
 
 -   Use of artifact management solutions to internally mirror third party dependencies in packaged form.
