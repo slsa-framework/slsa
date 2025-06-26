@@ -122,6 +122,7 @@ The build process consumes all third party build dependencies only from artifact
 Artifact producer is able to enforce a secure ingestion policy over third-party build dependencies in order to prevent the consumption of compromised upstream artifacts.
 
 **Threat**
+
 Malicious attacks on upstream sources such as package managers, compromised packages, and dependency confusion.
 
 **Outcome**
