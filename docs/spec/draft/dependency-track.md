@@ -150,16 +150,6 @@ Software producer enforces the following minimum secure ingestion policy over th
 -   All private producer-owned build dependencies are acquired from internal sources.
 -   Build dependencies must not contain any known malicious packages, or unwanted functionality (e.g. bitcoin miners).
 
-**Intended for:**
-Consumers of third party dependencies, including open source, and third party binaries wanting to mitigate against the most prevalent supply chain threats targeting the open source ecosystem.
-
-**Compliance options:**
-
--   Managed ingestion of artifacts into producer’s systems is one place to enforce the above requirements, e.g.:
-    -   By only ingesting packages that were released 72 hours ago.
-    -   By checking all packages and versions against known malicious packages databases (e.g. OpenSSF Malicious Packages).
--   Many artifact management solutions support virtual repositories that enable mitigation of dependency confusion.
--   Leverage dependency security metadata feeds to inform policy decisions on dependencies you consume.
 
 **NOTES / Discussion:**
 
