@@ -98,7 +98,7 @@ Artifacts are released with no unknown 'known' vulnerabilities. Outcomes of the 
 -   Does NOT mean the artifact is free of vulnerabilities, but at the time of release all known vulnerabilities are triaged.
 -   Race condition: new vulnerability can, theoretically, be published on the same day as the release.
 
-## Level 3: Dependencies consumed from sources under producer's control
+## Level 3: Dependencies consumed from locations under producer's control
 
 **Summary:**
 
