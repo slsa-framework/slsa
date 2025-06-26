@@ -120,6 +120,7 @@ Artifact producer is able to enforce a secure ingestion policy over third-party 
 Malicious attacks on upstream sources such as package managers, compromised packages, and dependency confusion.
 
 **Outcome**
+
 Reduced likelihood of a released artifact including a malicious or compromised third-party dependency.
 
 **Compliance options:**
