@@ -147,16 +147,6 @@ This capability builds on Level 3.
 -   Build step must enforce use of systems under producer’s control.
 -   Compliance with this level enables the ability to achieve Level 4 compliance.
 
-**Benefits:**
-All of Dependency L2, plus:
-
--   Enables developers to continue to build even if upstream resources are unavailable
--   Establishes a standardized consumption method to control how dependencies are consumed, thereby reducing your attackable surface
-
-**Threats mitigated at this level:**
-
--   Availability risks of upstream sources being removed or taken down (e.g. left-pad incident).
-
 ---
 
 ## Level 4: Proactive defence against prevailing supply chain threats
