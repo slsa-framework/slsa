@@ -142,11 +142,6 @@ This capability builds on Level 3.
 -   Source code vendoring, e.g. by mirroring a copy of the upstream code in a local VCS or using ecosystems tools like `go mod vendor` or `cargo vendor`.
 -   Republishing third-party Docker base image under producer’s project.
 
-**NOTES / Discussion:**
-
--   Build step must enforce use of systems under producer’s control.
--   Compliance with this level enables the ability to achieve Level 4 compliance.
-
 ---
 
 ## Level 4: Proactive defence against prevailing supply chain threats
