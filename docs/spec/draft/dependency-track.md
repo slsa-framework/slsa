@@ -102,7 +102,8 @@ Artifacts are released with no unknown 'known' vulnerabilities. Outcomes of the 
 **Summary**
 All third-party build dependencies are consumed from sources under the producer’s control
 
-**Threat**
+**Threat:**
+
 Availability risks of upstream sources being removed or taken down (e.g. left-pad incident). 
 
 **Outcome**
