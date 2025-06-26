@@ -145,10 +145,6 @@ Reduced likelihood of a released artifact including a malicious or compromised t
 
 This capability builds on Level 3.
 
-**NOTES / Discussion:**
-
--   This capability builds on Level 3.
-
 ---
 
 ## Requirements
