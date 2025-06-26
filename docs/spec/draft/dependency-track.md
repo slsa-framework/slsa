@@ -102,7 +102,7 @@ Artifacts are released with no unknown 'known' vulnerabilities. Outcomes of the 
 
 **Summary:**
 
-All third-party build dependencies are consumed from sources under the producer’s control.
+All third-party build dependencies are consumed from locations under the producer’s control.
 
 **Threat:**
 
