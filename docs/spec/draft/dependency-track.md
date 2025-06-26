@@ -119,18 +119,6 @@ Malicious attacks on upstream sources such as package managers, compromised pack
 **Outcome**
 Reduced likelihood of a released artifact including a malicious or compromised third-party dependency.
 
----
-
-## Level 3: All third-party build dependencies are consumed from sources under the producer’s control
-
-**Outcome:**
-
--   The build process consumes all third party build dependencies only from producer-controlled sources, which must address availability risks and third-party dependencies are mirrored from their canonical sources.
--   Gains control of how dependencies enter the supply chain, reducing your attackable surface through standardization of dependency consumption.
-
-**Intended for:**
-Consumers of third party dependencies, including open source, and third party binaries wanting to improve business continuity and control the consumption of dependencies through a standardized consumption method.
-
 **Compliance options:**
 
 -   Use of artifact management solutions to internally mirror third party dependencies in packaged form.
