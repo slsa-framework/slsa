@@ -49,7 +49,75 @@ No claims are made for prior artifact versions.
 
 ---
 
+## Level 0: No mitigations to dependency threats
+  
+**Summary**
+L0 represents the lack of SLSA.
+
+**Threats**
+N/A
+
+**Outcome**
+N/A
+
+
 ## Level 1: Inventory of dependencies exists
+   
+**Summary**
+Maintain an inventory of all build dependencies for a released artifact.
+
+**Threat**
+Inability to respond to incidents or remediate vulnerabilities.
+
+**Outcome**
+All third party build dependencies (including transitive) are identified.
+
+-   A comprehensive picture of all third party dependencies enables understanding of the risk exposure
+-   An inventory is a prerequisite to identify and manage known vulnerabilities
+-   Implementing a centralized inventorycan enable efficient incident response and risk exposure measurement.
+
+## Level 2: Known vulnerabilities have been triaged
+   
+**Summary**
+All known vulnerabilities in the artifact have been triaged.
+
+**Threat**
+Introducing vulnerable dependencies into artifact.
+
+**Outcome**
+Artifacts are released with no unknown 'known' vulnerabilities. Outcomes of the triage could result in the decision to:
+
+-   Remediate vulnerabilities, prior to release
+-   Proceed with the release and remediate vulnerabilities in the next release, following normal release cycle
+-   Proceed with the release and remediate vulnerabilities by expediting the next patch release.
+
+**Note:**
+-   Does NOT mean the artifact is free of vulnerabilities, but at the time of release all known vulnerabilities are triaged.
+-   Race condition: new vulnerability can, theoretically, be published on the same day as the release.
+
+
+## Level 3: Dependencies consumed from sources under producer's control
+ 
+**Summary**
+All third-party build dependencies are consumed from sources under the producer’s control
+
+**Threat**
+Availability risks of upstream sources being removed or taken down (e.g. left-pad incident). 
+
+**Outcome**
+The build process consumes all third party build dependencies only from artifact producer-controlled sources, allowing for control of how dependencies enter the supply chain, reducing the attackable surface. 
+
+
+## Level 4: Proactive defence against upstream attack
+  
+**Summary**
+Artifact producer is able to enforce a secure ingestion policy over third-party build dependencies in order to prevent the consumption of compromised upstream artifacts.
+
+**Threat**
+Malicious attacks on upstream sources such as package managers, compromised packages, and dependency confusion.
+
+**Outcome**
+Reduced likelihood of a released artifact including a malicious or compromised third-party dependency.
 
 |     |
  **Summary**
