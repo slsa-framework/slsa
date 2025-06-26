@@ -52,7 +52,14 @@ No claims are made for prior artifact versions.
 ## Level 1: Inventory of dependencies exists
 
 |     |
-| Summary | Maintain an inventory of all build dependencies for a released artifact
+ **Summary**
+Maintain an inventory of all build dependencies for a released artifact
+
+**Threat**
+Inability to respond to incidents or remediate vulnerabilities
+
+**Outcome**
+All third party build dependencies (including transitive) are identified such that a software producer is able to automatically match them against known vulnerabilities and assess exposure to supply chain incidents (e.g. compromised upstream open source package).
 | Threats | Unknown dependencies in your supply chain is unmanaged risk
 | Outcome | All third party build dependencies (including transitive) are identified such that a software producer is able to automatically match them against known vulnerabilities and assess exposure to supply chain incidents (e.g. compromised upstream open source package).
 
