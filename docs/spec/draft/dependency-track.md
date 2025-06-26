@@ -136,17 +136,6 @@ Reduced likelihood of a released artifact including a malicious or compromised t
 **Note:**
 
 This capability builds on Level 3.
-**Compliance options:**
-
--   Use of artifact management solutions to internally mirror third party dependencies in packaged form.
--   Source code vendoring, e.g. by mirroring a copy of the upstream code in a local VCS or using ecosystems tools like `go mod vendor` or `cargo vendor`.
--   Republishing third-party Docker base image under producer’s project.
-
----
-
-## Level 4: Proactive defence against prevailing supply chain threats
-
-**Outcome:**  
 Software producer enforces the following minimum secure ingestion policy over third-party build dependencies in order to prevent the consumption of compromised upstream artifacts:
 
 -   All versions of build dependencies must be at least 72 hours old, with exemption for versions that address known vulnerabilities.
