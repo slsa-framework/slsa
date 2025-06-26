@@ -4,6 +4,7 @@ description: This page describes the SLSA Dependeny track, which enablse a softw
 ---
 
 # Basics
+
 ## Objective
 
 Enable a software producer to measure, control, and reduce risk introduced from third party dependencies.
@@ -50,12 +51,11 @@ No claims are made for prior artifact versions.
 
 ## Level 1: Inventory of dependencies exists
 
-|     |     
+|     |
 | --- | ---
 | Summary | Maintain an inventory of all build dependencies for a released artifact
 | Threats | Unknown dependencies in your supply chain is unmanaged risk
 | Outcome | All third party build dependencies (including transitive) are identified such that a software producer is able to automatically match them against known vulnerabilities and assess exposure to supply chain incidents (e.g. compromised upstream open source package).
-
 
 **Outcome:**  
 
