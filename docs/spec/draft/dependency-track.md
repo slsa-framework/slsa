@@ -112,7 +112,8 @@ The build process consumes all third party build dependencies only from artifact
 
 ## Level 4: Proactive defence against upstream attack
   
-**Summary**
+**Summary:**
+
 Artifact producer is able to enforce a secure ingestion policy over third-party build dependencies in order to prevent the consumption of compromised upstream artifacts.
 
 **Threat**
