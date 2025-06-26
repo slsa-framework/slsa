@@ -69,7 +69,8 @@ Maintain an inventory of all build dependencies for a released artifact.
 **Threat**
 Inability to respond to incidents or remediate vulnerabilities.
 
-**Outcome**
+**Outcome:**
+
 All third party build dependencies (including transitive) are identified.
 
 -   A comprehensive picture of all third party dependencies enables understanding of the risk exposure
