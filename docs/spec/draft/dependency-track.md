@@ -60,9 +60,8 @@ N/A
 **Outcome**
 N/A
 
-
 ## Level 1: Inventory of dependencies exists
-   
+
 **Summary:**
 
 Maintain an inventory of all build dependencies for a released artifact.
@@ -75,13 +74,12 @@ Inability to respond to incidents or remediate vulnerabilities.
 
 All third party build dependencies (including transitive) are identified.
 
--   A comprehensive picture of all third party dependencies enables understanding of the risk exposure
--   An inventory is a prerequisite to identify and manage known vulnerabilities
+-   A comprehensive picture of all third party dependencies enables understanding of the risk exposure.
+-   An inventory is a prerequisite to identify and manage known vulnerabilities.
 -   Implementing a centralized inventorycan enable efficient incident response and risk exposure measurement.
 
-
 ## Level 2: Known vulnerabilities have been triaged
-   
+
 **Summary:**
 
 All known vulnerabilities in the artifact have been triaged.
@@ -103,16 +101,15 @@ Artifacts are released with no unknown 'known' vulnerabilities. Outcomes of the 
 -   Does NOT mean the artifact is free of vulnerabilities, but at the time of release all known vulnerabilities are triaged.
 -   Race condition: new vulnerability can, theoretically, be published on the same day as the release.
 
-
 ## Level 3: Dependencies consumed from sources under producer's control
- 
+
 **Summary:**
 
-All third-party build dependencies are consumed from sources under the producer’s control
+All third-party build dependencies are consumed from sources under the producer’s control.
 
 **Threat:**
 
-Availability risks of upstream sources being removed or taken down (e.g. left-pad incident). 
+Availability risks of upstream sources being removed or taken down (e.g. left-pad incident).
 
 **Outcome:**
 
@@ -128,11 +125,11 @@ Compliance with this level enables the ability to achieve Level 4 compliance.
 
 Artifact producer is able to enforce a secure ingestion policy over third-party build dependencies in order to prevent the consumption of compromised upstream artifacts.
 
-**Threat**
+**Threat:**
 
 Malicious attacks on upstream sources such as package managers, compromised packages, and dependency confusion.
 
-**Outcome**
+**Outcome:**
 
 Reduced likelihood of a released artifact including a malicious or compromised third-party dependency.
 
