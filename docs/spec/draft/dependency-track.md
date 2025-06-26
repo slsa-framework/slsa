@@ -76,6 +76,7 @@ All third party build dependencies (including transitive) are identified.
 -   An inventory is a prerequisite to identify and manage known vulnerabilities
 -   Implementing a centralized inventorycan enable efficient incident response and risk exposure measurement.
 
+
 ## Level 2: Known vulnerabilities have been triaged
    
 **Summary**
