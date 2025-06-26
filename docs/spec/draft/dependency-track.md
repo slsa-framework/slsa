@@ -102,7 +102,8 @@ Artifacts are released with no unknown 'known' vulnerabilities. Outcomes of the 
 
 ## Level 3: Dependencies consumed from sources under producer's control
  
-**Summary**
+**Summary:**
+
 All third-party build dependencies are consumed from sources under the producer’s control
 
 **Threat:**
