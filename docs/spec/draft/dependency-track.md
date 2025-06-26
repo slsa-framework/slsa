@@ -160,21 +160,6 @@ Consumers of third party dependencies, including open source, and third party bi
 **NOTES / Discussion:**
 
 -   This capability builds on Level 3.
-
-**Benefits:**
-All of Dependency L3, plus:
-
--   Policy enforcement systems are integrated into the standardized consumption method to check dependencies for issues before the dependency is downloaded.
--   Reduces risk of initial compromise from supply chain threats, preventing costs incurred from responding to an incident.
-
-**Threats mitigated at this level:**
-
--   A malicious actor compromises a known good dependency to add malicious functionality in a newly published version of that dependency (e.g. ESLint incident)
--   A dependency adds a new transitive dependency that is malicious (e.g. Event-Stream incident)
--   Typosquatting
--   Dependency Confusion
--   Intentional vulnerabilities/backdoors/protestware added to a code base (e.g. Colors v1.4.1 incident, node-ipc incident)
-
 ---
 
 ## Requirements
