@@ -125,7 +125,7 @@ distributing provenance.
 
 A package's <dfn>build platform</dfn> is the infrastructure used to transform the
 software from source to package. This includes the transitive closure of all
-hardware, software, persons, and organizations that can influence the build. A
+hardware, software, actors, and organizations that can influence the build. A
 build platform is often a hosted, multi-tenant build service, but it could be a
 system of multiple independent rebuilders, a special-purpose build platform used
 by a single software project, or even an individual's workstation. Ideally, one
