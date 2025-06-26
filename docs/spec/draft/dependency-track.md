@@ -79,7 +79,8 @@ All third party build dependencies (including transitive) are identified.
 
 ## Level 2: Known vulnerabilities have been triaged
    
-**Summary**
+**Summary:**
+
 All known vulnerabilities in the artifact have been triaged.
 
 **Threat**
