@@ -119,20 +119,6 @@ Malicious attacks on upstream sources such as package managers, compromised pack
 **Outcome**
 Reduced likelihood of a released artifact including a malicious or compromised third-party dependency.
 
-**NOTES / Discussion:**
-
--   Does NOT mean the artifact is free of vulnerabilities, but at the time of release all known vulnerabilities are triaged.
--   Race condition: new vulnerability can, theoretically, be published on the same day as the release.
-
-**Benefits:**
-All of Dependency L1, plus:
-
--   Conducting an inventory where each artifact is used, knowing in which services it is deployed, and in which products it was released is required for incident response scenarios so that teams affected by a compromised package can be contacted for  initiation of the appropriate actions that can be taken to remove the affected package.
-
-**Threats mitigated at this level:**
-
--   Accidental vulnerabilities in dependency code that can impact the security of your artifact
-
 ---
 
 ## Level 3: All third-party build dependencies are consumed from sources under the producer’s control
