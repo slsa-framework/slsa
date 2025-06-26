@@ -86,7 +86,8 @@ All known vulnerabilities in the artifact have been triaged.
 **Threat**
 Introducing vulnerable dependencies into artifact.
 
-**Outcome**
+**Outcome:**
+
 Artifacts are released with no unknown 'known' vulnerabilities. Outcomes of the triage could result in the decision to:
 
 -   Remediate vulnerabilities, prior to release
