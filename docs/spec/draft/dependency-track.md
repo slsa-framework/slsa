@@ -57,7 +57,8 @@ L0 represents the lack of SLSA.
 **Threats**
 N/A
 
-**Outcome**
+**Outcome:**
+
 N/A
 
 ## Level 1: Inventory of dependencies exists
