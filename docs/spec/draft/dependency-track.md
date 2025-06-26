@@ -51,7 +51,8 @@ No claims are made for prior artifact versions.
 
 ## Level 0: No mitigations to dependency threats
   
-**Summary**
+**Summary:**
+
 L0 represents the lack of SLSA.
 
 **Threats:**
