@@ -138,7 +138,7 @@ The Compute platform is fully trusted at this level as it provides a virtual TPM
 
 [BuildEnv L3] protects from threats coming from the Compute Platform by adopting hardware root of trust.
 Boot time integrity is verifiable using the cryptographic evidences signed by a key unique to each hardware device (e.g., CPU chip). 
-Practically, achieving L3 requires Compute Providers supporting remote attestation of the hypervisor stack or having the build running in a trusted execution environment using technologies like [AMD SEV-SNP] and [Intel TDX] without dependence on a host-provided virtual TPM device. 
+Practically, achieving L3 requires Compute Providers supporting remote attestation of the hypervisor stack using a hardware [TPM] or having the build running in a trusted execution environment using technologies like [AMD SEV-SNP] and [Intel TDX] without dependence on a host-provided virtual TPM device. 
 
 NOTE: [Control Plane] is considered trusted at L2 and L3 because it _verifies_ the remote attestation of the build environment. 
 Build platforms MAY provide capabilities that let tenants perform remote attestation themselves. 
