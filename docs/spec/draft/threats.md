@@ -586,7 +586,7 @@ Control Plane performs remote attestation of the Build Environment prior to sche
 
 *Example:* Awesome Builder uses VM images provided by a Fancy Image partner. 
 Adversary was able to get unauthorized access to the Awesome Builder persistent storage and modify the image after it was received from Fancy Image.
-Image size is large enough to make SLSA provenance verification prohibitively expensive upon every Build Environment creation.
+Image size is large enough to make SLSA provenance verification prohibitively expensive upon every Build Environment instantiation.
 
 </details>
 <details><summary>Unexpected reuse of a build environment<span>(BuildEnv L2+)</span></summary>
