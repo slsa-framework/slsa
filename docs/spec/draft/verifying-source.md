@@ -119,7 +119,7 @@ fields:
 | ---- | ---
 | Verifier (SCS) identity from [Step 1] | To prevent an adversary from substituting a VSA making false claims from an unintended SCS.
 | `predicate.resourceUri` | To prevent an adversary from substituting a VSA for the intended repository (e.g. `git+https://github.com/IntendedOrg/hello-world`) for another (e.g. `git+https://github.com/AdversaryOrg/hello-world`)
-| `subject.annotations.source_refs` | To prevent an adversary from substituting the intended revision from one branch (e.g. `release`) with another (e.g. `experimental_auth`).
+| `subject.annotations.sourceRefs` | To prevent an adversary from substituting the intended revision from one branch (e.g. `release`) with another (e.g. `experimental_auth`).
 | `verifiedLevels` | To ensure the expected controls were in place for the creation of the revision. E.g. `SLSA_SOURCE_LEVEL_3`, `ORG_SOURCE_STATIC_ANALYSIS`, etc...
 
 [Threat "B"]: threats#b-modifying-the-source
