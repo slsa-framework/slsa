@@ -470,16 +470,20 @@ the changes that contributed to that revision over its history.
 
 The source track issues Source VSAs using the [Verification Summary Attestations](./verification_summary.md) format as follows:
 
-1.  `subject.uri` SHOULD be set to a human readable URI of the revision.
+1.  `subject.uri` SHOULD be set to a URI where a human can find details about
+    the revision. This field is not intended for policy decisions. Instead, it
+    is only intended to direct a human investigating verification failures.
+    -   For example: `https://github.com/slsa-framework/slsa/commit/6ff3cd75c8c9e0fcedc62bd6a79cf006f185cedb`
 2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
-SCSs that do not use cryptographic digests MUST define a canonical type that is used to identify immutable revisions (e.g. `svn_revision_id`)[^1].
-3.  `subject.annotations.source_refs` SHOULD be set to a list of references that pointed to this revision when the attestation was created. The list MAY NOT be exhaustive
+SCSs that do not use cryptographic digests MUST define a canonical type that is used to identify immutable revisions and MUST include the repository within the type[^1].
+    -   For example: `svn_revision_id: svn+https://svn.myproject.org/svn/MyProject/trunk@2019`
+3.  `subject.annotations.sourceRefs` SHOULD be set to a list of references that pointed to this revision when the attestation was created. The list MAY be non-exhaustive.
     -   git references MUST be fully qualified (e.g. `refs/head/main` or `refs/tags/v1.0`) to reduce the likelihood of confusing downstream tooling.
 4.  `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field).
 E.g. `git+https://github.com/foo/hello-world`.
 5.  `verifiedLevels` MUST include the SLSA source track level the SCS asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
 MAY include additional properties as asserted by the SCS.  The SCS MUST include _only_ the highest SLSA source level met by the revision.
-6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain. This COULD be used to indicate the source level of any git submodules present in the revision.
+6.  `dependencyLevels` MAY be empty as source revisions are typically terminal nodes in a supply chain. For example, this could be used to indicate the source level of any git submodules present in the revision.
 
 #### Additional properties
 
@@ -502,14 +506,14 @@ organization-provided properties within `verifiedLevels` SHOULD NOT be
 considered an endorsement of the veracity of the organization defined property
 by the SCS.
 
-#### Populating source_refs
+#### Populating sourceRefs
 
-The Source VSA issuer may choose to populate `source_refs` in any way they wish.
+The Source VSA issuer may choose to populate `sourceRefs` in any way they wish.
 Downstream users are expected to be familiar with the method used by the issuer.
 
 Example implementations:
 
--   Issue a new VSA for each merged Pull Request and add the destination branch to `source_refs`.
+-   Issue a new VSA for each merged Pull Request and add the destination branch to `sourceRefs`.
 -   Issue a new VSA each time a 'consumable branch' is updated to point to a new revision.
 -   Issue a new VSA each time a 'consumable tag' is created to point to a new revision.
 
@@ -520,7 +524,7 @@ Example implementations:
 "subject": [{
   "uri": "https://github.com/foo/hello-world/commit/9a04d1ee393b5be2773b1ce204f61fe0fd02366a",
   "digest": {"gitCommit": "9a04d1ee393b5be2773b1ce204f61fe0fd02366a"},
-  "annotations": {"source_refs": ["refs/heads/main", "refs/heads/release_1.0"]}
+  "annotations": {"sourceRefs": ["refs/heads/main", "refs/heads/release_1.0"]}
 }],
 
 "predicateType": "https://slsa.dev/verification_summary/v1",
@@ -541,7 +545,7 @@ Example implementations:
 #### How to verify
 
 -   VSAs for source revisions MUST follow [the standard method of VSA verification](./verification_summary.md#how-to-verify).
--   Users SHOULD check that an allowed branch is listed in `subject.annotations.source_refs` to ensure the revision is from an appropriate context within the repository.
+-   Users SHOULD check that an allowed branch is listed in `subject.annotations.sourceRefs` to ensure the revision is from an appropriate context within the repository.
 -   Users SHOULD check that the expected `SLSA_SOURCE_LEVEL_` is listed within `verifiedLevels`.
 -   Users MUST ignore any unrecognized values in `verifiedLevels`.
 
