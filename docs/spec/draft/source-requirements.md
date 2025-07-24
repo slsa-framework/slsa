@@ -471,8 +471,8 @@ the changes that contributed to that revision over its history.
 The source track issues Source VSAs using the [Verification Summary Attestations](./verification_summary.md) format as follows:
 
 1.  `subject.uri` SHOULD be set to a URI where a human can find details about
-    the revision. The URI MUST NOT be used during verification, but SHOULD be used
-    to direct a human investigating verification failures.
+    the revision. This field is not intended for policy decisions. Instead, it
+    is only intended to direct a human investigating verification failures.
     -   For example: `https://github.com/slsa-framework/slsa/commit/6ff3cd75c8c9e0fcedc62bd6a79cf006f185cedb`
 2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
 SCSs that do not use cryptographic digests MUST define a canonical type that is used to identify immutable revisions and MUST include the repository within the type[^1].
