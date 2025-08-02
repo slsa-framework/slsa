@@ -265,10 +265,11 @@ See also [Use cases for non-cryptographic, immutable, digests](https://github.co
 <td>✓<td>✓<td>✓<td>✓
 <tr id="human-readable-diff"><td>Human readable changes <a href="#human-readable-diff">🔗</a><td>
 
-The SCS MUST provide tooling to display changes in a human readable form (e.g.
-'diffs') for all plain-text changes and SHOULD provide mechanisms to provide
-human understandable interpretations of non-plain-text changes (e.g. render
-images, verify and display provenance for binaries, etc...).
+The SCS MUST provide tooling to display Changes between one Source Revision and
+another in a human readable form (e.g. 'diffs') for all plain-text changes and
+SHOULD provide mechanisms to provide human understandable interpretations of
+non-plain-text changes (e.g. render images, verify and display provenance for
+binaries, etc...).
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="source-summary"><td>Source Verification Summary Attestations <a href="#source-summary">🔗</a><td>
