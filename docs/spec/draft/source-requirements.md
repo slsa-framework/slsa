@@ -16,19 +16,19 @@ Consumers can review attestations to verify whether a particular revision meets 
 
 | Term | Description
 | --- | ---
-| Source | An identifiable set of text and binary files and associated metadata. Source is regularly used as input to a build system (see [SLSA Build Track](build-requirements.md)).
-| Organization | A set of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals and methods of the source.
-| Version Control System (VCS)| Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
-| Revision | A specific state of the source with an identifier provided by the version control system. As an example, you can identify a git revision by its commit object ID.
-| Source Control System (SCS) | A suite of tools and services (self-hosted or SaaS) relied upon by the organization to produce new revisions of the source. The role of the SCS may be fulfilled by a single service (e.g., GitHub / GitLab) or a combination of services (e.g., GitLab with Gerrit code reviews, GitHub with OpenSSF Scorecard, etc).
+| Source | The set of Source Revisions, Branches, Tags, and other metadata within a Source Repository.
+| Organization | A set of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals of the Source and the methods used to produce it.
+| Source Management Tool | Software for the creation and tracking of Source Revisions within a Source Repository, e.g. Git, Subversion.
+| Source Control System (SCS) | A Source Control System (SCS) is the platform or combination of services (self-hosted or SaaS) that hosts a Source Repository and provides a trusted foundation for managing revisions by enforcing policies for authentication, authorization, and change management, such as mandatory code reviews or passing status checks.
 | Source Provenance | Information about how a revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and which parent revisions preceded it.
-| Repository / Repo | A uniquely identifiable instance of a VCS. The repository controls access to the Source in the VCS. The objective of a repository is to reflect the intent of the organization that controls it.
-| Branch | A named, moveable, pointer to a revision that tracks development in the named context over time. Branches may be modified to point to different revisions by authorized actors. Different branches may have different security requirements.
-| Tag | A named pointer to a revision that does not typically move. Similar to branches, tags may be modified by authorized actors. Tags are often used by producers to indicate a more permanent name for a revision.
-| Change | A set of modifications to the source in a specific context. A change can be proposed and reviewed before being accepted.
+| Source Repository (Repo) | A logical unit of version-controlled source files, including its full history and metadata, that is uniquely identified by a stable locator, such as a URI.
+| Source Revision | A specific, logically immutable snapshot of the repository's tracked files at a point in time. It is uniquely identified by a revision identifier, such as a cryptographic hash like a Git commit SHA or a path-qualified sequential number like 25@trunk/ in SVN. A Source Revision MUST include both the content (the files) and its associated version control metadata, such as the author, timestamp, and parent revision(s). Source Revisions are regularly used as input to a build system (see [SLSA Build Track](build-requirements.md)). Note: Path qualification is needed for version control systems that use represent Branches and Tags using paths, such as Subversion and Perforce.
+| Branch | An evolving named reference that points to a specific Source Revision within a Source Repository. It is expected to be updated over time to point to new Source Revisions as development occurs. Different branches may have different security requirements. For example: `main`, `develop`, `feature-x`.
+| Tag | A named reference to a specific Source Revision within a Source Repository. Tags are often used to to permanently mark a specific point in history, such as an official release version (e.g., `v1.2.3`, `release-20250722`), but may also be used to make a temporary assoiation with a Source Revision (e.g. `latest`, `nightly`).
+| Change | A Change is an atomic operation that updates a Branch or Tag to point from a prior Source Revision to a new Source Revision. A Change represents the unit of work that is proposed, reviewed, and accepted into the repository, and may encompass one or more individual commits (e.g., a merged pull request).
 | Change History | A record of the history of revisions that preceded a specific revision.
-| Push / upload / publish | When an actor adds or modifies the Source, Branches or Tags in the repository.
-| Review / approve / vote | When an actor uses a change management tool to comment upon, endorse, or reject a source change proposal.
+| Push / upload / publish | When an actor creates or modifies the Source Revisions, Branches or Tags in the repository.
+| Review / approve / vote | When an actor uses a change management tool to comment upon, endorse, or reject a Change.
 
 ### Source Roles
 
@@ -222,7 +222,7 @@ Content changed under this process includes changing files, history, references,
 #### Warning
 
 Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact.
-> For example, in VCSs like Git, each revision ID is based on the ones before it. When you remove a revision, you must generate new revisions (and new revision IDs) for any revisions that were built on top of it. Consumers who took a dependency on the old revisions may now be unable to refer to the source they've already integrated into their products.
+> For example, in Source Management Tools like Git, each revision ID is based on the ones before it. When you remove a revision, you must generate new revisions (and new revision IDs) for any revisions that were built on top of it. Consumers who took a dependency on the old revisions may now be unable to refer to the revision they've already integrated into their products.
 
 It may be the case that the specific set of changes targeted by a legal takedown can be expunged in ways that do not impact consumed revisions, which can mitigate these problems.
 
