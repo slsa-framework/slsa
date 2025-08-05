@@ -221,7 +221,7 @@ Content changed under this process includes changing files, history, references,
 #### Warning
 
 Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact.
-> For example, in Source Management Tools like Git, each revision ID is based on the ones before it. When you remove a revision, you must generate new revisions (and new revision IDs) for any revisions that were built on top of it. Consumers who took a dependency on the old revisions may now be unable to refer to the revision they've already integrated into their products.
+> For example, in Git, each revision ID is based on the ones before it. When you remove a revision, you must generate new revisions (and new revision IDs) for any revisions that were built on top of it. Consumers who took a dependency on the old revisions may now be unable to refer to the revision they've already integrated into their products.
 
 It may be the case that the specific set of changes targeted by a legal takedown can be expunged in ways that do not impact consumed revisions, which can mitigate these problems.
 
