@@ -16,7 +16,7 @@ Consumers can review attestations to verify whether a particular revision meets 
 
 | Term | Description
 | --- | ---
-| Organization | A set of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals of the contents of a Source Repository and the methods used to produce it.
+| Organization | A set of people who collectively create source revisions within a Source Repository. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals of a Source Repository and the methods used to produce new revisions.
 | Source Management Tool | Software for the creation and tracking of Source Revisions within a Source Repository, e.g. Git, Subversion.
 | Source Control System (SCS) | The platform or combination of services (self-hosted or SaaS) that hosts a Source Repository and provides a trusted foundation for managing revisions by enforcing policies for authentication, authorization, and change management, such as mandatory code reviews or passing status checks.
 | Source Provenance | Information about how a revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and which parent revisions preceded it.
