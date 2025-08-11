@@ -439,7 +439,7 @@ repo + branch in git. Moving fully reviewed content from one context to another
 still requires review. The exact definition of “context” depends on the project,
 and this does not preclude well-understood automatic merges, such as cutting a release branch.
 
-**[Informed Review]** The SCS MUST present reviewers with difference between
+**[Informed Review]** The SCS MUST present reviewers with a clear representation of the result of accepting the proposed change. See [Human Readable Changes](#human-readable-diff).
 the old and new revisions. E.g. by using [the diff tool](#human-readable-diff).
 
 **[Trusted Robot Contributions]** An organization MAY choose to grant a Trusted
