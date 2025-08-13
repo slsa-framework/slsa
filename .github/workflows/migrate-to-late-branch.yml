@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Checkout main (no matter what else is requested)
-        uses: actions/checkout@v4
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4 on 2025-08-13
         with:
           ref: main # Checkout the main branch
           fetch-depth: 1 # We don't need the full history for this operation
