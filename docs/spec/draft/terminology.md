@@ -171,7 +171,7 @@ It is the primary identifier to which consumers attach expectations.
 
 -   *Package repository:* Could mean either package registry or package name,
     depending on the ecosystem. To avoid confusion, we always use "repository"
-    exclusively to mean "source repository", where there is no ambiguity.
+    exclusively to mean "Source Repository", where there is no ambiguity.
 -   *Package manager* (without "client"): Could mean either package ecosystem,
     package registry, or client-side tooling.
 
@@ -290,7 +290,7 @@ additions are welcome!
 Notes:
 
 -   Go uses a significantly different distribution model than other ecosystems.
-    In Go, the package name is a source repository URL. While clients can fetch
+    In Go, the package name is a Source Repository URL. While clients can fetch
     directly from that URL---in which case there is no "package" or
     "registry"---they usually fetch a zip file from a *module proxy*. The module
     proxy acts as both a builder (by constructing the package artifact from

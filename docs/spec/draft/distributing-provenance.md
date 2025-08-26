@@ -87,8 +87,8 @@ There are a number of opportunities and venues to publish attestations during
 and after the build process. Producers MUST publish attestations in at least
 one place, and SHOULD publish attestations in more than one place:
 
--   **Publish attestations alongside the source repository releases**: If the
-    source repository hosting provider offers an artifact "release" feature,
+-   **Publish attestations alongside the Source Repository releases**: If the
+    Source Repository hosting provider offers an artifact "release" feature,
     such as [GitHub
     releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)
     or [GitLab releases](https://docs.gitlab.com/ee/user/project/releases/),
@@ -131,8 +131,8 @@ provenance alongside the artifact. This model is preferred for two reasons:
     adding an additional point of failure.
 
 Short term, consumers of build artifacts can bootstrap a manual policy by using
-the source repository only for projects that publish all artifacts and
-attestations to the source repository, and later extend this to all artifacts
+the Source Repository only for projects that publish all artifacts and
+attestations to the Source Repository, and later extend this to all artifacts
 published to the package registry via the canonical installation tools once
 a given ecosystem supports them.
 
@@ -155,7 +155,7 @@ both producer and consumer agree and it meets all the other requirements.
 Some ecosystems have support for installing directly from source repositories
 (an option for Python/`pip`, Go, etc.). In these cases, there is no need to
 publish or verify provenance because there is no "build" step that translates
-between a source repository and an artifact that is being installed.
+between a Source Repository and an artifact that is being installed.
 
 However, for ecosystems that install from source repositories _via_ some
 intermediary (e.g., [Homebrew installing from GitHub release artifacts generated
@@ -163,7 +163,7 @@ from the repository or GitHub Packages](https://docs.brew.sh/Bottles), [Go
 installing through the Go module proxy](https://proxy.golang.org/)), these
 ecosystems distribute "source archives" that are not the bit-for-bit identical
 form from version control. These intermediaries are transforming the original
-source repository in some way that constitutes a "build" and as a result SHOULD
+Source Repository in some way that constitutes a "build" and as a result SHOULD
 be providing build provenance for this "package", and the recommendations
 outlined here apply.
 

@@ -143,7 +143,7 @@ Next, check that the package's provenance meets your expectations for that
 package in order to mitigate [threat "D"].
 
 In our threat model, the adversary has the ability to invoke a build and to publish
-to the registry. The adversary is not able to write to the source repository, nor do
+to the registry. The adversary is not able to write to the Source Repository, nor do
 they have insider access to any trusted systems. Your expectations SHOULD be
 sufficient to detect or prevent this adversary from injecting unofficial
 behavior into the package.
@@ -154,7 +154,7 @@ following fields:
 | What | Why
 | ---- | ---
 | Builder identity from [Step 1] | To prevent an adversary from building the correct code on an unintended platform
-| Canonical source repository | To prevent an adversary from building from an unofficial fork (or other disallowed source)
+| Canonical Source Repository | To prevent an adversary from building from an unofficial fork (or other disallowed source)
 | `buildType` | To ensure that `externalParameters` are interpreted as intended
 | `externalParameters` | To prevent an adversary from injecting unofficial behavior
 
@@ -168,7 +168,7 @@ be a sign that the `buildType`'s level of abstraction is too low. For example,
 `externalParameters` that record a list of commands to run is likely impractical
 to verify because the commands change on every build. Instead, consider a
 `buildType` that defines the list of commands in a configuration file in a
-source repository, then put only the source repository in
+Source Repository, then put only the Source Repository in
 `externalParameters`. Such a design is easier to verify because the source
 repository is constant across builds.
 
@@ -218,11 +218,11 @@ Possible models for forming expectations include:
     two-party control, or consumers might have to accept each policy change
     (another form of trust on first use).
 
--   **Defined in source:** The source repository tells the verifier what their
+-   **Defined in source:** The Source Repository tells the verifier what their
     expectations ought to be. In this model, the package name is immutably bound
-    to a source repository and all other external parameters are defined in the
-    source repository. This is how the Go ecosystem works, for example, since
-    the package name *is* the source repository location.
+    to a Source Repository and all other external parameters are defined in the
+    Source Repository. This is how the Go ecosystem works, for example, since
+    the package name *is* the Source Repository location.
 
 It is important to note that expectations are tied to a *package name*, whereas
 provenance is tied to an *artifact*. Different versions of the same package name

@@ -16,8 +16,8 @@ NOTE: If you landed here via the
 `https://slsa.dev/provenance/v1` please see
 [Build provenance](build-provenance.md).
 
--   [Build provenance](build-provenance.md) - tracks the output of a build process
+-   [Build Provenance](build-provenance.md) - tracks the output of a build process
    back to the source code used to produce that output.
--   [Source provenance](source-requirements#source-provenance-attestations) - tracks the
-    creation of source code revisions and the change management processes
+-   [Source Provenance](source-requirements#source-provenance-attestations) - tracks the
+    creation of Source Revisions and the change management processes
     that were in place during their creation.

@@ -73,7 +73,7 @@ permissions across various packages.
 Example ways an open source ecosystem might use SLSA to protect users:
 
 -   At upload time, the package registry rejects the package if it was not built
-    from the canonical source repository.
+    from the canonical Source Repository.
 -   At download time, the packaging client rejects the package if it was not
     built by a trusted builder.
 

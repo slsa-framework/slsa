@@ -110,7 +110,7 @@ If a producer wishes to distribute their artifact through a [package ecosystem]
 that requires explicit metadata about the build process in the form of a
 configuration file, the producer MUST complete the configuration file and keep
 it up to date. This metadata might include information related to the artifact's
-source repository and build parameters.
+Source Repository and build parameters.
 
 ### Distribute provenance
 

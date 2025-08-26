@@ -58,20 +58,20 @@ The following section details these elements.
 ### Change management interface
 
 The change management interface is the user interface for proposing and
-approving changes to protected branches within a source repository. During
+approving changes to protected branches within a Source Repository. During
 normal operation all such changes go through this interface.
 
 ### Control configuration
 
 Control configuration is how organizations establish technical controls in a
-given source repository. If done well the configuration will reflect the intent
+given Source Repository. If done well the configuration will reflect the intent
 of the organization.
 
 ### Technical controls
 
 Technical controls are the organization configured settings that are used to
-determine if a revision can be introduced into storage within any particular
-context and who has access to those revisions.
+determine if a Source Revision can be introduced into storage within any particular
+context and who has access to those Source Revisions.
 
 The technical controls component is responsible for the storage of these
 settings while the [control plane](#control-plane) is responsible for enforcing
@@ -90,22 +90,22 @@ They include:
 ### Control plane
 
 The control plane is the SCS component that orchestrates the introduction and
-creation of new revisions into a source repository. It is responsible for
+creation of new Source Revisions into a Source Repository. It is responsible for
 enforcing [technical controls](#technical-controls) and, at SLSA Source L3+,
-generating and signing source provenance for each revision. The control plane is
+generating and signing Source Provenance for each Source Revision. The control plane is
 operated by one or more administrators, who have privileges to modify the
 control plane.
 
 ### Verifier
 
-The verifier is the SCS component that evaluates source provenance and generates
+The verifier is the SCS component that evaluates Source Provenance and generates
 and signs a
 [verification summary attestation](source-requirements#summary-attestation)
 (VSA).
 
 ### Storage
 
-Storage holds source revisions and their provenance and summary attestations.
+Storage holds Source Revisions and their provenance and summary attestations.
 
 ## Assessing components
 
@@ -139,7 +139,7 @@ should typically be assessed together.
 
 -   Administration
     -   What are the ways an SCS administrator can use privileged access to
-        influence a revision creation, provenance generation, or VSA generation?
+        influence a Source Revision creation, provenance generation, or VSA generation?
         Examples: physical access, terminal access, access to cryptographic
         secrets
     -   What controls are in place to detect or prevent an SCS administrator
@@ -155,16 +155,16 @@ should typically be assessed together.
     -   How does the SCS ensure the control plane is enforcing the
         [technical controls](#technical-controls) are working as intended?
 
--   Source provenance generation
-    -   How does the control plane observe the revision creation to ensure the
+-   Source Provenance generation
+    -   How does the control plane observe the Source Revision creation to ensure the
         provenance's accuracy?
     -   Are there situations in which the control plane will not generate
-        source provenance? What are they?
-    -   What details are included in the source provenance? Are they sufficient
+    Source Provenance? What are they?
+    -   What details are included in the Source Provenance? Are they sufficient
         to mitigate tampering with other SCS components?
 
 -   VSA generation
-    -   How does the verifier determine what source level a revision meets?
+    -   How does the verifier determine what source level a Source Revision meets?
     -   How does the verifier determine the organization's control expectations
         and if they are met?
 
@@ -194,7 +194,7 @@ should typically be assessed together.
 ### Prompts for assessing output storage
 
 -   How do you prevent tampering with storage directly?
--   How do you prevent one project's revisions from affecting another project?
+-   How do you prevent one project's Source Revisions from affecting another project?
 
 ## Source control system evaluation
 

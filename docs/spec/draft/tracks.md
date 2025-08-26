@@ -40,17 +40,17 @@ failure. Guidelines for implementers can be found in the
 
 The SLSA source track provides producers and consumers with increasing levels of
 trust in the source code they produce and consume. It describes increasing
-levels of trustworthiness and completeness of how a source revision was created.
+levels of trustworthiness and completeness of how a Source Revision was created.
 
-The expected process for creating a new revision is determined solely by that
+The expected process for creating a new Source Revision is determined solely by that
 repository's owner (the organization) who also determines the intent of the
 software in the repository and administers technical controls to enforce the
 process.
 
-Consumers can review attestations to verify whether a particular revision meets their standards.
+Consumers can review attestations to verify whether a particular Source Revision meets their standards.
 
 -   [Requirements](source-requirements.md)
--   [Source provenance](source-requirements#source-provenance-attestations)
+-   [Source Provenance](source-requirements#source-provenance-attestations)
 -   [Assessing source systems](assessing-source-systems.md)
 
 ## Build Environment track
