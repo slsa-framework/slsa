@@ -14,20 +14,46 @@ Consumers can review attestations to verify whether a particular revision meets 
 
 ## Definitions
 
+A **Version Control System (VCS)** is a system of software and protocols for
+managing the version history of files. Git, Mercurial, and Subversion are all
+examples of version control systems.
+
+The following terms apply to Version Control Systems:
+
+| Term | Description
+| --- | ---
+| Source Repository (Repo) | A logical unit of files, their full revision history, as well as Branches, Tags, and other metadata.
+| Source Revision | A specific, logically immutable snapshot of the repository's tracked files. It is uniquely identified by a revision identifier, such as a cryptographic hash like a Git commit SHA or a path-qualified sequential number like `25@trunk/` in SVN. A Source Revision includes both the content (the files) and its associated version control metadata, such as the author, timestamp, and parent revision(s). Note: Path qualification is needed for version control systems that use represent Branches and Tags using paths, such as Subversion and Perforce.
+| Named Reference | A user-friendly name for a specific source revision, such as `main` or `v1.2.3`.
+| Change | A modification to the state of the Source Repository including: updating the content of an existing Source Revision to create a new Source Revision, or the creation, deletion or modification of a named reference.
+| Change History | A record of the history of Source Revisions that preceded a specific revision.
+| Branch | A Named Reference that moves to track a line of development within a Source Repository. E.g. `main`, `develop`, `feature-x`
+| Tag | A Named Reference that is intended to be immutable. Once created, it is not moved to point to a different revision. E.g. `v1.2.3`, `release-20250722`
+
+> **NOTE:** The 'branch' and 'tag' features within version control systems may
+not always align with the ‘Branch’ and ‘Tag’ definitions provided in this
+specification. For example, in git and other version control systems, the UX may
+allow 'tags' to be moved. For the purposes of this specification these would be
+classified as 'Named References' and not as 'Tags'.
+
+
+A **Source Control System (SCS)** is a platform or combination of services
+(self-hosted or SaaS) that hosts a Source Repository and provides a trusted
+foundation for managing source revisions by enforcing policies for
+authentication, authorization, and change management, such as mandatory code
+reviews or passing status checks.
+
+The following terms apply to Source Control Systems:
+
 | Term | Description
 | --- | ---
 | Organization | A set of people who collectively create Source Revisions within a Source Repository. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals of a Source Repository and the methods used to produce new Source Revisions.
-| Source Management Tool | Software for the creation and tracking of Source Revisions within a Source Repository, e.g. Git, Subversion.
-| Source Control System (SCS) | The platform or combination of services (self-hosted or SaaS) that hosts a Source Repository and provides a trusted foundation for managing revisions by enforcing policies for authentication, authorization, and change management, such as mandatory code reviews or passing status checks.
-| Source Provenance | Information about how a revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and which parent revisions preceded it.
-| Source Repository (Repo) | A logical unit of files, their full revision history, as well as Branches, Tags, and other metadata.  Source Repositories are uniquely identified by a stable locator, such as a URI.
-| Source Revision | A specific, logically immutable snapshot of the repository's tracked files at a point in  time. It is uniquely identified by a revision identifier, such as a cryptographic hash like a Git commit SHA or a path-qualified sequential number like 25@trunk/ in SVN. A Source Revision MUST include both the content (the files) and its associated version control metadata, such as the author, timestamp, and parent revision(s). Source Revisions are regularly used as input to a build system (see [SLSA Build Track](build-requirements.md)). Note: Path qualification is needed for version control systems that use represent Branches and Tags using paths, such as Subversion and Perforce.
-| Branch | An evolving named reference that points to a specific Source Revision within a Source Repository. It is expected to be updated to point to new Source Revisions as development occurs. Different branches may have different security requirements. Examples: `main`, `develop`, `feature-x`.
-| Tag | A named reference to a specific Source Revision within a Source Repository. Tags are often used to to permanently mark a specific point in history, such as an official release version (e.g., `v1.2.3`, `release-20250722`), but may also be used to make a temporary assoiation with a Source Revision (e.g. `latest`, `nightly`).
-| Change | A proposal to update a Specific Branch to a different Source Revision. A change can be proposed and reviewed before being accepted.
-| Change History | A record of the history of revisions that preceded a specific revision.
-| Push / upload / publish | When an actor creates or modifies the Source Revisions, Branches or Tags in the repository.
-| Review / approve / vote | When an actor uses a change management tool to comment upon, endorse, or reject a Change.
+| Proposed Change | A proposal to make a Change in a Source Repository.
+| Review | When an actor considers and comments upon a Proposed Change.
+| Approve | When an actor endorses a Change Proposal.
+| Submission | When an actor makes a Change in the repository.
+| Source Provenance | Information about how a Source Revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and which parent revisions preceded it.
+
 
 ### Source Roles
 
@@ -37,8 +63,8 @@ Consumers can review attestations to verify whether a particular revision meets 
 | Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
 | Trusted robot | Automation authorized by the organization to act in explicitly defined contexts. The Robot’s identity and codebase cannot be unilaterally influenced.
 | Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
-| Proposer | An actor that proposes (or uploads) a particular change to the source.
-| Reviewer / Voter / Approver | An actor that reviews (or votes on) a particular change to the source.
+| Proposer | An actor that proposes a particular change to the source.
+| Reviewer | An actor that reviews a particular change to the source.
 | Merger | An actor that applies a change to the source. This actor may be the proposer.
 
 ## Onboarding
@@ -250,7 +276,8 @@ Organizations SHOULD prefer to make logs public if possible.
 
 <tr id="repository-ids"><td>Repositories are uniquely identifiable <a href="#repository-ids">🔗</a><td>
 
-The repository ID is defined by the SCS and MUST be uniquely identifiable within the context of the SCS.
+The repository ID is defined by the SCS and MUST be uniquely identifiable within
+the context of the SCS with a stable locator, such as a URI.
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="revision-ids"><td>Revisions are immutable and uniquely identifiable <a href="#revision-ids">🔗</a><td>
@@ -716,9 +743,9 @@ This has many educational, forensics, and security auditing benefits.
 
 Requirements:
 
-The change management tool SHOULD record a description of the proposed change and all discussions / commentary related to it.
+The SCS SHOULD record a description of the proposed change and all discussions / commentary related to it.
 
-The change management tool MUST link this discussion to the revision itself. This is regularly done via commit metadata.
+The SCS MUST link this discussion to the revision itself. This is regularly done via commit metadata.
 
 All collected content SHOULD be made immutable if the change is accepted.
 It SHOULD NOT be possible to edit the discussion around a revision after it has been accepted.
