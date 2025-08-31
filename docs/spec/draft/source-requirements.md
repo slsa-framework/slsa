@@ -36,7 +36,6 @@ specification. For example, in git and other version control systems, the UX may
 allow 'tags' to be moved. For the purposes of this specification these would be
 classified as 'Named References' and not as 'Tags'.
 
-
 A **Source Control System (SCS)** is a platform or combination of services
 (self-hosted or SaaS) that hosts a Source Repository and provides a trusted
 foundation for managing source revisions by enforcing policies for
@@ -53,7 +52,6 @@ The following terms apply to Source Control Systems:
 | Approve | When an actor endorses a Change Proposal.
 | Submission | When an actor makes a Change in the repository.
 | Source Provenance | Information about how a Source Revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and which parent revisions preceded it.
-
 
 ### Source Roles
 
