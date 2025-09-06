@@ -15,8 +15,8 @@ Consumers can review attestations to verify whether a particular revision meets 
 ## Definitions
 
 A **Version Control System (VCS)** is a system of software and protocols for
-managing the version history of files. Git, Mercurial, and Subversion are all
-examples of version control systems.
+managing the version history of a set of files. Git, Mercurial, and Subversion
+are all examples of version control systems.
 
 The following terms apply to Version Control Systems:
 
