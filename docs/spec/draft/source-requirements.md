@@ -25,7 +25,7 @@ The following terms apply to Version Control Systems:
 | Source Repository (Repo) | A self-contained unit that holds the content and revision history for a set of files, along with related metadata like Branches and Tags.
 | Source Revision | A specific, logically immutable snapshot of the repository's tracked files. It is uniquely identified by a revision identifier, such as a cryptographic hash like a Git commit SHA or a path-qualified sequential number like `25@trunk/` in SVN. A Source Revision includes both the content (the files) and its associated version control metadata, such as the author, timestamp, and parent revision(s). Note: Path qualification is needed for version control systems that use represent Branches and Tags using paths, such as Subversion and Perforce.
 | Named Reference | A user-friendly name for a specific source revision, such as `main` or `v1.2.3`.
-| Change | A modification to the state of the Source Repository including: updating the content of an existing Source Revision to create a new Source Revision, or the creation, deletion or modification of a named reference.
+| Change | A modification to the state of the Source Repository, such as creation of a new Source Revision based on a previous Source Revision, or creation, deletion, or modification of a Named Reference.
 | Change History | A record of the history of Source Revisions that preceded a specific revision.
 | Branch | A Named Reference that moves to track the Change History of a coheasive line of development within a Source Repository. E.g. `main`, `develop`, `feature-x`
 | Tag | A Named Reference that is intended to be immutable. Once created, it is not moved to point to a different revision. E.g. `v1.2.3`, `release-20250722`
