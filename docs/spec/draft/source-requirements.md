@@ -27,7 +27,7 @@ The following terms apply to Version Control Systems:
 | Named Reference | A user-friendly name for a specific source revision, such as `main` or `v1.2.3`.
 | Change | A modification to the state of the Source Repository, such as creation of a new Source Revision based on a previous Source Revision, or creation, deletion, or modification of a Named Reference.
 | Change History | A record of the history of Source Revisions that preceded a specific revision.
-| Branch | A Named Reference that moves to track the Change History of a coheasive line of development within a Source Repository. E.g. `main`, `develop`, `feature-x`
+| Branch | A Named Reference that moves to track the Change History of a cohesive line of development within a Source Repository. E.g. `main`, `develop`, `feature-x`
 | Tag | A Named Reference that is intended to be immutable. Once created, it is not moved to point to a different revision. E.g. `v1.2.3`, `release-20250722`
 
 > **NOTE:** The 'branch' and 'tag' features within version control systems may
