@@ -62,9 +62,6 @@ The following terms apply to Source Control Systems:
 | Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
 | Trusted robot | Automation authorized by the organization to act in explicitly defined contexts. The Robot’s identity and codebase cannot be unilaterally influenced.
 | Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
-| Proposer | An actor that proposes a particular change to the source.
-| Reviewer | An actor that reviews a particular change to the source.
-| Merger | An actor that applies a change to the source. This actor may be the proposer.
 
 ## Onboarding
 
