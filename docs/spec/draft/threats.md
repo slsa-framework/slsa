@@ -460,10 +460,10 @@ the source repo does not match the expected value.
 ### (E) Build process
 
 An adversary introduces an unauthorized change to a build output through
-tampering of the build process; or introduces false information into the
+tampering of the build image, build environment or build process; or introduces false information into the
 provenance.
 
-These threats are directly addressed by the SLSA Build track.
+These threats are directly addressed by the SLSA Build and BuildEnv track.
 
 <details><summary>Forge values of the provenance (other than output digest) <span>(Build L2+)</span></summary>
 
@@ -597,19 +597,60 @@ transitive closure of the inputs, and the cache entry is itself a SLSA Build L3
 build with its own provenance that corresponds to the key.
 
 </details>
-<details><summary>Compromise build platform admin <span>(verification)</span></summary>
+<details><summary>Compromise build platform admin <span>(BuildEnv L3)</span></summary>
 
 *Threat:* An adversary gains admin permissions for the artifact's build platform.
 
-*Mitigation:* The build platform must have controls in place to prevent and
-detect abusive behavior from administrators (e.g. two-person approvals, audit
-logging).
+*Mitigation:* Admin may potentially access the build environment directly (e.g. using SSH to the VM) or modify it from the host machine.
+Remote (SSH) access is disabled in the build image. 
+Virtualized build environments run in the trusted execution environment (TEE) using technologies like [AMD SEV-SNP] and [Intel TDX] that provide isolation for the VM from the privileged software running on the host machine.
+Control Plane attests build environment before the build is started in it and produces a [VSA][vsa] providing evidence that build environment has no outside-in access and runs in the TEE with the expected image and early boot components (e.g., firmware)
+Root file system integrity is protected by cryptographic mechanisms like [dm-verity], [IMA] or similar.
+Temporary file system is encrypted by an ephemeral key that is provisioned upon bootstrapping the environment and sealed in the TEE. 
 
 *Example:* MyPackage is built on Awesome Builder. Awesome Builder allows
 engineers on-call to SSH into build machines to debug production issues. An
 adversary uses this access to modify a build in progress. Solution: Consumers
-do not accept provenance from the build platform unless they trust sufficient
-controls are in place to prevent abusing admin privileges.
+do not accept provenance from the build platform unless they can validate 
+build environment integrity.
+
+</details>
+<details><summary>Compromise build image during the distribution (in transit)<span>(BuildEnv L1+)</span></summary>
+
+*Threat:* An adversary injects malicious code into the build image time after the image has been generated and before it was consumed by the Build Platform. 
+
+*Mitigation:* Build image is produced by a pipeline having SLSA Build L3 level and comes with SLSA provenance. Control Plane verifies the build image upon the initial consumption (e.g., as it is being pulled from the public registry into a local cache).
+
+*Example:* MyPackage is built on Awesome Builder. Awesome Builder uses VM images provided by a 
+Fancy Image partner. Adversary was able to hijack the supply channel between Fancy Image and Awesome Builder and install malicious tools into the image.
+
+</details>
+<details><summary>Compromise build image at rest<span>(BuildEnv L2+)</span></summary>
+
+*Threat:* An adversary injects malicious code into the build image after it was accepted by the Build Platform and passed initial verification.
+
+*Mitigation:* Build Environment is bootstrapped using Secure Boot with boot measurements performed by vTPM.
+Control Plane performs remote attestation of the Build Environment prior to scheduling the build on it.  
+
+*Example:* Awesome Builder uses VM images provided by a Fancy Image partner. 
+Adversary was able to get unauthorized access to the Awesome Builder persistent storage and modify the image after it was received from Fancy Image and persisted locally.
+Image size is large enough to make SLSA provenance verification prohibitively expensive to perform prior to every Build Environment instantiation.
+Integrity of the root file system is protected by the mechanisms that delay verification until the actual usage of the underlying blocks (e.g., [dm-veryity], [IMA] or similar).
+
+</details>
+<details><summary>Compromise build image in use<span>(BuildEnv L3)</span></summary>
+
+*Threat 1:* Malware having elevated privileges to the host interface in the Compute Platform was able to compromise Build Environment state data while it's running.
+
+*Threat 2:* Compute Platform admin credentials were compromised allowing an adversary to get access and modify Build Environment state while it's running via privileged hypervisor APIs or direct VM memory manipulation.
+
+*Mitigation:* Build environment is continuously protected while it’s running in a TEE using mechanisms like [AMD SEV-SNP] or [Intel TDX]. 
+Root file system is protected accordingly by cryptographic mechanisms like [dm-verity], [IMA] or similar. 
+Temporary file system is overlaid over the root file system and is encrypted by an ephemeral key that is provisioned upon bootstrapping the environment and sealed in the TEE.
+
+*Example:* Awesome Builder uses Cloudy Sky compute provider for provisioning virtual machines. 
+An adversary got unauthorized access to Cloudy Sky infrastructure using the compromised admin credentials and was able to get privileged access to the host machines.
+Adversary was able then to modify virtual machine state while it's running on the host.
 
 </details>
 
@@ -1066,10 +1107,14 @@ Solution: Only accept cryptographic hashes with strong collision resistance.
 [apply SLSA recursively]: verifying-artifacts.md#step-3-optional-check-dependencies-recursively
 [authentic]: build-requirements.md#provenance-authentic
 [build-cache-poisoning-example]: https://adnanthekhan.com/2024/05/06/the-monsters-in-your-build-cache-github-actions-cache-poisoning/
+[dm-verity]: https://docs.kernel.org/admin-guide/device-mapper/verity.html
 [exists]: build-requirements.md#provenance-exists
+[ima]: https://ima-doc.readthedocs.io/
 [isolated]: build-requirements.md#isolated
 [unforgeable]: build-requirements.md#provenance-unforgeable
 [secure-by-design]: https://www.cisa.gov/securebydesign
 [supply chain threats]: threats-overview
 [vsa]: verification_summary
 [vsa_verification]: verification_summary#how-to-verify
+[AMD SEV-SNP]: https://www.amd.com/en/developer/sev.html
+[Intel TDX]: https://www.intel.com/content/www/us/en/developer/tools/trust-domain-extensions/overview.html
