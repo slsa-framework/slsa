@@ -1,6 +1,6 @@
 ---
 title: "Source: Requirements for producing source"
-description: This page covers the detailed technical requirements for producing producing source revisions at each SLSA level. The intended audience is source control system implementers and security engineers.
+description: "This page covers the detailed technical requirements for producing producing source revisions at each SLSA level. The intended audience is source control system implementers and security engineers."
 ---
 
 ## Objective
@@ -263,6 +263,15 @@ The same revision ID MAY be present in multiple repositories.
 See also [Use cases for non-cryptographic, immutable, digests](https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#use-cases-for-non-cryptographic-immutable-digests).
 
 <td>✓<td>✓<td>✓<td>✓
+<tr id="human-readable-diff"><td>Human readable changes <a href="#human-readable-diff">🔗</a><td>
+
+The SCS MUST provide tooling to display Changes between one Source Revision and
+another in a human readable form (e.g. 'diffs') for all plain-text changes and
+SHOULD provide mechanisms to provide human understandable interpretations of
+non-plain-text changes (e.g. render images, verify and display provenance for
+binaries, etc...).
+
+<td>✓<td>✓<td>✓<td>✓
 <tr id="source-summary"><td>Source Verification Summary Attestations <a href="#source-summary">🔗</a><td>
 
 The SCS MUST generate a
@@ -430,10 +439,8 @@ repo + branch in git. Moving fully reviewed content from one context to another
 still requires review. The exact definition of “context” depends on the project,
 and this does not preclude well-understood automatic merges, such as cutting a release branch.
 
-**[Informed Review]** The SCS MUST provide a human readable diff of all
-plain-text changes being reviewed and SHOULD provide mechanisms to provide human
-understandable interpretations of non-plain-text changes (e.g. render images,
-verify and display provenance for binaries, etc...).
+**[Informed Review]** The SCS MUST present reviewers with a clear representation of the result of accepting the proposed change. See [Human Readable Changes](#human-readable-diff).
+the old and new revisions. E.g. by using [the diff tool](#human-readable-diff).
 
 **[Trusted Robot Contributions]** An organization MAY choose to grant a Trusted
 Robot a perpetual exception to a policy (e.g. a bot may be able to merge a change
