@@ -31,10 +31,10 @@ The following terms apply to Version Control Systems:
 | Tag | A Named Reference that is intended to be immutable. Once created, it is not moved to point to a different revision. E.g. `v1.2.3`, `release-20250722`
 
 > **NOTE:** The 'branch' and 'tag' features within version control systems may
-not always align with the ‘Branch’ and ‘Tag’ definitions provided in this
+not always align with the 'Branch' and 'Tag' definitions provided in this
 specification. For example, in git and other version control systems, the UX may
-allow 'tags' to be moved. For the purposes of this specification these would be
-classified as 'Named References' and not as 'Tags'.
+allow 'tags' to be moved. Patterns like `latest` and `nightly` tags rely on this.
+For the purposes of this specification these would be classified as 'Named References' and not as 'Tags'.
 
 A **Source Control System (SCS)** is a platform or combination of services
 (self-hosted or SaaS) that hosts a Source Repository and provides a trusted
