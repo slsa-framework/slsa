@@ -463,7 +463,7 @@ An adversary introduces an unauthorized change to a build output through
 tampering of the build image, build environment or build process; or introduces false information into the
 provenance.
 
-These threats are directly addressed by the SLSA Build and BuildEnv track.
+These threats are directly addressed by the SLSA Build and BuildEnv tracks.
 
 <details><summary>Forge values of the provenance (other than output digest) <span>(Build L2+)</span></summary>
 
