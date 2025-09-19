@@ -136,7 +136,7 @@ This covers the case of unauthorized modifications to the image as it is distrib
 [BuildEnv L2] delivers boot time integrity providing cryptographic evidence that the build environment has been bootstrapped to an expected state.
 The Compute platform is fully trusted at this level as it provides a virtual TPM device that performs boot measurements. 
 
-[BuildEnv L3] extends boot time integrity into the run time all the way until Build Environment is terminated. 
+[BuildEnv L3] extends boot time integrity into the run time all the way until the Build Environment is terminated. 
 L3 addresses infrastructure threats coming from malicious actors (e.g., software agents or compromised admin credentials) in the Build or Compute Platform.
 Vulnerabilities in the software that is legitimally included in the Build Image are out of scope.
 Physical and side-channel attacks are out of scope too but may be considered in the additional future levels of this track.
