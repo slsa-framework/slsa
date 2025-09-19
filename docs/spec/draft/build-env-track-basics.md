@@ -97,7 +97,7 @@ A typical build environment will go through the following lifecycle:
 
 ### Build environment threats
 
-SLSA [Build track] defines requirements for the provenance that is produced for the build artifacts. 
+The SLSA [Build track] defines requirements for the provenance that is produced for the build artifacts. 
 Trustworthiness of the build provenance largely depends on the trustworthiness of the [build environment] the build runs in. 
 The Build track assumes full trust into the [Build Platform], and provides no requirements to verify integrity of the build environment. 
 BuildEnv track intends to close this gap.
