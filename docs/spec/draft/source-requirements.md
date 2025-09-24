@@ -80,7 +80,7 @@ level.
 | Track/Level | Requirements | Focus
 | ----------- | ------------ | -----
 | [Source L1](#source-l1)  | Use a version control system. | Generation and use of discrete Source Revisions.
-| [Source L2](#source-l2)  | Preserve Change History and generate Source Provenance. | Reliable history through enforced controls and evidence. 
+| [Source L2](#source-l2)  | Preserve Change History and generate Source Provenance. | Reliable history through enforced controls and evidence.
 | [Source L3](#source-l3)  | Enforce organizational intent with technical controls. | Consumer knowledge of consumable Source Revisions and their guaranteed technical controls.
 | [Source L4](#source-l4)  | Require code review. | Improved code quality and resistance to insider threats.
 
@@ -211,7 +211,7 @@ These controls MUST be implemented using the SCS-provided
 > For example, an organization may configure the SCS to assign users to a
 `maintainers` role and only allow users in `maintainers` to make updates to `main`.
 
-The SCS MUST be configured to produce a reliable [Change History](#history) 
+The SCS MUST be configured to produce a reliable [Change History](#history)
 for all consumable Source Revisions.
 
 > For example, if the organization intends for all new Source Revisions on the
