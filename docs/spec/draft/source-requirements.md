@@ -79,7 +79,7 @@ level.
 
 | Track/Level | Requirements | Focus
 | ----------- | ------------ | -----
-| [Source L1](#source-l1)  | Use a version control system. | Generation and use of discrete Source Revisions.
+| [Source L1](#source-l1)  | Use a version control system. | Generation of discrete Source Revisions for precise consumption.
 | [Source L2](#source-l2)  | Preserve Change History and generate Source Provenance. | Reliable history through enforced controls and evidence.
 | [Source L3](#source-l3)  | Enforce organizational intent with technical controls. | Consumer knowledge of consumable Source Revisions and their guaranteed technical controls.
 | [Source L4](#source-l4)  | Require code review. | Improved code quality and resistance to insider threats.
