@@ -460,7 +460,7 @@ The SCS MUST
 <tr id="branches"><td>Protected Branches <a href="#branches">🔗</a><td>
 
 The SCS MUST provide any technical controls needed to enforce the organization's
-intent for the repo.
+intent for the branch.
 
 The SCS MUST provide a mechanism for organizations to indicate which branches
 should be protected by technical controls.
@@ -476,14 +476,14 @@ policies.
 <tr id="protected-tags"><td>Protected Tags <a href="#protected-tags">🔗</a><td>
 
 The SCS MUST provide any technical controls needed to enforce the organization's
-intent for the repo.
+intent for the tag.
 
 The SCS MUST provide a mechanism for organizations to indicate which tags
 should be protected by technical controls.
 
 > For example, the organization may instruct the SCS to prevent the deletion of
-all `refs/tags/*` using tag
-protection rules (e.g. [GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets),
+all `refs/tags/releases/*` using tag protection rules
+(e.g. [GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets),
 [GitLab](https://docs.gitlab.com/user/project/protected_tags/))
 or via the application and verification of [gittuf](https://github.com/gittuf/gittuf)
 policies.
