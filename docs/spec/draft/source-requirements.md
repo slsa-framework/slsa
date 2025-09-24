@@ -217,9 +217,9 @@ The SCS MUST be configured to produce a reliable [Change History](#history)
 for all consumable Source Revisions. If your SCS provides this capability by
 design, no additional controls are needed.
 
-If the SCS supports "tags" (or any other Named Reference types that do not support
-change management), the SCS MUST be configured to prevent them from being moved
-or deleted.
+If the SCS supports "tags" (or any other Named Reference types that do not
+support change management), the SCS MUST be configured to prevent them from
+being moved or deleted.
 
 > For example, if a git tag `release1` is used to indicate a release revision
 with ID `abc123`, controls must be configured to prevent that tag from being
