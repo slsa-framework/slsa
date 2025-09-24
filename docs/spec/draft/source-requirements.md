@@ -354,21 +354,21 @@ the VSAs.
 
 <tr id="history"><td>History <a href="#history">🔗</a><td>
 
-The SCS MUST record the sequence of all Source Revisions ever referenced by a
-branch.
-This MUST include metadata capturing when each change occurred and the actor who
-made it.
+If a Named Reference is updated, the SCS MUST record the actor making the
+change, the new Source Revision ID and the timestamp of the change.
+The SCS MUST prevent tampering with these records.
 
-The SCS MUST prevent tampering with these records on protected branches.
+> For example, in systems like GitHub or GitLab, ref updated information is
+stored on the server and branch protection rules must be used to prohibit the
+deletion of the branch.
 
-> For example, in systems like GitHub or GitLab, this can be accomplished by
-enabling branch protection rules that prevent force pushes and branch deletions.
-
-If revisions have their own ancestries in the VCS, the SCS MUST ensure that all
-new revisions added to a branch are descendants of the previous revision of the branch.
+Additionally, if Source Revisions have their own ancestries in the VCS, the SCS
+MUST ensure that the Branch may only be updated to point to Source Revisions
+which are descendants of the current revision.
+In git VCS, this requires a technical control to prohibit `git push --force`.
 
 > For example, if `main` currently points to revision `a`, it may only be
-moved to a new revision, `b`, if `b` has `a` somewhere in its revision ancestry.
+moved to a new revision, `b`, if `a` is an ancestor of `b`.
 
 <td><td>✓<td>✓<td>✓
 <tr id="continuity"><td>Continuity <a href="#continuity">🔗</a><td>
