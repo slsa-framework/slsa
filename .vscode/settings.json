@@ -1,3 +1,12 @@
 {
-    "editor.rulers": [80]
+    "editor.rulers": [
+        80
+    ],
+    "cSpell.words": [
+        "gittuf",
+        "MERGESAME",
+        "SCAI",
+        "SLSA",
+        "unreviewed"
+    ]
 }

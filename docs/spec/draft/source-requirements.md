@@ -1,6 +1,6 @@
 ---
 title: "Source: Requirements for producing source"
-description: "This page covers the detailed technical requirements for producing producing source revisions at each SLSA level. The intended audience is source control system implementers and security engineers."
+description: "This page covers the detailed technical requirements for producing source revisions at each SLSA level. The intended audience is source control system implementers and security engineers."
 ---
 
 ## Objective
@@ -23,7 +23,7 @@ The following terms apply to Version Control Systems:
 | Term | Description
 | --- | ---
 | Source Repository (Repo) | A self-contained unit that holds the content and revision history for a set of files, along with related metadata like Branches and Tags.
-| Source Revision | A specific, logically immutable snapshot of the repository's tracked files. It is uniquely identified by a revision identifier, such as a cryptographic hash like a Git commit SHA or a path-qualified sequential number like `25@trunk/` in SVN. A Source Revision includes both the content (the files) and its associated version control metadata, such as the author, timestamp, and parent revision(s). Note: Path qualification is needed for version control systems that use represent Branches and Tags using paths, such as Subversion and Perforce.
+| Source Revision | A specific, logically immutable snapshot of the repository's tracked files. It is uniquely identified by a revision identifier, such as a cryptographic hash like a Git commit SHA or a path-qualified sequential number like `25@trunk/` in SVN. A Source Revision includes both the content (the files) and its associated version control metadata, such as the author, timestamp, and parent revision(s). Note: Path qualification is needed for version control systems that represent Branches and Tags using paths, such as Subversion and Perforce.
 | Named Reference | A user-friendly name for a specific source revision, such as `main` or `v1.2.3`.
 | Change | A modification to the state of the Source Repository, such as creation of a new Source Revision based on a previous Source Revision, or creation, deletion, or modification of a Named Reference.
 | Change History | A record of the history of Source Revisions that preceded a specific revision.
@@ -60,7 +60,7 @@ The following terms apply to Source Control Systems:
 | --- | ---
 | Administrator | A human who can perform privileged operations on one or more projects. Privileged actions include, but are not limited to, modifying the change history and modifying project- or organization-wide security policies.
 | Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
-| Trusted robot | Automation authorized by the organization to act in explicitly defined contexts. The Robot’s identity and codebase cannot be unilaterally influenced.
+| Trusted robot | Automation authorized by the organization to act in explicitly defined contexts. The robot’s identity and codebase cannot be unilaterally influenced.
 | Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
 
 ## Onboarding
@@ -182,13 +182,13 @@ Many examples in this document use the [git version control system](https://git-
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
 
-<tr id="choose-scs"><td>Choose an appropriate source control system <a href="#choose-scs">🔗</a><td>
+<tr id="choose-scs"><td>Choose an appropriate Source Control System <a href="#choose-scs">🔗</a><td>
 
-An organization producing source revisions MUST select a SCS capable of reaching
+An organization producing Source Revisions MUST select an SCS capable of reaching
 their desired SLSA Source Level.
 
 > For example, if an organization wishes to produce revisions at Source Level 3,
-they MUST choose a source control system capable of producing Source Level 3
+they MUST choose a Source Control System capable of producing Source Level 3
 attestations.
 
 <td>✓<td>✓<td>✓<td>✓
@@ -236,30 +236,49 @@ determine if that expectation has been met by looking for the
 
 <tr id="safe-expunging-process"><td>Safe Expunging Process <a href="#safe-expunging-process">🔗</a><td>
 
-SCSs MAY allow the organization to expunge (remove) content from a repository and its change history without leaving a public record of the removed content,
-but the organization MUST only allow these changes in order to meet legal or privacy compliance requirements.
-Content changed under this process includes changing files, history, references, or any other metadata stored by the SCS.
+SCSs MAY allow the organization to expunge (remove) content from a repository
+and its change history without leaving a public record of the removed content,
+but the organization MUST only allow these changes in order to meet legal or
+privacy compliance requirements. Content changed under this process includes
+changing files, history, references, or any other metadata stored by the SCS.
 
 #### Warning
 
-Removing a revision from a repository is similar to deleting a package version from a registry: it's almost impossible to estimate the amount of downstream supply chain impact.
-> For example, in Git, each revision ID is based on the ones before it. When you remove a revision, you must generate new revisions (and new revision IDs) for any revisions that were built on top of it. Consumers who took a dependency on the old revisions may now be unable to refer to the revision they've already integrated into their products.
+Removing a revision from a repository is similar to deleting a package version
+from a registry: it's almost impossible to estimate the amount of downstream
+supply chain impact.
 
-It may be the case that the specific set of changes targeted by a legal takedown can be expunged in ways that do not impact consumed revisions, which can mitigate these problems.
+> For example, in Git, each revision ID is based on the ones before it.
+When you remove a revision, you must generate new revisions (and new revision IDs)
+for any revisions that were built on top of it. Consumers who took a dependency
+on the old revisions may now be unable to refer to the revision they've already
+integrated into their products.
 
-It is also the case that removing content from a repository won't necessarily remove it everywhere.
-The content may still exist in other copies of the repository, either in backups or on developer machines.
+It may be the case that the specific set of changes targeted by a legal takedown
+can be expunged in ways that do not impact consumed revisions, which can mitigate
+these problems.
+
+It is also the case that removing content from a repository won't necessarily
+remove it everywhere.
+The content may still exist in other copies of the repository, either in backups
+or on developer machines.
 
 #### Process
 
-An organization MUST document the Safe Expunging Process and describe how requests and actions are tracked and SHOULD log the fact that content was removed.
-Different organizations and tech stacks may have different approaches to the problem.
+An organization MUST document the Safe Expunging Process and describe how
+requests and actions are tracked and SHOULD log the fact that content was
+removed. Different organizations and tech stacks may have different approaches
+to the problem.
 
-SCSs SHOULD have technical mechanisms in place which require an Administrator plus, at least, one additional 'trusted person' to trigger any expunging (removals) made under this process.
+SCSs SHOULD have technical mechanisms in place which require an Administrator
+plus at least one additional 'trusted person' to trigger any expunging
+(removals) made under this process.
 
-The application of the safe expunging process and the resulting logs MAY be private to both prevent calling attention to potentially sensitive data (e.g. PII) or to comply with local laws
-and regulations which may require the change to be kept private to the extent possible.
-Organizations SHOULD prefer to make logs public if possible.
+The application of the safe expunging process and the resulting logs MAY be
+private to both prevent calling attention to potentially sensitive data (e.g.
+PII) or to comply with local laws and regulations which may require the change
+to be kept private to the extent possible. Organizations SHOULD prefer to make
+logs public if possible.
 
 <td><td>✓<td>✓<td>✓
 
@@ -309,7 +328,7 @@ If the SCS DOES NOT generate a VSA for a revision, the revision has Source Level
 At Source Levels 1 and 2 the SCS MAY issue these attestations based on its
 understanding of the underlying system (e.g. based on design docs, security
 reviews, etc...), but at Level 3+ the SCS MUST use
-the SCS issued [source provenance](#source-provenance) when making the issuing
+the SCS-issued [source provenance](#source-provenance) when issuing
 the VSAs.
 
 <td>✓<td>✓<td>✓<td>✓
@@ -442,7 +461,7 @@ It is possible that an SCS can make no claims about a particular revision.
 or if the revision was not the result of an accepted change management process.
 
 <td><td><td>✓<td>✓
-<tr id="two-party-review"><td>Two party review <a href="#two-party-review">🔗</a><td>
+<tr id="two-party-review"><td>Two-party review <a href="#two-party-review">🔗</a><td>
 
 Changes in protected branches MUST be agreed to by two or more trusted persons prior to submission.
 The following combinations are acceptable:
@@ -462,7 +481,6 @@ still requires review. The exact definition of “context” depends on the proj
 and this does not preclude well-understood automatic merges, such as cutting a release branch.
 
 **[Informed Review]** The SCS MUST present reviewers with a clear representation of the result of accepting the proposed change. See [Human Readable Changes](#human-readable-diff).
-the old and new revisions. E.g. by using [the diff tool](#human-readable-diff).
 
 **[Trusted Robot Contributions]** An organization MAY choose to grant a Trusted
 Robot a perpetual exception to a policy (e.g. a bot may be able to merge a change
@@ -487,7 +505,7 @@ There are two broad categories of source attestations within the source track:
 2.  Source provenance attestations: Provide trustworthy, tamper-proof, metadata with the necessary information to determine what high level security properties a given source revision has.
 
 To provide interoperability and ensure ease of use, it's essential that the Source VSAs are applicable across all Source Control Systems.
-However, due to the significant differences in how SCSs operate and how they may chose to meet the Source Track requirements, it is preferable to
+However, due to the significant differences in how SCSs operate and how they may choose to meet the Source Track requirements, it is preferable to
 allow for flexibility with the full source provenance attestations. To that end, SLSA leaves source provenance attestations undefined and up to the SCSs to determine
 what works best in their environment.
 
@@ -507,7 +525,7 @@ The source track issues Source VSAs using the [Verification Summary Attestations
 SCSs that do not use cryptographic digests MUST define a canonical type that is used to identify immutable revisions and MUST include the repository within the type[^1].
     -   For example: `svn_revision_id: svn+https://svn.myproject.org/svn/MyProject/trunk@2019`
 3.  `subject.annotations.sourceRefs` SHOULD be set to a list of references that pointed to this revision when the attestation was created. The list MAY be non-exhaustive.
-    -   git references MUST be fully qualified (e.g. `refs/head/main` or `refs/tags/v1.0`) to reduce the likelihood of confusing downstream tooling.
+    -   git references MUST be fully qualified (e.g. `refs/heads/main` or `refs/tags/v1.0`) to reduce the likelihood of confusing downstream tooling.
 4.  `resourceUri` MUST be set to the URI of the repository, preferably using [SPDX Download Location](https://spdx.github.io/spdx-spec/v2.3/package-information/#77-package-download-location-field).
 E.g. `git+https://github.com/foo/hello-world`.
 5.  `verifiedLevels` MUST include the SLSA source track level the SCS asserts the revision meets. One of `SLSA_SOURCE_LEVEL_0`, `SLSA_SOURCE_LEVEL_1`, `SLSA_SOURCE_LEVEL_2`, `SLSA_SOURCE_LEVEL_3`.
@@ -523,7 +541,7 @@ was code reviewed).
 The SCS MAY embed organization-provided properties within `verifiedLevels`
 corresponding to technical controls enforced by the SCS. If such properties are
 provided they MUST be prefixed with `ORG_SOURCE_` to distinguish them from other
-properties the SCS may wish use.
+properties the SCS may wish to use.
 
 -   `ORG_SOURCE_` to indicate a property that is meant for consumption by
    external consumers.
@@ -580,8 +598,8 @@ Example implementations:
 
 ### Source provenance attestations
 
-Source provenance attestations provide tamper-proof evidence ([attestation model](attestation-model)))
-that can be used to determine what SLSA Source Level or other high level properties a given revision meets.
+Source provenance attestations provide tamper-proof evidence ([attestation model](attestation-model))
+that can be used to determine what SLSA Source Level or other high-level properties a given revision meets.
 This evidence can be used by:
 
 -   an authority as the basis for issuing a [Source VSA](#source-verification-summary-attestation)
@@ -595,7 +613,7 @@ operate over Subversion repositories.
 These differences also mean that, depending on the configuration, the issuers of provenance attestations may vary from implementation to implementation, often because entities with the knowledge to issue them may vary.
 The authority that issues [Source VSAs](#source-verification-summary-attestation) MUST understand which entity should issue each provenance attestation type, and ensure all source provenance attestations come from their expected issuers.
 
-'Source provenance attestations' is a generic term used to refer to any type of attestation that provides evidence the process used to create a revision.
+'Source provenance attestations' is a generic term used to refer to any type of attestation that provides evidence of the process used to create a revision.
 
 Example source provenance attestations:
 
@@ -623,7 +641,7 @@ revision's properties recorded in the summary attestation.
 In addition to the requirements for SLSA Source L4, most organizations will
 require multiple of these controls as part of their required protections.
 
-If an organization has indicated that use of these these controls are part of
+If an organization has indicated that use of these controls is part of
 their repository's expectations, consumers SHOULD be able to verify that the
 process was followed for the revision they are consuming by examining the
 [summary](#source-verification-summary-attestation) or [source
@@ -702,7 +720,7 @@ Requirements:
 
 #### Context
 
-In many organizations it is normal to review only the "net difference" between the tip of  the topic branch and the "best merge base", the closest shared commit between the topic and target branches computed at the time of review.
+In many organizations, it is normal to review only the "net difference" between the tip of the topic branch and the "best merge base", the closest shared commit between the topic and target branches computed at the time of review.
 
 The topic branch may contain many commits of which not all were intended to represent a shippable state of the repository.
 
@@ -710,7 +728,7 @@ If a repository merges branches with a standard merge commit, all those unreview
 
 When a repo is cloned, all commits _reachable_ from the main branch are fetched and become accessible from the local checkout.
 
-This combination of factors allows attacks where the victim performs a `git clone` operation followed by a `git reset --hard <unreviewed revision id>`.
+This combination of factors allows attacks where the victim performs a `git clone` operation followed by a `git reset --hard <unreviewed revision ID>`.
 
 #### Mitigations
 
@@ -738,7 +756,7 @@ Summary:
 The discussion around a change may often be as important as the change itself.
 
 Intended for:
-Large organizations, or any where discussion is an important part of the change management process.
+Large organizations, or anywhere discussion is an important part of the change management process.
 
 Benefits:
 From any revision, it's possible for future developers to read through the discussion that ultimately produced it.
@@ -766,7 +784,7 @@ If there are problems detected with the contents on the train branch, it's norma
 Approved changes will be re-applied to a new train in this scenario.
 
 The key benefit to this approach is that the protected branch remains stable for longer, allowing more time for human and automatic code review.
-A key downside to this approach is that organizations will not know the final revision id that represents a change until the entire train process completes.
+A key downside to this approach is that organizations will not know the final revision ID that represents a change until the entire train process completes.
 
 A change review process will now be associated with multiple distinct revisions.
 
@@ -776,7 +794,7 @@ A change review process will now be associated with multiple distinct revisions.
 It is important to note that no human or automatic review will have the chance to pre-approve ID2. This will appear to violate any organization policies that require pre-approval of changes before submission.
 The SCS and the organization MUST protect this process in the same way they protect other artifact build pipelines.
 
-At a minimum the SCS MUST issue an attestation that the revision id generated by a merged train is identical ("MERGESAME" in git terminology) to the state of the protected branch after applying each approved changeset in sequence.
+At a minimum the SCS MUST issue an attestation that the revision ID generated by a merged train is identical ("MERGESAME" in git terminology) to the state of the protected branch after applying each approved changeset in sequence.
 No other content may be added or removed during this process.
 
 ## Future Considerations
