@@ -181,7 +181,9 @@ organization.
 
 ## Requirements
 
-Many examples in this document use the [git version control system](https://git-scm.com/), but use of git is not a requirement to meet any level on the SLSA source track.
+Many examples in this document use the
+[git version control system](https://git-scm.com/), but use of git is not a
+requirement to meet any level on the SLSA source track.
 
 ### Organization
 
@@ -203,24 +205,21 @@ attestations.
 
 <tr id="configure-controls"><td>Configure the SCS to enforce intent <a href="#configure-controls">🔗</a><td>
 
-The organization MUST configure access controls that govern access to sensitive
-operations on the Source Repository.
-These controls MUST be implemented using the SCS-provided
-[Identity Management capability](#identity-management).
+The organization MUST configure access controls to restrict sensitive operations
+on the Source Repository. These controls MUST be implemented using the
+SCS-provided [Identity Management capability](#identity-management).
 
 > For example, an organization may configure the SCS to assign users to a
-`maintainers` role and only allow users in `maintainers` to make updates to `main`.
+`maintainers` role and only allow users in `maintainers` to make updates to
+`main`.
 
 The SCS MUST be configured to produce a reliable [Change History](#history)
-for all consumable Source Revisions.
+for all consumable Source Revisions. If your SCS provides this capability by
+design, no additional controls are needed.
 
-> For example, if the organization intends for all new Source Revisions on the
-`main` branch to be unit tested prior to acceptance, this MUST be explicitly
-configured in the SCS, not a social contract.
-
-If the SCS supports "tags" (or other Named References that do not support
-continuity enforcement mechanisms or change management processes), the SCS MUST
-be configured to prevent tags from being moved or deleted.
+If the SCS supports "tags" (or any other Named Reference types that do not support
+change management), the SCS MUST be configured to prevent them from being moved
+or deleted.
 
 > For example, if a git tag `release1` is used to indicate a release revision
 with ID `abc123`, controls must be configured to prevent that tag from being
@@ -276,7 +275,7 @@ to be kept private to the extent possible. Organizations SHOULD prefer to make
 logs public if possible.
 
 <td><td>✓<td>✓<td>✓
-<tr id="intent"><td>Declare which revisions are consumable <a href="#intent">🔗</a><td>
+<tr id="intent"><td>Declare which revisions are consumable and their technical controls<a href="#intent">🔗</a><td>
 
 The organization MUST specify which Source Revisions are intended for use and
 how to find them.
@@ -291,9 +290,14 @@ The organization MUST specify what technical controls consumers can expect to be
 enforced on consumable Source Revisions and it MUST document the meaning of
 those controls.
 
-> For example, if an organization requires Static Application Security Testing
-on consumable revisions and implements it via a required GitHub Actions workflow,
-it must indicate the name of this workflow and what it accomplishes.
+> For example, if an organization implements a technical control via a custom
+tool (such as required GitHub Actions workflow), it must indicate the name of
+this tool, what it accomplishes, and how to find its evidence in the provenance
+attestation.
+
+> For another example, if the organization intends to claim that all consumable
+Source Revisions on the `main` branch were unit tested prior to acceptance, this
+MUST be explicitly configured in the SCS, not left to a purely social contract.
 
 <td><td><td>✓<td>✓
 
