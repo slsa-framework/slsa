@@ -98,12 +98,17 @@ A typical build environment will go through the following lifecycle:
 ### Build environment threats
 
 The SLSA [Build track] defines requirements for the provenance that is produced for the build artifacts. 
-Trustworthiness of the build provenance largely depends on the trustworthiness of the [build environment] the build runs in. 
+Trustworthiness of the build process largely depends on the trustworthiness of the [build environment] the build runs in. 
 The Build track assumes full trust into the [Build Platform], and provides no requirements to verify integrity of the build environment. 
 BuildEnv track intends to close this gap.
 
 Build environment is bootstrapped from a [build image], which is expected to be an artifact of a SLSA build pipeline. 
 Build platform verifies image security properties including provenance upon starting up the environment and makes evidence of the verification available to tenants or other auditors.
+
+BuildEnv track assumes full trust in the software that comes with the build image or is installed at runtime.
+Malicious software having privileged access within the build environment might be able to circumvent protections provided by the BuildEnv track.
+Image providers should manage vulnerabilities in the image components to reduce the risks of such attacks, e.g. by using SLSA Dependency track and hardening images with mandatory access control (MAC) policies.
+Control Plane may perform additional analysis of the image SBOM as it bootstraps the build environment.
 
 Bootstrapping the build environment is a complex process, especially at higher SLSA levels. 
 [Build L3] usually requires significant changes to existing build platforms to maintain ephemeral build environments. 
@@ -112,14 +117,21 @@ This in turn significantly expands the attack surface because added build platfo
 Cloud providers are big companies with complex infrastructure that often provide limited abilities to scope the context of trust and continuously validate it over time when using their services. 
 
 The BuildEnv track addresses build TCB size concerns at [BuildEnv L2] and [BuildEnv L3] levels. 
+
 [BuildEnv L1] level assumes full trust into the Build Platform including underlying [Compute Platform] (e.g., public cloud provider). 
+
 [BuildEnv L2] level adds capabilities for verifying the Compute Platform providing evidence that the build environment is bootstrapped from the expected image with the expected early boot components (e.g. UEFI firmware) provided by the Compute Platform. 
 In essence L2 provides evidence of the boot time integrity of a build environment.
-[BuildEnv L3] level reduces the Compute Platform attack surface through the use of trusted execution environments (TEEs) addressing runtime infrastructure threats that could be coming from compromised Build Platform admin credentials or malicious software within the Build Platform. 
+L2 also addresses malicious access to the build environment using compromised Build Platform Admin credentials assuming that image has Compute Platform maintenance agents disabled in it, which are typically used for providing remote access to the virtual machine using Compute Platform APIs.
+It is the responsibility of the Image provider to disable/uninstall those agents.
+Control Plane should verify that maintenance agents are disabled in the image upon consuming it.  
 
-A TEE has its own security properties in which to place trust, among which should be protected boot integrity measurements whose signature is rooted to the hardware manufacturer public key infrastructure.
+[BuildEnv L3] level reduces the Compute Platform attack surface through the use of trusted execution environments (TEEs) addressing runtime infrastructure threats that could be coming from compromised Compute Platform admin credentials (that would allow direct access to the host interface) or malicious software within the Compute Platform.
+The [SEV-SNP/TDX threat model](https://www.kernel.org/doc/Documentation/security/snp-tdx-threat-model.rst) describes this level of trust reduction through the use of memory encryption, integrity protection, and remote attestation with cryptographic keys that are certified by the hardware manufacturer.
+L3 provides evidence of continuous integrity of the build environment for the whole lifetime.
+TEE technologies are not infallible, so physical human access to hardware and side channel attacks are still a risk that is accepted at L3.
 
-This diagram outlines the lifetime of a build image between its creation and use in creating a build environment. 
+This diagram outlines the lifetime of a build image between its creation and use in bootstrapping a build environment. 
 A Build Image could be compromised at any stage of its lifetime. 
 Higher SLSA BuildEnv levels secure the build environment from larger classes of threats.
 
@@ -141,8 +153,8 @@ L3 addresses infrastructure threats coming from malicious actors (e.g., software
 Vulnerabilities in the software that is legitimally included in the Build Image are out of scope.
 Physical and side-channel attacks are out of scope too but may be considered in the additional future levels of this track.
 
-Practically, achieving L3 requires the build running in a trusted execution environment (TEE) using technologies like [AMD SEV-SNP] and [Intel TDX]. 
-Compute Platform footprint in TCB is reduced but may not be elimintated completely if TEE uses custom virtualization components running within the VM (e.g., [paravisor]).
+Practically, achieving L3 requires the build running in a confidential VM using technologies like [AMD SEV-SNP] and [Intel TDX]. 
+Compute Platform footprint in TCB is reduced but may not be eliminated completely if a confidential VM uses custom virtualization components running within it (e.g., [paravisor]).
 
 NOTE: [Control Plane] is considered trusted at L2 and L3 because it _verifies_ the remote attestation of the build environment. 
 Build platforms MAY provide capabilities that let tenants perform remote attestation using a third-party verifier. 
