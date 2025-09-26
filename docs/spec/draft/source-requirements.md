@@ -217,7 +217,8 @@ The SCS MUST be configured to produce a reliable [Change History](#history)
 for all consumable Source Revisions. If your SCS provides this capability by
 design, no additional controls are needed.
 
-If the SCS supports "tags" (or any other Named Reference types that do not
+If the SCS supports "tags", the SCS MUST be configured to prevent them from
+being moved or deleted.
 support change management), the SCS MUST be configured to prevent them from
 being moved or deleted.
 
