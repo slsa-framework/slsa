@@ -600,9 +600,9 @@ build with its own provenance that corresponds to the key.
 <details><summary>Compromise build platform admin <span>(BuildEnv L3)</span></summary>
 
 *Threat:* An adversary gains admin permissions for the artifact's build platform.
+Admin may potentially access the build environment directly (e.g. using Compute Platform APIs for the remote VM access) or modify it from the host machine.
 
-*Mitigation:* Admin may potentially access the build environment directly (e.g. using SSH to the VM) or modify it from the host machine.
-Remote (SSH) access is disabled in the build image. 
+*Mitigation:* Remote access  APIs (e.g. using Compute Platform-provided VM agent) is disabled in the build image. 
 Virtualized build environments run in the trusted execution environment (TEE) using technologies like [AMD SEV-SNP] and [Intel TDX] that provide isolation for the VM from the privileged software running on the host machine.
 Control Plane attests build environment before the build is started in it and produces a [VSA][vsa] providing evidence that build environment has no outside-in access and runs in the TEE with the expected image and early boot components (e.g., firmware)
 Root file system integrity is protected by cryptographic mechanisms like [dm-verity], [IMA] or similar.
