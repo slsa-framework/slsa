@@ -617,7 +617,7 @@ build environment integrity.
 </details>
 <details><summary>Compromise build image during the distribution (in transit)<span>(BuildEnv L1+)</span></summary>
 
-*Threat:* An adversary injects malicious code into the build image time after the image has been generated and before it was consumed by the Build Platform. 
+*Threat:* An adversary injects malicious code into the build image after the image has been generated and before it is consumed by the Build Platform. 
 
 *Mitigation:* The build image is produced by a pipeline having SLSA Build L2+ level and comes with SLSA Build Provenance. The Control Plane verifies the build image upon the initial consumption (e.g., as it is being pulled from the build image registry into a local cache).
 
