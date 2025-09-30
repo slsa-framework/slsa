@@ -625,7 +625,7 @@ build environment integrity.
 Fancy Image partner. An adversary was able to hijack the supply channel between Fancy Image and Awesome Builder and install malicious tools into the image.
 
 </details>
-<details><summary>Compromise build image at rest<span>(BuildEnv L2+)</span></summary>
+<details><summary>Local compromise of build image (at rest)<span>(BuildEnv L2+)</span></summary>
 
 *Threat:* An adversary injects malicious code into the build image after it was accepted by the Build Platform and passed initial verification.
 
