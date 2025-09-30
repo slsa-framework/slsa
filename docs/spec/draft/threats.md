@@ -597,32 +597,27 @@ transitive closure of the inputs, and the cache entry is itself a SLSA Build L3
 build with its own provenance that corresponds to the key.
 
 </details>
-<details><summary>Compromise build platform admin <span>(BuildEnv L3)</span></summary>
+<details><summary>Compromise build platform admin <span>(BuildEnv L2)</span></summary>
 
 *Threat:* An adversary gains admin permissions for the artifact's build platform.
-Admin may potentially access the build environment directly (e.g. using Compute Platform APIs for the remote VM access) or modify it from the host machine.
+Admin may potentially access the build environment directly (e.g., using Compute Platform APIs for the remote access).
 
-*Mitigation:* Remote access  APIs (e.g. using Compute Platform-provided VM agent) is disabled in the build image. 
-Virtualized build environments run in the trusted execution environment (TEE) using technologies like [AMD SEV-SNP] and [Intel TDX] that provide isolation for the VM from the privileged software running on the host machine.
-Control Plane attests build environment before the build is started in it and produces a [VSA][vsa] providing evidence that build environment has no outside-in access and runs in the TEE with the expected image and early boot components (e.g., firmware)
-Root file system integrity is protected by cryptographic mechanisms like [dm-verity], [IMA] or similar.
-Temporary file system is encrypted by an ephemeral key that is provisioned upon bootstrapping the environment and sealed in the TEE. 
+*Mitigation:* Compute Platform-provided agents that power remote access APIs are disabled in the build image.
+Control Plane attests build environment before the build is started in it and produces a [VSA][vsa] providing evidence that build environment has no outside-in access and runs with the expected image and early boot components (e.g., firmware)
 
-*Example:* MyPackage is built on Awesome Builder. Awesome Builder allows
-engineers on-call to SSH into build machines to debug production issues. An
-adversary uses this access to modify a build in progress. Solution: Consumers
-do not accept provenance from the build platform unless they can validate 
-build environment integrity.
+*Example:* MyPackage is built on Awesome Builder. Awesome Builder uses images that have Compute Platform infrastructure agents enabled in them (including those that allow remote access, provisioning new users and resetting credentials of the existing ones). An adversary uses these capabilities to remotely access the build environment and modify a build in progress.
+Solution: Consumers do not accept provenance from the Build platform unless they can validate that the build environment was bootstrapped from the expected image that has Compute Platform agents disabled in it (which is a responsibility of the Build Image provider).
 
 </details>
 <details><summary>Compromise build image during the distribution (in transit)<span>(BuildEnv L1+)</span></summary>
 
-*Threat:* An adversary injects malicious code into the build image after the image has been generated and before it is consumed by the Build Platform. 
+*Threat:* An adversary injects malicious code into the build image after the image has been generated and before it is consumed by the Build Platform.
 
-*Mitigation:* The build image is produced by a pipeline having SLSA Build L2+ level and comes with SLSA Build Provenance. The Control Plane verifies the build image upon the initial consumption (e.g., as it is being pulled from the build image registry into a local cache).
+*Mitigation:* The build image is produced by a pipeline having SLSA Build L2+ level and comes with SLSA Build Provenance.
+The Control Plane verifies the build image upon the initial consumption (e.g., as it is being pulled from the build image registry into a local cache).
 
-*Example:* MyPackage is built on Awesome Builder. Awesome Builder uses VM images provided by a 
-Fancy Image partner. An adversary was able to hijack the supply channel between Fancy Image and Awesome Builder and install malicious tools into the image.
+*Example:* MyPackage is built on Awesome Builder. Awesome Builder uses images provided by a Fancy Image partner.
+An adversary was able to hijack the supply channel between Fancy Image and Awesome Builder and install malicious tools into the image.
 
 </details>
 <details><summary>Local compromise of build image (at rest)<span>(BuildEnv L2+)</span></summary>
@@ -630,9 +625,9 @@ Fancy Image partner. An adversary was able to hijack the supply channel between 
 *Threat:* An adversary injects malicious code into the build image after it was accepted by the Build Platform and passed initial verification.
 
 *Mitigation:* Build Environment is bootstrapped using Secure Boot with boot measurements performed by vTPM.
-Control Plane performs remote attestation of the Build Environment prior to scheduling the build on it.  
+Control Plane performs remote attestation of the Build Environment prior to scheduling the build on it.
 
-*Example:* Awesome Builder uses VM images provided by a Fancy Image partner. 
+*Example:* Awesome Builder uses images provided by a Fancy Image partner.
 Adversary was able to get unauthorized access to the Awesome Builder persistent storage and modify the image after it was received from Fancy Image and persisted locally.
 Image size is large enough to make SLSA provenance verification prohibitively expensive to perform prior to every Build Environment instantiation.
 Integrity of the root file system is protected by the mechanisms that delay verification until the actual usage of the underlying blocks (e.g., [dm-veryity], [IMA] or similar).
@@ -644,11 +639,12 @@ Integrity of the root file system is protected by the mechanisms that delay veri
 
 *Threat 2:* Compute Platform admin credentials were compromised allowing an adversary to get access and modify Build Environment state while it's running via privileged hypervisor APIs or direct VM memory manipulation.
 
-*Mitigation:* Build environment is continuously protected while it’s running in a TEE using mechanisms like [AMD SEV-SNP] or [Intel TDX]. 
-Root file system is protected accordingly by cryptographic mechanisms like [dm-verity], [IMA] or similar. 
-Temporary file system is overlaid over the root file system and is encrypted by an ephemeral key that is provisioned upon bootstrapping the environment and sealed in the TEE.
+*Mitigation:* Virtualized build environments run in the trusted execution environment (TEE) using technologies like [AMD SEV-SNP] and [Intel TDX] that provide isolation for the VM from the privileged software running on the host machine.
+Control Plane attests build environment before the build is started in it and produces a [VSA][vsa] providing evidence that build environment has no outside-in access and runs in the TEE with the expected image and early boot components (e.g., firmware).
+Root file system integrity is protected by cryptographic mechanisms like [dm-verity], [IMA] or similar.
+Temporary file system is overlaid over the root file system and is encrypted to protect integrity of intermediate files by an ephemeral key that is provisioned inside TEE upon bootstrapping the environment.
 
-*Example:* Awesome Builder uses Cloudy Sky compute provider for provisioning virtual machines. 
+*Example:* Awesome Builder uses Cloudy Sky compute provider for provisioning virtual machines.
 An adversary got unauthorized access to Cloudy Sky infrastructure using the compromised admin credentials and was able to get privileged access to the host machines.
 Adversary was able then to modify virtual machine state while it's running on the host.
 
