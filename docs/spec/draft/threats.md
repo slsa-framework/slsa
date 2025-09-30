@@ -619,7 +619,7 @@ build environment integrity.
 
 *Threat:* An adversary injects malicious code into the build image time after the image has been generated and before it was consumed by the Build Platform. 
 
-*Mitigation:* Build image is produced by a pipeline having SLSA Build L3 level and comes with SLSA provenance. Control Plane verifies the build image upon the initial consumption (e.g., as it is being pulled from the public registry into a local cache).
+*Mitigation:* The build image is produced by a pipeline having SLSA Build L2+ level and comes with SLSA Build Provenance. The Control Plane verifies the build image upon the initial consumption (e.g., as it is being pulled from the build image registry into a local cache).
 
 *Example:* MyPackage is built on Awesome Builder. Awesome Builder uses VM images provided by a 
 Fancy Image partner. Adversary was able to hijack the supply channel between Fancy Image and Awesome Builder and install malicious tools into the image.
