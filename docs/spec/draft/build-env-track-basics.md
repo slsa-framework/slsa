@@ -127,7 +127,7 @@ It is the responsibility of the Image provider to disable/uninstall those agents
 Control Plane should verify that maintenance agents are disabled in the image upon consuming it.  
 
 [BuildEnv L3] level reduces the Compute Platform attack surface through the use of trusted execution environments (TEEs) addressing runtime infrastructure threats that could be coming from compromised Compute Platform admin credentials (that would allow direct access to the host interface) or malicious software within the Compute Platform.
-The [SEV-SNP/TDX threat model](https://www.kernel.org/doc/Documentation/security/snp-tdx-threat-model.rst) describes this level of trust reduction through the use of memory encryption, integrity protection, and remote attestation with cryptographic keys that are certified by the hardware manufacturer.
+The [SEV-SNP/TDX threat model] describes this level of trust reduction through the use of memory encryption, integrity protection, and remote attestation with cryptographic keys that are certified by the hardware manufacturer.
 L3 provides evidence of continuous integrity of the build environment for the whole lifetime.
 TEE technologies are not infallible, so physical human access to hardware and side channel attacks are still a risk that is accepted at L3.
 
@@ -149,7 +149,7 @@ This covers the case of unauthorized modifications to the image as it is distrib
 The Compute platform is fully trusted at this level as it provides a virtual TPM device that performs boot measurements. 
 
 [BuildEnv L3] extends boot time integrity into the run time all the way until the Build Environment is terminated. 
-L3 addresses infrastructure threats coming from malicious actors (e.g., software agents or compromised admin credentials) in the Build or Compute Platform.
+L3 addresses threats coming from malicious actors (e.g., software agents or compromised admin credentials) in the Compute Platform host interface (see [SEV-SNP/TDX threat model] for the list of threats).
 Vulnerabilities in the software that is legitimally included in the Build Image are out of scope.
 Physical and side-channel attacks are out of scope too but may be considered in the additional future levels of this track.
 
@@ -437,3 +437,4 @@ TODO
 [AMD SEV-SNP]: https://www.amd.com/en/developer/sev.html
 [Intel TDX]: https://www.intel.com/content/www/us/en/developer/tools/trust-domain-extensions/overview.html
 [TCB]: https://csrc.nist.gov/glossary/term/trusted_computing_base
+[SEV-SNP/TDX threat model]: https://www.kernel.org/doc/Documentation/security/snp-tdx-threat-model.rst
