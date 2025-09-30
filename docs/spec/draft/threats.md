@@ -638,7 +638,7 @@ Image size is large enough to make SLSA provenance verification prohibitively ex
 Integrity of the root file system is protected by the mechanisms that delay verification until the actual usage of the underlying blocks (e.g., [dm-veryity], [IMA] or similar).
 
 </details>
-<details><summary>Compromise build image in use<span>(BuildEnv L3)</span></summary>
+<details><summary>Compromise build environment in use<span>(BuildEnv L3)</span></summary>
 
 *Threat 1:* Malware having elevated privileges to the host interface in the Compute Platform was able to compromise Build Environment state data while it's running.
 
