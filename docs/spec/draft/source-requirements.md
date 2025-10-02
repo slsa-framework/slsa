@@ -219,8 +219,6 @@ design, no additional controls are needed.
 
 If the SCS supports "tags", the SCS MUST be configured to prevent them from
 being moved or deleted.
-support change management), the SCS MUST be configured to prevent them from
-being moved or deleted.
 
 > For example, if a git tag `release1` is used to indicate a release revision
 with ID `abc123`, controls must be configured to prevent that tag from being
