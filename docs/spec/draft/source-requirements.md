@@ -347,7 +347,7 @@ the VSAs.
 
 <tr id="history"><td>History <a href="#history">🔗</a><td>
 
-There are two key aspects to change history:
+There are three key aspects to change history:
 
 1. What were all the previous states of a Branch?
 2. How and when did they change?
