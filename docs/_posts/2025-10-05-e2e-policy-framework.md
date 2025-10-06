@@ -4,8 +4,6 @@ author: "Trishank Karthik Kuppusamy and Snahil Singh"
 is_guest_post: true
 ---
 
-# SLSA E2E Verification with the in-toto Policy Framework 
-
 ## 1. Introduction
 
 In this blog post, we introduce [in-toto](https://in-toto.io/) *Policies* and show how they can turn multiple in-toto [Attestations](https://github.com/in-toto/attestation) across different [Supply-chain Levels for Software Artifacts (SLSA)](https://slsa.dev/) tracks into evidence-backed, [end-to-end (E2E)](https://slsa.dev/blog/2025/07/slsa-e2e) narratives about security and compliance.
