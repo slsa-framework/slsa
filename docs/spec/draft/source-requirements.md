@@ -135,7 +135,7 @@ was followed to produce a Source Revision.
 <dl class="as-table">
 <dt>Summary<dd>
 
-The SCS is configured to enforce the Organization's intentions for the Source
+The SCS is configured to enforce the Organization's intentions for specific Named References within the Source
 Repository using any necessary technical controls.
 
 The Organization clarifies which revisions and Named References in a repo are
