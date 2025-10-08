@@ -138,7 +138,6 @@ was followed to produce a Source Revision.
 The SCS is configured to enforce the Organization's intentions for specific Named References within the Source
 Repository using any necessary technical controls.
 
-
 <dt>Intended for<dd>
 
 Organizations that need to show evidence of additional technical controls.
@@ -345,9 +344,9 @@ the VSAs.
 
 There are three key aspects to change history:
 
-1. What were all the previous states of a Branch?
-2. How and when did they change?
-3. How does the current revision relate to previous revisions?
+1.  What were all the previous states of a Branch?
+2.  How and when did they change?
+3.  How does the current revision relate to previous revisions?
 
 To answer these questions, the SCS MUST record all changes to Named References,
 including when they occurred, who made them, and the new Source Revision ID.
