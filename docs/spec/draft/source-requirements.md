@@ -287,7 +287,7 @@ attestation.
 
 > For another example, if the organization claims that all consumable Source
 Revisions on the `main` branch were tested prior to acceptance, this MUST be
-explicitly enforced in the SCS, not left to a purely social contract.
+explicitly enforced in the SCS.
 
 <td><td><td>✓<td>✓
 
