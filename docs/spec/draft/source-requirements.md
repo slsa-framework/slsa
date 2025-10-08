@@ -141,8 +141,7 @@ Repository using any necessary technical controls.
 
 <dt>Intended for<dd>
 
-Organizations with many Named References or who otherwise need to document
-which controls were enforced.
+Organizations that need to show evidence of additional technical controls.
 
 <dt>Benefits<dd>
 
