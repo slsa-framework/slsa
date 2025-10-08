@@ -184,6 +184,7 @@ notice that the signer identities are verified and "baked" into the policyset co
 By codifying the signer identities and contextual values in the policy, you can
 make them immutable when you sign the policy.
 
+<!-- markdownlint-disable MD026 -->
 ## Moaar Data!
 
 As part of their build process, the Fritoto builder creates additional attestations
@@ -237,7 +238,7 @@ policy works with a tests-result attestation from any other tool.
 Again, this statement will describe the test run at the specific build point,
 that is, it will have the commit’s sha as its subject.
 
-## Build that Castle!
+## Let's Build that Castle
 
 It is time to run the build. But before doing so, we need to verify that the
 conditions snapshotted in all the attested data check out with out expectations.
@@ -266,10 +267,10 @@ code more easily.
 We won't go into the policy details, but you can check the policy set code and
 see that it reuses three community polices that:
 
-1) [Check the SBOM was generated](https://github.com/carabiner-dev/policies/blob/main/sbom/sbom-exists.json),
-2) [Verify that all unit tests passed](https://github.com/carabiner-dev/policies/blob/main/test-results/tests-pass.json),
+1)  [Check the SBOM was generated](https://github.com/carabiner-dev/policies/blob/main/sbom/sbom-exists.json),
+2)  [Verify that all unit tests passed](https://github.com/carabiner-dev/policies/blob/main/test-results/tests-pass.json),
 and
-3) [Ensure no exploitable vulnerabilities are present](https://github.com/carabiner-dev/policies/blob/main/openvex/no-exploitable-vulns-osv.json).
+3)  [Ensure no exploitable vulnerabilities are present](https://github.com/carabiner-dev/policies/blob/main/openvex/no-exploitable-vulns-osv.json).
 
 As we mentioned before, the OSV scan returned two CVEs, but thanks to the OpenVEX
 attestations, the release is allowed to run because the
@@ -350,10 +351,10 @@ and attests the results in individual VSAs:
 
 The `fritoto-gate-publish` policy set performs the following checks:
 
-1) All the SLSA Build verifications of the binaries themselves as recommended on the spec.
-2) Verifies the dependency VSAs produced from the previous verifications, namely:
-   - That the build image is `SLSA_BUILD_LEVEL3`
-   - That the git commit used as build point is `SLSA_SOURCE_3`
+1)  All the SLSA Build verifications of the binaries themselves as recommended on the spec.
+2)  Verifies the dependency VSAs produced from the previous verifications, namely:
+    -   That the build image is `SLSA_BUILD_LEVEL3`
+    -   That the git commit used as build point is `SLSA_SOURCE_3`
 
 By verifying the VSAs, we don’t have to do all the checks for the image and
 source again!
@@ -479,13 +480,13 @@ Notice in the VSA the subject is the linux/amd64 binary and how its `SLSA_BUILD_
 level is recorded, but also the verified levels of its dependencies. The
 important parts in this document are:
 
-- The verifier ([https://carabiner.dev/ampel@v1](https://carabiner.dev/ampel@v1)) that tells you what tool performed the verification
-- The subject (the fritoto-linux-amd64 binary)
-- The verification result (`PASSED`)
-- The verified levels of the binary (`SLSA_BUILD_LEVEL_2`)
-- The verified SLSA levels of the dependencies (`dependencyLevels`):
-  - One `SLSA_BUILD_LEVEL_3` (the go container image)
-  - One `SLSA_SOURCE_1` (the build point commit, protected with the SLSA source tools)
+-   The verifier ([https://carabiner.dev/ampel@v1](https://carabiner.dev/ampel@v1)) that tells you what tool performed the verification
+-   The subject (the fritoto-linux-amd64 binary)
+-   The verification result (`PASSED`)
+-   The verified levels of the binary (`SLSA_BUILD_LEVEL_2`)
+-   The verified SLSA levels of the dependencies (`dependencyLevels`):
+    -   One `SLSA_BUILD_LEVEL_3` (the go container image)
+    -   One `SLSA_SOURCE_1` (the build point commit, protected with the SLSA source tools)
 
 This VSA can be used to communicate to users all the verifications performed on
 the binaries, they can act as guarantees that the released assets were built in
@@ -574,17 +575,17 @@ for others to reuse!
 This case study went through the basic steps of a secure build leveraging the SLSA
 model:
 
-1. We checked the source code attestations  
-2. We checked the builder attestations  
-3. We performed checks on our project and attested the results.  
-4. We checked the results of 1-3 before triggering the build and produced a VSA of the verification.
-5. We verified the resulting binaries before releasing them and produced VSAs to capture the verification results.  
-6. We published all the signed security metadata in a bundle along with the binaries.
-7. Finally, showed how end users can check the binaries using the verification summaries. If they wish, they can also perform the complete verification themselves, as all the data and policies are open and available.
+1.  We checked the source code attestations  
+2.  We checked the builder attestations  
+3.  We performed checks on our project and attested the results.  
+4.  We checked the results of 1-3 before triggering the build and produced a VSA of the verification.
+5.  We verified the resulting binaries before releasing them and produced VSAs to capture the verification results.  
+6.  We published all the signed security metadata in a bundle along with the binaries.
+7.  Finally, showed how end users can check the binaries using the verification summaries. If they wish, they can also perform the complete verification themselves, as all the data and policies are open and available.
 
-The 
+The
 [example project repository](https://github.com/carabiner-dev/demo-slsa-e2e)
-is open source, feel free to suggest improvements or fix any bugs, 
+is open source, feel free to suggest improvements or fix any bugs,
 just not the CVEs,please ;)
 
 ## Resources
