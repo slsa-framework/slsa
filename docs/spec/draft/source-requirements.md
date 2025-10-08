@@ -130,7 +130,7 @@ was followed to produce a Source Revision.
 </section>
 <section id="source-l3">
 
-### Level 3: Communication and Enforcement of Intent
+### Level 3: Continuous technical controls
 
 <dl class="as-table">
 <dt>Summary<dd>
