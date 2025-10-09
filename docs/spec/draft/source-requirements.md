@@ -110,7 +110,7 @@ Migrating to the appropriate tools is an important first step on the road to ope
 <dl class="as-table">
 <dt>Summary<dd>
 
-At least one branch’s history is continuous, immutable, and retained, and the
+Branch history is continuous, immutable, and retained, and the
 SCS issues Source Provenance Attestations for each new Source Revision.
 The attestations provide contemporaneous, tamper-resistant evidence of when
 changes were made, who made them, and which technical controls were enforced.
