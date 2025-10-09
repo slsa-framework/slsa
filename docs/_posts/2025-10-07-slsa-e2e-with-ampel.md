@@ -51,7 +51,8 @@ the Fritoto team have secured their git repository with
 [`sourcetool`](https://github.com/slsa-framework/source-tool), the SLSA Source
 Track CLI.
 
-The SLSA Source tools allowed the project to onboard its repository in minutes,
+The SLSA Source tools allowed the project to 
+[onboard its repository in minutes](https://github.com/slsa-framework/source-tool/blob/main/GETTING_STARTED.md),
 hardening the revision history and setting up tools to continuously check that
 repository security controls are properly set. Once the SLSA Source workflows are
 in place, each commit receives its own SLSA Source attestations, confirming
@@ -68,7 +69,7 @@ enforce a policy that verifies the build point’s source attestations:
 - name: 🔴🟡🟢 Verify Build Point Commit to be SLSA Source Level 3+
   uses: carabiner-dev/actions/ampel/verify@HEAD
   with:
-    subject: "sha1:{% raw %}${{ github.sha }}{% endraw %}"
+    subject: "gitCommit:{% raw %}${{ github.sha }}{% endraw %}"
     policy: "git+https://github.com/carabiner-dev/policies#vsa/slsa-source-level3.json"
     collector: "note:https://github.com/{% raw %}${{ github.repository }}{% endraw %}@{% raw %}${{ github.sha }}{% endraw %}"
     signer: "sigstore::https://token.actions.githubusercontent.com::https://github.com/slsa-framework/source-actions/.github/workflows/compute_slsa_source.yml@refs/heads/main"
@@ -127,8 +128,8 @@ verification which we’ll also save for later in our jsonl file.
 ### The Build Image PolicySet
 
 A PolicySet is a group of policies that AMPEL applies together. Fritoto’s
-[build image PolicySet](https://github.com/carabiner-dev/demo-slsa-e2e/blob/main/policies/verify-builder-image-slsa3.set.json)
-performs the [verifications suggested in the SLSA spec](https://slsa.dev/spec/v1.0/verifying-artifacts) by reusing three
+[build image PolicySet](https://github.com/carabiner-dev/demo-slsa-e2e/blob/main/policies/fritoto-verify-builder.hjson)
+performs the [verifications suggested in the SLSA spec](/spec/v1.0/verifying-artifacts) by reusing three
 policies from AMPEL’s community repository:
 
 ```json
@@ -224,7 +225,8 @@ the release engineers issue two OpenVEX attestations assessing the project as
 [`not_affected`](https://github.com/openvex/spec/blob/main/OPENVEX-SPEC.md#status-labels)
 by them. They do this using [vexctl](https://github.com/openvex/vexctl) the
 OpenVEX CLI that manages VEX documents, and then signing them into attestations
-using bnd.
+using bnd. In the demo, the VEX documents are generated on the fly and will be
+published in the attestations bundle.
 
 ### Show me Those Tests!
 
@@ -509,9 +511,13 @@ You don’t need to download the policy or the attestations; AMPEL can fetch the
 for you when it needs them using the releases collector driver:
 
 ```bash
-ampel verify sha256:b2f66926949aef30bede58144b797b763fed2d00c75a58a246814a5e65acec55 \
+# Download the binary from GitHub:
+curl -LO https://github.com/carabiner-dev/demo-slsa-e2e/releases/download/v0.1.6/fritoto-linux-amd64
+
+# Verify it using the fritoto-check-artifacts policy which uses the VSA.
+ampel verify fritoto-linux-amd64 \
       --policy "git+https://github.com/carabiner-dev/demo-slsa-e2e#policies/fritoto-check-artifacts.json" \
-      --collector release:carabiner-dev/demo-slsa-e2e@v0.1.1  
+      --collector release:carabiner-dev/demo-slsa-e2e@v0.1.6
 ```
 
 The results in the terminal show the checks performed on the VSA with their
