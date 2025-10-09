@@ -139,7 +139,7 @@ The SCS is configured to enforce the Organization's technical controls for speci
 
 <dt>Intended for<dd>
 
-Organizations that need to show evidence of additional technical controls.
+Organizations that want to show evidence of their additional technical controls.
 
 <dt>Benefits<dd>
 
