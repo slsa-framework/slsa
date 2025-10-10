@@ -561,8 +561,7 @@ Downstream users are expected to be familiar with the method used by the issuer.
 Example implementations:
 
 -   Issue a new VSA for each merged Pull Request and add the destination branch to `sourceRefs`.
--   Issue a new VSA each time a 'consumable branch' is updated to point to a new revision.
--   Issue a new VSA each time a 'consumable tag' is created to point to a new revision.
+-   Issue a new VSA each time a Named Reference is updated to point to a new revision.
 
 #### Example
 
