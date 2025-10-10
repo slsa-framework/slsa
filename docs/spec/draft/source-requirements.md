@@ -262,11 +262,10 @@ SCSs SHOULD have technical mechanisms in place which require an Administrator
 plus at least one additional 'trusted person' to trigger any expunging
 (removals) made under this process.
 
-The application of the safe expunging process and the resulting logs MAY be
-private to both prevent calling attention to potentially sensitive data (e.g.
-PII) or to comply with local laws and regulations which may require the change
-to be kept private to the extent possible. Organizations SHOULD prefer to make
-logs public if possible.
+The application of the Safe Expunging Process and the resulting logs MAY be
+private to prevent calling attention to potentially sensitive data or to comply
+with local laws and regulations. Organizations SHOULD prefer to make logs public
+if possible.
 
 <td><td>✓<td>✓<td>✓
 <tr id="technical-controls"><td>Continuous technical controls <a href="#technical-controls">🔗</a><td>
@@ -424,7 +423,7 @@ It is possible that an SCS can make no claims about a particular revision.
 
 > For example, this would happen if the revision was created on another SCS,
 on an unprotected branch (such as a `topic` branch), or if the revision was not
-the result of the expected change management process.
+the result of the expected process.
 
 The SCS MUST
 
@@ -605,7 +604,7 @@ This evidence can be used by:
 
 -   an authority as the basis for issuing a [Source VSA](#source-verification-summary-attestation)
 -   a consumer to cross-check a [Source VSA](#source-verification-summary-attestation) they received for a revision
--   a consumer to enforce a more detailed policy than the organization's change management process
+-   a consumer to enforce a more detailed policy than the organization's own process
 
 SCSs may have different methods of operating that necessitate different forms of evidence.
 E.g. GitHub-based workflows may need different evidence than Gerrit-based workflows, which would both likely be different from workflows that
@@ -637,7 +636,7 @@ revision's properties recorded in the summary attestation.
 
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
 
-## Potential Change Management Controls
+## Potential Technical Controls
 
 In addition to the requirements for SLSA Source L4, most organizations will
 require multiple of these controls as part of their required protections.
