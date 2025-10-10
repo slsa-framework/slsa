@@ -447,8 +447,7 @@ The SCS MUST
 <td><td>✓<td>✓<td>✓
 <tr id="protected-refs"><td>Protected Named References <a href="#protected-refs">🔗</a><td>
 
-The SCS MUST provide any technical controls needed to enforce the organization's
-intent for the Named Reference.
+The SCS MUST provide the ability for an organization to enforce customized technical controls for Named References.
 
 The SCS MUST provide a mechanism for organizations to indicate which Named
 References should be protected by technical controls.
