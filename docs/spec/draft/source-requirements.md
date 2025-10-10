@@ -144,7 +144,7 @@ Organizations that want to show evidence of their additional technical controls.
 <dt>Benefits<dd>
 
 A verifier can use this published data to ensure that a given Source Revision
-was created in the correct way by verifying the Source Provenance or VSA
+was created in the correct way by verifying the Source Provenance or VSA.
 Provides verifiers strong evidence of all technical controls enforced during the update of a Named Reference.
 
 </dl>
