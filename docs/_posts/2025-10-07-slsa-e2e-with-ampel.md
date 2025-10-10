@@ -420,42 +420,42 @@ attesting to everything we’ve seen so far. Here is an example:
     "inputAttestations": [
       {
         "digest": {
-          "sha256": "373f06d2ac598b6007fe3357bf615abe3fda42aefc237a17c82b5623aeb6b4e8",
-          "sha512": "03090c3a1d4645bb387b0a1049dd5d79abdd105623355c627834e92b720a8704d029485104e2c71e1e63fd569a66b610bae22f8d38cf28b6a561278edfbd3551"
+          "sha256": "2f0f9f9a37f20449875d851b74cfaaaeaccb954a71c8d1ce78fba7bcbfb7990f",
+          "sha512": "f045158113f9cc8cd298c3903d5eb94aef5113c09f00e69d01e045aae71d015a9d6d535591d92571048c952807ed9f9cc4a3b9f877efc46fc76ad076c83b61e0"
         },
         "uri": "jsonl:.attestations/attestations.bundle.jsonl#12"
       },
       {
         "digest": {
-          "sha256": "599aa831e76e3a67b2c29dc1e86f8b8f97d3744c5659c29c705fb44a03212043",
-          "sha512": "4529ea0e06ba837acea803cca2412078b1a7df5b7c0a47aa53e3b93e49ae84dc64d4ef518c6335a65e1e16a233ab17f253b1f73f2cc6d77fbbca22df222fb405"
+          "sha256": "6e437c982c3eb448f08feee2549829923f7b61da2d485fbe34571436c27b1ef7",
+          "sha512": "de594ea3853663abf58d804ee4d5eca056a7eb193a5694abce4f8d1c15025f073a39319bf45f14a5d0bff1b24188917e6a5a58d774a8c820b25a1639dd2b70bb"
         },
         "uri": "jsonl:.attestations/attestations.bundle.jsonl#6"
       },
       {
         "digest": {
-          "sha256": "3ed7cc1676248a8ad28bed5548df56ed5d26c7885005d9e3784bad89daa91caf",
-          "sha512": "db066d7cb23b0d93d2579feb2c22ea710e44aef49b0ebea63908dcaf88afa3186d9aede215f1d9c72d21d1ae13357b995b593058c30c9d4a92fa5ae009a74aad"
+          "sha256": "ebf2acb09c2febca789fd30ab4badbdb73d574caa7a747387cc47d68e10204e7",
+          "sha512": "fff6203a5b0a183c0ca0bd7793a6b8de7450d557f57ccb663ac9f136b0de3fc8acdb7cc4f52e8932b774924e0fc331410a314a12f6d4af874013a3c4dd958873"
         },
         "uri": "jsonl:.attestations/attestations.bundle.jsonl#1"
       },
       {
         "digest": {
-          "sha256": "b0d07cb1bf30999e3e35151388ecf973f19a4191d34df663b554a42a6f45ecc2",
-          "sha512": "ffaaa754841d9d894cdda57e0c5cef13d0482ccfe4fc3b7c0b2aae87f9f4d5fbc36463ed77c76e37513bb702709ee8e449ca6e1fca2f9555fb5bf0d93fb597e5"
+          "sha256": "d78b94aec61b5d8e1fcf1f4b3a486748d52d1de45072530f95908d5798e26c9a",
+          "sha512": "7003ca97a7519986d80737596a6da22dbefc4101e3082c67f647566f5a87670ebd7ecfb1cf6bf7c38d934122f0e57ef35a4d9dd93e29cc802e5fe76492db05c9"
         },
         "uri": "jsonl:.attestations/attestations.bundle.jsonl#3"
       }
     ],
     "policy": {
       "digest": {
-        "sha256": "ab1e3904bed05955198e246941e3c60554599fa6ce92755b400b461e0b2b77df",
-        "sha512": "46f579b7e97d9db8c1e8cb1f8b16d1f7593128855a766ba0577a02612669f169367f4e75adf8c9665beb9d9d8c4da1480af265a7c04a9355162323f6d2074c6d"
+        "sha256": "175812c1dd152826cdd604aa14a35674c2f5073ef7a822cf8a2dde02026c03bd",
+        "sha512": "195fcb1023068374c404bf679ce7697e80b45e7a8736d58bb64e89fea5d9f5afa8cfcbc4411a83acd6c18131e7198f717e045d7649388599700008272c12e342"
       }
     },
-    "resourceUri": "https://github.com/carabiner-dev/demo-slsa-e2e/releases/download/v0.1.7/fritoto-linux-amd64",
+    "resourceUri": "https://github.com/carabiner-dev/demo-slsa-e2e/releases/download/v0.1.8/fritoto-linux-amd64",
     "slsaVersion": "1.1",
-    "timeVerified": "2025-10-10T00:23:16.892941921Z",
+    "timeVerified": "2025-10-10T01:14:42.461212072Z",
     "verificationResult": "PASSED",
     "verifiedLevels": [
       "SLSA_BUILD_LEVEL_2"
@@ -471,8 +471,8 @@ attesting to everything we’ve seen so far. Here is an example:
       "name": "fritoto-linux-amd64",
       "uri": "bin/fritoto-linux-amd64",
       "digest": {
-        "sha256": "beffc62d3ba6518aefaea687720dd55a594ea9fa2be51efb10f308246d86efd8",
-        "sha512": "962600582081708f052823f0bc58e78f0e32789d5c62c6d835ac01bdfb28bb6dca33a4316b5ededbef3b8f26420e6a32526fa165feff6d0f2991573c648a0cd9"
+        "sha256": "3e6d22582191fb4b22632907f3b24a22629325e32b6cd4fe9692a63938819983",
+        "sha512": "3f06fb85ff6aef9d2a86590ab83a8b9c14dacc85e29e4d273993b01426a752fc2fe0ead6c22dcaac1ed31ec50e9cbadea63b4e2daf3c58cfc63df398e343dc5e"
       }
     }
   ]
@@ -513,31 +513,33 @@ for you when it needs them using the releases collector driver:
 
 ```bash
 # Download the binary from GitHub:
-curl -LO https://github.com/carabiner-dev/demo-slsa-e2e/releases/download/v0.1.6/fritoto-linux-amd64
+curl -LO https://github.com/carabiner-dev/demo-slsa-e2e/releases/download/v0.1.8/fritoto-linux-amd64
 
 # Verify it using the fritoto-check-artifacts policy which uses the VSA.
 ampel verify fritoto-linux-amd64 \
       --policy "git+https://github.com/carabiner-dev/demo-slsa-e2e#policies/fritoto-check-artifacts.json" \
-      --collector release:carabiner-dev/demo-slsa-e2e@v0.1.6
+      --collector release:carabiner-dev/demo-slsa-e2e@v0.1.8
 ```
 
 The results in the terminal show the checks performed on the VSA with their
 respective verification results:
 
 ```bash
-+--------------------------------------------------------------------------------------------------------------------+  
-| ⬤⬤⬤AMPEL: Evaluation Results                                                                                       |  
-+-------------------------+--------------------------+--------+------------------------------------------------------+  
-| PolicySet               | fritoto-artifacts-verify | Date   | 2025-10-03 11:45:39.149795 -0600 CST                 |  
-+-------------------------+--------------------------+--------+------------------------------------------------------+  
-| Status: ● PASS          | Subject                  | - sha256:b2f66926949aef30bede58144b797b76...                  |  
-+-------------------------+--------------------------+--------+------------------------------------------------------+  
-| Policy                  | Controls                 | Status | Details                                              |  
-+-------------------------+--------------------------+--------+------------------------------------------------------+  
-| slsa-build-level-2      | BUILD-LEVEL_2            | ● PASS | VSA attesting a SLSA_BUILD_2 compliance verification |  
-| slsa-build-deps-level-3 | BUILD-LEVEL_3            | ● PASS | All verified dependencies are SLSA_BUILD_LEVEL_2+    |  
-| vsa-verify-verifier     | -                        | ● PASS | Attestation was issued by trusted verifier           |  
-+-------------------------+--------------------------+--------+------------------------------------------------------+  
++--------------------------------------------------------------------------------------------------------------------+
+| ⬤⬤⬤AMPEL: Evaluation Results                                                                                       |
++-------------------------+-------------------------+--------+-------------------------------------------------------+
+| PolicySet               | fritoto-check-artifacts | Date   | 2025-10-09 19:25:06.805181588 -0600 CST               |
++-------------------------+-------------------------+--------+-------------------------------------------------------+
+| Status: ● PASS          | Subject                 | - sha256:884aa2480316522ff74cebf2eb2ca16d...                   |
++-------------------------+-------------------------+--------+-------------------------------------------------------+
+| Policy                  | Controls                | Status | Details                                               |
++-------------------------+-------------------------+--------+-------------------------------------------------------+
+| slsa-build-deps-level-3 | BUILD-LEVEL_3           | ● PASS | All verified dependencies are SLSA_BUILD_LEVEL_3+     |
+| vsa-verify-verifier     | -                       | ● PASS | Attestation was issued by trusted verifier            |
+| vsa-verify-resourceuri  | -                       | ● PASS | VSA verification of expected resource URI             |
+| slsa-build-level-2      | BUILD-LEVEL_2           | ● PASS | VSA attesting a SLSA_BUILD_2+ compliance verification |
++-------------------------+-------------------------+--------+-------------------------------------------------------+
+
 ```
 
 ### Checking the Attestation Bundle
@@ -547,7 +549,7 @@ statements, if you want to see what is in there, you can use
 [bnd, the attestations multitool](https://github.com/carabiner-dev/bnd):
 
 ```bash  
-bnd read release:carabiner-dev/demo-slsa-e2e@v0.1.1
+bnd read release:carabiner-dev/demo-slsa-e2e@v0.1.8
 ```
 
 ```bash
