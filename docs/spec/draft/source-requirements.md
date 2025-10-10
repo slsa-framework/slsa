@@ -197,7 +197,7 @@ attestations.
 
 <td>✓<td>✓<td>✓<td>✓
 
-<tr id="access-and-history"><td>Configure the SCS to control access and enforce history<a href="#access-and-history">🔗</a><td>
+<tr id="access-and-history"><td>Configure the SCS to control access and enforce history <a href="#access-and-history">🔗</a><td>
 
 The organization MUST configure access controls to restrict sensitive operations
 on the Source Repository. These controls MUST be implemented using the
@@ -269,9 +269,9 @@ to be kept private to the extent possible. Organizations SHOULD prefer to make
 logs public if possible.
 
 <td><td>✓<td>✓<td>✓
-<tr id="technical-controls"><td>Continuous technical controls<a href="#technical-controls">🔗</a><td>
+<tr id="technical-controls"><td>Continuous technical controls <a href="#technical-controls">🔗</a><td>
 
-The  organization MUST provide evidence of continuous enforcement via technical
+The organization MUST provide evidence of continuous enforcement via technical
 controls for any claims made in the Source Provenance attestations or VSAs (see
 [control continuity](#continuity)).
 
@@ -473,7 +473,7 @@ The following combinations are acceptable:
 Reviews SHOULD cover, at least, security relevant properties of the code.
 
 **[Final revision approved]** This requirement applies to the final revision
-submitted. I.e. if additional changes are made during the review process, those changes MUST
+submitted. I.e., if additional changes are made during the review process, those changes MUST
 be reviewed as well.
 
 **[Context-specific approvals]** Approvals are for a specific context, such as a
