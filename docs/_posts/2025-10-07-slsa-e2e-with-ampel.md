@@ -51,7 +51,7 @@ the Fritoto team have secured their git repository with
 [`sourcetool`](https://github.com/slsa-framework/source-tool), the SLSA Source
 Track CLI.
 
-The SLSA Source tools allowed the project to 
+The SLSA Source tools allowed the project to
 [onboard its repository in minutes](https://github.com/slsa-framework/source-tool/blob/main/GETTING_STARTED.md),
 hardening the revision history and setting up tools to continuously check that
 repository security controls are properly set. Once the SLSA Source workflows are
@@ -406,81 +406,82 @@ attestations, evaluating the policy on the commit instead of the binary.
 
 ### Attesting the Verification
 
-After running the prerelease policy, AMPEL generates a SLSA VSA attesting to
-everything we’ve seen so far. Here is an example:
+After running the prerelease policy, AMPEL generates a SLSA VSA for each binary,
+attesting to everything we’ve seen so far. Here is an example:
 
 ```json
-{  
-  "predicateType": "https://slsa.dev/verification_summary/v1",  
-  "predicate": {  
-    "dependencyLevels": {  
-      "SLSA_BUILD_LEVEL_3": "1",  
-      "SLSA_SOURCE_3": "1"  
-    },  
+{
+  "predicateType": "https://slsa.dev/verification_summary/v1",
+  "predicate": {
+    "dependencyLevels": {
+      "SLSA_BUILD_LEVEL_3": "1",
+      "SLSA_SOURCE_3": "1"
+    },
     "inputAttestations": [
-      {  
-        "digest": {  
-          "sha256": "91e6462a44f09ed64a116366309df93fdc73479e6efac4b8df5977db5211f483",  
-          "sha512": "a267338f5793f40342753bd0907bd1f6f70e9c23fd9354f549015a8da585127051138d2c08de704289e727fe12a6668e4b9e9c15bc9899e06a9a47d71f8d48c2"  
-        },  
-        "uri": "jsonl:.attestations/attestations.bundle.jsonl#7"
-      },  
-      {  
-        "digest": {  
-          "sha256": "1986b7579ab97ed99ac26e9e60c071226cf9dc14426f97c7aca07622ade18fb6",  
-          "sha512": "b6ae07bd5419e174b2435fd22e8e6f0d07e5bd8be5b8ecba92fda674db283b072a964b5642ccc3caf2d063b5024eda496b0c4475e8a61aa3adf014e8ec179967"  
-        },  
-        "uri": "jsonl:.attestations/attestations.bundle.jsonl#6"  
-      },  
-      {  
-        "digest": {  
-          "sha256": "677d5750e149f926c22fa1acd729b82904c0651e3cbf07440f41e7c5c124a99d",  
-          "sha512": "ee2907d53b672e8ce69247fdf3ef4c8fadb749260c004361ffc55c9a76dbd716430d2caa94e6813019c954202e8dfd727733a2bc03359a57647db05ac66939e7"  
-        },  
-        "uri": "jsonl:.attestations/attestations.bundle.jsonl#1"  
-      },  
-      {  
-        "digest": {  
-          "sha256": "d9e62d33953cd5a64bbd8cce6f9c2ba4af7e4c7041ff80f3e216092c55bd9aa1",  
-          "sha512": "ba3404aa79483e56ed971d8e882a96471e47854e189d96581b7b08d089a33e3bb87a44c9f4db77998fb9b152239f6f0231b18600bac94315a0187da1248c219b"  
-        },  
-        "uri": "jsonl:.attestations/attestations.bundle.jsonl#3"  
-      }  
-    ],  
-    "policy": {  
-      "digest": {  
-        "sha256": "62220a01aa36267f6f82d2204d9021fdc1db3ee7e7dc03b562e62ec462718136",  
-        "sha512": "85efcb43985589a6557adff865f4950b6b20d60f12e4c22a289432d3dfe87ff49bf1d61e01adb6e445b6f0c5d865381d9616b202f92143177180a1df5efcfa2c"  
-      }  
-    },  
-    "resourceUri": "bin/fritoto-linux-amd64",  
-    "slsaVersion": "1.1",  
-    "timeVerified": "2025-10-03T05:25:08.324338730Z",  
-    "verificationResult": "PASSED",  
+      {
+        "digest": {
+          "sha256": "373f06d2ac598b6007fe3357bf615abe3fda42aefc237a17c82b5623aeb6b4e8",
+          "sha512": "03090c3a1d4645bb387b0a1049dd5d79abdd105623355c627834e92b720a8704d029485104e2c71e1e63fd569a66b610bae22f8d38cf28b6a561278edfbd3551"
+        },
+        "uri": "jsonl:.attestations/attestations.bundle.jsonl#12"
+      },
+      {
+        "digest": {
+          "sha256": "599aa831e76e3a67b2c29dc1e86f8b8f97d3744c5659c29c705fb44a03212043",
+          "sha512": "4529ea0e06ba837acea803cca2412078b1a7df5b7c0a47aa53e3b93e49ae84dc64d4ef518c6335a65e1e16a233ab17f253b1f73f2cc6d77fbbca22df222fb405"
+        },
+        "uri": "jsonl:.attestations/attestations.bundle.jsonl#6"
+      },
+      {
+        "digest": {
+          "sha256": "3ed7cc1676248a8ad28bed5548df56ed5d26c7885005d9e3784bad89daa91caf",
+          "sha512": "db066d7cb23b0d93d2579feb2c22ea710e44aef49b0ebea63908dcaf88afa3186d9aede215f1d9c72d21d1ae13357b995b593058c30c9d4a92fa5ae009a74aad"
+        },
+        "uri": "jsonl:.attestations/attestations.bundle.jsonl#1"
+      },
+      {
+        "digest": {
+          "sha256": "b0d07cb1bf30999e3e35151388ecf973f19a4191d34df663b554a42a6f45ecc2",
+          "sha512": "ffaaa754841d9d894cdda57e0c5cef13d0482ccfe4fc3b7c0b2aae87f9f4d5fbc36463ed77c76e37513bb702709ee8e449ca6e1fca2f9555fb5bf0d93fb597e5"
+        },
+        "uri": "jsonl:.attestations/attestations.bundle.jsonl#3"
+      }
+    ],
+    "policy": {
+      "digest": {
+        "sha256": "ab1e3904bed05955198e246941e3c60554599fa6ce92755b400b461e0b2b77df",
+        "sha512": "46f579b7e97d9db8c1e8cb1f8b16d1f7593128855a766ba0577a02612669f169367f4e75adf8c9665beb9d9d8c4da1480af265a7c04a9355162323f6d2074c6d"
+      }
+    },
+    "resourceUri": "https://github.com/carabiner-dev/demo-slsa-e2e/releases/download/v0.1.7/fritoto-linux-amd64",
+    "slsaVersion": "1.1",
+    "timeVerified": "2025-10-10T00:23:16.892941921Z",
+    "verificationResult": "PASSED",
     "verifiedLevels": [
       "SLSA_BUILD_LEVEL_2"
     ],
-    "verifier": {  
-      "id": "https://carabiner.dev/ampel@v1"  
-    }  
+    "verifier": {
+      "id": "https://carabiner.dev/ampel@v1"
+    }
   },
-  "_type": "https://in-toto.io/Statement/v1",  
+  "_type": "",
+  "type": "https://in-toto.io/Statement/v1",
   "subject": [
     {
-      "name": "fritoto-linux-amd64",  
-      "uri": "bin/fritoto-linux-amd64",  
-      "digest": {  
-        "sha256": "21b3129c3707d19b79596b9acb75fd7d245675bec9d1cede3d08250b2ddb1f6e",  
-        "sha512": "26fe589a09d779833adb20b32230e6be9b0540db290bd148026fd814573c05988c43e02457b7245f70c3477ed706bacc5bf9b820dcde3eab0ff39a4c0e4b50b5"
+      "name": "fritoto-linux-amd64",
+      "uri": "bin/fritoto-linux-amd64",
+      "digest": {
+        "sha256": "beffc62d3ba6518aefaea687720dd55a594ea9fa2be51efb10f308246d86efd8",
+        "sha512": "962600582081708f052823f0bc58e78f0e32789d5c62c6d835ac01bdfb28bb6dca33a4316b5ededbef3b8f26420e6a32526fa165feff6d0f2991573c648a0cd9"
       }
     }
   ]
-}  
+}
 ```
 
-Notice in the VSA the subject is the linux/amd64 binary and how its `SLSA_BUILD_2`
-level is recorded, but also the verified levels of its dependencies. The
-important parts in this document are:
+Notice in the VSA the subject is the darwin/arm64 binary and how its
+`SLSA_BUILD_LEVEL_2` level is recorded, but also the verified levels of its
+dependencies. The important parts in this document are:
 
 -   The verifier ([https://carabiner.dev/ampel@v1](https://carabiner.dev/ampel@v1)) that tells you what tool performed the verification
 -   The subject (the fritoto-linux-amd64 binary)
@@ -488,7 +489,7 @@ important parts in this document are:
 -   The verified levels of the binary (`SLSA_BUILD_LEVEL_2`)
 -   The verified SLSA levels of the dependencies (`dependencyLevels`):
     -   One `SLSA_BUILD_LEVEL_3` (the go container image)
-    -   One `SLSA_SOURCE_1` (the build point commit, protected with the SLSA source tools)
+    -   One `SLSA_SOURCE_3` (the build point commit, protected with the SLSA source tools)
 
 This VSA can be used to communicate to users all the verifications performed on
 the binaries, they can act as guarantees that the released assets were built in
@@ -534,7 +535,7 @@ respective verification results:
 | Policy                  | Controls                 | Status | Details                                              |  
 +-------------------------+--------------------------+--------+------------------------------------------------------+  
 | slsa-build-level-2      | BUILD-LEVEL_2            | ● PASS | VSA attesting a SLSA_BUILD_2 compliance verification |  
-| slsa-build-deps-level-3 | BUILD-LEVEL_3            | ● PASS | All verified dependencies are SLSA_BUILD_LEVEL_3+    |  
+| slsa-build-deps-level-3 | BUILD-LEVEL_3            | ● PASS | All verified dependencies are SLSA_BUILD_LEVEL_2+    |  
 | vsa-verify-verifier     | -                        | ● PASS | Attestation was issued by trusted verifier           |  
 +-------------------------+--------------------------+--------+------------------------------------------------------+  
 ```
