@@ -333,9 +333,8 @@ If the SCS DOES NOT generate a VSA for a revision, the revision has Source Level
 
 At Source Levels 1 and 2 the SCS MAY issue these attestations based on its
 understanding of the underlying system (e.g. based on design docs, security
-reviews, etc.), but at Level 3+ the SCS MUST use
-the SCS-issued [source provenance](#source-provenance) when issuing
-the VSAs.
+reviews, etc.), but at Level 2+ the SCS MUST use the SCS-issued
+[source provenance](#source-provenance) when issuing the VSAs.
 
 <td>✓<td>✓<td>✓<td>✓
 
@@ -349,10 +348,6 @@ There are three key aspects to change history:
 
 To answer these questions, the SCS MUST record all changes to Named References,
 including when they occurred, who made them, and the new Source Revision ID.
-
-> For example, if a safe-expungement process rewrites history, it must be
-possible to determine if a revision was ever pointed-to by a Branch.
-The SCS's record provides forensic evidence of the history rewrite.
 
 If Source Revisions have ancestry relationships in the VCS, the SCS MUST ensure
 that a Branch can only be updated to point to revisions that descend from the
