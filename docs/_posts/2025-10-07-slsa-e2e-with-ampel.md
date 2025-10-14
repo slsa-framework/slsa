@@ -62,8 +62,8 @@ By checking the SLSA Source attestations, Fritoto makes sure all builds are run
 on a commit guaranteed to be part of a revision history were all changes were
 properly vetted.
 
-In their release process, before anything goes on, Fritoto leverages AMPEL to
-enforce a policy that verifies the build point’s source attestations:
+Before allowing any other steps of the release process run, Fritoto leverages
+AMPEL to enforce a policy that verifies the build point’s source attestations:
 
 ```yaml
 - name: 🔴🟡🟢 Verify Build Point Commit to be SLSA Source Level 3+
@@ -85,7 +85,7 @@ enforce a policy that verifies the build point’s source attestations:
 
 In this fragment of the
 [release workflow](https://github.com/carabiner-dev/demo-slsa-e2e/blob/main/.github/workflows/release.yaml),
-AMPEL pulls the commit’s VSA (Verification Summary Attestation) from the build
+AMPEL pulls the commit’s VSA (Verification Summary Attestation) from the git
 commit notes and verifies that the repository had Source Level 3 protections in place,
 ensuring no rogue commits altered the code base.
 
@@ -324,7 +324,8 @@ Finally, Fritoto performs a SLSA Build and Source verification on the built
 binaries to ensure everything securely ties together. To spare downstream
 consumers from doing the same heavy checks, the project will issue separate
 VSAs, one for each binary, which can be later used to check that every
-verification up to this point actually took place and the results were as expected.
+verification up to this point actually took place and the results passed as
+expected (see End User Verification).
 
 Here, the workflow runs `ampel verify` on each binary, applying the
 [`fritoto-gate-publish.hjson`](https://github.com/carabiner-dev/demo-slsa-e2e/policies/fritoto-gate-publish.hjson),
