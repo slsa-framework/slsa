@@ -79,10 +79,10 @@ level.
 
 | Track/Level | Requirements | Focus
 | ----------- | ------------ | -----
-| [Source L1](#source-l1)  | Use a version control system | First steps towards operational maturity
-| [Source L2](#source-l2)  | History and controls for protected branches & tags | Preserve history and ensure the process has been followed
-| [Source L3](#source-l3)  | Signed provenance | Tampering by the source control system
-| [Source L4](#source-l4)  | Code review | Tampering by project contributors
+| [Source L1](#source-l1)  | Use a version control system. | Generation of discrete Source Revisions for precise consumption.
+| [Source L2](#source-l2)  | Preserve Change History and generate Source Provenance. | Reliable history through enforced controls and evidence.
+| [Source L3](#source-l3)  | Enforce organizational technical controls. | Consumer knowledge of guaranteed technical controls.
+| [Source L4](#source-l4)  | Require code review. | Improved code quality and resistance to insider threats.
 
 <section id="source-l1">
 
@@ -105,14 +105,15 @@ Migrating to the appropriate tools is an important first step on the road to ope
 </section>
 <section id="source-l2">
 
-### Level 2: Controls
+### Level 2: History & Provenance
 
 <dl class="as-table">
 <dt>Summary<dd>
 
-Clarifies which branches and tags in a repo are consumable and guarantees that
-all changes to protected branches and tags are recorded and subject to the
-organization's technical controls.
+Branch history is continuous, immutable, and retained, and the
+SCS issues Source Provenance Attestations for each new Source Revision.
+The attestations provide contemporaneous, tamper-resistant evidence of when
+changes were made, who made them, and which technical controls were enforced.
 
 <dt>Intended for<dd>
 
@@ -120,30 +121,31 @@ All organizations of any size producing software of any kind.
 
 <dt>Benefits<dd>
 
-Allows organizations and source consumers the ability to ensure the change
-management process has been followed to track changes to the software over time
-and attribute those changes to the actors that made them.
+Reliable history allows organizations and consumers to track changes to software
+over time, enabling attribution of those changes to the actors that made them.
+Source Provenance provides strong, tamper-resistant evidence of the process that
+was followed to produce a Source Revision.
 
 </dl>
 </section>
 <section id="source-l3">
 
-### Level 3: Signed and Auditable Provenance
+### Level 3: Continuous technical controls
 
 <dl class="as-table">
 <dt>Summary<dd>
 
-The SCS generates credible, tamper-resistant, and contemporaneous evidence of how a specific revision was created.
-It is provided to authorized users of the source repository in a documented format.
+The SCS is configured to enforce the Organization's technical controls for specific Named References within the Source Repository.
 
 <dt>Intended for<dd>
 
-Organizations that want strong guarantees and auditability of their change management processes.
+Organizations that want to show evidence of their additional technical controls.
 
 <dt>Benefits<dd>
 
-Provides information to policy enforcement tools to reduce the risk of tampering
-within the SCS's storage systems.
+A verifier can use this published data to ensure that a given Source Revision
+was created in the correct way by verifying the Source Provenance or VSA.
+Provides verifiers strong evidence of all technical controls enforced during the update of a Named Reference.
 
 </dl>
 </section>
@@ -173,7 +175,9 @@ organization.
 
 ## Requirements
 
-Many examples in this document use the [git version control system](https://git-scm.com/), but use of git is not a requirement to meet any level on the SLSA source track.
+Many examples in this document use the
+[git version control system](https://git-scm.com/), but use of git is not a
+requirement to meet any level on the SLSA source track.
 
 ### Organization
 
@@ -193,47 +197,31 @@ attestations.
 
 <td>✓<td>✓<td>✓<td>✓
 
-<tr id="protect-consumable-branches-and-tags"><td>Protect consumable branches and tags <a href="#protect-consumable-branches-and-tags">🔗</a><td>
+<tr id="access-and-history"><td>Configure the SCS to control access and enforce history <a href="#access-and-history">🔗</a><td>
 
-An organization producing source revisions MUST implement a change management
-process to ensure changes to source matches the organization's intent.
+The organization MUST configure access controls to restrict sensitive operations
+on the Source Repository. These controls MUST be implemented using the
+SCS-provided [Identity Management capability](#identity-management).
 
-The organization MUST specify which branches and tags are covered by the process
-and are intended for use in its own applications or services or those of
-downstream consumers of the software.
+> For example, an organization may configure the SCS to assign users to a
+`maintainers` role and only allow users in `maintainers` to make updates to
+`main`.
 
-> For example, if an organization has branches 'main' and 'experimental' and it
-intends for 'main' to be protected then it MUST indicate to the SCS that 'main'
-should be protected. From that point forward revisions on 'main' will be
-eligible for Source Level 2+ while revisions made solely on 'experimental' will
-not.
+The SCS MUST be configured to produce a reliable [Change History](#history) for
+its consumable Source Revisions.
+If the SCS provides this capability by design, no additional controls are needed.
+Otherwise the organization MUST provide evidence of [continuous enforcement](#continuity).
 
-The organization MUST use the SCS provided
-[Identity Management capability](#identity-management) to configure the actors
-and roles that are allowed to perform sensitive actions on protected branches
-and tags.
+If the SCS supports Tags, the SCS MUST be configured to prevent them from
+being moved or deleted.
 
-> For example, an organization may configure the SCS to assign users to a `maintainers` role and only allow users in `maintainers` to make updates to `main`.
-
-The organization MUST specify what technical controls consumers can expect to be
-enforced for revisions in each protected branch and tag using the
-[Enforced change management process](#enforced-change-management-process)
-and it MUST document the meaning of those controls.
-
-> For example, an organization may claim that revisions on `main` passed unit
-tests before being accepted.  The organization could then configure the SCS to
-enforce this requirement and store corresponding [test result attestations] for
-all affected revisions.  They may then embed the `ORG_SOURCE_UNIT_TESTED`
-property in the [Source VSA](#source-verification-summary-attestation). Consumers
-would then expect that future revisions on `main` have been united tested and
-determine if that expectation has been met by looking for the
-`ORG_SOURCE_UNIT_TESTED` property in the VSAs and, if desired, consult the
-[test result attestations] as well.
-
-[test result attestations]: https://github.com/in-toto/attestation/blob/main/spec/predicates/test-result.md
+> For example, if a git tag `release1` is used to indicate a release revision
+with ID `abc123`, controls must be configured to prevent that tag from being
+updated to any other revision in the future.
+Evidence of these controls (and their continuity) will appear in the Source
+Provenance documents for revision `abc123`.
 
 <td><td>✓<td>✓<td>✓
-
 <tr id="safe-expunging-process"><td>Safe Expunging Process <a href="#safe-expunging-process">🔗</a><td>
 
 SCSs MAY allow the organization to expunge (remove) content from a repository
@@ -274,13 +262,30 @@ SCSs SHOULD have technical mechanisms in place which require an Administrator
 plus at least one additional 'trusted person' to trigger any expunging
 (removals) made under this process.
 
-The application of the safe expunging process and the resulting logs MAY be
-private to both prevent calling attention to potentially sensitive data (e.g.
-PII) or to comply with local laws and regulations which may require the change
-to be kept private to the extent possible. Organizations SHOULD prefer to make
-logs public if possible.
+The application of the Safe Expunging Process and the resulting logs MAY be
+private to prevent calling attention to potentially sensitive data or to comply
+with local laws and regulations. Organizations SHOULD prefer to make logs public
+if possible.
 
 <td><td>✓<td>✓<td>✓
+<tr id="technical-controls"><td>Continuous technical controls <a href="#technical-controls">🔗</a><td>
+
+The organization MUST provide evidence of continuous enforcement via technical
+controls for any claims made in the Source Provenance attestations or VSAs (see
+[control continuity](#continuity)).
+
+The organization MUST document the meaning of their enforced technical controls.
+
+> For example, if an organization implements a technical control via a custom
+tool (such as required GitHub Actions workflow), it must indicate the name of
+this tool, what it accomplishes, and how to find its evidence in the provenance
+attestation.
+
+> For another example, if the organization claims that all consumable Source
+Revisions on the `main` branch were tested prior to acceptance, this MUST be
+explicitly enforced in the SCS.
+
+<td><td><td>✓<td>✓
 
 </table>
 
@@ -310,7 +315,7 @@ The SCS MUST provide tooling to display Changes between one Source Revision and
 another in a human readable form (e.g. 'diffs') for all plain-text changes and
 SHOULD provide mechanisms to provide human understandable interpretations of
 non-plain-text changes (e.g. render images, verify and display provenance for
-binaries, etc...).
+binaries, etc.).
 
 <td>✓<td>✓<td>✓<td>✓
 <tr id="source-summary"><td>Source Verification Summary Attestations <a href="#source-summary">🔗</a><td>
@@ -327,97 +332,56 @@ If the SCS DOES NOT generate a VSA for a revision, the revision has Source Level
 
 At Source Levels 1 and 2 the SCS MAY issue these attestations based on its
 understanding of the underlying system (e.g. based on design docs, security
-reviews, etc...), but at Level 3+ the SCS MUST use
-the SCS-issued [source provenance](#source-provenance) when issuing
-the VSAs.
+reviews, etc.), but at Level 2+ the SCS MUST use the SCS-issued
+[source provenance](#source-provenance) when issuing the VSAs.
 
 <td>✓<td>✓<td>✓<td>✓
-<tr id="branches"><td>Protected Branches <a href="#branches">🔗</a><td>
 
-The SCS MUST provide a mechanism for organizations to indicate which branches
-should be protected by SLSA Source Level 2+ requirements.
-
-E.g. The organization may configure the SCS to protect `main` and
-`refs/heads/releases/*`, but not `refs/heads/playground/*`.
-
-<td><td>✓<td>✓<td>✓
 <tr id="history"><td>History <a href="#history">🔗</a><td>
 
-Revisions are created by applying specific code changes (a "diff" in git) on
-top of earlier revisions of a branch. This sequence of changes, the revisions
-they produced, and how they were introduced into a branch constitute the history
-of that branch.
+There are three key aspects to change history:
 
-The SCS MUST record the sequence of changes, the revisions they created,
-the actors that introduced them and the context they were introduced into.
+1.  What were all the previous states of a Branch?
+2.  How and when did they change?
+3.  How does the current revision relate to previous revisions?
 
-The SCS MUST prevent tampering with these records on protected branches.
+To answer these questions, the SCS MUST record all changes to Named References,
+including when they occurred, who made them, and the new Source Revision ID.
 
-> For example, in systems like GitHub or GitLab, this can be accomplished by
-enabling branch protection rules that prevent force pushes and branch deletions.
+If Source Revisions have ancestry relationships in the VCS, the SCS MUST ensure
+that a Branch can only be updated to point to revisions that descend from the
+current revision.
+In git, this requires a technical control to prohibit `git push --force`.
 
-<td><td>✓<td>✓<td>✓
-<tr id="enforced-change-management-process"><td>Enforced change management process <a href="#enforced-change-management-process">🔗</a><td>
+This requirement captures evidence that the organization intended to make the
+changes captured by the new revision.
 
-The SCS MUST
-
--   Ensure organization-defined technical controls are enforced for changes made
-   to protected branches.
--   Allow organizations to specify
-   [additional properties](#additional-properties) to be included in the
-   [Source VSA](#source-verification-summary-attestation) when the corresponding controls are
-   enforced.
--   Allow organizations to distribute additional attestations related to their
-   technical controls to consumers authorized to access the corresponding source
-   revision.
--   Prevent organization-specified properties from beginning with any value
-   other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
-   corresponding claims.
-
-> For example: enforcement of the organization-defined technical controls could
-be accomplished by the configuration of branch protection rules (e.g.
-[GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets),
-[GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html))
-which require additional checks to 'pass' (e.g. unit tests, linters) or the
-application and verification of [gittuf](https://github.com/gittuf/gittuf)
-policies.
+> For example, if a branch currently points to revision `a`, it may only be
+moved to a new revision `b` if `a` is an ancestor of `b`.
 
 <td><td>✓<td>✓<td>✓
 <tr id="continuity"><td>Continuity <a href="#continuity">🔗</a><td>
 
-In a source control system, each new revision is built on top of prior
-revisions. Controls (e.g. [history](#history) or
-[enforced change management process](#enforced-change-management-process)) are
-only effective if they are used continuously from one revision to another. If
-a control is disabled for the introduction of a new revision and then re-enabled
-it is difficult to reason about the effectiveness of the control. 'Continuity' is
-the concept of ensuring controls are enforced continuously from the time they
-were introduced, leading to a higher degree of trust in the revisions produced
-after their introduction.
+Technical Controls are only effective if they are used continuously in the
+history of a Branch.
+'Control continuity' reflects an organization's ongoing commitment to a
+technical control.
 
-On [protected branches](#branches) continuity for [history](#history) and
-[enforced change management process](#enforced-change-management-process)
-controls MUST be established and tracked from a specific revision forward
-through each new revision created. If there is a lapse in continuity for a
-specific control, continuity of that control MUST be re-established from a new
-revision.
+For each technical control claimed in a VSA, continuity MUST be established and
+tracked from a specific start revision.
+If there is a lapse in continuity for a specific control, continuity of that
+control MUST be re-established from a new revision.
 
-Continuity exceptions are allowed via the [safe expunging process](#safe-expunging-process).
+Exceptions to the continuity requirement are allowed via the [safe expunging process](#safe-expunging-process).
 
-<td><td>✓<td>✓<td>✓
-<tr id="protected-tags"><td>Protected Tags <a href="#protected-tags">🔗</a><td>
-
-If the SCS supports tags (or other non-branch revision trackers), additional
-care must be taken to prevent unintentional changes.
-Unlike branches, tags have no built-in continuity enforcement mechanisms or
-change management processes.
-
-The SCS MUST provide a mechanism for organizations to indicate which tags should
-be protected by SLSA Source Level 2+ requirements.
-
-The SCS MUST prevent protected tags from being moved or deleted.
+> For example, the `main` branch currently points to revision `a` when a new
+technical control `t` is configured.
+The next revision on the `main` branch, `b` will be the first revision that was
+protected by `t` and `b` is the first revision in the "continuity" of `t`.
+Any revisions added to `main` while `t` is disabled will reset the continuity of `t`.
 
 <td><td>✓<td>✓<td>✓
+
 <tr id="identity-management"><td>Identity Management <a href="#identity-management">🔗</a><td>
 
 The SCS MUST provide an identity management system or some other means of
@@ -429,7 +393,7 @@ branches, approval of changes).
 
 Depending on the SCS, identity management may be provided by source control
 services (e.g., GitHub, GitLab), implemented using cryptographic signatures
-(e.g., using gittuf to manage public keys for actors), or extend existing
+(e.g., using gittuf to manage public keys for actors), or extending existing
 authentication systems used by the organization (e.g., Active Directory, Okta,
 etc.).
 
@@ -439,6 +403,7 @@ Activities conducted on the SCS SHOULD be attributed to authenticated
 identities.
 
 <td><td>✓<td>✓<td>✓
+
 <tr id="source-provenance"><td>Source Provenance <a href="#source-provenance">🔗</a><td>
 
 [Source Provenance](#source-provenance-attestations) are attestations that
@@ -448,17 +413,52 @@ associated with the revision identifier delivered to consumers and are a
 statement of fact from the perspective of the SCS. The SCS MUST document the
 format and intent of all Source Provenance attestations it produces.
 
-At Source Level 3, Source Provenance MUST be created contemporaneously with the
-branch being updated to use that revision such that they provide a credible,
-auditable, record of changes.
+Source Provenance MUST be created contemporaneously with the branch being
+updated such that they provide a credible, auditable, record of changes.
 
-If a consumer is authorized to access a revision, they MUST be able to fetch the
-corresponding source provenance documents for that revision.
+If a consumer is authorized to access a revision, they MUST be able to access the
+corresponding Source Provenance documents for that revision.
 
 It is possible that an SCS can make no claims about a particular revision.
 
 > For example, this would happen if the revision was created on another SCS,
-or if the revision was not the result of an accepted change management process.
+on an unprotected branch (such as a `topic` branch), or if the revision was not
+the result of the expected process.
+
+The SCS MUST
+
+-   Allow organizations to provide
+   [organization-specified properties](#additional-properties) to be included in the
+   [Source VSA](#source-verification-summary-attestation) when the corresponding controls are
+   enforced.
+-   Allow organizations to distribute additional attestations related to their
+   technical controls to consumers authorized to access the corresponding Source
+   Revision.
+-   Prevent organization-specified properties from beginning with any value
+   other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
+   corresponding claims.
+
+<td><td>✓<td>✓<td>✓
+<tr id="protected-refs"><td>Protected Named References <a href="#protected-refs">🔗</a><td>
+
+The SCS MUST provide the ability for an organization to enforce customized technical controls for Named References.
+
+The SCS MUST provide a mechanism for organizations to indicate which Named
+References should be protected by technical controls.
+
+> For example, the organization may instruct the SCS to protect `main` and
+`refs/heads/releases/*`, but not `refs/heads/experimental/*` using branch
+protection rules (e.g. [GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets),
+[GitLab](https://docs.gitlab.com/ee/user/project/repository/branches/protected.html))
+or via the application and verification of [gittuf](https://github.com/gittuf/gittuf)
+policies.
+
+> For another example, the organization may instruct the SCS to prevent the deletion of
+all `refs/tags/releases/*` using tag protection rules
+(e.g. [GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets),
+[GitLab](https://docs.gitlab.com/user/project/protected_tags/))
+or via the application and verification of [gittuf](https://github.com/gittuf/gittuf)
+policies.
 
 <td><td><td>✓<td>✓
 <tr id="two-party-review"><td>Two-party review <a href="#two-party-review">🔗</a><td>
@@ -472,7 +472,7 @@ The following combinations are acceptable:
 Reviews SHOULD cover, at least, security relevant properties of the code.
 
 **[Final revision approved]** This requirement applies to the final revision
-submitted. I.e. if additional changes are made during the review process, those changes MUST
+submitted. I.e., if additional changes are made during the review process, those changes MUST
 be reviewed as well.
 
 **[Context-specific approvals]** Approvals are for a specific context, such as a
@@ -521,7 +521,7 @@ The source track issues Source VSAs using the [Verification Summary Attestations
     the revision. This field is not intended for policy decisions. Instead, it
     is only intended to direct a human investigating verification failures.
     -   For example: `https://github.com/slsa-framework/slsa/commit/6ff3cd75c8c9e0fcedc62bd6a79cf006f185cedb`
-2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc...).
+2.  `subject.digest` MUST include the revision identifier (e.g. `gitCommit`) and MAY include other digests over the contents of the revision (e.g. `gitTree`, `dirHash`, etc.).
 SCSs that do not use cryptographic digests MUST define a canonical type that is used to identify immutable revisions and MUST include the repository within the type[^1].
     -   For example: `svn_revision_id: svn+https://svn.myproject.org/svn/MyProject/trunk@2019`
 3.  `subject.annotations.sourceRefs` SHOULD be set to a list of references that pointed to this revision when the attestation was created. The list MAY be non-exhaustive.
@@ -561,8 +561,7 @@ Downstream users are expected to be familiar with the method used by the issuer.
 Example implementations:
 
 -   Issue a new VSA for each merged Pull Request and add the destination branch to `sourceRefs`.
--   Issue a new VSA each time a 'consumable branch' is updated to point to a new revision.
--   Issue a new VSA each time a 'consumable tag' is created to point to a new revision.
+-   Issue a new VSA each time a Named Reference is updated to point to a new revision.
 
 #### Example
 
@@ -604,7 +603,7 @@ This evidence can be used by:
 
 -   an authority as the basis for issuing a [Source VSA](#source-verification-summary-attestation)
 -   a consumer to cross-check a [Source VSA](#source-verification-summary-attestation) they received for a revision
--   a consumer to enforce a more detailed policy than the organization's change management process
+-   a consumer to enforce a more detailed policy than the organization's own process
 
 SCSs may have different methods of operating that necessitate different forms of evidence.
 E.g. GitHub-based workflows may need different evidence than Gerrit-based workflows, which would both likely be different from workflows that
@@ -636,7 +635,7 @@ revision's properties recorded in the summary attestation.
 
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
 
-## Potential Change Management Controls
+## Potential Technical Controls
 
 In addition to the requirements for SLSA Source L4, most organizations will
 require multiple of these controls as part of their required protections.
