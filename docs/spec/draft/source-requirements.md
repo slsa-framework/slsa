@@ -590,10 +590,8 @@ Example implementations:
 
 #### How to verify
 
--   VSAs for source revisions MUST follow [the standard method of VSA verification](./verification_summary.md#how-to-verify).
--   Users SHOULD check that an allowed branch is listed in `subject.annotations.sourceRefs` to ensure the revision is from an appropriate context within the repository.
--   Users SHOULD check that the expected `SLSA_SOURCE_LEVEL_` is listed within `verifiedLevels`.
--   Users MUST ignore any unrecognized values in `verifiedLevels`.
+See [Verifying Source](./verifying-source.md) for instructions how to verify
+VSAs for Source Revisions.
 
 ### Source provenance attestations
 
