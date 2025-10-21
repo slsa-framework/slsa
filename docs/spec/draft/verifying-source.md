@@ -89,7 +89,7 @@ Once, when bootstrapping the verifier:
     </details>
 
 Given a revision and its VSA follow the
-[VSA verification instructions](./verification_summary.md#how-to-verify) and
+[VSA verification instructions](./verification_summary.md#how-to-verify) and the
 [validation-model] using the revision identifier to perform subject matching and
 checking the `verifier.id` against the root-of-trust described above.
 
@@ -118,6 +118,7 @@ fields:
 | `verifiedLevels` | To ensure the expected controls were in place for the creation of the revision. E.g. `SLSA_SOURCE_LEVEL_3`, `ORG_SOURCE_STATIC_ANALYSIS`, etc...
 
 [Threat "B"]: threats#b-modifying-the-source
+[validation-model]: https://github.com/in-toto/attestation/blob/main/docs/validation.md#validation-model
 
 ### Step 3: Verify Evidence using Source Provenance [optional]
 
