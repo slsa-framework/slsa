@@ -299,8 +299,8 @@ Verification MUST include the following steps:
     value. This step ensures that the consumer is using the VSA for the
     producer's intended purpose.
 
-6.  Verify that the value for `slsaResult` is `PASSED`. This step ensures the
-    artifact is suitable for the consumer's purposes.
+6.  Verify that the value for `verificationResult` is `PASSED`. This step
+    ensures the artifact is suitable for the consumer's purposes.
 
 7.  Verify that `verifiedLevels` contains the expected value. This step ensures
     that the artifact is suitable for the consumer's purposes.

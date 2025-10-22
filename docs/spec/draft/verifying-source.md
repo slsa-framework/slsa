@@ -25,7 +25,7 @@ recording the result of prior verifications. Source VSAs may be issued by a VSA
 provider to make a SLSA source level determination based on the content of those
 attestations.
 
-## How to verify SLSA a source revision
+## How to verify a source revision
 
 The source consumer checks:
 
@@ -88,17 +88,10 @@ Once, when bootstrapping the verifier:
 
     </details>
 
-Given a revision and its VSA:
-
-1.  [Verify][validation-model] the envelope's signature using the roots of
-    trust, resulting in a list of recognized public keys (or equivalent).
-2.  [Verify][validation-model] that statement's `subject` matches the digest of
-    the revision in question.
-3.  Verify that the `predicateType` is `https://slsa.dev/verification_summary/v1`.
-4.  Look up the SLSA Source Level in the roots of trust, using the recognized
-    public keys and the `verifier.id`, defaulting to SLSA Source L1.
-
-[validation-model]: https://github.com/in-toto/attestation/blob/main/docs/validation.md#validation-model
+Given a revision and its VSA follow the
+[VSA verification instructions](./verification_summary.md#how-to-verify) and the
+[validation-model] using the revision identifier to perform subject matching and
+checking the `verifier.id` against the root-of-trust described above.
 
 ### Step 2: Check Expectations
 
@@ -117,12 +110,15 @@ fields:
 
 | What | Why
 | ---- | ---
-| Verifier (SCS) identity from [Step 1] | To prevent an adversary from substituting a VSA making false claims from an unintended SCS.
+| `verifier.id` identity from [Step 1] | To prevent an adversary from substituting a VSA making false claims from an unintended SCS.
+| `subject.digest` from [Step 1] | To prevent an adversary from substituting a VSA from another revision.
+| `verificationResult` | To prevent an adversary from providing a VSA for a revision that failed some aspect of the organization's expectations.
 | `predicate.resourceUri` | To prevent an adversary from substituting a VSA for the intended repository (e.g. `git+https://github.com/IntendedOrg/hello-world`) for another (e.g. `git+https://github.com/AdversaryOrg/hello-world`)
 | `subject.annotations.sourceRefs` | To prevent an adversary from substituting the intended revision from one branch (e.g. `release`) with another (e.g. `experimental_auth`).
 | `verifiedLevels` | To ensure the expected controls were in place for the creation of the revision. E.g. `SLSA_SOURCE_LEVEL_3`, `ORG_SOURCE_STATIC_ANALYSIS`, etc...
 
 [Threat "B"]: threats#b-modifying-the-source
+[validation-model]: https://github.com/in-toto/attestation/blob/main/docs/validation.md#validation-model
 
 ### Step 3: Verify Evidence using Source Provenance [optional]
 
