@@ -191,7 +191,7 @@ does enforce any controls. They then update the `release_1.2` tag to point to
 Source Control System does not allow protected tags to be updated.
 
 </details>
-<details><summary>Skip required checks<span>(Source L2+)</span></summary>
+<details><summary>Skip required checks<span>(Source L3+)</span></summary>
 
 *Threat:* Code is submitted without following the producers documented
 development process, introducing unintended behavior.
@@ -305,8 +305,8 @@ stamping."
 discoverability of a change.
 
 *Mitigation:* The Source Control System only attributes changes to authenticated
-identities and, at Source L3+, records contemporaneous evidence of changes in
-signed source provenance attestations.
+identities and records contemporaneous evidence of changes in signed source
+provenance attestations.
 
 *Example:* Adversary 'X' creates a commit with unauthenticated metadata claiming
 it was authored by 'Y'. Solution: The Source Control System records the identity
