@@ -635,7 +635,6 @@ revision's properties recorded in the summary attestation.
 
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
 
-
 ## Future Considerations
 
 ### Authentication
