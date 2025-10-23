@@ -20,6 +20,7 @@ attestations.
 
 ### Expert Code Review
 
+<!-- markdownlint-disable-next-line MD055 -->
 | | |
 | --- | ---
 | **Summary** | All changes to the source are pre-approved by experts.
@@ -41,6 +42,7 @@ attestations.
 
 ### Review Every Single Revision
 
+<!-- markdownlint-disable-next-line MD055 -->
 | | |
 | --- | ---
 | **Summary** | The final revision was reviewed by experts prior to submission.
@@ -60,6 +62,7 @@ attestations.
 
 ### Automated testing
 
+<!-- markdownlint-disable-next-line MD055 -->
 | | |
 | --- | ---
 | **Summary** | The final revision was validated by automated tests.
@@ -85,8 +88,9 @@ topic branch.
 
 ### Every revision reachable from a branch was approved
 
-|              |                                                               |
-| :----------- | :-------------------------------------------------------------
+<!-- markdownlint-disable-next-line MD055 -->
+| | |
+| --- | ---
 | **Summary** | New revisions are created based ONLY on approved changes.
 | **Benefits** | Prevents attacks that hide malicious, unreviewed commits.
 
@@ -144,6 +148,7 @@ topic branch.
 
 ### Immutable Change Discussion
 
+<!-- markdownlint-disable-next-line MD055 -->
 | | |
 | --- | ---
 | **Summary** | The discussion around a change is preserved and immutable.
