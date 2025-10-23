@@ -21,18 +21,18 @@ attestations.
 ### Expert Code Review
 
 |                |                                                             |
-| :------------- | :-----------------------------------------------------------|
-| **Summary** | All changes to the source are pre-approved by experts.|
-| **Intended for** | Enterprise repositories and mature open source projects.|
-| **Benefits** | Prevents mistakes by developers unfamiliar with the area.|
+| :------------- | :-----------------------------------------------------------
+| **Summary** | All changes to the source are pre-approved by experts.
+| **Intended for** | Enterprise repositories and mature open source projects.
+| **Benefits** | Prevents mistakes by developers unfamiliar with the area.
 
-**Requirements**
+#### Requirements
 
-* **Code ownership**
+-   **Code ownership**
 
     Each part of the source MUST have a clearly identified set of experts.
 
-* **Approvals from all relevant experts**
+-   **Approvals from all relevant experts**
 
     For each portion of the source modified by a change proposal, pre-approval
     MUST be granted by a member of the defined expert set. An approval from an
@@ -42,14 +42,14 @@ attestations.
 ### Review Every Single Revision
 
 |                |                                                             |
-| :------------- | :-----------------------------------------------------------|
-| **Summary** | The final revision was reviewed by experts prior to submission.|
-| **Intended for** | The highest-of-high-security-posture repos.|
-| **Benefits** | Provides maximum chance for experts to spot problems.|
+| :------------- | :-----------------------------------------------------------
+| **Summary** | The final revision was reviewed by experts prior to submission.
+| **Intended for** | The highest-of-high-security-posture repos.
+| **Benefits** | Provides maximum chance for experts to spot problems.
 
-**Requirements**
+#### Requirements
 
-* **Reset votes on all changes**
+-   **Reset votes on all changes**
 
     If the proposal is modified after receiving expert approval, all previously
     granted approvals MUST be revoked. A new approval MUST be granted from ALL
@@ -61,12 +61,12 @@ attestations.
 ### Automated testing
 
 |                |                                                             |
-| :------------- | :-----------------------------------------------------------|
-| **Summary** | The final revision was validated by automated tests.|
-| **Intended for** | All organizations and repositories.|
-| **Benefits** | Improves accuracy, prevents errors, and reduces human load.|
+| :------------- | :-----------------------------------------------------------
+| **Summary** | The final revision was validated by automated tests.
+| **Intended for** | All organizations and repositories.
+| **Benefits** | Improves accuracy, prevents errors, and reduces human load.
 
-**Requirements**
+#### Requirements
 
 The organization MUST configure a branch protection rule to require that only
 revisions with passing test results can be pointed-to by the branch.
@@ -86,13 +86,13 @@ topic branch.
 ### Every revision reachable from a branch was approved
 
 |              |                                                               |
-| :----------- | :-------------------------------------------------------------|
-| **Summary** | New revisions are created based ONLY on approved changes.|
-| **Benefits** | Prevents attacks that hide malicious, unreviewed commits.|
+| :----------- | :-------------------------------------------------------------
+| **Summary** | New revisions are created based ONLY on approved changes.
+| **Benefits** | Prevents attacks that hide malicious, unreviewed commits.
 
-**Requirements**
+#### Requirements
 
-* **Context**
+-   **Context**
 
     In many organizations, it is normal to review only the "net difference"
     between the tip of the topic branch and the "best merge base", the closest
@@ -112,9 +112,9 @@ topic branch.
     This combination of factors allows attacks where the victim performs a `git
     clone` operation followed by a `git reset --hard <unreviewed revision ID>`.
 
-* **Mitigations**
+-   **Mitigations**
 
-    * **Informed Review**
+    -   **Informed Review**
 
         The reviewer is able and encouraged to make an informed decision about
         what they're approving. The reviewer MUST be presented with a full,
@@ -124,7 +124,7 @@ topic branch.
         It is not sufficient to indicate that a file changed without showing
         the contents.
 
-    * **Use only rebase operations on the protected branch**
+    -   **Use only rebase operations on the protected branch**
 
         Require a squash merge strategy for the protected branch.
 
@@ -145,12 +145,12 @@ topic branch.
 ### Immutable Change Discussion
 
 |                |                                                             |
-| :------------- | :-----------------------------------------------------------|
-| **Summary** | The discussion around a change is preserved and immutable.|
-| **Intended for** | Large orgs, or where discussion is vital to change management.|
-| **Benefits** | Enables future education, forensics, and security auditing.|
+| :------------- | :-----------------------------------------------------------
+| **Summary** | The discussion around a change is preserved and immutable.
+| **Intended for** | Large orgs, or where discussion is vital to change management.
+| **Benefits** | Enables future education, forensics, and security auditing.
 
-**Requirements**
+#### Requirements
 
 The SCS SHOULD record a description of the proposed change and all discussions
 / commentary related to it.
