@@ -9,11 +9,11 @@ require multiple of these controls as part of their required protections.
 If an organization has indicated that use of these controls is part of
 their repository's expectations, consumers SHOULD be able to verify that the
 process was followed for the revision they are consuming by examining the
-[summary](./source-requirements.md#source-verification-summary-attestation) or [source
-provenance](./source-requirements.md#source-provenance-attestations) attestations.
+[summary](./source-requirements#source-verification-summary-attestation) or [source
+provenance](./source-requirements#source-provenance-attestations) attestations.
 
 > For example: consumers can look for the related `ORG_SOURCE` properties in the
-`verifiedLevels` field of the [summary attestation](./source-requirements.md#source-verification-summary-attestation).
+`verifiedLevels` field of the [summary attestation](./source-requirements#source-verification-summary-attestation).
 
 ### Expert Code Review
 
