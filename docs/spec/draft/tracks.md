@@ -47,11 +47,13 @@ repository's owner (the organization) who also determines the intent of the
 software in the repository and administers technical controls to enforce the
 process.
 
-Consumers can review attestations to verify whether a particular revision meets their standards.
+Consumers can review attestations to verify whether a particular revision meets
+their standards.
 
 -   [Requirements](source-requirements.md)
 -   [Source provenance](source-requirements#source-provenance-attestations)
 -   [Assessing source systems](assessing-source-systems.md)
+-   [Example controls](source-example-controls.md)
 
 ## Build Environment track
 
