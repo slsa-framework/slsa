@@ -4,8 +4,9 @@ description: "This page provides examples of additional controls that
   organizations may want to implement as they adopt the SLSA Source track."
 ---
 
-In addition to the requirements for SLSA Source L4, most organizations will
-require multiple of these controls as part of their required protections.
+At SLSA Source L3+ organizations are allowed and encouraged to define their own
+controls that go over and above specific requirements outlined by SLSA. This
+page provides some examples of what these additional controls could be.
 
 If an organization has indicated that use of these controls is part of
 their repository's expectations, consumers SHOULD be able to verify that the
