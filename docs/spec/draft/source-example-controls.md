@@ -123,57 +123,55 @@ Prevents attacks that hide malicious, unreviewed commits.
 
 </dl>
 
+#### Context
+
+In many organizations, it is normal to review only the "net difference"
+between the tip of the topic branch and the "best merge base", the closest
+shared commit between the topic and target branches computed at the time of
+review.
+
+The topic branch may contain many commits of which not all were intended to
+represent a shippable state of the repository.
+
+If a repository merges branches with a standard merge commit, all those
+unreviewed commits on the topic branch will become "reachable" from the
+protected branch by virtue of the multi-parent merge commit.
+
+When a repo is cloned, all commits _reachable_ from the main branch are
+fetched and become accessible from the local checkout.
+
+This combination of factors allows attacks where the victim performs a `git
+clone` operation followed by a `git reset --hard <unreviewed revision ID>`.
+
 #### Requirements
 
--   **Context**
+-   **Informed Review**
 
-    In many organizations, it is normal to review only the "net difference"
-    between the tip of the topic branch and the "best merge base", the closest
-    shared commit between the topic and target branches computed at the time of
-    review.
+    The reviewer is able and encouraged to make an informed decision about
+    what they're approving. The reviewer MUST be presented with a full,
+    meaningful content diff between the proposed revision and the
+    previously reviewed revision.
 
-    The topic branch may contain many commits of which not all were intended to
-    represent a shippable state of the repository.
+    It is not sufficient to indicate that a file changed without showing
+    the contents.
 
-    If a repository merges branches with a standard merge commit, all those
-    unreviewed commits on the topic branch will become "reachable" from the
-    protected branch by virtue of the multi-parent merge commit.
+-   **Use only rebase operations on the protected branch**
 
-    When a repo is cloned, all commits _reachable_ from the main branch are
-    fetched and become accessible from the local checkout.
+    Require a squash merge strategy for the protected branch.
 
-    This combination of factors allows attacks where the victim performs a `git
-    clone` operation followed by a `git reset --hard <unreviewed revision ID>`.
+    To guarantee that only commits representing reviewed diffs are cloned,
+    the SCS MUST rebase (or "squash") the reviewed diff into a single new
+    commit (the "squashed" commit) that has only a single parent (the
+    revision previously pointed-to by the protected branch). This is
+    different than a standard merge commit strategy which would cause all
+    the user-contributed commits to become reachable from the protected
+    branch via the second parent.
 
--   **Mitigations**
-
-    -   **Informed Review**
-
-        The reviewer is able and encouraged to make an informed decision about
-        what they're approving. The reviewer MUST be presented with a full,
-        meaningful content diff between the proposed revision and the
-        previously reviewed revision.
-
-        It is not sufficient to indicate that a file changed without showing
-        the contents.
-
-    -   **Use only rebase operations on the protected branch**
-
-        Require a squash merge strategy for the protected branch.
-
-        To guarantee that only commits representing reviewed diffs are cloned,
-        the SCS MUST rebase (or "squash") the reviewed diff into a single new
-        commit (the "squashed" commit) that has only a single parent (the
-        revision previously pointed-to by the protected branch). This is
-        different than a standard merge commit strategy which would cause all
-        the user-contributed commits to become reachable from the protected
-        branch via the second parent.
-
-        It is not acceptable to replay the sequence of commits from the topic
-        branch onto the protected branch. The intent is to reduce the accepted
-        changes to the exact diffs that were reviewed. Constituent commits of
-        the topic branch may or may not have been reviewed on an individual
-        basis, and should not become reachable from the protected branch.
+    It is not acceptable to replay the sequence of commits from the topic
+    branch onto the protected branch. The intent is to reduce the accepted
+    changes to the exact diffs that were reviewed. Constituent commits of
+    the topic branch may or may not have been reviewed on an individual
+    basis, and should not become reachable from the protected branch.
 
 ### Immutable Change Discussion
 
