@@ -20,8 +20,8 @@ attestations.
 
 ### Expert Code Review
 
-|                |                                                             |
-| :------------- | :-----------------------------------------------------------
+| | |
+| --- | ---
 | **Summary** | All changes to the source are pre-approved by experts.
 | **Intended for** | Enterprise repositories and mature open source projects.
 | **Benefits** | Prevents mistakes by developers unfamiliar with the area.
@@ -41,8 +41,8 @@ attestations.
 
 ### Review Every Single Revision
 
-|                |                                                             |
-| :------------- | :-----------------------------------------------------------
+| | |
+| --- | ---
 | **Summary** | The final revision was reviewed by experts prior to submission.
 | **Intended for** | The highest-of-high-security-posture repos.
 | **Benefits** | Provides maximum chance for experts to spot problems.
@@ -60,8 +60,8 @@ attestations.
 
 ### Automated testing
 
-|                |                                                             |
-| :------------- | :-----------------------------------------------------------
+| | |
+| --- | ---
 | **Summary** | The final revision was validated by automated tests.
 | **Intended for** | All organizations and repositories.
 | **Benefits** | Improves accuracy, prevents errors, and reduces human load.
@@ -144,8 +144,8 @@ topic branch.
 
 ### Immutable Change Discussion
 
-|                |                                                             |
-| :------------- | :-----------------------------------------------------------
+| | |
+| --- | ---
 | **Summary** | The discussion around a change is preserved and immutable.
 | **Intended for** | Large orgs, or where discussion is vital to change management.
 | **Benefits** | Enables future education, forensics, and security auditing.
