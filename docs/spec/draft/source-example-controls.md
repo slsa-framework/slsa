@@ -20,11 +20,11 @@ attestations.
 
 ### Expert Code Review
 
-|                |                                                              |
-| :------------- | :----------------------------------------------------------- |
-| **Summary** | All changes to the source are pre-approved by experts.       |
-| **Intended for** | Enterprise repositories and mature open source projects.   |
-| **Benefits** | Prevents mistakes by developers unfamiliar with the area.    |
+|                |                                                             |
+| :------------- | :-----------------------------------------------------------|
+| **Summary** | All changes to the source are pre-approved by experts.|
+| **Intended for** | Enterprise repositories and mature open source projects.|
+| **Benefits** | Prevents mistakes by developers unfamiliar with the area.|
 
 **Requirements**
 
@@ -41,11 +41,11 @@ attestations.
 
 ### Review Every Single Revision
 
-|                |                                                              |
-| :------------- | :----------------------------------------------------------- |
+|                |                                                             |
+| :------------- | :-----------------------------------------------------------|
 | **Summary** | The final revision was reviewed by experts prior to submission.|
-| **Intended for** | The highest-of-high-security-posture repos.                |
-| **Benefits** | Provides maximum chance for experts to spot problems.      |
+| **Intended for** | The highest-of-high-security-posture repos.|
+| **Benefits** | Provides maximum chance for experts to spot problems.|
 
 **Requirements**
 
@@ -60,11 +60,11 @@ attestations.
 
 ### Automated testing
 
-|                |                                                              |
-| :------------- | :----------------------------------------------------------- |
-| **Summary** | The final revision was validated by automated tests.         |
-| **Intended for** | All organizations and repositories.                          |
-| **Benefits** | Improves accuracy, prevents errors, and reduces human load.  |
+|                |                                                             |
+| :------------- | :-----------------------------------------------------------|
+| **Summary** | The final revision was validated by automated tests.|
+| **Intended for** | All organizations and repositories.|
+| **Benefits** | Improves accuracy, prevents errors, and reduces human load.|
 
 **Requirements**
 
@@ -85,10 +85,10 @@ topic branch.
 
 ### Every revision reachable from a branch was approved
 
-|              |                                                                |
-| :----------- | :------------------------------------------------------------- |
-| **Summary** | New revisions are created based ONLY on approved changes.      |
-| **Benefits** | Prevents attacks that hide malicious, unreviewed commits.    |
+|              |                                                               |
+| :----------- | :-------------------------------------------------------------|
+| **Summary** | New revisions are created based ONLY on approved changes.|
+| **Benefits** | Prevents attacks that hide malicious, unreviewed commits.|
 
 **Requirements**
 
@@ -130,7 +130,7 @@ topic branch.
 
         To guarantee that only commits representing reviewed diffs are cloned,
         the SCS MUST rebase (or "squash") the reviewed diff into a single new
--       commit (the "squashed" commit) that has only a single parent (the
+        commit (the "squashed" commit) that has only a single parent (the
         revision previously pointed-to by the protected branch). This is
         different than a standard merge commit strategy which would cause all
         the user-contributed commits to become reachable from the protected
@@ -144,11 +144,11 @@ topic branch.
 
 ### Immutable Change Discussion
 
-|                |                                                              |
-| :------------- | :----------------------------------------------------------- |
-| **Summary** | The discussion around a change is preserved and immutable.   |
+|                |                                                             |
+| :------------- | :-----------------------------------------------------------|
+| **Summary** | The discussion around a change is preserved and immutable.|
 | **Intended for** | Large orgs, or where discussion is vital to change management.|
-| **Benefits** | Enables future education, forensics, and security auditing.  |
+| **Benefits** | Enables future education, forensics, and security auditing.|
 
 **Requirements**
 
