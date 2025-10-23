@@ -20,12 +20,20 @@ attestations.
 
 ### Expert Code Review
 
-<!-- markdownlint-disable-next-line MD055 -->
-| | |
-| --- | ---
-| **Summary** | All changes to the source are pre-approved by experts.
-| **Intended for** | Enterprise repositories and mature open source projects.
-| **Benefits** | Prevents mistakes by developers unfamiliar with the area.
+<dl class="as-table">
+<dt>Summary<dd>
+
+All changes to the source are pre-approved by experts.
+
+<dt>Intended for<dd>
+
+Enterprise repositories and mature open source projects.
+
+<dt>Benefits<dd>
+
+Prevents mistakes by developers unfamiliar with the area.
+
+</dl>
 
 #### Requirements
 
@@ -42,12 +50,20 @@ attestations.
 
 ### Review Every Single Revision
 
-<!-- markdownlint-disable-next-line MD055 -->
-| | |
-| --- | ---
-| **Summary** | The final revision was reviewed by experts prior to submission.
-| **Intended for** | The highest-of-high-security-posture repos.
-| **Benefits** | Provides maximum chance for experts to spot problems.
+<dl class="as-table">
+<dt>Summary<dd>
+
+The final revision was reviewed by experts prior to submission.
+
+<dt>Intended for<dd>
+
+The highest-of-high-security-posture repos.
+
+<dt>Benefits<dd>
+
+Provides maximum chance for experts to spot problems.
+
+</dl>
 
 #### Requirements
 
@@ -62,12 +78,20 @@ attestations.
 
 ### Automated testing
 
-<!-- markdownlint-disable-next-line MD055 -->
-| | |
-| --- | ---
-| **Summary** | The final revision was validated by automated tests.
-| **Intended for** | All organizations and repositories.
-| **Benefits** | Improves accuracy, prevents errors, and reduces human load.
+<dl class="as-table">
+<dt>Summary<dd>
+
+The final revision was validated by automated tests.
+
+<dt>Intended for<dd>
+
+All organizations and repositories.
+
+<dt>Benefits<dd>
+
+Improves accuracy, prevents errors, and reduces human load.
+
+</dl>
 
 #### Requirements
 
@@ -88,11 +112,16 @@ topic branch.
 
 ### Every revision reachable from a branch was approved
 
-<!-- markdownlint-disable-next-line MD055 -->
-| | |
-| --- | ---
-| **Summary** | New revisions are created based ONLY on approved changes.
-| **Benefits** | Prevents attacks that hide malicious, unreviewed commits.
+<dl class="as-table">
+<dt>Summary<dd>
+
+New revisions are created based ONLY on approved changes.
+
+<dt>Benefits<dd>
+
+Prevents attacks that hide malicious, unreviewed commits.
+
+</dl>
 
 #### Requirements
 
@@ -148,12 +177,20 @@ topic branch.
 
 ### Immutable Change Discussion
 
-<!-- markdownlint-disable-next-line MD055 -->
-| | |
-| --- | ---
-| **Summary** | The discussion around a change is preserved and immutable.
-| **Intended for** | Large orgs, or where discussion is vital to change management.
-| **Benefits** | Enables future education, forensics, and security auditing.
+<dl class="as-table">
+<dt>Summary<dd>
+
+The discussion around a change is preserved and immutable.
+
+<dt>Intended for<dd>
+
+Large orgs, or where discussion is vital to change management.
+
+<dt>Benefits<dd>
+
+Enables future education, forensics, and security auditing.
+
+</dl>
 
 #### Requirements
 
