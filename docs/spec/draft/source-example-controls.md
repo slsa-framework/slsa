@@ -3,8 +3,6 @@ title: "Source: Example controls"
 description: "This page provides examples of additional controls that organizations may want to implement as they adopt the SLSA Source track."
 ---
 
-## Potential Technical Controls
-
 In addition to the requirements for SLSA Source L4, most organizations will
 require multiple of these controls as part of their required protections.
 
