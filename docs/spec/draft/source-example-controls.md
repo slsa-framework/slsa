@@ -117,6 +117,10 @@ topic branch.
 
 New revisions are created based ONLY on approved changes.
 
+<dt>Intended for<dd>
+
+All organizations and repositories.
+
 <dt>Benefits<dd>
 
 Prevents attacks that hide malicious, unreviewed commits.
@@ -202,7 +206,27 @@ All collected content SHOULD be made immutable if the change is accepted. It
 SHOULD NOT be possible to edit the discussion around a revision after it has
 been accepted.
 
-### Fast moving repos and "merge trains"
+### Merge trains
+
+<dl class="as-table">
+<dt>Summary<dd>
+
+A buffer branch (or "train") collects a certain number of approved changes
+before merging into the protected branch.
+
+<dt>Intended for<dd>
+
+Large organizations with high-velocity repositories where the protected branch
+needs to remain stable for longer periods.
+
+<dt>Benefits<dd>
+
+Allows more time for human and automatic code review by stabilizing the
+protected branch.
+
+</dl>
+
+#### Requirements
 
 Large organizations must keep the number of updates to key protected branches
 under certain limits to allow time for code review to happen. For example, if
