@@ -449,7 +449,11 @@
 
     - title: Assessing source control systems
       url: /spec/draft/assessing-source-systems
-      description: Guidelines for assessing source control system security. 
+      description: Guidelines for assessing source control system security.
+
+    - title: Example controls
+      url: /spec/draft/source-example-controls
+      description: This page provides examples of additional controls that organizations may want to implement as they adopt the SLSA Source track.
 
   - title: Cross Track Information
     description: These pages describe information that crosses track boundaries.
