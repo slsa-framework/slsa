@@ -339,12 +339,13 @@ The SCS MUST ensure this information is protected from tampering and
 falsification from both users and platform administrators.
 
 > For example:
-> 1. The SCS may record detailed metadata for revisions in signed
+>
+> 1.  The SCS may record detailed metadata for revisions in signed
 Source Provenance, protecting it from tampering from other components of the
 system. OR
-> 2. The SCS may record the detailed metadata (or a digest of that metadata) in
+> 2.  The SCS may record the detailed metadata (or a digest of that metadata) in
 a transparency log. OR
-> 3. The SCS may undergo a thorough security review that covers its design,
+> 3.  The SCS may undergo a thorough security review that covers its design,
 technical controls, and ACLs, and audits real-world usage to ensure the history
 is accurate.
 
@@ -352,9 +353,10 @@ The SCS MUST make history information available to all authorized consumers of
 source revisions.
 
 > For example:
-> 1. The SCS makes history information available via Source Provenance. OR
-> 2. The SCS makes history information available via a documented and trusted
-API. 
+>
+> 1.  The SCS makes history information available via Source Provenance. OR
+> 2.  The SCS makes history information available via a documented and trusted
+API.
 
 If Source Revisions have ancestry relationships in the VCS, the SCS MUST ensure
 that a Branch can only be updated to point to revisions that descend from the
