@@ -28,7 +28,7 @@ The following terms apply to Version Control Systems:
 | Change | A modification to the state of the Source Repository, such as creation of a new Source Revision based on a previous Source Revision, or creation, deletion, or modification of a Named Reference.
 | Change History | A record of the history of Source Revisions that preceded a specific revision.
 | Branch | A Named Reference that moves to track the Change History of a cohesive line of development within a Source Repository. E.g. `main`, `develop`, `feature-x`
-| Tag | A Named Reference that is intended to be immutable. Once created, it is not moved to point to a different revision. E.g. `v1.2.3`, `release-20250722`
+| <span id="tag">Tag</span> | A Named Reference that is intended to be immutable. Once created, it is not moved to point to a different revision. E.g. `v1.2.3`, `release-20250722`
 
 > **NOTE:** The 'branch' and 'tag' features within version control systems may
 not always align with the 'Branch' and 'Tag' definitions provided in this
@@ -212,8 +212,8 @@ its consumable Source Revisions.
 If the SCS provides this capability by design, no additional controls are needed.
 Otherwise the organization MUST provide evidence of [continuous enforcement](#continuity).
 
-If the SCS supports Tags, the SCS MUST be configured to prevent them from
-being moved or deleted.
+If the SCS supports [Tags](#tag), the SCS MUST be configured to prevent them
+from being moved or deleted.
 
 > For example, if a git tag `release1` is used to indicate a release revision
 with ID `abc123`, controls must be configured to prevent that tag from being
