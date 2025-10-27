@@ -80,7 +80,7 @@ level.
 | Track/Level | Requirements | Focus
 | ----------- | ------------ | -----
 | [Source L1](#source-l1)  | Use a version control system. | Generation of discrete Source Revisions for precise consumption.
-| [Source L2](#source-l2)  | Preserve Change History and generate Source Provenance. | Reliable history through enforced controls and evidence.
+| [Source L2](#source-l2)  | Preserve Change History. | Reliable history through enforced controls and evidence.
 | [Source L3](#source-l3)  | Enforce organizational technical controls. | Consumer knowledge of guaranteed technical controls.
 | [Source L4](#source-l4)  | Require code review. | Improved code quality and resistance to insider threats.
 
@@ -105,15 +105,12 @@ Migrating to the appropriate tools is an important first step on the road to ope
 </section>
 <section id="source-l2">
 
-### Level 2: History & Provenance
+### Level 2: History
 
 <dl class="as-table">
 <dt>Summary<dd>
 
-Branch history is continuous, immutable, and retained, and the
-SCS issues Source Provenance Attestations for each new Source Revision.
-The attestations provide contemporaneous, tamper-resistant evidence of when
-changes were made, who made them, and which technical controls were enforced.
+Branch history is continuous, immutable, and retained.
 
 <dt>Intended for<dd>
 
@@ -123,8 +120,6 @@ All organizations of any size producing software of any kind.
 
 Reliable history allows organizations and consumers to track changes to software
 over time, enabling attribution of those changes to the actors that made them.
-Source Provenance provides strong, tamper-resistant evidence of the process that
-was followed to produce a Source Revision.
 
 </dl>
 </section>
@@ -144,7 +139,7 @@ Organizations that want to show evidence of their additional technical controls.
 <dt>Benefits<dd>
 
 A verifier can use this published data to ensure that a given Source Revision
-was created in the correct way by verifying the Source Provenance or VSA.
+was created in the correct way.
 Provides verifiers strong evidence of all technical controls enforced during the update of a Named Reference.
 
 </dl>
@@ -218,8 +213,8 @@ from being moved or deleted.
 > For example, if a git tag `release1` is used to indicate a release revision
 with ID `abc123`, controls must be configured to prevent that tag from being
 updated to any other revision in the future.
-Evidence of these controls (and their continuity) will appear in the Source
-Provenance documents for revision `abc123`.
+Evidence of these controls (and their continuity) will appear in the history for
+revision `abc123`.
 
 <td><td>✓<td>✓<td>✓
 <tr id="safe-expunging-process"><td>Safe Expunging Process <a href="#safe-expunging-process">🔗</a><td>
@@ -270,16 +265,12 @@ if possible.
 <td><td>✓<td>✓<td>✓
 <tr id="technical-controls"><td>Continuous technical controls <a href="#technical-controls">🔗</a><td>
 
-The organization MUST provide evidence of continuous enforcement via technical
-controls for any claims made in the Source Provenance attestations or VSAs (see
-[control continuity](#continuity)).
-
 The organization MUST document the meaning of their enforced technical controls.
 
 > For example, if an organization implements a technical control via a custom
-tool (such as required GitHub Actions workflow), it must indicate the name of
-this tool, what it accomplishes, and how to find its evidence in the provenance
-attestation.
+tool (such as required GitHub Actions workflow) and tracks its status in
+provenance attestations, it must indicate the name of this tool, what it
+accomplishes, and how to find its evidence in the provenance attestation.
 
 > For another example, if the organization claims that all consumable Source
 Revisions on the `main` branch were tested prior to acceptance, this MUST be
@@ -318,22 +309,18 @@ non-plain-text changes (e.g. render images, verify and display provenance for
 binaries, etc.).
 
 <td>✓<td>✓<td>✓<td>✓
-<tr id="source-summary"><td>Source Verification Summary Attestations <a href="#source-summary">🔗</a><td>
+<tr id="source-summary"><td>Source Revision status <a href="#source-summary">🔗</a><td>
 
-The SCS MUST generate a
-[source verification summary attestation](#source-verification-summary-attestation) (Source VSA)
-to indicate the SLSA Source Level of any revision at Level 1 or above.
+The SCS MUST provide a method for consumers of Source Revisions to determine
+what SLSA Source Level is claimed for that revision as well as which additional
+technical controls were continuously in place for the creation of those
+revisions.
 
-If a consumer is authorized to access a revision, they MUST be able to fetch the
-corresponding Source VSA.
-
-If the SCS DOES NOT generate a VSA for a revision, the revision has Source Level
-0.
-
-At Source Levels 1 and 2 the SCS MAY issue these attestations based on its
-understanding of the underlying system (e.g. based on design docs, security
-reviews, etc.), but at Level 2+ the SCS MUST use the SCS-issued
-[source provenance](#source-provenance) when issuing the VSAs.
+> For example, an SCS may generate a
+[source verification summary attestation](#source-verification-summary-attestation)
+(Source VSA) to indicate the SLSA Source Level of any revision at Level 1 or
+above.  If the SCS DOES NOT generate a VSA for a revision, the revision is
+assumed to have Source Level 0.
 
 <td>✓<td>✓<td>✓<td>✓
 
@@ -347,6 +334,27 @@ There are three key aspects to change history:
 
 To answer these questions, the SCS MUST record all changes to Named References,
 including when they occurred, who made them, and the new Source Revision ID.
+
+The SCS MUST ensure this information is protected from tampering and
+falsification from both users and platform administrators.
+
+> For example:
+> 1. The SCS may record detailed metadata for revisions in signed
+Source Provenance, protecting it from tampering from other components of the
+system. OR
+> 2. The SCS may record the detailed metadata (or a digest of that metadata) in
+a transparency log. OR
+> 3. The SCS may undergo a thorough security review that covers its design,
+technical controls, and ACLs, and audits real-world usage to ensure the history
+is accurate.
+
+The SCS MUST make history information available to all authorized consumers of
+source revisions.
+
+> For example:
+> 1. The SCS makes history information available via Source Provenance. OR
+> 2. The SCS makes history information available via a documented and trusted
+API. 
 
 If Source Revisions have ancestry relationships in the VCS, the SCS MUST ensure
 that a Branch can only be updated to point to revisions that descend from the
@@ -367,10 +375,10 @@ history of a Branch.
 'Control continuity' reflects an organization's ongoing commitment to a
 technical control.
 
-For each technical control claimed in a VSA, continuity MUST be established and
-tracked from a specific start revision.
-If there is a lapse in continuity for a specific control, continuity of that
-control MUST be re-established from a new revision.
+The SCS MUST record which technical controls were in place during the creation
+of each revision and it MUST ensure each control was in place from a specific
+start revision. If there is a lapse in continuity for a specific control,\
+continuity of that control MUST be re-established from a new revision.
 
 Exceptions to the continuity requirement are allowed via the [safe expunging process](#safe-expunging-process).
 
@@ -401,42 +409,6 @@ The SCS MUST document how actors are identified for the purposes of attribution.
 
 Activities conducted on the SCS SHOULD be attributed to authenticated
 identities.
-
-<td><td>✓<td>✓<td>✓
-
-<tr id="source-provenance"><td>Source Provenance <a href="#source-provenance">🔗</a><td>
-
-[Source Provenance](#source-provenance-attestations) are attestations that
-contain information about how a specific revision was created and how it came to
-exist on a protected branch or how a tag came to point at it. They are
-associated with the revision identifier delivered to consumers and are a
-statement of fact from the perspective of the SCS. The SCS MUST document the
-format and intent of all Source Provenance attestations it produces.
-
-Source Provenance MUST be created contemporaneously with the branch being
-updated such that they provide a credible, auditable, record of changes.
-
-If a consumer is authorized to access a revision, they MUST be able to access the
-corresponding Source Provenance documents for that revision.
-
-It is possible that an SCS can make no claims about a particular revision.
-
-> For example, this would happen if the revision was created on another SCS,
-on an unprotected branch (such as a `topic` branch), or if the revision was not
-the result of the expected process.
-
-The SCS MUST
-
--   Allow organizations to provide
-   [organization-specified properties](#additional-properties) to be included in the
-   [Source VSA](#source-verification-summary-attestation) when the corresponding controls are
-   enforced.
--   Allow organizations to distribute additional attestations related to their
-   technical controls to consumers authorized to access the corresponding Source
-   Revision.
--   Prevent organization-specified properties from beginning with any value
-   other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
-   corresponding claims.
 
 <td><td>✓<td>✓<td>✓
 <tr id="protected-refs"><td>Protected Named References <a href="#protected-refs">🔗</a><td>
