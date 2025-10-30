@@ -48,10 +48,6 @@ The following terms apply to Source Control Systems:
 | --- | ---
 | Organization | A set of people who collectively create Source Revisions within a Source Repository. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals of a Source Repository and the methods used to produce new Source Revisions.
 | Proposed Change | A proposal to make a Change in a Source Repository.
-| Propose | When an actor uploads a Proposed Change, making it available to Review, Approve, or Submit.
-| Review | When an actor considers and comments upon a Proposed Change.
-| Approve | When an actor endorses a Proposed Change.
-| Submit | When an actor applies a Proposed Change to the repository, making it a Change.
 | Source Provenance | Information about how a Source Revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and which parent revisions preceded it.
 
 ### Source Roles
