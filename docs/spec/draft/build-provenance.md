@@ -44,6 +44,10 @@ software artifacts through execution of the `buildDefinition`.
 
 ![Build Model](images/provenance-model.svg)
 
+> NOTE: This diagram depicts how the SLSA Provenance format is structured.  It
+> elaborates on the [SLSA Build Model](terminology#build-model) but only applies
+> to the SLSA Provenance format specifically and not to builds in general.
+
 The model is as follows:
 
 -   Each build runs as an independent process on a multi-tenant build platform.
