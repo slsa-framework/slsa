@@ -316,11 +316,11 @@ what SLSA Source Level is claimed for that revision as well as which additional
 technical controls were continuously in place for the creation of those
 revisions.
 
-> For example, an SCS may generate a
-[source verification summary attestation](#source-verification-summary-attestation)
-(Source VSA) to indicate the SLSA Source Level of any revision at Level 1 or
-above.  If the SCS DOES NOT generate a VSA for a revision, the revision is
-assumed to have Source Level 0.
+> For example, an SCS MAY use
+[source verification summary attestations](#source-verification-summary-attestation)
+(Source VSAs) to communicate the SLSA Source Level of Source Revisions.  In this
+case, if the SCS DOES NOT generate a VSA for a revision, the revision is assumed
+to have Source Level 0.
 
 <td>✓<td>✓<td>✓<td>✓
 
