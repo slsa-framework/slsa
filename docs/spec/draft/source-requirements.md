@@ -379,7 +379,7 @@ technical control.
 
 The SCS MUST record which technical controls were in place during the creation
 of each revision and it MUST ensure each control was in place from a specific
-start revision. If there is a lapse in continuity for a specific control,\
+start revision. If there is a lapse in continuity for a specific control,
 continuity of that control MUST be re-established from a new revision.
 
 Exceptions to the continuity requirement are allowed via the [safe expunging process](#safe-expunging-process).
