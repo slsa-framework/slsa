@@ -8,8 +8,8 @@
   url: /current-activities
   description: What the SLSA community is currently working on
 
-- title: SLSA v1.2 RC1
-  url: /spec/v1.2-rc1/
+- title: SLSA v1.2 RC2
+  url: /spec/v1.2-rc2/
   children:
 
   - title: Understanding SLSA
@@ -20,35 +20,35 @@
     children:
 
     - title: What's new
-      url: /spec/v1.2-rc1/whats-new
-      description: The changes brought by this Working Draft.
+      url: /spec/v1.2-rc2/whats-new
+      description: The changes brought by this revision of SLSA.
 
     - title: About SLSA
-      url: /spec/v1.2-rc1/about
+      url: /spec/v1.2-rc2/about
       description: An introductory guide to SLSA
 
     - title: Supply chain threats
-      url: /spec/v1.2-rc1/threats-overview
+      url: /spec/v1.2-rc2/threats-overview
       description: An introduction to supply chain threats
 
     - title: Use cases
-      url: /spec/v1.2-rc1/use-cases
+      url: /spec/v1.2-rc2/use-cases
       description: Use cases
 
     - title: Guiding principles
-      url: /spec/v1.2-rc1/principles
+      url: /spec/v1.2-rc2/principles
       description: Use cases
 
     - title: FAQ
-      url: /spec/v1.2-rc1/faq
+      url: /spec/v1.2-rc2/faq
       description: Questions and more information
 
     - title: Future directions
-      url: /spec/v1.2-rc1/future-directions
+      url: /spec/v1.2-rc2/future-directions
       description: Additions and changes being considered for future SLSA versions
 
     - title: Tracks
-      url: /spec/v1.2-rc1/tracks
+      url: /spec/v1.2-rc2/tracks
       description: Provides an overview of each track and links to more specific information.
 
   - title: Build Track
@@ -59,27 +59,27 @@
     children:
 
     - title: Basics
-      url: /spec/v1.2-rc1/build-track-basics
+      url: /spec/v1.2-rc2/build-track-basics
       description: The SLSA build track is organized into a series of levels that provide increasing supply chain security guarantees. This gives you confidence that software hasn't been tampered with and can be securely traced back to its source. This page is a descriptive overview of the SLSA build track levels, describing their intent.
 
     - title: Terminology
-      url: /spec/v1.2-rc1/terminology
+      url: /spec/v1.2-rc2/terminology
       description: Terminology and model used by SLSA
 
     - title: Producing artifacts
-      url: /spec/v1.2-rc1/build-requirements
+      url: /spec/v1.2-rc2/build-requirements
       description: Detailed technical requirements for producing software artifacts, intended for platform implementers
 
     - title: Distributing provenance
-      url: /spec/v1.2-rc1/distributing-provenance
+      url: /spec/v1.2-rc2/distributing-provenance
       description: Detailed technical requirements for distributing provenance, intended for platform implementers and software distributors
 
     - title: Verifying artifacts
-      url: /spec/v1.2-rc1/verifying-artifacts
+      url: /spec/v1.2-rc2/verifying-artifacts
       description: Guidance for verifying software artifacts and their SLSA provenance, intended for platform implementers and software consumers
 
     - title: Assessing build platforms
-      url: /spec/v1.2-rc1/assessing-build-platforms
+      url: /spec/v1.2-rc2/assessing-build-platforms
       description: Guidelines for securing SLSA Build L3+ builders, intended for platform implementers
 
   - title: Source Track
@@ -90,23 +90,27 @@
     children:
 
     - title: Producing source
-      url: /spec/v1.2-rc1/source-requirements
+      url: /spec/v1.2-rc2/source-requirements
       description: Overview of the Source track
 
     - title: Verifying source
-      url: /spec/v1.2-rc1/verifying-source
+      url: /spec/v1.2-rc2/verifying-source
       description: Guidelines for verifying source provenance
 
     - title: Assessing source control systems
-      url: /spec/v1.2-rc1/assessing-source-systems
+      url: /spec/v1.2-rc2/assessing-source-systems
       description: Guidelines for assessing source control system security.
+
+    - title: Example controls
+      url: /spec/v1.2-rc2/source-example-controls
+      description: This page provides examples of additional controls that organizations may want to implement as they adopt the SLSA Source track.
 
   - title: Cross Track Information
     description: These pages describe information that crosses track boundaries.
     children:
 
     - title: Threats & mitigations
-      url: /spec/v1.2-rc1/threats
+      url: /spec/v1.2-rc2/threats
       description: Detailed information about specific supply chain attacks and how SLSA helps
 
   - title: Attestation formats
@@ -117,23 +121,23 @@
     children:
 
     - title: General model
-      url: /spec/v1.2-rc1/attestation-model
+      url: /spec/v1.2-rc2/attestation-model
       description: General attestation mode
 
     - title: Provenance
-      url: /spec/v1.2-rc1/provenance
+      url: /spec/v1.2-rc2/provenance
       description: Provides a description of the concept of provenance and links to the various tracks specific definitions.
 
     - title: Build Provenance
-      url: /spec/v1.2-rc1/build-provenance
+      url: /spec/v1.2-rc2/build-provenance
       description: Suggested build provenance format and explanation
 
     - title: Verification Summary
-      url: /spec/v1.2-rc1/verification_summary
+      url: /spec/v1.2-rc2/verification_summary
       description: Suggested VSA format and explanation
 
   - title: Single-page view
-    url: /spec/v1.2-rc1/onepage
+    url: /spec/v1.2-rc2/onepage
     skip_next_prev: true  # don't show as a next/prev link
 
 - title: SLSA v1.1
