@@ -538,7 +538,7 @@ The following fields from v0.2 are no longer present in v1.0:
 
 ### v1.2
 
--   Note the difference between the _provenance_ build model diagram and
+-   Note the difference between the *provenance* build model diagram and
     the general SLSA build model diagram.
 
 ### v1.0

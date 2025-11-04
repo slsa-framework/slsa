@@ -54,4 +54,3 @@ their standards.
 -   [Source provenance](source-requirements#source-provenance-attestations)
 -   [Assessing source systems](assessing-source-systems.md)
 -   [Example controls](source-example-controls.md)
-
