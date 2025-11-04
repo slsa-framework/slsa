@@ -421,19 +421,6 @@ It is possible that an SCS can make no claims about a particular revision.
 on an unprotected branch (such as a `topic` branch), or if the revision was not
 the result of the expected process.
 
-The SCS MUST
-
--   Allow organizations to provide
-   [organization-specified properties](#additional-properties) to be included in the
-   [Source VSA](#source-verification-summary-attestation) when the corresponding controls are
-   enforced.
--   Allow organizations to distribute additional attestations related to their
-   technical controls to consumers authorized to access the corresponding Source
-   Revision.
--   Prevent organization-specified properties from beginning with any value
-   other than `ORG_SOURCE_` unless the SCS endorses the veracity of the
-   corresponding claims.
-
 <td><td>✓<td>✓<td>✓
 <tr id="protected-refs"><td>Protected Named References <a href="#protected-refs">🔗</a><td>
 
@@ -455,6 +442,20 @@ all `refs/tags/releases/*` using tag protection rules
 [GitLab](https://docs.gitlab.com/user/project/protected_tags/))
 or via the application and verification of [gittuf](https://github.com/gittuf/gittuf)
 policies.
+
+The SCS MUST
+
+-   Record technical controls enforced on Named References in contemporaneously
+   produced attestations associated with the corresponding Source Revisions.
+-   Allow organizations to provide
+   [organization-specified properties](#additional-properties) to be included in the
+   [Source VSA](#source-verification-summary-attestation) when the corresponding controls are
+   enforced.
+-   Allow organizations to distribute additional attestations related to their
+   technical controls to consumers authorized to access the corresponding Source
+   Revision.
+-   Prevent organization-specified properties from beginning with any value
+   other than `ORG_SOURCE_`.
 
 <td><td><td>✓<td>✓
 <tr id="two-party-review"><td>Two-party review <a href="#two-party-review">🔗</a><td>
@@ -531,23 +532,20 @@ MAY include additional properties as asserted by the SCS.  The SCS MUST include 
 #### Additional properties
 
 The SLSA source track MAY create additional properties to include in
-`verifiedLevels` which attest to other claims concerning a revision (e.g. if it
-was code reviewed).
+`verifiedLevels` which attest to other claims concerning a revision.
 
-The SCS MAY embed organization-provided properties within `verifiedLevels`
-corresponding to technical controls enforced by the SCS. If such properties are
-provided they MUST be prefixed with `ORG_SOURCE_` to distinguish them from other
-properties the SCS may wish to use.
+The SCS MAY embed additional properties within `verifiedLevels` provided by the
+organization as long as they are prefixed by `ORG_SOURCE_`  to distinguish them
+from other properties the SCS may wish to use. The SCS MUST enforce the use of
+this prefix for such properties. An organization MAY further differentiate
+properties using:
 
 -   `ORG_SOURCE_` to indicate a property that is meant for consumption by
    external consumers.
 -   `ORG_SOURCE_INTERNAL_` to indicate a property that is not meant for
    consumption by external consumers.
 
-The meaning of the properties is left entirely to the organization. Inclusion of
-organization-provided properties within `verifiedLevels` SHOULD NOT be
-considered an endorsement of the veracity of the organization defined property
-by the SCS.
+The meaning of the properties is left entirely to the organization.
 
 #### Populating sourceRefs
 
