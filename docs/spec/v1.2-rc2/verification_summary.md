@@ -378,9 +378,7 @@ SHOULD be
 -   The [SLSA Track](#tracks) level the referenced artifact qualifies for as
 `SLSA_<TRACK_NAME>_LEVEL_<LEVEL_NUMBER>`, or
 -   `SLSA_<TRACK NAME>_LEVEL_UNEVALUATED` if the VSA issuer does not want to
-    make a claim about the track level an artifact meets, or
--   The SLSA [verified property](verified-properties) the referenced artifact
-    qualifies for.
+    make a claim about the track level an artifact meets
 
 For example:
 
@@ -404,6 +402,8 @@ Users MAY use custom values here but MUST NOT use custom values starting with
     -   Update SlsaResult definition to discuss how to refer to new tracks and
         link to [verified properties](verified-properties) for additional SLSA
         endorsed values.
+    -   Fixed a typo where the verificationResult was incorrectly referred to
+        as slsaResult.
 -   1.1:
     -   Changed the `policy` object to recommend that the `digest` field of
         the `ResourceDescriptor` is set.

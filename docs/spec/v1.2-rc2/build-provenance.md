@@ -536,6 +536,11 @@ The following fields from v0.2 are no longer present in v1.0:
 
 ## Change history
 
+### v1.2
+
+-   Note the difference between the _provenance_ build model diagram and
+    the general SLSA build model diagram.
+
 ### v1.0
 
 Major refactor to reduce misinterpretation, including a minor change in model.

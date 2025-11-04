@@ -7,7 +7,7 @@ noindex: true
 A single page containing all the following files as different sections
 {%- endcomment -%}
 
-{% assign dir = "/spec/draft/" %}
-{% assign filenames = "whats-new,about,threats-overview,use-cases,principles,faq,future-directions,tracks,build-track-basics,terminology,build-requirements,distributing-provenance,verifying-artifacts,assessing-build-platforms,build-env-track-basics,source-requirements,verifying-source,assessing-source-systems,threats,verified-properties,attestation-model,provenance,build-provenance,verification_summary" %}
+{% assign dir = "/spec/v1.2-rc2/" %}
+{% assign filenames = "whats-new,about,threats-overview,use-cases,principles,faq,future-directions,tracks,build-track-basics,terminology,build-requirements,distributing-provenance,verifying-artifacts,assessing-build-platforms,source-requirements,verifying-source,assessing-source-systems,source-example-controls,threats,attestation-model,provenance,build-provenance,verification_summary" %}
 
 {% include onepage.liquid dir=dir filenames=filenames %}
