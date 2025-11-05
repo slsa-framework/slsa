@@ -4,7 +4,7 @@ description: The changes brought by SLSA 1.2 RC2.
 ---
 
 This document describes the major changes brought by SLSA 1.2 RC2 relative to
-the prior release, [v1.1] and the prior release candidate [v1.2 RC1].
+the prior release [v1.1] and the prior release candidate [v1.2 RC1].
 
 ## Summary of changes since v1.2 RC1
 
