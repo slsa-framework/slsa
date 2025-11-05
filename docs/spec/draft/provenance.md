@@ -8,7 +8,7 @@ an artifact back, through all the moving parts in a complex supply chain, to
 where it came from. It’s the verifiable information about software artifacts
 describing where, when, and how something was produced.
 
-The different SLSA tracks have their own, more specific, implementations of
+The different SLSA tracks may have their own, more specific, implementations of
 provenance to account for their unique needs.
 
 NOTE: If you landed here via the
