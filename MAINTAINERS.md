@@ -25,7 +25,6 @@ permissions in this repository.
 | Tom Bedford | tbedford9@bloomberg.net | @Tom Bedford | [tombedfordgit](https://github.com/tombedfordgit) | Bloomberg
 | Tom Hennen | tomhennen@google.com | @Tom Hennen | [TomHennen](https://github.com/TomHennen) | Google
 | Trishank Karthik Kuppusamy | trishank.kuppusamy@datadoghq.com | @trishank | [trishankatdatadog](https://github.com/trishankatdatadog) | Datadog
-| Zachariah Cox | zachariahcox@github.com | @zachariahcox | [zachariahcox](https://github.com/zachariahcox) | GitHub
 
 ### Becoming a Maintainer
 
@@ -56,6 +55,7 @@ candidate to the [Specification Maintainers] GitHub team.
 | --- | --- | --- | --- | ---
 | Kris K | kkris@google.com | @Kris K | [kpk47](https://github.com/kpk47) | Google
 | Joshua Lock | joshuagloe@gmail.com | @Joshua Lock |  [joshuagl](https://github.com/joshuagl) | Verizon
+| Zachariah Cox | zachariahcox@github.com | @zachariahcox | [zachariahcox](https://github.com/zachariahcox) | GitHub
 
 ### Removing a Maintainer
 
