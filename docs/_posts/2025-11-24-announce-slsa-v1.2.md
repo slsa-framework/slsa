@@ -9,8 +9,9 @@ the latest version of the SLSA specification.
 
 With the introduction of the _Source Track_, SLSA v1.2 represents a major
 milestone in the development of SLSA. The Source Track covers threats from
-the authoring and reviewing and management of source code. You can find more
-details on how SLSA addresses these threats [here](/threats). 
+the authoring and reviewing and management of source code. For more details on
+how SLSA addresses these threats please refer to
+[Threats & mitigations](/threats).
 
 Please, refer to the [What's new](/spec/v1.2/whats-new) section for further
 details.
