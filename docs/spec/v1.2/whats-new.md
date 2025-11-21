@@ -1,10 +1,15 @@
 ---
 title: What's new
-description: The changes brought by SLSA 1.2 RC2.
+description: The changes brought by SLSA 1.2.
 ---
 
-This document describes the major changes brought by SLSA 1.2 RC2 relative to
-the prior release [v1.1] and the prior release candidate [v1.2 RC1].
+This document describes the major changes brought by SLSA 1.2 relative to
+the prior release [v1.1] and the prior release candidates [v1.2 RC1],
+[v1.2 RC2].
+
+## Summary of changes since v1.2 RC2
+
+-   No changes.
 
 ## Summary of changes since v1.2 RC1
 
@@ -28,3 +33,4 @@ the prior release [v1.1] and the prior release candidate [v1.2 RC1].
 
 [v1.1]: /spec/v1.1/
 [v1.2 RC1]: /spec/v1.2-rc1/
+[v1.2 RC2]: /spec/v1.2-rc2/
