@@ -97,12 +97,12 @@ A typical build environment will go through the following lifecycle:
 
 ### Build environment threats
 
-The SLSA [Build track] defines requirements for the provenance that is produced for the build artifacts. 
-Trustworthiness of the build process largely depends on the trustworthiness of the [build environment] the build runs in. 
-The Build track assumes full trust into the [Build Platform], and provides no requirements to verify integrity of the build environment. 
+The SLSA [Build track] defines requirements for the provenance that is produced for the build artifacts.
+Trustworthiness of the build process largely depends on the trustworthiness of the [build environment] the build runs in.
+The Build track assumes full trust into the [Build Platform], and provides no requirements to verify integrity of the build environment.
 BuildEnv track intends to close this gap.
 
-Build environment is bootstrapped from a [build image], which is expected to be an artifact of a SLSA build pipeline. 
+Build environment is bootstrapped from a [build image], which is expected to be an artifact of a SLSA build pipeline.
 Build platform verifies image security properties including provenance upon starting up the environment and makes evidence of the verification available to tenants or other auditors.
 
 BuildEnv track assumes full trust in the software that comes with the build image or is installed at runtime.
@@ -110,17 +110,17 @@ Malicious software having privileged access within the build environment might b
 Image providers should manage vulnerabilities in the image components to reduce the risks of such attacks, e.g. by using SLSA Dependency track and hardening images with mandatory access control (MAC) policies.
 Control Plane may perform additional analysis of the image SBOM as it bootstraps the build environment.
 
-Bootstrapping the build environment is a complex process, especially at higher SLSA levels. 
-[Build L3] usually requires significant changes to existing build platforms to maintain ephemeral build environments. 
-It is not uncommon for the build platforms to rely on public cloud providers to manage the compute resources that power build environments. 
+Bootstrapping the build environment is a complex process, especially at higher SLSA levels.
+[Build L3] usually requires significant changes to existing build platforms to maintain ephemeral build environments.
+It is not uncommon for the build platforms to rely on public cloud providers to manage the compute resources that power build environments.
 This in turn significantly expands the attack surface because added build platform dependencies become part of the [TCB].
-Cloud providers are big companies with complex infrastructure that often provide limited abilities to scope the context of trust and continuously validate it over time when using their services. 
+Cloud providers are big companies with complex infrastructure that often provide limited abilities to scope the context of trust and continuously validate it over time when using their services.
 
-The BuildEnv track addresses build TCB size concerns at [BuildEnv L2] and [BuildEnv L3] levels. 
+The BuildEnv track addresses build TCB size concerns at [BuildEnv L2] and [BuildEnv L3] levels.
 
-[BuildEnv L1] level assumes full trust into the Build Platform including underlying [Compute Platform] (e.g., public cloud provider). 
+[BuildEnv L1] level assumes full trust into the Build Platform including underlying [Compute Platform] (e.g., public cloud provider).
 
-[BuildEnv L2] level adds capabilities for verifying the Compute Platform providing evidence that the build environment is bootstrapped from the expected image with the expected early boot components (e.g. UEFI firmware) provided by the Compute Platform. 
+[BuildEnv L2] level adds capabilities for verifying the Compute Platform providing evidence that the build environment is bootstrapped from the expected image with the expected early boot components (e.g. UEFI firmware) provided by the Compute Platform.
 In essence L2 provides evidence of the boot time integrity of a build environment.
 L2 also addresses malicious access to the build environment using compromised Build Platform Admin credentials assuming that image has Compute Platform maintenance agents disabled in it, which are typically used for providing remote access to the virtual machine using Compute Platform APIs.
 It is the responsibility of the Image provider to disable/uninstall those agents.
@@ -131,34 +131,34 @@ The [SEV-SNP/TDX threat model] describes this level of trust reduction through t
 L3 provides evidence of continuous integrity of the build environment for the whole lifetime.
 TEE technologies are not infallible, so physical human access to hardware and side channel attacks are still a risk that is accepted at L3.
 
-This diagram outlines the lifetime of a build image between its creation and use in bootstrapping a build environment. 
-A Build Image could be compromised at any stage of its lifetime. 
+This diagram outlines the lifetime of a build image between its creation and use in bootstrapping a build environment.
+A Build Image could be compromised at any stage of its lifetime.
 Higher SLSA BuildEnv levels secure the build environment from larger classes of threats.
 
 <div class="mermaid">
-flowchart LR    
+flowchart LR
       BuildImage>Build Image] ---> |L1|BuildPlatform[[Build Platform]]
       BuildPlatform[[Build Platform]] ---> |L2|ComputeProvider[[Compute Provider]]
       ComputeProvider[[Compute Provider]] ---> |L3|BuildEnvironment[(Build Environment)]
 </div>
 
-[BuildEnv L1] protects from threats that happened during the build image _distribution_, i.e. in between image creation and consumption (e.g., pulling image from a shared registry) by the Build Platform. 
+[BuildEnv L1] protects from threats that happened during the build image *distribution*, i.e. in between image creation and consumption (e.g., pulling image from a shared registry) by the Build Platform.
 This covers the case of unauthorized modifications to the image as it is distributed (potentially via untrusted channels).
 
 [BuildEnv L2] delivers boot time integrity providing cryptographic evidence that the build environment has been bootstrapped to an expected state.
-The Compute platform is fully trusted at this level as it provides a virtual TPM device that performs boot measurements. 
+The Compute platform is fully trusted at this level as it provides a virtual TPM device that performs boot measurements.
 
-[BuildEnv L3] extends boot time integrity into the run time all the way until the Build Environment is terminated. 
+[BuildEnv L3] extends boot time integrity into the run time all the way until the Build Environment is terminated.
 L3 addresses threats coming from malicious actors (e.g., software agents or compromised admin credentials) in the Compute Platform host interface (see [SEV-SNP/TDX threat model] for the list of threats).
 Vulnerabilities in the software that is legitimally included in the Build Image are out of scope.
 Physical and side-channel attacks are out of scope too but may be considered in the additional future levels of this track.
 
-Practically, achieving L3 requires the build running in a confidential VM using technologies like [AMD SEV-SNP] and [Intel TDX]. 
+Practically, achieving L3 requires the build running in a confidential VM using technologies like [AMD SEV-SNP] and [Intel TDX].
 Compute Platform footprint in TCB is reduced but may not be eliminated completely if a confidential VM uses custom virtualization components running within it (e.g., [paravisor]).
 
-NOTE: [Control Plane] is considered trusted at L2 and L3 because it _verifies_ the remote attestation of the build environment. 
-Build platforms MAY provide capabilities that let tenants perform remote attestation using a third-party verifier. 
-However, for the Control Plane to be considered untrusted it should have no back-door access to the build environment (e.g. via SSH). 
+NOTE: [Control Plane] is considered trusted at L2 and L3 because it *verifies* the remote attestation of the build environment.
+Build platforms MAY provide capabilities that let tenants perform remote attestation using a third-party verifier.
+However, for the Control Plane to be considered untrusted it should have no back-door access to the build environment (e.g. via SSH).
 Besides, Control Plane provides input data to the build environment (i.e. build request message) and security risks associated with compromising inputs have to be considered as well.
 
 For the example threats refer to the [Build Threats] section.
