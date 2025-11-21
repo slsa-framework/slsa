@@ -13,8 +13,9 @@ url_to_key:
   v1.1: v11
   v1.2-rc1: v12-rc1
   v1.2-rc2: v12-rc2
+  v1.2: v12
   v1: v11
-  latest: v11
+  latest: v12
 
 # TODO: when viewing spec v0.1, it would be better to link to attestations v0.2.
 # Not sure how to implement that though.
