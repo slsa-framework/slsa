@@ -19,7 +19,7 @@ attestations.
 > the `verifiedLevels` field of the [summary
 > attestation](./source-requirements#source-verification-summary-attestation).
 
-### Expert Code Review
+## Expert Code Review
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -36,7 +36,7 @@ Prevents mistakes by developers unfamiliar with the area.
 
 </dl>
 
-#### Requirements
+### Requirements
 
 -   **Code ownership**
 
@@ -49,7 +49,7 @@ Prevents mistakes by developers unfamiliar with the area.
     actor that is a member of multiple expert groups may satisfy the
     requirement for all groups in which they are a member.
 
-### Review Every Single Revision
+## Review Every Single Revision
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -66,7 +66,7 @@ Provides maximum chance for experts to spot problems.
 
 </dl>
 
-#### Requirements
+### Requirements
 
 -   **Reset votes on all changes**
 
@@ -77,7 +77,7 @@ Provides maximum chance for experts to spot problems.
     The new approval MAY be granted by an actor who approved a previous
     iteration.
 
-### Automated testing
+## Automated testing
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -94,7 +94,7 @@ Improves accuracy, prevents errors, and reduces human load.
 
 </dl>
 
-#### Requirements
+### Requirements
 
 The organization MUST configure a branch protection rule to require that only
 revisions with passing test results can be pointed-to by the branch.
@@ -111,7 +111,7 @@ branch (containing the proposed changes) into the target branch.
 Use of the proposed merge commit should be preferred to using the tip of the
 topic branch.
 
-### Every revision reachable from a branch was approved
+## Every revision reachable from a branch was approved
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -128,7 +128,7 @@ Prevents attacks that hide malicious, unreviewed commits.
 
 </dl>
 
-#### Context
+### Context
 
 In many organizations, it is normal to review only the "net difference"
 between the tip of the topic branch and the "best merge base", the closest
@@ -148,7 +148,7 @@ fetched and become accessible from the local checkout.
 This combination of factors allows attacks where the victim performs a `git
 clone` operation followed by a `git reset --hard <unreviewed revision ID>`.
 
-#### Requirements
+### Requirements
 
 -   **Informed Review**
 
@@ -178,7 +178,7 @@ clone` operation followed by a `git reset --hard <unreviewed revision ID>`.
     the topic branch may or may not have been reviewed on an individual
     basis, and should not become reachable from the protected branch.
 
-### Immutable Change Discussion
+## Immutable Change Discussion
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -195,7 +195,7 @@ Enables future education, forensics, and security auditing.
 
 </dl>
 
-#### Requirements
+### Requirements
 
 The SCS SHOULD record a description of the proposed change and all discussions
 / commentary related to it.
@@ -207,7 +207,7 @@ All collected content SHOULD be made immutable if the change is accepted. It
 SHOULD NOT be possible to edit the discussion around a revision after it has
 been accepted.
 
-### Merge trains
+## Merge trains
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -227,7 +227,7 @@ protected branch.
 
 </dl>
 
-#### Requirements
+### Requirements
 
 Large organizations must keep the number of updates to key protected branches
 under certain limits to allow time for code review to happen. For example, if
