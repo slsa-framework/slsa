@@ -39,7 +39,7 @@
 /github-actions-workflow/v1         https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1    301
 /github-actions-workflow/v1.0       https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1    301
 
-/images/provenance/v1/model.svg         /spec/v1.1/images/provenance-model.svg      302  # floating
+/images/provenance/v1/model.svg         /spec/latest/images/provenance-model.svg      302  # floating
 /images/v1.0/supply-chain-threats-build-verification.svg    /spec/v1.0/images/supply-chain-threats-build-verification.svg   302
 /images/v1.0/supply-chain-threats.svg   /spec/v1.0/images/supply-chain-threats.svg  302
 /spec/v1.0/build-model.svg              /spec/v1.0/images/build-model.svg           302
@@ -54,20 +54,27 @@
 /provenance/v1-rc2      /spec/v1.0-rc2/provenance   301
 /provenance/v1.0        /spec/v1.0/provenance       301
 /provenance/v1.1        /spec/v1.1/provenance       301
+/provenance/v1.2        /spec/v1.2/provenance       301
 
 /spec                     /spec/latest            302  # floating
 /spec/faq                 /spec/latest/faq        302  # floating
 /spec/v1/*                /spec/v1.1/:splat       302  # floating
 /spec/v1.1/*              /spec/v1.1/:splat       302
-/spec/latest/*            /spec/v1.1/:splat       302  # floating
+/spec/v1.2/*              /spec/v1.2/:splat       302
+/spec/latest/*            /spec/v1.2/:splat       302  # floating
 /spec/current-activities  /current-activities     301
-/spec/latest/*            /spec/v1.1/:splat       302
 # Levels are defined per track. Send folks to the tracks landing page to
 # disambiguate.
 /spec/draft/levels        /spec/draft/tracks      301
 /spec/draft/provenance    /spec/draft/build-provenance   302
+/spec/latest/levels        /spec/draft/tracks      301
+/spec/latest/provenance    /spec/draft/build-provenance   302
 /spec/v1.2-rc1/build      /spec/v1.2-rc1/tracks#build-track  302
 /spec/v1.2-rc1/source     /spec/v1.2-rc1/tracks#source-track  302
+/spec/v1.2-rc2/build      /spec/v1.2-rc2/tracks#build-track  302
+/spec/v1.2-rc2/source     /spec/v1.2-rc2/tracks#source-track  302
+/spec/v1.2/build      /spec/v1.2/tracks#build-track  302
+/spec/v1.2/source     /spec/v1.2/tracks#source-track  302
 
 # Note: Versions prior to v1.0 stay in /verification_summary.
 /verification_summary           /spec/latest/verification_summary   302  # floating
@@ -79,6 +86,7 @@
 /verification_summary/v1-rc2    /spec/v1.0-rc2/verification_summary 301
 /verification_summary/v1.0      /spec/v1.0/verification_summary     301
 /verification_summary/v1.1      /spec/v1.1/verification_summary     301
+/verification_summary/v1.2      /spec/v1.2/verification_summary     301
 /verification_summary/draft     /spec/draft/verification_summary    301
 
 # Removed files. Keep URLs working forever.
