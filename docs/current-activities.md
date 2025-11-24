@@ -10,7 +10,7 @@ and expand its breadth and depth with updates and new tracks.
 
 Learn how you can [get involved](/community#get-involved)!
 
-### Build Environment track
+## Build Environment track
 
 The goal of a Build Environment track is to enable the detection of tampering
 with core components of the compute environment executing builds.
@@ -27,7 +27,7 @@ of the Build Environment track includes the following requirements:
 These requirements are **subject to significant change** while this track
 is in draft.
 
-### Dependency track
+## Dependency track
 
 The Dependency track defines requirements aimed at mitigating risks introduced to a project through its dependencies.
 

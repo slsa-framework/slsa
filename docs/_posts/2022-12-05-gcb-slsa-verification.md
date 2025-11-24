@@ -11,7 +11,7 @@ SLSA’s series of [levels](/spec/v0.1/levels) provide progressively stronger gu
 
 As we’ll see below, this new provenance information can be used to validate that builds were generated from a specific version-controlled build pipeline, and to maintain a record of the parameters used to generate the container image for policy evaluation or reproducibility.
 
-### GCB Provenance at SLSA Level 3
+## GCB Provenance at SLSA Level 3
 
 At SLSA Level 3, users have assurance that the metadata content is authentic, tamper-proof, and not altered by the project maintainers. The build definition and configuration is verifiably derived from definitions stored in versioned source control systems (known as “[build-as-code](/spec/v0.1/requirements#build-as-code)”). So in order to describe the full top-level build instructions, GCB now identifies the build configuration stored in git, the `entrypoint`, often named [cloudbuild.yaml](https://cloud.google.com/build/docs/configuring-builds/create-basic-configuration).  A record of all user-controlled parameters ([substitutions](https://cloud.google.com/build/docs/configuring-builds/substitute-variable-values)) to the build is also provided in the provenance’s `recipe`.
 
@@ -58,7 +58,7 @@ At SLSA Level 3, users have assurance that the metadata content is authentic, ta
 
 A user can view a container's provenance by following the [viewing instructions](https://cloud.google.com/build/docs/securing-builds/view-build-provenance#validate_the_provenance_metadata). Next, we’ll discuss how you can use our SLSA tools to easily verify its authenticity, integrity and properties.
 
-### Verification
+## Verification
 
 Validating SLSA Level 3 provenance can help to both verify that a build was produced by an expected source and build system and also identify whether any code was injected via an untrusted source location or build system. At SLSA Level 3, the provenance is service-generated (by GCB), verifiable for authenticity and integrity, and non-forgeable—meaning that a user cannot tamper with the provenance metadata.
 
@@ -97,7 +97,7 @@ To run the verified container image, use the `$IMMUTABLE_IMAGE` (not `$UNVERIFIE
 docker run "${IMMUTABLE_IMAGE}"
 ```
 
-### Use-Cases
+## Use-Cases
 
 In previous posts ([1](/blog/2022/06/slsa-github-workflows), [2](/blog/2022/08/slsa-github-workflows-generic-ga)), we described how consumers can use information found in non-forgeable SLSA Level 3 build provenance to evaluate policies that may prevent certain classes of supply chain attacks.
 
@@ -107,7 +107,7 @@ In particular, with the new information provided in GCB’s provenance, users ma
 jq -r '.predicate.recipe.entryPoint' verified-provenance.json # cloudbuild.yaml
 ```
 
-### Conclusion
+## Conclusion
 
 Reaching SLSA Level 3 with GCB is a major step in making provenance available to even more consumers. This is important to provide build transparency and security in your own or your end-users’ supply-chain. We encourage you to enable build provenance in your container image builds on GCB and to use our verification tools to start validating provenance for policy evaluation. We welcome all types of feedback and contributions to our [verifier](https://github.com/slsa-framework/slsa-verifier).
 
