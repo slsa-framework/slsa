@@ -227,8 +227,7 @@ Review process:
 
 3.  Wait an appropriate amount of time to allow for lazy consensus. Different
     types have different minimum waiting periods. The waiting period begins at
-    the timestamp of either the final required approval or the latest non-author
-    comment, whichever is later.
+    the timestamp of the last substantial change to the PR.
     -   If a few days have passed without any feedback please feel free to ping
     the PR and [in Slack](https://openssf.slack.com/archives/C03NUSAPKC6).
 
