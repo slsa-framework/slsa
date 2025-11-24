@@ -67,8 +67,7 @@
 # disambiguate.
 /spec/draft/levels        /spec/draft/tracks      301
 /spec/draft/provenance    /spec/draft/build-provenance   302
-/spec/latest/levels        /spec/draft/tracks      301
-/spec/latest/provenance    /spec/draft/build-provenance   302
+/spec/latest/levels        /spec/v1.2/tracks      301
 /spec/v1.2-rc1/build      /spec/v1.2-rc1/tracks#build-track  302
 /spec/v1.2-rc1/source     /spec/v1.2-rc1/tracks#source-track  302
 /spec/v1.2-rc2/build      /spec/v1.2-rc2/tracks#build-track  302
