@@ -11,7 +11,7 @@ ecosystem. You’ll see how each step in a project’s build can be protected
 through attested data, using VSA receipts to capture and verify each step
 integrity along the way.
 
-### Requirements
+## Requirements
 
 This example runs through the
 [release workflow in the SLSA E2E demo repository](https://github.com/carabiner-dev/demo-slsa-e2e/blob/main/.github/workflows/release.yaml).

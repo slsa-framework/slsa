@@ -18,7 +18,7 @@ Consumers can review attestations to verify whether a particular revision meets 
 | --- | ---
 | Source | An identifiable set of text and binary files and associated metadata. Source is regularly used as input to a build system (see [SLSA Build Track](build-requirements.md)).
 | Organization | A set of people who collectively create the Source. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals and methods of the source.
-| Version Control System (VCS)| Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
+| Version Control System (VCS) | Software for tracking and managing changes to source. Git and Subversion are examples of version control systems.
 | Revision | A specific state of the source with an identifier provided by the version control system. As an example, you can identify a git revision by its commit object ID.
 | Source Control System (SCS) | A suite of tools and services (self-hosted or SaaS) relied upon by the organization to produce new revisions of the source. The role of the SCS may be fulfilled by a single service (e.g., GitHub / GitLab) or a combination of services (e.g., GitLab with Gerrit code reviews, GitHub with OpenSSF Scorecard, etc).
 | Source Provenance | Information about how a revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and which parent revisions preceded it.
@@ -58,10 +58,10 @@ level.
 
 | Track/Level | Requirements | Focus
 | ----------- | ------------ | -----
-| [Source L1](#source-l1)  | Use a version control system | First steps towards operational maturity
-| [Source L2](#source-l2)  | History and controls for protected branches & tags | Preserve history and ensure the process has been followed
-| [Source L3](#source-l3)  | Signed provenance | Tampering by the source control system
-| [Source L4](#source-l4)  | Code review | Tampering by project contributors
+| [Source L1](#source-l1) | Use a version control system | First steps towards operational maturity
+| [Source L2](#source-l2) | History and controls for protected branches & tags | Preserve history and ensure the process has been followed
+| [Source L3](#source-l3) | Signed provenance | Tampering by the source control system
+| [Source L4](#source-l4) | Code review | Tampering by project contributors
 
 <section id="source-l1">
 

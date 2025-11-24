@@ -30,9 +30,9 @@ execution context. In this track, provenance describes how a build image
 was created, how the hosted build platform deployed a build image in its
 environment, and the compute platform they used.
 
-| Track/Level   | Requirements | Focus | Trust Root
-| ------------- | ------------ | ----- | ----------
-| [BuildEnv L0] | (none)       | (n/a) | (n/a)
+| Track/Level | Requirements | Focus | Trust Root
+| ----------- | ------------ | ----- | ----------
+| [BuildEnv L0] | (none) | (n/a) | (n/a)
 | [BuildEnv L1] | Signed build image provenance exists | Tampering during build image distribution | Signed build image provenance
 | [BuildEnv L2] | Attested build environment instantiation | Tampering via the build platform's control plane | The compute platform's host interface
 | [BuildEnv L3] | Hardware-attested build environment | Tampering via the compute platform's host interface | The compute platform's hardware
