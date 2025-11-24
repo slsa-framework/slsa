@@ -30,6 +30,7 @@
 /threats                /spec/latest/threats        302  # floating
 /threats-overview       /spec/latest/threats-overview   302  # floating
 /use-cases              /spec/latest/use-cases      302  # floating
+/tracks                 /spec/latest/tracks         302  # floating
 
 # Renamed files.
 /getinvolved            /community              301
@@ -61,13 +62,13 @@
 /spec/v1/*                /spec/v1.1/:splat       302  # floating
 /spec/v1.1/*              /spec/v1.1/:splat       302
 /spec/v1.2/*              /spec/v1.2/:splat       302
-/spec/latest/*            /spec/v1.2/:splat       302  # floating
-/spec/current-activities  /current-activities     301
 # Levels are defined per track. Send folks to the tracks landing page to
 # disambiguate.
 /spec/draft/levels        /spec/draft/tracks      301
 /spec/draft/provenance    /spec/draft/build-provenance   302
 /spec/latest/levels        /spec/v1.2/tracks      301
+/spec/latest/*            /spec/v1.2/:splat       302  # floating 
+/spec/current-activities  /current-activities     301
 /spec/v1.2-rc1/build      /spec/v1.2-rc1/tracks#build-track  302
 /spec/v1.2-rc1/source     /spec/v1.2-rc1/tracks#source-track  302
 /spec/v1.2-rc2/build      /spec/v1.2-rc2/tracks#build-track  302
