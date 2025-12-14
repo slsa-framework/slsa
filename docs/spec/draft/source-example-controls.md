@@ -1,7 +1,7 @@
 ---
 title: "Source: Example controls"
 description: "This page provides examples of additional controls that
-  organizations may want to implement as they adopt the SLSA Source track."
+  organizations may want to implement as they adopt the SLSA Source track." 
 ---
 
 At SLSA Source L3+ organizations are allowed and encouraged to define their own
