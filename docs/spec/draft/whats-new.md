@@ -1,5 +1,5 @@
 ---
-title: What's new
+title: What's new 
 description: The changes brought by this Working Draft.
 ---
 
