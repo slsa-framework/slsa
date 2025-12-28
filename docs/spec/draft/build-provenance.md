@@ -1,8 +1,31 @@
 ---
-title: "Build: Provenance" 
-description: Description of SLSA build provenance specification for verifying where, when, and how something was produced.
-layout: standard
+title: Build Provenance
+description: The software supply chain is divided into different types of activities that are needed to produce software artifacts: build, build environment, dependency, and source. This page covers the provenance of the build track portion of the supply chain.
 ---
+
+This page covers the provenance of the build track portion of the supply chain.
+
+Other pages in this section cover the following topics directly related to the build track:
+
+1. [Build: Track Basics](build-track-basics.md)
+2. [Build: Requirements](build-requirements.md)
+3. [Build: Attestation formats](build-attestation.md)
+4. [Build: Verification systems](build-verification.md)
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+## Build Provenance Overview
+
+The producer MUST distribute provenance to artifact consumers. The producer
+MAY delegate this responsibility to the
+[package ecosystem], provided that the package ecosystem is capable of
+distributing provenance.
+
+### Distributing provenance
+
+
 To trace software back to the source and define the moving parts in a complex
 supply chain, provenance needs to be there from the very beginning. It's the
 verifiable information about software artifacts describing where, when, and how
@@ -21,10 +44,6 @@ attestation] framework:
 > in the URL bar. The `predicateType` URI will always resolve to the latest
 > minor version of this specification. See [parsing rules](#parsing-rules) for
 > more information.
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ## Purpose
 
