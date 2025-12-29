@@ -3,14 +3,17 @@ title: Build Track Basics
 description: The software supply chain is divided into different types of activities that are needed to produce software artifacts: build, build environment, dependency, and source. This page covers the basic overview of the build track portion of the supply chain.
 ---
 
-The software supply chain is divided into different types of activities that are needed to produce secure software artifacts: [build](build-track-basics.md), [build environment](build-env-track-basics), [dependency](depend-track-basics.md), and [source](source-track-basic.md). This page covers the basic overview of the build track portion of the supply chain. 
+# Build Track Basics
+
+The software supply chain is divided into different types of activities that are needed to produce secure software artifacts: [build](build-track-basics.md), [build environment](build-env-track-basics), [dependency](depend-track-basics.md), and [source](source-track-basic.md). This page introduces the basics of the build track portion of the supply chain.
 
 Other pages in the build section cover the following topics directly related to the build track:
 
+1. [Build: Track Basics](build-track-basics.md)
 1. [Build: Requirements](build-requirements.md)
-2. [Build: Provenence](build-provenence.md)
-3. [Build: Attestation formats](build-attestation.md)
-4. [Build: Verification systems](build-verification.md)
+1. [Build: Provenence](build-provenance.md)
+1. [Build: Attestation formats](build-attestation.md)
+1. [Build: Verification systems](build-verification.md)
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be

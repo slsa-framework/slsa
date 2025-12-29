@@ -3,6 +3,8 @@ title: Build Attestation
 description: The software supply chain is divided into different types of activities that are needed to produce software artifacts: build, build environment, dependency, and source. This page covers attestation formats for the build track portion of the supply chain.
 ---
 
+# Build Attestation
+
 This page covers attestation formats for the build track portion of the supply chain. 
 
 Other pages in this section cover the following topics directly related to the build track:

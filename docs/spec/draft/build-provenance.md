@@ -3,6 +3,8 @@ title: Build Provenance
 description: The software supply chain is divided into different types of activities that are needed to produce software artifacts: build, build environment, dependency, and source. This page covers the provenance of the build track portion of the supply chain.
 ---
 
+# Build Provenance
+
 This page covers the provenance of the build track portion of the supply chain.
 
 Other pages in this section cover the following topics directly related to the build track:
