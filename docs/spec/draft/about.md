@@ -97,7 +97,7 @@ chain between them.
 ## How SLSA works
 
 We talk about SLSA in terms of *tracks* and *levels*.
-A SLSA track focuses on a particular portion of a supply chain, such as the Build part, or the Build Environment, Dependency, or Source parts.
+A SLSA track focuses on a particular portion of a supply chain, such as the Build or Source parts.
 
 Within each track, ascending levels indicate increasingly hardened security
 practices. Higher levels provide better guarantees against supply chain threats,
