@@ -3,6 +3,8 @@ title: "Source: Assessing source control systems"
 description: Guidelines for assessing source control system security.
 ---
 
+# {Source Track: Accessing Source Control Systems}
+
 One of SLSA's guiding [principles](principles.md) is to "trust platforms, verify
 artifacts". However, consumers cannot trust source control systems (SCSs) unless
 they have some proof that an SCS meets its
