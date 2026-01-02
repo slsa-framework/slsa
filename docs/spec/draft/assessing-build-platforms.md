@@ -3,6 +3,8 @@ title: "Build: Assessing build platforms"
 description: Guidelines for assessing build platform security.
 ---
 
+# {Assessing Build Platforms}
+
 One of SLSA's guiding [principles](principles.md) is to "trust platforms, verify
 artifacts". However, consumers cannot trust platforms to produce Build L3
 artifacts and provenance unless they have some proof that the provenance is
@@ -12,7 +14,7 @@ artifacts and provenance unless they have some proof that the provenance is
 This page describes the parts of a build platform that consumers SHOULD assess
 and provides sample questions consumers can ask when assessing a build platform.
 See also [Threats & mitigations](threats.md) and the
-[build model](terminology.md#build-model).
+[build model](threats-overview.md#build-model).
 
 ## Threats
 
