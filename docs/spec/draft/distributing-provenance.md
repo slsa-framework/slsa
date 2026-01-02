@@ -3,6 +3,8 @@ title: "Build: Distributing provenance"
 description: This page covers the detailed technical requirements for distributing provenance at each SLSA level. The intended audience is platform implementers and software distributors.
 ---
 
+# {Build: Distributing Provenance}
+
 In order to make provenance for artifacts available after generation
 for verification, SLSA requires the distribution and verification of provenance
 metadata in the form of SLSA attestations.

@@ -3,32 +3,34 @@ title: "Build: Verifying artifacts"
 description: SLSA uses provenance to indicate whether an artifact is authentic or not, but provenance doesn't do anything unless somebody inspects it. SLSA calls that inspection verification, and this page describes how to verify artifacts and their SLSA provenance. The intended audience is platform implementers, security engineers, and software consumers.
 ---
 
+# {Build: Veryifying Artifacts}
+
 SLSA uses provenance to indicate whether an artifact is authentic or not, but
 provenance doesn't do anything unless somebody inspects it. SLSA calls that
 inspection **verification**, and this page describes recommendations for how to
 verify artifacts and their SLSA provenance.
 
-This page is divided into several sections. The first describes the process
+This page is divided into several sections. The [first](how-to-verify) describes the process
 for verifying an artifact and its provenance against a set of expectations. The
-second describes how to form the expectations used to verify provenance. The
-third discusses architecture choices for where provenance verification can
+[second](forming-expectations) describes how to form the expectations used to verify provenance. The
+[third](architecture) discusses architecture choices for where provenance verification can
 happen.
 
 ## How to verify
 
 Verification SHOULD include the following steps:
 
--   Ensuring that the builder identity is one of those in the map of trusted
+-   [Step 1:](step-1:-check-slsa-build-level) Ensure that the builder identity is one of those in the map of trusted
     builder id's to SLSA level.
--   Verifying the signature on the provenance envelope.
--   Ensuring that the values for `buildType` and `externalParameters` in the
+-   [Step 2:](step-2:-check-expectations) Verify the signature on the provenance envelope.
+-   [Step 3:]((optional)-check-dependencies-recursively) Ensuring that the values for `buildType` and `externalParameters` in the
     provenance match the expected values. The package ecosystem MAY allow
     an approved list of `externalParameters` to be ignored during verification.
     Any unrecognized `externalParameters` SHOULD cause verification to fail.
 
 ![Threats covered by each step](images/supply-chain-threats-build-verification.svg)
 
-See [Terminology](terminology.md) for an explanation of the supply chain model and
+See [Terminology](build-track-bassics.md#terminology) for build track terms and
 [Threats & mitigations](threats.md) for a detailed explanation of each threat.
 
 **Note:** This section assumes that the provenance is in the recommended
