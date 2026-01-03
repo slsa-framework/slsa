@@ -3,7 +3,7 @@ title: SLSA generic terminology
 description: The following generic terminology is used in the SLSA specification. 
 ---
 
-## SLSA specification generic terminology
+# {General Terminology} 
 
 The following terms and descriptions will be used throughout the SLSA specification. Examples are provided when relevant. 
 
