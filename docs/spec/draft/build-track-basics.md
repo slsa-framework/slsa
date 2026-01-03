@@ -1,21 +1,21 @@
 ---
-title: "Build: Track Basics"
+title: "Build Track: Basics"
 description: The SLSA build track is organized into a series of levels that provide increasing supply chain security guarantees. This gives you confidence that software hasn’t been tampered with and can be securely traced back to its source. This page is a descriptive overview of the SLSA build track and the levels.
 ---
 
-# {Build Track Basics}
+# {Build Track: Basics}
 
 ## Introduction
 
 {improve this introduction?}
 
-The build track part of a supply chain covers the creation of software artifacts and the security requirements you want to achieve. The amount of security you want to apply is called a level. The levels go from Level 0 (none) to Level 3 (most). The levels are outlined on this page, but more details are found on these pages:
+The build track part of a supply chain covers the creation of software artifacts and the security requirements you want to achieve. The amount of security you want to apply is called a level. The levels go from Level 0 (none) to Level 3 (most). 
 
 {list and links to other build track pages?}
 
 ## Terminology
 
-{does this need an introduction?}
+{does this need an introduction? Something like "Below are terms that apply to the Build track."}
 
 | Term | Description
 | --- | ---

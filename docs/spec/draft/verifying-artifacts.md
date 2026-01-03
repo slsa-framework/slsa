@@ -1,42 +1,43 @@
 ---
-title: "Build: Verifying artifacts"
+title: "Build Track: Verifying artifacts"
 description: SLSA uses provenance to indicate whether an artifact is authentic or not, but provenance doesn't do anything unless somebody inspects it. SLSA calls that inspection verification, and this page describes how to verify artifacts and their SLSA provenance. The intended audience is platform implementers, security engineers, and software consumers.
 ---
 
-# {Build: Veryifying Artifacts}
+# {Build Track: Verifying Artifacts}  
 
 SLSA uses provenance to indicate whether an artifact is authentic or not, but
 provenance doesn't do anything unless somebody inspects it. SLSA calls that
-inspection **verification**, and this page describes recommendations for how to
-verify artifacts and their SLSA provenance.
+inspection verification. 
 
-This page is divided into several sections. The [first](how-to-verify) describes the process
-for verifying an artifact and its provenance against a set of expectations. The
-[second](forming-expectations) describes how to form the expectations used to verify provenance. The
-[third](architecture) discusses architecture choices for where provenance verification can
-happen.
+This page describes recommendations for how to
+verify artifacts and their SLSA provenance. It explains:
 
-## How to verify
+- process for verifying an artifact and its provenance against a set of expectations.
+- how to form the expectations used to verify provenance.
+- architecture choices for where provenance verification can happen.
 
-Verification SHOULD include the following steps:
+## How to verify SLSA artifacts
 
--   [Step 1:](step-1:-check-slsa-build-level) Ensure that the builder identity is one of those in the map of trusted
-    builder id's to SLSA level.
+Verification SHOULD include the following steps. The linked steps provide a summary and connection to the detailed procedures in the [Verification Steps](#verification-steps.md) below.
+
+-   [Step 1:](step-1:-check-slsa-build-level) Ensure that the builder identity is in the map of trusted builder id's to SLSA level.
 -   [Step 2:](step-2:-check-expectations) Verify the signature on the provenance envelope.
--   [Step 3:]((optional)-check-dependencies-recursively) Ensuring that the values for `buildType` and `externalParameters` in the
+-   [Step 3:]((optional)-check-dependencies-recursively) Make sure that the values for `buildType` and `externalParameters` in the
     provenance match the expected values. The package ecosystem MAY allow
     an approved list of `externalParameters` to be ignored during verification.
     Any unrecognized `externalParameters` SHOULD cause verification to fail.
 
 ![Threats covered by each step](images/supply-chain-threats-build-verification.svg)
 
-See [Terminology](build-track-bassics.md#terminology) for build track terms and
+See [Build Track Terminology](build-track-bassics.md#terminology) for build track terms and
 [Threats & mitigations](threats.md) for a detailed explanation of each threat.
 
 **Note:** This section assumes that the provenance is in the recommended
 [provenance format](/provenance/v1). If it is not, then the verifier SHOULD
 perform equivalent checks on provenance fields that correspond to the ones
 referenced here.
+
+## Verification Steps
 
 ### Step 1: Check SLSA Build level
 
@@ -197,7 +198,7 @@ L0. (For example, consider the compiler's compiler's compiler's ... compiler.)
 [VSA]: /verification_summary
 [threats]: threats
 
-## Forming Expectations
+## Expectation Models
 
 <dfn>Expectations</dfn> are known provenance values that indicate the
 corresponding artifact is authentic. For example, a package ecosystem may
@@ -226,13 +227,13 @@ Possible models for forming expectations include:
     source repository. This is how the Go ecosystem works, for example, since
     the package name *is* the source repository location.
 
-It is important to note that expectations are tied to a *package name*, whereas
+>**Note:** that expectations are tied to a *package name*, whereas
 provenance is tied to an *artifact*. Different versions of the same package name
 will likely have different artifacts and therefore different provenance. Similarly, an
 artifact might have different names in different package ecosystems but use the same
 provenance file.
 
-## Architecture options
+## Architecture options for provenance verifications
 
 There are several options (non-mutually exclusive) for where provenance verification
 can happen: the package ecosystem at upload time, the consumers at download time, or
