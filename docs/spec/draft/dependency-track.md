@@ -5,6 +5,24 @@ description: This page describes the SLSA Dependency track, which enables a soft
 
 # {Dependency Track: Consuming Dependencies}
 
+**About this page:** the Build Track Basics page describes the SLSA Dependency track, which enables a software producer to measure, control, and reduce risk introduced from third party dependencies.
+
+**Intended audience:** {TBD}.
+
+**Topics covered:** terminology, dependency track level summary, dependency track requirements
+
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+**For more information, see:** [General SLSA terminology](terminology.md), [Build track specific terminology](build-track-basics.md#terminology).
+
+## Overview
+
+
+
 This page describes the SLSA Dependency track, which enables a software producer to measure, control, and reduce risk introduced from third party dependencies.
 
 ## Overview
