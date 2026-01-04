@@ -1,31 +1,31 @@
 ---
 title: "Build: Requirements for producing artifacts"
-description: This page covers the detailed technical requirements for producing artifacts at each SLSA level. The intended audience is platform implementers and security engineers.
+description: This page covers the technical requirements for producing artifacts at each SLSA level. 
 ---
 
 # {Build Track: Requirements for producing artifacts}
 
-This page covers the technical requirements for producing artifacts at
-each SLSA build level.
+**About this page:** the *Build Track Requirements for producing artifacts* page covers the technical requirements for producing artifacts at each SLSA level.
 
-{Maybe explain more here about this page and the parts included.}
+**Intended audience:** {platform implementers and security engineers}.
 
-The intended audience is platform implementers and security
-engineers. For information on the build track levels intended for *all* audiences, see
-[Build Track Basics](build-track-basics.md). 
+**Topics covered:** build levels, producer and build platform responsibility sharing
 
-For more information on:
-
-- Terminology 
-
-    - See [general SLSA terminology](terminology.md)
-    - See [Build track specific terminology](build-track-basics.md#terminology)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-## Build levels
+For more information on terminology, see: [General SLSA terminology](terminology.md), [Build track specific terminology](build-track-basics.md#terminology).
+
+## Overview
+
+In order to produce artifacts with a specific build level, responsibility for meeting requirements is split between the [producer](#producer-responsibilities) and the [platform](#build-platform-responsibilities). The build platform MUST strengthen the security controls in order to achieve a specific level while the
+producer MUST choose and adopt a build platform capable of achieving a desired
+build level, implementing any controls as specified by the chosen platform.
+
+### Build provenance levels
 
 The build platform MUST strengthen the security controls in order to achieve a specific level while the
 producer MUST choose and adopt a build platform capable of achieving a desired
@@ -67,7 +67,7 @@ build level, implementing any controls as specified by the chosen platform.
   <td> <td> <td>✓
 </table>
 
-### Security Best Practices
+### Security best practices for creating build levels
 
 While the exact definition of what constitutes a secure platform is beyond the
 scope of this specification, all implementations MUST use industry security
@@ -79,12 +79,12 @@ and promptly fixing known vulnerabilities.
 Various relevant standards and guides can be consulted for that matter such as
 the [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list).
 
-## Producer and Build Platform responsibility sharing
+## Responsibilities and Requirements for Producers and Build Platforms
 
 In order to produce artifacts with a specific build level, responsibility is
 split between the [Producer] and the [Build platform].
 
-### Producer responsibilities
+### Producer responsibilities and requirements
 
 [Producer]: #producer
 
@@ -127,7 +127,7 @@ MAY delegate this responsibility to the
 [package ecosystem], provided that the package ecosystem is capable of
 distributing provenance.
 
-### Build platform responsibilities
+### Build platform responsibilities and requirements
 
 [Build platform]: #build-platform
 

@@ -1,24 +1,35 @@
 ---
 title: "Build Track: Basics"
-description: The SLSA build track is organized into a series of levels that provide increasing supply chain security guarantees. This gives you confidence that software hasn’t been tampered with and can be securely traced back to its source. This page is a descriptive overview of the SLSA build track and the levels.
+description: This page introduces the SLSA build track part of the supply chain and the levels it uses to create software artifacts and the security requirements you want to achieve.
 ---
 
 # {Build Track: Basics}
 
-## Introduction
+**About this page:** the *Build Track Basics* page introduces the SLSA build track part of the supply chain and the levels it uses to create software artifacts and the security requirements you want to achieve.
 
-{improve this introduction?}
+**Intended audience:** {everyone}.
 
-The build track part of a supply chain covers the creation of software artifacts and the security requirements you want to achieve. The amount of security you want to apply is called a level. The levels go from Level 0 (none) to Level 3 (most). 
+**Topics covered:** Build track terminology, concept models, track levels
 
-{list and links to other build track pages?}
+**Internet standards:** {insert standards that apply}
 
-## Terminology
+## Overview
 
-{does this need an introduction? Something like "Below are terms that apply to the Build track."}
+{redo these into a new overview}
+{see overview of SLSA track section for lingo defining what each track means, maybe link back to the original tracks.md info}
+{more about what a level is}
+{more about what a model is}t
 
-| Term | Description
-| --- | ---
+- The SLSA build track is organized into a series of levels that provide increasing supply chain security guarantees. 
+- This gives you confidence that software hasn’t been tampered with and can be securely traced back to its source.
+- The amount of security you want to apply is called a level. The levels go from Level 0 (none) to Level 3 (most). 
+
+## Build Terminology
+
+These terms apply to SLSA Build track. See the general terminology [list](terms-generic.md) for terms used throughout the SLSA specification.
+
+| Term | Definition |
+| --- | --- |
 | Admin | A privileged user with administrative access to the platform, potentially allowing them to tamper with builds or the control plane. |
 | Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single build environment on a platform. |
 | Build caches | An intermediate artifact storage managed by the platform that maps intermediate artifacts to their explicit inputs. A build may share build caches with any subsequent build running on the platform. |
@@ -55,10 +66,6 @@ These terms can be ambiguous and should be avoided.
 
 The SLSA build track uses the following software manufacturing *models* that are based on real-world supply chain systems to define their framework criteria.
 
-1. [Build model](threats-overview#Build-model) - defines the production of software artifacts
-2. [Distribution model](threats-overview#distribution-model) - distributes the artifact provenance
-3. [Verification model](threats-overview#verification-model) - authenticates artifact provenance and certified the build platform
-
 ### Build production process model
 
 When SLSA's build model defines the production process of software artifacts, the build runs on a multi-tenant *build platform*, where each execution is independent. 
@@ -67,7 +74,7 @@ The diagram below shows the build model workflow.
 
 <p align="center"><img src="images/build-model.svg" alt="Model Build"></p>
 
-#### Workflow steps
+#### Build workflow steps
 
 1.  A tenant invokes the build by specifying *external parameters* through an
     *interface*, either directly or via a trigger. Typically, at least one of
@@ -136,7 +143,7 @@ The diagram below shows how SLSA verifies artifact provenance.
 
 ![Verification Model](images/verification-model.svg)
 
-#### Diagram terminology
+#### Verification diagram terminology
 
 | Term | Description
 | ---- | ----
@@ -169,7 +176,7 @@ implemented for different and broadly-defined package ecosystems.
 
 ## Build Track Levels
 
-{need more intro here?}
+Provenance describes how the artifact was created. Levels define the type of provenance. Each type gives you a different kind of security, with the zero being the lowest level and 3 providing the most security. 
 
 | Track/Level | Requirements | Focus
 | ----------- | ------------ | -----
