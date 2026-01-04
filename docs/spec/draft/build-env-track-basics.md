@@ -4,7 +4,25 @@ description: This page gives an overview of the SLSA Build Environment track and
 mermaid: true 
 ---
 
-# {Build Environment Track Basics}
+# {Build Environment Track: Basics}
+
+**About this page:** the Build Track Basics page gives an overview of the SLSA Build Environment track and its levels, describing their security objectives and general requirements.
+
+**Intended audience:** {TBD}.
+
+**Topics covered:** build environment track threats, build environment trackterminology, build environment track concept model, build environment track levels, build environment track level specifics, considerations for distributed builds
+
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+**For more information, see:** [General SLSA terminology](terminology.md).
+
+
+## Overview
+
 
 This page gives an overview of the SLSA Build Environment track and its levels, describing their security objectives and general requirements.
 
