@@ -5,6 +5,21 @@ description: Guidelines for assessing source control system security.
 
 # {Source Track: Accessing Source Control Systems}
 
+**About this page:** the Build Track Basics page introduces the SLSA build track part of the supply chain and the levels it uses to create software artifacts and the security requirements you want to achieve.
+
+**Intended audience:** {everyone}.
+
+**Topics covered:** Build track terminology, concept models, track levels
+
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+**For more information, see:** [General SLSA terminology](terminology.md), [Build track specific terminology](build-track-basics.md#terminology).
+
+
 One of SLSA's guiding [principles](principles.md) is to "trust platforms, verify
 artifacts". However, consumers cannot trust source control systems (SCSs) unless
 they have some proof that an SCS meets its

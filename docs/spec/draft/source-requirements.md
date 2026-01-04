@@ -1,11 +1,23 @@
 ---
 title: "Source: Requirements for producing source"
-description: "This page covers the detailed technical requirements for producing source revisions at each SLSA level. The intended audience is source control system implementers and security engineers." 
+description: "This page covers the detailed technical requirements for producing source revisions at each SLSA level." 
 ---
 
 # {Source Track: Requirements for Producing Source}
 
-This page covers the detailed technical requirements for producing source revisions at each SLSA level. The intended audience is source control system implementers and security engineers.
+**About this page:** the *Source Track Requirements for Producing Source* page covers the detailed technical requirements for producing source revisions at each SLSA level.
+
+**Intended audience:** source control system implementers and security engineers..
+
+**Topics covered:** terminology, source track requirements, source track attestations
+
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+**For more information, see:** [General SLSA terminology](terminology.md), [Build track specific terminology](build-track-basics.md#terminology).
 
 ## Source Track Overview
 
