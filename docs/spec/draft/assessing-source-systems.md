@@ -1,15 +1,15 @@
 ---
 title: "Source: Assessing source control systems"
-description: Guidelines for assessing source control system security.
+description: This page describes the parts of an Source Constrol System (SCS) platform that consumers SHOULD assess in order to verify an artifact's security.
 ---
 
 # {Source Track: Accessing Source Control Systems}
 
-**About this page:** the Build Track Basics page introduces the SLSA build track part of the supply chain and the levels it uses to create software artifacts and the security requirements you want to achieve.
+**About this page:** This page describes the parts of an Source Constrol System (SCS) platform that consumers SHOULD assess in order to verify an artifact's security.
 
 **Intended audience:** {everyone}.
 
-**Topics covered:** Build track terminology, concept models, track levels
+**Topics covered:** threats, source control system components
 
 **Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
 
@@ -17,17 +17,14 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-**For more information, see:** [General SLSA terminology](terminology.md), [Build track specific terminology](build-track-basics.md#terminology).
+**For more information, see:** [General SLSA terminology](terminology.md), [Threats & mitigations](threats.md)
 
+## Overview
 
 One of SLSA's guiding [principles](principles.md) is to "trust platforms, verify
 artifacts". However, consumers cannot trust source control systems (SCSs) unless
 they have some proof that an SCS meets its
 [requirements](source-requirements.md).
-
-This page describes the parts of an SCS that consumers SHOULD assess and
-provides sample questions consumers can ask when assessing a SCS. See also
-[Threats & mitigations](threats.md).
 
 ## Threats
 

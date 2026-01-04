@@ -6,6 +6,25 @@ description: "This page provides examples of additional controls that
 
 # {Source Track: Example Controls}
 
+
+**About this page:** the *Source Track Example Controls* page provides examples of additional controls that organizations may want to implement as they adopt the SLSA Source track.
+
+**Intended audience:** {TBD}.
+
+**Topics covered:** expert code review, review every single revision, automated testing, every revision reachable from a branch was approved, immutable change discussion, merge trains
+
+
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+**For more information, see:** [General SLSA terminology](terminology.md), [Build track specific terminology](build-track-basics.md#terminology).
+
+## Overview
+
+
 SLSA Source L3+ organizations are allowed and encouraged to define their own
 controls that go over and above specific requirements outlined by SLSA. This
 page provides some examples of what these additional controls could be.
