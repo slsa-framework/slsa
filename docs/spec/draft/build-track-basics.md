@@ -1,7 +1,7 @@
 ---
 title: "Build Track: Basics"
 description: This page introduces the SLSA build track part of the supply chain and the levels it uses to create software artifacts and the security requirements you want to achieve.
----
+--- 
 
 # {Build Track: Basics}
 
