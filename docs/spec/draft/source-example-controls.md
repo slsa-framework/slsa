@@ -9,13 +9,13 @@ description: "This page provides examples of additional controls that
 
 **About this page:** the *Source Track Example Controls* page provides examples of additional controls that organizations may want to implement as they adopt the SLSA Source track.
 
-**Intended audience:** {add appropriate audience}.
+**Intended audience:** {add appropriate audience}
 
-**Topics covered:** examples of source control procedures and requirements explained in detail
+**Topics covered:** detailed examples of source control procedures and requirements explained
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
@@ -283,7 +283,7 @@ revisions.
     It represents the state of the protected branch _after other changes have
     been applied_.
 
-It is important to note that no human or automatic review will have the chance
+**Note:** No human or automatic review will have the chance
 to pre-approve ID2. This will appear to violate any organization policies that
 require pre-approval of changes before submission. The SCS and the
 organization MUST protect this process in the same way they protect other

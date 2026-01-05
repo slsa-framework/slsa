@@ -1,11 +1,11 @@
 ---
 title: "Source: Requirements for producing source"
-description: "This page covers the detailed technical requirements for producing source revisions at each SLSA level." 
+description: "This page covers the technical requirements for producing source revisions at each SLSA level." 
 ---
 
 # {Source Track: Requirements for Producing Source}
 
-**About this page:** the *Source Track: Requirements for Producing Source* page covers the detailed technical requirements for producing source revisions at each SLSA level.
+**About this page:** the *Source Track: Requirements for Producing Source* page covers the detailed requirements for producing source revisions at each SLSA level.
 
 **Intended audience:** source control system implementers and security engineers
 
@@ -13,26 +13,19 @@ description: "This page covers the detailed technical requirements for producing
 
 **Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 **For more information, see:** {optional}
 
->**Note:** When onboarding a branch to the SLSA Source Track or increasing the level of
-that branch, organizations are making claims about how the branch is managed
-from that revision forward. This establishes [continuity](#continuity).
+## Overview
 
->No claims are made for prior revisions.
-
-## Source Track Overview
-
-The primary purpose of the SLSA Source track is to provide producers and consumers with increasing levels of trust in the source code they produce and consume.
-It describes increasing levels of trustworthiness and completeness of how a source revision was created.
+The primary purpose of the SLSA Source track is to provide producers and consumers with increasing levels of trust in the source code they produce and consume. This track describes increasing levels of trustworthiness and completeness of how a source revision was created. This page will show track-level specifics and requirements.
 
 The expected process for creating a new revision is determined solely by that repository's owner (the organization) who also determines the intent of the software in the repository and administers technical controls to enforce the process.
 
-Consumers can review attestations to verify whether a particular revision meets their standards.
+Consumers can review attestations to verify whether a particular revision meets their standards for consuming artifacts. Information on how to use attestations is defined in this document.
 
 ## Source Track Terminology
 
@@ -645,6 +638,14 @@ formats, and how each provenance attestation can be used to reason about the
 revision's properties recorded in the summary attestation.
 
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
+
+## Disclaimer
+
+When onboarding a branch to the SLSA Source Track or increasing the level of
+that branch, organizations are making claims about how the branch is managed
+from that revision forward. This establishes [continuity](#continuity).
+
+No claims are made for prior revisions.
 
 ## Future Considerations
 

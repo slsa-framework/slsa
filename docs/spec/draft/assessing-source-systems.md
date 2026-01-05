@@ -3,28 +3,28 @@ title: "Source: Assessing source control systems"
 description: This page describes the parts of an Source Constrol System (SCS) platform that consumers SHOULD assess in order to verify an artifact's security.
 ---
 
-# {Source Track: Accessing Source Control Systems}
+# {Source Track: Assessing Source Control Systems}
 
-**About this page:** This page describes the parts of an Source Control System (SCS) platform that consumers SHOULD assess in order to verify an artifact's security.
+**About this page:** the parts of a Source Control System (SCS) platform that consumers SHOULD assess in order to verify an artifact's security is described on this *Source Track: Assessing Source Control Systems* page.
 
-**Intended audience:** {add appropriate audience}.
+**Intended audience:** {add appropriate audience}
 
 **Topics covered:** details on adversary behavior, prompts to access source control systems
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-**For more information, see:** [Threats & mitigations](threats.md)
+**For more information, see:** [Threats & mitigations](threats.md).
 
 ## Overview
 
 One of SLSA's guiding [principles](principles.md) is to "trust platforms, verify
 artifacts". However, consumers cannot trust source control systems (SCSs) unless
 they have some proof that an SCS meets its
-[requirements](source-requirements.md).
+[requirements](source-requirements.md). This page will provide information and example prompts to help assess and verify a SCS.
 
 ## Threats
 
