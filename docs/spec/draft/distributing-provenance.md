@@ -1,25 +1,25 @@
 ---
 title: "Build: Distributing provenance"
 description: This document provides specifications for distributing provenance and the
-relationship between build artifacts and provenance, also referred to as build attestations. 
+relationship between build artifacts and provenance.
 ---
 
 # { Build Track: Distributing Provenance}
 
 **About this page:** the *Build Track Distributing Provenance* page provides specifications for distributing provenance and the
-relationship between build artifacts and provenance, also referred to as build attestations.
+relationship between build artifacts and provenance.
 
-**Intended audience:** platform implementers and software distributors.
+**Intended audience:** platform implementers and software distributors
 
 **Topics covered:** build provenance attestations
 
-**Internet standards:** {[RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)}
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-**For more information, see:** {optional} .
+**For more information, see:** {optional} 
 
 ## Overview
 
@@ -27,7 +27,7 @@ In order to make provenance for artifacts available after generation
 for verification, SLSA requires the distribution and verification of provenance
 metadata in the form of SLSA attestations.
 
-This document this document focuses oh artifacts for ecosystems that distribute build
+This document focuses on artifacts for ecosystems that distribute build
 artifacts, but some attention is also paid to ecosystems that distribute
 container images or only distribute source artifacts, as many of the same
 principles generally apply to any artifact or group of artifacts.

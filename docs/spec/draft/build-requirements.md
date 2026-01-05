@@ -7,13 +7,13 @@ description: This page covers the technical requirements for producing artifacts
 
 **About this page:** the *Build Track Requirements for producing artifacts* page covers the technical requirements for producing artifacts at each SLSA level.
 
-**Intended audience:** {platform implementers and security engineers}.
+**Intended audience:** platform implementers and security engineers
 
 **Topics covered:** build levels, producer and build platform responsibility sharing
 
 **Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
@@ -25,7 +25,7 @@ In order to produce artifacts with a specific build level, responsibility for me
 producer MUST choose and adopt a build platform capable of achieving a desired
 build level, implementing any controls as specified by the chosen platform.
 
-### Build provenance levels
+## Build provenance levels
 
 The build platform MUST strengthen the security controls in order to achieve a specific level while the
 producer MUST choose and adopt a build platform capable of achieving a desired
@@ -80,9 +80,6 @@ Various relevant standards and guides can be consulted for that matter such as
 the [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list).
 
 ## Responsibilities and Requirements for Producers and Build Platforms
-
-In order to produce artifacts with a specific build level, responsibility is
-split between the [Producer] and the [Build platform].
 
 ### Producer responsibilities and requirements
 

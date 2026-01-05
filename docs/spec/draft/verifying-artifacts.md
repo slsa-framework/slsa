@@ -7,17 +7,17 @@ description: This page describes how to verify artifacts and their SLSA provenan
 
 **About this page:** the *Build Track Verifying Artifacts* page describes how to verify artifacts and their SLSA provenance. 
 
-**Intended audience:** platform implementers, security engineers, and software consumers.
+**Intended audience:** platform implementers, security engineers, and software consumers
 
 **Topics covered:** verification procedures, expectation models, provenance, architecture options for provenance verification
 
-**Internet standards:** {[RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)}
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-**For more information, see:** {optional} .
+**For more information, see:** {optional} 
 
 ## Overview
 
@@ -40,7 +40,7 @@ Verification SHOULD include the following steps. These steps link more detailed 
 
 ![Threats covered by each step](images/supply-chain-threats-build-verification.svg)
 
-See [Build Track Terminology](build-track-bassics.md#terminology) for build track terms and
+See [Build Track Terminology](build-track-basics.md#terminology) for build track terms and
 [Threats & mitigations](threats.md) for a detailed explanation of each threat.
 
 **Note:** This section assumes that the provenance is in the recommended
@@ -244,7 +244,7 @@ will likely have different artifacts and therefore different provenance. Similar
 artifact might have different names in different package ecosystems but use the same
 provenance file.
 
-## Architecture options for provenance verifications
+## Architecture options for provenance verification
 
 There are several options (non-mutually exclusive) for where provenance verification
 can happen: the package ecosystem at upload time, the consumers at download time, or

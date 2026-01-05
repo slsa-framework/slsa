@@ -5,15 +5,15 @@ description: This page describes the parts of a build platform that consumers SH
 
 # {Build Track: Assessing Build Platforms}
 
-**About this page:** the *Build Track Accessing Build Platforms* page describes the parts of a build platform that consumers SHOULD assess in order to verify an artifact's security.
+**About this page:** the *Build Track: Accessing Build Platforms* page describes the parts of a build platform that consumers SHOULD assess in order to verify an artifact's security.
 
-**Intended audience:** {Insert audience details}. 
+**Intended audience:** {add appropriate audience} 
 
-**Topics covered:** details on adversary behavior, prompts to access build platform security 
+**Topics covered:** adversary behavior, sample prompts to access build platform security 
 
-**Internet standards:** {[RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)}
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
@@ -25,9 +25,7 @@ One of SLSA's guiding [principles](principles.md) is to "trust platforms, verify
 artifacts". However, consumers cannot trust platforms to produce Build L3
 artifacts and provenance unless they have proof that the provenance is
 [unforgeable](build-requirements.md#provenance-unforgeable) and the builds are
-[isolated](build-requirements.md#isolated).
-
-This document provides sample prompts consumers can ask to assess a build platform.
+[isolated](build-requirements.md#isolated). This document provides sample prompts consumers can use to assess a build platform and measure its security level.
 
 ## Threats
 

@@ -1,35 +1,27 @@
 ---
 title: "Build Track: Basics"
-description: This page introduces the SLSA build track part of the supply chain and the levels it uses to create software artifacts and the security requirements you want to achieve.
+description: This page introduces the SLSA build track part of the supply chain and the levels it uses to create software artifacts and  and their security requirements.
 --- 
 
 # {Build Track: Basics}
 
-**About this page:** the *Build Track Basics* page introduces the SLSA build track part of the supply chain and the levels it uses to create software artifacts and the security requirements you want to achieve.
+**About this page:** the *Build Track: Basics* page introduces the SLSA build track part of the supply chain and the levels it uses to create software artifacts and their security requirements.
 
-**Intended audience:** {everyone}.
+**Intended audience:** everyone
 
-**Topics covered:** Build track terminology, concept models, track levels
+**Topics covered:** build track terminology, concept models, track levels
 
 **Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
-{this seems to be on every track page:}
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-**For more information, see:** {optional} .
+**For more information, see:** {optional} 
 
 ## Overview
 
-{redo these into a new overview}
-{see overview of SLSA track section for lingo defining what each track means, maybe link back to the original tracks.md info}
-{more about what a level is}
-{more about what a model is}t
-
-- The SLSA build track is organized into a series of levels that provide increasing supply chain security guarantees. 
-- This gives you confidence that software hasn’t been tampered with and can be securely traced back to its source.
-- The amount of security you want to apply is called a level. The levels go from Level 0 (none) to Level 3 (most). 
+The SLSA build track consists of a series of provenance levels that provide increasing supply chain security guarantees. The amount of security you want to apply is called a level. The levels go from Level 0 (none) to Level 3 (most). A high level of provenance gives you confidence that software hasn’t been tampered with and can be securely traced back to its source.
 
 ## Build Terminology
 
@@ -71,7 +63,7 @@ These terms can be ambiguous and should be avoided.
 
 ## Build track concept models
 
-The SLSA build track uses the following software manufacturing *models* that are based on real-world supply chain systems to define their framework criteria.
+This section introduces software manufacturing models that SLSA uses to define the production of software artifacts, the distribution of artifact provenance, and the verification process.
 
 ### Build production process model
 
