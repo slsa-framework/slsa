@@ -5,35 +5,29 @@ description: This page describes the SLSA Dependency track, which enables a soft
 
 # {Dependency Track: Consuming Dependencies}
 
-**About this page:** the Build Track Basics page describes the SLSA Dependency track, which enables a software producer to measure, control, and reduce risk introduced from third party dependencies.
+**About this page:** this page describes the SLSA Dependency track, which enables a software producer to measure, control, and reduce risk introduced from third party dependencies.
 
-**Intended audience:** {TBD}.
+**Intended audience:** {add appropriate audience}.
 
-**Topics covered:** terminology, dependency track level summary, dependency track requirements
+**Topics covered:** dependency track terminology, dependency track level summary, dependency track requirements
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-**For more information, see:** [General SLSA terminology](terminology.md), [Build track specific terminology](build-track-basics.md#terminology).
+**For more information, see:** {optional}
 
 ## Overview
 
-
-
-This page describes the SLSA Dependency track, which enables a software producer to measure, control, and reduce risk introduced from third party dependencies.
-
-## Overview
-
-The Dependency track is designed to enable a software producer to measure, control, and reduce risk introduced from third party dependencies. It is primarily aimed at enterprises/organizations, with medium to large-sized organizations benefiting the most from adoption of the dependency track levels. Organizations include enterprises, but also large open source projects that want to manage third party dependency risk.
+The Dependency track is primarily aimed at enterprises/organizations, with medium to large-sized organizations benefiting the most from adoption of the dependency track levels. Organizations include enterprises, but also large open source projects that want to manage third party dependency risk.
 
 The scope of the SLSA Dependency Track is to properly manage and securely consume build dependencies into the developer workflow to mitigate against supply chain threats targeting the open source ecosystem.
 
-## Terminology
+## Dependency Track Terminology
 
-{Introduction?}
+These terms apply to the Build track. See the general terminology [list](terms-generic.md) for terms used throughout the SLSA specification.
 
 | Term | Description |
 | --- | --- |
@@ -42,8 +36,6 @@ The scope of the SLSA Dependency Track is to properly manage and securely consum
 | Dependency security metadata feed | A metadata feed that provides security or risk information about each dependency to assist consumers in making judgements about the safety of their dependencies. |
 | Package registry | An entity responsible for mapping package names to artifacts within a packaging ecosystem. Most ecosystems support multiple registries, usually a single global registry and multiple private registries. |
 | Package source files | A language-specific config file in a source code repo that identifies the package registry feeds or artifact repository manager feeds to consume dependencies from. |
-
----
 
 ## Dependency Track Level Summary
 
@@ -55,9 +47,9 @@ The scope of the SLSA Dependency Track is to properly manage and securely consum
 | Dependency L3 | Dependencies consumed from sources under producer's control
 | Dependency L4 | Proactive defence against upstream attacks
 
-### Dependency Track Level Specifics
+## Dependency Track Level Specifics
 
-#### Level 0: No mitigations to dependency threats
+### Level 0: No mitigations to dependency threats
   
 **Summary:**
 
@@ -71,7 +63,7 @@ N/A
 
 N/A
 
-#### Level 1: Inventory of dependencies exists
+### Level 1: Inventory of dependencies exists
 
 **Summary:**
 
@@ -89,7 +81,7 @@ All third party build dependencies (including transitive) are identified.
 -   An inventory is a prerequisite to identify and manage known vulnerabilities.
 -   Implementing a centralized inventory can enable efficient incident response and risk exposure measurement.
 
-#### Level 2: Known vulnerabilities have been triaged
+### Level 2: Known vulnerabilities have been triaged
 
 **Summary:**
 
@@ -107,12 +99,9 @@ Artifacts are released with no unknown 'known' vulnerabilities. Outcomes of the 
 -   Proceed with the release and remediate vulnerabilities in the next release, following normal release cycle
 -   Proceed with the release and remediate vulnerabilities by expediting the next patch release.
 
-**Note:**
+**Note:** This does NOT mean the artifact is free of vulnerabilities, but at the time of release all known vulnerabilities are triaged. Also covers race conditions: new vulnerability can, theoretically, be published on the same day as the release.
 
--   Does NOT mean the artifact is free of vulnerabilities, but at the time of release all known vulnerabilities are triaged.
--   Race condition: new vulnerability can, theoretically, be published on the same day as the release.
-
-#### Level 3: Dependencies consumed from locations under producer's control
+### Level 3: Dependencies consumed from locations under producer's control
 
 **Summary:**
 
@@ -126,11 +115,9 @@ Availability risks of upstream sources being removed or taken down (e.g. left-pa
 
 The build process consumes all third party build dependencies only from artifact producer-controlled locations, allowing for control of how dependencies enter the supply chain, reducing the attackable surface.  This also enables developers to continue to build even if upstream resources are unavailable.
 
-**Note:**
+**Note:** Compliance with this level enables the ability to achieve Level 4 compliance.
 
-Compliance with this level enables the ability to achieve Level 4 compliance.
-
-#### Level 4: Proactive defence against upstream attack
+### Level 4: Proactive defence against upstream attack
   
 **Summary:**
 
@@ -149,9 +136,7 @@ Malicious attacks on upstream sources such as package managers, compromised pack
 
 Reduced likelihood of a released artifact including a malicious or compromised third-party dependency.
 
-**Note:**
-
-This capability builds on Level 3.
+**Note:** This capability builds upon Level 3.
 
 ## Dependency Track Requirements
 
