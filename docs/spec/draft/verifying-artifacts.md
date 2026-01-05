@@ -1,40 +1,54 @@
 ---
-title: "Build: Verifying artifacts"
-description: SLSA uses provenance to indicate whether an artifact is authentic or not, but provenance doesn't do anything unless somebody inspects it. SLSA calls that inspection verification, and this page describes how to verify artifacts and their SLSA provenance. The intended audience is platform implementers, security engineers, and software consumers.
+title: "Build Track: Verifying artifacts"
+description: This page describes how to verify artifacts and their SLSA provenance. 
 ---
+
+# {Build Track: Verifying Artifacts}  
+
+**About this page:** the *Build Track Verifying Artifacts* page describes how to verify artifacts and their SLSA provenance. 
+
+**Intended audience:** platform implementers, security engineers, and software consumers
+
+**Topics covered:** verification procedures, expectation models, provenance, architecture options for provenance verification
+
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
+
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+**For more information, see:** {optional} 
+
+## Overview
 
 SLSA uses provenance to indicate whether an artifact is authentic or not, but
 provenance doesn't do anything unless somebody inspects it. SLSA calls that
-inspection **verification**, and this page describes recommendations for how to
-verify artifacts and their SLSA provenance.
+inspection verification. 
 
-This page is divided into several sections. The first describes the process
-for verifying an artifact and its provenance against a set of expectations. The
-second describes how to form the expectations used to verify provenance. The
-third discusses architecture choices for where provenance verification can
-happen.
+This document explains the process for verifying an artifact and its provenance against a set of expectations. It also shows how to form the expectations used to verify provenance and discusses architecture choices for where provenance verification can happen.
 
-## How to verify
+## How to verify SLSA artifacts
 
-Verification SHOULD include the following steps:
+Verification SHOULD include the following steps. These steps link more detailed procedures in the [Verification Steps](#verification-steps.md) section below.
 
--   Ensuring that the builder identity is one of those in the map of trusted
-    builder id's to SLSA level.
--   Verifying the signature on the provenance envelope.
--   Ensuring that the values for `buildType` and `externalParameters` in the
+-   [Step 1:](step-1:-check-slsa-build-level) Ensure that the builder identity is in the map of trusted builder id's to SLSA level.
+-   [Step 2:](step-2:-check-expectations) Verify the signature on the provenance envelope.
+-   [Step 3:]((optional)-check-dependencies-recursively) Make sure that the values for `buildType` and `externalParameters` in the
     provenance match the expected values. The package ecosystem MAY allow
     an approved list of `externalParameters` to be ignored during verification.
     Any unrecognized `externalParameters` SHOULD cause verification to fail.
 
 ![Threats covered by each step](images/supply-chain-threats-build-verification.svg)
 
-See [Terminology](terminology.md) for an explanation of the supply chain model and
+See [Build Track Terminology](build-track-basics.md#terminology) for build track terms and
 [Threats & mitigations](threats.md) for a detailed explanation of each threat.
 
 **Note:** This section assumes that the provenance is in the recommended
-[provenance format](/provenance/v1). If it is not, then the verifier SHOULD
+[provenance format](provenance.md). If it is not, then the verifier SHOULD
 perform equivalent checks on provenance fields that correspond to the ones
 referenced here.
+
+## Verification Steps
 
 ### Step 1: Check SLSA Build level
 
@@ -195,7 +209,7 @@ L0. (For example, consider the compiler's compiler's compiler's ... compiler.)
 [VSA]: /verification_summary
 [threats]: threats
 
-## Forming Expectations
+## Expectation Models
 
 <dfn>Expectations</dfn> are known provenance values that indicate the
 corresponding artifact is authentic. For example, a package ecosystem may
@@ -224,13 +238,13 @@ Possible models for forming expectations include:
     source repository. This is how the Go ecosystem works, for example, since
     the package name *is* the source repository location.
 
-It is important to note that expectations are tied to a *package name*, whereas
+>**Note:** that expectations are tied to a *package name*, whereas
 provenance is tied to an *artifact*. Different versions of the same package name
 will likely have different artifacts and therefore different provenance. Similarly, an
 artifact might have different names in different package ecosystems but use the same
 provenance file.
 
-## Architecture options
+## Architecture options for provenance verification
 
 There are several options (non-mutually exclusive) for where provenance verification
 can happen: the package ecosystem at upload time, the consumers at download time, or
