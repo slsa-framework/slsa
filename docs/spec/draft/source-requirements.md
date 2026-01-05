@@ -5,19 +5,25 @@ description: "This page covers the detailed technical requirements for producing
 
 # {Source Track: Requirements for Producing Source}
 
-**About this page:** the *Source Track Requirements for Producing Source* page covers the detailed technical requirements for producing source revisions at each SLSA level.
+**About this page:** the *Source Track: Requirements for Producing Source* page covers the detailed technical requirements for producing source revisions at each SLSA level.
 
-**Intended audience:** source control system implementers and security engineers..
+**Intended audience:** source control system implementers and security engineers
 
-**Topics covered:** terminology, source track requirements, source track attestations
+**Topics covered:** source track terminology, track-level specifics and requirements, source track systems and attestations
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-**For more information, see:** [General SLSA terminology](terminology.md), [Build track specific terminology](build-track-basics.md#terminology).
+**For more information, see:** {optional}
+
+>**Note:** When onboarding a branch to the SLSA Source Track or increasing the level of
+that branch, organizations are making claims about how the branch is managed
+from that revision forward. This establishes [continuity](#continuity).
+
+>No claims are made for prior revisions.
 
 ## Source Track Overview
 
@@ -28,17 +34,15 @@ The expected process for creating a new revision is determined solely by that re
 
 Consumers can review attestations to verify whether a particular revision meets their standards.
 
-## Terminology
+## Source Track Terminology
 
-{Introduction?}
+These terms apply to the Source track. See the general terminology [list](terms-generic.md) for terms used throughout the SLSA specification.
 
-### Version Control Systems
+### Version Control Systems terminology
 
 A **Version Control System (VCS)** is a system of software and protocols for
 managing the version history of a set of files. Git, Mercurial, and Subversion
-are all examples of version control systems.
-
-The following terms apply to Version Control Systems:
+are all examples of version control systems. The following terms apply to Version Control Systems:
 
 | Term | Description |
 | --- | --- |
@@ -56,15 +60,13 @@ specification. For example, in git and other version control systems, the UX may
 allow 'tags' to be moved. Patterns like `latest` and `nightly` tags rely on this.
 For the purposes of this specification these would be classified as 'Named References' and not as 'Tags'.
 
-### Source Control Systems
+### Source Control Systems terminology
 
 A **Source Control System (SCS)** is a platform or combination of services
 (self-hosted or SaaS) that hosts a Source Repository and provides a trusted
 foundation for managing source revisions by enforcing policies for
 authentication, authorization, and change management, such as mandatory code
-reviews or passing status checks.
-
-The following terms apply to Source Control Systems:
+reviews or passing status checks. The following terms apply to Source Control Systems:
 
 | Term | Description
 | --- | ---
@@ -72,7 +74,7 @@ The following terms apply to Source Control Systems:
 | Proposed Change | A proposal to make a Change in a Source Repository. |
 | Source Provenance | Information about how a Source Revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and which parent revisions preceded it. |
 
-#### Source Roles
+### Source Roles terminology
 
 | Role | Description
 | --- | ---
@@ -82,18 +84,10 @@ The following terms apply to Source Control Systems:
 | Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project. |
 
 
-
-
->**Note:** When onboarding a branch to the SLSA Source Track or increasing the level of
-that branch, organizations are making claims about how the branch is managed
-from that revision forward. This establishes [continuity](#continuity).
-
->No claims are made for prior revisions.
-
-## Source Track Level Overview
+## Source Track Level Introduction
 
 NOTE: This table presents a simplified view of the requirements. See the
-[Requirements](#requirements) section for the full list of requirements for each
+[Source Track Requirements](#source-track-requirements) section later in this document for the full list of requirements for each
 level.
 
 | Track/Level | Requirements | Focus
@@ -105,9 +99,9 @@ level.
 
 <section id="source-l1">
 
-### Source Track Level Specifics
+## Source Track Level Specifics
 
-#### Level 1: Version controlled
+### Level 1: Version controlled
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -126,7 +120,7 @@ Migrating to the appropriate tools is an important first step on the road to ope
 </section>
 <section id="source-l2">
 
-#### Level 2: History & Provenance
+### Level 2: History & Provenance
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -151,7 +145,7 @@ was followed to produce a Source Revision.
 </section>
 <section id="source-l3">
 
-#### Level 3: Continuous technical controls
+### Level 3: Continuous technical controls
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -172,7 +166,7 @@ Provides verifiers strong evidence of all technical controls enforced during the
 </section>
 <section id="source-l4">
 
-#### Level 4: Two-party review
+### Level 4: Two-party review
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -251,7 +245,7 @@ but the organization MUST only allow these changes in order to meet legal or
 privacy compliance requirements. Content changed under this process includes
 changing files, history, references, or any other metadata stored by the SCS.
 
-#### Warning
+#### Warning: Revision Removal
 
 Removing a revision from a repository is similar to deleting a package version
 from a registry: it's almost impossible to estimate the amount of downstream
@@ -272,7 +266,7 @@ remove it everywhere.
 The content may still exist in other copies of the repository, either in backups
 or on developer machines.
 
-#### Process
+#### Documentation Process Requirements
 
 An organization MUST document the Safe Expunging Process and describe how
 requests and actions are tracked and SHOULD log the fact that content was

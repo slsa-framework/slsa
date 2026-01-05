@@ -5,19 +5,19 @@ description: This page describes the parts of an Source Constrol System (SCS) pl
 
 # {Source Track: Accessing Source Control Systems}
 
-**About this page:** This page describes the parts of an Source Constrol System (SCS) platform that consumers SHOULD assess in order to verify an artifact's security.
+**About this page:** This page describes the parts of an Source Control System (SCS) platform that consumers SHOULD assess in order to verify an artifact's security.
 
-**Intended audience:** {everyone}.
+**Intended audience:** {add appropriate audience}.
 
-**Topics covered:** threats, source control system components
+**Topics covered:** details on adversary behavior, prompts to access source control systems
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-**For more information, see:** [General SLSA terminology](terminology.md), [Threats & mitigations](threats.md)
+**For more information, see:** [Threats & mitigations](threats.md)
 
 ## Overview
 
@@ -28,7 +28,9 @@ they have some proof that an SCS meets its
 
 ## Threats
 
-### Adversary goal
+SLSA's purpose is to help people defend against adversaries that threaten the software supply chain. By understanding adversary goals and profiles, you can assess your source  control system more easily.
+
+### The adversary's goals
 
 The SLSA Source track defends against an adversary whose primary goal is to
 inject unofficial behavior into protected source code while avoiding detection.
@@ -59,7 +61,7 @@ against the following types of adversaries.
     -   Modify the behavior of the Source Control System itself.
     -   Access the control plane's cryptographic secrets.
 
-## Source Control System components
+## Source Control System components to assess
 
 Consumers SHOULD consider at least these elements when assessing a Source
 Control System for SLSA conformance: control configuration, change management
@@ -126,7 +128,7 @@ Storage holds source revisions and their provenance and summary attestations.
 The following are prompts for assessing a Source Control System's ability to
 meet the SLSA requirements.
 
-### Prompts for assessing the change management interface
+### Sample prompts for assessing the change management interface
 
 -   How does the SCS manage which actors are permitted to approve changes?
 -   What types of non-plain-text changes can the change management interface
@@ -135,7 +137,7 @@ meet the SLSA requirements.
     Trusted Robot Contributions? Example: SLSA Build L3+ provenance, built from
     SLSA Source L4+ source.
 
-### Prompts for assessing control configuration & technical controls
+### Sample prompts for assessing control configuration & technical controls
 
 -   How does the SCS prevent regression in control configurations?
     Examples: built-in controls that cannot change, notifying project
@@ -146,9 +148,9 @@ meet the SLSA requirements.
 -   How does the SCS prevent SCS administrators from tampering with a project's
     configured technical controls?
 
-### Prompts for assessing the control plane & verifier
+### Sample prompts for assessing the control plane & verifier
 
-NOTE The control plane and verifier perform related roles within the SCS and
+**Note:** The control plane and verifier perform related roles within the SCS and
 should typically be assessed together.
 
 -   Administration
@@ -205,7 +207,7 @@ should typically be assessed together.
     -   What is your plan for remediating cryptographic secret compromise? How
         frequently is this plan tested?
 
-### Prompts for assessing output storage
+### Sample prompts for assessing output storage
 
 -   How do you prevent tampering with storage directly?
 -   How do you prevent one project's revisions from affecting another project?

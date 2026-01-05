@@ -9,40 +9,38 @@ description:  This page describes how to verify properties of source revisions u
 
 **Intended audience:** platform implementers, security engineers, and software consumers.
 
-**Topics covered:** verifying source revisions, forming expectations, architecture options
+**Topics covered:** verification steps, forming expectations, architecture options
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-**For more information, see:** [General SLSA terminology](terminology.md), [Build track specific terminology](build-track-basics.md#terminology).
+**For more information, see:** {optional}
 
 ## Overview
 
 SLSA uses attestations to indicate security claims associated with a repository
 revision, but attestations don't do anything unless somebody inspects them. SLSA
-calls that inspection **verification**, and this page describes how to verify
+calls that inspection, *verification*, and this page describes how to verify
 properties of source revisions using
 [the attestations](source-requirements#communicating-source-levels) associated
 with those revisions.
 
-At Source L3+, Source Control Systems (SCSs) issue detailed
+When verifications reach Source L3+, Source Control Systems (SCSs) issue detailed
 [provenance attestations](source-requirements#source-provenance-attestations) of
 the process that was used to create specific revisions of a repository. These
 provenance attestations are issued in bespoke formats and may be too burdensome
-to use in some use cases.
-
-[Source Verification Summary Attestations](source-requirements#source-verification-summary-attestation)
+to use in some use cases. However, [Source Verification Summary Attestations](source-requirements#source-verification-summary-attestation)
 (Source VSAs) address this, making verification more efficient and ergonomic by
 recording the result of prior verifications. Source VSAs may be issued by a VSA
 provider to make a SLSA source level determination based on the content of those
 attestations.
 
-## How to verify a source revision
+## What needs to be verified
 
-The source consumer checks:
+The source consumer needs to check and confirm the following:
 
 1.  If they trust the SCS that issued the VSA and if the VSA applies to the
    revision they've fetched.
@@ -50,10 +48,12 @@ The source consumer checks:
    should be managed.
 3.  (Optional): If the evidence presented in the source provenance matches the
    claims made in the VSA.
+   
+## How to verify a source revision
 
 ### Step 1: Check the SCS
 
-First, check the SLSA Source level by comparing the artifact to its VSA and the
+First, confirm the SLSA Source level by comparing the artifact to its VSA and the
 VSA to a preconfigured root of trust. The goal is to ensure that the VSA
 actually applies to the artifact in question and to assess the trustworthiness
 of the VSA. This mitigates threats within "B" and "C", depending on SLSA Source
@@ -110,7 +110,7 @@ checking the `verifier.id` against the root-of-trust described above.
 
 ### Step 2: Check Expectations
 
-Next, check that the revision's VSA meets your expectations in order to mitigate
+Next, confirm that the revision's VSA meets your expectations in order to mitigate
 [threat "B"].
 
 In our threat model, the adversary has the ability to create revisions within
@@ -158,7 +158,7 @@ Possible models for forming expectations include:
     each update, compare the old VSA to the new VSA and alert on any
     differences.
 
--   **Defined by producer:** The revision producer tells the verifier what their
+-   **If defined by producer:** The revision producer tells the verifier what their
     expectations ought to be. In this model, the verifier SHOULD provide an
     authenticated communication mechanism for the producer to set the revision's
     expectations, and there SHOULD be some protection against an adversary
