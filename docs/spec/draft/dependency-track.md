@@ -1,19 +1,19 @@
 ---
 title: Dependency Track
-description: This page describes the SLSA Dependency track, which enables a software producer to measure, control, and reduce risk introduced from third party dependencies.
+description: This page shows how the SLSA Dependency track enables a software producer to measure, control, and reduce risk introduced from third party dependencies.
 ---
 
 # {Dependency Track: Consuming Dependencies}
 
-**About this page:** this page describes the SLSA Dependency track, which enables a software producer to measure, control, and reduce risk introduced from third party dependencies.
+**About this page:** the *Dependency Track: Consuming Dependencies* page shows how this track enables a software producer to measure, control, and reduce risk introduced from third party dependencies.
 
-**Intended audience:** {add appropriate audience}.
+**Intended audience:** {add appropriate audience}
 
-**Topics covered:** dependency track terminology, dependency track level summary, dependency track requirements
+**Topics covered:** dependency track terminology, track level summary, track requirements
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
@@ -27,7 +27,7 @@ The scope of the SLSA Dependency Track is to properly manage and securely consum
 
 ## Dependency Track Terminology
 
-These terms apply to the Build track. See the general terminology [list](terms-generic.md) for terms used throughout the SLSA specification.
+These terms apply to the Dependency track. See the general terminology [list](terms-generic.md) for terms used throughout the SLSA specification.
 
 | Term | Description |
 | --- | --- |
