@@ -11,7 +11,14 @@ description: This page introduces the SLSA build track part of the supply chain 
 
 **Topics covered:** Build track terminology, concept models, track levels
 
-**Internet standards:** {insert standards that apply}
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
+
+{this seems to be on every track page:}
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+**For more information, see:** {optional} .
 
 ## Overview
 

@@ -7,7 +7,7 @@ description: This page describes the parts of a build platform that consumers SH
 
 **About this page:** the *Build Track Accessing Build Platforms* page describes the parts of a build platform that consumers SHOULD assess in order to verify an artifact's security.
 
-**Intended audience:** {Insert audience details}.
+**Intended audience:** {Insert audience details}. 
 
 **Topics covered:** details on adversary behavior, prompts to access build platform security 
 
