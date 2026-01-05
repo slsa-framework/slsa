@@ -1,16 +1,16 @@
 ---
 title: Build Environment track
-description: This page gives an overview of the SLSA Build Environment track and its levels, describing their security objectives and general requirements.
+description: This page covers the SLSA Build Environment track and its levels, describing their security objectives and general requirements.
 mermaid: true 
 ---
 
 # {Build Environment Track: Basics}
 
-**About this page:** the Build Track Basics page gives an overview of the SLSA Build Environment track and its levels, describing their security objectives and general requirements.
+**About this page:** this page covers the SLSA Build Environment track and its levels, describing their security objectives and general requirements.
 
-**Intended audience:** {TBD}.
+**Intended audience:** {add appropriate audience}.
 
-**Topics covered:** build environment track threats, build environment trackterminology, build environment track concept model, build environment track levels, build environment track level specifics, considerations for distributed builds
+**Topics covered:** build track terminology, threats to build environments, build environment model, lifecycle, level specifics explaination and requirements for
 
 **Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
 
@@ -18,15 +18,9 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-**For more information, see:** [General SLSA terminology](terminology.md).
-
+**For more information, see:** [General SLSA terminology](terminology.md). {optional} 
 
 ## Overview
-
-
-This page gives an overview of the SLSA Build Environment track and its levels, describing their security objectives and general requirements.
-
-## Build Environment Track Overview
 
 Today's hosted [build platforms] play a central role in an artifact's supply
 chain. Whether it's a cloud-hosted service like GitHub Actions or an internal
@@ -44,28 +38,54 @@ The SLSA Build Environment track aims to address these issues by making it
 possible to validate the integrity and trace the provenance of core build
 platform components.
 
-## Build environment threats
+## Build Environment Track Terminology
 
-The SLSA [Build track] defines requirements for the provenance that is produced for the build artifacts.
+These terms apply to the Build Environment track. See the general terminology [list](terms-generic.md) for terms used throughout the SLSA specification.
 
-Trustworthiness of the build process largely depends on the trustworthiness of the [build environment] the build runs in.
+| Term | Description |
+| --- | --- |
+| <span id="boot-process">Boot process</span> | In the context of builds, the process of loading and executing the layers of firmware and/or software needed to start up a build environment on the host compute platform. |
+| <span id="build-agent">Build agent</span> | A build platform-provided program that interfaces with the build platform's control plane from within a running build environment. The build agent is also responsible for executing the tenant’s build definition, i.e., running the build. In practice, the build agent may be loaded into the build environment after instantiation, and may consist of multiple components. All build agent components must be measured along with the build image. |
+| <span id="build-dispatch">Build dispatch</span> | The process of assigning a tenant's build to a pre-deployed build environment on a hosted build platform. |
+| <span id="build-id">Build ID</span> | An immutable identifier assigned uniquely to a specific execution of a tenant's build. In practice, the build ID may be an identifier, such as a UUID, associated with the build execution. |
+| <span id="build-image">Build image</span> | The template for a build environment, such as a VM or container image. Individual components of a build image include the root filesystem, pre-installed guest OS and packages, the build executor, and the build agent. |
+| <span id="build-image-producer">Build image producer</span> | The party that creates and distributes build images. In practice, the build image producer may be the hosted build platform or a third party in a bring-your-own (BYO) build image setting. |
+| Build platform assessment | [Build platforms are assessed](assessing-build-platforms.md) for their ability to meet SLSA requirements at the stated level. |
+| <span id="compute-platform">Compute platform</span> | The compute system and infrastructure underlying a build platform, i.e., the host system (hypervisor and/or OS) and hardware. In practice, the compute platform and the build platform may be managed by the same or distinct organizations. |
+| <span id="host-interface">Host interface</span> | The component in the compute platform that the hosted build platform uses to request resources for deploying new build environments, i.e., the VMM/hypervisor or container orchestrator. |
+| <span id="measurement">Measurement</span> | The cryptographic hash of some component or system state in the build environment, including software binaries, configuration, or initialized run-time data. |
+| <span id="quote">Quote</span> | (Virtual) hardware-signed data that contains one or more (virtual) hardware-generated measurements. Quotes may additionally include nonces for replay protection, firmware information, or other platform metadata. (Based on the definition in [section 9.5.3.1](https://trustedcomputinggroup.org/wp-content/uploads/TPM-2.0-1.83-Part-1-Architecture.pdf) of the TPM 2.0 spec) |
+| <span id="reference-value">Reference value</span> | A specific measurement used as the good known value for a given build environment component or state. |
 
-The Build track assumes full trust into the [Build Platform], and provides no requirements to verify integrity of the build environment.
-BuildEnv track intends to close this gap.
+### Build environment track terms to avoid
 
-Build environment is bootstrapped from a [build image], which is expected to be an artifact of a SLSA build pipeline.
+| Term | Reason to avoid | 
+| --- | --- |
+| image| Disambiguate similar terms. |
+| build job | Disambiguate similar terms. |
+| build executor/runner | Disambiguate similar terms. |
 
-Build platform verifies image security properties including provenance upon starting up the environment and makes evidence of the verification available to tenants or other auditors.
+## What the Build Environment Track does
 
-BuildEnv track assumes full trust in the software that comes with the build image or is installed at runtime.
+{clean} The SLSA [Build track] defines requirements for the provenance that is produced for the build artifacts. Trustworthiness of the build process largely depends on the trustworthiness of the [build environment] the build runs in. The Build track assumes full trust into the [Build Platform], and provides no requirements to verify integrity of the build environment. BuildEnv track intends to close this gap.
 
-Malicious software having privileged access within the build environment might be able to circumvent protections provided by the BuildEnv track.
+### What it includes
 
-Image providers should manage vulnerabilities in the image components to reduce the risks of such attacks, e.g. by using SLSA Dependency track and hardening images with mandatory access control (MAC) policies.
+ - Build environment is bootstrapped from a [build image], which is expected to be an artifact of a SLSA build pipeline.
 
-Control Plane may perform additional analysis of the image SBOM as it bootstraps the build environment.
+ - Build platform verifies image security properties including provenance upon starting up the environment and makes evidence of the verification available to tenants or other auditors.
+
+ - BuildEnv track assumes full trust in the software that comes with the build image or is installed at runtime.
+
+ - Malicious software having privileged access within the build environment might be able to circumvent protections provided by the BuildEnv track.
+
+ - Image providers should manage vulnerabilities in the image components to reduce the risks of such attacks, e.g. by using SLSA Dependency track and hardening images with mandatory access control (MAC) policies.
+
+ - Control Plane may perform additional analysis of the image SBOM as it bootstraps the build environment.
 
 Bootstrapping the build environment is a complex process, especially at higher SLSA levels.
+
+## Build environment threats
 
 ### Threats and Build Levels
 
@@ -96,7 +116,7 @@ The [SEV-SNP/TDX threat model] describes this level of trust reduction through t
 L3 provides evidence of continuous integrity of the build environment for the whole lifetime.
 TEE technologies are not infallible, so physical human access to hardware and side channel attacks are still a risk that is accepted at L3.
 
-### Build image lifetimes
+### Build image lifetimes diagram
 
 This diagram outlines the lifetime of a build image between its creation and use in bootstrapping a build environment.
 A Build Image could be compromised at any stage of its lifetime.
@@ -134,33 +154,6 @@ Besides, Control Plane provides input data to the build environment (i.e. build 
 
 For the example threats, refer to the [Build Threats] section.
 
-## Build Environment Track Terminology
-
-{needs introduction?}
-
-| Term | Description |
-| --- | --- |
-| <span id="boot-process">Boot process</span> | In the context of builds, the process of loading and executing the layers of firmware and/or software needed to start up a build environment on the host compute platform. |
-| <span id="build-agent">Build agent</span> | A build platform-provided program that interfaces with the build platform's control plane from within a running build environment. The build agent is also responsible for executing the tenant’s build definition, i.e., running the build. In practice, the build agent may be loaded into the build environment after instantiation, and may consist of multiple components. All build agent components must be measured along with the build image. |
-| <span id="build-dispatch">Build dispatch</span> | The process of assigning a tenant's build to a pre-deployed build environment on a hosted build platform. |
-| <span id="build-id">Build ID</span> | An immutable identifier assigned uniquely to a specific execution of a tenant's build. In practice, the build ID may be an identifier, such as a UUID, associated with the build execution. |
-| <span id="build-image">Build image</span> | The template for a build environment, such as a VM or container image. Individual components of a build image include the root filesystem, pre-installed guest OS and packages, the build executor, and the build agent. |
-| <span id="build-image-producer">Build image producer</span> | The party that creates and distributes build images. In practice, the build image producer may be the hosted build platform or a third party in a bring-your-own (BYO) build image setting. |
-| Build platform assessment | [Build platforms are assessed](assessing-build-platforms.md) for their ability to meet SLSA requirements at the stated level. |
-| <span id="compute-platform">Compute platform</span> | The compute system and infrastructure underlying a build platform, i.e., the host system (hypervisor and/or OS) and hardware. In practice, the compute platform and the build platform may be managed by the same or distinct organizations. |
-| <span id="host-interface">Host interface</span> | The component in the compute platform that the hosted build platform uses to request resources for deploying new build environments, i.e., the VMM/hypervisor or container orchestrator. |
-| <span id="measurement">Measurement</span> | The cryptographic hash of some component or system state in the build environment, including software binaries, configuration, or initialized run-time data. |
-| <span id="quote">Quote</span> | (Virtual) hardware-signed data that contains one or more (virtual) hardware-generated measurements. Quotes may additionally include nonces for replay protection, firmware information, or other platform metadata. (Based on the definition in [section 9.5.3.1](https://trustedcomputinggroup.org/wp-content/uploads/TPM-2.0-1.83-Part-1-Architecture.pdf) of the TPM 2.0 spec) |
-| <span id="reference-value">Reference value</span> | A specific measurement used as the good known value for a given build environment component or state. |
-
-### Build environment track terms to avoid
-
-| Term | Reason to avoid | 
-| --- | --- |
-| image| Disambiguate similar terms. |
-| build job | Disambiguate similar terms. |
-| build executor/runner | Disambiguate similar terms. |
-
 ## Build environment concept model
 
 The Build Environment (BuildEnv) track expands upon the
@@ -170,9 +163,9 @@ build image and compute platform from the
 
 <p align="center"><img src="images/build-env-model.svg" alt="Build Environment Model"></p>
 
-#### Build environment lifecycle
+### Build environment lifecycle diagram
 
-A typical build environment will go through the following lifecycle:
+The above diagram shows how a typical build environment will go through the following lifecycle:
 
 1.  *Build image creation*: A [build image producer](#build-image-producer)
     creates different [build images](#build-image) through a dedicated build
