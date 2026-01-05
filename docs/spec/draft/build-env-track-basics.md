@@ -6,15 +6,15 @@ mermaid: true
 
 # {Build Environment Track: Basics}
 
-**About this page:** this page covers *Build Environment Track: Basics* and its levels, describing their security objectives and general requirements.
+**About this page:** the *Build Environment Track: Basics* page defines its levels, describes their security objectives and general requirements.
 
-**Intended audience:** {add appropriate audience}.
+**Intended audience:** {add appropriate audience}
 
-**Topics covered:** build track terminology, threats to build environments, build environment model, lifecycle, level specifics explaination and requirements for
+**Topics covered:** build track terminology, threats to build environments,  explaination for build environment model, level specifics 
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
@@ -121,8 +121,6 @@ TEE technologies are not infallible, so physical human access to hardware and si
 This diagram outlines the lifetime of a build image between its creation and use in bootstrapping a build environment.
 A Build Image could be compromised at any stage of its lifetime.
 Higher SLSA BuildEnv levels secure the build environment from larger classes of threats.
-
-{mermaid diagram below}
 
 <div class="mermaid">
 flowchart LR
