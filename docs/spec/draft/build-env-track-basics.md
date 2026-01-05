@@ -6,7 +6,7 @@ mermaid: true
 
 # {Build Environment Track: Basics}
 
-**About this page:** this page covers the SLSA Build Environment track and its levels, describing their security objectives and general requirements.
+**About this page:** this page covers *Build Environment Track: Basics* and its levels, describing their security objectives and general requirements.
 
 **Intended audience:** {add appropriate audience}.
 
@@ -18,7 +18,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-**For more information, see:** [General SLSA terminology](terminology.md). {optional} 
+**For more information, see:** {optional} 
 
 ## Overview
 
