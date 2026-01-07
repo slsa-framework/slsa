@@ -13,7 +13,7 @@ A SLSA level helps give consumers confidence that software has not been tampered
 with and can be securely traced back to source. Something that is difficult, if
 not impossible, to do with most software today.
 
-This page outlines a set of real world supply chain threat problems and explains how SLSA can mitigate each one.
+The table below outlines a set of real world supply chain threat problems and explains how SLSA can mitigate them. Each threat in this table has a label of (A) through (I). These labels coincide with the red triangle threat locations in the [Supply Chain Threat Model](threats.md#supply-chain-threat-model) diagram. See that [page](threats.md#supply-chain-threat-model) for in-depth details on threat problems and SLSA solutions.
 
 ## Real world examples of Supply Chain threats
 
