@@ -1,126 +1,21 @@
-## Mapping to real-world ecosystems
+---
+title: The Supply Chain Problem
+description: Attacks can occur at every link in a typical software supply chain, and these kinds of attacks are increasingly public, disruptive, and costly in today's environment. This page outlines a set of real world supply chain threat situations and explains how SLSA could mitigate each type of problem.
+---
 
-Most real-world ecosystems fit the package model above but use different terms.
-The table below attempts to document how various ecosystems map to the SLSA
-Package model. There are likely mistakes and omissions; corrections and
-additions are welcome!
+# {The Supply Chain Problem}
 
-<!-- Please keep this list sorted alphabetically within each section. -->
+Attacks can occur at every link in a typical software supply chain, and these
+kinds of attacks are increasingly public, disruptive, and costly in today's
+environment.
 
-<table>
-  <tr>
-    <th>Package ecosystem
-    <th>Package registry
-    <th>Package name
-    <th>Package artifact
-  <tr>
-    <td colspan=4><em>Languages</em>
-  <tr>
-    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html">Cargo</a> (Rust)
-    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html#registry">Registry</a>
-    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html#crate">Crate name</a>
-    <td><a href="https://doc.rust-lang.org/cargo/appendix/glossary.html#artifact">Artifact</a>
-  <tr>
-    <td><a href="https://www.cpan.org">CPAN</a> (Perl)
-    <td><a href="https://pause.perl.org/pause/query?ACTION=pause_04about">PAUSE</a>
-    <td><a href="https://neilb.org/2015/09/05/cpan-glossary.html#distribution">Distribution</a>
-    <td><a href="https://neilb.org/2015/09/05/cpan-glossary.html#release">Release</a> (or <a href="https://neilb.org/2015/09/05/cpan-glossary.html#distribution">Distribution</a>)
-  <tr>
-    <td><a href="https://go.dev/ref/mod">Go</a>
-    <td><a href="https://go.dev/ref/mod#glos-module-proxy">Module proxy</a>
-    <td><a href="https://go.dev/ref/mod#glos-module-path">Module path</a>
-    <td><a href="https://go.dev/ref/mod#glos-module">Module</a>
-  <tr>
-    <td><a href="https://maven.apache.org/glossary">Maven</a> (Java)
-    <td>Repository
-    <td>Group ID + Artifact ID
-    <td>Artifact
-  <tr>
-    <td><a href="https://www.npmjs.com/">npm</a> (JavaScript)
-    <td><a href="https://docs.npmjs.com/about-the-public-npm-registry">Registry</a>
-    <td><a href="https://docs.npmjs.com/package-name-guidelines">Package Name</a>
-    <td><a href="https://docs.npmjs.com/about-packages-and-modules">Package</a>
-  <tr>
-    <td><a href="https://docs.microsoft.com/en-us/nuget/nuget-org/overview-nuget-org">NuGet</a> (C#)
-    <td>Host
-    <td>Project
-    <td>Package
-  <tr>
-    <td><a href="https://packaging.python.org/en/latest/specifications/binary-distribution-format/#file-name-convention">PyPA</a> (Python)
-    <td><a href="https://packaging.python.org/en/latest/glossary/#term-Package-Index">Index</a>
-    <td><a href="https://packaging.python.org/en/latest/glossary/#term-Project">Project Name</a>
-    <td><a href="https://packaging.python.org/en/latest/glossary/#term-Distribution-Package">Distribution</a>
-  <tr>
-    <td colspan=4><em>Operating systems</em>
-  <tr>
-    <td><a href="https://wiki.debian.org/Teams/Dpkg">Dpkg </a> (e.g. Debian)
-    <td><em>?</em>
-    <td>Package name
-    <td>Package
-  <tr>
-    <td><a href="https://docs.flatpak.org/en/latest/introduction.html#terminology">Flatpak</a>
-    <td>Repository
-    <td>Application
-    <td>Bundle
-  <tr>
-    <td><a href="https://docs.brew.sh/Manpage">Homebrew</a> (e.g. Mac)
-    <td>Repository (Tap)
-    <td>Package name (Formula)
-    <td>Binary package (Bottle)
-  <tr>
-    <td><a href="https://wiki.archlinux.org/title/Pacman">Pacman</a> (e.g. Arch)
-    <td>Repository
-    <td>Package name
-    <td>Package
-  <tr>
-    <td><a href="https://rpm.org">RPM</a> (e.g. Red Hat)
-    <td>Repository
-    <td>Package name
-    <td>Package
-  <tr>
-    <td><a href="https://nixos.org/manual/nix">Nix</a> (e.g. <a href="https://nixos.org/">NixOS</a>)
-    <td>Repository (e.g. <a href="https://github.com/NixOS/nixpkgs">Nixpkgs</a>) or <a href="https://nixos.org/manual/nix/stable/glossary.html#gloss-binary-cache">binary cache</a>
-    <td><a href="https://nixos.org/manual/nix/stable/language/derivations.html">Derivation name</a>
-    <td><a href="https://nixos.org/manual/nix/stable/language/derivations.html">Derivation</a> or <a href="https://nixos.org/manual/nix/stable/glossary.html#gloss-store-object">store object</a>
-  <tr>
-    <td colspan=4><em>Storage systems</em>
-  <tr>
-    <td><a href="https://cloud.google.com/storage/docs/key-terms">GCS</a>
-    <td><em>n/a</em>
-    <td>Object name
-    <td>Object
-  <tr>
-    <td><a href="https://github.com/opencontainers/distribution-spec/blob/main/spec.md#definitions">OCI</a>/Docker
-    <td>Registry
-    <td>Repository
-    <td>Object
-  <tr>
-    <td colspan=4><em>Meta</em>
-  <tr>
-    <td><a href="https://deps.dev/glossary">deps.dev</a>: <a href="https://deps.dev/glossary#system">System</a>
-    <td><a href="https://deps.dev/glossary#packaging-authority">Packaging authority</a>
-    <td><a href="https://deps.dev/glossary#package">Package</a>
-    <td><em>n/a</em>
-  <tr>
-    <td><a href="https://github.com/package-url/purl-spec/blob/master/PURL-SPECIFICATION.rst">purl</a>: type
-    <td>Namespace
-    <td>Name
-    <td><em>n/a</em>
-</table>
+A SLSA level helps give consumers confidence that software has not been tampered
+with and can be securely traced back to source. Something that is difficult, if
+not impossible, to do with most software today.
 
-Notes:
+This page outlines a set of real world supply chain threat problems and explains how SLSA can mitigate each one.
 
--   [Go](https://go.dev) (golang) uses a significantly different distribution model than other ecosystems.
-    In Go, the package name is a source repository URL. While clients can fetch
-    directly from that URL---in which case there is no "package" or
-    "registry"---they usually fetch a zip file from a *module proxy*. The module
-    proxy acts as both a builder (by constructing the package artifact from
-    source) and a registry (by mapping package name to package artifact). People
-    trust the module proxy because builds are independently reproducible, and a
-    *checksum database* guarantees that all clients receive the same artifact
-    for a given URL.
-
-### Real-world supply chain examples
+## Real world examples of Supply Chain threats
 
 Many recent high-profile attacks were consequences of supply chain integrity vulnerabilities, and could have been prevented by SLSA's framework. For example:
 
@@ -200,8 +95,4 @@ For closed source software SLSA does not provide any solutions for malicious pro
 <td>SLSA does not directly address this threat.
 </table>
 
-A SLSA level helps give consumers confidence that software has not been tampered
-with and can be securely traced back to source—something that is difficult, if
-not impossible, to do with most software today.
-
- 
+For a detailed list of Supply Chain Threat Problems and Solutions, go [here](threats.md).
