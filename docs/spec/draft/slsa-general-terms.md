@@ -5,7 +5,7 @@ description: The following general terminology is used in the SLSA specification
 
 ## SLSA specification general terminology
 
-The following terms and descriptions will be used throughout the SLSA specification. They include basic terminology and not track-specifc language. Terms that only apply to individual tracks can be linked to below.
+The following terms and descriptions will be used throughout the SLSA specification. This table includes basic terminology and not track-specifc language. Links for terms that only apply to individual tracks are supplied after this table. There is also a list of ambiguous terms to avoid using and a comparison map that shows how SLSA terms relate to real-world ecosystem terminology.
 
 | Term | Description | Example |
 | ---  | ---         | ---   |
@@ -41,7 +41,7 @@ Many SLSA terms are specific to an individual track and are defined in these tra
 
 ### Terms to avoid
 
-These terms can be ambiguous and should be avoided.
+These terms can be ambiguous and shouldn't be used.
 
 | Term | Reason to avoid | 
 | ---  | ---         | 
