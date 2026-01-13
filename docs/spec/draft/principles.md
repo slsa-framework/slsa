@@ -1,5 +1,5 @@
 ---
-title: Guiding principles 
+title: Guiding principles  
 description: An introduction to the guiding principles behind SLSA's design decisions.
 ---
 

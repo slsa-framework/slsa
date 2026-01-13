@@ -3,7 +3,7 @@ title: Applying SLSA - two parts: (1) Use cases (2) Guiding principles
 description: Applying SLSA has three use cases. Guiding principles will make it clear why you are using SLSA.
 ---
 
-# {Applying SLSA}
+# {Applying SLSA} 
 
 <!-- Do we need all these div tags below? -->
 
