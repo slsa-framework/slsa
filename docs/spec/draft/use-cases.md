@@ -1,30 +1,26 @@
 ---
-title: Use cases
-description: SLSA protects against tampering during the software supply chain, but how? The answer depends on the use case in which SLSA is applied. Here are descriptions of the three main use cases for SLSA.
-layout: standard
+title: Applying SLSA - two parts: (1) Use cases (2) Guiding principles
+description: Applying SLSA has three use cases. Guiding principles will make it clear why you are using SLSA.
 ---
 
+# {Applying SLSA}
+
+<!-- Do we need all these div tags below? -->
+
+The pages in this section provide information on general concepts of how and where to put SLSA into practice. They define SLSA [use cases](use-cases) and [guiding principles](principles.md).
+
+## Use cases
+
 SLSA protects against tampering during the software supply chain, but how?
-The answer depends on the use case in which SLSA is applied. Below
-describe the three main use cases for SLSA.
+The answer depends on the use case in which SLSA is applied. This page defines the three most common settings where supply chain problems threaten the security of different types of software producing organizations. They include: first party organizations,
+oopen source software producers, and vendor services.
 
-<section class="section bg-pastel-green flex justify-center items-center main-content">
-<div class="wrapper w-full">
 
-<div class="-mt-16 mb-16">
-
-## Applications of SLSA
-
-</div>
-
-<div class="md:flex gap-5 mb-12 rounded-xl p-10 bg-white">
-<div class="md:w-1/3 -mt-8">
-
-### First party
+## First party organizations
 
 <div class="hidden md:block"><!-- Hide on mobile -->
 
-Reducing risk within an organization from insiders and compromised accounts
+**How SLSA can be used here:** Reducing risk within an organization from insiders and compromised accounts.
 
 </div>
 
@@ -35,7 +31,7 @@ In its simplest form, SLSA can be used entirely within an organization to reduce
 risk from internal sources. This is the easiest case in which to apply SLSA
 because there is no need to transfer trust across organizational boundaries.
 
-Example ways an organization might use SLSA internally:
+Example of ways an organization might use SLSA internally:
 
 -   A small company or team uses SLSA to ensure that the code being deployed to
     production in binary form is the same one that was tested and reviewed in
@@ -53,11 +49,11 @@ Example ways an organization might use SLSA internally:
 <div class="md:flex gap-5 mb-12 rounded-xl p-10 bg-white">
 <div class="md:w-1/3 -mt-8">
 
-### Open source
+## Open source software producers
 
 <div class="hidden md:block"><!-- Hide on mobile -->
 
-Reducing risk from consuming open source software
+**How SLSA can be used here:** Reducing risk from consuming open source software.
 
 </div>
 
@@ -70,7 +66,7 @@ dependencies. In this way, consumers need only trust a small number of secure
 build platforms rather than the many thousands of developers with upload
 permissions across various packages.
 
-Example ways an open source ecosystem might use SLSA to protect users:
+Example of ways an open source ecosystem might use SLSA to protect users:
 
 -   At upload time, the package registry rejects the package if it was not built
     from the canonical source repository.
@@ -85,23 +81,23 @@ Example ways an open source ecosystem might use SLSA to protect users:
 <div class="md:flex gap-5 mb-12 rounded-xl p-10 bg-white">
 <div class="md:w-1/3 -mt-8">
 
-### Vendors
+## Vendor services
 
 <div class="hidden md:block"><!-- Hide on mobile -->
 
-Reducing risk from consuming vendor provided software and services
+**How SLSA can be used here:** Reducing risk from consuming vendor provided software and services.
 
 </div>
 
 </div>
 <div class="md:w-2/3">
 
-Finally, SLSA can be used to reduce risk for consumers of vendor-provided
+SLSA can also be used to reduce risk for consumers of vendor-provided
 software and services. Unlike open source, there is no canonical source
 repository to map to, so instead the focus is on the trustworthiness of claims made
 by the vendor.
 
-Example ways a consumer might use SLSA for vendor-provided software:
+Example of ways a consumer might use SLSA for vendor-provided software:
 
 -   Prefer vendors who make SLSA claims and back them up with credible evidence.
 -   Require a vendor to implement SLSA as part of a contract.
@@ -118,7 +114,7 @@ Example ways a consumer might use SLSA for vendor-provided software:
 
 <div class="-mt-16 mb-16">
 
-## Motivating example
+## Hypothetical example
 
 </div>
 
