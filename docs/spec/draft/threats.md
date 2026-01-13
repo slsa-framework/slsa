@@ -6,9 +6,9 @@ description: A comprehensive technical analysis of supply chain threats and thei
 # {Threats & Mitigations}
 
 This page supplies a comprehensive technical analysis of supply chain threat problems and
-their corresponding mitigations with SLSA. The following examples provide detailed descriptions of different types of supply chain threats. They cover threats to the integrity of source, build, usage, dependency, availability, and verification portions of the software supply chain. Each threat problem includes a SLSA mitigation and example that explains the reasons for the SLSA [build](build-requirements.md) and [source](source-requirements.md) requirements. 
+their corresponding mitigations with SLSA. It expands on the diagram first presented in the [Introduction to supply chain attacks](threats-overview.md#introduction-to-supply-chain-attacks) page and provides additional examples with detailed descriptions of different types of supply chain threats. They cover threats to the integrity of source, build, usage, dependency, availability, and verification portions of the software supply chain. Each example of a threat problem includes a SLSA mitigation that explains the reasons for the SLSA [build](build-requirements.md) and [source](source-requirements.md) requirements. 
 
-This information on threats and mitigation can increase confidence that the SLSA requirements are sufficient to achieve the desired [level](about#how-slsa-works) of integrity protection and help implementers understand what they are protecting against so that they can better design and implement controls.
+Having more information on threats and mitigation can increase confidence that the SLSA requirements are sufficient to achieve the desired [level](about#how-slsa-works) of integrity protection and help implementers understand what they are protecting against so that they can better design and implement controls.
 
 <!--
 **TODO:** Expand this threat model to also cover "unknowns". Not sure if that is
@@ -23,22 +23,19 @@ diagram.
 
 <article class="threats">
 
-## Supply Chain Threat Model
+## Supply chain threat model
 
 ![Supply Chain Threats](images/supply-chain-threats.svg)
 
-This threat model shows the *software supply chain*, the process by
-which software is produced and consumed. This page describes cluster threats based
+The threat model above that was first shown in the [Introduction to supply chain attacks](threats-overview.md#introduction-to-supply-chain-attacks) page, shows the software supply chain process of how software is produced and consumed, and where threats can occur. This *Threats & Mitigation* page adds additional details that describe cluster threats based
 on where in the software development pipeline those threats occur. The threat locations are labeled (A)
-through (I). This is useful because priorities and mitigations mostly cluster
-along those same lines. Keep in mind that dependencies are
-[highly recursive](#dependency-threats), so each dependency has its own threats
-(A) through (I), and the same for *their* dependencies, and so on.
+through (I) in the diagram and all the examples.
 
-Producers and consumers face *aggregate* risk across all of the
-software they produce and consume. Many organizations produce
-and/or consume thousands of software packages, both first- and third-party, and
-it is not practical to rely on every individual team in the organization to do
+This detailed threat information is important because priorities and mitigations mostly cluster
+along those same lines. Dependencies are
+[highly recursive](#dependency-threats), and each dependency in these examples has its own threats
+(A) through (I), and the same for *their* dependencies, and so on. Recursion problems cause producers and consumers to face *aggregate* risk across all of the
+software they produce and consume. Due to the size and scope of software development organizations, it's not practical to rely on every individual team to do
 the right thing. For this reason, SLSA prioritizes mitigations that can be
 broadly adopted in an automated fashion, minimizing the chance of mistakes.
 

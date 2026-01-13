@@ -1,42 +1,51 @@
 ---
-title: Supply chain threats
+title: Supply chain threat overview
 description: Attacks can occur at every link in a typical software supply chain, and these kinds of attacks are increasingly public, disruptive, and costly in today's environment. This page is an introduction to possible attacks throughout the supply chain and how SLSA could help.
 ---
 
+# {The Supply Chain Problem}
+
+## Introduction to Supply Chain Attacks
+
 Attacks can occur at every link in a typical software supply chain, and these
 kinds of attacks are increasingly public, disruptive, and costly in today's
-environment.
+environment. This page outlines possible attacks throughout the supply chain and how
+SLSA can help. 
 
-This page is an introduction to possible attacks throughout the supply chain and how
-SLSA could help. For a more technical discussion, see [Threats & mitigations](threats.md).
-
-## Summary
-
-![Supply Chain Threats](images/supply-chain-threats.svg)
-
-**Note that SLSA does not currently address all of the threats presented here.**
-See [Threats & mitigations](threats.md) for what is currently addressed and
-[Terminology](terminology.md) for an explanation of the supply chain model.
-
-SLSA's primary focus is supply chain integrity, with a secondary focus on
-availability. Integrity means protection against tampering or unauthorized
+Threats can be mitigated because SLSA's primary focus is supply chain integrity. Integrity means protection against tampering or unauthorized
 modification at any stage of the software lifecycle. Within SLSA, we divide
-integrity into source integrity vs build integrity.
+integrity into source integrity vs build integrity: 
 
-**Source integrity:** Ensure that the source revision represents the intent of the producer, that all expected processes were followed and that the revision was not modified after being accepted.
+- **Source integrity:** Ensures that the source revision represents the intent of the producer, that all expected processes were followed and that the revision was not modified after being accepted.
 
-**Build integrity:** Ensure that the package is built from the correct,
+- **Build integrity:** Ensures that the package is built from the correct,
 unmodified sources and dependencies according to the build recipe defined by the
 software producer, and that artifacts are not modified as they pass between
 development stages.
 
-**Availability:** Ensure that the package can continue to be built and
+SLSA can provide additional mitigation because its secondary focus is on availablity:
+
+- **Availability:** Ensures that the package can continue to be built and
 maintained in the future, and that all code and change history is available for
 investigations and incident response.
 
-### Real-world examples
+SLSA helps give consumers confidence that software has not been tampered
+with and can be securely traced back to source - something that is difficult, if
+not impossible, to do with most software today.
 
-Many recent high-profile attacks were consequences of supply chain integrity vulnerabilities, and could have been prevented by SLSA's framework. For example:
+## Supply chain threat model
+
+![Supply Chain Threats](images/supply-chain-threats.svg)
+
+This supply chain threat model diagram shows where threats can occur in the supply chain sequence of events. The letters (A) through (I) represent different threats and are explained in the real-world example table [below](real-world-examples). For more technical details on supply chain threats, see [Threats & mitigations](threats.md).
+
+**Note:** SLSA does not currently address all of the threats presented in the diagram.
+
+## Real-world examples of Supply Chain threats
+
+Many recent high-profile attacks were consequences of supply chain integrity vulnerabilities, and could have been prevented by SLSA's framework. 
+
+The table below outlines a set of real world supply chain threat problems and explains how SLSA can mitigate them. Each threat in this table has a label of (A) through (I). These labels coincide with the red triangle threat locations in the diagram above. See the [Threats & Mitigations](threats.md) page for in-depth details on threat problems and SLSA solutions.
 
 <table>
 <thead>
@@ -114,6 +123,4 @@ For closed source software SLSA does not provide any solutions for malicious pro
 <td>SLSA does not directly address this threat.
 </table>
 
-A SLSA level helps give consumers confidence that software has not been tampered
-with and can be securely traced back to source—something that is difficult, if
-not impossible, to do with most software today.
+
