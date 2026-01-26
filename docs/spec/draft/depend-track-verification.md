@@ -1,15 +1,15 @@
 ---
 title: Dependency track verification
-description: This page covers the SLSA Dependency track provenance
+description: This page covers the SLSA Dependency track verificatation
 ---
 
 # {Dependency Track: Verification}
 
-**About this page:** the *Dependency Track: Provenance* page defines the dependency track verification.
+**About this page:** the *Dependency Track: Verification* page lists recommendations on how human inspectors should verify artifacts and their SLSA provenance.
 
 **Intended audience:** {add appropriate audience}
 
-**Topics covered:** verification
+**Topics covered:** {expand topic list when contributors add content}
 
 **Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
@@ -19,6 +19,6 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 **For more information, see:** {optional} 
 
-Note to contributors: This page needs to explain in detail the recommendations for how to verify artifacts and their SLSA provenance by human inspection for the Dependency track. When appropriate, follow the outline of the Build Track Verification page. Also, fill in the above header information on About this page, intended audience, topics covered, Internet standards, and For more information.
-
 ## Overview of Dependency track verification
+
+This information will be supplied when development is completed.

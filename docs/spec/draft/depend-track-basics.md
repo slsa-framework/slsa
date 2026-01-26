@@ -1,15 +1,15 @@
 ---
-title: Dependency Track
+title: Dependency Track: Basics
 description: This page shows how the SLSA Dependency track enables a software producer to measure, control, and reduce risk introduced from third party dependencies.
 ---
 
-# {Dependency Track: Consuming Dependencies}
+# {Dependency Track: Basics}
 
-**About this page:** the *Dependency Track: Consuming Dependencies* page shows how this track enables a software producer to measure, control, and reduce risk introduced from third party dependencies.
+**About this page:** the *Dependency Track: Basics* page shows how this track enables a software producer to measure, control, and reduce risk introduced from third party dependencies.
 
 **Intended audience:** {add appropriate audience}
 
-**Topics covered:** dependency track terminology, track level summary
+**Topics covered:** dependency track terminology, track level summaries and specifics
 
 **Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 

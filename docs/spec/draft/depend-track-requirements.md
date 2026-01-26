@@ -3,7 +3,7 @@ title: Dependency Track Requirements
 description: This page covers the SLSA Dependency track requirements.
 ---
 
-# {Dependency Track: Requirements}
+# {Dependency Track: Requirements} 
 
 **About this page:** the *Dependency Track: Requirements* page explains the security requirements for the dependency track.
 

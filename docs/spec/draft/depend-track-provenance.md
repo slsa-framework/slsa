@@ -5,11 +5,11 @@ description: This page covers the SLSA Dependency track provenance
 
 # {Dependency Track: Provenance}
 
-**About this page:** the *Dependency Track: Provenance* page defines the dependency track provenance.
+**About this page:** the *Dependency Track: Provenance* page defines how the distribution and verification of provenance metadata should be done using the SLSA attastation format.
 
 **Intended audience:** {add appropriate audience}
 
-**Topics covered:** provenance
+**Topics covered:** {expand topic list when contributors add content}
 
 **Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
@@ -19,8 +19,7 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 **For more information, see:** {optional} 
 
-Note to contributors: This page needs to explain in detail the distribution and verification of provenance metadata in the form of SLSA attestations for the Dependency track. When appropriate, follow the outline of the Build Track Provenance page. Also, fill in the above header information on About this page, intended audience, topics covered, Internet standards, and For more information.
-
 ## Overview of Dependency track provenance
 
+This information will be supplied when development is completed.
 
