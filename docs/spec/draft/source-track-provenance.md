@@ -9,9 +9,9 @@ description: This page covers the distribution and verification of provenance me
 
 **Intended audience:** source control system implementers and security engineers
 
-**Topics covered:** source track provenance
+**Topics covered:** source track provenance and attestations
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
 >The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be

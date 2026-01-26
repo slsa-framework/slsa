@@ -9,9 +9,9 @@ description:  This page describes how to verify properties of source revisions u
 
 **Intended audience:** platform implementers, security engineers, and software consumers
 
-**Topics covered:** verification steps, forming expectations, architecture options
+**Topics covered:** verification criteria and steps, forming expectations, architecture options
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
 >The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be

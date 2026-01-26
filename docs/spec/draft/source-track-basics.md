@@ -1,6 +1,6 @@
 ---
 title: Source Track: Basics
-description: This page This page introduces the SLSA source track part of the supply chain, terminology, and the levels of the source security requirements.
+description: This page introduces the SLSA source track part of the supply chain, terminology, and the levels of the source security requirements.
 ---
 
 # {Source Track: Basics}
@@ -11,7 +11,7 @@ description: This page This page introduces the SLSA source track part of the su
 
 **Topics covered:** source track overview, terminology, and introduction to source track levels of security
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
 >The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
