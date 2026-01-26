@@ -1,24 +1,23 @@
 ---
-title: "Build: Distributing provenance"
+title: "Build Track: Provenance"
 description: This document provides specifications for distributing provenance and the
 relationship between build artifacts and provenance.
 ---
 
-# { Build Track: Distributing Provenance}
+# { Build Track: Provenance}
 
-**About this page:** the *Build Track Distributing Provenance* page provides specifications for distributing provenance and the
+**About this page:** the *Build Track: Provenance* page provides specifications for distributing provenance and the
 relationship between build artifacts and provenance.
 
 **Intended audience:** platform implementers and software distributors
 
-**Topics covered:** build provenance attestations
+**Topics covered:** build provenance metadata and attestation formats 
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
 >The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
-
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
 **For more information, see:** {optional} 
 
 ## Overview

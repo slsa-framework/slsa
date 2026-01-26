@@ -1,17 +1,17 @@
 ---
-title: "Build: Assessing build platforms"
+title: "Build Track: Assessment"
 description: This page describes the parts of a build platform that consumers SHOULD assess in order to verify an artifact's security.
 ---
 
-# {Build Track: Assessing Build Platforms}
+# {Build Track: Assessment}
 
-**About this page:** the *Build Track: Accessing Build Platforms* page describes the parts of a build platform that consumers SHOULD assess in order to verify an artifact's security.
+**About this page:** the *Build Track: Assessment* page describes the parts of a build platform that consumers SHOULD assess in order to verify an artifact's security.
 
 **Intended audience:** {add appropriate audience} 
 
-**Topics covered:** adversary behavior, sample prompts to access build platform security 
+**Topics covered:** adversary behavior, sample prompts to assess build platform security 
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
 >The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be

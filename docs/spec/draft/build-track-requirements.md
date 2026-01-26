@@ -1,17 +1,17 @@
 ---
-title: "Build: Requirements for producing artifacts"
+title: "Build: Requirements"
 description: This page covers the technical requirements for producing artifacts at each SLSA level. 
 ---
 
-# {Build Track: Requirements for producing artifacts}
+# {Build Track: Requirements}
 
-**About this page:** the *Build Track Requirements for producing artifacts* page covers the technical requirements for producing artifacts at each SLSA level.
+**About this page:** the *Build Track: Requirements* page covers the technical requirements for producing artifacts at each SLSA level.
 
 **Intended audience:** platform implementers and security engineers
 
-**Topics covered:** build levels, producer and build platform responsibility sharing
+**Topics covered:** build levels, responsibilities and requirements
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list), {other standards as required}
 
 >The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be

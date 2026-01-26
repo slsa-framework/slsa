@@ -1,17 +1,17 @@
 ---
-title: "Build Track: Verifying artifacts"
+title: "Build Track: Verification"
 description: This page describes how to verify artifacts and their SLSA provenance. 
 ---
 
-# {Build Track: Verifying Artifacts}  
+# {Build Track: Verification}  
 
-**About this page:** the *Build Track Verifying Artifacts* page describes how to verify artifacts and their SLSA provenance. 
+**About this page:** the *Build Track: Verification* page describes how to verify artifacts and their SLSA provenance. 
 
 **Intended audience:** platform implementers, security engineers, and software consumers
 
-**Topics covered:** verification procedures, expectation models, provenance, architecture options for provenance verification
+**Topics covered:** verification procedures, expectation models, architecture options for provenance verification
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
 >The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be

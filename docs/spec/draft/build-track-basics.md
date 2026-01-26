@@ -17,7 +17,7 @@ description: This page introduces the SLSA build track part of the supply chain 
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-**For more information, see:** {optional} 
+**For more information, see:** {optional}  
 
 ## Overview
 
