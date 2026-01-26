@@ -1,17 +1,17 @@
 ---
-title: "Source: Verifying source"
+title: "Source Track: Verification"
 description:  This page describes how to verify properties of source revisions using their SLSA source provenance attestations. 
 ---
 
-# {Source Track: Verifying Source}
+# {Source Track: Verification}
 
-**About this page:** the *Source Track: Verifying Source* page describes how to verify properties of source revisions using their SLSA source provenance attestations. 
+**About this page:** the *Source Track: Verification* page describes how to verify properties of source revisions using their SLSA source provenance attestations. 
 
 **Intended audience:** platform implementers, security engineers, and software consumers
 
-**Topics covered:** verification steps, forming expectations, architecture options
+**Topics covered:** verification criteria and steps, forming expectations, architecture options
 
-**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
 >The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
@@ -19,7 +19,7 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 **For more information, see:** {optional}
 
-## Overview
+## Overview of Source Track Verification
 
 SLSA uses attestations to indicate security claims associated with a repository
 revision, but attestations don't do anything unless somebody inspects them. SLSA

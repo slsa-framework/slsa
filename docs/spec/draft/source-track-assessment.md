@@ -1,15 +1,15 @@
 ---
-title: "Source: Assessing source control systems"
+title: "Source Track: Assessment"
 description: This page describes the parts of an Source Constrol System (SCS) platform that consumers SHOULD assess in order to verify an artifact's security.
 ---
 
-# {Source Track: Assessing Source Control Systems}
+# {Source Track: Assessment}
 
-**About this page:** the parts of a Source Control System (SCS) platform that consumers SHOULD assess in order to verify an artifact's security is described on this *Source Track: Assessing Source Control Systems* page.
+**About this page:** the *Source Track: Assessment* page explains the parts of a Source Control System (SCS) platform that consumers SHOULD assess in order to verify an artifact's security.
 
 **Intended audience:** {add appropriate audience}
 
-**Topics covered:** details on adversary behavior, prompts to access source control systems
+**Topics covered:** adversary threats, source control system assessments and prompts
 
 **Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
@@ -19,14 +19,14 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 **For more information, see:** [Threats & mitigations](threats.md).
 
-## Overview
+## Overview of Source Track Assessment
 
 One of SLSA's guiding [principles](principles.md) is to "trust platforms, verify
 artifacts". However, consumers cannot trust source control systems (SCSs) unless
 they have some proof that an SCS meets its
 [requirements](source-requirements.md). This page will provide information and example prompts to help assess and verify a SCS.
 
-## Threats
+## Adversary Threats
 
 SLSA's purpose is to help people defend against adversaries that threaten the software supply chain. By understanding adversary goals and profiles, you can assess your source  control system more easily.
 
@@ -123,7 +123,7 @@ and signs a
 
 Storage holds source revisions and their provenance and summary attestations.
 
-## Assessing components
+## Assessing components with prompts
 
 The following are prompts for assessing a Source Control System's ability to
 meet the SLSA requirements.
