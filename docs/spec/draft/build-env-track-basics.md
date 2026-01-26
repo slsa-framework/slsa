@@ -1,5 +1,5 @@
 ---
-title: Build Environment track basics
+title: Build Environment Track: Basics
 description: This page covers the SLSA Build Environment track basics, terminology, and general requirements.
 mermaid: true 
 ---
@@ -10,7 +10,7 @@ mermaid: true
 
 **Intended audience:** {add appropriate audience}
 
-**Topics covered:** build track terminology, threats to build environments,  explaination for build environment model
+**Topics covered:** build environment track terminology, introduction, threats, build environment model
 
 **Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 

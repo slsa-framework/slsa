@@ -1,5 +1,5 @@
 ---
-title: Build Environment track level requirements
+title: Build Environment Track: Requirements
 description: This page covers the SLSA Build Environment level requirements in detail.
 ---
 
@@ -9,7 +9,7 @@ description: This page covers the SLSA Build Environment level requirements in d
 
 **Intended audience:** {add appropriate audience}
 
-**Topics covered:** details of the build environment track requirements
+**Topics covered:** build environment track requirements
 
 **Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 

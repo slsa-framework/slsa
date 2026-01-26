@@ -1,15 +1,15 @@
 ---
-title: Build Environment track provenance
+title: Build Environment Track: Provenance
 description: This page covers the SLSA Build Environment track provenance
 ---
 
 # {Build Environment Track: Provenance}
 
-**About this page:** the *Build Environment Track: Basics* page defines the build track environment provenance.
+**About this page:** the *Build Environment Track: Provenance* page defines how the distribution and verification of Provenance metadata should be done using the SLSA Attestation format.
 
 **Intended audience:** {add appropriate audience}
 
-**Topics covered:** provenance
+**Topics covered:** {expand topic list when contributors add content}
 
 **Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
@@ -19,9 +19,7 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 **For more information, see:** {optional} 
 
-Note to contributors: This page needs to explain in detail the distribution and verification of provenance metadata in the form of SLSA attestations. When appropriate, follow the outline of the Build Track Provenance page. Also, fill in the above header information on About this page, intended audience, topics covered, Internet standards, and For more information.
+## Overview of Build Environment Track: Provenance
 
-## Overview of Build Environment track provenance
-
-
+This information will be supplied when development is completed.
 
