@@ -7,7 +7,7 @@ description: This page provides an overview of the four SLSA tracks.
 
 ## Tracks overview
 
-SLSA is composed of four tracks and each one has multiple levels of security. These tracks address different threats and have their own set of requirements and patterns of use. The tracks are introduced below and later sections of this specification will  explain these standards and requirements in greater detail. 
+The SLSA Specification is composed of four tracks that have multiple levels of security. These tracks address different types of threats to the supply chain and each has their own set of requirements and patterns of use. The tracks are introduced below and the individual sections of this specification will  explain their standards and requirements in greater detail. 
 
 ## Build Track
 
@@ -37,7 +37,7 @@ requirements page of the build track. The build track will cover these five topi
 - Requirements
 - Provenance
 - Verification
-- Assessment of platform
+- Assessment
 
 ## Build Environment track
 
@@ -59,7 +59,7 @@ This track will cover the same five topics as the build track:
 - Requirements
 - Provenance
 - Verification
-- Assessment of environment
+- Assessment
 
 **Note:** The build environment track is currently being developed. Some of the topics are not complete at this time.
 
@@ -73,9 +73,9 @@ This track will cover the same five topics as the build track:
 - Requirements
 - Provenance
 - Verification
-- Assessment of dependency system
+- Assessment
 
-**Note:** The dependency track is currently being developed. Some of the topics are not complete at this time.
+**Note:** The dependency track is also still being developed. Some of the topics are not complete at this time.
 
 ## Source Track
 
@@ -95,8 +95,7 @@ This track will cover the same five topics as the build track, but it has one ad
 - Requirements
 - Provenance
 - Verification
-- Assessment of control system
+- Assessment
 - Example controls
 
-**Note:** The source track is currently being developed. Some of the topics are not complete at this time.
 
