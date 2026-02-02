@@ -1,13 +1,15 @@
 ---
-title: Introduction to Tracks
-description: This page provides an overview of the four SLSA tracks.
+title: Introduction to Tracks and Attestations
+description: This page provides an overview of the four SLSA tracks and Attestation formats.
 ---
 
-# {Introduction to Tracks}
+# {Introduction to Tracks and Attestations}
 
-## Tracks overview
+## Tracks and Attestations overview
 
-The SLSA Specification is composed of four tracks that have multiple levels of security. These tracks address different types of threats to the supply chain and each has their own set of requirements and patterns of use. The tracks are introduced below and the individual sections of this specification will  explain their standards and requirements in greater detail. 
+The SLSA Specification is composed of four tracks that have multiple levels of security. These tracks address different types of threats to the supply chain and each has their own set of requirements and patterns of use. The tracks are introduced below and the individual sections of this specification will explain their standards and requirements in greater detail. 
+
+Each track can generate Provenance attestations to facilitate automated security level testing. Because the attestation formats are common to all tracks, the formats are supplied in a section after the four tracks.
 
 ## Build Track
 
@@ -97,5 +99,20 @@ This track will cover the same five topics as the build track, but it has one ad
 - Verification
 - Assessment
 - Example controls
+
+## Attestation Formats
+
+SLSA provides specific attestation formats to be used for atomated Provenance testing. A software attestation is an authenticated statement (metadata) about a software artifact or collection of software artifacts. The primary intended use case is to feed into automated policy engines.
+
+Attestation formats can speed up the security testing of an artifact at every level, but must be backed up by humans verifying the Provenance using the Verification procedures for that track.
+
+The Attestation format information is covered in these four pages:
+
+- General model
+- Provenance
+- Build Provenance
+- Verification Summary Attestations (VSA)
+
+**Note:** Verified Properties are explained in the VSA page. These properties are to be used in place of attestations when the security state of an artifact is not appropriate.
 
 
