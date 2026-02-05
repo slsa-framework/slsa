@@ -1,10 +1,11 @@
 ---
-title: Guiding principles
+title: Guiding principles  
 description: An introduction to the guiding principles behind SLSA's design decisions.
 ---
 
-This page is an introduction to the guiding principles behind SLSA's design
-decisions.
+Best practices for implementing the slsa specification are outlined on this page. They include
+advice on how to achieve the best outcomes through: 
+simplicity, trust and verify, minimize platforms, using attestations, anonymous contributors.
 
 ## Simple levels with clear outcomes
 
