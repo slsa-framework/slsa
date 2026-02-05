@@ -3,7 +3,7 @@ title: Supply chain threats
 description: Attacks can occur at every link in a typical software supply chain, and these kinds of attacks are increasingly public, disruptive, and costly in today's environment. This page is an introduction to possible attacks throughout the supply chain and how SLSA could help.  
 ---
 
-SLSA defines *software manufacturing models* that fight supply chain *attacks*. These threats can occur at any link in a software supply chain and are becoming increasingly public, disruptive, and costly in today's environment.
+SLSA defines *software manufacturing models* that fight supply chain *attacks*. These threats can occur at any link in a software supply chain and are becoming increasingly public, disruptive, and costly in today's environment. 
 
 This page introduces two key SLSA software models: [framework system models](threats-overview.md#SLSA-framework-system-models) and [supply chain threat model](threats-overview.md#supply-chain-threat-model). It also shows how they can help mitigate possible attacks throughout the supply chain. For a more technical discussion of SLSA's threat methodology, see [Threats & mitigation solutions](threats.md).  
 
