@@ -78,6 +78,13 @@ If you prefer to work locally, you can use VS Code with the DevContainers extens
 
 VS Code will build the container and configure the development environment automatically. **The initial setup may take a few minutes as the container is built.**
 
+Once done, you can open a Terminal and launch the development server in the DevContainer with the following command:
+
+```shell
+cd docs
+netlify dev -c 'bundle exec jekyll serve --livereload --incremental'
+```
+
 ### Deploying the site locally
 
 SLSA.dev is hosted on [Netlify](https://www.netlify.com/), and you can run a local development server using the Netlify CLI.
