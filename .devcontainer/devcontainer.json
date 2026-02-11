@@ -1,6 +1,6 @@
 {
   "name": "Jekyll and Netlify",
-  "image": "mcr.microsoft.com/devcontainers/ruby:4.0",
+  "image": "mcr.microsoft.com/devcontainers/ruby:2.7",
   "containerUser": "vscode",
   "remoteUser": "vscode",
   "features": {
