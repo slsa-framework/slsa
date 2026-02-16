@@ -20,18 +20,18 @@ if [ "$(basename $(pwd))" != "www" ]; then
 fi
 
 # --- Parse command line arguments ---
-FETCH_BRANCHES=false
+FETCH_BRANCHES=true
 
 for arg in "$@"; do
   case "$arg" in
-    --fetch)
-      FETCH_BRANCHES=true
+    --nofetch)
+      FETCH_BRANCHES=false
       ;;
     --help)
       echo "Usage: $0 [--fetch]"
       echo ""
       echo "Options:"
-      echo "  --fetch   Fetch branches from the remote repository (default: off)"
+      echo "  --nofetch Do not fetch branches from the remote repository (default is to fetch)"
       echo "  --help    Show this help message"
       exit 0
       ;;
