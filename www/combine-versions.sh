@@ -57,9 +57,8 @@ mkdir spec/draft
 cp -r "$REPO_ROOT/spec"/* spec/draft/
 
 # deploy older versions
-VERSIONS=("v1.0" "v1.0-rc1" "v1.0-rc2" "v1.1-rc1" "v1.1-rc2" "v1.1" "v1.2" "v1.2-rc1" "v1.2-rc2")
-for version in "${VERSIONS[@]}"; do
-    RELEASE_BRANCH=releases/$version
+for RELEASE_BRANCH in $(git branch -r --list 'origin/releases/*'); do
+    version="$(basename $RELEASE_BRANCH)"
     git -C "$REPO_ROOT" reset --hard
     if [[ "$FETCH_BRANCHES" == true ]]; then
 	git -C "$REPO_ROOT" fetch origin $RELEASE_BRANCH:refs/remotes/origin/$RELEASE_BRANCH
