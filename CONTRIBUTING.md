@@ -88,7 +88,13 @@ SLSA.dev is hosted on [Netlify](https://www.netlify.com/), and you can run a loc
     npm install -g netlify-cli # this will be pre-installed in the DevContainer
     ```
 
-2.  `cd` into the `docs` directory
+2.  `cd` into the `www` directory
+3.  Run the following command to build the site:
+
+    ```shell
+    ./combine-versions.sh
+    ```
+
 3.  Run the following command to start the local development server:
 
     ```shell
