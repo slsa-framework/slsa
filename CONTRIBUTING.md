@@ -95,14 +95,14 @@ SLSA.dev is hosted on [Netlify](https://www.netlify.com/), and you can run a loc
     ./combine-versions.sh
     ```
 
-3.  Run the following command to start the local development server:
+4.  Run the following command to start the local development server:
 
     ```shell
     netlify dev
     ```
 
-4.  Open the browser and navigate to http://localhost:8888
-5.  Verify that the site is running locally
+5.  Open the browser and navigate to http://localhost:8888
+6.  Verify that the site is running locally
 
 ### Markdown style
 
