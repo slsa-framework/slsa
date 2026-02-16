@@ -11,7 +11,7 @@ served by [Netlify](https://netlify.com).
 
     ```bash
     git clone https://github.com/slsa-framework/slsa
-    cd slsa/docs
+    cd slsa/www
     ```
 
 2.  Install system dependencies:
@@ -168,7 +168,6 @@ deploy**.
 
 This will stay active until the next push to `main`.
 
-<<<<<<< HEAD
 ## Insights on some of the internals of the SLSA website
 
 This section provides a collection of tips on some of the internals of how the
@@ -179,7 +178,7 @@ about when publishing a new version of the SLSA specification.
 
 Several configuration files govern the website layout and behavior.
 
-#### docs/_data/versions.yml
+#### www/_data/versions.yml
 
 This file defines the status of the different versions of the specification
 (Draft, Approved, or Retired) along with which version is the current one
@@ -189,7 +188,7 @@ not the current one with a pointer to the current version).
 The `hidden` property was used by the version selector which was abandoned and
 is no longer in use.
 
-#### docs/_data/nav/*
+#### www/_data/nav/*
 
 This folder contains a set of files defining the navigation side bars to be
 used for the different versions of the specification.
@@ -211,16 +210,16 @@ specification. Practically speaking this means that, when you remove a specific
 version from `main.yaml` you should always create a corresponding `v***.yaml`
 if none exists already.
 
-The content of the navigation files is used (in `docs/_includes/nav.html`) to
+The content of the navigation files is used (in `www/_includes/nav.html`) to
 define the navigation side bar but also to define (in
-`docs/_includes/pagination.html`) how pages are chained via the previous and
+`www/_includes/pagination.html`) how pages are chained via the previous and
 next links displayed at the bottom of a page).
 
 The `config.yml` file defines the mapping of the version of the specification
 taken from the page URL to the key in the site.data.nav array where the various
 navigation menu definitions are stored.
 
-### docs/_redirects
+### www/_redirects
 
 Typical website configuration type of file, defining a bunch of redirects used
 to maintain backwards compatibility and provide for some resilience by defining
@@ -233,17 +232,18 @@ burden.
 
 This lists some of the steps one must take to publish a new version of the specification:
 
--   Edit `docs/_data/versions.yml` to add the new version, with its status, and possibly update the status of the previous one.
--   Edit `docs/_data/nav/config.yml` to add the new version
--   Edit `docs/_data/main.yml` to add the new version and possibly remove any older versions to be hidden. If you remove an old version, make sure that a version specific file exists because it will be needed if the hidden version is accessed directly.
--   Edit `docs/_redirects` as necessary including the definition of `/spec/latest/*`
-=======
+-   Edit `www/_data/versions.yml` to add the new version, with its status, and possibly update the status of the previous one.
+-   Edit `www/_data/nav/config.yml` to add the new version
+-   Edit `www/_data/main.yml` to add the new version and possibly remove any older versions to be hidden. If you remove an old version, make sure that a version specific file exists because it will be needed if the hidden version is accessed directly.
+-   Edit `www/_redirects` as necessary including the definition of `/spec/latest/*`
 
-# updates
+## updates
 
-## testing the site locally
-* (optional) Open the slsa repo in a gh codespace.
-* run the following script:
+### testing the site locally
+
+-   (optional) Open the slsa repo in a gh codespace.
+-   run the following script:
+
 ```bash
 cd path/to/slsa
 ./combine-versions.sh
@@ -253,4 +253,3 @@ bundle install
 npm install -g netlify-cli
 netlify dev
 ```
->>>>>>> 20f605d (add some debug instructions)

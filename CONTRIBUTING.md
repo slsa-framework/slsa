@@ -321,6 +321,8 @@ The netlify configuration is in the `/netlify.toml` file. This file overrides se
 
 At deployment time, the website is built in several steps. First, we take all the different versions of the spec from the branches and copy them into corresponding `www/spec/<version>` folders. Then, the jekyll build is run to generate the website files in `www/_site` which is then deployed by netlify.
 
+For more information see the [www/README.md](www/README.md) file.
+
 ## Workstream lifecycle
 
 Major workstreams that require considerable effort, such as a new release, a new
