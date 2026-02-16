@@ -43,7 +43,7 @@ for arg in "$@"; do
   esac
 done
 
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+CURRENT_BRANCH=$(git rev-parse HEAD)
 REPO_ROOT=$(git rev-parse --show-toplevel)
 
 # clean spec dir
