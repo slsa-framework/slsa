@@ -1,34 +1,51 @@
 ---
 title: "Source: Requirements for producing source"
-description: "This page covers the detailed technical requirements for producing source revisions at each SLSA level. The intended audience is source control system implementers and security engineers."
+description: "This page covers the technical requirements for producing source revisions at each SLSA level." 
 ---
 
-## Objective
+# {Source Track: Requirements for Producing Source}
 
-The primary purpose of the SLSA Source track is to provide producers and consumers with increasing levels of trust in the source code they produce and consume.
-It describes increasing levels of trustworthiness and completeness of how a source revision was created.
+**About this page:** the *Source Track: Requirements for Producing Source* page covers the detailed requirements for producing source revisions at each SLSA level.
+
+**Intended audience:** source control system implementers and security engineers
+
+**Topics covered:** source track terminology, track-level specifics and requirements, source track systems and attestations
+
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
+
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+**For more information, see:** {optional}
+
+## Overview
+
+The primary purpose of the SLSA Source track is to provide producers and consumers with increasing levels of trust in the source code they produce and consume. This track describes increasing levels of trustworthiness and completeness of how a source revision was created. This page will show track-level specifics and requirements.
 
 The expected process for creating a new revision is determined solely by that repository's owner (the organization) who also determines the intent of the software in the repository and administers technical controls to enforce the process.
 
-Consumers can review attestations to verify whether a particular revision meets their standards.
+Consumers can review attestations to verify whether a particular revision meets their standards for consuming artifacts. Information on how to use attestations is defined in this document.
 
-## Definitions
+## Source Track Terminology
+
+These terms apply to the Source track. See the general terminology [list](terms-generic.md) for terms used throughout the SLSA specification.
+
+### Version Control Systems terminology
 
 A **Version Control System (VCS)** is a system of software and protocols for
 managing the version history of a set of files. Git, Mercurial, and Subversion
-are all examples of version control systems.
+are all examples of version control systems. The following terms apply to Version Control Systems:
 
-The following terms apply to Version Control Systems:
-
-| Term | Description
-| --- | ---
-| Source Repository (Repo) | A self-contained unit that holds the content and revision history for a set of files, along with related metadata like Branches and Tags.
-| Source Revision | A specific, logically immutable snapshot of the repository's tracked files. It is uniquely identified by a revision identifier, such as a cryptographic hash like a Git commit SHA or a path-qualified sequential number like `25@trunk/` in SVN. A Source Revision includes both the content (the files) and its associated version control metadata, such as the author, timestamp, and parent revision(s). Note: Path qualification is needed for version control systems that represent Branches and Tags using paths, such as Subversion and Perforce.
-| Named Reference | A user-friendly name for a specific source revision, such as `main` or `v1.2.3`.
-| Change | A modification to the state of the Source Repository, such as creation of a new Source Revision based on a previous Source Revision, or creation, deletion, or modification of a Named Reference.
-| Change History | A record of the history of Source Revisions that preceded a specific revision.
-| Branch | A Named Reference that moves to track the Change History of a cohesive line of development within a Source Repository. E.g. `main`, `develop`, `feature-x`
-| <span id="tag">Tag</span> | A Named Reference that is intended to be immutable. Once created, it is not moved to point to a different revision. E.g. `v1.2.3`, `release-20250722`
+| Term | Description |
+| --- | --- |
+| Branch | A Named Reference that moves to track the Change History of a cohesive line of development within a Source Repository; e.g. `main`, `develop`, `feature-x`. |
+| Change | A modification to the state of the Source Repository, such as creation of a new Source Revision based on a previous Source Revision, or creation, deletion, or modification of a Named Reference. |
+| Change History | A record of the history of Source Revisions that preceded a specific revision. |
+| Named Reference | A user-friendly name for a specific source revision, such as `main` or `v1.2.3`. |
+| Source Repository (Repo) | A self-contained unit that holds the content and revision history for a set of files, along with related metadata like Branches and Tags. |
+| Source Revision | A specific, logically immutable snapshot of the repository's tracked files. It is uniquely identified by a revision identifier, such as a cryptographic hash like a Git commit SHA or a path-qualified sequential number like `25@trunk/` in SVN. A Source Revision includes both the content (the files) and its associated version control metadata, such as the author, timestamp, and parent revision(s). Note: Path qualification is needed for version control systems that represent Branches and Tags using paths, such as Subversion and Perforce. |
+| <span id="tag">Tag</span> | A Named Reference that is intended to be immutable. Once created, it is not moved to point to a different revision; e.g. `v1.2.3`, `release-20250722`. |
 
 > **NOTE:** The 'branch' and 'tag' features within version control systems may
 not always align with the 'Branch' and 'Tag' definitions provided in this
@@ -36,41 +53,34 @@ specification. For example, in git and other version control systems, the UX may
 allow 'tags' to be moved. Patterns like `latest` and `nightly` tags rely on this.
 For the purposes of this specification these would be classified as 'Named References' and not as 'Tags'.
 
+### Source Control Systems terminology
+
 A **Source Control System (SCS)** is a platform or combination of services
 (self-hosted or SaaS) that hosts a Source Repository and provides a trusted
 foundation for managing source revisions by enforcing policies for
 authentication, authorization, and change management, such as mandatory code
-reviews or passing status checks.
-
-The following terms apply to Source Control Systems:
+reviews or passing status checks. The following terms apply to Source Control Systems:
 
 | Term | Description
 | --- | ---
-| Organization | A set of people who collectively create Source Revisions within a Source Repository. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals of a Source Repository and the methods used to produce new Source Revisions.
-| Proposed Change | A proposal to make a Change in a Source Repository.
-| Source Provenance | Information about how a Source Revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and which parent revisions preceded it.
+| Organization | A set of people who collectively create Source Revisions within a Source Repository. Examples of organizations include open-source projects, a company, or a team within a company. The organization defines the goals of a Source Repository and the methods used to produce new Source Revisions. |
+| Proposed Change | A proposal to make a Change in a Source Repository. |
+| Source Provenance | Information about how a Source Revision came to exist, where it was hosted, when it was generated, what process was used, who the contributors were, and which parent revisions preceded it. |
 
-### Source Roles
+### Source Roles terminology
 
 | Role | Description
 | --- | ---
-| Administrator | A human who can perform privileged operations on one or more projects. Privileged actions include, but are not limited to, modifying the change history and modifying project- or organization-wide security policies.
-| Trusted person | A human who is authorized by the organization to propose and approve changes to the source.
-| Trusted robot | Automation authorized by the organization to act in explicitly defined contexts. The robot’s identity and codebase cannot be unilaterally influenced.
-| Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project.
+| Administrator | A human who can perform privileged operations on one or more projects. Privileged actions include, but are not limited to, modifying the change history and modifying project- or organization-wide security policies. |
+| Trusted person | A human who is authorized by the organization to propose and approve changes to the source. |
+| Trusted robot | Automation authorized by the organization to act in explicitly defined contexts. The robot’s identity and codebase cannot be unilaterally influenced. |
+| Untrusted person | A human who has limited access to the project. They MAY be able to read the source. They MAY be able to propose or review changes to the source. They MAY NOT approve changes to the source or perform any privileged actions on the project. |
 
-## Onboarding
 
-When onboarding a branch to the SLSA Source Track or increasing the level of
-that branch, organizations are making claims about how the branch is managed
-from that revision forward. This establishes [continuity](#continuity).
-
-No claims are made for prior revisions.
-
-## Basics
+## Source Track Level Introduction
 
 NOTE: This table presents a simplified view of the requirements. See the
-[Requirements](#requirements) section for the full list of requirements for each
+[Source Track Requirements](#source-track-requirements) section later in this document for the full list of requirements for each
 level.
 
 | Track/Level | Requirements | Focus
@@ -81,6 +91,8 @@ level.
 | [Source L4](#source-l4) | Require code review. | Improved code quality and resistance to insider threats.
 
 <section id="source-l1">
+
+## Source Track Level Specifics
 
 ### Level 1: Version controlled
 
@@ -169,13 +181,13 @@ organization.
 </dl>
 </section>
 
-## Requirements
+## Source Track Requirements
 
 Many examples in this document use the
 [git version control system](https://git-scm.com/), but use of git is not a
 requirement to meet any level on the SLSA source track.
 
-### Organization
+### Organization Requirements
 
 [Organization]: #organization
 
@@ -226,7 +238,7 @@ but the organization MUST only allow these changes in order to meet legal or
 privacy compliance requirements. Content changed under this process includes
 changing files, history, references, or any other metadata stored by the SCS.
 
-#### Warning
+#### Warning: Revision Removal
 
 Removing a revision from a repository is similar to deleting a package version
 from a registry: it's almost impossible to estimate the amount of downstream
@@ -247,7 +259,7 @@ remove it everywhere.
 The content may still exist in other copies of the repository, either in backups
 or on developer machines.
 
-#### Process
+#### Documentation Process Requirements
 
 An organization MUST document the Safe Expunging Process and describe how
 requests and actions are tracked and SHOULD log the fact that content was
@@ -285,7 +297,7 @@ explicitly enforced in the SCS.
 
 </table>
 
-### Source Control System
+### Source Control System Requirements
 
 <table>
 <tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
@@ -491,7 +503,7 @@ Examples:
 <td><td><td><td>✓
 </table>
 
-## Communicating source levels
+## Source Track Attestations
 
 SLSA source level details are communicated using attestations.
 These attestations either refer to a source revision itself or provide context needed to evaluate an attestation that _does_ refer to a revision.
@@ -626,6 +638,14 @@ formats, and how each provenance attestation can be used to reason about the
 revision's properties recorded in the summary attestation.
 
 [^1]: in-toto attestations allow non-cryptographic digest types: https://github.com/in-toto/attestation/blob/main/spec/v1/digest_set.md#supported-algorithms.
+
+## Disclaimer
+
+When onboarding a branch to the SLSA Source Track or increasing the level of
+that branch, organizations are making claims about how the branch is managed
+from that revision forward. This establishes [continuity](#continuity).
+
+No claims are made for prior revisions.
 
 ## Future Considerations
 

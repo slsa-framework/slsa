@@ -1,17 +1,16 @@
 ---
-title: "Source: Example controls"
+title: "Source Track: Example controls"
 description: "This page provides examples of additional controls that
   organizations may want to implement as they adopt the SLSA Source track." 
 ---
 
 # {Source Track: Example Controls}
 
-
-**About this page:** the *Source Track Example Controls* page provides examples of additional controls that organizations may want to implement as they adopt the SLSA Source track.
+**About this page:** the *Source Track: Example Controls* page provides examples of additional controls that organizations may want to implement as they adopt the SLSA Source track.
 
 **Intended audience:** {add appropriate audience}
 
-**Topics covered:** detailed examples of source control procedures and requirements explained
+**Topics covered:** examples of source control procedures and requirements explained in detail
 
 **Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
 
@@ -21,7 +20,7 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 **For more information, see:** {optional}
 
-## Overview
+## Overview of Source Track Example controls
 
 SLSA Source L3+ organizations are allowed and encouraged to define their own
 control procedures that go over and above specific requirements outlined by SLSA. This
