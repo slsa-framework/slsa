@@ -11,8 +11,6 @@
 # Each subdirectory contains a full copy of the spec files for that version.
 # Usage: ./combine-versions.sh
 
-set -x
-
 # Ensure the script is run from www/
 if [ "$(basename $(pwd))" != "www" ]; then
     echo "Error: This script must be run from the www directory."
@@ -43,22 +41,30 @@ for arg in "$@"; do
   esac
 done
 
-CURRENT_BRANCH=$(git rev-parse HEAD)
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [ "$CURRENT_BRANCH" = "HEAD" ]; then
+    # If detached, store commit SHA
+    CURRENT_BRANCH=$(git rev-parse HEAD)
+fi
+
 REPO_ROOT=$(git rev-parse --show-toplevel)
 
 # clean spec dir
+echo Cleaning spec folder
 if [ -d spec ]; then
     rm -rf spec
 fi
 mkdir spec
 
 # deploy draft from main
+echo Populating spec/draft
 mkdir spec/draft
 cp -r "$REPO_ROOT/spec"/* spec/draft/
 
 # deploy older versions
 for RELEASE_BRANCH in $(git branch -r --list 'origin/releases/*'); do
     version="$(basename $RELEASE_BRANCH)"
+    echo Populating spec/$version
     git -C "$REPO_ROOT" reset --hard
     if [[ "$FETCH_BRANCHES" == true ]]; then
 	git -C "$REPO_ROOT" fetch origin $RELEASE_BRANCH:refs/remotes/origin/$RELEASE_BRANCH
@@ -71,3 +77,6 @@ done
 # back to the original branch
 git reset --hard
 git checkout $CURRENT_BRANCH
+echo '
+The spec folder is now ready:'
+ls -F spec
