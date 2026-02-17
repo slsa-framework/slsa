@@ -1,5 +1,5 @@
 ---
-title: "Build: Terminology"
+title: "Build: Terminology" 
 description: Before diving into the SLSA specification levels, we need to establish a core set of terminology and models to describe what we're protecting.
 ---
 <!-- Note on updating docs:
