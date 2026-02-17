@@ -1,22 +1,37 @@
 ---
 title: "Build: Assessing build platforms"
-description: Guidelines for assessing build platform security.
+description: This page describes the parts of a build platform that consumers SHOULD assess in order to verify an artifact's security.
 ---
+
+# {Build Track: Assessing Build Platforms}
+
+**About this page:** the *Build Track: Accessing Build Platforms* page describes the parts of a build platform that consumers SHOULD assess in order to verify an artifact's security.
+
+**Intended audience:** {add appropriate audience} 
+
+**Topics covered:** adversary behavior, sample prompts to access build platform security 
+
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
+
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+**For more information see:**  [Threats & mitigations](threats.md) and the [build model](build-track-basics.md#build-model).
+
+## Overview
 
 One of SLSA's guiding [principles](principles.md) is to "trust platforms, verify
 artifacts". However, consumers cannot trust platforms to produce Build L3
-artifacts and provenance unless they have some proof that the provenance is
+artifacts and provenance unless they have proof that the provenance is
 [unforgeable](build-requirements.md#provenance-unforgeable) and the builds are
-[isolated](build-requirements.md#isolated).
-
-This page describes the parts of a build platform that consumers SHOULD assess
-and provides sample questions consumers can ask when assessing a build platform.
-See also [Threats & mitigations](threats.md) and the
-[build model](terminology.md#build-model).
+[isolated](build-requirements.md#isolated). This document provides sample prompts consumers can use to assess a build platform and measure its security level.
 
 ## Threats
 
-### Adversary goal
+SLSA's purpose is to help people defend against adversaries that threaten the software supply chain. By understanding adversary goals and profiles, you can assess your build platform more easily.
+
+### The adversary's goals
 
 The SLSA Build track defends against an adversary whose primary goal is to
 inject unofficial behavior into a package artifact while avoiding detection.
@@ -33,7 +48,7 @@ with external parameters P produced an artifact with binary hash Y.
 
 See threats [D], [E], [F], and [G] for examples of specific threats.
 
-Note: Platform abuse (e.g. running non-build workloads) and attacks against
+**Note:** Platform abuse (e.g. running non-build workloads) and attacks against
 builder availability are out of scope of this document.
 
 ### Adversary profiles
@@ -68,7 +83,7 @@ following types of adversaries.
 [F]: threats.md#f-artifact-publication
 [G]: threats.md#g-distribution-channel
 
-## Build platform components
+## Build platform components to assess
 
 Consumers SHOULD consider at least these five elements of the
 [build model](terminology.md#build-model) when assessing build platforms for SLSA
@@ -84,7 +99,7 @@ transitive closure of the `builder.id` for the
 [provenance model](build-provenance.md#model), specifically around the
 platform's boundaries, actors, and interfaces.
 
-### External parameters
+### External parameter of the build process
 
 External parameters are the external interface to the builder and include all
 inputs to the build process. Examples include the source to be built, the build
@@ -92,7 +107,7 @@ definition/script to be executed, user-provided instructions to the
 control plane for how to create the build environment (e.g. which operating
 system to use), and any additional user-provided strings.
 
-#### Prompts for assessing external parameters
+#### Sample prompts for assessing external parameters
 
 -   How does the control plane process user-provided external parameters?
     Examples: sanitizing, parsing, not at all
@@ -105,7 +120,7 @@ system to use), and any additional user-provided strings.
 -   How will you ensure that future design changes will not add additional
     external parameters without representing them in the provenance?
 
-### Control plane
+### Control plane component
 
 The control plane is the build platform component that orchestrates each
 independent build execution. It is responsible for setting up each build and
@@ -114,7 +129,7 @@ provenance for each build performed on the build platform. The control plane is
 operated by one or more administrators, who have privileges to modify the
 control plane.
 
-#### Prompts for assessing the control plane
+#### Sample prompts for assessing the control plane
 
 -   Administration
     -   What are the ways an employee can use privileged access to influence a
@@ -169,7 +184,7 @@ control plane.
     -   What is your plan for remediating cryptographic secret compromise? How
         frequently is this plan tested?
 
-### Build environment
+### Build environment execution context
 
 The build environment is the independent execution context where the build
 takes place. In the case of a distributed build, the build environment is the
@@ -180,7 +195,7 @@ Tenants are free to modify the build environment arbitrarily. Build
 environments must have a means to fetch input artifacts (source, dependencies,
 etc).
 
-#### Prompts for assessing build environments
+#### Sample prompts for assessing build environments
 
 -   Isolation technologies
     -   How are build environments isolated from the control plane and each
@@ -208,29 +223,29 @@ etc).
     -   Are build environments able to open services on the network? If so, how
         do you prevent remote interference through these services?
 
-### Cache
+### Cache issues
 
 Builders may have zero or more caches to store frequently used dependencies.
 Build environments may have either read-only or read-write access to caches.
 
-#### Prompts for assessing caches
+#### Sample prompts for assessing caches
 
 -   What sorts of caches are available to build environments?
 -   How are those caches populated?
 -   How are cache contents validated before use?
 
-### Output storage
+### Output storage types
 
 Output Storage holds built artifacts and their provenance. Storage may either be
 shared between build projects or allocated separately per-project.
 
-#### Prompts for assessing output storage
+#### Sample prompts for assessing output storage
 
 -   How do you prevent builds from reading or overwriting files that belong to
     another build? Example: authorization on storage
 -   What processing, if any, does the control plane do on output artifacts?
 
-## Builder evaluation
+## Builder evaluation procedures
 
 Organizations can either self-attest to their answers or seek certification from
 a third-party auditor. Evidence for self-attestation should be published on

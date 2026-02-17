@@ -1,15 +1,33 @@
 ---
 title: "Build: Distributing provenance"
-description: This page covers the detailed technical requirements for distributing provenance at each SLSA level. The intended audience is platform implementers and software distributors.
+description: This document provides specifications for distributing provenance and the
+relationship between build artifacts and provenance.
 ---
+
+# { Build Track: Distributing Provenance}
+
+**About this page:** the *Build Track Distributing Provenance* page provides specifications for distributing provenance and the
+relationship between build artifacts and provenance.
+
+**Intended audience:** platform implementers and software distributors
+
+**Topics covered:** build provenance attestations
+
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
+
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+**For more information, see:** {optional} 
+
+## Overview
 
 In order to make provenance for artifacts available after generation
 for verification, SLSA requires the distribution and verification of provenance
 metadata in the form of SLSA attestations.
 
-This document provides specifications for distributing provenance and the
-relationship between build artifacts and provenance (build attestations). It is
-primarily concerned with artifacts for ecosystems that distribute build
+This document focuses on artifacts for ecosystems that distribute build
 artifacts, but some attention is also paid to ecosystems that distribute
 container images or only distribute source artifacts, as many of the same
 principles generally apply to any artifact or group of artifacts.
@@ -20,18 +38,18 @@ provenance. It is primarily concerned with the means of distributing
 attestations and the relationship of attestations to build artifacts, and not
 with the specific format of the attestation itself.
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+## Build provenance attestations
 
-## Background
+The process of creating and distributing build attestations requires addressing the following issues:
+
+### Maintainer responsibilities
 
 The [package ecosystem]'s maintainers are responsible for reliably
 redistributing artifacts and provenance, making the producers' expectations
 available to consumers, and providing tools to enable safe artifact consumption
 (e.g., whether an artifact meets its producer's expectations).
 
-## Relationship between releases and attestations
+### Relationship between releases and attestations
 
 Attestations SHOULD be bound to artifacts, not releases.
 
@@ -51,7 +69,7 @@ release. At the time of a given build, the relevant provenance for that build
 can be added to the release, depending on the relationship to the given
 artifacts.
 
-## Relationship between artifacts and attestations
+### Relationship between artifacts and attestations
 
 Package ecosystems SHOULD support a one-to-many relationship from build
 artifacts to attestations to ensure that anyone is free to produce and publish
@@ -81,7 +99,7 @@ artifact filename. For example, for an artifact `<filename>.<extension>`, the
 attestation is `<filename>.attestation` or some similar extension (for example
 [in-toto](https://in-toto.io/) recommends `<filename>.intoto.jsonl`).
 
-## Where attestations are published
+### Where attestations are published
 
 There are a number of opportunities and venues to publish attestations during
 and after the build process. Producers MUST publish attestations in at least
@@ -136,21 +154,21 @@ attestations to the source repository, and later extend this to all artifacts
 published to the package registry via the canonical installation tools once
 a given ecosystem supports them.
 
-## Immutability of attestations
+### Immutability of attestations
 
 Attestations SHOULD be immutable. Once an attestation is published as it
 corresponds to a given artifact, that attestation is immutable and cannot be
 overwritten later with a different attestation that refers to the same
 artifact. Instead, a new release (and new artifacts) SHOULD be created.
 
-## Format of the attestation
+### Format of the attestation
 
 The provenance is available to the consumer in a format that the consumer
 accepts. The format SHOULD be in-toto
 [SLSA Build Provenance](/build-provenance), but another format MAY be used if
 both producer and consumer agree and it meets all the other requirements.
 
-## Considerations for source-based ecosystems
+### Considerations for source-based ecosystems
 
 Some ecosystems have support for installing directly from source repositories
 (an option for Python/`pip`, Go, etc.). In these cases, there is no need to

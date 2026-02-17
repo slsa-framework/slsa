@@ -1,29 +1,33 @@
 ---
 title: "Build: Requirements for producing artifacts"
-description: This page covers the detailed technical requirements for producing artifacts at each SLSA level. The intended audience is platform implementers and security engineers.
+description: This page covers the technical requirements for producing artifacts at each SLSA level. 
 ---
 
+# {Build Track: Requirements for producing artifacts}
 
-This page covers the detailed technical requirements for producing artifacts at
-each SLSA level. The intended audience is platform implementers and security
-engineers.
+**About this page:** the *Build Track Requirements for producing artifacts* page covers the technical requirements for producing artifacts at each SLSA level.
 
-For an informative description of the levels intended for all audiences, see
-[Build Track Basics](build-track-basics.md). For background, see
-[Terminology](terminology.md). To better understand the reasoning behind the
-requirements, see [Threats and mitigations](threats.md).
+**Intended audience:** platform implementers and security engineers
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+**Topics covered:** build levels, producer and build platform responsibility sharing
+
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list)
+
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
+**For more information, see:** {optional}
+
 ## Overview
 
-### Build levels
+In order to produce artifacts with a specific build level, responsibility for meeting requirements is split between the [producer](#producer-responsibilities) and the [platform](#build-platform-responsibilities). The build platform MUST strengthen the security controls in order to achieve a specific level while the
+producer MUST choose and adopt a build platform capable of achieving a desired
+build level, implementing any controls as specified by the chosen platform.
 
-In order to produce artifacts with a specific build level, responsibility is
-split between the [Producer] and [Build platform]. The build platform MUST
-strengthen the security controls in order to achieve a specific level while the
+## Build provenance levels
+
+The build platform MUST strengthen the security controls in order to achieve a specific level while the
 producer MUST choose and adopt a build platform capable of achieving a desired
 build level, implementing any controls as specified by the chosen platform.
 
@@ -63,7 +67,7 @@ build level, implementing any controls as specified by the chosen platform.
   <td> <td> <td>✓
 </table>
 
-### Security Best Practices
+### Security best practices for creating build levels
 
 While the exact definition of what constitutes a secure platform is beyond the
 scope of this specification, all implementations MUST use industry security
@@ -73,10 +77,11 @@ implementing proper management of cryptographic secrets, doing frequent updates,
 and promptly fixing known vulnerabilities.
 
 Various relevant standards and guides can be consulted for that matter such as
-the [CIS Critical Security
-Controls](https://www.cisecurity.org/controls/cis-controls-list).
+the [CIS Critical Security Controls](https://www.cisecurity.org/controls/cis-controls-list).
 
-## Producer
+## Responsibilities and Requirements for Producers and Build Platforms
+
+### Producer responsibilities and requirements
 
 [Producer]: #producer
 
@@ -90,7 +95,7 @@ how a package can be built. These were removed in the v1.0 specification and
 will be reassessed and re-added as indicated in the
 [future directions](future-directions.md).
 
-### Choose an appropriate build platform
+#### Choose an appropriate build platform
 
 The producer MUST select a build platform that is capable of reaching their
 desired SLSA Build Level.
@@ -98,7 +103,7 @@ desired SLSA Build Level.
 For example, if a producer wishes to produce a Build Level 3 artifact, they MUST
 choose a builder capable of producing Build Level 3 provenance.
 
-### Follow a consistent build process
+#### Follow a consistent build process
 
 The producer MUST build their artifact in a consistent
 manner such that verifiers can form expectations about the build process. In
@@ -112,14 +117,14 @@ configuration file, the producer MUST complete the configuration file and keep
 it up to date. This metadata might include information related to the artifact's
 source repository and build parameters.
 
-### Distribute provenance
+#### Distribute provenance
 
 The producer MUST distribute provenance to artifact consumers. The producer
 MAY delegate this responsibility to the
 [package ecosystem], provided that the package ecosystem is capable of
 distributing provenance.
 
-## Build Platform
+### Build platform responsibilities and requirements
 
 [Build platform]: #build-platform
 
@@ -138,7 +143,7 @@ generation] and [isolation between builds]. The
 [Build level](build-track-basics) describes the degree to which each of these
 properties is met.
 
-### Provenance generation
+#### Provenance generation
 
 [Provenance generation]: #provenance-generation
 
@@ -262,7 +267,7 @@ Note: This requirement was called "non-falsifiable" in the initial
 <td> <td> <td>✓
 </table>
 
-### Isolation strength
+#### Build platform isolation strength
 
 [Isolation strength]: #isolation-strength
 [Isolation between builds]: #isolation-strength
