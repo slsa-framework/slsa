@@ -1,5 +1,5 @@
 ---
-title: "Build: Provenance"
+title: "Build: Provenance" 
 description: Description of SLSA build provenance specification for verifying where, when, and how something was produced.
 layout: standard
 ---
