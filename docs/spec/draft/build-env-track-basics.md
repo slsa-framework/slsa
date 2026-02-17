@@ -1,7 +1,7 @@
 ---
 title: Build Environment track
 description: This page gives an overview of the SLSA Build Environment track and its levels, describing their security objectives and general requirements.
-mermaid: true
+mermaid: true 
 ---
 
 ## Rationale
