@@ -1,7 +1,181 @@
 ---
-title: "Build: Track Basics"
-description: The SLSA build track is organized into a series of levels that provide increasing supply chain security guarantees. This gives you confidence that software hasn’t been tampered with and can be securely traced back to its source. This page is a descriptive overview of the SLSA build track levels, describing their intent.
----
+title: "Build Track: Basics"
+description: This page introduces the SLSA build track part of the supply chain and the levels it uses to create software artifacts and  and their security requirements.
+--- 
+
+# {Build Track: Basics}
+
+**About this page:** the *Build Track: Basics* page introduces the SLSA build track part of the supply chain and the levels it uses to create software artifacts and their security requirements.
+
+**Intended audience:** everyone
+
+**Topics covered:** build track terminology, concept models, track levels
+
+**Internet standards:** [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), {other standards as required}
+
+>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
+
+**For more information, see:** {optional}  
+
+## Overview
+
+The SLSA build track consists of a series of provenance levels that provide increasing supply chain security guarantees. The amount of security you want to apply is called a level. The levels go from Level 0 (none) to Level 3 (most). A high level of provenance gives you confidence that software hasn’t been tampered with and can be securely traced back to its source.
+
+## Build Terminology
+
+These terms apply to SLSA Build track. See the general terminology [list](terms-generic.md) for terms used throughout the SLSA specification.
+
+| Term | Definition |
+| --- | --- |
+| Admin | A privileged user with administrative access to the platform, potentially allowing them to tamper with builds or the control plane. |
+| Build | Process that converts input sources and dependencies into output artifacts, defined by the tenant and executed within a single build environment on a platform. |
+| Build caches | An intermediate artifact storage managed by the platform that maps intermediate artifacts to their explicit inputs. A build may share build caches with any subsequent build running on the platform. |
+| <span id="build-environment">Build environment</span> | The independent execution context in which the build runs, initialized by the control plane. In the case of a distributed build, this is the collection of all such machines/containers/VMs that run steps.  |
+| <span id="control-plane">Control plane</span> | Build platform component that orchestrates each independent build execution and produces provenance. The control plane is managed by an admin and trusted to be outside the tenant's control. |
+| Dependencies | Artifacts fetched during initialization or execution of the build process, such as configuration files, source artifacts, or build tools. |
+| Distribution platform | An entity responsible for mapping package names to immutable package artifacts. |
+| Expectations | Defined by the producer's security personnel and stored in a database. |
+| External parameters | The set of top-level, independent inputs to the build, specified by a tenant and used by the control plane to initialize the build. |
+| Outputs | Collection of artifacts produced by the build. |
+| Package | An identifiable unit of software intended for distribution, ambiguously meaning either an "artifact" or a "package name". Only use this term when the ambiguity is acceptable or desirable. |
+| Package artifact | A file or other immutable object that is intended for distribution. |
+| Package ecosystem | A set of rules and conventions governing how packages are distributed, including how clients resolve a package name into one or more specific artifacts. |
+| Package manager client | Client-side tooling to interact with a package ecosystem. |
+| Package name | <p>The primary identifier for a mutable collection of artifacts that all represent different versions of the same software. This is the primary identifier that consumers use to obtain the software.<p>A package name is specific to an ecosystem + registry, has a maintainer, is more general than a specific hash or version, and has a "correct" source location. A package ecosystem may group package names into some sort of hierarchy, such as the Group ID in Maven, though SLSA does not have a special term for this. |
+| Package registry | A specific type of "distribution platform" used within a packaging ecosystem. Most ecosystems support multiple registries, usually a single global registry and multiple private registries. |
+| <span id="platform">Platform</span> | System that allows tenants to run builds. Technically, it is the transitive closure of software and services that must be trusted to faithfully execute the build. It includes software, hardware, people, and organizations. |
+| <span id="provenance">Provenance</span> | Attestation (metadata) describing how the outputs were produced, including identification of the platform and external parameters. |
+| Provenance verification | Performed automatically on cluster nodes before execution by querying the expectations database. |
+| Publish [a package] | Make an artifact available for use by registering it with the package registry. In technical terms, this means associating an artifact to a package name. This does not necessarily mean making the artifact fully public; an artifact may be published for only a subset of users, such as internal testing or a closed beta. |
+| Steps | The set of actions that comprise a build, defined by the tenant. |
+| Tenant | An untrusted user that builds an artifact on the platform. The tenant defines the build steps and external parameters. | 
+
+### Build track terms to avoid
+
+These terms can be ambiguous and should be avoided.
+
+| Term | Reason to avoid | 
+| --- | --- |
+| Build recipe | Could mean external parameters, but may include concrete steps of how to perform a build. To avoid implementation details, we don't define this term, but always use "external parameters" which is the interface to a build platform. Similar terms are build configuration source and build definition. |
+| Builder | Usually means build platform, but might be used for build environment, the user who invoked the build, or a build tool from dependencies. To avoid confusion, we always use "build platform". The only exception is in the provenance, where builder is used as a more concise field name. |
+
+## Build track concept models
+
+This section introduces software manufacturing models that SLSA uses to define the production of software artifacts, the distribution of artifact provenance, and the verification process.
+
+### Build production process model
+
+When SLSA's build model defines the production process of software artifacts, the build runs on a multi-tenant *build platform*, where each execution is independent. 
+
+The diagram below shows the build model workflow.
+
+<p align="center"><img src="images/build-model.svg" alt="Model Build"></p>
+
+#### Build workflow steps
+
+1.  A tenant invokes the build by specifying *external parameters* through an
+    *interface*, either directly or via a trigger. Typically, at least one of
+    these external parameters is a reference to a *dependency*. External
+    parameters are literal values while dependencies are artifacts.
+2.  The build platform's *control plane* interprets these external parameters,
+    fetches an initial set of dependencies, initializes a *build environment*,
+    and then starts the execution within that environment.
+3.  The build then performs arbitrary steps (which might include fetching
+    additional dependencies) and produces one or more *output* artifacts.
+    Because the steps within the build environment are under the tenant's control, 
+    the build platform isolates build environments from each other in accordance with the SLSA Build Level.
+4.  Finally, for SLSA Build L2+, the control plane outputs *provenance* information,
+    describing the whole process.
+
+**Note:** there is no formal definition of "source" in the build model, just external
+parameters and dependencies. Most build platforms have an explicit "source"
+artifact to fetch, which is often a Git repository. The
+reference to the artifact is an external parameter, but the artifact itself is
+a dependency.
+
+For examples of how this model applies to real-world build platforms, see [provenance](provenance.md). 
+
+### Distribution of the artifact provenance model
+
+SLSA's distribution model generates artifact provenance to guarantee the integrity of the distribution of software <dfn>packages</dfn>, once they are manufactured. These packages are created according to the rules and conventions of standard <dfn>package ecosystems</dfn>.
+Examples of formal ecosystems include [Python/PyPA](https://www.pypa.io),
+[Debian/Apt](https://wiki.debian.org/DebianRepository/Format), and
+[OCI](https://github.com/opencontainers/distribution-spec), while examples of
+informal ecosystems include links to files on a website or distribution of
+first-party software within a company.
+
+As an example, a consumer locates software within an ecosystem by asking a
+<dfn>distribution platform</dfn>, such as a package registry, to resolve a
+mutable <dfn>package name</dfn> into an immutable <dfn>package artifact</dfn>.
+
+To <dfn>publish</dfn> a package artifact, the software producer asks
+the registry to update a mapping to resolve to the new artifact. The registry
+represents the entity or entities with the power to alter what artifacts are
+accepted by consumers for a given package name. For example, if consumers only
+accept packages signed by a particular public key, then the access to the
+public key serves as the registry.
+
+The package name is the primary security boundary within a package ecosystem.
+Different package names represent separate pieces of
+software, such as different owners, behaviors, security properties, and so on.
+As a result, *the package name is the primary unit being protected in SLSA*.
+It is the primary identifier to which consumers attach expectations.
+
+**Note:** This resolution might include a version number, label, or some other
+    selector in addition to the package name, but that is not important to SLSA.
+    
+### Verification of the artifact provenance model
+
+SLSA verifies artifact provenance in two ways:
+
+- **Build platform certification** ensures conformance to the level requirements specified by
+the build platform. This certification should happen on a recurring cadence, with
+the outcomes published by the platform operator for their users to review and
+make informed decisions about which builders to trust.
+- **Artifact verification** ensures that artifacts meet the producer-defined
+expectations of where the package source code was retrieved and on what
+build platform the package was built.
+
+The diagram below shows how SLSA verifies artifact provenance.
+
+![Verification Model](images/verification-model.svg)
+
+#### Verification diagram terminology
+
+| Term | Description
+| ---- | ----
+| Expectations | A set of constraints on the package's provenance metadata. The package producer sets expectations for a package, either explicitly or implicitly.
+| Provenance verification | Artifacts are verified by the package ecosystem to ensure that the package's expectations are met before the package is used.
+| Build platform assessment | [Build platforms are assessed](assessing-build-platforms.md) for their ability to meet SLSA requirements at the stated level.
+
+The examples below suggest ways that expectations and verification can be
+implemented for different and broadly-defined package ecosystems.
+
+<details><summary>Example: Small software team</summary>
+
+| Term | Example
+| ---- | -------
+| Expectations | Defined by the producer's security personnel and stored in a database.
+| Provenance verification | Performed automatically on cluster nodes before execution by querying the expectations database.
+| Build platform assessment | The build platform implementer follows secure design and development best practices, does annual penetration testing exercises, and self-certifies their adherence to SLSA requirements.
+
+</details>
+
+<details><summary>Example: Open source language distribution</summary>
+
+| Term | Example
+| ---- | -------
+| Expectations | Defined separately for each package and stored in the package registry.
+| Provenance verification | The language distribution registry verifies newly uploaded packages meet expectations before publishing them. Further, the package manager client also verifies expectations prior to installing packages.
+| Build platform assessment | Performed by the language ecosystem packaging authority.
+
+</details>
+
+## Build Track Levels
+
+Provenance describes how the artifact was created. Levels define the type of provenance. Each type gives you a different kind of security, with the zero being the lowest level and 3 providing the most security. 
 
 | Track/Level | Requirements | Focus
 | ----------- | ------------ | -----
@@ -20,7 +194,7 @@ hermeticity or completeness of provenance -->
 
 <section id="build-l0">
 
-## Build L0: No guarantees
+### Build L0: No guarantees
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -44,7 +218,7 @@ n/a
 </section>
 <section id="build-l1">
 
-## Build L1: Provenance exists
+### Build L1: Provenance exists
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -92,7 +266,7 @@ SLSA---other than tamper protection---without changing their build workflows.
 </section>
 <section id="build-l2">
 
-## Build L2: Hosted build platform
+### Build L2: Hosted build platform
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -147,7 +321,7 @@ All of [Build L1], plus:
 [^sign]: Alternate means of verifying the authenticity of the provenance are
     also acceptable.
 
-## Build L3: Hardened builds
+### Build L3: Hardened builds
 
 <dl class="as-table">
 <dt>Summary<dd>
