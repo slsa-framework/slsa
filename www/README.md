@@ -246,8 +246,8 @@ This lists some of the steps one must take to publish a new version of the speci
 
 ```bash
 cd path/to/slsa
-./combine-versions.sh
 cd www
+../tools/combine-versions.sh
 bundle config set --local path 'vendor/bundle'
 bundle install
 npm install -g netlify-cli
