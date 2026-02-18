@@ -180,8 +180,8 @@ Provenance.
 -   *Authenticity:* No requirements.
 -   *Accuracy:* No requirements.
 
-[SLSA Provenance]: ../../provenance/v1-rc2
-[associated suite]: ../../attestation-model#recommended-suite
+[SLSA Provenance]: provenance.md
+[associated suite]: attestation-model#recommended-suite
 
 <td>✓<td>✓<td>✓
 <tr id="provenance-authentic"><td>Provenance is Authentic<td>

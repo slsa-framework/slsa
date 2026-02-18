@@ -65,7 +65,7 @@ artifact may have different names in different package ecosystems but use the sa
 provenance file.
 
 Package ecosystems
-using the [RECOMMENDED suite](/attestation-model#recommended-suite) of attestation
+using the [RECOMMENDED suite](attestation-model#recommended-suite) of attestation
 formats SHOULD list the package name in the provenance attestation statement's
 `subject` field, though the precise semantics for binding a package name to an
 artifact are defined by the package ecosystem.
