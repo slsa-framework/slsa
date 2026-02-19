@@ -1,6 +1,5 @@
 {
   "name": "Jekyll and Netlify",
-<<<<<<< HEAD
   "image": "mcr.microsoft.com/devcontainers/ruby:2.7",
   "containerUser": "vscode",
   "remoteUser": "vscode",
@@ -10,47 +9,16 @@
     }
   },
   "postCreateCommand": "./.devcontainer/post-create.sh",
-=======
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "features": {
-    "ghcr.io/devcontainers/features/ruby:1": {
-      "version": "3.2"
-    }
-  },
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "bungcip.better-toml", 
-        "dbaeumer.vscode-eslint", 
-        "esbenp.prettier-vscode"
-      ]
-    }
-  },
-  "postCreateCommand": "bundle install && npm install -g netlify-cli",
->>>>>>> 5056967 (Create devcontainer.json)
-=======
-  "postCreateCommand": "cd docs && bundle config set --local path 'vendor/bundle' && bundle install && npm install -g netlify-cli && cd ..",
->>>>>>> 8fbf360 (tune devcontainer)
-=======
-  "postCreateCommand": "cd www && bundle config set --local path 'vendor/bundle' && bundle install && npm install -g netlify-cli && cd ..",
->>>>>>> 9ab0364 (update directory name)
   "forwardPorts": [4000],
   "portsAttributes": {
     "4000": {
       "label": "Jekyll Server"
     }
   },
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 8fbf360 (tune devcontainer)
   "customizations": {
     "vscode": {
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash"
-<<<<<<< HEAD
       },
       "extensions": [
         "eamodio.gitlens", // GitLens extension for Git superpowers
@@ -66,13 +34,5 @@
         "davidanson.vscode-markdownlint" // Markdown linting
       ]
     }
-=======
-  "settings": {
-    "terminal.integrated.defaultProfile.linux": "bash"
->>>>>>> 5056967 (Create devcontainer.json)
-=======
-      }
-    }
->>>>>>> 8fbf360 (tune devcontainer)
   }
 }
