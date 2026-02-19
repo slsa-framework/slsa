@@ -128,9 +128,8 @@ Team configuration: https://app.netlify.com/teams/slsa
 Prefer to configure the site using `netlify.toml` rather than the web UI, when
 possible.
 
-To be added to ACL to allow you to configure the site, contact Mark Lodato or
-Joshua Lock via email or Slack. In the event that no SLSA team member has
-access, contact OpenSSF.
+To be added to the ACL to allow you to configure the site, open an issue asking
+for access.
 
 ### Production builds
 
@@ -236,20 +235,3 @@ This lists some of the steps one must take to publish a new version of the speci
 -   Edit `www/_data/nav/config.yml` to add the new version
 -   Edit `www/_data/main.yml` to add the new version and possibly remove any older versions to be hidden. If you remove an old version, make sure that a version specific file exists because it will be needed if the hidden version is accessed directly.
 -   Edit `www/_redirects` as necessary including the definition of `/spec/latest/*`
-
-## updates
-
-### testing the site locally
-
--   (optional) Open the slsa repo in a gh codespace.
--   run the following script:
-
-```bash
-cd path/to/slsa
-cd www
-../tools/combine-versions.sh
-bundle config set --local path 'vendor/bundle'
-bundle install
-npm install -g netlify-cli
-netlify dev
-```

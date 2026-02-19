@@ -80,29 +80,21 @@ VS Code will build the container and configure the development environment autom
 
 ### Deploying the site locally
 
-SLSA.dev is hosted on [Netlify](https://www.netlify.com/), and you can run a local development server using the Netlify CLI.
+For detailed instructions on building and testing the site locally, see [www/README.md](www/README.md#building-and-testing-locally).
 
-1.  Install the Netlify CLI globally if you haven't already:
+Quick start (from the repository root):
 
-    ```shell
-    npm install -g netlify-cli # this will be pre-installed in the DevContainer
-    ```
+```shell
+cd www
+../tools/combine-versions.sh
+netlify dev
+```
 
-2.  `cd` into the `www` directory
-3.  Run the following command to build the site:
+Then browse to http://localhost:8888 to view the site locally.
 
-    ```shell
-    ././tools/combine-versions.sh
-    ```
+### Deploying the site in production
 
-4.  Run the following command to start the local development server:
-
-    ```shell
-    netlify dev
-    ```
-
-5.  Open the browser and navigate to http://localhost:8888
-6.  Verify that the site is running locally
+For detailed instructions on deploying the site in production, see [www/README.md](www/README.md#production).
 
 ### Markdown style
 
