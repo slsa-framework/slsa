@@ -16,5 +16,6 @@
 # Ignore Jekyll version number
 s@Jekyll v[0-9.]\+@Jekyll v#.#.#@
 
-# Ignore git commit ID
+# Ignore git commit ID - cover both old /docs dir and new /www one
 s@/slsa/blob/[0-9a-f]\+/docs/@/slsa/blob/COMMIT/docs/@g
+s@/slsa/blob/[0-9a-f]\+/www/@/slsa/blob/COMMIT/docs/@g

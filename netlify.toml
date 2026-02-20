@@ -1,7 +1,10 @@
 [build]
-base = "docs/"
-publish = "_site/"  # relative to `base` directory
-command = "bundle exec jekyll build"
+  base = "www/"
+  publish = "_site/"  # relative to `base` directory
+  command = "../tools/combine-versions.sh && bundle exec jekyll build"
+
+  [build.environment]
+    BUNDLE_GEMFILE = "Gemfile"
 
 [context.deploy-preview]
-  command = "bundle exec jekyll build --drafts --future"
+  command = "../tools/combine-versions.sh && bundle exec jekyll build --drafts --future"

@@ -8,7 +8,7 @@
 
 ## What
 
-Text and vector path editing has been preserved for these copies of the diagrams. They are not optimised and should not be published. For optimised, publishable versions, use the assets inside [docs/images](../../docs/images)
+Text and vector path editing has been preserved for these copies of the diagrams. They are not optimised and should not be published. For optimised, publishable versions, use the assets inside [www/images](../../www/images)
 
 ## Included
 
