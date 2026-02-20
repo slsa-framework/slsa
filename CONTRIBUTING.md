@@ -183,7 +183,7 @@ approvers for their own PRs. For example, if the author of a PR with the
 two additional approvers before merging. However, a PR with the `impl` type
 always requires one reviewer, even if the author has write access.
 
-Note 2: If the PR only touches files in the [Draft](docs/spec-stages.md)
+Note 2: If the PR only touches files in the [Draft](www/spec-stages.md)
 specification stage, then the "waiting period" and "# reviewers" are relaxed and
 up to Maintainer discretion (including the PR author if they're a maintainer). Note
 that a relaxed number of reviewers and waiting period may result in more back
@@ -305,11 +305,11 @@ www/_data/versions.yml
 www/_redirects
 ```
 
-To patch a specific version of the specification, the changes should be made to both the corresponding branch as well as, if applicable, to all later versions including and the draft on the main branch.
+To patch a specific version of the specification, the changes should be made to both the corresponding branch as well as, if applicable, all the later versions and the draft on the main branch.
 
-To compare the changes between two versions you may find it handy to use the [diff site script](https://github.com/slsa-framework/slsa/tree/main/docs#comparing-built-versions).
+To compare the changes between two versions you may find it handy to use the [diff site script](https://github.com/slsa-framework/slsa/tree/main/www#comparing-built-versions).
 
-**Note**: When publishing new versions of the SLSA specification, make sure to follow the [Specification stages and versions documentation](docs/spec-stages.md) and the [Specification Development Process](https://github.com/slsa-framework/governance/blob/main/5._Governance.md#4-specification-development-process) to ensure compliance with the [Community Specification License](https://github.com/slsa-framework/governance/blob/main/1._Community_Specification_License-v1.md).
+**Note**: When publishing new versions of the SLSA specification, make sure to follow the [Specification stages and versions documentation](www/spec-stages.md) and the [Specification Development Process](https://github.com/slsa-framework/governance/blob/main/5._Governance.md#4-specification-development-process) to ensure compliance with the [Community Specification License](https://github.com/slsa-framework/governance/blob/main/1._Community_Specification_License-v1.md).
 
 ## Netlify and Jekylll
 

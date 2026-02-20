@@ -7,7 +7,7 @@ served by [Netlify](https://netlify.com).
 
 ### Building and testing locally
 
-1.  Clone this repo and change directory to `/docs`:
+1.  Clone this repo and change directory to `/www`:
 
     ```bash
     git clone https://github.com/slsa-framework/slsa
