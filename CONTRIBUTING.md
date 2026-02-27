@@ -81,7 +81,9 @@ VS Code will build the container and configure the development environment autom
 Once done, you can open a Terminal and launch the development server in the DevContainer with the following command:
 
 ```shell
-cd docs
+cd www
+../tools/combine-versions.sh
+bundle exec jekyll serve
 netlify dev -c 'bundle exec jekyll serve --livereload --incremental'
 ```
 
