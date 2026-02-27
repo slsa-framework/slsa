@@ -57,6 +57,8 @@
 /provenance/v1.1        /spec/v1.1/provenance       301
 /provenance/v1.2        /spec/v1.2/provenance       301
 
+/attestation-model      /spec/latest/attestation-model   302  # floating
+
 /spec                     /spec/latest            302  # floating
 /spec/faq                 /spec/latest/faq        302  # floating
 /spec/v1/*                /spec/v1.1/:splat       302  # floating
