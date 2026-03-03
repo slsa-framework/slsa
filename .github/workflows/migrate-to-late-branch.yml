@@ -2,9 +2,15 @@ name: Migrate to Late Branching Strategy
 
 on:
   workflow_dispatch: # Allows only manual triggering of the workflow
+    inputs:
+      push:
+        description: 'Push the created branch to remote'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
-  contents: read # Minimum permission required to read the repository
+  contents: write # Required to create branches and push commits
   pull-requests: write # Required to create branches and push changes
 
 jobs:
@@ -18,7 +24,16 @@ jobs:
           ref: main # Checkout the main branch
           fetch-depth: 1 # We don't need the full history for this operation
 
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Run migration script
         run: |
           chmod +x tools/migrate-to-late-branch.sh
-          ./tools/migrate-to-late-branch.sh
+          if [ "${{ inputs.push }}" = "true" ]; then
+            ./tools/migrate-to-late-branch.sh --push
+          else
+            ./tools/migrate-to-late-branch.sh
+          fi
