@@ -1,9 +1,0 @@
-<article class="p-8 {% if level[forloop.index].layout == slim %}bg-white{% else %}p-16{% endif %} flex items-start justify-between">
-    <div class="w-1/4">
-        <img class="w-full" src="{{ site.baseurl }}{{level[forloop.index].badge}}" alt"{{level[forloop.index].title}} Badge" />
-    </div>
-    <div class="w-3/4 pl-8">
-        <p class="h3 font-semibold mb-4">{{level[forloop.index].title}}</p>
-        <p>{{level[forloop.index].text}}</p>
-    </div>
-</article>
