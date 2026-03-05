@@ -10,9 +10,10 @@ See https://slsa.dev to learn about SLSA.
 
 ## What's in this repo?
 
-The primary content of this repo is the [www/](www/) directory, which contains
-the core SLSA specification and sources to the [slsa.dev] website. See the
-README.md in that directory for instructions on how to build the site.
+The primary content of this repo is the [spec/](spec/) directory which contains
+the core SLSA specification and the [www/](www/) directory which contains the
+sources of the [slsa.dev] website. See the README.md in that directory for instructions
+on how to build the site.
 
 This repository also hosts SLSA's main [issue tracker], covering the website,
 specification, and overall project management. Other git repositories within the
@@ -40,7 +41,7 @@ See https://slsa.dev/community for ways to get involved in SLSA development.
 
 ## URL Aliases
 
-We have several [redirect](www/_redirects) configured on slsa.dev for
+We have several [redirects](www/_redirects) configured on slsa.dev for
 convenience of the team:
 
 -   https://slsa.dev/gh &rArr; SLSA GitHub repo
