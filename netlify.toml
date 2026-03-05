@@ -2,6 +2,9 @@
   base = "www/"
   publish = "_site/"  # relative to `base` directory
   command = "../tools/combine-versions.sh && bundle exec jekyll build"
+  # Monitor changes in spec/ and tools/ directories outside base directory
+  # Exit 0 (skip build) if no changes, exit 1 (build) if changes detected
+  ignore = "bash -c 'git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF . ../spec/ ../tools/ && exit 0 || exit 1'"
 
   [build.environment]
     BUNDLE_GEMFILE = "Gemfile"
@@ -10,3 +13,6 @@
   base = "www/"
   publish = "_site/"  # relative to `base` directory
   command = "../tools/combine-versions.sh && bundle exec jekyll build --drafts --future"
+  # Monitor changes in spec/ and tools/ directories outside base directory
+  # Exit 0 (skip build) if no changes, exit 1 (build) if changes detected
+  ignore = "bash -c 'git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF . ../spec/ ../tools/ && exit 0 || exit 1'"
