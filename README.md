@@ -15,6 +15,10 @@ the core SLSA specification and the [www/](www/) directory which contains the
 sources of the [slsa.dev] website. See the README.md in that directory for instructions
 on how to build the site.
 
+The `spec/` folder on the main branch contains the current Draft specification.
+The released versions of the spec are found in the same folder but on the corresponding
+release branch (i.e., `releases/v1.0`, `releases/v1.2`, etc.)
+
 This repository also hosts SLSA's main [issue tracker], covering the website,
 specification, and overall project management. Other git repositories within the
 [slsa-framework](https://github.com/slsa-framework) organization have
