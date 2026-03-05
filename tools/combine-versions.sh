@@ -62,14 +62,18 @@ mkdir spec/draft
 cp -r "$REPO_ROOT/spec"/* spec/draft/
 
 # deploy older versions
+# First, fetch all release branches if needed
+if [[ "$FETCH_BRANCHES" == true ]]; then
+    echo "Fetching release branches..."
+    git -C "$REPO_ROOT" fetch origin 'refs/heads/releases/*:refs/remotes/origin/releases/*'
+fi
+
+# Then, populate every remote release branch
 for FULLNAME_BRANCH in $(git branch -r --list 'origin/releases/*'); do
     VERSION="$(basename $FULLNAME_BRANCH)"
     RELEASE_BRANCH=releases/$VERSION
     echo Populating spec/$VERSION
     git -C "$REPO_ROOT" reset --hard
-    if [[ "$FETCH_BRANCHES" == true ]]; then
-	git -C "$REPO_ROOT" fetch origin $RELEASE_BRANCH:refs/remotes/origin/$RELEASE_BRANCH
-    fi
     git -C "$REPO_ROOT" checkout $RELEASE_BRANCH
     mkdir spec/$VERSION
     cp -r "$REPO_ROOT/spec"/* spec/$VERSION/
