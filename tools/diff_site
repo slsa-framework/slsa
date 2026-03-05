@@ -2,7 +2,7 @@
 USAGE="USAGE: $0 DIR_OR_FILE DIR_OR_FILE"'
 
 Displays the diff of two built site directories, each of which can be a
-local directory (usually `docs/_site`) or a `deploy-*.zip` archive downloaded
+local directory (usually `www/_site`) or a `deploy-*.zip` archive downloaded
 from Netlify. Before diffing, we filter out innocuous changes such as the
 Jekyll version or git commit IDs; see `textconv` in this directory for details.
 

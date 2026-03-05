@@ -37,7 +37,7 @@ EOF
 # This uses a heuristic to detect links in Markdown files, namely
 # `https?://slsa.dev` immediately following `(` or `]: `.
 check_absolute_links() {
-  local FILES=':/docs/*.md'
+  local FILES=':/www/*.md'
   local CMD=(
       git grep --break --heading --line-number
       -e '\((\|\]: \)https\?://slsa.dev'

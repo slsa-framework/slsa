@@ -81,29 +81,29 @@ VS Code will build the container and configure the development environment autom
 Once done, you can open a Terminal and launch the development server in the DevContainer with the following command:
 
 ```shell
-cd docs
+cd www
+../tools/combine-versions.sh
+bundle exec jekyll serve
 netlify dev -c 'bundle exec jekyll serve --livereload --incremental'
 ```
 
 ### Deploying the site locally
 
-SLSA.dev is hosted on [Netlify](https://www.netlify.com/), and you can run a local development server using the Netlify CLI.
+For detailed instructions on building and testing the site locally, see [www/README.md](www/README.md#building-and-testing-locally).
 
-1.  Install the Netlify CLI globally if you haven't already:
+Quick start (from the repository root):
 
-    ```shell
-    npm install -g netlify-cli # this will be pre-installed in the DevContainer
-    ```
+```shell
+cd www
+../tools/combine-versions.sh
+netlify dev
+```
 
-2.  `cd` into the `docs` directory
-3.  Run the following command to start the local development server:
+Then browse to http://localhost:8888 to view the site locally.
 
-    ```shell
-    netlify dev
-    ```
+### Deploying the site in production
 
-4.  Open the browser and navigate to http://localhost:8888
-5.  Verify that the site is running locally
+For detailed instructions on deploying the site in production, see [www/README.md](www/README.md#production).
 
 ### Markdown style
 
@@ -192,7 +192,7 @@ approvers for their own PRs. For example, if the author of a PR with the
 two additional approvers before merging. However, a PR with the `impl` type
 always requires one reviewer, even if the author has write access.
 
-Note 2: If the PR only touches files in the [Draft](docs/spec-stages.md)
+Note 2: If the PR only touches files in the [Draft](www/spec-stages.md)
 specification stage, then the "waiting period" and "# reviewers" are relaxed and
 up to Maintainer discretion (including the PR author if they're a maintainer). Note
 that a relaxed number of reviewers and waiting period may result in more back
@@ -303,34 +303,32 @@ in your git config.
 
 ## SLSA versions management
 
-The main working draft is located in the `spec/draft` folder while the various versions are in specific folders:
+The main working draft is located in the `spec` folder with the various versions in branches a la "releases/v0.1", "releases/v1.0", etc.
+
+`spec` is where all new work should take place. To publish a new version of the SLSA specification, create a new branch (e.g., `releases/v1.1`) and make the necessary changes to the spec folder on that branch: it is possible for instance that not all that is in the draft should be included in which case you will need to remove that content, and several config and navigation files need to be updated such as:
 
 ```none
-spec/draft
-spec/v0.1
-spec/v0.2
-spec/v1.0
-spec/v1.0-rc1
-spec/v1.0-rc2
-spec/v1.1
+www/_data/nav/config.yml
+www/_data/nav/v1.1.yml (corresponding to the version you are creating)
+www/_data/versions.yml
+www/_redirects
 ```
 
-`spec/draft` is where all new work should take place. To publish a new version of the SLSA specification, copy the draft folder to a version specific folder (e.g., `spec/v1.1`) and make the necessary changes to that folder: it is possible for instance that not all that is in the draft should be included in which case you will need to remove that content, and several config and navigation files need to be updated such as:
+To patch a specific version of the specification, the changes should be made to both the corresponding branch as well as, if applicable, all the later versions and the draft on the main branch.
 
-```none
-_data/nav/config.yml
-_data/nav/v1.1.yml (corresponding to the version you are creating)
-_data/versions.yml
-_redirects
-```
+To compare the changes between two versions you may find it handy to use the [diff site script](https://github.com/slsa-framework/slsa/tree/main/www#comparing-built-versions).
 
-To patch a specific version of the specification, the changes should be made to both the corresponding folder as well as, if applicable, to all later versions including the draft folder.
+**Note**: When publishing new versions of the SLSA specification, make sure to follow the [Specification stages and versions documentation](www/spec-stages.md) and the [Specification Development Process](https://github.com/slsa-framework/governance/blob/main/5._Governance.md#4-specification-development-process) to ensure compliance with the [Community Specification License](https://github.com/slsa-framework/governance/blob/main/1._Community_Specification_License-v1.md).
 
-Unfortunately we've not figured out a better way to handle the different versions with Jekyll. If you do, please let us know!
+## Netlify and Jekylll
 
-To compare the changes between two versions you may find it handy to use the [diff site script](https://github.com/slsa-framework/slsa/tree/main/docs#comparing-built-versions).
+The website https://slsa.dev is built with Jekyll and served by Netlify where we have an account managed by the Steering Committee. Netlify is setup to monitor the GitHub repository and automatically deploy updates when a PR is merged on main.
 
-**Note**: When publishing new versions of the SLSA specification, make sure to follow the [Specification stages and versions documentation](docs/spec-stages.md) and the [Specification Development Process](https://github.com/slsa-framework/governance/blob/main/5._Governance.md#4-specification-development-process) to ensure compliance with the [Community Specification License](https://github.com/slsa-framework/governance/blob/main/1._Community_Specification_License-v1.md).
+The netlify configuration is in the `/netlify.toml` file. This file overrides settings defined on the Netlify admin control panel where we need to say little more than which repository and branch to monitor.
+
+At deployment time, the website is built in several steps. First, we take all the different versions of the spec from the branches and copy them into corresponding `www/spec/<version>` folders. Then, the jekyll build is run to generate the website files in `www/_site` which is then deployed by netlify.
+
+For more information see the [www/README.md](www/README.md) file.
 
 ## Workstream lifecycle
 

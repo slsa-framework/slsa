@@ -1,6 +1,6 @@
 # SLSA ("salsa") is Supply-chain Levels for Software Artifacts
 
-<img align="right" src="https://github.com/slsa-framework/slsa/blob/main/docs/images/slsa-dancing-goose-logo.svg" alt="The OpenSSF mascot, a goose in armor, strikes a pose wearing a red salsa dress">
+<img align="right" src="https://github.com/slsa-framework/slsa/blob/main/www/images/slsa-dancing-goose-logo.svg" alt="The OpenSSF mascot, a goose in armor, strikes a pose wearing a red salsa dress">
 
 SLSA (pronounced ["salsa"](https://www.google.com/search?q=how+to+pronounce+salsa)) is a security framework from source to service, giving anyone working with software a common language for increasing levels of software security and supply chain integrity. It’s how you get from safe enough to being as resilient as possible, at any link in the chain.
 
@@ -10,7 +10,7 @@ See https://slsa.dev to learn about SLSA.
 
 ## What's in this repo?
 
-The primary content of this repo is the [docs/](docs/) directory, which contains
+The primary content of this repo is the [www/](www/) directory, which contains
 the core SLSA specification and sources to the [slsa.dev] website. See the
 README.md in that directory for instructions on how to build the site.
 
@@ -40,7 +40,7 @@ See https://slsa.dev/community for ways to get involved in SLSA development.
 
 ## URL Aliases
 
-We have several [redirect](docs/_redirects) configured on slsa.dev for
+We have several [redirect](www/_redirects) configured on slsa.dev for
 convenience of the team:
 
 -   https://slsa.dev/gh &rArr; SLSA GitHub repo
