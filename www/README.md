@@ -96,9 +96,13 @@ Example 1: comparing two locally built versions of the site
 
 ```bash
 # Prepare version A
+$ cd www
+$ ../tools/combine-versions.sh
 $ bundle exec jekyll build
 $ mv _site _site.A
 # Prepare version B
+$ cd www
+$ ../tools/combine-versions.sh
 $ bundle exec jekyll build
 $ mv _site _site.B
 # Run the script
@@ -134,6 +138,19 @@ for access.
 ### Production builds
 
 Netlify automatically builds and deploys the `main` branch to https://slsa.dev.
+
+The configuration ensures that changes to the `spec/` folder are detected.
+However, Netlify only monitors the `main` branch so changes only made to release
+branches will not get detected.
+
+Typically, when a change is made to a release branch (for instance to fix a typo
+or a broken link) that change will also apply to the Draft spec so when the change
+to the Draft, which is on the `main` branch, is merged the build will automatically
+get triggered and changes on all branches will get deployed.
+
+In the unlikely scenario where only a release branch is updated, you will need to
+manually force a build by going to the Netlify site and using the "Deploy project
+without cache" option of the "Trigger deploy" function.
 
 ### DNS
 
