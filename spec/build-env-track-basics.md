@@ -246,23 +246,6 @@ checking at higher levels of the BuildEnv track.
 Physical and side-channel attacks on the build or compute platform, including
 any trusted execution hardware, are out of scope.
 
-<!--
-
-#### Parking lot
-
-
-Build platform verifies image security properties including provenance upon starting up the environment and makes evidence of the verification available to tenants or other auditors.
-
-Bootstrapping the build environment is a complex process, especially at higher SLSA levels.
-[Build L3] usually requires significant changes to existing build platforms to maintain ephemeral build environments.
-
-Practically, achieving L3 requires the build running in a confidential VM using technologies like [AMD SEV-SNP] and [Intel TDX].
-Compute Platform footprint in TCB is reduced but may not be eliminated completely if a confidential VM uses custom virtualization components running within it (e.g., [paravisor]).
-
--  Build platforms MAY provide capabilities that let tenants perform remote attestation using a third-party verifier.
-
--->
-
 ## BuildEnv levels
 
 The primary purpose of the Build Environment (BuildEnv) track is to enable
@@ -471,15 +454,19 @@ All of [BuildEnv L2], plus:
 	with the compute platform's *trusted hardware* component to obtain
 	a signed attestation with the build environment's initial state,
 	*including the host interface*.
-	-   During [build dispatch]: The generated signed attestation binding
+	-   During [build dispatch]: Generate a signed attestation binding
 	the build environment's boot process attestation to the assigned
 	build ID *and* the trusted hardware (e.g., using [SCAI]).
+	-   After the build completes: Include the control plane's setup
+	verification SVRs in the resulting SLSA Build L3 Provenance.
 	-   The attestation mechanism is determined by the build and compute
 	platforms' implementation; we provide implementation examples (TBD)
 	for guidance.
     -   Prior to [build dispatch]: The control plane MUST verify automatically
     the attestation binding the booted build environment to the assigned build ID
     *and* the trusted hardware.
+    -  MAY provide capabilities to enable tenants to perform build environment
+    remote attestation using a third-party verifier.
 
 -   Compute Platform Requirements:
     -   MUST have trusted hardware capabilities, i.e., built-in physical
