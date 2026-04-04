@@ -13,29 +13,33 @@ access to artifacts and sensitive operations during a build (e.g., access to
 producer secrets, provenance signing).
 
 This central and privileged role makes hosted build platforms an attractive
-target for supply chain attackers. But even with strong economic and
-reputational incentives to mitigate these risks, it's very challenging to
-implement and operate fully secure build platforms because they are made up
-of many layers of interconnected components and subsystems.
+target for supply chain attackers. Similarly, cloud providers are big companies
+with complex infrastructure that is not immune to compromise.
+
+Even with strong economic and reputational incentives to mitigate these risks,
+it's very challenging to implement and operate fully secure build platforms because
+they are made up of many layers of interconnected components and subsystems.
+Platforms today provide limited abilities to scope the context of trust, or
+to continuously validate components over time when using their services.
 
 The SLSA Build Environment track aims to address these issues by making it
-possible to validate the integrity and trace the [provenance] of core build
-platform components.
+possible to validate the integrity and trace the provenance of core **build
+platform components**.
 
 ## Track overview
 
 The SLSA Build Environment (BuildEnv) track describes increasing levels of
-integrity and trustworthiness of the provenance of a build's
-execution context. In this track, provenance describes how a build image
-was created, how the hosted build platform deployed a build image in its
-environment, and the compute platform they used.
+integrity and transparency of a build's execution context. In this track,
+provenance describes how a build image was created, how the hosted build
+platform deployed a build image in its environment, and the compute
+platform they used.
 
 | Track/Level | Requirements | Focus | Trust Root
 | ----------- | ------------ | ----- | ----------
 | [BuildEnv L0] | (none) | (n/a) | (n/a)
 | [BuildEnv L1] | Signed build image provenance exists | Tampering during build image distribution | Signed build image provenance
-| [BuildEnv L2] | Attested build environment instantiation | Tampering during build environment boot process | The compute platform's host interface
-| [BuildEnv L3] | Hardware-attested build environment | Tampering with compute platform software | The compute platform's hardware
+| [BuildEnv L2] | Attested build environment setup | Tampering during build environment lifecycle | The compute platform's host interface
+| [BuildEnv L3] | Hardware-attested build environment execution | Tampering via compute platform software | The compute platform's hardware
 
 > :warning:
 > The Build Environment track L1+ currently requires a [hosted] build platform.
@@ -45,6 +49,16 @@ environment, and the compute platform they used.
 > :grey_exclamation:
 > We may consider the addition of an L4 to the Build Environment track, which
 > covers hardware-attested runtime integrity checking during a build.
+
+### Relationship with the SLSA Build track
+
+The [Build track] defines requirements for the provenance that is produced for the build artifacts.
+Trustworthiness of the build process largely depends on the trustworthiness of the [build environment] the build runs in.
+
+However, the Build track assumes full trust in the [build environment], and provides no requirements to
+verify its integrity. The BuildEnv track intends to close this gap
+through an approach that enhances the transparency of the build environment in a way that
+complements the Build track.
 
 ### Build environment model
 
@@ -62,6 +76,7 @@ Specifically, the BuildEnv track defines the following roles, components, and co
 | <span id="build-image">Build image</span> | The template for a build environment, such as a VM or container image. Individual components of a build image include the root filesystem, pre-installed guest OS and packages, the build executor, and the build agent.
 | <span id="build-image-producer">Build image producer</span> | The party that creates and distributes build images. In practice, the build image producer may be the hosted build platform or a third party in a bring-your-own (BYO) build image setting.
 | <span id="build-agent">Build agent</span> | A build platform-provided program that interfaces with the build platform's control plane from within a running build environment. The build agent is also responsible for executing the tenant’s build definition, i.e., running the build. In practice, the build agent may be loaded into the build environment after instantiation, and may consist of multiple components. All build agent components must be measured along with the build image.
+| <span id="build-environment-admission">Build environment admission</span> | As a performance measure, build platforms often have a process of admitting build environments, after they have been booted, into a pool of resources ready for a build request.
 | <span id="build-dispatch">Build dispatch</span> | The process of assigning a tenant's build to a pre-deployed build environment on a hosted build platform.
 | <span id="build-request">Build request</span> | The process of a tenant sending a request to a hosted build platform to execute the build definition. In practice, the build request may be sent automatically after events like a new pull reuquests, or triggered manually by the tenant.
 | <span id="compute-platform">Compute platform</span> | The compute system and infrastructure underlying a build platform, i.e., the host system (hypervisor and/or OS) and hardware. In practice, the compute platform and the build platform may be managed by the same or distinct organizations.
@@ -96,15 +111,23 @@ A typical build environment will go through the following lifecycle:
 2.  *Build image distribution*: A build image producer distributes the build
     image and makes it available for usage on
     [hosted build platforms](terminology#platform).
-3.  *Build environment instantiation*: A hosted build platform calls into the
-    [host interface](#host-interface) to create a new instance of a build
-    environment from a given build image. The [build agent](#build-agent) waits
-    for an incoming [build dispatch](#build-dispatch).
+3.  *Build environment setup*: A hosted build platform typically sets up a
+    build environment in two steps.
+
+    i) The control plane calls into the [host interface](#host-interface) to
+    boot a new instance of a build environment from a given build image.
+
+    ii) The booted build environment is admitted into the pool managed by the
+    control plane. The [build agent](#build-agent) waits for an incoming
+    [build request](#build-request).
+
     For the SLSA BuildEnv track, the host interface in the compute platform
     attests to the integrity of the environment's initial state during its
-    [boot process](#boot-process).
+    [boot process](#boot-process). The trusted control plane validates this
+    attestation during the [build environment admission](#build-environment-admission)
+    step.
 3.  *Build dispatch*: When the tenant [requests a new build](#build-request),
-    the hosted build platform assigns the build to an instantiated build
+    the hosted build platform assigns the build to an already-set up build
     environment.
     For the SLSA BuildEnv track, the build platform attests to the binding
     between a build environment and [build ID](#build-id).
@@ -132,50 +155,57 @@ by requiring that build images be created following the SLSA Build track.
 [BuildEnv L1] also assumes full trust in the build platform including the
 underlying [compute platform] (e.g., public cloud provider).
 
-### Build environment instantiation threats
+### Build environment setup threats
 
 An attacker may tamper with the bootstrapping process of the build environment
 to instantiate a build environment with compromised boot components (e.g., UEFI
-firmware). If the attacker manages to compromise build platform admin
+firmware). If an attacker manages to compromise build platform admin
 credentials, these can be used to gain malicious access to the build environment
 via installed compute platform maintenance software. While such software is
-typically used for providing remote admin access to the virtual machine (VM)
-using compute platform APIs, it can also be used to modify boot components in
-the VM.
+typically used for providing remote admin access to the build environment
+using compute platform APIs, it can also be used to modify components
+during the build environment's instantiation, admission or dispatch stages.
 
-[BuildEnv L2] addresses these threats by requiring evidence provided by the
-compute platform's host interface that the build environment is instantiated
-from the expected image with the expected early boot components. In essence, L2
-provides evidence of the boot time integrity of a build environment.
+These threats cannot be mitigated by only checking a build image's SLSA Build
+Provenance because they take advantage of the time window between the check
+and when the running build environment is booted and used in a build
+(i.e., a so-called Time-of-check-to-Time-of-use, or TOCTTOU, attack).
+
+[BuildEnv L2] addresses these threats by requiring that the build environment's
+integrity be verified at every stage of its lifecycle. This, in turn, relies on
+evidence provided by the compute platform's host interface showing the build
+environment's pre-build state. In essence, BuildEnv L2 provides transparency
+of the lifecycle's integrity of a build environment.
 
 The compute platform is fully trusted at [BuildEnv L2] as the level relies on
-the host interface to perform a build environment's boot-time measurements. It
+the host interface to perform a build environment's measurements. It
 remains the responsibility of the build image producer to disable/uninstall any
 admin interfaces that could be misused by an attacker.
 
-### Compute platform threats
+### Build environment execution threats
 
 Attackers may seek to compromise a build platform's runtime infrastructure, and
-thereby any builds it executes, or circumvent any VM boot-time integrity checks,
-through vulnerable/malicious software within the compute platform or its host
-nterface. These threats may also arise from compromised compute platform admin
-credentials that would allow direct access to compute platform software.
-
-See the [AMD SEV-SNP/Intel TDX threat model] for a more detailed list of compute
-platform level threats.
+thereby any builds it executes, or circumvent any build environment integrity
+checks, through vulnerable/malicious software within the compute platform or its
+host interface. These threats may also arise from compromised compute platform
+admin credentials that would allow direct access to compute platform software.
+These threats cannot be mitigated by the approaches used at L1 and L2.
 
 [BuildEnv L3] reduces the compute platform attack surface through the use of
 hardware-based attestation, commonly provided by trusted execution environments
 (TEEs). The [AMD SEV-SNP/Intel TDX threat model] describes how this level of
-trust reduction can be achieved through the use of VM memory encryption and
+trust reduction can be achieved through the use of memory encryption and
 integrity checking, as well as remote attestation with cryptographic keys that
 are certified by the compute platform's hardware manufacturer.
 
-[BuildEnv L3] therefore extends a build environment's boot time integrity to
+[BuildEnv L3] therefore extends a build environment's lifecycle integrity to
 to its execution. That is, L3 requires *hardware-attested* evidence that the
 build environment was instantiated from the expected build image and is running
 within a legitimate hardware environment supporting the above integrity
-properties.
+properties, bringing transparency to the compute platform.
+
+See the [AMD SEV-SNP/Intel TDX threat model] for a more detailed list of compute
+platform level threats.
 
 #### Trusted components and track scope
 
@@ -183,8 +213,8 @@ The BuildEnv track assumes full trust in the following components. Risks that
 are out of scope may be considered in a future version of the BuildEnv or
 other SLSA track.
 
-The [control plane] is trusted even at L2 and L3 because it *verifies* the
-provenance attestations of the build environment.
+The [build agent] and [control plane] are trusted at all levels because they
+*attest* and *verify*, respectively, the integrity of the build environment.
 
 -  Reducing trust in the control plane is out of scope, and would require
    measures like removing back-door access to the build environment (e.g., via
@@ -207,6 +237,11 @@ checking at higher levels of the BuildEnv track.
    and hardening images with mandatory access control (MAC) policies.
 -  The control plane may perform additional analysis of build image supply
    chain information like SBOM as part of build environment bootstrapping.
+-  As the build agent running within the build environment is typically
+   authenticated by the control plane in practice, this track deems checking the
+   agent's integrity as sufficient during authentication. As with other build
+   environment software, vulnerability detection in the build agent is out of
+   scope.
 
 Physical and side-channel attacks on the build or compute platform, including
 any trusted execution hardware, are out of scope.
@@ -215,18 +250,11 @@ any trusted execution hardware, are out of scope.
 
 #### Parking lot
 
-The SLSA [Build track] defines requirements for the provenance that is produced for the build artifacts.
-Trustworthiness of the build process largely depends on the trustworthiness of the [build environment] the build runs in.
-The Build track assumes full trust into the [Build Platform], and provides no requirements to verify integrity of the build environment.
-BuildEnv track intends to close this gap.
 
-Build environment is bootstrapped from a [build image], which is expected to be an artifact of a SLSA build pipeline.
 Build platform verifies image security properties including provenance upon starting up the environment and makes evidence of the verification available to tenants or other auditors.
 
 Bootstrapping the build environment is a complex process, especially at higher SLSA levels.
 [Build L3] usually requires significant changes to existing build platforms to maintain ephemeral build environments.
-
-Cloud providers are big companies with complex infrastructure that often provide limited abilities to scope the context of trust and continuously validate it over time when using their services.
 
 Practically, achieving L3 requires the build running in a confidential VM using technologies like [AMD SEV-SNP] and [Intel TDX].
 Compute Platform footprint in TCB is reduced but may not be eliminated completely if a confidential VM uses custom virtualization components running within it (e.g., [paravisor]).
@@ -315,19 +343,21 @@ integrity for build environments at the time of build image distribution.
     -   MUST automatically generate SLSA [Build L2] or higher
     Provenance for created build images (i.e., VM or container images).
     -   MUST allow independent automatic verification of a build image's [SLSA
-    Build Provenance]. If the build image artifact cannot be published, for
+    Build Provenance].
+
+    *Note*: If the build image artifact cannot be published, for
     example due to intellectual property concerns, an attestation asserting the
     expected hash value of the build image MUST be generated and distributed
     instead (e.g., using [SCAI] or a [Release Attestation]). If the full Build
-    Provenance document cannot be disclosed, a [VSA] asserting the build
-    image's SLSA Provenance MUST be distributed instead.
+    Provenance document cannot be disclosed, a Simple Verification Result ([SVR])
+    attestation asserting the build image's SLSA Provenance MUST be distributed instead.
 
 -   Build Platform:
     -   MUST meet SLSA [Build L2] requirements.
-    -   Prior to the instantiation of a new build environment, the SLSA
-    Provenance for the selected build image MUST be automatically verified.
-    A signed attestation to the result of the SLSA Provenance verification
-    MUST be generated and distributed (e.g., via a [VSA]).
+    -   Prior to the setup of a new build environment, the SLSA Build Provenance for
+    the selected build image MUST be automatically verified.
+    A signed attestation to the result of the SLSA Build Provenance verification
+    MAY be generated and distributed (e.g., via an [SVR]).
 
 <dt>Benefits<dd>
 
@@ -339,7 +369,7 @@ source and build process.
 </section>
 <section id="buildenv-l2">
 
-### BuildEnv L2: Attested build environment instantiation
+### BuildEnv L2: Attested build environment setup
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -357,33 +387,40 @@ a clean, known good state.
 
 All of [BuildEnv L1], plus:
 
--   Build Image Producer:
+-   Build Image Producer Requirements:
     -   Build images MUST be created via a SLSA [Build L3] or higher build
     process.
-    -   MUST automatically generate and distribute signed [reference values]
-    for the following build image components: bootloader or equivalent,
-    guest kernel, [build agent], and root filesystem (e.g., via the image's
-    SLSA Provenance, or [SCAI]).
-    Additional build image components whose initial state is to be checked
-    MAY be also measured.
-    -   The build agent MUST be capable of:
-        -   Upon completion of the [boot process]: Automatically interfacing
-        with the host interface to obtain and transmit a signed quote for the
-        build environment's system state.
-        -   Upon build dispatch: Automatically generating and distributing
-        a signed attestation that binds its boot process quote to the
-        assigned build ID (e.g., using [SCAI]).
+    -   MUST make available signed [reference values] of initial build image
+    components for validation by the build platform's control plane (e.g.,
+    via the image's SLSA Provenance, or [SCAI]). The specific set of
+    measured components is determined by the build platform's implementation;
+    we provide implementation examples (TBD) for guidance.
 
 -   Build Platform Requirements:
     -   MUST meet SLSA [Build L3] requirements.
-    -   Prior to dispatching a tenant's build to an instantiated environment,
-    a signed [quote] MUST be automatically requested from the build agent,
-    and the contained [measurements] verified against their boot process
-    reference values. A signed attestation to the result of the verification
-    MUST be generated and distributed (e.g., via a [VSA]).
+    -   The build agent MUST support the following functionality:
+        -   Upon completion of the [boot process]: Interface automatically
+        with the host interface to obtain a signed attestation with the build
+	environment's initial state.
+        -   During [build dispatch]: Automatically generate a signed attestation
+	that binds the build environment's boot process attestation to the assigned
+	build ID (e.g., using [SCAI]).
+	-   Make available boot process and dispatch attestations for validation
+	by the control plane.
+	-   The attestation mechanism is determined by the build and compute
+	platforms' implementation; we provide implementation examples (TBD) for
+	guidance.
+    -   Prior to [build environment admission]: The control plane MUST verify
+    automatically the build agent's integrity and the build environment's boot
+    process attestation.
+    -   Prior to [build dispatch]: The control plane MUST verify automatically
+    the attestation binding the booted build environment to the assigned build ID.
+    -   Signed attestations to the results of the pre-setup build image SLSA
+    Build Provenance, build environment admission and build dispatch verification
+    steps MUST be generated and distributed (e.g., via an [SVR]).
 
 -   Compute Platform Requirements:
-    -   The [host interface] MUST be capable of generating signed quotes for
+    -   The [host interface] MUST be capable of generating [signed quotes] for
     the build environment's system state.
     In a VM-based environment, this MUST be achieved by enabling a feature
     like [vTPM], or equivalent, in the hypervisor.
@@ -396,11 +433,6 @@ All of [BuildEnv L1], plus:
     like [Secure Boot], or equivalent, in the hypervisor.
     For container-based environments, the container orchestrator MAY need
     modifications to perform these checks.[^1]
-    -   Prior to instantiating a new build environment, the host interface
-    MUST automatically verify the SLSA Provenance for the selected build
-    image. A signed attestation to the verification of the build image's
-    SLSA Provenance MUST be automatically generated and distributed (e.g.,
-    via a [VSA]).
 
 <dt>Benefits<dd>
 
@@ -414,7 +446,7 @@ adversary.
 </section>
 <section id="buildenv-l3">
 
-### BuildEnv L3: Hardware-attested build environment
+### BuildEnv L3: Hardware-attested build environment execution
 
 <dl class="as-table">
 <dt>Summary<dd>
@@ -433,35 +465,35 @@ place full trust in the compute platform.
 
 All of [BuildEnv L2], plus:
 
--   Build Image Producer:
-    -   Upon completion of the boot process: The build agent MUST be capable
-    of automatically interfacing with the *trusted hardware* component to
-    obtain a signed quote for the host interface's boot process and
-    the environment's system state.
-    -   Upon build dispatch: The generated dispatch attestation MUST include
-    the host interface's boot process quote.
-
 -   Build Platform Requirements:
-    -   Prior to dispatching a tenant's build to an instantiated environment,
-    the measurements in the *host interface's* boot process quote MUST be
-    automatically verified against their reference values.
-    A signed attestation to the result of the verification MUST be generated
-    and distributed (e.g., via a [VSA]).
+    -   The build agent MUST support the following functionality:
+        -   Upon completion of the [boot process]: Interface automatically
+	with the compute platform's *trusted hardware* component to obtain
+	a signed attestation with the build environment's initial state,
+	*including the host interface*.
+	-   During [build dispatch]: The generated signed attestation binding
+	the build environment's boot process attestation to the assigned
+	build ID *and* the trusted hardware (e.g., using [SCAI]).
+	-   The attestation mechanism is determined by the build and compute
+	platforms' implementation; we provide implementation examples (TBD)
+	for guidance.
+    -   Prior to [build dispatch]: The control plane MUST verify automatically
+    the attestation binding the booted build environment to the assigned build ID
+    *and* the trusted hardware.
 
 -   Compute Platform Requirements:
     -   MUST have trusted hardware capabilities, i.e., built-in physical
     hardware features for generating measurements and quotes for its system
-    state. This SHOULD be achieved using a feature like [TPM],
-    [trsuted execution environment], or equivalent.
-    -   MUST enable validation of the host interface's boot process against
-    its reference values. This MUST be achieved by enabling a process
-    like [Secure Boot], or equivalent, in the host platform.
+    state. This MAY be achieved using a feature like [TPM], or equivalent; a
+    [trusted execution environment] is STRONGLY RECOMMENDED.
+    -   MUST enable validation of the host interface's initial state against
+    its reference value(s) by the build platform's control plane.
 
 <dt>Benefits<dd>
 
 Provides hardware-authenticated evidence that a build ran in the expected
-high-integrity environment, even in the face of a compromised host interface
-(hypervisor/container orchestrator).
+high-integrity environment, even in the face of compromised compute platform
+software.
 
 </dl>
 
@@ -473,6 +505,8 @@ high-integrity environment, even in the face of a compromised host interface
 
 <!-- Link definitions -->
 
+[AMD SEV-SNP]: https://www.amd.com/en/developer/sev.html
+[AMD SEV-SNP/Intel TDX threat model]: https://www.kernel.org/doc/Documentation/security/snp-tdx-threat-model.rst
 [Build track]: build-track-basics.md
 [Build L1]: build-track-basics.md#build-l1
 [Build L2]: build-track-basics.md#build-l2
@@ -482,10 +516,13 @@ high-integrity environment, even in the face of a compromised host interface
 [BuildEnv L2]: #buildenv-l2
 [BuildEnv L3]: #buildenv-l3
 [Control plane]: terminology.md#control-plane
+[Intel TDX]: https://www.intel.com/content/www/us/en/developer/tools/trust-domain-extensions/overview.html
 [Release Attestation]: https://github.com/in-toto/attestation/blob/main/spec/predicates/release.md
 [SCAI]: https://github.com/in-toto/attestation/blob/main/spec/predicates/scai.md
 [Secure Boot]: https://wiki.debian.org/SecureBoot#What_is_UEFI_Secure_Boot.3F
 [SLSA Build Provenance]: provenance.md
+[SVR]: https://github.com/in-toto/attestation/blob/main/spec/predicates/svr.md
+[TCB]: https://csrc.nist.gov/glossary/term/trusted_computing_base
 [TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
 [VSA]: verification_summary.md
 [build image]: #build-image
@@ -494,7 +531,9 @@ high-integrity environment, even in the face of a compromised host interface
 [hosted]: build-requirements.md#isolation-strength
 [boot process]: #boot-process
 [build agent]: #build-agent
+[build dispatch]: #build-dispatch
 [build environment]: terminology.md#build-environment
+[build environment admission]: #build-environment-admission
 [build image producer]: #build-image-producer
 [build platform]: terminology.md#platform
 [build platforms]: terminology.md#platform
@@ -504,11 +543,7 @@ high-integrity environment, even in the face of a compromised host interface
 [measurement]: #measurement
 [paravisor]: https://openvmm.dev/
 [provenance]: terminology.md#provenance
-[quote]: #quote
+[signed quotes]: #quote
 [reference values]: #reference-value
 [several classes]: #build-environment-threats
 [vTPM]: https://trustedcomputinggroup.org/about/what-is-a-virtual-trusted-platform-module-vtpm/
-[AMD SEV-SNP]: https://www.amd.com/en/developer/sev.html
-[Intel TDX]: https://www.intel.com/content/www/us/en/developer/tools/trust-domain-extensions/overview.html
-[TCB]: https://csrc.nist.gov/glossary/term/trusted_computing_base
-[SEV-SNP/TDX threat model]: https://www.kernel.org/doc/Documentation/security/snp-tdx-threat-model.rst
