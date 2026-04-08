@@ -38,7 +38,7 @@ platform they used.
 | ----------- | ------------ | ----- | ----------
 | [BuildEnv L0] | (none) | (n/a) | (n/a)
 | [BuildEnv L1] | Signed build image provenance exists | Tampering during build image distribution | Signed build image provenance
-| [BuildEnv L2] | Attested build environment setup | Tampering during build environment lifecycle | The compute platform's host interface
+| [BuildEnv L2] | Attested build environment setup | Tampering during the build environment lifecycle | The compute platform's host interface
 | [BuildEnv L3] | Hardware-attested build environment execution | Tampering via compute platform software | The compute platform's hardware
 
 > :warning:
@@ -114,24 +114,25 @@ A typical build environment will go through the following lifecycle:
 3.  *Build environment setup*: A hosted build platform typically sets up a
     build environment in two steps.
 
-    i) The control plane calls into the [host interface](#host-interface) to
+    i.  *Boot process*: The control plane calls into the [host
+    interface](#host-interface) to
     boot a new instance of a build environment from a given build image.
 
-    ii) The booted build environment is admitted into the pool managed by the
-    control plane. The [build agent](#build-agent) waits for an incoming
-    [build request](#build-request).
+    ii.  *Build environment admission*: The booted build environment is admitted
+    into the pool managed by the control plane. The [build agent](#build-agent)
+    waits for an incoming [build request](#build-request).
 
     For the SLSA BuildEnv track, the host interface in the compute platform
     attests to the integrity of the environment's initial state during its
     [boot process](#boot-process). The trusted control plane validates this
-    attestation during the [build environment admission](#build-environment-admission)
-    step.
-3.  *Build dispatch*: When the tenant [requests a new build](#build-request),
+    attestation during the [build environment
+    admission](#build-environment-admission) step.
+4.  *Build dispatch*: When the tenant [requests a new build](#build-request),
     the hosted build platform assigns the build to an already-set up build
     environment.
     For the SLSA BuildEnv track, the build platform attests to the binding
     between a build environment and [build ID](#build-id).
-4.  *Build execution*: Finally, the build agent within the environment executes
+5.  *Build execution*: Finally, the build agent within the environment executes
     the tenant's build definition.
 
 ### Build environment threats
@@ -216,32 +217,32 @@ other SLSA track.
 The [build agent] and [control plane] are trusted at all levels because they
 *attest* and *verify*, respectively, the integrity of the build environment.
 
--  Reducing trust in the control plane is out of scope, and would require
-   measures like removing back-door access to the build environment (e.g., via
-   SSH).
--  The control plane provides input data to the build environment (i.e., build
-   request message). Mitiating security risks associated with compromised
-   inputs are also out of scope.
+-   Reducing trust in the control plane is out of scope, and would require
+    measures like removing back-door access to the build environment (e.g., via
+    SSH).
+-   The control plane provides input data to the build environment (i.e., build
+    request message). Mitiating security risks associated with compromised
+    inputs are also out of scope.
 
 The software that ships with the build image or is installed at runtime is
 trusted at all levels, but may be optionally verified for enhanced integrity
 checking at higher levels of the BuildEnv track.
 
--  Vulnerabilities in the software that is legitimally included in the build
-   image are out of scope.
--  Addressing attempts to circumvent the integrity protections provided by the
-   BuildEnv track by malicious software with privileged access within the build
-   environment is also out of scope.
--  Build image producers should manage vulnerabilities in the image components
-   to reduce the risks of such attacks, e.g. by using the SLSA Dependency track
-   and hardening images with mandatory access control (MAC) policies.
--  The control plane may perform additional analysis of build image supply
-   chain information like SBOM as part of build environment bootstrapping.
--  As the build agent running within the build environment is typically
-   authenticated by the control plane in practice, this track deems checking the
-   agent's integrity as sufficient during authentication. As with other build
-   environment software, vulnerability detection in the build agent is out of
-   scope.
+-   Vulnerabilities in the software that is legitimally included in the build
+    image are out of scope.
+-   Addressing attempts to circumvent the integrity protections provided by the
+    BuildEnv track by malicious software with privileged access within the build
+    environment is also out of scope.
+-   Build image producers should manage vulnerabilities in the image components
+    to reduce the risks of such attacks, e.g. by using the SLSA Dependency track
+    and hardening images with mandatory access control (MAC) policies.
+-   The control plane may perform additional analysis of build image supply
+    chain information like SBOM as part of build environment bootstrapping.
+-   As the build agent running within the build environment is typically
+    authenticated by the control plane in practice, this track deems checking
+    the agent's integrity as sufficient during authentication. As with other
+    build environment software, vulnerability detection in the build agent is
+    out of scope.
 
 Physical and side-channel attacks on the build or compute platform, including
 any trusted execution hardware, are out of scope.
@@ -384,23 +385,24 @@ All of [BuildEnv L1], plus:
     -   The build agent MUST support the following functionality:
         -   Upon completion of the [boot process]: Interface automatically
         with the host interface to obtain a signed attestation with the build
-	environment's initial state.
+        environment's initial state.
         -   During [build dispatch]: Automatically generate a signed attestation
-	that binds the build environment's boot process attestation to the assigned
-	build ID (e.g., using [SCAI]).
-	-   Make available boot process and dispatch attestations for validation
-	by the control plane.
-	-   The attestation mechanism is determined by the build and compute
-	platforms' implementation; we provide implementation examples (TBD) for
-	guidance.
+	that binds the build environment's boot process attestation to the
+        assigned build ID (e.g., using [SCAI]).
+        -   Make available boot process and dispatch attestations for validation
+        by the control plane.
+        -   The attestation mechanism is determined by the build and compute
+        platforms' implementation; we provide implementation examples (TBD) for
+        guidance.
     -   Prior to [build environment admission]: The control plane MUST verify
     automatically the build agent's integrity and the build environment's boot
     process attestation.
     -   Prior to [build dispatch]: The control plane MUST verify automatically
-    the attestation binding the booted build environment to the assigned build ID.
+    the attestation binding the booted build environment to the assigned build
+    ID.
     -   Signed attestations to the results of the pre-setup build image SLSA
-    Build Provenance, build environment admission and build dispatch verification
-    steps MUST be generated and distributed (e.g., via an [SVR]).
+    Build Provenance, build environment admission and build dispatch
+    verification steps MUST be generated and distributed (e.g., via an [SVR]).
 
 -   Compute Platform Requirements:
     -   The [host interface] MUST be capable of generating [signed quotes] for
@@ -451,21 +453,21 @@ All of [BuildEnv L2], plus:
 -   Build Platform Requirements:
     -   The build agent MUST support the following functionality:
         -   Upon completion of the [boot process]: Interface automatically
-	with the compute platform's *trusted hardware* component to obtain
-	a signed attestation with the build environment's initial state,
-	*including the host interface*.
-	-   During [build dispatch]: Generate a signed attestation binding
-	the build environment's boot process attestation to the assigned
-	build ID *and* the trusted hardware (e.g., using [SCAI]).
-	-   After the build completes: Include the control plane's setup
-	verification SVRs in the resulting SLSA Build L3 Provenance.
-	-   The attestation mechanism is determined by the build and compute
-	platforms' implementation; we provide implementation examples (TBD)
-	for guidance.
+        with the compute platform's *trusted hardware* component to obtain
+        a signed attestation with the build environment's initial state,
+        *including the host interface*.
+        -   During [build dispatch]: Generate a signed attestation binding
+        the build environment's boot process attestation to the assigned
+        build ID *and* the trusted hardware (e.g., using [SCAI]).
+        -   After the build completes: Include the control plane's setup
+        verification SVRs in the resulting SLSA Build L3 Provenance.
+        -   The attestation mechanism is determined by the build and compute
+        platforms' implementation; we provide implementation examples (TBD)
+        for guidance.
     -   Prior to [build dispatch]: The control plane MUST verify automatically
-    the attestation binding the booted build environment to the assigned build ID
-    *and* the trusted hardware.
-    -  MAY provide capabilities to enable tenants to perform build environment
+    the attestation binding the booted build environment to the assigned build
+    ID *and* the trusted hardware.
+    -   MAY provide capabilities to enable tenants to perform build environment
     remote attestation using a third-party verifier.
 
 -   Compute Platform Requirements:
