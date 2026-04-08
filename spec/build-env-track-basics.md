@@ -95,9 +95,13 @@ the build image to its setup and execution.
 
 <div class="mermaid">
 flowchart LR
-      BuildImage>Build Image] ---> |Setup|Setup[[Build Environment]]
-      Setup[[Build Environment]] ---> |Dispatch|Dispatch[[Build Environment]]
-      Dispatch[[Build Environment]] ---> |Execution|Build[(Build)]
+    subgraph LR Setup[Build Environment Setup]
+        Boot[[Boot Process]] -->|Build Environment| Admission[[Build Env Admission]]
+    end
+    Distribution[(Distribution)] -->|Build Image| Boot
+    Admission -->|Build Environment| Dispatch[[Build Dispatch]]
+    Tenant(Tenant) -->|Build Definition| Dispatch
+    Dispatch --> Build[[Build Execution]]
 </div>
 
 A typical build environment will go through the following lifecycle:
