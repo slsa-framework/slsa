@@ -192,11 +192,11 @@ admin credentials that would allow direct access to compute platform software.
 These threats cannot be mitigated by the approaches used at L1 and L2.
 
 [BuildEnv L3] reduces the compute platform attack surface through the use of
-hardware-based attestation, commonly provided by trusted execution environments
-(TEEs). The [AMD SEV-SNP/Intel TDX threat model] describes how this level of
-trust reduction can be achieved through the use of memory encryption and
-integrity checking, as well as remote attestation with cryptographic keys that
-are certified by the compute platform's hardware manufacturer.
+hardware-based attestation, commonly provided by a [trusted execution
+environment] (TEE). The [AMD SEV-SNP/Intel TDX threat model] describes how this
+level of trust reduction can be achieved through the use of memory encryption
+and integrity checking, as well as remote attestation with cryptographic keys
+that are certified by the compute platform's hardware manufacturer.
 
 [BuildEnv L3] therefore extends a build environment's lifecycle integrity to
 to its execution. That is, L3 requires *hardware-attested* evidence that the
@@ -512,7 +512,6 @@ software.
 [SVR]: https://github.com/in-toto/attestation/blob/main/spec/predicates/svr.md
 [TCB]: https://csrc.nist.gov/glossary/term/trusted_computing_base
 [TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
-[VSA]: verification_summary.md
 [build image]: #build-image
 [confidential computing]: https://confidentialcomputing.io/wp-content/uploads/sites/10/2023/03/Common-Terminology-for-Confidential-Computing.pdf
 [execution context]: terminology.md#build-environment
@@ -534,4 +533,5 @@ software.
 [signed quotes]: #quote
 [reference values]: #reference-value
 [several classes]: #build-environment-threats
+[trusted execution environment]: https://confidentialcomputing.io/2024/03/13/basics-of-trusted-execution-environments-tees-the-heart-of-confidential-computing/
 [vTPM]: https://trustedcomputinggroup.org/about/what-is-a-virtual-trusted-platform-module-vtpm/
