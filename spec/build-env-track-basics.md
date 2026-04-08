@@ -60,7 +60,7 @@ verify its integrity. The BuildEnv track intends to close this gap
 through an approach that enhances the transparency of the build environment in a way that
 complements the Build track.
 
-### Build environment model
+## Build environment model
 
 <p align="center"><img src="images/build-env-model.svg" alt="Build Environment Model"></p>
 
@@ -88,10 +88,9 @@ Specifically, the BuildEnv track defines the following roles, components, and co
 
 **TODO:** Disambiguate similar terms (e.g., image, build job, build executor/runner)
 
-#### Build environment lifecycle
+### Build environment lifecycle
 
-This diagram outlines the lifecycle of a build environment from the creation of
-the build image to its setup and execution.
+A typical build environment will go through the following lifecycle.
 
 <div class="mermaid">
 flowchart LR
@@ -103,8 +102,6 @@ flowchart LR
     Tenant(Tenant) -->|Build Definition| Dispatch
     Dispatch --> Build[[Build Execution]]
 </div>
-
-A typical build environment will go through the following lifecycle:
 
 1.  *Build image creation*: A [build image producer](#build-image-producer)
     creates different [build images](#build-image) through a dedicated build
@@ -137,7 +134,7 @@ A typical build environment will go through the following lifecycle:
 5.  *Build execution*: Finally, the build agent within the environment executes
     the tenant's build definition.
 
-### Build environment threats
+## Build environment threats
 
 A [build environment] could be compromised at any stage of its lifecycle. The
 SLSA BuildEnv levels incrementally address several classes of threats to the
@@ -210,7 +207,7 @@ properties, bringing transparency to the compute platform.
 See the [AMD SEV-SNP/Intel TDX threat model] for a more detailed list of compute
 platform level threats.
 
-#### Trusted components and track scope
+### Trusted components and track scope
 
 The BuildEnv track assumes full trust in the following components. Risks that
 are out of scope may be considered in a future version of the BuildEnv or
