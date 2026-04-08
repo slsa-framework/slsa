@@ -122,8 +122,6 @@ Example ways a consumer might use SLSA for vendor-provided software:
 
 </div>
 
-For a look at how SLSA might be applied to open source in the future, see the
-[hypothetical curl example](../../example.md).
 
 </div>
 </section>

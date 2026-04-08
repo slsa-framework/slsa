@@ -15,7 +15,7 @@ Learn how you can [get involved](/community#get-involved)!
 The goal of a Build Environment track is to enable the detection of tampering
 with core components of the compute environment executing builds.
 
-The current [draft version](/spec/draft/build-env-track-basics.md)
+The current [draft version](/spec/build-env-track-basics.md)
 of the Build Environment track includes the following requirements:
 
 -   Generation and verification of SLSA Build Provenance for build images.

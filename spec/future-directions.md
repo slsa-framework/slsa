@@ -40,7 +40,7 @@ A Platform Operations track could provide assurances around the hardening of
 platforms (e.g. build or source platforms) as they are operated.
 
 The initial [draft version (v0.1)] of SLSA included a section on
-[common requirements](../v0.1/requirements.md#common-requirements) that formed
+[common requirements](https://github.com/slsa-framework/slsa/blob/v0.1/requirements.md#common-requirements) that formed
 the foundation of the guidance for
 [assessing build platforms](assessing-build-platforms.md), which **may or may not** form
 the basis for a future Build Platform Operations track:

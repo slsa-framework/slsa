@@ -16,8 +16,7 @@ any progress further downstream. By making each artifact's SLSA rating
 independent from one another, it allows parallel progress and prioritization
 based on risk. (This is a lesson we learned when deploying other security
 controls at scale throughout Google.) We expect SLSA ratings to be composed to
-describe a supply chain's overall security stance, as described in the case
-study [vision](../../example.md#vision-case-study).
+describe a supply chain's overall security stance.
 
 ## Q: What about reproducible builds?
 

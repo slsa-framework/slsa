@@ -85,7 +85,7 @@ software. It might be an open-source project, a company, a team within a
 company, or even an individual.
 
 NOTE: There were more requirements for producers in the initial
-[draft version (v0.1)](../v0.1/requirements.md#scripted-build) which impacted
+[draft version (v0.1)](https://github.com/slsa-framework/slsa/blob/v0.1/requirements.md#scripted-build) which impacted
 how a package can be built. These were removed in the v1.0 specification and
 will be reassessed and re-added as indicated in the
 [future directions](future-directions.md).
@@ -257,7 +257,7 @@ build platform (i.e. outside the trust boundary), except as noted below.
 -   Completeness of resolved dependencies is best effort.
 
 Note: This requirement was called "non-falsifiable" in the initial
-[draft version (v0.1)](../v0.1/requirements.md#non-falsifiable).
+[draft version (v0.1)](https://github.com/slsa-framework/slsa/blob/v0.1/requirements.md#non-falsifiable).
 
 <td> <td> <td>✓
 </table>
@@ -324,7 +324,7 @@ out to a remote execution service or a "self-hosted runner" that is outside the
 trust boundary of the build platform.
 
 NOTE: This requirement was split into "Isolated" and "Ephemeral Environment"
-in the initial [draft version (v0.1)](../v0.1/requirements.md).
+in the initial [draft version (v0.1)](https://github.com/slsa-framework/slsa/blob/v0.1/requirements.md).
 
 NOTE: This requirement is not to be confused with "Hermetic", which roughly
 means that the build ran with no network access. Such a requirement requires
