@@ -90,17 +90,15 @@ Specifically, the BuildEnv track defines the following roles, components, and co
 
 #### Build environment lifecycle
 
-<!--
-This diagram outlines the lifetime of a build image between its creation and
-use in bootstrapping a build environment.
+This diagram outlines the lifecycle of a build environment from the creation of
+the build image to its setup and execution.
 
 <div class="mermaid">
 flowchart LR
-      BuildImage>Build Image] ---> |L1|BuildPlatform[[Build Platform]]
-      BuildPlatform[[Build Platform]] ---> |L2|ComputeProvider[[Compute Provider]]
-      ComputeProvider[[Compute Provider]] ---> |L3|BuildEnvironment[(Build Environment)]
+      BuildImage>Build Image] ---> |Setup|Setup[[Build Environment]]
+      Setup[[Build Environment]] ---> |Dispatch|Dispatch[[Build Environment]]
+      Dispatch[[Build Environment]] ---> |Execution|Build[(Build)]
 </div>
--->
 
 A typical build environment will go through the following lifecycle:
 
@@ -137,9 +135,9 @@ A typical build environment will go through the following lifecycle:
 
 ### Build environment threats
 
-A [build image] could be compromised at any stage of its lifetime. The SLSA
-BuildEnv levels incrementally address several classes of threats to the build
-environment.
+A [build environment] could be compromised at any stage of its lifecycle. The
+SLSA BuildEnv levels incrementally address several classes of threats to the
+build environment.
 
 For example threats, refer to the [Build Threats] section.
 
@@ -387,7 +385,7 @@ All of [BuildEnv L1], plus:
         with the host interface to obtain a signed attestation with the build
         environment's initial state.
         -   During [build dispatch]: Automatically generate a signed attestation
-	that binds the build environment's boot process attestation to the
+        that binds the build environment's boot process attestation to the
         assigned build ID (e.g., using [SCAI]).
         -   Make available boot process and dispatch attestations for validation
         by the control plane.
