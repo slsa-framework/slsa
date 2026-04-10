@@ -36,7 +36,7 @@ Guidelines:
 -   **Use tracks sparingly.** Additional tracks add extra complexity to SLSA, so
     a new track should be seen as a last resort. Each track should have a clear,
     distinct purpose with a crisply defined objective, such as trustworthy
-    provenance for the [Build track](levels#build-track). As a rule of thumb, a
+    provenance for the [Build track](build-track-basics). As a rule of thumb, a
     new track may be warranted if it addresses threats unrelated to another
     track. Try to avoid tracks that sound confusingly similar in either name or
     objective.

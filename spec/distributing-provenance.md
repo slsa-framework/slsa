@@ -147,7 +147,7 @@ artifact. Instead, a new release (and new artifacts) SHOULD be created.
 
 The provenance is available to the consumer in a format that the consumer
 accepts. The format SHOULD be in-toto
-[SLSA Build Provenance](/build-provenance), but another format MAY be used if
+[SLSA Build Provenance](build-provenance), but another format MAY be used if
 both producer and consumer agree and it meets all the other requirements.
 
 ## Considerations for source-based ecosystems
