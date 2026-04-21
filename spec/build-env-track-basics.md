@@ -199,7 +199,7 @@ and integrity checking, as well as remote attestation with cryptographic keys
 that are certified by the compute platform's hardware manufacturer.
 
 [BuildEnv L3] therefore extends a build environment's lifecycle integrity to
-to its execution. That is, L3 requires *hardware-attested* evidence that the
+its execution. That is, L3 requires *hardware-attested* evidence that the
 build environment was instantiated from the expected build image and is running
 within a legitimate hardware environment supporting the above integrity
 properties, bringing transparency to the compute platform.
@@ -220,14 +220,14 @@ The [build agent] and [control plane] are trusted at all levels because they
     measures like removing back-door access to the build environment (e.g., via
     SSH).
 -   The control plane provides input data to the build environment (i.e., build
-    request message). Mitiating security risks associated with compromised
+    request message). Mitigating security risks associated with compromised
     inputs are also out of scope.
 
 The software that ships with the build image or is installed at runtime is
 trusted at all levels, but may be optionally verified for enhanced integrity
 checking at higher levels of the BuildEnv track.
 
--   Vulnerabilities in the software that is legitimally included in the build
+-   Vulnerabilities in the software that is legitimately included in the build
     image are out of scope.
 -   Addressing attempts to circumvent the integrity protections provided by the
     BuildEnv track by malicious software with privileged access within the build
