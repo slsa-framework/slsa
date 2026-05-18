@@ -186,7 +186,8 @@
     color: $grey-medium;
 }
 
-.markdown .guest-post-banner {
+.markdown .guest-post-banner,
+.markdown .ai-assisted-banner {
     margin-left: $spacer-xxl;
     margin-right: $spacer-xxl;
     font-style: italic;
