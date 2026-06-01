@@ -60,7 +60,7 @@ SLSA also does not evaluate whether a workflow's trigger configuration is safe o
 
 ## What policy on top of SLSA can address
 
-SLSA records evidence; policy decides what is acceptable. Several gaps that SLSA leaves narrow when a policy layer is added.
+SLSA records evidence; policy decides what is acceptable.
 
 SLSA v1.2's [Source Track](/spec/v1.2/source-requirements) addresses the risk of malicious code being approved and merged, whether by exploiting a weak review process, compromising a maintainer account, or submitting a convincing-looking PR. The Source Track records evidence about how a commit was created: whether branch protection was active, whether review requirements were met, and which identities were involved. A policy engine that requires source attestations alongside build provenance means an attacker who compromises the source repository still needs to satisfy source-level requirements, including review, attribution, and continuity, before the artifact is accepted downstream. Build provenance and source provenance are complementary; policy is what connects them.
 
