@@ -17,3 +17,9 @@ is_post: true
   are the author’s alone.
 </div>
 {%- endif %}
+
+{% if page.ai_assisted -%}
+<div class="ai-assisted-banner">
+  This post was written with assistance from {{ page.ai_assisted }}.
+</div>
+{%- endif %}
