@@ -41,12 +41,6 @@ for arg in "$@"; do
   esac
 done
 
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-if [ "$CURRENT_BRANCH" = "HEAD" ]; then
-    # If detached, store commit SHA
-    CURRENT_BRANCH=$(git rev-parse HEAD)
-fi
-
 REPO_ROOT=$(git rev-parse --show-toplevel)
 
 # clean spec dir
@@ -71,17 +65,11 @@ fi
 # Then, populate every remote release branch
 for FULLNAME_BRANCH in $(git branch -r --list 'origin/releases/*'); do
     VERSION="$(basename $FULLNAME_BRANCH)"
-    RELEASE_BRANCH=releases/$VERSION
     echo Populating spec/$VERSION
-    git -C "$REPO_ROOT" reset --hard
-    git -C "$REPO_ROOT" checkout $RELEASE_BRANCH
     mkdir spec/$VERSION
-    cp -r "$REPO_ROOT/spec"/* spec/$VERSION/
+    git -C "$REPO_ROOT" archive "$FULLNAME_BRANCH" -- spec/ | tar -x --strip-components=1 -C spec/$VERSION
 done
 
-# back to the original branch
-git reset --hard
-git checkout $CURRENT_BRANCH
 echo '
 The spec folder is now ready:'
 ls -F spec
