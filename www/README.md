@@ -16,7 +16,7 @@ served by [Netlify](https://netlify.com).
 
 2.  Install system dependencies:
 
-    -   Ruby, bundler, and the dev headers:
+    -   Ruby, bundler, and the dev headers (check the [.ruby-version](.ruby-version) file to see which version we currently use) :
 
         ```bash
         apt install ruby ruby-dev bundler
