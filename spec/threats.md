@@ -849,7 +849,12 @@ packages on a SLSA Level 2+ compliant build system and define expectations for
 build provenance. Expectations must be verified on installation of the internal
 packages. If a misconfigured victim attempts to install attacker's package with
 an internal name but from the public registry, then verification against
-expectations will fail.
+expectations will fail. The SLSA Dependency Track also addresses this
+threat structurally by requiring
+[secure configuration of package source files](dependency-track.md#dep-package-source-config)
+at L2 and
+[structural enforcement of the ingestion chokepoint](dependency-track.md#dep-enforce-curated-feed)
+at L3, so that fetches from public registries cannot occur without policy.
 
 For more information see [Verifying artifacts](verifying-artifacts.md)
 and [Defender's Perspective: Dependency Confusion and Typosquatting Attacks](/blog/2024/08/dep-confusion-and-typosquatting).
@@ -861,10 +866,14 @@ and [Defender's Perspective: Dependency Confusion and Typosquatting Attacks](/bl
 *Threat:* Register a package name that is similar looking to a popular package
 and get users to use your malicious package instead of the benign one.
 
-*Mitigation:* This threat is not currently addressed by SLSA. That said, the
-requirement to make the source available can be a mild deterrent, can aid
-investigation or ad-hoc analysis, and can complement source-based typosquatting
-solutions.
+*Mitigation:* The SLSA Dependency Track does not prescribe specific
+typosquat defenses. A verifier requiring Provenance whose
+[recorded admission policies](dependency-track.md#dep-policy-attestation)
+include evaluation against a malicious-packages feed or organizational
+allow-list can refuse Provenance lacking those entries. The integrity
+guarantee from the Dep Track is that whatever defenses the platform
+applied are recorded in the Provenance; the choice of defenses is
+operator policy.
 
 </details>
 
@@ -896,10 +905,21 @@ or source threat to *B* is also a dependency threat to *A*. Furthermore, if
 library *B* uses build tool *C*, then a source or build threat to *C* is also a
 dependency threat to both *A* and *B*.
 
-This version of SLSA does not explicitly address dependency threats, but we
-expect that a future version will. In the meantime, you can [apply SLSA
-recursively] to your dependencies in order to reduce the risk of dependency
-threats.
+SLSA addresses dependency threats through two complementary mechanisms.
+[Applying SLSA recursively] to every dependency would address most of
+these threats if each upstream producer published SLSA Build and Source
+attestations. Most upstream OSS does not yet do so, so the
+[Dependency Track](dependency-track.md), in Working Draft, adds controls
+for cases where upstream guarantees are absent. The track defines a
+per-ingestion attestation, Dependency Ingestion Provenance, and grades
+the platform's claims about each ingested dependency across three levels:
+L1 Inventoried (identity and content), L2 Controlled (controlled ingest
+path, verified integrity, constrained ingest-time behavior), and L3
+Screened (deny-list, malware scan, upstream identity verified, source
+mirrored, bypass blocked). A future cross-cutting "Verified" axis covers
+the ingestor producing their own producer-side attestations over consumed
+deps via rebuild. See
+[Future Considerations](dependency-track.md#future-considerations).
 
 <!--
 -   **TODO:** Should we distinguish 1P vs 3P boundaries in the diagram, or
@@ -935,10 +955,129 @@ contributor accidentally introduces a security vulnerability into libDep. The
 next time MyPackage is built, it picks up and includes the vulnerable version of
 libDep, resulting in MyPackage also having the security vulnerability.
 
-*Mitigation:* A future
-[Dependency track](../../current-activities#dependency-track) may
-provide more comprehensive guidance on how to address more specfiic
-aspects of this threat.
+*Mitigation:* The SLSA [Dependency Track](dependency-track.md) does not
+prescribe specific vulnerability scans. A verifier that requires
+Provenance with a recorded vulnerability scan verdict
+(`scans[].type == "vulnerability"`) and refuses Provenance lacking one
+can drive producers to surface the vulnerable dep before release.
+Vulnerability scanning and automated dependency-update tooling
+(Dependabot, Renovate, OSV-Scanner) are out of scope for the Dep
+Track itself; they are recommended via the OpenSSF Security Baseline
+or applied as verifier policy.
+
+</details>
+<details id="malicious-package-ingest"><summary>Ingest a known-malicious package version</summary>
+
+*Threat:* An adversary publishes a malicious version of a dependency the
+producer consumes (e.g., the Event-Stream incident, Colors v1.4.1, node-ipc,
+the SolarWinds-style upstream compromise pattern), and the producer's build
+fetches that version before disclosure.
+
+*Mitigation:* The SLSA [Dependency Track](dependency-track.md) provides
+the integrity scaffolding rather than prescribing specific defenses.
+At L2,
+[publisher signature verification](dependency-track.md#dep-publisher-signature)
+detects publisher-account takeover when the upstream publishes a
+signature. At L3, the
+[upstream-provenance verdict is recorded](dependency-track.md#dep-verify-provenance),
+allowing verifiers to refuse Provenance whose upstream identity does
+not trace back to its claimed source. Defenses against known-malicious
+packages (deny-lists, malware scanners, version-age quarantine) are
+not prescribed by this track; if applied, they appear in the
+Provenance's
+[recorded admission policies](dependency-track.md#dep-policy-attestation)
+where verifiers can require their presence as a matter of verifier
+policy. A cross-cutting "Verified" axis that lets the ingestor rebuild
+the dependency under their own SLSA Build provenance is a
+[future direction](dependency-track.md#future-considerations).
+
+</details>
+<details id="ingest-time-code-execution"><summary>Malicious dependency executes code or pulls payloads at install time</summary>
+
+*Threat:* A dependency contains an install-time hook (npm `preinstall`
+or `postinstall`, Python `setup.py` for sdists, Composer plugin script,
+Cargo `build.rs`, Maven plugin) that executes arbitrary code or fetches
+additional payloads during the package manager's install phase. The
+malicious behavior happens before the build or runtime starts, so
+controls that gate the build or runtime don't see it.
+
+*Example:* The `event-stream` attack pattern: a maintainer adds a
+`postinstall` script to an otherwise-benign package that downloads a
+second-stage payload from an attacker-controlled URL the first time the
+package is installed in a build environment.
+
+*Mitigation:* The SLSA [Dependency Track](dependency-track.md) addresses
+this threat at L3 via the outcome property of
+[cross-dep ingestion isolation](dependency-track.md#dep-ingestion-isolation):
+the ingestion of any one dep MUST NOT affect the ingestion of any other.
+The platform may satisfy this by ensuring no dep code runs at all
+(install hooks blocked, sdists refused or pre-built elsewhere) or by
+running each dep's ingestion in an ephemeral environment. Either
+satisfies the outcome — the Dep Track does not prescribe the method.
+
+</details>
+<details id="dep-install-hook-credential-theft"><summary>Install hook steals credentials from the ingestion environment</summary>
+
+*Threat:* A malicious dependency's install script runs during ingestion
+and exfiltrates credentials from the environment around it: npm tokens,
+GitHub tokens, AWS keys, signing keys held by the platform. The stolen
+credentials are used to compromise further packages (worm propagation)
+or to forge attestations about future dep versions.
+
+*Example:* The Shai Hulud family of npm worms. A maintainer account is
+compromised, a malicious version is published, the `postinstall`
+script scans the environment for secrets, exfiltrates them, and uses
+stolen npm tokens to publish malicious versions of other packages the
+compromised account had publish access to. If the ingestion environment
+also holds the platform's Provenance signing key, the attacker can
+sign forged Provenance about themselves and about future deps,
+defeating the trust signal at its source.
+
+*Mitigation:* The SLSA [Dependency Track](dependency-track.md) closes
+this threat at L3 via
+[signing infrastructure isolation](dependency-track.md#dep-signing-isolation):
+the Provenance signing key MUST NOT be reachable by any process that
+executed dep code. Signing happens in a control plane that did not
+execute dep code, often via a separate signer process, hardware-backed
+key, or post-ingestion signing job that did not have access to the
+ingestion environment's secrets. The complementary outcome at L3,
+[cross-dep ingestion isolation](dependency-track.md#dep-ingestion-isolation),
+ensures that even if dep code did run during the dep's own ingestion,
+it cannot affect the ingestion of subsequent deps.
+
+</details>
+<details id="dep-cross-ingestion-contamination"><summary>One dependency's ingestion contaminates another's</summary>
+
+*Threat:* A malicious dependency's install hook (or other dep-code
+execution during ingestion) tampers with the ingestion environment for
+later deps. The hook poisons a shared package cache, modifies the
+platform's policy state, plants a backdoor in a shared filesystem path
+that a later dep's hook retrieves, or otherwise contaminates state that
+the next dep's ingestion will read.
+
+*Mitigation:* The SLSA [Dependency Track](dependency-track.md) requires
+[cross-dep ingestion isolation](dependency-track.md#dep-ingestion-isolation)
+at L3. The platform satisfies this either by ensuring no dep code runs
+during ingestion at all (so there is nothing to do the contaminating),
+or by running each dep's ingestion in an ephemeral environment that is
+destroyed after the dep is admitted (so contamination cannot persist
+across deps). Direct parallel to the SLSA Build Track's L3 ephemeral
+build environment requirement.
+
+</details>
+<details id="abandoned-dep"><summary>Rely on an unmaintained or end-of-life dependency</summary>
+
+*Threat:* The producer continues to consume a dependency whose upstream has
+been abandoned or marked end-of-life, accumulating unfixed vulnerabilities
+and exposure to friendly-takeover-style attacks against the dormant
+publisher account.
+
+*Mitigation:* The SLSA [Dependency Track](dependency-track.md) does
+not prescribe EOL detection as a required scan. A verifier requiring
+Provenance with a recorded `scans[].type == "eol"` entry can refuse
+Provenance lacking one as a matter of verifier policy. Producers that
+record an EOL verdict in their Provenance surface the EOL status as
+per-artifact evidence that can drive triage decisions.
 
 </details>
 <details id="build-tool"><summary>Use a compromised build tool (compiler, utility, interpreter, OS package, etc.)</summary>
