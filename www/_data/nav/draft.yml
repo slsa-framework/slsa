@@ -89,6 +89,14 @@
     url: /spec/draft/source-requirements
     description: Overview of the Source track
 
+  - title: Dependency Track
+    url: /spec/draft/dependency-track
+    description: Requirements for ingestion of third-party build dependencies. Integrity-focused — the track defines the Provenance shape and architectural requirements, not specific scans or policies. Three levels grade L1 Inventoried / L2 Controlled / L3 Screened. L3 addresses the Shai Hulud-style threat where a malicious dep steals the platform's signing key via install hooks.
+
+  - title: Dependency Provenance
+    url: /spec/draft/dependency-provenance
+    description: Predicate format for the Dependency Track — one signed attestation per ingested dependency.
+
 - title: Attestation formats
   description: >
     These pages include the concrete schemas for SLSA attestations. The
