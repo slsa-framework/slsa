@@ -29,11 +29,42 @@ is in draft.
 
 ## Dependency track
 
-The Dependency track defines requirements aimed at mitigating risks introduced to a project through its dependencies.
+The Dependency Track defines a new SLSA evidence type, Dependency
+Ingestion Provenance, emitted per ingested dependency by a Dependency
+Ingestion Platform. Three levels grade the platform's claims about
+each ingested dep: L1 Inventoried (identity recorded; other verdicts
+MAY be recorded as transparency), L2 Controlled (configured ingestion
+path including transitive deps; identity-verification verdicts MUST be
+`verified`; admission policies the platform applies are recorded in
+the Provenance; the platform signs the Provenance), and L3 Screened
+(bypass structurally blocked; upstream-provenance verdict recorded;
+platform signing infrastructure isolated from dep code and cross-dep
+ingestion isolated, so a hostile dep cannot subvert the Provenance —
+addressing the Shai Hulud npm-worm threat model).
 
-There is an ongoing effort to develop this track, building upon the foundation laid by [S2C2F](https://github.com/ossf/s2c2f/).
-S2C2F provides a guide for the safe consumption of open source dependencies. As part of this ongoing effort, community members from both SLSA and S2C2F collaborated to translate the practices outlined in S2C2F into requirements that align with the structure of existing SLSA specifications.
+The track is deliberately integrity-focused. It does not prescribe
+specific scans, deny-lists, version-age cutoffs, or install-hook
+constraints — those are best-practice decisions left to operator and
+verifier policy. The integrity guarantee is that whatever verifications
+and admission policies the platform applies are transparent in the
+Provenance, signed by the platform, and (at L3) impossible for a
+hostile dep to subvert. A small set of S2C2F requirements are imported
+(inventory, chokepoint, integrity verification, transitive resolution,
+publisher signature, structural enforcement, upstream-provenance
+verification). Most of S2C2F's catalog (specific scans, deny-lists,
+update tooling) is out of scope for this track and is referred to the
+OpenSSF Security Baseline. The full traceability table is in the
+[S2C2F mapping appendix](/spec/draft/dependency-track#s2c2f-mapping-appendix).
 
-A first draft of the Dependency track has been published to the [SLSA Working Draft site](/spec/draft/dependency-track).
+A formal proposal documenting the restructure — its motivation, the new
+predicate format, and open design questions — is open for community review
+in
+[slsa-framework/slsa-proposals](https://github.com/slsa-framework/slsa-proposals).
 
-Join the discussions and ongoing efforts [on the SLSA Dependency Track Slack channel](https://openssf.slack.com/archives/C03THTH3RSM).
+The current Working Draft is published at
+[/spec/draft/dependency-track](/spec/draft/dependency-track); the predicate
+schema is at
+[/spec/draft/dependency-provenance](/spec/draft/dependency-provenance).
+
+Join the discussions and ongoing efforts
+[on the SLSA Dependency Track Slack channel](https://openssf.slack.com/archives/C03THTH3RSM).

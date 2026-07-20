@@ -72,8 +72,35 @@ the hardware level.
 
 ## Dependency Track
 
-The goal of Dependency Track is to enable a software producer to measure, control and reduce risk introduced from third party dependencies.
+The SLSA Dependency Track defines requirements for the ingestion of
+third-party build dependencies. It defines a per-ingestion attestation,
+Dependency Ingestion Provenance, emitted by a Dependency Ingestion
+Platform. Three levels grade the platform's claims about each ingested
+dependency: L1 Inventoried (identity recorded; other verdicts MAY be
+recorded as transparency), L2 Controlled (configured ingestion path
+including transitive deps; identity-verification verdicts MUST be
+`verified`; admission policies the platform applies are recorded in
+the Provenance; the platform signs the Provenance), and L3 Screened
+(bypass structurally blocked; upstream-provenance verdict recorded;
+signing infrastructure isolated from dep code and cross-dep ingestion
+isolated, so a hostile dep cannot subvert the Provenance about itself
+or about other deps — the Shai Hulud threat model).
 
-The Dependency Track is primarily aimed at enterprises/organizations, with medium to large-sized organizations benefiting the most from adoption of the dependency track levels. Organizations include enterprises, but also large open source projects that want to manage third party dependency risk.
+The track imports the attestable subset of the OpenSSF
+[Secure Supply Chain Consumption Framework
+(S2C2F)](https://github.com/ossf/s2c2f). S2C2F requirements that
+describe organizational practice rather than per-artifact evidence are
+referred to the OpenSSF Security Baseline. S2C2F requirements that
+describe the ingestor producing their own producer-side Build
+attestations over consumed dependencies (via rebuild) are deferred to a
+future cross-cutting axis. See the
+[S2C2F mapping appendix](dependency-track.md#s2c2f-mapping-appendix).
 
--   [Requirements](dependency-track.md)
+The track is for any organization that ingests third-party software
+dependencies. This includes software producers consuming upstream OSS
+and pure consumers such as enterprises that consume OSS internally
+without releasing downstream artifacts.
+
+-   [Basics & requirements](dependency-track.md)
+-   [Dependency Ingestion Provenance](dependency-provenance.md)
+-   [S2C2F mapping appendix](dependency-track.md#s2c2f-mapping-appendix)
