@@ -32,16 +32,16 @@ See https://slsa.dev/community for ways to get involved in SLSA development.
 
 | Workstream | [Shepherd]
 | ---------- | ----------
-| [Build Level 4] | David A Wheeler (@david-a-wheeler)
+| [Build Level 4] | Andrew McNamara (@arewm)
 | [Attested Build Environments Track] | Marcela Melara (@marcelamelara), Pavel Iakovenko (@paveliak)
-| [Source Track] | Tom Hennen (@TomHennen)
-| [Version 1.2 release] | Arnaud J Le Hors (@lehors)
+| [Dependency Ingestion Track] | Mike Lieberman (@mlieberman85)
+| [Tooling] | Adolfo García Veytia (@puerco)
 
 [Shepherd]: CONTRIBUTING.md#workstream-lifecycle
 [Build Level 4]: https://github.com/slsa-framework/slsa/issues/977
 [Attested Build Environments Track]: https://github.com/slsa-framework/slsa/labels/build-environment-track
-[Source Track]: https://github.com/orgs/slsa-framework/projects/5
-[Version 1.2 release]: https://github.com/slsa-framework/slsa/labels/slsa%201.2
+[Dependency Ingestion Track]: https://github.com/slsa-framework/slsa/pull/1627
+[Tooling]: https://github.com/ossf/tac/issues/537
 
 ## URL Aliases
 
