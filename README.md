@@ -35,13 +35,13 @@ See https://slsa.dev/community for ways to get involved in SLSA development.
 | [Build Level 4] | Andrew McNamara (@arewm)
 | [Attested Build Environments Track] | Marcela Melara (@marcelamelara), Pavel Iakovenko (@paveliak)
 | [Dependency Ingestion Track] | Mike Lieberman (@mlieberman85)
-| [Tooling] | Adolfo García Veytia (@puerco)
+| [SLSA Tooling Modernization] | Adolfo García Veytia (@puerco)
 
 [Shepherd]: CONTRIBUTING.md#workstream-lifecycle
 [Build Level 4]: https://github.com/slsa-framework/slsa/issues/977
 [Attested Build Environments Track]: https://github.com/slsa-framework/slsa/labels/build-environment-track
 [Dependency Ingestion Track]: https://github.com/slsa-framework/slsa/pull/1627
-[Tooling]: https://github.com/ossf/tac/issues/537
+[SLSA Tooling Modernization]: https://github.com/ossf/tac/issues/537
 
 ## URL Aliases
 
