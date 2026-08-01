@@ -152,7 +152,7 @@ Possible models for forming expectations include:
     (another form of trust on first use).
 
 It is important to note that expectations are tied to a *repository branch or
-tag*, whereas a VSA is tied to an *revision*. Different revisions will have
+tag*, whereas a VSA is tied to a *revision*. Different revisions will have
 different VSAs and the claims made by those VSAs may differ.
 
 ## Architecture options

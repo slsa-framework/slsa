@@ -51,7 +51,7 @@ Let's examine how SLSA build provenance prevents successful dependency confusion
 1.  Organization defines a policy for its internal packages by binding each package to the authorized builder and the expected canonical source repository.
 2.  Organization's internal packages are built with a SLSA-compliant build system, which produces SLSA build provenance.
 3.  SLSA build provenance is [distributed along with the artifact](/spec/v1.0/distributing-provenance), e.g. by the internal registry instance.
-4.  Upon installation of the internal packages their build provenance is verified aginst the policy defined earlier. The verification ensures that the internal packages were built by the authorized build system using source code from the canonical source repository.
+4.  Upon installation of the internal packages their build provenance is verified against the policy defined earlier. The verification ensures that the internal packages were built by the authorized build system using source code from the canonical source repository.
 
 Attackers are unable to forge SLSA Level 2+ build provenance thus all dependency confusion attempts will be immediately detected due to a different canonical source repository or builder ID. Native support for SLSA build provenance and its verification in ecosystems like npm will enable this robust form of protection against dependency confusion attacks.
 
