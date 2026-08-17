@@ -29,9 +29,28 @@ claim.
 
 ## SLSA_BUILD_REPRODUCED
 
-Indicates the referenced artifact has been reproduced by two or more builders.
+Indicates the referenced artifact has been reproduced by two or more
+independently operated build platforms trusted by the VSA issuer.
 
-This property MUST only be issued if the referenced artifact has
-[build provenance](build-provenance) from two or more independently
-operated [Build Platforms](build-requirements#build-platform) which are
-trusted by the VSA issuer.
+This property MUST only be issued if:
+
+-   Each participating build platform produced its own attestation recording
+    the output artifact digest and sufficient build inputs to identify what was
+    built, and
+-   The output digest recorded in each attestation is identical.
+
+There is no minimum [SLSA Build level](build-track-basics) required of any
+participating build's attestation, and the attestations need not be in the
+[SLSA Provenance format](build-provenance) — any format that records the output
+digest and build inputs is acceptable.
+
+Per the general [VSA requirements](verification_summary#inputAttestations), if
+the VSA issuer used these attestations when performing verification they MUST be
+included in `inputAttestations`.
+
+## Change history
+
+-   Draft (v1.3):
+    -   Added `SLSA_BUILD_REPRODUCED` verified property with requirements on
+        participating attestations and `inputAttestations` linkage.
+    -   Added initial Change history section.

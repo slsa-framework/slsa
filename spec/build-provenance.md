@@ -220,10 +220,21 @@ not practical to do so.
 <td>array (<a href="https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/resource_descriptor.md">ResourceDescriptor</a>)<td>
 
 Unordered collection of artifacts needed at build time. Completeness is best
-effort, at least through SLSA Build L3. For example, if the build script
-fetches and executes "example.com/foo.sh", which in turn fetches
-"example.com/bar.tar.gz", then both "foo.sh" and "bar.tar.gz" SHOULD be
-listed here.
+effort through SLSA Build L3. At SLSA Build L4, the build platform MUST have
+technical controls ensuring this field is complete — see
+[Dependencies complete](requirements.md#dependencies-complete).
+
+For example, if the build script fetches and executes "example.com/foo.sh",
+which in turn fetches "example.com/bar.tar.gz", then both "foo.sh" and
+"bar.tar.gz" SHOULD be listed here. At any build level, a build-time SBOM MAY
+be referenced here as a `ResourceDescriptor` entry (with `uri`, `digest`, and
+`mediaType`) in lieu of or in addition to listing individual dependency entries
+directly. When an SBOM is referenced this way, `resolvedDependencies` becomes a
+superset of it: the SBOM entry is itself a resolved dependency, and the SBOM
+document serves as the full dependency record. At Build L4, if an SBOM reference
+is used to satisfy the completeness requirement, verifiers MUST follow the
+reference and validate the SBOM's digest — see
+[Dependencies complete](requirements.md#dependencies-complete).
 
 </table>
 
@@ -295,7 +306,8 @@ Guidelines:
 -   The purpose of `resolvedDependencies` is to facilitate recursive analysis of
     the software supply chain. Where practical, it is valuable to record the
     URI and digest of artifacts that, if compromised, could impact the build. At
-    SLSA Build L3, completeness is considered "best effort".
+    SLSA Build L3, completeness is considered "best effort". At SLSA Build L4,
+    completeness is a platform-enforced guarantee.
 
 [^digest-param]: The `externalParameters` SHOULD reflect reality. If clients
     send the evaluated configuration object directly to the build server, record
@@ -535,6 +547,15 @@ The following fields from v0.2 are no longer present in v1.0:
 -   `metadata.reproducible`: Now implicit from `builder.id`.
 
 ## Change history
+
+### Draft (v1.3)
+
+-   Clarified that `resolvedDependencies` completeness is "best effort through
+    SLSA Build L3" and MUST be complete at Build L4 (see
+    [Dependencies complete](requirements.md#dependencies-complete)).
+-   Noted that a build-time SBOM MAY be referenced as a `ResourceDescriptor`
+    entry in `resolvedDependencies` in lieu of inlining all individual
+    dependencies.
 
 ### v1.0
 

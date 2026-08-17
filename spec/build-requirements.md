@@ -32,35 +32,38 @@ build level, implementing any controls as specified by the chosen platform.
   <th>Implementer
   <th>Requirement
   <th>Degree
-  <th>L1<th>L2<th>L3
+  <th>L1<th>L2<th>L3<th>L4
 <tr>
   <td rowspan=3><a href="#producer">Producer</a>
   <td colspan=2><a href="#choose-an-appropriate-build-platform">Choose an appropriate build platform</a>
-  <td>✓<td>✓<td>✓
+  <td>✓<td>✓<td>✓<td>✓
 <tr>
   <td colspan=2><a href="#follow-a-consistent-build-process">Follow a consistent build process</a>
-  <td>✓<td>✓<td>✓
+  <td>✓<td>✓<td>✓<td>✓
 <tr>
   <td colspan=2><a href="#distribute-provenance">Distribute provenance</a>
-  <td>✓<td>✓<td>✓
+  <td>✓<td>✓<td>✓<td>✓
 <tr>
-  <td rowspan=5><a href="#build-platform">Build platform</a>
-  <td rowspan=3><a href="#provenance-generation">Provenance generation</a>
+  <td rowspan=6><a href="#build-platform">Build platform</a>
+  <td rowspan=4><a href="#provenance-generation">Provenance generation</a>
   <td><a href="#provenance-exists">Exists</a>
-  <td>✓<td>✓<td>✓
+  <td>✓<td>✓<td>✓<td>✓
 <tr>
   <td><a href="#provenance-authentic">Authentic</a>
-  <td> <td>✓<td>✓
+  <td> <td>✓<td>✓<td>✓
 <tr>
   <td><a href="#provenance-unforgeable">Unforgeable</a>
-  <td> <td> <td>✓
+  <td> <td> <td>✓<td>✓
+<tr>
+  <td><a href="#dependencies-complete">Dependencies complete</a>
+  <td> <td> <td> <td>✓
 <tr>
   <td rowspan=2><a href="#isolation-strength">Isolation strength</a>
   <td><a href="#hosted">Hosted</a>
-  <td> <td>✓<td>✓
+  <td> <td>✓<td>✓<td>✓
 <tr>
   <td><a href="#isolated">Isolated</a>
-  <td> <td> <td>✓
+  <td> <td> <td>✓<td>✓
 </table>
 
 ### Security Best Practices
@@ -154,7 +157,7 @@ minimum requirements on its:
     the build process?
 
 <table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
 
 <tr id="provenance-exists"><td>Provenance Exists<td>
 
@@ -183,7 +186,7 @@ Provenance.
 [SLSA Provenance]: provenance.md
 [associated suite]: attestation-model#recommended-suite
 
-<td>✓<td>✓<td>✓
+<td>✓<td>✓<td>✓<td>✓
 <tr id="provenance-authentic"><td>Provenance is Authentic<td>
 
 *Authenticity:* Consumers MUST be able to validate the authenticity of the
@@ -234,7 +237,7 @@ build platform (i.e. outside the trust boundary), except as noted below.
     the provenance.
 -   Completeness of resolved dependencies is best effort.
 
-<td> <td>✓<td>✓
+<td> <td>✓<td>✓<td>✓
 <tr id="provenance-unforgeable"><td>Provenance is Unforgeable<td>
 
 *Accuracy:* Provenance MUST be strongly resistant to forgery by tenants.
@@ -259,7 +262,60 @@ build platform (i.e. outside the trust boundary), except as noted below.
 Note: This requirement was called "non-falsifiable" in the initial
 [draft version (v0.1)](../v0.1/requirements.md#non-falsifiable).
 
-<td> <td> <td>✓
+<td> <td> <td>✓<td>✓
+<tr id="dependencies-complete"><td>Dependencies complete<td>
+
+*Completeness:* The build platform MUST have technical controls in its trusted
+control plane that provide confidence that `resolvedDependencies` is complete —
+that is, every artifact consumed during the build is accounted for.
+
+The build platform MUST guarantee:
+
+-   All artifacts fetched during the build are observed or controlled by the
+    trusted control plane before being made available to user-defined build
+    steps.
+-   The resulting `resolvedDependencies` reflects the complete set of artifacts
+    observed, with no additional artifacts having been accessible to the build
+    outside of those listed.
+
+Acceptable implementation approaches include, but are not limited to:
+
+-   A pre-fetch phase executed within the trusted control plane that resolves
+    all dependencies before user-defined build steps begin, with the control
+    plane recording what was fetched.
+-   Network interception within the trusted control plane that observes and
+    catalogs all artifact fetches made during the build.
+-   Vendoring, where all dependencies are present in the source tree and the
+    build platform can verify no additional artifacts were fetched.
+
+Note: Network isolation is a common mechanism but is not itself mandated. What
+matters is that the control plane has a structural basis for claiming
+completeness, not that the build ran without network access.
+
+If the build platform generates a complete build-time SBOM (for example, a
+CycloneDX or SPDX attestation signed by the same build platform identity), the
+build platform MAY satisfy the completeness requirement by referencing that SBOM
+as an entry in `resolvedDependencies` using the `uri`, `digest`, and `mediaType`
+fields of a `ResourceDescriptor`. Verifiers MUST follow such a reference and
+validate the SBOM's digest when assessing completeness.
+
+Note: Referencing an SBOM from `resolvedDependencies` is not limited to Build
+L4. A build platform at any level MAY include an SBOM reference as one of the
+resolved dependencies. At lower levels, this does not satisfy a completeness
+requirement, but it does make the SBOM discoverable and verifiable through the
+provenance.
+
+Note: This requirement subsumes the "Hermetic" and "Dependencies complete"
+requirements from the initial [draft version
+(v0.1)](../v0.1/requirements.md#hermetic). The v0.1 formulation mandated network
+isolation; this formulation generalizes that to any technical control that
+achieves the same provenance completeness guarantee. Reproducible builds, also
+part of v0.1 SLSA 4, are now expressed as the
+[`SLSA_BUILD_REPRODUCED`](verified-properties.md#slsa_build_reproduced) verified
+property in a VSA, since reproducibility is a property of independent
+verification rather than of a single build platform.
+
+<td> <td> <td> <td>✓
 </table>
 
 ### Isolation strength
@@ -276,7 +332,7 @@ information on assessing a build platform's isolation strength, see
 [Assessing build platforms](assessing-build-platforms.md).
 
 <table>
-<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3
+<tr><th>Requirement<th>Description<th>L1<th>L2<th>L3<th>L4
 
 <tr id="hosted">
 <td>Hosted
@@ -287,7 +343,7 @@ infrastructure, not on an individual's workstation.
 
 Examples: GitHub Actions, Google Cloud Build, Travis CI.
 
-<td> <td>✓<td>✓
+<td> <td>✓<td>✓<td>✓
 <tr id="isolated">
 <td>Isolated
 <td>
@@ -326,14 +382,25 @@ trust boundary of the build platform.
 NOTE: This requirement was split into "Isolated" and "Ephemeral Environment"
 in the initial [draft version (v0.1)](../v0.1/requirements.md).
 
-NOTE: This requirement is not to be confused with "Hermetic", which roughly
-means that the build ran with no network access. Such a requirement requires
-substantial changes to both the build platform and each individual build, and is
-considered in the [future directions](future-directions.md).
+NOTE: This requirement is not to be confused with "Hermetic", which is sometimes
+used to mean that the build ran with no network access. The related concept of
+complete dependency provenance is addressed by the
+[Dependencies complete](#dependencies-complete) requirement at Build L4.
 
-<td> <td> <td>✓
+<td> <td> <td>✓<td>✓
 </table>
 
 [external parameters]: provenance.md#externalParameters
 [identified in the provenance]: provenance.md#model
 [package ecosystem]: verifying-artifacts.md#package-ecosystem
+
+## Change history
+
+-   Draft (v1.3):
+    -   Added Build L4 with the [Dependencies complete](#dependencies-complete)
+        provenance generation requirement, which requires build platforms to have
+        technical controls ensuring `resolvedDependencies` is complete.
+    -   Added L4 column throughout all requirement tables.
+    -   Updated the NOTE in [Isolated](#isolated) to reference the new
+        Dependencies complete requirement rather than future directions.
+    -   Added initial Change history section.
