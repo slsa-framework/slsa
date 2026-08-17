@@ -398,8 +398,48 @@ For example, `SLSA_BUILD_LEVEL_3` means (`SLSA_BUILD_LEVEL_1` +
 Users MAY use custom values here but MUST NOT use custom values starting with
 `SLSA_`.
 
+## How to issue
+
+VSA issuers create VSAs to communicate the results of verification to consumers.
+The following sections provide guidance for issuing VSAs with specific
+[verified properties](verified-properties).
+
+### Issuing SLSA_BUILD_REPRODUCED
+
+A VSA issuer asserting `SLSA_BUILD_REPRODUCED` is claiming that two or more
+independently operated build platforms have produced identical output from the
+same inputs. The issuer SHOULD:
+
+1.  Collect attestations from each participating build platform recording the
+    output artifact digest and the build inputs used. These need not be in the
+    [SLSA Provenance format](build-provenance); any format that records the
+    output digest and sufficient build inputs is acceptable.
+
+2.  Verify that the output digest recorded in each attestation is identical.
+
+3.  Include all participating attestations in the VSA's `inputAttestations`
+    field. Per the [general requirement](#inputAttestations), if these
+    attestations were used to perform verification they MUST be included.
+
+4.  Set `verifiedLevels` to include `SLSA_BUILD_REPRODUCED` (in addition to
+    any applicable SLSA Build level).
+
+The issuer need not have performed the reproduction themselves — they may
+delegate reproduction to trusted third parties and collect the resulting
+attestations. What matters is that the issuer trusts each participating build
+platform and can verify that each attestation is authentic.
+
+There is no minimum SLSA Build level required of the participating builds'
+attestations. The security value of reproduction comes from the independence of
+the platforms, not from any individual platform's level. Consumers who wish to
+know the level of the participating builds can inspect the referenced
+`inputAttestations`.
+
 ## Change history
 
+-   Draft (v1.3):
+    -   Added "How to issue" section with guidance for asserting
+        `SLSA_BUILD_REPRODUCED`.
 -   1.2:
     -   Update SlsaResult definition to discuss how to refer to new tracks and
         link to [verified properties](verified-properties) for additional SLSA

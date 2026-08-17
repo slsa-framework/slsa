@@ -896,10 +896,11 @@ or source threat to *B* is also a dependency threat to *A*. Furthermore, if
 library *B* uses build tool *C*, then a source or build threat to *C* is also a
 dependency threat to both *A* and *B*.
 
-This version of SLSA does not explicitly address dependency threats, but we
-expect that a future version will. In the meantime, you can [apply SLSA
-recursively] to your dependencies in order to reduce the risk of dependency
-threats.
+Build L4 partially addresses dependency threats by ensuring that the
+`resolvedDependencies` in the provenance is complete, making it possible for
+consumers to [apply SLSA recursively] to all build-time dependencies. The
+[Dependency track](dependency-track.md) addresses complementary organizational
+controls around which dependencies are consumed and how they are vetted.
 
 <!--
 -   **TODO:** Should we distinguish 1P vs 3P boundaries in the diagram, or
@@ -939,6 +940,29 @@ libDep, resulting in MyPackage also having the security vulnerability.
 [Dependency track](../../current-activities#dependency-track) may
 provide more comprehensive guidance on how to address more specfiic
 aspects of this threat.
+
+</details>
+<details id="unknown-dep"><summary>Use an unrecorded build dependency <span>(Build L4)</span></summary>
+
+*Threat:* The build consumes a dependency that is not captured in the provenance,
+preventing consumers from detecting that the dependency was used and applying
+SLSA verification recursively.
+
+*Mitigation:* At [Build L4][dependencies-complete], the build platform has
+technical controls in its trusted control plane ensuring that
+`resolvedDependencies` is complete. This makes it possible for consumers to
+[apply SLSA recursively] to all build-time dependencies and detect compromised
+or unexpected inputs.
+
+*Example:* MyPackage is built with a build script that dynamically fetches a
+helper library from an external URL during the build. The build platform records
+only the top-level source repository in `resolvedDependencies`. An adversary
+compromises the helper library. Because the library is not in the provenance,
+consumers have no visibility into it and cannot detect the compromise via
+recursive SLSA verification. Solution: At Build L4, the build platform has
+technical controls — such as a pre-fetch phase in the trusted control plane or
+network interception — that ensure all fetched artifacts appear in
+`resolvedDependencies`.
 
 </details>
 <details id="build-tool"><summary>Use a compromised build tool (compiler, utility, interpreter, OS package, etc.)</summary>
@@ -1106,6 +1130,7 @@ Solution: Only accept cryptographic hashes with strong collision resistance.
 [dm-verity]: https://docs.kernel.org/admin-guide/device-mapper/verity.html
 [exists]: build-requirements.md#provenance-exists
 [ima]: https://ima-doc.readthedocs.io/
+[dependencies-complete]: build-requirements.md#dependencies-complete
 [isolated]: build-requirements.md#isolated
 [unforgeable]: build-requirements.md#provenance-unforgeable
 [secure-by-design]: https://www.cisa.gov/securebydesign
