@@ -66,8 +66,9 @@ expectations and records the verification verdict.
 Trust flows from *the upstream identity's own attestation about the
 artifact*.
 
-In the Provenance: [`upstreamProvenance`](#dep-verify-provenance) (Mode 1
-as a build-process attestation, at L3) and
+In the Provenance: [`upstreamAttestations`](#dep-verify-provenance) (Mode 1
+via upstream attestations — Build Provenance, VSA, or other predicate
+types — at L3) and
 [`publisherSignature`](#dep-publisher-signature) (Mode 1 as a
 publisher-identity attestation, at L2+).
 
@@ -249,7 +250,7 @@ The schema, parsing rules, and verification procedure are documented in
 | Dep L0 | (none) | (n/a)
 | Dep L1 | Inventoried | The platform emits a Dependency Ingestion Provenance for each ingested dep, naming the dep and recording scan verdicts for vulnerabilities and end-of-life status.
 | Dep L2 | Controlled | The platform is the only path through which deps are ingested, including transitive deps. Per-fetch integrity is verified. Upstream publisher signatures are verified when available. Install-time code execution and network access are constrained. The Provenance is signed by the platform.
-| Dep L3 | Screened | Ingestion bypass is blocked. Each dep is screened against a deny-list and a malware feed, and is subject to a minimum version-age policy. Upstream provenance is verified when available. The platform's Provenance signature is recorded in a transparency log.
+| Dep L3 | Screened | Ingestion bypass is blocked. Each dep is screened against a deny-list and a malware feed, and is subject to a minimum version-age policy. Upstream attestations (Build Provenance, VSA, or other predicate types) are verified when available. The platform's Provenance signature is recorded in a transparency log.
 
 ### Why the levels are structured this way
 
@@ -441,7 +442,7 @@ All of [Dep L1], plus:
 
 Dep L3 closes the threats L2 leaves open:
 (a) bypass is structurally blocked, not just detectable; (b) the
-upstream-provenance reference for each dep is recorded (verified when
+verdicts on upstream-published attestations for each dep are recorded (verified when
 available, `unavailable` otherwise) so the chain of trust ties to
 upstream's source of truth; and (c) a hostile dep cannot subvert the
 Provenance about itself or about other deps in the same ingestion
@@ -461,7 +462,7 @@ All of [Dep L2], plus:
 
 -   Dependency Ingestion Platform:
     -   [Block non-platform paths](#dep-enforce-curated-feed).
-    -   [Record the upstream-provenance verdict in every Provenance](#dep-verify-provenance) — verdict MAY be `verified`, `failed`, `not-attempted`, or `unavailable`.
+    -   [Record upstream-attestation verdicts in every Provenance](#dep-verify-provenance) — at least one entry describing the platform's stance; per-entry verdicts MAY be `verified`, `failed`, `not-attempted`, or `unavailable`.
     -   [Isolate signing infrastructure from dep code](#dep-signing-isolation).
     -   [Isolate the ingestion of each dep from others](#dep-ingestion-isolation).
     -   Record the platform's Dependency Ingestion Provenance signatures
@@ -474,9 +475,10 @@ All of [Dep L2], plus:
 
 -   Ingestion bypass is blocked, not just detectable. The Provenance
     describes every consumed dependency.
--   The upstream-provenance reference is recorded for every dep; when
-    upstream produces SLSA Build Provenance, a verifier inherits
-    upstream's Build-side guarantees by reference.
+-   Upstream-attestation verdicts are recorded for every dep; when
+    upstream produces SLSA Build Provenance (or a VSA, or another
+    verifiable predicate), a verifier inherits the corresponding
+    upstream guarantees by reference.
 -   A malicious dep cannot steal the platform's Provenance signing key
     via an install hook (Shai Hulud-style) because the key is not
     reachable from any process that executed dep code.
@@ -549,7 +551,7 @@ keywords apply as marked.
   <td><a href="#dep-enforce-curated-feed">Block non-platform paths</a>
   <td> <td> <td>✓
 <tr>
-  <td><a href="#dep-verify-provenance">Upstream provenance verdict recorded</a>
+  <td><a href="#dep-verify-provenance">Upstream-attestation verdicts recorded</a>
   <td> <td> <td>✓
 <tr>
   <td><a href="#dep-signing-isolation">Signing infrastructure isolation</a>
@@ -588,7 +590,7 @@ reaching their desired SLSA Dependency Level.
 
 For example, an ingestor targeting Dep L3 MUST choose a platform capable
 of emitting Dependency Ingestion Provenance with policy-evaluation,
-source-mirror, and upstream-provenance fields populated and signed.
+source-mirror, and upstream-attestation fields populated and signed.
 
 ### Distribute Dependency Ingestion Provenance
 
@@ -768,8 +770,10 @@ signature is published by the upstream, the Provenance MUST record
 
 Publisher signature verification is distinct from per-fetch integrity
 (which only confirms the artifact matches a known hash) and from
-upstream provenance verification (which confirms how the artifact was
-built). It detects publisher-account takeover and impersonation.
+upstream-attestation verification (which confirms an upstream's own
+claim about the artifact — Build Provenance about how it was built,
+a VSA about a downstream verifier's verdict, etc.). It detects
+publisher-account takeover and impersonation.
 
 > For example: verifying an npm package's publisher signature against
 the publisher's signing key registered with npm; verifying a Maven
@@ -832,7 +836,7 @@ without requiring any specific policy.
 [L3 requirements]: #l3-requirements-screened
 
 At L3 the platform blocks non-platform ingestion paths structurally,
-records the upstream-provenance verdict in every Provenance, isolates
+records upstream-attestation verdicts in every Provenance, isolates
 the Provenance signing infrastructure from any code that runs during
 ingestion, isolates the ingestion of each dep from others, and
 publishes its Provenance signatures to a transparency log.
@@ -856,22 +860,25 @@ Maps to S2C2F [ENF-2](#s2c2f-mapping-appendix).
 
 <td> <td> <td>✓
 
-<tr id="dep-verify-provenance"><td>Upstream-provenance verdict recorded <a href="#dep-verify-provenance">🔗</a><td>
+<tr id="dep-verify-provenance"><td>Upstream-attestation verdicts recorded <a href="#dep-verify-provenance">🔗</a><td>
 
-The Dependency Ingestion Provenance MUST record an upstream-provenance
-verdict at L3. The verdict identifies whether upstream-published
-provenance was found, whether it was verified, and the result. Valid
-values are `verified`, `failed`, `not-attempted`, or `unavailable`.
+The Dependency Ingestion Provenance MUST record at least one
+upstream-attestation verdict at L3. Each entry identifies an upstream
+predicate type (for example, SLSA Build Provenance, VSA, or
+upstream-signed VEX), whether the platform found an attestation of that
+type, whether it verified it, and the result. Per-entry verdict values
+are `verified`, `failed`, `not-attempted`, or `unavailable`.
 
-When the upstream of a consumed dependency produces verifiable
-provenance (for example, SLSA Build Provenance), the platform MUST
-attempt verification against the ingestor's expectations and MUST
-record either `verified` or `failed`. When upstream does not produce
-provenance, the Provenance MUST record `unavailable`. When the
-platform chose not to verify available upstream provenance, the
-Provenance MUST record `not-attempted` so verifiers can distinguish
-"no upstream provenance was published" from "verification was not
-attempted."
+For each upstream predicate type the ingestor considers within scope,
+when the upstream of a consumed dependency produces a verifiable
+attestation of that type, the platform MUST attempt verification
+against the ingestor's expectations and MUST record either `verified`
+or `failed` in the corresponding entry. When upstream does not produce
+an attestation of that type, the entry MUST record `unavailable`. When
+the platform chose not to verify an available upstream attestation,
+the entry MUST record `not-attempted` so verifiers can distinguish
+"no such upstream attestation was published" from "verification was
+not attempted."
 
 This requirement does not prescribe what to do with the verdict —
 verifiers MAY refuse Provenance with `not-attempted`, `failed`, or
@@ -1032,7 +1039,7 @@ hardening — rather than best-practice prescriptions.
 | AUD-3 | Audit | L2 | L2 | [Identity-verification verdict (integrity)](#dep-validate-integrity)
 | ENF-1 | Enforce | L2 | L2 | [Configure build to resolve through the platform](#dep-package-source-config)
 | ENF-2 | Enforce | L3 | L3 | [Block non-platform paths](#dep-enforce-curated-feed)
-| AUD-1 | Audit | L3 | L3 | [Upstream-provenance verdict recorded](#dep-verify-provenance)
+| AUD-1 | Audit | L3 | L3 | [Upstream-attestation verdicts recorded](#dep-verify-provenance)
 
 ING-2 moves from S2C2F L1 to Dep L2. S2C2F placed the chokepoint as
 foundational practice. In this track the chokepoint is what grounds
@@ -1047,7 +1054,7 @@ S2C2F does not enumerate as attestable claims.
 | Requirement | Dep level | Why it's needed
 | --- | --- | ---
 | [Admit transitive dependencies through the platform](#dep-transitive-resolution) | L2 | The chokepoint's integrity claim extends to transitive resolution. Without this, an L2 ingestor could chokepoint the direct dep and let its transitive dependencies be pulled from arbitrary upstream sources, defeating the chokepoint.
-| [Identity-verification verdict (publisher signature)](#dep-publisher-signature) | L2 | Per-fetch integrity (matches a known hash) and upstream provenance verification (matches the upstream's claimed build process) are distinct from publisher signature verification (signed by the publisher's identity). Publisher signature is the strongest control against publisher-account takeover.
+| [Identity-verification verdict (publisher signature)](#dep-publisher-signature) | L2 | Per-fetch integrity (matches a known hash) and upstream-attestation verification (matches an upstream's own claim — Build Provenance, VSA, etc.) are distinct from publisher signature verification (signed by the publisher's identity). Publisher signature is the strongest control against publisher-account takeover.
 | [Record any admission policies applied](#dep-policy-attestation) | L2 | The integrity claim that *whatever policies the platform applies are transparent in the Provenance*. The track does not prescribe which policies to apply; it requires that those applied be recorded so verifiers can apply policy on top.
 | [Signing infrastructure isolation](#dep-signing-isolation) | L3 | Addresses Shai Hulud-style npm-worm attacks where install scripts exfiltrate credentials (including signing keys) from the ingestion environment. Without this, a malicious dep can forge Provenance about itself or future deps. Direct parallel to Build L3 signing-key isolation.
 | [Cross-dep ingestion isolation](#dep-ingestion-isolation) | L3 | Outcome property: a dep's ingestion cannot affect another dep's ingestion or the Provenance about it. Direct parallel to Build L3 ephemeral build environment.
