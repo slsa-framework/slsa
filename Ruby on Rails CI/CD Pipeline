@@ -1,0 +1,1539 @@
+Here's the complete, self-contained set — the workflow plus every companion file, with the staging deploy config and CODEOWNERS filled in.
+
+---
+
+## 1. `.github/workflows/rubyonrails.yml`
+
+```yaml
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support documentation.
+#
+# Full CI/CD for a Ruby on Rails app:
+#   - Parallel RSpec on a Ruby matrix
+#   - Security + style lint
+#   - Schema drift check
+#   - Docker image build & push to GHCR
+#   - Kamal deploy to production (main) and staging (staging branch)
+#   - Slack alert on failure
+name: "Ruby on Rails CI"
+
+on:
+  push:
+    branches: [ "main", "staging" ]
+  pull_request:
+    branches: [ "main" ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # -----------------------------------------------------------------
+  # TEST — parallel RSpec on a Ruby matrix
+  # -----------------------------------------------------------------
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: [ "3.3" ]
+        workers: [ 4 ]
+    services:
+      postgres:
+        image: postgres:16-alpine
+        ports: [ "5432:5432" ]
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:7-alpine
+        ports: [ "6379:6379" ]
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+      REDIS_URL: "redis://localhost:6379/0"
+      PARALLEL_TEST_FIRST_IS_1: "true"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410 # v1.179.1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      - name: Create & prepare parallel test databases
+        run: |
+          bundle exec rake parallel:create[${{ matrix.workers }}]
+          bundle exec rake parallel:prepare[${{ matrix.workers }}]
+
+      - name: Run RSpec in parallel
+        run: bundle exec parallel_rspec spec -n ${{ matrix.workers }}
+
+      - name: Upload coverage
+        if: ${{ !cancelled() }}
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/.resultset.json
+          fail_ci_if_error: false
+
+  # -----------------------------------------------------------------
+  # LINT — security + style
+  # -----------------------------------------------------------------
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410 # v1.179.1
+        with:
+          bundler-cache: true
+
+      - name: Generate binstubs
+        run: bundle binstubs bundler-audit brakeman rubocop
+
+      - name: Security audit dependencies
+        run: bin/bundler-audit --update
+
+      - name: Security audit application code
+        run: bin/brakeman -q -w2
+
+      - name: Lint Ruby files
+        run: bin/rubocop --parallel
+
+  # -----------------------------------------------------------------
+  # SCHEMA CHECK — fail if db/schema.rb is stale
+  # -----------------------------------------------------------------
+  schema-check:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        ports: [ "5432:5432" ]
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410 # v1.179.1
+        with:
+          bundler-cache: true
+
+      - name: Prepare database (loads schema, applies pending migrations)
+        run: bin/rails db:prepare
+
+      - name: Fail if schema.rb changed
+        run: |
+          if ! git diff --exit-code db/schema.rb; then
+            echo "::error::db/schema.rb is out of date. Run \`bin/rails db:migrate\` locally and commit the result."
+            exit 1
+          fi
+
+  # -----------------------------------------------------------------
+  # BUILD — Docker image to GHCR (main & staging)
+  # -----------------------------------------------------------------
+  build:
+    needs: [ test, lint, schema-check ]
+    if: >-
+      github.event_name == 'push' &&
+      (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image: ${{ steps.meta.outputs.tags }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix=sha-,format=short
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          provenance: false
+
+  # -----------------------------------------------------------------
+  # DEPLOY — production via Kamal (main only)
+  # -----------------------------------------------------------------
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://example.com   # <-- change to your real URL
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410 # v1.179.1
+        with:
+          bundler-cache: true
+
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add host to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy with Kamal
+        env:
+          KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          KAMAL_REGISTRY_USERNAME: ${{ github.actor }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: bin/kamal deploy
+
+  # -----------------------------------------------------------------
+  # DEPLOY STAGING — Kamal to staging (staging branch only)
+  # -----------------------------------------------------------------
+  deploy-staging:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/staging'
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://staging.example.com   # <-- your staging URL
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410 # v1.179.1
+        with:
+          bundler-cache: true
+
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.STAGING_SSH_PRIVATE_KEY }}
+
+      - name: Add host to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.STAGING_DEPLOY_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy with Kamal to staging
+        env:
+          KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          KAMAL_REGISTRY_USERNAME: ${{ github.actor }}
+          RAILS_MASTER_KEY: ${{ secrets.STAGING_RAILS_MASTER_KEY }}
+        run: bin/kamal deploy -d staging
+
+  # -----------------------------------------------------------------
+  # NOTIFY — Slack on any failure
+  # -----------------------------------------------------------------
+  notify:
+    needs: [ test, lint, schema-check, build, deploy, deploy-staging ]
+    if: ${{ always() && contains(needs.*.result, 'failure') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Slack
+        uses: slackapi/slack-github-action@v2
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "❌ CI failed on `${{ github.repository }}` (${{ github.ref_name }}) — ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            }
+```
+
+---
+
+## 2. `.github/dependabot.yml`
+
+```yaml
+version: 2
+updates:
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Kuala_Lumpur"
+    open-pull-requests-limit: 10
+    groups:
+      rails:
+        patterns:
+          - "rails"
+          - "railties"
+          - "actionpack"
+          - "activerecord"
+          - "actionview"
+          - "activesupport"
+          - "actionmailer"
+          - "activejob"
+          - "activestorage"
+          - "actioncable"
+          - "actionmailbox"
+          - "actiontext"
+      dev-dependencies:
+        dependency-type: "development"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+```
+
+---
+
+## 3. `.github/CODEOWNERS`
+
+Replace `@your-org/your-team` with real handles. Order matters — later rules win.
+
+```
+# Default owners for everything in the repo
+*                           @your-org/maintainers
+
+# CI/CD and infrastructure — require platform review
+/.github/                   @your-org/platform
+/.github/workflows/         @your-org/platform
+/Dockerfile                 @your-org/platform
+/.dockerignore              @your-org/platform
+/config/deploy.yml          @your-org/platform
+/config/deploy.staging.yml  @your-org/platform
+/bin/kamal                  @your-org/platform
+
+# Dependencies — reviewed by platform before merging Dependabot PRs
+/Gemfile                    @your-org/platform
+/Gemfile.lock               @your-org/platform
+/package.json               @your-org/platform
+/yarn.lock                  @your-org/platform
+/package-lock.json          @your-org/platform
+
+# Database & schema — DBA / backend leads
+/db/                        @your-org/backend-leads
+/db/schema.rb               @your-org/backend-leads
+/db/structure.sql           @your-org/backend-leads
+/db/migrate/                @your-org/backend-leads
+
+# Auth, payments, and other sensitive areas
+/app/models/user.rb         @your-org/security
+/app/controllers/sessions_controller.rb  @your-org/security
+/app/services/payments/     @your-org/security @your-org/finance
+
+# Docs
+/docs/                      @your-org/docs
+/README.md                  @your-org/docs
+```
+
+---
+
+## 4. `config/database.yml` — test block (for parallel_tests)
+
+```yaml
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
+  username: <%= ENV.fetch("DATABASE_USER", "rails") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "password") %>
+
+development:
+  <<: *default
+  database: myapp_development
+
+test:
+  <<: *default
+  database: myapp_test<%= ENV["TEST_ENV_NUMBER"] %>
+
+production:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
+```
+
+> The `<%= ENV["TEST_ENV_NUMBER"] %>` suffix gives each parallel worker its own DB: `myapp_test`, `myapp_test2`, `myapp_test3`, `myapp_test4`.
+
+---
+
+## 5. `config/deploy.yml` — production
+
+Fill in `<owner>`, `<repo>`, and your host IPs. This is read by `bin/kamal deploy` from the `deploy` job.
+
+```yaml
+service: myapp
+image: ghcr.io/<owner>/<repo>
+
+servers:
+  web:
+    - 203.0.113.10          # <-- production web server IP
+  # job:
+  #   hosts:
+  #     - 203.0.113.10
+  #   cmd: bin/jobs         # if you use Solid Queue
+
+proxy:
+  ssl: true
+  host: example.com         # <-- your production hostname
+  healthcheck:
+    path: /up
+    interval: 10s
+
+registry:
+  server: ghcr.io
+  username: <owner>
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+builder:
+  arch: amd64
+  cache:
+    type: gha
+    options: mode=max
+
+env:
+  clear:
+    RAILS_ENV: production
+    RAILS_LOG_TO_STDOUT: "true"
+    RAILS_SERVE_STATIC_FILES: "true"
+  secret:
+    - RAILS_MASTER_KEY
+    - DATABASE_URL
+    - REDIS_URL
+
+volumes:
+  - "myapp_storage:/rails/storage"
+
+asset_path: /rails/public/assets
+
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell:   app exec --interactive --reuse "bash"
+  logs:    app logs -f
+  dbc:     app exec --interactive --reuse "bin/rails dbconsole"
+```
+
+---
+
+## 6. `config/deploy.staging.yml` — staging overlay
+
+Kamal merges this over `deploy.yml` when you pass `-d staging`. Only overrides what differs.
+
+```yaml
+service: myapp-staging
+image: ghcr.io/<owner>/<repo>
+
+servers:
+  web:
+    - 203.0.113.20          # <-- staging web server IP
+
+proxy:
+  ssl: true
+  host: staging.example.com
+  healthcheck:
+    path: /up
+    interval: 10s
+
+env:
+  clear:
+    RAILS_ENV: production     # Rails' "production" mode; app detects staging via env var
+    APP_ENV: staging
+    RAILS_LOG_TO_STDOUT: "true"
+    RAILS_SERVE_STATIC_FILES: "true"
+  secret:
+    - RAILS_MASTER_KEY        # <-- staging's master key (different credentials)
+    - DATABASE_URL
+    - REDIS_URL
+
+# Staging typically doesn't need zero-downtime swaps as strict as prod,
+# but Kamal keeps them anyway. Use a distinct container name prefix so
+# prod and staging don't clash on a shared host (if you run them together).
+```
+
+Run it manually with:
+```bash
+bin/kamal deploy -d staging
+```
+
+---
+
+## 7. `Gemfile` — test group
+
+```ruby
+group :development, :test do
+  gem "rspec-rails"
+  gem "parallel_tests"
+  gem "brakeman", require: false
+  gem "bundler-audit", require: false
+  gem "rubocop", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
+end
+
+group :test do
+  gem "simplecov", require: false
+end
+```
+
+---
+
+## 8. `spec/spec_helper.rb` — must be the very first require
+
+```ruby
+require "simplecov"
+SimpleCov.start "rails" do
+  enable_coverage :branch
+  add_filter "/spec/"
+  add_filter "/config/"
+  add_filter "/db/"
+end
+
+RSpec.configure do |config|
+  config.expect_with :rspec do |expectations|
+    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
+
+  config.mock_with :rspec do |mocks|
+    mocks.verify_partial_doubles = true
+  end
+
+  config.shared_context_metadata_behavior = :apply_to_host_groups
+  config.example_status_persistence_file_path = "tmp/rspec_status.txt"
+  config.disable_monkey_patching!
+  config.order = :random
+  Kernel.srand config.seed
+end
+```
+
+---
+
+## 9. Secrets checklist
+
+Configure in **Repo → Settings → Secrets and variables → Actions**:
+
+| Secret | Scope | Purpose |
+|---|---|---|
+| `CODECOV_TOKEN` | Repository | Coverage upload (skip if public repo) |
+| `SSH_PRIVATE_KEY` | Repository | SSH key for production host |
+| `DEPLOY_HOST` | Repository | Production host IP / hostname (for `ssh-keyscan`) |
+| `RAILS_MASTER_KEY` | `production` environment | Production `config/master.key` |
+| `STAGING_SSH_PRIVATE_KEY` | Repository | SSH key for staging host |
+| `STAGING_DEPLOY_HOST` | Repository | Staging host IP / hostname |
+| `STAGING_RAILS_MASTER_KEY` | `staging` environment | Staging `config/master.key` |
+| `SLACK_WEBHOOK_URL` | Repository | Slack incoming webhook |
+| `DATABASE_URL` | Kamal `.env` on server | Prod DB connection string |
+| `REDIS_URL` | Kamal `.env` on server | Prod Redis connection string |
+
+> `GITHUB_TOKEN` is provided automatically and is used for GHCR login and as `KAMAL_REGISTRY_PASSWORD`.
+
+Create the environments (**Settings → Environments**):
+- `production` — optionally require a reviewer before deploy.
+- `staging` — usually no gate.
+
+---
+
+## 10. Branch protection — required checks
+
+**Settings → Branches → Add rule** for `main`:
+
+- Require a pull request before merging
+- Require approvals: **1**
+- Dismiss stale approvals on new commits
+- Require review from **Code Owners**
+- Require status checks to pass:
+  - `test (3.3, 4)`
+  - `lint`
+  - `schema-check`
+- Require branches to be up to date
+- Require conversation resolution
+- Require linear history
+- Do not allow bypassing
+
+Repeat for `staging` if you want the same gate there (often with a lower approval count).
+
+---
+
+## 11. `Dockerfile` — Rails 7.1+ / 8.x default
+
+If you already have one from `rails new`, you're done. If not, generate with `bin/rails app:template LOCATION="..."` or copy the stock Rails 8 Dockerfile — it exposes `RAILS_ENV`, supports `SOLID_QUEUE_IN_PUMA`, and listens on port 80 via Thruster. No changes needed for this pipeline.
+
+---
+
+## 12. Server-side `.env` for Kamal
+
+On each deploy host, `~/.kamal/env/roles/myapp-web.env` (or use `kamal env push`):
+
+```
+RAILS_MASTER_KEY=<contents of master.key>
+DATABASE_URL=postgres://user:pass@db-host:5432/myapp_production
+REDIS_URL=redis://redis-host:6379/0
+```
+
+For staging, use the staging values and a distinct `~/.kamal/env/roles/myapp-staging-web.env`.
+
+---
+
+## File tree
+
+```
+.
+├── .github/
+│   ├── CODEOWNERS
+│   ├── dependabot.yml
+│   └── workflows/
+│       └── rubyonrails.yml
+├── Gemfile
+├── Gemfile.lock
+├── Dockerfile
+├── config/
+│   ├── database.yml
+│   ├── deploy.yml
+│   └── deploy.staging.yml
+├── db/
+│   └── schema.rb
+├── spec/
+│   └── spec_helper.rb
+└── bin/
+    ├── kamal
+    └── rails
+```
+
+---
+
+## Pipeline recap
+
+```
+PR → main    ─▶ test (matrix) ─┐
+                lint ──────────┤
+                schema-check ──┘   (all must pass before merge)
+
+push → main  ─▶ test/lint/schema-check ─▶ build (GHCR) ─▶ deploy prod ─▶ ✅
+                                                                  ╲
+                                                                   notify Slack
+
+push → staging ─▶ test/lint/schema-check ─▶ build (GHCR) ─▶ deploy-staging
+```
+
+Everything is version-pinned, gated by branch protection, kept up to date by Dependabot, and deployed with zero downtime through Kamal.
+
+If you'd like, I can also draft: the `config/initializers/` health endpoint (`/up`), a Solid Queue / Sidekiq worker definition for Kamal, or a script to seed the Kamal `.env` files from GitHub secrets during the deploy job. Just say which.
+Here's everything — the health endpoint, the worker definition, the env-seeding script, and a standalone HTML summary page you can open in a browser.
+
+---
+
+## 1. Health check endpoint (`/up`)
+
+Rails 7.1+ ships this generator, but here's the full setup so Kamal's healthcheck works.
+
+**`config/routes.rb`**
+```ruby
+Rails.application.routes.draw do
+  # Kamal / load balancer health probe — no auth, no DB dependency for liveness
+  get "up" => "rails/health#show", as: :rails_health_check
+
+  # Optional: a deeper readiness probe that DOES check DB + Redis
+  get "ready" => "health#ready"
+
+  # ...your other routes
+end
+```
+
+**`app/controllers/health_controller.rb`**
+```ruby
+class HealthController < ActionController::API
+  def ready
+    checks = {
+      database: database_ok?,
+      redis:    redis_ok?,
+      migrations: migrations_ok?
+    }
+
+    if checks.values.all?
+      render json: { status: "ok", checks: checks }, status: :ok
+    else
+      render json: { status: "degraded", checks: checks }, status: :service_unavailable
+    end
+  end
+
+  private
+
+  def database_ok?
+    ActiveRecord::Base.connection.execute("SELECT 1")
+    true
+  rescue StandardError
+    false
+  end
+
+  def redis_ok?
+    return true unless defined?(Redis)
+    Redis.new(url: ENV["REDIS_URL"]).ping == "PONG"
+  rescue StandardError
+    false
+  end
+
+  def migrations_ok?
+    !ActiveRecord::Base.connection.migration_context.needs_migration?
+  rescue StandardError
+    false
+  end
+end
+```
+
+Point Kamal's `healthcheck.path` at `/up` for liveness (fast, no dependencies) and optionally use `/ready` in your load balancer. If you're on Rails < 7.1, replace `rails/health#show` with `health#show` and add a `show` action that returns `head :ok`.
+
+---
+
+## 2. Worker definition for Kamal
+
+### Option A — Solid Queue (Rails 8 default)
+
+**`config/deploy.yml`** (add under `servers:`)
+```yaml
+servers:
+  web:
+    - 203.0.113.10
+  job:
+    hosts:
+      - 203.0.113.10
+    cmd: bin/jobs
+```
+
+**`config/deploy.staging.yml`**
+```yaml
+servers:
+  web:
+    - 203.0.113.20
+  job:
+    hosts:
+      - 203.0.113.20
+    cmd: bin/jobs
+```
+
+`bin/jobs` is generated by `rails solid_queue:install` and just runs `SolidQueue::Cli.start`. You can also run jobs inside Puma by setting `SOLID_QUEUE_IN_PUMA=true` in the `env.clear` block — simpler for small apps, but not great for autoscaling.
+
+### Option B — Sidekiq
+
+**`config/deploy.yml`**
+```yaml
+servers:
+  web:
+    - 203.0.113.10
+  worker:
+    hosts:
+      - 203.0.113.10
+    cmd: bundle exec sidekiq -C config/sidekiq.yml
+    options:
+      memory: 512m
+```
+
+**`config/sidekiq.yml`**
+```yaml
+:concurrency: 5
+:queues:
+  - [critical, 4]
+  - [default, 2]
+  - [low, 1]
+:max_retries: 5
+:timeout: 25
+```
+
+Redis is already in your CI services and referenced via `REDIS_URL`, so Sidekiq will connect automatically.
+
+---
+
+## 3. Script to seed Kamal `.env` files from GitHub secrets
+
+Kamal reads secrets from `.kamal/secrets` in the repo, evaluated at deploy time. Create this file — it uses `$SECRET_NAME` env vars that GitHub Actions already injects.
+
+**`.kamal/secrets`**
+```bash
+# Kamal evaluates this file at deploy time. Anything exported here is
+# available to config/deploy.yml's `env.secret` list.
+#
+# In GitHub Actions, secrets are injected as env vars, so we just re-export them.
+# Locally, you'd export these from your shell or a .env file before running kamal.
+
+KAMAL_REGISTRY_PASSWORD=${KAMAL_REGISTRY_PASSWORD:-$GITHUB_TOKEN}
+KAMAL_REGISTRY_USERNAME=${KAMAL_REGISTRY_USERNAME:-$GITHUB_ACTOR}
+
+# Pulled from the environment set by GitHub Actions (see workflow `env:` block)
+RAILS_MASTER_KEY=$RAILS_MASTER_KEY
+DATABASE_URL=$DATABASE_URL
+REDIS_URL=$REDIS_URL
+```
+
+For **staging**, either put a second file at `.kamal/secrets.staging` or branch on `${DEPLOY_ENV}` inside `.kamal/secrets`:
+
+```bash
+if [ "$DEPLOY_ENV" = "staging" ]; then
+  RAILS_MASTER_KEY=$STAGING_RAILS_MASTER_KEY
+  DATABASE_URL=$STAGING_DATABASE_URL
+  REDIS_URL=$STAGING_REDIS_URL
+else
+  RAILS_MASTER_KEY=$RAILS_MASTER_KEY
+  DATABASE_URL=$DATABASE_URL
+  REDIS_URL=$REDIS_URL
+fi
+
+KAMAL_REGISTRY_PASSWORD=${KAMAL_REGISTRY_PASSWORD:-$GITHUB_TOKEN}
+KAMAL_REGISTRY_USERNAME=${KAMAL_REGISTRY_USERNAME:-$GITHUB_ACTOR}
+```
+
+Then add the extra secrets to the deploy jobs in your workflow:
+
+```yaml
+      - name: Deploy with Kamal
+        env:
+          KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          KAMAL_REGISTRY_USERNAME: ${{ github.actor }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          REDIS_URL: ${{ secrets.REDIS_URL }}
+        run: bin/kamal deploy
+```
+
+And for staging:
+
+```yaml
+      - name: Deploy with Kamal to staging
+        env:
+          DEPLOY_ENV: staging
+          KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          KAMAL_REGISTRY_USERNAME: ${{ github.actor }}
+          STAGING_RAILS_MASTER_KEY: ${{ secrets.STAGING_RAILS_MASTER_KEY }}
+          STAGING_DATABASE_URL: ${{ secrets.STAGING_DATABASE_URL }}
+          STAGING_REDIS_URL: ${{ secrets.STAGING_REDIS_URL }}
+        run: bin/kamal deploy -d staging
+```
+
+**`.kamal/secrets` must be git-ignored or contain no literal values** — it only reads env vars, so it's safe to commit, but add `.kamal/secrets.local` to `.gitignore` for local overrides.
+
+---
+
+## 4. HTML summary page
+
+Save this as `docs/ci-pipeline.html` and open it in any browser. No dependencies, self-contained.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rails CI/CD Pipeline — Overview</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --green: #3fb950;
+    --blue: #58a6ff;
+    --yellow: #d29922;
+    --red: #f85149;
+    --purple: #bc8cff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem 1rem;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 2rem; margin: 0 0 .25rem; }
+  h2 { font-size: 1.25rem; margin: 2rem 0 .75rem; color: var(--blue); border-bottom: 1px solid var(--border); padding-bottom: .35rem; }
+  .subtitle { color: var(--muted); margin-bottom: 2rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+  }
+  .card h3 { margin: 0 0 .5rem; font-size: 1rem; }
+  .card p { margin: 0; color: var(--muted); font-size: .9rem; }
+  .badge {
+    display: inline-block;
+    padding: .1rem .5rem;
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 600;
+    margin-right: .35rem;
+  }
+  .badge.green  { background: rgba(63,185,80,.15);  color: var(--green); }
+  .badge.blue   { background: rgba(88,166,255,.15); color: var(--blue); }
+  .badge.yellow { background: rgba(210,153,34,.15); color: var(--yellow); }
+  .badge.red    { background: rgba(248,81,73,.15);  color: var(--red); }
+  .badge.purple { background: rgba(188,140,255,.15);color: var(--purple); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: .9rem;
+  }
+  th, td { text-align: left; padding: .65rem .9rem; border-bottom: 1px solid var(--border); }
+  th { background: #1c2128; color: var(--muted); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .03em; }
+  tr:last-child td { border-bottom: none; }
+  pre {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .85rem;
+    color: var(--text);
+  }
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+    padding: 1.25rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .85rem;
+  }
+  .stage {
+    padding: .35rem .7rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: #1c2128;
+  }
+  .arrow { color: var(--muted); }
+  .stage.test   { border-color: var(--blue);   color: var(--blue); }
+  .stage.lint   { border-color: var(--purple); color: var(--purple); }
+  .stage.build  { border-color: var(--yellow); color: var(--yellow); }
+  .stage.deploy { border-color: var(--green);  color: var(--green); }
+  .stage.fail   { border-color: var(--red);    color: var(--red); }
+  code { background: #1c2128; padding: .1rem .35rem; border-radius: 4px; font-size: .85em; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .footer { margin-top: 3rem; color: var(--muted); font-size: .85rem; text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>Ruby on Rails CI/CD Pipeline</h1>
+  <p class="subtitle">GitHub Actions · Parallel RSpec · Kamal · GHCR · Zero-downtime deploys</p>
+
+  <h2>Pipeline flow</h2>
+  <div class="flow">
+    <span class="stage test">test (matrix)</span>
+    <span class="arrow">→</span>
+    <span class="stage lint">lint</span>
+    <span class="arrow">→</span>
+    <span class="stage lint">schema-check</span>
+    <span class="arrow">→</span>
+    <span class="stage build">build → GHCR</span>
+    <span class="arrow">→</span>
+    <span class="stage deploy">deploy (prod / staging)</span>
+    <span class="arrow">→</span>
+    <span class="stage fail">notify (on failure)</span>
+  </div>
+
+  <h2>Jobs at a glance</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>test <span class="badge blue">parallel</span></h3>
+      <p>RSpec split across 4 workers on PostgreSQL 16 + Redis 7. Uploads coverage to Codecov.</p>
+    </div>
+    <div class="card">
+      <h3>lint <span class="badge purple">security</span></h3>
+      <p>bundler-audit, Brakeman, and RuboCop run in parallel.</p>
+    </div>
+    <div class="card">
+      <h3>schema-check <span class="badge yellow">drift</span></h3>
+      <p>Fails the PR if <code>db/schema.rb</code> is out of sync with migrations.</p>
+    </div>
+    <div class="card">
+      <h3>build <span class="badge yellow">container</span></h3>
+      <p>Multi-stage Docker image pushed to GHCR with tag <code>latest</code>, branch, and <code>sha-</code>.</p>
+    </div>
+    <div class="card">
+      <h3>deploy <span class="badge green">kamal</span></h3>
+      <p>Zero-downtime rollout to production on <code>main</code>, gated by a GitHub environment.</p>
+    </div>
+    <div class="card">
+      <h3>deploy-staging <span class="badge green">kamal</span></h3>
+      <p>Same pipeline to the staging host on the <code>staging</code> branch.</p>
+    </div>
+    <div class="card">
+      <h3>notify <span class="badge red">slack</span></h3>
+      <p>Fires on any job failure and posts the run URL to Slack.</p>
+    </div>
+    <div class="card">
+      <h3>dependabot <span class="badge purple">weekly</span></h3>
+      <p>Grouped PRs for gems, Actions, Docker images, and npm — major bumps ignored.</p>
+    </div>
+  </div>
+
+  <h2>Required secrets</h2>
+  <table>
+    <thead>
+      <tr><th>Secret</th><th>Scope</th><th>Used by</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>CODECOV_TOKEN</code></td><td>Repository</td><td>test</td></tr>
+      <tr><td><code>SSH_PRIVATE_KEY</code></td><td>Repository</td><td>deploy</td></tr>
+      <tr><td><code>DEPLOY_HOST</code></td><td>Repository</td><td>deploy</td></tr>
+      <tr><td><code>RAILS_MASTER_KEY</code></td><td>production env</td><td>deploy</td></tr>
+      <tr><td><code>DATABASE_URL</code></td><td>production env</td><td>deploy</td></tr>
+      <tr><td><code>REDIS_URL</code></td><td>production env</td><td>deploy</td></tr>
+      <tr><td><code>STAGING_SSH_PRIVATE_KEY</code></td><td>Repository</td><td>deploy-staging</td></tr>
+      <tr><td><code>STAGING_DEPLOY_HOST</code></td><td>Repository</td><td>deploy-staging</td></tr>
+      <tr><td><code>STAGING_RAILS_MASTER_KEY</code></td><td>staging env</td><td>deploy-staging</td></tr>
+      <tr><td><code>STAGING_DATABASE_URL</code></td><td>staging env</td><td>deploy-staging</td></tr>
+      <tr><td><code>STAGING_REDIS_URL</code></td><td>staging env</td><td>deploy-staging</td></tr>
+      <tr><td><code>SLACK_WEBHOOK_URL</code></td><td>Repository</td><td>notify</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Required status checks</h2>
+  <p>Branch protection on <code>main</code>:</p>
+  <pre>test (3.3, 4)
+lint
+schema-check</pre>
+
+  <h2>File tree</h2>
+  <pre>.
+├── .github/
+│   ├── CODEOWNERS
+│   ├── dependabot.yml
+│   └── workflows/
+│       └── rubyonrails.yml
+├── .kamal/
+│   └── secrets
+├── Gemfile
+├── Dockerfile
+├── config/
+│   ├── database.yml
+│   ├── deploy.yml
+│   ├── deploy.staging.yml
+│   ├── routes.rb
+│   └── sidekiq.yml          # or bin/jobs for Solid Queue
+├── app/
+│   └── controllers/
+│       └── health_controller.rb
+├── db/
+│   └── schema.rb
+├── spec/
+│   └── spec_helper.rb
+└── bin/
+    ├── kamal
+    └── rails</pre>
+
+  <h2>Local commands</h2>
+  <pre># Run the same parallel suite locally
+bundle exec rake parallel:create[4]
+bundle exec rake parallel:prepare[4]
+bundle exec parallel_rspec spec -n 4
+
+# Deploy manually
+bin/kamal deploy                # production
+bin/kamal deploy -d staging     # staging
+
+# Health checks
+curl https://example.com/up      # liveness
+curl https://example.com/ready   # readiness (DB + Redis + migrations)</pre>
+
+  <p class="footer">Generated for the Ruby on Rails CI workflow. Open this file in any browser — no build step required.</p>
+
+</div>
+</body>
+</html>
+```
+
+---
+
+## Everything you now have
+
+| File | Purpose |
+|---|---|
+| `.github/workflows/rubyonrails.yml` | Full CI/CD pipeline |
+| `.github/dependabot.yml` | Weekly grouped dependency updates |
+| `.github/CODEOWNERS` | Path-based review rules |
+| `.kamal/secrets` | Runtime secret resolution for Kamal |
+| `config/database.yml` | Parallel-safe test DB naming |
+| `config/deploy.yml` | Production Kamal config (+ job/worker) |
+| `config/deploy.staging.yml` | Staging overlay |
+| `config/routes.rb` | `/up` + `/ready` endpoints |
+| `app/controllers/health_controller.rb` | Deep health probe |
+| `config/sidekiq.yml` | Worker queues (or `bin/jobs` for Solid Queue) |
+| `spec/spec_helper.rb` | SimpleCov + RSpec config |
+| `Gemfile` (test group) | rspec-rails, parallel_tests, simplecov, linters |
+| `docs/ci-pipeline.html` | This overview page |
+
+Open `docs/ci-pipeline.html` in a browser to see the whole pipeline at a glance. Anything else you want added — a Solid Queue recurring-jobs config, a `bin/setup` for onboarding, or a pre-commit hook mirroring the linters?
+Your message came through as just "O" — I'm not sure what you meant. A few possibilities:
+
+- **Typo / cut off** — did you mean to type something longer?
+- **"OK"** — everything's good, no action needed.
+- **"Output"** — you want the final combined file(s) printed again in one block.
+- **Another of the offers** — Solid Queue recurring jobs, a `bin/setup` onboarding script, or a pre-commit hook mirroring the linters.
+
+Just tell me which, and I'll go.
+Sounds good. You've got the complete setup:
+
+**Workflow + config**
+- `.github/workflows/rubyonrails.yml`
+- `.github/dependabot.yml`
+- `.github/CODEOWNERS`
+- `.kamal/secrets`
+- `config/deploy.yml` / `config/deploy.staging.yml`
+- `config/database.yml`, `config/routes.rb`, `config/sidekiq.yml`
+- `app/controllers/health_controller.rb`
+- `spec/spec_helper.rb`
+- `docs/ci-pipeline.html`
+
+**Next steps to go live**
+1. Commit the files to a branch.
+2. Add the secrets in **Settings → Secrets and variables → Actions**.
+3. Create the `production` and `staging` environments in **Settings → Environments**.
+4. Run the workflow once — then copy the exact check names into **Settings → Branches** protection for `main`.
+
+If anything breaks or you want to add the Solid Queue recurring jobs, `bin/setup`, or a pre-commit hook later, just shout.
+Here are all four additions, ready to drop in.
+
+---
+
+## 1. Solid Queue recurring jobs
+
+**`config/recurring.yml`** — the scheduler config Solid Queue reads at boot.
+
+```yaml
+production:
+  # Clear finished jobs every hour so the tables don't grow unbounded
+  clear_solid_queue_finished_jobs:
+    command: "SolidQueue::Job.clear_finished_in_batches(sleep_between_batches: 0.3)"
+    schedule: every hour at minute 12
+
+  # Nightly cleanup of old Active Storage blobs (if you use it)
+  purge_orphaned_attachments:
+    command: "AttachmentPurgeJob.perform_later"
+    schedule: every day at 3am
+
+  # Example: send a daily digest email
+  daily_digest:
+    command: "DailyDigestJob.perform_later"
+    schedule: every day at 6am
+
+staging:
+  clear_solid_queue_finished_jobs:
+    command: "SolidQueue::Job.clear_finished_in_batches(sleep_between_batches: 0.3)"
+    schedule: every hour at minute 12
+
+development:
+  # nothing scheduled in dev
+```
+
+**`config/queue.yml`** — worker pools and their concurrency.
+
+```yaml
+default: &default
+  dispatchers:
+    - polling_interval: 1
+      batch_size: 500
+      concurrency_maintenance_interval: 300
+  workers:
+    - queues: "*"
+      threads: 3
+      processes: <%= ENV.fetch("JOB_CONCURRENCY", 1) %>
+      polling_interval: 0.1
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+```
+
+**`config/environments/production.rb`** — enable the Solid Queue plugin if running Puma with the embedded job process:
+
+```ruby
+config.solid_queue.connects_to = { database: { writing: :queue } }
+# or, if running jobs in Puma:
+# plugin :solid_queue
+```
+
+**`Gemfile`**
+```ruby
+gem "solid_queue"
+gem "mission_control-jobs"   # optional web UI at /jobs
+```
+
+Then in `config/routes.rb`:
+```ruby
+mount MissionControl::Jobs::Engine, at: "/jobs" if defined?(MissionControl::Jobs)
+```
+
+Kamal already runs the job process via `servers.job.cmd: bin/jobs` from the deploy config — nothing else to change.
+
+---
+
+## 2. `bin/setup` onboarding script
+
+**`bin/setup`**
+```bash
+#!/usr/bin/env ruby
+require "fileutils"
+
+APP_ROOT = File.expand_path("..", __dir__)
+
+def system!(*args)
+  system(*args, exception: true)
+end
+
+FileUtils.chdir APP_ROOT do
+  puts "== Checking Ruby version =="
+  required = File.read(".ruby-version").strip
+  current  = RUBY_VERSION
+  abort "Ruby #{required} required, you have #{current}" unless current.start_with?(required)
+
+  puts "\n== Installing dependencies =="
+  system! "gem install bundler --conservative"
+  system! "bundle check || bundle install"
+
+  puts "\n== Installing JavaScript dependencies =="
+  system! "yarn install --check-files" if File.exist?("yarn.lock")
+  system! "npm ci"                    if File.exist?("package-lock.json")
+
+  puts "\n== Preparing database =="
+  system! "bin/rails db:prepare"
+
+  puts "\n== Loading seed data =="
+  system! "bin/rails db:seed" if File.exist?("db/seeds.rb")
+
+  puts "\n== Copying example configs =="
+  if File.exist?("config/database.yml.example") && !File.exist?("config/database.yml")
+    FileUtils.cp "config/database.yml.example", "config/database.yml"
+    puts "  created config/database.yml"
+  end
+  if File.exist?(".env.example") && !File.exist?(".env")
+    FileUtils.cp ".env.example", ".env"
+    puts "  created .env"
+  end
+
+  puts "\n== Installing git hooks =="
+  system! "bin/hooks install"
+
+  puts "\n== Clearing logs and tmp =="
+  FileUtils.rm_rf Dir["log/*"] + Dir["tmp/*"]
+  FileUtils.mkdir_p "log"
+  FileUtils.mkdir_p "tmp/pids"
+  FileUtils.touch "log/development.log"
+  FileUtils.touch "log/test.log"
+
+  puts "\n== Setup complete =="
+  puts "Start the app with: bin/dev"
+end
+```
+
+```bash
+chmod +x bin/setup
+```
+
+New contributors run `bin/setup` and get a working environment in one command.
+
+---
+
+## 3. Pre-commit hook mirroring CI
+
+**`bin/hooks`** — tiny hook manager, no external gems.
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+HOOKS_DIR="$(git rev-parse --show-toplevel)/.githooks"
+GIT_DIR="$(git rev-parse --git-dir)"
+
+case "${1:-}" in
+  install)
+    mkdir -p "$HOOKS_DIR"
+    if [ -d "$GIT_DIR/hooks" ] && [ ! -L "$GIT_DIR/hooks" ]; then
+      rm -rf "$GIT_DIR/hooks.old"
+      mv "$GIT_DIR/hooks" "$GIT_DIR/hooks.old"
+    fi
+    ln -sfn "$HOOKS_DIR" "$GIT_DIR/hooks"
+    chmod +x "$HOOKS_DIR"/*
+    echo "Git hooks installed (symlinked to .githooks/)."
+    ;;
+  uninstall)
+    rm -f "$GIT_DIR/hooks"
+    [ -d "$GIT_DIR/hooks.old" ] && mv "$GIT_DIR/hooks.old" "$GIT_DIR/hooks"
+    echo "Git hooks uninstalled."
+    ;;
+  *)
+    echo "Usage: bin/hooks {install|uninstall}"
+    exit 1
+    ;;
+esac
+```
+
+```bash
+chmod +x bin/hooks
+```
+
+**`.githooks/pre-commit`** — same checks CI runs, but only on staged files where possible.
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "▶ RuboCop (staged Ruby files)"
+staged_ruby=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(rb|rake)$' || true)
+if [ -n "$staged_ruby" ]; then
+  echo "$staged_ruby" | xargs bundle exec rubocop --force-exclusion
+else
+  echo "  no Ruby files staged, skipping"
+fi
+
+echo "▶ Brakeman"
+bundle exec brakeman -q -w2
+
+echo "▶ bundler-audit"
+bundle exec bundler-audit check --update
+
+echo "▶ schema.rb drift"
+if git diff --cached --name-only | grep -q '^db/schema\.rb$'; then
+  echo "  schema.rb staged — OK"
+elif git diff --cached --name-only | grep -q '^db/migrate/'; then
+  echo "  ⚠ migration staged but db/schema.rb is not. Run bin/rails db:migrate."
+  exit 1
+fi
+
+echo "▶ RSpec (fast subset)"
+# Only run specs related to changed files if you have rspec-boost or similar.
+# For a hard guarantee, run the full suite:
+# bundle exec rspec
+if command -v bundle >/dev/null && bundle exec rspec --dry-run spec >/dev/null 2>&1; then
+  bundle exec rspec spec --fail-fast
+fi
+
+echo "✅ Pre-commit checks passed."
+```
+
+```bash
+chmod +x .githooks/pre-commit
+```
+
+**`.githooks/pre-push`** — runs the full suite before pushing.
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "▶ Full RSpec before push"
+bundle exec rspec
+
+echo "✅ Pre-push checks passed."
+```
+
+```bash
+chmod +x .githooks/pre-push
+```
+
+Wire it into `bin/setup` (already done above) and remind contributors in the README:
+
+```markdown
+## Setup
+
+```bash
+bin/setup   # installs deps, prepares DB, installs git hooks
+```
+```
+
+To skip a hook in an emergency: `git commit --no-verify` (use sparingly).
+
+---
+
+## 4. `Dockerfile` — Rails 8 stock (Kamal-compatible)
+
+```dockerfile
+# syntax=docker/dockerfile:1
+# check=error=true
+
+ARG RUBY_VERSION=3.3.6
+FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
+
+WORKDIR /rails
+
+ENV RAILS_ENV="production" \
+    BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT="development:test"
+
+# ---------- build stage ----------
+FROM base AS build
+
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+      build-essential \
+      curl \
+      git \
+      libjemalloc2 \
+      libvips \
+      libpq-dev \
+      libyaml-dev \
+      pkg-config \
+      postgresql-client && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+RUN curl -sL https://github.com/rbenv/rbenv-installer/raw/main/bin/rbenv-installer | bash
+
+COPY Gemfile Gemfile.lock ./
+RUN bundle install && \
+    rm -rf "${BUNDLE_PATH}"/ruby/*/cache \
+           "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+    bundle exec bootsnap precompile --gemfile
+
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
+
+COPY . .
+
+RUN bundle exec bootsnap precompile app/ lib/
+
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
+# ---------- runtime stage ----------
+FROM base
+
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+      curl \
+      libjemalloc2 \
+      libvips \
+      postgresql-client && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --from=build /rails /rails
+
+RUN groupadd --system --gid 1000 rails && \
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
+    chown -R rails:rails db log storage tmp
+USER 1000:1000
+
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+EXPOSE 80
+CMD ["./bin/thrust", "./bin/rails", "server"]
+```
+
+The `ENTRYPOINT` script (`bin/docker-entrypoint`) should run migrations only on the web role:
+
+```bash
+#!/bin/bash
+set -e
+
+# Only run migrations on the web server (Kamal sets this via env)
+if [ "${KAMAL_ROLE:-web}" = "web" ]; then
+  echo "Running db:prepare..."
+  bin/rails db:prepare
+fi
+
+exec "${@}"
+```
+
+```bash
+chmod +x bin/docker-entrypoint
+```
+
+---
+
+## Summary of what got added
+
+| # | Addition | Files |
+|---|---|---|
+| 1 | Solid Queue recurring jobs | `config/recurring.yml`, `config/queue.yml`, Gemfile gems, routes mount |
+| 2 | Onboarding script | `bin/setup` |
+| 3 | Pre-commit / pre-push hooks | `bin/hooks`, `.githooks/pre-commit`, `.githooks/pre-push` |
+| 4 | Production Dockerfile | `Dockerfile`, `bin/docker-entrypoint` |
+
+Combined with everything from earlier, the repo now covers: dev environment, hooks, CI, security scans, schema drift, container build, dual-environment Kamal deploy, recurring jobs, health checks, and dependency automation.
+
+Want me to wrap all of this into a single `README.md` so a new contributor sees the full picture on day one?
