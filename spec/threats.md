@@ -975,7 +975,7 @@ At L2,
 [publisher signature verification](dependency-track.md#dep-publisher-signature)
 detects publisher-account takeover when the upstream publishes a
 signature. At L3, the
-[upstream-provenance verdict is recorded](dependency-track.md#dep-verify-provenance),
+[upstream-attestation verdicts are recorded](dependency-track.md#dep-verify-provenance),
 allowing verifiers to refuse Provenance whose upstream identity does
 not trace back to its claimed source. Defenses against known-malicious
 packages (deny-lists, malware scanners, version-age quarantine) are
