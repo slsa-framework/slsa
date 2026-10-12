@@ -11,9 +11,10 @@ It records the upstream identity of the consumed dependency, the
 platform that admitted it, and (where applicable) the
 identity-verification verdicts (integrity, publisher signature) and any
 admission-policy evaluations the platform applied. At higher levels of
-the [Dependency Track](dependency-track.md) it also records the
-upstream-provenance verdict and the platform's signing-infrastructure
-and ingestion isolation attestations.
+the [Dependency Track](dependency-track.md) it also records verdicts on
+any upstream-published attestations (SLSA Build Provenance, VSA, or other
+upstream predicate types) and the platform's signing-infrastructure and
+ingestion isolation attestations.
 
 This document defines the following predicate type within the
 [in-toto attestation] framework:
@@ -67,10 +68,11 @@ the controls REQUIRED at the claimed Dependency Track level.
     artifact's cryptographic digest and to the time the verdict was
     produced.
 
--   The Provenance MAY reference verified upstream Build provenance
-    (`upstreamProvenance`) when the upstream produces it. A verifier of
-    this Provenance inherits the upstream's Build Track guarantees by
-    reference.
+-   The Provenance MAY reference verified upstream attestations
+    (`upstreamAttestations`) when the upstream produces them — SLSA Build
+    Provenance, a VSA, an upstream-signed VEX, or any other predicate type.
+    A verifier of this Provenance inherits the corresponding upstream
+    guarantees by reference.
 
 -   A release-level inventory such as an SBOM references the set of
     Dependency Ingestion Provenance attestations for the dependencies in
@@ -100,7 +102,7 @@ the controls REQUIRED at the claimed Dependency Track level.
     "integrity":            { /* IntegrityVerdict; OPTIONAL at L1, REQUIRED `verified` at L2+ */ },
     "publisherSignature":   { /* PublisherSignature; OPTIONAL at L1, REQUIRED at L2+ (value MAY be `unavailable`) */ },
     "policyEvaluations":    [ /* PolicyEvaluation; REQUIRED at L2+ for any admission policies the platform applies */ ],
-    "upstreamProvenance":   { /* UpstreamProvenanceRef; REQUIRED at L3+ (value MAY be `unavailable` / `not-attempted`) */ },
+    "upstreamAttestations": [ /* UpstreamAttestationRef; REQUIRED at L3+ (at least one entry describing the platform's stance; entries MAY carry `unavailable` or `not-attempted`) */ ],
     "signingIsolation":     { /* SigningIsolation; REQUIRED at L3+ */ },
     "ingestionIsolation":   { /* IngestionIsolation; REQUIRED at L3+ */ }
   }
@@ -246,21 +248,31 @@ custom organizational policies.
 | `result` | string | REQUIRED. One of `allow`, `deny`. Provenance with any `deny` MUST NOT be emitted for an artifact admitted to the platform — a `deny` verdict implies admission was refused.
 | `description` | string | OPTIONAL. Free-text description of the policy, for verifiers and auditors.
 
-### `predicate.upstreamProvenance`
+### `predicate.upstreamAttestations[]`
 
-The upstream-provenance verdict for this dep. REQUIRED at L3+.
+Verdicts on upstream-published attestations verified (or looked for) by
+the platform. REQUIRED at L3+, where the array MUST contain at least one
+entry describing the platform's stance on upstream attestations for this
+dep (e.g., a verified Build Provenance, a "not attempted" verdict, or an
+"unavailable" verdict for a predicate type the platform looked for and
+did not find).
 
-The verdict identifies whether upstream-published provenance was found,
-whether it was verified, and the result. Verifiers can use this to
-chain trust to the upstream's source of truth, or to refuse Provenance
-whose upstream-provenance verdict doesn't satisfy verifier policy.
+Each entry identifies a single upstream predicate type, an OPTIONAL
+reference to the attestation, and the platform's verification verdict.
+Verifiers can use these to chain trust to the upstream's source of truth
+per predicate type, or to refuse Provenance whose recorded upstream
+verdicts don't satisfy verifier policy.
+
+Supported upstream predicate types include (non-exhaustive) SLSA Build
+Provenance, VSA, upstream-signed VEX, and any other in-toto predicate the
+upstream publishes.
 
 | Field | Type | Description
 | --- | --- | ---
-| `predicateType` | string | REQUIRED if `verification.result` is `verified` or `failed`. URI of the upstream predicate (e.g., `https://slsa.dev/provenance/v1`).
+| `predicateType` | string | REQUIRED. URI of the upstream predicate this entry describes (e.g., `https://slsa.dev/provenance/v1`, `https://slsa.dev/verification_summary/v1`).
 | `ref` | string | REQUIRED if `verification.result` is `verified` or `failed`. Reference to the upstream attestation (DSSE envelope URI or content-addressed digest).
-| `verification.result` | string | REQUIRED unless `availability == "unavailable"`. One of `verified`, `failed`, `not-attempted`. `not-attempted` means upstream publishes provenance but the platform did not verify.
-| `availability` | string | REQUIRED if upstream does NOT publish provenance. MUST be `unavailable`. Distinguishes "no upstream provenance was published" from "verification was not attempted."
+| `verification.result` | string | REQUIRED unless `availability == "unavailable"`. One of `verified`, `failed`, `not-attempted`. `not-attempted` means upstream publishes an attestation of this type but the platform chose not to verify.
+| `availability` | string | REQUIRED if upstream does NOT publish an attestation of this `predicateType`. MUST be `unavailable`. Distinguishes "no such upstream attestation was published" from "verification was not attempted."
 
 ### `predicate.signingIsolation`
 
@@ -310,7 +322,7 @@ and vice versa.
 | Signed envelope | OPTIONAL | REQUIRED | REQUIRED
 | Envelope signature recorded in a transparency log | OPTIONAL | OPTIONAL | REQUIRED
 | `policyEvaluations[]` (record any policies applied) | OPTIONAL | REQUIRED for any policy the platform applies | REQUIRED for any policy the platform applies
-| `upstreamProvenance` | OPTIONAL | OPTIONAL | REQUIRED
+| `upstreamAttestations[]` | OPTIONAL | OPTIONAL | REQUIRED (at least one entry)
 | `signingIsolation` | OPTIONAL | OPTIONAL | REQUIRED
 | `ingestionIsolation` | OPTIONAL | OPTIONAL | REQUIRED
 
@@ -366,15 +378,16 @@ level:
 8.  **Source mirror (L3+).** OPTIONALLY fetch the source from
     `sourceMirror.uri` and verify against `sourceMirror.digest` if doing
     independent source-level audit.
-9.  **Upstream provenance (L3+).** If `upstreamProvenance.availability` is
-    `unavailable`, the verifier MAY still accept the artifact at Dep L3
-    (the platform attests no upstream provenance exists). If
-    `upstreamProvenance.ref` is present, the verifier MAY independently
-    verify the upstream attestation against the verifier's expectations
-    (this is the preferred path for end-to-end verification).
+9.  **Upstream attestations (L3+).** Iterate over `upstreamAttestations[]`.
+    For each entry: if `availability` is `unavailable`, the verifier MAY
+    still accept the artifact at Dep L3 (the platform attests no upstream
+    attestation of that predicate type exists). If `ref` is present, the
+    verifier MAY independently verify the upstream attestation against
+    the verifier's expectations (this is the preferred path for
+    end-to-end verification for that predicate type).
 
 A verifier MAY trust the platform's `integrity.result`,
-`policyEvaluations[].result`, and `upstreamProvenance.verification.result`
+`policyEvaluations[].result`, and `upstreamAttestations[].verification.result`
 fields based on a trust relationship with the platform (per [Trust
 platforms, verify artifacts](principles.md#trust-platforms-verify-artifacts)),
 or MAY re-perform any of those checks independently.
@@ -451,18 +464,20 @@ any admission policies it applied in `policyEvaluations[]`.
 }
 ```
 
-### L3 — adds upstream provenance verdict, signing and ingestion isolation, transparency-log
+### L3 — adds upstream attestation verdicts, signing and ingestion isolation, transparency-log
 
 ```json
 {
   /* envelope + signature elided + signature recorded in transparency log */
   "predicate": {
     /* ...as L2, plus: */
-    "upstreamProvenance": {
-      "predicateType": "https://slsa.dev/provenance/v1",
-      "ref": "https://attest.example.com/lodash/4.17.21/provenance",
-      "verification": { "result": "verified" }
-    },
+    "upstreamAttestations": [
+      {
+        "predicateType": "https://slsa.dev/provenance/v1",
+        "ref": "https://attest.example.com/lodash/4.17.21/provenance",
+        "verification": { "result": "verified" }
+      }
+    ],
     "signingIsolation": {
       "method": "post-ingestion-signing",
       "description": "Signing is performed by a separate CI job that does not execute dep code and is granted access to the signing key only via short-lived OIDC.",
@@ -476,16 +491,19 @@ any admission policies it applied in `policyEvaluations[]`.
 }
 ```
 
-### L3 — upstream provenance unavailable
+### L3 — upstream attestation unavailable
 
 ```json
 {
   /* envelope + signature elided */
   "predicate": {
     /* ...as L3 above, but: */
-    "upstreamProvenance": {
-      "availability": "unavailable"
-    }
+    "upstreamAttestations": [
+      {
+        "predicateType": "https://slsa.dev/provenance/v1",
+        "availability": "unavailable"
+      }
+    ]
   }
 }
 ```
