@@ -3,8 +3,12 @@
   publish = "_site/"  # relative to `base` directory
   command = "../tools/combine-versions.sh && bundle exec jekyll build"
   # Monitor changes in spec/ and tools/ directories outside base directory
-  # Exit 0 (skip build) if no changes, exit 1 (build) if changes detected
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF . ../spec/ ../tools/"
+  # Exit 0 (skip build) if no changes, exit 1 (build) if changes detected.
+  # If CACHED_COMMIT_REF is unset (first build, cache reset, API-triggered
+  # build), fail safe and build rather than skip: without the guard, git
+  # diff degenerates to comparing COMMIT_REF against its own working tree,
+  # which always matches and skips the build forever.
+  ignore = "if [ -z \"$CACHED_COMMIT_REF\" ]; then exit 1; fi; git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ../spec/ ../tools/"
 
   [build.environment]
     BUNDLE_GEMFILE = "Gemfile"
@@ -14,5 +18,6 @@
   publish = "_site/"  # relative to `base` directory
   command = "../tools/combine-versions.sh && bundle exec jekyll build --drafts --future"
   # Monitor changes in spec/ and tools/ directories outside base directory
-  # Exit 0 (skip build) if no changes, exit 1 (build) if changes detected
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF . ../spec/ ../tools/"
+  # Exit 0 (skip build) if no changes, exit 1 (build) if changes detected.
+  # Fail safe (build) when CACHED_COMMIT_REF is unset — see note above.
+  ignore = "if [ -z \"$CACHED_COMMIT_REF\" ]; then exit 1; fi; git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ../spec/ ../tools/"
