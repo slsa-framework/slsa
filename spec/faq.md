@@ -61,6 +61,14 @@ chain integrity, nor are they practical in all cases:
 Therefore, SLSA does not require verified reproducible builds directly. Instead,
 verified reproducible builds are one option for implementing the requirements.
 
+For producers who do achieve verified reproducible builds, SLSA provides the
+[`SLSA_BUILD_REPRODUCED`](verified-properties.md#slsa_build_reproduced) verified
+property that can be included in a VSA to communicate this fact to consumers.
+This reflects the underlying principle: reproducibility is a property of
+*verification* (it requires two or more independent builders to corroborate
+each other) rather than of a single build platform, and therefore belongs in
+a VSA rather than as a build level requirement.
+
 For more on reproducibility, see
 [Hermetic, Reproducible, or Verifiable?](https://google.github.io/building-secure-and-reliable-systems/raw/ch14.html#hermeticcomma_reproduciblecomma_or_veri)
 
@@ -142,6 +150,20 @@ the Build track. Yet SBOMs are a good practice and may form part of a future
 SLSA Vulnerabilities track. Further, SLSA Provenance can increase the
 trustworthiness of an SBOM by describing how the SBOM was created.
 
+`resolvedDependencies` and an SBOM are independent artifacts that may overlap
+in content but have no formal connection unless one explicitly references the
+other — they can be entirely disjoint.
+
+At any build level, a build platform MAY reference a build-time SBOM as a
+`ResourceDescriptor` entry in `resolvedDependencies` (with `uri`, `digest`, and
+`mediaType`) rather than or in addition to listing individual dependencies
+inline. Only when such a reference exists does `resolvedDependencies` become a
+superset of the SBOM: the SBOM entry is itself a resolved dependency, and the
+SBOM document it references serves as the dependency record. At
+[Build L4](build-track-basics#build-l4), if an SBOM reference is used to
+satisfy the completeness requirement, verifiers MUST follow the reference and
+validate the SBOM's digest.
+
 SLSA Provenance, the wider [in-toto Attestation Framework] in which the
 recommended format sits, and the various SBOM standards, are all rapidly
 evolving spaces. There is ongoing investigation into linking between the
@@ -175,7 +197,28 @@ Some common situations may include:
     shared between the platform and the runner so the requirements are imposed on both.
 
 Additional requirements on the self-hosted runners may be added to Build levels
-greater than L3 when such levels get defined.
+greater than L3, such as the [Dependencies complete](build-requirements.md#dependencies-complete)
+requirement at Build L4.
+
+## Q: What SLSA Build level should `builder.id` reflect for a platform that supports multiple levels?
+
+A build platform that can operate in multiple modes — for example, supporting
+both Build L3 and Build L4 builds depending on producer configuration — MUST
+use a `builder.id` that reflects the **minimum** level that the platform
+guarantees for all builds using that ID. This is a conservative, safe default:
+consumers who rely on `builder.id` alone will not assume more has been achieved
+than is actually guaranteed.
+
+If a producer's specific build achieves a higher level than the minimum indicated
+by `builder.id` (for example, because the producer opted into L4 controls such as
+prefetched dependencies or network interception), the build platform SHOULD issue
+a [VSA](verification_summary) to communicate the achieved level for that specific
+artifact. Consumers who want to rely on the higher level MUST verify the VSA
+rather than relying solely on `builder.id`.
+
+For example, a platform that supports both L3 and L4 builds would use a
+`builder.id` associated with L3 (the minimum), and then issue a per-artifact VSA
+asserting `SLSA_BUILD_LEVEL_4` for builds where the producer used L4 controls.
 
 [build level requirements]: build-requirements.md
 [GitHub Actions]: https://docs.github.com/en/actions/hosting-your-own-runners
