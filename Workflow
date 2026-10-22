@@ -1,0 +1,64 @@
+Job ini gagal kerana workflow “PR title follows <type>: <subject>” mengharuskan tajuk pull request mengikuti format conventional commits, tetapi tajuk PR ini ialah:
+
+“Merge updates from slsa-framework into main”
+
+Workflow mengesan bahawa tiada jenis release dalam tajuk, dan ia memerlukan awalan seperti:
+
+- content: ...
+- editorial: ...
+
+Ralat yang tepat:
+- “No release type found in pull request title "Merge updates from slsa-framework into main". Add a prefix to indicate what kind of release this pull request corresponds to.”
+- “Available types: content, editorial”
+
+Jadi, sebab kegagalan ialah PR title tidak memenuhi pola yang diperlukan oleh workflow, bukan kerana kod atau ujian gagal. Untuk membaiki, ubah tajuk PR kepada sesuatu seperti:
+- content: Merge updates from slsa-framework into main
+- editorial: Merge updates from slsa-framework into main
+
+Workflow fail tersebut boleh dilihat di:
+- .github/workflows/conventional-commits.yml
+
+Kalau anda mahu, saya juga boleh bantu anda tafsir maksud setiap jenis release yang dibenarkan di repo ini.Saya sudah semak log job untuk PR #1661.
+
+Punca kegagalan:
+- Workflow yang gagal ialah `.github/workflows/conventional-commits.yml`
+- Ia mengharuskan tajuk PR mematuhi format `type: subject`
+- Tajuk PR semasa ialah:
+  “Merge updates from slsa-framework into main”
+- Workflow tidak menemui sebarang jenis release dalam tajuk itu
+
+Ralat penuh:
+- “No release type found in pull request title "Merge updates from slsa-framework into main". Add a prefix to indicate what kind of release this pull request corresponds to.”
+- “Available types: content, editorial”
+
+Jadi, ini bukan masalah kod atau build — ia adalah masalah format tajuk PR. Untuk lulus, tajuk PR perlu berubah kepada salah satu format yang dibenarkan, contohnya:
+- content: Merge updates from slsa-framework into main
+- editorial: Merge updates from slsa-framework into main
+
+Anda boleh ubah tajuk PR dan rerun workflow.Ya, URL itu menunjukkan job yang sama. Ia gagal kerana workflow “PR title follows `<type>: <subject>`” memeriksa tajuk PR.
+
+Kesalahan utama:
+- Tajuk PR sekarang: “Merge updates from slsa-framework into main”
+- Diperlukan format: `type: subject`
+- Jenis yang dibenarkan oleh repo ialah:
+  - content
+  - editorial
+
+Jadi job gagal semata-mata kerana tajuk PR tidak dimulakan dengan satu daripada jenis tersebut.
+
+Contoh yang betul:
+- content: Merge updates from slsa-framework into main
+- editorial: Merge updates from slsa-framework into main
+
+Setelah tajuk PR diubah, workflow sepatutnya lulus.Ya, URL yang anda kongsikan ialah job yang sama, dan ralatnya tetap sama:
+
+- Workflow: PR title follows `<type>: <subject>`
+- Kegagalan: no release type found in pull request title
+- Tajuk PR semasa: “Merge updates from slsa-framework into main”
+- Jenis yang diterima: `content` atau `editorial`
+
+Sebabnya ialah workflow mengesan tajuk PR tidak memenuhi format conventional commit yang diperlukan. Contohnya, tajuk yang betul perlu seperti:
+- content: Merge updates from slsa-framework into main
+- editorial: Merge updates from slsa-framework into main
+
+Oleh itu, job gagal kerana format tajuk PR, bukan kerana code atau test.
