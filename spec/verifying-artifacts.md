@@ -191,6 +191,18 @@ heuristic or exception mechanism is almost always necessary when verifying
 dependencies because there will be transitive dependencies that are SLSA Build
 L0. (For example, consider the compiler's compiler's compiler's ... compiler.)
 
+At [SLSA Build L4](build-track-basics#build-l4), `resolvedDependencies` is
+guaranteed complete by the build platform, making recursive verification
+tractable without a best-effort caveat.
+
+A consumer who wishes to verify that an artifact has been independently
+reproduced by multiple build platforms can check whether a VSA for the artifact
+includes [`SLSA_BUILD_REPRODUCED`](verified-properties#slsa_build_reproduced)
+in its `verifiedLevels`. Standard [VSA verification][VSA] applies; the consumer
+does not need to reproduce the build themselves. See
+[`verification_summary.md`][VSA] for guidance on what a VSA issuer should
+include when asserting this property.
+
 [dependency threats]: threats#dependency-threats
 [VSA]: /verification_summary
 [threats]: threats
