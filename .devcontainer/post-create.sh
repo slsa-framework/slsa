@@ -2,8 +2,9 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-# Change to the 'docs' directory
-cd docs
+# Change to the 'www' directory
+# (renamed from 'docs' in bc8d1b8)
+cd www
 
 # Configure Bundler to install gems locally in the 'vendor/bundle' directory
 bundle config set --local path 'vendor/bundle'
