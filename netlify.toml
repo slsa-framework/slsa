@@ -8,7 +8,7 @@
   # build), fail safe and build rather than skip: without the guard, git
   # diff degenerates to comparing COMMIT_REF against its own working tree,
   # which always matches and skips the build forever.
-  ignore = "if [ -z \"$CACHED_COMMIT_REF\" ]; then exit 1; fi; git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ../spec/ ../tools/"
+  ignore = "echo CACHED_COMMIT_REF=\"$CACHED_COMMIT_REF\" COMMIT_REF=\"$COMMIT_REF\";if [ -z \"$CACHED_COMMIT_REF\" ]; then exit 1; fi; git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ../spec/ ../tools/ ../netlify.toml ../package.json ../package-lock.json"
 
   [build.environment]
     BUNDLE_GEMFILE = "Gemfile"
@@ -20,4 +20,4 @@
   # Monitor changes in spec/ and tools/ directories outside base directory
   # Exit 0 (skip build) if no changes, exit 1 (build) if changes detected.
   # Fail safe (build) when CACHED_COMMIT_REF is unset — see note above.
-  ignore = "if [ -z \"$CACHED_COMMIT_REF\" ]; then exit 1; fi; git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ../spec/ ../tools/"
+  ignore = "echo CACHED_COMMIT_REF=\"$CACHED_COMMIT_REF\" COMMIT_REF=\"$COMMIT_REF\";if [ -z \"$CACHED_COMMIT_REF\" ]; then exit 1; fi; git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ../spec/ ../tools/ ../netlify.toml ../package.json ../package-lock.json"
