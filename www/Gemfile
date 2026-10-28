@@ -1,4 +1,31 @@
 source "https://rubygems.org"
-gem 'github-pages', group: :jekyll_plugins
-gem 'netrc'    # Allows using ~/.netrc for personal access token
-gem 'webrick'  # Needed for Ruby 3
+
+gem "jekyll", "3.10.0"
+
+# Needed for Ruby 3+
+gem "base64", ">= 0.3.0"
+gem "bigdecimal", ">= 4.1.3"
+gem "webrick"
+
+# Allows using ~/.netrc for personal access token
+gem "netrc"
+
+# Markdown and theme
+gem "jekyll-commonmark-ghpages", "~> 0.5.1"
+gem "jekyll-remote-theme", ">= 0.4.3"
+
+# Plugins
+gem "jekyll-seo-tag", "2.8.0"
+gem "jekyll-sitemap", "~> 1.4"
+
+# Plugins formerly provided by github-pages
+gem "jekyll-coffeescript", "~> 2.0"
+gem "jekyll-default-layout", "~> 0.2.1"
+gem "jekyll-feed", "~> 0.18.0"
+gem "jekyll-gist", "~> 1.5"
+gem "jekyll-github-metadata", "~> 2.16"
+gem "jekyll-optional-front-matter", "~> 0.3.4"
+gem "jekyll-paginate", "~> 1.1"
+gem "jekyll-readme-index", "~> 0.5.1"
+gem "jekyll-relative-links", "~> 0.9.1"
+gem "jekyll-titles-from-headings", "~> 0.5.7"

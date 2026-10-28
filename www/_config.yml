@@ -1,10 +1,13 @@
 title: SLSA
 description: "SLSA: Security framework to ensure software supply chain integrity"
+# Keep generated URLs relative (jekyll-github-metadata would otherwise inject
+# an absolute url/baseurl, and `jekyll serve` sets url to http://xxx).
+url: ""
+baseurl: ""
 logo: /images/icons/android-chrome-512x512.png
 repository: slsa-framework/slsa
 collections:
   posts:
-    layout: post
     output: true
     permalink: /blog/:year/:month/:title
 include:
@@ -18,7 +21,7 @@ exclude:
   - vendor/bundle
 goatcounter:
   endpoint: https://slsa.goatcounter.com/count
-theme: minima
+remote_theme: jekyll/minima@v2.5.1
 permalink: :path/:basename
 markdown: CommonMarkGhPages
 commonmark:
@@ -41,6 +44,7 @@ plugins:
   - jekyll-readme-index
   - jekyll-titles-from-headings
   - jekyll-relative-links
+  - jekyll-remote-theme
 relative_links:
   collections: true
 defaults:
@@ -55,6 +59,7 @@ defaults:
   - scope:
       path: "_posts"
     values:
+      layout: post
       type: posts
   - scope:
       path: ""
