@@ -37,13 +37,13 @@ EOF
 # This uses a heuristic to detect links in Markdown files, namely
 # `https?://slsa.dev` immediately following `(` or `]: `.
 check_absolute_links() {
-  local FILES=':/www/*.md'
+  local FILES=(':/www/*.md' ':/spec/*.md')
   local CMD=(
       git grep --break --heading --line-number
       -e '\((\|\]: \)https\?://slsa.dev'
   )
   # Exit silently if there are no matches.
-  "${CMD[@]}" -q "$FILES" || return 0
+  "${CMD[@]}" -q "${FILES[@]}" || return 0
   # If there are matches, print an error and then print the results afterward.
   # NOTE: We don't just capture the command above because that ends up being
   # more difficult to code and also messes with colors (tty detection). It's
@@ -53,7 +53,7 @@ ERROR: Absolute URLs to slsa.dev are disallowed; use a relative URL instead.
 For example, instead of [foo](https://slsa.dev/foo), use [foo](/foo).
 
 EOF
-  "${CMD[@]}" "$FILES" >&2
+  "${CMD[@]}" "${FILES[@]}" >&2
   return 1
 }
 
