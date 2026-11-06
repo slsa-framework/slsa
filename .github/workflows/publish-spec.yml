@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - 'releases/v*.*.*'
+      - 'releases/v*.*'
 
 jobs:
   publish-spec:
@@ -21,7 +22,6 @@ jobs:
 
       - name: Create source artifact
         run: |
-          cd docs
           zip -r spec.zip spec
 
       - name: Set up GitHub CLI
@@ -31,8 +31,8 @@ jobs:
         run: |
           gh attestation generate build-provenance \
             --repo "$GITHUB_REPOSITORY" \
-            --subject-path docs/spec.zip \
-            --output docs/spec.attestation.json
+            --subject-path spec.zip \
+            --output spec.attestation.json
 
       - name: Create or recreate GitHub Release and upload assets
         env:
@@ -45,6 +45,6 @@ jobs:
             gh release delete "$VERSION" --yes
           fi
           # Create a new release and upload the spec artifact and attestation
-          gh release create "$VERSION" docs/spec.zip docs/spec.attestation.json \
+          gh release create "$VERSION" spec.zip spec.attestation.json \
             --title "Release $VERSION" \
             --notes "This is the release of the spec. The source artifact and attestation are attached."
