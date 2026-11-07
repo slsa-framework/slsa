@@ -1,1 +1,15 @@
-.gitignore
+.bundle
+.DS_store
+.jekyll-cache
+.jekyll-metadata
+.sass-cache
+node_modules
+/www/vendor/bundle
+/www/spec
+_site
+
+# Ignore tracked files that should not be linted
+/LICENSE.md
+
+# Local Netlify folder
+.netlify
