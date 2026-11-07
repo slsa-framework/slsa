@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "lint": "markdownlint .",
-    "format": "markdownlint . --fix"
+    "lint": "markdownlint --ignore-path .gitignore .",
+    "format": "markdownlint --ignore-path .gitignore . --fix"
   },
   "dependencies": {
     "markdownlint-cli": "0.50.0"
