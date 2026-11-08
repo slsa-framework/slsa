@@ -1,0 +1,46 @@
+# Publishes the SLSA specification as a GitHub Release when a commit is pushed to a release branch.
+# Creates a zip of the spec, generates a build provenance attestation, and attaches both to the release.
+name: Publish Spec as Release
+
+on:
+  push:
+    branches:
+      - 'releases/v*.*.*'
+
+jobs:
+  publish-spec:
+    permissions:
+      attestations: write # Generate and store build provenance attestations
+      contents: write     # Create/delete releases and upload assets
+      id-token: write     # OIDC token for Sigstore signing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create source artifact
+        run: |
+          cd docs
+          zip -r spec.zip spec
+
+      - name: Generate build provenance attestation
+        id: attest
+        uses: actions/attest-build-provenance@v4
+        with:
+          subject-path: docs/spec.zip
+
+      - name: Create or recreate GitHub Release and upload assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUNDLE_PATH: ${{ steps.attest.outputs.bundle-path }}
+        run: |
+          VERSION=${GITHUB_REF##*/}
+          # Delete any existing release with this version to avoid conflicts
+          if gh release view "$VERSION" > /dev/null 2>&1; then
+            gh release delete "$VERSION" --yes
+          fi
+          cp "$BUNDLE_PATH" docs/spec.attestation.json
+          gh release create "$VERSION" docs/spec.zip docs/spec.attestation.json \
+            --target "$GITHUB_SHA" \
+            --title "Release $VERSION" \
+            --notes "This is the release of the spec. The source artifact and attestation are attached."
