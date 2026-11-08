@@ -12,6 +12,7 @@ attestation] framework:
 
 ```json
 "predicateType": "https://slsa.dev/verification_summary/v1"
+"predicateType": "https://slsa.dev/verification_summary/v0.2"
 ```
 
 > Important: Always use the above string for `predicateType` rather than what is
@@ -32,6 +33,7 @@ complex policy decisions to some trusted party and then simply trust that
 party's decision regarding the artifact.
 
 It also allows software producers to keep the details of their build pipeline
+It also allows software publishers to keep the details of their build pipeline
 confidential while still communicating that some verification has taken place.
 This might be necessary for legal reasons (keeping a software supplier
 confidential) or for security reasons (not revealing that an embargoed patch has
@@ -63,43 +65,39 @@ to establish minimum requirements on dependencies SLSA levels may use
 
 ```jsonc
 // Standard attestation fields:
-"_type": "https://in-toto.io/Statement/v1",
+"_type": "https://in-toto.io/Statement/v0.1",
 "subject": [{
   "name": <NAME>,
   "digest": { <digest-in-request> }
 }],
 
 // Predicate
-"predicateType": "https://slsa.dev/verification_summary/v1",
+"predicateType": "https://slsa.dev/verification_summary/v0.2",
 "predicate": {
+  // Required
   "verifier": {
-    "id": "<URI>",
-    "version": {
-      "<COMPONENT>": "<VERSION>",
-      ...
-    }
+    "id": "<URI>"
   },
-  "timeVerified": <TIMESTAMP>,
-  "resourceUri": <artifact-URI-in-request>,
+  "time_verified": <TIMESTAMP>,
+  "resource_uri": <artifact-URI-in-request>,
   "policy": {
     "uri": "<URI>",
-    "digest": { <digest-of-policy-data> }
+    "digest": { /* DigestSet */ }
   }
-  "inputAttestations": [
+  "input_attestations": [
     {
       "uri": "<URI>",
       "digest": { <digest-of-attestation-data> }
     },
     ...
   ],
-  "verificationResult": "<PASSED|FAILED>",
-  "verifiedLevels": ["<SlsaResult>"],
-  "dependencyLevels": {
+  "verification_result": "<PASSED|FAILED>",
+  "policy_level": "<SlsaResult>",
+  "dependency_levels": {
     "<SlsaResult>": <Int>,
     "<SlsaResult>": <Int>,
     ...
-  },
-  "slsaVersion": "<MAJOR>.<MINOR>",
+  }
 }
 ```
 
@@ -141,230 +139,118 @@ of the other top-level fields, such as `subject`, see [Statement]._
 
 > URI indicating the verifier’s identity.
 
-<a id="verifier.version"></a>
-`verifier.version` _map (string->string), optional_
-
-> Map of names of components of the verification platform to their version.
-
-<a id="timeVerified"></a>
-`timeVerified` _string ([Timestamp]), optional_
+<a id="time_verified"></a>
+`time_verified` _string ([Timestamp]), required_
 
 > Timestamp indicating what time the verification occurred.
 
-<a id="resourceUri"></a>
-`resourceUri` _string ([ResourceURI]), required_
+<a id="resource_uri"></a>
+`resource_uri` _string ([ResourceURI]), required_
 
 > URI that identifies the resource associated with the artifact being verified.
->
-> The `resourceUri` SHOULD be set to the URI from which the producer expects the
-> consumer to fetch the artifact for verification. This enables the consumer to
-> easily determine the expected value when [verifying](#how-to-verify). If the
-> `resourceUri` is set to some other value, the producer MUST communicate the
-> expected value, or how to determine the expected value, to consumers through
-> an out-of-band channel.
 
 <a id="policy"></a>
-`policy` _object ([ResourceDescriptor]), required_
+`policy` _object, required_
 
-> Describes the policy that the `subject` was verified against.
->
-> The entry MUST contain a `uri` identifying which policy was applied and
-> SHOULD contain a `digest` to indicate the exact version of that policy.
+> Describes the policy that was used to verify this artifact.
 
-<a id="inputAttestations"></a>
-`inputAttestations` _array ([ResourceDescriptor]), optional_
+<a id="policy.uri"></a>
+`policy.uri` _string ([ResourceURI]), required_
+
+> The URI of the policy used to perform verification.
+
+<a id="policy.digest"></a>
+`policy.digest` _object ([DigestSet]), optional_
+
+> Collection of cryptographic digests for the contents of the policy used to perform verification.
+
+<a id="input_attestations"></a>
+`input_attestations` _object, optional_
 
 > The collection of attestations that were used to perform verification.
-> Conceptually similar to the `resolvedDependencies` field in [SLSA Provenance].
+> Conceptually similar to the `materials` field in the [SLSA Provenance](/provenance).
 >
-> This field MAY be absent if the verifier does not support this feature.
-> If non-empty, this field MUST contain information on _all_ the attestations
+> This field can be absent if the verifier does not support this feature;
+> If present, this field must contain information on _all_ the attestations
 > used to perform verification.
->
-> Each entry MUST contain a `digest` of the attestation and SHOULD contains a
-> `uri` that can be used to fetch the attestation.
+> An empty collection indicates the decision was made without attestations.
 
-<a id="verificationResult"></a>
-`verificationResult` _string, required_
+<a id="input_attestations.uri"></a>
+`input_attestations[*].uri` _string ([ResourceURI]), optional_
+
+> A URI that can be used (provided the requester has read permission) to fetch
+> the attestation.
+>
+> An absent field indicates the verifier does not know where to fetch the attestation
+> (e.g. it was supplied by the verification requester).
+>
+> The data fetched from the URI may contain more than one attestation (e.g. an
+> attestation bundle file). In that case, the attestation is identified by
+> `digest` field values.
+
+<a id="input_attestations.digest"></a>
+`input_attestations[*].digest` _object ([DigestSet]), required_
+
+> Collection of cryptographic digests for this attestation.
+
+<a id="verification_result"></a>
+`verification_result` _string, required_
 
 > Either “PASSED” or “FAILED” to indicate if the artifact passed or failed the policy verification.
 
-<a id="verifiedLevels"></a>
-`verifiedLevels` _array ([SlsaResult]), required_
+<a id="policy_level"></a>
+`policy_level` _string ([SlsaResult]), required_
 
-> Indicates the highest level of each track verified for the artifact (and not
-> its dependencies) and any [verified properties](verified-properties) verified
-> for the artifact or "FAILED" if policy verification failed.
->
-> Users MUST NOT include more than one level per SLSA track. Note that each SLSA
-> level implies all levels below it (e.g. `SLSA_BUILD_LEVEL_3` implies
-> `SLSA_BUILD_LEVEL_2` and `SLSA_BUILD_LEVEL_1`), so there is no need to
-> include more than one level per track.
+> Indicates what SLSA level the artifact itself (and not its dependencies) was verified at or "FAILED" if policy verification failed.
 
-<a id="dependencyLevels"></a>
-`dependencyLevels` _object, optional_
+<a id="dependency_levels"></a>
+`dependency_levels` _object, required_
 
 > A count of the dependencies at each SLSA level.
 >
 > Map from [SlsaResult] to the number of the artifact's _transitive_ dependencies
 > that were verified at the indicated level. Absence of a given level of
 > [SlsaResult] MUST be interpreted as reporting _0_ dependencies at that level.
-> A set but empty `dependencyLevels` object means that the artifact has **no**
-> dependency at all, while an unset or null `dependencyLevels` means that the
-> verifier makes no claims about the artifact's dependencies.
->
-> Users MUST count each dependency only once per SLSA track, at the highest
-> level verified. For example, if a dependency meets `SLSA_BUILD_LEVEL_2`,
-> you include it with the count for `SLSA_BUILD_LEVEL_2` but not the count for
-> `SLSA_BUILD_LEVEL_1`.
-
-<a id="slsaVersion"></a>
-`slsaVersion` _string, optional_
-
-> Indicates the version of the SLSA specification that the verifier used, in the
-> form `<MAJOR>.<MINOR>`. Example: `1.0`. If unset, the default is an
-> unspecified minor version of `1.x`.
 
 ## Example
 
 WARNING: This is just for demonstration purposes.
 
 ```jsonc
-"_type": "https://in-toto.io/Statement/v1",
+"_type": "https://in-toto.io/Statement/v0.1",
 "subject": [{
   "name": "out/example-1.2.3.tar.gz",
   "digest": {"sha256": "5678..."}
 }],
 
 // Predicate
-"predicateType": "https://slsa.dev/verification_summary/v1",
+"predicateType": "https://slsa.dev/verification_summary/v0.2",
 "predicate": {
   "verifier": {
-    "id": "https://example.com/publication_verifier",
-    "version": {
-      "slsa-verifier-linux-amd64": "v2.3.0",
-      "slsa-framework/slsa-verifier/actions/installer": "v2.3.0"
-    }
+    "id": "https://example.com/publication_verifier"
   },
-  "timeVerified": "1985-04-12T23:20:50.52Z",
-  "resourceUri": "https://example.com/example-1.2.3.tar.gz",
+  "time_verified": "1985-04-12T23:20:50.52Z",
+  "resource_uri": "https://example.com/example-1.2.3.tar.gz",
   "policy": {
     "uri": "https://example.com/example_tarball.policy",
     "digest": {"sha256": "1234..."}
   },
-  "inputAttestations": [
+  "input_attestations": [
     {
       "uri": "https://example.com/provenances/example-1.2.3.tar.gz.intoto.jsonl",
       "digest": {"sha256": "abcd..."}
     }
   ],
-  "verificationResult": "PASSED",
-  "verifiedLevels": ["SLSA_BUILD_LEVEL_3"],
-  "dependencyLevels": {
-    "SLSA_BUILD_LEVEL_3": 5,
-    "SLSA_BUILD_LEVEL_2": 7,
-    "SLSA_BUILD_LEVEL_1": 1,
-  },
-  "slsaVersion": "1.0"
+  "verification_result": "PASSED",
+  "policy_level": "SLSA_LEVEL_3",
+  "dependency_levels": {
+    "SLSA_LEVEL_4": 1,
+    "SLSA_LEVEL_3": 5,
+    "SLSA_LEVEL_2": 7,
+    "SLSA_LEVEL_1": 1,
+  }
 }
 ```
-
-## How to verify
-
-VSA consumers use VSAs to accomplish goals based on delegated trust. We call the
-process of establishing a VSA's authenticity and determining whether it meets
-the consumer's goals 'verification'. Goals differ, as do levels of confidence
-in VSA producers, so the verification procedure changes to suit its context.
-However, there are certain steps that most verification procedures have in
-common.
-
-Verification MUST include the following steps:
-
-1.  Verify the signature on the VSA envelope using the preconfigured roots of
-    trust. This step ensures that the VSA was produced by a trusted producer
-    and that it hasn't been tampered with.
-
-2.  Verify the statement's `subject` matches the digest of the artifact in
-    question. This step ensures that the VSA pertains to the intended artifact.
-
-3.  Verify that the `predicateType` is
-    `https://slsa.dev/verification_summary/v1`. This step ensures that the
-    in-toto predicate is using this version of the VSA format.
-
-4.  Verify that the `verifier` matches the public key (or equivalent) used to
-    verify the signature in step 1. This step identifies the VSA producer in
-    cases where their identity is not implicitly revealed in step 1.
-
-5.  Verify that the value for `resourceUri` in the VSA matches the expected
-    value. This step ensures that the consumer is using the VSA for the
-    producer's intended purpose.
-
-6.  Verify that the value for `verificationResult` is `PASSED`. This step
-    ensures the artifact is suitable for the consumer's purposes.
-
-7.  Verify that `verifiedLevels` contains the expected value. This step ensures
-    that the artifact is suitable for the consumer's purposes.
-
-Verification MAY additionally contain the following step:
-
-1.  (Optional) Verify additional fields required to determine whether the VSA
-    meets your goal.
-
-Verification mitigates different threats depending on the VSA's contents and the
-verification procedure.
-
-IMPORTANT: A VSA does not protect against compromise of the verifier, such as by
-a malicious insider. Instead, VSA consumers SHOULD carefully consider which
-verifiers they add to their roots of trust.
-
-### Examples
-
-1.  Suppose consumer C wants to delegate to verifier V the decision for whether
-    to accept artifact A as resource R. Consumer C verifies that:
-
-    -   The signature on the VSA envelope using V's public signing key from their
-      preconfigured root of trust.
-
-    -   `subject` is A.
-
-    -   `predicateType` is `https://slsa.dev/verification_summary/v1`.
-
-    -   `verifier.id` is V.
-
-    -   `resourceUri` is R.
-
-    -   `slsaResult` is `PASSED`.
-
-    -   `verifiedLevels` contains `SLSA_BUILD_LEVEL_UNEVALUATED`.
-
-    Note: This example is analogous to traditional code signing. The expected
-    value for `verifiedLevels` is arbitrary but prenegotiated by the producer and
-    the consumer. The consumer does not need to check additional fields, as C
-    fully delegates the decision to V.
-
-2.  Suppose consumer C wants to enforce the rule "Artifact A at resource R must
-    have a passing VSA from verifier V showing it meets SLSA Build Level 2+."
-    Consumer C verifies that:
-
-    -   The signature on the VSA envelope using V's public signing key from their
-      preconfigured root of trust.
-
-    -   `subject` is A.
-
-    -   `predicateType` is `https://slsa.dev/verification_summary/v1`.
-
-    -   `verifier.id` is V.
-
-    -   `resourceUri` is R.
-
-    -   `slsaResult` is `PASSED`.
-
-    -   `verifiedLevels` is `SLSA_BUILD_LEVEL_2` or `SLSA_BUILD_LEVEL_3`.
-
-    Note: In this example, verifying the VSA mitigates the same threats as
-    verifying the artifact's SLSA provenance. See
-    [Verifying artifacts](/spec/v1.0/verifying-artifacts) for details about which
-    threats are addressed by verifying each SLSA level.
 
 <div id="slsaresult">
 
@@ -373,100 +259,27 @@ verifiers they add to their roots of trust.
 </div>
 
 The result of evaluating an artifact (or set of artifacts) against SLSA.
-SHOULD be
+Must be one of these values:
 
--   The [SLSA Track](#tracks) level the referenced artifact qualifies for as
-`SLSA_<TRACK_NAME>_LEVEL_<LEVEL_NUMBER>`, or
--   `SLSA_<TRACK NAME>_LEVEL_UNEVALUATED` if the VSA issuer does not want to
-    make a claim about the track level an artifact meets, or
--   The SLSA [verified property](verified-properties) the referenced artifact
-    qualifies for.
-
-For example:
-
--   `SLSA_BUILD_LEVEL_UNEVALUATED`
--   `SLSA_BUILD_LEVEL_0`
--   `SLSA_BUILD_LEVEL_3`
--   `SLSA_SOURCE_LEVEL_2`
--   `SLSA_SOURCE_LEVEL_4`
--   `FAILED` (Indicates policy evaluation failed)
-
-Note that each SLSA level implies the levels below it in the same track.
-For example, `SLSA_BUILD_LEVEL_3` means (`SLSA_BUILD_LEVEL_1` +
-`SLSA_BUILD_LEVEL_2` + `SLSA_BUILD_LEVEL_3`).
-
-Users MAY use custom values here but MUST NOT use custom values starting with
-`SLSA_`.
-
-## How to issue
-
-VSA issuers create VSAs to communicate the results of verification to consumers.
-The following sections provide guidance for issuing VSAs with specific
-[verified properties](verified-properties).
-
-### Issuing SLSA_BUILD_REPRODUCED
-
-A VSA issuer asserting `SLSA_BUILD_REPRODUCED` is claiming that two or more
-independently operated build platforms have produced identical output from the
-same inputs. The issuer SHOULD:
-
-1.  Collect attestations from each participating build platform recording the
-    output artifact digest and the build inputs used. These need not be in the
-    [SLSA Provenance format](build-provenance); any format that records the
-    output digest and sufficient build inputs is acceptable.
-
-2.  Verify that the output digest recorded in each attestation is identical.
-
-3.  Include all participating attestations in the VSA's `inputAttestations`
-    field. Per the [general requirement](#inputAttestations), if these
-    attestations were used to perform verification they MUST be included.
-
-4.  Set `verifiedLevels` to include `SLSA_BUILD_REPRODUCED` (in addition to
-    any applicable SLSA Build level).
-
-The issuer need not have performed the reproduction themselves — they may
-delegate reproduction to trusted third parties and collect the resulting
-attestations. What matters is that the issuer trusts each participating build
-platform and can verify that each attestation is authentic.
-
-There is no minimum SLSA Build level required of the participating builds'
-attestations. The security value of reproduction comes from the independence of
-the platforms, not from any individual platform's level. Consumers who wish to
-know the level of the participating builds can inspect the referenced
-`inputAttestations`.
+-   SLSA_LEVEL_0
+-   SLSA_LEVEL_1
+-   SLSA_LEVEL_2
+-   SLSA_LEVEL_3
+-   SLSA_LEVEL_4
+-   FAILED (Indicates policy evaluation failed)
 
 ## Change history
 
--   Draft (v1.3):
-    -   Added "How to issue" section with guidance for asserting
-        `SLSA_BUILD_REPRODUCED`.
--   1.2:
-    -   Update SlsaResult definition to discuss how to refer to new tracks and
-        link to [verified properties](verified-properties) for additional SLSA
-        endorsed values.
--   1.1:
-    -   Changed the `policy` object to recommend that the `digest` field of
-        the `ResourceDescriptor` is set.
-    -   Added optional `verifier.version` field to record verification tools.
-    -   Added Verification section with examples.
-    -   Made `timeVerified` optional.
--   1.0:
-    -   Replaced `materials` with `resolvedDependencies`.
-    -   Relaxed `SlsaResult` to allow other values.
-    -   Converted to lowerCamelCase for consistency with [SLSA Provenance].
-    -   Added `slsaVersion` field.
 -   0.2:
     -   Added `resource_uri` field.
     -   Added optional `input_attestations` field.
 -   0.1: Initial version.
 
-[SLSA Provenance]: /provenance
 [SlsaResult]: #slsaresult
-[DigestSet]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/digest_set.md
-[ResourceURI]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/field_types.md#resourceuri
-[ResourceDescriptor]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/resource_descriptor.md
-[Statement]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/statement.md
-[Timestamp]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/field_types.md#timestamp
-[TypeURI]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/field_types.md#TypeURI
+[DigestSet]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/field_types.md#DigestSet
+[ResourceURI]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/field_types.md#ResourceURI
+[Statement]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/README.md#statement
+[Timestamp]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/field_types.md#Timestamp
+[TypeURI]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/field_types.md#TypeURI
 [in-toto attestation]: https://github.com/in-toto/attestation
-[parsing rules]: https://github.com/in-toto/attestation/blob/7aefca35a0f74a6e0cb397a8c4a76558f54de571/spec/v1/README.md#parsing-rules
+[parsing rules]: https://github.com/in-toto/attestation/blob/main/spec/v0.1.0/README.md#parsing-rules
