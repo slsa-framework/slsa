@@ -1,0 +1,7 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Ensure shell scripts always use LF line endings on checkout
+*.sh text eol=lf
+tools/diff_site text eol=lf
+tools/textconv text eol=lf
