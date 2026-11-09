@@ -5,13 +5,14 @@
 # For lack of a better solution, we allowlist "recommended suite" using a
 # negative lookahead assertion.
 check_rfc2119() {
+  local FILES=(':/spec/*.md')
   local CMD=(
       git grep --break --heading --line-number --perl-regexp --all-match
       -e '(RFC ?|rfc ?)2119'
-      -e '\b([Mm]ust( not)?|[Ss]hall( not)?|[Ss]hould( not)?|[Mm]ay|[Rr]equired|[Rr]ecommended|[Oo]ptional)\b(?![ -][Ss]uite)'
+      -e '(?<![`.\/_\-])\b([Mm]ust( not)?|[Ss]hall( not)?|[Ss]hould( not)?|[Mm]ay|[Rr]equired|[Rr]ecommended|[Oo]ptional)\b(?![ -][Ss]uite)(?![`.\/_\-])'
   )
   # Exit silently if there are no matches.
-  "${CMD[@]}" -q '*.md' || return 0
+  "${CMD[@]}" -q "${FILES[@]}" || return 0
   # If there are matches, print an error and then print the results afterward.
   # NOTE: We don't just capture the command above because that ends up being
   # more difficult to code and also messes with colors (tty detection). It's
@@ -21,10 +22,10 @@ ERROR: Do not use lowercase RFC 2119 keywords ("must", "should", etc.) because
 such usage is ambiguous. Use uppercase if RFC 2119 meaning is intended,
 otherwise use alternate phrasing.
 
-(This check triggers on any Markdown file containing the string "RFC 2119".)
+(This check triggers on specification Markdown files containing the string "RFC 2119".)
 
 EOF
-  "${CMD[@]}" '*.md' >&2
+  "${CMD[@]}" "${FILES[@]}" >&2
   return 1
 }
 
