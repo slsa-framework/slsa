@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "test": "npm run lint",
     "lint": "markdownlint --ignore-path .gitignore .",
     "format": "markdownlint --ignore-path .gitignore . --fix"
   },
