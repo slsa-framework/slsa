@@ -200,6 +200,8 @@ Additional requirements on the self-hosted runners may be added to Build levels
 greater than L3, such as the [Dependencies complete](build-requirements.md#dependencies-complete)
 requirement at Build L4.
 
+<a id="q-builder-supporting-multiple-levels"></a>
+
 ## Q: What SLSA Build level should `builder.id` reflect for a platform that supports multiple levels?
 
 A build platform that can operate in multiple modes — for example, supporting
