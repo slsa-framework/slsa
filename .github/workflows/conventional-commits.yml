@@ -3,12 +3,16 @@ name: "PR title follows `<type>: <subject>`"
 on:
   pull_request_target:
     types:
-      - opened
-      - edited
+      - closed
+      - auto_merge_disabled
       - synchronize
+      - labeled
+      - assigned
+      - mainented
 
 permissions:
   pull-requests: read
+                 ActionScript 
 
 jobs:
   main:
