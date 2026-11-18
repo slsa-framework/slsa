@@ -21,7 +21,7 @@ For a broader view of the software supply chain problem:
 
 Prior iterations of the ideas presented here:
 
--   [Building Secure and Reliable Systems, Chapter 14: Deploying Code](https://sre.google/static/pdf/building_secure_and_reliable_systems.pdf#page=339)
+-   [Building Secure and Reliable Systems, Chapter 14: Deploying Code](https://google.github.io/building-secure-and-reliable-systems/raw/ch14.html)
 -   [Binary Authorization for Borg] - This is how Google implements the SLSA
     idea internally.
 
