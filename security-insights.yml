@@ -1,0 +1,78 @@
+header:
+  schema-version: 2.2.0
+  last-updated: '2026-11-06'
+  last-reviewed: '2026-11-06'
+  url: https://github.com/slsa-framework/slsa
+  comment: |
+    This file contains the security information for the SLSA project.
+
+project:
+  name: SLSA
+  administrators:
+    - name: Christopher Robinson
+      affiliation: Linux Foundation
+      primary: true
+  repositories:
+    - name: SLSA
+      url: https://github.com/slsa-framework/slsa
+      comment: |
+        This is the core repository containing the SLSA specification and website code.
+  vulnerability-reporting:
+    reports-accepted: true
+    bug-bounty-available: false
+    contact:
+      name: The OpenSSF provides security support for all projects in the foundation.
+      email: security@openssf.org
+      primary: true
+
+repository:
+  url: https://github.com/slsa-framework/slsa
+  status: active
+  accepts-change-request: true
+  accepts-automated-change-request: true
+  core-team:
+    - name:        Andrew McNamara
+      affiliation: Red Hat
+      email:       arewm@redhat.com
+      primary:     false
+    - name:        Aditya Sirish A Yelgundhalli
+      affiliation: Bloomberg
+      email:       ayelgundhall@bloomberg.net
+      primary:     false
+    - name:        Arnaud Le Hors
+      affiliation: IBM
+      email:       lehors@us.ibm.com
+      primary:     true
+    - name:        Marcela Melara
+      affiliation: Intel
+      email:       marcela.melara@intel.com
+      primary:     false
+    - name:        Michael Lieberman
+      affiliation: Kusari
+      email:       mlieberman85@gmail.com
+      primary:     false
+    - name:        Pavel Iakovenko
+      affiliation: GitHub
+      email:       paveliak@github.com
+      primary:     false
+    - name:        Tom Bedford
+      affiliation: Bloomberg
+      email:       tbedford9@bloomberg.net
+      primary:     false
+
+  license:
+    url: https://github.com/slsa-framework/slsa/LICENSE
+    expression: Community Specification License 1.0
+  security:
+    assessments:
+      self:
+        comment: |
+          Self assessment has not yet been completed.
+  documentation:
+    contributing-guide: https://github.com/slsa-framework/slsa/blob/main/CONTRIBUTING.md
+    governance: https://github.com/slsa-framework/governance
+  release:
+    automated-pipeline: false
+    distribution-points:
+      - uri:  https://slsa.dev
+        comment: SLSA website
