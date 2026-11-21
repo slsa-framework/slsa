@@ -162,6 +162,13 @@ of the other top-level fields, such as `subject`, see [Statement]._
 > `resourceUri` is set to some other value, the producer MUST communicate the
 > expected value, or how to determine the expected value, to consumers through
 > an out-of-band channel.
+>
+> The `resourceUri` is not tied to the `uri` of any entry in the attestation's
+> `subject`. The `subject` identifies the artifact by digest, while
+> `resourceUri` records where the verifier was asked to verify it from. A
+> producer can set `subject[*].uri` to the same value, but nothing requires the
+> two to match, so consumers check `resourceUri` against their own expected
+> value as described in [How to verify](#how-to-verify).
 
 <a id="policy"></a>
 `policy` _object ([ResourceDescriptor]), required_
