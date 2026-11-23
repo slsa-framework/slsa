@@ -250,6 +250,14 @@ integrity for build environments at the time of build image distribution.
     Provenance for the selected build image MUST be automatically verified.
     A signed attestation to the result of the SLSA Provenance verification
     MUST be generated and distributed (e.g., via a [VSA]).
+    -   If the tenant selects the build image, the selection MUST be recorded
+    in the [`externalParameters`] of the SLSA Provenance for artifacts built
+    in that environment, since it is a tenant-controlled input to the build.
+    -   The build image the environment was instantiated from, including its
+    digest, SHOULD be listed in the [`resolvedDependencies`] of the SLSA
+    Provenance for artifacts built in that environment, whether the tenant or
+    the build platform selected it. This lets consumers tie an artifact back
+    to the build image's own provenance and verification attestation.
 
 <dt>Benefits<dd>
 
@@ -414,6 +422,8 @@ TODO
 [SLSA Build Provenance]: provenance.md
 [TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
 [VSA]: verification_summary.md
+[`externalParameters`]: build-provenance.md#externalParameters
+[`resolvedDependencies`]: build-provenance.md#resolvedDependencies
 [build image]: #build-image
 [confidential computing]: https://confidentialcomputing.io/wp-content/uploads/sites/10/2023/03/Common-Terminology-for-Confidential-Computing.pdf
 [execution context]: terminology.md#build-environment
