@@ -5,6 +5,6 @@
     "format": "markdownlint --ignore-path .gitignore . --fix"
   },
   "dependencies": {
-    "markdownlint-cli": "0.50.0"
+    "markdownlint-cli": "0.50.1"
   }
 }
