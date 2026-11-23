@@ -248,6 +248,11 @@ integrity for build environments at the time of build image distribution.
     -   MUST meet SLSA [Build L2] requirements.
     -   Prior to the instantiation of a new build environment, the SLSA
     Provenance for the selected build image MUST be automatically verified.
+    The verification MUST follow [verifying artifacts] and check at least
+    that the provenance, or the VSA distributed in its place, is authentic
+    and issued by the expected build image producer, that its `subject`
+    digest matches the selected build image, and that it shows the image was
+    built at SLSA [Build L2] or higher.
     A signed attestation to the result of the SLSA Provenance verification
     MUST be generated and distributed (e.g., via a [VSA]).
 
@@ -320,7 +325,9 @@ All of [BuildEnv L1], plus:
     modifications to perform these checks.[^1]
     -   Prior to instantiating a new build environment, the host interface
     MUST automatically verify the SLSA Provenance for the selected build
-    image. A signed attestation to the verification of the build image's
+    image, with the same checks as in [BuildEnv L1] except that the image
+    MUST have been built at SLSA [Build L3] or higher. A signed attestation
+    to the verification of the build image's
     SLSA Provenance MUST be automatically generated and distributed (e.g.,
     via a [VSA]).
 
@@ -414,6 +421,7 @@ TODO
 [SLSA Build Provenance]: provenance.md
 [TPM]: https://trustedcomputinggroup.org/resource/tpm-library-specification/
 [VSA]: verification_summary.md
+[verifying artifacts]: verifying-artifacts.md#how-to-verify
 [build image]: #build-image
 [confidential computing]: https://confidentialcomputing.io/wp-content/uploads/sites/10/2023/03/Common-Terminology-for-Confidential-Computing.pdf
 [execution context]: terminology.md#build-environment
