@@ -22,13 +22,13 @@ message BuildDefinition {
 }
 
 message ResourceDescriptor {
-  string uri = 1;
-  map<string, string> digest = 2;
-  string name = 3;
-  string download_location = 4;
-  string media_type = 5;
-  bytes content = 6;
-  map<string, google.protobuf.Value> annotations = 7;
+  string name = 1;
+  string uri = 2;
+  map<string, string> digest = 3;
+  bytes content = 4;
+  string download_location = 5;
+  string media_type = 6;
+  google.protobuf.Struct annotations = 7;
 }
 
 message RunDetails {
